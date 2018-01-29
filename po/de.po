@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-28 22:52+0300\n"
+"POT-Creation-Date: 2018-01-29 18:39+0300\n"
 "PO-Revision-Date: 2010-05-20 19:49-0400\n"
 "Last-Translator: \n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -272,7 +272,7 @@ msgstr "ActionsAPI [dosym]: Datei existiert schon: {}"
 msgid "No file matched pattern \"{}\"."
 msgstr "Keine Datei gleicht dem Muster \"{}\"."
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:95
+#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
 #, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Keine Datei gleicht dem Muster \"{}\". Entfernen fehlgeschlagen."
@@ -404,117 +404,117 @@ msgstr "Es scheint, dass mehr als eine .pro Datei verfügbar ist. Sie müssen ei
 msgid "Running 'ruby {}' failed."
 msgstr "Ausführung von 'ruby {}' fehlgeschlagen"
 
-#: inary/actionsapi/shelltools.py:49
+#: inary/actionsapi/shelltools.py:50
 #, fuzzy
 msgid "Cannot create directory {}"
 msgstr "Verzeichnis {} konnte nicht erstellt werden"
 
-#: inary/actionsapi/shelltools.py:57
+#: inary/actionsapi/shelltools.py:58
 #, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr "ActionsAPI [echo]: Konnte nicht an die Datei {} hinzugefügen."
 
-#: inary/actionsapi/shelltools.py:63
+#: inary/actionsapi/shelltools.py:64
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Keine Datei gleicht dem Muster \"{}\"."
 
-#: inary/actionsapi/shelltools.py:70
+#: inary/actionsapi/shelltools.py:71
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Vorgang nicht gestattet %s (Modus: 0%o)"
 
-#: inary/actionsapi/shelltools.py:72
+#: inary/actionsapi/shelltools.py:73
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: Datei {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:80
+#: inary/actionsapi/shelltools.py:81
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: Vorgang nicht gestattet {0} (uid: {1}, gid: {2})"
 
-#: inary/actionsapi/shelltools.py:82
+#: inary/actionsapi/shelltools.py:83
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: Datei {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:89
+#: inary/actionsapi/shelltools.py:90
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Zugang verweigert: {0} zu {1}"
 
-#: inary/actionsapi/shelltools.py:103
+#: inary/actionsapi/shelltools.py:104
 #, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Zugriff verweigert: {}."
 
-#: inary/actionsapi/shelltools.py:107
+#: inary/actionsapi/shelltools.py:108
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [unlink]: Datei {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:115
+#: inary/actionsapi/shelltools.py:116
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr "ActionsAPI [unlinkDir]: Vorgang nicht gestattet: {}"
 
-#: inary/actionsapi/shelltools.py:119
+#: inary/actionsapi/shelltools.py:120
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Verzeichnis {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:125
+#: inary/actionsapi/shelltools.py:126
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Keine Datei gleicht dem Muster \"{}\"."
 
-#: inary/actionsapi/shelltools.py:132
+#: inary/actionsapi/shelltools.py:133
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [move]: Zugriff verweigert: {0} zu {1}"
 
-#: inary/actionsapi/shelltools.py:134
+#: inary/actionsapi/shelltools.py:135
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [move]: Datei {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:141
+#: inary/actionsapi/shelltools.py:142
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Keine Datei gleicht dem Muster \"{}\"."
 
-#: inary/actionsapi/shelltools.py:148
+#: inary/actionsapi/shelltools.py:149
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [copy]: Zugriff verweigert: {0} zu {1}"
 
-#: inary/actionsapi/shelltools.py:164
+#: inary/actionsapi/shelltools.py:165
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [copy]: Datei {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:179
+#: inary/actionsapi/shelltools.py:180
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree] {0} nach {1}: {2}"
 
-#: inary/actionsapi/shelltools.py:181
+#: inary/actionsapi/shelltools.py:182
 #, fuzzy
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr "ActionsAPI [copytree]: Verzeichnis {} existiert nicht."
 
-#: inary/actionsapi/shelltools.py:189
+#: inary/actionsapi/shelltools.py:190
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [touch]: Keine Datei gleicht dem Muster \"{}\"."
 
-#: inary/actionsapi/shelltools.py:198
+#: inary/actionsapi/shelltools.py:199
 #, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Zugriff verweigert: {}"
 
-#: inary/actionsapi/shelltools.py:257
+#: inary/actionsapi/shelltools.py:258
 #, fuzzy, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr "Kommando \"{0}\" fehlgeschlagen, Rückgabewert war {1}."
@@ -4090,277 +4090,6 @@ msgid "Invalid version string: '{}'"
 msgstr "Ungültige Versionskennzeichnung: '{}'"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Build-Verzeichnis wird geleert..."
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Konfliktierende Datei wird nicht entfernt: {}"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "Option {} benötigt ein Argument"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY Paket"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber muss installiert sein um diesen Befehl auszuführen zu können"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Benutzer {} kann auf diesem System nicht gefunden werden"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Gruppe  {} kann auf diesem System nicht gefunden werden"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} hat ungültiges XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Kann die Datei {} nicht lesen: {}"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
-
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} wurde zu {}/language.%s.dat hinzugefügt"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
-
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} wurde zu %s/language.%s.dat hinzugefügt"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Ein Upgrade auf die neue Distributions-Build wird ausgeführt"
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Zum alten Distribution-Build downgraden?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Build-Nr nicht auswerten."
-
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "INARY binäre Paket-Formate: '1.0', '1.1' (Standard)"
-
-#~ msgid "package_format must be one of {} "
-#~ msgstr "Paket_format muss von {} sein"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Aktuelles Verzeichnis wird indiziert"
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "Kompression zip noch nicht unterstützt"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "Kompression gzip noch nicht unterstützt"
-
-#~ msgid "(found old version {})"
-#~ msgstr "(alte Version {} gefunden)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(kein vorheriges Build gefunden, setze Build-Nr auf 1.)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(Altes Paket hat keine Build-Version, setze Build-Nr auf 1.)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Es gibt Änderungen, erhöhe die Build-Nr auf %d"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Es gibt keine Änderungen seit dem vorherigen Build %d"
-
-#~ msgid "Generating {},"
-#~ msgstr "{} wird generiert,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "Build-Nr ist nicht vorhanden. Für Depot-Builds muss in inary.conf buildno aktiviert sein."
-
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "Alle Dateien im Installationsverzeichnis {} wurden von Paketen aufgesammelt"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Für das selbe Paket kann kein Delta erstellt werden!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Erstelle Delta INARY-Paket zwischen {} {}"
-
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "Paket {} ist schon in der letzten Build-Version {}."
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Name: {}, Version: {}, Release: %s, Build %s\n"
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Depot {} konnte nicht kontaktiert werden. Entferne {} vom System."
-
-#~ msgid "Run inary build process in silent mode"
-#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken"
-
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "INARY Datenbank für Depot {} aktualisieren ?"
-
-#~ msgid "Repository architecture does not match. Removing {} from system."
-#~ msgstr "Depot {} konnte nicht kontaktiert werden. Entferne {} vom System."
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden installiert:"
-
-#~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
-#~ msgstr ""
-#~ "Die folgenden Pakete werden in der angegebenen \n"
-#~ "Reihenfolge installiert um die zusätzlichen Abhängigkeiten zu erfüllen:\n"
-
-#~ msgid "Storing {}."
-#~ msgstr "{} wird abgelegt"
-
-#~ msgid "Storing {}, "
-#~ msgstr "{} wird abgelegt, "
-
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Suche im Binär - Depot...\n"
-
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Suche im Quellcode - Depot...\n"
-
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Webseite nicht erzeugen.\n"
-
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
-
-#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
-#~ msgstr "Entwickler '{} <{}>' hat eina andere email adresse {} im Quelltext-Paket {}"
-
-#~ msgid ""
-#~ "Duplicate source packages:\n"
-#~ "{}\n"
-#~ "{}\n"
-#~ msgstr ""
-#~ "Doppelte Quellcode -Pakete:\n"
-#~ "{}\n"
-#~ "{}\n"
-
-#~ msgid ""
-#~ "Duplicate binary packages:\n"
-#~ "{}\n"
-#~ "{}\n"
-#~ msgstr ""
-#~ "Doppelte Binär-Pakete:\n"
-#~ "{}\n"
-#~ "{}\n"
-
-#~ msgid "Reverse dependency {} of {} cannot be satisfied"
-#~ msgstr "Rückabhängigkeit {} von {} kann nicht zufriedenstellend sein"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Folgende Konfigurations-Datei geändert: {}"
-
-#~ msgid "Checking /{} "
-#~ msgstr "/{} wird überprüft"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Mehrere 'Tags' für diesen Pfad angegeben: {}"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Pfad muss mit einem Slash anfangen: {}"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Quelle ist ein Teil von Komponente {}"
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf tag nicht definiert, suche Komponente"
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Paket {} ist korrupt."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paket {} hat die Konfigurations-Dateien geändert."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* {} wird überprüft... "
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Pakete werden in das Arbeitsverzeichnis ausgegeben."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Das Sicherheitssystem erzwingt die Aktualisierung der folgenden Pakete:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Upgrade ist nicht möglich."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Folgende Pakete werden aktualisiert:"
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Es gibt keine Pakete zu aktualisieren."
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Paket {0.name} ist schon mit der letzten Release {0.release}."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "Beim Upgrade des Systems, Pakete und Komponenten ignorieren, deren Basisnamen mit einem der Muster aus der Datei übereinstimmt."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "Beim Upgrade des Systemes, Pakete und Komponenten ignorieren, deren Basisnamen mit dem Muster übereinstimmt."
-
-# Zweifel - "abrufen" hört sich zu zart an, ist doch ein echter download !!
-# ist aber nur subjektiv meine Meinung..
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Upgrades abrufen aber nicht installieren."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Name des Paket-Depots welches aktualisiert werden soll"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Upgrade für die Komponente durchführen und Pakete der Komponente rekursivieren"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Nur sicherheitsrelevante Aktualisierungen"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "Optionen von upgrade"
-
-#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -4394,3 +4123,274 @@ msgstr "Ungültige Versionskennzeichnung: '{}'"
 #~ "\n"
 #~ "Man kann auch Komponenten des Namens angeben, welche anschließend zum\n"
 #~ "Paketnamen erweitert werden.\n"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "Optionen von upgrade"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nur sicherheitsrelevante Aktualisierungen"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade für die Komponente durchführen und Pakete der Komponente rekursivieren"
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name des Paket-Depots welches aktualisiert werden soll"
+
+# Zweifel - "abrufen" hört sich zu zart an, ist doch ein echter download !!
+# ist aber nur subjektiv meine Meinung..
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Upgrades abrufen aber nicht installieren."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "Beim Upgrade des Systemes, Pakete und Komponenten ignorieren, deren Basisnamen mit dem Muster übereinstimmt."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "Beim Upgrade des Systems, Pakete und Komponenten ignorieren, deren Basisnamen mit einem der Muster aus der Datei übereinstimmt."
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} ist schon mit der letzten Release {0.release}."
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Es gibt keine Pakete zu aktualisieren."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Folgende Pakete werden aktualisiert:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade ist nicht möglich."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Das Sicherheitssystem erzwingt die Aktualisierung der folgenden Pakete:"
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Pakete werden in das Arbeitsverzeichnis ausgegeben."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* {} wird überprüft... "
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paket {} hat die Konfigurations-Dateien geändert."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paket {} ist korrupt."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf tag nicht definiert, suche Komponente"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Quelle ist ein Teil von Komponente {}"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Pfad muss mit einem Slash anfangen: {}"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Mehrere 'Tags' für diesen Pfad angegeben: {}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Sicherheitsschalter: system.devel ist bereits installiert"
+
+#~ msgid "Checking /{} "
+#~ msgstr "/{} wird überprüft"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Folgende Konfigurations-Datei geändert: {}"
+
+#~ msgid "Reverse dependency {} of {} cannot be satisfied"
+#~ msgstr "Rückabhängigkeit {} von {} kann nicht zufriedenstellend sein"
+
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "{}\n"
+#~ "{}\n"
+#~ msgstr ""
+#~ "Doppelte Binär-Pakete:\n"
+#~ "{}\n"
+#~ "{}\n"
+
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "{}\n"
+#~ "{}\n"
+#~ msgstr ""
+#~ "Doppelte Quellcode -Pakete:\n"
+#~ "{}\n"
+#~ "{}\n"
+
+#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
+#~ msgstr "Entwickler '{} <{}>' hat eina andere email adresse {} im Quelltext-Paket {}"
+
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Syntax: repostats.py [OPTIONEN] Quelle-Depot-Pfad [Binär-Depot-Pfad]\n"
+
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Webseite nicht erzeugen.\n"
+
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Suche im Quellcode - Depot...\n"
+
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Suche im Binär - Depot...\n"
+
+#~ msgid "Storing {}, "
+#~ msgstr "{} wird abgelegt, "
+
+#~ msgid "Storing {}."
+#~ msgstr "{} wird abgelegt"
+
+#~ msgid ""
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
+#~ msgstr ""
+#~ "Die folgenden Pakete werden in der angegebenen \n"
+#~ "Reihenfolge installiert um die zusätzlichen Abhängigkeiten zu erfüllen:\n"
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden installiert:"
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Sicherheitsschalter: Die folgenden Pakete in system.base werden aktualisiert:"
+
+#~ msgid "Repository architecture does not match. Removing {} from system."
+#~ msgstr "Depot {} konnte nicht kontaktiert werden. Entferne {} vom System."
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "INARY Datenbank für Depot {} aktualisieren ?"
+
+#~ msgid "Run inary build process in silent mode"
+#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken"
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Depot {} konnte nicht kontaktiert werden. Entferne {} vom System."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Name: {}, Version: {}, Release: %s, Build %s\n"
+
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "Paket {} ist schon in der letzten Build-Version {}."
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Erstelle Delta INARY-Paket zwischen {} {}"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Für das selbe Paket kann kein Delta erstellt werden!"
+
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "Alle Dateien im Installationsverzeichnis {} wurden von Paketen aufgesammelt"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "Build-Nr ist nicht vorhanden. Für Depot-Builds muss in inary.conf buildno aktiviert sein."
+
+#~ msgid "Generating {},"
+#~ msgstr "{} wird generiert,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Es gibt keine Änderungen seit dem vorherigen Build %d"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Es gibt Änderungen, erhöhe die Build-Nr auf %d"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(Altes Paket hat keine Build-Version, setze Build-Nr auf 1.)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(kein vorheriges Build gefunden, setze Build-Nr auf 1.)"
+
+#~ msgid "(found old version {})"
+#~ msgstr "(alte Version {} gefunden)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "Kompression gzip noch nicht unterstützt"
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "Kompression zip noch nicht unterstützt"
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Aktuelles Verzeichnis wird indiziert"
+
+#~ msgid "package_format must be one of {} "
+#~ msgstr "Paket_format muss von {} sein"
+
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY binäre Paket-Formate: '1.0', '1.1' (Standard)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Build-Nr nicht auswerten."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Zum alten Distribution-Build downgraden?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Ein Upgrade auf die neue Distributions-Build wird ausgeführt"
+
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} wurde zu %s/language.%s.dat hinzugefügt"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
+
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} wurde zu {}/language.%s.dat hinzugefügt"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} wurde zu %s/language.%s.def hinzugefügt"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Kann die Datei {} nicht lesen: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} hat ungültiges XML"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Gruppe  {} kann auf diesem System nicht gefunden werden"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Benutzer {} kann auf diesem System nicht gefunden werden"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber muss installiert sein um diesen Befehl auszuführen zu können"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY Paket"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "Option {} benötigt ein Argument"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Konfliktierende Datei wird nicht entfernt: {}"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Build-Verzeichnis wird geleert..."

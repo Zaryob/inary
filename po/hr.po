@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-28 22:52+0300\n"
+"POT-Creation-Date: 2018-01-29 18:39+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -247,7 +247,7 @@ msgstr "ActionsAPI [dosym]: Datoteka već postoji: {}"
 msgid "No file matched pattern \"{}\"."
 msgstr "Nijedna datoteka se ne podudara sa uzorkom \"{}\". "
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:95
+#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
 #, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Nijedna datoteka se ne podudara sa uzorkom \"{}\". Operacija uklonjanja nije uspjela."
@@ -374,116 +374,116 @@ msgstr "Čini se da postoji više od jedne.pro datoteke,morate odrediti jednu. (
 msgid "Running 'ruby {}' failed."
 msgstr "Pokretanje 'ruby {}' nije uspjelo."
 
-#: inary/actionsapi/shelltools.py:49
+#: inary/actionsapi/shelltools.py:50
 #, fuzzy
 msgid "Cannot create directory {}"
 msgstr "Ne mogu napraviti diretorij {}"
 
-#: inary/actionsapi/shelltools.py:57
+#: inary/actionsapi/shelltools.py:58
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:63
+#: inary/actionsapi/shelltools.py:64
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Nijedna datoteka ne odgovara uzorku \"{}\"."
 
-#: inary/actionsapi/shelltools.py:70
+#: inary/actionsapi/shelltools.py:71
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Operacija nije dopuštena: %s (mode: 0%o)"
 
-#: inary/actionsapi/shelltools.py:72
+#: inary/actionsapi/shelltools.py:73
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: Datoteka {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:80
+#: inary/actionsapi/shelltools.py:81
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: Operacija nije dopuštena: {0} (uid: {1}, gid: {2})"
 
-#: inary/actionsapi/shelltools.py:82
+#: inary/actionsapi/shelltools.py:83
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: Datoteka {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:89
+#: inary/actionsapi/shelltools.py:90
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Dozvola odbijena: {0} u {1}"
 
-#: inary/actionsapi/shelltools.py:103
+#: inary/actionsapi/shelltools.py:104
 #, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Dozvola odbijena: {}."
 
-#: inary/actionsapi/shelltools.py:107
+#: inary/actionsapi/shelltools.py:108
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [unlink]: Datoteka {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:115
+#: inary/actionsapi/shelltools.py:116
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr "ActionsAPI [unlinkDir]: Operacija nije dozvoljena: {}"
 
-#: inary/actionsapi/shelltools.py:119
+#: inary/actionsapi/shelltools.py:120
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Direktorij {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:125
+#: inary/actionsapi/shelltools.py:126
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [Move]:  Nijedna datoteka ne odgovara uzorku \"{}\"."
 
-#: inary/actionsapi/shelltools.py:132
+#: inary/actionsapi/shelltools.py:133
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [Move]: Dozvola odbijena: {0} u {1}"
 
-#: inary/actionsapi/shelltools.py:134
+#: inary/actionsapi/shelltools.py:135
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [Move]: Datoteka {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:141
+#: inary/actionsapi/shelltools.py:142
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [primjerak]: Nijedna datoteka se ne podudara sa uzorakom \"{}\"."
 
-#: inary/actionsapi/shelltools.py:148
+#: inary/actionsapi/shelltools.py:149
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [primjerak]: Dozvola odbijena: {0} u {1}"
 
-#: inary/actionsapi/shelltools.py:164
+#: inary/actionsapi/shelltools.py:165
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [primjerak]: Datoteka {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:179
+#: inary/actionsapi/shelltools.py:180
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree] {0} u {1}: {2}"
 
-#: inary/actionsapi/shelltools.py:181
+#: inary/actionsapi/shelltools.py:182
 #, fuzzy
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr "ActionsAPI [copytree]: Direktorij {} ne postoji."
 
-#: inary/actionsapi/shelltools.py:189
+#: inary/actionsapi/shelltools.py:190
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [touch]:  Nijedna datoteka se ne podudara sa uzorakom \"{}\"."
 
-#: inary/actionsapi/shelltools.py:198
+#: inary/actionsapi/shelltools.py:199
 #, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Dozvola odbijena: {}"
 
-#: inary/actionsapi/shelltools.py:257
+#: inary/actionsapi/shelltools.py:258
 #, fuzzy, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr "Naredba \"{0}\" nije uspjela, povratna vrijednost je {1}."
@@ -3750,64 +3750,6 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Obnovi bazu podataka datoteka"
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opcija zahtijeva argument"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paket"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ne uklanjanje sporne datoteke: {}"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nije moguće čitati datoteku  {}: {}"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Nadogradnja nije moguća."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Slijedeći paketi će biti nadograđeni:"
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Nema paketa za nadogradnju"
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Ime nadograđenog repozitorija paketa"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "opcije nadogradnje"
-
-#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -3835,3 +3777,61 @@ msgstr ""
 #~ "\n"
 #~ "Također možete odrediti komponente umjesto imena paketa, koje će biti\n"
 #~ "proširene na imena paketa.\n"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "opcije nadogradnje"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Ime nadograđenog repozitorija paketa"
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nema paketa za nadogradnju"
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Slijedeći paketi će biti nadograđeni:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Nadogradnja nije moguća."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nije moguće čitati datoteku  {}: {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ne uklanjanje sporne datoteke: {}"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paket"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opcija zahtijeva argument"
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Obnovi bazu podataka datoteka"

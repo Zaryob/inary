@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-28 22:52+0300\n"
+"POT-Creation-Date: 2018-01-29 18:39+0300\n"
 "PO-Revision-Date: 2010-12-27 13:15+0100\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -256,7 +256,7 @@ msgstr "ActionsAPI [dosym]: A fájl már létezik: {}"
 msgid "No file matched pattern \"{}\"."
 msgstr "Nincs illeszkedő fájlnév-minta \"{}\"."
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:95
+#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
 #, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Nincs illeszkedő fájlnév-minta \"{}\". A törlés nem sikerült."
@@ -388,117 +388,117 @@ msgstr "Úgy tűnik több mint egy .pro fájl van. Válasszon ki egyet. (Lehets�
 msgid "Running 'ruby {}' failed."
 msgstr "'ruby {}' futtatása nem sikerült."
 
-#: inary/actionsapi/shelltools.py:49
+#: inary/actionsapi/shelltools.py:50
 #, fuzzy
 msgid "Cannot create directory {}"
 msgstr "Nem tudom létrehozni a(z) {} könyvtárat."
 
-#: inary/actionsapi/shelltools.py:57
+#: inary/actionsapi/shelltools.py:58
 #, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr "ActionsAPI [echo]: Nem tudok a(z) {} fájlba írni."
 
-#: inary/actionsapi/shelltools.py:63
+#: inary/actionsapi/shelltools.py:64
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Nincs illeszkedő fájlnév-minta \"{}\"."
 
-#: inary/actionsapi/shelltools.py:70
+#: inary/actionsapi/shelltools.py:71
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: A művelet nem engedélyezett: %s (mode: 0%o)"
 
-#: inary/actionsapi/shelltools.py:72
+#: inary/actionsapi/shelltools.py:73
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: A(z) {} nevű fájl nem létezik."
 
-#: inary/actionsapi/shelltools.py:80
+#: inary/actionsapi/shelltools.py:81
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: A művelet nem engedélyezett: {0} (uid: {1}, gid: {2})"
 
-#: inary/actionsapi/shelltools.py:82
+#: inary/actionsapi/shelltools.py:83
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: A(z) {} nevű fájl nem létezik."
 
-#: inary/actionsapi/shelltools.py:89
+#: inary/actionsapi/shelltools.py:90
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Engedély megtagadva: {0} link ide: {1}"
 
-#: inary/actionsapi/shelltools.py:103
+#: inary/actionsapi/shelltools.py:104
 #, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Engedély megtagadva: {}."
 
-#: inary/actionsapi/shelltools.py:107
+#: inary/actionsapi/shelltools.py:108
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [unlink]: {} fájl nem létezik."
 
-#: inary/actionsapi/shelltools.py:115
+#: inary/actionsapi/shelltools.py:116
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr "ActionsAPI [unlinkDir]: A művelet nem engedélyezett: {}"
 
-#: inary/actionsapi/shelltools.py:119
+#: inary/actionsapi/shelltools.py:120
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: A(z) {} könyvtár nem létezik."
 
-#: inary/actionsapi/shelltools.py:125
+#: inary/actionsapi/shelltools.py:126
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Nincs illeszkedő fájlnév-minta \"{}\"."
 
-#: inary/actionsapi/shelltools.py:132
+#: inary/actionsapi/shelltools.py:133
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [move]: Engedély megtagadva: {0} átnevezés: {1}"
 
-#: inary/actionsapi/shelltools.py:134
+#: inary/actionsapi/shelltools.py:135
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [move]: A(z) {} fájl nem létezik."
 
-#: inary/actionsapi/shelltools.py:141
+#: inary/actionsapi/shelltools.py:142
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [copy]: Nincs illeszkedő fájlnév-minta \"{}\"."
 
-#: inary/actionsapi/shelltools.py:148
+#: inary/actionsapi/shelltools.py:149
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [copy]: Engedély megtagadva: {0} -hoz {1}"
 
-#: inary/actionsapi/shelltools.py:164
+#: inary/actionsapi/shelltools.py:165
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [copy]: A(z) {} fájl nem létezik."
 
-#: inary/actionsapi/shelltools.py:179
+#: inary/actionsapi/shelltools.py:180
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree] {0} to {1}: {2}"
 
-#: inary/actionsapi/shelltools.py:181
+#: inary/actionsapi/shelltools.py:182
 #, fuzzy
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr "ActionsAPI [copytree]: A(z) {} könyvtár nem létezik."
 
-#: inary/actionsapi/shelltools.py:189
+#: inary/actionsapi/shelltools.py:190
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [touch]: Nincs illeszkedő fájlnév-minta \"{}\"."
 
-#: inary/actionsapi/shelltools.py:198
+#: inary/actionsapi/shelltools.py:199
 #, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Engedély megtagadva: {}"
 
-#: inary/actionsapi/shelltools.py:257
+#: inary/actionsapi/shelltools.py:258
 #, fuzzy, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr "A(z) \"{0}\" parancs hibát jelzett, a visszatérési érték {1}."
@@ -4032,203 +4032,6 @@ msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Átmeneti könyvtár tisztítása..."
-
-#~ msgid "long integer"
-#~ msgstr "hosszú egész"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "a(z) {} opcióhoz paramétert is meg kell adni"
-
-#, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "INARY csomag létrehozása"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ütköző fájl nincs eltávolítva: {} "
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Dátum: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "E parancs futtatásához az urlgrabber telepítése szükséges."
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Nincs {} nevű felhasználó a rendszerben"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Nincs {} nevű csoport a rendszerben"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "A(z) {} sztring hibás XML adatot tartalmaz"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nem olvasható a fájl {}: {}"
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* {} ellenőrzése... "
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) {} csomag konfigurációs állományai megváltoztak."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "A(z) {} csomag sérült."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "A forrás a(z) {} komponens része."
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
-
-#~ msgid "Checking /{} "
-#~ msgstr "/{} ellenőrzése "
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Megváltozott beállító fájl: {}"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
-
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} hozzáadva {}/language.%s.dat-hoz"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
-
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} hozzáadva %s/language.%s.dat-hoz "
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Frissítés a disztribúció új build-változatára"
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
-
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "INARY bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
-
-#~ msgid "package_format must be one of {} "
-#~ msgstr "a csomag formátuma csak a következők egyike lehet:  {}"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Az aktuális könyvtár indexelése."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "A zip tömörítés még nem támogatott."
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "A gzip tömörítés még nem támogatott."
-
-#~ msgid "(found old version {})"
-#~ msgstr "(régebbi verziójú {}-t találtam)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Nincs változás az előző build-hez (%d) képest."
-
-#~ msgid "Generating {},"
-#~ msgstr "{} generálása,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a inary.conf-ban."
-
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba gyűjtve"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "INARY különbözeti csomag létrehozása {} és {} között."
-
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "A(z) {} csomag már a legutolsó build számot viseli: {}."
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Név: {}, verzió: {}, kiadás: %s, build: %s\n"
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "A biztonsági kapcsoló kényszeríti a következő csomagok frissítését:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "A frissítés nem lehetséges."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "A következő csomagok lesznek frissítve:"
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Nincsenek frissíthető csomagok."
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "A(z) {0.name} csomag már a legfrissebb verziójú: {0.release}."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "A rendszer frissítése során lépje át azokat a csomagokat és komponenseket amelyek neve illeszkedik a megadott fájlban található valamelyik mintára."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "A rendszer frissítése során lépje át azokat a csomagokat és komponenseket amelyek neve illeszkedik a mintára."
-
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "A frissítések letöltése telepítés nélkül."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "A frissítéseket tartalmazó tároló neve."
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Frissítse a komponenst és rekurzívan a komponens csomagjait."
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Csak a biztonsággal kapcsolatos csomagok frissítése"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade opciói"
-
-#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -4262,3 +4065,200 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #~ "\n"
 #~ "Komponens neveket is megadhat csomagok helyett, mely automatikusan\n"
 #~ "csomagnevekre lesz bontva.\n"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade opciói"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Csak a biztonsággal kapcsolatos csomagok frissítése"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Frissítse a komponenst és rekurzívan a komponens csomagjait."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "A frissítéseket tartalmazó tároló neve."
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "A frissítések letöltése telepítés nélkül."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "A rendszer frissítése során lépje át azokat a csomagokat és komponenseket amelyek neve illeszkedik a mintára."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "A rendszer frissítése során lépje át azokat a csomagokat és komponenseket amelyek neve illeszkedik a megadott fájlban található valamelyik mintára."
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "A(z) {0.name} csomag már a legfrissebb verziójú: {0.release}."
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nincsenek frissíthető csomagok."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "A következő csomagok lesznek frissítve:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "A frissítés nem lehetséges."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "A biztonsági kapcsoló kényszeríti a következő csomagok frissítését:"
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Név: {}, verzió: {}, kiadás: %s, build: %s\n"
+
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "A(z) {} csomag már a legutolsó build számot viseli: {}."
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "INARY különbözeti csomag létrehozása {} és {} között."
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Nem hozható létre különbözet ugyanazon csomagból!"
+
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "A telepési könyvtárban {} található valamennyi fájl a csomag(ok)ba gyűjtve"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "A build számok használata nem lehetséges. Ha tároló számára épít, engedélyezze a buildno opciót a inary.conf-ban."
+
+#~ msgid "Generating {},"
+#~ msgstr "{} generálása,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Nincs változás az előző build-hez (%d) képest."
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Változásokat észleltem, a build szám így növelve lesz. Az új érték: %d."
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(a régi csomgnak nincs build száma, az új build szám ezért 1. lesz)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(nem találtam régebbi build-et, a sorszám 1-re lesz állítva)"
+
+#~ msgid "(found old version {})"
+#~ msgstr "(régebbi verziójú {}-t találtam)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "A gzip tömörítés még nem támogatott."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "A zip tömörítés még nem támogatott."
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Az aktuális könyvtár indexelése."
+
+#~ msgid "package_format must be one of {} "
+#~ msgstr "a csomag formátuma csak a következők egyike lehet:  {}"
+
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY bináris csomag formátumok: 1.0', '1.1' (alapértelmezett)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Nem veszi figyelembe a \"build-no\" kapcsolót."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Visszatér a disztribúció korábbi build-változatára?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Frissítés a disztribúció új build-változatára"
+
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} hozzáadva %s/language.%s.dat-hoz "
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez "
+
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} hozzáadva {}/language.%s.dat-hoz"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} hozzáadva %s/language.%s.def-hez"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Megváltozott beállító fájl: {}"
+
+#~ msgid "Checking /{} "
+#~ msgstr "/{} ellenőrzése "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Biztonsági kapcsoló: a system.devel már telepítve van"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "A forrás a(z) {} komponens része."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf címke nincs definiálva, komponens keresése"
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) {} csomag sérült."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "A(z) {} csomag konfigurációs állományai megváltoztak."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* {} ellenőrzése... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Csomagok elhelyezése a munkakönyvtárban."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nem olvasható a fájl {}: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "A(z) {} sztring hibás XML adatot tartalmaz"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Nincs {} nevű csoport a rendszerben"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Nincs {} nevű felhasználó a rendszerben"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "E parancs futtatásához az urlgrabber telepítése szükséges."
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Dátum: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ütköző fájl nincs eltávolítva: {} "
+
+#, fuzzy
+#~ msgid "INARY package"
+#~ msgstr "INARY csomag létrehozása"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "a(z) {} opcióhoz paramétert is meg kell adni"
+
+#~ msgid "long integer"
+#~ msgstr "hosszú egész"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Átmeneti könyvtár tisztítása..."
