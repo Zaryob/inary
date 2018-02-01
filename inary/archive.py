@@ -252,9 +252,9 @@ class ArchiveLzma(ArchiveBase):
             import lzma
         except:
             from backports import lzma
-        lzma_file = lzma.LZMAFile(self.file_path, "r")
+        lzma_file = lzma.LZMAFile(self.file_path, "rb")
         output = open(output_path, "w")
-        output.write(lzma_file.read())
+        output.write(str(lzma_file.read()))
         output.close()
         lzma_file.close()
 

@@ -86,7 +86,7 @@ class LocalText(dict):
                 # FIXME: check for dups and 'en'
                 if not lang:
                     lang = 'en'
-                self[lang] = c
+                self[lang] = str(c)
 
     def encode(self, node, errs):
         assert self.tag != ''

@@ -742,7 +742,7 @@ class Builder:
                                                       "/root/.ccache"))
 
                 ret = catbox.run(self.actionLocals[func],
-                                 valid_paths,
+                                 bytes(valid_paths.encode('utf-8')),
                                  logger=self.log_sandbox_violation)
                 # Retcode can be 0 while there is a sanbox violation, so only
                 # look for violations to correctly handle it
