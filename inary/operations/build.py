@@ -726,7 +726,7 @@ class Builder:
                 ctx.ui.info(_("Sandbox enabled build..."))
 
                 # Configure allowed paths from sandbox.conf
-                valid_paths = [self.pkg_dir()]
+                valid_paths = [bytes(self.pkg_dir().encode('utf-8'))]
                 conf_file = ctx.const.sandbox_conf
                 if os.path.exists(conf_file):
                     for line in open(conf_file):
@@ -734,7 +734,7 @@ class Builder:
                         if len(line) > 0 and not line.startswith("#"):
                             if line.startswith("~"):
                                 line = os.environ["HOME"] + line[1:]
-                            valid_paths.append(line)
+                            valid_paths.append(line.encode('utf-8'))
 
                 # Extra path for ccache when needed
                 if ctx.config.values.build.buildhelper == "ccache":
@@ -742,7 +742,7 @@ class Builder:
                                                       "/root/.ccache"))
 
                 ret = catbox.run(self.actionLocals[func],
-                                 bytes(valid_paths.encode('utf-8')),
+                                 valid_paths,
                                  logger=self.log_sandbox_violation)
                 # Retcode can be 0 while there is a sanbox violation, so only
                 # look for violations to correctly handle it

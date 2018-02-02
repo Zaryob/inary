@@ -81,7 +81,7 @@ def dohtml(*sourceFiles, **kw):
 
         for source in sourceFileGlob:
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:
-                system('install -m0644 "{0}" {1}'.format(source, destionationDirectory))
+                system('install -m 0644 "{0}" {1}'.format(source, destionationDirectory))
             if os.path.isdir(source) and os.path.basename(source) not in disallowed_directories:
                 eraser = os.path.split(source)[0]
                 for root, dirs, files in os.walk(source):
@@ -89,7 +89,7 @@ def dohtml(*sourceFiles, **kw):
                     for sourcename in files:
                         if os.path.splitext(sourcename)[1] in allowed_extensions:
                             makedirs(join_path(destionationDirectory, newRoot))
-                            system('install -m0644 {0} {1}'.format(join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
+                            system('install -m 0644 {0} {1}'.format(join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
 
 def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
@@ -149,7 +149,7 @@ def doman(*sourceFiles):
             manPDIR = join_path(manDIR, '/man{}'.format(pageDirectory))
             makedirs(manPDIR)
             if not compressed:
-                system('install -m0644 {0} {1}'.format(source, manPDIR))
+                system('install -m 0644 {0} {1}'.format(source, manPDIR))
             else:
                 uncompress(compressed, targetDir=manPDIR)
 

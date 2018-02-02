@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 18:39+0300\n"
+"POT-Creation-Date: 2018-01-30 22:31+0300\n"
 "PO-Revision-Date: 2013-01-04 21:08+0000\n"
 "Last-Translator: circass <erdincgultekin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4029,6 +4029,91 @@ msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
 #, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Cleaning build directory..."
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Not removing conflicted file : {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Date: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "No user named {} found on the system"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "No group named {} found on the system"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} has invalid XML"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Safety switch forces the upgrade of following packages:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade is not possible."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "The following packages will be upgraded:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "No packages to upgrade."
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Package {} is already at the latest release {}."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Fetch upgrades but do not install."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name of the to be upgraded packages' repository"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade component's and recursive components' packages"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Security related package upgrades only"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade options"
+
+#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -4063,88 +4148,3 @@ msgstr "Invalid version string: {}"
 #~ "\n"
 #~ "You can also specify components instead of package names, which will be\n"
 #~ "expanded to package names.\n"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade options"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Security related package upgrades only"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Upgrade component's and recursive components' packages"
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Name of the to be upgraded packages' repository"
-
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Fetch upgrades but do not install."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Package {} is already at the latest release {}."
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "No packages to upgrade."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "The following packages will be upgraded:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Upgrade is not possible."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Safety switch forces the upgrade of following packages:"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} has invalid XML"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "No group named {} found on the system"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "No user named {} found on the system"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Date: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Not removing conflicted file : {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Cleaning build directory..."

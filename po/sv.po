@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 18:39+0300\n"
+"POT-Creation-Date: 2018-01-30 22:31+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -3674,67 +3674,30 @@ msgid "Invalid version string: '{}'"
 msgstr "Ogiltig versionssträng: {}"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade-alternativ"
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Rensar byggkatalog..."
+
+#~ msgid "long integer"
+#~ msgstr "långt heltal"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{}-alternativet kräver ett argument"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Inga paket att uppdatera."
+#~ msgid "INARY package"
+#~ msgstr "Skapar INARY-paketet"
 
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Följande paket kommer att uppdateras:"
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Tar inte bort fil i konflikt: {}"
 
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Uppdatering ej möjlig."
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
 
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
 
-#~ msgid "Generating {},"
-#~ msgstr "Skapar {},"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
-
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Storing {}."
-#~ msgstr "Lagrar {}."
-
-#~ msgid "Storing {}, "
-#~ msgstr "Lagrar {}, "
-
-#~ msgid "Checking /{} "
-#~ msgstr "Kontrollerar /{} "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet {} är trasigt."
+#~ msgid "* Checking {}... "
+#~ msgstr "* Kontrollerar {}... "
 
 #~ msgid ""
 #~ "\n"
@@ -3743,28 +3706,65 @@ msgstr "Ogiltig versionssträng: {}"
 #~ "\n"
 #~ "Paketet {} har förändrade konfigurationsfiler."
 
-#~ msgid "* Checking {}... "
-#~ msgstr "* Kontrollerar {}... "
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet {} är trasigt."
 
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
 
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
+#~ msgid "Checking /{} "
+#~ msgstr "Kontrollerar /{} "
 
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Tar inte bort fil i konflikt: {}"
+#~ msgid "Storing {}, "
+#~ msgstr "Lagrar {}, "
+
+#~ msgid "Storing {}."
+#~ msgstr "Lagrar {}."
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Generating {},"
+#~ msgstr "Skapar {},"
 
 #, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "Skapar INARY-paketet"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{}-alternativet kräver ett argument"
-
-#~ msgid "long integer"
-#~ msgstr "långt heltal"
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Rensar byggkatalog..."
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Uppdatering ej möjlig."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Följande paket kommer att uppdateras:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Inga paket att uppdatera."
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade-alternativ"

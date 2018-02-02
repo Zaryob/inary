@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 18:39+0300\n"
+"POT-Creation-Date: 2018-01-30 22:31+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -4029,6 +4029,140 @@ msgid "Invalid version string: '{}'"
 msgstr "Недопустимая строка версии: {}"
 
 #, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Очистка директории сборки..."
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} опция требует аргумент"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY пакет"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Не удаляется конфликтующий файл: {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Дата: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Пользователь по имени {} не найден в системе"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Группа {} не найдена в системе"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Строка {} содержит неверный XML"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Невозможно прочитать файл {}: {}"
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Проверка {}... "
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} изменение конфигурационного файла."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} поврежден."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Источник является частью {} компонента"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Путь должен начинаться с \"/\": {}"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Проверка /{}"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Изменен конфигурационный файл: {}"
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Обновление не возможно."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Следующие пакеты будут обновлены:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Нет пакетов для обновления."
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Выполнить обновление, но не устанавливать."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Название для обновления пакетов репозитория"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Обновления только по вопросам безопасности"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade опции"
+
+#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -4063,137 +4197,3 @@ msgstr "Недопустимая строка версии: {}"
 #~ "\n"
 #~ "Вы также можете задать компоненты вместо имен пакетов, которые потом\n"
 #~ "будут преобразованы в имена пакетов.\n"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade опции"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Обновления только по вопросам безопасности"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Название для обновления пакетов репозитория"
-
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Выполнить обновление, но не устанавливать."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Нет пакетов для обновления."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Следующие пакеты будут обновлены:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Обновление не возможно."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Изменен конфигурационный файл: {}"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Проверка /{}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Путь должен начинаться с \"/\": {}"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Источник является частью {} компонента"
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} поврежден."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} изменение конфигурационного файла."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Проверка {}... "
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Невозможно прочитать файл {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Строка {} содержит неверный XML"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Группа {} не найдена в системе"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Пользователь по имени {} не найден в системе"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Дата: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Не удаляется конфликтующий файл: {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY пакет"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} опция требует аргумент"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Очистка директории сборки..."

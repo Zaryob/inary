@@ -17,7 +17,7 @@ import glob
 import sys
 import inspect
 import tempfile
-from setuptools import setup, Extension
+from setuptools import setup
 from distutils.cmd import Command
 from distutils.command.build import build
 from distutils.command.install import install
@@ -96,7 +96,7 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        self.installi18n()
+        #self.installi18n()
         self.installdoc()
         self.generateConfigFile()
 
@@ -194,8 +194,7 @@ setup(name="inary",
                 'inary.db',
                 'inary.operations',
                 'inary.sxml',
-                'inary.scenarioapi',
-                'inary.system_literals'],
+                'inary.scenarioapi'],
     scripts = ['inary-cli', 
                'scripts/lsinary',
                'scripts/uninary',
@@ -206,10 +205,6 @@ setup(name="inary",
                 'build_po' : BuildPo,
                 'install' : Install,
                 'uninstall' : Uninstall},
-    ext_modules = [Extension('inary.system_literals.csapi',
-                               sources=['inary/system_literals/csapi.c'],
-                               libraries=[]),
-                    ],
     data_files =datas
     )
 

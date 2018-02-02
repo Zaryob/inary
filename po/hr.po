@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 18:39+0300\n"
+"POT-Creation-Date: 2018-01-30 22:31+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -3750,6 +3750,64 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Obnovi bazu podataka datoteka"
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opcija zahtijeva argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paket"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ne uklanjanje sporne datoteke: {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nije moguće čitati datoteku  {}: {}"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Nadogradnja nije moguća."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Slijedeći paketi će biti nadograđeni:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nema paketa za nadogradnju"
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Ime nadograđenog repozitorija paketa"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "opcije nadogradnje"
+
+#, fuzzy
 #~ msgid ""
 #~ "Downgrade INARY packages\n"
 #~ "\n"
@@ -3777,61 +3835,3 @@ msgstr ""
 #~ "\n"
 #~ "Također možete odrediti komponente umjesto imena paketa, koje će biti\n"
 #~ "proširene na imena paketa.\n"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "opcije nadogradnje"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Ime nadograđenog repozitorija paketa"
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Nema paketa za nadogradnju"
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Slijedeći paketi će biti nadograđeni:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Nadogradnja nije moguća."
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nije moguće čitati datoteku  {}: {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ne uklanjanje sporne datoteke: {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paket"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opcija zahtijeva argument"
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Obnovi bazu podataka datoteka"
