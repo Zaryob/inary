@@ -19,6 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+import sys
 
 class ListInstalled(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Print the list of all installed packages
@@ -74,7 +75,7 @@ Usage: list-installed
 
         if self.options.install_info:
             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
-            sys.stdout.write('===========================================================================')
+            sys.stdout.write('===========================================================================\n')
         for pkg in installed:
             package = self.installdb.get_package(pkg)
             inst_info = self.installdb.get_info(pkg)
