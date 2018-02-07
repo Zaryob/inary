@@ -7,13 +7,13 @@
 # Problem  : If the revdep of the "upgraded only packages"' dependency is not satisfied
 #            it is also added to the upgrade list and creates "confusion"
 #
-#            # spam lu
+#            # inary lu
 #        amarok - KDE için müzik çalıcısı
 #    ksynaptics - Synaptics touchpad yapılandırma aracı
 #        libwmf - Microsoft Word gibi uygulamaların kullan.....
 #      tunepimp - MusicBrainz uyumluluğu olan uygulamalar.......
 #
-#      spam up tunepimp libwmf ksynaptics
+#      inary up tunepimp libwmf ksynaptics
 #      Depolar güncelleniyor
 #      * pardus-1.1 deposu güncelleniyor
 #      pardus-1.1 deposu için güncelleme yok.
@@ -29,10 +29,10 @@
 #
 # Expected:
 #
-# spam either should not upgrade packages out of the given upgrade list or should show
+# inary either should not upgrade packages out of the given upgrade list or should show
 # all the "to be upgraded" list before the conflict warning.
 
-from spam.scenarioapi.scenario import *
+from inary.scenarioapi.scenario import *
 
 AMAROK = "amarok"
 KSYNAPTICS = "ksynaptics"
@@ -46,7 +46,7 @@ let_repo_had(TUNEPIMP, with_version("0.3.9"))
 let_repo_had(KSYNAPTICS)
 let_repo_had(LIBWMF)
 
-let_spam_had(AMAROK, LASTFM, TUNEPIMP, KSYNAPTICS, LIBWMF)
+let_inary_had(AMAROK, LASTFM, TUNEPIMP, KSYNAPTICS, LIBWMF)
 
 def run():
     repo_version_bumped(TUNEPIMP, with_version("0.4.1"))
@@ -54,4 +54,4 @@ def run():
     repo_version_bumped(KSYNAPTICS)
     repo_version_bumped(LIBWMF)
     repo_updated_index()
-    spam_upgraded(LIBWMF, TUNEPIMP, KSYNAPTICS)
+    inary_upgraded(LIBWMF, TUNEPIMP, KSYNAPTICS)

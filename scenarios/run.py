@@ -17,14 +17,14 @@ import shutil
 import glob
 import sys
 
-from spam.scenarioapi.constants import *
+from inary.scenarioapi.constants import *
 
 def clean_out():
-    for x in glob.glob(consts.repo_path + consts.glob_spams):
+    for x in glob.glob(consts.repo_path + consts.glob_inarys):
         os.unlink(x)
 
-    if os.path.exists(consts.spam_db):
-        shutil.rmtree(consts.spam_db)
+    if os.path.exists(consts.inary_db):
+        shutil.rmtree(consts.inary_db)
 
 def run_scen(scenario):
     scenario()

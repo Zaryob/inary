@@ -12,8 +12,8 @@
 #            Emniyet mandalı: taban sistem system.base deki bu paketler kaldırılamıyor: hashalot
 #            Kaldıracak paket yok.
 #            Program sonlandırıldı.
-#            spam.operations.Error: Çakışmalar var
-#            Genel yardım için lütfen 'spam help' komutunu kullanınız.
+#            inary.operations.Error: Çakışmalar var
+#            Genel yardım için lütfen 'inary help' komutunu kullanınız.
 #
 # Problem Description: 
 # 
@@ -26,7 +26,7 @@
 # Pisi should remove the package if answered yes.
 #
 
-from spam.scenarioapi.scenario import *
+from inary.scenarioapi.scenario import *
 
 HASHALOT="hashalot"
 COREUTILS="coreutils"
@@ -38,11 +38,11 @@ let_repo_had(COREUTILS, with_partof("system.base"))
 let_repo_had(GLIBC, with_partof("system.base"))
 let_repo_had(UTIL_LINUX, with_partof("system.base"))
 
-let_spam_had(COREUTILS, HASHALOT, GLIBC, UTIL_LINUX)
+let_inary_had(COREUTILS, HASHALOT, GLIBC, UTIL_LINUX)
 
 def run():
     repo_version_bumped(GLIBC)
     repo_version_bumped(UTIL_LINUX)
     repo_version_bumped(COREUTILS, with_added_conflicts(HASHALOT))
     repo_updated_index()
-    spam_upgraded()
+    inary_upgraded()

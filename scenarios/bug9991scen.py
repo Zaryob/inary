@@ -16,11 +16,11 @@
 # All blacklisted packages should be excluded from upgrade plans.
 
 
-from spam.scenarioapi.scenario import *
+from inary.scenarioapi.scenario import *
 
 DBUS = "dbus"
 GRUB = "grub"
-SPAM = "spam"
+SPAM = "inary"
 KERNEL = "kernel"
 BLUEZ = "bluez"
 
@@ -28,7 +28,7 @@ let_repo_had(KERNEL)
 let_repo_had(BLUEZ)
 let_repo_had(DBUS, with_partof("system.base"))
 let_repo_had(SPAM, with_partof("system.base"))
-let_spam_had(DBUS, SPAM, KERNEL, BLUEZ)
+let_inary_had(DBUS, SPAM, KERNEL, BLUEZ)
 
 def run():
     repo_version_bumped(KERNEL)
@@ -37,5 +37,5 @@ def run():
     repo_version_bumped(SPAM)
     repo_updated_index()
 
-    # The packages in /etc/spam/blacklist should not be upgraded
-    spam_upgraded()
+    # The packages in /etc/inary/blacklist should not be upgraded
+    inary_upgraded()

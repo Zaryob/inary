@@ -6,7 +6,7 @@
 #
 # Problem  : reverse dependency information disappears
 #
-# faik@iago scenarios $ spam info kdelibs
+# faik@iago scenarios $ inary info kdelibs
 # Yüklü paket:
 # Ad: kdelibs, versiyon 3.5.4, sürüm 35, inşa 17
 # Özet: Tüm KDE programlarının ihtiyaç duyduğu KDE kütüphaneleri
@@ -29,7 +29,7 @@
 # They should not. :)
 #
 
-from spam.scenarioapi.scenario import *
+from inary.scenarioapi.scenario import *
 
 FLIGHTGEAR = "flightgear"
 FLIGHTGEAR_DATA = "flightgear-data"
@@ -37,11 +37,11 @@ FLIGHTGEAR_DATA = "flightgear-data"
 let_repo_had(FLIGHTGEAR, with_dependencies(FLIGHTGEAR_DATA))
 let_repo_had(FLIGHTGEAR_DATA)
 
-let_spam_had(FLIGHTGEAR, FLIGHTGEAR_DATA)
+let_inary_had(FLIGHTGEAR, FLIGHTGEAR_DATA)
 
 def run():
-    spam_info(FLIGHTGEAR_DATA)
+    inary_info(FLIGHTGEAR_DATA)
     repo_version_bumped(FLIGHTGEAR_DATA)
     repo_updated_index()
-    spam_upgraded()
-    spam_info(FLIGHTGEAR_DATA)
+    inary_upgraded()
+    inary_info(FLIGHTGEAR_DATA)

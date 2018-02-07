@@ -21,7 +21,7 @@
 # SPaM should not remove the conflicting packages unless fetching of all the new upgrade
 # packages has finished.
 
-from spam.scenarioapi.scenario import *
+from inary.scenarioapi.scenario import *
 
 XORG = "xorg"
 QT = "qt"
@@ -31,7 +31,7 @@ XORG_FONT = "xorg-font"
 
 let_repo_had(XORG)
 let_repo_had(QT, with_dependencies(XORG))
-let_spam_had(XORG, QT)
+let_inary_had(XORG, QT)
 
 def run():
     repo_added_package(XORG_VIDEO, with_conflicts(XORG))
@@ -39,4 +39,4 @@ def run():
     repo_added_package(XORG_SERVER, with_conflicts(XORG), with_dependencies(XORG_VIDEO, XORG_FONT))
     repo_version_bumped(QT, with_removed_dependencies(XORG), with_added_dependencies(XORG_SERVER))
     repo_updated_index()
-    spam_upgraded()
+    inary_upgraded()
