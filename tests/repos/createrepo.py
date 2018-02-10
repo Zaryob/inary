@@ -15,7 +15,7 @@ import shutil
 import time
 
 pspecTemplate = """<?xml version="1.0" ?>
-<!DOCTYPE INARY SYSTEM "http://www.pardus.org.tr/projeler/spam/spam-spec.dtd">
+<!DOCTYPE INARY SYSTEM "http://www.pardus.org.tr/projeler/inary/spam-spec.dtd">
 <INARY>
     <Source>
         <Name>%(package)s</Name>
@@ -74,13 +74,13 @@ componentTemplate = """
 """
 
 actionsTemplate = """
-from spam.actionsapi import spamtools
+from inary.actionsapi import spamtools
 
 WorkDir = "skeleton"
 
 def install():
-    spamtools.dobin("skeleton.py")
-    spamtools.rename("/usr/bin/skeleton.py", "%s")
+    inarytools.dobin("skeleton.py")
+    inarytools.rename("/usr/bin/skeleton.py", "%s")
 """
 
 distributionTemplate = """
@@ -270,8 +270,8 @@ class BuildFarm:
     def create_index(self, repo):
         binrepo = "%s-bin" % repo
         shutil.copy("%s/distribution.xml" % repo, binrepo)
-        os.system("spam index %s --skip-signing -o %s/spam-index.xml" % (repo, repo))
-        os.system("spam index --skip-sources --skip-signing -o %s/spam-index.xml %s %s" % (binrepo, binrepo, repo))
+        os.system("inary index %s --skip-signing -o %s/spam-index.xml" % (repo, repo))
+        os.system("inary index --skip-sources --skip-signing -o %s/spam-index.xml %s %s" % (binrepo, binrepo, repo))
 
     def build(self, repos):
         for repo in repos:
@@ -279,7 +279,7 @@ class BuildFarm:
             os.mkdir(binrepo)
             for root, dirs, files in os.walk(repo):
                 if "pspec.xml" in files:
-                    os.system("spam build %s/%s -O %s" % (root, "pspec.xml", binrepo))
+                    os.system("inary build %s/%s -O %s" % (root, "pspec.xml", binrepo))
             self.create_index(repo)
 
 if __name__ == "__main__":
