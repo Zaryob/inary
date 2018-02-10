@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-30 22:31+0300\n"
+"POT-Creation-Date: 2018-02-10 14:13+0300\n"
 "PO-Revision-Date: 2014-02-26 16:34+0000\n"
 "Last-Translator: obsoleteman <tulliana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/INARYLinux/language/pt_BR/)\n"
@@ -200,76 +200,74 @@ msgstr "util {} não pode ser encontrado"
 msgid "Warning: {0} does not exist, using plain name {1}"
 msgstr "Aviso: {0} não existe, usando o nome de planície {1}"
 
-#: inary/actionsapi/inarytools.py:80 inary/actionsapi/inarytools.py:137
-#, fuzzy
-msgid "No file matched pattern \"{}\""
-msgstr "Nenhum ficheiro corresponde padrão \"{}\""
-
-#: inary/actionsapi/inarytools.py:147
-#, fuzzy
-msgid "ActionsAPI [doman]: Wrong man page file: {}"
-msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
-
-#: inary/actionsapi/inarytools.py:174
-#, fuzzy
-msgid "No file matched pattern \"{}\". 'domove' operation failed."
-msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'domove \"operação falhou."
-
-#: inary/actionsapi/inarytools.py:193
-#, fuzzy, python-brace-format
-msgid "ActionsAPI [rename]: {0}: {1}"
-msgstr "ActionsAPI [rename]: {}: {}"
-
-#: inary/actionsapi/inarytools.py:230
-#, fuzzy
-msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
-msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'dosed \"operação falhou."
-
-#: inary/actionsapi/inarytools.py:244
-#, fuzzy
-msgid "dosed method has not changed file '{}'."
-msgstr "método de dosed não alterou o ficheiro {}."
-
-#: inary/actionsapi/inarytools.py:245
-msgid "{} has been changed by dosed method."
+#: inary/actionsapi/inarytools.py:56 inary/actionsapi/inarytools.py:74
+#: inary/actionsapi/inarytools.py:91
+msgid "Insufficient arguments."
 msgstr ""
 
-#: inary/actionsapi/inarytools.py:248
+#: inary/actionsapi/inarytools.py:64
 #, fuzzy
-msgid "File does not exist or permission denied: {}"
-msgstr "O ficheiro não existe ou permissão negada: {}"
+msgid "No executable file matched pattern \"{}\"."
+msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/inarytools.py:265
-#, fuzzy
-msgid "ActionsAPI [dosym]: File already exists: {}"
-msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
-
-#: inary/actionsapi/inarytools.py:274
-#: inary/actionsapi/inarytoolsfunctions.py:71
+#: inary/actionsapi/inarytools.py:82 inary/actionsapi/inarytools.py:337
 #, fuzzy
 msgid "No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
+#: inary/actionsapi/inarytools.py:143 inary/actionsapi/inarytools.py:200
+#, fuzzy
+msgid "No file matched pattern \"{}\""
+msgstr "Nenhum ficheiro corresponde padrão \"{}\""
+
+#: inary/actionsapi/inarytools.py:210
+#, fuzzy
+msgid "ActionsAPI [doman]: Wrong man page file: {}"
+msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
+
+#: inary/actionsapi/inarytools.py:237
+#, fuzzy
+msgid "No file matched pattern \"{}\". 'domove' operation failed."
+msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'domove \"operação falhou."
+
+#: inary/actionsapi/inarytools.py:256
+#, fuzzy, python-brace-format
+msgid "ActionsAPI [rename]: {0}: {1}"
+msgstr "ActionsAPI [rename]: {}: {}"
+
+#: inary/actionsapi/inarytools.py:293
+#, fuzzy
+msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
+msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'dosed \"operação falhou."
+
+#: inary/actionsapi/inarytools.py:307
+#, fuzzy
+msgid "dosed method has not changed file '{}'."
+msgstr "método de dosed não alterou o ficheiro {}."
+
+#: inary/actionsapi/inarytools.py:308
+msgid "{} has been changed by dosed method."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:311
+#, fuzzy
+msgid "File does not exist or permission denied: {}"
+msgstr "O ficheiro não existe ou permissão negada: {}"
+
+#: inary/actionsapi/inarytools.py:328
+#, fuzzy
+msgid "ActionsAPI [dosym]: File already exists: {}"
+msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
+
+#: inary/actionsapi/inarytools.py:364 inary/actionsapi/shelltools.py:95
 #, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". Remover operaçao falhou."
 
-#: inary/actionsapi/inarytools.py:310
+#: inary/actionsapi/inarytools.py:373
 #, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". Remover operação falhou."
-
-#: inary/actionsapi/inarytoolsfunctions.py:45
-#: inary/actionsapi/inarytoolsfunctions.py:63
-#: inary/actionsapi/inarytoolsfunctions.py:80
-msgid "Insufficient arguments."
-msgstr ""
-
-#: inary/actionsapi/inarytoolsfunctions.py:53
-#, fuzzy
-msgid "No executable file matched pattern \"{}\"."
-msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/javamodules.py:84 inary/actionsapi/javamodules.py:193
 #, fuzzy
@@ -379,111 +377,111 @@ msgstr ""
 msgid "Running 'ruby {}' failed."
 msgstr "Execução {} falhou."
 
-#: inary/actionsapi/shelltools.py:50
+#: inary/actionsapi/shelltools.py:49
 msgid "Cannot create directory {}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:58
+#: inary/actionsapi/shelltools.py:57
 #, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
-#: inary/actionsapi/shelltools.py:64
+#: inary/actionsapi/shelltools.py:63
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/shelltools.py:71
+#: inary/actionsapi/shelltools.py:70
 #, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:73
+#: inary/actionsapi/shelltools.py:72
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
-#: inary/actionsapi/shelltools.py:81
+#: inary/actionsapi/shelltools.py:80
 #, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:83
+#: inary/actionsapi/shelltools.py:82
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
-#: inary/actionsapi/shelltools.py:90
+#: inary/actionsapi/shelltools.py:89
 #, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:104
+#: inary/actionsapi/shelltools.py:103
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:108
+#: inary/actionsapi/shelltools.py:107
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
-#: inary/actionsapi/shelltools.py:116
+#: inary/actionsapi/shelltools.py:115
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:120
+#: inary/actionsapi/shelltools.py:119
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:126
+#: inary/actionsapi/shelltools.py:125
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/shelltools.py:133
+#: inary/actionsapi/shelltools.py:132
 #, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:135
+#: inary/actionsapi/shelltools.py:134
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
-#: inary/actionsapi/shelltools.py:142
+#: inary/actionsapi/shelltools.py:141
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/shelltools.py:149
+#: inary/actionsapi/shelltools.py:148
 #, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:165
+#: inary/actionsapi/shelltools.py:164
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
-#: inary/actionsapi/shelltools.py:180
+#: inary/actionsapi/shelltools.py:179
 #, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:182
+#: inary/actionsapi/shelltools.py:181
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:190
+#: inary/actionsapi/shelltools.py:189
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
-#: inary/actionsapi/shelltools.py:199
+#: inary/actionsapi/shelltools.py:198
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr ""
 
-#: inary/actionsapi/shelltools.py:258
+#: inary/actionsapi/shelltools.py:257
 #, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr ""
@@ -1153,7 +1151,7 @@ msgstr ""
 msgid ""
 "Update the system a new release\n"
 "\n"
-"Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]\n"
+"Usage: dist-update [ next_dist_release_repo_url ] \n"
 "\n"
 "                WARNING: DIST-UPDATE risk içerir.\n"
 "    Dist-Update yapmadan önce iki kez düşününüz. Çünkü\n"
@@ -1175,19 +1173,15 @@ msgstr ""
 msgid "dist-update options"
 msgstr "%prog [optçaos]"
 
-#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:53
-msgid "Security related package upgrades only"
-msgstr ""
-
-#: inary/cli/distupdate.py:56 inary/cli/upgrade.py:67
+#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:67
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: inary/cli/distupdate.py:59 inary/cli/upgrade.py:70
+#: inary/cli/distupdate.py:57 inary/cli/upgrade.py:70
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr ""
 
-#: inary/cli/distupdate.py:63 inary/cli/upgrade.py:74
+#: inary/cli/distupdate.py:61 inary/cli/upgrade.py:74
 msgid "compare sha1sum repo and installed packages"
 msgstr ""
 
@@ -1616,7 +1610,7 @@ msgid "list-available options"
 msgstr ""
 
 #: inary/cli/listavailable.py:46 inary/cli/listcomponents.py:41
-#: inary/cli/listinstalled.py:46 inary/cli/listsources.py:40
+#: inary/cli/listinstalled.py:47 inary/cli/listsources.py:40
 #: inary/cli/listupgrades.py:43 inary/cli/searchfile.py:39
 msgid "Show in long format"
 msgstr ""
@@ -1655,30 +1649,30 @@ msgstr ""
 msgid "Name of the source or package repository"
 msgstr ""
 
-#: inary/cli/listinstalled.py:24
+#: inary/cli/listinstalled.py:25
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
 "Usage: list-installed\n"
 msgstr ""
 
-#: inary/cli/listinstalled.py:38
+#: inary/cli/listinstalled.py:39
 msgid "list-installed options"
 msgstr ""
 
-#: inary/cli/listinstalled.py:43
+#: inary/cli/listinstalled.py:44
 msgid "Only list the installed packages built by the given host"
 msgstr ""
 
-#: inary/cli/listinstalled.py:48
+#: inary/cli/listinstalled.py:49
 msgid "List installed packages under given component"
 msgstr ""
 
-#: inary/cli/listinstalled.py:50 inary/cli/listupgrades.py:47
+#: inary/cli/listinstalled.py:51 inary/cli/listupgrades.py:47
 msgid "Show detailed install info"
 msgstr ""
 
-#: inary/cli/listinstalled.py:76 inary/cli/listupgrades.py:72
+#: inary/cli/listinstalled.py:77 inary/cli/listupgrades.py:72
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 msgstr ""
 
@@ -2001,6 +1995,10 @@ msgstr ""
 
 #: inary/cli/upgrade.py:49
 msgid "upgrade options"
+msgstr ""
+
+#: inary/cli/upgrade.py:53
+msgid "Security related package upgrades only"
 msgstr ""
 
 #: inary/cli/upgrade.py:55
@@ -2716,6 +2714,10 @@ msgstr ""
 msgid "* Find missing packages for distupdate "
 msgstr ""
 
+#: inary/operations/distupdate.py:300
+msgid "A problem occured"
+msgstr ""
+
 #: inary/operations/emerge.py:35
 msgid "No packages to emerge."
 msgstr ""
@@ -3008,87 +3010,87 @@ msgid "  total space needed for distupdate {}"
 msgstr ""
 
 #: inary/reactor.py:362
-msgid "Do you want make dist-update?"
+msgid "Do you want make dist update?"
 msgstr ""
 
-#: inary/reactor.py:455
+#: inary/reactor.py:366 inary/reactor.py:746
+msgid "Repo {} removed from system."
+msgstr ""
+
+#: inary/reactor.py:462
 msgid "Cleaning package cache {}..."
 msgstr ""
 
-#: inary/reactor.py:457
+#: inary/reactor.py:464
 msgid "Cleaning source archive cache {}..."
 msgstr ""
 
-#: inary/reactor.py:459
+#: inary/reactor.py:466
 msgid "Cleaning temporary directory {}..."
 msgstr ""
 
-#: inary/reactor.py:463
+#: inary/reactor.py:470
 msgid "Removing cache file {}..."
 msgstr ""
 
-#: inary/reactor.py:494
+#: inary/reactor.py:501
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: inary/reactor.py:655
+#: inary/reactor.py:662
 msgid "scom package is not fully installed"
 msgstr ""
 
-#: inary/reactor.py:667
+#: inary/reactor.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "util {} não pode ser encontrado"
 
-#: inary/reactor.py:709
+#: inary/reactor.py:716
 msgid "Building index of Inary files under {}"
 msgstr ""
 
-#: inary/reactor.py:714
+#: inary/reactor.py:721
 msgid "Index file written"
 msgstr ""
 
-#: inary/reactor.py:720
+#: inary/reactor.py:727
 msgid "Not a valid repo name."
 msgstr ""
 
-#: inary/reactor.py:723
+#: inary/reactor.py:730
 msgid "Repo {} already present."
 msgstr ""
 
-#: inary/reactor.py:726
+#: inary/reactor.py:733
 msgid "Repo already present with name {}."
 msgstr ""
 
-#: inary/reactor.py:731
+#: inary/reactor.py:738
 msgid "Repo {} added to system."
 msgstr ""
 
-#: inary/reactor.py:739
-msgid "Repo {} removed from system."
-msgstr ""
-
-#: inary/reactor.py:741
+#: inary/reactor.py:748
 msgid "Repository {} does not exist. Cannot remove."
 msgstr ""
 
-#: inary/reactor.py:762
+#: inary/reactor.py:769
 msgid "Updating repository: {}"
 msgstr ""
 
-#: inary/reactor.py:771
+#: inary/reactor.py:778
 msgid "{} repository information is up-to-date."
 msgstr ""
 
-#: inary/reactor.py:773
+#: inary/reactor.py:780
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: inary/reactor.py:786
+#: inary/reactor.py:793
 msgid "Package database updated."
 msgstr ""
 
-#: inary/reactor.py:788
+#: inary/reactor.py:795
 msgid "No repository named {} found."
 msgstr ""
 
@@ -3307,163 +3309,6 @@ msgstr ""
 msgid "Cannot read URI {0}: {1}"
 msgstr ""
 
-#: inary/system_literals/localedata.py:46
-msgid "Turkish"
-msgstr "Turco"
-
-#: inary/system_literals/localedata.py:51
-msgid "Turkish Q"
-msgstr "Turco Q"
-
-#: inary/system_literals/localedata.py:52
-msgid "Turkish F"
-msgstr "Turco F"
-
-#: inary/system_literals/localedata.py:57
-msgid "English"
-msgstr "Inglês"
-
-#: inary/system_literals/localedata.py:62
-#, fuzzy
-msgid "English GB"
-msgstr "Inglês"
-
-#: inary/system_literals/localedata.py:68
-msgid "Afrikaans"
-msgstr "Africâner"
-
-#: inary/system_literals/localedata.py:74
-msgid "Arabic"
-msgstr "Árabe"
-
-#: inary/system_literals/localedata.py:80
-msgid "Belgium"
-msgstr "Belgo"
-
-#: inary/system_literals/localedata.py:86
-msgid "Bulgarian"
-msgstr "Búlgaro"
-
-#: inary/system_literals/localedata.py:92
-msgid "Catalan"
-msgstr "Catalã"
-
-#: inary/system_literals/localedata.py:98
-msgid "Welsh"
-msgstr "Galês"
-
-#: inary/system_literals/localedata.py:104
-msgid "Czech"
-msgstr "Tcheco"
-
-#: inary/system_literals/localedata.py:110
-msgid "Danish"
-msgstr "Dinamarquês"
-
-#: inary/system_literals/localedata.py:116
-msgid "German"
-msgstr "Alemão"
-
-#: inary/system_literals/localedata.py:122
-msgid "Spanish"
-msgstr "Espanhol"
-
-#: inary/system_literals/localedata.py:128
-msgid "Estonian"
-msgstr "Estoniano"
-
-#: inary/system_literals/localedata.py:134
-msgid "Finnish"
-msgstr "Finlandês"
-
-#: inary/system_literals/localedata.py:140
-msgid "French"
-msgstr "Francês"
-
-#: inary/system_literals/localedata.py:146
-msgid "Greek"
-msgstr "Grego"
-
-#: inary/system_literals/localedata.py:152
-msgid "Croatian"
-msgstr "Croata"
-
-#: inary/system_literals/localedata.py:158
-msgid "Hungarian"
-msgstr "Húngaro"
-
-#: inary/system_literals/localedata.py:166
-msgid "Icelandic"
-msgstr "Islandês"
-
-#: inary/system_literals/localedata.py:172
-msgid "Italian"
-msgstr "Italiano"
-
-#: inary/system_literals/localedata.py:178
-msgid "Japanese"
-msgstr "Japonês"
-
-#: inary/system_literals/localedata.py:184
-msgid "Macedonian"
-msgstr "Macedônio"
-
-#: inary/system_literals/localedata.py:190
-msgid "Malayalam"
-msgstr "Malaiala"
-
-#: inary/system_literals/localedata.py:196
-msgid "Norwegian"
-msgstr "Norueguês"
-
-#: inary/system_literals/localedata.py:202
-msgid "Dutch"
-msgstr "Holandês"
-
-#: inary/system_literals/localedata.py:208
-msgid "Polish"
-msgstr "Polonês"
-
-#: inary/system_literals/localedata.py:214
-msgid "Portuguese"
-msgstr "Português"
-
-#: inary/system_literals/localedata.py:220
-msgid "Brazilian"
-msgstr "Português do Brasil"
-
-#: inary/system_literals/localedata.py:226
-msgid "Russian"
-msgstr "Russo"
-
-#: inary/system_literals/localedata.py:234
-msgid "Slovak"
-msgstr "Eslovaco"
-
-#: inary/system_literals/localedata.py:240
-msgid "Slovenian"
-msgstr "Esloveno"
-
-#: inary/system_literals/localedata.py:246
-msgid "Serbian"
-msgstr "Sérvio"
-
-#: inary/system_literals/localedata.py:252
-msgid "Swedish"
-msgstr "Sueco"
-
-#: inary/system_literals/localedata.py:259
-msgid "Ukrainian"
-msgstr "Ucraniano"
-
-#: inary/system_literals/localedata.py:265
-msgid "Vietnamese"
-msgstr "Vietnamita"
-
-#: inary/system_literals/sysutils.py:116
-msgid "Module: \"subprocess\" can not import"
-msgstr ""
-
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
@@ -3546,12 +3391,131 @@ msgstr ""
 msgid "Invalid delta package name: {}"
 msgstr ""
 
+#: inary/util.py:956
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/version.py:64
 msgid "Invalid version string: '{}'"
 msgstr ""
 
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opção requer um argumento"
+
 #~ msgid "long integer"
 #~ msgstr "totalidade longo"
 
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opção requer um argumento"
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamita"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ucraniano"
+
+#~ msgid "Swedish"
+#~ msgstr "Sueco"
+
+#~ msgid "Serbian"
+#~ msgstr "Sérvio"
+
+#~ msgid "Slovenian"
+#~ msgstr "Esloveno"
+
+#~ msgid "Slovak"
+#~ msgstr "Eslovaco"
+
+#~ msgid "Russian"
+#~ msgstr "Russo"
+
+#~ msgid "Brazilian"
+#~ msgstr "Português do Brasil"
+
+#~ msgid "Portuguese"
+#~ msgstr "Português"
+
+#~ msgid "Polish"
+#~ msgstr "Polonês"
+
+#~ msgid "Dutch"
+#~ msgstr "Holandês"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norueguês"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malaiala"
+
+#~ msgid "Macedonian"
+#~ msgstr "Macedônio"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonês"
+
+#~ msgid "Italian"
+#~ msgstr "Italiano"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandês"
+
+#~ msgid "Hungarian"
+#~ msgstr "Húngaro"
+
+#~ msgid "Croatian"
+#~ msgstr "Croata"
+
+#~ msgid "Greek"
+#~ msgstr "Grego"
+
+#~ msgid "French"
+#~ msgstr "Francês"
+
+#~ msgid "Finnish"
+#~ msgstr "Finlandês"
+
+#~ msgid "Estonian"
+#~ msgstr "Estoniano"
+
+#~ msgid "Spanish"
+#~ msgstr "Espanhol"
+
+#~ msgid "German"
+#~ msgstr "Alemão"
+
+#~ msgid "Danish"
+#~ msgstr "Dinamarquês"
+
+#~ msgid "Czech"
+#~ msgstr "Tcheco"
+
+#~ msgid "Welsh"
+#~ msgstr "Galês"
+
+#~ msgid "Catalan"
+#~ msgstr "Catalã"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Búlgaro"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgo"
+
+#~ msgid "Arabic"
+#~ msgstr "Árabe"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Africâner"
+
+#, fuzzy
+#~ msgid "English GB"
+#~ msgstr "Inglês"
+
+#~ msgid "English"
+#~ msgstr "Inglês"
+
+#~ msgid "Turkish F"
+#~ msgstr "Turco F"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Turco Q"
+
+#~ msgid "Turkish"
+#~ msgstr "Turco"

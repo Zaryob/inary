@@ -106,3 +106,4 @@ def run(parameters=''):
 
     if system('ruby {}'.format(parameters)):
         raise RuntimeError(_("Running 'ruby {}' failed.").format(parameters))
+

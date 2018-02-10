@@ -76,7 +76,7 @@ def getNodeText(node, tagpath = ""):
         # KLUDGE: FIXME: python 2.x bug: force decoding as UTF-8
         child_data = str(child.data())
         #print('child_data=', child_data.strip())
-        return child_data.strip() # in any case, strip whitespaces...
+        return str(child_data.strip()) # in any case, strip whitespaces...
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 

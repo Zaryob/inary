@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-30 22:31+0300\n"
+"POT-Creation-Date: 2018-02-10 14:13+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -202,76 +202,74 @@ msgstr "Утилита {} не найдена"
 msgid "Warning: {0} does not exist, using plain name {1}"
 msgstr "Предупреждение: {0} не существует, используя {1}"
 
-#: inary/actionsapi/inarytools.py:80 inary/actionsapi/inarytools.py:137
+#: inary/actionsapi/inarytools.py:56 inary/actionsapi/inarytools.py:74
+#: inary/actionsapi/inarytools.py:91
+msgid "Insufficient arguments."
+msgstr "Недостаточно аргументов."
+
+#: inary/actionsapi/inarytools.py:64
 #, fuzzy
-msgid "No file matched pattern \"{}\""
-msgstr "Нет файла, соответствующего запросу \"{}\""
+msgid "No executable file matched pattern \"{}\"."
+msgstr "Нет запускаемого файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/inarytools.py:147
-#, fuzzy
-msgid "ActionsAPI [doman]: Wrong man page file: {}"
-msgstr "ActionsAPI [doman]: Неверная страница man: {}"
-
-#: inary/actionsapi/inarytools.py:174
-#, fuzzy
-msgid "No file matched pattern \"{}\". 'domove' operation failed."
-msgstr "Нет файла, соответствующего шаблону \"{}\". 'domove' операция отменена."
-
-#: inary/actionsapi/inarytools.py:193
-#, fuzzy, python-brace-format
-msgid "ActionsAPI [rename]: {0}: {1}"
-msgstr "ActionsAPI [rename]: {}: {}"
-
-#: inary/actionsapi/inarytools.py:230
-#, fuzzy
-msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
-msgstr "Нет файла, соответствующего запросу: \"{}\". 'dosed' операция отменена."
-
-#: inary/actionsapi/inarytools.py:244
-#, fuzzy
-msgid "dosed method has not changed file '{}'."
-msgstr "dosed метод не поменял файл {}."
-
-#: inary/actionsapi/inarytools.py:245
-msgid "{} has been changed by dosed method."
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:248
-#, fuzzy
-msgid "File does not exist or permission denied: {}"
-msgstr "Файл не существует или доступ запрещен: {}"
-
-#: inary/actionsapi/inarytools.py:265
-#, fuzzy
-msgid "ActionsAPI [dosym]: File already exists: {}"
-msgstr "ActionsAPI [dosym]: Файл уже существует: {}"
-
-#: inary/actionsapi/inarytools.py:274
-#: inary/actionsapi/inarytoolsfunctions.py:71
+#: inary/actionsapi/inarytools.py:82 inary/actionsapi/inarytools.py:337
 #, fuzzy
 msgid "No file matched pattern \"{}\"."
 msgstr "Нет файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
+#: inary/actionsapi/inarytools.py:143 inary/actionsapi/inarytools.py:200
+#, fuzzy
+msgid "No file matched pattern \"{}\""
+msgstr "Нет файла, соответствующего запросу \"{}\""
+
+#: inary/actionsapi/inarytools.py:210
+#, fuzzy
+msgid "ActionsAPI [doman]: Wrong man page file: {}"
+msgstr "ActionsAPI [doman]: Неверная страница man: {}"
+
+#: inary/actionsapi/inarytools.py:237
+#, fuzzy
+msgid "No file matched pattern \"{}\". 'domove' operation failed."
+msgstr "Нет файла, соответствующего шаблону \"{}\". 'domove' операция отменена."
+
+#: inary/actionsapi/inarytools.py:256
+#, fuzzy, python-brace-format
+msgid "ActionsAPI [rename]: {0}: {1}"
+msgstr "ActionsAPI [rename]: {}: {}"
+
+#: inary/actionsapi/inarytools.py:293
+#, fuzzy
+msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
+msgstr "Нет файла, соответствующего запросу: \"{}\". 'dosed' операция отменена."
+
+#: inary/actionsapi/inarytools.py:307
+#, fuzzy
+msgid "dosed method has not changed file '{}'."
+msgstr "dosed метод не поменял файл {}."
+
+#: inary/actionsapi/inarytools.py:308
+msgid "{} has been changed by dosed method."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:311
+#, fuzzy
+msgid "File does not exist or permission denied: {}"
+msgstr "Файл не существует или доступ запрещен: {}"
+
+#: inary/actionsapi/inarytools.py:328
+#, fuzzy
+msgid "ActionsAPI [dosym]: File already exists: {}"
+msgstr "ActionsAPI [dosym]: Файл уже существует: {}"
+
+#: inary/actionsapi/inarytools.py:364 inary/actionsapi/shelltools.py:95
 #, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Нет файла, соответствующего шаблону \"{}\". Операция удаления отменена."
 
-#: inary/actionsapi/inarytools.py:310
+#: inary/actionsapi/inarytools.py:373
 #, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
 msgstr "Нет директории, соответствующего шаблону \"{}\". Операция удаления директории отменена."
-
-#: inary/actionsapi/inarytoolsfunctions.py:45
-#: inary/actionsapi/inarytoolsfunctions.py:63
-#: inary/actionsapi/inarytoolsfunctions.py:80
-msgid "Insufficient arguments."
-msgstr "Недостаточно аргументов."
-
-#: inary/actionsapi/inarytoolsfunctions.py:53
-#, fuzzy
-msgid "No executable file matched pattern \"{}\"."
-msgstr "Нет запускаемого файла, соответствующего шаблону \"{}\"."
 
 #: inary/actionsapi/javamodules.py:84 inary/actionsapi/javamodules.py:193
 #, fuzzy
@@ -384,117 +382,117 @@ msgstr "Похоже, что .pro файлов несколько, Вы долж
 msgid "Running 'ruby {}' failed."
 msgstr "Ошибка запуска 'ruby {}'."
 
-#: inary/actionsapi/shelltools.py:50
+#: inary/actionsapi/shelltools.py:49
 #, fuzzy
 msgid "Cannot create directory {}"
 msgstr "Невозможно создать директорию {}"
 
-#: inary/actionsapi/shelltools.py:58
+#: inary/actionsapi/shelltools.py:57
 #, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr "ActionsAPI [echo]: Невозможно добавить в файл {}."
 
-#: inary/actionsapi/shelltools.py:64
+#: inary/actionsapi/shelltools.py:63
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Нет файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/shelltools.py:71
+#: inary/actionsapi/shelltools.py:70
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Операция не разрешается: %s (режим: 0%o)"
 
-#: inary/actionsapi/shelltools.py:73
+#: inary/actionsapi/shelltools.py:72
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: Файл {} не существует."
 
-#: inary/actionsapi/shelltools.py:81
+#: inary/actionsapi/shelltools.py:80
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: Операция не разрешает: {0} (uid: {1}, gid: {2})"
 
-#: inary/actionsapi/shelltools.py:83
+#: inary/actionsapi/shelltools.py:82
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: Файл {} не существует."
 
-#: inary/actionsapi/shelltools.py:90
+#: inary/actionsapi/shelltools.py:89
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Доступ запрещен: {0} to {1}"
 
-#: inary/actionsapi/shelltools.py:104
+#: inary/actionsapi/shelltools.py:103
 #, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Доступ запрещен: {}."
 
-#: inary/actionsapi/shelltools.py:108
+#: inary/actionsapi/shelltools.py:107
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [unlink]: Файл {} не существует."
 
-#: inary/actionsapi/shelltools.py:116
+#: inary/actionsapi/shelltools.py:115
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr "ActionsAPI [unlinkDir]: Операция не разрешается: {}"
 
-#: inary/actionsapi/shelltools.py:120
+#: inary/actionsapi/shelltools.py:119
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Директория {} не существует."
 
-#: inary/actionsapi/shelltools.py:126
+#: inary/actionsapi/shelltools.py:125
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Нет файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/shelltools.py:133
+#: inary/actionsapi/shelltools.py:132
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [move]: Доступ запрещен: {0} to {1}"
 
-#: inary/actionsapi/shelltools.py:135
+#: inary/actionsapi/shelltools.py:134
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [move]: Файл {} не существует."
 
-#: inary/actionsapi/shelltools.py:142
+#: inary/actionsapi/shelltools.py:141
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [copy]: Нет файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/shelltools.py:149
+#: inary/actionsapi/shelltools.py:148
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [copy]: Доступ запрещен: {0} to {1}"
 
-#: inary/actionsapi/shelltools.py:165
+#: inary/actionsapi/shelltools.py:164
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [copy]: Файл {} не существует."
 
-#: inary/actionsapi/shelltools.py:180
+#: inary/actionsapi/shelltools.py:179
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree] {0} to {1}: {2}"
 
-#: inary/actionsapi/shelltools.py:182
+#: inary/actionsapi/shelltools.py:181
 #, fuzzy
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr "ActionsAPI [copytree]: Директория {} не существует."
 
-#: inary/actionsapi/shelltools.py:190
+#: inary/actionsapi/shelltools.py:189
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [touch]: Нет файла, соответствующего шаблону \"{}\"."
 
-#: inary/actionsapi/shelltools.py:199
+#: inary/actionsapi/shelltools.py:198
 #, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Доступ запрещен: {}"
 
-#: inary/actionsapi/shelltools.py:258
+#: inary/actionsapi/shelltools.py:257
 #, fuzzy, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr "Команда \"{0}\" завершилась с ошибкой, возвращенное значение было {1}."
@@ -1270,7 +1268,7 @@ msgstr ""
 msgid ""
 "Update the system a new release\n"
 "\n"
-"Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]\n"
+"Usage: dist-update [ next_dist_release_repo_url ] \n"
 "\n"
 "                WARNING: DIST-UPDATE risk içerir.\n"
 "    Dist-Update yapmadan önce iki kez düşününüz. Çünkü\n"
@@ -1292,19 +1290,15 @@ msgstr ""
 msgid "dist-update options"
 msgstr "опции list-upgrades"
 
-#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:53
-msgid "Security related package upgrades only"
-msgstr "Обновления только по вопросам безопасности"
-
-#: inary/cli/distupdate.py:56 inary/cli/upgrade.py:67
+#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:67
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
 
-#: inary/cli/distupdate.py:59 inary/cli/upgrade.py:70
+#: inary/cli/distupdate.py:57 inary/cli/upgrade.py:70
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
 
-#: inary/cli/distupdate.py:63 inary/cli/upgrade.py:74
+#: inary/cli/distupdate.py:61 inary/cli/upgrade.py:74
 #, fuzzy
 msgid "compare sha1sum repo and installed packages"
 msgstr "Переустановить  уже установленные пакеты"
@@ -1829,7 +1823,7 @@ msgid "list-available options"
 msgstr "list-available опции"
 
 #: inary/cli/listavailable.py:46 inary/cli/listcomponents.py:41
-#: inary/cli/listinstalled.py:46 inary/cli/listsources.py:40
+#: inary/cli/listinstalled.py:47 inary/cli/listsources.py:40
 #: inary/cli/listupgrades.py:43 inary/cli/searchfile.py:39
 msgid "Show in long format"
 msgstr "Показать в расширенном формате"
@@ -1875,7 +1869,7 @@ msgstr "опции list-component"
 msgid "Name of the source or package repository"
 msgstr "Имя исходного или пакетного репозитория"
 
-#: inary/cli/listinstalled.py:24
+#: inary/cli/listinstalled.py:25
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
@@ -1885,23 +1879,23 @@ msgstr ""
 "\n"
 "Использование: list-installed\n"
 
-#: inary/cli/listinstalled.py:38
+#: inary/cli/listinstalled.py:39
 msgid "list-installed options"
 msgstr "опции list-installed"
 
-#: inary/cli/listinstalled.py:43
+#: inary/cli/listinstalled.py:44
 msgid "Only list the installed packages built by the given host"
 msgstr "Показать только список установленных пакетов, собранных указанным хостом"
 
-#: inary/cli/listinstalled.py:48
+#: inary/cli/listinstalled.py:49
 msgid "List installed packages under given component"
 msgstr "Список доступных пакетов по данному компоненту"
 
-#: inary/cli/listinstalled.py:50 inary/cli/listupgrades.py:47
+#: inary/cli/listinstalled.py:51 inary/cli/listupgrades.py:47
 msgid "Show detailed install info"
 msgstr "Показать детальную информацию об установке"
 
-#: inary/cli/listinstalled.py:76 inary/cli/listupgrades.py:72
+#: inary/cli/listinstalled.py:77 inary/cli/listupgrades.py:72
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 msgstr "Имя пакета |Ст| Версия| Рел.| Дистр.| Дата"
 
@@ -2325,6 +2319,10 @@ msgstr ""
 #: inary/cli/upgrade.py:49
 msgid "upgrade options"
 msgstr "upgrade опции"
+
+#: inary/cli/upgrade.py:53
+msgid "Security related package upgrades only"
+msgstr "Обновления только по вопросам безопасности"
 
 #: inary/cli/upgrade.py:55
 msgid "Do not update repositories"
@@ -3111,6 +3109,10 @@ msgstr ""
 msgid "* Find missing packages for distupdate "
 msgstr ""
 
+#: inary/operations/distupdate.py:300
+msgid "A problem occured"
+msgstr ""
+
 #: inary/operations/emerge.py:35
 msgid "No packages to emerge."
 msgstr "Нет пакетов для сборки."
@@ -3434,100 +3436,100 @@ msgstr ""
 
 #: inary/reactor.py:362
 #, fuzzy
-msgid "Do you want make dist-update?"
+msgid "Do you want make dist update?"
 msgstr "Вы хотите продолжить?"
 
-#: inary/reactor.py:455
-#, fuzzy
-msgid "Cleaning package cache {}..."
-msgstr "Очистка кэша пакетов {}..."
-
-#: inary/reactor.py:457
-#, fuzzy
-msgid "Cleaning source archive cache {}..."
-msgstr "Очистка кеша архивов исходных файлов {}..."
-
-#: inary/reactor.py:459
-#, fuzzy
-msgid "Cleaning temporary directory {}..."
-msgstr "Очистка временного каталога {}..."
-
-#: inary/reactor.py:463
-#, fuzzy
-msgid "Removing cache file {}..."
-msgstr "Удаление файла кэша {}."
-
-#: inary/reactor.py:494
-msgid "Taking snapshot of the system"
-msgstr "Снятие снимка с системы"
-
-#: inary/reactor.py:655
-#, fuzzy
-msgid "scom package is not fully installed"
-msgstr "Пакет сomar  не полностью установлен"
-
-#: inary/reactor.py:667
-#, fuzzy
-msgid "File {} not found"
-msgstr "Файл {} не найден"
-
-#: inary/reactor.py:709
-#, fuzzy
-msgid "Building index of Inary files under {}"
-msgstr "Создание индексов файлов INARY для {}"
-
-#: inary/reactor.py:714
-msgid "Index file written"
-msgstr "Файл индекса записан"
-
-#: inary/reactor.py:720
-msgid "Not a valid repo name."
-msgstr "Неверное имя репозитория"
-
-#: inary/reactor.py:723
-#, fuzzy
-msgid "Repo {} already present."
-msgstr "Репозиторий {} уже существует."
-
-#: inary/reactor.py:726
-#, fuzzy
-msgid "Repo already present with name {}."
-msgstr "Репозиторий уже существует с именем {}."
-
-#: inary/reactor.py:731
-#, fuzzy
-msgid "Repo {} added to system."
-msgstr "Репозиторий {} добавлен в систему."
-
-#: inary/reactor.py:739
+#: inary/reactor.py:366 inary/reactor.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Репозиторий {} удален из системы."
 
-#: inary/reactor.py:741
+#: inary/reactor.py:462
+#, fuzzy
+msgid "Cleaning package cache {}..."
+msgstr "Очистка кэша пакетов {}..."
+
+#: inary/reactor.py:464
+#, fuzzy
+msgid "Cleaning source archive cache {}..."
+msgstr "Очистка кеша архивов исходных файлов {}..."
+
+#: inary/reactor.py:466
+#, fuzzy
+msgid "Cleaning temporary directory {}..."
+msgstr "Очистка временного каталога {}..."
+
+#: inary/reactor.py:470
+#, fuzzy
+msgid "Removing cache file {}..."
+msgstr "Удаление файла кэша {}."
+
+#: inary/reactor.py:501
+msgid "Taking snapshot of the system"
+msgstr "Снятие снимка с системы"
+
+#: inary/reactor.py:662
+#, fuzzy
+msgid "scom package is not fully installed"
+msgstr "Пакет сomar  не полностью установлен"
+
+#: inary/reactor.py:674
+#, fuzzy
+msgid "File {} not found"
+msgstr "Файл {} не найден"
+
+#: inary/reactor.py:716
+#, fuzzy
+msgid "Building index of Inary files under {}"
+msgstr "Создание индексов файлов INARY для {}"
+
+#: inary/reactor.py:721
+msgid "Index file written"
+msgstr "Файл индекса записан"
+
+#: inary/reactor.py:727
+msgid "Not a valid repo name."
+msgstr "Неверное имя репозитория"
+
+#: inary/reactor.py:730
+#, fuzzy
+msgid "Repo {} already present."
+msgstr "Репозиторий {} уже существует."
+
+#: inary/reactor.py:733
+#, fuzzy
+msgid "Repo already present with name {}."
+msgstr "Репозиторий уже существует с именем {}."
+
+#: inary/reactor.py:738
+#, fuzzy
+msgid "Repo {} added to system."
+msgstr "Репозиторий {} добавлен в систему."
+
+#: inary/reactor.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Репозиторий {} не существует и не может быть удален."
 
-#: inary/reactor.py:762
+#: inary/reactor.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Обновление репозитория: {}"
 
-#: inary/reactor.py:771
+#: inary/reactor.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{} информация о репозитории обновлена"
 
-#: inary/reactor.py:773
+#: inary/reactor.py:780
 msgid "Updating database at any rate as requested"
 msgstr "Обновление базы данных в любом случае как запрос"
 
-#: inary/reactor.py:786
+#: inary/reactor.py:793
 msgid "Package database updated."
 msgstr "База данных пакетов обновлена."
 
-#: inary/reactor.py:788
+#: inary/reactor.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "Не найден репозиторий с именем {} ."
@@ -3774,162 +3776,6 @@ msgstr "getNodeText: Ожидаемый текстовый узел, получ�
 msgid "Cannot read URI {0}: {1}"
 msgstr ""
 
-#: inary/system_literals/localedata.py:46
-msgid "Turkish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:51
-msgid "Turkish Q"
-msgstr ""
-
-#: inary/system_literals/localedata.py:52
-msgid "Turkish F"
-msgstr ""
-
-#: inary/system_literals/localedata.py:57
-msgid "English"
-msgstr ""
-
-#: inary/system_literals/localedata.py:62
-msgid "English GB"
-msgstr ""
-
-#: inary/system_literals/localedata.py:68
-msgid "Afrikaans"
-msgstr ""
-
-#: inary/system_literals/localedata.py:74
-msgid "Arabic"
-msgstr ""
-
-#: inary/system_literals/localedata.py:80
-msgid "Belgium"
-msgstr ""
-
-#: inary/system_literals/localedata.py:86
-msgid "Bulgarian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:92
-msgid "Catalan"
-msgstr ""
-
-#: inary/system_literals/localedata.py:98
-msgid "Welsh"
-msgstr ""
-
-#: inary/system_literals/localedata.py:104
-msgid "Czech"
-msgstr ""
-
-#: inary/system_literals/localedata.py:110
-msgid "Danish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:116
-msgid "German"
-msgstr ""
-
-#: inary/system_literals/localedata.py:122
-msgid "Spanish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:128
-msgid "Estonian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:134
-msgid "Finnish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:140
-msgid "French"
-msgstr ""
-
-#: inary/system_literals/localedata.py:146
-msgid "Greek"
-msgstr ""
-
-#: inary/system_literals/localedata.py:152
-msgid "Croatian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:158
-msgid "Hungarian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:166
-msgid "Icelandic"
-msgstr ""
-
-#: inary/system_literals/localedata.py:172
-msgid "Italian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:178
-msgid "Japanese"
-msgstr ""
-
-#: inary/system_literals/localedata.py:184
-msgid "Macedonian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:190
-msgid "Malayalam"
-msgstr ""
-
-#: inary/system_literals/localedata.py:196
-msgid "Norwegian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:202
-msgid "Dutch"
-msgstr ""
-
-#: inary/system_literals/localedata.py:208
-msgid "Polish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:214
-msgid "Portuguese"
-msgstr ""
-
-#: inary/system_literals/localedata.py:220
-msgid "Brazilian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:226
-msgid "Russian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:234
-msgid "Slovak"
-msgstr ""
-
-#: inary/system_literals/localedata.py:240
-msgid "Slovenian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:246
-msgid "Serbian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:252
-msgid "Swedish"
-msgstr ""
-
-#: inary/system_literals/localedata.py:259
-msgid "Ukrainian"
-msgstr ""
-
-#: inary/system_literals/localedata.py:265
-msgid "Vietnamese"
-msgstr ""
-
-#: inary/system_literals/sysutils.py:116
-msgid "Module: \"subprocess\" can not import"
-msgstr ""
-
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo needs a tuple (user, pass)"
@@ -4023,144 +3869,14 @@ msgstr "Неверное имя пакета: {}"
 msgid "Invalid delta package name: {}"
 msgstr "Неверное имя дельта пакета: {}"
 
+#: inary/util.py:956
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/version.py:64
 #, fuzzy
 msgid "Invalid version string: '{}'"
 msgstr "Недопустимая строка версии: {}"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Очистка директории сборки..."
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} опция требует аргумент"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY пакет"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Не удаляется конфликтующий файл: {}"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Дата: {} {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Пользователь по имени {} не найден в системе"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Группа {} не найдена в системе"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Строка {} содержит неверный XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Невозможно прочитать файл {}: {}"
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Проверка {}... "
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} изменение конфигурационного файла."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} поврежден."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Источник является частью {} компонента"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Путь должен начинаться с \"/\": {}"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Проверка /{}"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Изменен конфигурационный файл: {}"
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Обновление не возможно."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Следующие пакеты будут обновлены:"
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Нет пакетов для обновления."
-
-#, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
-
-#, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
-
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Выполнить обновление, но не устанавливать."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Название для обновления пакетов репозитория"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Обновления только по вопросам безопасности"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade опции"
 
 #, fuzzy
 #~ msgid ""
@@ -4197,3 +3913,137 @@ msgstr "Недопустимая строка версии: {}"
 #~ "\n"
 #~ "Вы также можете задать компоненты вместо имен пакетов, которые потом\n"
 #~ "будут преобразованы в имена пакетов.\n"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade опции"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Обновления только по вопросам безопасности"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Название для обновления пакетов репозитория"
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Выполнить обновление, но не устанавливать."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
+
+#, fuzzy
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
+
+#, fuzzy
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Нет пакетов для обновления."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Следующие пакеты будут обновлены:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Обновление не возможно."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Изменен конфигурационный файл: {}"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Проверка /{}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Путь должен начинаться с \"/\": {}"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Источник является частью {} компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} поврежден."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} изменение конфигурационного файла."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Проверка {}... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Невозможно прочитать файл {}: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Строка {} содержит неверный XML"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Группа {} не найдена в системе"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Пользователь по имени {} не найден в системе"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Дата: {} {}"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Не удаляется конфликтующий файл: {}"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY пакет"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} опция требует аргумент"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Очистка директории сборки..."

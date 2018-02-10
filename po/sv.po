@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-30 22:31+0300\n"
+"POT-Creation-Date: 2018-02-10 14:13+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -203,70 +203,68 @@ msgstr "Verktyget {} kunde inte hittas"
 msgid "Warning: {0} does not exist, using plain name {1}"
 msgstr ""
 
-#: inary/actionsapi/inarytools.py:80 inary/actionsapi/inarytools.py:137
+#: inary/actionsapi/inarytools.py:56 inary/actionsapi/inarytools.py:74
+#: inary/actionsapi/inarytools.py:91
+msgid "Insufficient arguments."
+msgstr "Otillräckligt med argument."
+
+#: inary/actionsapi/inarytools.py:64
 #, fuzzy
-msgid "No file matched pattern \"{}\""
+msgid "No executable file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/inarytools.py:147
-#, fuzzy
-msgid "ActionsAPI [doman]: Wrong man page file: {}"
-msgstr "ActionsAPI [doman]: Fel man-sidefil: {}"
-
-#: inary/actionsapi/inarytools.py:174
-msgid "No file matched pattern \"{}\". 'domove' operation failed."
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:193
-#, fuzzy, python-brace-format
-msgid "ActionsAPI [rename]: {0}: {1}"
-msgstr "ActionsAPI [rename]: {0}: {1}"
-
-#: inary/actionsapi/inarytools.py:230
-msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:244
-msgid "dosed method has not changed file '{}'."
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:245
-msgid "{} has been changed by dosed method."
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:248
-msgid "File does not exist or permission denied: {}"
-msgstr ""
-
-#: inary/actionsapi/inarytools.py:265
-#, fuzzy
-msgid "ActionsAPI [dosym]: File already exists: {}"
-msgstr "ActionsAPI [dosym]: Filen finns redan: {}"
-
-#: inary/actionsapi/inarytools.py:274
-#: inary/actionsapi/inarytoolsfunctions.py:71
+#: inary/actionsapi/inarytools.py:82 inary/actionsapi/inarytools.py:337
 #, fuzzy
 msgid "No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/inarytools.py:301 inary/actionsapi/shelltools.py:96
+#: inary/actionsapi/inarytools.py:143 inary/actionsapi/inarytools.py:200
+#, fuzzy
+msgid "No file matched pattern \"{}\""
+msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"{}\"."
+
+#: inary/actionsapi/inarytools.py:210
+#, fuzzy
+msgid "ActionsAPI [doman]: Wrong man page file: {}"
+msgstr "ActionsAPI [doman]: Fel man-sidefil: {}"
+
+#: inary/actionsapi/inarytools.py:237
+msgid "No file matched pattern \"{}\". 'domove' operation failed."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:256
+#, fuzzy, python-brace-format
+msgid "ActionsAPI [rename]: {0}: {1}"
+msgstr "ActionsAPI [rename]: {0}: {1}"
+
+#: inary/actionsapi/inarytools.py:293
+msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:307
+msgid "dosed method has not changed file '{}'."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:308
+msgid "{} has been changed by dosed method."
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:311
+msgid "File does not exist or permission denied: {}"
+msgstr ""
+
+#: inary/actionsapi/inarytools.py:328
+#, fuzzy
+msgid "ActionsAPI [dosym]: File already exists: {}"
+msgstr "ActionsAPI [dosym]: Filen finns redan: {}"
+
+#: inary/actionsapi/inarytools.py:364 inary/actionsapi/shelltools.py:95
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr ""
 
-#: inary/actionsapi/inarytools.py:310
+#: inary/actionsapi/inarytools.py:373
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
 msgstr ""
-
-#: inary/actionsapi/inarytoolsfunctions.py:45
-#: inary/actionsapi/inarytoolsfunctions.py:63
-#: inary/actionsapi/inarytoolsfunctions.py:80
-msgid "Insufficient arguments."
-msgstr "Otillräckligt med argument."
-
-#: inary/actionsapi/inarytoolsfunctions.py:53
-#, fuzzy
-msgid "No executable file matched pattern \"{}\"."
-msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"{}\"."
 
 #: inary/actionsapi/javamodules.py:84 inary/actionsapi/javamodules.py:193
 #, fuzzy
@@ -377,117 +375,117 @@ msgstr ""
 msgid "Running 'ruby {}' failed."
 msgstr "Körning av 'ruby {}' misslyckades."
 
-#: inary/actionsapi/shelltools.py:50
+#: inary/actionsapi/shelltools.py:49
 #, fuzzy
 msgid "Cannot create directory {}"
 msgstr "Kan inte skapa katalog {}"
 
-#: inary/actionsapi/shelltools.py:58
+#: inary/actionsapi/shelltools.py:57
 #, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file {}."
 msgstr "ActionsAPI [echo]: Kan inte lägga till till filen {}."
 
-#: inary/actionsapi/shelltools.py:64
+#: inary/actionsapi/shelltools.py:63
 #, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/shelltools.py:71
+#: inary/actionsapi/shelltools.py:70
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: Åtgärden ej tillåten: %s (mode: 0%o)"
 
-#: inary/actionsapi/shelltools.py:73
+#: inary/actionsapi/shelltools.py:72
 #, fuzzy
 msgid "ActionsAPI [chmod]: File {} doesn't exists."
 msgstr "ActionsAPI [chmod]: Filen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:81
+#: inary/actionsapi/shelltools.py:80
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: Åtgärden ej tillåten: {0} (uid: {1}, gid: {2})"
 
-#: inary/actionsapi/shelltools.py:83
+#: inary/actionsapi/shelltools.py:82
 #, fuzzy
 msgid "ActionsAPI [chown]: File {} doesn't exists."
 msgstr "ActionsAPI [chown]: Filen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:90
+#: inary/actionsapi/shelltools.py:89
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [sym]: Tillstånd nekas: {0} till {1}"
 
-#: inary/actionsapi/shelltools.py:104
+#: inary/actionsapi/shelltools.py:103
 #, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Tillstånd nekas: {}."
 
-#: inary/actionsapi/shelltools.py:108
+#: inary/actionsapi/shelltools.py:107
 #, fuzzy
 msgid "ActionsAPI [unlink]: File {} doesn't exists."
 msgstr "ActionsAPI [unlink]: Filen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:116
+#: inary/actionsapi/shelltools.py:115
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: {}"
 msgstr "ActionsAPI [unlinkDir]: Åtgärd ej tillåten: {}"
 
-#: inary/actionsapi/shelltools.py:120
+#: inary/actionsapi/shelltools.py:119
 #, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory {} doesn't exists."
 msgstr "ActionsAPI [unlinkDir]: Katalogen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:126
+#: inary/actionsapi/shelltools.py:125
 #, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [move]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/shelltools.py:133
+#: inary/actionsapi/shelltools.py:132
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [move]: Tillstånd nekas: {0} till {2}"
 
-#: inary/actionsapi/shelltools.py:135
+#: inary/actionsapi/shelltools.py:134
 #, fuzzy
 msgid "ActionsAPI [move]: File {} doesn't exists."
 msgstr "ActionsAPI [move]: Filen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:142
+#: inary/actionsapi/shelltools.py:141
 #, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [copy]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/shelltools.py:149
+#: inary/actionsapi/shelltools.py:148
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: {0} to {1}"
 msgstr "ActionsAPI [copy]: Tillstånd nekas: {0} till {1}"
 
-#: inary/actionsapi/shelltools.py:165
+#: inary/actionsapi/shelltools.py:164
 #, fuzzy
 msgid "ActionsAPI [copy]: File {} does not exist."
 msgstr "ActionsAPI [copy]: Filen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:180
+#: inary/actionsapi/shelltools.py:179
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [copytree] {0} to {1}: {2}"
 msgstr "ActionsAPI [copytree] {0} till {1}: {2}"
 
-#: inary/actionsapi/shelltools.py:182
+#: inary/actionsapi/shelltools.py:181
 #, fuzzy
 msgid "ActionsAPI [copytree]: Directory {} doesn't exists."
 msgstr "ActionsAPI [copytree]: Katalogen {} finns inte."
 
-#: inary/actionsapi/shelltools.py:190
+#: inary/actionsapi/shelltools.py:189
 #, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [touch]: Ingen fil matchade mönstret \"{}\"."
 
-#: inary/actionsapi/shelltools.py:199
+#: inary/actionsapi/shelltools.py:198
 #, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: {}"
 msgstr "ActionsAPI [touch]: Tillstånd nekas: {}"
 
-#: inary/actionsapi/shelltools.py:258
+#: inary/actionsapi/shelltools.py:257
 #, python-brace-format
 msgid "Command \"{0}\" failed, return value was {1}."
 msgstr ""
@@ -1172,7 +1170,7 @@ msgstr ""
 msgid ""
 "Update the system a new release\n"
 "\n"
-"Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]\n"
+"Usage: dist-update [ next_dist_release_repo_url ] \n"
 "\n"
 "                WARNING: DIST-UPDATE risk içerir.\n"
 "    Dist-Update yapmadan önce iki kez düşününüz. Çünkü\n"
@@ -1194,19 +1192,15 @@ msgstr ""
 msgid "dist-update options"
 msgstr "list-upgrades-alternativ"
 
-#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:53
-msgid "Security related package upgrades only"
-msgstr ""
-
-#: inary/cli/distupdate.py:56 inary/cli/upgrade.py:67
+#: inary/cli/distupdate.py:54 inary/cli/upgrade.py:67
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr ""
 
-#: inary/cli/distupdate.py:59 inary/cli/upgrade.py:70
+#: inary/cli/distupdate.py:57 inary/cli/upgrade.py:70
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr ""
 
-#: inary/cli/distupdate.py:63 inary/cli/upgrade.py:74
+#: inary/cli/distupdate.py:61 inary/cli/upgrade.py:74
 msgid "compare sha1sum repo and installed packages"
 msgstr ""
 
@@ -1644,7 +1638,7 @@ msgid "list-available options"
 msgstr "list-available-alternativ"
 
 #: inary/cli/listavailable.py:46 inary/cli/listcomponents.py:41
-#: inary/cli/listinstalled.py:46 inary/cli/listsources.py:40
+#: inary/cli/listinstalled.py:47 inary/cli/listsources.py:40
 #: inary/cli/listupgrades.py:43 inary/cli/searchfile.py:39
 msgid "Show in long format"
 msgstr ""
@@ -1684,30 +1678,30 @@ msgstr "list-components-alternativ"
 msgid "Name of the source or package repository"
 msgstr ""
 
-#: inary/cli/listinstalled.py:24
+#: inary/cli/listinstalled.py:25
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
 "Usage: list-installed\n"
 msgstr ""
 
-#: inary/cli/listinstalled.py:38
+#: inary/cli/listinstalled.py:39
 msgid "list-installed options"
 msgstr "list-installed-alternativ"
 
-#: inary/cli/listinstalled.py:43
+#: inary/cli/listinstalled.py:44
 msgid "Only list the installed packages built by the given host"
 msgstr ""
 
-#: inary/cli/listinstalled.py:48
+#: inary/cli/listinstalled.py:49
 msgid "List installed packages under given component"
 msgstr ""
 
-#: inary/cli/listinstalled.py:50 inary/cli/listupgrades.py:47
+#: inary/cli/listinstalled.py:51 inary/cli/listupgrades.py:47
 msgid "Show detailed install info"
 msgstr "Visa detaljerad install-information"
 
-#: inary/cli/listinstalled.py:76 inary/cli/listupgrades.py:72
+#: inary/cli/listinstalled.py:77 inary/cli/listupgrades.py:72
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 msgstr "Paketnamn |St|Version|Utg.|Distro| Datum"
 
@@ -2036,6 +2030,10 @@ msgstr ""
 #: inary/cli/upgrade.py:49
 msgid "upgrade options"
 msgstr "upgrade-alternativ"
+
+#: inary/cli/upgrade.py:53
+msgid "Security related package upgrades only"
+msgstr ""
 
 #: inary/cli/upgrade.py:55
 msgid "Do not update repositories"
@@ -2789,6 +2787,10 @@ msgstr ""
 msgid "* Find missing packages for distupdate "
 msgstr ""
 
+#: inary/operations/distupdate.py:300
+msgid "A problem occured"
+msgstr ""
+
 #: inary/operations/emerge.py:35
 msgid "No packages to emerge."
 msgstr ""
@@ -3098,102 +3100,102 @@ msgstr ""
 
 #: inary/reactor.py:362
 #, fuzzy
-msgid "Do you want make dist-update?"
+msgid "Do you want make dist update?"
 msgstr "Vill du fortsätta?"
 
-#: inary/reactor.py:455
-#, fuzzy
-msgid "Cleaning package cache {}..."
-msgstr "Testar paket..."
-
-#: inary/reactor.py:457
-#, fuzzy
-msgid "Cleaning source archive cache {}..."
-msgstr "Bygger källpaketet: {}"
-
-#: inary/reactor.py:459
-#, fuzzy
-msgid "Cleaning temporary directory {}..."
-msgstr "Rensar byggkatalog..."
-
-#: inary/reactor.py:463
-#, fuzzy
-msgid "Removing cache file {}..."
-msgstr "Tar bort paketet {}"
-
-#: inary/reactor.py:494
-msgid "Taking snapshot of the system"
-msgstr ""
-
-#: inary/reactor.py:655
-#, fuzzy
-msgid "scom package is not fully installed"
-msgstr "{} är inte installerad."
-
-#: inary/reactor.py:667
-#, fuzzy
-msgid "File {} not found"
-msgstr "Filen {} hittades inte"
-
-#: inary/reactor.py:709
-#, fuzzy
-msgid "Building index of Inary files under {}"
-msgstr "* Indexerar INARY-filer under {}"
-
-#: inary/reactor.py:714
-#, fuzzy
-msgid "Index file written"
-msgstr "* Indexfil skriven"
-
-#: inary/reactor.py:720
-msgid "Not a valid repo name."
-msgstr "Ogiltigt förrådsnamn."
-
-#: inary/reactor.py:723
-#, fuzzy
-msgid "Repo {} already present."
-msgstr "Förrådet {} finns redan."
-
-#: inary/reactor.py:726
-#, fuzzy
-msgid "Repo already present with name {}."
-msgstr "Förrådet finns redan under namnet {}."
-
-#: inary/reactor.py:731
-#, fuzzy
-msgid "Repo {} added to system."
-msgstr "Förrådet {} lades till:"
-
-#: inary/reactor.py:739
+#: inary/reactor.py:366 inary/reactor.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Förrådet {} lades till:"
 
-#: inary/reactor.py:741
+#: inary/reactor.py:462
+#, fuzzy
+msgid "Cleaning package cache {}..."
+msgstr "Testar paket..."
+
+#: inary/reactor.py:464
+#, fuzzy
+msgid "Cleaning source archive cache {}..."
+msgstr "Bygger källpaketet: {}"
+
+#: inary/reactor.py:466
+#, fuzzy
+msgid "Cleaning temporary directory {}..."
+msgstr "Rensar byggkatalog..."
+
+#: inary/reactor.py:470
+#, fuzzy
+msgid "Removing cache file {}..."
+msgstr "Tar bort paketet {}"
+
+#: inary/reactor.py:501
+msgid "Taking snapshot of the system"
+msgstr ""
+
+#: inary/reactor.py:662
+#, fuzzy
+msgid "scom package is not fully installed"
+msgstr "{} är inte installerad."
+
+#: inary/reactor.py:674
+#, fuzzy
+msgid "File {} not found"
+msgstr "Filen {} hittades inte"
+
+#: inary/reactor.py:716
+#, fuzzy
+msgid "Building index of Inary files under {}"
+msgstr "* Indexerar INARY-filer under {}"
+
+#: inary/reactor.py:721
+#, fuzzy
+msgid "Index file written"
+msgstr "* Indexfil skriven"
+
+#: inary/reactor.py:727
+msgid "Not a valid repo name."
+msgstr "Ogiltigt förrådsnamn."
+
+#: inary/reactor.py:730
+#, fuzzy
+msgid "Repo {} already present."
+msgstr "Förrådet {} finns redan."
+
+#: inary/reactor.py:733
+#, fuzzy
+msgid "Repo already present with name {}."
+msgstr "Förrådet finns redan under namnet {}."
+
+#: inary/reactor.py:738
+#, fuzzy
+msgid "Repo {} added to system."
+msgstr "Förrådet {} lades till:"
+
+#: inary/reactor.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: inary/reactor.py:762
+#: inary/reactor.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Uppdaterar förråd: {}"
 
-#: inary/reactor.py:771
+#: inary/reactor.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{}-förrådets information är aktuell."
 
-#: inary/reactor.py:773
+#: inary/reactor.py:780
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: inary/reactor.py:786
+#: inary/reactor.py:793
 #, fuzzy
 msgid "Package database updated."
 msgstr "* Paketdatabas uppdaterad."
 
-#: inary/reactor.py:788
+#: inary/reactor.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "Inget förråd med namnet {} funnet."
@@ -3426,163 +3428,6 @@ msgstr ""
 msgid "Cannot read URI {0}: {1}"
 msgstr ""
 
-#: inary/system_literals/localedata.py:46
-msgid "Turkish"
-msgstr "Turkiska"
-
-#: inary/system_literals/localedata.py:51
-msgid "Turkish Q"
-msgstr "Turkiska Q"
-
-#: inary/system_literals/localedata.py:52
-msgid "Turkish F"
-msgstr "Turkiska F"
-
-#: inary/system_literals/localedata.py:57
-msgid "English"
-msgstr "Engelska"
-
-#: inary/system_literals/localedata.py:62
-#, fuzzy
-msgid "English GB"
-msgstr "Engelska"
-
-#: inary/system_literals/localedata.py:68
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: inary/system_literals/localedata.py:74
-msgid "Arabic"
-msgstr "Arabiska"
-
-#: inary/system_literals/localedata.py:80
-msgid "Belgium"
-msgstr "Belgien"
-
-#: inary/system_literals/localedata.py:86
-msgid "Bulgarian"
-msgstr "Bulgarien"
-
-#: inary/system_literals/localedata.py:92
-msgid "Catalan"
-msgstr "Katalanska"
-
-#: inary/system_literals/localedata.py:98
-msgid "Welsh"
-msgstr "Kymriska"
-
-#: inary/system_literals/localedata.py:104
-msgid "Czech"
-msgstr "Tjeckiska"
-
-#: inary/system_literals/localedata.py:110
-msgid "Danish"
-msgstr "Danska"
-
-#: inary/system_literals/localedata.py:116
-msgid "German"
-msgstr "Tyska"
-
-#: inary/system_literals/localedata.py:122
-msgid "Spanish"
-msgstr "Spanska"
-
-#: inary/system_literals/localedata.py:128
-msgid "Estonian"
-msgstr "Estniska"
-
-#: inary/system_literals/localedata.py:134
-msgid "Finnish"
-msgstr "Finska"
-
-#: inary/system_literals/localedata.py:140
-msgid "French"
-msgstr "Franska"
-
-#: inary/system_literals/localedata.py:146
-msgid "Greek"
-msgstr "Grekiska"
-
-#: inary/system_literals/localedata.py:152
-msgid "Croatian"
-msgstr "Kroatiska"
-
-#: inary/system_literals/localedata.py:158
-msgid "Hungarian"
-msgstr "Ungerska"
-
-#: inary/system_literals/localedata.py:166
-msgid "Icelandic"
-msgstr "Isländska"
-
-#: inary/system_literals/localedata.py:172
-msgid "Italian"
-msgstr "Italienska"
-
-#: inary/system_literals/localedata.py:178
-msgid "Japanese"
-msgstr "Japanska"
-
-#: inary/system_literals/localedata.py:184
-msgid "Macedonian"
-msgstr "Makedonska"
-
-#: inary/system_literals/localedata.py:190
-msgid "Malayalam"
-msgstr "Malayalam"
-
-#: inary/system_literals/localedata.py:196
-msgid "Norwegian"
-msgstr "Norska"
-
-#: inary/system_literals/localedata.py:202
-msgid "Dutch"
-msgstr "Nederländska"
-
-#: inary/system_literals/localedata.py:208
-msgid "Polish"
-msgstr "Polska"
-
-#: inary/system_literals/localedata.py:214
-msgid "Portuguese"
-msgstr "Portugisiska"
-
-#: inary/system_literals/localedata.py:220
-msgid "Brazilian"
-msgstr "Brasiliansk Portugisiska"
-
-#: inary/system_literals/localedata.py:226
-msgid "Russian"
-msgstr "Ryska"
-
-#: inary/system_literals/localedata.py:234
-msgid "Slovak"
-msgstr "Slovakiska"
-
-#: inary/system_literals/localedata.py:240
-msgid "Slovenian"
-msgstr "Slovenska"
-
-#: inary/system_literals/localedata.py:246
-msgid "Serbian"
-msgstr "Serbiska"
-
-#: inary/system_literals/localedata.py:252
-msgid "Swedish"
-msgstr "Svenska"
-
-#: inary/system_literals/localedata.py:259
-msgid "Ukrainian"
-msgstr "Ukrainska"
-
-#: inary/system_literals/localedata.py:265
-msgid "Vietnamese"
-msgstr "Vietnamesiska"
-
-#: inary/system_literals/sysutils.py:116
-msgid "Module: \"subprocess\" can not import"
-msgstr ""
-
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr ""
@@ -3668,43 +3513,70 @@ msgstr "Ogiltigt paketnamn: {}"
 msgid "Invalid delta package name: {}"
 msgstr "Ogiltigt paketnamn: {}"
 
+#: inary/util.py:956
+msgid "Module: \"subprocess\" can not import"
+msgstr ""
+
 #: inary/version.py:64
 #, fuzzy
 msgid "Invalid version string: '{}'"
 msgstr "Ogiltig versionssträng: {}"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Rensar byggkatalog..."
-
-#~ msgid "long integer"
-#~ msgstr "långt heltal"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{}-alternativet kräver ett argument"
+#~ msgid "downgrade options"
+#~ msgstr "upgrade-alternativ"
 
 #, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "Skapar INARY-paketet"
+#~ msgid "No packages to downgrade."
+#~ msgstr "Inga paket att uppdatera."
 
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Tar inte bort fil i konflikt: {}"
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Följande paket kommer att uppdateras:"
 
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Uppdatering ej möjlig."
 
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
 
-#~ msgid "* Checking {}... "
-#~ msgstr "* Kontrollerar {}... "
+#~ msgid "Generating {},"
+#~ msgstr "Skapar {},"
 
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet {} har förändrade konfigurationsfiler."
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Storing {}."
+#~ msgstr "Lagrar {}."
+
+#~ msgid "Storing {}, "
+#~ msgstr "Lagrar {}, "
+
+#~ msgid "Checking /{} "
+#~ msgstr "Kontrollerar /{} "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
 
 #~ msgid ""
 #~ "\n"
@@ -3713,58 +3585,150 @@ msgstr "Ogiltig versionssträng: {}"
 #~ "\n"
 #~ "Paketet {} är trasigt."
 
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet {} har förändrade konfigurationsfiler."
 
-#~ msgid "Checking /{} "
-#~ msgstr "Kontrollerar /{} "
+#~ msgid "* Checking {}... "
+#~ msgstr "* Kontrollerar {}... "
 
-#~ msgid "Storing {}, "
-#~ msgstr "Lagrar {}, "
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
 
-#~ msgid "Storing {}."
-#~ msgstr "Lagrar {}."
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
 
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Generating {},"
-#~ msgstr "Skapar {},"
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Tar inte bort fil i konflikt: {}"
 
 #, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
+#~ msgid "INARY package"
+#~ msgstr "Skapar INARY-paketet"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{}-alternativet kräver ett argument"
+
+#~ msgid "long integer"
+#~ msgstr "långt heltal"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Uppdatering ej möjlig."
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Rensar byggkatalog..."
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamesiska"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrainska"
+
+#~ msgid "Swedish"
+#~ msgstr "Svenska"
+
+#~ msgid "Serbian"
+#~ msgstr "Serbiska"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovenska"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovakiska"
+
+#~ msgid "Russian"
+#~ msgstr "Ryska"
+
+#~ msgid "Brazilian"
+#~ msgstr "Brasiliansk Portugisiska"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugisiska"
+
+#~ msgid "Polish"
+#~ msgstr "Polska"
+
+#~ msgid "Dutch"
+#~ msgstr "Nederländska"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norska"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malayalam"
+
+#~ msgid "Macedonian"
+#~ msgstr "Makedonska"
+
+#~ msgid "Japanese"
+#~ msgstr "Japanska"
+
+#~ msgid "Italian"
+#~ msgstr "Italienska"
+
+#~ msgid "Icelandic"
+#~ msgstr "Isländska"
+
+#~ msgid "Hungarian"
+#~ msgstr "Ungerska"
+
+#~ msgid "Croatian"
+#~ msgstr "Kroatiska"
+
+#~ msgid "Greek"
+#~ msgstr "Grekiska"
+
+#~ msgid "French"
+#~ msgstr "Franska"
+
+#~ msgid "Finnish"
+#~ msgstr "Finska"
+
+#~ msgid "Estonian"
+#~ msgstr "Estniska"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanska"
+
+#~ msgid "German"
+#~ msgstr "Tyska"
+
+#~ msgid "Danish"
+#~ msgstr "Danska"
+
+#~ msgid "Czech"
+#~ msgstr "Tjeckiska"
+
+#~ msgid "Welsh"
+#~ msgstr "Kymriska"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanska"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgarien"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgien"
+
+#~ msgid "Arabic"
+#~ msgstr "Arabiska"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Följande paket kommer att uppdateras:"
+#~ msgid "English GB"
+#~ msgstr "Engelska"
 
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Inga paket att uppdatera."
+#~ msgid "English"
+#~ msgstr "Engelska"
 
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade-alternativ"
+#~ msgid "Turkish F"
+#~ msgstr "Turkiska F"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Turkiska Q"
+
+#~ msgid "Turkish"
+#~ msgstr "Turkiska"

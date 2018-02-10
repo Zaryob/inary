@@ -96,7 +96,7 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        #self.installi18n()
+        self.installi18n()
         self.installdoc()
         self.generateConfigFile()
 

@@ -31,11 +31,74 @@ from inary.util import join_path, remove_prefix, uncompress
 # ActionsAPI Modules
 import inary.actionsapi
 import inary.actionsapi.get as get
-from inary.actionsapi.inarytoolsfunctions import *
 from inary.actionsapi.shelltools import *
 
 from inary.actionsapi import error
 
+# Error Classes
+class FileError(inary.actionsapi.Error):
+    def __init__(self, value=''):
+        inary.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
+
+class ArgumentError(inary.actionsapi.Error):
+    def __init__(self, value=''):
+        inary.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
+
+#Tool functions
+def executable_insinto(destinationDirectory, *sourceFiles):
+    '''insert a executable file into destinationDirectory'''
+
+    if not sourceFiles or not destinationDirectory:
+        raise ArgumentError(_('Insufficient arguments.'))
+
+    if not can_access_directory(destinationDirectory):
+        makedirs(destinationDirectory)
+
+    for sourceFile in sourceFiles:
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No executable file matched pattern \"{}\".").format(sourceFile))
+
+        for source in sourceFileGlob:
+            # FIXME: use an internal install routine for these
+            system('install -m 0755 -o root -g root {0} {1}'.format(source, destinationDirectory))
+
+def readable_insinto(destinationDirectory, *sourceFiles):
+    '''inserts file list into destinationDirectory'''
+
+    if not sourceFiles or not destinationDirectory:
+        raise ArgumentError(_('Insufficient arguments.'))
+
+    if not can_access_directory(destinationDirectory):
+        makedirs(destinationDirectory)
+
+    for sourceFile in sourceFiles:
+        sourceFileGlob = glob.glob(sourceFile)
+        if len(sourceFileGlob) == 0:
+            raise FileError(_("No file matched pattern \"{}\".").format(sourceFile))
+
+        for source in sourceFileGlob:
+            system('install -m 0644 "{0}" {1}'.format(source, destinationDirectory))
+
+def lib_insinto(sourceFile, destinationDirectory, permission = 644):
+    '''inserts a library fileinto destinationDirectory with given permission'''
+
+    if not sourceFile or not destinationDirectory:
+        raise ArgumentError(_('Insufficient arguments.'))
+
+    if not can_access_directory(destinationDirectory):
+        makedirs(destinationDirectory)
+
+    if os.path.islink(sourceFile):
+        os.symlink(os.path.realpath(sourceFile), os.path.join(destinationDirectory, sourceFile))
+    else:
+        system('install -m 0{0} {1} {2}'.format(permission, sourceFile, destinationDirectory))
+
+# inarytools funtions
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     '''insert a executable file into /bin or /usr/bin'''
     ''' example call: inarytools.dobin("bin/xloadimage", "/bin", "xload") '''
@@ -103,7 +166,7 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
-    lib_insinto(sourceFile, destinationDirectory, 0o755)
+    lib_insinto(sourceFile, destinationDirectory, 755)
 
 def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the static library into /usr/lib with permission 0644'''
@@ -112,7 +175,7 @@ def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
-    lib_insinto(sourceFile, destinationDirectory, 0o644)
+    lib_insinto(sourceFile, destinationDirectory, 644)
 
 def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     '''insert the dynamic library into /usr/lib with permission 0755'''
@@ -121,7 +184,7 @@ def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
-    lib_insinto(sourceFile, destinationDirectory, 0o755)
+    lib_insinto(sourceFile, destinationDirectory, 755)
 
 def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''

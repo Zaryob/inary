@@ -13,7 +13,6 @@
 import os
 import glob
 import shutil
-import string
 import pwd
 import grp
 import sys
