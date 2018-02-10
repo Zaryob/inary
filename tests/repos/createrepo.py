@@ -133,13 +133,13 @@ class Package:
 
     def get_spec_template(self):
         package =  self.name
-        homepage = "www.pardus.org.tr"
-        packager_name = "Joe Packager"
-        packager_email = "joe@pardus.org.tr"
-        summary = "%s is a very useful package" % self.name
-        description = "%s is a very useful package that is known for its usefulness." % self.name
+        homepage = "www.sulin.org"
+        packager_name = "Inary Testers"
+        packager_email = "developers@sulin.org"
+        summary = "%s is a test package" % self.name
+        description = "%s is a test package for testing repositories." % self.name
         sha1sum = "cc64dfa6e068fe1f6fb68a635878b1ea21acfac7"
-        archive = "http://cekirdek.uludag.org.tr/~faik/spam/skeleton.tar.gz"
+        archive = "http://dev.sulin.org/inary/skeleton.tar.gz"
         date = time.strftime("%Y-%m-%d")
         partof = self.partof
 
@@ -216,7 +216,7 @@ class Repository:
         open("components.xml", "w").write(xml_content)
 
 
-class Pardus2007Repo(Repository):
+class MainRepo(Repository):
     def __init__(self):
         Repository.__init__(self, "main-2018", "2018", [], ["wengophone", "rar"])
         
@@ -245,9 +245,9 @@ class Pardus2007Repo(Repository):
 
         Repository.create(self)
 
-class Contrib2007Repo(Repository):
+class ContribRepo(Repository):
     def __init__(self):
-        Repository.__init__(self, "contrib-2007", "2007", [], ["xara"])
+        Repository.__init__(self, "contrib-2018", "2018", [], ["xara"])
         
     def create(self):
 
@@ -283,6 +283,6 @@ class BuildFarm:
             self.create_index(repo)
 
 if __name__ == "__main__":
-    Pardus2007Repo().create()
-    Contrib2007Repo().create()
-    BuildFarm().build(["pardus-2007", "contrib-2007", "repo1", "repo2"])
+    MainRepo().create()
+    ContribRepo().create()
+    BuildFarm().build(["main-2018", "contrib-2018", "repo1", "repo2"])

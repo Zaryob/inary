@@ -20,7 +20,7 @@ import inary.context as ctx
 
 defaultForceInstallPackageURI = "http://packages.sulin.org/main/force-install.list"
 
-class DistupdatePlanner:
+class DistUpdatePlanner:
     def __init__(self, nextRepoUri, forceInstallUri=defaultForceInstallPackageURI, Debug=False):
         self.debug = Debug
         self.forceInstallUri = forceInstallUri
@@ -292,5 +292,10 @@ class DistupdatePlanner:
         self.calculateNextRepoSize()
         self.calculeNeededSpace()
 
-class MakeDistUpdate():
-    pass
+def MakeDistUpdate():
+    try:
+        inary.operations.upgrade.upgrade(packages, 'distuprepo') #FIXME: Should write a detailed
+                                                                 # upgrade system
+    except:
+        raise Error(_('A problem occured')) # FIXME: When not complete distupdate
+                                            # inary make takeback

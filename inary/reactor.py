@@ -342,7 +342,7 @@ def upgrade(packages=[], repo=None):
     return inary.operations.upgrade.upgrade(packages, repo)
 
 def distupdate(targetrepo):
-    weddingplanner = inary.operations.distupdate.DistupdatePlanner(nextRepoUri=targetrepo, Debug=True)
+    weddingplanner = inary.operations.distupdate.DistUpdatePlanner(nextRepoUri=targetrepo, Debug=True)
     weddingplanner.plan()
 
     ctx.ui.info(inary.util.colorize(_("*** Conclusion ***"),"red"))
@@ -359,7 +359,14 @@ def distupdate(targetrepo):
     ctx.ui.info(_("  biggest package size {}").format(weddingplanner.sizeOfBiggestPackage))
     ctx.ui.info(_("  total space needed for distupdate {}").format(weddingplanner.sizeOfNeededTotalSpace))
 
-    if ctx.ui.confirm(str(_('Do you want make dist-update?'))):
+    if ctx.ui.confirm(str(_('Do you want make dist update?'))):
+        for repo in inary.db.repodb.RepoDB().list_repos():
+            repodb.remove_repo(repo) 
+            inary.db.flush_caches()
+            ctx.ui.debug(_('Repo {} removed from system.').format(name))
+            
+        add_repo('distuprepo',targetrepo)
+        update_repo(['distuprepo'])
         inary.operations.distupdate.MakeDistUpdate()
 
 

@@ -24,7 +24,7 @@ import inary.db
 class DistUpdate(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Update the system a new release
 
-Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]
+Usage: dist-update [ next_dist_release_repo_url ] 
 
                 WARNING: DIST-UPDATE risk içerir.
     Dist-Update yapmadan önce iki kez düşününüz. Çünkü
@@ -50,8 +50,6 @@ Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]
         group = optparse.OptionGroup(self.parser, _("dist-update options"))
 
         super(Upgrade, self).options(group)
-        group.add_option("--security-only", action="store_true",
-                     default=False, help=_("Security related package upgrades only"))
         group.add_option("-x", "--exclude", action="append",
                      default=None, help=_("When upgrading system, ignore packages and components whose basenames match pattern."))
         group.add_option("--exclude-from", action="store",
@@ -65,8 +63,11 @@ Usage: DistUpdate [ next_dist_release_repo_url ] [ dist-update-list ]
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init()
-        argv = []
-        argv.extend(self.args)
-        targetrepo = argv[1]
-        Reactor.distupdate(targetrepo)
+        if len(self.args) > 1:
+            self.init()
+            for arg in self.args:
+                if arg.endswith(".xml") or arg.endswith("xml.xz"):
+                    targetrepo = arg
+                    break
+
+            Reactor.distupdate(targetrepo)
