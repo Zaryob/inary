@@ -17,6 +17,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+import inary.reactor as Reactor
 import inary.context as ctx
 import inary.cli.command as command
 

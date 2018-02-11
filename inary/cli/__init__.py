@@ -41,13 +41,6 @@ def printu(obj, err = False):
     out.flush()
 
 
-#def printu(obj,err = False):
-#    if err:
-#       sys.stdout.write(str(obj))
-#    
-#    else: 
-#       sys.stdout.write(str(obj))
-    
 class CLI(inary.ui.UI):
     "Command Line Interface"
 
@@ -60,14 +53,14 @@ class CLI(inary.ui.UI):
         inary.util.xterm_title_reset()
 
 #########   in old releases use this output function #########
-#    def output(self, msg, err = False, verbose = False):
-#        if (verbose and self.show_verbose) or (not verbose):
-#            if type(msg)==type(str()):
-#                msg = msg.encode('utf-8')
-#            if err:
-#                sys.stderr.write(str(msg))
-#            else:
-#                sys.stdout.write(str(msg))
+    def output(self, msg, err = False, verbose = False):
+        if (verbose and self.show_verbose) or (not verbose):
+            if type(msg)==type(bytes()):
+                msg = msg.decode('utf-8')
+            if err:
+                sys.stderr.write(str(msg))
+            else:
+                sys.stdout.write(str(msg))
 #######But there are formatted problem in this,   #####
 #######So I write a skeleton output function      #####
  

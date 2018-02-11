@@ -35,7 +35,8 @@ _ = __trans.gettext
 INSTALLDB = inary.db.installdb.InstallDB()
 COMPONENTDB = inary.db.componentdb.ComponentDB()
 CONSTANTS = inary.constants.Constants()
-REPODB = inary.db.repodb.RepoDB
+REPODB = inary.db.repodb.RepoDB()
+FILESDB = inary.db.filesdb.FilesDB()
 
 class Error(inary.Error):
     pass
@@ -264,10 +265,10 @@ class LDD:
 
         # create a sorted iteration object of the final results variables
         # the lists may have variable lengths, thus we fill the smallers one with empty strings.
-        cmp_func = lambda x, y: len(x) - len(y)
-        result_lists = itertools.zip_longest(sorted(list(set(package_deps)), cmp=cmp_func),
-                                             sorted(result_deps, cmp=cmp_func),
-                                             sorted(result_section, cmp=cmp_func),
+        key_func = lambda x: len(x)
+        result_lists = itertools.zip_longest(sorted(list(set(package_deps)), key=key_func),
+                                             sorted(result_deps, key=key_func),
+                                             sorted(result_section, key=key_func),
                                              fillvalue="")
         return result_lists
 
@@ -310,20 +311,26 @@ class LDD:
             os.environ.update({'LD_LIBRARY_PATH': ":".join(ld_library_paths)})
 
         for elf_file in package_elf_files:
-            ldd_output = subprocess.Popen(["ldd", elf_file],
-                                          stdout=subprocess.PIPE,
-                                          stderr=subprocess.STDOUT,
-                                          env = os.environ).communicate()[0].strip().split("\n")
+            ldd_output = str(subprocess.Popen(["ldd", elf_file],
+                                              stdout=subprocess.PIPE,
+                                              stderr=subprocess.STDOUT,
+                                              env = os.environ).communicate()[0]).strip().split("\n")
 
-            ldd_unused, ldd_undefined = subprocess.Popen(["ldd", "-u", "-r", elf_file],
-                                                       stdout=subprocess.PIPE,
-                                                       stderr=subprocess.PIPE,
-                                                       env = os.environ).communicate()
+            ldd_unused = str(subprocess.Popen(["ldd", "-u", "-r", elf_file],
+                                              stdout=subprocess.PIPE,
+                                              stderr=subprocess.PIPE,
+                                              env = os.environ).communicate()[0])
 
-            runpath  = subprocess.Popen(["chrpath", "-l", elf_file],
-                                          stdout=subprocess.PIPE,
-                                          stderr=subprocess.STDOUT,
-                                          env = os.environ).communicate()[0].strip().split(": ")
+            ldd_undefined = str(subprocess.Popen(["ldd", "-u", "-r", elf_file],
+                                                 stdout=subprocess.PIPE,
+                                                 stderr=subprocess.PIPE,
+                                                 env = os.environ).communicate()[1])
+
+
+            runpath  = str(subprocess.Popen(["chrpath", "-l", elf_file],
+                                            stdout=subprocess.PIPE,
+                                            stderr=subprocess.STDOUT,
+                                            env = os.environ).communicate()[0]).strip().split(": ")
 
             objdump_needed = [line.strip().split()[1] for line in \
                     os.popen("objdump -p \"{}\" | grep 'NEEDED'".format(elf_file)).readlines()]
@@ -345,3 +352,5 @@ class LDD:
             _dependencies[pc_file] = check_pc_files(pc_file)
 
         return (_dependencies, _broken, _unused, _undefined, _runpath)
+
+

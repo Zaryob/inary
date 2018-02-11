@@ -82,10 +82,10 @@ class ItemByRepo:
 
             if self.compressed:
                 for item in list(self.dbobj[r].keys()):
-                    yield item, gzip.zlib.decompress(self.dbobj[r][item])
+                    yield str(item), str(gzip.zlib.decompress(self.dbobj[r][item]))
             else:
                 for item in list(self.dbobj[r].keys()):
-                    yield item, self.dbobj[r][item]
+                    yield str(item), str(self.dbobj[r][item])
 
     def item_repos(self, repo=None):
         repos = inary.db.repodb.RepoDB().list_repos()

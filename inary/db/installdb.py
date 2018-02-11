@@ -245,7 +245,7 @@ class InstallDB(lazydb.LazyDB):
         dependency.package = node.firstChild().data()
         if node.attributes():
             attr = node.attributes()[0]
-            dependency.__dict__[attr] = node.getAttribute(attr)
+            dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
         return dependency
 
     def __create_dependency(self, depStr):

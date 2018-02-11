@@ -1,3 +1,15 @@
+2018-01-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+  * distupdate komutu:
+	Stabilize edildi ve renklendirildi
+	* string -> strutils:
+	Strutils fonksiyonu kullanılır hale getirildi. String
+	modulunun icindekiler strutils içine taşındı
+	* Bug Fixes:
+	Sorunlu olan search-file komutu düzeltildi.
+	Xml dosyasındaki Utf-8 decode etmeden string oluşturmasına
+	çözüm bulunamadı :(
+
+
 2018-01-07 Suleyman Poyraz <nipalensisaquila@gmail.com>
   * System modulleri silindi:
 	Inary içinde onlara ihtiyaç olmadığını farkettim. Scom içine alarak yer

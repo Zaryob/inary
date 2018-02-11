@@ -125,7 +125,7 @@ class PackageDB(lazydb.LazyDB):
                     (fields['summary'] and \
                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
                     (fields['desc'] and \
-                    re.compile(redesc(lang, term), 0 if cs else re.I).search(xml))]:
+                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
                 found.append(name)
         return found
 
