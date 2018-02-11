@@ -18,6 +18,10 @@ import ciksemel
 import inary
 import inary.context as ctx
 
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
 defaultForceInstallPackageURI = "http://packages.sulin.org/main/force-install.list"
 
 class DistUpdatePlanner:
@@ -48,7 +52,7 @@ class DistUpdatePlanner:
 
     def getIndex(self):
         uri = self.nextRepoUri
-        ctx.ui.info(_("* Getting index from {}").format(uri))
+        ctx.ui.info(inary.util.colorize(_("   |__  Getting index from {}").format(uri), 'blue'),noln="purple")
 
         try:
             if "://" in uri:
@@ -56,7 +60,7 @@ class DistUpdatePlanner:
             else:
                 rawdata = open(uri, "r").read()
         except IOError:
-            ctx.ui.info("could not fetch {}".format(uri))
+            ctx.ui.info(inary.util.colorize(_("could not fetch {}".format(uri)), 'red'))
             return None
 
         if uri.endswith("bz2"):
@@ -70,17 +74,17 @@ class DistUpdatePlanner:
         self.nextRepoRaw = data
 
     def convertToInaryRepoDB(self, ix):
-        ctx.ui.info(_("* Converting package objects to db object"),noln=True)
+        ctx.ui.info(inary.util.colorize(_("   |__ Converting package objects to db object"), 'green'  ),noln=True)
 
         doc = ciksemel.parseString(ix)
-        dbobj = inary.index.Index()
+        dbobj = inary.data.index.Index()
         dbobj.decode(doc, [])
 
-        ctx.ui.info("    done")
+        ctx.ui.info(inary.util.colorize(_("    done"), 'green'))
         return dbobj
 
     def parseRepoIndex(self):
-        ctx.ui.info(_("* Parsing package properties in new repo"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Parsing package properties in new repo"), 'blue'))
 
         pkgprop = {}
         obsoletelist = []
@@ -107,30 +111,33 @@ class DistUpdatePlanner:
 
             pkgprop[pkgName] = [replaceslist, pkgURI, pkgSize, pkgInstalledSize, pkgHash]
 
-        ctx.ui.info(_("    found {0} packages and {1} obsoletelist").format(len(list(pkgprop.keys())), len(obsoletelist)))
+        ctx.ui.info(inary.util.colorize(_("       \_ found {0} packages and {1} obsoletelist").format(len(list(pkgprop.keys())), len(obsoletelist)), 'green' ))
 
         self.nextRepoPackages = pkgprop
         self.nextRepoObsoletes = obsoletelist
 
     def getInstalledPackages(self):
-        ctx.ui.info(_("* Getting installed packages"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Getting installed packages"), 'blue'))
 
         a = inary.reactor.list_installed()
         a.sort()
 
-        ctx.ui.info(_("    found {} packages").format(len(a)))
+        ctx.ui.info(inary.util.colorize(_("       \_ found {} packages").format(len(a)),'green'))
         self.installedPackages = a
 
     def getForceInstallPackages(self):
-        ctx.ui.info(_("* Getting force install packages"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Getting force install packages"), 'blue'))
+        pkglist=[]
+        #try:
+        #    pkglist = urllib.request.urlopen(self.forceInstallUri).read().split()
+        #except:
+        #    ctx.ui.info(inary.util.colorize(_('    [X] Not get force install packages'), 'red'))
 
-        pkglist = urllib.request.urlopen(self.forceInstallUri).read().split()
-
-        ctx.ui.info(_("    found {} packages").format(len(pkglist)))
+        ctx.ui.info(inary.util.colorize(_("       \_ found {} packages".format(len(pkglist))), 'green'))
         self.forceInstallPackages = pkglist
 
     def calculateInstalledSize(self):
-        ctx.ui.info(_("* Calculating disk space installed packages are using"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Calculating disk space installed packages are using"), 'blue'))
 
         totalsize = 0
         idb = inary.db.installdb.InstallDB()
@@ -138,13 +145,13 @@ class DistUpdatePlanner:
         for i in self.installedPackages:
             pkg = idb.get_package(i)
             totalsize += pkg.installedSize
-            #print "%-30s %s" % (pkg.name, pkg.installedSize)
+            ctx.ui.debug("   %-30s %s" % (pkg.name, pkg.installedSize))
 
-        ctx.ui.info(_("    total size = {}").format(totalsize))
+        ctx.ui.info(inary.util.colorize(_("       \_ total size = {}").format(totalsize),'cyan'))
         self.sizeOfInstalledPackages = totalsize
 
     def calculateNextRepoSize(self):
-        ctx.ui.info(_("* Calculating package size and installed size of new packages"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Calculating package size and installed size of new packages"), 'blue'))
 
         for p in self.packagesToInstall:
             i = self.nextRepoPackages[p]
@@ -155,11 +162,11 @@ class DistUpdatePlanner:
             if i[2] > self.sizeOfBiggestPackage:
                 self.sizeOfBiggestPackage = i[2]
 
-        ctx.ui.info(_("    total download size = {}").format(self.sizeOfPackagesToDownload))
-        ctx.ui.info(_("    total install size  = {}").format(self.sizeOfInstalledPackagesAfterUpdate))
+        ctx.ui.info(inary.util.colorize(_("       \_ total download size = {}").format(self.sizeOfPackagesToDownload)), 'green')
+        ctx.ui.info(inary.util.colorize(_("       \_ total install size  = {}").format(self.sizeOfInstalledPackagesAfterUpdate)), 'green')
 
     def calculeNeededSpace(self):
-        ctx.ui.info(_("* Calculating needed space for distupate"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Calculating needed space for distupate")),'blue')
 
         neededspace = 0
         neededspace += self.sizeOfPackagesToDownload
@@ -167,10 +174,10 @@ class DistUpdatePlanner:
         neededspace += 2 * self.sizeOfBiggestPackage
 
         self.sizeOfNeededTotalSpace = neededspace
-        ctx.ui.info(_("    total needed space = {}").format(neededspace))
+        ctx.ui.info(inary.util.colorize(_("       \_ total needed space = {}").format(neededspace)), 'green')
 
     def findMissingPackages(self):
-        ctx.ui.info(_("* Calculating package differences of old and new repos"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Calculating package differences of old and new repos"), 'blue'))
 
         pkglist = []
         replacedBy = {}
@@ -196,11 +203,11 @@ class DistUpdatePlanner:
             if i not in uniqpkglist:
                 neededPackages.append(i)
 
-        ctx.ui.info(_("    found {} obsoleted and replaced packages").format(len(neededPackages)))
+        ctx.ui.info(inary.util.colorize(_("       \_ found {} obsoleted and replaced packages").format(len(neededPackages)),'green'))
         self.missingPackages = neededPackages
 
     def resolveDependencies(self, A, pkgdb):
-        ctx.ui.info(_("* Find dependencies for packages to be installed"))
+        ctx.ui.info(inary.util.colorize(_("   |__ Find dependencies for packages to be installed"), 'blue'))
 
         # this would be the system package db on a normal scenario
         # packagedb = inary.db.packagedb.PackageDB()
@@ -219,7 +226,7 @@ class DistUpdatePlanner:
         # A = repodict.keys()
 
         # construct G_f
-        G_f = inary.pgraph.PGraph(packagedb)
+        G_f = inary.data.pgraph.PGraph(packagedb)
 
         # find the install closure graph of G_f by package
         # set A using packagedb
@@ -246,7 +253,7 @@ class DistUpdatePlanner:
 
 
     def planDistUpdate(self):
-        ctx.ui.info(_("* Planning the whole distupdate process"))
+        ctx.ui.info(inary.util.colorize(_("* Planning the whole distupdate process"), 'purple'))
 
         # installed packages
         currentPackages = self.installedPackages
@@ -278,10 +285,11 @@ class DistUpdatePlanner:
 
         self.graphobj, self.packagesToInstall = self.resolveDependencies(currentPackages, repodb)
 
-        ctx.ui.info("    found {} packages to install".format(len(self.packagesToInstall)))
+        ctx.ui.info(inary.util.colorize(_("    done"), 'green'))
+        ctx.ui.info(inary.util.colorize(_("       \_ found {} packages to install".format(len(self.packagesToInstall))), 'green'))
 
     def plan(self):
-        ctx.ui.info(_("* Find missing packages for distupdate "))
+        ctx.ui.info(inary.util.colorize(_("* Find missing packages for dist-update "), 'purple'))
 
         self.getIndex()
         self.parseRepoIndex()
@@ -292,7 +300,7 @@ class DistUpdatePlanner:
         self.calculateNextRepoSize()
         self.calculeNeededSpace()
 
-def MakeDistUpdate():
+def MakeDistUpdate(packages=None):
     try:
         inary.operations.upgrade.upgrade(packages, 'distuprepo') #FIXME: Should write a detailed
                                                                  # upgrade system

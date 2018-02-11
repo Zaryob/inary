@@ -25,20 +25,6 @@ class DistUpdate(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Update the system a new release
 
 Usage: dist-update [ next_dist_release_repo_url ] 
-
-                WARNING: DIST-UPDATE risk içerir.
-    Dist-Update yapmadan önce iki kez düşününüz. Çünkü
-    Dist-Update sonrası sisteminiz çalışmayabilir, tüm
-    dosyalarınızı kaybedebilirsiniz. 
-
-   Sisteminizi Dist-Update yapmadan önce yedekleyiniz ve
-   EĞER YAPMAK İSTEDİĞİNİZE GERÇEKTEN EMİNSENİZ BU İŞLEMİ
-   BAŞLATINIZ.
-
-                OLUŞAN HİÇBİR DİSK VE SİSTEM
-                 HASARINDAN SULIN TOPLULUĞU 
-                       MESUL DEĞİLDİR
-
 """)
 
     def __init__(self, args):
@@ -49,7 +35,7 @@ Usage: dist-update [ next_dist_release_repo_url ]
     def options(self):
         group = optparse.OptionGroup(self.parser, _("dist-update options"))
 
-        super(Upgrade, self).options(group)
+        super(DistUpdate, self).options(group)
         group.add_option("-x", "--exclude", action="append",
                      default=None, help=_("When upgrading system, ignore packages and components whose basenames match pattern."))
         group.add_option("--exclude-from", action="store",
@@ -63,11 +49,10 @@ Usage: dist-update [ next_dist_release_repo_url ]
         self.parser.add_option_group(group)
 
     def run(self):
-        if len(self.args) > 1:
-            self.init()
-            for arg in self.args:
-                if arg.endswith(".xml") or arg.endswith("xml.xz"):
-                    targetrepo = arg
-                    break
+        self.init()
+        for arg in self.args:
+            if arg.endswith(".xml") or arg.endswith("xml.xz"):
+                targetrepo = arg
+                break
 
-            Reactor.distupdate(targetrepo)
+        Reactor.distupdate(targetrepo)
