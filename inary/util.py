@@ -19,7 +19,7 @@ import re
 import sys
 import fcntl
 import shutil
-import string
+from . import strutils
 import struct
 import fnmatch
 import hashlib
@@ -671,7 +671,7 @@ def parse_package_name_legacy(package_name):
     # We should handle package names like 855resolution
     name = []
     for part in package_name.split("-"):
-        if name != [] and part[0] in string.digits:
+        if name != [] and part[0] in strutils.digits:
             break
         else:
             name.append(part)
@@ -697,7 +697,7 @@ def parse_package_name(package_name):
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format. Raise here to call
         # the legacy function.
-        if not arch or arch[0] in string.digits:
+        if not arch or arch[0] in strutils.digits:
             raise ValueError
 
     except ValueError:
@@ -742,7 +742,7 @@ def parse_delta_package_name(package_name):
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format. Raise here to call
         # the legacy function.
-        if not arch or arch[0] in string.digits:
+        if not arch or arch[0] in strutils.digits:
             raise ValueError
 
     except ValueError:
@@ -768,7 +768,7 @@ def split_package_filename(filename):
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format.
-        if not arch or arch[0] in string.digits:
+        if not arch or arch[0] in strutils.digits:
             raise ValueError
 
     except ValueError:
@@ -794,7 +794,7 @@ def split_delta_package_filename(filename):
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format.
-        if not arch or arch[0] in string.digits:
+        if not arch or arch[0] in strutils.digits:
             raise ValueError
 
     except ValueError:

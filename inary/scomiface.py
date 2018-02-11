@@ -12,7 +12,7 @@
 
 import os
 import time
-import string
+from . import strutils
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -32,7 +32,7 @@ except ImportError:
 
 def is_char_valid(char):
     """Test if char is valid object path character."""
-    return char in string.ascii_letters + string.digits + "_"
+    return char in strutils.ascii_letters + strutils.digits + "_"
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in SCOM script"""
