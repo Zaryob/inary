@@ -40,7 +40,6 @@ from inary.reactor import *
 import inary.operations.build
 import inary.operations.check
 import inary.operations.emerge
-import inary.operations.distupdate
 import inary.operations.install
 import inary.operations.history
 import inary.operations.helper
@@ -63,7 +62,7 @@ def set_scom_updated(updated):
     @param updated: True if COMAR package is updated, else False
     """
     ctx.scom_updated = updated
- 
+
 def set_userinterface(ui):
     """
     Set the user interface where the status information will be send

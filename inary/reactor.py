@@ -15,7 +15,7 @@ from inary.data import pgraph
 import os
 import fcntl
 import inary
-import inary.api 
+import inary.api
 import inary.context as ctx
 import inary.db
 import inary.errors
@@ -341,35 +341,6 @@ def upgrade(packages=[], repo=None):
     inary.db.historydb.HistoryDB().create_history("upgrade")
     return inary.operations.upgrade.upgrade(packages, repo)
 
-def distupdate(targetrepo):
-    weddingplanner = inary.operations.distupdate.DistUpdatePlanner(nextRepoUri=targetrepo, Debug=True)
-    weddingplanner.plan()
-
-    ctx.ui.info(inary.util.colorize(_("*** Conclusion ***"),"red"))
-
-    if len(weddingplanner.missingPackages):
-        ctx.ui.info(_("  found packages preventing distupdate"))
-        ctx.ui.info(weddingplanner.missingPackages)
-    else:
-        ctx.ui.info(_("  distupdate is good to go"))
-
-    ctx.ui.info(_("  installed size {}").format(weddingplanner.sizeOfInstalledPackages))
-    ctx.ui.info(_("  installed size after update {}").format(weddingplanner.sizeOfInstalledPackagesAfterUpdate))
-    ctx.ui.info(_("  download size {}").format(weddingplanner.sizeOfPackagesToDownload))
-    ctx.ui.info(_("  biggest package size {}").format(weddingplanner.sizeOfBiggestPackage))
-    ctx.ui.info(_("  total space needed for distupdate {}").format(weddingplanner.sizeOfNeededTotalSpace))
-
-    if ctx.ui.confirm(str(_('Do you want make dist update?'))):
-        for repo in inary.db.repodb.RepoDB().list_repos():
-            repodb.remove_repo(repo) 
-            inary.db.flush_caches()
-            ctx.ui.debug(_('Repo {} removed from system.').format(name))
-            
-        add_repo('distuprepo',targetrepo)
-        update_repo(['distuprepo'])
-        inary.operations.distupdate.MakeDistUpdate()
-
-
 @locked
 def remove(packages, ignore_dependency=False, ignore_safety=False):
     """
@@ -622,7 +593,7 @@ def generate_pending_order(A):
 
 @locked
 def configure_pending(packages=None):
-    # Import SCOM 
+    # Import SCOM
     import inary.scomiface
 
     # start with pending packages
@@ -899,4 +870,3 @@ def clearCache(all=False):
         removeOrderByLimit(cacheDir, order, cacheLimit)
     else:
         removeAll(cacheDir)
-
