@@ -35,7 +35,7 @@ def install_pkg_names(A, reinstall = False, extra = False):
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
 
-    A = [str(x) for x in A] #FIXME: why do we still get unicode input here? :/ -- exa
+    A = [str(x) for x in A] #FIXME: why do we still get unicode input here? :/
     # A was a list, remove duplicates
     A_0 = A = set(A)
 
@@ -300,4 +300,3 @@ def plan_install_pkg_names(A):
     order = G_f.topological_sort()
     order.reverse()
     return G_f, order
-

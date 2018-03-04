@@ -54,7 +54,6 @@ class AutoXmlTestCase(unittest.TestCase):
 
         # test read
         a.read('tests/lat.xml')
-        # print a FIXME: python 2.x bug likely
         self.assert_(a.href.startswith('http://www.su'))
         self.assertEqual(a.number, 911)
         self.assertEqual(a.name, u'Inary Testers')
@@ -67,7 +66,7 @@ class AutoXmlTestCase(unittest.TestCase):
         self.assert_( util.any(lambda x:x.find('02012018')!=-1, la) )
         a.write('/tmp/a.xml')
         return
-        
+
     def testWriteRead(self):
         a = self.Rat()
         a.name = "Inary Testers"
@@ -80,7 +79,7 @@ class AutoXmlTestCase(unittest.TestCase):
         a.dreams = [ 'will', 'be', 'hero' ]
         errs = a.errors()
         if errs:
-            self.fail( 'We got a bunch of errors: ' + str(errs)) 
+            self.fail( 'We got a bunch of errors: ' + str(errs))
         a.write('/tmp/rat1.xml')
         a2 = self.Rat()
         a2.read('/tmp/rat2.xml')

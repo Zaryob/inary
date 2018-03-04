@@ -188,7 +188,6 @@ class Command(object):
 
     def die(self):
         """exit program"""
-        #FIXME: not called from anywhere?
         ctx.ui.error(_('Command terminated abnormally.'))
         sys.exit(-1)
 

@@ -32,8 +32,6 @@ def setup():
 def build():
     autotools.make()
 
-# FIXME: package build stops right after checking even when no errors happen (probably
-# due to SIGHUP in test). It is the duty of the packager to run tests by hand.
 #def check():
 #    autotools.make("check")
 

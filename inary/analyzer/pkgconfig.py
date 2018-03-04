@@ -180,7 +180,7 @@ class LDD:
                 # search for the package name (i.e: inary sf /usr/lib/*.so )
                 # the library may not exist, thus adding an exception is welcome
                 try:
-                    if obj_dump.startswith("/"): # FIXME: why? why?
+                    if obj_dump.startswith("/"):
                         obj_dump = obj_dumpobj_dump[1:]
                     dependency_name = ctx.filesdb.search_file(obj_dump)[0][0]
                 except IndexError:

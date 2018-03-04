@@ -335,7 +335,7 @@ def dir_size(_dir):
     # installed size. Gettin a sum of all files' sizes if far from
     # being true. Using 'du' command (like Debian does) can be a
     # better solution :(.
-    # Not really, du calculates size on disk, this is much better -- exa
+    # Not really, du calculates size on disk, this is much better
 
     if os.path.exists(_dir) and (not os.path.isdir(_dir) and not os.path.islink(_dir)):
         #so, this is not a directory but file..
@@ -610,7 +610,7 @@ def strip_file(filepath, fileinfo, outpath):
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '{}'!").format(f))
 
-    if fileinfo == None:        
+    if fileinfo == None:
         ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
         if ret:
             ctx.ui.warning(_("file command failed with return code {0} for file: {1}").format(ret, filepath))
