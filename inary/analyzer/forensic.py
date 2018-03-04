@@ -45,7 +45,7 @@ def get_hash(filepath):
 def find_unowned(rootdir, last_unowned):
     db = inary.db.installdb.InstallDB()
     all_files = []
-    for package in inary.api.list_installed():
+    for package in inary.db.installdb.InstallDB().list_installed():
         files = ['/' + x.path for x in db.get_files(package).list]
         all_files.extend(files)
     filepaths = []
@@ -63,8 +63,8 @@ def find_unowned(rootdir, last_unowned):
                 sys.stdout.flush()
 
 def find_corrupted(rootdir, last_changed):
-    for package in inary.api.list_installed():
-        check = inary.api.check(package)
+    for package in inary.db.installdb.InstallDB().list_installed():
+        check = inary.operations.check.check_package(package, config=False)
 
         for filepath in check['corrupted']:
             filepath = '/' + filepath

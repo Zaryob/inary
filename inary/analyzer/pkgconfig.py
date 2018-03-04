@@ -96,7 +96,7 @@ class LDD:
                 if package_tempdir.startswith("/tmp/"):
                     shutil.rmtree(package_tempdir)
 
-                #add a touple 
+                #add a touple
                 pkgconfig_list.append((result_broken, result_unused, result_undefined, result_lists, result_runpath, package_name))
 
             # Check for a installed package in the system
@@ -180,7 +180,9 @@ class LDD:
                 # search for the package name (i.e: inary sf /usr/lib/*.so )
                 # the library may not exist, thus adding an exception is welcome
                 try:
-                    dependency_name = inary.api.search_file(obj_dump)[0][0]
+                    if obj_dump.startswith("/"): # FIXME: why? why?
+                        obj_dump = obj_dumpobj_dump[1:]
+                    dependency_name = ctx.filesdb.search_file(obj_dump)[0][0]
                 except IndexError:
                     dependency_name = "broken"
                     ctx.ui.info("{} (probably broken dependency)".format(needed))
@@ -352,5 +354,3 @@ class LDD:
             _dependencies[pc_file] = check_pc_files(pc_file)
 
         return (_dependencies, _broken, _unused, _undefined, _runpath)
-
-

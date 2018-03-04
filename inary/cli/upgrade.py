@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 import inary.db
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
@@ -84,8 +84,8 @@ expanded to package names.
 
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
-            repos = Reactor.list_repos()
-            Reactor.update_repos(repos)
+            repos = inary.api.list_repos()
+            inary.api.update_repos(repos)
         else:
             ctx.ui.info(_('Will not update repositories'))
 
@@ -102,4 +102,4 @@ expanded to package names.
                         packages.extend(componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
-        Reactor.upgrade(packages, repository)
+        inary.api.upgrade(packages, repository)

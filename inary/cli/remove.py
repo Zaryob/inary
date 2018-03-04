@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 import inary.db
 
 class Remove(command.PackageOp, metaclass=command.autocommand):
@@ -62,5 +62,4 @@ expanded to package names.
                     packages.extend(self.componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
-        Reactor.remove(packages)
-        
+        inary.api.remove(packages)

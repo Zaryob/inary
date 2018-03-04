@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 
 class RebuildDb(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Rebuild Databases
@@ -48,4 +48,4 @@ dirs under /var/lib/inary
     def run(self):
         self.init(database=True)
         if ctx.ui.confirm(str(_('Rebuild INARY databases?'))):
-            Reactor.rebuild_db()
+            inary.api.rebuild_db()

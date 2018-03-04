@@ -5,7 +5,7 @@
 ```Traceback (most recent call last):
   File "checkelf", line 89, in check_objdump
     dependency_name = inary.api.search_file(objdump_needed)[0][0]
-  File "/usr/local/lib/python3.5/dist-packages/inary/reactor.py", line 306, in search_file
+  File "/usr/local/lib/python3.5/dist-packages/inary/api.py", line 306, in search_file
     ctx.filesdb = inary.db.filesdb.FilesDB()
   File "/usr/local/lib/python3.5/dist-packages/inary/db/filesdb.py", line 31, in __init__
     self.filesdb = plyvel.DB(self.files_ldb_path, create_if_missing=True)

@@ -77,7 +77,7 @@ class Index(command.Command, metaclass=command.autocommand):
     def run(self):
         self.init(database=True, write=False)
 
-        import inary.reactor as Reactor
+        import inary.api
         from inary.file import File
 
         ctypes = {"bz2": File.COMPRESSION_TYPE_BZ2,
@@ -86,7 +86,7 @@ class Index(command.Command, metaclass=command.autocommand):
         for type_str in ctx.get_option("compression_types").split(","):
             compression |= ctypes.get(type_str, 0)
 
-        Reactor.index(self.args or ["."], ctx.get_option('output'),
+        inary.api.index(self.args or ["."], ctx.get_option('output'),
               skip_sources=ctx.get_option('skip_sources'),
               skip_signing=ctx.get_option('skip_signing'),
               compression=compression)

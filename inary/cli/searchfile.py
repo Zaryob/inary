@@ -17,7 +17,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.reactor as Reactor
+import inary.api
 import inary.context as ctx
 import inary.cli.command as command
 
@@ -43,7 +43,7 @@ Finds the installed package which contains the specified file.
         self.parser.add_option_group(group)
 
     def search_file(self, path):
-        found = Reactor.search_file(path)
+        found = inary.api.search_file(path)
         for pkg, files in found:
             for pkg_file in files:
                 ctx.ui.info(_("Package {0} has file /{1}").format(pkg, pkg_file))

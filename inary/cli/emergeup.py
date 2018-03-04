@@ -20,7 +20,7 @@ import inary
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and install INARY source packages from repository
@@ -76,7 +76,7 @@ You can also give the name of a component.
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
-        repos = Reactor.list_repos()
-        Reactor.update_repos(repos, ctx.get_option('force'))
-	
-        Reactor.emerge(emerge_up_list)
+        repos = inary.api.list_repos()
+        inary.api.update_repos(repos, ctx.get_option('force'))
+
+        inary.api.emerge(emerge_up_list)

@@ -19,7 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
-import inary.reactor as Reactor
+import inary.api
 import inary.db
 
 class ListAvailable(command.Command, metaclass=command.autocommand):
@@ -62,7 +62,7 @@ all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in Reactor.list_repos():
+            for repo in inary.api.list_repos():
                 ctx.ui.info(_("Repository : {}\n").format(str(repo)))
                 self.print_packages(repo)
 
@@ -75,9 +75,9 @@ all repositories.
             except Exception as e:
                 return
         else:
-            l = Reactor.list_available(repo)
+            l = inary.api.list_available(repo)
 
-        installed_list = Reactor.list_installed()
+        installed_list = inary.api.list_installed()
 
         # maxlen is defined dynamically from the longest package name (#9021)
         if l:

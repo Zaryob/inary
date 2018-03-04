@@ -19,7 +19,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 import inary
 
 class Fetch(command.Command, metaclass=command.autocommand):
@@ -55,9 +55,9 @@ Downloads the given inary packages to working directory
         if not self.args:
             self.help()
             return
-        
+
         full_packages = []
-        
+
         for inary_package in self.args:
             package = packages.get_package(inary_package)
             full_packages.append(inary_package)
@@ -65,4 +65,4 @@ Downloads the given inary packages to working directory
                 for dep in package.runtimeDependencies():
                     full_packages.append(dep.name())
 
-        Reactor.fetch(full_packages, ctx.config.options.output_dir)
+        inary.api.fetch(full_packages, ctx.config.options.output_dir)

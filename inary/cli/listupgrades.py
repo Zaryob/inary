@@ -19,7 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.blacklist
 import inary.context as ctx
-import inary.reactor as Reactor
+import inary.api
 import inary.db
 
 class ListUpgrades(command.Command, metaclass=command.autocommand):
@@ -49,7 +49,7 @@ Lists the packages that will be upgraded.
 
     def run(self):
         self.init(database = True, write = False)
-        upgradable_pkgs = Reactor.list_upgradable()
+        upgradable_pkgs = inary.api.list_upgradable()
 
         component = ctx.get_option('component')
         if component:

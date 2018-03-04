@@ -58,7 +58,9 @@ def get_firmware_package(firmware):
             for fw in firmwares:
                 ctx.ui.info("  * {}".format(fw), noln = True)
                 try:
-                    firmware = inary.api.search_file(fw)[0][0]
+                    if fw.startswith("/"): # FIXME: why? why?
+                        fw = fw[1:]
+                    firmware = ctx.filesdb.search_file(fw)[0][0]
                 except:
                     pass
 

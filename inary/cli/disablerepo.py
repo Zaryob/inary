@@ -16,7 +16,7 @@ _ = __trans.gettext
 
 import inary.db
 import inary.cli.command as command
-import inary.reactor as Reactor
+import inary.api
 
 class DisableRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Disable repository
@@ -43,4 +43,4 @@ Disabled repositories are not taken into account in operations
 
         for repo in self.args:
             if self.repodb.has_repo(repo):
-                Reactor.set_repo_activity(repo, False)
+                inary.api.set_repo_activity(repo, False)

@@ -31,7 +31,6 @@ import inary.file
 import inary.context as ctx
 import inary.analyzer.dependency as dependency
 import inary.api
-import inary.reactor as reactor
 import inary.sourcearchive
 import inary.data.files as Files
 import inary.fetcher
@@ -586,11 +585,11 @@ class Builder:
                 else:
                     abandoned_files.append(root)
 
-            if root in all_paths_in_packages: 
+            if root in all_paths_in_packages:
                 skip_paths.append(root)
                 continue
 
-            skip = False 
+            skip = False
             for skip_path in skip_paths:
                 if root.startswith(skip_path):
                     skip = True
@@ -655,7 +654,7 @@ class Builder:
             for pscom in package.providesScom:
                 fname = util.join_path(self.specdir, ctx.const.scom_dir,
                                      pscom.script)
- 
+
                 try:
                     buf = open(fname).read()
                     compile(buf, "error", "exec")
@@ -830,7 +829,7 @@ class Builder:
                 if ctx.ui.confirm(
                 _('Do you want to install the unsatisfied build dependencies')):
                     ctx.ui.info(_('Installing build dependencies.'))
-                    if not Reactor.Reactor.install([dep.package for dep in dep_unsatis], reinstall=True):
+                    if not inary.api.install([dep.package for dep in dep_unsatis], reinstall=True):
                         fail()
                 else:
                     fail()

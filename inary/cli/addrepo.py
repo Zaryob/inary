@@ -17,7 +17,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.reactor as Reactor
+import inary.api
 import inary.cli.command as command
 import inary.context as ctx
 
@@ -50,7 +50,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
     def warn_and_remove(self, message, repo):
         ctx.ui.warning(message)
-        Reactor.remove_repo(repo)
+        inary.api.remove_repo(repo)
 
     def run(self):
 
@@ -65,11 +65,11 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                                         'Do you want to continue?').format(name)):
                     return
 
-            Reactor.add_repo(name, indexuri, ctx.get_option('at'))
+            inary.api.add_repo(name, indexuri, ctx.get_option('at'))
 
             if not ctx.get_option('no_fetch'):
                 try:
-                    Reactor.update_repo(name)
+                    inary.api.update_repo(name)
                 except (inary.Error, IOError):
                     warning = _("{0} repository could not be reached. Removing {0} from system.").format(name)
                     self.warn_and_remove(warning, name)

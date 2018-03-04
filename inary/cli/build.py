@@ -17,7 +17,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.reactor as Reactor
+import inary.api
 import inary.cli.command as command
 import inary.context as ctx
 
@@ -176,6 +176,6 @@ class Build(command.Command, metaclass=command.autocommand):
 
         for x in self.args or ["pspec.xml"]:
             if ctx.get_option('until'):
-                Reactor.build_until(x, ctx.get_option('until'))
+                inary.operations.build.build_until(x, ctx.get_option('until'))
             else:
-                Reactor.build(x)
+                inary.api.build(x)
