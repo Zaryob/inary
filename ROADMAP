@@ -22,9 +22,9 @@ Legend:
       + Ruby Language Tools
       + Perl Language Tools
       + CMake Tools
-
     / unit test
   + source building
+    - Detailed build log file
   + package module
     + extraction
     + add file / compression
@@ -39,6 +39,7 @@ Legend:
   + single repository index
   + simple dependency checking
   + Package/Files
+  - Detailed inary logs into /var/lib/inary
 
 2. Alpha
   + multi-package dependency analysis (eray)
@@ -88,9 +89,9 @@ Legend:
     + basic types
     + list type
     + class type
-    ? localtext/text types (localtext.... Ummm?.... )
+    / localtext/text types (localtext.... Ummm?.... )
       + write meaningful localtext datas (Zaryob)
-      - return meaningful localtext summaries and descriptions (Hak getire)
+      - return meaningful localtext summaries and descriptions (Hak getire, inşallah xml.dom ile)
     + revised interface
     / Error handling
       + improved error handling, check routines, hooks, format/print routines
@@ -119,7 +120,7 @@ Legend:
     + decide how to implement
     + support repo order
   + refactor xml support and implement multiple backends
-    + ciksemel rewrite and adding python3 support (aquila)
+    / ciksemel based modules rewrite with xml.dom.minidom (Zaryob)
   / partial caching and automatic resume for file download (meren)
     + use a '.part' extension
     - resume file downloading (Darara.... fetcher will rewrite with httplib) (Zaryob)
@@ -156,7 +157,23 @@ Legend:
       + translations and correct language for summary, description (packagers)
       + make inary messages translatable (eray)
       + .pot support for dist script (gurer)
-      / translate messages mesajların çevirisinin yapılması (inary tr.po) (eray)
+      / translate messages mesajların çevirisinin yapılması (inary tr.po)
+        - az
+        + de
+        + en
+        + es
+        + fr
+        - hr
+        + hu
+        + it
+        - nl
+        - pl
+        - pt_BR
+        + ru
+        - sv
+        + tr
+        - uk
+
       + proper unicode handling in code - tons of fixes (eray - baris)
     / configure-pending (eray) (should return which packages configured)
       - report scom scripts problems to developers
@@ -224,12 +241,9 @@ Legend:
       + design decisions
       + extend XML specs to support that
       - cross-platform building support
-      - incremental build/fetch for repository index (inary-index.xml)
+      + incremental build/fetch for repository index (inary-index.xml)
     / xdelta support (caglar)
       - diffsets
-    / a useful distupdate command
-      + distupdate planner
-      - distupdate maker
     - a command (check-repo) to check if repos are consistent wrt dep relations
     - component improvements (optional)
       - maintain a list of components each component has
@@ -251,7 +265,7 @@ Legend:
       - enum type
       - make autoxml dependent on only xmlext and xmlfile interfaces
     - search command: (eray)
-      - search components
+      + search components
       - english stemming
       - turkish stemming
       - phonetic/syntactic fault tolerance (whichever works!)
