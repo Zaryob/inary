@@ -19,7 +19,7 @@ import subprocess
 # We don't use a secret keyring, of course, but gpg panics and
 # implodes if there isn't one available
 GPG_CMD = 'gpg --ignore-time-conflict --no-options --no-default-keyring \
-            --secret-keyring /etc/inary/secring.gpg --trustdb-name /etc/pisi/trustdb.gpg'
+            --secret-keyring /etc/inary/secring.gpg --trustdb-name /etc/inary/trustdb.gpg'
 
 GPG = GPG_CMD
 
@@ -103,7 +103,7 @@ def net_update():
         old_mtime = os.stat(keyring).st_mtime
     else:
         old_mtime = 0
-    
+
     pass
 
 def list_keys(GPG):
@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
     elif operation == 'add':
         keyfile = sys.argv[argc]
-        # TODO: check whether key_path is alive ('-' can be used for stdin) e.g. gpg --keyring inary-keyring.gpg --armour --export 102030AB | pisi-key add -
+        # TODO: check whether key_path is alive ('-' can be used for stdin) e.g. gpg --keyring inary-keyring.gpg --armour --export 102030AB | inary-key add -
         addKey(GPG, keyfile)
         print "Key in %s is succesfully added." % keyfile
 
@@ -236,4 +236,3 @@ if __name__ == '__main__':
         pass
     else:
         printUsage()
-

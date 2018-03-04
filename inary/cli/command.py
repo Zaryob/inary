@@ -80,7 +80,7 @@ class Command(object):
         self.scom = False
         self.parser = optparse.OptionParser(usage=getattr(self, "__doc__"),
                                             version="%prog " + inary.__version__,
-                                            formatter=PisiHelpFormatter())
+                                            formatter=InaryHelpFormatter())
         self.options()
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args(args)
@@ -213,7 +213,7 @@ class PackageOp(Command):
     def init(self, database=True, write=True):
         super(PackageOp, self).init(database, write)
 
-class PisiHelpFormatter(optparse.HelpFormatter):
+class InaryHelpFormatter(optparse.HelpFormatter):
     def __init__(self,
                  indent_increment=1,
                  max_help_position=32,

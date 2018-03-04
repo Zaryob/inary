@@ -136,7 +136,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
         if not necessary_permissions:
             ctx.ui.info("")
-            ctx.ui.warning(_("Pisi was unable to check the integrity of "
+            ctx.ui.warning(_("Inary was unable to check the integrity of "
                              "packages which contain files that you don't "
                              "have read access.\n"
                              "Running the check under a privileged user "

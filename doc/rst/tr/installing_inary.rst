@@ -19,7 +19,7 @@ Inary paket yöneticisi üç farklı şekilde kurulabilir:
   kalan tüm özellikleri sınırlandırılmış kurulum ile aynıdır
 
 
-.. note:: Inary paket yöneticisi herbir kurulum şekli için ayrı bir paket 
+.. note:: Inary paket yöneticisi herbir kurulum şekli için ayrı bir paket
   deposu içerir. Kurulum şeklinize uygun depo kullanmanız önemle rica edilir.
 
 
@@ -93,10 +93,8 @@ Inary kullandığınız inary'i kullanarak güncelleştirmeye olanak verir.
 
 Scom Kullanmadan Paket İşlemi Yapmak
 ````````````````````````````````````
-Inary paket yönetim sistemi eski pisi bağımlılığı olan ve pisi packet konfigurasyon
+Inary paket yönetim sistemi eski inary bağımlılığı olan ve pisi paket konfigurasyon
 betiklerini içerisinde bulunduran comar sistemini forklayıp geliştirmiştir.
 Ancak mevcut inary eskiden farklı olarak scom kullanmadan paket işlemi yapmaya
-olanak verir. Ancak bu durumda paketlerin kurulumundan sonraki konfigurasyon 
+olanak verir. Ancak bu durumda paketlerin kurulumundan sonraki konfigurasyon
 tamamen kullanıcıya bırakılmıştır.
-
-

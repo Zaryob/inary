@@ -18,7 +18,7 @@ detailed Source Version Section, and started the Section on Release Number.
 
 \section{Introduction}
 
-This document explains the \emph{version policy} that applies to 
+This document explains the \emph{version policy} that applies to
 P\.IS\.I packages. Classically, the issue of distinguishing source and
 binary distributions unambiguously has not received a rigorous
 treatment in the context of LINUX distributions. We have identified
@@ -42,7 +42,7 @@ built from the source are redistributed.
 
 \item[The problem of underdetermined rebuilds]
 There have been rapid changes in the system, and although no
-changes have been made to the package source, a new binary 
+changes have been made to the package source, a new binary
 distribution must be prepared.
 
 \end{description}
@@ -54,7 +54,7 @@ build numbers.
 
 Since the source version is usually used by the users and developers
 to identify software, we retain the notion of a source version in
-P\.IS\.I as a convenience. 
+P\.IS\.I as a convenience.
 
 In the following sections, we explain the components of our
 versioning scheme.
@@ -62,7 +62,7 @@ versioning scheme.
 \subsection{Source Version}
 
 Source version is the version number provided by the
-upstream maintainer of the source archive used in package. It must 
+upstream maintainer of the source archive used in package. It must
 always be the same as the upstream version used.
 
 \textbf{Example}: If the upstream archive name is
@@ -108,8 +108,8 @@ the \texttt{<Name>} tag. Version and release are available in the last
 
 The name of a source package is constant throughout its revision
 history. The version is the original version, given by its
-programmers. Release is a positive integer.  Name and release 
-is sufficient to uniquely identify a particular PISI source revision.
+programmers. Release is a positive integer.  Name and release
+is sufficient to uniquely identify a particular INARY source revision.
 That is, version and release are independent.
 
 \subsection{Release Number}
@@ -128,7 +128,7 @@ number always increments by $1$ in each revision in the
 The scope of the release number is a given distribution, regardless of
 its version, e.g. Pardus.
 
-In the future, PISI will have strict checks for release numbers.
+In the future, INARY will have strict checks for release numbers.
 
 \subsection{Dependency Specifications}
 
@@ -137,7 +137,7 @@ a particular version or a range of package versions.
 
 \section{Identifying Binary packages}
 
-A PISI binary package is produced from a PISI source package. It has a
+A INARY binary package is produced from a INARY source package. It has a
 name that is constant throughout the history of the source package,
 and it inherits the source version and release number from the source
 package. However, a binary package has in addition a binary build
@@ -164,9 +164,9 @@ a build number is built. A package without a build number is evaluated
 on the basis of release number, which is guaranteed to exist.
 
 The scope of a build number is a given distribution build environment
-for a particular architecture, which may vary from repository to 
+for a particular architecture, which may vary from repository to
 repository. Therefore, it is not used in dependency
-specifications. However, the system does assume that a build of a  
+specifications. However, the system does assume that a build of a
 given package and architecture is unique in a given repository.
 
 \section{Package File Names}
@@ -174,7 +174,7 @@ given package and architecture is unique in a given repository.
 A P\.IS\.I binary package file name contains all the components relevant
 to its identification, separated by dashes:
 \begin{verbatim}
-  <binary name>-<source version>-<source release>-<binary build>.pisi
+  <binary name>-<source version>-<source release>-<binary build>.inary
 \end{verbatim}
 
 \section{Future Work}

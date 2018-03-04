@@ -211,29 +211,29 @@
     <widgets>
      <classwidget usesdiagramfillcolour="0" width="142" showattsigs="601" usesdiagramusefillcolour="0" x="543" y="273" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="135" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="14" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
      <classwidget usesdiagramfillcolour="0" width="204" showattsigs="601" usesdiagramusefillcolour="0" x="35" y="355" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="24" showoperations="1" showpackage="1" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
-     <notewidget usesdiagramfillcolour="1" width="413" usesdiagramusefillcolour="1" x="27" y="149" linewidth="none" fillcolour="none" height="185" usefillcolor="1" isinstance="0" xmi.id="46" showstereotype="1" text="@d: is a bsddb dict which holds package related data. 
-key:&quot;package name&quot; value:InstallInfo 
+     <notewidget usesdiagramfillcolour="1" width="413" usesdiagramusefillcolour="1" x="27" y="149" linewidth="none" fillcolour="none" height="185" usefillcolor="1" isinstance="0" xmi.id="46" showstereotype="1" text="@d: is a bsddb dict which holds package related data.
+key:&quot;package name&quot; value:InstallInfo
 
-&quot;/var/db/pisi/install.bdb&quot; 
+&quot;/var/db/inary/install.bdb&quot;
 
-@dp: is a bsddb dict which holds pending packages data. 
-key:&quot;package name&quot; value:bool 
+@dp: is a bsddb dict which holds pending packages data.
+key:&quot;package name&quot; value:bool
 
-&quot;/var/db/pisi/configpending.bdb&quot; 
+&quot;/var/db/inary/configpending.bdb&quot;
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="411" usesdiagramusefillcolour="1" x="15" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="47" text="installdb.py 
+     <notewidget usesdiagramfillcolour="1" width="411" usesdiagramusefillcolour="1" x="15" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="47" text="installdb.py
 
 The main purpose of the installdb is to hold the packages' version and status infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="313" usesdiagramusefillcolour="1" x="678" y="50" linewidth="none" fillcolour="none" height="245" usefillcolor="1" isinstance="0" xmi.id="49" showstereotype="1" text="@state: holds the status of the package 
+     <notewidget usesdiagramfillcolour="1" width="313" usesdiagramusefillcolour="1" x="678" y="50" linewidth="none" fillcolour="none" height="245" usefillcolor="1" isinstance="0" xmi.id="49" showstereotype="1" text="@state: holds the status of the package
 	'i' : 'installed'
 	'ip' : 'installed-pending'
 	'r' : 'removed'
 	'p' : 'purged'
-@version: version of the package 
-@release: release number of the package 
-@build: build number of the package 
-@distribution: distribution of the package. (exp: &quot;Pardus&quot;) 
-@time: the time when the package is installed 
+@version: version of the package
+@release: release number of the package
+@build: build number of the package
+@distribution: distribution of the package. (exp: &quot;Pardus&quot;)
+@time: the time when the package is installed
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
     </widgets>
     <messages/>
@@ -250,15 +250,15 @@ The main purpose of the installdb is to hold the packages' version and status in
    </diagram>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="52" documentation="" type="402" showops="1" showpackage="0" name="RepoDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
     <widgets>
-     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="13" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="54" text="repodb.py 
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="13" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="54" text="repodb.py
 
-The main purpose of the repodb is to hold the repositories' infos (currently we only have the repository's url). 
+The main purpose of the repodb is to hold the repositories' infos (currently we only have the repository's url).
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="35" y="299" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="86" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="403" usesdiagramusefillcolour="1" x="22" y="165" linewidth="none" fillcolour="none" height="101" usefillcolor="1" isinstance="0" xmi.id="88" showstereotype="1" text="@d: is a bsddb dict which holds repositories' infos 
-key:&quot;repository name&quot; value:Repo 
+     <notewidget usesdiagramfillcolour="1" width="403" usesdiagramusefillcolour="1" x="22" y="165" linewidth="none" fillcolour="none" height="101" usefillcolor="1" isinstance="0" xmi.id="88" showstereotype="1" text="@d: is a bsddb dict which holds repositories' infos
+key:&quot;repository name&quot; value:Repo
 
-&quot;/var/db/pisi/repodb.bdb&quot; 
+&quot;/var/db/inary/repodb.bdb&quot;
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="121" showattsigs="601" usesdiagramusefillcolour="1" x="538" y="259" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="98" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
      <notewidget usesdiagramfillcolour="1" width="243" usesdiagramusefillcolour="1" x="615" y="211" linewidth="none" fillcolour="none" height="58" usefillcolor="1" isinstance="0" xmi.id="106" showstereotype="1" text="@indexuri: url of the repository. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
@@ -276,21 +276,21 @@ key:&quot;repository name&quot; value:Repo
    </diagram>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="109" documentation="" type="402" showops="1" showpackage="0" name="FilesDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
     <widgets>
-     <notewidget usesdiagramfillcolour="1" width="404" usesdiagramusefillcolour="1" x="14" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="110" text="filesdb.py 
+     <notewidget usesdiagramfillcolour="1" width="404" usesdiagramusefillcolour="1" x="14" y="14" linewidth="none" fillcolour="none" height="113" usefillcolor="1" isinstance="0" xmi.id="110" text="filesdb.py
 
-The main purpose of the filesdb is to hold all the packages' files' information. 
+The main purpose of the filesdb is to hold all the packages' files' information.
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="43" y="338" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="111" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="420" usesdiagramusefillcolour="1" x="15" y="188" linewidth="none" fillcolour="none" height="115" usefillcolor="1" isinstance="0" xmi.id="113" showstereotype="1" text="@d: is a bsddb dict which holds file infos that all the installed packages have. 
+     <notewidget usesdiagramfillcolour="1" width="420" usesdiagramusefillcolour="1" x="15" y="188" linewidth="none" fillcolour="none" height="115" usefillcolor="1" isinstance="0" xmi.id="113" showstereotype="1" text="@d: is a bsddb dict which holds file infos that all the installed packages have.
 
-key:&quot;file path&quot; value: (packagename, FileInfo) tuple 
-&quot;/var/db/pisi/filesdb.bdb&quot; 
+key:&quot;file path&quot; value: (packagename, FileInfo) tuple
+&quot;/var/db/inary/filesdb.bdb&quot;
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="140" showattsigs="601" usesdiagramusefillcolour="1" x="538" y="244" showopsigs="601" linewidth="none" fillcolour="none" height="122" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="114" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="335" usesdiagramusefillcolour="1" x="640" y="81" linewidth="none" fillcolour="none" height="223" usefillcolor="1" isinstance="0" xmi.id="133" showstereotype="1" text="@path: path of the file 
-@type: type of the file. (&quot;doc&quot;, &quot;man&quot;, &quot;info&quot;, &quot;config&quot;, &quot;header&quot;, &quot;library&quot;, &quot;executable&quot;, &quot;data&quot;, &quot;localedata&quot;) 
-@size: size of the file 
-@hash: sha1sum of the file 
+     <notewidget usesdiagramfillcolour="1" width="335" usesdiagramusefillcolour="1" x="640" y="81" linewidth="none" fillcolour="none" height="223" usefillcolor="1" isinstance="0" xmi.id="133" showstereotype="1" text="@path: path of the file
+@type: type of the file. (&quot;doc&quot;, &quot;man&quot;, &quot;info&quot;, &quot;config&quot;, &quot;header&quot;, &quot;library&quot;, &quot;executable&quot;, &quot;data&quot;, &quot;localedata&quot;)
+@size: size of the file
+@hash: sha1sum of the file
 @permanent: If true, file is not removed when the package is removed. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
     </widgets>
     <messages/>
@@ -308,10 +308,10 @@ key:&quot;file path&quot; value: (packagename, FileInfo) tuple
     <widgets>
      <enumwidget usesdiagramfillcolour="0" width="85" usesdiagramusefillcolour="0" x="507" y="249" linewidth="none" fillcolour="#ffffc0" height="126" usefillcolor="1" isinstance="0" xmi.id="141" showpackage="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" />
      <classwidget usesdiagramfillcolour="1" width="139" showattsigs="601" usesdiagramusefillcolour="1" x="52" y="262" showopsigs="601" linewidth="none" fillcolour="none" height="45" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="146" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="394" usesdiagramusefillcolour="1" x="38" y="178" linewidth="none" fillcolour="none" height="69" usefillcolor="1" isinstance="0" xmi.id="148" showstereotype="1" text="@d: is a bsddb dict which holds another key,value dict 
-key: objkey value:dict(&quot;repo name&quot;, objvalue) 
+     <notewidget usesdiagramfillcolour="1" width="394" usesdiagramusefillcolour="1" x="38" y="178" linewidth="none" fillcolour="none" height="69" usefillcolor="1" isinstance="0" xmi.id="148" showstereotype="1" text="@d: is a bsddb dict which holds another key,value dict
+key: objkey value:dict(&quot;repo name&quot;, objvalue)
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="152" text="itembydb.py 
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="152" text="itembydb.py
 
 The main purpose of the itembyrepo class is make it easier for holding datas by repository." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
     </widgets>
@@ -327,14 +327,14 @@ The main purpose of the itembyrepo class is make it easier for holding datas by 
    </diagram>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="153" documentation="" type="402" showops="1" showpackage="0" name="ComponentDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
     <widgets>
-     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="154" text="component.py 
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="154" text="component.py
 
 The main purpose of the componentdb is to hold the repositories component infos. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="130" showattsigs="601" usesdiagramusefillcolour="1" x="31" y="332" showopsigs="601" linewidth="none" fillcolour="none" height="47" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="155" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="401" usesdiagramusefillcolour="1" x="30" y="203" linewidth="none" fillcolour="none" height="112" usefillcolor="1" isinstance="0" xmi.id="157" showstereotype="1" text="@d: is a ItemByRepo object which contains component infos by repos. 
+     <notewidget usesdiagramfillcolour="1" width="401" usesdiagramusefillcolour="1" x="30" y="203" linewidth="none" fillcolour="none" height="112" usefillcolor="1" isinstance="0" xmi.id="157" showstereotype="1" text="@d: is a ItemByRepo object which contains component infos by repos.
 
 key: &quot;component name&quot; value: Component
-&quot;/var/db/pisi/component.bdb&quot;
+&quot;/var/db/inary/component.bdb&quot;
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="160" showattsigs="601" usesdiagramusefillcolour="1" x="549" y="317" showopsigs="601" linewidth="none" fillcolour="none" height="153" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="163" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
      <notewidget usesdiagramfillcolour="1" width="335" usesdiagramusefillcolour="1" x="673" y="106" linewidth="none" fillcolour="none" height="223" usefillcolor="1" isinstance="0" xmi.id="176" showstereotype="1" text="@name: component name
@@ -358,19 +358,19 @@ key: &quot;component name&quot; value: Component
    </diagram>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1021" snapy="10" showatts="1" xmi.id="184" documentation="" type="402" showops="1" showpackage="0" name="PackageDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="579" >
     <widgets>
-     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="185" text="packagedb.py 
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="16" y="20" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="185" text="packagedb.py
 
 The main purpose of the packagedb is to hold package infos of the repositories and reverse dependency informations." font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="125" showattsigs="601" usesdiagramusefillcolour="1" x="36" y="428" showopsigs="601" linewidth="none" fillcolour="none" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="186" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="418" usesdiagramusefillcolour="1" x="32" y="177" linewidth="none" fillcolour="none" height="235" usefillcolor="1" isinstance="0" xmi.id="189" showstereotype="1" text="@d: is a ItemByRepo object which holds the package informations of repos. 
+     <notewidget usesdiagramfillcolour="1" width="418" usesdiagramusefillcolour="1" x="32" y="177" linewidth="none" fillcolour="none" height="235" usefillcolor="1" isinstance="0" xmi.id="189" showstereotype="1" text="@d: is a ItemByRepo object which holds the package informations of repos.
 key:&quot;package name&quot; value:Package
 
-&quot;/var/db/pisi/package.bdb&quot; 
+&quot;/var/db/inary/package.bdb&quot;
 
-@d: is a ItemByRepo object which holds reverse dependency information of packages. 
+@d: is a ItemByRepo object which holds reverse dependency information of packages.
 key:&quot;dependency name&quot; value: [dependent package names list]
 
-&quot;/var/db/pisi/revdep.bdb&quot; " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
+&quot;/var/db/inary/revdep.bdb&quot; " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="217" showattsigs="601" usesdiagramusefillcolour="1" x="557" y="296" showopsigs="601" linewidth="none" fillcolour="none" height="243" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="190" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
      <notewidget usesdiagramfillcolour="1" width="317" usesdiagramusefillcolour="1" x="700" y="187" linewidth="none" fillcolour="none" height="120" usefillcolor="1" isinstance="0" xmi.id="206" showstereotype="1" text="@name: package name
 @summary: package's summary
@@ -392,19 +392,19 @@ key:&quot;dependency name&quot; value: [dependent package names list]
    </diagram>
    <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="1012" snapy="10" showatts="1" xmi.id="209" documentation="" type="402" showops="1" showpackage="0" name="SourceDB" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="593" >
     <widgets>
-     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="27" y="22" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="210" text="sourcedb.py 
+     <notewidget usesdiagramfillcolour="1" width="453" usesdiagramusefillcolour="1" x="27" y="22" linewidth="none" fillcolour="none" height="108" usefillcolor="1" isinstance="0" xmi.id="210" text="sourcedb.py
 
 The main purpose of the sourcedb is for emerge operation. " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="175" showattsigs="601" usesdiagramusefillcolour="1" x="33" y="433" showopsigs="601" linewidth="none" fillcolour="none" height="63" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="211" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
-     <notewidget usesdiagramfillcolour="1" width="414" usesdiagramusefillcolour="1" x="31" y="174" linewidth="none" fillcolour="none" height="242" usefillcolor="1" isinstance="0" xmi.id="214" showstereotype="1" text="@d: is a ItemByRepo object which contains source packages building information of the package for emerge. 
-key: &quot;source package name&quot; value: SpecFile 
+     <notewidget usesdiagramfillcolour="1" width="414" usesdiagramusefillcolour="1" x="31" y="174" linewidth="none" fillcolour="none" height="242" usefillcolor="1" isinstance="0" xmi.id="214" showstereotype="1" text="@d: is a ItemByRepo object which contains source packages building information of the package for emerge.
+key: &quot;source package name&quot; value: SpecFile
 
-&quot;/var/db/pisi/source.bdb&quot; 
+&quot;/var/db/inary/source.bdb&quot; 
 
 @d: is a ItemByRepo object which contains package name information and that package's source package name information
 key: &quot;package name&quot; value:&quot;source package name&quot;
 
-&quot;/var/db/pisi/pkgtosrc.bdb&quot; 
+&quot;/var/db/inary/pkgtosrc.bdb&quot;
 " font="DejaVu Sans,9,-1,5,50,0,0,0,0,0" linecolor="none" />
      <classwidget usesdiagramfillcolour="1" width="133" showattsigs="601" usesdiagramusefillcolour="1" x="666" y="365" showopsigs="601" linewidth="none" fillcolour="none" height="99" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="215" showoperations="1" showpackage="0" showscope="1" font="DejaVu Sans,9,-1,5,75,0,0,0,0,0" linecolor="none" />
     </widgets>

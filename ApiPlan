@@ -2,8 +2,8 @@ API Plan
 ========
 
 Inary does not have a usable api. All the projects use its internal modules to do their
-jobs. This file holds a list of these usages by project as a guide for a new competent 
-pisi api.
+jobs. This file holds a list of these usages by project as a guide for a new competent
+inary api.
 
 Inary
 ====
@@ -64,7 +64,7 @@ api.
 
 * repodb.get_repo
 * packagedb.get_package
-  pm still uses the old packagedb with pisi.itemsbyrepo.installed or pisi.itemsbyrepo.repos params
+  pm still uses the old packagedb with inary.itemsbyrepo.installed or inary.itemsbyrepo.repos params
 * componentdb.list_components
 * repodb.list
 * componentdb.get_union_comp
@@ -109,7 +109,7 @@ Below are the inary modules used internally by PackageKit.
 * api.upgrade
 * api.remove
 * api.list_upgradable
-* api.update_repo 
+* api.update_repo
 * api.list_repos
 * repodb.get_repo.indexuri.get_uri
 * version.Version

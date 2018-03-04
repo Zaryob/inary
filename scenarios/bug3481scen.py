@@ -15,15 +15,15 @@
 #            inary.operations.Error: Çakışmalar var
 #            Genel yardım için lütfen 'inary help' komutunu kullanınız.
 #
-# Problem Description: 
-# 
-# SPAM upgrade command sees some system.base packages conflict with each other. It asks if you 
-# want to remove the conflicting package but does not allow it to be removed without 
+# Problem Description:
+#
+# SPAM upgrade command sees some system.base packages conflict with each other. It asks if you
+# want to remove the conflicting package but does not allow it to be removed without
 # --bypass-safety parameter.
 #
 # Expected:
 #
-# Pisi should remove the package if answered yes.
+# Inary should remove the package if answered yes.
 #
 
 from inary.scenarioapi.scenario import *

@@ -5,11 +5,10 @@ You can install Inary on your system with a single command.
 If you are on a Solus or PisiLinux system, you should delete /usr/lib/pardus/pisi
 when you are installing the SVN version
 
-Inary requires piksemel XML processing library, Pardus configuration 
+Inary requires Pardus configuration 
 manager based SCOM and SCOM API in order to run.
 
-If you are upgrading from an old INARY release you may have to 
+If you are upgrading from an old INARY release you may have to
 run the following command as root:
 
 # inary rebuild-db
-

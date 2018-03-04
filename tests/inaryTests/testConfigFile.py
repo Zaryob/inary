@@ -17,7 +17,7 @@ class ConfigFileTestCase(unittest.TestCase):
         cf = self.cf
         self.assertEqual(cf.build.jobs, cf.build['jobs'])
         assert not cf.build.defaults.generateDebug
-        assert cf.build.defaults.enableSandbox  
+        assert cf.build.defaults.enableSandbox
         self.assertEqual(cf.build.compressionlevel, cf.build['compressionlevel'])
         self.assertEqual(cf.build.fallback, cf.build['fallback'])
 
@@ -35,7 +35,7 @@ class ConfigFileTestCase(unittest.TestCase):
         if not cf.dirs:
             self.fail()
 
-    def testPisiConfValues(self):
+    def testInaryConfValues(self):
         cf = self.cf
         self.assertEqual(cf.dirs.kde_dir, '/usr/')
         self.assertEqual(cf.dirs.compiled_packages_dir, '/var/cache/inary/packages')
@@ -50,10 +50,3 @@ class ConfigFileTestCase(unittest.TestCase):
         assert not cf.build.configurationlevel
         assert cf.dirs.qt_dir
         assert not cf.dirs.cache_dir
-
-
-
-
-
-
-

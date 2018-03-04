@@ -1,14 +1,14 @@
-PiSi TODO List
+Inary TODO List
 ==============
 A list of tasks to accomplish, organized into priority sections
 
 Legend:
-- Todo 
-? Not determined if/how we have to do 
-/ In progress 
-+ Accomplished  
+- Todo
+? Not determined if/how we have to do
+/ In progress
++ Accomplished
 
-1. Pre-Alpha  
+1. Pre-Alpha
 
   + reading spec file
   + writing
@@ -34,14 +34,14 @@ Legend:
   + command line interface
     + inary-build
     + inary-install
-    + inary-index 
-    + inary-updatedb 
+    + inary-index
+    + inary-updatedb
   + single repository index
   + simple dependency checking
-  + Package/Files  
+  + Package/Files
 
-2. Alpha   
-  + multi-package dependency analysis (eray)   
+2. Alpha
+  + multi-package dependency analysis (eray)
     + design a package operation planner
     + install/remove operations (eray)
   + command line interface:
@@ -50,10 +50,10 @@ Legend:
   + configuration file
     + define the format of the configuration file
     + extend Config module (config.py) accordingly
-    + define configuration keys (baris - meren) 
+    + define configuration keys (baris - meren)
   + query
     + list of installed packages (eray)
-  + refactor actionsAPI (caglar) 
+  + refactor actionsAPI (caglar)
   + fix xml indentation (meren)
   + define file types (doc, executable, conf, etc...) (baris - meren)
   + write specfile (eray)
@@ -61,9 +61,9 @@ Legend:
   + implement file uri
     + extend the modules dealing with files accordingly
   + ui module improvements
-  + methods for interaction (yes, no questions, etc.)  
-  + implement source database (eray) 
-  + easy package preparation   
+  + methods for interaction (yes, no questions, etc.)
+  + implement source database (eray)
+  + easy package preparation
     ? convert ebuild to inary
   + Configuring system interface after installing
     + what do we need to specify in a package
@@ -93,8 +93,8 @@ Legend:
       - return meaningful localtext summaries and descriptions (Hak getire)
     + revised interface
     / Error handling
-      + improved error handling, check routines, hooks, format/print routines 
-      / write a meaningful traceback output 
+      + improved error handling, check routines, hooks, format/print routines
+      / write a meaningful traceback output
     + xmlfile support (read/write)
     + string member, in addition to tag/attribute members
     + replace specfile with new specfile using autoxml
@@ -105,13 +105,13 @@ Legend:
     + requirementsu
     + xml format, add to PSPEC
   + index component.xml's and make use of them in build
-  + a database of components: 
+  + a database of components:
       + query components by name
       + query list of packages in a component
       + index: update component database(s)
       + bug fixing
     + install/remove/upgrade components
-    + safety switch: preserve system.base, install system.devel for build, etc. 
+    + safety switch: preserve system.base, install system.devel for build, etc.
     + info <component>
     + started documentation
   + component dependencies
@@ -125,11 +125,11 @@ Legend:
     - resume file downloading (Darara.... fetcher will rewrite with httplib) (Zaryob)
   + search-file command (eray)
   + exception handling (eray)
-    + uniform exception hierarchy 
+    + uniform exception hierarchy
     + proper handling
   + API: we even have application users (eray)
     + a facade module inary.api  (eray)
-    + clean unuseful inary.api functions 
+    + clean unuseful inary.api functions
     + a library init command (eray)
     + high-level package ops, index (eray)
     + info/util commands (eray)
@@ -154,7 +154,7 @@ Legend:
     + metaclass coolness for CLI command framework (eray)
     + i18n support
       + translations and correct language for summary, description (packagers)
-      + make pisi messages translatable (eray)
+      + make inary messages translatable (eray)
       + .pot support for dist script (gurer)
       / translate messages mesajların çevirisinin yapılması (inary tr.po) (eray)
       + proper unicode handling in code - tons of fixes (eray - baris)
@@ -177,33 +177,33 @@ Legend:
       + system-wide upgrade (upgrade-all) komutu
     + incremental build (eray)
       + generate binary release number by comparing MD5s (eray)
-      + keep track of successfully completed configure, make, install steps 
+      + keep track of successfully completed configure, make, install steps
       (necessary for large-scale builds?) (meren)
-    + database locking bugs (eray)  
+    + database locking bugs (eray)
 
     + SHOULD WORKING UNDER FIXME PARTS
 
-4. Release  
-  * high priority 
+4. Release
+  * high priority
     + transaction stuff for database (eray)
-    + database version file 
-  * low priority 
+    + database version file
+  * low priority
     + search command: (eray)
     + implement an inverted index
-    + search in summary and description  
+    + search in summary and description
 
-5. Post Release 
-  * high priority  
+5. Post Release
+  * high priority
     - refactoring
-    sort of match the refactoring of pisi-2.x series and improve it 
+    sort of match the refactoring of inary-2.x series and improve it
 
-    - accelerate search  
-    / package signing    
+    - accelerate search
+    / package signing
       / an embebed package signer.(aquila)
-      + a flag to sign package after building   
-      / code to check if the package has a valid signature  
-    - cli improvements    
-      - non interactive mode (similar to --auto in urpmi)  
+      + a flag to sign package after building
+      / code to check if the package has a valid signature
+    - cli improvements
+      - non interactive mode (similar to --auto in urpmi)
     / high-level build commands
       + an emerge command, just for fun
         + make use of binary repo to satisfy dependencies in emerge
@@ -213,18 +213,18 @@ Legend:
         ? build-all (or build-distro) command, or as a separate tool
     + make a package and sourcedb for each repo
       + packagedb
-      + sourceb  
+      + sourceb
     ? improve url support: consider adding "other" protocols
-      - removable media: media://   
+      - removable media: media://
       - ftp support
-  * medium priority   
-    - UI impl: non-interactive use that selects defaults and logs output 
-    - UI impl: a general purpose Qt or GTK UI  
+  * medium priority
+    - UI impl: non-interactive use that selects defaults and logs output
+    - UI impl: a general purpose Qt or GTK UI
     / multi-architecture support
-      + design decisions 
+      + design decisions
       + extend XML specs to support that
       - cross-platform building support
-      - incremental build/fetch for repository index (pisi-index.xml)
+      - incremental build/fetch for repository index (inary-index.xml)
     / xdelta support (caglar)
       - diffsets
     / a useful distupdate command
@@ -233,17 +233,17 @@ Legend:
     - a command (check-repo) to check if repos are consistent wrt dep relations
     - component improvements (optional)
       - maintain a list of components each component has
-      - maintain a list of packages 
+      - maintain a list of packages
     - more support for categories:
       - put categories into a database
-      - fast search for categories   
-  * low priority  
+      - fast search for categories
+  * low priority
     / overhaul installdb (try to merge its use with packagedb) (eray)
     / verify metodlari
       + SpecFile
       + MetaData
       + Files
-      / Index (somebody should write one :} ) 
+      / Index (somebody should write one :} )
     - autoxml:
       - revise error checking, printing and tests
       - uri type
@@ -259,6 +259,3 @@ Legend:
         - research if there are language independent phonetic encodings
         - implement as an option (or make it possible to turn it off if it works well :))
     - fault tolerant search in package names (somehow)
-
-
-
