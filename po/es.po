@@ -1181,7 +1181,7 @@ msgstr "Carpeta destino {} no existe. Creando carpeta.\n"
 msgid "Password: "
 msgstr "Contraseña: "
 
-#: inary/cli/command.py:167 inary/reactor.py:38
+#: inary/cli/command.py:167 inary/api.py:38
 msgid "You have to be root for this operation."
 msgstr "Solo el usuario root puede realizar esta operación."
 
@@ -3462,156 +3462,156 @@ msgstr ""
 "Ocurrió un problema al obtener {}.\n"
 "El paquete puede ya estar más actualizado. Por favor intente una actualizción del paquete."
 
-#: inary/reactor.py:45
+#: inary/api.py:45
 #, fuzzy
 msgid "Another instance of Inary is running. Only one instance is allowed."
 msgstr "Se está ejecutando ya otra instancia de INARY. Se permite ejecutar solamente una vez."
 
-#: inary/reactor.py:321
+#: inary/api.py:321
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "Paquete {0} encontrado en repositorio {1}"
 
-#: inary/reactor.py:325
+#: inary/api.py:325
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "Paquete {} ya está descargado"
 
-#: inary/reactor.py:348
+#: inary/api.py:348
 msgid "*** Conclusion ***"
 msgstr ""
 
-#: inary/reactor.py:351
+#: inary/api.py:351
 msgid "  found packages preventing distupdate"
 msgstr ""
 
-#: inary/reactor.py:354
+#: inary/api.py:354
 msgid "  distupdate is good to go"
 msgstr ""
 
-#: inary/reactor.py:356
+#: inary/api.py:356
 #, fuzzy
 msgid "  installed size {}"
 msgstr "Instalado {}"
 
-#: inary/reactor.py:357
+#: inary/api.py:357
 msgid "  installed size after update {}"
 msgstr ""
 
-#: inary/reactor.py:358
+#: inary/api.py:358
 msgid "  download size {}"
 msgstr ""
 
-#: inary/reactor.py:359
+#: inary/api.py:359
 #, fuzzy
 msgid "  biggest package size {}"
 msgstr ", Tamaño del Paquete: {}"
 
-#: inary/reactor.py:360
+#: inary/api.py:360
 msgid "  total space needed for distupdate {}"
 msgstr ""
 
-#: inary/reactor.py:362
+#: inary/api.py:362
 #, fuzzy
 msgid "Do you want make dist update?"
 msgstr "Desea continuar ?"
 
-#: inary/reactor.py:366 inary/reactor.py:746
+#: inary/api.py:366 inary/api.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Repositorio {} removido del sistema."
 
-#: inary/reactor.py:462
+#: inary/api.py:462
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Creando Paquete INARY {}."
 
-#: inary/reactor.py:464
+#: inary/api.py:464
 #, fuzzy
 msgid "Cleaning source archive cache {}..."
 msgstr "No se ha encontrado paquete fuente: {}"
 
-#: inary/reactor.py:466
+#: inary/api.py:466
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Limpiando carpeta build..."
 
-#: inary/reactor.py:470
+#: inary/api.py:470
 #, fuzzy
 msgid "Removing cache file {}..."
 msgstr "Eliminando paquete {}"
 
 # o mejor decir: capturar estado del sistema ?
-#: inary/reactor.py:501
+#: inary/api.py:501
 msgid "Taking snapshot of the system"
 msgstr "Generando instantánea del sistema"
 
-#: inary/reactor.py:662
+#: inary/api.py:662
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "paquete scom no está instalado completamente"
 
-#: inary/reactor.py:674
+#: inary/api.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "Archivo {} no encontrado"
 
-#: inary/reactor.py:716
+#: inary/api.py:716
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "* Generando índice de archivos de INARY en {}"
 
-#: inary/reactor.py:721
+#: inary/api.py:721
 #, fuzzy
 msgid "Index file written"
 msgstr "* Archivo de índice grabado"
 
-#: inary/reactor.py:727
+#: inary/api.py:727
 msgid "Not a valid repo name."
 msgstr "No es un nombre válido para un Repositorio."
 
-#: inary/reactor.py:730
+#: inary/api.py:730
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Repositorio {} ya existe."
 
-#: inary/reactor.py:733
+#: inary/api.py:733
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Repositorio ya existe con el nombre {}."
 
-#: inary/reactor.py:738
+#: inary/api.py:738
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Repositorio {} agregado al sistema."
 
-#: inary/reactor.py:748
+#: inary/api.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Repositorio {} no existe. No posible remover."
 
-#: inary/reactor.py:769
+#: inary/api.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Actualizando repositorio: {}"
 
-#: inary/reactor.py:778
+#: inary/api.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "Información de repositorio {} está actualizado."
 
 # what do You mean here with "at any rate" ? ok, got it, but will think of
 # better spanish translation. it is not yet in here.
-#: inary/reactor.py:780
+#: inary/api.py:780
 msgid "Updating database at any rate as requested"
 msgstr "Actualizando base de datos de todas formas según solicitado"
 
-#: inary/reactor.py:793
+#: inary/api.py:793
 #, fuzzy
 msgid "Package database updated."
 msgstr "* Base de datos de paquetes actualizada."
 
-#: inary/reactor.py:795
+#: inary/api.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "No se encontró repositorio con nombre {}."

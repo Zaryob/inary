@@ -1154,7 +1154,7 @@ msgstr "Целевая директория {} не найдена. Создан
 msgid "Password: "
 msgstr "Пароль:"
 
-#: inary/cli/command.py:167 inary/reactor.py:38
+#: inary/cli/command.py:167 inary/api.py:38
 msgid "You have to be root for this operation."
 msgstr "Вы должны иметь привилегии суперпользователя для этой операции."
 
@@ -3385,151 +3385,151 @@ msgstr ""
 "There was a problem while fetching {}.\n"
 "The package may have been upgraded. Please try to upgrade the package."
 
-#: inary/reactor.py:45
+#: inary/api.py:45
 #, fuzzy
 msgid "Another instance of Inary is running. Only one instance is allowed."
 msgstr "Работает другой экземпляр INARY. Допускается работа только одного экземпляра программы."
 
-#: inary/reactor.py:321
+#: inary/api.py:321
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} пакет найден в {1} репозитории."
 
-#: inary/reactor.py:325
+#: inary/api.py:325
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "{} пакет уже получен"
 
-#: inary/reactor.py:348
+#: inary/api.py:348
 msgid "*** Conclusion ***"
 msgstr ""
 
-#: inary/reactor.py:351
+#: inary/api.py:351
 msgid "  found packages preventing distupdate"
 msgstr ""
 
-#: inary/reactor.py:354
+#: inary/api.py:354
 msgid "  distupdate is good to go"
 msgstr ""
 
-#: inary/reactor.py:356
+#: inary/api.py:356
 #, fuzzy
 msgid "  installed size {}"
 msgstr "{} установлен"
 
-#: inary/reactor.py:357
+#: inary/api.py:357
 msgid "  installed size after update {}"
 msgstr ""
 
-#: inary/reactor.py:358
+#: inary/api.py:358
 msgid "  download size {}"
 msgstr ""
 
-#: inary/reactor.py:359
+#: inary/api.py:359
 #, fuzzy
 msgid "  biggest package size {}"
 msgstr ", Размер пакета: {}"
 
-#: inary/reactor.py:360
+#: inary/api.py:360
 msgid "  total space needed for distupdate {}"
 msgstr ""
 
-#: inary/reactor.py:362
+#: inary/api.py:362
 #, fuzzy
 msgid "Do you want make dist update?"
 msgstr "Вы хотите продолжить?"
 
-#: inary/reactor.py:366 inary/reactor.py:746
+#: inary/api.py:366 inary/api.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Репозиторий {} удален из системы."
 
-#: inary/reactor.py:462
+#: inary/api.py:462
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Очистка кэша пакетов {}..."
 
-#: inary/reactor.py:464
+#: inary/api.py:464
 #, fuzzy
 msgid "Cleaning source archive cache {}..."
 msgstr "Очистка кеша архивов исходных файлов {}..."
 
-#: inary/reactor.py:466
+#: inary/api.py:466
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Очистка временного каталога {}..."
 
-#: inary/reactor.py:470
+#: inary/api.py:470
 #, fuzzy
 msgid "Removing cache file {}..."
 msgstr "Удаление файла кэша {}."
 
-#: inary/reactor.py:501
+#: inary/api.py:501
 msgid "Taking snapshot of the system"
 msgstr "Снятие снимка с системы"
 
-#: inary/reactor.py:662
+#: inary/api.py:662
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "Пакет сomar  не полностью установлен"
 
-#: inary/reactor.py:674
+#: inary/api.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "Файл {} не найден"
 
-#: inary/reactor.py:716
+#: inary/api.py:716
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "Создание индексов файлов INARY для {}"
 
-#: inary/reactor.py:721
+#: inary/api.py:721
 msgid "Index file written"
 msgstr "Файл индекса записан"
 
-#: inary/reactor.py:727
+#: inary/api.py:727
 msgid "Not a valid repo name."
 msgstr "Неверное имя репозитория"
 
-#: inary/reactor.py:730
+#: inary/api.py:730
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Репозиторий {} уже существует."
 
-#: inary/reactor.py:733
+#: inary/api.py:733
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Репозиторий уже существует с именем {}."
 
-#: inary/reactor.py:738
+#: inary/api.py:738
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Репозиторий {} добавлен в систему."
 
-#: inary/reactor.py:748
+#: inary/api.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Репозиторий {} не существует и не может быть удален."
 
-#: inary/reactor.py:769
+#: inary/api.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Обновление репозитория: {}"
 
-#: inary/reactor.py:778
+#: inary/api.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{} информация о репозитории обновлена"
 
-#: inary/reactor.py:780
+#: inary/api.py:780
 msgid "Updating database at any rate as requested"
 msgstr "Обновление базы данных в любом случае как запрос"
 
-#: inary/reactor.py:793
+#: inary/api.py:793
 msgid "Package database updated."
 msgstr "База данных пакетов обновлена."
 
-#: inary/reactor.py:795
+#: inary/api.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "Не найден репозиторий с именем {} ."

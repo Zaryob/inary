@@ -1181,7 +1181,7 @@ msgstr "Doelmap {} bestaat niet. Aanmaken map.\n"
 msgid "Password: "
 msgstr "Wachtwoord: "
 
-#: inary/cli/command.py:167 inary/reactor.py:38
+#: inary/cli/command.py:167 inary/api.py:38
 msgid "You have to be root for this operation."
 msgstr "U dient root te zijn voor deze handeling."
 
@@ -3413,151 +3413,151 @@ msgstr ""
 "Er was een probleem het bij ophalen van {}.\n"
 "Het pakket kan opgewaardeerd zijn. Probeer het pakket op te waarderen."
 
-#: inary/reactor.py:45
+#: inary/api.py:45
 #, fuzzy
 msgid "Another instance of Inary is running. Only one instance is allowed."
 msgstr "Er is al een kopie van INARY actief. Dit is slechts eenmaal toegestaan."
 
-#: inary/reactor.py:321
+#: inary/api.py:321
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} pakket gevonden in {1} softwarebron"
 
-#: inary/reactor.py:325
+#: inary/api.py:325
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "{} pakket reeds opgehaald"
 
-#: inary/reactor.py:348
+#: inary/api.py:348
 msgid "*** Conclusion ***"
 msgstr ""
 
-#: inary/reactor.py:351
+#: inary/api.py:351
 msgid "  found packages preventing distupdate"
 msgstr ""
 
-#: inary/reactor.py:354
+#: inary/api.py:354
 msgid "  distupdate is good to go"
 msgstr ""
 
-#: inary/reactor.py:356
+#: inary/api.py:356
 #, fuzzy
 msgid "  installed size {}"
 msgstr "Geïnstalleerd {}"
 
-#: inary/reactor.py:357
+#: inary/api.py:357
 msgid "  installed size after update {}"
 msgstr ""
 
-#: inary/reactor.py:358
+#: inary/api.py:358
 msgid "  download size {}"
 msgstr ""
 
-#: inary/reactor.py:359
+#: inary/api.py:359
 #, fuzzy
 msgid "  biggest package size {}"
 msgstr ", Pakketgrootte: {}"
 
-#: inary/reactor.py:360
+#: inary/api.py:360
 msgid "  total space needed for distupdate {}"
 msgstr ""
 
-#: inary/reactor.py:362
+#: inary/api.py:362
 #, fuzzy
 msgid "Do you want make dist update?"
 msgstr "Wilt u doorgaan?"
 
-#: inary/reactor.py:366 inary/reactor.py:746
+#: inary/api.py:366 inary/api.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Bron {} verwijderd uit het systeem."
 
-#: inary/reactor.py:462
+#: inary/api.py:462
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Opschonen pakketcache {}..."
 
-#: inary/reactor.py:464
+#: inary/api.py:464
 #, fuzzy
 msgid "Cleaning source archive cache {}..."
 msgstr "Opschonen bronarchiefcache {}..."
 
-#: inary/reactor.py:466
+#: inary/api.py:466
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Opschonen tijdelijke map {}..."
 
-#: inary/reactor.py:470
+#: inary/api.py:470
 #, fuzzy
 msgid "Removing cache file {}..."
 msgstr "Verwijderen cachebestand {}..."
 
-#: inary/reactor.py:501
+#: inary/api.py:501
 msgid "Taking snapshot of the system"
 msgstr "Snapshot van het systeem nemen"
 
-#: inary/reactor.py:662
+#: inary/api.py:662
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "scom-pakket is niet volledig geïnstalleerd"
 
-#: inary/reactor.py:674
+#: inary/api.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "Bestand {} niet gevonden"
 
-#: inary/reactor.py:716
+#: inary/api.py:716
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "Index aanmaken van INARY-bestanden onder {}"
 
-#: inary/reactor.py:721
+#: inary/api.py:721
 msgid "Index file written"
 msgstr "Index-bestand geschreven"
 
-#: inary/reactor.py:727
+#: inary/api.py:727
 msgid "Not a valid repo name."
 msgstr "Geen geldige bronnaam."
 
-#: inary/reactor.py:730
+#: inary/api.py:730
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Bron {} is al aanwezig."
 
-#: inary/reactor.py:733
+#: inary/api.py:733
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Bron met naam {} is reeds aanwezig."
 
-#: inary/reactor.py:738
+#: inary/api.py:738
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Bron {} toegevoegd aan het systeem."
 
-#: inary/reactor.py:748
+#: inary/api.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Softwarebron {} bestaat niet. Kan niet verwijderd worden."
 
-#: inary/reactor.py:769
+#: inary/api.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Bijwerken softwarebron: {} "
 
-#: inary/reactor.py:778
+#: inary/api.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{} softwarebroninformatie is nog recent."
 
-#: inary/reactor.py:780
+#: inary/api.py:780
 msgid "Updating database at any rate as requested"
 msgstr "Database op elke snelheid zoals verzocht bijwerken"
 
-#: inary/reactor.py:793
+#: inary/api.py:793
 msgid "Package database updated."
 msgstr "Pakketdatabase bijgewerkt."
 
-#: inary/reactor.py:795
+#: inary/api.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "Geen softwarebron met de naam {} gevonden."

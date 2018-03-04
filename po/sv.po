@@ -1085,7 +1085,7 @@ msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 msgid "Password: "
 msgstr "Lösenord: "
 
-#: inary/cli/command.py:167 inary/reactor.py:38
+#: inary/cli/command.py:167 inary/api.py:38
 msgid "You have to be root for this operation."
 msgstr "Du måste vara root för den här åtgärden."
 
@@ -3050,152 +3050,152 @@ msgid ""
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 
-#: inary/reactor.py:45
+#: inary/api.py:45
 msgid "Another instance of Inary is running. Only one instance is allowed."
 msgstr ""
 
-#: inary/reactor.py:321
+#: inary/api.py:321
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0}-paketet finns i {1}-förrådet."
 
-#: inary/reactor.py:325
+#: inary/api.py:325
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "Paketborttagning nekades"
 
-#: inary/reactor.py:348
+#: inary/api.py:348
 msgid "*** Conclusion ***"
 msgstr ""
 
-#: inary/reactor.py:351
+#: inary/api.py:351
 msgid "  found packages preventing distupdate"
 msgstr ""
 
-#: inary/reactor.py:354
+#: inary/api.py:354
 msgid "  distupdate is good to go"
 msgstr ""
 
-#: inary/reactor.py:356
+#: inary/api.py:356
 #, fuzzy
 msgid "  installed size {}"
 msgstr "Installerat {}"
 
-#: inary/reactor.py:357
+#: inary/api.py:357
 msgid "  installed size after update {}"
 msgstr ""
 
-#: inary/reactor.py:358
+#: inary/api.py:358
 msgid "  download size {}"
 msgstr ""
 
-#: inary/reactor.py:359
+#: inary/api.py:359
 #, fuzzy
 msgid "  biggest package size {}"
 msgstr ", Paketstorlek: {}"
 
-#: inary/reactor.py:360
+#: inary/api.py:360
 msgid "  total space needed for distupdate {}"
 msgstr ""
 
-#: inary/reactor.py:362
+#: inary/api.py:362
 #, fuzzy
 msgid "Do you want make dist update?"
 msgstr "Vill du fortsätta?"
 
-#: inary/reactor.py:366 inary/reactor.py:746
+#: inary/api.py:366 inary/api.py:746
 #, fuzzy
 msgid "Repo {} removed from system."
 msgstr "Förrådet {} lades till:"
 
-#: inary/reactor.py:462
+#: inary/api.py:462
 #, fuzzy
 msgid "Cleaning package cache {}..."
 msgstr "Testar paket..."
 
-#: inary/reactor.py:464
+#: inary/api.py:464
 #, fuzzy
 msgid "Cleaning source archive cache {}..."
 msgstr "Bygger källpaketet: {}"
 
-#: inary/reactor.py:466
+#: inary/api.py:466
 #, fuzzy
 msgid "Cleaning temporary directory {}..."
 msgstr "Rensar byggkatalog..."
 
-#: inary/reactor.py:470
+#: inary/api.py:470
 #, fuzzy
 msgid "Removing cache file {}..."
 msgstr "Tar bort paketet {}"
 
-#: inary/reactor.py:501
+#: inary/api.py:501
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: inary/reactor.py:662
+#: inary/api.py:662
 #, fuzzy
 msgid "scom package is not fully installed"
 msgstr "{} är inte installerad."
 
-#: inary/reactor.py:674
+#: inary/api.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "Filen {} hittades inte"
 
-#: inary/reactor.py:716
+#: inary/api.py:716
 #, fuzzy
 msgid "Building index of Inary files under {}"
 msgstr "* Indexerar INARY-filer under {}"
 
-#: inary/reactor.py:721
+#: inary/api.py:721
 #, fuzzy
 msgid "Index file written"
 msgstr "* Indexfil skriven"
 
-#: inary/reactor.py:727
+#: inary/api.py:727
 msgid "Not a valid repo name."
 msgstr "Ogiltigt förrådsnamn."
 
-#: inary/reactor.py:730
+#: inary/api.py:730
 #, fuzzy
 msgid "Repo {} already present."
 msgstr "Förrådet {} finns redan."
 
-#: inary/reactor.py:733
+#: inary/api.py:733
 #, fuzzy
 msgid "Repo already present with name {}."
 msgstr "Förrådet finns redan under namnet {}."
 
-#: inary/reactor.py:738
+#: inary/api.py:738
 #, fuzzy
 msgid "Repo {} added to system."
 msgstr "Förrådet {} lades till:"
 
-#: inary/reactor.py:748
+#: inary/api.py:748
 #, fuzzy
 msgid "Repository {} does not exist. Cannot remove."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
-#: inary/reactor.py:769
+#: inary/api.py:769
 #, fuzzy
 msgid "Updating repository: {}"
 msgstr "Uppdaterar förråd: {}"
 
-#: inary/reactor.py:778
+#: inary/api.py:778
 #, fuzzy
 msgid "{} repository information is up-to-date."
 msgstr "{}-förrådets information är aktuell."
 
-#: inary/reactor.py:780
+#: inary/api.py:780
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: inary/reactor.py:793
+#: inary/api.py:793
 #, fuzzy
 msgid "Package database updated."
 msgstr "* Paketdatabas uppdaterad."
 
-#: inary/reactor.py:795
+#: inary/api.py:795
 #, fuzzy
 msgid "No repository named {} found."
 msgstr "Inget förråd med namnet {} funnet."

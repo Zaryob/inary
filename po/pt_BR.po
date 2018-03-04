@@ -1066,7 +1066,7 @@ msgstr ""
 msgid "Password: "
 msgstr ""
 
-#: inary/cli/command.py:167 inary/reactor.py:38
+#: inary/cli/command.py:167 inary/api.py:38
 msgid "You have to be root for this operation."
 msgstr ""
 
@@ -2963,134 +2963,134 @@ msgid ""
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 
-#: inary/reactor.py:45
+#: inary/api.py:45
 msgid "Another instance of Inary is running. Only one instance is allowed."
 msgstr ""
 
-#: inary/reactor.py:321
+#: inary/api.py:321
 #, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr ""
 
-#: inary/reactor.py:325
+#: inary/api.py:325
 msgid "{} package already fetched"
 msgstr ""
 
-#: inary/reactor.py:348
+#: inary/api.py:348
 msgid "*** Conclusion ***"
 msgstr ""
 
-#: inary/reactor.py:351
+#: inary/api.py:351
 msgid "  found packages preventing distupdate"
 msgstr ""
 
-#: inary/reactor.py:354
+#: inary/api.py:354
 msgid "  distupdate is good to go"
 msgstr ""
 
-#: inary/reactor.py:356
+#: inary/api.py:356
 #, fuzzy
 msgid "  installed size {}"
 msgstr "Instale falhou."
 
-#: inary/reactor.py:357
+#: inary/api.py:357
 msgid "  installed size after update {}"
 msgstr ""
 
-#: inary/reactor.py:358
+#: inary/api.py:358
 msgid "  download size {}"
 msgstr ""
 
-#: inary/reactor.py:359
+#: inary/api.py:359
 msgid "  biggest package size {}"
 msgstr ""
 
-#: inary/reactor.py:360
+#: inary/api.py:360
 msgid "  total space needed for distupdate {}"
 msgstr ""
 
-#: inary/reactor.py:362
+#: inary/api.py:362
 msgid "Do you want make dist update?"
 msgstr ""
 
-#: inary/reactor.py:366 inary/reactor.py:746
+#: inary/api.py:366 inary/api.py:746
 msgid "Repo {} removed from system."
 msgstr ""
 
-#: inary/reactor.py:462
+#: inary/api.py:462
 msgid "Cleaning package cache {}..."
 msgstr ""
 
-#: inary/reactor.py:464
+#: inary/api.py:464
 msgid "Cleaning source archive cache {}..."
 msgstr ""
 
-#: inary/reactor.py:466
+#: inary/api.py:466
 msgid "Cleaning temporary directory {}..."
 msgstr ""
 
-#: inary/reactor.py:470
+#: inary/api.py:470
 msgid "Removing cache file {}..."
 msgstr ""
 
-#: inary/reactor.py:501
+#: inary/api.py:501
 msgid "Taking snapshot of the system"
 msgstr ""
 
-#: inary/reactor.py:662
+#: inary/api.py:662
 msgid "scom package is not fully installed"
 msgstr ""
 
-#: inary/reactor.py:674
+#: inary/api.py:674
 #, fuzzy
 msgid "File {} not found"
 msgstr "util {} não pode ser encontrado"
 
-#: inary/reactor.py:716
+#: inary/api.py:716
 msgid "Building index of Inary files under {}"
 msgstr ""
 
-#: inary/reactor.py:721
+#: inary/api.py:721
 msgid "Index file written"
 msgstr ""
 
-#: inary/reactor.py:727
+#: inary/api.py:727
 msgid "Not a valid repo name."
 msgstr ""
 
-#: inary/reactor.py:730
+#: inary/api.py:730
 msgid "Repo {} already present."
 msgstr ""
 
-#: inary/reactor.py:733
+#: inary/api.py:733
 msgid "Repo already present with name {}."
 msgstr ""
 
-#: inary/reactor.py:738
+#: inary/api.py:738
 msgid "Repo {} added to system."
 msgstr ""
 
-#: inary/reactor.py:748
+#: inary/api.py:748
 msgid "Repository {} does not exist. Cannot remove."
 msgstr ""
 
-#: inary/reactor.py:769
+#: inary/api.py:769
 msgid "Updating repository: {}"
 msgstr ""
 
-#: inary/reactor.py:778
+#: inary/api.py:778
 msgid "{} repository information is up-to-date."
 msgstr ""
 
-#: inary/reactor.py:780
+#: inary/api.py:780
 msgid "Updating database at any rate as requested"
 msgstr ""
 
-#: inary/reactor.py:793
+#: inary/api.py:793
 msgid "Package database updated."
 msgstr ""
 
-#: inary/reactor.py:795
+#: inary/api.py:795
 msgid "No repository named {} found."
 msgstr ""
 
