@@ -144,7 +144,7 @@ class CLI(inary.ui.UI):
         msg = str(msg)
         prompt = msg + inary.util.colorize(' (%s)' %("/".join(opts)), 'red')
         while True:
-            s = input(prompt.encode('utf-8'))
+            s = input(prompt)
             for opt in opts:
                 if opt.startswith(s):
                     return opt
