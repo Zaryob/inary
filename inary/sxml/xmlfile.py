@@ -45,7 +45,7 @@ class XmlFile(object):
     def newDocument(self):
         """clear DOM"""
         impl = minidom.getDOMImplementation()
-        self.doc = impl.createDocument(None, self.rootTag, None).documentElement
+        self.doc = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):
         """deallocate DOM structure"""
@@ -58,7 +58,7 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
-            self.doc = minidom.parseString(str(file))
+            self.doc = minidom.parseString(file)
             return self.doc.documentElement
         except Exception as e:
             raise Error(_("File '{}' has invalid XML").format(file) )

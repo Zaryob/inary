@@ -243,7 +243,7 @@ class InstallDB(lazydb.LazyDB):
         dependency.package = node.childNodes[0]
         #FIXME: Bir sakatlık çıkacak
         if node.attributes():
-            attr = node.attributes)()[0]
+            attr = node.attributes()()[0]
             dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
         return dependency
 

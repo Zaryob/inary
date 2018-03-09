@@ -447,7 +447,7 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         #FIXME: How can we fix it
         for pak in doc.childNodes:
-            if pak.nodeType == pak.ELEMENT_NODE and pak.tagName == "Package"
+            if pak.nodeType == pak.ELEMENT_NODE and pak.tagName == "Package":
                 for inst in self.packages:
                     if inst.name == pak.getElementsByTagName("Name")[0].firstChild.data:
                         self._set_i18n(pak, inst)

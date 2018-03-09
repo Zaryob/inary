@@ -55,7 +55,7 @@ class PackageDB(lazydb.LazyDB):
 
     def __generate_replaces(self, doc):
         for x in doc.getElementsByTagName("Package"):
-            if x.getElementsByTagName("Replaces")[0]]:
+            if x.getElementsByTagName("Replaces")[0]:
                 return x.getElementsByTagName("Name")[0].firstChild.data
 
     def __generate_obsoletes(self, doc):
@@ -77,7 +77,7 @@ class PackageDB(lazydb.LazyDB):
     def __generate_revdeps(self, doc):
         revdeps = {}
         for node in doc.childNodes:
-            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package"
+            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
                 name = node.getElementsByTagName('Name')[0].firstChild.data
                 deps = node.getElementsByTagName('RuntimeDependencies')
                 if deps:

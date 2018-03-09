@@ -41,9 +41,9 @@ def parse(fileName):
     try:
         dom = minidom.parse(fileName)
         return dom.documentElement
-    except ExpatError, inst:
-        raise Error(_("File '%s' has invalid XML: %s\n") % (fileName,
-                                                            str(inst)))
+    except ExpatError as err:
+        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
+                                                            str(err)))
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -73,7 +73,7 @@ def setNodeAttribute(node, attrname, value):
 
 def getChildElts(parent):
     """get only child elements"""
-    return [x if x.nodeType == x.ELEMENT_NODE: for x in parent.childNodes]
+    return [x for x in parent.childNodes if x.nodeType == x.ELEMENT_NODE]
 
 def getTagByName(parent, childName):
     return [x for x in parent.childNodes
