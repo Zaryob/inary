@@ -44,15 +44,15 @@ class GroupDB(lazydb.LazyDB):
 
     def __generate_components(self, doc):
         groups = {}
-        for c in doc.tags("Component"):
-            group = c.getTagData("Group")
+        for c in doc.getElementsByTagName("Component"):
+            group = c.getElementsByTagName("Group")[0]
             if not group:
                 group = "unknown"
-            groups.setdefault(group, []).append(c.getTagData("Name"))
+            groups.setdefault(group.firstChild.data, []).append(c.getElementsByTagName("Name")[0].firstChild.data)
         return groups
 
     def __generate_groups(self, doc):
-        return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Group")])
+        return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml()) for x in doc.getElementsByTagName("Group")])
 
     def has_group(self, name, repo = None):
         return self.gdb.has_item(name, repo)

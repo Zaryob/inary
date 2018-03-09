@@ -22,7 +22,10 @@ _ = __trans.gettext
 
 # standard python modules
 import os.path
-import ciksemel
+
+#for compability cross platform package managing
+import xml.dom.minidom as minidom
+from xml.parsers.expat import ExpatError
 
 # inary modules
 import inary.sxml.xmlfile as xmlfile
@@ -171,8 +174,8 @@ class Source(metaclass= autoxml.autoxml):
     t_License = [ [autoxml.String], autoxml.mandatory]
     t_IsA = [ [autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
-    t_Summary = [autoxml.LocalText, autoxml.mandatory] ## FIXME autoxml.LocalText should be typed with bytes
-    t_Description = [autoxml.LocalText, autoxml.mandatory] 
+    t_Summary = [autoxml.LocalText, autoxml.mandatory]
+    t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Icon = [ autoxml.String, autoxml.optional]
     t_Archive = [ [Archive], autoxml.mandatory, "Archive" ]
     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
@@ -422,10 +425,10 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
     def _set_i18n(self, tag, inst):
         try:
-            for summary in tag.tags("Summary"):
-                inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
-            for desc in tag.tags("Description"):
-                inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+            for summary in tag.getElementsByTagName("Summary"):
+                inst.summary[summary.getAttribute("xml:lang")] = summary.childNodes[0].data
+            for desc in tag.getElementsByTagName("Description"):
+                inst.description[desc.getAttribute("xml:lang")] = desc.childNodes[0].data
         except AttributeError:
             raise Error(_("translations.xml file is badly formed."))
 
@@ -434,19 +437,21 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         if not os.path.exists(path):
             return
         try:
-            doc = ciksemel.parse(path)
-        except Exception as e:
-            raise Error(_("File '{}' has invalid XML").format(path) )
+            doc = minidom.parse(path).documentElement
+        except ExpatError as err:
+            raise Error(_("File '{0}' has invalid XML: {1}").format(path, err) )
 
-        if doc.getTag("Source").getTagData("Name") == self.source.name:
+        if doc.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data == self.source.name:
             # Set source package translations
-            self._set_i18n(doc.getTag("Source"), self.source)
+            self._set_i18n(doc.getElementsByTagName("Source")[0], self.source)
 
-        for pak in doc.tags("Package"):
-            for inst in self.packages:
-                if inst.name == pak.getTagData("Name"):
-                    self._set_i18n(pak, inst)
-                    break
+        #FIXME: How can we fix it
+        for pak in doc.childNodes:
+            if pak.nodeType == pak.ELEMENT_NODE and pak.tagName == "Package"
+                for inst in self.packages:
+                    if inst.name == pak.getElementsByTagName("Name")[0].firstChild.data:
+                        self._set_i18n(pak, inst)
+                        break
 
     def __str__(self):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(

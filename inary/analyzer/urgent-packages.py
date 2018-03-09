@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-import ciksemel
+import xml.dom.minidom as minidom
 import bz2
 import sys
 import os
@@ -28,22 +28,22 @@ def loadFile(_file):
 
 def getXmlData(_file):
     if os.path.exists(_file):
-        return ciksemel.parse(_file)
+        return minidom.parse(_file).documentElement
     elif os.path.exists("{}.bz2".format(_file)):
         indexdata = bz2.decompress(open("{}.bz2".format(_file)).read())
-        return ciksemel.parseString(indexdata)
+        return minidom.parseString(indexdata)
     else:
         print("{} not found".format(indexfile))
         sys.exit(1)
 
 def fillPackageDict(tag, _hasSpecFile, packageOf):
-        PackagePartOf = tag.getTagData("PartOf")
-        PackageName = tag.getTagData("Name")
+        PackagePartOf = tag.getElementsByTagName("PartOf")[0]
+        PackageName = tag.getElementsByTagName("Name")[0]
 
         if _hasSpecFile:
-            PackagePackagerName = tag.getTag("Packager").getTagData("Name")
+            PackagePackagerName = tag.getElementsByTagName("Packager")[0].getElementsByTagName("Name")[0].firstChild.data
         else:
-            PackagePackagerName = tag.getTag("Source").getTag("Packager").getTagData("Name")
+            PackagePackagerName = tag.getElementsByTagName("Source")[0].getElementsByTagName("Packager")[0].getElementsByTagName("Name")[0].firstChild.data
 
         fullpath = "{0}/{1}".format(PackagePartOf.replace(".", "/"), PackageName)
 
@@ -53,13 +53,13 @@ def fillPackageDict(tag, _hasSpecFile, packageOf):
 
 def parseXmlData(_index):
     packageOf = {}
-    hasSpecFile = _index.getTag("SpecFile")
+    hasSpecFile = _index.getElementsByTagName("SpecFile")
     if hasSpecFile:
-        for i in _index.tags("SpecFile"):
-            parent = i.getTag("Source")
+        for i in hasSpecFile:
+            parent = i.getElementsByTagName("Source")[0]
             fillPackageDict(parent, hasSpecFile, packageOf)
     else:
-        for parent in _index.tags("Package"):
+        for parent in _index.getElementsByTagName("Package"):
             fillPackageDict(parent, hasSpecFile, packageOf)
 
     return packageOf
@@ -93,4 +93,3 @@ def urgent_packages(index, packages):
 #        print("-> %s" % i)
 #        for k in requiredPackages[i]:
 #             print("\t%s" % k)
-
