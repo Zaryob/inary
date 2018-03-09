@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 #
-# Copyright (C) 2016 - 2017, Suleyman POYRAZ (AquilaNipalensis) 
+# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -38,4 +38,3 @@ def inary_installed(*args):
 
 def inary_reinstalled(package):
     os.system("inary -D{0} install --reinstall {1}".format(consts.inary_db, package))
-
