@@ -27,23 +27,10 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+import ciksemel as iks
 
-import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
-
-
-def newDocument(tag):
-    impl = minidom.getDOMImplementation()
-    dom = impl.createDocument(None, tag, None)
-    return dom.documentElement
-
-def parse(fileName):
-    try:
-        dom = minidom.parse(fileName)
-        return dom.documentElement
-    except ExpatError as err:
-        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
-                                                            str(err)))
+parse = iks.parse
+newDocument = iks.newDocument
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -63,8 +50,6 @@ def getAllNodes(node, tagPath):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    if not node.hasAttribute(attrname):
-        return None
     return node.getAttribute(attrname)
 
 def setNodeAttribute(node, attrname, value):
@@ -73,25 +58,25 @@ def setNodeAttribute(node, attrname, value):
 
 def getChildElts(parent):
     """get only child elements"""
-    return [x for x in parent.childNodes if x.nodeType == x.ELEMENT_NODE]
+    return [x for x in parent.tags()]
 
 def getTagByName(parent, childName):
-    return [x for x in parent.childNodes
-            if x.nodeType == x.ELEMENT_NODE and x.tagName == childName]
+    return [x for x in parent.tags(childName)]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
     if tagpath!="":
         node = getNode(node, tagpath)
-    try:
-        child = node.childNodes[0]
-    except IndexError:
+        if not node:
+            return None
+    child = node.firstChild()
+    if not child:
         return None
-    except AttributeError: # no node by that name
-        return None
-    if child.nodeType == child.TEXT_NODE:
+    if child.type() == iks.DATA:
+        # KLUDGE: FIXME: python 2.x bug: force decoding as UTF-8
+        child_data = str(child.data())
         #print('child_data=', child_data.strip())
-        return child.data.strip()  # in any case, strip whitespaces...
+        return str(child_data.strip()) # in any case, strip whitespaces...
     else:
         raise XmlError(_("getNodeText: Expected text node, got something else!"))
 
@@ -107,7 +92,7 @@ def getNode(node, tagpath):
 
     if tagpath == "":
         return node
-
+    
     assert type(tagpath)==str
     tags = tagpath.split('/')
     assert len(tags)>0
@@ -115,8 +100,8 @@ def getNode(node, tagpath):
     # iterative code to search for the path
     for tag in tags:
         currentNode = None
-        for child in node.childNodes:
-            if child.nodeType == node.ELEMENT_NODE and child.tagName == tag:
+        for child in node.tags():
+            if child.name() == tag:
                 currentNode = child
                 break
         if not currentNode:
@@ -130,16 +115,15 @@ def createTagPath(node, tags):
     no matter what"""
     if len(tags)==0:
         return node
-    dom = node.ownerDocument
     for tag in tags:
-        node = node.appendChild(dom.createElement(tag))
+        node = node.insertTag(tag)
     return node
 
 def addTagPath(node, tags, newnode=None):
     """add newnode at the end of a tag chain, smart one"""
     node = createTagPath(node, tags)
     if newnode:                     # node to add specified
-        node.appendChild(newnode)
+        node.insertNode(newnode)
     return node
 
 def addNode(node, tagpath, newnode = None, branch=True):
@@ -152,8 +136,8 @@ def addNode(node, tagpath, newnode = None, branch=True):
         tags = tagpath.split('/')           # tag chain
     else:
         addTagPath(node, [], newnode)
-        return node
-
+        return node #FIXME: is this correct!?!?
+        
     assert len(tags)>0                  # we want a chain
 
     # iterative code to search for the path
@@ -177,9 +161,9 @@ def addNode(node, tagpath, newnode = None, branch=True):
 
     return node
 
-def addText(node, tagPath, text, branch = True):
-    newnode = node.ownerDocument.createTextNode(text)
-    return addNode(node, tagPath, newnode, branch = branch)
+def addText(node, tagpath, text):
+    node = addNode(node, tagpath)
+    node.insertData(text)
 
 def newNode(node, tag):
-    return node.ownerDocument.createElement(tag)
+    return iks.newDocument(tag)

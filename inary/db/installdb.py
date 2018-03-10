@@ -19,8 +19,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
+import ciksemel
 
 # INARY
 import inary
@@ -68,7 +67,7 @@ class InstallDB(lazydb.LazyDB):
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
         self.rev_deps_db = self.__generate_revdeps()
-        self.installed_extra = self.__generate_installed_extra()
+        self.installed_extra = self.__generate_installed_extra() 
 
     def __generate_installed_extra(self):
         ie = []
@@ -94,8 +93,8 @@ class InstallDB(lazydb.LazyDB):
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         try:
-            meta_doc = minidom.parse(metadata_xml).documentElement
-            pkg = meta_doc.getElementsByTagName("Package")[0]
+            meta_doc = ciksemel.parse(metadata_xml)
+            pkg = meta_doc.getTag("Package")
         except:
             pkg = None
 
@@ -106,15 +105,15 @@ class InstallDB(lazydb.LazyDB):
             del self.installed_db[package]
             return
 
-        deps = pkg.getElementsByTagName('RuntimeDependencies')
+        deps = pkg.getTag('RuntimeDependencies')
         if deps:
-            for dep in deps.getElementsByTagName("Dependency"):
-                revdep = revdeps.setdefault(dep.childNodes[0].data, {})
-                revdep[package] = dep.toxml('utf-8')
-            for anydep in deps.getElementsByTagName("AnyDependency"):
-                for dep in anydep.getElementsByTagName ("Dependency"):
-                    revdep = revdeps.setdefault(dep.firstChild.data, {})
-                    revdep[package] = anydep.toxml('utf-8')
+            for dep in deps.tags("Dependency"):
+                revdep = revdeps.setdefault(dep.firstChild().data(), {})
+                revdep[package] = dep.toString()
+            for anydep in deps.tags("AnyDependency"):
+                for dep in anydep.tags("Dependency"):
+                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
+                    revdep[package] = anydep.toString()
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -145,34 +144,37 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        history = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("History")[0].firstChild.data
-        version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
-        release = history.getElementsByTagName("Update")[0].getAttribute("release")[0].firstChild.data
+        history = meta_doc.getTag("Package").getTag("History")
+        version = history.getTag("Update").getTagData("Version")
+        release = history.getTag("Update").getAttribute("release")
+
         # TODO Remove None
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        distro = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("Distribution")[0].firstChild.data
-        release = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("DistributionRelease")[0].firstChild.data
+        distro = meta_doc.getTag("Package").getTagData("Distribution")
+        release = meta_doc.getTag("Package").getTagData("DistributionRelease")
+
         return distro, release
 
     def __get_install_tar_hash(self, meta_doc):
-        hash = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("InstallTarHash")[0].firstChild.data
+        hash = meta_doc.getTag("Package").getTagData("InstallTarHash")
+
         return hash
 
     def get_install_tar_hash(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = minidom.parse(metadata_xml).documentElement
+        meta_doc = ciksemel.parse(metadata_xml)
         return self.__get_install_tar_hash(meta_doc)
 
     def get_version_and_distro_release(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = minidom.parse(metadata_xml).documentElement
+        meta_doc = ciksemel.parse(metadata_xml)
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = minidom.parse(metadata_xml).documentElement
+        meta_doc = ciksemel.parse(metadata_xml)
         return self.__get_version(meta_doc)
 
     def get_files(self, package):
@@ -238,12 +240,11 @@ class InstallDB(lazydb.LazyDB):
         return info
 
     def __make_dependency(self, depStr):
-        node = minidom.parseString(depStr).documentElement
+        node = ciksemel.parseString(depStr)
         dependency = inary.analyzer.dependency.Dependency()
-        dependency.package = node.childNodes[0]
-        #FIXME: Bir sakatlık çıkacak
+        dependency.package = node.firstChild().data()
         if node.attributes():
-            attr = node.attributes()()[0]
+            attr = node.attributes()[0]
             dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
         return dependency
 
