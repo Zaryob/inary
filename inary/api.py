@@ -132,10 +132,10 @@ from inary.operations.operations import *
 
 #Within functions
 from inary.analyzer.conflict import calculate_conflicts
-from inary.analyzer.firmwares import get_firmware_package
+#from inary.analyzer.firmwares import get_firmware_package
 from inary.data.index import index
 from inary.data.pgraph import package_graph
-from inary.fetcher import fetcher
+from inary.fetcher import fetch
 from inary.db.dbhelper import *
 from inary.operations.build import build, build_until
 from inary.operations.helper import calculate_download_sizes, get_package_requirements

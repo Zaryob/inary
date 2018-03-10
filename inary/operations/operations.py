@@ -11,7 +11,7 @@
 #
 
 import os
-import fnctl
+import fcntl
 
 import inary
 import inary.atomicoperations
