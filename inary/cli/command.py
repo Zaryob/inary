@@ -19,6 +19,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.api
+import inary.util as util
 import inary.context as ctx
 
 class autocommand(type):
@@ -58,7 +59,7 @@ class Command(object):
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' ({})'.format(commandcls.name[1])
-            s += ' %23s - %s\n' % (name, summary)
+            s += util.colorize(' %23s '% name , 'blue') + '- %s\n' % summary
         return s
 
     @staticmethod

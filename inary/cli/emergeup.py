@@ -23,7 +23,7 @@ import inary.context as ctx
 import inary.api
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
-    __doc__ = _("""Build and install INARY source packages from repository
+    __doc__ = _("""Build and upgrade INARY source packages from repository
 
 Usage: emergeup ...
 
