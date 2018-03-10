@@ -168,7 +168,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             sorted_pkgs = {}
             for pkg in latest_packages:
                 key = re.search("\/((lib)?[\d\w])\/", pkg[0])
-                key = key.group(1) if key else os.path.dirname(pkg[0]) 
+                key = key.group(1) if key else os.path.dirname(pkg[0])
                 try:
                     sorted_pkgs[key].append(pkg)
                 except KeyError:
@@ -298,3 +298,21 @@ def add_spec(params):
     except KeyboardInterrupt:
         # Multiprocessing hack, see add_package method for explanation
         raise Exception
+
+# INDEXER
+def index(dirs=None, output='inary-index.xml',
+          skip_sources=False, skip_signing=False,
+          compression=0):
+    """Accumulate Inary XML files in a directory, and write an index."""
+    index = Index()
+    index.distribution = None
+    if not dirs:
+        dirs = ['.']
+    for repo_dir in dirs:
+        repo_dir = str(repo_dir)
+        ctx.ui.info(_('Building index of Inary files under {}').format(repo_dir))
+        index.index(repo_dir, skip_sources)
+
+    sign = None if skip_signing else inary.file.File.detached
+    index.write(output, sha1sum=True, compress=compression, sign=sign)
+    ctx.ui.info(_('Index file written'))

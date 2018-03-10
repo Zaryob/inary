@@ -159,7 +159,7 @@ def takeback(operation):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))
 
     if errors:
-        ctx.ui.info(_("\nFollowing packages could not be found in repositories and are not cached:\n") + 
+        ctx.ui.info(_("\nFollowing packages could not be found in repositories and are not cached:\n") +
                     inary.util.strlist(errors))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             return
@@ -172,3 +172,13 @@ def takeback(operation):
 
     for pkg, operation in configs:
         historydb.load_config(operation, pkg)
+
+def get_takeback_plan(operation):
+    """
+    Calculates and returns the plan of the takeback operation that contains information of which
+    packages are going to be removed and which packages are going to be installed
+    @param operation: number of the operation that the system will be taken back -> integer
+    """
+
+    beinstalled, beremoved, configs = plan_takeback(operation)
+    return beinstalled, beremoved

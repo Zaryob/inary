@@ -300,3 +300,13 @@ def plan_install_pkg_names(A):
     order = G_f.topological_sort()
     order.reverse()
     return G_f, order
+
+def get_install_order(packages):
+    """
+    Return a list of packages in the installation order with extra needed
+    dependencies -> list_of_strings
+    @param packages: list of package names -> list_of_strings
+    """
+    install_order = inary.operations.install.plan_install_pkg_names
+    i_graph, order = install_order(packages)
+    return order

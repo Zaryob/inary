@@ -26,7 +26,7 @@ import inary.db
 def reorder_base_packages(order):
 
     componentdb = inary.db.componentdb.ComponentDB()
-    
+
     """system.base packages must be first in order"""
     systembase = componentdb.get_union_component('system.base').packages
 
@@ -116,3 +116,38 @@ def calculate_download_sizes(order):
 
     ctx.ui.notify(ui.cached, total=total_size, cached=cached_size)
     return total_size, cached_size
+
+def get_package_requirements(packages):
+    """
+    Returns a dict with two keys - systemRestart, serviceRestart - with package lists as their values
+    @param packages: list of package names -> list_of_strings
+
+    >>> lu = inary.api.list_upgrades()
+
+    >>> requirements = inary.api.get_package_requirements(lu)
+
+    >>> print requirements
+    >>> { "systemRestart":["kernel", "module-alsa-driver"], "serviceRestart":["mysql-server", "memcached", "postfix"] }
+
+    """
+
+    actions = ("systemRestart", "serviceRestart")
+    requirements = dict((action, []) for action in actions)
+
+    installdb = inary.db.installdb.InstallDB()
+    packagedb = inary.db.packagedb.PackageDB()
+
+    for i_pkg in packages:
+        try:
+            pkg = packagedb.get_package(i_pkg)
+        except Exception: #FIXME: Should catch RepoItemNotFound exception
+            pass
+
+        version, release, build = installdb.get_version(i_pkg)
+        pkg_actions = pkg.get_update_actions(release)
+
+        for action_name in pkg_actions:
+            if action_name in actions:
+                requirements[action_name].append(pkg.name)
+
+    return requirements

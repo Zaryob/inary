@@ -49,7 +49,27 @@ def package_conflicts(pkg, confs):
     return None
 
 def calculate_conflicts(order, packagedb):
+    """
+    Return a tuple of the conflicting packages information -> tuple
+    @param packages: list of package names -> list_of_strings
 
+    >>> (pkgs, within, pairs) = inary.api.calculate_conflicts(packages)
+    >>>
+    >>> pkgs # list of packages that are installed and conflicts with the
+             # given packages list -> list_of_strings
+    >>> [...]
+    >>> within # list of packages that already conflict with each other
+               # in the given packages list -> list_of_strings
+    >>> [...]
+    >>> pairs # dictionary of conflict information that contains which package in the
+              # given packages list conflicts with which of the installed packages
+
+    >>> {'imlib2': <class inary.data.conflict.Conflict>, 'valgrind': <class inary.conflict.Conflict>,
+    'libmp4v2':'<class inary.data.conflict.Conflict>}
+
+    >>> print map(lambda c:str(pairs[c]), pairs)
+    >>> ['imblib', 'callgrind', 'faad2 release >= 3']
+    """
     # check conflicting packages in the installed system
     def check_installed(pkg, order):
         conflicts = []

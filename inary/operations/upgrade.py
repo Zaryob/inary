@@ -415,3 +415,25 @@ def is_upgradable(name):
         return True
 
     return int(i_release) < int(release)
+
+def get_upgrade_order(packages):
+    """
+    Return a list of packages in the upgrade order with extra needed
+    dependencies -> list_of_strings
+    @param packages: list of package names -> list_of_strings
+    """
+    upgrade_order = inary.operations.upgrade.plan_upgrade
+    i_graph, order = upgrade_order(packages)
+    return order
+
+def get_base_upgrade_order(packages):
+    """
+    Return a list of packages of the system.base component that needs to be upgraded
+    or installed in install order -> list_of_strings
+    All the packages of the system.base component must be installed on the system
+    @param packages: list of package names -> list_of_strings
+    """
+    upgrade_order = inary.operations.upgrade.upgrade_base
+    order = upgrade_order(packages)
+    return list(order)
+

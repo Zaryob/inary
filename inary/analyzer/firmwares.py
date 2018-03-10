@@ -48,7 +48,7 @@ def get_firmware_package(firmware):
     try:
         fw_packages = COMPONENTDB.get_packages("hardware.firmware")
         unavailable_fw_packages = set(fw_packages).difference(INSTALLDB.list_installed())
-
+        
         if unavailable_fw_packages:
             ctx.ui.info(inary.util.colorize("The following firmwares are not installed:", "yellow"))
             ctx.ui.info("\n".join(unavailable_fw_packages))

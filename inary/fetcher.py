@@ -445,3 +445,28 @@ def fetch_url(url, destdir, progress=None, destfile=None):
     fetch = Fetcher(url, destdir, destfile)
     fetch.progress = progress
     fetch.fetch()
+
+# Operation function
+def fetch(packages=[], path=os.path.curdir):
+    """
+    Fetches the given packages from the repository without installing, just downloads the packages.
+    @param packages: list of package names -> list_of_strings
+    @param path: path to where the packages will be downloaded. If not given, packages will be downloaded
+    to the current working directory.
+    """
+    packagedb = inary.db.packagedb.PackageDB()
+    repodb = inary.db.repodb.RepoDB()
+    for name in packages:
+        package, repo = packagedb.get_package_repo(name)
+        ctx.ui.info(_("{0} package found in {1} repository").format(package.name, repo))
+        uri = inary.uri.URI(package.packageURI)
+        output = os.path.join(path, uri.path())
+        if os.path.exists(output) and package.packageHash == inary.util.sha1_file(output):
+            ctx.ui.warning(_("{} package already fetched").format(uri.path()))
+            continue
+        if uri.is_absolute_path():
+            url = str(pkg_uri)
+        else:
+            url = os.path.join(os.path.dirname(repodb.get_repo_url(repo)), str(uri.path()))
+
+        fetcher.fetch_url(url, path, ctx.ui.Progress)

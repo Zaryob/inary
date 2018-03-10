@@ -13,6 +13,7 @@
 """INARY package relation graph that represents the state of packagedb"""
 
 import inary
+import inary.db
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -203,4 +204,79 @@ class PGraph(Digraph):
     def write_graphviz_vlabel(self, f, u):
         (v, r) = self.vertex_data(u)
         f.write('[ label = \"' + str(u) + '(' + str(v) + ',' + str(r) + ')\" ]')
+
+# ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
+
+def package_graph(A, packagedb, ignore_installed = False, reverse=False):
+    """Construct a package relations graph.
+
+    Graph will contain all dependencies of packages A, if ignore_installed
+    option is True, then only uninstalled deps will be added.
+
+    """
+
+    ctx.ui.debug('A = {}'.format(str(A)))
+
+    # try to construct a inary graph of packages to
+    # install / reinstall
+
+    G_f = PGraph(packagedb)             # construct G_f
+
+    # find the "install closure" graph of G_f by package
+    # set A using packagedb
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    #state = {}
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = packagedb.get_package(x)
+            #print pkg
+            if reverse:
+                for name,dep in packagedb.get_rev_deps(x):
+                    if ignore_installed:
+                        if dep.satisfied_by_installed():
+                            continue
+                    if not name in G_f.vertices():
+                        Bp.add(name)
+                    G_f.add_dep(name, dep)
+            else:
+                for dep in pkg.runtimeDependencies():
+                    if ignore_installed:
+                        if dep.satisfied_by_installed():
+                            continue
+                    if not dep.package in G_f.vertices():
+                        Bp.add(str(dep.package))
+                    G_f.add_dep(x, dep)
+        B = Bp
+    return G_f
+
+def generate_pending_order(A):
+    # returns pending package list in reverse topological order of dependency
+    installdb = inary.db.installdb.InstallDB()
+    G_f = PGraph(installdb) # construct G_f
+    for x in A:
+        G_f.add_package(x)
+    B = A
+    while len(B) > 0:
+        Bp = set()
+        for x in B:
+            pkg = installdb.get_package(x)
+            for dep in pkg.runtimeDependencies():
+                if dep.package in G_f.vertices():
+                    G_f.add_dep(x, dep)
+        B = Bp
+    if ctx.get_option('debug'):
+        import sys
+        G_f.write_graphviz(sys.stdout)
+    order = G_f.topological_sort()
+    order.reverse()
+
+    componentdb = inary.db.componentdb.ComponentDB()
+    # Bug 4211
+    if componentdb.has_component('system.base'):
+        order = reorder_base_packages(order)
+
+    return order
 

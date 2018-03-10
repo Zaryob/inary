@@ -136,3 +136,12 @@ def remove_obsoleted_packages():
 def remove_replaced_packages(replaced):
     if remove(replaced, ignore_dep=True, ignore_safety=True):
         raise Exception(_("Replaced package remains"))
+
+def get_remove_order(packages):
+    """
+    Return a list of packages in the remove order -> list_of_strings
+    @param packages: list of package names -> list_of_strings
+    """
+    remove_order = inary.operations.remove.plan_remove
+    i_graph, order = remove_order(packages)
+    return order
