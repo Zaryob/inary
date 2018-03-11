@@ -46,10 +46,8 @@ class FilesDB(lazydb.LazyDB):
         ctx.ui.info(inary.util.colorize(_('Creating files database...'), 'blue'))
         installdb = inary.db.installdb.InstallDB()
         for pkg in installdb.list_installed():
-            ctx.ui.info(inary.util.colorize(_('  |___* Adding \'{}\' to db... '), 'purple').format(pkg), noln=True)
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
-            ctx.ui.info(inary.util.colorize(_('OK.'), 'backgroundmagenta'))
         ctx.ui.info(inary.util.colorize(_('Added files database...'), 'blue'))
 
     def get_file(self, path):
@@ -71,12 +69,12 @@ class FilesDB(lazydb.LazyDB):
         return found
 
     def add_files(self, pkg, files):
-
         self.__check_filesdb()
-        ctx.ui.info(inary.util.colorize(_('* Adding \'{}\' to db... '), 'purple').format(pkg), noln=True)
+        ctx.ui.info(inary.util.colorize(_('  |___* Adding \'{}\' to db... '), 'purple').format(pkg), noln=True)
         for f in files.list:
             key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
             self.filesdb[key] = pkg
+        ctx.ui.info(inary.util.colorize(_('OK.'), 'backgroundmagenta'))
 
     def remove_files(self, files):
         for f in files:
@@ -94,7 +92,6 @@ class FilesDB(lazydb.LazyDB):
             self.filesdb.close()
 
     def __check_filesdb(self):
-        ctx.ui.info(_("Checking filesdb..."))
         if isinstance(self.filesdb, shelve.DbfilenameShelf):
             return
 

@@ -21,11 +21,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
-FW_PATH = "/lib/firmware"
-INSTALDB = inary.db.installdb.InstallDB()
-COMPONENTDB = inary.db.componentdb.ComponentDB()
-
 class Error(inary.Error):
     pass
 
@@ -46,8 +41,8 @@ def get_firmwares():
 
 def get_firmware_package(firmware):
     try:
-        fw_packages = COMPONENTDB.get_packages("hardware.firmware")
-        unavailable_fw_packages = set(fw_packages).difference(INSTALLDB.list_installed())
+        fw_packages = inary.db.componentdb.ComponentDB().get_packages("hardware.firmware")
+        unavailable_fw_packages = set(fw_packages).difference(inary.db.installdb.InstallDB().list_installed())
         
         if unavailable_fw_packages:
             ctx.ui.info(inary.util.colorize("The following firmwares are not installed:", "yellow"))

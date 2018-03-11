@@ -16,16 +16,25 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+
+#Analyzers
+import inary.analyzer.ctypes_analyzer
+import inary.analyzer.forensic
+import inary.analyzer.pkgconfig
+
 import inary.atomicoperations
 import inary.blacklist
 import inary.config
 import inary.context as ctx
+
+#DataFile Libraries
 import inary.data
 import inary.data.index
 import inary.data.metadata
 import inary.data.pgraph
+
+#DataBase Libraries
 import inary.db.componentdb
-import inary.db.dbhelper
 import inary.db.packagedb
 import inary.db.repodb
 import inary.db.filesdb
@@ -34,8 +43,11 @@ import inary.db.historydb
 import inary.db.sourcedb
 import inary.db.componentdb
 import inary.db.groupdb
+
 import inary.errors
 import inary.file
+
+#Operation Libraries
 import inary.operations.build
 import inary.operations.check
 import inary.operations.emerge
@@ -46,6 +58,7 @@ import inary.operations.helper
 import inary.operations.remove
 import inary.operations.search
 import inary.operations.upgrade
+
 import inary.uri
 import inary.util
 
@@ -128,20 +141,22 @@ def set_options(options):
     ctx.config.set_options(options)
 
 # The following are INARY operations which constitute the INARY API
-from inary.operations.operations import *
+
+#It looking soo bad
+from inary.atomicoperations import *
 
 #Within functions
 from inary.analyzer.conflict import calculate_conflicts
-#from inary.analyzer.firmwares import get_firmware_package
+from inary.analyzer.firmwares import get_firmware_package
 from inary.data.index import index
 from inary.data.pgraph import package_graph
 from inary.fetcher import fetch
-from inary.db.dbhelper import *
 from inary.operations.build import build, build_until
 from inary.operations.helper import calculate_download_sizes, get_package_requirements
 from inary.operations.history import get_takeback_plan
 from inary.operations.info import info
 from inary.operations.install import get_install_order
+from inary.operations.op_wrappers import *
 from inary.operations.remove import get_remove_order
 from inary.operations.upgrade import get_upgrade_order, get_base_upgrade_order
 from inary.operations.search import *

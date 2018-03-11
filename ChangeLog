@@ -1,4 +1,46 @@
-2018-01-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * colorized help output:
+		Colorized command names and now help screen look well.
+		* Minimum dependency, Maximum stabilization:
+		patchfile:
+		patches/applied-patches/minimum-dependency-maximum-stabilization-001.patch
+		If we had one or two dependency we can control inary
+		but there are a lot of runtime dependency. And this is
+		look up bad. I clean runtime dependencies and I write 
+		alternative libraries into inary. I clean runtimes:
+		    * magic: it soo easy if when use ctypes.I import libmagic
+				with ctypes and I use it in inary
+				* plyvel: for basic files database, we musn't a big
+				database library. Shelve is pretty than "Google's"
+				plyvel database library.
+				* ciksemel: I work about this.
+
+
+2018-03-10 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * Cleaned ınary/api.py:
+		Clean unuseful commands, Moved functions true palaces and
+		writed 2 new module.
+		* Not worked patch delete-runtime-dependency-ciksemel:
+		Not work well minidom. So I returned codes to ciksemel.
+		Should work with minidom detailed.
+
+2018-03-09 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * Patched delete-runtime-dependency-ciksemel:
+		For compability we shoul use minidom in xml file parsing,
+		we shouldn't use a new runtime dependency. (Please Read CODING)
+
+2018-03-04 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * Updated RoadMap
+		* Cleaned FIXME tags:
+		Cleaned not understandable Fixme tags
+
+
+2018-03-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * deleted distupdate command:
+		Sulin will be a roolling release distro. So we don't have a 
+		distupdater.
+
+2018-02-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
   * distupdate komutu:
 	Stabilize edildi ve renklendirildi
 	* string -> strutils:
@@ -10,7 +52,7 @@
 	çözüm bulunamadı :(
 
 
-2018-01-07 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-02-07 Suleyman Poyraz <nipalensisaquila@gmail.com>
   * System modulleri silindi:
 	Inary içinde onlara ihtiyaç olmadığını farkettim. Scom içine alarak yer
 	kazandım.
@@ -18,7 +60,7 @@
 	Str veri tipi için basit tipte fonksiyonları ve multisplit gibi şeyleri
 	içeren bir modul.
 
-2018-01-04 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-02-04 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* Kozmetik fixler ve düzenlemeler yapıldı(developing branch)
 	* Dokumantasyon taslakları yazıldı.(developing branch)
 	* Merge Developing branch into master on 2018-01-07

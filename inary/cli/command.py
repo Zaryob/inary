@@ -167,7 +167,7 @@ class Command(object):
             ('sf' in self.get_name() and not os.access(os.path.join(ctx.config.info_dir(), ctx.const.files_ldb), os.W_OK))):
             raise inary.cli.Error(_("You have to be root for this operation."))
 
-        inary.api.set_scom(self.scom and not ctx.get_option('ignore_comar'))
+        inary.api.set_scom(self.scom and not ctx.get_option('ignore_scom'))
         inary.api.set_userinterface(ui)
         inary.api.set_options(self.options)
 

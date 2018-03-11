@@ -78,10 +78,10 @@ def find_corrupted(rootdir, last_changed):
             filepath = '/' + filepath
             if not filepath.startswith(rootdir):
                 continue
-            sys.stdout.write("MISSING %s %s\n" % (package, filepath))
+            sys.stdout.write("MISSING {0} {1}\n".format(package, filepath))
             sys.stdout.flush()
 
-def forensics(rootdir='/',logfile=logfile):
+def forensics(rootdir='/',logfile='logfile'):
     if not rootdir.endswith('/'):
         rootdir += '/'
 

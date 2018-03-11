@@ -15,7 +15,6 @@ import os
 import re
 import sys
 import glob
-import magic
 import shutil
 import fnmatch
 import tempfile
@@ -25,6 +24,8 @@ import subprocess
 
 #Inary functions
 import inary
+import inary.db
+import inary.analyzer.magic
 import inary.context as ctx
 
 #Gettext
@@ -32,11 +33,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-INSTALLDB = inary.db.installdb.InstallDB()
-COMPONENTDB = inary.db.componentdb.ComponentDB()
-CONSTANTS = inary.constants.Constants()
-REPODB = inary.db.repodb.RepoDB()
-FILESDB = inary.db.filesdb.FilesDB()
 
 class Error(inary.Error):
     pass
@@ -44,6 +40,10 @@ class Error(inary.Error):
 class LDD:
     def __init__(self, packages, directory, component, installed_list=True, systembase=False, systemdevel=False):
 
+        self.installdb = inary.db.installdb.InstallDB()
+        self.componentdb = inary.db.componentdb.ComponentDB()
+        self.repodb = inary.db.repodb.RepoDB()
+        self.filesdb = inary.db.filesdb.FilesDB()
         self.systembase = systembase
         self.systemdevel = systemdevel
         self.packages = package
@@ -59,12 +59,12 @@ class LDD:
         # check for components, like system.base, tex.language, etc.
         if self.component:
             for repo in RepoDB.list_repos():
-                if COMPONENTDB.has_component(component):
-                    self.packages.extend(COMPONENTDB.get_packages(component, repo))
+                if self.componentdb.has_component(component):
+                    self.packages.extend(self.componentdb.get_packages(component, repo))
 
         # check for all packages installed on the machine
         if installedlist:
-            self.packages.extend(INSTALLDB.list_installed())
+            self.packages.extend(self.installdb.list_installed())
 
     def find_dependencies_on_pkgconfig(self):
         pkgconfig_list = []
@@ -100,7 +100,7 @@ class LDD:
                 pkgconfig_list.append((result_broken, result_unused, result_undefined, result_lists, result_runpath, package_name))
 
             # Check for a installed package in the system
-            elif package in INSTALLDB.list_installed():
+            elif package in self.installdb.list_installed():
                 if used_inary:
                     raise Error("You've checked for a inary file before\nPlease do not check for a installed package and inary file at the same time")
 
@@ -108,7 +108,7 @@ class LDD:
                     package_name = package
 
                     # Gather runtime dependencies directly from the database of installed packages
-                    package_deps = [dep.name() for dep in INSTALLDB.get_package(package).runtimeDependencies()]
+                    package_deps = [dep.name() for dep in self.installdb.get_package(package).runtimeDependencies()]
                     package_tempdir = False # There is no need of temporary directory, hence we look for files that are installed
 
                     # Same functions in the above part. You can read them
@@ -216,12 +216,12 @@ class LDD:
         # get system.base and system.devel packages
         systembase_packages = []
         systemdevel_packages= []
-        for repo in REPODB.list_repos():
-            for component in COMPONENTDB.list_components(repo):
+        for repo in self.repodb.list_repos():
+            for component in self.componentdb.list_components(repo):
                 if component == "system.base":
-                    systembase_packages.extend(COMPONENTDB.get_packages('system.base', repo))
+                    systembase_packages.extend(self.componentdb.get_packages('system.base', repo))
                 if component == "system.devel":
-                    systemdevel_packages.extend(COMPONENTDB.get_packages('system.devel', repo))
+                    systemdevel_packages.extend(self.componentdb.get_packages('system.devel', repo))
 
         # look for packages that are system.base but are written as dependency
         # mark them with "*"
@@ -293,13 +293,13 @@ class LDD:
             package_pc_files = glob.glob("{}/usr/*/pkgconfig/*.pc".format(package_dir))
         else:
             package_files = set(["/{}".format(file_name.path) \
-                for file_name in INSTALLDB.get_files(package_name).list])
+                for file_name in self.installdb.get_files(package_name).list])
             package_pc_files = set([os.path.realpath("/{}".format(file_name.path)) \
-                    for file_name in INSTALLDB.get_files(package_name).list \
+                    for file_name in self.installdb.get_files(package_name).list \
                     if fnmatch.fnmatch(file_name.path, "*/pkgconfig/*.pc")])
 
         for package_file in package_files:
-            package_file_info = magic.from_file(package_file) #Return file type
+            package_file_info = inary.analyzer.magic.file_type(package_file) #Return file type
             if "LSB shared object" in package_file_info:
                 package_elf_files.append(os.path.realpath(package_file))
             elif "LSB executable" in package_file_info:

@@ -27,6 +27,7 @@ class Error(inary.Error):
 try:
     import scom
     import dbus
+
 except ImportError:
     raise Error(_("scom-api package is not fully installed"))
 

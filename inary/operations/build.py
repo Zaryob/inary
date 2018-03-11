@@ -1001,12 +1001,12 @@ class Builder:
     def file_actions(self):
         install_dir = self.pkg_install_dir()
 
-        import magic
+        import inary.analyzer.magic as magic
 
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = util.join_path(root, fn)
-                fileinfo = magic.from_file(filepath)
+                fileinfo = magic.file_type(filepath)
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 exclude_special_files(filepath, fileinfo, self.actionGlobals)
 

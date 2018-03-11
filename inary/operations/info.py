@@ -14,6 +14,10 @@ import inary
 import inary.db
 import inary.data
 
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
 def info(package, installed = False):
     if package.endswith(ctx.const.package_suffix):
         return info_file(package)
