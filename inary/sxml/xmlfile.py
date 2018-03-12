@@ -19,16 +19,15 @@
  function names are mixedCase for compatibility with minidom,
  an 'old library'
 
- this implementation uses pciksemel
 """
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import codecs
 import io
-import ciksemel as iks
+import xml.dom.minidom as minidom
+from xml.parsers.expat import ExpatError
 
 import inary
 from inary.file import File
@@ -45,35 +44,37 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-        self.doc = iks.newDocument(self.rootTag)
+        impl = minidom.getDOMImplementation()
+        self.doc = impl.createDocument(None, self.rootTag, None)
 
     def unlink(self):
         """deallocate DOM structure"""
+        self.doc.unlink()
         del self.doc
 
     def rootNode(self):
         """returns root document element"""
-        return self.doc
-        
+        return self.doc.documentElement
+
     def parsexml(self, file):
-        #try:
-        self.doc = iks.parseString(str(file))
-        return self.doc
-        #except Exception as e:
-            #raise Error(_("File '{}' has invalid XML").format(file) )
+        try:
+            self.doc = minidom.parseString(file)
+            return self.doc.documentElement
+        except Exception as e:
+            raise Error(_("File '{}' has invalid XML").format(file) )
 
 
-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
+    def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
         uri = File.make_uri(uri)
         try:
-            localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
+            localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
                                   compress=compress,sign=sign, copylocal=copylocal)
         except IOError as e:
             raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)) )
-        
+
         st = io.StringIO()
-        
+
         try:
             from preprocess import preprocess, PreprocessError
             preprocess(infile=localpath,outfile=st,defines=inary.config.Config().values.directives)
@@ -82,15 +83,15 @@ class XmlFile(object):
             st = open(localpath,'r')
 
         try:
-            self.doc = iks.parse(localpath)
-            return self.doc
-        except Exception as e:
-            raise Error(_("File '{}' has invalid XML").format(localpath) )
-
+            self.doc = minidom.parse(localpath)
+            return self.doc.documentElement
+        except ExpatError as err:
+            raise Error(_("File '{}' has invalid XML: {}\n").format(localpath,
+                                                                    str(err)))
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
         f = inary.file.File(uri, inary.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
-        f.write(self.doc.toPrettyString())
+        f.write(self.doc.toprettyxml())
         f.close()
 
     def writexmlfile(self, f):
-        f.write(self.doc.toPrettyString())
+        f.write(self.doc.toprettyxml())

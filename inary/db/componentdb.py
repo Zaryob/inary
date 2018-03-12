@@ -45,19 +45,24 @@ class ComponentDB(lazydb.LazyDB):
 
     def __generate_packages(self, doc):
         components = {}
-        for pkg in doc.tags("Package"):
-            components.setdefault(pkg.getTagData("PartOf"), []).append(pkg.getTagData("Name"))
+        for pkg in doc.getElementsByTagName("Package"):
+            partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
+            pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
+            components.setdefault(partOf, []).append(pkgName)
         return components
 
     def __generate_sources(self, doc):
         components = {}
-        for spec in doc.tags("SpecFile"):
-            src = spec.getTag("Source")
-            components.setdefault(src.getTagData("PartOf"), []).append(src.getTagData("Name"))
+        for spec in doc.getElementsByTagName("SpecFile"):
+            src = spec.getElementsByTagName("Source")[0]
+            partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
+            pkgName = src.getElementsByTagName("Name")[0].firstChild.data
+            components.setdefault(partOf, []).append(pkgName)
         return components
 
     def __generate_components(self, doc):
-        return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
+        #return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
+        return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml('utf-8')) for x in doc.getElementsByTagName("Component")])
 
     def has_component(self, name, repo = None):
         return self.cdb.has_item(name, repo)
@@ -106,7 +111,7 @@ class ComponentDB(lazydb.LazyDB):
 
         component = Component.Component()
         component.parse(self.cdb.get_item(component_name))
-        
+
         for repo in inary.db.repodb.RepoDB().list_repos():
             try:
                 component.packages.extend(self.cpdb.get_item(component_name, repo))
@@ -117,11 +122,11 @@ class ComponentDB(lazydb.LazyDB):
                 component.sources.extend(self.csdb.get_item(component_name, repo))
             except Exception: #FIXME: what exception could we catch here, replace with that.
                 pass
-            
+
         return component
 
     # Returns packages of given component from given repo or first found component's packages in repo
-    # order if repo is None. 
+    # order if repo is None.
     # If walk is True than also the sub components' packages are returned
     def get_packages(self, component_name, repo=None, walk=False):
 
@@ -162,7 +167,7 @@ class ComponentDB(lazydb.LazyDB):
         return packages
 
     # Returns sources of given component from given repo or first found component's packages in repo
-    # order if repo is None. 
+    # order if repo is None.
     # If walk is True than also the sub components' packages are returned
     def get_sources(self, component_name, repo=None, walk=False):
 
@@ -201,4 +206,3 @@ class ComponentDB(lazydb.LazyDB):
                 pass
 
         return sources
-

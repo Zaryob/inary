@@ -238,16 +238,14 @@ python << EOF
 import re
 import os
 import vim
-import xml.dom.minidom
+import ciksemel
 
 def normal(str):
     vim.command("normal "+str)
 
-try:
-    pspec = xml.dom.minidom.parse("pspec.xml")
-except:
-    raise Exception("Can Not Parsed File: pspec.xml")
-comment_data = pspec.getElementsByTagName("History")[0].getElementsByTagName("Update")[0].getElementsByTagName("Comment")[0].firstChild.data
+pspec = ciksemel.parse("pspec.xml")
+comment_data = pspec.getTag("History").getTag("Update").getTagData("Comment")
+
 file_name = "commit-msg.tmp"
 if os.path.exists(file_name):
     os.unlink(file_name)
@@ -276,3 +274,4 @@ vim.command(":!svn ci --file commit-msg.tmp")
 os.system("rm commit-msg.tmp")
 EOF
 endfunction
+

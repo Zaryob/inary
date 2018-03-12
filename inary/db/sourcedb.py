@@ -13,7 +13,7 @@
 import re
 import gzip
 
-import ciksemel
+import xml.dom.minidom as minidom
 
 import inary
 import inary.data.specfile as Specfile
@@ -44,22 +44,23 @@ class SourceDB(lazydb.LazyDB):
         sources = {}
         pkgstosrc = {}
 
-        for spec in doc.tags("SpecFile"):
-            src_name = spec.getTag("Source").getTagData("Name")
-            sources[src_name] = gzip.zlib.compress(spec.toString().encode('utf-8'))
-            for package in spec.tags("Package"):
-                pkgstosrc[package.getTagData("Name")] = src_name
+        for spec in doc.getElementsByTagName("SpecFile"):
+            src_name = spec.getElementsByTagName("Source")[0].getElementsByTagName("Name").firstChild.data
+            sources[src_name] = gzip.zlib.compress(spec.toxml('utf-8'))
+            for package in spec.getElementsByTagName("Package"):
+                pkgstosrc[package.getElementsByTagName("Name")[0].firstChild.data] = src_name
 
         return sources, pkgstosrc
 
     def __generate_revdeps(self, doc):
         revdeps = {}
-        for spec in doc.tags("SpecFile"):
-            name = spec.getTag("Source").getTagData("Name")
-            deps = spec.getTag("Source").getTag("BuildDependencies")
+        for spec in doc.getElementsByTagName("SpecFile"):
+            source = spec.getElementsByTagName("Source")[0]
+            name = source.getElementsByTagName("Name")[0].firstChild.data
+            deps = source.getElementsByTagName("BuildDependencies")[0].firstChild.data
             if deps:
-                for dep in deps.tags("Dependency"):
-                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
+                for dep in deps.getElementsByTagName("Dependency"):
+                    revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml()))
         return revdeps
 
     def list_sources(self, repo=None):
@@ -123,9 +124,9 @@ class SourceDB(lazydb.LazyDB):
 
         rev_deps = []
         for pkg, dep in rvdb:
-            node = ciksemel.parseString(dep)
+            node = minidom.parseString(dep)
             dependency = inary.analyzer.dependency.Dependency()
-            dependency.package = node.firstChild().data()
+            dependency.package = node.childNodes[0].data
             if node.attributes():
                 attr = node.attributes()[0]
                 dependency.__dict__[attr] = node.getAttribute(attr)

@@ -10,7 +10,7 @@
 # Please read the COPYING file.
 #
 
-import xml.dom.minidom as minidom
+import ciksemel
 import bz2
 import sys
 import os
@@ -53,13 +53,13 @@ def fillPackageDict(tag, _hasSpecFile, packageOf):
 
 def parseXmlData(_index):
     packageOf = {}
-    hasSpecFile = _index.getElementsByTagName("SpecFile")
+    hasSpecFile = _index.getTag("SpecFile")
     if hasSpecFile:
-        for i in hasSpecFile:
-            parent = i.getElementsByTagName("Source")[0]
+        for i in _index.tags("SpecFile"):
+            parent = i.getTag("Source")
             fillPackageDict(parent, hasSpecFile, packageOf)
     else:
-        for parent in _index.getElementsByTagName("Package"):
+        for parent in _index.tags("Package"):
             fillPackageDict(parent, hasSpecFile, packageOf)
 
     return packageOf
@@ -93,3 +93,4 @@ def urgent_packages(index, packages):
 #        print("-> %s" % i)
 #        for k in requiredPackages[i]:
 #             print("\t%s" % k)
+

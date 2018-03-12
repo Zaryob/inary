@@ -21,7 +21,7 @@ index 02712542..0e772ddc 100644
      elif os.path.exists("{}.bz2".format(_file)):
          indexdata = bz2.decompress(open("{}.bz2".format(_file)).read())
 -        return ciksemel.parseString(indexdata)
-+        return minidom.parseString(indexdata)
++        return minidom.parseString(indexdata).documentElement
      else:
          print("{} not found".format(indexfile))
          sys.exit(1)
