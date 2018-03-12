@@ -714,6 +714,7 @@ def locked(func):
             raise inary.errors.PrivilegeError(_("You have to be root for this operation."))
 
         try:
+            import fcntl
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             ctx.locked = True
         except IOError:

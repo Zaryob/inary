@@ -92,9 +92,9 @@ class RepoOrder:
         repo_doc = self._get_doc()
         for r in repo_doc.getElementsByTagName("Repo"):
             if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                status_node = r.getElementsByTagName("Status").firstChild.data
+                status_node = r.getElementsByTagName("Status")
                 if status_node:
-                    status = status_node.childNodes[0].data
+                    status = status_node[0].childNodes[0].data
                     if status in ["active", "inactive"]:
                         return status
         return "inactive"

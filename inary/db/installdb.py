@@ -152,7 +152,7 @@ class InstallDB(lazydb.LazyDB):
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        distro = meta_doc.getElementsBy TagName("Package")[0].getElementsByTagName("Distribution")[0].firstChild.data
+        distro = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("Distribution")[0].firstChild.data
         release = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("DistributionRelease")[0].firstChild.data
         return distro, release
 
