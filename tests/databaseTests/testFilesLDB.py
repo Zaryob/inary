@@ -15,7 +15,7 @@ import inary
 
 class FilesDBTestCase(testcase.TestCase):
 
-    filesdb = inary.db.filesldb.FilesLDB()
+    filesdb = inary.db.filesdb.FilesDB()
 
     def testHasFile(self):
         assert not self.filesdb.has_file("bin/bash")

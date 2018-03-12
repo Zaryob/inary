@@ -180,8 +180,8 @@ class Repository:
         obsoletes = ""
         for obs in self.obsoletes:
             obsoletes += "     <Package>%s</Package>\n" % obs
-            
-        return distributionTemplate % {"sourcename": "Pardus",
+
+        return distributionTemplate % {"sourcename": "Sulin",
                                        "version": self.version,
                                        "description":self.name,
                                        "obsoletes":obsoletes}
@@ -191,7 +191,7 @@ class Repository:
         os.makedirs(self.name)
         os.chdir(self.name)
         open("distribution.xml", "w").write(self.get_dist_template())
-        
+
         for pkg in self.packages:
             pkg.create()
 
@@ -216,39 +216,48 @@ class Repository:
         open("components.xml", "w").write(xml_content)
 
 
-class MainRepo(Repository):
+class Repo1(Repository):
     def __init__(self):
-        Repository.__init__(self, "main-2018", "2018", [], ["wengophone", "rar"])
-        
+        Repository.__init__(self, "repo1", "2018", [], ["wengophone", "rar"])
+
     def create(self):
 
         pf = PackageFactory()
 
         self.packages = [
             # system.base
+	        pf.getPackage("liblouis", [], "desktop.accessibility"),
             pf.getPackage("bash"),
             pf.getPackage("curl", ["libidn", "zlib", "openssl"]),
             pf.getPackage("shadow", ["db4","pam", "cracklib"]),
-            pf.getPackage("jpeg"),
-            
+
             # applications.network
             pf.getPackage("ncftp", [], "applications.network"),
             pf.getPackage("bogofilter", ["gsl"], "applications.network"),
             pf.getPackage("gsl", [], "applications.network"),
+
+            # multimedia
+            pf.getPackage("uif2iso", [], "multimedia.converter"),
+            pf.getPackage("jpeg", [], "multimedia.graphics"),
+
+            pf.getPackage("dialog", [], "util"),
+            pf.getPackage("vlock", [], "util"),
+            pf.getPackage("pv", [], "util"),
+            pf.getPackage("tidy", [], "util")
             ]
-        
+
         # system.base
-        self.packages.extend(pf.getPackageBundle("system.base", "libidn", "zlib", "openssl", "db4", "pam", "cracklib"))
+        self.packages.extend(pf.getPackageBundle("system.base", "ca-certificates", "libidn", "zlib", "openssl", "db4", "pam", "run-parts" "cracklib", "ncurses", "zlib"))
 
         # applications.network
         self.packages.extend(pf.getPackageBundle("applications.network", "ethtool", "nfdump"))
 
         Repository.create(self)
 
-class ContribRepo(Repository):
+class Repo2(Repository):
     def __init__(self):
-        Repository.__init__(self, "contrib-2018", "2018", [], ["xara"])
-        
+        Repository.__init__(self, "repo2", "2018", [], ["xara"])
+
     def create(self):
 
         pf = PackageFactory()
@@ -259,8 +268,14 @@ class ContribRepo(Repository):
             pf.getPackage("ctorrent", ["openssl"], "applications.network"),
             pf.getPackage("lft", ["libpcap"], "applications.network"),
             pf.getPackage("libpcap", [], "applications.network"),
+
+            pf.getPackage("inxi", [], "util.admin"),
+            pf.getPackage("dialog", [], "util.misc"),
+            pf.getPackage("lsof", [], "util.misc"),
+            pf.getPackage("most", [], "util.misc")
             ]
-        
+
+
         # applications.util
         self.packages.extend(pf.getPackageBundle("applications.util", "iat", "rpl", "cpulimit"))
 
@@ -270,8 +285,8 @@ class BuildFarm:
     def create_index(self, repo):
         binrepo = "%s-bin" % repo
         shutil.copy("%s/distribution.xml" % repo, binrepo)
-        os.system("inary index %s --skip-signing -o %s/spam-index.xml" % (repo, repo))
-        os.system("inary index --skip-sources --skip-signing -o %s/spam-index.xml %s %s" % (binrepo, binrepo, repo))
+        os.system("inary-cli index %s --skip-signing -o %s/inary-index.xml" % (repo, repo))
+        os.system("inary-cli index --skip-sources --skip-signing -o %s/inary-index.xml %s %s" % (binrepo, binrepo, repo))
 
     def build(self, repos):
         for repo in repos:
@@ -279,10 +294,10 @@ class BuildFarm:
             os.mkdir(binrepo)
             for root, dirs, files in os.walk(repo):
                 if "pspec.xml" in files:
-                    os.system("inary build %s/%s -O %s" % (root, "pspec.xml", binrepo))
+                    os.system("inary-cli build %s/%s -O %s" % (root, "pspec.xml", binrepo))
             self.create_index(repo)
 
 if __name__ == "__main__":
-    MainRepo().create()
-    ContribRepo().create()
-    BuildFarm().build(["main-2018", "contrib-2018", "repo1", "repo2"])
+    Repo1().create()
+    Repo2().create()
+    BuildFarm().build(["repo1", "repo2"])
