@@ -20,7 +20,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
 
 # INARY
 import inary
