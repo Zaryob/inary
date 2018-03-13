@@ -1,41 +1,37 @@
 #!/usr/bin/env python3
 #
-#
-# Old author: Copyright (C) 2005 - 2011, Tubitak/UEKAE
-#
 # Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
-# This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
-# Public License as published by the Free Software Foundation; either version 3 of the License, or (at your
+# This program is free software; you can redistribute it and/or modify it under the terms of the GNU General 
+# Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
 # option) any later version.
 #
 # Please read the COPYING file.
 #
 # Authors: Eray, Baris
-
-import sys
+import sys 
 import locale
 import traceback
 import signal
 import os
 
-import inary.ui
-import inary.context as ctx
-from inary.cli.inarycli import InaryCLI
+import inary.ui 
+import inary.context as ctx 
+from inary.cli.inarycli import InaryCLI 
 
-import gettext
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
+import gettext 
+__trans = gettext.translation('inary', fallback=True) 
+_ = __trans.gettext 
 
 def exit(retval = 0):
-    sys.exit(retval)
+    sys.exit(retval) 
 
 if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, '')
-    ctx.ui.info(_("""Welcome to the interactive INARY shell.
-           Type "help" to see a list of commands.
+    ctx.ui.info(_("""Welcome to the interactive INARY shell. 
+           Type "help" to see a list of commands. 
            To end the session, type "exit".
-           You can run system commands by prefixing with '!' as in '!ls'.
+           You can run system commands by prefixing with '!' as in '!ls'. 
            Copyright 2018 (c) Zaryob and Sulin Community. """))
     while 1:
         cmd = input('inary> ')
@@ -62,7 +58,7 @@ if __name__ == "__main__":
                 show_traceback = ctx.get_option('debug')
             elif isinstance(value, inary.Exception):
                 show_traceback = True
-                ui.error(_("""Unhandled internal exception. Please file a bug report.
+                ui.error(_("""Unhandled internal exception. Please file a bug report. 
 (http://bugs.sulin.org)"""))
             else:
                 # For any other exception (possibly Python exceptions) show the traceback!

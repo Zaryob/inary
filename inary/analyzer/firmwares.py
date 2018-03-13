@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 3 of the License, or (at your option)
+# Software Foundation; either version 2 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -43,7 +43,7 @@ def get_firmware_package(firmware):
     try:
         fw_packages = inary.db.componentdb.ComponentDB().get_packages("hardware.firmware")
         unavailable_fw_packages = set(fw_packages).difference(inary.db.installdb.InstallDB().list_installed())
-
+        
         if unavailable_fw_packages:
             ctx.ui.info(inary.util.colorize("The following firmwares are not installed:", "yellow"))
             ctx.ui.info("\n".join(unavailable_fw_packages))
