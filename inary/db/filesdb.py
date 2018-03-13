@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -25,8 +25,8 @@ _ = __trans.gettext
 
 # FIXME:
 # We could traverse through files.xml files of the packages to find the path and
-# the package - a linear search - as some well known package managers do. But the current 
-# file conflict mechanism of inary prevents this and needs a fast has_file function. 
+# the package - a linear search - as some well known package managers do. But the current
+# file conflict mechanism of inary prevents this and needs a fast has_file function.
 # So currently filesdb is the only db and we cant still get rid of rebuild-db :/
 
 class FilesDB(lazydb.LazyDB):

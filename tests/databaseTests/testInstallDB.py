@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2007-2010, TUBITAK/UEKAE
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -38,7 +38,7 @@ class InstallDBTestCase(testcase.TestCase):
     def testListInstalled(self):
         inary.api.install(["openssl"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert set(self.installdb.list_installed()) == set(['zlib', 'ca-certificates', 
+        assert set(self.installdb.list_installed()) == set(['zlib', 'ca-certificates',
                                                             'run-parts', 'openssl'])
 
     def testGetVersion(self):

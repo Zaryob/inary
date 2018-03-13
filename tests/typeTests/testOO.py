@@ -1,4 +1,4 @@
-# Copyright (C) 2005, TUBITAK/UEKAE
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free

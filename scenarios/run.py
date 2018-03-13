@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 #
-# Copyright (C) 2006, TUBITAK/UEKAE
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     os.chdir(consts.scenarios_path)
 
     args = sys.argv
-    if len(args) > 1: 
+    if len(args) > 1:
         scens = sys.argv[1:]
         for scen in scens:
             clean_out()
@@ -53,5 +53,5 @@ if __name__ == "__main__":
             print("\n* Running scenario in %s\n" % scen)
             module = __import__(scen[:len(scen)-3])
             run_scen(module.run)
-    else: 
+    else:
         run_all()

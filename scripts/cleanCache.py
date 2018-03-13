@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005, 2006 TUBITAK/UEKAE
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -100,4 +100,3 @@ if __name__ == "__main__":
 
     else:
         cleanInarys(clean)
-
