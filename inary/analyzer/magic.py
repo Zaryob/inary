@@ -4,7 +4,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -30,11 +30,11 @@ if not libmagic or not libmagic._name:
 
 #Magic Flags from libmagic.so
 
-MAGIC_CONTINUE = 0x000020 
+MAGIC_CONTINUE = 0x000020
 MAGIC_COMPRESS = 0x000004
-MAGIC_NONE = 0x000000 
+MAGIC_NONE = 0x000000
 MAGIC_MIME = 0x000010
-MAGIC_MIME_ENCODING = 0x000400 
+MAGIC_MIME_ENCODING = 0x000400
 
 _instances = {}
 
@@ -110,14 +110,14 @@ class Magic:
         magic_load(self.cookie, magic_file)
 
     def get_file_type(self, data):
-        # If given argument is a file load with magic_file 
+        # If given argument is a file load with magic_file
         # If given argument is a buffer load with magic_buffer
         try:
-            if os.path.isfile(data): 
+            if os.path.isfile(data):
                 open(data)
                 with self.lock:
                     return magic_file(self.cookie, data)
-            else: 
+            else:
                 with self.lock:
                     if type(data) == str and str != bytes:
                         buf = data.encode('utf-8', errors='replace')
@@ -129,4 +129,3 @@ class Magic:
         if self.cookie and magic_close:
             magic_close(self.cookie)
             self.cookie = None
-

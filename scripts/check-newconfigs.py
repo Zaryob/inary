@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
+#
+# Old author: Copyright (C) 2005 - 2011, Tubitak/UEKAE 
+#
 # Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -33,12 +36,12 @@ def get_installed_packages():
     return installdb.list_installed()
 
 def check_changed_config_files(package):
-    
+
     all_files = installdb.get_files(package)
     config_files = [x for x in all_files.list if x.type == 'config']
     config_paths = ["/" + str(x.path) for x in config_files]
 
-    newconfig = [] 
+    newconfig = []
     for path in config_paths:
         if os.path.exists(path) and os.path.exists(path + ".newconfig"):
             newconfig.append(path)

@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General substitutions.
 project = 'Inary Documentation'
-copyright = "2016-2017 Zaryob"
+copyright = "2016-2018 Zaryob"
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
@@ -97,7 +97,7 @@ highlight_language = 'YAML+Jinja'
 
 # Substitutions, variables, entities, & shortcuts for text which do not need to link to anything.
 # For titles which should be a link, use the intersphinx anchors set at the index, chapter, and section levels, such as  qi_start_:
-rst_epilog = """ 
+rst_epilog = """
 """
 
 

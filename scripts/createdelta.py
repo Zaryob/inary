@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
+#
+# Old author: Copyright (C) 2005 - 2011, Tubitak/UEKAE 
+#
 # Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -43,7 +46,7 @@ if __name__ == "__main__":
         name, version = util.parse_package_name(pkg)
 
         if not old_pkg == new_pkg:
-        # skip if same 
+        # skip if same
             if not os.path.exists("%s-%s-%s.delta.inary" % (name, str(mi[pkg].build), str(ma[pkg].build))):
             # skip if delta exists
                 print(("%s --> Min: %s Max: %s \n %s-%s-%s.delta.inary" % (pkg, old_pkg, new_pkg, name, str(mi[pkg].build), str(ma[pkg].build))))
