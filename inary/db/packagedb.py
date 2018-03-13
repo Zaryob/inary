@@ -53,15 +53,21 @@ class PackageDB(lazydb.LazyDB):
         self.odb = inary.db.itembyrepo.ItemByRepo(self.__obsoletes)
         self.rpdb = inary.db.itembyrepo.ItemByRepo(self.__replaces)
 
+
+    ## Generate functions look sooo ugly
     def __generate_replaces(self, doc):
-        for x in doc.getElementsByTagName("Package"):
-            if x.getElementsByTagName("Replaces"):
-                return x.getElementsByTagName("Name")[0].firstChild.data
+        for node in doc.childNodes:
+            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
+                if node.getElementsByTagName("Replaces"):
+                    node.getElementsByTagName("Name")[0].firstChild.data
 
     def __generate_obsoletes(self, doc):
         distribution = doc.getElementsByTagName("Distribution")[0]
         obsoletes = distribution and distribution.getElementsByTagName("Obsoletes")[0]
-        src_repo = doc.getElementsByTagName("SpecFile")[0] is not None
+        try:
+            src_repo = doc.getElementsByTagName("SpecFile")[0]
+        except:
+            src_repo = None
 
         if not obsoletes or src_repo:
             return []
@@ -70,8 +76,10 @@ class PackageDB(lazydb.LazyDB):
 
     def __generate_packages(self, doc):
         pdict={}
-        for x in doc.getElementsByTagName("Package"):
-            pdict[x.getElementsByTagName("Name")[0].firstChild.data]= gzip.zlib.compress(x.toxml('utf-8'))
+        for node in doc.childNodes:
+            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
+                name = node.getElementsByTagName('Name')[0].firstChild.data
+                pdict[name]= gzip.zlib.compress(node.toxml('utf-8'))
         return pdict
 
     def __generate_revdeps(self, doc):
@@ -81,8 +89,9 @@ class PackageDB(lazydb.LazyDB):
                 name = node.getElementsByTagName('Name')[0].firstChild.data
                 deps = node.getElementsByTagName('RuntimeDependencies')
                 if deps:
-                    for dep in deps.getElementsByTagName("Dependency"):
-                        revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml('utf-8')))
+                    for dep in deps:
+                        for i in dep.getElementsByTagName('Dependency'):
+                            revdeps.setdefault(i.firstChild.data, set()).add((name, i.toxml('utf-8')))
 
         return revdeps
 

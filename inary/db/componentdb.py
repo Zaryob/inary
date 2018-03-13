@@ -45,19 +45,21 @@ class ComponentDB(lazydb.LazyDB):
 
     def __generate_packages(self, doc):
         components = {}
-        for pkg in doc.getElementsByTagName("Package"):
-            partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
-            pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
-            components.setdefault(partOf, []).append(pkgName)
+        for pkg in doc.childNodes:
+            if pkg.nodeType == pkg.ELEMENT_NODE and pkg.tagName == "Package":
+                partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
+                pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
+                components.setdefault(partOf, []).append(pkgName)
         return components
 
     def __generate_sources(self, doc):
         components = {}
-        for spec in doc.getElementsByTagName("SpecFile"):
-            src = spec.getElementsByTagName("Source")[0]
-            partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
-            pkgName = src.getElementsByTagName("Name")[0].firstChild.data
-            components.setdefault(partOf, []).append(pkgName)
+        for spec in doc.childNodes:
+            if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
+                src = spec.getElementsByTagName("Source")[0]
+                partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
+                pkgName = src.getElementsByTagName("Name")[0].firstChild.data
+                components.setdefault(partOf, []).append(pkgName)
         return components
 
     def __generate_components(self, doc):

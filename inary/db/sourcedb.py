@@ -124,7 +124,7 @@ class SourceDB(lazydb.LazyDB):
 
         rev_deps = []
         for pkg, dep in rvdb:
-            node = minidom.parseString(dep)
+            node = minidom.parseString(dep).documentElement
             dependency = inary.analyzer.dependency.Dependency()
             dependency.package = node.childNodes[0].data
             if node.attributes():

@@ -25,6 +25,7 @@ import inary.util
 import inary.context as ctx
 import inary.db.lazydb as lazydb
 from inary.file import File
+import inary.sxml.xmlext as xmlext
 
 class RepoError(inary.Error):
     pass
@@ -49,10 +50,11 @@ class RepoOrder:
 
         try:
             #FIXME:Burada bir sakatlık çıkacak
-            node = [x for x in repo_doc.getElementsByTagName("Repo")][-1]
-            repo_node = node.createElement("Repo")
-        except ExpatError as err:
-            raise("Can not created Repo tag: {}".format(err))
+            #2018-03-12 dedim ama ben gunler oncesinden dedim
+            node = [x for x in repo_doc.childNodes if x.nodeType == x.ELEMENT_NODE and x.tagName == "Repo"][-1]
+            repo_node = repo_doc.appendChild(node.createElement("Repo"))
+        except Exception:
+            repo_node = repo_doc.appendChild(repo_doc.createElement("Repo"))
 
         name_node = repo_node.createElement("Name")
         name_node.appendChild(node.createTextNode(repo_name))
@@ -77,10 +79,10 @@ class RepoOrder:
 
         for r in repo_doc.getElementsByTagName("Repo"):
             if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                status_node = r.getElementsByTagName("Status")[0].firstChild.data
-                #FIXME: Program burda göt olacak
+                status_node = r.getElementsByTagName("Status")[0]
+                print(dir(status_node))
                 if status_node:
-                    status_node.childNodes[0].hide()
+                    status_node.childNodes[0].data
                     status_node.insertData(status)
                 else:
                     status_node = r.insertTag("Status")
@@ -104,7 +106,7 @@ class RepoOrder:
 
         for r in repo_doc.getElementsByTagName("Repo"):
             if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                r.hide()
+                repo_doc.removeChild(r)
 
         self._update(repo_doc)
 
@@ -180,7 +182,7 @@ class RepoDB(lazydb.LazyDB):
             return dom.documentElement
 
         try:
-            return minidom.parse(index_path)
+            return minidom.parse(index_path).documentElement
         except ExpatError as e:
             raise RepoError(_("Error parsing repository index information. Index file does not exist or is malformed."))
 
@@ -195,7 +197,13 @@ class RepoDB(lazydb.LazyDB):
 
     def add_repo(self, name, repo_info, at = None):
         repo_path = inary.util.join_path(ctx.config.index_dir(), name)
-        os.makedirs(repo_path)
+        ###########
+        try:
+            os.makedirs(repo_path)
+        except:
+            pass
+        #FIXME: FileExistError errno: 17 
+        #When addind repo there are the same as name empty dirs it should remove it
         urifile_path = inary.util.join_path(ctx.config.index_dir(), name, "uri")
         open(urifile_path, "w").write(repo_info.indexuri.get_uri())
         self.repoorder.add(name, repo_info.indexuri.get_uri())
