@@ -107,13 +107,16 @@ class InstallDB(lazydb.LazyDB):
 
         deps = pkg.getElementsByTagName('RuntimeDependencies')
         if deps:
-            for dep in deps.getElementsByTagName("Dependency"):
-                revdep = revdeps.setdefault(dep.childNodes[0].data, {})
-                revdep[package] = dep.toxml('utf-8')
-            for anydep in deps.getElementsByTagName("AnyDependency"):
-                for dep in anydep.getElementsByTagName ("Dependency"):
-                    revdep = revdeps.setdefault(dep.firstChild.data, {})
-                    revdep[package] = anydep.toxml('utf-8')
+            for dep_tag in deps:
+                for dep in dep_tag.childNodes:
+                    if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "Dependency":
+                        revdep = revdeps.setdefault(dep.childNodes[0].data, {})
+                        revdep[package] = dep.toxml('utf-8')
+                for anydep in dep_tag.childNodes:
+                    if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "AnyDependency":
+                        for dep in anydep.getElementsByTagName ("Dependency"):
+                            revdep = revdeps.setdefault(dep.firstChild.data, {})
+                            revdep[package] = anydep.toxml('utf-8')
 
     def __generate_revdeps(self):
         revdeps = {}

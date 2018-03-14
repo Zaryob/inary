@@ -168,7 +168,6 @@ class Uninstall(Command):
         if os.path.exists(project_dir):
             print(' removing: ', project_dir)
             shutil.rmtree(project_dir)
-#class makeTest():
 
 
 datas = [
@@ -199,7 +198,8 @@ setup(name="inary",
                'scripts/lsinary',
                'scripts/uninary',
                'scripts/check-newconfigs.py',
-               'scripts/inarysh'],
+               'scripts/inarysh',
+               'tools/pspec2po'],
     include_package_data=True,
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,

@@ -48,7 +48,7 @@ class RepoOrder:
         self.repos = self._get_repos()
 
     def add(self, repo_name, repo_url, repo_type="remote"):
-        repo_doc = self._get_doc()
+        repo_doc = self._get_doc().ownerDocument
 
         repo_node = repo_doc.createElement("Repo")
 
@@ -126,11 +126,11 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                self._doc = minidom.parse(repos_file)
+                self._doc = minidom.parse(repos_file).documentElement
             else:
                 impl = minidom.getDOMImplementation()
                 dom = impl.createDocument(None, "REPOS", None)
-                self._doc = dom
+                self._doc = dom.documentElement
 
         return self._doc
 
