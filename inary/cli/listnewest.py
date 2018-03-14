@@ -18,8 +18,8 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.api
 import inary.db
+import inary.operations.op_wrappers as op_wrappers
 
 class ListNewest(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List newest packages in the repositories
@@ -56,7 +56,7 @@ packages from all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in inary.api.list_repos():
+            for repo in op_wrappers.list_repos():
                 self.print_packages(repo)
 
     def print_packages(self, repo):
@@ -67,7 +67,7 @@ packages from all repositories.
         else:
             since = None
 
-        l = inary.api.list_newest(repo, since)
+        l = op_wrappers.list_newest(repo, since)
         if not l:
             return
 

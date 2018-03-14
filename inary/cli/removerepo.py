@@ -15,7 +15,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
-import inary.api
+import inary.atomicoperations
 
 class RemoveRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Remove repositories
@@ -35,7 +35,7 @@ Remove all repository information from the system.
         if len(self.args)>=1:
             self.init()
             for repo in self.args:
-                inary.api.remove_repo(repo)
+                inary.atomicoperations.remove_repo(repo)
         else:
             self.help()
             return

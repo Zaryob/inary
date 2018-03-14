@@ -469,4 +469,4 @@ def fetch(packages=[], path=os.path.curdir):
         else:
             url = os.path.join(os.path.dirname(repodb.get_repo_url(repo)), str(uri.path()))
 
-        fetcher.fetch_url(url, path, ctx.ui.Progress)
+        fetch_url(url, path, ctx.ui.Progress)

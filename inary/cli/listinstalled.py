@@ -63,7 +63,7 @@ Usage: list-installed
 
         component = ctx.get_option('component')
         if component:
-            #FIXME: inary api is insufficient to do this
+            #FIXME: inary.atomicoperations is insufficient to do this
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             installed = list(set(installed) & set(component_pkgs))
 

@@ -29,6 +29,7 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
+import inary.data.pgraph as pgraph
 
 class Error(inary.Error):
     pass
@@ -887,7 +888,7 @@ def configure_pending(packages=None):
     else:
         packages = set(packages).intersection(installdb.list_pending())
 
-    order = generate_pending_order(packages)
+    order = pgraph.generate_pending_order(packages)
     try:
         for x in order:
             if installdb.has_package(x):

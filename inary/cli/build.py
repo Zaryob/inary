@@ -17,7 +17,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.api
+import inary.atomicoperations
 import inary.cli.command as command
 import inary.context as ctx
 
@@ -178,4 +178,4 @@ class Build(command.Command, metaclass=command.autocommand):
             if ctx.get_option('until'):
                 inary.operations.build.build_until(x, ctx.get_option('until'))
             else:
-                inary.api.build(x)
+                inary.atomicoperations.build(x)

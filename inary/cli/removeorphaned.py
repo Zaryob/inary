@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.api
+import inary.atomicoperations
 import inary.db
 
 class RemoveOrphaned(command.PackageOp, metaclass=command.autocommand):
@@ -51,4 +51,4 @@ Remove all orphaned packages from the system.
         if ctx.get_option('exclude'):
             orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))
 
-        inary.api.remove(orphaned)
+        inary.atomicoperations.remove(orphaned)

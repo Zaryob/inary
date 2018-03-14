@@ -19,8 +19,8 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
-import inary.api
 import inary.db
+import inary.operations.info as info_operation
 
 class Info(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Display package information
@@ -87,7 +87,7 @@ Usage: info <package1> <package2> ... <packagen>
         # info of packages
         for arg in self.args:
             if self.options.xml:
-                index.packages.append(inary.api.info(arg)[0].package)
+                index.packages.append(info_operation.info(arg)[0].package)
             else:
                 self.info_package(arg)
 
@@ -140,7 +140,7 @@ Usage: info <package1> <package2> ... <packagen>
                 print()
 
     def inaryfile_info(self, package):
-        metadata, files = inary.api.info_file(package)
+        metadata, files = info_operation.info_file(package)
         ctx.ui.formatted_output(_("Package file: {}").format(package))
 
         self.print_metadata(metadata)
@@ -149,7 +149,7 @@ Usage: info <package1> <package2> ... <packagen>
 
     def installdb_info(self, package):
         if self.installdb.has_package(package):
-            metadata, files, repo = inary.api.info_name(package, True)
+            metadata, files, repo = info_operation.info_name(package, True)
 
             if self.options.files or self.options.files_path:
                 self.print_files(files)
@@ -166,7 +166,7 @@ Usage: info <package1> <package2> ... <packagen>
 
     def packagedb_info(self, package):
         if self.packagedb.has_package(package):
-            metadata, files, repo = inary.api.info_name(package, False)
+            metadata, files, repo = info_operation.info_name(package, False)
             if self.options.short:
                 ctx.ui.formatted_output(_("[binary] "), noln=True, column=" ")
             else:

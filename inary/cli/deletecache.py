@@ -15,7 +15,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.api
+import inary.atomicoperations
 import inary.cli.command as command
 
 class DeleteCache(command.Command, metaclass=command.autocommand):
@@ -34,4 +34,4 @@ consume a lot of disk space.""")
 
     def run(self):
         self.init(database=False, write=True)
-        inary.api.delete_cache()
+        inary.atomicoperations.delete_cache()

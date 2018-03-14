@@ -13,6 +13,8 @@
 """INARY package relation graph that represents the state of packagedb"""
 
 import inary
+import inary.context as ctx
+import inary.operations.helper as op_helper
 import inary.db
 
 import gettext
@@ -276,7 +278,7 @@ def generate_pending_order(A):
     componentdb = inary.db.componentdb.ComponentDB()
     # Bug 4211
     if componentdb.has_component('system.base'):
-        order = reorder_base_packages(order)
+        order = op_helper.reorder_base_packages(order)
 
     return order
 

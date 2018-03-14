@@ -19,8 +19,8 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.api
-import inary
+import inary.db
+import inary.fetcher as fetcher
 
 class Fetch(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Fetch a package
@@ -65,4 +65,4 @@ Downloads the given inary packages to working directory
                 for dep in package.runtimeDependencies():
                     full_packages.append(dep.name())
 
-        inary.api.fetch(full_packages, ctx.config.options.output_dir)
+        fetcher.fetch(full_packages, ctx.config.options.output_dir)

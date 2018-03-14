@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.api
+import inary.atomicoperations
 import inary.db
 
 class Install(command.PackageOp, metaclass=command.autocommand):
@@ -102,4 +102,4 @@ expanded to package names.
             packages = inary.blacklist.exclude(packages, ctx.get_option('exclude'))
 
         reinstall = bool(packages) and packages[0].endswith(ctx.const.package_suffix)
-        inary.api.install(packages, ctx.get_option('reinstall') or reinstall)
+        inary.atomicoperations.install(packages, ctx.get_option('reinstall') or reinstall)

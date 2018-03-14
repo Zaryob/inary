@@ -16,8 +16,9 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.api
+import inary.atomicoperations
 import inary.operations.check
+import inary.operations.op_wrappers as op_wrappers
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
@@ -72,7 +73,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
         component = ctx.get_option('component')
         if component:
-            installed = inary.api.list_installed()
+            installed = op_wrappers.list_installed()
             component_pkgs = self.componentdb.get_union_packages(component,
                                                                  walk=True)
             pkgs = list(set(installed) & set(component_pkgs))
@@ -80,7 +81,7 @@ class Check(command.Command, metaclass=command.autocommand):
             pkgs = self.args
         else:
             ctx.ui.info(_('Checking all installed packages') + '\n')
-            pkgs = inary.api.list_installed()
+            pkgs = op_wrappers.list_installed()
 
         necessary_permissions = True
 
@@ -96,9 +97,7 @@ class Check(command.Command, metaclass=command.autocommand):
         for pkg in pkgs:
             if self.installdb.has_package(pkg):
                 check_results = inary.operations.check.check_package(pkg, check_config)
-                ctx.ui.info("{0}    {1}".format((prefix.format(pkg),
-                                          ' ' * (maxpkglen - len(pkg)))),
-                            noln=True)
+                ctx.ui.info("{0}    {1}".format(prefix.format(pkg), (' ' * (maxpkglen - len(pkg)))), noln=True)
 
                 if check_results['missing'] or check_results['corrupted'] \
                         or check_results['config']:

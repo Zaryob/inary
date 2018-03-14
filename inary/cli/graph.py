@@ -16,11 +16,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
-import inary.api
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+import inary.data.pgraph as pgraph
+import inary.operations.op_wrappers as op_wrappers
 
 class Graph(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Graph package relations
@@ -76,7 +76,7 @@ the package in graphviz format to 'pgraph.dot'.
             if self.args:
                 a = self.args
             else:
-                a = inary.api.list_available(repo)
+                a = op_wrappers.list_available(repo)
         else:
             # Graph from installed packages database
             packagedb = inary.db.installdb.InstallDB()
@@ -86,8 +86,8 @@ the package in graphviz format to 'pgraph.dot'.
             else:
                 # if A is empty, then graph all packages
                 ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
-                a = inary.api.list_installed()
+                a = op_wrappers.list_installed()
 
-        g = inary.api.package_graph(a, packagedb,
+        g = pgraph.package_graph(a, packagedb,
                                    ignore_installed = ctx.get_option('ignore_installed'), reverse = ctx.get_option('reverse'))
         g.write_graphviz(open(ctx.get_option('output'), 'w'))

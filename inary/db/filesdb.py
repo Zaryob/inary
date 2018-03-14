@@ -55,6 +55,7 @@ class FilesDB(lazydb.LazyDB):
         return self.filesdb.get(key), path
 
     def search_file(self, term):
+        print("GELDIM BURAYA")
         if self.has_file(term):
             pkg, path = self.get_file(term)
             return [(pkg,[path])]
