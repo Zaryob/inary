@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 #
+#
+# Old author: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
 # Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # Please read the COPYING file.
@@ -17,7 +20,6 @@ _ = __trans.gettext
 import os
 
 import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
 
 import inary
 import inary.uri
@@ -48,57 +50,51 @@ class RepoOrder:
     def add(self, repo_name, repo_url, repo_type="remote"):
         repo_doc = self._get_doc()
 
-        try:
-            #FIXME:Burada bir sakatlık çıkacak
-            #2018-03-12 dedim ama ben gunler oncesinden dedim
-            node = [x for x in repo_doc.childNodes if x.nodeType == x.ELEMENT_NODE and x.tagName == "Repo"][-1]
-            repo_node = repo_doc.appendChild(node.createElement("Repo"))
-        except Exception:
-            repo_node = repo_doc.appendChild(repo_doc.createElement("Repo"))
+        repo_node = repo_doc.createElement("Repo")
 
         name_node = repo_node.createElement("Name")
-        name_node.appendChild(node.createTextNode(repo_name))
+        name_node.appendChild(repo_doc.createTextNode(repo_name))
         repo_node.appendChild(name_node)
 
         url_node = repo_node.createElement("Url")
-        url_node.appendChild(node.createTextNode(repo_url))
+        url_node.appendChild(repo_doc.createTextNode(repo_url))
         repo_node.appendChild(url_node)
 
         status_node = repo_node.createElement("Status")
-        status_node.appendChild(node.createTextNode("active"))
+        status_node.appendChild(repo_doc.createTextNode("active"))
         repo_node.appendChild(status_node)
 
         media_node = repo_node.createElement("Media")
-        media_node.appendChild(node.createTextNode(repo_type))
+        media_node.appendChild(repo_doc.createTextNode(repo_type))
         repo_node.appendChild(media_node)
 
         self._update(repo_doc)
 
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
-
-        for r in repo_doc.getElementsByTagName("Repo"):
-            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                status_node = r.getElementsByTagName("Status")[0]
-                print(dir(status_node))
-                if status_node:
-                    status_node.childNodes[0].data
-                    status_node.insertData(status)
-                else:
-                    status_node = r.insertTag("Status")
-                    status_node.insertData(status)
+        for r in repo_doc.childNodes:
+            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                    status_node = r.getElementsByTagName("Status")[0]
+                    if status_node:
+                        status_node.childNodes[0].nodeValue = status
+                    else:
+                        status_node = repo_node.createElement("Status")
+                        status_node.appendChild(repo_doc.createTextNode("active"))
+                        r.appendChild(status_node)
 
         self._update(repo_doc)
 
     def get_status(self, repo_name):
         repo_doc = self._get_doc()
-        for r in repo_doc.getElementsByTagName("Repo"):
-            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                status_node = r.getElementsByTagName("Status")
-                if status_node:
-                    status = status_node[0].childNodes[0].data
-                    if status in ["active", "inactive"]:
-                        return status
+        for r in repo_doc.childNodes:
+            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                    status_node = r.getElementsByTagName("Status")
+                    if status_node:
+                        status = status_node[0].childNodes[0].data
+                        if status in ["active", "inactive"]:
+                            return status
         return "inactive"
 
     def remove(self, repo_name):
@@ -130,11 +126,11 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                self._doc = minidom.parse(repos_file).documentElement
+                self._doc = minidom.parse(repos_file)
             else:
                 impl = minidom.getDOMImplementation()
                 dom = impl.createDocument(None, "REPOS", None)
-                self._doc = dom.documentElement
+                self._doc = dom
 
         return self._doc
 
@@ -142,11 +138,12 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        for r in repo_doc.getElementsByTagName("Repo"):
-            media = r.getElementsByTagName("Media")[0].firstChild.data
-            name = r.getElementsByTagName("Name")[0].firstChild.data
-            status = r.getElementsByTagName("Status")[0].firstChild.data
-            order.setdefault(media, []).append(name)
+        for r in repo_doc.childNodes:
+            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                media = r.getElementsByTagName("Media")[0].firstChild.data
+                name = r.getElementsByTagName("Name")[0].firstChild.data
+                status = r.getElementsByTagName("Status")[0].firstChild.data
+                order.setdefault(media, []).append(name)
 
         return order
 
@@ -202,7 +199,7 @@ class RepoDB(lazydb.LazyDB):
             os.makedirs(repo_path)
         except:
             pass
-        #FIXME: FileExistError errno: 17 
+        #FIXME: FileExistError errno: 17
         #When addind repo there are the same as name empty dirs it should remove it
         urifile_path = inary.util.join_path(ctx.config.index_dir(), name, "uri")
         open(urifile_path, "w").write(repo_info.indexuri.get_uri())
