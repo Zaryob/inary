@@ -55,10 +55,12 @@ class PackageDB(lazydb.LazyDB):
 
     ## Generate functions look sooo ugly
     def __generate_replaces(self, doc):
-        for node in doc.childNodes:
-            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
-                if node.getElementsByTagName("Replaces"):
-                    node.getElementsByTagName("Name")[0].firstChild.data
+        return [node.getElementsByTagName("Name")[0].firstChild.data \
+                for node in doc.childNodes \
+                    if node.nodeType == node.ELEMENT_NODE and \
+                    node.tagName == "Package" and \
+                    node.getElementsByTagName("Replaces")]
+
 
     def __generate_obsoletes(self, doc):
         distribution = doc.getElementsByTagName("Distribution")[0]
@@ -219,15 +221,17 @@ class PackageDB(lazydb.LazyDB):
 
         for pkg_name in self.rpdb.get_list_item():
             xml = self.pdb.get_item(pkg_name, repo)
-            package = ciksemel.parseString(str(xml))
-            replaces_tag = package.getTag("Replaces")
+            package = minidom.parseString(xml)
+            replaces_tag = package.getElementsByTagName("Replaces")
             if replaces_tag:
-                for node in replaces_tag.tags("Package"):
-                    r = inary.data.relation.Relation()
-                    # XXX Is there a better way to do this?
-                    r.decode(node, [])
-                    if inary.data.replace.installed_package_replaced(r):
-                        pairs.setdefault(r.package, []).append(pkg_name)
+                for tag in replaces_tag:
+                    for node in tag.childNodes:
+                        if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
+                            r = inary.data.relation.Relation()
+                            # XXX Is there a better way to do this?
+                            r.decode(node, [])
+                            if inary.data.replace.installed_package_replaced(r):
+                                pairs.setdefault(r.package, []).append(pkg_name)
 
         return pairs
 

@@ -147,7 +147,7 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        history = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("History")[0].firstChild.data
+        history = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("History")[0]
         version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
         release = history.getElementsByTagName("Update")[0].getAttribute("release")[0]
         # TODO Remove None
