@@ -20,6 +20,7 @@ _ = __trans.gettext
 import os
 
 import xml.dom.minidom as minidom
+from xml.parsers.expat import ExpatError
 
 import inary
 import inary.uri
@@ -52,21 +53,23 @@ class RepoOrder:
 
         repo_node = repo_doc.createElement("Repo")
 
-        name_node = repo_node.createElement("Name")
+        name_node = repo_doc.createElement("Name")
         name_node.appendChild(repo_doc.createTextNode(repo_name))
         repo_node.appendChild(name_node)
 
-        url_node = repo_node.createElement("Url")
+        url_node = repo_doc.createElement("Url")
         url_node.appendChild(repo_doc.createTextNode(repo_url))
         repo_node.appendChild(url_node)
 
-        status_node = repo_node.createElement("Status")
+        status_node = repo_doc.createElement("Status")
         status_node.appendChild(repo_doc.createTextNode("active"))
         repo_node.appendChild(status_node)
 
-        media_node = repo_node.createElement("Media")
+        media_node = repo_doc.createElement("Media")
         media_node.appendChild(repo_doc.createTextNode(repo_type))
         repo_node.appendChild(media_node)
+
+        repo_doc.childNodes[0].appendChild(repo_node)
 
         self._update(repo_doc)
 
@@ -118,7 +121,7 @@ class RepoOrder:
 
     def _update(self, doc):
         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
-        open(repos_file, "w").write("{}\n".format(doc.toprettyxml()))
+        open(repos_file, "w").write("{}\n".format(doc.toprettyxml().strip()))
         self._doc = None
         self.repos = self._get_repos()
 
