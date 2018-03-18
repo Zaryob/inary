@@ -43,7 +43,7 @@ class ItemByRepo:
         for r in self.item_repos(repo):
             if r in self.dbobj and item in self.dbobj[r]:
                 if self.compressed:
-                    return gzip.zlib.decompress(self.dbobj[r][item]), r
+                    return gzip.zlib.decompress(self.dbobj[r][item]).decode('utf-8') , r
                 else:
                     return self.dbobj[r][item], r
 
@@ -82,7 +82,7 @@ class ItemByRepo:
 
             if self.compressed:
                 for item in list(self.dbobj[r].keys()):
-                    yield str(item), str(gzip.zlib.decompress(self.dbobj[r][item]))
+                    yield str(item), gzip.zlib.decompress(self.dbobj[r][item]).decode('utf-8')
             else:
                 for item in list(self.dbobj[r].keys()):
                     yield str(item), str(self.dbobj[r][item])

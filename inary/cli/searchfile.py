@@ -54,6 +54,7 @@ Finds the installed package which contains the specified file.
     def run(self):
 
         self.init(database = True, write = False)
+        print(34623456)
 
         if not self.args:
             self.help()

@@ -19,6 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.atomicoperations
+import inary.operations.op_wrappers as op_wrappers
 
 class UpdateRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Update repository databases

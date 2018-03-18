@@ -254,7 +254,7 @@ class ArchiveLzma(ArchiveBase):
             from backports import lzma
         lzma_file = lzma.LZMAFile(self.file_path, "rb")
         output = open(output_path, "w")
-        output.write(str(lzma_file.read()))
+        output.write(lzma_file.read().decode('utf-8'))
         output.close()
         lzma_file.close()
 

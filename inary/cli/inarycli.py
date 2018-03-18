@@ -118,6 +118,7 @@ class InaryCLI(object):
     def __init__(self, orig_args=None):
         # first construct a parser for common options
         # this is really dummy
+
         self.parser = PreParser(version="%prog " + inary.__version__)
         try:
             opts, args = self.parser.parse_args(args=orig_args)

@@ -13,11 +13,21 @@
 import re
 import gzip
 
-import xml.dom.minidom as minidom
-
 import inary
+import inary.context as ctx
 import inary.data.specfile as Specfile
 import inary.db.lazydb as lazydb
+
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
+try:
+    import ciksemel
+    parser = "ciksemel"
+except: 
+    import xml.dom.minidom as minidom
+    parser = "minidom"
 
 class SourceDB(lazydb.LazyDB):
 
@@ -44,28 +54,45 @@ class SourceDB(lazydb.LazyDB):
         sources = {}
         pkgstosrc = {}
 
-        for spec in doc.childNodes:
-            if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                src_name = spec.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data
-                sources[src_name] = gzip.zlib.compress(spec.toxml('utf-8'))
-                for package in spec.childNodes:
-                    if package.nodeType == package.ELEMENT_NODE and package.tagName == "Package":
-                        pkgstosrc[package.getElementsByTagName("Name")[0].firstChild.data] = src_name
+        if parser=="ciksemel":
+            for spec in doc.tags("SpecFile"):
+                src_name = spec.getTag("Source").getTagData("Name")
+                sources[src_name] = gzip.zlib.compress(spec.toString().encode('utf-8'))
+                for package in spec.tags("Package"):
+                    pkgstosrc[package.getTagData("Name")] = src_name
+
+        else:
+            for spec in doc.childNodes:
+                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
+                    src_name = spec.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data
+                    sources[src_name] = gzip.zlib.compress(spec.toxml('utf-8'))
+                    for package in spec.childNodes:
+                        if package.nodeType == package.ELEMENT_NODE and package.tagName == "Package":
+                            pkgstosrc[package.getElementsByTagName("Name")[0].firstChild.data] = src_name
 
         return sources, pkgstosrc
 
     def __generate_revdeps(self, doc):
         revdeps = {}
-        for spec in doc.childNodes:
-            if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                source = spec.getElementsByTagName("Source")[0]
-                name = source.getElementsByTagName("Name")[0].firstChild.data
-                deps = source.getElementsByTagName("BuildDependencies")
+
+        if parser=="ciksemel":
+            for spec in doc.tags("SpecFile"):
+                name = spec.getTag("Source").getTagData("Name")
+                deps = spec.getTag("Source").getTag("BuildDependencies")
                 if deps:
-                    for sdep in deps:
-                        for dep in sdep.childNodes:
-                            if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "Dependency":
-                                revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml()))
+                    for dep in deps.tags("Dependency"):
+                        revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
+        else:
+            for spec in doc.childNodes:
+                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
+                    source = spec.getElementsByTagName("Source")[0]
+                    name = source.getElementsByTagName("Name")[0].firstChild.data
+                    deps = source.getElementsByTagName("BuildDependencies")
+                    if deps:
+                        for sdep in deps:
+                            for dep in sdep.childNodes:
+                                if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "Dependency":
+                                    revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml()))
         return revdeps
 
     def list_sources(self, repo=None):
@@ -128,12 +155,24 @@ class SourceDB(lazydb.LazyDB):
             return []
 
         rev_deps = []
-        for pkg, dep in rvdb:
-            node = minidom.parseString(dep).documentElement
-            dependency = inary.analyzer.dependency.Dependency()
-            dependency.package = node.childNodes[0].data
-            if node.attributes():
-                attr = node.attributes()[0]
-                dependency.__dict__[attr] = node.getAttribute(attr)
-            rev_deps.append((pkg, dependency))
+
+        if parser=="ciksemel":
+            for pkg, dep in rvdb:
+                node = ciksemel.parseString(dep)
+                dependency = inary.analyzer.dependency.Dependency()
+                dependency.package = node.firstChild().data()
+                if node.attributes():
+                    attr = node.attributes()[0]
+                    dependency.__dict__[attr] = node.getAttribute(attr)
+                    rev_deps.append((pkg, dependency))
+
+        else:
+            for pkg, dep in rvdb:
+                node = minidom.parseString(dep).documentElement
+                dependency = inary.analyzer.dependency.Dependency()
+                dependency.package = node.childNodes[0].data
+                if node.attributes():
+                    attr = node.attributes()[0]
+                    dependency.__dict__[attr] = node.getAttribute(attr)
+                rev_deps.append((pkg, dependency))
         return rev_deps

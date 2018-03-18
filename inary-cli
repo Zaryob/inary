@@ -17,6 +17,12 @@ import signal
 import inary
 import inary.context as ctx
 import inary.cli.inarycli as inarycli
+try:
+    import ciksemel
+except:
+    #FIXME: Görünüşü güzel olsa bile kodda anlamsızlık yaratıyor
+    sys.stdout.write("\033[05;31mWARNING:\033[0m\n\t\033[02;37mCiksemel XML Parser not found!!!\n\tFalling back with minidom!!! :(\033[0m\n\n")
+
 import gettext
 gettext.bindtextdomain('inary', "/usr/share/locale")
 gettext.textdomain('inary')

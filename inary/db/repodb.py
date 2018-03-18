@@ -19,9 +19,6 @@ _ = __trans.gettext
 
 import os
 
-import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
-
 import inary
 import inary.uri
 import inary.util
@@ -29,6 +26,13 @@ import inary.context as ctx
 import inary.db.lazydb as lazydb
 from inary.file import File
 import inary.sxml.xmlext as xmlext
+
+try:
+    import ciksemel
+    parser = "ciksemel"
+except: 
+    import xml.dom.minidom as minidom
+    parser = "minidom"
 
 class RepoError(inary.Error):
     pass
@@ -48,64 +52,116 @@ class RepoOrder:
         self._doc = None
         self.repos = self._get_repos()
 
+
     def add(self, repo_name, repo_url, repo_type="remote"):
-        repo_doc = self._get_doc().ownerDocument
+        if parser == "ciksemel":
+            repo_doc = self._get_doc()
+            try:
+                node = [x for x in repo_doc.tags("Repo")][-1]
+                repo_node = node.appendTag("Repo")
+            except IndexError:
+                repo_node = repo_doc.insertTag("Repo")
 
-        repo_node = repo_doc.createElement("Repo")
+            name_node = repo_node.insertTag("Name")
+            name_node.insertData(repo_name)
 
-        name_node = repo_doc.createElement("Name")
-        name_node.appendChild(repo_doc.createTextNode(repo_name))
-        repo_node.appendChild(name_node)
+            url_node = repo_node.insertTag("Url")
+            url_node.insertData(repo_url)
 
-        url_node = repo_doc.createElement("Url")
-        url_node.appendChild(repo_doc.createTextNode(repo_url))
-        repo_node.appendChild(url_node)
+            name_node = repo_node.insertTag("Status")
+            name_node.insertData("active")
 
-        status_node = repo_doc.createElement("Status")
-        status_node.appendChild(repo_doc.createTextNode("active"))
-        repo_node.appendChild(status_node)
+            media_node = repo_node.insertTag("Media")
+            media_node.insertData(repo_type)
 
-        media_node = repo_doc.createElement("Media")
-        media_node.appendChild(repo_doc.createTextNode(repo_type))
-        repo_node.appendChild(media_node)
+        else:
+            repo_doc = self._get_doc().ownerDocument
 
-        repo_doc.childNodes[0].appendChild(repo_node)
+            repo_node = repo_doc.createElement("Repo")
+
+            name_node = repo_doc.createElement("Name")
+            name_node.appendChild(repo_doc.createTextNode(repo_name))
+            repo_node.appendChild(name_node)
+
+            url_node = repo_doc.createElement("Url")
+            url_node.appendChild(repo_doc.createTextNode(repo_url))
+            repo_node.appendChild(url_node)
+
+            status_node = repo_doc.createElement("Status")
+            status_node.appendChild(repo_doc.createTextNode("active"))
+            repo_node.appendChild(status_node)
+
+            media_node = repo_doc.createElement("Media")
+            media_node.appendChild(repo_doc.createTextNode(repo_type))
+            repo_node.appendChild(media_node)
+
+            repo_doc.childNodes[0].appendChild(repo_node)
 
         self._update(repo_doc)
 
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
-        for r in repo_doc.childNodes:
-            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                    status_node = r.getElementsByTagName("Status")[0]
+
+        if parser=="ciksemel":
+            for r in repo_doc.tags("Repo"):
+                if r.getTagData("Name") == repo_name:
+                    status_node = r.getTag("Status")
                     if status_node:
-                        status_node.childNodes[0].nodeValue = status
+                        status_node.firstChild().hide()
+                        status_node.insertData(status)
                     else:
-                        status_node = repo_node.createElement("Status")
-                        status_node.appendChild(repo_doc.createTextNode("active"))
-                        r.appendChild(status_node)
+                        status_node = r.insertTag("Status")
+                        status_node.insertData(status)
+
+        else:
+            for r in repo_doc.childNodes:
+                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                    if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                        status_node = r.getElementsByTagName("Status")[0]
+                        if status_node:
+                            status_node.childNodes[0].nodeValue = status
+                        else:
+                            status_node = repo_node.createElement("Status")
+                            status_node.appendChild(repo_doc.createTextNode("active"))
+                            r.appendChild(status_node)
+
 
         self._update(repo_doc)
 
     def get_status(self, repo_name):
         repo_doc = self._get_doc()
-        for r in repo_doc.childNodes:
-            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                    status_node = r.getElementsByTagName("Status")
+        if parser=="ciksemel":
+            for r in repo_doc.tags("Repo"):
+                if r.getTagData("Name") == repo_name:
+                    status_node = r.getTag("Status")
                     if status_node:
-                        status = status_node[0].childNodes[0].data
+                        status = status_node.firstChild().data()
                         if status in ["active", "inactive"]:
                             return status
+
+        else:
+            for r in repo_doc.childNodes:
+                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                    if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                        status_node = r.getElementsByTagName("Status")
+                        if status_node:
+                            status = status_node[0].childNodes[0].data
+                            if status in ["active", "inactive"]:
+                                return status
+
         return "inactive"
 
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-        for r in repo_doc.getElementsByTagName("Repo"):
-            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                repo_doc.removeChild(r)
+        if parser=="ciksemel":
+            for r in repo_doc.tags("Repo"):
+                if r.getTagData("Name") == repo_name:
+                    r.hide()
+        else:
+            for r in repo_doc.getElementsByTagName("Repo"):
+                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                    repo_doc.removeChild(r)
 
         self._update(repo_doc)
 
@@ -121,7 +177,12 @@ class RepoOrder:
 
     def _update(self, doc):
         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
-        open(repos_file, "w").write("{}\n".format(doc.toprettyxml().strip()))
+        if parser=="ciksemel":
+            open(repos_file, "w").write("{}\n".format(doc.toPrettyString()))
+
+        else:
+            open(repos_file, "w").write("{}\n".format(doc.toprettyxml().strip()))
+
         self._doc = None
         self.repos = self._get_repos()
 
@@ -129,11 +190,17 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                self._doc = minidom.parse(repos_file).documentElement
+                if parser=="ciksemel":
+                    self._doc = ciksemel.parse(repos_file)
+                else:
+                    self._doc = minidom.parse(repos_file).documentElement
             else:
-                impl = minidom.getDOMImplementation()
-                dom = impl.createDocument(None, "REPOS", None)
-                self._doc = dom.documentElement
+                if parser=="ciksemel":
+                    self._doc = ciksemel.newDocument("REPOS")
+                else:
+                    impl = minidom.getDOMImplementation()
+                    dom = impl.createDocument(None, "REPOS", None)
+                    self._doc = dom.documentElement
 
         return self._doc
 
@@ -141,12 +208,20 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        for r in repo_doc.childNodes:
-            if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                media = r.getElementsByTagName("Media")[0].firstChild.data
-                name = r.getElementsByTagName("Name")[0].firstChild.data
-                status = r.getElementsByTagName("Status")[0].firstChild.data
+        if parser=="ciksemel":
+            for r in repo_doc.tags("Repo"):
+                media = r.getTagData("Media")
+                name = r.getTagData("Name")
+                status = r.getTagData("Status")
                 order.setdefault(media, []).append(name)
+
+        else:
+            for r in repo_doc.childNodes:
+                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
+                    media = r.getElementsByTagName("Media")[0].firstChild.data
+                    name = r.getElementsByTagName("Name")[0].firstChild.data
+                    status = r.getElementsByTagName("Status")[0].firstChild.data
+                    order.setdefault(media, []).append(name)
 
         return order
 
@@ -177,14 +252,20 @@ class RepoDB(lazydb.LazyDB):
 
         if not os.path.exists(index_path):
             ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
-            impl = minidom.getDOMImplementation()
-            dom = impl.createDocument(None, "INARY", None)
-            return dom.documentElement
+            if parser=="ciksemel":
+                return ciksemel.newDocument("INARY")
+            else:
+                impl = minidom.getDOMImplementation()
+                dom = impl.createDocument(None, "INARY", None)
+                return dom.documentElement
 
         try:
-            return minidom.parse(index_path).documentElement
-        except ExpatError as e:
-            raise RepoError(_("Error parsing repository index information. Index file does not exist or is malformed."))
+            if parser=="ciksemel":
+                return ciksemel.parse(index_path)
+            else:
+                return minidom.parse(index_path).documentElement
+        except Exception as e:
+            raise RepoError(_("Error parsing repository index information: {} \n Index file does not exist or is malformed.").format(e))
 
     def get_repo(self, repo):
         return Repo(inary.uri.URI(self.get_repo_url(repo)))
@@ -214,16 +295,30 @@ class RepoDB(lazydb.LazyDB):
 
     def get_source_repos(self, only_active=True):
         repos = []
-        for r in self.list_repos(only_active):
-            if self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
-                repos.append(r)
+
+        if parser=="ciksemel":
+            for r in self.list_repos(only_active):
+                if self.get_repo_doc(r).getTag("SpecFile"):
+                    repos.append(r)
+
+        else:
+            for r in self.list_repos(only_active):
+                if self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
+                    repos.append(r)
         return repos
 
     def get_binary_repos(self, only_active=True):
         repos = []
-        for r in self.list_repos(only_active):
-            if not self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
-                repos.append(r)
+
+        if parser=="ciksemel":
+            for r in self.list_repos(only_active):
+                if self.get_repo_doc(r).getTag("SpecFile"):
+                    repos.append(r)
+
+        else:
+            for r in self.list_repos(only_active):
+                if not self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
+                    repos.append(r)
         return repos
 
     def list_repos(self, only_active=True):
@@ -260,13 +355,26 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution(self, name):
         doc = self.get_repo_doc(name)
-        distro = doc.getElementsByTagName("Distribution")[0]
-        return distro.firstChild.data and distro.getElementsByTagName("SourceName")[0].firstChild.data
+        if parser=="ciksemel":
+            distro = doc.getTag("Distribution")
+            return distro and distro.getTagData("SourceName")
+
+        else:
+            distro = doc.getElementsByTagName("Distribution")[0]
+            return distro.firstChild.data and distro.getElementsByTagName("SourceName")[0].firstChild.data
+
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
-        distro = doc.getElementsByTagName("Distribution")[0]
-        return distro.firstChild.data and distro.getElementsByTagName("Version")[0].firstChild.data
+
+        if parser=="ciksemel":
+            distro = doc.getTag("Distribution")
+            return distro and distro.getTagData("Version")
+
+        else:
+            distro = doc.getElementsByTagName("Distribution")[0]
+            return distro.firstChild.data and distro.getElementsByTagName("Version")[0].firstChild.data
+
 
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):

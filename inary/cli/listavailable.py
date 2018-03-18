@@ -64,7 +64,7 @@ all repositories.
         else:
             # print for all repos
             for repo in op_wrappers.list_repos():
-                ctx.ui.info(_("Repository : {}\n").format(str(repo)))
+                ctx.ui.info(util.colorize(_("\n Repository : {}\n"), "blue").format(str(repo)))
                 self.print_packages(repo)
 
     def print_packages(self, repo):

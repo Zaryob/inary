@@ -21,13 +21,11 @@
 
 # System
 import locale
-import types
 import formatter
 import sys
 import io
 import inspect
 import re
-import codecs
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -528,7 +526,10 @@ class autoxml(oo.autosuper, oo.autoprop):
         tag_type = spec[0]
         assert type(tag_type) == type(type)
         def readtext(node, blah):
-            node.normalize() # minidom have this :D
+            try:
+                node.normalize() # ciksemel doesn't have this
+            except:
+                pass
             return xmlext.getNodeText(node)
         def writetext(node, blah, text):
             xmlext.addText(node, "", text)
@@ -704,6 +705,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def encode(node, obj, errs):
             if node and obj:
                 try:
+                    #FIXME: this doesn't look pretty
                     classnode = xmlext.newNode(node, tag)
                     obj.encode(classnode, errs)
                     xmlext.addNode(node, '', classnode)
@@ -823,6 +825,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def encode(node, obj, errs):
             if node and obj:
                 try:
+                    #FIXME: this doesn't look pretty
                     obj.encode(node, errs)
                 except Error:
                     if req == mandatory:

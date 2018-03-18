@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 import inary
+import inary.context as ctx
 import inary.db
 
 def search_package(terms, lang=None, repo=None):

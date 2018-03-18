@@ -16,6 +16,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+import inary.context as ctx
 import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.component as Component
@@ -25,6 +26,11 @@ class ComponentDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
+        try: 
+            import ciksemel
+            self.parser = "ciksemel"
+        except:
+            self.parser = "minidom"
 
     def init(self):
         component_nodes = {}
@@ -43,28 +49,42 @@ class ComponentDB(lazydb.LazyDB):
         self.cpdb = inary.db.itembyrepo.ItemByRepo(component_packages)
         self.csdb = inary.db.itembyrepo.ItemByRepo(component_sources)
 
-    def __generate_packages(self, doc):
+    def __generate_packages(self, doc, ):
         components = {}
-        for pkg in doc.childNodes:
-            if pkg.nodeType == pkg.ELEMENT_NODE and pkg.tagName == "Package":
-                partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
-                pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
-                components.setdefault(partOf, []).append(pkgName)
+        if self.parser == "ciksemel":
+            for pkg in doc.tags("Package"):
+                components.setdefault(pkg.getTagData("PartOf"), []).append(pkg.getTagData("Name"))
+        else:
+            for pkg in doc.childNodes:
+                if pkg.nodeType == pkg.ELEMENT_NODE and pkg.tagName == "Package":
+                    partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
+                    pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
+                    components.setdefault(partOf, []).append(pkgName)
+
         return components
 
     def __generate_sources(self, doc):
         components = {}
-        for spec in doc.childNodes:
-            if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                src = spec.getElementsByTagName("Source")[0]
-                partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
-                pkgName = src.getElementsByTagName("Name")[0].firstChild.data
-                components.setdefault(partOf, []).append(pkgName)
+        if self.parser == "ciksemel":
+            for spec in doc.tags("SpecFile"):
+                src = spec.getTag("Source")
+                components.setdefault(src.getTagData("PartOf"), []).append(src.getTagData("Name"))
+
+        else:
+            for spec in doc.childNodes:
+                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
+                    src = spec.getElementsByTagName("Source")[0]
+                    partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
+                    pkgName = src.getElementsByTagName("Name")[0].firstChild.data
+                    components.setdefault(partOf, []).append(pkgName)
+
         return components
 
     def __generate_components(self, doc):
-        #return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
-        return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml('utf-8')) for x in doc.getElementsByTagName("Component")])
+        if self.parser == "ciksemel":
+            return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
+        else:
+            return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml('utf-8')) for x in doc.getElementsByTagName("Component")])
 
     def has_component(self, name, repo = None):
         return self.cdb.has_item(name, repo)
