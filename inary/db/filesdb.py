@@ -38,10 +38,6 @@ class FilesDB(lazydb.LazyDB):
     def __del__(self):
         self.close()
 
-    def has_file(self, path):
-        if key in self.filesdb:
-            return True
-
     def create_filesdb(self):
         ctx.ui.info(inary.util.colorize(_('Creating files database...'), 'blue'))
         installdb = inary.db.installdb.InstallDB()
@@ -55,8 +51,8 @@ class FilesDB(lazydb.LazyDB):
         return self.filesdb.get(key), path
 
     def search_file(self, term):
-        if self.has_file(term):
-            pkg, path = self.get_file(term)
+        pkg, path = self.get_file(term)
+        if pkg:
             return [(pkg,[path])]
 
         installdb = inary.db.installdb.InstallDB()

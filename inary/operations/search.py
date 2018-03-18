@@ -74,5 +74,5 @@ def search_file(term):
     """
     if term.startswith("/"): # FIXME: why? why?
         term = term[1:]
-        return ctx.filesdb.search_file(term)
+    return ctx.filesdb.search_file(term)
 

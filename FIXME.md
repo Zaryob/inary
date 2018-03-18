@@ -17,11 +17,8 @@
     Şu satır bir kontrol edilmeli:
 
 2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
-    * inary searchfile command: --- status: not fixed; flag: critical ---:
-    Traceback:
-    Program terminated.
-    You have to be root for this operation.
-    Please use 'inary help' for general help.
+    * inary searchfile command: --- status: fixed; flag: critical ---:
+    -> filesdb modulune dayalı bir hata tespit edildi.
 
 
 2018-01-26 Suleyman POYRAZ <nipalensisaquila@gmail.com>
@@ -36,6 +33,7 @@
 
     * inary/sxml/xmlext --- status: fixed; flag: cosmetical ---:
     -> Minidom kullanarak fixe edildi
+    -> Ciksemel için gzip modulu kullanımındaki hata fixe edildi.
     xmlext modulunde bulunan getNodeText olayinda ciktilar utf-8 ile
     decode edilmeli. Yoksa Localtext ve Text type veriler ile ilgili sorun
     cıkıyor

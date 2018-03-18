@@ -44,17 +44,17 @@ Finds the installed package which contains the specified file.
 
     def search_file(self, path):
         found = search.search_file(path)
-        for pkg, files in found:
-            for pkg_file in files:
-                ctx.ui.info(_("Package {0} has file /{1}").format(pkg, pkg_file))
 
         if not found:
             ctx.ui.error(_("Path '{}' does not belong to an installed package").format(path))
 
+        for pkg, files in found:
+            for pkg_file in files:
+                ctx.ui.info(_("Package {0} has file /{1}").format(pkg, pkg_file))
+
     def run(self):
 
         self.init(database = True, write = False)
-        print(34623456)
 
         if not self.args:
             self.help()
