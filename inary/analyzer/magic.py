@@ -15,9 +15,18 @@ import glob
 import os
 import threading
 
+import gettext
+__trans = gettext.translation("inary", fallback=True)
+_ = __trans.gettext
+
 import ctypes
 from ctypes import c_char_p, c_int, c_size_t, c_void_p
 import ctypes.util
+
+class MagicException(Exception):
+    def __init__(self, message):
+        super(MagicException, self).__init__(message)
+        self.message = message
 
 libmagic = None
 dll = ctypes.util.find_library('magic') or ctypes.util.find_library('magic1') or ctypes.util.find_library('cygmagic-1')
@@ -26,15 +35,31 @@ if dll:
     libmagic = ctypes.CDLL(dll)
 
 if not libmagic or not libmagic._name:
-    raise ImportError('failed to find libmagic.  Check your installation')
+    magic_dlls = {'darwin': ['/opt/local/lib/libmagic.dylib',
+                                  '/usr/local/lib/libmagic.dylib',
+                                  glob.glob('/usr/local/Cellar/libmagic/*/lib/libmagic.dylib')],
+                       'win32': 'magic1.dll','cygmagic-1.dll',
+                       'linux': ['libmagic.so.1'],
+                      }
 
+    if sys.platform.startswith('linux'):
+        platform = 'linux'
+    else:
+        platform = sys.platform
+
+    for dll in magic_dlls.get(platform, []):
+        try:
+            libmagic = ctypes.CDLL(dll)
+            break
+        except OSError:
+            pass
 #Magic Flags from libmagic.so
 
-MAGIC_CONTINUE = 0x000020 
+MAGIC_CONTINUE = 0x000020
 MAGIC_COMPRESS = 0x000004
-MAGIC_NONE = 0x000000 
+MAGIC_NONE = 0x000000
 MAGIC_MIME = 0x000010
-MAGIC_MIME_ENCODING = 0x000400 
+MAGIC_MIME_ENCODING = 0x000400
 
 _instances = {}
 
@@ -52,7 +77,7 @@ def errorcheck(result, func, args):
     else:
         return result
 
-
+# Declarations
 magic_file = libmagic.magic_file
 magic_file.restype = c_char_p
 magic_file.argtypes = [magic_t, c_char_p]
@@ -110,23 +135,22 @@ class Magic:
         magic_load(self.cookie, magic_file)
 
     def get_file_type(self, data):
-        # If given argument is a file load with magic_file 
+        # If given argument is a file load with magic_file
         # If given argument is a buffer load with magic_buffer
         try:
-            if os.path.isfile(data): 
+            if os.path.isfile(data):
                 open(data)
                 with self.lock:
                     return magic_file(self.cookie, data)
-            else: 
+            else:
                 with self.lock:
                     if type(data) == str and str != bytes:
                         buf = data.encode('utf-8', errors='replace')
                     return magic_buffer(self.cookie, data, len(data))
-        except Exception as err:
+        except MagicException as err:
             raise(_("Can Not load file or buffer {}").format(err))
 
     def __del__(self):
         if self.cookie and magic_close:
             magic_close(self.cookie)
             self.cookie = None
-

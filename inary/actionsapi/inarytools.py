@@ -118,12 +118,6 @@ def dodoc(*sourceFiles, **kw):
     destDir = kw.get("destDir", get.srcNAME())
     readable_insinto(join_path(get.installDIR(), get.docDIR(), destDir), *sourceFiles)
 
-def doexe(sourceFile, destinationDirectory):
-    '''insert a executable file into destination directory'''
-
-    ''' example call: inarytools.doexe("kde-3.4.sh", "/etc/X11/Sessions")'''
-    executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
-
 def dohtml(*sourceFiles, **kw):
     '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
 
@@ -158,33 +152,16 @@ def doinfo(*sourceFiles):
     '''inserts the into files in the list of files into /usr/share/info'''
     readable_insinto(join_path(get.installDIR(), get.infoDIR()), *sourceFiles)
 
-def dolib(sourceFile, destinationDirectory = '/usr/lib'):
+def dolib(sourceFile, destinationDirectory = '/usr/lib', mode=755):
     '''insert the library into /usr/lib'''
-
     '''example call: inarytools.dolib("libz.a")'''
     '''example call: inarytools.dolib("libz.so")'''
+    if mode==755 and sourceFile.endswith('.a'):
+        mode=644
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
-    lib_insinto(sourceFile, destinationDirectory, 755)
-
-def dolib_a(sourceFile, destinationDirectory = '/usr/lib'):
-    '''insert the static library into /usr/lib with permission 0644'''
-
-    '''example call: inarytools.dolib_a("staticlib/libvga.a")'''
-    sourceFile = join_path(os.getcwd(), sourceFile)
-    destinationDirectory = join_path(get.installDIR(), destinationDirectory)
-
-    lib_insinto(sourceFile, destinationDirectory, 644)
-
-def dolib_so(sourceFile, destinationDirectory = '/usr/lib'):
-    '''insert the dynamic library into /usr/lib with permission 0755'''
-
-    '''example call: inarytools.dolib_so("pppd/plugins/minconn.so")'''
-    sourceFile = join_path(os.getcwd(), sourceFile)
-    destinationDirectory = join_path(get.installDIR(), destinationDirectory)
-
-    lib_insinto(sourceFile, destinationDirectory, 755)
+    lib_insinto(sourceFile, destinationDirectory, mode)
 
 def doman(*sourceFiles):
     '''inserts the man pages in the list of files into /usr/share/man/'''
@@ -281,7 +258,7 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
     backupExtension = ".inary-backup"
     sourceFiles = []
     sourcesGlob = glob.glob(sources)
-    
+
     for source in sourcesGlob:
         if os.path.isdir(source):
             sourceFiles.extend(get_files(source, filePattern, level))
@@ -298,7 +275,7 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
             for line in fileinput.input(sourceFile, inplace = 1, backup = backupExtension):
                 #FIXME: In-place filtering is disabled when standard input is read
                 if re.search(findPattern, line):
-                    line = "" if deleteLine else re.sub(findPattern, replacePattern, line)  
+                    line = "" if deleteLine else re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
             if can_access_file(backupFile):
                 # By default, filecmp.cmp() compares two files by looking file sizes.
@@ -381,7 +358,7 @@ class Flags:
 
     def add(self, *flags):
         for evar in self.evars:
-            os.environ[evar] = " ".join(os.environ[evar].split() + [f.strip() for f in flags])            
+            os.environ[evar] = " ".join(os.environ[evar].split() + [f.strip() for f in flags])
 
     def remove(self, *flags):
         for evar in self.evars:

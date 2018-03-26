@@ -10,7 +10,10 @@
 # Please read the COPYING file.
 #
 
+import os
+
 import inary
+import inary.context as ctx
 import inary.db
 import inary.data
 

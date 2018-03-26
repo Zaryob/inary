@@ -162,7 +162,7 @@ def install():
     dumpVersion()
 
     # Install kernel image
-    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-{}".formar(suffix))
+    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-{}".format(suffix))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
@@ -215,6 +215,8 @@ def installHeaders(extraHeaders=None):
 
     # Install additional headers
     for headers in extras:
+        if not os.path.exist("{0}/{1}".format(destination, headers)):
+            shelltools.system("mkdir {0}/{1}".format(destination, headers))
         shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
 
     # Install remaining headers
@@ -254,7 +256,7 @@ def installLibcHeaders(excludes=None):
     # Create directories
     shelltools.makedirs(headers_tmp)
     shelltools.makedirs(headers_dir)
-    
+
     ###################Workaround begins here ...
     #Workaround information -- http://patches.openembedded.org/patch/33433/
     cpy_src="{}/linux-*/arch/x86/include/generated".format(get.workDIR())
