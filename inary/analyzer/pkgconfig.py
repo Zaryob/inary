@@ -37,7 +37,7 @@ _ = __trans.gettext
 class Error(inary.Error):
     pass
 
-class LDD:
+class PCorLDD:
     def __init__(self, packages, directory, component, installed_list=True, systembase=False, systemdevel=False):
 
         self.installdb = inary.db.installdb.InstallDB()

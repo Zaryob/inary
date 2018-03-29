@@ -1,5 +1,20 @@
+2018-03-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
+		* Hata düzeltmeleri:
+		Kararlı öncesi. 
+			-> Magic modülü kararlı hale getirildi, pkgconfig librarisi düzenlenecek.
+			-> Arşiv çıkartılırken oluşan hata düzeltildi.
+			-> inary-cli betiğini hangi kafa ile düzeltmişim? Saçmalamasına
+			sebeb olan hata düzeltildi
+
+		* Genel iyileştirmeler
+			-> Actionsapi betiklerinden gereksiz fonksiyon var mı diye kontrol edilip 
+			betikler düzenlendi. 
+			-> Yeni bir renk skalası eklendi. ("faint")
+			-> Renklendirme yapıldı
+
+
 2018-03-18 Suleyman Poyraz <nipalensisaquila@gmail.com>
-		* minidom vs ciksemek:
+		* minidom vs ciksemel:
 		minidom ile tüm inary sistemi yeniden yazıldı. Ancak ciddi manada
 		inar yavaşlıyor. Db initializing süresi 8 sn. Yuh yani. Ama minidom 
 		uğraşımı öylece silmek istemediğim için minidom ve ciksemeli beraber

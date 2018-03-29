@@ -52,7 +52,6 @@ class CLI(inary.ui.UI):
     def close(self):
         inary.util.xterm_title_reset()
 
-#########   in old releases use this output function #########
     def output(self, msg, err = False, verbose = False):
         if (verbose and self.show_verbose) or (not verbose):
             if type(msg)==type(bytes()):
@@ -61,11 +60,7 @@ class CLI(inary.ui.UI):
                 sys.stderr.write(str(msg))
             else:
                 sys.stdout.write(str(msg))
-#######But there are formatted problem in this,   #####
-#######So I write a skeleton output function      #####
- 
-    def output(self, msg, err = False, verbose = False):
-        sys.stdout.write(str(msg))
+
 
     def formatted_output(self, msg, verbose = False, noln = False, column=":"):
         key_width = 20

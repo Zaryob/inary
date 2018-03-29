@@ -24,7 +24,7 @@ Legend:
       + CMake Tools
     / unit test
   + source building
-    - Detailed build log file
+    + Detailed build log file
   + package module
     + extraction
     + add file / compression
@@ -89,9 +89,9 @@ Legend:
     + basic types
     + list type
     + class type
-    / localtext/text types (localtext.... Ummm?.... )
-      + write meaningful localtext datas (Zaryob)
-      - return meaningful localtext summaries and descriptions (Hak getire, inşallah xml.dom ile)
+    + localtext/text types (localtext.... Ummm?.... )
+      + write meaningful localtext datas
+      + return meaningful localtext summaries and descriptions
     + revised interface
     / Error handling
       + improved error handling, check routines, hooks, format/print routines
@@ -120,7 +120,7 @@ Legend:
     + decide how to implement
     + support repo order
   + refactor xml support and implement multiple backends
-    / ciksemel based modules rewrite with xml.dom.minidom (Zaryob)
+    + ciksemel based modules rewrite with xml.dom.minidom (Zaryob)
   / partial caching and automatic resume for file download (meren)
     + use a '.part' extension
     - resume file downloading (Darara.... fetcher will rewrite with httplib) (Zaryob)
@@ -142,7 +142,7 @@ Legend:
   + UI
     - INARYMAT
       / Automatic dependency finder
-        / read pkgconfig files and find dependencies (Zaryob)
+        + read pkgconfig files and find dependencies (Zaryob)
         + find cycle dependencies (Zaryob)
       - Automatic build upgrader
     - pykde & pygtk GUI (cartman)
@@ -214,7 +214,7 @@ Legend:
     - refactoring
     sort of match the refactoring of inary-2.x series and improve it
 
-    - accelerate search
+    + accelerate search
     / package signing
       / an embebed package signer.(aquila)
       + a flag to sign package after building

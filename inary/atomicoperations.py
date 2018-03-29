@@ -291,7 +291,7 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            ctx.ui.debug("** chowning in postinstall ({0}:{1})".format(_file.uid, _file.gid))
+            ctx.ui.debug("* Chowning in postinstall ({0}:{1})".format(_file.uid, _file.gid))
             os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:
@@ -321,6 +321,7 @@ class Install(AtomicOperation):
                 self.config_later = True
         else:
             self.config_later = True
+
     def extract_install(self):
         "unzip package in place"
 

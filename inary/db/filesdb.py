@@ -16,6 +16,7 @@ import shelve
 import hashlib
 
 import inary
+import inary.util as util
 import inary.context as ctx
 import inary.db.lazydb as lazydb
 
@@ -66,11 +67,10 @@ class FilesDB(lazydb.LazyDB):
 
     def add_files(self, pkg, files):
         self.__check_filesdb()
-        ctx.ui.info(inary.util.colorize(_('  |___* Adding \'{}\' to db... '), 'purple').format(pkg), noln=True)
+        ctx.ui.info("%-80.80s\r" % (util.colorize(_('-> Adding \'{}\' to db...'), 'purple').format(pkg)), noln=True)
         for f in files.list:
             key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
             self.filesdb[key] = pkg
-        ctx.ui.info(inary.util.colorize(_('OK.'), 'backgroundmagenta'))
 
     def remove_files(self, files):
         for f in files:

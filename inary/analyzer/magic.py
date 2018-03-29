@@ -38,7 +38,7 @@ if not libmagic or not libmagic._name:
     magic_dlls = {'darwin': ['/opt/local/lib/libmagic.dylib',
                                   '/usr/local/lib/libmagic.dylib',
                                   glob.glob('/usr/local/Cellar/libmagic/*/lib/libmagic.dylib')],
-                       'win32': 'magic1.dll','cygmagic-1.dll',
+                       'win32': ['magic1.dll','cygmagic-1.dll'],
                        'linux': ['libmagic.so.1'],
                       }
 
@@ -141,14 +141,14 @@ class Magic:
             if os.path.isfile(data):
                 open(data)
                 with self.lock:
-                    return magic_file(self.cookie, data)
+                    return magic_file(self.cookie, data.encode('utf-8')).decode('utf-8')
             else:
                 with self.lock:
                     if type(data) == str and str != bytes:
                         buf = data.encode('utf-8', errors='replace')
-                    return magic_buffer(self.cookie, data, len(data))
+                    return magic_buffer(self.cookie, data, len(data)).decode('utf-8')
         except MagicException as err:
-            raise(_("Can Not load file or buffer {}").format(err))
+            raise(_("Can't load file or buffer {}").format(err))
 
     def __del__(self):
         if self.cookie and magic_close:

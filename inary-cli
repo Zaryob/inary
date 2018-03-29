@@ -9,6 +9,7 @@
 #
 # Please read the COPYING file.
 #
+
 import sys
 import errno
 import traceback
@@ -17,17 +18,20 @@ import signal
 import inary
 import inary.context as ctx
 import inary.cli.inarycli as inarycli
-try:
-    import ciksemel
-except:
-    #FIXME: Görünüşü güzel olsa bile kodda anlamsızlık yaratıyor
-    sys.stdout.write("\033[05;31mWARNING:\033[0m\n\t\033[02;37mCiksemel XML Parser not found!!!\n\tFalling back with minidom!!! :(\033[0m\n\n")
 
 import gettext
 gettext.bindtextdomain('inary', "/usr/share/locale")
 gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
+try:
+    import ciksemel
+except:
+    #FIXME: Görünüşü güzel olsa bile kodda anlamsızlık yaratıyor
+    warn = inary.util.colorize(_("WARNING\n"),"blinkingred")+  inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
+                                                                                   "\tFalling back with minidom!!! :(\n"), 'faintwhite')
+    sys.stdout.write(warn)
 
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
@@ -37,19 +41,19 @@ def exit():
     sys.exit(1)
 
 def handle_exception(exception, value, tb):
-    try:
-        signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
-        ui = inary.cli.CLI() # make a temporary UI
-        show_traceback = False
 
-    except KeyboardInterrupt:
-        ui.error(_("Keyboard Interrupt: Exiting..."))
-        exit()
+    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+    ui = inary.cli.CLI() # make a temporary UI
+    show_traceback = False
+
     if isinstance(value, inary.Error):
-        ui.error(_("Program terminated."))
+        ui.error(_("\nProgram terminated."))
+    elif isinstance(value, KeyboardInterrupt):
+        ui.error(_("\nKeyboard Interrupt: Exiting..."))
+        exit()
     elif isinstance(value, inary.Exception):
         show_traceback = True
-        ui.error(_("Unhandled internal exception.\n"
+        ui.error(_("\nUnhandled internal exception.\n"
                    "Please file a bug report to <http://bugs.sulin.org>."))
     elif isinstance(value, IOError) and value.errno == errno.EPIPE:
         # Ignore broken pipe errors
@@ -58,7 +62,7 @@ def handle_exception(exception, value, tb):
         # For any other exception (possibly Python exceptions) show
         # the traceback!
         show_traceback = ctx.get_option('debug')
-        ui.error(_("System error. Program terminated."))
+        ui.error(_("\nSystem error. Program terminated."))
 
     if show_traceback:
         ui.error("{}: {}".format(exception, str(value)))

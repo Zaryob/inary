@@ -25,7 +25,7 @@ class Error(inary.Error):
     pass
 
 def get_firmwares():
-    ctx.ui.info(inary.util.colorize("Extracting firmware list for {}...".format(os.uname()[2]), "green"))
+    ctx.ui.info(inary.util.colorize(_("Extracting firmware list for {}...").format(os.uname()[2]), "green"))
     d = {}
     modules = [os.path.basename(mod.replace(".ko", "")) for mod in \
             os.popen("modprobe -l").read().strip().split("\n")]
@@ -45,7 +45,7 @@ def get_firmware_package(firmware):
         unavailable_fw_packages = set(fw_packages).difference(inary.db.installdb.InstallDB().list_installed())
         
         if unavailable_fw_packages:
-            ctx.ui.info(inary.util.colorize("The following firmwares are not installed:", "yellow"))
+            ctx.ui.info(inary.util.colorize(_("The following firmwares are not installed:"), "yellow"))
             ctx.ui.info("\n".join(unavailable_fw_packages))
 
         for module, firmwares in list(get_firmwares().items()):
@@ -60,6 +60,6 @@ def get_firmware_package(firmware):
                     pass
 
                 ctx.ui.info(" ({})".format(inary.util.colorize(firmware, 'green') if firmware else \
-                        inary.util.colorize("missing", 'red')))
+                        inary.util.colorize(_("Missing"), 'red')))
     except:
         raise Error()
