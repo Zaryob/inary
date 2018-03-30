@@ -28,7 +28,7 @@ _ = __trans.gettext
 try:
     import ciksemel
 except:
-    #FIXME: Görünüşü güzel olsa bile kodda anlamsızlık yaratıyor
+    #FIXME: Gorunusu guzel olsa bile kodda anlamsizlik yaratiyor
     warn = inary.util.colorize(_("WARNING\n"),"blinkingred")+  inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
                                                                                    "\tFalling back with minidom!!! :(\n"), 'faintwhite')
     sys.stdout.write(warn)
