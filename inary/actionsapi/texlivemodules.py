@@ -28,7 +28,7 @@ from inary.actionsapi.shelltools import *
 from inary.actionsapi.inarytools import dodoc, dodir, domove, dosym, insinto, removeDir
 
 
-WorkDir = "{0}-{1.split('_')[-1]}".format(get.srcNAME(), get.srcVERSION())
+WorkDir = "{0}-{1}".format(get.srcNAME(), get.srcVERSION().split('_')[-1])
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):

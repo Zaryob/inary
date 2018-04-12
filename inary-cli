@@ -30,7 +30,7 @@ try:
 except:
     #FIXME: Gorunusu guzel olsa bile kodda anlamsizlik yaratiyor
     warn = inary.util.colorize(_("WARNING\n"),"blinkingred")+  inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
-                                                                                   "\tFalling back with minidom!!! :(\n"), 'faintwhite')
+                                                                                   "\tFalling back with minidom!!! :(\n\n"), 'faintwhite')
     sys.stdout.write(warn)
 
 def sig_handler(sig, frame):

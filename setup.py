@@ -17,7 +17,7 @@ import glob
 import sys
 import inspect
 import tempfile
-from setuptools import setup
+from distutils.core import setup
 from distutils.cmd import Command
 from distutils.command.build import build
 from distutils.command.install import install

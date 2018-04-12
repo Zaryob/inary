@@ -16,7 +16,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.atomicoperations
+import inary.data.pgraph
 import inary.operations.op_wrappers as op_wrappers
 
 class ListPending(command.Command, metaclass=command.autocommand):
@@ -35,7 +35,7 @@ Lists packages waiting to be configured.
 
         A = op_wrappers.list_pending()
         if len(A):
-            for p in inary.atomicoperations.generate_pending_order(A):
+            for p in inary.data.pgraph.generate_pending_order(A):
                 sys.stdout.write(p)
         else:
             ctx.ui.info(_('There are no packages waiting to be configured'))

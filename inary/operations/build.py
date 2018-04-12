@@ -642,8 +642,7 @@ class Builder:
             localSymbols = globalSymbols = {}
             exec(compiled_script, localSymbols, globalSymbols)
         except Exception as e:
-            import traceback
-            traceback.print_exc(e)
+            raise(e)
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols

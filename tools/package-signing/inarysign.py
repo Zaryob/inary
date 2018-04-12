@@ -47,8 +47,8 @@ def sign_data(data, key_file, password_fd):
     password_fd.seek(0)
 
     # Use OpenSSL to sign data
-    command = '/usr/bin/openssl dgst -sha1 -sign %s -passin fd:%d'
-    command = command % (key_file, password_fd.fileno())
+    command = '/usr/bin/openssl dgst -sha1 -sign {} -passin fd:{}'
+    command = command.format(key_file, password_fd.fileno())
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdin=subprocess.PIPE,
@@ -72,8 +72,8 @@ def get_public_key(cert_file):
             Public key
     """
     # Use OpenSSL to extract public key
-    command = 'openssl x509 -inform pem -in %s -pubkey -noout'
-    command = command % cert_file
+    command = 'openssl x509 -inform pem -in {} -pubkey -noout'
+    command = command.format(cert_file)
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -92,8 +92,8 @@ def get_hash(cert_file):
             Hash
     """
     # Use OpenSSL to extract hash
-    command = 'openssl x509 -noout -in %s -hash'
-    command = command % cert_file
+    command = 'openssl x509 -noout -in {} -hash'
+    command = command.format(cert_file)
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -143,8 +143,8 @@ def verify_certificate(cert_file):
             CERT_OK, CERT_SELF or CERT_CORRUPTED
     """
     # Use OpenSSL to verify certificate
-    command = '/usr/bin/openssl verify %s'
-    command = command % cert_file
+    command = '/usr/bin/openssl verify {}'
+    command = command.format(cert_file)
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -204,8 +204,8 @@ def verify_file(data_file, cert_file=None, signature_file=None, trust_dir=None):
     pub_file.flush()
 
     # Use OpenSSL to verify signature
-    command = '/usr/bin/openssl dgst -sha1 -verify %s -signature %s %s'
-    command = command % (pub_file.name, signature_file, data_file)
+    command = '/usr/bin/openssl dgst -sha1 -verify {} -signature {} {}'
+    command = command.format(pub_file.name, signature_file, data_file)
     command = shlex.split(command)
 
     pipe = subprocess.Popen(command, stdout=subprocess.PIPE,
@@ -291,7 +291,7 @@ def get_zip_hashes(zip_obj):
     for info in zip_obj.infolist():
         content = zip_obj.read(info.filename)
         content_hash = hashlib.sha1(content).hexdigest()
-        hashes.append('%s %s' % (info.filename, content_hash))
+        hashes.append('{} {}'.format(info.filename, content_hash))
 
     return "\n".join(hashes)
 
@@ -333,15 +333,15 @@ def sign_file(filename, key_file, cert_file, password_fd):
             cert_file: Certificate
             password_fd: File that contains passphrase
     """
-    data = file(filename).read()
+    data = open(filename).read()
     signed_binary = sign_data(data, key_file, password_fd)
-    cert_data = file(cert_file).read()
+    cert_data = open(cert_file).read()
 
     # Save certificate
-    file('%s.%s' % (filename, EXT_CERT), 'w').write(cert_data)
+    open('{}.{}'.format(filename, EXT_CERT), 'w').write(cert_data)
 
     # Save signed data
-    file('%s.%s' % (filename, EXT_SIGN), 'w').write(signed_binary)
+    open('{}.{}'.format(filename, EXT_SIGN), 'w').write(signed_binary)
 
 def sign_zipfile(filename, key_file, cert_file, password_fd):
     """
@@ -361,11 +361,11 @@ def sign_zipfile(filename, key_file, cert_file, password_fd):
     signed_ascii = base64.b64encode(signed_binary)
 
     # Encode certificate
-    cert_data = file(cert_file).read()
+    cert_data = open(cert_file).read()
     cert_ascii = base64.b64encode(cert_data)
 
     # Add signed data as ZIP comment
-    zip_obj.comment = '%s:%s:%s' % (HEADER, cert_ascii, signed_ascii)
+    zip_obj.comment = '{}:{}:{}'.format(HEADER, cert_ascii, signed_ascii)
 
     # Mark file as modified and save it
     zip_obj._didModify = True
@@ -377,8 +377,8 @@ def print_usage():
     """
 
     print("Usage:")
-    print(("  %s sign <priv_key> <cert> <file1 ...>" % sys.argv[0]))
-    print(("  %s verify <trust_dir> <file1 ...>" % sys.argv[0]))
+    print("  {} sign <priv_key> <cert> <file1 ...>".format(sys.argv[0]))
+    print("  {} verify <trust_dir> <file1 ...>".format(sys.argv[0]))
     sys.exit(1)
 
 def main():
@@ -410,7 +410,7 @@ def main():
                     sign_zipfile(filename, key_file, cert_file, password_fd)
                 else:
                     sign_file(filename, key_file, cert_file, password_fd)
-                print(("Signed %s with %s" % (filename, key_file)))
+                print(("Signed {} with {}".format(filename, key_file)))
 
             # Destroy temporary file
             password_fd.close()
@@ -430,15 +430,15 @@ def main():
                 else:
                     result = verify_file(filename, trust_dir)
                 if result == SIGN_OK:
-                    print(("%s is signed by a trusted source." % filename))
+                    print("{} is signed by a trusted source.".format(filename))
                 elif result == SIGN_NO:
-                    print(("%s is unsigned." % filename))
+                    print("{} is unsigned.".format(filename))
                 elif result == SIGN_SELF:
-                    print(("%s is self-signed by a trusted source." % filename))
+                    print("{} is self-signed by a trusted source.".format(filename))
                 elif result == SIGN_UNTRUSTED:
-                    print(("%s is signed by an untrusted source." % filename))
+                    print("{} is signed by an untrusted source.".format(filename))
                 else:
-                    print(("%s is corrupted." % filename))
+                    print("{} is corrupted.".format(filename))
         else:
             print_usage()
 

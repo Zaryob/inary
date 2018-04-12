@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # inary-key script adopted from apt-key
@@ -34,8 +34,8 @@ REMOVED_KEYS='/usr/share/keyrings/pardus-archive-removed-keys.gpg'
 def addKey(GPG, keyfile):
     """ add the key """
 
-    cmd = GPG + ' --quiet --batch --import %s' % keyfile
-    print "cmd: " + cmd
+    cmd = GPG + ' --quiet --batch --import {}'.format( keyfile)
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
@@ -43,8 +43,8 @@ def addKey(GPG, keyfile):
 def removeKey(GPG, keyfile):
     """ remove the key """
 
-    cmd = GPG + ' --quiet --batch --delete-key --yes %s' % keyfile
-    print "cmd: " + cmd
+    cmd = GPG + ' --quiet --batch --delete-key --yes {}'.format( keyfile)
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
@@ -59,30 +59,30 @@ def update(GPG):
      add any security. we *need* this check on net-update though """
 
     if not os.access(ARCHIVE_KEYRING, os.F_OK):
-        print "ERROR: Can't find the archive-keyring"
-        print "Is the inary-archive-keyring package installed?"
+        print("ERROR: Can't find the archive-keyring")
+        print("Is the inary-archive-keyring package installed?")
         sys.exit(1)
 
-    cmd = GPG_CMD + ' --quiet --batch --keyring %s --export | %s --import' % (ARCHIVE_KEYRING, GPG)
-    print "cmd: " + cmd
+    cmd = GPG_CMD + ' --quiet --batch --keyring {} --export | {} --import'.format(ARCHIVE_KEYRING, GPG)
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if not pipe.wait() == 0:
-        print "An error occured, inform the maintainer about this issue"
+        print("An error occured, inform the maintainer about this issue")
         sys.exit(1)
 
     if os.access(REMOVED_KEYS, os.R_OK):
         # remove no-longer supported/used keys
-        cmd = '%s --keyring %s --with-colons --list-keys | grep ^pub | cut -d: -f5' % (GPG_CMD, REMOVED_KEYS)
+        cmd = '{} --keyring {} --with-colons --list-keys | grep ^pub | cut -d: -f5'.format(GPG_CMD, REMOVED_KEYS)
         pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         keys = pipe.stdout.read()
         for key in keys:
-            cmd = '%s --list-keys --with-colons | grep ^pub | cut -d: -f5 | grep -q %s' % (GPG, key)
+            cmd = '{} --list-keys --with-colons | grep ^pub | cut -d: -f5 | grep -q {}'.format(GPG, key)
             pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             if pipe.stdout.read():
-                cmd = '%s --quiet --batch --delete-key --yes %s' % (GPG, key)
+                cmd = '{} --quiet --batch --delete-key --yes {}'.format(GPG, key)
     else:
-        print "Warning: removed keys keyring %s missing or not readable" % REMOVED_KEYS
+        print("Warning: removed keys keyring {} missing or not readable".format( REMOVED_KEYS))
         sys.exit(1)
 
 
@@ -91,14 +91,14 @@ def net_update():
     the archive-keyring keys needs to be signed with the master key
     (otherwise it does not make sense from a security POV) """
     if len(ARCHIVE_KEYRING_URI) == 0:
-        print "Error: no location for the archive-keyring given"
+        print("Error: no location for the archive-keyring given")
         sys.exit(1)
 
     #TODO: Network connection should be checked!!
     if not os.path.isdir("/var/lib/inary/keyrings"):
         os.mkdir("/var/lib/inary/keyrings")
 
-    keyring = "/var/lib/inary/keyrings/%s" ARCHIVE_KEYRING.split("/")[-1]
+    keyring = "/var/lib/inary/keyrings/{}".format(ARCHIVE_KEYRING.split("/")[-1])
     if os.path.exists(keyring):
         old_mtime = os.stat(keyring).st_mtime
     else:
@@ -109,7 +109,7 @@ def net_update():
 def list_keys(GPG):
     """ list keys """
     cmd = GPG + ' --batch --list_keys'
-    print "cmd: " + cmd
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
@@ -117,15 +117,15 @@ def list_keys(GPG):
 def list_fingerprints(GPG):
     """ list fingerprints """
     cmd = GPG + ' --batch --fingerprint'
-    print "cmd: " + cmd
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
 
 def export(GPG, keyid):
     """ output the key with the <keyid> """
-    cmd = GPG + ' --armor --export %s' keyid
-    print "cmd: " + cmd
+    cmd = GPG + ' --armor --export {}'.format(keyid)
+    print("cmd: " + cmd)
     pass
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
@@ -133,7 +133,7 @@ def export(GPG, keyid):
 def exportAll(GPG):
     """ output all trusted keys """
     cmd = GPG + ' --armor --export'
-    print "cmd: " + cmd
+    print("cmd: " + cmd)
     pipe = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return pipe.wait() == 0
 
@@ -142,21 +142,21 @@ def printUsage():
         Prints usage information of application and exits.
     """
 
-    print "Usage: inary-key [--keyring file] [command] [arguments]"
-    print
-    print "Manage inary's list of trusted keys"
-    print
-    print "  inary-key add <file>          - add the key contained in <file> ('-' for stdin)"
-    print "  inary-key del <keyid>         - remove the key <keyid>"
-    print "  inary-key export <keyid>      - output the key <keyid>"
-    print "  inary-key exportall           - output all trusted keys"
-    print "  inary-key update              - update keys using the keyring package"
-    print "  inary-key net-update          - update keys using the network"
-    print "  inary-key list                - list keys"
-    print "  inary-key finger              - list fingerprints"
-    print "  inary-key adv                 - pass advanced options to gpg (download key)"
-    print
-    print "If no specific keyring file is given the command applies to all keyring files."
+    print("Usage: inary-key [--keyring file] [command] [arguments]")
+    print()
+    print("Manage inary's list of trusted keys")
+    print()
+    print("  inary-key add <file>          - add the key contained in <file> ('-' for stdin)")
+    print("  inary-key del <keyid>         - remove the key <keyid>")
+    print("  inary-key export <keyid>      - output the key <keyid>")
+    print("  inary-key exportall           - output all trusted keys")
+    print("  inary-key update              - update keys using the keyring package")
+    print("  inary-key net-update          - update keys using the network")
+    print("  inary-key list                - list keys")
+    print("  inary-key finger              - list fingerprints")
+    print("  inary-key adv                 - pass advanced options to gpg (download key)")
+    print()
+    print("If no specific keyring file is given the command applies to all keyring files.")
     sys.exit(1)
 
 if __name__ == '__main__':
@@ -175,25 +175,25 @@ if __name__ == '__main__':
         argc += 1 # becomes 2
         keyring = sys.argv[argc]
         if not os.access(keyring, F_OK):
-            print "Error: The specified keyring %s is missing or not readable" % keyring
+            print("Error: The specified keyring {} is missing or not readable".format(keyring))
             sys.exit(1)
 
         argc += 1 # becomes 3
         operation = sys.argv[argc]
-        GPG += ' --keyring %s --primary-keyring %s' % (keyring, keyring)
+        GPG += ' --keyring {} --primary-keyring {}'.format(keyring, keyring)
         argc += 1 # becomes 4
 
     else:
         # otherwise use the default
         keyring = '/etc/inary/trusted.gpg'
         if os.access(keyring, os.F_OK):
-            GPG += ' --keyring %s' % keyring
-        GPG += ' --primary-keyring %s' % keyring
+            GPG += ' --keyring {}'.format(keyring)
+        GPG += ' --primary-keyring {}'.format(keyring)
             #NOTICE:: TRUSTEDPARTS is not implemented.
         operation = sys.argv[argc]
         argc += 1 # becomes 2
 
-    # print 'COMMAND: %s' % GPG
+    # print ('COMMAND: {}'.format(GPG))
 
     if operation == 'help':
         printUsage()
@@ -203,12 +203,12 @@ if __name__ == '__main__':
         keyfile = sys.argv[argc]
         # TODO: check whether key_path is alive ('-' can be used for stdin) e.g. gpg --keyring inary-keyring.gpg --armour --export 102030AB | inary-key add -
         addKey(GPG, keyfile)
-        print "Key in %s is succesfully added." % keyfile
+        print("Key in {} is succesfully added.".format(keyfile))
 
     elif operation == 'del':
         keyfile = sys.argv[argc]
         removeKey(GPG, keyfile)
-        print "Key in %s is succesfully deleted." % keyfile
+        print("Key in {} is succesfully deleted.".format(keyfile))
 
     elif operation == 'update':
         update(GPG)
@@ -231,7 +231,7 @@ if __name__ == '__main__':
 
     elif operation == 'adv':
         adv_command = GPG + ' ' + sys.args[3:]
-        print 'Executing: ' + adv_command
+        print('Executing: ' + adv_command)
         # TODO: execute
         pass
     else:

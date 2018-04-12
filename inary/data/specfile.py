@@ -166,7 +166,7 @@ class Archive(metaclass= autoxml.autoxml):
         self.name = os.path.basename(str(self.uri))
 
     def __str__(self):
-        s = _('URI: {0}, type: {1}, sha1sum: {2}') % (self.uri, self.type, self.sha1sum)
+        s = _('URI: {0}, type: {1}, sha1sum: {2}').format(self.uri, self.type, self.sha1sum)
         return s
 
 class Source(metaclass= autoxml.autoxml):

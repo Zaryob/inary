@@ -292,7 +292,7 @@ def add_spec(params):
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding {} to source index').format(path)),
+        ctx.ui.info("%-80.80s\r" % (_('Adding source to index: {}').format(path)),
                                     noln = False if ctx.config.get_option("verbose") else True)
         return sf
 
