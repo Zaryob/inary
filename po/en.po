@@ -3781,55 +3781,89 @@ msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades options"
-
-#, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Adding {} to source index"
-
-#~ msgid "OK."
-#~ msgstr "OK."
-
-#, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Cleaning build directory..."
 
-#, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Fetching source from: {}"
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Not removing conflicted file : {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Date: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "No user named {} found on the system"
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "No group named {} found on the system"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} has invalid XML"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Safety switch forces the upgrade of following packages:"
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Configuring {} package"
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade is not possible."
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "The following packages will be upgraded:"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Checking all installed packages"
+#~ msgid "No packages to downgrade."
+#~ msgstr "No packages to upgrade."
 
 #, fuzzy
-#~ msgid "* Find dependencies for packages to be installed"
-#~ msgstr "Following packages will be installed:"
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Package {} is already at the latest release {}."
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Installed {}"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Package Size: {}"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Do you want to continue?"
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Fetch upgrades but do not install."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name of the to be upgraded packages' repository"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade component's and recursive components' packages"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Security related package upgrades only"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade options"
 
 #, fuzzy
 #~ msgid ""
@@ -3868,86 +3902,52 @@ msgstr "Invalid version string: {}"
 #~ "expanded to package names.\n"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade options"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Do you want to continue?"
 
 #, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Security related package upgrades only"
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Package Size: {}"
 
 #, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Upgrade component's and recursive components' packages"
+#~ msgid "  installed size {}"
+#~ msgstr "Installed {}"
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Name of the to be upgraded packages' repository"
+#~ msgid "* Find dependencies for packages to be installed"
+#~ msgstr "Following packages will be installed:"
 
 #, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Fetch upgrades but do not install."
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgid "    found {} packages"
+#~ msgstr "Configuring {} package"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Package {} is already at the latest release {}."
+#~ msgid "* Getting installed packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "No packages to upgrade."
+#~ msgid "* Getting index from {}"
+#~ msgstr "Fetching source from: {}"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "The following packages will be upgraded:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Upgrade is not possible."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Safety switch forces the upgrade of following packages:"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} has invalid XML"
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "No group named {} found on the system"
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "No user named {} found on the system"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Date: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Not removing conflicted file : {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Cleaning build directory..."
+
+#~ msgid "OK."
+#~ msgstr "OK."
+
+#, fuzzy
+#~ msgid "Adding {} to source index"
+#~ msgstr "Adding {} to source index"
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades options"

@@ -3807,64 +3807,335 @@ msgstr ""
 msgid "Invalid version string: '{}'"
 msgstr "Hatalı sürüm dizgisi: {}"
 
-#, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades seçenekleri"
+#~ msgid "Turkish"
+#~ msgstr "Türkçe"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Türkçe Q"
+
+#~ msgid "Turkish F"
+#~ msgstr "Türkçe F"
+
+#~ msgid "English"
+#~ msgstr "İngilizce (US)"
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "{} kaynak kataloğuna ekleniyor"
+#~ msgid "English GB"
+#~ msgstr "İngilizce (US)"
 
-#~ msgid "OK."
-#~ msgstr "Tamam."
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaanca"
+
+#~ msgid "Arabic"
+#~ msgstr "Arapça"
+
+#~ msgid "Belgium"
+#~ msgstr "Belçika"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgarca"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanca"
+
+#~ msgid "Welsh"
+#~ msgstr "Gallerce"
+
+#~ msgid "Czech"
+#~ msgstr "Çekce"
+
+#~ msgid "Danish"
+#~ msgstr "Danca"
+
+#~ msgid "German"
+#~ msgstr "Almanca"
+
+#~ msgid "Spanish"
+#~ msgstr "İspanyolca"
+
+#~ msgid "Estonian"
+#~ msgstr "Estonca"
+
+#~ msgid "Finnish"
+#~ msgstr "Fince"
+
+#~ msgid "French"
+#~ msgstr "Fransızca"
+
+#~ msgid "Greek"
+#~ msgstr "Yunanca"
+
+#~ msgid "Croatian"
+#~ msgstr "Hırvatça"
+
+#~ msgid "Hungarian"
+#~ msgstr "Macarca"
+
+#~ msgid "Icelandic"
+#~ msgstr "İzlandaca"
+
+#~ msgid "Italian"
+#~ msgstr "İtalyanca"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonca"
+
+#~ msgid "Macedonian"
+#~ msgstr "Makedonca"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malayalamca"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norveççe"
+
+#~ msgid "Dutch"
+#~ msgstr "Hollandaca"
+
+#~ msgid "Polish"
+#~ msgstr "Lehce"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portekizce"
+
+#~ msgid "Brazilian"
+#~ msgstr "Brezilya Portekizcesi"
+
+#~ msgid "Russian"
+#~ msgstr "Rusça"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovakça"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovence"
+
+#~ msgid "Serbian"
+#~ msgstr "Sırpça"
+
+#~ msgid "Swedish"
+#~ msgstr "İsveççe"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukraynaca"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamca"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "İnşa dizini temizleniyor..."
 
 #, fuzzy
-#~ msgid "done."
-#~ msgstr "Tamamlandı."
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "İsim: {}, sürüm: {}, yayım: %s\n"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Çakışan dosya {} silinmiyor."
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Tarih: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "long integer"
+#~ msgstr "uzun tamsayı"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} seçeneği bir argüman almalıdır"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paketi"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı."
+
+#~ msgid "No user named {} found on the system"
+#~ msgstr "Sistemde {} isminde bir kullanıcı bulunamadı."
+
+#~ msgid "No group named {} found on the system"
+#~ msgstr "Sistemde {} isminde bir grup bulunamadı."
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "{} katarının XML sözdizimi geçersiz."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Dosya okunamadı {}: {}"
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Paketler çalışma dizinine yazılıyor."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* {} denetleniyor... "
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "{} paketininin yapılandırma dosyaları değiştirilmiş."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "{} paketi bozuk."
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf imi tanımlanmamış, bileşen araştırılıyor"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Kaynak {} bileşeninin parçası"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Yol, bölme işareti ile başlamalı: {}"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Bu yol için birden fazla 'Path' etiketi yazılmış: {}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
+
+#~ msgid "Checking /{} "
+#~ msgstr "/{} denetleniyor "
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Değişen yapılandırma dosyası: {}"
+
+#~ msgid "Reverse dependency {} of {} cannot be satisfied"
+#~ msgstr "Ters bağımlılık {}, {} paketi için sağlanamadı."
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. {} deposu sistemden kaldırılıyor."
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "İsim: {}, sürüm {}, yayım %s, inşa %s\n"
+
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "{} paketi zaten (en son) inşa {}."
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "{} ile {} paketi arasında INARY delta paketi oluşturuluyor."
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Aynı paket için delta oluşturulamaz!"
+
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından toplandı."
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için inary.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
+
+#~ msgid "Generating {},"
+#~ msgstr "{} yaratılıyor,"
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
+
+#~ msgid "(found old version {})"
+#~ msgstr "({} numaralı eski sürüm bulundu)"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Güncel dizin kataloglanıyor."
+
+#~ msgid "package_format must be one of {} "
+#~ msgstr "package_format, bunlardan birisi olmalı: {}"
+
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "İnşa numarasını dikkate alma."
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
+
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} %s/language.%s.dat dosyasına eklendi."
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
+
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} {}/language.%s.dat dosyasına eklendi."
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
 
 #, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Kaynak {} adresinden indiriliyor"
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Emniyet mandalı aşağıdaki paketlerin yükseltilmesini zorunlu kılıyor:"
 
 #, fuzzy
-#~ msgid "    done"
-#~ msgstr "Tamamlandı."
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Yükseltme mümkün değil."
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Tüm kurulu paketler denetleniyor."
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Aşağıdaki paketler yükseltilecektir:"
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "{} paketi yapılandırılıyor"
+#~ msgid "No packages to downgrade."
+#~ msgstr "Yükseltilecek paket yok."
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Tüm kurulu paketler denetleniyor."
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "{0.name} paketi zaten (ilk) sürümde {0.release}."
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Tüm kurulu paketler denetleniyor."
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
 
 #, fuzzy
-#~ msgid "* Find dependencies for packages to be installed"
-#~ msgstr "Aşağıdaki paketler kurulacak:"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "{} kuruldu."
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Yükseltmeleri indir ama kurma."
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Paket Boyutu: {}"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Güncellenecek paketlerin depo ismi"
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Devam etmek istiyor musunuz?"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Bileşenin ve alt bileşenlerinin paketlerini güncelle"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Sadece güvenlik ile alakalı paket güncellemeleri"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade seçenekleri"
 
 #, fuzzy
 #~ msgid ""
@@ -3903,331 +4174,60 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ "bileşendeki paketler kurulur.\n"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade seçenekleri"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Devam etmek istiyor musunuz?"
 
 #, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Sadece güvenlik ile alakalı paket güncellemeleri"
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Paket Boyutu: {}"
 
 #, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Bileşenin ve alt bileşenlerinin paketlerini güncelle"
+#~ msgid "  installed size {}"
+#~ msgstr "{} kuruldu."
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Güncellenecek paketlerin depo ismi"
+#~ msgid "* Find dependencies for packages to be installed"
+#~ msgstr "Aşağıdaki paketler kurulacak:"
 
 #, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Yükseltmeleri indir ama kurma."
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Tüm kurulu paketler denetleniyor."
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden verilen kalıp ile eşleşenleri yoksay."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Tüm kurulu paketler denetleniyor."
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "Sistemi yükseltirken paket ya da bileşen isimlerinden dosya içerisinde verilen kalıplardan herhangi birisi ile eşleşenleri yoksay."
+#~ msgid "    found {} packages"
+#~ msgstr "{} paketi yapılandırılıyor"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "{0.name} paketi zaten (ilk) sürümde {0.release}."
+#~ msgid "* Getting installed packages"
+#~ msgstr "Tüm kurulu paketler denetleniyor."
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Yükseltilecek paket yok."
+#~ msgid "    done"
+#~ msgstr "Tamamlandı."
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Aşağıdaki paketler yükseltilecektir:"
+#~ msgid "* Getting index from {}"
+#~ msgstr "Kaynak {} adresinden indiriliyor"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Yükseltme mümkün değil."
+#~ msgid "done."
+#~ msgstr "Tamamlandı."
 
 #, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Emniyet mandalı aşağıdaki paketlerin yükseltilmesini zorunlu kılıyor:"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
-
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} {}/language.%s.dat dosyasına eklendi."
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} %s/language.%s.def dosyasına eklendi."
-
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} %s/language.%s.dat dosyasına eklendi."
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Yeni dağıtım inşasına yükseltiliyor."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Eski dağıtım inşasına dönülsün mü?"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "İnşa numarasını dikkate alma."
-
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "INARY ikili paket biçimleri: '1.0', '1.1' (öntanımlı)"
-
-#~ msgid "package_format must be one of {} "
-#~ msgstr "package_format, bunlardan birisi olmalı: {}"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Güncel dizin kataloglanıyor."
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "zip sıkıştırma henüz desteklenmiyor."
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "gzip sıkıştırma algoritması henüz desteklenmiyor."
-
-#~ msgid "(found old version {})"
-#~ msgstr "({} numaralı eski sürüm bulundu)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(eski bir inşa bulunamadı, inşa numarası olarak 1 atanıyor.)"
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(önceki inşa numaraya sahip değil, inşa numarası 1 yapılıyor.)"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Değişiklikler var, inşa numarası bir arttırılarak %d yapıldı."
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Bir önceki %d numaralı inşadan bu yana herhangi bir değişiklik yok."
-
-#~ msgid "Generating {},"
-#~ msgstr "{} yaratılıyor,"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "İnşa numarası alınamıyor. Depo inşaları için inary.conf dosyasında buildno seçeneğini etkinleştirmelisiniz."
-
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "Kurulum dizini {} altındaki bütün dosyalar paket(ler) tarafından toplandı."
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Aynı paket için delta oluşturulamaz!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "{} ile {} paketi arasında INARY delta paketi oluşturuluyor."
-
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "{} paketi zaten (en son) inşa {}."
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "İsim: {}, sürüm {}, yayım %s, inşa %s\n"
-
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Dağıtım hakkında bilgi içermediği için bu deponun uyumluluğu denetlenemiyor."
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Depo dağıtımı sisteminizle uyumsuz. {} deposu sistemden kaldırılıyor."
-
-#~ msgid "Reverse dependency {} of {} cannot be satisfied"
-#~ msgstr "Ters bağımlılık {}, {} paketi için sağlanamadı."
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Değişen yapılandırma dosyası: {}"
-
-#~ msgid "Checking /{} "
-#~ msgstr "/{} denetleniyor "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Emniyet mandalı: taban geliştirme bileşeni system.devel zaten kurulu."
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Bu yol için birden fazla 'Path' etiketi yazılmış: {}"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Yol, bölme işareti ile başlamalı: {}"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Kaynak {} bileşeninin parçası"
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf imi tanımlanmamış, bileşen araştırılıyor"
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "{} paketi bozuk."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "{} paketininin yapılandırma dosyaları değiştirilmiş."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* {} denetleniyor... "
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Paketler çalışma dizinine yazılıyor."
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Dosya okunamadı {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "{} katarının XML sözdizimi geçersiz."
-
-#~ msgid "No group named {} found on the system"
-#~ msgstr "Sistemde {} isminde bir grup bulunamadı."
-
-#~ msgid "No user named {} found on the system"
-#~ msgstr "Sistemde {} isminde bir kullanıcı bulunamadı."
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı."
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paketi"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} seçeneği bir argüman almalıdır"
-
-#~ msgid "long integer"
-#~ msgstr "uzun tamsayı"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Tarih: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Çakışan dosya {} silinmiyor."
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "İsim: {}, sürüm: {}, yayım: %s\n"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "İnşa dizini temizleniyor..."
 
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamca"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ukraynaca"
-
-#~ msgid "Swedish"
-#~ msgstr "İsveççe"
-
-#~ msgid "Serbian"
-#~ msgstr "Sırpça"
-
-#~ msgid "Slovenian"
-#~ msgstr "Slovence"
-
-#~ msgid "Slovak"
-#~ msgstr "Slovakça"
-
-#~ msgid "Russian"
-#~ msgstr "Rusça"
-
-#~ msgid "Brazilian"
-#~ msgstr "Brezilya Portekizcesi"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portekizce"
-
-#~ msgid "Polish"
-#~ msgstr "Lehce"
-
-#~ msgid "Dutch"
-#~ msgstr "Hollandaca"
-
-#~ msgid "Norwegian"
-#~ msgstr "Norveççe"
-
-#~ msgid "Malayalam"
-#~ msgstr "Malayalamca"
-
-#~ msgid "Macedonian"
-#~ msgstr "Makedonca"
-
-#~ msgid "Japanese"
-#~ msgstr "Japonca"
-
-#~ msgid "Italian"
-#~ msgstr "İtalyanca"
-
-#~ msgid "Icelandic"
-#~ msgstr "İzlandaca"
-
-#~ msgid "Hungarian"
-#~ msgstr "Macarca"
-
-#~ msgid "Croatian"
-#~ msgstr "Hırvatça"
-
-#~ msgid "Greek"
-#~ msgstr "Yunanca"
-
-#~ msgid "French"
-#~ msgstr "Fransızca"
-
-#~ msgid "Finnish"
-#~ msgstr "Fince"
-
-#~ msgid "Estonian"
-#~ msgstr "Estonca"
-
-#~ msgid "Spanish"
-#~ msgstr "İspanyolca"
-
-#~ msgid "German"
-#~ msgstr "Almanca"
-
-#~ msgid "Danish"
-#~ msgstr "Danca"
-
-#~ msgid "Czech"
-#~ msgstr "Çekce"
-
-#~ msgid "Welsh"
-#~ msgstr "Gallerce"
-
-#~ msgid "Catalan"
-#~ msgstr "Katalanca"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulgarca"
-
-#~ msgid "Belgium"
-#~ msgstr "Belçika"
-
-#~ msgid "Arabic"
-#~ msgstr "Arapça"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaanca"
+#~ msgid "OK."
+#~ msgstr "Tamam."
 
 #, fuzzy
-#~ msgid "English GB"
-#~ msgstr "İngilizce (US)"
+#~ msgid "Adding {} to source index"
+#~ msgstr "{} kaynak kataloğuna ekleniyor"
 
-#~ msgid "English"
-#~ msgstr "İngilizce (US)"
-
-#~ msgid "Turkish F"
-#~ msgstr "Türkçe F"
-
-#~ msgid "Turkish Q"
-#~ msgstr "Türkçe Q"
-
-#~ msgid "Turkish"
-#~ msgstr "Türkçe"
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades seçenekleri"

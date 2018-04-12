@@ -3500,51 +3500,62 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "opcije listaj-najnovije"
-
-#, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Dodajem grupe .xml u indeks"
-
-#~ msgid "OK."
-#~ msgstr "U redu"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Obnovi bazu podataka datoteka"
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opcija zahtijeva argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paket"
+
+#~ msgid "Not removing conflicted file : {}"
+#~ msgstr "Ne uklanjanje sporne datoteke: {}"
+
+#~ msgid "Date: {} {}"
+#~ msgstr "Datum: {} {}"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nije moguće čitati datoteku  {}: {}"
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Konfiguriram{} paket"
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Nadogradnja nije moguća."
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Slijedeći paketi će biti nadograđeni:"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nema paketa za nadogradnju"
 
 #, fuzzy
-#~ msgid "* Find dependencies for packages to be installed"
-#~ msgstr "Slijedeći paketi će biti instalirani:"
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Instaliran {}"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Ime nadograđenog repozitorija paketa"
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Veličina paketa: {}"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Želite li nastaviti?"
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "opcije nadogradnje"
 
 #, fuzzy
 #~ msgid ""
@@ -3576,59 +3587,48 @@ msgstr ""
 #~ "proširene na imena paketa.\n"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "opcije nadogradnje"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Želite li nastaviti?"
 
 #, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Veličina paketa: {}"
 
 #, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+#~ msgid "  installed size {}"
+#~ msgstr "Instaliran {}"
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Ime nadograđenog repozitorija paketa"
+#~ msgid "* Find dependencies for packages to be installed"
+#~ msgstr "Slijedeći paketi će biti instalirani:"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Nema paketa za nadogradnju"
+#~ msgid "* Getting force install packages"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Slijedeći paketi će biti nadograđeni:"
+#~ msgid "    found {} packages"
+#~ msgstr "Konfiguriram{} paket"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Nadogradnja nije moguća."
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nije moguće čitati datoteku  {}: {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Date: {} {}"
-#~ msgstr "Datum: {} {}"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ne uklanjanje sporne datoteke: {}"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paket"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opcija zahtijeva argument"
+#~ msgid "* Getting installed packages"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Obnovi bazu podataka datoteka"
+
+#~ msgid "OK."
+#~ msgstr "U redu"
+
+#, fuzzy
+#~ msgid "Adding {} to source index"
+#~ msgstr "Dodajem grupe .xml u indeks"
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "opcije listaj-najnovije"
