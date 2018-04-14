@@ -16,7 +16,7 @@
  high-level dom functions provided in xmlext module (and sorely lacking
  in xml.dom :( )
 
- function names are mixedCase for compatibility with minidom,
+ function names are mixedCase for compatibility with ciksemel,
  an 'old library'
 
  this implementation uses ciksemel
@@ -55,11 +55,11 @@ class XmlFile(object):
         return self.doc
 
     def parsexml(self, file):
-        #try:
-        self.doc = iks.parseString(str(file))
-        return self.doc
-        #except Exception as e:
-            #raise Error(_("File '{}' has invalid XML").format(file) )
+        try:
+            self.doc = iks.parseString(file)
+            return self.doc
+        except Exception as e:
+            raise Error(_("File '{}' has invalid XML").format(file) )
 
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
