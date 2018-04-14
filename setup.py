@@ -101,13 +101,12 @@ class Install(install):
         self.generateConfigFile()
 
     def installi18n(self):
-        pass
         for name in os.listdir('po'):
             if not name.endswith('.po'):
                 continue
             lang = name[:-3]
             print("Installing '{}' translations...".format(lang))
-            os.popen("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
+            os.system("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
             if not self.root:
                 self.root = "/"
             destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
@@ -200,7 +199,7 @@ setup(name="inary",
                'scripts/check-newconfigs.py',
                'scripts/inarysh',
                'tools/pspec2po'],
-    include_package_data=True,
+   # include_package_data=True,
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,

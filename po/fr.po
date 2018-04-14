@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 15:40+0300\n"
+"POT-Creation-Date: 2018-04-14 14:36+0300\n"
 "PO-Revision-Date: 2010-01-01 22:22+0100\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -89,30 +89,31 @@ msgid "Options"
 msgstr "Options"
 
 #: inary-cli:32
-msgid ""
-"\tCiksemel XML Parser not found!!!\n"
-"\tFalling back with minidom!!! :(\n"
-msgstr ""
-
-#: inary-cli:32
 msgid "WARNING\n"
 msgstr ""
 
-#: inary-cli:50
+#: inary-cli:33
+msgid ""
+"\tCiksemel XML Parser not found!!!\n"
+"\tFalling back with minidom!!! :(\n"
+"\n"
+msgstr ""
+
+#: inary-cli:52
 #, fuzzy
 msgid ""
 "\n"
 "Program terminated."
 msgstr "Programme terminé."
 
-#: inary-cli:52
+#: inary-cli:54
 #, fuzzy
 msgid ""
 "\n"
 "Keyboard Interrupt: Exiting..."
 msgstr "Interruption Clavier : Sortie..."
 
-#: inary-cli:56
+#: inary-cli:58
 #, fuzzy
 msgid ""
 "\n"
@@ -122,18 +123,18 @@ msgstr ""
 "Exception interne non gérée.\n"
 "Veuillez signaler le bogue s'il vous plaît sur <http://bugs.sulin.org>."
 
-#: inary-cli:65
+#: inary-cli:67
 #, fuzzy
 msgid ""
 "\n"
 "System error. Program terminated."
 msgstr "Erreur du système. Programme terminé."
 
-#: inary-cli:74
+#: inary-cli:76
 msgid "Please use 'inary help' for general help."
 msgstr "Veuillez utiliser 'inary help' pour une aide généraliste."
 
-#: inary-cli:77
+#: inary-cli:79
 msgid ""
 "\n"
 "Traceback:"
@@ -141,7 +142,7 @@ msgstr ""
 "\n"
 "Pile d'exécution : "
 
-#: inary-cli:80
+#: inary-cli:82
 msgid "Use --debug to see a traceback."
 msgstr "Utiliser --debug pour voir la pile d'exécution."
 
@@ -716,7 +717,7 @@ msgstr "Le paquet {} introuvable dans les dépôts actifs."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Installation de {0.name}, version {0.version}, millésime {0.release}"
 
-#: inary/atomicoperations.py:193 inary/operations/build.py:787
+#: inary/atomicoperations.py:193 inary/operations/build.py:786
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} n'est pas un format de version valide de INARY."
@@ -795,6 +796,10 @@ msgstr "Suppression du paquet {}"
 #: inary/atomicoperations.py:587
 msgid "Trying to remove nonexistent package "
 msgstr " Tentative de suppression d'un paquet inexistant"
+
+#: inary/atomicoperations.py:626
+msgid "Not removing conflicted file : {}"
+msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
 
 #: inary/atomicoperations.py:656
 #, fuzzy
@@ -1527,8 +1532,9 @@ msgid "Output directory for the fetched packages"
 msgstr "Répertoire accueillant les paquets téléchargés"
 
 #: inary/cli/fetch.py:49
-msgid "Bağımlılıkları ile indirme açıklaması."
-msgstr ""
+#, fuzzy
+msgid "Download with runtime dependencies."
+msgstr "Ignore les dépendances de compilations."
 
 #: inary/cli/graph.py:26
 msgid ""
@@ -2851,35 +2857,35 @@ msgstr "invalide pour {}"
 msgid "uri must have type either URI or string"
 msgstr "uri doit être de type URI ou string"
 
-#: inary/file.py:138
+#: inary/file.py:139
 #, fuzzy
 msgid "Fetching {}"
 msgstr "Téléchargement de {}"
 
-#: inary/file.py:142
+#: inary/file.py:143
 #, fuzzy
 msgid "Copying {} to transfer dir"
 msgstr "Copie de {} vers le répertoire de transfert"
 
-#: inary/file.py:147
+#: inary/file.py:148
 #, fuzzy
 msgid "File '{}' not found."
 msgstr "Fichier {} introuvable."
 
-#: inary/file.py:168
+#: inary/file.py:169
 #, fuzzy
 msgid "File integrity of {} compromised."
 msgstr "L'intégrité du fichier {} est compromise."
 
-#: inary/file.py:192
+#: inary/file.py:193
 msgid "File mode must be either File.read or File.write"
 msgstr "Le mode d'accès au fichier doit être soit File.read soit File.write"
 
-#: inary/file.py:197
+#: inary/file.py:198
 msgid "Remote write not implemented"
 msgstr "Écriture distante non implémentée"
 
-#: inary/file.py:250 inary/file.py:253
+#: inary/file.py:251 inary/file.py:254
 #, fuzzy
 msgid "ERROR: gpg --detach-sig {} failed"
 msgstr "ERREUR : gpg --detach-sig {} a échoué"
@@ -2974,144 +2980,144 @@ msgstr "Impossible de lire le Script d'Actions ({0}) : {1}"
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "Erreur de syntaxe dans le Script d'Actions ({0}) : {1}"
 
-#: inary/operations/build.py:662
+#: inary/operations/build.py:661
 #, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
 msgstr "Impossible de lire le script SCOM ({0}) : {1}"
 
-#: inary/operations/build.py:665
+#: inary/operations/build.py:664
 #, fuzzy, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
 msgstr "Erreur de syntaxe dans le fichier SCOM ({0}) : {1}"
 
-#: inary/operations/build.py:699
+#: inary/operations/build.py:698
 #, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Violation du bac à sable (sandbox) : {0} ({1} -> {2})"
 
-#: inary/operations/build.py:715 inary/util.py:525
+#: inary/operations/build.py:714 inary/util.py:525
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "ERREUR : Le répertoire de travail ({}) n'existe pas.\n"
 
-#: inary/operations/build.py:725
+#: inary/operations/build.py:724
 msgid "Sandbox enabled build..."
 msgstr "Build avec bac à sable (sandbox) autorisé..."
 
-#: inary/operations/build.py:749
+#: inary/operations/build.py:748
 msgid "Sandbox violation result:"
 msgstr "Violation du bac à sable (sandbox) : "
 
-#: inary/operations/build.py:754
+#: inary/operations/build.py:753
 msgid "Sandbox violations!"
 msgstr "Violations du bac à sable (sandbox) !"
 
-#: inary/operations/build.py:760
+#: inary/operations/build.py:759
 #, fuzzy
 msgid "unable to call function from actions: {}"
 msgstr "impossible d'appeler une fonction depuis une action : {}"
 
-#: inary/operations/build.py:773
+#: inary/operations/build.py:772
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr "Le paquet source {0} définit un chemin relatif de l'élément : {1}"
 
-#: inary/operations/build.py:777
+#: inary/operations/build.py:776
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "Le paquet source {0} définit plusieurs balises de chemin pour {1}"
 
-#: inary/operations/build.py:805
+#: inary/operations/build.py:804
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Précautions de sécurité : les paquets supplémentaire dans system.devel vont être installés :"
 
-#: inary/operations/build.py:810
+#: inary/operations/build.py:809
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr "Précautions de sécurité : Le composant system.devel est introuvable"
 
-#: inary/operations/build.py:819
+#: inary/operations/build.py:818
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Dépendance de Compilation Insatisfaites : "
 
-#: inary/operations/build.py:823
+#: inary/operations/build.py:822
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr "Impossible de construire le paquet à cause de dépendance de compilation insatisfaites"
 
-#: inary/operations/build.py:828
+#: inary/operations/build.py:827
 #, fuzzy
 msgid "Build dependency {} cannot be satisfied"
 msgstr "La dépendance de compilation {} ne peut être satisfaite"
 
-#: inary/operations/build.py:830
+#: inary/operations/build.py:829
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr "Voulez vous installer les dépendances de compilations manquantes ?"
 
-#: inary/operations/build.py:831
+#: inary/operations/build.py:830
 msgid "Installing build dependencies."
 msgstr "Installation des dépendances de compilation."
 
-#: inary/operations/build.py:837
+#: inary/operations/build.py:836
 msgid "Ignoring build dependencies."
 msgstr "Ignore les dépendances de compilations."
 
-#: inary/operations/build.py:847
+#: inary/operations/build.py:846
 #, fuzzy
 msgid "Patch file is missing: {}\n"
 msgstr "Le fichier de patch {} est manquant\n"
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:848
 #, fuzzy
 msgid "Patch file is empty: {}"
 msgstr "Fichier de patch vide : {}"
 
-#: inary/operations/build.py:865
+#: inary/operations/build.py:864
 #, fuzzy
 msgid "Applying patch: {}"
 msgstr "Application du patch : {}"
 
-#: inary/operations/build.py:986
+#: inary/operations/build.py:985
 #, fuzzy
 msgid "/{} has suid bit set"
 msgstr "/{} a le bit suid"
 
-#: inary/operations/build.py:1078
+#: inary/operations/build.py:1077
 #, fuzzy
 msgid "There are abandoned files under the install dir ({}):"
 msgstr "Fichiers abandonnés sous le répertoire d'installation {} :"
 
-#: inary/operations/build.py:1114
+#: inary/operations/build.py:1113
 #, fuzzy
 msgid "Ignoring empty package {}"
 msgstr "Ignorons le paquet vide {}"
 
-#: inary/operations/build.py:1117
+#: inary/operations/build.py:1116
 #, fuzzy
 msgid "Building package: {}"
 msgstr "Construction du paquet : {}"
 
-#: inary/operations/build.py:1134 inary/operations/delta.py:56
+#: inary/operations/build.py:1133 inary/operations/delta.py:56
 #, fuzzy
 msgid "Creating {}..."
 msgstr "Création de {}..."
 
-#: inary/operations/build.py:1183
+#: inary/operations/build.py:1182
 msgid "Cleaning build directory..."
 msgstr "Nettoyage du dossier de construction..."
 
-#: inary/operations/build.py:1186
+#: inary/operations/build.py:1185
 msgid "Keeping build directory"
 msgstr "Dossier de construction conservé"
 
-#: inary/operations/build.py:1276
+#: inary/operations/build.py:1275
 msgid "Action script error caught."
 msgstr "Erreur de script d'action rencontrée"
 
-#: inary/operations/build.py:1280
+#: inary/operations/build.py:1279
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d erreur(s), %d alerte(s)"
 
-#: inary/operations/build.py:1363
+#: inary/operations/build.py:1362
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Le dernier état était {}"
@@ -3653,15 +3659,16 @@ msgstr "getNodeText : Attendait un noeud texte, reçu quelque chose d'autre !"
 msgid "File '{}' has invalid XML: {}\n"
 msgstr "Le fichier {} contient un texte XML invalide"
 
+#: inary/sxml/xmlfile_iks.py:62 inary/sxml/xmlfile_iks.py:87
+#: inary/sxml/xmlfile_minidom.py:64
+#, fuzzy
+msgid "File '{}' has invalid XML"
+msgstr "Le fichier {} contient un texte XML invalide"
+
 #: inary/sxml/xmlfile_iks.py:72 inary/sxml/xmlfile_minidom.py:74
 #, python-brace-format
 msgid "Cannot read URI {0}: {1}"
 msgstr ""
-
-#: inary/sxml/xmlfile_iks.py:87 inary/sxml/xmlfile_minidom.py:64
-#, fuzzy
-msgid "File '{}' has invalid XML"
-msgstr "Le fichier {} contient un texte XML invalide"
 
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -3896,9 +3903,6 @@ msgstr "Chaîne de caractères invalide : {}"
 
 #~ msgid "INARY package"
 #~ msgstr "Paquet INARY"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
 
 #~ msgid "Date: {} {}"
 #~ msgstr "Date : {} {}"

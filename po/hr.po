@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 15:40+0300\n"
+"POT-Creation-Date: 2018-04-14 14:36+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -93,53 +93,54 @@ msgid "Options"
 msgstr "Opcije"
 
 #: inary-cli:32
-msgid ""
-"\tCiksemel XML Parser not found!!!\n"
-"\tFalling back with minidom!!! :(\n"
-msgstr ""
-
-#: inary-cli:32
 msgid "WARNING\n"
 msgstr ""
 
-#: inary-cli:50
+#: inary-cli:33
+msgid ""
+"\tCiksemel XML Parser not found!!!\n"
+"\tFalling back with minidom!!! :(\n"
+"\n"
+msgstr ""
+
+#: inary-cli:52
 #, fuzzy
 msgid ""
 "\n"
 "Program terminated."
 msgstr "Program je prekinut."
 
-#: inary-cli:52
+#: inary-cli:54
 msgid ""
 "\n"
 "Keyboard Interrupt: Exiting..."
 msgstr ""
 
-#: inary-cli:56
+#: inary-cli:58
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.sulin.org>."
 msgstr ""
 
-#: inary-cli:65
+#: inary-cli:67
 #, fuzzy
 msgid ""
 "\n"
 "System error. Program terminated."
 msgstr "Greška sustava. Program je prekinut."
 
-#: inary-cli:74
+#: inary-cli:76
 msgid "Please use 'inary help' for general help."
 msgstr "Molim koristite  'inary pomoć' za osnovnu pomoć."
 
-#: inary-cli:77
+#: inary-cli:79
 msgid ""
 "\n"
 "Traceback:"
 msgstr ""
 
-#: inary-cli:80
+#: inary-cli:82
 msgid "Use --debug to see a traceback."
 msgstr ""
 
@@ -699,7 +700,7 @@ msgstr "Paket {} nije nađen u nijednom aktivnom repozitoriju."
 msgid "Installing {0.name}, version {0.version}, release {0.release}"
 msgstr "Instaliram {0.name},verzija {0.version},izdanje {0.release}"
 
-#: inary/atomicoperations.py:193 inary/operations/build.py:787
+#: inary/atomicoperations.py:193 inary/operations/build.py:786
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} nije valjan format Inary verzije"
@@ -778,6 +779,10 @@ msgstr "Uklanjam paket {}"
 #: inary/atomicoperations.py:587
 msgid "Trying to remove nonexistent package "
 msgstr "Pokušava ukloniti nepostojeći paket"
+
+#: inary/atomicoperations.py:626
+msgid "Not removing conflicted file : {}"
+msgstr "Ne uklanjanje sporne datoteke: {}"
 
 #: inary/atomicoperations.py:656
 #, fuzzy
@@ -1443,8 +1448,9 @@ msgid "Output directory for the fetched packages"
 msgstr ""
 
 #: inary/cli/fetch.py:49
-msgid "Bağımlılıkları ile indirme açıklaması."
-msgstr ""
+#, fuzzy
+msgid "Download with runtime dependencies."
+msgstr "Ima dodatnih paketa zbog zavisnosti"
 
 #: inary/cli/graph.py:26
 msgid ""
@@ -2636,33 +2642,33 @@ msgstr "neispravno za {}"
 msgid "uri must have type either URI or string"
 msgstr ""
 
-#: inary/file.py:138
+#: inary/file.py:139
 msgid "Fetching {}"
 msgstr ""
 
-#: inary/file.py:142
+#: inary/file.py:143
 #, fuzzy
 msgid "Copying {} to transfer dir"
 msgstr "Kopiranje {} u direktorij prijenosa "
 
-#: inary/file.py:147
+#: inary/file.py:148
 #, fuzzy
 msgid "File '{}' not found."
 msgstr "Datoteka {} nije nađena."
 
-#: inary/file.py:168
+#: inary/file.py:169
 msgid "File integrity of {} compromised."
 msgstr ""
 
-#: inary/file.py:192
+#: inary/file.py:193
 msgid "File mode must be either File.read or File.write"
 msgstr ""
 
-#: inary/file.py:197
+#: inary/file.py:198
 msgid "Remote write not implemented"
 msgstr ""
 
-#: inary/file.py:250 inary/file.py:253
+#: inary/file.py:251 inary/file.py:254
 #, fuzzy
 msgid "ERROR: gpg --detach-sig {} failed"
 msgstr "GREŠKA: gpg --detach-sig {} nije uspjelo"
@@ -2754,138 +2760,138 @@ msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr ""
 
-#: inary/operations/build.py:662
+#: inary/operations/build.py:661
 #, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
 msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 
-#: inary/operations/build.py:665
+#: inary/operations/build.py:664
 #, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
 msgstr ""
 
-#: inary/operations/build.py:699
+#: inary/operations/build.py:698
 #, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:715 inary/util.py:525
+#: inary/operations/build.py:714 inary/util.py:525
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "repozitorij {} ne postoji."
 
-#: inary/operations/build.py:725
+#: inary/operations/build.py:724
 msgid "Sandbox enabled build..."
 msgstr ""
 
-#: inary/operations/build.py:749
+#: inary/operations/build.py:748
 msgid "Sandbox violation result:"
 msgstr ""
 
-#: inary/operations/build.py:754
+#: inary/operations/build.py:753
 msgid "Sandbox violations!"
 msgstr ""
 
-#: inary/operations/build.py:760
+#: inary/operations/build.py:759
 msgid "unable to call function from actions: {}"
 msgstr ""
 
-#: inary/operations/build.py:773
+#: inary/operations/build.py:772
 #, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr ""
 
-#: inary/operations/build.py:777
+#: inary/operations/build.py:776
 #, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
 
-#: inary/operations/build.py:805
+#: inary/operations/build.py:804
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr ""
 
-#: inary/operations/build.py:810
+#: inary/operations/build.py:809
 msgid "Safety switch: the component system.devel cannot be found"
 msgstr ""
 
-#: inary/operations/build.py:819
+#: inary/operations/build.py:818
 msgid "Unsatisfied Build Dependencies:"
 msgstr ""
 
-#: inary/operations/build.py:823
+#: inary/operations/build.py:822
 msgid "Cannot build package due to unsatisfied build dependencies"
 msgstr ""
 
-#: inary/operations/build.py:828
+#: inary/operations/build.py:827
 #, fuzzy
 msgid "Build dependency {} cannot be satisfied"
 msgstr "Zavisnost {} od {} ne može biti zadovoljena"
 
-#: inary/operations/build.py:830
+#: inary/operations/build.py:829
 msgid "Do you want to install the unsatisfied build dependencies"
 msgstr ""
 
-#: inary/operations/build.py:831
+#: inary/operations/build.py:830
 msgid "Installing build dependencies."
 msgstr ""
 
-#: inary/operations/build.py:837
+#: inary/operations/build.py:836
 msgid "Ignoring build dependencies."
 msgstr ""
 
-#: inary/operations/build.py:847
+#: inary/operations/build.py:846
 msgid "Patch file is missing: {}\n"
 msgstr ""
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:848
 msgid "Patch file is empty: {}"
 msgstr ""
 
-#: inary/operations/build.py:865
+#: inary/operations/build.py:864
 msgid "Applying patch: {}"
 msgstr ""
 
-#: inary/operations/build.py:986
+#: inary/operations/build.py:985
 msgid "/{} has suid bit set"
 msgstr ""
 
-#: inary/operations/build.py:1078
+#: inary/operations/build.py:1077
 msgid "There are abandoned files under the install dir ({}):"
 msgstr ""
 
-#: inary/operations/build.py:1114
+#: inary/operations/build.py:1113
 #, fuzzy
 msgid "Ignoring empty package {}"
 msgstr "Zanemari sukobe pakete"
 
-#: inary/operations/build.py:1117
+#: inary/operations/build.py:1116
 #, fuzzy
 msgid "Building package: {}"
 msgstr "Uklanjam paket {}"
 
-#: inary/operations/build.py:1134 inary/operations/delta.py:56
+#: inary/operations/build.py:1133 inary/operations/delta.py:56
 #, fuzzy
 msgid "Creating {}..."
 msgstr "Stvaram  {}..."
 
-#: inary/operations/build.py:1183
+#: inary/operations/build.py:1182
 msgid "Cleaning build directory..."
 msgstr ""
 
-#: inary/operations/build.py:1186
+#: inary/operations/build.py:1185
 msgid "Keeping build directory"
 msgstr ""
 
-#: inary/operations/build.py:1276
+#: inary/operations/build.py:1275
 msgid "Action script error caught."
 msgstr ""
 
-#: inary/operations/build.py:1280
+#: inary/operations/build.py:1279
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr ""
 
-#: inary/operations/build.py:1363
+#: inary/operations/build.py:1362
 msgid "Last state was '{}'"
 msgstr ""
 
@@ -3395,15 +3401,16 @@ msgstr ""
 msgid "File '{}' has invalid XML: {}\n"
 msgstr "Datoteka {} ima neispravan XML"
 
+#: inary/sxml/xmlfile_iks.py:62 inary/sxml/xmlfile_iks.py:87
+#: inary/sxml/xmlfile_minidom.py:64
+#, fuzzy
+msgid "File '{}' has invalid XML"
+msgstr "Datoteka {} ima neispravan XML"
+
 #: inary/sxml/xmlfile_iks.py:72 inary/sxml/xmlfile_minidom.py:74
 #, python-brace-format
 msgid "Cannot read URI {0}: {1}"
 msgstr ""
-
-#: inary/sxml/xmlfile_iks.py:87 inary/sxml/xmlfile_minidom.py:64
-#, fuzzy
-msgid "File '{}' has invalid XML"
-msgstr "Datoteka {} ima neispravan XML"
 
 #: inary/uri.py:78
 msgid "setAuthInfo needs a tuple (user, pass)"
@@ -3512,9 +3519,6 @@ msgstr ""
 
 #~ msgid "INARY package"
 #~ msgstr "INARY paket"
-
-#~ msgid "Not removing conflicted file : {}"
-#~ msgstr "Ne uklanjanje sporne datoteke: {}"
 
 #~ msgid "Date: {} {}"
 #~ msgstr "Datum: {} {}"
