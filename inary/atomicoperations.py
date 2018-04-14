@@ -621,10 +621,10 @@ class Remove(AtomicOperation):
         # package (this can legitimately occur while upgrading
         # two packages such that a file has moved from one package to
         # another as in #2911)
-        #pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
-        #if pkg != package_name:
-        #    ctx.ui.warning(_('Not removing conflicted file : {}').format(fpath))
-        #    return
+        pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
+        if pkg != package_name:
+            ctx.ui.warning(_('Not removing conflicted file : {}').format(fpath))
+            return
 
         if fileinfo.type == ctx.const.conf:
             # config files are precious, leave them as they are
