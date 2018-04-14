@@ -136,6 +136,7 @@ class Install(AtomicOperation):
         self.metadata = self.package.metadata
         self.files = self.package.files
         self.pkginfo = self.metadata.package
+        self.installedSize = self.metadata.package.installedSize
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
@@ -173,7 +174,11 @@ class Install(AtomicOperation):
 
     def check_requirements(self):
         """check system requirements"""
-        #TODO: IS THERE ENOUGH SPACE?
+        # Check free space
+        ctx.ui.debug(_("Free Space: {} MB").format(util.free_space() / (1024*1024.0)))
+        if util.free_space() < self.installedSize:
+            raise Error(_("Is there any free space in your disk."))
+
         # what to do if / is split into /usr, /var, etc.
         # check scom
         if self.metadata.package.providesScom and ctx.scom:

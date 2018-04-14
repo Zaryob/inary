@@ -361,6 +361,16 @@ def copy_file_stat(src,dest):
     ensure_dirs(os.path.dirname(dest))
     shutil.copy2(src, dest)
 
+def free_space(directory=None):
+    """Returns the free space (x Byte) in the device. """
+    if not directory:
+        # Defaults to /
+        directory = ctx.config.values.general.destinationdirectory
+    _stat = os.statvfs(directory)
+    free_space = _stat.f_bfree * _stat.f_bsize
+
+    return free_space
+
 def read_link(link):
     """Return the normalized path which is pointed by the symbolic link."""
     # tarfile module normalizes the paths pointed by symbolic links. This
