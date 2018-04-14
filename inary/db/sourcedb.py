@@ -171,8 +171,8 @@ class SourceDB(lazydb.LazyDB):
                 node = minidom.parseString(dep).documentElement
                 dependency = inary.analyzer.dependency.Dependency()
                 dependency.package = node.childNodes[0].data
-                if node.attributes():
-                    attr = node.attributes()[0]
+                if node.attributes:
+                    attr = node.attributes[0]
                     dependency.__dict__[attr] = node.getAttribute(attr)
                 rev_deps.append((pkg, dependency))
         return rev_deps

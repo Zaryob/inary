@@ -94,7 +94,8 @@ class File:
                 import lzma
             except:
                 from backports import lzma
-            open(localfile[:-3], "w").write(str(lzma.LZMAFile(localfile).read()))
+
+            open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read().decode('utf-8'))
             localfile = localfile[:-3]
         elif compress == File.COMPRESSION_TYPE_BZ2:
             import bz2
