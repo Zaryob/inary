@@ -45,6 +45,7 @@ class FilesDB(lazydb.LazyDB):
         for pkg in installdb.list_installed():
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
+            ctx.ui.info("%-80.80s\r" % (util.colorize(_('-> Adding \'{}\' to db...'), 'purple').format(pkg)), noln=True)
         ctx.ui.info(inary.util.colorize(_('\nAdded files database...'), 'green'))
 
     def get_file(self, path):
@@ -67,7 +68,7 @@ class FilesDB(lazydb.LazyDB):
 
     def add_files(self, pkg, files):
         self.__check_filesdb()
-        ctx.ui.info("%-80.80s\r" % (util.colorize(_('-> Adding \'{}\' to db...'), 'purple').format(pkg)), noln=True)
+
         for f in files.list:
             key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
             self.filesdb[key] = pkg
@@ -92,7 +93,6 @@ class FilesDB(lazydb.LazyDB):
             return
 
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
-
         if not os.path.exists(files_db):
             flag = "n"
         elif os.access(files_db, os.W_OK):

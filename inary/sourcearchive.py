@@ -12,6 +12,8 @@
 # python standard library
 
 import os
+import shutil
+
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -83,9 +85,9 @@ class SourceArchive:
     def fetch_from_locale(self):
         url = self.url.uri
 
-        if not os.access(url, os.F_OK):
+        if not os.access(url[7:], os.F_OK):
             raise Error(_('No such file or no permission to read'))
-        shutil.copy(url, self.archiveFile)
+        shutil.copy(url[7:], self.archiveFile)
 
 
     def fetch_from_mirror(self):

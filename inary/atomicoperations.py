@@ -291,7 +291,7 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            ctx.ui.debug("* Chowning in postinstall ({0}:{1})".format(_file.uid, _file.gid))
+            ctx.ui.debug("* Chowning in postinstall {0} ({1}:{2})".format(_file.path, _file.uid, _file.gid))
             os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:
@@ -532,6 +532,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package)
 
         # filesdb
+        ctx.ui.info(util.colorize(_('Adding \'{}\' to db...'), 'purple').format(self.metadata.package.name))
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages

@@ -56,7 +56,7 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
-            self.doc = iks.parseString(file)
+            self.doc = iks.parseString(str(file))
             return self.doc
         except Exception as e:
             raise Error(_("File '{}' has invalid XML").format(file) )

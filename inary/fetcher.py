@@ -22,7 +22,7 @@ from base64 import encodestring
 # Network libraries
 from http.client import HTTPException
 import ftplib
-import urllib.request, urllib.parse, urllib.error 
+import urllib.request, urllib.parse, urllib.error
 
 #Gettext translation library
 import gettext
@@ -183,7 +183,7 @@ class Fetcher:
             try:
                 try:
                     responseObj = urllib.request.urlopen(self.formatRequest(urllib.request.Request(uri)))
-
+                    
                 except RangeError:
                     ctx.ui.info(_('Requested range not satisfiable, starting again.'))
                     self.exist_size = 0
@@ -341,7 +341,7 @@ class HTTPRangeHandler(urllib.request.BaseHandler):
         return urllib.addinfourl(fp, headers, request.get_full_url())
     def http_error_416(self, request, fp, errcode, msg, headers):
         # HTTP 1.1's 'Range Not Satisfiable' error..
-        raise RangeError 
+        raise RangeError
 
 class FTPRangeHandler(urllib.request.FTPHandler):
     """
