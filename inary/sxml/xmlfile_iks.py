@@ -29,11 +29,12 @@ _ = __trans.gettext
 import io
 import ciksemel as iks
 
-import inary
+import inary.file
+import inary.config
 from inary.file import File
 from inary.util import join_path as join
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class XmlFile(object):
@@ -56,17 +57,17 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
-            self.doc = iks.parseString(file)
+            self.doc = iks.parseString(str(file))
             return self.doc
         except Exception as e:
             raise Error(_("File '{}' has invalid XML").format(file) )
 
 
-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
+    def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal = False):
         uri = File.make_uri(uri)
         try:
-            localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
+            localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
                                   compress=compress,sign=sign, copylocal=copylocal)
         except IOError as e:
             raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)) )
@@ -87,7 +88,7 @@ class XmlFile(object):
             raise Error(_("File '{}' has invalid XML").format(localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
-        f = inary.file.File(uri, inary.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+        f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()
 

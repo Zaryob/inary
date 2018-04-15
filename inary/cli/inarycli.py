@@ -18,6 +18,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+import inary.errors
+
 import inary.cli
 import inary.cli.command as command
 import inary.cli.addrepo
@@ -59,7 +61,7 @@ import inary.cli.upgrade
 #FIXME: why does this has to be imported last
 import inary.cli.help
 
-class ParserError(inary.Exception):
+class ParserError(inary.errors.Exception):
     pass
 
 class PreParser(optparse.OptionParser):

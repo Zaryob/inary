@@ -18,7 +18,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.package
 import inary.context as ctx
 import inary.util as util
 import inary.atomicoperations as atomicoperations
@@ -140,7 +140,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     if not reinstall:
         for x in package_URIs:
             if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(ctx.const.package_suffix):
-                pkg_name, pkg_version = inary.util.parse_package_name(os.path.basename(x))
+                pkg_name, pkg_version = util.parse_package_name(os.path.basename(x))
                 if installdb.has_package(pkg_name):
                     already_installed.add(pkg_name)
                 else:
@@ -307,6 +307,6 @@ def get_install_order(packages):
     dependencies -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    install_order = inary.operations.install.plan_install_pkg_names
+    install_order = operations.install.plan_install_pkg_names
     i_graph, order = install_order(packages)
     return order

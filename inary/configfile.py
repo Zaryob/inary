@@ -58,9 +58,9 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class GeneralDefaults:
@@ -222,7 +222,7 @@ class ConfigurationFile(object):
             r'(?P<padding>\s*)'
             r'(?P<value>.*)$'
             )
-        
+
         fp = open(self.filePath, "r+")
         # Default to " = " to match write(), but use the most recent
         # separator found if the file has any options.
@@ -329,4 +329,3 @@ class ConfigurationFile(object):
                 fp.write(sect.getvalue())
 
         fp.close()
-        

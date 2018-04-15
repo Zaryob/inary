@@ -39,7 +39,7 @@ Legend:
   + single repository index
   + simple dependency checking
   + Package/Files
-  - Detailed inary logs into /var/lib/inary
+  + Detailed inary logs into /var/log
 
 2. Alpha
   + multi-package dependency analysis (eray)
@@ -66,6 +66,8 @@ Legend:
   + implement source database (eray)
   + easy package preparation
     ? convert ebuild to inary
+    \ convert deb packages to inary
+    \ convert rpm packages to inary
   + Configuring system interface after installing
     + what do we need to specify in a package
     + package install: register script and configure system with it
@@ -74,7 +76,7 @@ Legend:
     + support URI's whereever a filename is supported
     + http server
     + https server
-    - ftp server
+    + ftp server
     + inary updatedb over internet
 
 3. Beta

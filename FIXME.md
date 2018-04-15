@@ -2,13 +2,16 @@
     * inary.fetcher.py: --- status: not fixed; flag: critical ---:
     Neden local dosyaları çekmiyor bu?
     """
-    $ inary fc dbus 
+    $ inary fc dbus
     dbus package found in binrepo repository
     Error: Program terminated.
-    Error: A problem occurred. Please check the archive address and/or permissions again. Could not fetch destination file: "/home/zaryob/Repositories/binrepo/d/dbus/dbus-1.11.8-1-s18-x86_64.inary" 
+    Error: A problem occurred. Please check the archive address and/or permissions again. Could not fetch destination file: "/home/zaryob/Repositories/binrepo/d/dbus/dbus-1.11.8-1-s18-x86_64.inary"
     Raised Value error: "unknown url type: '/home/zaryob/Repositories/binrepo/d/dbus/dbus-1.11.8-1-s18-x86_64.inary'"
     Please use 'inary help' for general help.
     """
+
+    * ayrıca yine fetcher:
+    sudo inary it dbus -f diyince nereye indiriyor yaw bu 
 
 
 2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
@@ -48,5 +51,3 @@
     * inary/atomicoperations.py --- status: not fixed flag: critical ---
     In removing not asking "Do you want remove conflicted files "
     Now remove all package files and conflicted files
-
-

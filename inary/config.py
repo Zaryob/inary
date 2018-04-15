@@ -22,12 +22,12 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.context as ctx
 import inary.configfile
+import inary.errors
 import inary.util
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class Options(object):

@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 #
 
-import inary
 import inary.sxml.xmlfile as xmlfile
 import inary.sxml.autoxml as autoxml
 

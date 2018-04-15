@@ -38,4 +38,3 @@ def installed_package_replaced(repinfo):
     """determine if an installed package in *repository* replaced with
 given a package"""
     return relation.installed_package_satisfies(repinfo)
-

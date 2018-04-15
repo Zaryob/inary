@@ -21,7 +21,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.context as ctx
 import inary.data.specfile as specfile
 import inary.data.metadata as metadata
@@ -57,12 +56,12 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             tmpdir = os.path.join(ctx.config.index_dir(), repo)
         else:
             tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
-            inary.util.clean_dir(tmpdir)
+            util.clean_dir(tmpdir)
 
-        inary.util.ensure_dirs(tmpdir)
+        util.ensure_dirs(tmpdir)
 
         # write uri
-        urlfile = open(inary.util.join_path(tmpdir, 'uri'), 'w')
+        urlfile = open(util.join_path(tmpdir, 'uri'), 'w')
         urlfile.write(uri) # uri
         urlfile.close()
 
@@ -72,7 +71,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             repo = self.distribution.name()
             # and what do we do with it? move it to index dir properly
             newtmpdir = os.path.join(ctx.config.index_dir(), repo)
-            inary.util.clean_dir(newtmpdir) # replace newtmpdir
+            util.clean_dir(newtmpdir) # replace newtmpdir
             shutil.move(tmpdir, newtmpdir)
 
     def check_signature(self, filename, repo):

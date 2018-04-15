@@ -12,7 +12,6 @@
 
 import os
 import glob
-import inary
 import inary.util as util
 from inary.version import Version
 from inary.delta import create_delta_package
@@ -43,7 +42,7 @@ if __name__ == "__main__":
         name, version = util.parse_package_name(pkg)
 
         if not old_pkg == new_pkg:
-        # skip if same 
+        # skip if same
             if not os.path.exists("%s-%s-%s.delta.inary" % (name, str(mi[pkg].build), str(ma[pkg].build))):
             # skip if delta exists
                 print(("%s --> Min: %s Max: %s \n %s-%s-%s.delta.inary" % (pkg, old_pkg, new_pkg, name, str(mi[pkg].build), str(ma[pkg].build))))

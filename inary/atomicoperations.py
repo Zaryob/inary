@@ -20,10 +20,15 @@ import shutil
 import zipfile
 
 import inary
+
+import inary.configfile
 import inary.context as ctx
 import inary.data
 import inary.errors
+import inary.data
 import inary.db
+import inary.file
+import inary.package
 import inary.operations
 import inary.uri
 import inary.ui
@@ -31,10 +36,10 @@ import inary.util as util
 import inary.version
 import inary.data.pgraph as pgraph
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
-class NotfoundError(inary.Error):
+class NotfoundError(inary.errors.Error):
     pass
 
 # single package operations
@@ -114,7 +119,7 @@ class Install(AtomicOperation):
             if not cached_file:
                 downloaded_file = install_op.package.filepath
                 if util.sha1_file(downloaded_file) != pkg_hash:
-                    raise inary.Error(_("Download Error: Package does not match the repository package."))
+                    raise inary.errors.Error(_("Download Error: Package does not match the repository package."))
 
             return install_op
         else:
@@ -136,6 +141,7 @@ class Install(AtomicOperation):
         self.metadata = self.package.metadata
         self.files = self.package.files
         self.pkginfo = self.metadata.package
+        self.installedSize = self.metadata.package.installedSize
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
@@ -173,7 +179,12 @@ class Install(AtomicOperation):
 
     def check_requirements(self):
         """check system requirements"""
-        #TODO: IS THERE ENOUGH SPACE?
+        # Check free space
+        total_size, symbol = util.human_readable_size(util.free_space())
+        ctx.ui.debug(_("Free Space: %.2f %s "% (total_size, symbol))) # I DONT KNOW BETTER WAY
+        if util.free_space() < self.installedSize:
+            raise Error(_("Is there any free space in your disk."))
+
         # what to do if / is split into /usr, /var, etc.
         # check scom
         if self.metadata.package.providesScom and ctx.scom:
@@ -291,7 +302,7 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            ctx.ui.debug("* Chowning in postinstall ({0}:{1})".format(_file.uid, _file.gid))
+            ctx.ui.debug("* Chowning in postinstall {0} ({1}:{2})".format(_file.path, _file.uid, _file.gid))
             os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:
@@ -532,6 +543,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package)
 
         # filesdb
+        ctx.ui.info(util.colorize(_('Adding \'{}\' to db...'), 'purple').format(self.metadata.package.name))
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -572,11 +584,11 @@ class Remove(AtomicOperation):
         self.store_old_paths = store_old_paths
         try:
             self.files = self.installdb.get_files(self.package_name)
-        except inary.Error as e:
+        except inary.errors.Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
             ctx.ui.warning(_('File list could not be read for package {}, continuing removal.').format(package_name))
-            self.files = inary.files.Files()
+            self.files = inary.data.files.Files()
 
     def run(self):
         """Remove a single package"""
@@ -915,20 +927,20 @@ def configure_pending(packages=None):
                 ctx.ui.notify(inary.ui.configured, package = pkginfo, files = None)
             installdb.clear_pending(x)
     except ImportError:
-        raise inary.Error(_("scom package is not fully installed"))
+        raise inary.errors.Error(_("scom package is not fully installed"))
 
 
 @locked
 def add_repo(name, indexuri, at = None):
     import re
     if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
-        raise inary.Error(_('Not a valid repo name.'))
+        raise inary.errors.Error(_('Not a valid repo name.'))
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
-        raise inary.Error(_('Repo {} already present.').format(name))
+        raise inary.errors.Error(_('Repo {} already present.').format(name))
     elif repodb.has_repo_url(indexuri, only_active = False):
         repo = repodb.get_repo_by_url(indexuri)
-        raise inary.Error(_('Repo already present with name {}.').format(repo))
+        raise inary.errors.Error(_('Repo already present with name {}.').format(repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at = at)
@@ -943,7 +955,7 @@ def remove_repo(name):
         inary.db.flush_caches()
         ctx.ui.info(_('Repo {} removed from system.').format(name))
     else:
-        raise inary.Error(_('Repository {} does not exist. Cannot remove.').format(name))
+        raise inary.errors.Error(_('Repository {} does not exist. Cannot remove.').format(name))
 
 @locked
 def update_repos(repos, force=False):
@@ -990,7 +1002,7 @@ def __update_repo(repo, force=False):
 
         ctx.ui.info(_('Package database updated.'))
     else:
-        raise inary.Error(_('No repository named {} found.').format(repo))
+        raise inary.errors.Error(_('No repository named {} found.').format(repo))
 
     return True
 
@@ -1002,11 +1014,13 @@ def rebuild_db():
     options = ctx.config.options
     ui = ctx.ui
     scom = ctx.scom
-    inary._cleanup()
+    from inary import _cleanup
+    _cleanup()
 
     ctx.filesdb.close()
     ctx.filesdb.destroy()
     ctx.filesdb = inary.db.filesdb.FilesDB()
+    ctx.filesdb.update()
 
     # reinitialize everything
     ctx.ui = ui

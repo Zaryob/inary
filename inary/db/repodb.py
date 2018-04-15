@@ -19,22 +19,22 @@ _ = __trans.gettext
 
 import os
 
-import inary
-import inary.uri
-import inary.util
 import inary.context as ctx
 import inary.db.lazydb as lazydb
+import inary.errors
 from inary.file import File
 import inary.sxml.xmlext as xmlext
+import inary.uri
+import inary.util as util
 
 try:
     import ciksemel
     parser = "ciksemel"
-except: 
+except:
     import xml.dom.minidom as minidom
     parser = "minidom"
 
-class RepoError(inary.Error):
+class RepoError(inary.errors.Error):
     pass
 
 class IncompatibleRepoError(RepoError):
@@ -244,7 +244,7 @@ class RepoDB(lazydb.LazyDB):
         #FIXME Local index files should also be cached.
         if File.is_compressed(index_path) or repo.indexuri.is_remote_file():
             index = os.path.basename(index_path)
-            index_path = inary.util.join_path(ctx.config.index_dir(),
+            index_path = util.join_path(ctx.config.index_dir(),
                                              repo_name, index)
 
             if File.is_compressed(index_path):
@@ -272,12 +272,12 @@ class RepoDB(lazydb.LazyDB):
 
     #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
     def get_repo_url(self, repo):
-        urifile_path = inary.util.join_path(ctx.config.index_dir(), repo, "uri")
+        urifile_path = util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
         return uri.rstrip()
 
     def add_repo(self, name, repo_info, at = None):
-        repo_path = inary.util.join_path(ctx.config.index_dir(), name)
+        repo_path = util.join_path(ctx.config.index_dir(), name)
         ###########
         try:
             os.makedirs(repo_path)
@@ -285,12 +285,12 @@ class RepoDB(lazydb.LazyDB):
             pass
         #FIXME: FileExistError errno: 17
         #When addind repo there are the same as name empty dirs it should remove it
-        urifile_path = inary.util.join_path(ctx.config.index_dir(), name, "uri")
+        urifile_path = util.join_path(ctx.config.index_dir(), name, "uri")
         open(urifile_path, "w").write(repo_info.indexuri.get_uri())
         self.repoorder.add(name, repo_info.indexuri.get_uri())
 
     def remove_repo(self, name):
-        inary.util.clean_dir(os.path.join(ctx.config.index_dir(), name))
+        util.clean_dir(os.path.join(ctx.config.index_dir(), name))
         self.repoorder.remove(name)
 
     def get_source_repos(self, only_active=True):

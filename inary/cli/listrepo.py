@@ -16,8 +16,8 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.util as util
 import inary.db
+import inary.util as util
 
 class ListRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List repositories
@@ -43,4 +43,3 @@ Lists currently tracked repositories.
             else:
                 ctx.ui.info(util.colorize(_("{0} [{1}]").format(repo, active), 'red'))
             print('  ', self.repodb.get_repo_url(repo))
-

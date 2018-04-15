@@ -2,9 +2,11 @@
 
 import hashlib
 import os
-import inary
 import sys
 import time
+
+import inary.db
+import inary.operations
 
 IGNORE_DIRS = ('/root',
                '/tmp',

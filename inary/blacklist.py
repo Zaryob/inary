@@ -33,7 +33,7 @@ def exclude_from(packages, exfrom):
 def exclude(packages, patterns):
     packages = set(packages)
     componentdb = inary.db.componentdb.ComponentDB()
-    
+
     for pattern in patterns:
         # match pattern in package names
         match = fnmatch.filter(packages, pattern)

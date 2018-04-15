@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob) 
+# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -9,11 +9,10 @@
 #
 # Please read the COPYING file.
 #
-import inary
+import inary.errors
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
-class Exception(inary.Exception):
+class Exception(inary.errors.Exception):
     pass
-

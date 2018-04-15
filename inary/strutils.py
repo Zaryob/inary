@@ -96,4 +96,3 @@ def ascii_upper(str):
     """Ascii only version of string.upper()"""
     trans_table = str.maketrans(str.ascii_lowercase, str.ascii_uppercase)
     return str.translate(trans_table)
-

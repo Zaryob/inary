@@ -280,4 +280,3 @@ def generateConfigFiles():
                 elif command == "BuildLanguageDat":
                     ctx.ui.info(_('No rule to proccess {}. Please file a bug.').format(command))
         jobsfile.close()
-

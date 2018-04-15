@@ -16,13 +16,13 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.operations
 import inary.context as ctx
 import inary.util as util
 import inary.atomicoperations as atomicoperations
 import inary.ui as ui
 import inary.db
+import inary.data
 
 def emerge(A):
 
@@ -82,7 +82,7 @@ installed in the respective order to satisfy dependencies:
 def plan_emerge(A):
 
     sourcedb = inary.db.sourcedb.SourceDB()
-    
+
     # try to construct a inary graph of packages to
     # install / reinstall
 

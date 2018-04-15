@@ -18,10 +18,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.api
 import inary.context as ctx
+import inary.errors
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 try:

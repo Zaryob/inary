@@ -29,11 +29,10 @@ import io
 import xml.dom.minidom as minidom
 from xml.parsers.expat import ExpatError
 
-import inary
 from inary.file import File
 from inary.util import join_path as join
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class XmlFile(object):
@@ -89,7 +88,7 @@ class XmlFile(object):
             raise Error(_("File '{}' has invalid XML: {}\n").format(localpath,
                                                                     str(err)))
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
-        f = inary.file.File(uri, inary.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+        f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toprettyxml())
         f.close()
 

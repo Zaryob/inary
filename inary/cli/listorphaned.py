@@ -18,8 +18,8 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.util as util
 import inary.db
+import inary.util as util
 
 class ListOrphaned(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List orphaned packages

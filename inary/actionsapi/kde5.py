@@ -65,4 +65,3 @@ def make(parameters = ''):
 
 def install(parameters = '', argument = 'install'):
     cmaketools.install('-C build {}'.format(parameters), argument)
-

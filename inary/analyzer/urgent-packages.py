@@ -15,7 +15,6 @@ import bz2
 import sys
 import os
 
-
 def loadFile(_file):
     try:
         f = open(_file)
@@ -93,4 +92,3 @@ def urgent_packages(index, packages):
 #        print("-> %s" % i)
 #        for k in requiredPackages[i]:
 #             print("\t%s" % k)
-

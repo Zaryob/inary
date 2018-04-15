@@ -10,7 +10,8 @@
 # Please read the COPYING file.
 
 import os.path
-import inary
+
+import inary.errors
 import inary.context as ctx
 
 import gettext
@@ -43,5 +44,4 @@ class Mirrors:
                       (name, url) = mirror
                       self._add_mirror(name, url)
         else:
-            raise inary.Error(_('Mirrors file {} does not exist. Could not resolve mirrors://').format(config))
-
+            raise inary.errors.Error(_('Mirrors file {} does not exist. Could not resolve mirrors://').format(config))

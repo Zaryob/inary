@@ -132,7 +132,7 @@ class TarFile(tarfile.TarFile):
 
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
-        else:            
+        else:
             options = {"format":    compressformat}
             fileobj = lzma.LZMAFile(name, mode)
 
@@ -422,7 +422,7 @@ class ArchiveTar(ArchiveBase):
 
             except IOError as e:
                 # Handle the case where new path is file, but old path is directory
-                # due to not possible touch file c in /a/b if directory /a/b/c exists.  
+                # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:
                     path = tarinfo.name
                     found = False
@@ -572,7 +572,7 @@ class Archive7Zip(ArchiveBase):
 
     def __init__(self, file_path, arch_type="7z"):
         super(Archive7Zip, self).__init__(file_path, arch_type)
-        self.cmd = inary.util.search_executable(arch_type)
+        self.cmd = util.search_executable(arch_type)
         if not self.cmd:
             raise ArchiveHandlerNotInstalled
 
@@ -584,7 +584,7 @@ class Archive7Zip(ArchiveBase):
         """Unpack 7z archive to a given target directory(target_dir)."""
 
         # e.g. 7z x -bd -o<target_directory> <archive.7z>
-        inary.util.run_batch("{0} x -bd -o{1} {2}".format(self.cmd, target_dir, self.file_path))
+        util.run_batch("{0} x -bd -o{1} {2}".format(self.cmd, target_dir, self.file_path))
 
 
 class ArchiveZip(ArchiveBase):

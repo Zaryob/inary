@@ -31,4 +31,3 @@ This command deletes unused locks from the database directory.""")
 
     def run(self):
         self.init()
-        

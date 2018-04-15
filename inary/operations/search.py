@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 #
-import inary
+
 import inary.context as ctx
 import inary.db
 
@@ -75,4 +75,3 @@ def search_file(term):
     if term.startswith("/"): # FIXME: why? why?
         term = term[1:]
     return ctx.filesdb.search_file(term)
-
