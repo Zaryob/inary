@@ -16,11 +16,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.atomicoperations
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
-import inary.atomicoperations
+import inary.db
 import inary.operations.op_wrappers as op_wrappers
 
 class EmergeUp(build.Build, metaclass=command.autocommand):

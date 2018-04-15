@@ -19,5 +19,5 @@ _ = __trans.gettext
 
 import inary
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass

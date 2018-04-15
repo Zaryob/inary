@@ -23,10 +23,13 @@ import itertools
 import subprocess
 
 #Inary functions
-import inary
-import inary.db
+import inary.api
 import inary.analyzer.magic
 import inary.context as ctx
+import inary.db
+import inary.errors
+import inary.package
+
 
 #Gettext
 import gettext
@@ -34,7 +37,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class PCorLDD:

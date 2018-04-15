@@ -43,5 +43,3 @@ class Files(autoxml.xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
     def append(self, fileinfo):
         self.list.append(fileinfo)
-
-

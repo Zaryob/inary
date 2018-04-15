@@ -1,14 +1,49 @@
+2018-03-15 Suleyman Poyraz <nipalensisaquila@gmail.com>
+		* fetcher.py:
+			-> Her zaman sinirimi bozan bu fetcher requests ile yeniden yazıldı.
+				 urllib kullanmak indirme yöneticisini yavaşlatıyordu.
+				 Bir tane yeni bağımlılık eklerim de yine de o yavaşlığı çekemem arkadaş
+		* İç aksam düzenlemeleri:
+			-> inary.__init__()
+			   inary main modulu içindeki error sınıfı ait olduğunu hissettiğim
+				 yer inary.errors içine taşındı. Böylece bir error için bütün inary
+				 modulunu yeniden import etmeye gerek kalmayacak.
+				 Bknz: 'Bit için yorgan yakılmaz.'
+			-> inary.db.filesdb:
+				 filesdb zaten dinamik bir database. O yüzden her installing ardından
+				 koskocaman files databasesi yapılandırmayı saçma buldum. Onu
+				 düzelttim. Ayrıca database testleri ile sağlıklı çalıştığına emin
+				 oldum.
+			-> Çıktılar biraz ellendi, renklendirmeler eklendi
+
+
+		* Atom düzenlemeleri:
+			-> Gereksiz boşluklar temizlendi.
+			-> Simetri hastası bir insan olarak bazı modul importlarını elle
+			düzelttim.
+
+
+2018-03-14 Suleyman Poyraz <nipalensisaquila@gmail.com>
+    * Özellik eklemesi:
+			-> Paket kurulumundan önce yeterli alan olup olmadığı artık denetleniyor.
+
+		* Hata düzeltmeleri:
+			-> Görünümsel hatalar fixe edildi.
+			-> runtime hatalarından bazıları giderildi
+			-> dosym methodundaki hata düzeltildi.
+
+
 2018-03-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
 		* Hata düzeltmeleri:
-		Kararlı öncesi. 
+		Kararlı öncesi.
 			-> Magic modülü kararlı hale getirildi, pkgconfig librarisi düzenlenecek.
 			-> Arşiv çıkartılırken oluşan hata düzeltildi.
 			-> inary-cli betiğini hangi kafa ile düzeltmişim? Saçmalamasına
 			sebeb olan hata düzeltildi
 
 		* Genel iyileştirmeler
-			-> Actionsapi betiklerinden gereksiz fonksiyon var mı diye kontrol edilip 
-			betikler düzenlendi. 
+			-> Actionsapi betiklerinden gereksiz fonksiyon var mı diye kontrol edilip
+			betikler düzenlendi.
 			-> Yeni bir renk skalası eklendi. ("faint")
 			-> Renklendirme yapıldı
 
@@ -16,7 +51,7 @@
 2018-03-18 Suleyman Poyraz <nipalensisaquila@gmail.com>
 		* minidom vs ciksemel:
 		minidom ile tüm inary sistemi yeniden yazıldı. Ancak ciddi manada
-		inar yavaşlıyor. Db initializing süresi 8 sn. Yuh yani. Ama minidom 
+		inar yavaşlıyor. Db initializing süresi 8 sn. Yuh yani. Ama minidom
 		uğraşımı öylece silmek istemediğim için minidom ve ciksemeli beraber
 		kullanma kararı aldım.
 
@@ -29,7 +64,7 @@
 		patches/applied-patches/minimum-dependency-maximum-stabilization-001.patch
 		If we had one or two dependency we can control inary
 		but there are a lot of runtime dependency. And this is
-		look up bad. I clean runtime dependencies and I write 
+		look up bad. I clean runtime dependencies and I write
 		alternative libraries into inary. I clean runtimes:
 		    * magic: it soo easy if when use ctypes.I import libmagic
 				with ctypes and I use it in inary
@@ -60,7 +95,7 @@
 
 2018-03-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
     * deleted distupdate command:
-		Sulin will be a roolling release distro. So we don't have a 
+		Sulin will be a roolling release distro. So we don't have a
 		distupdater.
 
 2018-02-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
@@ -79,7 +114,7 @@
   * System modulleri silindi:
 	Inary içinde onlara ihtiyaç olmadığını farkettim. Scom içine alarak yer
 	kazandım.
-	* inary/strutils.py: 
+	* inary/strutils.py:
 	Str veri tipi için basit tipte fonksiyonları ve multisplit gibi şeyleri
 	içeren bir modul.
 
@@ -97,8 +132,8 @@
 
 2018-01-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
   * distupdate komutu eklendi:
-	Upgrade komutu buyuk capta guncellemeler için biraz 
-	tehlikeli kaçıyordu ve yetersiz sayılırdı. Bu yüzden bu 
+	Upgrade komutu buyuk capta guncellemeler için biraz
+	tehlikeli kaçıyordu ve yetersiz sayılırdı. Bu yüzden bu
 	modul eklendi.
 
   * Downgrade silindi:
@@ -140,7 +175,7 @@
 	-> testlerin islevselliginden emin olunuldu (2018-01-23)
 
 2018-01-17 Suleyman Poyraz <nipalensisaquila@gmail.com>
-  * Added system_literals and now work crossplatorm 
+  * Added system_literals and now work crossplatorm
 	inary packaging:
 	Look more about inary/system_literals/Modules.md
 
@@ -151,7 +186,7 @@
 
 2017-12-24 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* Python3 kutuphane uyumlulugu:
-	lzma hataları düzenlendi, urllib.request ile fetcher 
+	lzma hataları düzenlendi, urllib.request ile fetcher
 	yeniden yazıldı
 	magic kutuphanesi düzenlendi.
 
@@ -173,7 +208,7 @@
 
 	* unuseful importing libraries:
 	example in xmlfile. A developer imported an old library preprocess
-	and I try fix it 
+	and I try fix it
 	Türkçesi ile benim neler çektiğimi nerden bileceksiniz
 
 2017-09-01 Suleyman Poyraz <nipalensisaquila@gmail.com>
@@ -184,11 +219,11 @@
 	in packages and it moving to package dirs actions.py file
 
 	* install:
-	FIXME: If we want install a new release for any package it 
+	FIXME: If we want install a new release for any package it
 	report file conflicts error, it should fix it.
 
 	* removing:
-	FIXME: In removing a package it report file conflicts error 
+	FIXME: In removing a package it report file conflicts error
 	and can not remove package
 
 	* delta:
@@ -207,7 +242,7 @@
 2017-08-31 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* Remove Comar/scom libraries:
 	Now we can install packages without comar scripts
-	I add a function in actions.py file.  I we want 
+	I add a function in actions.py file.  I we want
 	configure package after installing we can make it quickly
 
 2017-08-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
@@ -243,7 +278,7 @@
 2017-04-14 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* filesldb and plyvel:
 	Should fix pisi-plyvel library hash encode type error
-	
+
 	* install:
 	Fixed compressed metadata and files xml file reading problem
 	(FileNotFound ERROR when reading)
@@ -259,16 +294,16 @@
 	* indexing:
 	Fixed index library. Now we an indexing. And basic type package
 	handling
-	
+
 	* installing:
 	Now there are a problem in install library so we can't install
 	packages from package files. Should fix autoxml.py write module
 	and xmlfilepiks module
-	
+
 	* fetching and progress:
 	I rewrite fetcher without UIHandler. I write an progress handler
 	with use python
-	
+
 
 2017-04-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
 	* lzma archive options:
@@ -322,5 +357,3 @@
 	Old versions written by Python2. This will be a problem in future. So
 	I start it porting Python2 to Python3. This is an hard job but It doesn't
 	impossible.
-
-

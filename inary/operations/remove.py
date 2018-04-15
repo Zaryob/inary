@@ -17,13 +17,14 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
-import inary.context as ctx
 import inary.atomicoperations as atomicoperations
+import inary.context as ctx
 import inary.data.pgraph as pgraph
+import inary.db
+import inary.errors
+import inary.operations
 import inary.util as util
 import inary.ui as ui
-import inary.db
 
 def remove(A, ignore_dep = False, ignore_safety = False):
     """remove set A of packages from system (A is a list of package names)"""
@@ -41,7 +42,7 @@ def remove(A, ignore_dep = False, ignore_safety = False):
             systembase = set(componentdb.get_union_component('system.base').packages)
             refused = A.intersection(systembase)
             if refused:
-                raise inary.Error(_("Safety switch prevents the removal of "
+                raise inary.errors.Error(_("Safety switch prevents the removal of "
                                    "following packages:\n") +
                                     util.format_by_columns(sorted(refused)))
                 A = A - systembase

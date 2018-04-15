@@ -12,7 +12,7 @@
 
 import os
 import sys
-import inary
+import inary.api
 
 def show_info(filename):
     metadata, files = inary.api.info_file(filename)

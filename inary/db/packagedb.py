@@ -21,7 +21,7 @@ import inary.data.metadata as Metadata
 import inary.analyzer.dependency
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
-import inary.context as ctx 
+import inary.context as ctx
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -30,7 +30,7 @@ _ = __trans.gettext
 try:
     import ciksemel
     parser = "ciksemel"
-except: 
+except:
     import xml.dom.minidom as minidom
     parser = "minidom"
 
@@ -275,7 +275,7 @@ class PackageDB(lazydb.LazyDB):
                 dependency.package = node.firstChild().data()
                 if node.attributes():
                     attr = node.attributes()[0]
-                    dependency.__dict__[attr] = node.getAttribute(attr)
+                    dependency.__dict__[attr] = node.getAttribute(str(attr))
                 rev_deps.append((pkg, dependency))
 
         else:

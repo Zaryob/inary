@@ -31,7 +31,7 @@ __keywords = (
         ("p",        1),
         )
 
-class InvalidVersionError(inary.Error):
+class InvalidVersionError(inary.errors.Error):
     pass
 
 def __make_version_item(v):

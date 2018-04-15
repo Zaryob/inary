@@ -12,7 +12,8 @@
 
 import os
 
-import inary
+import inary.errors
+import inary.package
 import inary.context as ctx
 import inary.db
 import inary.data
@@ -31,7 +32,7 @@ def info(package, installed = False):
 def info_file(package_fn):
 
     if not os.path.exists(package_fn):
-        raise inary.Error (_('File {} not found').format(package_fn))
+        raise inary.errors.Error (_('File {} not found').format(package_fn))
 
     package = inary.package.Package(package_fn)
     package.read()
@@ -56,7 +57,7 @@ def info_name(package_name, useinstalldb=False):
     if useinstalldb and installdb.has_package(package.name):
         try:
             files = installdb.get_files(package.name)
-        except inary.Error as e:
+        except inary.errors.Error as e:
             ctx.ui.warning(e)
             files = None
     else:

@@ -14,13 +14,14 @@ import gettext
 __trans = gettext.translation("inary", fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 import inary.context as ctx
 import inary.util
 import inary.db
 import inary.fetcher
+import inary.operations
 
-class PackageNotFound(inary.Error):
+class PackageNotFound(inary.errors.Error):
     pass
 
 def __pkg_already_installed(name, pkginfo):

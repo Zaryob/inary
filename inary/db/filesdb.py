@@ -15,10 +15,10 @@ import re
 import shelve
 import hashlib
 
-import inary
-import inary.util as util
 import inary.context as ctx
+import inary.db
 import inary.db.lazydb as lazydb
+import inary.util as util
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -74,6 +74,7 @@ class FilesDB(lazydb.LazyDB):
             self.filesdb[key] = pkg
 
     def remove_files(self, files):
+        ctx.ui.info(util.colorize(_('Removing files from database'), 'green'))
         for f in files:
             key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
             if key in self.filesdb:
@@ -93,9 +94,9 @@ class FilesDB(lazydb.LazyDB):
             return
 
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
-        if not os.path.exists(files_db):
+        if not os.path.exists(files_db+'.db'):
             flag = "n"
-        elif os.access(files_db, os.W_OK):
+        elif os.access(files_db+'.db', os.W_OK):
             flag = "w"
         else:
             flag = "r"
@@ -103,3 +104,8 @@ class FilesDB(lazydb.LazyDB):
         self.filesdb = shelve.open(files_db, flag)
         if flag == "n":
             self.create_filesdb()
+
+    def update(self):
+        files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
+        self.filesdb= shelve.open(files_db, 'n')
+        self.create_filesdb()

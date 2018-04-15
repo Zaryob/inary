@@ -16,10 +16,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.atomicoperations
 import inary.cli.command as command
 import inary.context as ctx
+import inary.db
+import inary.errors
 
 class AddRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Add a repository
@@ -70,7 +71,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
             if not ctx.get_option('no_fetch'):
                 try:
                     inary.atomicoperations.update_repo(name)
-                except (inary.Error, IOError):
+                except (inary.errors.Error, IOError):
                     warning = _("{0} repository could not be reached. Removing {0} from system.").format(name)
                     self.warn_and_remove(warning, name)
         else:

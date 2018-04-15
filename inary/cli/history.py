@@ -18,7 +18,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.atomicoperations
 import inary.db
 import inary.context as ctx

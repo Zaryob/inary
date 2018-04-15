@@ -20,22 +20,23 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY
-import inary
 import inary.analyzer.dependency
+import inary.context as ctx
+import inary.data
 import inary.data.files as Files
 import inary.db.lazydb as lazydb
+import inary.sxml
 import inary.util
-import inary.context as ctx
 
 try:
     import ciksemel
     parser = "ciksemel"
-except: 
+except:
     import xml.dom.minidom as minidom
     parser = "minidom"
 
 
-class InstallDBError(inary.Error):
+class InstallDBError(inary.errors.Error):
     pass
 
 class InstallInfo:

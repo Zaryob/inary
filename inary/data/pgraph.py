@@ -12,16 +12,16 @@
 
 """INARY package relation graph that represents the state of packagedb"""
 
-import inary
 import inary.context as ctx
 import inary.operations.helper as op_helper
 import inary.db
+import inary.errors
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-class CycleException(inary.Exception):
+class CycleException(inary.errors.Exception):
     def __init__(self, cycle):
         self.cycle = cycle
 
@@ -281,4 +281,3 @@ def generate_pending_order(A):
         order = op_helper.reorder_base_packages(order)
 
     return order
-

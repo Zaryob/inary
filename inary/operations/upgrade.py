@@ -436,4 +436,3 @@ def get_base_upgrade_order(packages):
     upgrade_order = inary.operations.upgrade.upgrade_base
     order = upgrade_order(packages)
     return list(order)
-

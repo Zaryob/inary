@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 #
 
-import inary
 import inary.version
 import inary.db
 import inary.sxml.autoxml as autoxml

@@ -17,16 +17,15 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.context as ctx
 import inary.ui
 import inary.util
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 
-class Exception(inary.Exception):
+class Exception(inary.errors.Exception):
     pass
 
 #in old releases used this printu function
@@ -182,7 +181,7 @@ class CLI(inary.ui.UI):
             self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
 
         if ka['percent'] == 100:
-            self.output(inary.util.colorize(_(' [complete]\n'), 'gray'))
+            self.output(inary.util.colorize(_('\n [complete]\n'), 'yellow'))
 
     def status(self, msg = None):
         if msg:

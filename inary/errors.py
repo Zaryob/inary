@@ -9,6 +9,21 @@
 #
 # Please read the COPYING file.
 
+# FIXME: Exception shadows builtin Exception. This is no good.
+class Exception(Exception):
+    """Class of exceptions that must be caught and handled within INARY"""
+    def __str__(self):
+        s = ''
+        for x in self.args:
+            if s != '':
+                s += '\n'
+            s += str(x)
+        return str(s)
+
+class Error(Exception):
+    """Class of exceptions that lead to program termination"""
+    pass
+
 class AnotherInstanceError(Exception):
     pass
 

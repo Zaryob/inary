@@ -43,13 +43,13 @@ import inary.actionsapi.variables
 import inary.db
 
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class ActionScriptException(Error):
     pass
 
-class AbandonedFilesException(inary.Error):
+class AbandonedFilesException(inary.errors.Error):
     pass
 
 class ExcludedArchitectureException(Error):

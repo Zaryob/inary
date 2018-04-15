@@ -24,29 +24,30 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.context as ctx
+import inary.errors
+import inary.fetcher
 import inary.uri
 import inary.util
-import inary.fetcher
-import inary.context as ctx
 
-class AlreadyHaveException(inary.Exception):
+
+class AlreadyHaveException(inary.errors.Exception):
     def __init__(self, url, localfile):
-        inary.Exception.__init__(self, _("URL {0} already downloaded as {1}").format(url, localfile))
+        inary.errors.Exception.__init__(self, _("URL {0} already downloaded as {1}").format(url, localfile))
         self.url = url
         self.localfile = localfile
 
-class NoSignatureFound(inary.Exception):
+class NoSignatureFound(inary.errors.Exception):
     def __init__(self, url):
-        inary.Exception.__init__(self, _("No signature found for {}").format(url))
+        inary.errors.Exception.__init__(self, _("No signature found for {}").format(url))
         self.url = url
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
-class InvalidSignature(inary.Error):
+class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
-        inary.Exception.__init__(self, _(" invalid for {}").format(url))
+        inary.errors.Exception.__init__(self, _(" invalid for {}").format(url))
         self.url = url
 
 class File:

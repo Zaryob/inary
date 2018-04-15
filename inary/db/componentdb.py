@@ -15,18 +15,18 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.context as ctx
 import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.component as Component
 import inary.db.lazydb as lazydb
+import inary.sxml
 
 class ComponentDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
-        try: 
+        try:
             import ciksemel
             self.parser = "ciksemel"
         except:

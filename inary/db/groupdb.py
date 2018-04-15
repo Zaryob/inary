@@ -14,7 +14,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.context as ctx
 import inary.db.repodb
 import inary.db.itembyrepo
@@ -33,7 +32,7 @@ class GroupDB(lazydb.LazyDB):
         group_nodes = {}
         group_components = {}
 
-        try: 
+        try:
             import ciksemel
             self.parser = "ciksemel"
         except:

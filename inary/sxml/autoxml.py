@@ -39,7 +39,7 @@ import inary.context as ctx
 import inary.util as util
 import inary.oo as oo
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 # requirement specs

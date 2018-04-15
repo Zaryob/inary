@@ -16,7 +16,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.operations.search as search
 import inary.context as ctx
 import inary.cli.command as command

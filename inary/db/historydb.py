@@ -12,10 +12,10 @@
 
 import os
 
-import inary
 import inary.context as ctx
 import inary.db.lazydb as lazydb
 import inary.data.history as History
+import inary.util
 
 class HistoryDB(lazydb.LazyDB):
 

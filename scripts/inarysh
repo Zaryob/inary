@@ -2,36 +2,36 @@
 #
 # Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
 #
-# This program is free software; you can redistribute it and/or modify it under the terms of the GNU General 
-# Public License as published by the Free Software Foundation; either version 2 of the License, or (at your 
+# This program is free software; you can redistribute it and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software Foundation; either version 2 of the License, or (at your
 # option) any later version.
 #
 # Please read the COPYING file.
 #
 # Authors: Eray, Baris
-import sys 
+import sys
 import locale
 import traceback
 import signal
 import os
 
-import inary.ui 
-import inary.context as ctx 
-from inary.cli.inarycli import InaryCLI 
+import inary.ui
+import inary.context as ctx
+from inary.cli.inarycli import InaryCLI
 
-import gettext 
-__trans = gettext.translation('inary', fallback=True) 
-_ = __trans.gettext 
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
 
 def exit(retval = 0):
-    sys.exit(retval) 
+    sys.exit(retval)
 
 if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, '')
-    ctx.ui.info(_("""Welcome to the interactive INARY shell. 
-           Type "help" to see a list of commands. 
+    ctx.ui.info(_("""Welcome to the interactive INARY shell.
+           Type "help" to see a list of commands.
            To end the session, type "exit".
-           You can run system commands by prefixing with '!' as in '!ls'. 
+           You can run system commands by prefixing with '!' as in '!ls'.
            Copyright 2018 (c) Zaryob and Sulin Community. """))
     while 1:
         cmd = input('inary> ')
@@ -45,20 +45,20 @@ if __name__ == "__main__":
         try:
             cli = InaryCLI(cmd.split())
             cli.run_command()
-        except inary.Exception  as e:
-            ctx.ui.info(_('Inary has been upgraded.'))
+        except inary.errors.Exception as e:
+            pass
         except Exception as value:
             signal.signal(signal.SIGINT, signal.SIG_IGN) # disable further interrupts
             ui = inary.cli.CLI() # make a temporary UI
             show_traceback = False
             if isinstance(value, KeyboardInterrupt):
                 ui.error(_("Keyboard Interrupt: Exiting..."))
-            elif isinstance(value, inary.Error):
+            elif isinstance(value, inary.errors.Error):
                 ui.error(_("Program Terminated."))
                 show_traceback = ctx.get_option('debug')
-            elif isinstance(value, inary.Exception):
+            elif isinstance(value, inary.errors.Exception):
                 show_traceback = True
-                ui.error(_("""Unhandled internal exception. Please file a bug report. 
+                ui.error(_("""Unhandled internal exception. Please file a bug report.
 (http://bugs.sulin.org)"""))
             else:
                 # For any other exception (possibly Python exceptions) show the traceback!

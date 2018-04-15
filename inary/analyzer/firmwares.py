@@ -12,8 +12,9 @@
 
 import os
 import sys
-import inary
 import inary.context as ctx
+import inary.db
+import inary.errors
 import inary.util
 
 #Gettext
@@ -21,7 +22,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 def get_firmwares():
@@ -43,7 +44,7 @@ def get_firmware_package(firmware):
     try:
         fw_packages = inary.db.componentdb.ComponentDB().get_packages("hardware.firmware")
         unavailable_fw_packages = set(fw_packages).difference(inary.db.installdb.InstallDB().list_installed())
-        
+
         if unavailable_fw_packages:
             ctx.ui.info(inary.util.colorize(_("The following firmwares are not installed:"), "yellow"))
             ctx.ui.info("\n".join(unavailable_fw_packages))

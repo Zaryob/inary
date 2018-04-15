@@ -18,10 +18,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 import inary.context as ctx
 import inary.archive as archive
 import inary.uri
+import inary.ui
 import inary.data.metadata
 import inary.file
 import inary.data.files
@@ -29,7 +30,7 @@ import inary.util as util
 from . import fetcher
 
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 
@@ -97,7 +98,7 @@ class Package:
         if not os.path.exists(self.filepath):
             try:
                 inary.file.File.download(url, dest)
-            except inary.fetcher.FetchError:
+            except fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
                     raise Error(_("There was a problem while fetching '{}'.\nThe package may have been upgraded. Please try to upgrade the package.").format(url))
@@ -210,7 +211,7 @@ class Package:
                 # accessed. Removing and creating the file will also
                 # change the inode and will do the trick (in fact, old
                 # file will be deleted only when its closed).
-                # 
+                #
                 # Also, tar.extract() doesn't write on symlinks... Not any
                 # more :).
                 if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
@@ -239,7 +240,7 @@ class Package:
         self.impl.unpack_dir_flat(dir, outdir)
 
     def extract_to(self, outdir, clean_dir = False):
-        """Extracts contents of the archive to outdir. Before extracting if clean_dir 
+        """Extracts contents of the archive to outdir. Before extracting if clean_dir
         is set, outdir is deleted with its contents"""
         self.impl.unpack(outdir, clean_dir)
 
@@ -274,7 +275,7 @@ class Package:
 
     def scom_dir(self):
         return os.path.join(self.pkg_dir(), ctx.const.scom_dir)
- 
+
     @staticmethod
     def is_cached(packagefn):
         url = inary.uri.URI(packagefn)

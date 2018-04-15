@@ -38,11 +38,11 @@ import inary.db
 try:
     import ciksemel
     parser = "ciksemel"
-except: 
+except:
     import xml.dom.minidom as minidom
     parser = "minidom"
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class Packager(metaclass= autoxml.autoxml):

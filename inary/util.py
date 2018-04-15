@@ -46,9 +46,10 @@ class Singleton(type):
 
 # inary modules
 import inary
+import inary.errors
 import inary.context as ctx
 
-class Error(inary.Error):
+class Error(inary.errors.Error):
     pass
 
 class FileError(Error):
@@ -876,14 +877,14 @@ def colorize(msg, color):
     return str(msg)
 
 def config_changed(config_file):
-    fpath = inary.util.join_path(ctx.config.dest_dir(), config_file.path)
+    fpath = join_path(ctx.config.dest_dir(), config_file.path)
     if os.path.exists(fpath) and not os.path.isdir(fpath):
         if os.path.islink(fpath):
             f = os.readlink(fpath)
-            if os.path.exists(f) and inary.util.sha1_data(f) != config_file.hash:
+            if os.path.exists(f) and sha1_data(f) != config_file.hash:
                 return True
         else:
-            if inary.util.sha1_file(fpath) != config_file.hash:
+            if sha1_file(fpath) != config_file.hash:
                 return True
     return False
 

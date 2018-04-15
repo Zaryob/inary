@@ -13,10 +13,12 @@
 import re
 import gzip
 
-import inary
+import inary.analyzer
 import inary.context as ctx
 import inary.data.specfile as Specfile
+import inary.db
 import inary.db.lazydb as lazydb
+import inary.sxml
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -25,7 +27,7 @@ _ = __trans.gettext
 try:
     import ciksemel
     parser = "ciksemel"
-except: 
+except:
     import xml.dom.minidom as minidom
     parser = "minidom"
 

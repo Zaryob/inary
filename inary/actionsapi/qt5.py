@@ -70,4 +70,3 @@ def make(parameters=''):
 
 def install(parameters='', argument='install'):
     cmaketools.install('INSTALL_ROOT="{0}" {1}'.format(get.installDIR(), parameters), argument)
-
