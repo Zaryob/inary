@@ -140,9 +140,8 @@ class Fetcher:
                              }
 
 
-    def fetch(self, timeout=3):
+    def test(self, timeout=3):
         try:
-            import urllib.request
             requests.get(self.url.get_uri(),
                            proxies=self._get_proxies(),
                            timeout=timeout,
@@ -151,11 +150,6 @@ class Fetcher:
 
         except ValueError as e:
             msg = _("Url Problem: \n {}").format(e)
-            raise FetchError(msg)
-            return False
-
-        except urlerror.HTTPError as e:
-            msg = _("Reaised an HTTP Error: \n {}").format(e)
             raise FetchError(msg)
             return False
 
@@ -186,6 +180,7 @@ class Fetcher:
                                         proxies = self._get_proxies(),
                                         headers = self.headers_dict,
                                         verify=verify,
+                                        timeout=5,
                                         stream=True)
 
                     handler= UIHandler()
