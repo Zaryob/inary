@@ -67,6 +67,9 @@ def getNodeAttribute(node, attrname):
         return None
     return node.getAttribute(attrname)
 
+def getAttributeList(node):
+    return node.attributes
+
 def setNodeAttribute(node, attrname, value):
     """get named attribute from DOM node"""
     return node.setAttribute(attrname, value)
@@ -183,3 +186,9 @@ def addText(node, tagPath, text, branch = True):
 
 def newNode(node, tag):
     return node.ownerDocument.createElement(tag)
+
+def toString(node):
+    return node.toxml('utf-8')
+
+def toPretty(node):
+    return node.toprettyxml()

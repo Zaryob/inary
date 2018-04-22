@@ -29,7 +29,7 @@ _ = __trans.gettext
 import io
 import ciksemel as iks
 
-import inary.file
+import inary.errors
 import inary.config
 from inary.file import File
 from inary.util import join_path as join

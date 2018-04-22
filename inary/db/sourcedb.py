@@ -18,18 +18,11 @@ import inary.context as ctx
 import inary.data.specfile as Specfile
 import inary.db
 import inary.db.lazydb as lazydb
-import inary.sxml
+from inary.sxml import autoxml, xmlext
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-try:
-    import ciksemel
-    parser = "ciksemel"
-except:
-    import xml.dom.minidom as minidom
-    parser = "minidom"
 
 class SourceDB(lazydb.LazyDB):
 
@@ -56,45 +49,28 @@ class SourceDB(lazydb.LazyDB):
         sources = {}
         pkgstosrc = {}
 
-        if parser=="ciksemel":
-            for spec in doc.tags("SpecFile"):
-                src_name = spec.getTag("Source").getTagData("Name")
-                sources[src_name] = gzip.zlib.compress(spec.toString().encode('utf-8'))
-                for package in spec.tags("Package"):
-                    pkgstosrc[package.getTagData("Name")] = src_name
+        for spec in xmlext.getTagByName(doc, "SpecFile"):
+            src = xmlext.getNodeText(spec, "Source")
+            src_name = xmlext.getNodeText(src, "Name")
+            compressed_data = gzip.zlib.compress(xmlext.toString(spec).encode('utf-8'))
+            sources[src_name] = gzip.zlib.compress(compressed_data)
 
-        else:
-            for spec in doc.childNodes:
-                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                    src_name = spec.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data
-                    sources[src_name] = gzip.zlib.compress(spec.toxml('utf-8'))
-                    for package in spec.childNodes:
-                        if package.nodeType == package.ELEMENT_NODE and package.tagName == "Package":
-                            pkgstosrc[package.getElementsByTagName("Name")[0].firstChild.data] = src_name
+            for package in xmlext.getTagByName(doc, "Package"):
+                pkgstosrc[xmlext.getNodeText(package, "Name")] = src_name
 
         return sources, pkgstosrc
 
     def __generate_revdeps(self, doc):
         revdeps = {}
 
-        if parser=="ciksemel":
-            for spec in doc.tags("SpecFile"):
-                name = spec.getTag("Source").getTagData("Name")
-                deps = spec.getTag("Source").getTag("BuildDependencies")
-                if deps:
-                    for dep in deps.tags("Dependency"):
-                        revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
-        else:
-            for spec in doc.childNodes:
-                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                    source = spec.getElementsByTagName("Source")[0]
-                    name = source.getElementsByTagName("Name")[0].firstChild.data
-                    deps = source.getElementsByTagName("BuildDependencies")
-                    if deps:
-                        for sdep in deps:
-                            for dep in sdep.childNodes:
-                                if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "Dependency":
-                                    revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml()))
+        for spec in xmlext.getTagByName(doc, "SpecFile"):
+            src = xmlext.getNodeText(spec, "Source")
+            name = xmlext.getNodeText(src, "Name")
+            deps = xmlext.getNode(src, "BuildDependencies")
+            if deps:
+                for dep in xmlext.getTagByName(deps, "Dependency"):
+                    revdeps.setdefault(xmlext.getNodeText(dep, set())).add((name, xmlext.toString(dep)))
+
         return revdeps
 
     def list_sources(self, repo=None):
@@ -129,7 +105,7 @@ class SourceDB(lazydb.LazyDB):
         if not fields:
             fields = {'name': True, 'summary': True, 'desc': True}
         if not lang:
-            lang = inary.sxml.autoxml.LocalText.get_lang()
+            lang = autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.sdb.get_items_iter(repo):
             if terms == [term for term in terms if (fields['name'] and \

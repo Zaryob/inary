@@ -22,18 +22,11 @@ import inary.analyzer.dependency
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
 import inary.context as ctx
+from inary.sxml import xmlext
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-try:
-    import ciksemel
-    parser = "ciksemel"
-except:
-    import xml.dom.minidom as minidom
-    parser = "minidom"
-
 
 class PackageDB(lazydb.LazyDB):
 
@@ -64,72 +57,40 @@ class PackageDB(lazydb.LazyDB):
 
     ## Generate functions look sooo ugly
     def __generate_replaces(self, doc):
-        if parser== "ciksemel":
-            return [x.getTagData("Name") for x in doc.tags("Package") if x.getTagData("Replaces")]
-
-        else:
-            return [node.getElementsByTagName("Name")[0].firstChild.data \
-                for node in doc.childNodes \
-                    if node.nodeType == node.ELEMENT_NODE and \
-                    node.tagName == "Package" and \
-                    node.getElementsByTagName("Replaces")]
-
+        replaces = []
+        packages = xmlext.getTagByName(doc, "Package")
+        for node in packages:
+            if xmlext.getNodeText(node, "Replaces"):
+                replaces.append(xmlext.getNodeText(node, "Name"))
+        return replaces
 
     def __generate_obsoletes(self, doc):
-        if parser=="ciksemel":
-            distribution = doc.getTag("Distribution")
-            obsoletes = distribution and distribution.getTag("Obsoletes")
-            src_repo = doc.getTag("SpecFile") is not None
+        distribution = xmlext.getNode(doc, "Distribution")
+        obsoletes = distribution and xmlext.getNode(distribution, "Obsoletes")
+        src_repo = xmlext.getNode(doc, "SpecFile") is not None
 
-            if not obsoletes or src_repo:
-                return []
-            return [x.firstChild().data() for x in obsoletes.tags("Package")]
-
-        else:
-            distribution = doc.getElementsByTagName("Distribution")[0]
-            obsoletes = distribution and distribution.getElementsByTagName("Obsoletes")[0]
-            try:
-                src_repo = doc.getElementsByTagName("SpecFile")[0]
-            except:
-                src_repo = None
-
-            if not obsoletes or src_repo:
-                return []
-
-            return [x.childNodes[0].data for x in obsoletes.getElementsByTagName("Package")]
+        if not obsoletes or src_repo:
+            return []
+        return [xmlext.getNodeText(x) for x in xmlext.getTagByName(obsolates, "Package")]
 
     def __generate_packages(self, doc):
         pdict={}
-        if parser=="ciksemel":
-            for x in doc.tags("Package"):
-                pdict[x.getTagData("Name")]= gzip.zlib.compress(x.toString().encode('utf-8'))
 
-        else:
-            for node in doc.childNodes:
-                if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
-                    name = node.getElementsByTagName('Name')[0].firstChild.data
-                    pdict[name]= gzip.zlib.compress(node.toxml('utf-8'))
+        for x in xmlext.getTagByName(doc, "Package"):
+            name = xmlext.getNodeText(x, "Name")
+            compressed_data =gzip.zlib.compress(xmlext.toString(x).encode('utf-8'))
+            pdict[name]= compressed_data
+
         return pdict
 
     def __generate_revdeps(self, doc):
         revdeps = {}
-        if parser=="ciksemel":
-            for node in doc.tags("Package"):
-                name = node.getTagData('Name')
-                deps = node.getTag('RuntimeDependencies')
-                if deps:
-                    for dep in deps.tags("Dependency"):
-                        revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
-
-        else:
-            for node in doc.childNodes:
-                if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
-                    name = node.getElementsByTagName('Name')[0].firstChild.data
-                    deps = node.getElementsByTagName('RuntimeDependencies')
-                    if deps:
-                        for dep in deps:
-                            for i in dep.getElementsByTagName('Dependency'):
-                                revdeps.setdefault(i.firstChild.data, set()).add((name, i.toxml('utf-8')))
+        for node in xmlext.getTagByName(doc,"Package"):
+            name = xmlext.getNodeText(node, 'Name')
+            deps = xmlext.getNode(node, 'RuntimeDependencies')
+            if deps:
+                for dep in xmlext.getTagByName(deps, "Dependency"):
+                    revdeps.setdefault(xmlext.getNodeText(dep), set()).add((name, xmlext.toString(dep)))
 
         return revdeps
 

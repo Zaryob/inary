@@ -20,17 +20,12 @@ import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.component as Component
 import inary.db.lazydb as lazydb
-import inary.sxml
+from inary.sxml import autoxml, xmlext
 
 class ComponentDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
-        try:
-            import ciksemel
-            self.parser = "ciksemel"
-        except:
-            self.parser = "minidom"
 
     def init(self):
         component_nodes = {}
@@ -49,42 +44,35 @@ class ComponentDB(lazydb.LazyDB):
         self.cpdb = inary.db.itembyrepo.ItemByRepo(component_packages)
         self.csdb = inary.db.itembyrepo.ItemByRepo(component_sources)
 
-    def __generate_packages(self, doc, ):
+    def __generate_packages(self, doc):
         components = {}
-        if self.parser == "ciksemel":
-            for pkg in doc.tags("Package"):
-                components.setdefault(pkg.getTagData("PartOf"), []).append(pkg.getTagData("Name"))
-        else:
-            for pkg in doc.childNodes:
-                if pkg.nodeType == pkg.ELEMENT_NODE and pkg.tagName == "Package":
-                    partOf = pkg.getElementsByTagName("PartOf")[0].firstChild.data
-                    pkgName = pkg.getElementsByTagName("Name")[0].firstChild.data
-                    components.setdefault(partOf, []).append(pkgName)
+        packages = xmlext.getTagByName(doc, "Package")
+        for pkg in packages:
+            name = xmlext.getNodeText(pkg, "Name")
+            partof = xmlext.getNodeText(pkg,"PartOf")
+            components.setdefault(partof, []).append(name)
 
         return components
 
     def __generate_sources(self, doc):
         components = {}
-        if self.parser == "ciksemel":
-            for spec in doc.tags("SpecFile"):
-                src = spec.getTag("Source")
-                components.setdefault(src.getTagData("PartOf"), []).append(src.getTagData("Name"))
-
-        else:
-            for spec in doc.childNodes:
-                if spec.nodeType == spec.ELEMENT_NODE and spec.tagName == "SpecFile":
-                    src = spec.getElementsByTagName("Source")[0]
-                    partOf = src.getElementsByTagName("PartOf")[0].firstChild.data
-                    pkgName = src.getElementsByTagName("Name")[0].firstChild.data
-                    components.setdefault(partOf, []).append(pkgName)
+        specfile = xmlext.getTagByName(doc, "SpecFile")
+        for spec in specfile:
+            source = xmlext.getNode(spec, "Source")
+            name = xmlext.getNodeText(source, "Name")
+            partof = xmlext.getNodeText(source, "PartOf")
+            components.setdefault(partof, []).append(name)
 
         return components
 
     def __generate_components(self, doc):
-        if self.parser == "ciksemel":
-            return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
-        else:
-            return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml('utf-8')) for x in doc.getElementsByTagName("Component")])
+        components = {}
+        component = xmlext.getTagByName(doc, "Component")
+        for comp in component:
+            name = xmlext.getNodeText(comp, "Name")
+            components[name] = xmlext.toString(comp)
+
+        return components
 
     def has_component(self, name, repo = None):
         return self.cdb.has_item(name, repo)
@@ -98,7 +86,7 @@ class ComponentDB(lazydb.LazyDB):
         redesc = '<Description xml:lang="({0}|en)">.*?{1}.*?</Description>'
 
         if not lang:
-            lang = inary.sxml.autoxml.LocalText.get_lang()
+            lang = autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.cdb.get_items_iter(repo):
             if name not in found and terms == [term for term in terms if re.compile(rename.format(lang, term), re.I).search(xml) or \

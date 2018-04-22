@@ -19,6 +19,8 @@ import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.group as Group
 import inary.db.lazydb as lazydb
+from inary.sxml import xmlext
+
 
 class GroupNotFound(Exception):
     pass
@@ -32,12 +34,6 @@ class GroupDB(lazydb.LazyDB):
         group_nodes = {}
         group_components = {}
 
-        try:
-            import ciksemel
-            self.parser = "ciksemel"
-        except:
-            self.parser = "minidom"
-
         repodb = inary.db.repodb.RepoDB()
 
         for repo in repodb.list_repos():
@@ -50,31 +46,22 @@ class GroupDB(lazydb.LazyDB):
 
     def __generate_components(self, doc):
         groups = {}
+        components = xmlext.getTagByName(doc, "Component")
+        for comp in components:
+            group = xmlext.getNodeText(comp, "Group")
+            name = xmlext.getNodeText(comp, "Name")
+            groups.setdefault(group, []).append(name)
 
-        if self.parser=="ciksemel":
-            for c in doc.tags("Component"):
-                group = c.getTagData("Group")
-                if not group:
-                    group = "unknown"
-                groups.setdefault(group, []).append(c.getTagData("Name"))
-
-        else:
-            for c in doc.childNodes:
-                if c.nodeType == c.ELEMENT_NODE and c.tagName == "Component":
-                    group = c.getElementsByTagName("Group")[0]
-                    if not group:
-                        group = "unknown"
-                    groups.setdefault(group.firstChild.data, []).append(c.getElementsByTagName("Name")[0].firstChild.data)
         return groups
 
     def __generate_groups(self, doc):
+        groups = {}
+        group = xmlext.getTagByName(doc, "Group")
+        for gr in group:
+            name = xmlext.getNodeText(gr, "Name")
+            groups[name] = xmlext.toString(gr)
 
-        if self.parser=="ciksemel":
-            return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Group")])
-
-        else:
-            return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml()) \
-            for x in doc.childNodes if x.nodeType == x.ELEMENT_NODE and x.tagName == "Group"])
+        return groups
 
     def has_group(self, name, repo = None):
         return self.gdb.has_item(name, repo)

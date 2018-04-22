@@ -52,6 +52,9 @@ def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
     return node.getAttribute(attrname)
 
+def getAttributeList(node):
+    return node.attributes()
+
 def setNodeAttribute(node, attrname, value):
     """get named attribute from DOM node"""
     return node.setAttribute(attrname, value)
@@ -69,6 +72,7 @@ def getNodeText(node, tagpath = ""):
         node = getNode(node, tagpath)
         if not node:
             return None
+
     child = node.firstChild()
     if not child:
         return None
@@ -167,3 +171,9 @@ def addText(node, tagpath, text):
 
 def newNode(node, tag):
     return iks.newDocument(tag)
+
+def toString(node):
+    return node.toString()
+
+def toPretty(node):
+    return node.toPrettyString()

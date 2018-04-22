@@ -45,6 +45,10 @@ Gives a brief list of sources published in the repositories.
         self.init(database = True, write = False)
 
         l = self.sourcedb.list_sources()
+
+        if l:
+            maxlen = max([len(_p) for _p in l])
+
         l.sort()
         for p in l:
             sf, repo = self.sourcedb.get_spec_repo(p)
@@ -52,8 +56,7 @@ Gives a brief list of sources published in the repositories.
                 ctx.ui.info('[Repository: ' + repo + ']')
                 ctx.ui.info(str(sf.source))
             else:
-                lenp = len(p)
                 #if p in installed_list:
                 #    p = util.colorize(p, 'cyan')
-                p = p + ' ' * max(0, 15 - lenp)
+                sf.source.name += ' ' * max(0, maxlen - len(p))
                 ctx.ui.info('{0} - {1}'.format(sf.source.name, str(sf.source.summary)))

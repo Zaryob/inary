@@ -29,6 +29,8 @@ import io
 import xml.dom.minidom as minidom
 from xml.parsers.expat import ExpatError
 
+import inary.errors
+import inary.config
 from inary.file import File
 from inary.util import join_path as join
 

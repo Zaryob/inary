@@ -25,15 +25,8 @@ import inary.context as ctx
 import inary.data
 import inary.data.files as Files
 import inary.db.lazydb as lazydb
-import inary.sxml
+from inary.sxml import autoxml, xmlext
 import inary.util
-
-try:
-    import ciksemel
-    parser = "ciksemel"
-except:
-    import xml.dom.minidom as minidom
-    parser = "minidom"
 
 
 class InstallDBError(inary.errors.Error):
@@ -99,57 +92,31 @@ class InstallDB(lazydb.LazyDB):
 
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        meta_doc = xmlext.parse(metadata_xml)
 
-        if parser=="ciksemel":
-            try:
-                meta_doc = ciksemel.parse(metadata_xml)
-                pkg = meta_doc.getTag("Package")
-            except:
-                pkg = None
+        try:
+            pkg = xmlext.getNode(meta_doc, "Package")
+        except:
+            pkg = None
 
-            if pkg is None:
-                # If package info is broken or not available, skip it.
-                ctx.ui.warning(_("Installation info for package '{}' is broken. "
-                                 "Reinstall it to fix this problem.").format(package))
-                del self.installed_db[package]
-                return
+        if pkg is None:
+            # If package info is broken or not available, skip it.
+            ctx.ui.warning(_("Installation info for package '{}' is broken. "
+                             "Reinstall it to fix this problem.").format(package))
+            del self.installed_db[package]
+            return
 
-            deps = pkg.getTag('RuntimeDependencies')
-            if deps:
-                for dep in deps.tags("Dependency"):
-                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
-                    revdep[package] = dep.toString()
-                for anydep in deps.tags("AnyDependency"):
-                    for dep in anydep.tags("Dependency"):
-                        revdep = revdeps.setdefault(dep.firstChild().data(), {})
-                        revdep[package] = anydep.toString()
+        deps= xmlext.getTagByName(meta_doc, 'RuntimeDependencies')
+        if deps:
+            for dep in xmlext.getTagByName(deps, 'Dependency'):
 
-        else:
-            try:
-                meta_doc = minidom.parse(metadata_xml).documentElement
-                pkg = meta_doc.getElementsByTagName("Package")[0]
-            except:
-                pkg = None
+                revdep = revdeps.setdefault(xmlext.getNodeText(dep), {})
+                revdep[package] = xmlext.toString(dep)
 
-            if pkg is None:
-                # If package info is broken or not available, skip it.
-                ctx.ui.warning(_("Installation info for package '{}' is broken. "
-                                 "Reinstall it to fix this problem.").format(package))
-                del self.installed_db[package]
-                return
-
-            deps = pkg.getElementsByTagName('RuntimeDependencies')
-            if deps:
-                for dep_tag in deps:
-                    for dep in dep_tag.childNodes:
-                        if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "Dependency":
-                            revdep = revdeps.setdefault(dep.childNodes[0].data, {})
-                            revdep[package] = dep.toxml('utf-8')
-                    for anydep in dep_tag.childNodes:
-                        if dep.nodeType == dep.ELEMENT_NODE and dep.tagName == "AnyDependency":
-                            for dep in anydep.getElementsByTagName ("Dependency"):
-                                revdep = revdeps.setdefault(dep.firstChild.data, {})
-                                revdep[package] = anydep.toxml('utf-8')
+            for anydep in xmlext.getTagByName(deps, 'AnyDependency'):
+                for dep in xmlext.getTagByName(anydep, 'Dependency'):
+                    revdep = revdeps.setdefault(xmlext.getNodeText(dep), {})
+                    revdep[package] = xmlext.toString(anydep)
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -180,56 +147,63 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        if parser== "ciksemel":
-            history = meta_doc.getTag("Package").getTag("History")
-            version = history.getTag("Update").getTagData("Version")
-            release = history.getTag("Update").getAttribute("release")
+        package = xmlext.getNode(meta_doc,'Package')
+        update = xmlext.getNode(meta_doc,'Update')
+        history = xmlext.getNodeText(package, 'History')
+        version = xmlext.getNodeText(update, 'Version')
+        release = xmlext.getNodeText(update, 'release')
 
-        else:
-            history = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("History")[0]
-            version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
-            release = history.getElementsByTagName("Update")[0].getAttribute("release")[0]
-        # TODO Remove None
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        if parser== "ciksemel":
-            distro = meta_doc.getTag("Package").getTagData("Distribution")
-            release = meta_doc.getTag("Package").getTagData("DistributionRelease")
-        else:
-            distro = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("Distribution")[0].firstChild.data
-            release = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("DistributionRelease")[0].firstChild.data
+        package = xmlext.getNode(meta_doc, 'Package')
+        distro = xmlext.getNodeText(package, 'Distribution')
+        release = xmlext.getNodeText(package, 'DistributionRelease')
+
         return distro, release
 
     def __get_install_tar_hash(self, meta_doc):
-        if parser== "ciksemel":
-            hash = meta_doc.getTag("Package").getTagData("InstallTarHash")
-        else:
-            hash = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("InstallTarHash")[0].firstChild.data
+        package = xmlext.getNode(meta_doc, 'Package')
+        hash = xmlext.getNodeText(package, 'InstallTarHash')
         return hash
 
     def get_install_tar_hash(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        if parser== "ciksemel":
+
+        try:
+            import ciksemel
             meta_doc = ciksemel.parse(metadata_xml)
-        else:
+
+        except:
+            import xml.dom.minidom as minidom
             meta_doc = minidom.parse(metadata_xml).documentElement
+
         return self.__get_install_tar_hash(meta_doc)
 
     def get_version_and_distro_release(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        if parser== "ciksemel":
+
+        try:
+            import ciksemel
             meta_doc = ciksemel.parse(metadata_xml)
-        else:
+
+        except:
+            import xml.dom.minidom as minidom
             meta_doc = minidom.parse(metadata_xml).documentElement
+
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        if parser== "ciksemel":
+
+        try:
+            import ciksemel
             meta_doc = ciksemel.parse(metadata_xml)
-        else:
+
+        except:
+            import xml.dom.minidom as minidom
             meta_doc = minidom.parse(metadata_xml).documentElement
+
         return self.__get_version(meta_doc)
 
     def get_files(self, package):
@@ -257,7 +231,7 @@ class InstallDB(lazydb.LazyDB):
         if not fields:
             fields = {'name': True, 'summary': True, 'desc': True}
         if not lang:
-            lang = inary.sxml.autoxml.LocalText.get_lang()
+            lang = autoxml.LocalText.get_lang()
         found = []
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
@@ -295,21 +269,20 @@ class InstallDB(lazydb.LazyDB):
         return info
 
     def __make_dependency(self, depStr):
-        if parser=="ciksemel":
+        try:
+            import ciksemel
             node = ciksemel.parseString(depStr)
-            dependency = inary.analyzer.dependency.Dependency()
-            dependency.package = node.firstChild().data()
-            if node.attributes():
-                attr = node.attributes()[0]
-                dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
 
-        else:
+        except:
+            import xml.dom.minidom as minidom
             node = minidom.parseString(depStr).documentElement
-            dependency = inary.analyzer.dependency.Dependency()
-            dependency.package = node.childNodes[0].data
-            if node.attributes:
-                attr = node.attributes[0]
-                dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
+
+        dependency = inary.analyzer.dependency.Dependency()
+        dependency.package = xmlext.getNodeText(node)
+
+        if xmlext.getAttributeList(node):
+            attr = xmlext.getAttributeList(node)[0]
+            dependency.__dict__[str(attr)] = xmlext.getNodeAttribute(node.str(attr))
 
         return dependency
 
