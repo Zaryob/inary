@@ -71,7 +71,7 @@ class GeneralDefaults:
     autoclean = False
     distribution = "Sulin"
     distribution_release = "2018"
-    distribution_id = "18s"
+    distribution_id = "s18"
     architecture = "i686"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
@@ -113,8 +113,8 @@ class DirectoriesDefaults:
     lock_dir = "/var/lock/subsys"
     index_dir = "/var/lib/inary/index"
     tmp_dir =  "/var/inary"
-    kde_dir = "/usr/kde/4"
-    qt_dir = "/usr/qt/4"
+    kde_dir = "/usr/kde/5"
+    qt_dir = "/usr/qt/5"
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration

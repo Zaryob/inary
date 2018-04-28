@@ -32,6 +32,7 @@ import inary
 import ciksemel as iks
 
 parse = iks.parse
+parseString = iks.parseString
 newDocument = iks.newDocument
 
 def getAllNodes(node, tagPath):

@@ -186,27 +186,15 @@ class InstallDB(lazydb.LazyDB):
     def get_version_and_distro_release(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
 
-        try:
-            import ciksemel
-            meta_doc = ciksemel.parse(metadata_xml)
-
-        except:
-            import xml.dom.minidom as minidom
-            meta_doc = minidom.parse(metadata_xml).documentElement
+        meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
 
-        try:
-            import ciksemel
-            meta_doc = ciksemel.parse(metadata_xml)
-
-        except:
-            import xml.dom.minidom as minidom
-            meta_doc = minidom.parse(metadata_xml).documentElement
-
+        meta_doc = xmlext.parse(metadata_xml)
+        
         return self.__get_version(meta_doc)
 
     def get_files(self, package):

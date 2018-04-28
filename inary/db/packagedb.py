@@ -73,7 +73,7 @@ class PackageDB(lazydb.LazyDB):
 
         if not obsoletes or src_repo:
             return []
-        return [xmlext.getNodeText(x) for x in xmlext.getTagByName(obsolates, "Package")]
+        return [xmlext.getNodeText(x) for x in xmlext.getTagByName(obsoletes, "Package")]
 
     def __generate_packages(self, doc):
         pdict={}
@@ -145,26 +145,17 @@ class PackageDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        if parser=="ciksemel":
-            history = meta_doc.getTag("History")
-            version = history.getTag("Update").getTagData("Version")
-            release = history.getTag("Update").getAttribute("release")
-        else:
-            history = meta_doc.getElementsByTagName("History")[0]
-            version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
-            release = history.getElementsByTagName("Update")[0].getAttribute["release"]
+        history = xmlext.getNode(meta_doc, 'History')
+        update = xmlext.getNode(history,'Update')
 
-        # TODO Remove None
+        version = xmlext.getNodeText(update, 'Version')
+        release = xmlext.getNodeAttribute(update, 'release')
+
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        if parser=="ciksemel":
-            distro = meta_doc.getTagData("Distribution")
-            release = meta_doc.getTagData("DistributionRelease")
-
-        else:
-            distro = meta_doc.getElementsByTagName("Distribution")[0].firstChild.data
-            release = meta_doc.getElementsByTagName("DistributionRelease")[0].firstChild.data
+        distro = xmlext.getNodeText(meta_doc, 'Distribution')
+        release = xmlext.getNodeText(meta_doc, 'DistributionRelease')
 
         return distro, release
 
@@ -172,20 +163,16 @@ class PackageDB(lazydb.LazyDB):
         if not self.has_package(name, repo):
             raise Exception(_('Package {} not found.').format(name))
 
-        if parser=="ciksemel":
-            pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
-        else:
-            pkg_doc = minidom.parseString(self.pdb.get_item(name, repo)).documentElement
+        pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
+
         return self.__get_version(pkg_doc) + self.__get_distro_release(pkg_doc)
 
     def get_version(self, name, repo):
         if not self.has_package(name, repo):
             raise Exception(_('Package {} not found.').format(name))
 
-        if parser=="ciksemel":
-            pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
-        else:
-            pkg_doc = minidom.parseString(self.pdb.get_item(name, repo)).documentElement
+        pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
+
         return self.__get_version(pkg_doc)
 
     def get_package_repo(self, name, repo=None):
@@ -204,23 +191,14 @@ class PackageDB(lazydb.LazyDB):
         repodb = inary.db.repodb.RepoDB()
 
         packages = set()
+        for repo in repodb.list_repos():
+            doc = repodb.get_repo_doc(repo)
+            for package in xmlext.getTagByName(doc, "Package"):
+                if xmlext.getNodeText(package, "IsA"):
+                    for node in xmlext.getTagByName(package, "IsA"):
+                        if xmlext.getNodeText(node) == isa:
+                            packages.add(xmlext.getNodeText(package, "Name"))
 
-        if parser=="ciksemel":
-            for repo in repodb.list_repos():
-                doc = repodb.get_repo_doc(repo)
-                for package in doc.tags("Package"):
-                    if package.getTagData("IsA"):
-                        for node in package.tags("IsA"):
-                            if node.firstChild().data() == isa:
-                                packages.add(package.getTagData("Name"))
-        else:
-            for repo in repodb.list_repos():
-                doc = repodb.get_repo_doc(repo)
-                for package in doc.getElementsByTagName("Package"):
-                    if package.getElementsByTagName("IsA"):
-                        for node in package.getElementsByTagName("IsA"):
-                            if node.childNodes[0].data == isa:
-                                packages.add(package.getElementsByTagName("Name")[0].firstChild.data)
         return list(packages)
 
     def get_rev_deps(self, name, repo=None):
@@ -231,26 +209,14 @@ class PackageDB(lazydb.LazyDB):
 
         rev_deps = []
 
-        if parser=="ciksemel":
-            for pkg, dep in rvdb:
-                node = ciksemel.parseString(dep)
-                dependency = inary.analyzer.dependency.Dependency()
-                dependency.package = node.firstChild().data()
-                if node.attributes():
-                    attr = node.attributes()[0]
-                    dependency.__dict__[attr] = node.getAttribute(str(attr))
-                rev_deps.append((pkg, dependency))
-
-        else:
-            for pkg, dep in rvdb:
-                node = minidom.parseString(dep).documentElement
-                dependency = inary.analyzer.dependency.Dependency()
-                dependency.package = node.childNodes[0].data
-                #FIXME
-                if node.attributes:
-                    attr = node.attributes[0]
-                    dependency.__dict__[attr] = node.getAttribute(attr)
-                rev_deps.append((pkg, dependency))
+        for pkg, dep in rvdb:
+            node = xmlext.parseString(dep)
+            dependency = inary.analyzer.dependency.Dependency()
+            dependency.package = xmlext.getNodeText(node)
+            if node.attributes():
+                attr = xmlext.getAttributeList(node)[0]
+                dependency.__dict__[attr] = xmlext.getNodeAttribute(node, str(attr))
+            rev_deps.append((pkg, dependency))
 
         return rev_deps
 
@@ -258,33 +224,17 @@ class PackageDB(lazydb.LazyDB):
     def get_replaces(self, repo=None):
         pairs = {}
 
-        if parser=="ciksemel":
-            for pkg_name in self.rpdb.get_list_item():
-                xml = self.pdb.get_item(pkg_name, repo)
-                package = ciksemel.parseString(str(xml))
-                replaces_tag = package.getTag("Replaces")
-                if replaces_tag:
-                    for node in replaces_tag.tags("Package"):
-                        r = inary.data.relation.Relation()
-                        # XXX Is there a better way to do this?
-                        r.decode(node, [])
-                        if inary.data.replace.installed_package_replaced(r):
-                            pairs.setdefault(r.package, []).append(pkg_name)
-
-        else:
-            for pkg_name in self.rpdb.get_list_item():
-                xml = self.pdb.get_item(pkg_name, repo)
-                package = minidom.parseString(xml)
-                replaces_tag = package.getElementsByTagName("Replaces")
-                if replaces_tag:
-                    for tag in replaces_tag:
-                        for node in tag.childNodes:
-                            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
-                                r = inary.data.relation.Relation()
-                                # XXX Is there a better way to do this?
-                                r.decode(node, [])
-                                if inary.data.replace.installed_package_replaced(r):
-                                    pairs.setdefault(r.package, []).append(pkg_name)
+        for pkg_name in self.rpdb.get_list_item():
+            xml = self.pdb.get_item(pkg_name, repo)
+            package = xmlext.parseString(str(xml))
+            replaces_tag = xmlext.getNode(package, "Replaces")
+            if replaces_tag:
+                for node in xmlext.getTagByName(replaces_tag, "Package"):
+                    r = inary.data.relation.Relation()
+                    # XXX Is there a better way to do this?
+                    r.decode(node, [])
+                    if inary.data.replace.installed_package_replaced(r):
+                        pairs.setdefault(r.package, []).append(pkg_name)
 
         return pairs
 

@@ -46,7 +46,13 @@ def parse(fileName):
     except ExpatError as inst:
         raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
                                                             str(inst)))
-
+def parseString(fileString):
+    try:
+        dom = minidom.parseString(fileString)
+        return dom.documentElement
+    except ExpatError as inst:
+        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
+                                                            str(inst)))
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
     tags = tagPath.split('/')

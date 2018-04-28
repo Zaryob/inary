@@ -120,7 +120,6 @@ class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         self.package.history = history
         self.package.conflicts = pkg.conflicts
         self.package.replaces = pkg.replaces
-        self.package.installedSize = pkg.installledsize
         self.package.additionalFiles = pkg.additionalFiles
 
         # FIXME: right way to do it?
