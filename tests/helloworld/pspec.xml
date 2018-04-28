@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE INARY SYSTEM "http://sulin.org/test/inary/inary-spec.dtd">
+
+<INARY>
+    <Source>
+        <Name>helloworld</Name>
+        <Homepage>http://www.uludag.org.tr</Homepage>
+        <Packager>
+            <Name>John Blonde</Name>
+            <Email>john@blonde.com</Email>
+        </Packager>
+        <License>GPL-2</License>
+        <IsA>category</IsA>
+        <PartOf>component</PartOf>
+        <Summary xml:lang="en">ActionsAPI test suit</Summary>
+        <Description xml:lang="en">ActionsAPI test suit</Description>
+        <Archive type="tarxz" sha1sum="650ff7153aaec65aef71563068154617ca8913d0">http://localhost/helloworld.tar.xz</Archive>
+    </Source>
+
+    <Package>
+        <Name>helloworld</Name>
+        <Files>
+            <Path fileType="binary">/</Path>
+        </Files>
+  </Package>
+
+          <History>
+            <Update release="1">
+                <Date>2018-04-28</Date>
+                <Version>2.0</Version>
+            </Update>
+        </History>
+</INARY>
+
