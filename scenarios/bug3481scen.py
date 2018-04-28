@@ -4,7 +4,7 @@
 #
 # Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=3481
 #
-# Problem  : SPAM asks if conflicting system.base application to be removed but does not
+# Problem  : INARY asks if conflicting system.base application to be removed but does not
 #            allow it without -S
 #
 #            Aşağıdaki paketlerde çakışmalar bulunuyor: [coreutils: hashalot  ile çakışıyor]
@@ -17,7 +17,7 @@
 #
 # Problem Description:
 #
-# SPAM upgrade command sees some system.base packages conflict with each other. It asks if you
+# INARY upgrade command sees some system.base packages conflict with each other. It asks if you
 # want to remove the conflicting package but does not allow it to be removed without
 # --bypass-safety parameter.
 #

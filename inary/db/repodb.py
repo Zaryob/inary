@@ -3,6 +3,8 @@
 #
 # Old author: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
+# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
 # Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under

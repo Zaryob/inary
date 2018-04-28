@@ -9,8 +9,8 @@
 #
 # Problem Description: 
 # 
-# SPaM is incapable to define conflict versioning info. libmp4v2 only conflicts with faad2
-# package's release no 3. But because SPaM does not understand that, two packages can not
+# INARY is incapable to define conflict versioning info. libmp4v2 only conflicts with faad2
+# package's release no 3. But because INARY does not understand that, two packages can not
 # be installed together.
 #
 # Expected:

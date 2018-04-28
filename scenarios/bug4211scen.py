@@ -4,7 +4,7 @@
 #
 # Source   : http://bugs.pardus.org.tr/show_bug.cgi?id=4211
 #
-# Problem  : SPAM does not upgrade or install system.base packages before any other package
+# Problem  : INARY does not upgrade or install system.base packages before any other package
 #
 # Bağımlılıkları sağlamak için bu paketler verilen sırada kurulacaktır:
 # util-macros xorg-proto xtrans libXdmcp libXau libX11 libXext libXp libICE libSM
@@ -39,14 +39,14 @@
 # xorg-proto-7.2_rc1-2-3.inary    (190.0 KB)100%     77.64 KB/s [00:00:00] [bitti]
 # Klavye kesmesi: Çıkıyor...
 #
-# Problem Description: 
-# 
-# In an upgrade or installation SPaM does not upgrade or install system.base packages before any
+# Problem Description:
+#
+# In an upgrade or installation INARY does not upgrade or install system.base packages before any
 # other package.
 #
 # Expected:
 #
-# SPaM should update or install system.base packages before any other package on the system.
+# INARY should update or install system.base packages before any other package on the system.
 #
 
 from inary.scenarioapi.scenario import *
@@ -77,4 +77,3 @@ def run():
 
     repo_updated_index()
     inary_upgraded(OPENOFFICE, SUN_JRE)
-

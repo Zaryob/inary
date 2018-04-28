@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016  -  2017,  Suleyman POYRAZ (AquilaNipalensis)
+# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
+# Copyright (C) 2016 - 2017, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free

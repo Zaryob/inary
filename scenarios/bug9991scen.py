@@ -20,21 +20,21 @@ from inary.scenarioapi.scenario import *
 
 DBUS = "dbus"
 GRUB = "grub"
-SPAM = "inary"
+INARY = "inary"
 KERNEL = "kernel"
 BLUEZ = "bluez"
 
 let_repo_had(KERNEL)
 let_repo_had(BLUEZ)
 let_repo_had(DBUS, with_partof("system.base"))
-let_repo_had(SPAM, with_partof("system.base"))
-let_inary_had(DBUS, SPAM, KERNEL, BLUEZ)
+let_repo_had(INARY, with_partof("system.base"))
+let_inary_had(DBUS, INARY, KERNEL, BLUEZ)
 
 def run():
     repo_version_bumped(KERNEL)
     repo_version_bumped(BLUEZ)
     repo_version_bumped(DBUS)
-    repo_version_bumped(SPAM)
+    repo_version_bumped(INARY)
     repo_updated_index()
 
     # The packages in /etc/inary/blacklist should not be upgraded

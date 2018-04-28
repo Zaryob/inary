@@ -18,7 +18,7 @@
 #
 # Expected:
 #
-# SPaM should not remove the conflicting packages unless fetching of all the new upgrade
+# INARY should not remove the conflicting packages unless fetching of all the new upgrade
 # packages has finished.
 
 from inary.scenarioapi.scenario import *
