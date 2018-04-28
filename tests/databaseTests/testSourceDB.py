@@ -11,6 +11,7 @@
 #
 
 from . import testcase
+
 import inary
 
 class SourceDBTestCase(testcase.TestCase):
@@ -22,40 +23,39 @@ class SourceDBTestCase(testcase.TestCase):
 
 
     def testListSources(self):
-        assert set(self.sourcedb.list_sources()) == set(['bash', 'ca-certificates', 'dialog', 'gnuconfig', 
-                                                         'zlib', 'pv', 'openssl', 'jpeg', 'liblouis', 'tidy',
-                                                         'xorg-util', 'vlock', 'run-parts', 'ncurses', 'uif2iso' ])
-    
+        assert set(self.sourcedb.list_sources()) == set(['ethtool', 'nfdump', 'shadow', 'libidn',
+                                                         'zlib', 'db4', 'openssl', 'jpeg', 'gsl',
+                                                         'curl', 'bogofilter', 'ncftp', 'pam',
+                                                         'bash', 'cracklib'])
+
     def testHasSpec(self):
-        assert self.sourcedb.has_spec("bash")
-        assert not self.sourcedb.has_spec("flict-floct")
+        assert self.sourcedb.has_spec("ethtool")
+        assert not self.sourcedb.has_spec("hedehodo")
 
     def testGetSpec(self):
-        spec = self.sourcedb.get_spec("vlock")
-        assert spec.source.name == "vlock"
-        assert spec.source.partOf == "util"
+        spec = self.sourcedb.get_spec("ethtool")
+        assert spec.source.name == "ethtool"
+        assert spec.source.partOf == "applications.network"
 
     def testGetSpecOfRepository(self):
-        spec = self.sourcedb.get_spec("dialog", "repo1")
-        assert spec.source.name == "dialog"
-        assert spec.source.partOf == "util"
+        spec = self.sourcedb.get_spec("ethtool", "repo1-src")
+        assert spec.source.name == "ethtool"
+        assert spec.source.partOf == "applications.network"
 
     def testGetSpecAndRepository(self):
-        spec, repo = self.sourcedb.get_spec_repo("pv")
-        assert spec.source.name == "pv"
-        assert spec.source.partOf == "util"
-        assert repo == "repo1"
+        spec, repo = self.sourcedb.get_spec_repo("ethtool")
+        assert spec.source.name == "ethtool"
+        assert spec.source.partOf == "applications.network"
+        assert repo == "repo1-src"
 
     def testGetSourceFromPackage(self):
         # FIXME: Add multi package from source to createrepo.py
-        pkg = self.sourcedb.pkgtosrc("run-parts")
-        assert pkg == "runparts"
+        pkg = self.sourcedb.pkgtosrc("cracklib")
+        assert pkg == "cracklib"
 
     def testSearchPackage(self):
         packages = self.sourcedb.search_spec(["open", "ssl"])
         assert set(["openssl"]) == set(packages)
 
-        packages = self.sourcedb.search_spec(["liblo", "!ouis"], repo="repo1")
-        assert set(["liblouis"]) == set(packages)
-
-
+        packages = self.sourcedb.search_spec(["bogo", "filter"], repo="repo1-src")
+        assert set(["bogofilter"]) == set(packages)

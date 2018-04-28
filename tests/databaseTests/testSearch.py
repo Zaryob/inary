@@ -9,9 +9,14 @@
 # Please read the COPYING file.
 #
 
-import unittest import os import inary.search import inary.db as db
-#import inary.db.lockeddbshelve as shelve
-import testcase class SearchTestCase(testcase.TestCase):
+import unittest
+import os
+import inary.search
+import inary.db as db
+
+from . import testcase
+
+class SearchTestCase(testcase.TestCase):
     def setUp(self):
         testcase.TestCase.setUp(self, database = True)
     def testSearch(self):

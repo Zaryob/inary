@@ -37,9 +37,9 @@ class ConfigFileTestCase(unittest.TestCase):
 
     def testInaryConfValues(self):
         cf = self.cf
-        self.assertEqual(cf.dirs.kde_dir, '/usr/')
+        self.assertEqual(cf.dirs.kde_dir, '/usr/kde/5')
         self.assertEqual(cf.dirs.compiled_packages_dir, '/var/cache/inary/packages')
-        self.assertEqual(cf.general.architecture, 'x86_64')
+        self.assertEqual(cf.general.architecture, 'i686')
         self.assertEqual(cf.general.distribution_release, '2018')
 
     def testValuesExists(self):

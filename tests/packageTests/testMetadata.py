@@ -8,7 +8,7 @@ class MetadataTestCase(unittest.TestCase):
 
     def testRead(self):
         md = metadata.MetaData()
-        md.read("../addfiles/metadata.xml")
+        md.read("metadata.xml")
         self.assertEqual(md.package.license,["As-Is"])
         self.assertEqual(md.package.version,"1.7")
         self.assertEqual(md.package.installedSize,149691)
@@ -21,7 +21,7 @@ class MetadataTestCase(unittest.TestCase):
 
     def testWrite(self):
         md = self.testRead()
-        md.write("/tmp/metadata-write.xml")
+        md.write("repos/tmp/metadata-write.xml")
 
 
 

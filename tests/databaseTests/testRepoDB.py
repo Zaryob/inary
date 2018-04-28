@@ -21,7 +21,7 @@ class RepoDBTestCase(testcase.TestCase):
 
     def testAddRemoveRepo(self):
         assert "repo2-src" not in self.repodb.list_repos()
-        repo = inary.db.repodb.Repo(inary.uri.URI("../repos/repo2/inary-index.xml"))
+        repo = inary.db.repodb.Repo(inary.uri.URI("repos/repo2/inary-index.xml"))
         self.repodb.add_repo("repo2-src", repo)
         assert "repo2-src" in self.repodb.list_repos()
         self.repodb.remove_repo("repo2-src")
@@ -51,7 +51,7 @@ class RepoDBTestCase(testcase.TestCase):
     def testGetRepo(self):
         repo = self.repodb.get_repo("repo1")
         uri = repo.indexuri
-        assert uri.get_uri() == "../repos/repo1-bin/inary-index.xml"
+        assert uri.get_uri() == "repos/repo1-bin/inary-index.xml"
 
     def testRepoOrder(self):
         repoorder = inary.db.repodb.RepoOrder()

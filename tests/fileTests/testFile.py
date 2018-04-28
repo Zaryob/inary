@@ -9,21 +9,21 @@ class FileTestCase(unittest.TestCase):
         unittest.TestCase.setUp(self)
 
     def testMakeUri(self):
-        spec = SpecFile("../repos/repo1/system/base/bash/pspec.xml")
+        spec = SpecFile("repos/repo1/system/base/bash/pspec.xml")
         url = uri.URI(spec.source.archive[0].uri)
         self.assertTrue(File.make_uri(url))
 
     def testChooseMethod(self):
-        compress = File('../repos/repo2/inary-index.xml', File.read)
+        compress = File('repos/repo2/inary-index.xml', File.read)
         self.assertTrue(File.choose_method('inary.conf', compress))
 
     def testDecompress(self):
-        localfile = File('../repos/repo1/system/base/bash/pspec.xml', File.read)
-        compress = File('../repos/repo2/inary-index.xml', File.read)
+        localfile = File('repos/repo1/system/base/bash/pspec.xml', File.read)
+        compress = File('repos/repo2/inary-index.xml', File.read)
         self.assertTrue(File.decompress(localfile,compress))
 
     def testLocalFile(self):
-        f = File('../repos/repo1/system/base/curl/pspec.xml', File.read)
+        f = File('repos/repo1/system/base/curl/pspec.xml', File.read)
         r = f.readlines()
         assert (len(r) > 0)
 

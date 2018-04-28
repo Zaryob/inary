@@ -6,11 +6,11 @@ import inary.util as util
 class SpecFileTestCase(unittest.TestCase):
     def setUp(self):
         self.spec = specfile.SpecFile()
-        self.spec.read('../repos/repo1/system/base/ncurses/pspec.xml')
+        self.spec.read('repos/repo1/system/base/curl/pspec.xml')
 
     def testGetSourceVersion(self):
-        assert '6.0' == self.spec.getSourceVersion()
-
+        assert '6.0' != self.spec.getSourceVersion()
+        assert '0.3' == self.spec.getSourceVersion()
     def testGetSourceRelease(self):
         assert '1' == self.spec.getSourceRelease()
 
@@ -19,18 +19,5 @@ class SpecFileTestCase(unittest.TestCase):
             self.fail()
 
     def testCopy(self):
-        self.spec.read('../repos/repo1/system/base/ncurses/pspec.xml')
-        self.spec.write('../repos/repo1/system/base/ncurses/pspec.xml')
-
-
-
-
-
-
-
-
-
-
-
-
-
+        self.spec.read('repos/repo1/system/base/curl/pspec.xml')
+        self.spec.write('repos/repo1/system/base/curl/pspec.xml')

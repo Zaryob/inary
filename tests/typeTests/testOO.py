@@ -13,15 +13,16 @@ import os
 import time
 
 from inary import version
+import inary.constants as constant
 from inary.oo import *
- 
+from inary.util import Singleton
+
 class OOTestCase(unittest.TestCase):
     def setUp(self):
         pass
-        
-    def testautosuper(self):
-        class A:
-            __metaclass__ = autosuper
+
+    def testAutosuper(self):
+        class A(metaclass = autosuper):
             def meth(self):
                 return "A"
         class B(A):
@@ -33,12 +34,11 @@ class OOTestCase(unittest.TestCase):
         class D(C, B):
             def meth(self):
                 return "D" + self.__super.meth()
-        
+
         self.assert_( D().meth() == "DCBA" )
 
-    def testconstant(self):
-        class A:
-            __metaclass__ = constant
+    def testConstant(self):
+        class A(metaclass = constant._constant):
             def __init__(self):
                 self.a = 1
                 self.b = 2
@@ -50,30 +50,13 @@ class OOTestCase(unittest.TestCase):
             passed = True
         self.assert_(passed)
 
-    def testsingleton(self):
-        class A:
-            __metaclass__ = singleton
+    def testSingleton(self):
+        class A(metaclass = Singleton):
             def __init__(self):
                 self.a = time.time()
         a1 = A()
         a2 = A()
         self.assert_(a1 is a2)
 
-    def testconstantsingleton(self):
-        class A:
-            __metaclass__ = constantsingleton
-            def __init__(self):
-                self.a = 1
-                self.b = 2
-        mya = A()
-        try:
-            passed = False
-            mya.a = 0
-        except ConstError as e:
-            passed = True
-        self.assert_(passed)
-        self.assertEqual(mya.a, 1)
-        mya2 = A()
-        self.assert_(mya is mya2)
 
 suite = unittest.makeSuite(OOTestCase)

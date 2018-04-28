@@ -5,14 +5,14 @@ from inary.data import pgraph
 
 class GraphTestCase(unittest.TestCase):
     def setUp(self):
-        self.g0 = inary.pgraph.Digraph()
+        self.g0 = pgraph.Digraph()
         self.g0.add_edge(1,2)
         self.g0.add_edge(1,3)
         self.g0.add_edge(2,3)
         self.g0.add_edge(3,4)
         self.g0.add_edge(4,1)
 
-        self.g1 = inary.pgraph.Digraph()
+        self.g1 = pgraph.Digraph()
         self.g1.add_edge(0,2)
         self.g1.add_edge(0,3)
         self.g1.add_edge(2,4)

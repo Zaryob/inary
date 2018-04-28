@@ -13,7 +13,7 @@ class FetchTestCase(unittest.TestCase):
     def setUp(self):
         unittest.TestCase.setUp(self)
         self.spec = SpecFile()
-        self.spec.read('../repos/repo1/system/base/openssl/pspec.xml')
+        self.spec.read('repos/repo1/system/base/openssl/pspec.xml')
         self.url = uri.URI(self.spec.source.archive[0].uri)
         self.url.set_auth_info(("user", "pass"))
         self.destpath = ctx.config.archives_dir()

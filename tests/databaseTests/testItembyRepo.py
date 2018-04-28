@@ -11,6 +11,7 @@
 #
 
 from . import testcase
+
 import inary.db.itembyrepo
 
 class TestDB:
@@ -35,7 +36,7 @@ class TestDB:
             if repo:
                 repos = [repo]
             return repos
-        
+
         self.tdb.item_repos = item_repos
         self.odb.item_repos = item_repos
 

@@ -11,7 +11,6 @@
 
 import unittest
 import os
-import types
 
 import inary
 import inary.api
@@ -23,41 +22,41 @@ class AutoXmlTestCase(unittest.TestCase):
 
     def setUp(self):
 
-        class OtherInfo:
-            __metaclass__ = autoxml.autoxml
-            t_StartDate = [types.StringType, autoxml.mandatory]
-            t_Interest = [types.StringType, autoxml.optional]
-            t_Tith = [ [types.UnicodeType], autoxml.optional, 'Tith/Person']
+        class OtherInfo(metaclass = autoxml.autoxml):
+            t_StartDate = [str, autoxml.mandatory]
+            t_Interest = [str, autoxml.optional]
+            t_Tith = [ [bytes], autoxml.optional, 'Tith/Person']
 
-        class Rat(xmlfile.XmlFile):
-            __metaclass__ = autoxml.autoxml
-            t_Name = [types.UnicodeType, autoxml.mandatory]
+        class Rat(xmlfile.XmlFile, metaclass = autoxml.autoxml):
+            t_Name = [bytes, autoxml.mandatory]
             t_Description = [autoxml.LocalText, autoxml.mandatory]
-            t_Number = [types.IntType, autoxml.optional]
-            t_Email = [types.StringType, autoxml.optional]
-            a_href = [types.StringType, autoxml.mandatory]
-            t_Dreams = [ [types.StringType], autoxml.mandatory, 'Dreams']
-            t_Heality = [ Heality, autoxml.optional ]
+            t_Number = [int, autoxml.optional]
+            t_Email = [str, autoxml.optional]
+            a_href = [str, autoxml.mandatory]
+            t_Dreams = [ [str], autoxml.mandatory, 'Dreams']
+            t_Heality = [ str, autoxml.optional ]
             s_Comment = [ autoxml.Text, autoxml.mandatory]
+            a_otherInfo = [OtherInfo, autoxml.mandatory]
 
         self.Rat = Rat
 
+
     def testDeclaration(self):
-        self.assertEqual(len(self.Rat.decoders), 3) # Decoders not work well
+        self.assertEqual(len(self.Rat.decoders), 8) # Decoders not work well
         self.assert_(hasattr(self.Rat, 'encode'))
 
     def testReadWrite(self):
-        a = self.Lat()
+        a = self.Rat()
 
         # test initializer
         self.assertEqual(a.href, None)
 
         # test read
-        a.read('tests/lat.xml')
+        a.read('tests/rat.xml')
         self.assert_(a.href.startswith('http://www.su'))
         self.assertEqual(a.number, 911)
-        self.assertEqual(a.name, u'Inary Testers')
-        self.assertEqual(len(a.dreams), 2)
+        self.assertEqual(a.name, 'Inary Testers')
+        self.assertEqual(len(a.dreams), 3)
         self.assertEqual(len(a.heality.tith), 100)
         self.assert_(not a.errors())
 
@@ -73,7 +72,7 @@ class AutoXmlTestCase(unittest.TestCase):
         a.number = 911
         a.email = "admins@sulin.org"
         a.description['tr'] = 'inary tester ekibi'
-        a.comment = u'Sozde test ekibi her seyi ben yapiom'
+        a.comment = b'Sozde test ekibi her seyi ben yapiom'
         a.href = 'http://www.sulin.orf/'
         a.otherInfo.startDate = '01012018'
         a.dreams = [ 'will', 'be', 'hero' ]
@@ -94,7 +93,7 @@ class LocalTextTestCase(unittest.TestCase):
         self.a = a
 
     def testStr(self):
-        s = unicode(self.a)
+        s = bytes(self.a)
         self.assert_(s!= None and len(s)>=6)
 
 suite1 = unittest.makeSuite(AutoXmlTestCase)

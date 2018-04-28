@@ -74,13 +74,19 @@ componentTemplate = """
 """
 
 actionsTemplate = """
-from inary.actionsapi import spamtools
+from inary.actionsapi import inarytools, cmaketools
 
-WorkDir = "skeleton"
+WorkDir = "helloworld"
+
+def setup():
+    cmaketools.configure()
+    
+def build():
+    cmaketools.make()
 
 def install():
-    inarytools.dobin("skeleton.py")
-    inarytools.rename("/usr/bin/skeleton.py", "%s")
+    autotools.install() 
+    inarytools.rename("/usr/bin/helloworld", "%s")
 """
 
 distributionTemplate = """
@@ -138,8 +144,8 @@ class Package:
         packager_email = "developers@sulin.org"
         summary = "%s is a test package" % self.name
         description = "%s is a test package for testing repositories." % self.name
-        sha1sum = "cc64dfa6e068fe1f6fb68a635878b1ea21acfac7"
-        archive = "http://dev.sulin.org/inary/skeleton.tar.gz"
+        sha1sum = "650ff7153aaec65aef71563068154617ca8913d0"
+        archive = "http://localhost/helloworld.tar.xz"
         date = time.strftime("%Y-%m-%d")
         partof = self.partof
 
@@ -226,7 +232,6 @@ class Repo1(Repository):
 
         self.packages = [
             # system.base
-	        pf.getPackage("liblouis", [], "desktop.accessibility"),
             pf.getPackage("bash"),
             pf.getPackage("curl", ["libidn", "zlib", "openssl"]),
             pf.getPackage("shadow", ["db4","pam", "cracklib"]),
@@ -235,19 +240,11 @@ class Repo1(Repository):
             pf.getPackage("ncftp", [], "applications.network"),
             pf.getPackage("bogofilter", ["gsl"], "applications.network"),
             pf.getPackage("gsl", [], "applications.network"),
-
-            # multimedia
-            pf.getPackage("uif2iso", [], "multimedia.converter"),
-            pf.getPackage("jpeg", [], "multimedia.graphics"),
-
-            pf.getPackage("dialog", [], "util"),
-            pf.getPackage("vlock", [], "util"),
-            pf.getPackage("pv", [], "util"),
-            pf.getPackage("tidy", [], "util")
+            pf.getPackage("jpeg"),
             ]
 
         # system.base
-        self.packages.extend(pf.getPackageBundle("system.base", "ca-certificates", "libidn", "zlib", "openssl", "db4", "pam", "run-parts" "cracklib", "ncurses", "zlib"))
+        self.packages.extend(pf.getPackageBundle("system.base", "libidn", "zlib", "openssl", "db4", "pam", "cracklib"))
 
         # applications.network
         self.packages.extend(pf.getPackageBundle("applications.network", "ethtool", "nfdump"))
@@ -268,11 +265,6 @@ class Repo2(Repository):
             pf.getPackage("ctorrent", ["openssl"], "applications.network"),
             pf.getPackage("lft", ["libpcap"], "applications.network"),
             pf.getPackage("libpcap", [], "applications.network"),
-
-            pf.getPackage("inxi", [], "util.admin"),
-            pf.getPackage("dialog", [], "util.misc"),
-            pf.getPackage("lsof", [], "util.misc"),
-            pf.getPackage("most", [], "util.misc")
             ]
 
 
@@ -294,7 +286,7 @@ class BuildFarm:
             os.mkdir(binrepo)
             for root, dirs, files in os.walk(repo):
                 if "pspec.xml" in files:
-                    os.system("inary-cli build %s/%s -O %s" % (root, "pspec.xml", binrepo))
+                    os.system("inary-cli build %s/%s -O %s --ignore-safety --ignore-dep --package" % (root, "pspec.xml", binrepo))
             self.create_index(repo)
 
 if __name__ == "__main__":

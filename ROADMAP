@@ -125,7 +125,7 @@ Legend:
     + ciksemel based modules rewrite with xml.dom.minidom (Zaryob)
   / partial caching and automatic resume for file download (meren)
     + use a '.part' extension
-    - resume file downloading (Darara.... fetcher will rewrite with httplib) (Zaryob)
+    - resume file downloading (Darara.... fetcher will rewrite with requests) (Zaryob)
   + search-file command (eray)
   + exception handling (eray)
     + uniform exception hierarchy
@@ -218,7 +218,7 @@ Legend:
 
     + accelerate search
     / package signing
-      / an embebed package signer.(aquila)
+      / an embebed package signer.(Zaryob)
       + a flag to sign package after building
       / code to check if the package has a valid signature
     - cli improvements

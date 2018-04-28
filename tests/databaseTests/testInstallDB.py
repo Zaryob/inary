@@ -20,90 +20,91 @@ class InstallDBTestCase(testcase.TestCase):
         self.installdb = inary.db.installdb.InstallDB()
 
     def tearDown(self):
-        inary.api.remove(["dialog", "pv"])
+        inary.api.remove(["ctorrent", "ethtool"])
 
     def testGetPackage(self):
-        inary.api.install(["dialog"])
+        inary.api.install(["ethtool"])
         idb = inary.db.installdb.InstallDB()
-        pkg = idb.get_package("dialog")
+        pkg = idb.get_package("ethtool")
         assert type(pkg) == inary.metadata.Package
-        assert pkg.name == "dialog"
+        assert pkg.name == "ethtool"
 
     def testHasPackage(self):
-        inary.api.install(["dialog"])
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
         assert not self.installdb.has_package("flipfloo")
-        assert self.installdb.has_package("dialog")
+        assert self.installdb.has_package("ethtool")
 
     def testListInstalled(self):
-        inary.api.install(["openssl"])
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert set(self.installdb.list_installed()) == set(['zlib', 'ca-certificates',
-                                                            'run-parts', 'openssl'])
+        assert set(self.installdb.list_installed()) == set(['zlib', 'pam', 'shadow', 
+                                                            'jpeg', 'libidn', 'db4', 
+                                                            'cracklib', 'openssl', 
+                                                            'curl', 'bash', 'ethtool'])
 
     def testGetVersion(self):
-        inary.api.install(["dialog"])
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
         version, release, build = self.installdb.get_version("zlib")
-        assert version == "1.1_20100428"
-        assert release == "10"
+        assert version == "0.3"
+        assert release == "1"
         assert build == None
 
     def testGetFiles(self):
-        inary.api.install(["bash"])
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
-        files = self.installdb.get_files("bash")
-        assert files.list[0].path == "bin/bash"
+        files = self.installdb.get_files("ethtool")
+        assert files.list[0].path == "usr/bin/ethtool"
 
     def testGetInfo(self):
-        inary.api.install(["dialog"])
+        inary.api.install(["ethtool"])
         idb = inary.db.installdb.InstallDB()
-        info = idb.get_info("dialog")
+        info = idb.get_info("ethtool")
         self.assertTrue(isinstance(info, inary.db.installdb.InstallInfo))
-        self.assertEqual(info.version, "1.1_20100428")
+        self.assertEqual(info.version, "0.3")
 
-    #FIXME: Yuksek ihtimal calismayacak
     def testGetReverseDependencies(self):
-        inary.api.install(["pv"])
-        inary.api.install(["dialog"])
+        inary.api.install(["ethtool"])
+        inary.api.install(["ctorrent"])
         self.installdb = inary.db.installdb.InstallDB()
         revdeps = self.installdb.get_rev_deps("openssl")
-        assert set(["pv", "dialog"]) == set([x[0] for x in revdeps])
+        assert set(["ctorrent", "curl"]) == set(map(lambda x:x[0], revdeps))
 
     def testAddRemovePackage(self):
-        inary.api.install(["pv"])
+        inary.api.install(["ctorrent"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert self.installdb.has_package("pv")
-        assert not self.installdb.has_package("dialog")
-        inary.api.install(["dialog"])
+        assert self.installdb.has_package("ctorrent")
+        assert not self.installdb.has_package("ethtool")
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert self.installdb.has_package("pv")
-        assert self.installdb.has_package("dialog")
+        assert self.installdb.has_package("ctorrent")
+        assert self.installdb.has_package("ethtool")
 
     def testMarkListPending(self):
         inary.api.set_scom(False)
-        assert not self.installdb.has_package("openssl")
-        inary.api.install(["openssl"])
-        assert "openssl" in self.installdb.list_pending()
-        inary.api.remove(["openssl"])
-        assert "openssl" not in self.installdb.list_pending()
+        assert not self.installdb.has_package("ethtool")
+        inary.api.install(["ethtool"])
+        assert "ethtool" in self.installdb.list_pending()
+        inary.api.remove(["ethtool"])
+        assert "ethtool" not in self.installdb.list_pending()
         inary.api.set_scom(True)
 
     def testClearPending(self):
         inary.api.set_scom(False)
-        assert not self.installdb.has_package("openssl")
-        inary.api.install(["openssl"])
-        assert "openssl" in self.installdb.list_pending()
-        self.installdb.clear_pending("openssl")
-        assert "openssl" not in self.installdb.list_pending()
-        inary.api.remove(["openssl"])
-        assert "openssl" not in self.installdb.list_pending()
+        assert not self.installdb.has_package("ethtool")
+        inary.api.install(["ethtool"])
+        assert "ethtool" in self.installdb.list_pending()
+        self.installdb.clear_pending("ethtool")
+        assert "ethtool" not in self.installdb.list_pending()
+        inary.api.remove(["ethtool"])
+        assert "ethtool" not in self.installdb.list_pending()
         inary.api.set_scom(True)
 
     def testSearchPackage(self):
         self.installdb = inary.db.installdb.InstallDB()
-        assert not self.installdb.has_package("tidy")
-        assert not self.installdb.search_package(["tidy"])
-        inary.api.install(["tidy"])
+        assert not self.installdb.has_package("ethtool")
+        assert not self.installdb.search_package(["ethtool"])
+        inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert self.installdb.search_package(["tid", "idy", "t"]) == ["tidy"]
+        assert self.installdb.search_package(["et", "tool", "h"]) == ["ethtool"]

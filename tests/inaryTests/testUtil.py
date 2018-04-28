@@ -10,8 +10,8 @@ class UtilTestCase(unittest.TestCase):
 
     #process related functions
     def testRunBatch(self):
-        assert (0, '', '') == run_batch('cd')
-        assert (127, '', '/bin/sh: add: command not found\n') == run_batch('add')
+        assert (0, b'', b'') == run_batch('cd')
+        assert (127, b'', b'/bin/sh: 1: add: not found\n') == run_batch('add')
 
     def testRunLogged(self):
         assert 0 == run_logged('ls')
@@ -24,7 +24,7 @@ class UtilTestCase(unittest.TestCase):
     #path processing functions tests
     def testSplitPath(self):
         assert ['usr', 'local', 'src'] == splitpath('usr/local/src')
-        assert ['usr', 'lib', 'sulin'] == splitpath('usr/lib/pardus')
+        assert ['usr', 'lib', 'sulin'] == splitpath('usr/lib/sulin')
 
     def testSubPath(self):
         self.assertTrue(subpath('usr','usr'))

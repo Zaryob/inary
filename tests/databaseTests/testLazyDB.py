@@ -31,7 +31,7 @@ class LazyDBTestCase(unittest.TestCase):
 
     def testDatabaseWithoutInit(self):
         db = TestDB()
-        assert "testfield" not in db.__dict__
+        assert not "testfield" in db.__dict__
         db._delete()
 
     def testSingletonBehaviour(self):
