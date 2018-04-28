@@ -1,5 +1,6 @@
 2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
-    * inary.fetcher.py: --- status: not fixed; flag: critical ---:
+    * inary.fetcher.py: --- status: fixed; flag: critical ---:
+    ->Ufak bir sihirli dokunuş düzeltmeye yetti.
     Neden local dosyaları çekmiyor bu?
     """
     $ inary fc dbus
@@ -11,6 +12,8 @@
     """
 
     * ayrıca yine fetcher:
+    -> local dosyalar indirilmiyor. Olduğu yerin path bilgisi alınıp kuruluyor
+    Oldukça temiz bir bakış açısı
     sudo inary it dbus -f diyince nereye indiriyor yaw bu 
 
 
@@ -48,6 +51,7 @@
 
 
 2018-01-14 Suleyman POYRAZ <nipalensisaquila@gmail.com>
-    * inary/atomicoperations.py --- status: not fixed flag: critical ---
+    * inary/atomicoperations.py --- status: fixed flag: critical ---
+    -> Dosya veritabanına bağlı hata düzeltildi.
     In removing not asking "Do you want remove conflicted files "
     Now remove all package files and conflicted files

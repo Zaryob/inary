@@ -16,14 +16,11 @@
 import os
 import time
 import shutil
-import socket
-import sys
 
 from base64 import encodestring
 
 # Network libraries
-from http.client import HTTPException
-import ftplib
+# import ftplib
 
 #Gettext translation library
 import gettext
@@ -174,16 +171,21 @@ class Fetcher:
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
             raise FetchError(_('Access denied to destination file: "%s"') % (self.archive_file))
 
+        if self.url.is_local_file:
+            ctx.ui.info(_("Getting local package {}").format(self.url.filename()))
+            util.copy_file(self.url.get_uri(), self.partial_file)
+
         else:
+            print(dir(self.url))
             try:
                 import requests
                 with open(self.partial_file, "wb") as f:
                     response = requests.get(self.url.get_uri(),
                                         proxies = self._get_proxies(),
                                         headers = self.headers_dict,
-                                        verify=verify,
-                                        timeout=5,
-                                        stream=True)
+                                        verify  = verify,
+                                        timeout = 5,
+                                        stream  = True)
 
                     handler= UIHandler()
                     total_length = int(response.headers.get('content-length'))
@@ -216,6 +218,9 @@ class Fetcher:
                 # TODO: Add ftp downloader with ftplib
                 raise FetchError(_('Package manager not support downloding from ftp mirror'))
 
+            except requests.exceptions.MissingSchema:
+                ctx.ui.info(_("Copying local file {}").format(self.url.get_uri()))
+                shutil.copy(self.url.get_uri(), self.partial_file)
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)

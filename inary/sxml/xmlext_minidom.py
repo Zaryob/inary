@@ -190,7 +190,7 @@ def newNode(node, tag):
     return node.ownerDocument.createElement(tag)
 
 def toString(node):
-    return node.toxml('utf-8')
+    return node.toxml()
 
 def toPretty(node):
     return node.toprettyxml()

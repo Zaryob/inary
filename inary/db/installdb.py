@@ -150,10 +150,11 @@ class InstallDB(lazydb.LazyDB):
 
     def __get_version(self, meta_doc):
         package = xmlext.getNode(meta_doc,'Package')
-        update = xmlext.getNode(meta_doc,'Update')
-        history = xmlext.getNodeText(package, 'History')
+        history = xmlext.getNode(package, 'History')
+        update = xmlext.getNode(history,'Update')
+
         version = xmlext.getNodeText(update, 'Version')
-        release = xmlext.getNodeText(update, 'release')
+        release = xmlext.getNodeAttribute(update, 'release')
 
         return version, release, None
 

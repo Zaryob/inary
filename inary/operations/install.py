@@ -272,7 +272,7 @@ def install_pkg_files(package_URIs, reinstall = False):
 def plan_install_pkg_names(A):
     # try to construct a inary graph of packages to
     # install / reinstall
-
+    ctx.ui.info(_('Checking packages to install...'))
     packagedb = inary.db.packagedb.PackageDB()
 
     G_f = pgraph.PGraph(packagedb)               # construct G_f
