@@ -10,8 +10,10 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
+
 import inary
+import unittest
+from . import testcase
 
 class FilesDBTestCase(testcase.TestCase):
 

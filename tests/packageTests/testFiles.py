@@ -16,4 +16,3 @@ class FilesTestCase(unittest.TestCase):
     def testFiles(self):
         self.files = inary.data.files.Files()
         self.files.read('repos/repo1/system/base/bash/pspec.xml')
-

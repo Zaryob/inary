@@ -10,13 +10,16 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
+
 import inary
+import unittest
+from . import testcase
 
 class RepoDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
+
         self.repodb = inary.db.repodb.RepoDB()
 
     def testAddRemoveRepo(self):
@@ -46,6 +49,7 @@ class RepoDBTestCase(testcase.TestCase):
         assert set(self.repodb.get_source_repos()) == set(['repo1-src'])
 
     def testGetBinaryRepos(self):
+        print(self.repodb.get_binary_repos())
         assert set(self.repodb.get_binary_repos()) == set(['repo1', 'repo2'])
 
     def testGetRepo(self):

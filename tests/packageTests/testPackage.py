@@ -40,4 +40,3 @@ class PackageTestCase(unittest.TestCase):
         pkg.extract_inary.data.files("002_remove.xml")
         if os.path.exists("002_remove.xml"):
             self.fail("Inary files extract error")
-

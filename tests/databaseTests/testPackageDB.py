@@ -10,14 +10,16 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
 
+import unittest
+from . import testcase
 import inary
 
 class PackageDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
+
         self.packagedb = inary.db.packagedb.PackageDB()
 
     def testGetPackage(self):

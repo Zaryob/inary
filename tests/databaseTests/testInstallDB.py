@@ -10,13 +10,16 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
+
 import inary
+import unittest
+from . import testcase
 
 class InstallDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
+
         self.installdb = inary.db.installdb.InstallDB()
 
     def tearDown(self):
@@ -38,9 +41,9 @@ class InstallDBTestCase(testcase.TestCase):
     def testListInstalled(self):
         inary.api.install(["ethtool"])
         self.installdb = inary.db.installdb.InstallDB()
-        assert set(self.installdb.list_installed()) == set(['zlib', 'pam', 'shadow', 
-                                                            'jpeg', 'libidn', 'db4', 
-                                                            'cracklib', 'openssl', 
+        assert set(self.installdb.list_installed()) == set(['zlib', 'pam', 'shadow',
+                                                            'jpeg', 'libidn', 'db4',
+                                                            'cracklib', 'openssl',
                                                             'curl', 'bash', 'ethtool'])
 
     def testGetVersion(self):

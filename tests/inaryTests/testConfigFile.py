@@ -50,3 +50,4 @@ class ConfigFileTestCase(unittest.TestCase):
         assert not cf.build.configurationlevel
         assert cf.dirs.qt_dir
         assert not cf.dirs.cache_dir
+        

@@ -12,4 +12,3 @@ class ConstantTestCase(unittest.TestCase):
             if hasattr(constants,i):
                 value = getattr(constants,i)
                 self.assertEqual(value, constDict[i])
-    

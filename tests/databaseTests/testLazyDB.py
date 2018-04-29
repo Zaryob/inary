@@ -11,6 +11,7 @@
 #
 
 import unittest
+from . import testcase
 import inary.db.lazydb as lazydb
 
 class TestDB(lazydb.LazyDB):
@@ -21,7 +22,7 @@ class TestDB(lazydb.LazyDB):
     def getTestField(self):
         return self.testfield
 
-class LazyDBTestCase(unittest.TestCase):
+class LazyDBTestCase(testcase.TestCase):
 
     def testDatabaseMethodForcingInit(self):
         db = TestDB()
@@ -38,3 +39,4 @@ class LazyDBTestCase(unittest.TestCase):
         db = TestDB()
         db2 = TestDB()
         assert id(db) == id(db2)
+    

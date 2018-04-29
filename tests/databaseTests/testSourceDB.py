@@ -10,15 +10,15 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
 
+import unittest
+from . import testcase
 import inary
 
 class SourceDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
-
         self.sourcedb = inary.db.sourcedb.SourceDB()
 
 

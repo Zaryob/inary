@@ -19,14 +19,14 @@ class RelationTestCase(unittest.TestCase):
         relation.versionFrom = "8"
         assert not inary.data.relation.installed_package_satisfies(relation)
         relation.versionFrom = None
-        
+
         #Test versionTo = X
         relation.versionTo = "8"
         assert inary.data.relation.installed_package_satisfies(relation)
         relation.versionTo = "0.1"
         assert not inary.data.relation.installed_package_satisfies(relation)
         relation.versionTo = None
-        
+
         #Test release = X
         relation.release = "3"
         assert not inary.data.relation.installed_package_satisfies(relation)
@@ -49,4 +49,3 @@ class RelationTestCase(unittest.TestCase):
         relation.releaseTo = None
 
         inary.api.remove(["ethtool"])
-

@@ -10,6 +10,8 @@
 # Please read the COPYING file.
 #
 
+
+import unittest
 from . import testcase
 
 import inary.db.itembyrepo

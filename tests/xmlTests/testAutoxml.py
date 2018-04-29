@@ -95,7 +95,3 @@ class LocalTextTestCase(unittest.TestCase):
     def testStr(self):
         s = bytes(self.a)
         self.assert_(s!= None and len(s)>=6)
-
-suite1 = unittest.makeSuite(AutoXmlTestCase)
-suite2 = unittest.makeSuite(LocalTextTestCase)
-suite = unittest.TestSuite((suite1, suite2))

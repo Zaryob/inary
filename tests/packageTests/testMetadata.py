@@ -22,6 +22,3 @@ class MetadataTestCase(unittest.TestCase):
     def testWrite(self):
         md = self.testRead()
         md.write("repos/tmp/metadata-write.xml")
-
-
-

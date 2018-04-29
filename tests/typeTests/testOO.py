@@ -57,6 +57,3 @@ class OOTestCase(unittest.TestCase):
         a1 = A()
         a2 = A()
         self.assert_(a1 is a2)
-
-
-suite = unittest.makeSuite(OOTestCase)

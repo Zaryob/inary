@@ -38,4 +38,3 @@ class UriTestCase(unittest.TestCase):
         uri4 = uri.URI()
         uri4.set_uri('/usr/share/aclocal')
         assert 'aclocal' ==  uri4.filename()
-

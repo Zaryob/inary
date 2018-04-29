@@ -10,11 +10,12 @@
 #
 
 import unittest
+from . import testcase
 import os
-import inary.search
+import inary.operations.search
 import inary.db as db
 
-from . import testcase
+
 
 class SearchTestCase(testcase.TestCase):
     def setUp(self):
@@ -31,4 +32,4 @@ class SearchTestCase(testcase.TestCase):
         self.assertEqual(q1, set([1,3]))
         q2 = inary.search.query('test', 'en', ['an', 'collection'], repo = db.itembyrepo.alldb)
         self.assertEqual(q2, set([1,2]))
-        inary.search.finalize() suite = unittest.makeSuite(SearchTestCase)
+        inary.search.finalize()

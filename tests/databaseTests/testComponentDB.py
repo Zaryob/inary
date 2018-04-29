@@ -10,8 +10,10 @@
 # Please read the COPYING file.
 #
 
-from . import testcase
+
 import inary
+import unittest
+from . import testcase
 
 class ComponentDBTestCase(testcase.TestCase):
 
@@ -84,4 +86,5 @@ class ComponentDBTestCase(testcase.TestCase):
         assert set(packages) == set(["system.base"])
 
         packages = self.componentdb.search_component(["system", "base"], repo="repo2")
+
         assert not packages

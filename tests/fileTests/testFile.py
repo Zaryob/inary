@@ -31,5 +31,3 @@ class FileTestCase(unittest.TestCase):
         f = File('http://www.sulin.org.tr/Releases/2018/roadmap.html', File.read)
         r = f.readlines()
         assert (len(r) > 0)
-
-
