@@ -68,7 +68,7 @@ class HistoryDB(lazydb.LazyDB):
         for log in self.__logs:
             if log.startswith("%03d_" % operation):
                 hist = History.History(os.path.join(ctx.config.history_dir(), log))
-                hist.operation.no = int(log.split("_")[0])
+                hist.operation.no = int(log.split("_")[0].replace("0o","0"))
                 return hist.operation
         return None
 
@@ -105,14 +105,14 @@ class HistoryDB(lazydb.LazyDB):
                 return
 
             hist = History.History(os.path.join(ctx.config.history_dir(), log))
-            hist.operation.no = int(log.split("_")[0])
+            hist.operation.no = int(log.split("_")[0].replace("0o","0"))
             yield hist.operation
 
     def get_last(self, count=0):
         count = count or len(self.__logs)
         for log in self.__logs[:count]:
             hist = History.History(os.path.join(ctx.config.history_dir(), log))
-            hist.operation.no = int(log.split("_")[0])
+            hist.operation.no = int(log.split("_")[0].replace("0o","0"))
             yield hist.operation
 
     def get_last_repo_update(self, last=1):

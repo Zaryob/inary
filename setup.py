@@ -19,6 +19,7 @@ import glob
 import sys
 import inspect
 import tempfile
+import subprocess
 from distutils.core import setup
 from distutils.cmd import Command
 from distutils.command.build import build
@@ -170,6 +171,21 @@ class Uninstall(Command):
             print(' removing: ', project_dir)
             shutil.rmtree(project_dir)
 
+class Test(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        self.run_command('build')
+        os.chdir('tests')
+        subprocess.check_call([
+            sys.executable, '-bWd',
+            os.path.join('runTests.py')
+        ])
+
 
 datas = [
     ("/etc/inary/" ,["config/mirrors.conf", "config/sandbox.conf"]),
@@ -205,7 +221,8 @@ setup(name="inary",
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,
-                'uninstall' : Uninstall},
+                'uninstall' : Uninstall,
+                'test' : Test},
     data_files =datas
     )
 
