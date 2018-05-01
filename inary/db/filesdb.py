@@ -52,6 +52,13 @@ class FilesDB(lazydb.LazyDB):
         key=hashlib.md5(path.encode('utf-8')).hexdigest()
         return self.filesdb.get(key), path
 
+    def has_file(self, path):
+        key=hashlib.md5(path.encode('utf-8')).hexdigest()
+        if key in self.filesdb:
+            return True
+        else:
+            return False
+
     def search_file(self, term):
         pkg, path = self.get_file(term)
         if pkg:

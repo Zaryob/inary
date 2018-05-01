@@ -23,7 +23,7 @@ import inary.context as ctx
 import inary.util as util
 import inary.atomicoperations
 import inary.db
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 
 class ListAvailable(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List available packages in the repositories
@@ -65,7 +65,7 @@ all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in op_wrappers.list_repos():
+            for repo in operations.list_repos():
                 ctx.ui.info(util.colorize(_("\n Repository : {}\n"), "blue").format(str(repo)))
                 self.print_packages(repo)
 
@@ -78,9 +78,9 @@ all repositories.
             except Exception as e:
                 return
         else:
-            l = op_wrappers.list_available(repo)
+            l = operations.list_available(repo)
 
-        installed_list = op_wrappers.list_installed()
+        installed_list = operations.list_installed()
 
         # maxlen is defined dynamically from the longest package name (#9021)
         if l:

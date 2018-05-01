@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+"""
+Forensic finder Sulin harici dağıtımlara paket kurulumunda
+sorun yaşamadan işimizi halletmemizi sağlayabilir.
+mevcut repodaki paketlerin files listesine bakılarak yüklü paket
+listesi çıkartılabilir bence.
+"""
 import hashlib
 import os
 import sys
@@ -25,10 +30,10 @@ IGNORE_DIRS = ('/root',
                '/var/lock/subsys',
                '/var/spool',
                '/var/cache',
-               '/var/db/comar3/scripts',
-               '/var/db/comar3/apps',
+               '/var/db/scom3/scripts',
+               '/var/db/scom3/apps',
                '/var/lib/mysql/mysql',
-               '/etc/mudur/services')
+               '/etc/scomd/services')
 
 IGNORE_EXTS = ('.pyc',
                '.pid')
@@ -61,8 +66,7 @@ def find_unowned(rootdir, last_unowned):
                 continue
             filepath = os.path.join(root, name)
             if filepath not in all_files and filepath not in last_unowned:
-                sys.stdout.write("UNOWNED %s\n" % filepath)
-                sys.stdout.flush()
+                ctx.ui.info("UNOWNED %s\n" % filepath)
 
 def find_corrupted(rootdir, last_changed):
     for package in inary.db.installdb.InstallDB().list_installed():
@@ -73,15 +77,13 @@ def find_corrupted(rootdir, last_changed):
             if not filepath.startswith(rootdir):
                 continue
             if filepath not in last_changed or last_changed[filepath] != get_hash(filepath):
-                sys.stdout.write("CHANGED %s %s %s\n" % (get_hash(filepath), package, filepath))
-                sys.stdout.flush()
+                ctx.ui.info("CHANGED %s %s %s\n" % (get_hash(filepath), package, filepath))
 
         for filepath in check['missing']:
             filepath = '/' + filepath
             if not filepath.startswith(rootdir):
                 continue
-            sys.stdout.write("MISSING {0} {1}\n".format(package, filepath))
-            sys.stdout.flush()
+            ctx.ui.info("MISSING {0} {1}\n".format(package, filepath))
 
 def forensics(rootdir='/',logfile='logfile'):
     if not rootdir.endswith('/'):

@@ -29,6 +29,10 @@ import inary.sxml.xmlext as xmlext
 import inary.uri
 import inary.util as util
 
+"""
+xmlext içine tag için remove eklenene kadar böyle
+"""
+
 try:
     import ciksemel
     parser = "ciksemel"
@@ -56,48 +60,17 @@ class RepoOrder:
 
 
     def add(self, repo_name, repo_url, repo_type="remote"):
-        if parser == "ciksemel":
-            repo_doc = self._get_doc()
-            try:
-                node = [x for x in repo_doc.tags("Repo")][-1]
-                repo_node = node.appendTag("Repo")
-            except IndexError:
-                repo_node = repo_doc.insertTag("Repo")
+        repo_doc = self._get_doc()
 
-            name_node = repo_node.insertTag("Name")
-            name_node.insertData(repo_name)
+        repo_node = xmlext.addNode(repo_doc, "Repo")
 
-            url_node = repo_node.insertTag("Url")
-            url_node.insertData(repo_url)
+        xmlext.addText(repo_node, "Name", repo_name)
 
-            name_node = repo_node.insertTag("Status")
-            name_node.insertData("active")
+        xmlext.addText(repo_node, "Url", repo_url)
 
-            media_node = repo_node.insertTag("Media")
-            media_node.insertData(repo_type)
+        xmlext.addText(repo_node, "Status", "active")
 
-        else:
-            repo_doc = self._get_doc().ownerDocument
-
-            repo_node = repo_doc.createElement("Repo")
-
-            name_node = repo_doc.createElement("Name")
-            name_node.appendChild(repo_doc.createTextNode(repo_name))
-            repo_node.appendChild(name_node)
-
-            url_node = repo_doc.createElement("Url")
-            url_node.appendChild(repo_doc.createTextNode(repo_url))
-            repo_node.appendChild(url_node)
-
-            status_node = repo_doc.createElement("Status")
-            status_node.appendChild(repo_doc.createTextNode("active"))
-            repo_node.appendChild(status_node)
-
-            media_node = repo_doc.createElement("Media")
-            media_node.appendChild(repo_doc.createTextNode(repo_type))
-            repo_node.appendChild(media_node)
-
-            repo_doc.childNodes[0].appendChild(repo_node)
+        xmlext.addText(repo_node, "Media", repo_type)
 
         self._update(repo_doc)
 
@@ -132,24 +105,13 @@ class RepoOrder:
 
     def get_status(self, repo_name):
         repo_doc = self._get_doc()
-        if parser=="ciksemel":
-            for r in repo_doc.tags("Repo"):
-                if r.getTagData("Name") == repo_name:
-                    status_node = r.getTag("Status")
-                    if status_node:
-                        status = status_node.firstChild().data()
-                        if status in ["active", "inactive"]:
-                            return status
-
-        else:
-            for r in repo_doc.childNodes:
-                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                    if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                        status_node = r.getElementsByTagName("Status")
-                        if status_node:
-                            status = status_node[0].childNodes[0].data
-                            if status in ["active", "inactive"]:
-                                return status
+        for r in xmlext.getTagByName(repo_doc, "Repo"):
+            if xmlext.getNodeText(r, "Name") == repo_name:
+                status_node = xmlext.getNode(r, "Status")
+                if status_node:
+                    status = xmlext.getNodeText(status_node)
+                    if status in ["active", "inactive"]:
+                        return status
 
         return "inactive"
 
@@ -179,11 +141,7 @@ class RepoOrder:
 
     def _update(self, doc):
         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
-        if parser=="ciksemel":
-            open(repos_file, "w").write("{}\n".format(doc.toPrettyString()))
-
-        else:
-            open(repos_file, "w").write("{}\n".format(doc.toprettyxml().strip()))
+        open(repos_file, "w").write("{}\n".format(xmlext.toPretty(doc)))
 
         self._doc = None
         self.repos = self._get_repos()
@@ -192,17 +150,10 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                if parser=="ciksemel":
-                    self._doc = ciksemel.parse(repos_file)
-                else:
-                    self._doc = minidom.parse(repos_file).documentElement
+                self._doc = xmlext.parse(repos_file)
+
             else:
-                if parser=="ciksemel":
-                    self._doc = ciksemel.newDocument("REPOS")
-                else:
-                    impl = minidom.getDOMImplementation()
-                    dom = impl.createDocument(None, "REPOS", None)
-                    self._doc = dom.documentElement
+                self._doc = xmlext.newDocument("REPOS")
 
         return self._doc
 
@@ -210,20 +161,11 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        if parser=="ciksemel":
-            for r in repo_doc.tags("Repo"):
-                media = r.getTagData("Media")
-                name = r.getTagData("Name")
-                status = r.getTagData("Status")
-                order.setdefault(media, []).append(name)
-
-        else:
-            for r in repo_doc.childNodes:
-                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                    media = r.getElementsByTagName("Media")[0].firstChild.data
-                    name = r.getElementsByTagName("Name")[0].firstChild.data
-                    status = r.getElementsByTagName("Status")[0].firstChild.data
-                    order.setdefault(media, []).append(name)
+        for r in xmlext.getTagByName(repo_doc, "Repo"):
+            media = xmlext.getNodeText(r, "Media")
+            name = xmlext.getNodeText(r, "Name")
+            status = xmlext.getNodeText(r, "Status")
+            order.setdefault(media, []).append(name)
 
         return order
 
@@ -254,18 +196,11 @@ class RepoDB(lazydb.LazyDB):
 
         if not os.path.exists(index_path):
             ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
-            if parser=="ciksemel":
-                return ciksemel.newDocument("INARY")
-            else:
-                impl = minidom.getDOMImplementation()
-                dom = impl.createDocument(None, "INARY", None)
-                return dom.documentElement
+            return xmlext.newDocument("INARY")
+
 
         try:
-            if parser=="ciksemel":
-                return ciksemel.parse(index_path)
-            else:
-                return minidom.parse(index_path).documentElement
+            return xmlext.parse(index_path)
         except Exception as e:
             raise RepoError(_("Error parsing repository index information: {} \n Index file does not exist or is malformed.").format(e))
 
@@ -298,29 +233,19 @@ class RepoDB(lazydb.LazyDB):
     def get_source_repos(self, only_active=True):
         repos = []
 
-        if parser=="ciksemel":
-            for r in self.list_repos(only_active):
-                if self.get_repo_doc(r).getTag("SpecFile"):
-                    repos.append(r)
+        for r in self.list_repos(only_active):
+            if xmlext.getNode(self.get_repo_doc(r), "SpecFile"):
+                repos.append(r)
 
-        else:
-            for r in self.list_repos(only_active):
-                if self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
-                    repos.append(r)
         return repos
 
     def get_binary_repos(self, only_active=True):
         repos = []
 
-        if parser=="ciksemel":
-            for r in self.list_repos(only_active):
-                if self.get_repo_doc(r).getTag("SpecFile"):
-                    repos.append(r)
+        for r in self.list_repos(only_active):
+            if not xmlext.getNode(self.get_repo_doc(r), "SpecFile"):
+                repos.append(r)
 
-        else:
-            for r in self.list_repos(only_active):
-                if not self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
-                    repos.append(r)
         return repos
 
     def list_repos(self, only_active=True):
@@ -357,25 +282,14 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution(self, name):
         doc = self.get_repo_doc(name)
-        if parser=="ciksemel":
-            distro = doc.getTag("Distribution")
-            return distro and distro.getTagData("SourceName")
-
-        else:
-            distro = doc.getElementsByTagName("Distribution")[0]
-            return distro.firstChild.data and distro.getElementsByTagName("SourceName")[0].firstChild.data
-
+        distro = xmlext.getNode(doc, "Distribution")
+        return distro and xmlext.getNodeText(distro, "SourceName")
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
 
-        if parser=="ciksemel":
-            distro = doc.getTag("Distribution")
-            return distro and distro.getTagData("Version")
-
-        else:
-            distro = doc.getElementsByTagName("Distribution")[0]
-            return distro.firstChild.data and distro.getElementsByTagName("Version")[0].firstChild.data
+        distro = xmlext.getNode(doc, "Distribution")
+        return distro and xmlext.getNodeText(distro, "Version")
 
 
     def check_distribution(self, name):

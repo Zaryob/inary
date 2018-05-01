@@ -27,6 +27,7 @@ import os.path
 
 # inary modules
 import inary.sxml.xmlfile as xmlfile
+import inary.sxml.xmlext as xmlext
 import inary.sxml.autoxml as autoxml
 import inary.context as ctx
 import inary.analyzer.dependency
@@ -37,12 +38,6 @@ import inary.data.group as group
 import inary.util as util
 import inary.db
 
-try:
-    import ciksemel
-    parser = "ciksemel"
-except:
-    import xml.dom.minidom as minidom
-    parser = "minidom"
 
 class Error(inary.errors.Error):
     pass
@@ -428,60 +423,30 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def getSourceRelease(self):
         return self.history[0].release
 
-    def _set_i18n(self, tag, inst, parser="ciksemel"):
-        if parser=="ciksemel":
-            try:
-                for summary in tag.tags("Summary"):
-                    inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
-                for desc in tag.tags("Description"):
-                    inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
-            except AttributeError:
-                raise Error(_("translations.xml file is badly formed."))
-
-        else:
-            try:
-                for summary in tag.getElementsByTagName("Summary"):
-                    inst.summary[summary.getAttribute("xml:lang")] = summary.childNodes[0].data
-                for desc in tag.getElementsByTagName("Description"):
-                    inst.description[desc.getAttribute("xml:lang")] = desc.childNodes[0].data
-            except AttributeError:
-                raise Error(_("translations.xml file is badly formed."))
-
+    def _set_i18n(self, tag, inst):
+        try:
+            for summary in xmlext.getTagByName(tag, "Summary"):
+                inst.summary[xmlext.getNodeAttribute(summary, "xml:lang")] = xmlext.getNodeText(summary)
+            for desc in xmlext.getTagByName(tag, "Description"):
+                inst.description[xmlext.getNodeAttribute(desc, "xml:lang")] = xmlext.getNodeText(desc)
+        except AttributeError as e:
+            raise Error(_("translations.xml {} file is badly formed.").format(e))
 
     def read_translations(self, path):
         if not os.path.exists(path):
             return
 
-        if parser=="ciksemel":
-            doc = ciksemel.parse(path)
+        doc = xmlext.parse(path)
 
-            if doc.getTag("Source").getTagData("Name") == self.source.name:
-                # Set source package translations
-                self._set_i18n(doc.getTag("Source"), self.source)
+        if xmlext.getNodeText(xmlext.getNode(doc, "Source"), "Name") == self.source.name:
+            # Set source package translations
+            self._set_i18n(xmlext.getNode(doc, "Source"), self.source)
 
-            for pak in doc.tags("Package"):
-                for inst in self.packages:
-                    if inst.name == pak.getTagData("Name"):
-                        self._set_i18n(pak, inst)
-                        break
-
-        else:
-            try:
-                doc = minidom.parse(path).documentElement
-            except ExpatError as err:
-                raise Error(_("File '{0}' has invalid XML: {1}").format(path, err) )
-
-            if doc.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data == self.source.name:
-                 # Set source package translations
-                 self._set_i18n(doc.getElementsByTagName("Source")[0], self.source, parser="minidom")
-
-            #FIXME: How can we fix it
-            for pak in doc.childNodes:
-                if pak.nodeType == pak.ELEMENT_NODE and pak.tagName == "Package":
-                    for inst in self.packages:
-                        if inst.name == pak.getElementsByTagName("Name")[0].firstChild.data:
-                            self._set_i18n(pak, inst, parser="minidom")
-                            break
+        for pak in xmlext.getTagByName(doc, "Package"):
+            for inst in self.packages:
+                if inst.name == xmlext.getNodeText(pak, "Name"):
+                    self._set_i18n(pak, inst)
+                    break
 
     def __str__(self):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(

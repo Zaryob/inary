@@ -20,7 +20,7 @@ _ = __trans.gettext
 
 import inary.atomicoperations
 import inary.operations.check
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
@@ -75,7 +75,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
         component = ctx.get_option('component')
         if component:
-            installed = op_wrappers.list_installed()
+            installed = operations.list_installed()
             component_pkgs = self.componentdb.get_union_packages(component,
                                                                  walk=True)
             pkgs = list(set(installed) & set(component_pkgs))
@@ -83,7 +83,7 @@ class Check(command.Command, metaclass=command.autocommand):
             pkgs = self.args
         else:
             ctx.ui.info(_('Checking all installed packages') + '\n')
-            pkgs = op_wrappers.list_installed()
+            pkgs = operations.list_installed()
 
         necessary_permissions = True
 

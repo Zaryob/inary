@@ -20,9 +20,7 @@ _ = __trans.gettext
 import inary
 
 #Analyzers
-import inary.analyzer.ctypes_analyzer
 import inary.analyzer.forensic
-import inary.analyzer.pkgconfig
 
 import inary.atomicoperations
 import inary.blacklist
@@ -158,7 +156,7 @@ from inary.operations.helper import calculate_download_sizes, get_package_requir
 from inary.operations.history import get_takeback_plan
 from inary.operations.info import info
 from inary.operations.install import get_install_order
-from inary.operations.op_wrappers import *
+from inary.operations.operations import *
 from inary.operations.remove import get_remove_order
 from inary.operations.upgrade import get_upgrade_order, get_base_upgrade_order
 from inary.operations.search import *

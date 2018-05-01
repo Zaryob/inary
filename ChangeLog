@@ -1,8 +1,53 @@
+2018-04-01 Suleyman Poyraz <nipalensisaquila@gmail.com>
+		* xmlext ile düzenlemeler:
+			-> inary.data.specfile:
+			   - translations.xml dosyasını okurken xmlext kullanıyor.
+		  -> inary.db.installdb, inary.db.sourcedb:
+			   - Geçirilmesi unutulan satırlar yeniden ele alındı
+			-> inary.db.repodb:
+			   - Yarı yarıya xmlext ile çalışıyor.
+
+		* Eklenenler:
+			-> inary.db.filesdb:
+			   - has_file fonksiyonu eklendi. Databasede dosya var mı yok mu
+				   kontrol etmek için birebir.
+			-> inary.sxml.xmlext:
+			   - removeChild fonksiyonu eklendi. removeChildText ve removeAttribute
+				   fonkdiyonları üzerinde çalışılıyor.
+			-> checkelf scripti:
+			   - pardus döneminde kullannılan ve paketin dependency'lerini ldd ve pc
+				  dosyalarına bakarak döndüren bir tool.
+
+		* Silinenler:
+		  -> inary.analyzer:
+			  - gereksiz olan ctypes_analyzer ile pkgconfig silindi. Pkgconfig yerine
+				  checkelf script olarak alındı.
+
+		* Hata düzeltmeleri:
+		  -> dbus exception için python3'de farklı bir class açılmış. Ona oygun olarak
+			   except satırları değiştirildi.
+			-> op_wrapper:
+			   inary.operations.operations olarak yeniden adlandırıldı.
+
+2018-03-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
+  * Darara (new tag= inary-1.0_rc3):
+		* historydb:
+			-> Hataya sebeb olan satırlar düzeltildi.
+		* Hata düzeltmeleri:
+			-> xmlext'ye geçirilmeyen bazı kısımlar düzeltildi.
+				 ve bu dönüşüme bağlı hatalar yamandı.
+			-> atomicoperations içindeki hatalar düzeltildi.
+		* Testler:
+			-> Portage'ın runTests betiği incelenip inary için daha
+				 uygun yeni bir betik yazıldı
+			-> setup.py içerisinde test sınıfı eklendi. Kararlılığı sağlandı.
+
+
 2018-03-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
-        * Hata düzeltmeleri:
-            -> Kodlama hataları ele alındı, arada anlamsız gelen çıktılar düzeltildi
-        * Lisans:
-            -> GPLv3 yapıldı, eski developerlerin kullandığı Copyright da eklendi.
+		* Hata düzeltmeleri:
+			-> Kodlama hataları ele alındı, arada anlamsız gelen çıktılar düzeltildi
+		* Lisans:
+			-> GPLv3 yapıldı, eski developerlerin kullandığı Copyright da eklendi.
 
 2018-03-15 Suleyman Poyraz <nipalensisaquila@gmail.com>
 		* fetcher.py:

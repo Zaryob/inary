@@ -20,9 +20,10 @@ Legend:
       - GoLang Tools
       + Python Language Tools
       + Ruby Language Tools
+        - Use gem agent
       + Perl Language Tools
       + CMake Tools
-    / unit test
+    + unit test
   + source building
     + Detailed build log file
   + package module
@@ -95,9 +96,9 @@ Legend:
       + write meaningful localtext datas
       + return meaningful localtext summaries and descriptions
     + revised interface
-    / Error handling
+    + Error handling
       + improved error handling, check routines, hooks, format/print routines
-      / write a meaningful traceback output
+      + write a meaningful traceback output
     + xmlfile support (read/write)
     + string member, in addition to tag/attribute members
     + replace specfile with new specfile using autoxml

@@ -171,12 +171,7 @@ class Fetcher:
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
             raise FetchError(_('Access denied to destination file: "%s"') % (self.archive_file))
 
-        if self.url.is_local_file:
-            ctx.ui.info(_("Getting local package {}").format(self.url.filename()))
-            util.copy_file(self.url.get_uri(), self.partial_file)
-
         else:
-            print(dir(self.url))
             try:
                 import requests
                 with open(self.partial_file, "wb") as f:
@@ -188,12 +183,12 @@ class Fetcher:
                                         stream  = True)
 
                     handler= UIHandler()
-                    total_length = int(response.headers.get('content-length'))
+                    total_length = response.headers.get('content-length')
 
                     if total_length is None:  # no content length header
                     # just download the file in one go and fake the progress reporting once done
                         ctx.ui.warning("Content-length header is missing for the fetch file, Download progress reporting will not be available")
-                        size=dest.tell()
+                        size=f.tell()
                         handler.start(self.archive_file, self.url.get_uri(), self.url.filename(), size)
                         for buf in response.iter_content(1024 * 1024):  # 1 MB chunks
                             f.write(buf)
@@ -202,7 +197,7 @@ class Fetcher:
                         handler.end(size)
 
                     else:
-                        handler.start(self.archive_file, self.url.get_uri(),self.url.filename(), total_length)
+                        handler.start(self.archive_file, self.url.get_uri(),self.url.filename(), int(total_length))
                         bytes_read = 0
                         for buf in response.iter_content(1024 * 1024):  # 1 MB chunks
                             if buf:

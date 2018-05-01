@@ -173,13 +173,7 @@ class InstallDB(lazydb.LazyDB):
     def get_install_tar_hash(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
 
-        try:
-            import ciksemel
-            meta_doc = ciksemel.parse(metadata_xml)
-
-        except:
-            import xml.dom.minidom as minidom
-            meta_doc = minidom.parse(metadata_xml).documentElement
+        meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_install_tar_hash(meta_doc)
 
@@ -194,7 +188,7 @@ class InstallDB(lazydb.LazyDB):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
-        
+
         return self.__get_version(meta_doc)
 
     def get_files(self, package):
@@ -260,13 +254,8 @@ class InstallDB(lazydb.LazyDB):
         return info
 
     def __make_dependency(self, depStr):
-        try:
-            import ciksemel
-            node = ciksemel.parseString(depStr)
 
-        except:
-            import xml.dom.minidom as minidom
-            node = minidom.parseString(depStr).documentElement
+        node = xmlext.parseString(depStr)
 
         dependency = inary.analyzer.dependency.Dependency()
         dependency.package = xmlext.getNodeText(node)

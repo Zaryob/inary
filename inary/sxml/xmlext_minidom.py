@@ -21,7 +21,7 @@
  function names are mixedCase for compatibility with minidom,
  an 'old library'
 
- this implementation uses pciksemel
+ this implementation uses ciksemel
 """
 
 import gettext
@@ -191,6 +191,15 @@ def addNode(node, tagpath, newnode = None, branch=True):
 def addText(node, tagPath, text, branch = True):
     newnode = node.ownerDocument.createTextNode(text)
     return addNode(node, tagPath, newnode, branch = branch)
+
+def removeChild(node, tag):
+    node.removeChild(tag)
+
+def removeChildText(node):
+    pass
+
+def removeAttribute(node):
+    pass
 
 def newNode(node, tag):
     return node.ownerDocument.createElement(tag)

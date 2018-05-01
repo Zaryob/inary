@@ -977,6 +977,7 @@ def update_repo(repo, force=False):
     if updated:
         inary.db.regenerate_caches()
 
+
 def __update_repo(repo, force=False):
     ctx.ui.action(_('Updating repository: {}').format(repo))
     ctx.ui.notify(inary.ui.updatingrepo, name = repo)
@@ -995,6 +996,7 @@ def __update_repo(repo, force=False):
                 return False
 
         inary.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
+
         repodb.check_distribution(repo)
 
         try:

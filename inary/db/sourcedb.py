@@ -136,23 +136,13 @@ class SourceDB(lazydb.LazyDB):
 
         rev_deps = []
 
-        if parser=="ciksemel":
-            for pkg, dep in rvdb:
-                node = ciksemel.parseString(dep)
-                dependency = inary.analyzer.dependency.Dependency()
-                dependency.package = node.firstChild().data()
-                if node.attributes():
-                    attr = node.attributes()[0]
-                    dependency.__dict__[attr] = node.getAttribute(attr)
-                    rev_deps.append((pkg, dependency))
-
-        else:
-            for pkg, dep in rvdb:
-                node = minidom.parseString(dep).documentElement
-                dependency = inary.analyzer.dependency.Dependency()
-                dependency.package = node.childNodes[0].data
-                if node.attributes:
-                    attr = node.attributes[0]
-                    dependency.__dict__[attr] = node.getAttribute(attr)
+        for pkg, dep in rvdb:
+            node = xmlext.parseString(dep)
+            dependency = inary.analyzer.dependency.Dependency()
+            dependency.package = xmlext.getNodeText(node)
+            if xmlext.getAttributeList(node):
+                attr = xmlext.getAttributeList(node)[0]
+                dependency.__dict__[attr] = xmlext.getNodeAttribute(node,attr)
                 rev_deps.append((pkg, dependency))
+
         return rev_deps

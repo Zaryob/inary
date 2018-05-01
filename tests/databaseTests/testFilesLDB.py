@@ -12,6 +12,7 @@
 
 
 import inary
+import inary.context as ctx
 import unittest
 from . import testcase
 

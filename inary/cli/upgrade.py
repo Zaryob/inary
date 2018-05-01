@@ -21,7 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 import inary.atomicoperations
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
@@ -87,7 +87,7 @@ expanded to package names.
 
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
-            repos = op_wrappers.list_repos()
+            repos = operations.list_repos()
             inary.atomicoperations.update_repos(repos)
         else:
             ctx.ui.info(_('Will not update repositories'))

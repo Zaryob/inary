@@ -23,7 +23,7 @@ import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
 import inary.db
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and upgrade INARY source packages from repository
@@ -79,7 +79,7 @@ You can also give the name of a component.
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
-        repos = op_wrappers.list_repos()
+        repos = operations.list_repos()
         inary.atomicoperations.update_repos(repos, ctx.get_option('force'))
 
         inary.atomicoperations.emerge(emerge_up_list)

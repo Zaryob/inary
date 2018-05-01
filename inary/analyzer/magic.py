@@ -19,7 +19,6 @@ import gettext
 __trans = gettext.translation("inary", fallback=True)
 _ = __trans.gettext
 
-import ctypes
 from ctypes import c_char_p, c_int, c_size_t, c_void_p
 import ctypes.util
 

@@ -116,11 +116,11 @@ class File:
 
         # Check file integrity before saving?
         check_integrity = sha1sum or sign
-
         origfile = inary.util.join_path(transfer_dir, uri.filename())
 
         if sha1sum:
             sha1filename = File.download(inary.uri.URI(uri.get_uri() + '.sha1sum'), transfer_dir)
+
             sha1f = open(sha1filename)
             newsha1 = sha1f.read().split("\n")[0]
 

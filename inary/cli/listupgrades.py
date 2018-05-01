@@ -22,7 +22,7 @@ import inary.cli.command as command
 import inary.blacklist
 import inary.context as ctx
 import inary.db
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 
 class ListUpgrades(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List packages to be upgraded
@@ -51,7 +51,7 @@ Lists the packages that will be upgraded.
 
     def run(self):
         self.init(database = True, write = False)
-        upgradable_pkgs = op_wrappers.list_upgradable()
+        upgradable_pkgs = operations.list_upgradable()
 
         component = ctx.get_option('component')
         if component:

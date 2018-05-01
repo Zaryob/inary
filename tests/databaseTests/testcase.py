@@ -9,7 +9,6 @@ class TestCase(unittest.TestCase):
         options.destdir = 'repos/tmp'
         inary.api.set_options(options)
         inary.api.set_scom(False)
-
         ctx.config.values.general.distribution = "Sulin"
         ctx.config.values.general.distribution_release = "2018"
 

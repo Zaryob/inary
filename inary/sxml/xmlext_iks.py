@@ -172,6 +172,16 @@ def addText(node, tagpath, text):
     node = addNode(node, tagpath)
     node.insertData(text)
 
+def removeChild(node, tag):
+    r = node.getTag(tag)
+    r.hide()
+
+def removeChildText(node):
+    pass
+
+def removeAttribute(node):
+    pass
+
 def newNode(node, tag):
     return iks.newDocument(tag)
 

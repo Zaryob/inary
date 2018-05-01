@@ -83,7 +83,7 @@ def get_link():
             link = scom.Link(socket=sockname, alternate=alternate)
             link.setLocale()
             return link
-        except dbus.DBusException as e:
+        except dbus.exceptions.DBusException as e:
             exceptions.append(str(e))
         except Exception as e:
             exceptions.append(str(e))
@@ -118,12 +118,12 @@ def post_install(package_name, provided_scripts,
         try:
             link.register(script_name, script.om,
                           os.path.join(scriptpath, script.script))
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             raise Error(_("Script error: {}").format(exception))
         if script.om == "System.Service":
             try:
                 link.System.Service[script_name].registerState()
-            except dbus.DBusException as exception:
+            except dbus.exceptions.DBusException as exception:
                 raise Error(_("Script error: {}").format(exception))
 
     ctx.ui.debug(_("Calling post install handlers"))
@@ -133,7 +133,7 @@ def post_install(package_name, provided_scripts,
                     metapath,
                     filepath,
                     timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if setupPackage method is not defined
             # in package script
             if not is_method_missing(exception):
@@ -150,7 +150,7 @@ def post_install(package_name, provided_scripts,
             link.System.Package[package_name].postInstall(
                     fromVersion, fromRelease, toVersion, toRelease,
                     timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if postInstall method is not defined in package script
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
@@ -169,7 +169,7 @@ def pre_remove(package_name, metapath, filepath):
         try:
             link.System.Package[package_name].preRemove(
                     timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if preRemove method is not defined in package script
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
@@ -179,7 +179,7 @@ def pre_remove(package_name, metapath, filepath):
         try:
             link.System.PackageHandler[handler].cleanupPackage(
                     metapath, filepath, timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if cleanupPackage method is not defined
             # in package script
             if not is_method_missing(exception):
@@ -202,7 +202,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=[]):
         try:
             link.System.Package[package_name].postRemove(
                     timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if postRemove method is not defined in package script
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
@@ -212,7 +212,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=[]):
         try:
             link.System.PackageHandler[handler].postCleanupPackage(
                     metapath, filepath, timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             # Do nothing if postCleanupPackage method is not defined
             # in package script
             if not is_method_missing(exception):
@@ -222,5 +222,5 @@ def post_remove(package_name, metapath, filepath, provided_scripts=[]):
     for scr in scripts:
         try:
             link.remove(scr, timeout=ctx.dbus_timeout)
-        except dbus.DBusException as exception:
+        except dbus.exceptions.DBusException as exception:
             raise Error(_("Script error: {}").format(exception))

@@ -21,7 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.atomicoperations
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 
 class UpdateRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Update repository databases
@@ -55,6 +55,6 @@ If no repository is given, all repositories are updated.
         if self.args:
             repos = self.args
         else:
-            repos = op_wrappers.list_repos()
+            repos = operations.list_repos()
 
         inary.atomicoperations.update_repos(repos, ctx.get_option('force'))

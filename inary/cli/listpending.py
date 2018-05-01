@@ -19,7 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.data.pgraph
-import inary.operations.op_wrappers as op_wrappers
+import inary.operations.operations as operations
 
 class ListPending(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List pending packages
@@ -35,7 +35,7 @@ Lists packages waiting to be configured.
     def run(self):
         self.init(database = True, write = False)
 
-        A = op_wrappers.list_pending()
+        A = operations.list_pending()
         if len(A):
             for p in inary.data.pgraph.generate_pending_order(A):
                 sys.stdout.write(p)
