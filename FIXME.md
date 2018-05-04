@@ -1,4 +1,4 @@
-2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-03-17 Suleyman POYRAZ <zaryob.dev@gmail.com>
     * inary.fetcher.py: --- status: fixed; flag: critical ---:
     ->Ufak bir sihirli dokunuş düzeltmeye yetti.
     Neden local dosyaları çekmiyor bu?
@@ -17,17 +17,17 @@
     sudo inary it dbus -f diyince nereye indiriyor yaw bu 
 
 
-2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-03-17 Suleyman POYRAZ <zaryob.dev@gmail.com>
     * inary.db.installdb.py: --- status: fixed; flag: critical ---:
     -> Programcı Hatası
     Şu satır bir kontrol edilmeli:
 
-2018-03-17 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-03-17 Suleyman POYRAZ <zaryob.dev@gmail.com>
     * inary searchfile command: --- status: fixed; flag: critical ---:
     -> filesdb modulune dayalı bir hata tespit edildi.
 
 
-2018-01-26 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-01-26 Suleyman POYRAZ <zaryob.dev@gmail.com>
   * inary/db/filesdb.py: --- status: fixed; flag: critical ---:
     -> Pylvel yerine shelve kullanarak fixe edildi
     plyvel yerine shelve kullanarak fixe edildi
@@ -35,7 +35,7 @@
 
 
 
-2018-01-26 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-01-26 Suleyman POYRAZ <zaryob.dev@gmail.com>
 
     * inary/sxml/xmlext --- status: fixed; flag: cosmetical ---:
     -> Minidom kullanarak fixe edildi
@@ -50,7 +50,7 @@
     girmiş xmlden alinan veriler içerisine
 
 
-2018-01-14 Suleyman POYRAZ <nipalensisaquila@gmail.com>
+2018-01-14 Suleyman POYRAZ <zaryob.dev@gmail.com>
     * inary/atomicoperations.py --- status: fixed flag: critical ---
     -> Dosya veritabanına bağlı hata düzeltildi.
     In removing not asking "Do you want remove conflicted files "

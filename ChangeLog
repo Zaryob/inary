@@ -1,4 +1,4 @@
-2018-04-01 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-04-01 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* xmlext ile düzenlemeler:
 			-> inary.data.specfile:
 			   - translations.xml dosyasını okurken xmlext kullanıyor.
@@ -29,7 +29,7 @@
 			-> op_wrapper:
 			   inary.operations.operations olarak yeniden adlandırıldı.
 
-2018-03-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-29 Suleyman Poyraz <zaryob.dev@gmail.com>
   * Darara (new tag= inary-1.0_rc3):
 		* historydb:
 			-> Hataya sebeb olan satırlar düzeltildi.
@@ -43,13 +43,13 @@
 			-> setup.py içerisinde test sınıfı eklendi. Kararlılığı sağlandı.
 
 
-2018-03-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-28 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* Hata düzeltmeleri:
 			-> Kodlama hataları ele alındı, arada anlamsız gelen çıktılar düzeltildi
 		* Lisans:
 			-> GPLv3 yapıldı, eski developerlerin kullandığı Copyright da eklendi.
 
-2018-03-15 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-15 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* fetcher.py:
 			-> Her zaman sinirimi bozan bu fetcher requests ile yeniden yazıldı.
 				 urllib kullanmak indirme yöneticisini yavaşlatıyordu.
@@ -74,7 +74,7 @@
 			düzelttim.
 
 
-2018-03-14 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-14 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Özellik eklemesi:
 			-> Paket kurulumundan önce yeterli alan olup olmadığı artık denetleniyor.
 
@@ -84,7 +84,7 @@
 			-> dosym methodundaki hata düzeltildi.
 
 
-2018-03-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-29 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* Hata düzeltmeleri:
 		Kararlı öncesi.
 			-> Magic modülü kararlı hale getirildi, pkgconfig librarisi düzenlenecek.
@@ -99,7 +99,7 @@
 			-> Renklendirme yapıldı
 
 
-2018-03-18 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-18 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* minidom vs ciksemel:
 		minidom ile tüm inary sistemi yeniden yazıldı. Ancak ciddi manada
 		inar yavaşlıyor. Db initializing süresi 8 sn. Yuh yani. Ama minidom
@@ -107,7 +107,7 @@
 		kullanma kararı aldım.
 
 
-2018-03-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-11 Suleyman Poyraz <zaryob.dev@gmail.com>
     * colorized help output:
 		Colorized command names and now help screen look well.
 		* Minimum dependency, Maximum stabilization:
@@ -125,7 +125,7 @@
 				* ciksemel: I work about this.
 
 
-2018-03-10 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-10 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Cleaned ınary/api.py:
 		Clean unuseful commands, Moved functions true palaces and
 		writed 2 new module.
@@ -133,23 +133,23 @@
 		Not work well minidom. So I returned codes to ciksemel.
 		Should work with minidom detailed.
 
-2018-03-09 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-09 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Patched delete-runtime-dependency-ciksemel:
 		For compability we shoul use minidom in xml file parsing,
 		we shouldn't use a new runtime dependency. (Please Read CODING)
 
-2018-03-04 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-04 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Updated RoadMap
 		* Cleaned FIXME tags:
 		Cleaned not understandable Fixme tags
 
 
-2018-03-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-03-02 Suleyman Poyraz <zaryob.dev@gmail.com>
     * deleted distupdate command:
 		Sulin will be a roolling release distro. So we don't have a
 		distupdater.
 
-2018-02-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-02-11 Suleyman Poyraz <zaryob.dev@gmail.com>
   * distupdate komutu:
 	Stabilize edildi ve renklendirildi
 	* string -> strutils:
@@ -161,7 +161,7 @@
 	çözüm bulunamadı :(
 
 
-2018-02-07 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-02-07 Suleyman Poyraz <zaryob.dev@gmail.com>
   * System modulleri silindi:
 	Inary içinde onlara ihtiyaç olmadığını farkettim. Scom içine alarak yer
 	kazandım.
@@ -169,19 +169,19 @@
 	Str veri tipi için basit tipte fonksiyonları ve multisplit gibi şeyleri
 	içeren bir modul.
 
-2018-02-04 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-02-04 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Kozmetik fixler ve düzenlemeler yapıldı(developing branch)
 	* Dokumantasyon taslakları yazıldı.(developing branch)
 	* Merge Developing branch into master on 2018-01-07
 
 
-2018-01-29 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-29 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Gereksiz toolar temizlendi:
 	Bazıları ismail abiye yüklenecek, İsmail abi kim mi?
 	ÇOK YAKINDAAAA....
 
 
-2018-01-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-28 Suleyman Poyraz <zaryob.dev@gmail.com>
   * distupdate komutu eklendi:
 	Upgrade komutu buyuk capta guncellemeler için biraz
 	tehlikeli kaçıyordu ve yetersiz sayılırdı. Bu yüzden bu
@@ -192,7 +192,7 @@
 	o yüzden yeniden yazılana kadar rafa kaldırdım. çok yakında
 	yeniden yazıp koyacam. öteki türlü hep aklımdan cıkıyor :)
 
-2018-01-27 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-27 Suleyman Poyraz <zaryob.dev@gmail.com>
   * Darara (new tag= inary-1.0_rc1):
 	-> work build, fetch, update, install functions.
 	  |_ Fixed itembyrepodb.
@@ -207,7 +207,7 @@
 
 
 
-2018-01-26 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-26 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Python3 kullanımı ile ilgili çok vasat bir kodlama
 	anlayışımız var:
 	a) Bu sorun ile ilgili olarak
@@ -218,42 +218,42 @@
 	c) yanlış kullanımlar gereksiz importlar silindi
 
 
-2018-01-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-20 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Testler elden geçirilmeli:
 	-> Testler düzenlendi (2018-01-20)
 	-> Testler gruplandirildi (2018-01-22)
 	-> oo ve autoxml testleri eklendi (2018-01-22)
 	-> testlerin islevselliginden emin olunuldu (2018-01-23)
 
-2018-01-17 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
   * Added system_literals and now work crossplatorm
 	inary packaging:
 	Look more about inary/system_literals/Modules.md
 
-2018-01-13 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2018-01-13 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Scom dosyalari pakette yok!!:
 	Bu hata Fixe edilmiştir
 
 
-2017-12-24 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-12-24 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Python3 kutuphane uyumlulugu:
 	lzma hataları düzenlendi, urllib.request ile fetcher
 	yeniden yazıldı
 	magic kutuphanesi düzenlendi.
 
-2017-09-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Yeniden adlandırıldı:
 	Yeni adı inary oldu
 
-2017-09-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* fetcher düzenlendi:
 
-2017-09-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Son dakika golu:
 	Rasbianin saati birkac gun geriden gelse de 3 eylulun
 	son saatinde api modulunun icerisi temizlendi
 
-2017-09-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* spam.operations.build:
 	There are an error in using ```Build(path)``` and I will fix it tomorrow
 
@@ -262,7 +262,7 @@
 	and I try fix it
 	Türkçesi ile benim neler çektiğimi nerden bileceksiniz
 
-2017-09-01 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-09-01 Suleyman Poyraz <zaryob.dev@gmail.com>
 	-> spam 1.0 beta 2
 	* build:
 	Add new configure function in actions.py and we can make
@@ -290,43 +290,43 @@
 	* rebuild-db:
 	It working.
 
-2017-08-31 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-08-31 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Remove Comar/scom libraries:
 	Now we can install packages without comar scripts
 	I add a function in actions.py file.  I we want
 	configure package after installing we can make it quickly
 
-2017-08-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-08-20 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Cleaning unuseful outputs
 
-2017-06-24 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-06-24 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* not use now iksemel:
 	I rewrite iksemel module and renamed to ciksemel
 	now we use in package manager ciksemel.
 
-2017-06-23 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-06-23 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* spam 1.0 beta:
 	Fixed byte type output problem, archive compressing
 	problem and xml problem. Ï will rewrite tests and
 	sha1 based key control problem.
 
-2017-06-19 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-06-19 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* spam 1.0 alpha:
 	Ported PiSi and make PiSi based Special Package
 	Manager. I thing it's name will be SPaM ;)
 	Now work it very well.
 
-2017-05-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-05-20 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Make tests:
 	There are a problem on ComarIface.
 
-2017-04-18 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-04-18 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* files hashs problem in filesldb:
 	FIXED: hash encode problem
 
 	* Should looked up install module!!!
 
-2017-04-14 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-04-14 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* filesldb and plyvel:
 	Should fix pisi-plyvel library hash encode type error
 
@@ -334,7 +334,7 @@
 	Fixed compressed metadata and files xml file reading problem
 	(FileNotFound ERROR when reading)
 
-2017-04-12 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-04-12 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* build:
 	now we can build packages. Build options work very well and
 	build time little than pisi-pardus or pisi-pisilinux releases
@@ -356,30 +356,30 @@
 	with use python
 
 
-2017-04-11 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-04-11 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* lzma archive options:
 	There are a problem when defining options in lzma.LZMAFile
 	I can't fixe there. Now defined compress level 9 and defined
 	compress type (.lzma).
 
-2017-04-08 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-04-08 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* fetcher:
 	Urlgrabber not work with python3. So I rewrite fetcher.py
 	Now work very well but it can't get archive or package
 	from ftp servers.
 
-2017-03-20 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-03-20 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* autoxml.py:
 	Fixed autoxml file problems. now work well.
 
-2017-01-03 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-01-03 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* pisi-cli work now:
 	There are a lot of problem in "pisi/cli/__init__.py". I rewrite somewheres and
 	pisi-cli work now. There are problem in build and install commands.
 
 	* FIX: There are String-Bytes bug in Error raising. Fix Here!!!!
 
-2017-01-02 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2017-01-02 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* lazydb.py:
 	It ported with fuatboluk. lower_map fixed. Now pisi module can importable
 	in scripts. I should make test now.
@@ -389,21 +389,21 @@
 	there are a bug list now :)
 
 
-2016-12-21 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2016-12-21 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* repodb.py:
 	It port with ilkermanap. Changes return object in a function list_repos.
 
-2016-12-13 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2016-12-13 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* pisi and scripts are ported.:
 	Now I start bugspacing. There are a lot of Byte-to-String Porting
 	problem. So there are a lot of works. I return porting it.
 
-2016-12-12 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2016-12-12 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Porting Status:
 	I ported iksemel and now I start port pisi and COMAR applications.
 
 
-2016-10-28 Suleyman Poyraz <nipalensisaquila@gmail.com>
+2016-10-28 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* pisi 2.6:
 	Old versions written by Python2. This will be a problem in future. So
 	I start it porting Python2 to Python3. This is an hard job but It doesn't
