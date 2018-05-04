@@ -16,7 +16,10 @@
 import os
 import time
 import shutil
-
+try:
+    import requests
+except ImportError:
+    raise ImportError(_("Please install requests"))
 from base64 import encodestring
 
 # Network libraries
@@ -152,7 +155,7 @@ class Fetcher:
             raise FetchError(msg)
             return False
 
-        except Error as e:
+        except FetchError as e:
             msg = _("Can not avaible remote server: \n {}").format(e)
             raise FetchError(msg)
             return False
@@ -173,7 +176,6 @@ class Fetcher:
 
         else:
             try:
-                import requests
                 with open(self.partial_file, "wb") as f:
                     response = requests.get(self.url.get_uri(),
                                         proxies = self._get_proxies(),
