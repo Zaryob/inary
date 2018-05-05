@@ -55,7 +55,7 @@ class SourceDB(lazydb.LazyDB):
             src = xmlext.getNode(spec, "Source")
             src_name = xmlext.getNodeText(src, "Name")
             compressed_data = gzip.zlib.compress(xmlext.toString(spec).encode('utf-8'))
-            sources[src_name] = gzip.zlib.compress(compressed_data)
+            sources[src_name] = compressed_data
 
             for package in xmlext.getTagByName(doc, "Package"):
                 pkgstosrc[xmlext.getNodeText(package, "Name")] = src_name
@@ -66,12 +66,12 @@ class SourceDB(lazydb.LazyDB):
         revdeps = {}
 
         for spec in xmlext.getTagByName(doc, "SpecFile"):
-            src = xmlext.getNodeText(spec, "Source")
+            src = xmlext.getNode(spec, "Source")
             name = xmlext.getNodeText(src, "Name")
             deps = xmlext.getNode(src, "BuildDependencies")
             if deps:
                 for dep in xmlext.getTagByName(deps, "Dependency"):
-                    revdeps.setdefault(xmlext.getNodeText(dep, set())).add((name, xmlext.toString(dep)))
+                    revdeps.setdefault(xmlext.getNodeText(dep), set()).add((name, xmlext.toString(dep)))
 
         return revdeps
 

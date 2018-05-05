@@ -49,7 +49,6 @@ class RepoDBTestCase(testcase.TestCase):
         assert set(self.repodb.get_source_repos()) == set(['repo1-src'])
 
     def testGetBinaryRepos(self):
-        print(self.repodb.get_binary_repos())
         assert set(self.repodb.get_binary_repos()) == set(['repo1', 'repo2'])
 
     def testGetRepo(self):

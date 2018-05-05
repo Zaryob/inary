@@ -15,7 +15,7 @@ import shutil
 import time
 
 pspecTemplate = """<?xml version="1.0" ?>
-<!DOCTYPE INARY SYSTEM "http://www.pardus.org.tr/projeler/inary/spam-spec.dtd">
+<!DOCTYPE INARY SYSTEM "http://www.sulin.org.tr/projeler/inary/inary-spec.dtd">
 <INARY>
     <Source>
         <Name>%(package)s</Name>
@@ -28,7 +28,7 @@ pspecTemplate = """<?xml version="1.0" ?>
         <IsA>app:gui</IsA>
         <Summary>%(summary)s</Summary>
         <Description>%(description)s</Description>
-        <Archive sha1sum="%(sha1sum)s" type="targz">%(archive)s</Archive>
+        <Archive sha1sum="%(sha1sum)s" type="tarxz">%(archive)s</Archive>
     </Source>
 
     <Package>
@@ -62,7 +62,7 @@ componentsTemplate = """
             <Group>system</Group>
             <Packager>
                 <Name>Joe Packager</Name>
-                <Email>joe@pardus.org.tr</Email>
+                <Email>joe@sulin.org.tr</Email>
             </Packager>
         </Component>
 """
@@ -80,12 +80,12 @@ WorkDir = "helloworld"
 
 def setup():
     cmaketools.configure()
-    
+
 def build():
     cmaketools.make()
 
 def install():
-    autotools.install() 
+    cmaketools.install()
     inarytools.rename("/usr/bin/helloworld", "%s")
 """
 

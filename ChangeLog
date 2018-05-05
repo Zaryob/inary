@@ -1,4 +1,10 @@
-2018-04-01 Suleyman Poyraz <zaryob.dev@gmail.com>
+2018-05-05 Suleyman Poyraz <zaryob.dev@gmail.com>
+		* Test sonuçlarına uygun düzenlemeler:
+		  -> inary/db/sourcedb.py dosyasında farkettiğim hata düzeltildi.
+			-> testlerden bazılarındaki ufak hatalar temizlendi.
+		  -> yeni bir hata fixme dosyasına geçirildi.
+
+2018-05-01 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* xmlext ile düzenlemeler:
 			-> inary.data.specfile:
 			   - translations.xml dosyasını okurken xmlext kullanıyor.
@@ -29,7 +35,7 @@
 			-> op_wrapper:
 			   inary.operations.operations olarak yeniden adlandırıldı.
 
-2018-03-29 Suleyman Poyraz <zaryob.dev@gmail.com>
+2018-04-29 Suleyman Poyraz <zaryob.dev@gmail.com>
   * Darara (new tag= inary-1.0_rc3):
 		* historydb:
 			-> Hataya sebeb olan satırlar düzeltildi.
@@ -43,13 +49,13 @@
 			-> setup.py içerisinde test sınıfı eklendi. Kararlılığı sağlandı.
 
 
-2018-03-28 Suleyman Poyraz <zaryob.dev@gmail.com>
+2018-04-28 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* Hata düzeltmeleri:
 			-> Kodlama hataları ele alındı, arada anlamsız gelen çıktılar düzeltildi
 		* Lisans:
 			-> GPLv3 yapıldı, eski developerlerin kullandığı Copyright da eklendi.
 
-2018-03-15 Suleyman Poyraz <zaryob.dev@gmail.com>
+2018-04-15 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* fetcher.py:
 			-> Her zaman sinirimi bozan bu fetcher requests ile yeniden yazıldı.
 				 urllib kullanmak indirme yöneticisini yavaşlatıyordu.
@@ -74,7 +80,7 @@
 			düzelttim.
 
 
-2018-03-14 Suleyman Poyraz <zaryob.dev@gmail.com>
+2018-04-14 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Özellik eklemesi:
 			-> Paket kurulumundan önce yeterli alan olup olmadığı artık denetleniyor.
 
