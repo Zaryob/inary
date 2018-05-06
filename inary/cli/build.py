@@ -18,11 +18,13 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+import os
 import inary.atomicoperations
 import inary.cli.command as command
 import inary.context as ctx
 import inary.package
 import inary.operations
+import inary.util as util
 
 
 usage = _("""Build INARY packages
@@ -102,6 +104,12 @@ class Build(command.Command, metaclass=command.autocommand):
                          help=_("Use quilt patch management system "
                                 "instead of GNU patch"))
 
+        group.add_option("--home-build",
+                         action="store_true",
+                         default=False,
+                         help=_("Do not use root user when packaging, "
+                                "make building under home folder"))
+
         group.add_option("--ignore-sandbox",
                          action="store_true",
                          default=False,
@@ -162,7 +170,7 @@ class Build(command.Command, metaclass=command.autocommand):
         if not self.options.quiet:
             self.options.debug = True
 
-        self.init(False, False)
+
         if self.options.package_format == "help":
             ctx.ui.info(_("Supported package formats:"))
             for format in inary.package.Package.formats:
@@ -172,13 +180,21 @@ class Build(command.Command, metaclass=command.autocommand):
                     ctx.ui.info("  {}".format(format))
             return
 
-        self.init()
+        self.init(False, False)
 
         if not ctx.get_option('output_dir'):
             ctx.config.options.output_dir = '.'
+
+        # IDEA: A little hack :)
+        if ctx.get_option('home_build'):
+            if os.environ['USER']== 'root': # For idiots
+                pass
+            else:
+                dest_dir = util.join_path(os.environ['HOME'], '.inary')
+                ctx.config.set_option('destdir', dest_dir)
 
         for x in self.args or ["pspec.xml"]:
             if ctx.get_option('until'):
                 inary.operations.build.build_until(x, ctx.get_option('until'))
             else:
-                inary.atomicoperations.build(x)
+                inary.operations.build.build(x)

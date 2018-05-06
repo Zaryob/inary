@@ -636,7 +636,7 @@ class Remove(AtomicOperation):
         # two packages such that a file has moved from one package to
         # another as in #2911)
         pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
-        if pkg != package_name:
+        if pkg and pkg != package_name:
             ctx.ui.warning(_('Not removing conflicted file : {}').format(fpath))
             return
 
@@ -712,11 +712,6 @@ class Remove(AtomicOperation):
 
 def remove_single(package_name):
     Remove(package_name).run()
-
-def build(package):
-    # wrapper for build op
-    import inary.operations.build
-    return inary.operations.build.build(package)
 
 #API ORDERS
 def locked(func):
