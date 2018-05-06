@@ -13,6 +13,7 @@
 import inary.db
 import inary.operations
 import inary.blacklist
+import inary.context as ctx
 
 def list_needs_restart():
     """

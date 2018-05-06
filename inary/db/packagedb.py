@@ -80,8 +80,8 @@ class PackageDB(lazydb.LazyDB):
 
         for x in xmlext.getTagByName(doc, "Package"):
             name = xmlext.getNodeText(x, "Name")
-            compressed_data =gzip.zlib.compress(xmlext.toString(x).encode('utf-8'))
-            pdict[name]= compressed_data
+            compressed_data = gzip.zlib.compress(xmlext.toString(x).encode('utf-8'))
+            pdict[name] = compressed_data
 
         return pdict
 

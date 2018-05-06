@@ -54,7 +54,7 @@ def sign_data(data, key_file, password_fd):
     pipe = subprocess.Popen(command, stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE)
-    pipe.stdin.write(data)
+    pipe.stdin.write(data.encode('utf-8'))
     pipe.stdin.close()
 
     # Get signed data
@@ -401,7 +401,7 @@ def main():
         if len(sys.argv[4:]):
             # Keep password in a temporary file
             password = getpass.getpass()
-            password_fd = os.tmpfile()
+            password_fd = open('/tmp/temporary_file_python', 'w')
             password_fd.write(password)
             password_fd.flush()
 
