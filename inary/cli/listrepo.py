@@ -41,7 +41,7 @@ Lists currently tracked repositories.
         for repo in self.repodb.list_repos(only_active=False):
             active = _("active") if self.repodb.repo_active(repo) else _("inactive")
             if active == _("active"):
-                ctx.ui.info(util.colorize(_("{0} [{1}]").format(repo, active), 'green'))
+                ctx.ui.info(_("{0} [{1}]").format(repo, active), color='green')
             else:
-                ctx.ui.info(util.colorize(_("{0} [{1}]").format(repo, active), 'red'))
+                ctx.ui.info(_("{0} [{1}]").format(repo, active), color='red')
             print('  ', self.repodb.get_repo_url(repo))

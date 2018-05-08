@@ -84,7 +84,7 @@ def fetch_remote_file(package, errors):
         uri = inary.file.File.make_uri(__getpackageurl(package))
     except PackageNotFound:
         errors.append(package)
-        ctx.ui.info(inary.util.colorize(_("{} could not be found").format(package), "red"))
+        ctx.ui.info(_("{} could not be found").format(package), color="red")
         return False
 
     dest = ctx.config.cached_packages_dir()
@@ -94,7 +94,7 @@ def fetch_remote_file(package, errors):
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
         except inary.fetcher.FetchError as e:
             errors.append(package)
-            ctx.ui.info(inary.util.colorize(_("{} could not be found").format(package), "red"))
+            ctx.ui.info(_("{} could not be found").format(package), color="red")
             return False
     else:
         ctx.ui.info(_('{} [cached]').format(uri.filename()))
@@ -156,7 +156,7 @@ def takeback(operation):
     errors = []
     paths = []
     for pkg in beinstalled:
-        ctx.ui.info(inary.util.colorize(_("Downloading %d / %d") % (beinstalled.index(pkg)+1, len(beinstalled)), "yellow"))
+        ctx.ui.info(_("Downloading %d / %d") % (beinstalled.index(pkg)+1, len(beinstalled)), color="yellow")
         pkg += ctx.const.package_suffix
         if fetch_remote_file(pkg, errors):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))

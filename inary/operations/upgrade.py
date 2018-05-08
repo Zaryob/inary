@@ -180,7 +180,7 @@ def upgrade(A=[], repo=None):
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(util.colorize(_('Total size of package(s): %.2f %s') % (total_size, symbol), "yellow"))
+    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol), color="yellow")
 
     needs_confirm = check_update_actions(order)
 
@@ -204,7 +204,7 @@ def upgrade(A=[], repo=None):
 
     paths = []
     for x in order:
-        ctx.ui.info(util.colorize(_("Downloading %d / %d") % (order.index(x)+1, len(order)), "yellow"))
+        ctx.ui.info(_("Downloading %d / %d") % (order.index(x)+1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
@@ -218,7 +218,7 @@ def upgrade(A=[], repo=None):
     operations.remove.remove_obsoleted_packages()
 
     for path in paths:
-        ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
+        ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), color="yellow")
         install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
         install_op.install(not ctx.get_option('compare_sha1sum'))
 

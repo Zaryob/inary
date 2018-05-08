@@ -70,12 +70,12 @@ def install_pkg_names(A, reinstall = False, extra = False):
         order = operations.helper.reorder_base_packages(order)
 
     if len(order) > 1:
-        ctx.ui.info(util.colorize(_("Following packages will be installed:"), "brightblue"))
+        ctx.ui.info(_("Following packages will be installed:"), color="brightblue")
         ctx.ui.info(util.format_by_columns(sorted(order)))
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)
     total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(util.colorize(_('Total size of package(s): %.2f %s') % (total_size, symbol), "yellow"))
+    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol), color="yellow")
 
     if ctx.get_option('dry_run'):
         return True
@@ -96,7 +96,7 @@ def install_pkg_names(A, reinstall = False, extra = False):
     paths = []
     extra_paths = {}
     for x in order:
-        ctx.ui.info(util.colorize(_("Downloading %d / %d") % (order.index(x)+1, len(order)), "yellow"))
+        ctx.ui.info(_("Downloading %d / %d") % (order.index(x)+1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
@@ -115,7 +115,7 @@ def install_pkg_names(A, reinstall = False, extra = False):
         operations.remove.remove_conflicting_packages(conflicts)
 
     for path in paths:
-        ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
+        ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), color="yellow")
         install_op = atomicoperations.Install(path)
         install_op.install(False)
         try:

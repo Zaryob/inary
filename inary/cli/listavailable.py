@@ -58,7 +58,7 @@ all repositories.
         self.init(database = True, write = False)
 
         if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
-            ctx.ui.info(util.colorize(_('Installed packages are shown in this color'), 'green'))
+            ctx.ui.info(_('Installed packages are shown in this color'), color='green')
 
         if self.args:
             for arg in self.args:
@@ -66,7 +66,7 @@ all repositories.
         else:
             # print for all repos
             for repo in operations.list_repos():
-                ctx.ui.info(util.colorize(_("\n Repository : {}\n"), "blue").format(str(repo)))
+                ctx.ui.info(_("\n Repository : {}\n").format(str(repo)), color="blue")
                 self.print_packages(repo)
 
     def print_packages(self, repo):

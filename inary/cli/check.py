@@ -103,33 +103,29 @@ class Check(command.Command, metaclass=command.autocommand):
 
                 if check_results['missing'] or check_results['corrupted'] \
                         or check_results['config']:
-                    ctx.ui.info(util.colorize(_("Broken"), 'brightred'))
+                    ctx.ui.info(_("Broken"), color='brightred')
                 elif check_results['denied']:
                     # We can't deduce a result when some files
                     # can't be accessed
                     necessary_permissions = False
-                    ctx.ui.info(util.colorize(_("Unknown"), 'yellow'))
+                    ctx.ui.info(_("Unknown"), color='yellow')
                 else:
-                    ctx.ui.info(util.colorize(_("OK"), 'green'))
+                    ctx.ui.info(_("OK"), color='green')
                     continue
 
                 # Dump per file stuff
                 for fpath in check_results['missing']:
-                    ctx.ui.info(util.colorize(
-                        _("Missing file: /{}").format(fpath), 'brightred'))
+                    ctx.ui.info(_("Missing file: /{}").format(fpath), color='brightred')
 
                 for fpath in check_results['denied']:
-                    ctx.ui.info(util.colorize(
-                        _("Access denied: /{}").format(fpath), 'yellow'))
+                    ctx.ui.info(_("Access denied: /{}").format(fpath), color='yellow')
 
                 for fpath in check_results['corrupted']:
-                    ctx.ui.info(util.colorize(
-                        _("Corrupted file: /{}").format(fpath), 'brightyellow'))
+                    ctx.ui.info(_("Corrupted file: /{}").format(fpath), color='brightyellow')
 
                 for fpath in check_results['config']:
-                    ctx.ui.info(util.colorize(
-                        _("Modified configuration file: /{}").format(fpath),
-                        'brightyellow'))
+                    ctx.ui.info(_("Modified configuration file: /{}").format(fpath),
+                        color='brightyellow')
 
             else:
                 # Package is not installed

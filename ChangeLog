@@ -3,6 +3,9 @@
       -> atomicoperations içerisine taşınan fonksiyonlar yeniden ele alınıp gerekli
       olanları cli içerisindeki kullanıldığı komuta taşınacak
 
+    * ctx.ui.info fonksiyonuna özellik eklendi:
+      -> inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
+      sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi.
 
 2018-05-06 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Küçük bir hack:

@@ -102,11 +102,14 @@ class CLI(inary.ui.UI):
         msg = new_msg
         self.output(str(msg), verbose=verbose)
 
-    def info(self, msg, verbose = False, noln = False):
+    def info(self, msg, verbose = False, noln = False, color='default'):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
+        msg = inary.util.colorize(msg, color)
+
         if not noln:
             msg = '%s\n'%(msg)
+            
         self.output(str(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):

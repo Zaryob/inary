@@ -545,7 +545,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package)
 
         # filesdb
-        ctx.ui.info(util.colorize(_('Adding \'{}\' to db...'), 'purple').format(self.metadata.package.name))
+        ctx.ui.info(_('Adding \'{}\' to db...').format(self.metadata.package.name), color='purple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
