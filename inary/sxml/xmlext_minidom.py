@@ -33,6 +33,8 @@ import inary
 import xml.dom.minidom as minidom
 from xml.parsers.expat import ExpatError
 
+class XMLError(inary.errors.Error):
+    pass
 
 def newDocument(tag):
     impl = minidom.getDOMImplementation()
@@ -44,14 +46,14 @@ def parse(fileName):
         dom = minidom.parse(fileName)
         return dom.documentElement
     except ExpatError as inst:
-        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
+        raise XMLError(_("File '{}' has invalid XML: {}\n").format(fileName,
                                                             str(inst)))
 def parseString(fileString):
     try:
         dom = minidom.parseString(fileString)
         return dom.documentElement
     except ExpatError as inst:
-        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
+        raise XMLError(_("File '{}' has invalid XML: {}\n").format(fileName,
                                                             str(inst)))
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -104,7 +106,7 @@ def getNodeText(node, tagpath = ""):
         #print('child_data=', child_data.strip())
         return child.data.strip()  # in any case, strip whitespaces...
     else:
-        raise XmlError(_("getNodeText: Expected text node, got something else!"))
+        raise XMLError(_("getNodeText: Expected text node, got something else!"))
 
 def getChildText(node_s, tagpath):
     """get the text of a child at the end of a tag path"""

@@ -35,6 +35,9 @@ parse = iks.parse
 parseString = iks.parseString
 newDocument = iks.newDocument
 
+class XMLError(inary.errors.Error):
+    pass
+
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
     tags = tagPath.split('/')
@@ -85,7 +88,7 @@ def getNodeText(node, tagpath = ""):
         # print('child_data=', child_data.strip())
         return child_data.strip() # in any case, strip whitespaces...
     else:
-        raise XmlError(_("getNodeText: Expected text node, got something else!"))
+        raise XMLError(_("getNodeText: Expected text node, got something else!"))
 
 def getChildText(node_s, tagpath):
     """get the text of a child at the end of a tag path"""

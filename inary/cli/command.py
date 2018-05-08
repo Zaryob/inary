@@ -157,7 +157,7 @@ class Command(object):
         else:
             self.options.authinfo = None
 
-    def init(self, database = True, write = True):
+    def init(self, database = True, write = True, locked = False):
         """initialize INARY components"""
 
         if self.options:
