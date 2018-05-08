@@ -734,7 +734,9 @@ def locked(func):
 
         try:
             inary.db.invalidate_caches()
+            ctx.ui.info(_('Invalidate database caches...'), verbose= True)
             ret = func(*__args,**__kw)
+            ctx.ui.info(_('Updating database caches...'), verbose= True)
             inary.db.update_caches()
             return ret
         finally:
@@ -817,6 +819,7 @@ def set_repo_activity(name, active):
         repodb.activate_repo(name)
     else:
         repodb.deactivate_repo(name)
+    ctx.ui.info(_('Regenerating database caches...'), verbose= True)
     inary.db.regenerate_caches()
 
 @locked
@@ -925,6 +928,7 @@ def add_repo(name, indexuri, at = None):
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at = at)
+        ctx.ui.info(_('Flushing database caches...'), verbose= True)
         inary.db.flush_caches()
         ctx.ui.info(_('Repo {} added to system.').format(name))
 
@@ -933,6 +937,7 @@ def remove_repo(name):
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
         repodb.remove_repo(name)
+        ctx.ui.info(_('Flushing database caches...'), verbose= True)
         inary.db.flush_caches()
         ctx.ui.info(_('Repo {} removed from system.').format(name))
     else:
@@ -947,6 +952,7 @@ def update_repos(repos, force=False):
             updated |= __update_repo(repo, force)
     finally:
         if updated:
+            ctx.ui.info(_('Regenerating database caches...'), verbose= True)
             inary.db.regenerate_caches()
 
 @locked
@@ -954,6 +960,7 @@ def update_repo(repo, force=False):
     inary.db.historydb.HistoryDB().create_history("repoupdate")
     updated = __update_repo(repo, force)
     if updated:
+        ctx.ui.info(_('Regenerating database caches...'), verbose= True)
         inary.db.regenerate_caches()
 
 

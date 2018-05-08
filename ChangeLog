@@ -7,8 +7,11 @@
       -> inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
       sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi.
 
-    * History biraz renklendirildi.
-      -> Paket yöneticisi pavyona döndü. Renkli filan.
+    * Cosmetics.
+      -> History renklendirildi: Paket yöneticisi pavyona döndü. Renkli filan.
+      -> Verbose ile çıktı verilirken artık o satırın detaylı çıktı olduğu belli edilecek.
+      -> inary.db içindeki database fonksiyonları çalışırken beklemek bir işkenceydi.
+         Hele minidom yüklü ise sistemde. Bu yüzden verbosed mesajlar eklendi.
 
 2018-05-06 Suleyman Poyraz <zaryob.dev@gmail.com>
     * Küçük bir hack:

@@ -12,6 +12,10 @@
 # Please read the COPYING file.
 #
 
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
 def invalidate_caches():
     # Invalidates inary caches in use and forces to re-fill caches from disk when needed
     for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),

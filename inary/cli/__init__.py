@@ -106,10 +106,11 @@ class CLI(inary.ui.UI):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         msg = inary.util.colorize(msg, color)
-
+        if verbose:
+            msg = inary.util.colorize(_('Verbose: '), 'white') + msg
         if not noln:
             msg = '%s\n'%(msg)
-            
+
         self.output(str(msg), verbose=verbose)
 
     def warning(self, msg, verbose = False):
