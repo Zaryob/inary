@@ -23,6 +23,7 @@ _ = __trans.gettext
 import inary.atomicoperations
 import inary.db
 import inary.context as ctx
+import inary.util as util
 import inary.cli.command as command
 
 # Operation names for translation
@@ -63,12 +64,21 @@ Lists previous operations.""")
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):
-            print(_("Operation #{0}: {1}").format(operation.no, opttrans[operation.type]))
-            print(_("Date: {0.date} {0.time}").format(operation))
 
+            msg_oprt = util.colorize(_("Operation "), 'yellow') \
+                     + util.colorize("#{}: ".format(operation.no), "blue")\
+                     + util.colorize("{}:".format(opttrans[operation.type]), "white")
+
+            date_and_time = util.colorize(_("Date: "), "cyan" )+ "{0.date} {0.time}".format(operation)
+            print(msg_oprt)
+            print(date_and_time)
 
             if operation.type == "snapshot":
-                print(_("    * There are %d packages in this snapshot.") % len(operation.packages))
+                msg_snap = util.colorize(
+                _("    * There are {} packages in this snapshot.").format(len(operation.packages)),
+                "purple")
+
+                print(msg_snap)
             elif operation.type == "repoupdate":
                 for repo in operation.repos:
                     print("    *",  repo)
@@ -85,7 +95,7 @@ Lists previous operations.""")
             class LessPipe():
                 def __init__(self):
                     import subprocess
-                    self.less = subprocess.Popen(["less", "-K", "-"],
+                    self.less = subprocess.Popen(["less", "-K -R", "-"],
                                             stdin=subprocess.PIPE)
 
                 def __del__(self):
