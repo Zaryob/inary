@@ -230,14 +230,14 @@ class Fetcher:
     def _get_http_headers(self):
         headers = []
         if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
-            enc = encodestring('{0}:{0}'.format(self.url.auth_info()))
+            enc = encodestring('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return str(headers)
 
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = encodestring('{0}:{0}'.format(self.url.auth_info()))
+            enc = encodestring('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return str(headers)
 
