@@ -53,7 +53,7 @@ class UI(object):
     def set_debug(self, flag):
         self.show_debug = flag
 
-    def info(self, msg, verbose = False, noln = False):
+    def info(self, msg, verbose = False, noln = False,color='default'):
         "give an informative message"
         pass
 

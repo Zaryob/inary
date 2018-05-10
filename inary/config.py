@@ -28,6 +28,7 @@ import inary.context as ctx
 import inary.configfile
 import inary.errors
 import inary.util
+from inary.util import Singleton
 
 class Error(inary.errors.Error):
     pass
@@ -42,7 +43,8 @@ class Options(object):
     def __setattr__(self, name, value):
             self.__dict__[name] = value
 
-class Config(object, metaclass=inary.util.Singleton):
+
+class Config(object, metaclass=Singleton):
     """Config Singleton"""
 
     def __init__(self, options = Options()):

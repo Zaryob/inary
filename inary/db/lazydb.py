@@ -18,9 +18,8 @@ import time
 import inary.context as ctx
 import inary.util as util
 
-from .. import strutils
 # lower borks for international locales. What we want is ascii lower.
-lower_map = str.maketrans(strutils.ascii_uppercase, strutils.ascii_lowercase)
+lower_map = str.maketrans(util.ascii_uppercase, util.ascii_lowercase)
 
 
 class Singleton(object):

@@ -18,7 +18,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
-import inary.context as ctx
 
 from .file_utils import *
 from .package_utils import *
@@ -26,3 +25,14 @@ from .path_utils import *
 from .process_utils import *
 from .term_utils import *
 from .type_utils import *
+
+class Singleton(type):
+    def __init__(cls, name, bases, dict):
+        super(Singleton, cls).__init__(name, bases, dict)
+        cls.instance = None
+
+    def __call__(cls, *args, **kw):
+        if cls.instance is None:
+            cls.instance = super(Singleton, cls).__call__(*args, **kw)
+
+        return cls.instance

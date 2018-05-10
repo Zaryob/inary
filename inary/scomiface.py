@@ -14,7 +14,6 @@
 
 import os
 import time
-from . import strutils
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -23,6 +22,7 @@ _ = __trans.gettext
 import inary.api
 import inary.context as ctx
 import inary.errors
+import inary.util as util
 
 class Error(inary.errors.Error):
     pass
@@ -36,7 +36,7 @@ except ImportError:
 
 def is_char_valid(char):
     """Test if char is valid object path character."""
-    return char in strutils.ascii_letters + strutils.digits + "_"
+    return char in util.ascii_letters + util.digits + "_"
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in SCOM script"""
@@ -84,9 +84,15 @@ def get_link():
             link.setLocale()
             return link
         except dbus.exceptions.DBusException as e:
-            exceptions.append(str(e))
-        except Exception as e:
-            exceptions.append(str(e))
+            if str(e) in exceptions:
+                pass
+            else:
+                exceptions.append(str(e))
+     except Exception as e:
+            if str(e) in exceptions:
+                pass
+            else:
+                exceptions.append(str(e))
         time.sleep(0.2)
         timeout -= 0.2
     raise Error(_("Cannot connect to SCOM: \n  {}\n").format("\n  ".join(exceptions)))
