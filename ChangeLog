@@ -1,27 +1,30 @@
 2018-05-09 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * util.py parçalandı:
-      -> ileride kod birikmesi olmasın diye (cross compiling özelliği ekleyince)
-      util.py dosyası parçalandı.
-    * One test passed:
-      -> fetcher testindeki errora sebeb olan yer bulundu fetcher fixe edildi.
+		* util.py parçalandı:
+			-> ileride kod birikmesi olmasın diye (cross compiling özelliği ekleyince)
+				util.py dosyası parçalandı.
+		* One test passed:
+			-> fetcher testindeki errora sebeb olan yer bulundu fetcher fixe edildi.
+		* Komutlara küçük dokunuşlar:
+		  -> innary.cli.listpendings.py dosyası düzenlendi. list-pendings komutu
+			biraz anlaşılır ve renkli yapıldı.
 
 2018-05-08 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Atomicoperations rahatlatılmalı:
-      -> atomicoperations içerisine taşınan fonksiyonlar yeniden ele alınıp gerekli
-      olanları cli içerisindeki kullanıldığı komuta taşınacak
+		* Atomicoperations rahatlatılmalı:
+			-> atomicoperations içerisine taşınan fonksiyonlar yeniden ele alınıp gerekli
+					olanları cli içerisindeki kullanıldığı komuta taşınacak
 
-    * ctx.ui.info fonksiyonuna özellik eklendi:
-      -> inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
-      sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi.
+		* ctx.ui.info fonksiyonuna özellik eklendi:
+			-> inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
+					sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi.
 
-    * Cosmetics.
-      -> History renklendirildi: Paket yöneticisi pavyona döndü. Renkli filan.
-      -> Verbose ile çıktı verilirken artık o satırın detaylı çıktı olduğu belli edilecek.
-      -> inary.db içindeki database fonksiyonları çalışırken beklemek bir işkenceydi.
-         Hele minidom yüklü ise sistemde. Bu yüzden verbosed mesajlar eklendi.
+		* Cosmetics.
+			-> History renklendirildi: Paket yöneticisi pavyona döndü. Renkli filan.
+			-> Verbose ile çıktı verilirken artık o satırın detaylı çıktı olduğu belli edilecek.
+			-> inary.db içindeki database fonksiyonları çalışırken beklemek bir işkenceydi.
+					Hele minidom yüklü ise sistemde. Bu yüzden verbosed mesajlar eklendi.
 
 2018-05-06 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Küçük bir hack:
+		* Küçük bir hack:
 		  -> Immm. Artık home-build şansımız var yani geliştirici root yetkisi
 			   almaksızın evde paket yapabilecek. Tabi ufak testler yapıldıktan sonra
 

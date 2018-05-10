@@ -38,6 +38,6 @@ Lists packages waiting to be configured.
         A = operations.list_pending()
         if len(A):
             for p in inary.data.pgraph.generate_pending_order(A):
-                sys.stdout.write(p)
+                ctx.ui.info(_('Listing pending orders:'), color='blue')
         else:
             ctx.ui.info(_('There are no packages waiting to be configured'))
