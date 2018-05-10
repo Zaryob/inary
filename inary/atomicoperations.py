@@ -734,7 +734,7 @@ def locked(func):
 
         try:
             inary.db.invalidate_caches()
-            ctx.ui.info(_('Invalidate database caches...'), verbose= True)
+            ctx.ui.info(_('Invalidating database caches...'), verbose= True)
             ret = func(*__args,**__kw)
             ctx.ui.info(_('Updating database caches...'), verbose= True)
             inary.db.update_caches()

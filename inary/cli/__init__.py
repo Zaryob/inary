@@ -107,7 +107,7 @@ class CLI(inary.ui.UI):
         # let's cheat from KDE :)
         msg = inary.util.colorize(msg, color)
         if verbose:
-            msg = inary.util.colorize(_('Verbose: '), 'white') + msg
+            msg = inary.util.colorize(_('Verboses: '), 'white') + msg
         if not noln:
             msg = '%s\n'%(msg)
 

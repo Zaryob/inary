@@ -36,9 +36,9 @@ try:
     import ciksemel
 except:
     #FIXME: Gorunusu guzel olsa bile kodda anlamsizlik yaratiyor
-    warn = inary.util.colorize(_("WARNING\n"),"blinkingred")+ \
+    warn = inary.util.colorize(_("WARNING:\n"),"blinkingred")+ \
            inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
-                                 "\tMinidom slower than ciksemel but\n"
+                                 "\tMinidom slower but\n"
                                  "\tFalling back with minidom!!! :(\n\n"), 'faintwhite')
 
     sys.stdout.write(warn)
