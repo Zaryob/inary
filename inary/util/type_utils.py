@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
+# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
+# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -9,11 +11,21 @@
 #
 # Please read the COPYING file.
 #
+# This module is part of  inary.util
 
-"""string/list/functional utility functions"""
-
-import operator
+from .term_utils import get_terminal_size
 from functools import reduce
+import unicodedata
+import operator
+import sys
+
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
+#########################
+# string/list/functional#
+#########################
 
 whitespace = ' \t\n\r\v\f'
 ascii_lowercase = 'abcdefghijklmnopqrstuvwxyz'
@@ -38,10 +50,6 @@ def concat(l):
     """Concatenate a list of lists."""
     return reduce( operator.concat, l )
 
-def strlist(l):
-    """Concatenate string reps of l's elements."""
-    return "".join([str(x) + ' ' for x in l])
-
 def multisplit(str, chars):
     """Split str with any of the chars."""
     l = [str]
@@ -60,6 +68,20 @@ def same(l):
                 return False
         return True
 
+def any(pred, seq):
+    return reduce(operator.or_, list(map(pred, seq)), False)
+
+def flatten_list(l):
+    """Flatten a list of lists."""
+    # Fastest solution is list comprehension
+    # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
+    return [item for sublist in l for item in sublist]
+
+def strlist(l):
+    """Concatenate string reps of l's elements."""
+    return "".join([str(x) + ' ' for x in l])
+
+
 def prefix(a, b):
     """Check if sequence a is a prefix of sequence b."""
     if len(a)>len(b):
@@ -73,6 +95,20 @@ def remove_prefix(a,b):
     """Remove prefix a from sequence b."""
     assert prefix(a,b)
     return b[len(a):]
+
+def suffix(a, b):
+    """Check if sequence a is a suffix of sequence b."""
+    if len(a) > len(b):
+        return False
+    for i in range(1, len(a) + 1):
+        if a[-i] != b[-i]:
+            return False
+    return True
+
+def remove_suffix(a, b):
+    """Remove suffix a from sequence b."""
+    assert suffix(a, b)
+    return b[:-len(a)]
 
 def human_readable_size(size = 0):
     symbols, depth = [' B', 'KB', 'MB', 'GB'], 0
@@ -96,3 +132,23 @@ def ascii_upper(str):
     """Ascii only version of string.upper()"""
     trans_table = str.maketrans(str.ascii_lowercase, str.ascii_uppercase)
     return str.translate(trans_table)
+
+# Python regex sucks
+# http://mail.python.org/pipermail/python-list/2009-January/523704.html
+def letters():
+    start = end = None
+    result = []
+    for index in range(sys.maxunicode + 1):
+        c = chr(index)
+        if unicodedata.category(c)[0] == 'L':
+            if start is None:
+                start = end = c
+            else:
+                end = c
+        elif start:
+            if start == end:
+                result.append(start)
+            else:
+                result.append(start + "-" + end)
+            start = None
+    return ''.join(result)
