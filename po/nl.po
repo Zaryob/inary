@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 23:07+0300\n"
+"POT-Creation-Date: 2018-05-10 23:14+0300\n"
 "PO-Revision-Date: 2011-06-17 15:13+0200\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -3872,533 +3872,59 @@ msgid "Invalid version string: '{}'"
 msgstr "Ongeldige versie tekenreeks: {}"
 
 #, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Handeling #{0}: {1}"
-
-#~ msgid "Date: {0.date} {0.time}"
-#~ msgstr "Datum: {0.date} {0.time}"
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades opties"
 
 #, fuzzy
-#~ msgid "File '{0}' has invalid XML: {1}"
-#~ msgstr "Bestand {} bevat ongeldige XML"
+#~ msgid "Adding {} to source index"
+#~ msgstr "Toevoegen {} aan bronindex"
+
+#~ msgid "OK."
+#~ msgstr "OK."
 
 #, fuzzy
-#~ msgid ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
-#~ msgstr "Kan bestemmingbestand niet bereiken \"{0}\": {1}"
-
-#, fuzzy
-#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-#~ msgstr "Kan bestemmingbestand niet bereiken \"{0}\"; \"{1}\": {2}"
-
-#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-#~ msgstr "Bestand op afstand kan niet bereikt worden. Het eerder opgehaalde deel van het bestand zal verwijderd worden."
-
-#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-#~ msgstr "De server ondersteunt geen gedeeltelijke downloads. Het eerder gedownloade deel van het bestand zal overschreven worden."
-
-#~ msgid "Turkish"
-#~ msgstr "Turks"
-
-#~ msgid "Turkish Q"
-#~ msgstr "Turks Q"
-
-#~ msgid "Turkish F"
-#~ msgstr "Turks F"
-
-#~ msgid "English"
-#~ msgstr "Engels"
-
-#, fuzzy
-#~ msgid "English GB"
-#~ msgstr "Engels"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaans"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabisch"
-
-#~ msgid "Belgium"
-#~ msgstr "België"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulgaars"
-
-#~ msgid "Catalan"
-#~ msgstr "Catalaans"
-
-#~ msgid "Welsh"
-#~ msgstr "Wales"
-
-#~ msgid "Czech"
-#~ msgstr "Tsjechisch"
-
-#~ msgid "Danish"
-#~ msgstr "Deens"
-
-#~ msgid "German"
-#~ msgstr "Duits"
-
-#~ msgid "Spanish"
-#~ msgstr "Spaans"
-
-#~ msgid "Estonian"
-#~ msgstr "Estonisch"
-
-#~ msgid "Finnish"
-#~ msgstr "Fins"
-
-#~ msgid "French"
-#~ msgstr "Frans"
-
-#~ msgid "Greek"
-#~ msgstr "Grieks"
-
-#~ msgid "Croatian"
-#~ msgstr "Kroatisch"
-
-#~ msgid "Hungarian"
-#~ msgstr "Hongaars"
-
-#~ msgid "Icelandic"
-#~ msgstr "IJslands"
-
-#~ msgid "Italian"
-#~ msgstr "Italiaans"
-
-#~ msgid "Japanese"
-#~ msgstr "Japans"
-
-#~ msgid "Macedonian"
-#~ msgstr "Macedonisch"
-
-#~ msgid "Malayalam"
-#~ msgstr "Malayas"
-
-#~ msgid "Norwegian"
-#~ msgstr "Noors"
-
-#~ msgid "Dutch"
-#~ msgstr "Nederlands"
-
-#~ msgid "Polish"
-#~ msgstr "Pools"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugees"
-
-#~ msgid "Brazilian"
-#~ msgstr "Braziliaans"
-
-#~ msgid "Russian"
-#~ msgstr "Russisch"
-
-#~ msgid "Slovak"
-#~ msgstr "Slowaaks"
-
-#~ msgid "Slovenian"
-#~ msgstr "Sloveens"
-
-#~ msgid "Serbian"
-#~ msgstr "Siberisch"
-
-#~ msgid "Swedish"
-#~ msgstr "Zweeds"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Oekraïens"
-
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamees"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Opschonen bouwmap..."
 
-#~ msgid "long integer"
-#~ msgstr "lang geheel getal"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "optie {} vereist een argument"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY-pakket"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber dient geïnstalleerd te zijn om dit commando uit te voeren"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Regel {} bevat ongeldige XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Kan bestand {} niet lezen : {}"
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Uitvoeren pakketten naar de werkmap."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Controle {}... "
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Pakket {} is veranderd in config bestanden."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Pakket {} is beschadigd."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "PartOf tag is niet omschreven, zoeken naar component"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Bron is onderdeel van {} component"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Pad dient te beginnen met een slash: {}"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Meerdere 'Pad'-tags opgegeven voor dit pad: {}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Veiligheidsprocedure: system.devel is al geïnstalleerd"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Controle /{} "
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Veranderd config bestand: {}"
-
-#~ msgid "Reverse dependency {} of {} cannot be satisfied"
-#~ msgstr "Omgekeerde afhankelijkheid {} van {} kan niet worden voldaan"
-
-#~ msgid ""
-#~ "\n"
-#~ "        Prints usage information of application and exits.\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Signs data with given key file and passphrase.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            data: Data to sign\n"
-#~ "            keyfile: Private key\n"
-#~ "            passphrase: Passphrase\n"
-#~ "        Returns:\n"
-#~ "            Signed data\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            data: Te ondertekenen data\n"
-#~ "            sleutelbestand: Persoonlijke sleutel\n"
-#~ "            wachtwoord: Wachtwoord\n"
-#~ "        Geeft terug:\n"
-#~ "            Ondertekende data\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Verifies signature. Keyfile or certificate is required.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            data: Original data\n"
-#~ "            signature: Signed data\n"
-#~ "            keyfile: Public keyfile\n"
-#~ "            certificate: Certificate\n"
-#~ "        Returns:\n"
-#~ "            True if valid, False if invalid\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Verifieert ondertekening. sleutelbestand of certificaat is vereist.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            data: Originele data\n"
-#~ "            handtekening: Ondertekende data\n"
-#~ "            sleutelbestand: Publiek sleutelbestand\n"
-#~ "            certificaat: Certificaat\n"
-#~ "        Geeft terug:\n"
-#~ "            True indien geldig, False indien ongeldig\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Calculates checksums of files in ZIP object.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            zip: ZipFile object\n"
-#~ "        Returns:\n"
-#~ "            File names and sums\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Berekent controlesom van de bestanden in het ZIP-object.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            zip: Zipbestand-object\n"
-#~ "        Geeft terug:\n"
-#~ "            Bestandsnamen en controlesommen\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Verifies integrity of a ZIP file. Keyfile or certificate is required.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            filename: ZIP filename\n"
-#~ "            keyfile: Public keyfile\n"
-#~ "            certificate: Certificate\n"
-#~ "        Returns:\n"
-#~ "            True if valid, False if invalid\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of certificaat is vereist.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            bestandnaam: ZIP-bestandnaam\n"
-#~ "            sleutelbestand: Publiek sleutelbestand\n"
-#~ "            certificaat: Certificaat\n"
-#~ "        Geeft terug:\n"
-#~ "            True indien geldig, False indien ongeldig\n"
-#~ "    "
-
-#~ msgid ""
-#~ "\n"
-#~ "        Signs a ZIP file.\n"
-#~ "\n"
-#~ "        Arguments:\n"
-#~ "            filename: ZIP filename\n"
-#~ "            keyfile: Private key\n"
-#~ "            passphrase: Passphrase\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "        Ondertekent een ZIP-bestand.\n"
-#~ "\n"
-#~ "        Argumenten:\n"
-#~ "            bestandnaam: ZIP-bestandnaam\n"
-#~ "            sleutelbestand: Persoonlijke sleutel\n"
-#~ "            wachtwoord: Wachtwoord\n"
-#~ "    "
-
-#~ msgid ""
-#~ "Duplicate binary packages:\n"
-#~ "{}\n"
-#~ "{}\n"
-#~ msgstr ""
-#~ "Dubbele binaire pakketten:\n"
-#~ "{}\n"
-#~ "{}\n"
-
-#~ msgid ""
-#~ "Duplicate source packages:\n"
-#~ "{}\n"
-#~ "{}\n"
-#~ msgstr ""
-#~ "Dubbele bronpakketten:\n"
-#~ "{}\n"
-#~ "{}\n"
-
-#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
-#~ msgstr "Ontwikkelaar '{} <{}>' heeft een ander e-mailadres {} in bronpakket '%s'"
-
-#~ msgid ""
-#~ "Cannot parse {}:\n"
-#~ "{}\n"
-#~ msgstr ""
-#~ "Kan {} niet ontleden:\n"
-#~ "{}\n"
-
-#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
-#~ msgstr "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
-
-#~ msgid "Dont generate the web site.\n"
-#~ msgstr "Website niet genereren.\n"
-
-#~ msgid "Scanning source repository...\n"
-#~ msgstr "Scannen van softwarebron...\n"
-
-#~ msgid "Scanning binary packages...\n"
-#~ msgstr "Scannen binaire pakketten...\n"
-
-#~ msgid "Storing {}, "
-#~ msgstr "Opslaan {}, "
-
-#~ msgid "Storing {}."
-#~ msgstr "Opslaan {}."
-
-#~ msgid ""
-#~ "The following packages will be installed\n"
-#~ "in the respective order to satisfy extra dependencies:\n"
-#~ msgstr ""
-#~ "De volgende pakketten zullen geïnstalleerd worden\n"
-#~ "in de meest gunstige volgorde voor extra afhankelijkheden:\n"
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden geïnstalleerd: "
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden opgewaardeerd: "
+#, fuzzy
+#~ msgid "done."
+#~ msgstr "Gereed."
 
 #, fuzzy
-#~ msgid "Repository architecture does not match. Removing {} from system."
-#~ msgstr "{} softwarebron is onbereikbaar. {} van systeem verwijderen."
-
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "INARY-database voor de softwarebron {} bijwerken?"
-
-#~ msgid "The repository couldn't be added because of distribution release mismatch"
-#~ msgstr "De softwarebron kan niet toegevoegd worden omdat de distributieversie niet overeen komt"
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Softwarebron van distributie komt niet overeen. {} van systeem verwijderen."
-
-#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
-#~ msgstr "Kan compatibiliteit van deze bron niet controleren vanwege ontbrekende informatie over de distributie. "
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Naam: {}, versie {}, uitgave %s, bouw %s\n"
-
-#~ msgid "Package {} is already at the latest build {}."
-#~ msgstr "Pakket {} is al de laatste bouw {}."
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Aanmaken delta INARY pakket tussen {} {}"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan geen delta maken voor hetzelfde pakket!"
-
-#~ msgid "All of the files under the install dir {} has been collected by package(s)"
-#~ msgstr "Alle bestanden in de installatiemap {} zijn verzameld door pakket(ten)"
-
-#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
-#~ msgstr "Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen in inary.conf noodzakelijk."
-
-# inary/build.py:503 :506
-#~ msgid "Generating {},"
-#~ msgstr "Genereren {},"
-
-#~ msgid "There is no change from previous build %d"
-#~ msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
-
-#~ msgid "There are changes, incrementing build no to %d"
-#~ msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
-
-#~ msgid "(old package lacks a build no, setting build no to 1.)"
-#~ msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
-
-#~ msgid "(no previous build found, setting build no to 1.)"
-#~ msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
-
-#~ msgid "(found old version {})"
-#~ msgstr "(gevonden oude versie {})"
-
-#~ msgid "gzip compression not supported yet"
-#~ msgstr "gzip-compressie nog niet ondersteund"
-
-#~ msgid "zip compression not supported yet"
-#~ msgstr "zip compressie nog niet ondersteund"
-
-#~ msgid "Indexing current directory."
-#~ msgstr "Indexeren huidige map."
-
-#~ msgid "package_format must be one of {} "
-#~ msgstr "package_format moet zijn {} "
-
-#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
-#~ msgstr "INARY binaire pakket formaten: '1.0', '1.1' (standaard)"
-
-#~ msgid "Do not take build no into account."
-#~ msgstr "Bouwnummer niet meerekenen."
-
-#~ msgid "Downgrade to old distribution build?"
-#~ msgstr "Terugwaarderen naar oude distributie bouw?"
-
-#~ msgid "Upgrading to new distribution build"
-#~ msgstr "Opwaarderen naar nieuwe distributie bouw"
-
-#~ msgid "{} {} is added to %s/language.%s.dat "
-#~ msgstr "{} {} is toegevoegd aan %s/language.%s.dat "
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} is toegevoegd aan %s/language.%s.def "
-
-#~ msgid "{} is added to {}/language.%s.dat"
-#~ msgstr "{} is toegevoegd aan {}/language.%s.dat"
-
-#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
-#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} is toegevoegd aan %s/language.%s.def"
+#~ msgid "* Getting index from {}"
+#~ msgstr "Ophalen bron van: {} "
 
 #, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Veiligheidsprocedure vereist het opwaarderen van de volgende pakketten:"
+#~ msgid "    done"
+#~ msgstr "Gereed."
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Opwaarderen niet mogelijk."
+#~ msgid "* Getting installed packages"
+#~ msgstr "Controleren alle geïnstalleerde pakketten"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "De volgende pakketten worden opgewaardeerd:"
+#~ msgid "    found {} packages"
+#~ msgstr "Configureren {} pakket"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Geen pakketten op te waarderen."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Controleren alle geïnstalleerde pakketten"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Pakket {0.name} is al de laatste uitgave {0.release}."
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Controleren alle geïnstalleerde pakketten"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "Als het systeem opgewaardeerd wordt, pakketten en componenten negeren waarbij basenames overeenkomen met ieder patroon in bestand."
+#~ msgid "  installed size {}"
+#~ msgstr "Geïnstalleerd {}"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "Bij het opwaarderen van het systeem, pakketten en componenten negeren waarbij basenames overeenkomen met patroon."
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Pakketgrootte: {}"
 
 #, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Haal bijgewerkte bestanden op maar installeer ze niet."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Naam van de op te waarderen pakketbron"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Opwaarderen componenten en recursieve componenten pakketten"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Alleen beveiligingspakketten opwaarderen"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "opwaardeeropties"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Wilt u doorgaan?"
 
 #, fuzzy
 #~ msgid ""
@@ -4437,56 +3963,530 @@ msgstr "Ongeldige versie tekenreeks: {}"
 #~ "worden naar pakketnamen geëxpandeerd.\n"
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Wilt u doorgaan?"
+#~ msgid "downgrade options"
+#~ msgstr "opwaardeeropties"
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Pakketgrootte: {}"
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Alleen beveiligingspakketten opwaarderen"
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Geïnstalleerd {}"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Opwaarderen componenten en recursieve componenten pakketten"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Controleren alle geïnstalleerde pakketten"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Naam van de op te waarderen pakketbron"
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Controleren alle geïnstalleerde pakketten"
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Haal bijgewerkte bestanden op maar installeer ze niet."
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Configureren {} pakket"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "Bij het opwaarderen van het systeem, pakketten en componenten negeren waarbij basenames overeenkomen met patroon."
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Controleren alle geïnstalleerde pakketten"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "Als het systeem opgewaardeerd wordt, pakketten en componenten negeren waarbij basenames overeenkomen met ieder patroon in bestand."
 
 #, fuzzy
-#~ msgid "    done"
-#~ msgstr "Gereed."
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Pakket {0.name} is al de laatste uitgave {0.release}."
 
 #, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Ophalen bron van: {} "
+#~ msgid "No packages to downgrade."
+#~ msgstr "Geen pakketten op te waarderen."
 
 #, fuzzy
-#~ msgid "done."
-#~ msgstr "Gereed."
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "De volgende pakketten worden opgewaardeerd:"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Opwaarderen niet mogelijk."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Veiligheidsprocedure vereist het opwaarderen van de volgende pakketten:"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def"
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} is toegevoegd aan %s/language.%s.def"
+
+#~ msgid "{} is added to {}/language.%s.dat"
+#~ msgstr "{} is toegevoegd aan {}/language.%s.dat"
+
+#~ msgid "\\languages{{}}{{}}{}{%s}{%s} is added to %s/language.%s.def "
+#~ msgstr "\\languages{{}}{{}}{}{%s}{%s} is toegevoegd aan %s/language.%s.def "
+
+#~ msgid "{} {} is added to %s/language.%s.dat "
+#~ msgstr "{} {} is toegevoegd aan %s/language.%s.dat "
+
+#~ msgid "Upgrading to new distribution build"
+#~ msgstr "Opwaarderen naar nieuwe distributie bouw"
+
+#~ msgid "Downgrade to old distribution build?"
+#~ msgstr "Terugwaarderen naar oude distributie bouw?"
+
+#~ msgid "Do not take build no into account."
+#~ msgstr "Bouwnummer niet meerekenen."
+
+#~ msgid "INARY binary package formats: '1.0', '1.1' (default)"
+#~ msgstr "INARY binaire pakket formaten: '1.0', '1.1' (standaard)"
+
+#~ msgid "package_format must be one of {} "
+#~ msgstr "package_format moet zijn {} "
+
+#~ msgid "Indexing current directory."
+#~ msgstr "Indexeren huidige map."
+
+#~ msgid "zip compression not supported yet"
+#~ msgstr "zip compressie nog niet ondersteund"
+
+#~ msgid "gzip compression not supported yet"
+#~ msgstr "gzip-compressie nog niet ondersteund"
+
+#~ msgid "(found old version {})"
+#~ msgstr "(gevonden oude versie {})"
+
+#~ msgid "(no previous build found, setting build no to 1.)"
+#~ msgstr "(geen eerdere bouw gevonden, zet bouwnummer op 1.)"
+
+#~ msgid "(old package lacks a build no, setting build no to 1.)"
+#~ msgstr "(oud pakket heeft geen bouwnummer, zet compilatienummer op 1.)"
+
+#~ msgid "There are changes, incrementing build no to %d"
+#~ msgstr "Er zijn wijzigingen, zet bouwnummer op %d "
+
+#~ msgid "There is no change from previous build %d"
+#~ msgstr "Er zijn geen wijzigingen sinds vorige bouw %d"
+
+# inary/build.py:503 :506
+#~ msgid "Generating {},"
+#~ msgstr "Genereren {},"
+
+#~ msgid "Build number is not available. For repo builds you must enable buildno in inary.conf."
+#~ msgstr "Bouwnummer is niet aanwezig. Bij repo-compilaties is buildno inschakelen in inary.conf noodzakelijk."
+
+#~ msgid "All of the files under the install dir {} has been collected by package(s)"
+#~ msgstr "Alle bestanden in de installatiemap {} zijn verzameld door pakket(ten)"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan geen delta maken voor hetzelfde pakket!"
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Aanmaken delta INARY pakket tussen {} {}"
+
+#~ msgid "Package {} is already at the latest build {}."
+#~ msgstr "Pakket {} is al de laatste bouw {}."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Naam: {}, versie {}, uitgave %s, bouw %s\n"
+
+#~ msgid "Unable to check compatibility of this repository as it does not have information about the distribution."
+#~ msgstr "Kan compatibiliteit van deze bron niet controleren vanwege ontbrekende informatie over de distributie. "
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Softwarebron van distributie komt niet overeen. {} van systeem verwijderen."
+
+#~ msgid "The repository couldn't be added because of distribution release mismatch"
+#~ msgstr "De softwarebron kan niet toegevoegd worden omdat de distributieversie niet overeen komt"
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "INARY-database voor de softwarebron {} bijwerken?"
+
+#, fuzzy
+#~ msgid "Repository architecture does not match. Removing {} from system."
+#~ msgstr "{} softwarebron is onbereikbaar. {} van systeem verwijderen."
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden opgewaardeerd: "
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Veiligheidsprocedure: de volgende pakketten in system.base worden geïnstalleerd: "
+
+#~ msgid ""
+#~ "The following packages will be installed\n"
+#~ "in the respective order to satisfy extra dependencies:\n"
+#~ msgstr ""
+#~ "De volgende pakketten zullen geïnstalleerd worden\n"
+#~ "in de meest gunstige volgorde voor extra afhankelijkheden:\n"
+
+#~ msgid "Storing {}."
+#~ msgstr "Opslaan {}."
+
+#~ msgid "Storing {}, "
+#~ msgstr "Opslaan {}, "
+
+#~ msgid "Scanning binary packages...\n"
+#~ msgstr "Scannen binaire pakketten...\n"
+
+#~ msgid "Scanning source repository...\n"
+#~ msgstr "Scannen van softwarebron...\n"
+
+#~ msgid "Dont generate the web site.\n"
+#~ msgstr "Website niet genereren.\n"
+
+#~ msgid "Usage: repostats.py [OPTIONS] source-repo-path [binary-repo-path]\n"
+#~ msgstr "Gebruik: repostats.py [Opties] pad-naar-repo-bron [binair-repo-adres]\n"
+
+#~ msgid ""
+#~ "Cannot parse {}:\n"
+#~ "{}\n"
+#~ msgstr ""
+#~ "Kan {} niet ontleden:\n"
+#~ "{}\n"
+
+#~ msgid "Developer '{} <{}>' has another mail address {} in source package '%s'"
+#~ msgstr "Ontwikkelaar '{} <{}>' heeft een ander e-mailadres {} in bronpakket '%s'"
+
+#~ msgid ""
+#~ "Duplicate source packages:\n"
+#~ "{}\n"
+#~ "{}\n"
+#~ msgstr ""
+#~ "Dubbele bronpakketten:\n"
+#~ "{}\n"
+#~ "{}\n"
+
+#~ msgid ""
+#~ "Duplicate binary packages:\n"
+#~ "{}\n"
+#~ "{}\n"
+#~ msgstr ""
+#~ "Dubbele binaire pakketten:\n"
+#~ "{}\n"
+#~ "{}\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Signs a ZIP file.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            filename: ZIP filename\n"
+#~ "            keyfile: Private key\n"
+#~ "            passphrase: Passphrase\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Ondertekent een ZIP-bestand.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            sleutelbestand: Persoonlijke sleutel\n"
+#~ "            wachtwoord: Wachtwoord\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Verifies integrity of a ZIP file. Keyfile or certificate is required.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            filename: ZIP filename\n"
+#~ "            keyfile: Public keyfile\n"
+#~ "            certificate: Certificate\n"
+#~ "        Returns:\n"
+#~ "            True if valid, False if invalid\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "         Verifieert de integriteit van een ZIP-bestand. Sleutelbestand of certificaat is vereist.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            bestandnaam: ZIP-bestandnaam\n"
+#~ "            sleutelbestand: Publiek sleutelbestand\n"
+#~ "            certificaat: Certificaat\n"
+#~ "        Geeft terug:\n"
+#~ "            True indien geldig, False indien ongeldig\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Calculates checksums of files in ZIP object.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            zip: ZipFile object\n"
+#~ "        Returns:\n"
+#~ "            File names and sums\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Berekent controlesom van de bestanden in het ZIP-object.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            zip: Zipbestand-object\n"
+#~ "        Geeft terug:\n"
+#~ "            Bestandsnamen en controlesommen\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Verifies signature. Keyfile or certificate is required.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            data: Original data\n"
+#~ "            signature: Signed data\n"
+#~ "            keyfile: Public keyfile\n"
+#~ "            certificate: Certificate\n"
+#~ "        Returns:\n"
+#~ "            True if valid, False if invalid\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Verifieert ondertekening. sleutelbestand of certificaat is vereist.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            data: Originele data\n"
+#~ "            handtekening: Ondertekende data\n"
+#~ "            sleutelbestand: Publiek sleutelbestand\n"
+#~ "            certificaat: Certificaat\n"
+#~ "        Geeft terug:\n"
+#~ "            True indien geldig, False indien ongeldig\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Signs data with given key file and passphrase.\n"
+#~ "\n"
+#~ "        Arguments:\n"
+#~ "            data: Data to sign\n"
+#~ "            keyfile: Private key\n"
+#~ "            passphrase: Passphrase\n"
+#~ "        Returns:\n"
+#~ "            Signed data\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Onderteken data met opgegeven sleutelbestand en wachtwoord.\n"
+#~ "\n"
+#~ "        Argumenten:\n"
+#~ "            data: Te ondertekenen data\n"
+#~ "            sleutelbestand: Persoonlijke sleutel\n"
+#~ "            wachtwoord: Wachtwoord\n"
+#~ "        Geeft terug:\n"
+#~ "            Ondertekende data\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "        Prints usage information of application and exits.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "        Informatie over het gebruik van de toepassing tonen en sluit af.\n"
+#~ "    "
+
+#~ msgid "Reverse dependency {} of {} cannot be satisfied"
+#~ msgstr "Omgekeerde afhankelijkheid {} van {} kan niet worden voldaan"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Veranderd config bestand: {}"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Controle /{} "
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Veiligheidsprocedure: system.devel is al geïnstalleerd"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Meerdere 'Pad'-tags opgegeven voor dit pad: {}"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Pad dient te beginnen met een slash: {}"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Bron is onderdeel van {} component"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "PartOf tag is niet omschreven, zoeken naar component"
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Pakket {} is beschadigd."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Pakket {} is veranderd in config bestanden."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Controle {}... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Uitvoeren pakketten naar de werkmap."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Kan bestand {} niet lezen : {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Regel {} bevat ongeldige XML"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber dient geïnstalleerd te zijn om dit commando uit te voeren"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY-pakket"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "optie {} vereist een argument"
+
+#~ msgid "long integer"
+#~ msgstr "lang geheel getal"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Opschonen bouwmap..."
 
-#~ msgid "OK."
-#~ msgstr "OK."
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamees"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Oekraïens"
+
+#~ msgid "Swedish"
+#~ msgstr "Zweeds"
+
+#~ msgid "Serbian"
+#~ msgstr "Siberisch"
+
+#~ msgid "Slovenian"
+#~ msgstr "Sloveens"
+
+#~ msgid "Slovak"
+#~ msgstr "Slowaaks"
+
+#~ msgid "Russian"
+#~ msgstr "Russisch"
+
+#~ msgid "Brazilian"
+#~ msgstr "Braziliaans"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugees"
+
+#~ msgid "Polish"
+#~ msgstr "Pools"
+
+#~ msgid "Dutch"
+#~ msgstr "Nederlands"
+
+#~ msgid "Norwegian"
+#~ msgstr "Noors"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malayas"
+
+#~ msgid "Macedonian"
+#~ msgstr "Macedonisch"
+
+#~ msgid "Japanese"
+#~ msgstr "Japans"
+
+#~ msgid "Italian"
+#~ msgstr "Italiaans"
+
+#~ msgid "Icelandic"
+#~ msgstr "IJslands"
+
+#~ msgid "Hungarian"
+#~ msgstr "Hongaars"
+
+#~ msgid "Croatian"
+#~ msgstr "Kroatisch"
+
+#~ msgid "Greek"
+#~ msgstr "Grieks"
+
+#~ msgid "French"
+#~ msgstr "Frans"
+
+#~ msgid "Finnish"
+#~ msgstr "Fins"
+
+#~ msgid "Estonian"
+#~ msgstr "Estonisch"
+
+#~ msgid "Spanish"
+#~ msgstr "Spaans"
+
+#~ msgid "German"
+#~ msgstr "Duits"
+
+#~ msgid "Danish"
+#~ msgstr "Deens"
+
+#~ msgid "Czech"
+#~ msgstr "Tsjechisch"
+
+#~ msgid "Welsh"
+#~ msgstr "Wales"
+
+#~ msgid "Catalan"
+#~ msgstr "Catalaans"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgaars"
+
+#~ msgid "Belgium"
+#~ msgstr "België"
+
+#~ msgid "Arabic"
+#~ msgstr "Arabisch"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Toevoegen {} aan bronindex"
+#~ msgid "English GB"
+#~ msgstr "Engels"
+
+#~ msgid "English"
+#~ msgstr "Engels"
+
+#~ msgid "Turkish F"
+#~ msgstr "Turks F"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Turks Q"
+
+#~ msgid "Turkish"
+#~ msgstr "Turks"
+
+#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+#~ msgstr "De server ondersteunt geen gedeeltelijke downloads. Het eerder gedownloade deel van het bestand zal overschreven worden."
+
+#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#~ msgstr "Bestand op afstand kan niet bereikt worden. Het eerder opgehaalde deel van het bestand zal verwijderd worden."
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades opties"
+#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+#~ msgstr "Kan bestemmingbestand niet bereiken \"{0}\"; \"{1}\": {2}"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+#~ msgstr "Kan bestemmingbestand niet bereiken \"{0}\": {1}"
+
+#, fuzzy
+#~ msgid "File '{0}' has invalid XML: {1}"
+#~ msgstr "Bestand {} bevat ongeldige XML"
+
+#~ msgid "Date: {0.date} {0.time}"
+#~ msgstr "Datum: {0.date} {0.time}"
+
+#, fuzzy
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Handeling #{0}: {1}"

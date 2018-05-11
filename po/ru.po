@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 23:07+0300\n"
+"POT-Creation-Date: 2018-05-10 23:14+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -3839,153 +3839,59 @@ msgid "Invalid version string: '{}'"
 msgstr "Недопустимая строка версии: {}"
 
 #, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Операция #{0}: {1}"
-
-#~ msgid "Date: {0.date} {0.time}"
-#~ msgstr "Дата: {0.date} {0.time}"
+#~ msgid "dist-update options"
+#~ msgstr "опции list-upgrades"
 
 #, fuzzy
-#~ msgid "File '{0}' has invalid XML: {1}"
-#~ msgstr "Файл {} содержит неправильный XML"
+#~ msgid "Adding {} to source index"
+#~ msgstr "Добавление {} в индекс исходника"
+
+#~ msgid "OK."
+#~ msgstr "ОК."
 
 #, fuzzy
-#~ msgid ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
-#~ msgstr "Не удалось получить конечный файл \"{0}\": {1}"
-
-#, fuzzy
-#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-#~ msgstr "Не удалось получить конечный файл \"{0}\"; (\"{1}\"): {2}"
-
-#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-#~ msgstr "Нет доступа к удаленному файлу. Скачанная предварительно часть файла будет удалена."
-
-#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-#~ msgstr "Сервер не поддерживает скачивание по частям. Ранее скачанная часть файла будет перезаписана."
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Очистка директории сборки..."
 
 #, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} опция требует аргумент"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY пакет"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "Строка {} содержит неверный XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Невозможно прочитать файл {}: {}"
-
-#~ msgid "Outputting packages in the working directory."
-#~ msgstr "Пакеты в рабочей директории."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Проверка {}... "
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} изменение конфигурационного файла."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Package {} поврежден."
-
-#~ msgid "PartOf tag not defined, looking for component"
-#~ msgstr "Тег PartOf не указан, поиск компонента"
-
-#~ msgid "Source is part of {} component"
-#~ msgstr "Источник является частью {} компонента"
-
-#~ msgid "Path must start with a slash: {}"
-#~ msgstr "Путь должен начинаться с \"/\": {}"
-
-#~ msgid "Multiple 'Path' tags specified for this path: {}"
-#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Изменение безопасности: system.devel уже установлен"
-
-#~ msgid "Checking /{} "
-#~ msgstr "Проверка /{}"
-
-#~ msgid ""
-#~ "\n"
-#~ "Changed config file: {}"
-#~ msgstr ""
-#~ "\n"
-#~ "Изменен конфигурационный файл: {}"
+#~ msgid "done."
+#~ msgstr "Выполнено."
 
 #, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
+#~ msgid "* Getting index from {}"
+#~ msgstr "Получение исходного кода из: {}"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Обновление не возможно."
+#~ msgid "    done"
+#~ msgstr "Выполнено."
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Следующие пакеты будут обновлены:"
+#~ msgid "* Getting installed packages"
+#~ msgstr "Проверка всех установленных пакетов"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Нет пакетов для обновления."
+#~ msgid "    found {} packages"
+#~ msgstr "Настройка {} пакета"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Проверка всех установленных пакетов"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Проверка всех установленных пакетов"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
+#~ msgid "  installed size {}"
+#~ msgstr "{} установлен"
 
 #, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Выполнить обновление, но не устанавливать."
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Размер пакета: {}"
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Название для обновления пакетов репозитория"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Обновления только по вопросам безопасности"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade опции"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Вы хотите продолжить?"
 
 #, fuzzy
 #~ msgid ""
@@ -4024,56 +3930,150 @@ msgstr "Недопустимая строка версии: {}"
 #~ "будут преобразованы в имена пакетов.\n"
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Вы хотите продолжить?"
+#~ msgid "downgrade options"
+#~ msgstr "upgrade опции"
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Размер пакета: {}"
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Обновления только по вопросам безопасности"
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "{} установлен"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Обновление компонентов и рекурсивных компонентов пакетов"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Проверка всех установленных пакетов"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Название для обновления пакетов репозитория"
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Проверка всех установленных пакетов"
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Выполнить обновление, но не устанавливать."
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Настройка {} пакета"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "При обновлении системы, игнорировать пакеты и компоненты, чьи базовые названия соответсвуют шаблону."
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Проверка всех установленных пакетов"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "При обновлении системы игнорировать пакеты и компоненты, чьи базовые названия соответствуют любому шаблону, содержащемуся в файле"
 
 #, fuzzy
-#~ msgid "    done"
-#~ msgstr "Выполнено."
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Пакет {0.name} уже последнего релиза {0.release}."
 
 #, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Получение исходного кода из: {}"
+#~ msgid "No packages to downgrade."
+#~ msgstr "Нет пакетов для обновления."
 
 #, fuzzy
-#~ msgid "done."
-#~ msgstr "Выполнено."
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Следующие пакеты будут обновлены:"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Обновление не возможно."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Изменение безопасности требует обновления следующих пакетов:"
+
+#~ msgid ""
+#~ "\n"
+#~ "Changed config file: {}"
+#~ msgstr ""
+#~ "\n"
+#~ "Изменен конфигурационный файл: {}"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Проверка /{}"
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Изменение безопасности: system.devel уже установлен"
+
+#~ msgid "Multiple 'Path' tags specified for this path: {}"
+#~ msgstr "Множественные тэги 'Path' определены для этого пути: {}"
+
+#~ msgid "Path must start with a slash: {}"
+#~ msgstr "Путь должен начинаться с \"/\": {}"
+
+#~ msgid "Source is part of {} component"
+#~ msgstr "Источник является частью {} компонента"
+
+#~ msgid "PartOf tag not defined, looking for component"
+#~ msgstr "Тег PartOf не указан, поиск компонента"
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} поврежден."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Package {} изменение конфигурационного файла."
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Проверка {}... "
+
+#~ msgid "Outputting packages in the working directory."
+#~ msgstr "Пакеты в рабочей директории."
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Невозможно прочитать файл {}: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "Строка {} содержит неверный XML"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber должен быть установлен для запуска этой команды"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY пакет"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} опция требует аргумент"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#, fuzzy
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Имя: {}, версия: {}, релиз: %s\n"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Очистка директории сборки..."
 
-#~ msgid "OK."
-#~ msgstr "ОК."
+#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+#~ msgstr "Сервер не поддерживает скачивание по частям. Ранее скачанная часть файла будет перезаписана."
+
+#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#~ msgstr "Нет доступа к удаленному файлу. Скачанная предварительно часть файла будет удалена."
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Добавление {} в индекс исходника"
+#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+#~ msgstr "Не удалось получить конечный файл \"{0}\"; (\"{1}\"): {2}"
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "опции list-upgrades"
+#~ msgid ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+#~ msgstr "Не удалось получить конечный файл \"{0}\": {1}"
+
+#, fuzzy
+#~ msgid "File '{0}' has invalid XML: {1}"
+#~ msgstr "Файл {} содержит неправильный XML"
+
+#~ msgid "Date: {0.date} {0.time}"
+#~ msgstr "Дата: {0.date} {0.time}"
+
+#, fuzzy
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Операция #{0}: {1}"

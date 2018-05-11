@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 23:07+0300\n"
+"POT-Creation-Date: 2018-05-10 23:14+0300\n"
 "PO-Revision-Date: 2013-01-04 21:08+0000\n"
 "Last-Translator: circass <erdincgultekin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3839,103 +3839,51 @@ msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
 #, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Operation #{0}: {1}"
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades options"
 
 #, fuzzy
-#~ msgid "File '{0}' has invalid XML: {1}"
-#~ msgstr "File {} has invalid XML"
+#~ msgid "Adding {} to source index"
+#~ msgstr "Adding {} to source index"
+
+#~ msgid "OK."
+#~ msgstr "OK."
 
 #, fuzzy
-#~ msgid ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
-#~ msgstr ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
-
-#, fuzzy
-#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-#~ msgstr "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-
-#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-#~ msgstr "Remote file can not be reached. Previously downloaded part of the file will be removed."
-
-#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-#~ msgstr "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Cleaning build directory..."
 
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} has invalid XML"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
+#, fuzzy
+#~ msgid "* Getting index from {}"
+#~ msgstr "Fetching source from: {}"
 
 #, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Safety switch forces the upgrade of following packages:"
+#~ msgid "* Getting installed packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Upgrade is not possible."
+#~ msgid "    found {} packages"
+#~ msgstr "Configuring {} package"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "The following packages will be upgraded:"
+#~ msgid "* Getting force install packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "No packages to upgrade."
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Package {} is already at the latest release {}."
+#~ msgid "  installed size {}"
+#~ msgstr "Installed {}"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Package Size: {}"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
-
-#, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Fetch upgrades but do not install."
-
-#, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Name of the to be upgraded packages' repository"
-
-#, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Upgrade component's and recursive components' packages"
-
-#, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Security related package upgrades only"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade options"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Do you want to continue?"
 
 #, fuzzy
 #~ msgid ""
@@ -3974,48 +3922,100 @@ msgstr "Invalid version string: {}"
 #~ "expanded to package names.\n"
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Do you want to continue?"
+#~ msgid "downgrade options"
+#~ msgstr "upgrade options"
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Package Size: {}"
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Security related package upgrades only"
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Installed {}"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade component's and recursive components' packages"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Checking all installed packages"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name of the to be upgraded packages' repository"
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Fetch upgrades but do not install."
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Configuring {} package"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 
 #, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Fetching source from: {}"
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Package {} is already at the latest release {}."
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "No packages to downgrade."
+#~ msgstr "No packages to upgrade."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "The following packages will be upgraded:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade is not possible."
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Safety switch forces the upgrade of following packages:"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} has invalid XML"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Cleaning build directory..."
 
-#~ msgid "OK."
-#~ msgstr "OK."
+#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+#~ msgstr "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+
+#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#~ msgstr "Remote file can not be reached. Previously downloaded part of the file will be removed."
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Adding {} to source index"
+#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+#~ msgstr "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades options"
+#~ msgid ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+#~ msgstr ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+
+#, fuzzy
+#~ msgid "File '{0}' has invalid XML: {1}"
+#~ msgstr "File {} has invalid XML"
+
+#, fuzzy
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Operation #{0}: {1}"
