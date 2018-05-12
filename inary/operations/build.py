@@ -1175,7 +1175,15 @@ class Builder:
                     orgname = util.join_path("debug", finfo.path)
                 pkg.add_to_install(orgname, finfo.path)
 
-            self.metadata.package.installTarHash = util.sha1_file("{}/install.tar.xz".format(self.pkg_dir()))
+            if self.target_package_format == "1.2":
+                archive_format = ".tar.xz"
+            elif self.target_package_format == "1.1":
+                archive_format = ".tar.lzma"
+            else:
+                # "1.0" format does not have an archive
+                archive_format = ""
+
+            self.metadata.package.installTarHash = util.sha1_file("{0}/install{1}".format(self.pkg_dir(), archive_format))
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
             pkg.add_metadata_xml(ctx.const.metadata_xml)
 

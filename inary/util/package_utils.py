@@ -17,7 +17,7 @@
 
 # standard python modules
 
-from .type_utils import remove_suffix
+from . import type_utils
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -56,7 +56,7 @@ def parse_package_name_legacy(package_name):
     # We should handle package names like 855resolution
     name = []
     for part in package_name.split("-"):
-        if name != [] and part[0] in strutils.digits:
+        if name != [] and part[0] in type_utils.digits:
             break
         else:
             name.append(part)
@@ -73,7 +73,7 @@ def parse_package_name(package_name):
 
     # Strip extension if exists
     if package_name.endswith(ctx.const.package_suffix):
-        package_name = remove_suffix(ctx.const.package_suffix, package_name)
+        package_name = type_utils.remove_suffix(ctx.const.package_suffix, package_name)
 
 
     try:
@@ -82,7 +82,7 @@ def parse_package_name(package_name):
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format. Raise here to call
         # the legacy function.
-        if not arch or arch[0] in strutils.digits:
+        if not arch or arch[0] in type_utils.digits:
             raise ValueError
 
     except ValueError:
@@ -127,7 +127,7 @@ def parse_delta_package_name(package_name):
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format. Raise here to call
         # the legacy function.
-        if not arch or arch[0] in strutils.digits:
+        if not arch or arch[0] in type_utils.digits:
             raise ValueError
 
     except ValueError:
@@ -146,14 +146,14 @@ def split_package_filename(filename):
 
     # Strip extension if exists
     if filename.endswith(ctx.const.package_suffix):
-        filename = remove_suffix(ctx.const.package_suffix, filename)
+        filename = type_utils.remove_suffix(ctx.const.package_suffix, filename)
 
     try:
         name, version, release, distro_id, arch = filename.rsplit("-", 4)
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format.
-        if not arch or arch[0] in strutils.digits:
+        if not arch or arch[0] in type_utils.digits:
             raise ValueError
 
     except ValueError:
@@ -171,7 +171,7 @@ def split_delta_package_filename(filename):
 
     # Strip extension if exists
     if filename.endswith(ctx.const.delta_package_suffix):
-        filename = remove_suffix(ctx.const.delta_package_suffix, filename)
+        filename = type_utils.remove_suffix(ctx.const.delta_package_suffix, filename)
 
     try:
         name, source_release, target_release, distro_id, arch = \
@@ -179,7 +179,7 @@ def split_delta_package_filename(filename):
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format.
-        if not arch or arch[0] in strutils.digits:
+        if not arch or arch[0] in type_utils.digits:
             raise ValueError
 
     except ValueError:

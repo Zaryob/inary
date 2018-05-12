@@ -116,6 +116,7 @@ class TarFile(tarfile.TarFile):
                  mode="r",
                  fileobj=None,
                  compressformat="xz",
+                 compresslevel=9,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
@@ -135,8 +136,9 @@ class TarFile(tarfile.TarFile):
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
         else:
-            options = {"format":    compressformat}
-            fileobj = lzma.LZMAFile(name, mode)
+            options = {"format":    compressformat,
+                       "level":     compresslevel}
+            fileobj = lzma.LZMAFile(name, mode, format=compressformat, preset=compresslevel)
 
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)

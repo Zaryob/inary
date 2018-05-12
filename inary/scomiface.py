@@ -88,7 +88,7 @@ def get_link():
                 pass
             else:
                 exceptions.append(str(e))
-     except Exception as e:
+        except Exception as e:
             if str(e) in exceptions:
                 pass
             else:
