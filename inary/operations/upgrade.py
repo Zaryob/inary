@@ -122,9 +122,16 @@ def find_upgrades(packages, replaces):
 
     return Ap
 
+@operations.locked
 def upgrade(A=[], repo=None):
     """Re-installs packages from the repository, trying to perform
-    a minimum or maximum number of upgrades according to options."""
+    a minimum or maximum number of upgrades according to options.
+
+    Upgrades the given packages, if no package given upgrades all the packages
+    @param packages (A): list of package names -> list_of_strings
+    @param repo: name of the repository that only the packages from that repo going to be upgraded
+    """
+    inary.db.historydb.HistoryDB().create_history("upgrade")
 
     packagedb = inary.db.packagedb.PackageDB()
     installdb = inary.db.installdb.InstallDB()

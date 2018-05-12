@@ -21,7 +21,7 @@ import inary.context as ctx
 import inary.util
 import inary.db
 import inary.fetcher
-import inary.operations
+import inary.operations as operations
 
 class PackageNotFound(inary.errors.Error):
     pass
@@ -140,8 +140,15 @@ def plan_takeback(operation):
 
     return __listactions(actions)
 
+@operations.locked
 def takeback(operation):
+    """
+    Takes back the system to a previous state. Uses inary history to find out which packages were
+    installed at the time _after_ the given operation that the system is requested to be taken back.
+    @param operation: number of the operation that the system will be taken back -> integer
+    """
     historydb = inary.db.historydb.HistoryDB()
+    historydb.create_history("takeback")
     beinstalled, beremoved, configs = plan_takeback(operation)
 
     if beinstalled:
@@ -168,10 +175,10 @@ def takeback(operation):
             return
 
     if beremoved:
-        inary.operations.remove.remove(beremoved, True, True)
+        operations.remove.remove(beremoved, True, True)
 
     if paths:
-        inary.operations.install.install_pkg_files(paths, True)
+        operations.install.install_pkg_files(paths, True)
 
     for pkg, operation in configs:
         historydb.load_config(operation, pkg)
@@ -185,3 +192,35 @@ def get_takeback_plan(operation):
 
     beinstalled, beremoved, configs = plan_takeback(operation)
     return beinstalled, beremoved
+
+@operations.locked
+def snapshot():
+    """
+    Takes snapshot of the system packages. The snapshot is only a record of which packages are currently
+    installed. The record is kept by inary history mechanism as it works automatically on install, remove
+    and upgrade operations.
+    """
+
+    installdb = inary.db.installdb.InstallDB()
+    historydb = inary.db.historydb.HistoryDB()
+    historydb.create_history("snapshot")
+
+    li = installdb.list_installed()
+    progress = ctx.ui.Progress(len(li))
+
+    processed = 0
+    for name in installdb.list_installed():
+        package = installdb.get_package(name)
+        historydb.add_package(pkgBefore=package, operation="snapshot")
+        # Save changed config files of the package in snapshot
+        for f in installdb.get_files(name).list:
+            if f.type == "config" and util.config_changed(f):
+                fpath = util.join_path(ctx.config.dest_dir(), f.path)
+                historydb.save_config(name, fpath)
+
+        processed += 1
+        ctx.ui.display_progress(operation = "snapshot",
+                                percent = progress.update(processed),
+                                info = _("Taking snapshot of the system"))
+
+    historydb.update_history()

@@ -18,12 +18,12 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.atomicoperations
+
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
 import inary.db
-import inary.operations.operations as operations
+from inary.operations import operations, repository, emerge
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and upgrade INARY source packages from repository
@@ -80,6 +80,6 @@ You can also give the name of a component.
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
         repos = operations.list_repos()
-        inary.atomicoperations.update_repos(repos, ctx.get_option('force'))
+        repository.update_repos(repos, ctx.get_option('force'))
 
-        inary.atomicoperations.emerge(emerge_up_list)
+        emerge.emerge(emerge_up_list)

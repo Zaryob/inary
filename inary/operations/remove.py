@@ -24,13 +24,19 @@ import inary.context as ctx
 import inary.data.pgraph as pgraph
 import inary.db
 import inary.errors
-import inary.operations
+import inary.operations as operations
 import inary.util as util
 import inary.ui as ui
 
+@operations.locked
 def remove(A, ignore_dep = False, ignore_safety = False):
-    """remove set A of packages from system (A is a list of package names)"""
-
+    """
+    Removes the given packages from the system
+    @param packages: list of package names -> list_of_strings
+    @param ignore_dependency: removes packages without looking into theirs reverse deps if True
+    @param ignore_safety: system.base packages can also be removed if True
+    """
+    inary.db.historydb.HistoryDB().create_history("remove")
     componentdb = inary.db.componentdb.ComponentDB()
     installdb = inary.db.installdb.InstallDB()
 
@@ -145,6 +151,5 @@ def get_remove_order(packages):
     Return a list of packages in the remove order -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    remove_order = inary.operations.remove.plan_remove
-    i_graph, order = remove_order(packages)
+    i_graph, order = plan_remove(packages)
     return order

@@ -65,7 +65,6 @@ Usage: list-installed
 
         component = ctx.get_option('component')
         if component:
-            #FIXME: inary.atomicoperations is insufficient to do this
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             installed = list(set(installed) & set(component_pkgs))
 
@@ -85,7 +84,9 @@ Usage: list-installed
                 ctx.ui.info(str(package))
                 ctx.ui.info(str(inst_info))
             elif self.options.install_info:
-                ctx.ui.info('%-20s  |%s' % (package.name, inst_info.one_liner()))
+                ctx.ui.info('%-20s  ' % package.name, color='white', noln=True)
+                ctx.ui.info('|%s' % inst_info.one_liner())
             else:
                 package.name = package.name + ' ' * (maxlen - len(package.name))
-                ctx.ui.info('{0} - {1}'.format(package.name, str(package.summary)))
+                ctx.ui.info('{} '.format(package.name), color='white', noln=True)
+                ctx.ui.info('- {}'.format(str(package.summary)))

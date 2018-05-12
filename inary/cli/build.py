@@ -19,7 +19,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import os
-import inary.atomicoperations
 import inary.cli.command as command
 import inary.context as ctx
 import inary.package

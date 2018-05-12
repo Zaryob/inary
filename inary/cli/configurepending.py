@@ -18,7 +18,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.atomicoperations
+import inary.operations as operations
 import inary.cli.command as command
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
@@ -43,4 +43,4 @@ configures those packages.
     def run(self):
 
         self.init()
-        inary.atomicoperations.configure_pending(self.args)
+        operations.configure_pending(self.args)

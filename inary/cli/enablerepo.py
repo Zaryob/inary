@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.db
 import inary.cli.command as command
-import inary.atomicoperations
+from inary.operations import repository
 
 class EnableRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Enable repository
@@ -45,4 +45,4 @@ Disabled repositories are not taken into account in operations
 
         for repo in self.args:
             if self.repodb.has_repo(repo):
-                inary.atomicoperations.set_repo_activity(repo, True)
+                repository.set_repo_activity(repo, True)

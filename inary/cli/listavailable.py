@@ -21,7 +21,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
-import inary.atomicoperations
 import inary.db
 import inary.operations.operations as operations
 

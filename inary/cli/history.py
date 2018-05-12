@@ -20,7 +20,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.atomicoperations
+from inary.operations import history 
 import inary.db
 import inary.context as ctx
 import inary.util as util
@@ -57,10 +57,10 @@ Lists previous operations.""")
                          help=_("Takeback to the state after the given operation finished"))
 
     def take_snapshot(self):
-        inary.atomicoperations.snapshot()
+        history.snapshot()
 
     def takeback(self, operation):
-        inary.atomicoperations.takeback(operation)
+        history.takeback(operation)
 
     def print_history(self):
         for operation in self.historydb.get_last(ctx.get_option('last')):

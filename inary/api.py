@@ -56,8 +56,10 @@ import inary.operations.install
 import inary.operations.history
 import inary.operations.helper
 import inary.operations.remove
+import inary.operations.repository
 import inary.operations.search
 import inary.operations.upgrade
+
 
 import inary.uri
 import inary.util
@@ -140,23 +142,43 @@ def set_options(options):
     """
     ctx.config.set_options(options)
 
+# FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
+@inary.operations.locked
+def rebuild_db():
+
+    # save parameters and shutdown inary
+    options = ctx.config.options
+    ui = ctx.ui
+    scom = ctx.scom
+    from inary import _cleanup
+    _cleanup()
+
+    ctx.filesdb.close()
+    ctx.filesdb.destroy()
+    ctx.filesdb = inary.db.filesdb.FilesDB()
+    ctx.filesdb.update()
+
+    # reinitialize everything
+    ctx.ui = ui
+    ctx.config.set_options(options)
+    ctx.scom = scom
+
 # The following are INARY operations which constitute the INARY API
-
-#It looking soo bad
-from inary.atomicoperations import *
-
-#Within functions
+# Within functions
 from inary.analyzer.conflict import calculate_conflicts
 from inary.analyzer.firmwares import get_firmware_package
 from inary.data.index import index
 from inary.data.pgraph import package_graph
 from inary.fetcher import fetch
 from inary.operations.build import build, build_until
+from inary.operations.check import check
+from inary.operations.emerge import emerge
 from inary.operations.helper import calculate_download_sizes, get_package_requirements
-from inary.operations.history import get_takeback_plan
+from inary.operations.history import takeback, get_takeback_plan, snapshot
 from inary.operations.info import info
-from inary.operations.install import get_install_order
+from inary.operations.install import install, get_install_order
 from inary.operations.operations import *
-from inary.operations.remove import get_remove_order
-from inary.operations.upgrade import get_upgrade_order, get_base_upgrade_order
+from inary.operations.remove import remove, get_remove_order
+from inary.operations.repository import *
+from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
 from inary.operations.search import *

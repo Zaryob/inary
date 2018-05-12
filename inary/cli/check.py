@@ -18,33 +18,28 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.atomicoperations
-import inary.operations.check
+import inary.operations.check as check
 import inary.operations.operations as operations
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
 import inary.db
 
-
-usage = _("""Verify installation
-
-Usage: check [<package1> <package2> ... <packagen>]
-       check -c <component>
-
-<packagei>: package name
-
-A cryptographic checksum is stored for each installed
-file. Check command uses the checksums to verify a package.
-Just give the names of packages.
-
-If no packages are given, checks all installed packages.
-""")
-
-
 class Check(command.Command, metaclass=command.autocommand):
 
-    __doc__ = usage
+    __doc__ = _("""Verify installation
+
+    Usage: check [<package1> <package2> ... <packagen>]
+           check -c <component>
+
+    <packagei>: package name
+
+    A cryptographic checksum is stored for each installed
+    file. Check command uses the checksums to verify a package.
+    Just give the names of packages.
+
+    If no packages are given, checks all installed packages.
+    """)
 
     def __init__(self, args):
         super(Check, self).__init__(args)
@@ -98,7 +93,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
         for pkg in pkgs:
             if self.installdb.has_package(pkg):
-                check_results = inary.operations.check.check_package(pkg, check_config)
+                check_results = check.check(pkg, check_config)
                 ctx.ui.info("{0}    {1}".format(prefix.format(pkg), (' ' * (maxpkglen - len(pkg)))), noln=True)
 
                 if check_results['missing'] or check_results['corrupted'] \

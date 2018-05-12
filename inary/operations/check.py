@@ -81,7 +81,13 @@ def check_package_files(package):
     files = inary.db.installdb.InstallDB().get_files(package).list
     return check_files(files)
 
-def check_package(package, config=False):
+def check(package, config=False):
+    """
+    Returns a dictionary that contains a list of both corrupted and missing files
+    @param package: name of the package to be checked
+    @param config: _only_ check the config files of the package, default behaviour is to check all the files
+    of the package but the config files
+    """
     if config:
         return check_config_files(package)
     else:

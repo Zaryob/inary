@@ -21,8 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.operations.operations as operations
-import inary.atomicoperations
+from inary.operations import operations, remove, upgrade
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
@@ -88,7 +87,7 @@ expanded to package names.
         if not ctx.get_option('bypass_update_repo'):
             ctx.ui.info(_('Updating repositories'))
             repos = operations.list_repos()
-            inary.atomicoperations.update_repos(repos)
+            repository.update_repos(repos)
         else:
             ctx.ui.info(_('Will not update repositories'))
 
@@ -105,4 +104,4 @@ expanded to package names.
                         packages.extend(componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
-        inary.atomicoperations.upgrade(packages, repository)
+        upgrade.upgrade(packages, repository)

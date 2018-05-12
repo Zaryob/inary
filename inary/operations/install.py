@@ -312,3 +312,29 @@ def get_install_order(packages):
     install_order = operations.install.plan_install_pkg_names
     i_graph, order = install_order(packages)
     return order
+
+@operations.locked
+def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
+    """
+    Returns True if no errors occured during the operation
+    @param packages: list of package names -> list_of_strings
+    @param reinstall: reinstalls already installed packages else ignores
+    @param ignore_file_conflicts: Ignores file conflicts during the installation and continues to install
+    packages.
+    @param ignore_package_conflicts: Ignores package conflicts during the installation and continues to
+    install packages.
+    """
+
+    inary.db.historydb.HistoryDB().create_history("install")
+
+    if not ctx.get_option('ignore_file_conflicts'):
+        ctx.set_option('ignore_file_conflicts', ignore_file_conflicts)
+
+    if not ctx.get_option('ignore_package_conflicts'):
+        ctx.set_option('ignore_package_conflicts', ignore_package_conflicts)
+
+    # Install inary package files or inary packages from a repository
+    if packages and packages[0].endswith(ctx.const.package_suffix):
+        return install_pkg_files(packages, reinstall)
+    else:
+        return install_pkg_names(packages, reinstall)

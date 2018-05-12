@@ -18,7 +18,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.operations
+import inary.operations as operations
 import inary.context as ctx
 import inary.util as util
 import inary.atomicoperations as atomicoperations
@@ -26,7 +26,13 @@ import inary.ui as ui
 import inary.db
 import inary.data
 
+@operations.locked
 def emerge(A):
+    """
+    Builds and installs the given packages from source
+    @param packages: list of package names -> list_of_strings
+    """
+    inary.db.historydb.HistoryDB().create_history("emerge")
 
     # A was a list, remove duplicates and expand components
     A = [str(x) for x in A]
@@ -71,7 +77,7 @@ installed in the respective order to satisfy dependencies:
     #ctx.ui.notify(ui.packagestogo, order = order_build)
 
     for x in order_build:
-        package_names = atomicoperations.build(x).new_packages
+        package_names = operations.build.build(x).new_packages
         inary.operations.install.install_pkg_files(package_names, reinstall=True) # handle inter-package deps here
         # reset counts between builds
         ctx.ui.errors = ctx.ui.warnings = 0

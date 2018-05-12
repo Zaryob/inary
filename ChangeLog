@@ -3,6 +3,14 @@
 		Belirtilen paket tipine uygun install dosyası pakete eklenmeli ve
 		sha değeri alınmalıdır. Bu yüzden bu konuda sıkıntı yaratan satırlar
 		düzenlendi.
+		* Gereksiz fonksiyonlar silindi:
+		  -> inary.atomicoperations.reorder_base_packages()
+		* atomicoperations.py eski haline getirildi:
+		  -> Kısa süreli bir çözüm için api içerisi atomicoperations'a verilmişti.
+			Tamamen baştaan ele alınarak her fonksiyon bulunması gereken yere taşındı.
+			inary ortalama 32 milisaniye hız artışı yaşadı.
+
+
 
 2018-05-09 Suleyman Poyraz <zaryob.dev@gmail.com>
 		* util.py parçalandı:
