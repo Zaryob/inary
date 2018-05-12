@@ -24,6 +24,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # inary modules
+import os
 import inary
 import inary.context as ctx
 

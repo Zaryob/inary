@@ -136,9 +136,8 @@ class TarFile(tarfile.TarFile):
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
         else:
-            options = {"format":    compressformat,
-                       "level":     compresslevel}
-            fileobj = lzma.LZMAFile(name, mode, format=compressformat, preset=compresslevel)
+            options = {"format":    compressformat}
+            fileobj = lzma.LZMAFile(name, mode, format=compressformat)
 
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
@@ -602,8 +601,10 @@ class ArchiveZip(ArchiveBase):
 
     def __init__(self, file_path, arch_type="zip", mode='r'):
         super(ArchiveZip, self).__init__(file_path, arch_type)
-
-        self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        try:
+            self.zip_obj = zipfile.ZipFile(self.file_path, mode)
+        except zipfile.BadZipFile:
+            raise UnknownArchiveType(_("File is not a zip file {}").format(self.file_path))
 
     def open(self, file_path, mode="r"):
         return self.zip_obj.open(file_path, mode)
@@ -663,7 +664,7 @@ class ArchiveZip(ArchiveBase):
         return file_path in self.zip_obj.namelist()
 
     def read_file(self, file_path):
-        return self.zip_obj.read(file_path)
+        return self.zip_obj.read(file_path).decode('utf-8')
 
     def unpack_file_cond(self, pred, target_dir, archive_root=''):
         """Unpack/Extract files according to predicate function

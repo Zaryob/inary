@@ -41,7 +41,7 @@ class Package:
     file)."""
 
     formats = ("1.0", "1.1", "1.2")
-    default_format =  "1.1"
+    default_format =  "1.2"
 
     @staticmethod
     def archive_name_and_format(package_format):
