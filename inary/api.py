@@ -75,7 +75,7 @@ def set_scom(enable):
 def set_scom_updated(updated):
     """
     Set scom package update status
-    @param updated: True if COMAR package is updated, else False
+    @param updated: True if SCOM package is updated, else False
     """
     ctx.scom_updated = updated
 

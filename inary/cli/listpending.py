@@ -19,7 +19,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.data.pgraph
-import inary.operations.operations as operations
+from inary.operations import operations
 
 class ListPending(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List pending packages
@@ -37,7 +37,8 @@ Lists packages waiting to be configured.
 
         A = operations.list_pending()
         if len(A):
+            ctx.ui.info(_('Listing pending orders:'), color='blue')
             for p in inary.data.pgraph.generate_pending_order(A):
-                ctx.ui.info(_('Listing pending orders:'), color='blue')
+                ctx.ui.info(p)
         else:
             ctx.ui.info(_('There are no packages waiting to be configured'))

@@ -12,10 +12,12 @@
 
 import inary.db
 import inary.data
+import inary.data.pgraph as pgraph
 import inary.errors
 import inary.operations as operations
 import inary.blacklist
 import inary.context as ctx
+import inary.util as util
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)

@@ -18,7 +18,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.operations as operations
+from inary.operations import operations
 import inary.cli.command as command
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):

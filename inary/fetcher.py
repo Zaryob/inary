@@ -154,7 +154,6 @@ class Fetcher:
             msg = _("Url Problem: \n {}").format(e)
             raise FetchError(msg)
             return False
-
         except FetchError as e:
             msg = _("Can not avaible remote server: \n {}").format(e)
             raise FetchError(msg)
