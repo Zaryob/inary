@@ -59,6 +59,8 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
+            if type(file)==bytes:
+                file.decode('utf-8')
             self.doc = iks.parseString(str(file))
             return self.doc
         except Exception as e:

@@ -22,60 +22,101 @@ import inary.context as ctx
 from inary.cli.inarycli import InaryCLI
 
 import gettext
+gettext.bindtextdomain('inary', "/usr/share/locale")
+gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
+try:
+    import ciksemel
+except:
+    #FIXME: Gorunusu guzel olsa bile kodda anlamsizlik yaratiyor
+    warn = inary.util.colorize(_("WARNING:\n"),"blinkingred")+ \
+           inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
+                                 "\tMinidom slower but\n"
+                                 "\tFalling back with minidom!!! :(\n\n"), 'faintwhite')
+
+    sys.stdout.write(warn)
 
 def exit(retval = 0):
     sys.exit(retval)
 
+def sig_handler(sig, frame):
+    if sig == signal.SIGTERM:
+        exit()
+
+def handle_exception(exception, value, tb):
+
+    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+    ui = inary.cli.CLI() # make a temporary UI
+    show_traceback = False
+
+    if isinstance(value, inary.errors.Error):
+        ui.error(_("\nProgram terminated."))
+    elif isinstance(value, KeyboardInterrupt):
+        ui.error(_("\nKeyboard Interrupt: Exiting..."))
+        exit()
+    elif isinstance(value, EOFError):
+        ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
+        exit()
+    elif isinstance(value, inary.errors.Exception):
+        show_traceback = True
+        ui.error(_("\nUnhandled internal exception.\n"
+                   "Please file a bug report to <http://bugs.sulin.org>."))
+    elif isinstance(value, IOError) and value.errno == errno.EPIPE:
+        # Ignore broken pipe errors
+        sys.exit(0)
+    else:
+        # For any other exception (possibly Python exceptions) show
+        # the traceback!
+        show_traceback = ctx.get_option('debug')
+        ui.error(_("\nSystem error. Program terminated."))
+
+    if show_traceback:
+        ui.error("{}: {}".format(exception, str(value)))
+    else:
+        msg = str(value)
+        if msg:
+            ui.error(msg)
+
+    ui.info(_("Please use 'inary help' for general help."))
+
+    if show_traceback:
+        ui.info(_("\nTraceback:"))
+        traceback.print_tb(tb)
+    elif not isinstance(value, inary.errors.Error):
+        ui.info(_("Use --debug to see a traceback."))
+
+    exit()
+
 if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, '')
-    ctx.ui.info(_("""Welcome to the interactive INARY shell.
-           Type "help" to see a list of commands.
-           To end the session, type "exit".
-           You can run system commands by prefixing with '!' as in '!ls'.
-           Copyright 2018 (c) Zaryob and Sulin Community. """))
+    sys.excepthook = handle_exception
+    signal.signal(signal.SIGTERM, sig_handler)
+    ui = inary.cli.CLI() # make a temporary UI
+    ui.info(_("Welcome to the interactive INARY shell.\n"
+           "Type 'help' to see a list of commands.\n"
+           "To end the session, type 'exit'.\n"
+           "You can run system commands by prefixing with '!' as in '!ls'.\n\n"
+           "      Copyright 2005-2011, Tubitak/UEKAE\n"
+           "      Copyright 2018 (c) Zaryob and Sulin Community.\n\n"))
+
     while 1:
-        cmd = input('inary> ')
+        sys.excepthook = handle_exception
+
+        cmd = input('inary >> ')
         if cmd.strip()=='exit':
             ctx.ui.info(_('Bye!'))
             exit()
         if cmd.startswith('!'):
             cmd = cmd[1:]
-            os.system(cmd)
+            if cmd.startswith('bash') or\
+               cmd.startswith('zsh') or\
+               cmd.startswith('sh'):
+                ui.error(_("Can not use an other SHELL in Inary Shell"))
+            else:
+                os.system(cmd)
             continue
-        try:
-            cli = InaryCLI(cmd.split())
-            cli.run_command()
-        except inary.errors.Exception as e:
-            pass
-        except Exception as value:
-            signal.signal(signal.SIGINT, signal.SIG_IGN) # disable further interrupts
-            ui = inary.cli.CLI() # make a temporary UI
-            show_traceback = False
-            if isinstance(value, KeyboardInterrupt):
-                ui.error(_("Keyboard Interrupt: Exiting..."))
-            elif isinstance(value, inary.errors.Error):
-                ui.error(_("Program Terminated."))
-                show_traceback = ctx.get_option('debug')
-            elif isinstance(value, inary.errors.Exception):
-                show_traceback = True
-                ui.error(_("""Unhandled internal exception. Please file a bug report.
-(http://bugs.sulin.org)"""))
-            else:
-                # For any other exception (possibly Python exceptions) show the traceback!
-                show_traceback = ctx.get_option('debug')
-                ui.error(_("System Error. Program Terminated."))
 
-            if ctx.get_option('debug'):
-                ui.error(u"{}: {}".format(exception, value))
-            else:
-                 ui.error(str(value))
-
-            ui.info(_("Please type 'help' for general help."))
-
-            if show_traceback:
-                ui.info(_("Traceback:"))
-                traceback.print_tb(sys.exc_traceback)
-            else:
-                ui.info(_("Use --debug to see a traceback."))
+        cli = InaryCLI(cmd.split())
+        cli.run_command()

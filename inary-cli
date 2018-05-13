@@ -61,6 +61,9 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, KeyboardInterrupt):
         ui.error(_("\nKeyboard Interrupt: Exiting..."))
         exit()
+    elif isinstance(value, EOFError):
+        ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
+        exit()
     elif isinstance(value, inary.errors.Exception):
         show_traceback = True
         ui.error(_("\nUnhandled internal exception.\n"

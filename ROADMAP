@@ -148,7 +148,9 @@ Legend:
         + read pkgconfig files and find dependencies (Zaryob)
         + find cycle dependencies (Zaryob)
       - Automatic build upgrader
+        / creating pspec files from shell script type
     - pykde & pygtk GUI (cartman)
+      + pykde interface (used package-manager)
     + improve interface (eray)
       + refactor UI, reintroduce base class
       + add an ack interface, start cleaning up a bit
@@ -221,7 +223,7 @@ Legend:
     / package signing
       / an embebed package signer.(Zaryob)
       + a flag to sign package after building
-      / code to check if the package has a valid signature
+      + code to check if the package has a valid signature
     - cli improvements
       - non interactive mode (similar to --auto in urpmi)
     / high-level build commands
