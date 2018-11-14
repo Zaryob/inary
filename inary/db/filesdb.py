@@ -101,9 +101,11 @@ class FilesDB(lazydb.LazyDB):
             return
 
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
-        if not os.path.exists(files_db+'.db'):
+
+        if not os.path.exists(files_db):
             flag = "n"
-        elif os.access(files_db+'.db', os.W_OK):
+
+        elif os.access(files_db , os.W_OK):
             flag = "w"
         else:
             flag = "r"
@@ -114,5 +116,5 @@ class FilesDB(lazydb.LazyDB):
 
     def update(self):
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
-        self.filesdb= shelve.open(files_db, 'n')
-        self.create_filesdb()
+        os.remove(files_db)
+        self.__check_filesdb()

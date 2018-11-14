@@ -14,21 +14,20 @@
 
 # python standard library modules
 import os
+import sys
 import time
 import shutil
-try:
-    import requests
-except ImportError:
-    raise ImportError(_("Please install requests"))
-from base64 import encodestring
+
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
 
 # Network libraries
 # import ftplib
 
 #Gettext translation library
-import gettext
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
+
 
 # inary modules
 import inary
@@ -37,6 +36,17 @@ import inary.errors
 import inary.util as util
 import inary.context as ctx
 import inary.uri
+
+# requests
+
+try:
+    import requests
+except ImportError:
+    sys.stdout.write(inary.util.colorize(_("ERROR:\n"),"blinkingred")+ \
+                     _("\tCan't imported requests module.\n"
+                       "\tWhether want the download packages please install\n"
+                       "\t'python3-requests' package from repository.\n"))
+from base64 import encodestring
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):

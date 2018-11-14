@@ -77,7 +77,7 @@ Legend:
     + support URI's whereever a filename is supported
     + http server
     + https server
-    + ftp server
+    - ftp server
     + inary updatedb over internet
 
 3. Beta
@@ -145,8 +145,8 @@ Legend:
   + UI
     - INARYMAT
       / Automatic dependency finder
-        + read pkgconfig files and find dependencies (Zaryob)
-        + find cycle dependencies (Zaryob)
+        / read pkgconfig files and find dependencies (Zaryob)
+        - find cycle dependencies (Zaryob)
       - Automatic build upgrader
         / creating pspec files from shell script type
     - pykde & pygtk GUI (cartman)
@@ -178,7 +178,6 @@ Legend:
         - sv
         + tr
         - uk
-
       + proper unicode handling in code - tons of fixes (eray - baris)
     / configure-pending (eray) (should return which packages configured)
       - report scom scripts problems to developers

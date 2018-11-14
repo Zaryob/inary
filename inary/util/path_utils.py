@@ -22,7 +22,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 #############################
-
 # Path Processing Functions #
 #############################
 def join_path(a, *p):

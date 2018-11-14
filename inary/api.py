@@ -19,9 +19,6 @@ _ = __trans.gettext
 
 import inary
 
-#Analyzers
-import inary.analyzer.forensic
-
 import inary.atomicoperations
 import inary.blacklist
 import inary.config
@@ -166,7 +163,6 @@ def rebuild_db():
 # The following are INARY operations which constitute the INARY API
 # Within functions
 from inary.analyzer.conflict import calculate_conflicts
-from inary.analyzer.firmwares import get_firmware_package
 from inary.data.index import index
 from inary.data.pgraph import package_graph
 from inary.fetcher import fetch

@@ -14,6 +14,7 @@
 # This module is part of  inary.util
 
 from .path_utils import join_path
+from .process_utils import run_batch
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)

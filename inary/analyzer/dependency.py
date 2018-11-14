@@ -19,7 +19,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.data.relation as relation
-import inary.db
+from inary.db.packagedb import PackageDB
+import os
 
 class Dependency(relation.Relation):
     def __str__(self):
@@ -49,10 +50,10 @@ class Dependency(relation.Relation):
             return self.satisfies_relation(pkg.version, pkg.release)
 
     def satisfied_by_installed(self):
-        return inary.data.relation.installed_package_satisfies(self)
+        return relation.installed_package_satisfies(self)
 
     def satisfied_by_repo(self):
-        packagedb = inary.db.packagedb.PackageDB()
+        packagedb = PackageDB()
         if not packagedb.has_package(self.package):
             return False
         else:

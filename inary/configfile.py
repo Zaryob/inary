@@ -72,7 +72,7 @@ class GeneralDefaults:
     distribution = "Sulin"
     distribution_release = "2018"
     distribution_id = "s18"
-    architecture = "i686"
+    architecture = "x86_64"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
     ftp_proxy = os.getenv("FTP_PROXY") or None
@@ -85,16 +85,16 @@ class GeneralDefaults:
 class BuildDefaults:
     """Default values for [build] section"""
     build_host = "localhost"
-    host = "i686-pc-linux-gnu"
+    host = "x86_64-sulin-linux"
     jobs = "-j3"
     generateDebug = False
     enableSandbox = True
-    cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
-    cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
+    cflags = "-mtune=generic -march=x86_64 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
+    cxxflags = "-mtune=generic -march=x86_64 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildhelper = None
     compressionlevel = 1
-    fallback = "http://www.pardus.org.tr/pub/source/2009"
+    fallback = "http://www.sulin.com.tr/pub"
     ignored_build_types = ""
 
 class DirectoriesDefaults:

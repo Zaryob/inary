@@ -36,10 +36,13 @@ MIMEFILE_DIR = "usr/share/mime/packages"
 
 class Build(build):
     def run(self):
+        #Preparing configure file
+        shutil.copy("config/inary.conf-{}".format(sys.arch), "config/inary.conf")
+
         build.run(self)
 
         self.mkpath(self.build_base)
-
+        
         for in_file in IN_FILES:
             name, ext = os.path.splitext(in_file)
             self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
@@ -118,7 +121,7 @@ class Install(install):
             shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
-        self.root ='/'
+        #self.root ='/'
         destpath = os.path.join(self.root, "usr/share/doc/inary")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
@@ -188,7 +191,7 @@ class Test(Command):
 
 
 datas = [
-    ("/etc/inary/" ,["config/mirrors.conf", "config/sandbox.conf"]),
+    ("/etc/inary/" ,["config/inary.conf","config/mirrors.conf", "config/sandbox.conf"]),
     ("/usr/share/mime/packages/", ["build/inary.xml"]),
     ("/usr/lib/tmpfiles.d/", ["config/inary.conf-armv7h"])
 ]
