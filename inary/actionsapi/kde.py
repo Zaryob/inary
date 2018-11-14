@@ -11,73 +11,59 @@
 #
 # Please read the COPYING file.
 
-# standard python modules
-import os
-
-import gettext
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
-
-# Inary Modules
-import inary.context as ctx
-
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system
-from inary.actionsapi.shelltools import can_access_file
+from inary.actionsapi import get
+from inary.actionsapi import cmaketools
+from inary.actionsapi import shelltools
 
-class ConfigureError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error(value)
-        if can_access_file('config.log'):
-            ctx.ui.error(_('\n!!! Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
+basename = "kde5"
 
-class MakeError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error(value)
+prefix = "/{}".format(get.defaultprefixDIR())
+libdir = "{}/lib".format(prefix)
+bindir = "{}/bin".format(prefix)
+libexecdir = "{}/lib".format(prefix)
+iconsdir = "{}/share/icons".format(prefix)
+applicationsdir = "{0}/share/applications/{1}".format(prefix, basename)
+mandir = "/{}".format(get.manDIR())
+sharedir = "{}/share".format(prefix)
+localedir = "{}/share/locale".format(prefix)
+qmldir = "{}/lib/qt5/qml".format(prefix)
+plugindir = "{}/lib/qt5/plugins".format(prefix)
+moduledir = "{}/lib/qt5/mkspecs/modules".format(prefix)
+pythondir = "{}/bin/python".format(prefix)
+appsdir = "{}".format(sharedir)
+sysconfdir= "/etc"
+configdir = "{}/xdg".format(sysconfdir)
+servicesdir = "{}/services".format(sharedir)
+servicetypesdir = "{}/servicetypes".format(sharedir)
+includedir = "{}/include".format(prefix)
+docdir = "/{0}/{1}".format(get.docDIR(), basename)
+htmldir = "{}/html".format(docdir)
+wallpapersdir = "{}/share/wallpapers".format(prefix)
 
-class InstallError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error(value)
+def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
+    ''' parameters -DLIB_INSTALL_DIR="hede" -DSOMETHING_USEFUL=1'''
 
-def configure(parameters = ''):
-    ''' parameters = '--with-nls --with-libusb --with-something-usefull '''
-    if can_access_file('configure'):
-        args = './configure \
-                --prefix={0} \
-                --build={1} \
-                --with-x \
-                --enable-mitshm \
-                --with-xinerama \
-                --with-qt-dir={2} \
-                --enable-mt \
-                --with-qt-libraries={2}/lib \
-                --disable-dependency-tracking \
-                --disable-debug \
-                {3}'.format(get.kdeDIR(), get.HOST(), get.qtDIR(), parameters)
+    shelltools.makedirs("build")
+    shelltools.cd("build")
 
-        if system(args):
-            raise ConfigureError(_('Configure failed.'))
-    else:
-        raise ConfigureError(_('No configure script found.'))
+    cmaketools.configure("-DCMAKE_BUILD_TYPE=Release \
+                          -DKDE_INSTALL_LIBEXECDIR={0} \
+                          -DCMAKE_INSTALL_LIBDIR=lib \
+                          -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+                          -DKDE_INSTALL_QMLDIR={1} \
+                          -DKDE_INSTALL_SYSCONFDIR={2} \
+                          -DKDE_INSTALL_PLUGINDIR={3} \
+                          -DECM_MKSPECS_INSTALL_DIR={4} \
+                          -DBUILD_TESTING=OFF \
+                          -DKDE_INSTALL_LIBDIR=lib \
+                          -Wno-dev \
+                          -DCMAKE_INSTALL_PREFIX={5}".format(libexecdir, qmldir, sysconfdir, plugindir, moduledir, prefix), installPrefix, sourceDir)
+
+    shelltools.cd("..")
 
 def make(parameters = ''):
-    '''make source with given parameters = "all" || "doc" etc.'''
-    if system('make {0} {1}'.format(get.makeJOBS(), parameters)):
-        raise MakeError(_('Make failed.'))
+    cmaketools.make('-C build {}'.format(parameters))
 
-def install(parameters = 'install'):
-    if can_access_file('Makefile'):
-        args = 'make DESTDIR={0} destdir={0} {1}'.format(get.installDIR(), parameters)
-
-        if system(args):
-            raise InstallError(_('Install failed.'))
-    else:
-        raise InstallError(_('No Makefile found.'))
+def install(parameters = '', argument = 'install'):
+    cmaketools.install('-C build {}'.format(parameters), argument)
