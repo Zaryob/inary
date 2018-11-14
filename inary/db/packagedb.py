@@ -19,7 +19,7 @@ import gettext
 import datetime
 
 import inary.db
-import inary.data.metadata as Metadata
+import inary.data.metadata
 import inary.analyzer.dependency
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
@@ -177,7 +177,7 @@ class PackageDB(lazydb.LazyDB):
 
     def get_package_repo(self, name, repo=None):
         pkg, repo = self.pdb.get_item_repo(name, repo)
-        package = Metadata.Package()
+        package = inary.data.metadata.Package()
         package.parse(pkg)
         return package, repo
 
