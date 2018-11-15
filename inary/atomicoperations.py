@@ -185,7 +185,7 @@ class Install(AtomicOperation):
         total_size, symbol = util.human_readable_size(util.free_space())
         ctx.ui.debug(_("Free Space: %.2f %s "% (total_size, symbol))) # I DONT KNOW BETTER WAY
         if util.free_space() < self.installedSize:
-            raise Error(_("Is there any free space in your disk."))
+            raise Error(_("Is there enought free space in your disk."))
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
@@ -304,8 +304,12 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            ctx.ui.debug("* Chowning in postinstall {0} ({1}:{2})".format(_file.path, _file.uid, _file.gid))
-            os.chown(fpath, int(_file.uid), int(_file.gid))
+            if os.path.islink(fpath):
+                ctx.ui.debug(_("* Added symlink '{}' ").format(fpath))
+                # Kontrol et
+            else:
+                ctx.ui.debug(_("* Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid))
+                os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:
             import inary.scomiface
