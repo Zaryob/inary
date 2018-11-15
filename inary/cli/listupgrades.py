@@ -73,6 +73,7 @@ Lists the packages that will be upgraded.
         if self.options.install_info:
             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
             sys.stdout.write('===========================================================================')
+
         for pkg in upgradable_pkgs:
             package = self.installdb.get_package(pkg)
             inst_info = self.installdb.get_info(pkg)
@@ -82,5 +83,5 @@ Lists the packages that will be upgraded.
             elif self.options.install_info:
                 ctx.ui.info('%-20s |%s ' % (package.name, inst_info.one_liner()))
             else:
-                package.name = package.name + ' ' * (maxlen - len(package.name))
+                package.name = package.name + ' ' * max(0, maxlen - len(package.name))
                 ctx.ui.info('{0} - {1}'.format(package.name, str(package.summary)))

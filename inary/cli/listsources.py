@@ -21,6 +21,8 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+import inary.operations.operations as operations
+import inary.util as util
 
 class ListSources(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List available sources
@@ -51,14 +53,16 @@ Gives a brief list of sources published in the repositories.
         if l:
             maxlen = max([len(_p) for _p in l])
 
+        installed_list = operations.list_installed()
         l.sort()
+
         for p in l:
             sf, repo = self.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info('[Repository: ' + repo + ']')
                 ctx.ui.info(str(sf.source))
             else:
-                #if p in installed_list:
-                #    p = util.colorize(p, 'cyan')
+                if p in installed_list:
+                    sf.source.name = util.colorize(sf.source.name, 'cyan')
                 sf.source.name += ' ' * max(0, maxlen - len(p))
                 ctx.ui.info('{0} - {1}'.format(sf.source.name, str(sf.source.summary)))
