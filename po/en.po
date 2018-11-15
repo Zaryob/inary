@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 23:14+0300\n"
+"POT-Creation-Date: 2018-11-14 22:02+0300\n"
 "PO-Revision-Date: 2013-01-04 21:08+0000\n"
 "Last-Translator: circass <erdincgultekin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,72 +17,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /usr/lib/python3.5/optparse.py:145
+#: /usr/lib64/python3.4/optparse.py:145
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "no such option: %s"
 
-#: /usr/lib/python3.5/optparse.py:156
+#: /usr/lib64/python3.4/optparse.py:156
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "ambiguous option: %s (%s?)"
 
-#: /usr/lib/python3.5/optparse.py:380
+#: /usr/lib64/python3.4/optparse.py:380
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Usage: %s\n"
 
-#: /usr/lib/python3.5/optparse.py:399
+#: /usr/lib64/python3.4/optparse.py:399
 msgid "Usage"
 msgstr "Usage"
 
-#: /usr/lib/python3.5/optparse.py:421 /usr/lib/python3.5/optparse.py:422
+#: /usr/lib64/python3.4/optparse.py:421 /usr/lib64/python3.4/optparse.py:422
 msgid "integer"
 msgstr "integer"
 
-#: /usr/lib/python3.5/optparse.py:423
+#: /usr/lib64/python3.4/optparse.py:423
 msgid "floating-point"
 msgstr "floating-point"
 
-#: /usr/lib/python3.5/optparse.py:424
+#: /usr/lib64/python3.4/optparse.py:424
 msgid "complex"
 msgstr "complex"
 
-#: /usr/lib/python3.5/optparse.py:432
+#: /usr/lib64/python3.4/optparse.py:432
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "option %s: invalid %s value: %r"
 
-#: /usr/lib/python3.5/optparse.py:440
+#: /usr/lib64/python3.4/optparse.py:440
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "option %s: invalid choice: %r (choose from %s)"
 
-#: /usr/lib/python3.5/optparse.py:1237
+#: /usr/lib64/python3.4/optparse.py:1237
 msgid "show this help message and exit"
 msgstr "show this help message and exit"
 
-#: /usr/lib/python3.5/optparse.py:1242
+#: /usr/lib64/python3.4/optparse.py:1242
 msgid "show program's version number and exit"
 msgstr "show program's version number and exit"
 
-#: /usr/lib/python3.5/optparse.py:1265
+#: /usr/lib64/python3.4/optparse.py:1265
 msgid "%prog [options]"
 msgstr "%prog [options]"
 
-#: /usr/lib/python3.5/optparse.py:1485 /usr/lib/python3.5/optparse.py:1523
+#: /usr/lib64/python3.4/optparse.py:1485 /usr/lib64/python3.4/optparse.py:1523
 #, fuzzy, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "%s option requires %d arguments"
 msgstr[1] "%s option requires %d arguments"
 
-#: /usr/lib/python3.5/optparse.py:1495
+#: /usr/lib64/python3.4/optparse.py:1495
 #, fuzzy, python-format
 msgid "%s option does not take a value"
 msgstr "%s option does not take a value"
 
-#: /usr/lib/python3.5/optparse.py:1611
+#: /usr/lib64/python3.4/optparse.py:1611
 msgid "Options"
 msgstr "Options"
 
@@ -112,7 +112,14 @@ msgid ""
 "Keyboard Interrupt: Exiting..."
 msgstr "Keyboard Interrupt: Exiting..."
 
-#: inary-cli:66
+#: inary-cli:65
+#, fuzzy
+msgid ""
+"\n"
+"Keyboard Interrupt [Ctrl-D]: Exiting..."
+msgstr "Keyboard Interrupt: Exiting..."
+
+#: inary-cli:69
 #, fuzzy
 msgid ""
 "\n"
@@ -122,18 +129,18 @@ msgstr ""
 "Unhandled internal exception.\n"
 "Please file a bug report to <http://bugs.sulin.com.tr>."
 
-#: inary-cli:75
+#: inary-cli:78
 #, fuzzy
 msgid ""
 "\n"
 "System error. Program terminated."
 msgstr "System error. Program terminated."
 
-#: inary-cli:84
+#: inary-cli:87
 msgid "Please use 'inary help' for general help."
 msgstr "Please use 'inary help' for general help."
 
-#: inary-cli:87
+#: inary-cli:90
 msgid ""
 "\n"
 "Traceback:"
@@ -141,7 +148,7 @@ msgstr ""
 "\n"
 "Traceback:"
 
-#: inary-cli:90
+#: inary-cli:93
 msgid "Use --debug to see a traceback."
 msgstr "Use --debug to see a traceback."
 
@@ -160,28 +167,25 @@ msgstr ""
 "{}/config.log"
 
 #: inary/actionsapi/autotools.py:85 inary/actionsapi/autotools.py:95
-#: inary/actionsapi/cmaketools.py:68 inary/actionsapi/kde.py:67
-#: inary/actionsapi/perlmodules.py:57 inary/actionsapi/perlmodules.py:60
+#: inary/actionsapi/cmaketools.py:68 inary/actionsapi/perlmodules.py:57
+#: inary/actionsapi/perlmodules.py:60
 msgid "Configure failed."
 msgstr "Configure failed."
 
 #: inary/actionsapi/autotools.py:87 inary/actionsapi/autotools.py:97
-#: inary/actionsapi/kde.py:69
 msgid "No configure script found."
 msgstr "No configure script found."
 
 #: inary/actionsapi/autotools.py:105 inary/actionsapi/cmaketools.py:80
-#: inary/actionsapi/kde.py:74 inary/actionsapi/perlmodules.py:66
-#: inary/actionsapi/perlmodules.py:75 inary/actionsapi/pythonmodules.py:64
-#: inary/actionsapi/scons.py:41
+#: inary/actionsapi/perlmodules.py:66 inary/actionsapi/perlmodules.py:75
+#: inary/actionsapi/pythonmodules.py:64 inary/actionsapi/scons.py:41
 msgid "Make failed."
 msgstr "Make failed."
 
 #: inary/actionsapi/autotools.py:139 inary/actionsapi/autotools.py:150
 #: inary/actionsapi/cmaketools.py:98 inary/actionsapi/cmaketools.py:106
-#: inary/actionsapi/kde.py:81 inary/actionsapi/pythonmodules.py:69
-#: inary/actionsapi/rubymodules.py:94 inary/actionsapi/rubymodules.py:101
-#: inary/actionsapi/scons.py:45
+#: inary/actionsapi/pythonmodules.py:69 inary/actionsapi/rubymodules.py:94
+#: inary/actionsapi/rubymodules.py:101 inary/actionsapi/scons.py:45
 msgid "Install failed."
 msgstr "Install failed."
 
@@ -209,7 +213,7 @@ msgstr "Running autoheader failed."
 msgid "No configure script found for cmake."
 msgstr "No configure script found for cmake."
 
-#: inary/actionsapi/cmaketools.py:110 inary/actionsapi/kde.py:83
+#: inary/actionsapi/cmaketools.py:110
 msgid "No Makefile found."
 msgstr "No Makefile found."
 
@@ -327,17 +331,6 @@ msgstr "Configuration failed."
 msgid "Run failed."
 msgstr "Running {} failed."
 
-#: inary/actionsapi/kde.py:36
-#, fuzzy
-msgid ""
-"\n"
-"!!! Please attach the config.log to your bug report:\n"
-"{}/config.log"
-msgstr ""
-"\n"
-"!!! Please attach the config.log to your bug report:\n"
-"{}/config.log"
-
 #: inary/actionsapi/kerneltools.py:119
 #, fuzzy
 msgid "Can't find kernel version information file {}."
@@ -388,12 +381,12 @@ msgstr "Configuration failed."
 msgid "Running {} failed."
 msgstr "Running {} failed."
 
-#: inary/actionsapi/qt4.py:54 inary/actionsapi/qt5.py:62
+#: inary/actionsapi/qt.py:62
 #, fuzzy
 msgid "Project file '{}' not found."
 msgstr "Project file {} not found."
 
-#: inary/actionsapi/qt4.py:58 inary/actionsapi/qt5.py:66
+#: inary/actionsapi/qt.py:66
 #, fuzzy
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})"
 msgstr "It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})"
@@ -620,73 +613,63 @@ msgstr "Language file  {}  already generated."
 msgid "No rule to proccess {}. Please file a bug."
 msgstr "No rule to proccess {}. Please file a bug."
 
-#: inary/analyzer/conflict.py:28 inary/analyzer/dependency.py:28
+#: inary/analyzer/conflict.py:28 inary/analyzer/dependency.py:29
 #: inary/data/replace.py:26
 msgid " version >= "
 msgstr " version >= "
 
-#: inary/analyzer/conflict.py:30 inary/analyzer/dependency.py:30
+#: inary/analyzer/conflict.py:30 inary/analyzer/dependency.py:31
 #: inary/data/replace.py:28
 msgid " version <= "
 msgstr " version <= "
 
-#: inary/analyzer/conflict.py:32 inary/analyzer/dependency.py:32
+#: inary/analyzer/conflict.py:32 inary/analyzer/dependency.py:33
 #: inary/data/replace.py:30
 msgid " version "
 msgstr " version "
 
-#: inary/analyzer/conflict.py:34 inary/analyzer/dependency.py:34
+#: inary/analyzer/conflict.py:34 inary/analyzer/dependency.py:35
 #: inary/data/replace.py:32
 msgid " release >= "
 msgstr " release >= "
 
-#: inary/analyzer/conflict.py:36 inary/analyzer/dependency.py:36
+#: inary/analyzer/conflict.py:36 inary/analyzer/dependency.py:37
 #: inary/data/replace.py:34
 msgid " release <= "
 msgstr " release <= "
 
-#: inary/analyzer/conflict.py:38 inary/analyzer/dependency.py:38
+#: inary/analyzer/conflict.py:38 inary/analyzer/dependency.py:39
 #: inary/data/replace.py:36
 msgid " release "
 msgstr " release "
-
-#: inary/analyzer/firmwares.py:29
-#, fuzzy
-msgid "Extracting firmware list for {}..."
-msgstr "Extracting the files of {}"
-
-#: inary/analyzer/firmwares.py:49
-#, fuzzy
-msgid "The following firmwares are not installed:"
-msgstr "Following packages will be installed:"
-
-#: inary/analyzer/firmwares.py:64
-msgid "Missing"
-msgstr ""
 
 #: inary/analyzer/magic.py:150
 #, fuzzy
 msgid "Can't load file or buffer {}"
 msgstr "chrpath command failed for file {}!"
 
-#: inary/archive.py:309
+#: inary/archive.py:310
 msgid "* Target DIR: {}"
 msgstr ""
 
-#: inary/archive.py:461
+#: inary/archive.py:462
 #, python-brace-format
 msgid "* Chowning {0} ({1}:{2})"
 msgstr ""
 
-#: inary/archive.py:464
+#: inary/archive.py:465
 #, python-brace-format
 msgid "* LChowning {0} ({1}:{2})"
 msgstr ""
 
-#: inary/archive.py:528
+#: inary/archive.py:529
 #, fuzzy
 msgid "Problem occured while uncompressing {}.Z file"
 msgstr "Problem occured while uncompressing {}.Z file"
+
+#: inary/archive.py:607
+msgid "File is not a zip file {}"
+msgstr ""
 
 #: inary/atomicoperations.py:79 inary/operations/history.py:75
 #, fuzzy, python-brace-format
@@ -814,97 +797,6 @@ msgstr "Not removing conflicted file : {}"
 #, fuzzy
 msgid "Installed file {} does not exist on system [Probably you manually deleted]"
 msgstr "Installed file {} does not exist on system [Probably you manually deleted]"
-
-#: inary/atomicoperations.py:725 inary/cli/command.py:170
-msgid "You have to be root for this operation."
-msgstr "You have to be root for this operation."
-
-#: inary/atomicoperations.py:733
-#, fuzzy
-msgid "Another instance of Inary is running. Only one instance is allowed."
-msgstr "Another instance of INARY is running. Only one instance is allowed."
-
-#: inary/atomicoperations.py:737
-#, fuzzy
-msgid "Invalidating database caches..."
-msgstr "Update database in any case"
-
-#: inary/atomicoperations.py:739
-#, fuzzy
-msgid "Updating database caches..."
-msgstr "Update database in any case"
-
-#: inary/atomicoperations.py:822 inary/atomicoperations.py:955
-#: inary/atomicoperations.py:963
-#, fuzzy
-msgid "Regenerating database caches..."
-msgstr "Rebuild files database"
-
-#: inary/atomicoperations.py:871
-msgid "Taking snapshot of the system"
-msgstr "Taking snapshot of the system"
-
-#: inary/atomicoperations.py:914
-#, fuzzy
-msgid "scom package is not fully installed"
-msgstr "scom package is not fully installed"
-
-#: inary/atomicoperations.py:921
-msgid "Not a valid repo name."
-msgstr "Not a valid repo name."
-
-#: inary/atomicoperations.py:924
-#, fuzzy
-msgid "Repo {} already present."
-msgstr "Repo {} already present."
-
-#: inary/atomicoperations.py:927
-#, fuzzy
-msgid "Repo already present with name {}."
-msgstr "Repo already present with name {}."
-
-#: inary/atomicoperations.py:931 inary/atomicoperations.py:940
-#, fuzzy
-msgid "Flushing database caches..."
-msgstr "Cleaning package cache {}..."
-
-#: inary/atomicoperations.py:933
-#, fuzzy
-msgid "Repo {} added to system."
-msgstr "Repo {} added to system."
-
-#: inary/atomicoperations.py:942
-#, fuzzy
-msgid "Repo {} removed from system."
-msgstr "Repo {} removed from system."
-
-#: inary/atomicoperations.py:944
-#, fuzzy
-msgid "Repository {} does not exist. Cannot remove."
-msgstr "Repository {} does not exist. Cannot remove."
-
-#: inary/atomicoperations.py:968
-#, fuzzy
-msgid "Updating repository: {}"
-msgstr "Updating repository: {}"
-
-#: inary/atomicoperations.py:977
-#, fuzzy
-msgid "{} repository information is up-to-date."
-msgstr "{} repository information is up-to-date."
-
-#: inary/atomicoperations.py:979
-msgid "Updating database at any rate as requested"
-msgstr "Updating database at any rate as requested"
-
-#: inary/atomicoperations.py:993
-msgid "Package database updated."
-msgstr "Package database updated."
-
-#: inary/atomicoperations.py:995
-#, fuzzy
-msgid "No repository named {} found."
-msgstr "No repository named {} found."
 
 #: inary/cli/__init__.py:110
 #, fuzzy
@@ -1056,7 +948,7 @@ msgstr "Release Updater: {} <{}>\n"
 msgid "Update Date: {}\n"
 msgstr "Update Date: {}\n"
 
-#: inary/cli/build.py:30
+#: inary/cli/build.py:29
 msgid ""
 "Build INARY packages\n"
 "\n"
@@ -1078,109 +970,111 @@ msgstr ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 
-#: inary/cli/build.py:54
+#: inary/cli/build.py:53
 msgid "build options"
 msgstr "build options"
 
-#: inary/cli/build.py:62
+#: inary/cli/build.py:61
 msgid "Run inary build operation without printing extra debug information"
 msgstr "Run inary build operation without printing extra debug information"
 
-#: inary/cli/build.py:68 inary/cli/command.py:207
+#: inary/cli/build.py:67 inary/cli/command.py:207
 msgid "Do not take dependency information into account"
 msgstr "Do not take dependency information into account"
 
-#: inary/cli/build.py:74
+#: inary/cli/build.py:73
 msgid "Output directory for produced packages"
 msgstr "Output directory for produced packages"
 
-#: inary/cli/build.py:78
+#: inary/cli/build.py:77
 msgid "Bypass errors from ActionsAPI"
 msgstr "Bypass errors from ActionsAPI"
 
-#: inary/cli/build.py:83 inary/cli/command.py:209
+#: inary/cli/build.py:82 inary/cli/command.py:209
 msgid "Bypass safety switch"
 msgstr "Bypass safety switch"
 
-#: inary/cli/build.py:88
+#: inary/cli/build.py:87
 msgid "Bypass testing step"
 msgstr "Bypass testing step"
 
-#: inary/cli/build.py:93
+#: inary/cli/build.py:92
 msgid "Create a static package with ar files"
 msgstr "Create a static package with ar files"
 
-#: inary/cli/build.py:97 inary/cli/delta.py:65
+#: inary/cli/build.py:96 inary/cli/delta.py:65
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
 msgstr "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
 
-#: inary/cli/build.py:104
+#: inary/cli/build.py:103
 msgid "Use quilt patch management system instead of GNU patch"
 msgstr "Use quilt patch management system instead of GNU patch"
 
-#: inary/cli/build.py:110
+#: inary/cli/build.py:109
 msgid "Do not use root user when packaging, make building under home folder"
 msgstr ""
 
-#: inary/cli/build.py:116
+#: inary/cli/build.py:115
 msgid "Do not constrain build process inside the build folder"
 msgstr "Do not constrain build process inside the build folder"
 
-#: inary/cli/build.py:120
+#: inary/cli/build.py:119
 msgid "build steps"
 msgstr "build steps"
 
-#: inary/cli/build.py:126
+#: inary/cli/build.py:125
 msgid "Break build after fetching the source archive"
 msgstr "Break build after fetching the source archive"
 
-#: inary/cli/build.py:133
+#: inary/cli/build.py:132
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches"
 msgstr "Break build after unpacking the source archive, checking sha1sum and applying patches"
 
-#: inary/cli/build.py:141
+#: inary/cli/build.py:140
 msgid "Break build after running configure step"
 msgstr "Break build after running configure step"
 
-#: inary/cli/build.py:147
+#: inary/cli/build.py:146
 msgid "Break build after running compile step"
 msgstr "Break build after running compile step"
 
-#: inary/cli/build.py:153
+#: inary/cli/build.py:152
 msgid "Break build after running check step"
 msgstr "Break build after running check step"
 
-#: inary/cli/build.py:159
+#: inary/cli/build.py:158
 msgid "Break build after running install step"
 msgstr "Break build after running install step"
 
-#: inary/cli/build.py:165
+#: inary/cli/build.py:164
 msgid "Create INARY package"
 msgstr "Create INARY package"
 
-#: inary/cli/build.py:175 inary/cli/delta.py:73
+#: inary/cli/build.py:174 inary/cli/delta.py:73
 msgid "Supported package formats:"
 msgstr "Supported package formats:"
 
-#: inary/cli/build.py:178 inary/cli/delta.py:76
+#: inary/cli/build.py:177 inary/cli/delta.py:76
 #, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (default)"
 
 #: inary/cli/check.py:30
+#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
-"Usage: check [<package1> <package2> ... <packagen>]\n"
-"       check -c <component>\n"
+"    Usage: check [<package1> <package2> ... <packagen>]\n"
+"           check -c <component>\n"
 "\n"
-"<packagei>: package name\n"
+"    <packagei>: package name\n"
 "\n"
-"A cryptographic checksum is stored for each installed\n"
-"file. Check command uses the checksums to verify a package.\n"
-"Just give the names of packages.\n"
+"    A cryptographic checksum is stored for each installed\n"
+"    file. Check command uses the checksums to verify a package.\n"
+"    Just give the names of packages.\n"
 "\n"
-"If no packages are given, checks all installed packages.\n"
+"    If no packages are given, checks all installed packages.\n"
+"    "
 msgstr ""
 "Verify installation\n"
 "\n"
@@ -1195,65 +1089,65 @@ msgstr ""
 "\n"
 "If no packages are given, checks all installed packages.\n"
 
-#: inary/cli/check.py:57
+#: inary/cli/check.py:52
 msgid "check options"
 msgstr "check options"
 
-#: inary/cli/check.py:62
+#: inary/cli/check.py:57
 msgid "Check installed packages under given component"
 msgstr "Check installed packages under given component"
 
-#: inary/cli/check.py:68
+#: inary/cli/check.py:63
 msgid "Checks only changed config files of the packages"
 msgstr "Checks only changed config files of the packages"
 
-#: inary/cli/check.py:85
+#: inary/cli/check.py:80
 msgid "Checking all installed packages"
 msgstr "Checking all installed packages"
 
-#: inary/cli/check.py:94
+#: inary/cli/check.py:89
 #, fuzzy
 msgid "Checking integrity of {}"
 msgstr "Checking integrity of {}"
 
-#: inary/cli/check.py:106
+#: inary/cli/check.py:101
 msgid "Broken"
 msgstr "Broken"
 
-#: inary/cli/check.py:111
+#: inary/cli/check.py:106
 msgid "Unknown"
 msgstr "Unknown"
 
-#: inary/cli/check.py:113
+#: inary/cli/check.py:108
 msgid "OK"
 msgstr "OK"
 
-#: inary/cli/check.py:118
+#: inary/cli/check.py:113
 #, fuzzy
 msgid "Missing file: /{}"
 msgstr "Missing file: /{}"
 
-#: inary/cli/check.py:121
+#: inary/cli/check.py:116
 #, fuzzy
 msgid "Access denied: /{}"
 msgstr "Access denied: /{}"
 
-#: inary/cli/check.py:124
+#: inary/cli/check.py:119
 #, fuzzy
 msgid "Corrupted file: /{}"
 msgstr "Corrupted file: /{}"
 
-#: inary/cli/check.py:127
+#: inary/cli/check.py:122
 #, fuzzy
 msgid "Modified configuration file: /{}"
 msgstr "Modified configuration file: /{}"
 
-#: inary/cli/check.py:132
+#: inary/cli/check.py:127
 #, fuzzy
 msgid "Package {} not installed"
 msgstr "Package {} not installed"
 
-#: inary/cli/check.py:136
+#: inary/cli/check.py:131
 #, fuzzy
 msgid ""
 "Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
@@ -1328,6 +1222,10 @@ msgstr "Destination directory {} does not exist. Creating directory.\n"
 #: inary/cli/command.py:155
 msgid "Password: "
 msgstr "Password: "
+
+#: inary/cli/command.py:170 inary/operations/__init__.py:32
+msgid "You have to be root for this operation."
+msgstr "You have to be root for this operation."
 
 #: inary/cli/command.py:194
 msgid "Command terminated abnormally."
@@ -1495,12 +1393,12 @@ msgid "Emerge available packages under given component"
 msgstr "Emerge available packages under given component"
 
 #: inary/cli/emerge.py:50 inary/cli/emergeup.py:52 inary/cli/install.py:54
-#: inary/cli/upgrade.py:60
+#: inary/cli/upgrade.py:59
 msgid "Ignore file conflicts"
 msgstr "Ignore file conflicts"
 
 #: inary/cli/emerge.py:52 inary/cli/emergeup.py:54 inary/cli/install.py:56
-#: inary/cli/upgrade.py:62
+#: inary/cli/upgrade.py:61
 msgid "Ignore package conflicts"
 msgstr "Ignore package conflicts"
 
@@ -1943,7 +1841,7 @@ msgstr "Install component's and recursive components' packages"
 msgid "Name of the component's repository"
 msgstr "Name of the component's repository"
 
-#: inary/cli/install.py:62 inary/cli/upgrade.py:68
+#: inary/cli/install.py:62 inary/cli/upgrade.py:67
 msgid "Fetch upgrades but do not install."
 msgstr "Fetch upgrades but do not install."
 
@@ -1964,7 +1862,7 @@ msgstr ""
 msgid "There is no component named {}"
 msgstr "There is no component named {}"
 
-#: inary/cli/listavailable.py:29
+#: inary/cli/listavailable.py:28
 msgid ""
 "List available packages in the repositories\n"
 "\n"
@@ -1982,29 +1880,29 @@ msgstr ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 
-#: inary/cli/listavailable.py:47
+#: inary/cli/listavailable.py:46
 msgid "list-available options"
 msgstr "list-available options"
 
-#: inary/cli/listavailable.py:49 inary/cli/listcomponents.py:43
+#: inary/cli/listavailable.py:48 inary/cli/listcomponents.py:43
 #: inary/cli/listinstalled.py:49 inary/cli/listsources.py:42
 #: inary/cli/listupgrades.py:45 inary/cli/searchfile.py:41
 msgid "Show in long format"
 msgstr "Show in long format"
 
-#: inary/cli/listavailable.py:51
+#: inary/cli/listavailable.py:50
 msgid "List available packages under given component"
 msgstr "List available packages under given component"
 
-#: inary/cli/listavailable.py:53
+#: inary/cli/listavailable.py:52
 msgid "Show uninstalled packages only"
 msgstr "Show uninstalled packages only"
 
-#: inary/cli/listavailable.py:61
+#: inary/cli/listavailable.py:60
 msgid "Installed packages are shown in this color"
 msgstr "Installed packages are shown in this color"
 
-#: inary/cli/listavailable.py:69
+#: inary/cli/listavailable.py:68
 #, fuzzy
 msgid ""
 "\n"
@@ -2061,7 +1959,7 @@ msgstr "List installed packages under given component"
 msgid "Show detailed install info"
 msgstr "Show detailed install info"
 
-#: inary/cli/listinstalled.py:79 inary/cli/listupgrades.py:74
+#: inary/cli/listinstalled.py:78 inary/cli/listupgrades.py:74
 msgid "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 msgstr "Package Name          |St|        Version|  Rel.|  Distro|             Date"
 
@@ -2149,11 +2047,11 @@ msgstr ""
 "\n"
 "Lists packages waiting to be configured.\n"
 
-#: inary/cli/listpending.py:41
+#: inary/cli/listpending.py:40
 msgid "Listing pending orders:"
 msgstr ""
 
-#: inary/cli/listpending.py:43
+#: inary/cli/listpending.py:44
 msgid "There are no packages waiting to be configured"
 msgstr "There are no packages waiting to be configured"
 
@@ -2224,7 +2122,7 @@ msgstr "list-upgrades options"
 msgid "List upgradable packages under given component"
 msgstr "List upgradable packages under given component"
 
-#: inary/cli/listupgrades.py:65 inary/operations/upgrade.py:161
+#: inary/cli/listupgrades.py:65 inary/operations/upgrade.py:168
 msgid "No packages to upgrade."
 msgstr "No packages to upgrade."
 
@@ -2450,7 +2348,7 @@ msgstr "update-repo options"
 msgid "Update database in any case"
 msgstr "Update database in any case"
 
-#: inary/cli/upgrade.py:28
+#: inary/cli/upgrade.py:27
 msgid ""
 "Upgrade INARY packages\n"
 "\n"
@@ -2486,44 +2384,44 @@ msgstr ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 
-#: inary/cli/upgrade.py:52
+#: inary/cli/upgrade.py:51
 msgid "upgrade options"
 msgstr "upgrade options"
 
-#: inary/cli/upgrade.py:56
+#: inary/cli/upgrade.py:55
 msgid "Security related package upgrades only"
 msgstr "Security related package upgrades only"
 
-#: inary/cli/upgrade.py:58
+#: inary/cli/upgrade.py:57
 msgid "Do not update repositories"
 msgstr "Do not update repositories"
 
-#: inary/cli/upgrade.py:64
+#: inary/cli/upgrade.py:63
 msgid "Upgrade component's and recursive components' packages"
 msgstr "Upgrade component's and recursive components' packages"
 
-#: inary/cli/upgrade.py:66
+#: inary/cli/upgrade.py:65
 msgid "Name of the to be upgraded packages' repository"
 msgstr "Name of the to be upgraded packages' repository"
 
-#: inary/cli/upgrade.py:70
+#: inary/cli/upgrade.py:69
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
 msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
 
-#: inary/cli/upgrade.py:73
+#: inary/cli/upgrade.py:72
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 
-#: inary/cli/upgrade.py:77
+#: inary/cli/upgrade.py:76
 #, fuzzy
 msgid "compare sha1sum repo and installed packages"
 msgstr "Reinstall already installed packages"
 
-#: inary/cli/upgrade.py:89
+#: inary/cli/upgrade.py:88
 msgid "Updating repositories"
 msgstr "Updating repositories"
 
-#: inary/cli/upgrade.py:93
+#: inary/cli/upgrade.py:92
 msgid "Will not update repositories"
 msgstr "Will not update repositories"
 
@@ -2814,71 +2712,78 @@ msgstr "Error parsing repository index information. Index file does not exist or
 msgid "Repository '{}' is not compatible with your distribution. Repository is disabled."
 msgstr "Repository {} is not compatible with your distribution. Repository is disabled."
 
-#: inary/fetcher.py:22
-msgid "Please install requests"
+#: inary/fetcher.py:45
+msgid "ERROR:\n"
 msgstr ""
 
-#: inary/fetcher.py:154
+#: inary/fetcher.py:46
+msgid ""
+"\tCan't imported requests module.\n"
+"\tWhether want the download packages please install\n"
+"\t'python3-requests' package from repository.\n"
+msgstr ""
+
+#: inary/fetcher.py:164
 msgid ""
 "Url Problem: \n"
 " {}"
 msgstr ""
 
-#: inary/fetcher.py:159
+#: inary/fetcher.py:168
 msgid ""
 "Can not avaible remote server: \n"
 " {}"
 msgstr ""
 
-#: inary/fetcher.py:169
+#: inary/fetcher.py:178
 msgid "Filename error"
 msgstr "Filename error"
 
-#: inary/fetcher.py:172
+#: inary/fetcher.py:181
 #, fuzzy, python-format
 msgid "Access denied to write to destination directory: \"%s\""
 msgstr "Access denied to write to destination directory: \"{}\""
 
-#: inary/fetcher.py:175
+#: inary/fetcher.py:184
 #, fuzzy, python-format
 msgid "Access denied to destination file: \"%s\""
 msgstr "Access denied to destination file: \"{}\""
 
-#: inary/fetcher.py:212
+#: inary/fetcher.py:221
 #, fuzzy, python-format
 msgid "Could not fetch destination file \"%s\":%s"
 msgstr "Could not fetch destination file \"{0}\": {1}"
 
-#: inary/fetcher.py:216
+#: inary/fetcher.py:225
 msgid "Package manager not support downloding from ftp mirror"
 msgstr ""
 
-#: inary/fetcher.py:219
+#: inary/fetcher.py:228
 #, fuzzy
 msgid "Copying local file {}"
 msgstr "Removing cache file {}..."
 
-#: inary/fetcher.py:224
+#: inary/fetcher.py:233
 #, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr "A problem occurred. Please check the archive address and/or permissions again."
 
-#: inary/fetcher.py:257
+#: inary/fetcher.py:266
 #, fuzzy
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr "Proxy configuration has been found for {} protocol"
 
-#: inary/fetcher.py:264
+#: inary/fetcher.py:273
 #, fuzzy
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr "Bandwidth usage is limited to {} KB/s"
 
-#: inary/fetcher.py:287
+#: inary/fetcher.py:296
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} package found in {1} repository"
 
-#: inary/fetcher.py:291
+#: inary/fetcher.py:300
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "{} package already fetched"
@@ -2939,6 +2844,21 @@ msgstr "ERROR: gpg --detach-sig {} failed"
 #, fuzzy
 msgid "Mirrors file {} does not exist. Could not resolve mirrors://"
 msgstr "Mirrors file {} does not exist. Could not resolve mirrors://"
+
+#: inary/operations/__init__.py:40
+#, fuzzy
+msgid "Another instance of Inary is running. Only one instance is allowed."
+msgstr "Another instance of INARY is running. Only one instance is allowed."
+
+#: inary/operations/__init__.py:44
+#, fuzzy
+msgid "Invalidating database caches..."
+msgstr "Update database in any case"
+
+#: inary/operations/__init__.py:46
+#, fuzzy
+msgid "Updating database caches..."
+msgstr "Update database in any case"
 
 #: inary/operations/build.py:116
 #, fuzzy
@@ -3040,7 +2960,7 @@ msgstr "SyntaxError in SCOM file (){0}): {1}"
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:717 inary/util/file_utils.py:277
+#: inary/operations/build.py:717 inary/util/file_utils.py:278
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "ERROR: WorkDir {} does not exist\n"
@@ -3160,24 +3080,25 @@ msgstr "Building package: {}"
 msgid "Creating {}..."
 msgstr "Creating {}..."
 
-#: inary/operations/build.py:1199
+#: inary/operations/build.py:1207
 msgid "Cleaning build directory..."
 msgstr "Cleaning build directory..."
 
-#: inary/operations/build.py:1202
+#: inary/operations/build.py:1210
 msgid "Keeping build directory"
 msgstr "Keeping build directory"
 
-#: inary/operations/build.py:1292
-msgid "Action script error caught."
+#: inary/operations/build.py:1300
+#, fuzzy
+msgid "Action script error caught. {}"
 msgstr "Action script error caught."
 
-#: inary/operations/build.py:1296
+#: inary/operations/build.py:1303
 #, python-format
 msgid "*** %d error(s), %d warning(s)"
 msgstr "*** %d error(s), %d warning(s)"
 
-#: inary/operations/build.py:1379
+#: inary/operations/build.py:1386
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Last state was {}"
@@ -3202,11 +3123,11 @@ msgstr "All files in the package {} are different from the files in the new pack
 msgid "New package '{}' exists in the list of old packages. Skipping it..."
 msgstr "New package {} exists in the list of old packages. Skipping it..."
 
-#: inary/operations/emerge.py:37
+#: inary/operations/emerge.py:43
 msgid "No packages to emerge."
 msgstr "No packages to emerge."
 
-#: inary/operations/emerge.py:52
+#: inary/operations/emerge.py:58
 msgid ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
@@ -3214,7 +3135,7 @@ msgstr ""
 "The following list of packages will be installed\n"
 "from repository in the respective order to satisfy dependencies:\n"
 
-#: inary/operations/emerge.py:55
+#: inary/operations/emerge.py:61
 msgid ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
@@ -3222,11 +3143,11 @@ msgstr ""
 "The following list of packages will be built and\n"
 "installed in the respective order to satisfy dependencies:\n"
 
-#: inary/operations/emerge.py:63 inary/operations/install.py:85
+#: inary/operations/emerge.py:69 inary/operations/install.py:85
 msgid "There are extra packages due to dependencies. Do you want to continue?"
 msgstr "There are extra packages due to dependencies. Do you want to continue?"
 
-#: inary/operations/emerge.py:97
+#: inary/operations/emerge.py:103
 #, fuzzy
 msgid "Cannot find source package: {}"
 msgstr "Cannot find source package: {}"
@@ -3269,33 +3190,37 @@ msgstr "{} could not be found"
 msgid "{} [cached]"
 msgstr "{} [cached]"
 
-#: inary/operations/history.py:148
+#: inary/operations/history.py:155
 msgid "Following packages will be installed:\n"
 msgstr "Following packages will be installed:\n"
 
-#: inary/operations/history.py:151
+#: inary/operations/history.py:158
 msgid "Following packages will be removed:\n"
 msgstr "Following packages will be removed:\n"
 
-#: inary/operations/history.py:153 inary/operations/history.py:167
-#: inary/operations/install.py:216 inary/operations/remove.py:76
-#: inary/operations/upgrade.py:196
+#: inary/operations/history.py:160 inary/operations/history.py:174
+#: inary/operations/install.py:216 inary/operations/remove.py:82
+#: inary/operations/upgrade.py:203
 msgid "Do you want to continue?"
 msgstr "Do you want to continue?"
 
-#: inary/operations/history.py:159 inary/operations/install.py:99
-#: inary/operations/upgrade.py:207
+#: inary/operations/history.py:166 inary/operations/install.py:99
+#: inary/operations/upgrade.py:214
 #, python-format
 msgid "Downloading %d / %d"
 msgstr "Downloading %d / %d"
 
-#: inary/operations/history.py:165
+#: inary/operations/history.py:172
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
 msgstr ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
+
+#: inary/operations/history.py:224
+msgid "Taking snapshot of the system"
+msgstr "Taking snapshot of the system"
 
 #: inary/operations/info.py:35
 #, fuzzy
@@ -3314,12 +3239,12 @@ msgstr "No packages to install."
 msgid "Following packages will be installed:"
 msgstr "Following packages will be installed:"
 
-#: inary/operations/install.py:78 inary/operations/upgrade.py:183
+#: inary/operations/install.py:78 inary/operations/upgrade.py:190
 #, python-format
 msgid "Total size of package(s): %.2f %s"
 msgstr "Total size of package(s): %.2f %s"
 
-#: inary/operations/install.py:118 inary/operations/upgrade.py:221
+#: inary/operations/install.py:118 inary/operations/upgrade.py:228
 #, python-format
 msgid "Installing %d / %d"
 msgstr "Installing %d / %d"
@@ -3360,24 +3285,29 @@ msgstr "Installation order: "
 msgid "Checking dependencies for install..."
 msgstr "Following packages will be installed:"
 
-#: inary/operations/remove.py:47
+#: inary/operations/operations.py:183
+#, fuzzy
+msgid "scom package is not fully installed"
+msgstr "scom package is not fully installed"
+
+#: inary/operations/remove.py:53
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Safety switch prevents the removal of following packages:\n"
 
-#: inary/operations/remove.py:52 inary/operations/upgrade.py:394
+#: inary/operations/remove.py:58 inary/operations/upgrade.py:401
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Safety switch: The component system.base cannot be found."
 
-#: inary/operations/remove.py:59
+#: inary/operations/remove.py:65
 #, fuzzy
 msgid "Package {} does not exist. Cannot remove."
 msgstr "Package {} does not exist. Cannot remove."
 
-#: inary/operations/remove.py:63
+#: inary/operations/remove.py:69
 msgid "No packages to remove."
 msgstr "No packages to remove."
 
-#: inary/operations/remove.py:72
+#: inary/operations/remove.py:78
 msgid ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
@@ -3385,26 +3315,89 @@ msgstr ""
 "The following list of packages will be removed\n"
 "in the respective order to satisfy dependencies:\n"
 
-#: inary/operations/remove.py:77
+#: inary/operations/remove.py:83
 msgid "Package removal declined"
 msgstr "Package removal declined"
 
-#: inary/operations/remove.py:94
+#: inary/operations/remove.py:100
 #, fuzzy
 msgid "Package {} is not installed. Cannot remove."
 msgstr "Package {} is not installed. Cannot remove."
 
-#: inary/operations/remove.py:129
+#: inary/operations/remove.py:135
 msgid "Conflicts remain"
 msgstr "Conflicts remain"
 
-#: inary/operations/remove.py:137
+#: inary/operations/remove.py:143
 msgid "Obsoleted packages remaining"
 msgstr "Obsoleted packages remaining"
 
-#: inary/operations/remove.py:141
+#: inary/operations/remove.py:147
 msgid "Replaced package remains"
 msgstr "Replaced package remains"
+
+#: inary/operations/repository.py:35
+msgid "Not a valid repo name."
+msgstr "Not a valid repo name."
+
+#: inary/operations/repository.py:38
+#, fuzzy
+msgid "Repo {} already present."
+msgstr "Repo {} already present."
+
+#: inary/operations/repository.py:41
+#, fuzzy
+msgid "Repo already present with name {}."
+msgstr "Repo already present with name {}."
+
+#: inary/operations/repository.py:45 inary/operations/repository.py:54
+#, fuzzy
+msgid "Flushing database caches..."
+msgstr "Cleaning package cache {}..."
+
+#: inary/operations/repository.py:47
+#, fuzzy
+msgid "Repo {} added to system."
+msgstr "Repo {} added to system."
+
+#: inary/operations/repository.py:56
+#, fuzzy
+msgid "Repo {} removed from system."
+msgstr "Repo {} removed from system."
+
+#: inary/operations/repository.py:58
+#, fuzzy
+msgid "Repository {} does not exist. Cannot remove."
+msgstr "Repository {} does not exist. Cannot remove."
+
+#: inary/operations/repository.py:73 inary/operations/repository.py:85
+#: inary/operations/repository.py:93
+#, fuzzy
+msgid "Regenerating database caches..."
+msgstr "Rebuild files database"
+
+#: inary/operations/repository.py:98
+#, fuzzy
+msgid "Updating repository: {}"
+msgstr "Updating repository: {}"
+
+#: inary/operations/repository.py:107
+#, fuzzy
+msgid "{} repository information is up-to-date."
+msgstr "{} repository information is up-to-date."
+
+#: inary/operations/repository.py:109
+msgid "Updating database at any rate as requested"
+msgstr "Updating database at any rate as requested"
+
+#: inary/operations/repository.py:123
+msgid "Package database updated."
+msgstr "Package database updated."
+
+#: inary/operations/repository.py:125
+#, fuzzy
+msgid "No repository named {} found."
+msgstr "No repository named {} found."
 
 #: inary/operations/upgrade.py:54
 msgid "You must restart the following service(s) manually for the updated software to take effect:"
@@ -3440,28 +3433,28 @@ msgstr ""
 "The following packages have conflicts:\n"
 "{}"
 
-#: inary/operations/upgrade.py:178
+#: inary/operations/upgrade.py:185
 msgid "The following packages will be upgraded:"
 msgstr "The following packages will be upgraded:"
 
-#: inary/operations/upgrade.py:189
+#: inary/operations/upgrade.py:196
 msgid "There are extra packages due to dependencies."
 msgstr "There are extra packages due to dependencies."
 
-#: inary/operations/upgrade.py:269
+#: inary/operations/upgrade.py:276
 #, fuzzy, python-brace-format
 msgid "Dependency {0} of {1} cannot be satisfied"
 msgstr "Dependency {0} of {1} cannot be satisfied"
 
-#: inary/operations/upgrade.py:270
+#: inary/operations/upgrade.py:277
 msgid "Upgrade is not possible."
 msgstr "Upgrade is not possible."
 
-#: inary/operations/upgrade.py:364
+#: inary/operations/upgrade.py:371
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Safety switch forces the installation of following packages:"
 
-#: inary/operations/upgrade.py:382
+#: inary/operations/upgrade.py:389
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Safety switch forces the upgrade of following packages:"
 
@@ -3727,13 +3720,13 @@ msgstr "getNodeText: Expected text node, got something else!"
 msgid "File '{}' has invalid XML: {}\n"
 msgstr "File {} has invalid XML"
 
-#: inary/sxml/xmlfile_iks.py:65 inary/sxml/xmlfile_iks.py:90
+#: inary/sxml/xmlfile_iks.py:67 inary/sxml/xmlfile_iks.py:92
 #: inary/sxml/xmlfile_minidom.py:67
 #, fuzzy
 msgid "File '{}' has invalid XML"
 msgstr "File {} has invalid XML"
 
-#: inary/sxml/xmlfile_iks.py:75 inary/sxml/xmlfile_minidom.py:77
+#: inary/sxml/xmlfile_iks.py:77 inary/sxml/xmlfile_minidom.py:77
 #, python-brace-format
 msgid "Cannot read URI {0}: {1}"
 msgstr "Cannot read URI {0}: {1}"
@@ -3742,71 +3735,71 @@ msgstr "Cannot read URI {0}: {1}"
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo needs a tuple (user, pass)"
 
-#: inary/util/file_utils.py:145
+#: inary/util/file_utils.py:146
 #, fuzzy
 msgid "Including external link '{}'"
 msgstr "Including external link {}"
 
-#: inary/util/file_utils.py:147
+#: inary/util/file_utils.py:148
 #, fuzzy
 msgid "Including directory '{}'"
 msgstr "Including directory {}"
 
-#: inary/util/file_utils.py:233
+#: inary/util/file_utils.py:234
 msgid "You don't have necessary read permissions"
 msgstr "You don't have necessary read permissions"
 
-#: inary/util/file_utils.py:235
+#: inary/util/file_utils.py:236
 #, fuzzy
 msgid "Cannot calculate SHA1 hash of {}: {}"
 msgstr "Cannot calculate SHA1 hash of {}"
 
-#: inary/util/file_utils.py:247
+#: inary/util/file_utils.py:248
 #, fuzzy
 msgid "Compression type is not valid: '{}'"
 msgstr "Compression type is not valid: {}"
 
-#: inary/util/file_utils.py:253
+#: inary/util/file_utils.py:254
 #, fuzzy, python-brace-format
 msgid "Error while decompressing {0}: {1}"
 msgstr "Error while decompressing {0}: {1}"
 
-#: inary/util/file_utils.py:331
+#: inary/util/file_utils.py:332
 #, fuzzy
 msgid "ERROR: patch ({}) failed"
 msgstr "ERROR: patch {} failed"
 
-#: inary/util/file_utils.py:333
+#: inary/util/file_utils.py:334
 #, fuzzy, python-brace-format
 msgid "ERROR: patch ({0}) failed: {1}"
 msgstr "ERROR: patch ({0}) failed: {1}"
 
-#: inary/util/file_utils.py:343
+#: inary/util/file_utils.py:344
 #, fuzzy
 msgid "strip command failed for file '{}'!"
 msgstr "strip command failed for file {}!"
 
-#: inary/util/file_utils.py:350
+#: inary/util/file_utils.py:351
 #, fuzzy
 msgid "chrpath command failed for file '{}'!"
 msgstr "chrpath command failed for file {}!"
 
-#: inary/util/file_utils.py:357
+#: inary/util/file_utils.py:358
 #, fuzzy
 msgid "objcopy (keep-debug) command failed for file '{}'!"
 msgstr "objcopy (keep-debug) command failed for file {}!"
 
-#: inary/util/file_utils.py:363
+#: inary/util/file_utils.py:364
 #, fuzzy
 msgid "objcopy (add-debuglink) command failed for file '{}'!"
 msgstr "objcopy (add-debuglink) command failed for file {}!"
 
-#: inary/util/file_utils.py:368
+#: inary/util/file_utils.py:369
 #, python-brace-format
 msgid "file command failed with return code {0} for file: {1}"
 msgstr "file command failed with return code {0} for file: {1}"
 
-#: inary/util/file_utils.py:369
+#: inary/util/file_utils.py:370
 msgid ""
 "Output:\n"
 "{}"
@@ -3814,12 +3807,12 @@ msgstr ""
 "Output:\n"
 "{}"
 
-#: inary/util/package_utils.py:92
+#: inary/util/package_utils.py:93
 #, fuzzy
 msgid "Invalid package name: {}"
 msgstr "Invalid package name: {}"
 
-#: inary/util/package_utils.py:137
+#: inary/util/package_utils.py:138
 #, fuzzy
 msgid "Invalid delta package name: {}"
 msgstr "Invalid delta package name: {}"
@@ -3839,51 +3832,103 @@ msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: {}"
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades options"
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Operation #{0}: {1}"
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Adding {} to source index"
-
-#~ msgid "OK."
-#~ msgstr "OK."
+#~ msgid "File '{0}' has invalid XML: {1}"
+#~ msgstr "File {} has invalid XML"
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+#~ msgstr ""
+#~ "Could not fetch destination file: \"{0}\" \n"
+#~ "Raised Value error: \"{1}\""
+
+#, fuzzy
+#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+#~ msgstr "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+
+#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#~ msgstr "Remote file can not be reached. Previously downloaded part of the file will be removed."
+
+#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+#~ msgstr "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Cleaning build directory..."
 
-#, fuzzy
-#~ msgid "* Getting index from {}"
-#~ msgstr "Fetching source from: {}"
+#~ msgid "long integer"
+#~ msgstr "long integer"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} option requires an argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY package"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Urlgrabber needs to be installed to run this command"
+#~ msgstr "Urlgrabber needs to be installed to run this command"
+
+#~ msgid "String {} has invalid XML"
+#~ msgstr "String {} has invalid XML"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Unable to read file {}: {}"
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Safety switch forces the upgrade of following packages:"
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Configuring {} package"
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Upgrade is not possible."
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Checking all installed packages"
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "The following packages will be upgraded:"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Checking all installed packages"
+#~ msgid "No packages to downgrade."
+#~ msgstr "No packages to upgrade."
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Installed {}"
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Package {} is already at the latest release {}."
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Package Size: {}"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Do you want to continue?"
+#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
+#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+
+#, fuzzy
+#~ msgid "Fetch downgrades but do not install."
+#~ msgstr "Fetch upgrades but do not install."
+
+#, fuzzy
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Name of the to be upgraded packages' repository"
+
+#, fuzzy
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Upgrade component's and recursive components' packages"
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Security related package upgrades only"
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade options"
 
 #, fuzzy
 #~ msgid ""
@@ -3922,100 +3967,66 @@ msgstr "Invalid version string: {}"
 #~ "expanded to package names.\n"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade options"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Do you want to continue?"
 
 #, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Security related package upgrades only"
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Package Size: {}"
 
 #, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Upgrade component's and recursive components' packages"
+#~ msgid "  installed size {}"
+#~ msgstr "Installed {}"
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Name of the to be upgraded packages' repository"
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "Fetch downgrades but do not install."
-#~ msgstr "Fetch upgrades but do not install."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match pattern."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match pattern."
+#~ msgid "    found {} packages"
+#~ msgstr "Configuring {} package"
 
 #, fuzzy
-#~ msgid "When downgrading system, ignore packages and components whose basenames match any pattern contained in file."
-#~ msgstr "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
+#~ msgid "* Getting installed packages"
+#~ msgstr "Checking all installed packages"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Package {} is already at the latest release {}."
+#~ msgid "* Getting index from {}"
+#~ msgstr "Fetching source from: {}"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "No packages to upgrade."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "The following packages will be upgraded:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Upgrade is not possible."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Safety switch forces the upgrade of following packages:"
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Unable to read file {}: {}"
-
-#~ msgid "String {} has invalid XML"
-#~ msgstr "String {} has invalid XML"
-
-#~ msgid "Urlgrabber needs to be installed to run this command"
-#~ msgstr "Urlgrabber needs to be installed to run this command"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY package"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} option requires an argument"
-
-#~ msgid "long integer"
-#~ msgstr "long integer"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Cleaning build directory..."
 
-#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-#~ msgstr "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-
-#~ msgid "Remote file can not be reached. Previously downloaded part of the file will be removed."
-#~ msgstr "Remote file can not be reached. Previously downloaded part of the file will be removed."
+#~ msgid "OK."
+#~ msgstr "OK."
 
 #, fuzzy
-#~ msgid "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
-#~ msgstr "Could not fetch destination file: \"{0}\"; (\"{1}\"): \"{2}\""
+#~ msgid "Adding {} to source index"
+#~ msgstr "Adding {} to source index"
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades options"
+
+#, fuzzy
+#~ msgid "The following firmwares are not installed:"
+#~ msgstr "Following packages will be installed:"
+
+#, fuzzy
+#~ msgid "Extracting firmware list for {}..."
+#~ msgstr "Extracting the files of {}"
 
 #, fuzzy
 #~ msgid ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
+#~ "\n"
+#~ "!!! Please attach the config.log to your bug report:\n"
+#~ "{}/config.log"
 #~ msgstr ""
-#~ "Could not fetch destination file: \"{0}\" \n"
-#~ "Raised Value error: \"{1}\""
-
-#, fuzzy
-#~ msgid "File '{0}' has invalid XML: {1}"
-#~ msgstr "File {} has invalid XML"
-
-#, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Operation #{0}: {1}"
+#~ "\n"
+#~ "!!! Please attach the config.log to your bug report:\n"
+#~ "{}/config.log"
