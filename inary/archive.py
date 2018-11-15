@@ -115,7 +115,6 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
-                 compressformat="xz",
                  compresslevel=9,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
@@ -136,8 +135,7 @@ class TarFile(tarfile.TarFile):
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
         else:
-            options = {"format":    compressformat}
-            fileobj = lzma.LZMAFile(name, mode)
+            fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
 
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
@@ -201,7 +199,7 @@ class ArchiveBzip2(ArchiveBase):
         import bz2
         bz2_file = bz2.BZ2File(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(bz2_file.read().decode('utf-8'))
+        output.write(bz2_file.read())
         output.close()
         bz2_file.close()
 
@@ -227,7 +225,7 @@ class ArchiveGzip(ArchiveBase):
         import gzip
         gzip_file = gzip.GzipFile(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(gzip_file.read().decode('utf-8'))
+        output.write(gzip_file.read())
         output.close()
         gzip_file.close()
 
@@ -255,9 +253,9 @@ class ArchiveLzma(ArchiveBase):
             import lzma
         except:
             from backports import lzma
-        lzma_file = lzma.LZMAFile(self.file_path, "rb")
+        lzma_file = lzma.LZMAFile(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(lzma_file.read().decode('utf-8'))
+        output.write(lzma_file.read())
         output.close()
         lzma_file.close()
 

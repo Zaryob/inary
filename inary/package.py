@@ -194,7 +194,7 @@ class Package:
         fpath = util.join_path(outdir, path)
         util.ensure_dirs(os.path.dirname(fpath))
 
-        with open(fpath, "wb") as f:
+        with open(fpath, "w") as f:
             f.write(data)
             f.flush()
             os.fsync(f.fileno())
