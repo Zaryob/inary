@@ -1,14 +1,14 @@
 API Plan
 ========
 
-Pisi does not have a usable api. All the projects use its internal modules to do their
-jobs. This file holds a list of these usages by project as a guide for a new competent 
-pisi api.
+Inary does not have a usable api. All the projects use its internal modules to do their
+jobs. This file holds a list of these usages by project as a guide for a new competent
+inary api.
 
-PiSi
+Inary
 ====
 
-Below are pisi's internal calls that they may help to figure out common api calls.
+Below are inary's internal calls that they may help to figure out common api calls.
 
 * packagedb.remove_repo
 * sourcedb.remove_repo
@@ -59,21 +59,22 @@ Below are pisi's internal calls that they may help to figure out common api call
 Package Manager
 ===============
 
-Below are the pisi modules used internally by package-manager. Package-manager should use pisi
+Below are the inary modules used internally by package-manager. Package-manager should use inary
 api.
 
 * repodb.get_repo
 * packagedb.get_package
-  pm still uses the old packagedb with pisi.itemsbyrepo.installed or pisi.itemsbyrepo.repos params
+  pm still uses the old packagedb with inary.itemsbyrepo.installed or inary.itemsbyrepo.repos params
 * componentdb.list_components
 * repodb.list
 * componentdb.get_union_comp
 * componentdb.get_union_packages
 
-Yali
+Sul-Ins
 ====
 
-Below are the pisi modules used internally by Yali. Yali should use pisi api.
+Below are the inary modules used internally by Sul-Ins. Sul-Ins should use inary api.
+
 
 * api.add_repo
 * api.update_repo
@@ -87,14 +88,14 @@ Below are the pisi modules used internally by Yali. Yali should use pisi api.
 Buildfarm
 =========
 
-Below are the pisi modules used internally by Buildfarm.
+Below are the inary modules used internally by Inaryfarm.
 
 * api.create_delta_package
 
 PackageKit
 ==========
 
-Below are the pisi modules used internally by PackageKit.
+Below are the inary modules used internally by PackageKit.
 
 * installdb.has_package
 * installdb.get_package
@@ -108,7 +109,7 @@ Below are the pisi modules used internally by PackageKit.
 * api.upgrade
 * api.remove
 * api.list_upgradable
-* api.update_repo 
+* api.update_repo
 * api.list_repos
 * repodb.get_repo.indexuri.get_uri
 * version.Version

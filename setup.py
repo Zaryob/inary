@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
+# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
+# Copyright (C) 2016 - 2017, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -17,24 +19,30 @@ import glob
 import sys
 import inspect
 import tempfile
+import subprocess
 from distutils.core import setup
+from distutils.cmd import Command
 from distutils.command.build import build
 from distutils.command.install import install
+from distutils.sysconfig import get_python_lib
 
 sys.path.insert(0, '.')
-import pisi
+import inary
 
-IN_FILES = ("pisi.xml.in",)
-PROJECT = "pisi"
+IN_FILES = ("inary.xml.in",)
+PROJECT = "inary"
 MIMEFILE_DIR = "usr/share/mime/packages"
 
 
 class Build(build):
     def run(self):
+        #Preparing configure file
+        shutil.copy("config/inary.conf-{}".format(sys.arch), "config/inary.conf")
+
         build.run(self)
 
         self.mkpath(self.build_base)
-
+        
         for in_file in IN_FILES:
             name, ext = os.path.splitext(in_file)
             self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
@@ -55,30 +63,30 @@ class BuildPo(build):
 
         # Collect headers for mimetype files
         for filename in IN_FILES:
-            os.system("intltool-extract --type=gettext/xml %s" % filename)
+            os.system("intltool-extract --type=gettext/xml {}".format(filename))
 
-        for root,dirs,filenames in os.walk("pisi"):
+        for root,dirs,filenames in os.walk("inary"):
             for filename in filenames:
                 if filename.endswith(".py"):
                     filelist.append(os.path.join(root, filename))
 
-        filelist.extend(["pisi-cli", "pisi.xml.in.h", optparse_path])
+        filelist.extend(["inary-cli", "inary.xml.in.h", optparse_path])
         filelist.sort()
         with open(files, "w") as _files:
             _files.write("\n".join(filelist))
 
         # Generate POT file
         os.system("xgettext -L Python \
-                            --default-domain=%s \
+                            --default-domain={0} \
                             --keyword=_ \
                             --keyword=N_ \
-                            --files-from=%s \
-                            -o po/%s.pot" % (PROJECT, files, PROJECT))
+                            --files-from={1} \
+                            -o po/{2}.pot".format(PROJECT, files, PROJECT))
 
         # Update PO files
         for item in glob.glob1("po", "*.po"):
-            print "Updating .. ", item
-            os.system("msgmerge --update --no-wrap --sort-by-file po/%s po/%s.pot" % (item, PROJECT))
+            print("Updating .. ", item)
+            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)
@@ -103,43 +111,44 @@ class Install(install):
             if not name.endswith('.po'):
                 continue
             lang = name[:-3]
-            print "Installing '%s' translations..." % lang
-            os.popen("msgfmt po/%s.po -o po/%s.mo" % (lang, lang))
+            print("Installing '{}' translations...".format(lang))
+            os.system("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
             if not self.root:
                 self.root = "/"
-            destpath = os.path.join(self.root, "usr/share/locale/%s/LC_MESSAGES" % lang)
+            destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
             if not os.path.exists(destpath):
                 os.makedirs(destpath)
-            shutil.copy("po/%s.mo" % lang, os.path.join(destpath, "pisi.mo"))
+            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
-        destpath = os.path.join(self.root, "usr/share/doc/pisi")
+        #self.root ='/'
+        destpath = os.path.join(self.root, "usr/share/doc/inary")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
         os.chdir('doc')
         for pdf in glob.glob('*.pdf'):
-            print 'Installing', pdf
+            print('Installing', pdf)
             shutil.copy(pdf, os.path.join(destpath, pdf))
         os.chdir('..')
 
     def generateConfigFile(self):
-        import pisi.configfile
-        destpath = os.path.join(self.root, "etc/pisi/")
+        import inary.configfile
+        destpath = os.path.join(self.root, "etc/inary/")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
 
-        confFile = os.path.join(destpath, "pisi.conf")
-        if os.path.isfile(confFile): # Don't overwrite existing pisi.conf
+        confFile = os.path.join(destpath, "inary.conf")
+        if os.path.isfile(confFile): # Don't overwrite existing inary.conf
             return
 
-        pisiconf = open(confFile, "w")
+        inaryconf = open(confFile, "w")
 
-        klasses = inspect.getmembers(pisi.configfile, inspect.isclass)
+        klasses = inspect.getmembers(inary.configfile, inspect.isclass)
         defaults = [klass for klass in klasses if klass[0].endswith('Defaults')]
 
         for d in defaults:
             section_name = d[0][:-len('Defaults')].lower()
-            pisiconf.write("[%s]\n" % section_name)
+            inaryconf.write("[{}]\n".format(section_name))
 
             section_members = [m for m in inspect.getmembers(d[1]) \
                                if not m[0].startswith('__') \
@@ -147,34 +156,85 @@ class Install(install):
 
             for member in section_members:
                 if member[1] == None or member[1] == "":
-                    pisiconf.write("# %s = %s\n" % (member[0], member[1]))
+                    inaryconf.write("# {0[0]} = {0[1]}\n".format(member))
                 else:
-                    pisiconf.write("%s = %s\n" % (member[0], member[1]))
-            pisiconf.write('\n')
+                    inaryconf.write("{0[0]} = {0[1]}\n".format(member))
+            inaryconf.write('\n')
+
+class Uninstall(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+    def finalize_options(self):
+        pass
+    def run(self):
+        print('Uninstalling ...')
+        project_dir = os.path.join(get_python_lib(), PROJECT)
+        if os.path.exists(project_dir):
+            print(' removing: ', project_dir)
+            shutil.rmtree(project_dir)
+
+class Test(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        self.run_command('build')
+        os.chdir('tests')
+        subprocess.check_call([
+            sys.executable, '-bWd',
+            os.path.join('runTests.py')
+        ])
 
 
+datas = [
+    ("/etc/inary/" ,["config/inary.conf","config/mirrors.conf", "config/sandbox.conf"]),
+    ("/usr/share/mime/packages/", ["build/inary.xml"]),
+    ("/usr/lib/tmpfiles.d/", ["config/inary.conf-armv7h"])
+]
 
-setup(name="pisi",
-    version= pisi.__version__,
-    description="PiSi (Packages Installed Successfully as Intended)",
-    long_description="PiSi is the package management system of Pardus Linux.",
+setup(name="inary",
+    version= inary.__version__,
+    description="Inary (Special Package Manager)",
+    long_description="Inary is the package management system of Sulin Linux.",
     license="GNU GPL2",
-    author="Pardus Developers",
-    author_email="pisi@pardus.org.tr",
-    url="http://www.pardus.org.tr/eng/pisi/",
-    package_dir = {'': ''},
-    packages = ['pisi', 'pisi.cli', 'pisi.operations', 'pisi.actionsapi', 'pisi.pxml', 'pisi.scenarioapi', 'pisi.db'],
-    scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild'],
+    author="Zaryob",
+    author_email="zaryob.dev@gmail.com",
+    url="https://github.com/Zaryob/inary",
+    #package_dir = {'': ''},
+    packages = ['inary',
+                'inary.actionsapi',
+                'inary.analyzer',
+                'inary.cli',
+                'inary.data',
+                'inary.db',
+                'inary.operations',
+                'inary.sxml',
+                'inary.scenarioapi',
+                'inary.util'],
+    scripts = ['inary-cli',
+               'scripts/lsinary',
+               'scripts/uninary',
+               'scripts/check-newconfigs.py',
+               'scripts/inarysh',
+               'tools/pspec2po'],
+   # include_package_data=True,
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
-                'install' : Install}
+                'install' : Install,
+                'uninstall' : Uninstall,
+                'test' : Test},
+    data_files =datas
     )
 
 # the below stuff is really nice but we already have a version
 # we can use this stuff for svn snapshots in a separate
 # script, or with a parameter I don't know -- exa
 
-PISI_VERSION = pisi.__version__
+INARY_VERSION = inary.__version__
 
 def getRevision():
     import os
@@ -193,6 +253,6 @@ def getRevision():
 def getVersion():
     rev = getRevision()
     if rev:
-        return "-r".join([PISI_VERSION, rev])
+        return "-r".join([INARY_VERSION, rev])
     else:
-        return PISI_VERSION
+        return INARY_VERSION
