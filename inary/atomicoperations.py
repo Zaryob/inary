@@ -50,7 +50,7 @@ class AtomicOperation(object):
 
     def __init__(self, ignore_dep = None):
         #self.package = package
-        if ignore_dep==None:
+        if ignore_dep is None:
             self.ignore_dep = ctx.config.get_option('ignore_dependency')
         else:
             self.ignore_dep = ignore_dep
@@ -58,7 +58,7 @@ class AtomicOperation(object):
         self.historydb = inary.db.historydb.HistoryDB()
 
     def run(self, package):
-        "perform an atomic package operation"
+        """perform an atomic package operation"""
         pass
 
 # possible paths of install operation
@@ -66,7 +66,7 @@ class AtomicOperation(object):
 opttostr = {INSTALL:"install", REMOVE:"remove", REINSTALL:"reinstall", UPGRADE:"upgrade", DOWNGRADE:"downgrade"}
 
 class Install(AtomicOperation):
-    "Install class, provides install routines for inary packages"
+    """Install class, provides install routines for inary packages"""
 
     @staticmethod
     def from_name(name, ignore_dep = None):
@@ -198,7 +198,8 @@ class Install(AtomicOperation):
             if self.installdb.has_package(replaced.package):
                 inary.operations.remove.remove_replaced_packages([replaced.package])
 
-    def check_versioning(self, version, release):
+    @staticmethod
+    def check_versioning(version, release):
         try:
             int(release)
             inary.version.make_version(version)
@@ -340,7 +341,7 @@ class Install(AtomicOperation):
             self.config_later = True
 
     def extract_install(self):
-        "unzip package in place"
+        """unzip package in place"""
 
         ctx.ui.notify(inary.ui.extracting, package = self.pkginfo, files = self.files)
 
@@ -528,7 +529,7 @@ class Install(AtomicOperation):
             self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
-        "update databases"
+        """update databases"""
         if self.reinstall():
             self.remove_old.remove_db()
 

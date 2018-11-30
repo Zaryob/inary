@@ -53,7 +53,8 @@ class BuildPo(build):
         build.run(self)
         self.build_po()
 
-    def build_po(self):
+    @staticmethod
+    def build_po():
         import optparse
         files = tempfile.mkstemp()[1]
         filelist = []
@@ -155,7 +156,7 @@ class Install(install):
                                and not m[0].endswith('__')]
 
             for member in section_members:
-                if member[1] == None or member[1] == "":
+                if member[1] is None or member[1] == "":
                     inaryconf.write("# {0[0]} = {0[1]}\n".format(member))
                 else:
                     inaryconf.write("{0[0]} = {0[1]}\n".format(member))

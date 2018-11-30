@@ -31,7 +31,7 @@ INSTALLDB = inary.db.installdb.InstallDB()
 CONSTANTS = inary.constants.Constants()
 
 def process_ldd(objdump_needed, ldd_output, ldd_unused, ldd_undefined):
-    '''Process the ldd outputs. And return a simple path only lists'''
+    """Process the ldd outputs. And return a simple path only lists"""
     result_unused = []
     result_undefined = []
     result_broken = []
@@ -74,8 +74,8 @@ def process_ldd(objdump_needed, ldd_output, ldd_unused, ldd_undefined):
     return (result_needed, result_broken, result_unused, result_undefined)
 
 def check_objdump(processed_needed, package_elf_files, package_name):
-    '''check the objdump needed libraries with the ldd libraries
-       the libraries that are needed can be used for dependencies'''
+    """check the objdump needed libraries with the ldd libraries
+       the libraries that are needed can be used for dependencies"""
     result_needed = []
     # check  if the libraries are shipped with the package
     # then associate each library(with his package_name)  with the given elf_file
@@ -95,8 +95,8 @@ def check_objdump(processed_needed, package_elf_files, package_name):
     return result_needed
 
 def check_pc_files(pc_file):
-    '''check for .pc files created by pkgconfig and shipped with the package
-       these .pc files have requirements tags that can be used for dependencies'''
+    """check for .pc files created by pkgconfig and shipped with the package
+       these .pc files have requirements tags that can be used for dependencies"""
     result_needed = []
     requires = set(os.popen("pkg-config --print-requires --print-requires-private %s | gawk '{ print $1 }'" % \
             os.path.basename(pc_file).replace(".pc", "")).read().split("\n")[:-1])
@@ -116,7 +116,7 @@ def check_pc_files(pc_file):
     return result_needed
 
 def check_intersections(result_dependencies, package_deps, package_name, systembase, systemdevel):
-    '''eliminate system base and system devel packages and self written deps'''
+    """eliminate system base and system devel packages and self written deps"""
 
     # get system.base and system.devel packages
     systembase_packages = []
@@ -185,7 +185,7 @@ def check_intersections(result_dependencies, package_deps, package_name, systemb
     return result_lists
 
 def output_result(package_name, package_dir):
-    '''execute ldd on elf files and returns them'''
+    """execute ldd on elf files and returns them"""
     #Initialize magic for using "file" in python
     magic_db = magic.open(magic.MAGIC_NONE)
     magic_db.load()
@@ -278,7 +278,7 @@ def colorize(msg, color, nocolor=False):
         return colors[color if sys.stdout.isatty() else 'none'] % msg
 
 def main(arg):
-    '''Initialize packages and get the results. Prints them out '''
+    """Initialize packages and get the results. Prints them out """
     # This is of type dictionary, it includes all the
     # options from the parser such as option.directory, etc.
     option = arg[0]
@@ -374,7 +374,7 @@ def main(arg):
             print "Error: '%s' is not a valid .inary file or an installed package\nPlease use -d <path> option for a directory" % package
 
 def print_results(result_broken, result_unused, result_undefined, result_lists, result_runpath, package_name, option):
-    '''Print the final results in fancy colors'''
+    """Print the final results in fancy colors"""
 
     def print_header(title, nocolor, color):
         print colorize("\n%s" % title, color , nocolor)
@@ -469,7 +469,7 @@ def print_results(result_broken, result_unused, result_undefined, result_lists, 
             print_missing(result_lists, option.plain_list)
 
 def argument():
-    '''Command line argument parsing'''
+    """Command line argument parsing"""
     # TODO: use argparse() in the future
 
     parser = optparse.OptionParser(usage="Usage:  %prog [options] foo.inary foo2.inary \n \t%prog [options] -d  <path>\n \t%prog [options]\n \t%prog [options] foo",

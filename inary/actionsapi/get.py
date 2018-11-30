@@ -38,24 +38,24 @@ dirs = inary.actionsapi.variables.glb.dirs
 generals = inary.actionsapi.variables.glb.generals
 
 def curDIR():
-    '''returns current work directory's path'''
+    """returns current work directory's path"""
     return os.getcwd()
 
 def curKERNEL():
-    '''returns currently running kernel's version'''
+    """returns currently running kernel's version"""
     return os.uname()[2]
 
 def curPYTHON():
-    ''' returns currently used python's version'''
+    """ returns currently used python's version"""
     (a, b, c, x, y) = sys.version_info
     return 'python{0}.{1}'.format(a, b)
 
 def curPERL():
-    ''' returns currently used perl's version'''
+    """ returns currently used perl's version"""
     return os.path.realpath('/usr/bin/perl').split('perl')[1]
 
 def ENV(environ):
-    '''returns any given environ variable'''
+    """returns any given environ variable"""
     try:
         return os.environ[environ];
     except KeyError:
@@ -64,7 +64,7 @@ def ENV(environ):
 # PİSİ Related Functions
 
 def pkgDIR():
-    '''returns the path of binary packages'''
+    """returns the path of binary packages"""
     '''Default: /var/cache/inary/packages'''
     return env.pkg_dir
 
@@ -72,7 +72,7 @@ def workDIR():
     return env.work_dir
 
 def installDIR():
-    '''returns the path of binary packages'''
+    """returns the path of binary packages"""
     return env.install_dir
 
 # Pardus Related Functions
@@ -125,7 +125,7 @@ def makeJOBS():
     return env.jobs
 
 def buildTYPE():
-    '''returns the current build type'''
+    """returns the current build type"""
     return env.build_type
 
 # Directory Related Functions

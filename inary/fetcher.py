@@ -46,7 +46,7 @@ except ImportError:
                      _("\tCan't imported requests module.\n"
                        "\tWhether want the download packages please install\n"
                        "\t'python3-requests' package from repository.\n"))
-from base64 import encodestring
+from base64 import encodebytes
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
@@ -163,11 +163,11 @@ class Fetcher:
         except ValueError as e:
             msg = _("Url Problem: \n {}").format(e)
             raise FetchError(msg)
-            return False
+
         except FetchError as e:
             msg = _("Can not avaible remote server: \n {}").format(e)
             raise FetchError(msg)
-            return False
+
 
         return True
 
@@ -239,14 +239,14 @@ class Fetcher:
     def _get_http_headers(self):
         headers = []
         if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
-            enc = encodestring('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+            enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return str(headers)
 
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = encodestring('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+            enc = encodesbytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return str(headers)
 
@@ -267,7 +267,8 @@ class Fetcher:
 
         return proxies
 
-    def _get_bandwith_limit(self):
+    @staticmethod
+    def _get_bandwith_limit():
         bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
         if bandwidth_limit and bandwidth_limit != "0":
             ctx.ui.warning(_("Bandwidth usage is limited to {} KB/s").format(bandwidth_limit))
@@ -282,13 +283,15 @@ def fetch_url(url, destdir, progress=None, destfile=None):
     fetch.fetch()
 
 # Operation function
-def fetch(packages=[], path=os.path.curdir):
+def fetch(packages=None, path=os.path.curdir):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
     @param packages: list of package names -> list_of_strings
     @param path: path to where the packages will be downloaded. If not given, packages will be downloaded
     to the current working directory.
     """
+    if packages is None:
+        packages = []
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
     for name in packages:

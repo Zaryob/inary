@@ -89,21 +89,21 @@ def auto_dodoc():
                 dodoc(doc)
 
 def install(parameters=''):
-    '''does ruby setup.rb install'''
+    """does ruby setup.rb install"""
     if system('ruby -w setup.rb --prefix=/{0.defaultprefixDIR()} --destdir={0.installDIR()} {1}'.format(get, parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
 
 def rake_install(parameters=''):
-    '''execute rake script for installation'''
+    """execute rake script for installation"""
     if system('rake -t -l {0} {1}'.format(os.path.join('/', get.defaultprefixDIR(), 'lib'), parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
 
 def run(parameters=''):
-    '''executes parameters with ruby'''
+    """executes parameters with ruby"""
     export('DESTDIR', get.installDIR())
 
     if system('ruby {}'.format(parameters)):

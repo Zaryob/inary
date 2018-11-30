@@ -421,7 +421,7 @@ class ArchiveTar(ArchiveBase):
                 # Try to extract again.
                 self.tar.extract(tarinfo)
 
-            except IOError as e:
+            except OSError as e:
                 # Handle the case where new path is file, but old path is directory
                 # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:
@@ -776,7 +776,8 @@ class Archive:
 
         self.archive = handler(file_path, arch_type)
 
-    def _guess_archive_type(self, file_path):
+    @staticmethod
+    def _guess_archive_type(file_path):
         types = (("targz",      (".tar.gz", ".tgz")),
                  ("tarbz2",     (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
                  ("tarlzma",    (".tar.lzma", ".tlz")),

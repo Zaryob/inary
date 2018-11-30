@@ -123,7 +123,7 @@ def find_upgrades(packages, replaces):
     return Ap
 
 @operations.locked
-def upgrade(A=[], repo=None):
+def upgrade(A=None, repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options.
 
@@ -131,6 +131,8 @@ def upgrade(A=[], repo=None):
     @param packages (A): list of package names -> list_of_strings
     @param repo: name of the repository that only the packages from that repo going to be upgraded
     """
+    if A is None:
+        A = []
     inary.db.historydb.HistoryDB().create_history("upgrade")
 
     packagedb = inary.db.packagedb.PackageDB()
@@ -359,7 +361,9 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     order.reverse()
     return G_f, order
 
-def upgrade_base(A = set()):
+def upgrade_base(A=None):
+    if A is None:
+        A = set()
     installdb = inary.db.installdb.InstallDB()
     componentdb = inary.db.componentdb.ComponentDB()
     if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):

@@ -50,7 +50,7 @@ class InstallError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = ''):
-    '''configure source with given parameters.'''
+    """configure source with given parameters."""
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
         if system('perl Build.PL installdirs=vendor destdir={}'.format(get.installDIR())):
@@ -60,7 +60,7 @@ def configure(parameters = ''):
             raise ConfigureError(_('Configure failed.'))
 
 def make(parameters = ''):
-    '''make source with given parameters.'''
+    """make source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
             raise MakeError(_('Make failed.'))
@@ -69,7 +69,7 @@ def make(parameters = ''):
             raise MakeError(_('perl build failed.'))
 
 def install(parameters = 'install'):
-    '''install source with given parameters.'''
+    """install source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
             raise InstallError(_('Make failed.'))
@@ -81,7 +81,7 @@ def install(parameters = 'install'):
     removePodfiles()
 
 def removePacklist(path = 'usr/lib/perl5/'):
-    ''' cleans .packlist file from perl packages '''
+    """ cleans .packlist file from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
         for packFile in files:
@@ -91,7 +91,7 @@ def removePacklist(path = 'usr/lib/perl5/'):
                     removeEmptydirs(root)
 
 def removePodfiles(path = 'usr/lib/perl5/'):
-    ''' cleans *.pod files from perl packages '''
+    """ cleans *.pod files from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
         for packFile in files:
@@ -101,7 +101,7 @@ def removePodfiles(path = 'usr/lib/perl5/'):
                     removeEmptydirs(root)
 
 def removeEmptydirs(d):
-    ''' remove empty dirs from perl package if exists after deletion .pod and .packlist files '''
+    """ remove empty dirs from perl package if exists after deletion .pod and .packlist files """
     if not os.listdir(d) and not d == get.installDIR():
         unlinkDir(d)
         d = d[:d.rfind("/")]

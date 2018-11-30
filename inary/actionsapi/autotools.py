@@ -60,7 +60,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = ''):
-    '''configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"'''
+    """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull\""""
 
     if can_access_file('configure'):
         gnuconfig_update()
@@ -87,7 +87,7 @@ def configure(parameters = ''):
         raise ConfigureError(_('No configure script found.'))
 
 def rawConfigure(parameters = ''):
-    '''configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls"'''
+    """configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls\""""
     if can_access_file('configure'):
         gnuconfig_update()
 
@@ -100,7 +100,7 @@ def compile(parameters = ''):
     system('{0} {1} {2}'.format(get.CC(), get.CFLAGS(), parameters))
 
 def make(parameters = ''):
-    '''make source with given parameters = "all" || "doc" etc.'''
+    """make source with given parameters = "all" || "doc" etc."""
     if system('make {0} {1}'.format(get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
@@ -110,14 +110,14 @@ def fixInfoDir():
         unlink(infoDir)
 
 def fixpc():
-    ''' fix .pc files in installDIR()/usr/lib32/pkgconfig'''
+    """ fix .pc files in installDIR()/usr/lib32/pkgconfig"""
     path = "{}/usr/lib32/pkgconfig".format(get.installDIR())
     if isDirectory(path):
         for f in ls("{}/*.pc".format(path)):
             dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
 
 def install(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters'''
+    """install source into install directory with given parameters"""
     args = 'make prefix={0}/{1} \
             datadir={0}/{2} \
             infodir={0}/{3} \
@@ -145,7 +145,7 @@ def install(parameters = '', argument = 'install'):
         if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 def rawInstall(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters = PREFIX=get.installDIR()'''
+    """install source into install directory with given parameters = PREFIX=get.installDIR()"""
     if system('make {0} {1}'.format(parameters, argument)):
         raise InstallError(_('Install failed.'))
     else:
@@ -156,26 +156,26 @@ def rawInstall(parameters = '', argument = 'install'):
         if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 def aclocal(parameters = ''):
-    '''generates an aclocal.m4 based on the contents of configure.in.'''
+    """generates an aclocal.m4 based on the contents of configure.in."""
     if system('aclocal {}'.format(parameters)):
         raise RunTimeError(_('Running aclocal failed.'))
 
 def autoconf(parameters = ''):
-    '''generates a configure script'''
+    """generates a configure script"""
     if system('autoconf {}'.format(parameters)):
         raise RunTimeError(_('Running autoconf failed.'))
 
 def autoreconf(parameters = ''):
-    '''re-generates a configure script'''
+    """re-generates a configure script"""
     if system('autoreconf {}'.format(parameters)):
         raise RunTimeError(_('Running autoreconf failed.'))
 
 def automake(parameters = ''):
-    '''generates a makefile'''
+    """generates a makefile"""
     if system('automake {}'.format(parameters)):
         raise RunTimeError(_('Running automake failed.'))
 
 def autoheader(parameters = ''):
-    '''generates templates for configure'''
+    """generates templates for configure"""
     if system('autoheader {}'.format(parameters)):
         raise RunTimeError(_('Running autoheader failed.'))

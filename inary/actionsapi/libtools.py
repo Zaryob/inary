@@ -40,7 +40,7 @@ def preplib(sourceDirectory = '/usr/lib'):
             raise RunTimeError(_('Running ldconfig failed.'))
 
 def gnuconfig_update():
-    ''' copy newest config.* onto source\'s '''
+    """ copy newest config.* onto source\'s """
     for root, dirs, files in os.walk(os.getcwd()):
         for fileName in files:
             if fileName in ['config.sub', 'config.guess']:

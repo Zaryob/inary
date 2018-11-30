@@ -45,10 +45,7 @@ Lists previous operations.""")
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("history options"))
-        self.add_options(group)
-        self.parser.add_option_group(group)
 
-    def add_options(self, group):
         group.add_option("-l", "--last", action="store", type="int", default=0,
                          help=_("Output only the last n operations"))
         group.add_option("-s", "--snapshot", action="store_true", default=False,
@@ -56,10 +53,14 @@ Lists previous operations.""")
         group.add_option("-t", "--takeback", action="store", type="int", default=-1,
                          help=_("Takeback to the state after the given operation finished"))
 
-    def take_snapshot(self):
+        self.parser.add_option_group(group)
+
+    @staticmethod
+    def take_snapshot():
         history.snapshot()
 
-    def takeback(self, operation):
+    @staticmethod
+    def takeback(operation):
         history.takeback(operation)
 
     def print_history(self):

@@ -14,6 +14,7 @@
 # This module is part of  inary.util
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -25,6 +26,7 @@ from .path_utils import *
 from .process_utils import *
 from .term_utils import *
 from .type_utils import *
+
 
 class Singleton(type):
     def __init__(cls, name, bases, dict):

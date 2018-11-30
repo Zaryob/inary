@@ -141,7 +141,7 @@ def exclude_special_files(filepath, fileinfo, ag):
         if name in keeplist:
             continue
 
-        if fileinfo == None:
+        if fileinfo is None:
             ctx.ui.warning(_("Removing special file skipped for: {}").format(filepath))
             return
         elif re.match(pattern, fileinfo):
@@ -286,7 +286,7 @@ class Builder:
     # pkg_x_dir: per package directory for storing info type x
 
     def pkg_dir(self):
-        "package build directory"
+        """package build directory"""
         packageDir = self.spec.source.name + '-' + \
                      self.spec.getSourceVersion() + '-' + \
                      self.spec.getSourceRelease()
@@ -485,7 +485,8 @@ class Builder:
                 ctx.ui.info("Scom Script Fetched {}".format(pscom.script))
 
 
-    def download(self, uri, transferdir):
+    @staticmethod
+    def download(uri, transferdir):
         # fix auth info and download
         uri = inary.file.File.make_uri(uri)
         inary.file.File.download(uri, transferdir)
@@ -575,7 +576,7 @@ class Builder:
                 all_paths_in_packages.append(path)
 
         def is_included(path1, path2):
-            "Return True if path2 includes path1"
+            """Return True if path2 includes path1"""
             return path1 == path2 \
                     or fnmatch.fnmatch(path1, path2) \
                     or (not os.path.isfile(path2) and fnmatch.fnmatch(path1, util.join_path(path2, "*")))
@@ -697,7 +698,8 @@ class Builder:
 
         return src_dir
 
-    def log_sandbox_violation(self, operation, path, canonical_path):
+    @staticmethod
+    def log_sandbox_violation(operation, path, canonical_path):
         ctx.ui.error(_("Sandbox violation: {0} ({1} -> {2})").format(operation,
                                                               path,
                                                               canonical_path))
@@ -747,7 +749,7 @@ class Builder:
                                  logger=self.log_sandbox_violation)
                 # Retcode can be 0 while there is a sanbox violation, so only
                 # look for violations to correctly handle it
-                if ret.violations != []:
+                if ret.violations:
                     ctx.ui.error(_("Sandbox violation result:"))
                     for result in ret.violations:
                         ctx.ui.error("{0} ({1} -> {2})".format(result[0],
@@ -781,7 +783,8 @@ class Builder:
 
                 paths.append(path)
 
-    def check_versioning(self, version, release):
+    @staticmethod
+    def check_versioning(version, release):
         try:
             int(release)
             inary.version.make_version(version)

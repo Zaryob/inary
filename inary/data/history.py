@@ -144,7 +144,8 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def update(self):
         self.write(os.path.join("%s/%s", ctx.config.history_dir(), self.histfile))
 
-    def _get_latest(self):
+    @staticmethod
+    def _get_latest():
 
         files = [h for h in os.listdir(ctx.config.history_dir()) if h.endswith(".xml")]
         if not files:
