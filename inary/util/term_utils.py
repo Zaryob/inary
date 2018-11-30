@@ -60,7 +60,6 @@ def colorize(msg, color):
         return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
     else:
         return str(msg)
-    return str(msg)
 
 def format_by_columns(strings, sep_width=2):
     longest_str_len = len(max(strings, key=len))

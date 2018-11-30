@@ -20,7 +20,7 @@ import inary.context as ctx
 # Set individual information, that are generally needed for ActionsAPI
 
 def exportFlags():
-    '''General flags used in actions API.'''
+    """General flags used in actions API."""
 
     # first reset environ
     os.environ.clear()
@@ -41,7 +41,7 @@ def exportFlags():
     os.environ['CXX'] = "{}-g++".format(values.build.host)
 
 class Env(object):
-    '''General environment variables used in actions API'''
+    """General environment variables used in actions API"""
     def __init__(self):
 
         exportFlags()
@@ -71,7 +71,7 @@ class Env(object):
             return None
 
 class Dirs:
-    '''General directories used in actions API.'''
+    """General directories used in actions API."""
     # TODO: Eventually we should consider getting these from a/the
     # configuration file
     doc = 'usr/share/doc'
@@ -94,7 +94,7 @@ class Dirs:
         self.qt = self.values.dirs.qt_dir
 
 class Generals:
-    '''General informations from /etc/inary/inary.conf'''
+    """General informations from /etc/inary/inary.conf"""
 
     def __init__(self):
         self.values = ctx.config.values

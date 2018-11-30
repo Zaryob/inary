@@ -39,14 +39,13 @@ Downloads the given inary packages to working directory
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("fetch options"))
-        self.add_options(group)
-        self.parser.add_option_group(group)
 
-    def add_options(self, group):
         group.add_option("-o", "--output-dir", action="store", default=os.path.curdir,
                                help=_("Output directory for the fetched packages"))
         group.add_option("--runtime-deps", action="store_true", default=None,
                                help=_("Download with runtime dependencies."))
+
+        self.parser.add_option_group(group)
 
     def run(self):
         packages = inary.db.packagedb.PackageDB()

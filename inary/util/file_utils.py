@@ -279,7 +279,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
 
     check_file(patchFile)
 
-    if level == None:
+    if level is None:
         with open(patchFile, "r") as patchfile:
             lines = patchfile.readlines()
             try:
@@ -301,13 +301,13 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                 for path_p, path_m in zip(paths_p, paths_m):
                     if "/dev/null" in path_m and not len(paths_p) -1 == paths_p.index(path_p): continue
                     level = check_patch_level(sourceDir, path_p)
-                    if level == None and len(paths_m) -1 == paths_m.index(path_m):
+                    if level is None and len(paths_m) -1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
-                    if not level == None:
+                    if not level is None:
                         ctx.ui.debug("Detected patch level={0} for {1}".format(level, os.path.basename(patchFile)))
                         break
 
-    if level == None:
+    if level is None:
         level = 0
 
     if name is None:
@@ -363,7 +363,7 @@ def strip_file(filepath, fileinfo, outpath):
         if ret:
             ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '{}'!").format(f))
 
-    if fileinfo == None:
+    if fileinfo is None:
         ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
         if ret:
             ctx.ui.warning(_("file command failed with return code {0} for file: {1}").format(ret, filepath))

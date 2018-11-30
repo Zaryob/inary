@@ -64,7 +64,8 @@ Usage: blame <package> ... <package>
                             self.print_package_info(pkg, hno)
                             return
 
-    def print_package_info(self, package, hno=0):
+    @staticmethod
+    def print_package_info(package, hno=0):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(
               package.name, package.history[hno].version, package.history[hno].release)
         s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name), package.source.packager.email)

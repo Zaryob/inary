@@ -13,8 +13,10 @@
 #
 import inary.errors
 
+
 class Error(inary.errors.Error):
     pass
+
 
 class Exception(inary.errors.Exception):
     pass

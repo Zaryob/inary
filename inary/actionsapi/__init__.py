@@ -15,11 +15,14 @@
 import inary.context as ctx
 import inary.errors
 
+
 class Error(inary.errors.Error):
     pass
 
+
 class Exception(inary.errors.Exception):
     pass
+
 
 def error(msg):
     if ctx.config.get_option('ignore_action_errors'):

@@ -16,10 +16,12 @@ import sys
 import locale
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+
 
 class Error(inary.errors.Error):
     pass

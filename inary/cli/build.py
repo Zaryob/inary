@@ -49,12 +49,8 @@ class Build(command.Command, metaclass=command.autocommand):
     name = ("build", "bi")
 
     def options(self):
-        self.add_steps_options()
         group = optparse.OptionGroup(self.parser, _("build options"))
-        self.add_options(group)
-        self.parser.add_option_group(group)
 
-    def add_options(self, group):
         group.add_option("-q", "--quiet",
                          action="store_true",
                          default=False,
@@ -115,7 +111,6 @@ class Build(command.Command, metaclass=command.autocommand):
                          help=_("Do not constrain build process inside "
                                 "the build folder"))
 
-    def add_steps_options(self):
         group = optparse.OptionGroup(self.parser, _("build steps"))
 
         group.add_option("--fetch",
@@ -163,6 +158,8 @@ class Build(command.Command, metaclass=command.autocommand):
                          const="package",
                          help=_("Create INARY package"))
 
+        self.parser.add_option_group(group)
+        self.add_options(group)
         self.parser.add_option_group(group)
 
     def run(self):

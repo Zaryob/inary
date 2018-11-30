@@ -42,7 +42,7 @@ htmldir = "{}/html".format(docdir)
 wallpapersdir = "{}/share/wallpapers".format(prefix)
 
 def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
-    ''' parameters -DLIB_INSTALL_DIR="hede" -DSOMETHING_USEFUL=1'''
+    """ parameters -DLIB_INSTALL_DIR="hede" -DSOMETHING_USEFUL=1"""
 
     shelltools.makedirs("build")
     shelltools.cd("build")

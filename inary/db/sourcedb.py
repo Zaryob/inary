@@ -47,7 +47,8 @@ class SourceDB(lazydb.LazyDB):
         self.psdb = inary.db.itembyrepo.ItemByRepo(self.__pkgstosrc)
         self.rvdb = inary.db.itembyrepo.ItemByRepo(self.__revdeps)
 
-    def __generate_sources(self, doc):
+    @staticmethod
+    def __generate_sources(doc):
         sources = {}
         pkgstosrc = {}
 
@@ -62,7 +63,8 @@ class SourceDB(lazydb.LazyDB):
 
         return sources, pkgstosrc
 
-    def __generate_revdeps(self, doc):
+    @staticmethod
+    def __generate_revdeps(doc):
         revdeps = {}
 
         for spec in xmlext.getTagByName(doc, "SpecFile"):

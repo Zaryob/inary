@@ -53,18 +53,18 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = '', pyVer = ''):
-    '''does python setup.py configure'''
+    """does python setup.py configure"""
     if system('python{0} setup.py configure {1}'.format(pyVer, parameters)):
         raise ConfigureError(_('Configuration failed.'))
 
 
 def compile(parameters = '', pyVer = ''):
-    '''compile source with given parameters.'''
+    """compile source with given parameters."""
     if system('python{0} setup.py build {1}'.format(pyVer, parameters)):
         raise CompileError(_('Make failed.'))
 
 def install(parameters = '', pyVer = ''):
-    '''does python setup.py install'''
+    """does python setup.py install"""
     if system('python{0} setup.py install --root={1} --no-compile -O0 {2}'.format(pyVer, get.installDIR(), parameters)):
         raise InstallError(_('Install failed.'))
 
@@ -78,12 +78,12 @@ def install(parameters = '', pyVer = ''):
                 dodoc(doc)
 
 def run(parameters = '', pyVer = ''):
-    '''executes parameters with python'''
+    """executes parameters with python"""
     if system('python{0} {1}'.format(pyVer, parameters)):
         raise RunTimeError(_('Running {} failed.').format(parameters))
 
 def fixCompiledPy(lookInto = '/usr/lib/{}/'.format(get.curPYTHON())):
-    ''' cleans *.py[co] from packages '''
+    """ cleans *.py[co] from packages """
     for root, dirs, files in os.walk('{0}/{1}'.format(get.installDIR(),lookInto)):
         for compiledFile in files:
             if compiledFile.endswith('.pyc') or compiledFile.endswith('.pyo'):

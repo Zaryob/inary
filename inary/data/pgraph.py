@@ -39,11 +39,11 @@ class Digraph(object):
         self.__edata = {}
 
     def vertices(self):
-        "return set of vertex descriptors"
+        """return set of vertex descriptors"""
         return self.__v
 
     def edges(self):
-        "return a list of edge descriptors"
+        """return a list of edge descriptors"""
         l = []
         for u in self.__v:
             for v in self.__adj[u]:
@@ -51,7 +51,7 @@ class Digraph(object):
                 return l
 
     def add_vertex(self, u, data = None):
-        "add vertex u, optionally with data"
+        """add vertex u, optionally with data"""
         assert not u in self.__v
         self.__v.add(u)
         self.__adj[u] = set()
@@ -60,13 +60,13 @@ class Digraph(object):
             self.__edata[u] = {}
 
     def add_edge(self, u, v, edata = None, udata = None, vdata = None):
-        "add edge u -> v"
+        """add edge u -> v"""
         if not u in self.__v:
             self.add_vertex(u, udata)
             if not v in self.__v:
                 self.add_vertex(v, vdata)
                 self.__adj[u].add(v)
-                if edata != None:
+                if edata is not None:
                     self.__edata[u][v] = edata
 
     def add_biedge(self, u, v, edata = None):
@@ -102,10 +102,10 @@ class Digraph(object):
         for u in self.__v:
             self.color[u] = 'w'         # mark white (unexplored)
             self.p[u] = None
-            self.time = 0
-            for u in self.__v:
-                if self.color[u] == 'w':
-                    self.dfs_visit(u, finish_hook)
+        self.time = 0
+        for u in self.__v:
+            if self.color[u] == 'w':
+                self.dfs_visit(u, finish_hook)
 
     def dfs_visit(self, u, finish_hook):
         self.color[u] = 'g'             # mark green (discovered)
@@ -141,7 +141,8 @@ class Digraph(object):
         list.reverse()
         return list
 
-    def id_str(self, u):
+    @staticmethod
+    def id_str(u):
         # Graph format only accepts underscores as key values
         # Sanitize the values. This is 2x faster than the old method.
         return u.replace("-", "_").replace("+", "_")
@@ -152,14 +153,14 @@ class Digraph(object):
             f.write(self.id_str(u))
             self.write_graphviz_vlabel(f, u)
             f.write(';\n')
-            f.write('\n')
-            for u in self.vertices():
-                for v in self.adj(u):
-                    f.write( self.id_str(u) + ' -> ' + self.id_str(v))
-                    self.write_graphviz_elabel(f, u, v)
-                    f.write(';\n')
-                    f.write('\n')
-                    f.write('}\n')
+        f.write('\n')
+        for u in self.vertices():
+            for v in self.adj(u):
+                f.write( self.id_str(u) + ' -> ' + self.id_str(v))
+                self.write_graphviz_elabel(f, u, v)
+                f.write(';\n')
+        f.write('\n')
+        f.write('}\n')
 
     def write_graphviz_vlabel(self, f, u):
         pass

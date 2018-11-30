@@ -423,7 +423,8 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def getSourceRelease(self):
         return self.history[0].release
 
-    def _set_i18n(self, tag, inst):
+    @staticmethod
+    def _set_i18n(tag, inst):
         try:
             for summary in xmlext.getTagByName(tag, "Summary"):
                 inst.summary[xmlext.getNodeAttribute(summary, "xml:lang")] = xmlext.getNodeText(summary)

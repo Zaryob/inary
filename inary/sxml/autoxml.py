@@ -102,7 +102,7 @@ class LocalText(dict):
             (lang, encoding) = locale.getlocale()
             if not lang:
                 (lang, encoding) = locale.getdefaultlocale()
-            if lang==None: # stupid python means it is C locale
+            if lang is None: # stupid python means it is C locale
                 return 'en'
             else:
                 return lang[0:2]
@@ -397,7 +397,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         if '__eq__' not in dict:
             def equal(self, other):
                 # handle None
-                if other ==None:
+                if other is None:
                     return False # well, must be False at this point :)
                 for name in names:
                     try:
@@ -415,7 +415,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         if xmlfile_support:
             def parse(self, xml, keepDoc = False):
-                "parse XML string and decode it into a python object"
+                """parse XML string and decode it into a python object"""
                 self.parsexml(xml)
                 errs = []
                 self.decode(self.rootNode(), errs)
@@ -434,11 +434,11 @@ class autoxml(oo.autosuper, oo.autoprop):
 
             def read(self, uri, keepDoc = False, tmpDir = '/tmp',
                      sha1sum = False, compress = None, sign = None, copylocal = False, nodecode = False):
-                "read XML file and decode it into a python object"
+                """read XML file and decode it into a python object"""
                 read_xml = self.readxml(uri, tmpDir, sha1sum=sha1sum,
                              compress=compress, sign=sign, copylocal=copylocal)
 
-                if nodecode == True:
+                if nodecode:
                    return read_xml
 
                 errs = []
@@ -459,7 +459,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
             def write(self, uri, keepDoc = False, tmpDir = '/tmp',
                       sha1sum = False, compress = None, sign = None):
-                "encode the contents of the python object into an XML file"
+                """encode the contents of the python object into an XML file"""
                 errs = self.errors()
                 if errs:
                     errs.append(_("autoxml.write: object validation has failed"))
@@ -565,7 +565,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def errors(self, where):
             """return errors in the object"""
             errs = []
-            if hasattr(self, name) and getattr(self, name) != None:
+            if hasattr(self, name) and getattr(self, name) is not None:
                 value = getattr(self,name)
                 errs.extend(errors_a(value, where + '.' + name))
             else:
@@ -585,7 +585,8 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         return (name, init, decode, encode, errors, format)
 
-    def mixed_case(cls, identifier):
+    @staticmethod
+    def mixed_case(identifier):
         """helper function to turn token name into mixed case"""
         if identifier is "":
             return ""
@@ -596,8 +597,9 @@ class autoxml(oo.autosuper, oo.autoprop):
               lowly = identifier[0].lower()
             return lowly + identifier[1:]
 
-    def tagpath_head_last(cls, tagpath):
-        "returns split of the tag path into last tag and the rest"
+    @staticmethod
+    def tagpath_head_last(tagpath):
+        """returns split of the tag path into last tag and the rest"""
         try:
             lastsep = tagpath.rindex('/')
         except ValueError as e:
@@ -857,6 +859,5 @@ class autoxml(oo.autosuper, oo.autoprop):
         bytes : bytes,
         str : str,
         int : int,
-        float : float,
-        int : int
+        float : float
         }

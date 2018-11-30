@@ -61,5 +61,6 @@ class Dependency(relation.Relation):
             return self.satisfies_relation(pkg.version, pkg.release)
 
     # Added for AnyDependency, single Dependency always returns False
-    def satisfied_by_any_installed_other_than(self, package):
+    @staticmethod
+    def satisfied_by_any_installed_other_than(package):
         return False

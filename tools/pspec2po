@@ -44,7 +44,8 @@ class Po:
         self.messages = messages or []
         self.header = header or po_header_tmpl
 
-    def _escape(self, str):
+    @staticmethod
+    def _escape(str):
         if not str:
             return '""'
 
@@ -74,7 +75,8 @@ class Po:
             f.write(po_entry)
         f.close()
 
-    def _unescape(self, str):
+    @staticmethod
+    def _unescape(str):
         str = re.sub('\\\\"', '"', str)
         str = re.sub('\\\\n', '\n', str)
         return str
@@ -160,7 +162,9 @@ def getDataByTagName(elem, tag):
     except:
         pass
 
-def extract_from_translationsxmls(path, language, old_messages = []):
+def extract_from_translationsxmls(path, language, old_messages=None):
+    if old_messages is None:
+        old_messages = []
     if not path.endswith('/'):
         path += '/'
     messages = []

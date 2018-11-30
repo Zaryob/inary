@@ -25,7 +25,8 @@ class HistoryDB(lazydb.LazyDB):
         self.__logs = self.__generate_history()
         self.history = History.History()
 
-    def __generate_history(self):
+    @staticmethod
+    def __generate_history():
         logs = [x for x in os.listdir(ctx.config.history_dir()) if x.endswith(".xml")]
         #logs.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         logs.sort(key=lambda x:int(x.split("_")[0].replace("0o","0")))
@@ -42,7 +43,8 @@ class HistoryDB(lazydb.LazyDB):
     def add_package(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
         self.history.add(pkgBefore, pkgAfter, operation, otype)
 
-    def load_config(self, operation, package):
+    @staticmethod
+    def load_config(operation, package):
         config_dir = os.path.join(ctx.config.history_dir(), "%03d" % operation, package)
         if os.path.exists(config_dir):
             import distutils.dir_util as dir_util
@@ -72,7 +74,8 @@ class HistoryDB(lazydb.LazyDB):
                 return hist.operation
         return None
 
-    def get_package_config_files(self, operation, package):
+    @staticmethod
+    def get_package_config_files(operation, package):
         package_path = os.path.join(ctx.config.history_dir(), "%03d/%s" % (operation, package))
         if not os.path.exists(package_path):
             return None

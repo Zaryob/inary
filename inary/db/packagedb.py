@@ -58,7 +58,8 @@ class PackageDB(lazydb.LazyDB):
 
 
     ## Generate functions look sooo ugly
-    def __generate_replaces(self, doc):
+    @staticmethod
+    def __generate_replaces(doc):
         replaces = []
         packages = xmlext.getTagByName(doc, "Package")
         for node in packages:
@@ -66,7 +67,8 @@ class PackageDB(lazydb.LazyDB):
                 replaces.append(xmlext.getNodeText(node, "Name"))
         return replaces
 
-    def __generate_obsoletes(self, doc):
+    @staticmethod
+    def __generate_obsoletes(doc):
         distribution = xmlext.getNode(doc, "Distribution")
         obsoletes = distribution and xmlext.getNode(distribution, "Obsoletes")
         src_repo = xmlext.getNode(doc, "SpecFile") is not None
@@ -75,7 +77,8 @@ class PackageDB(lazydb.LazyDB):
             return []
         return [xmlext.getNodeText(x) for x in xmlext.getTagByName(obsoletes, "Package")]
 
-    def __generate_packages(self, doc):
+    @staticmethod
+    def __generate_packages(doc):
         pdict={}
 
         for x in xmlext.getTagByName(doc, "Package"):
@@ -85,7 +88,8 @@ class PackageDB(lazydb.LazyDB):
 
         return pdict
 
-    def __generate_revdeps(self, doc):
+    @staticmethod
+    def __generate_revdeps(doc):
         revdeps = {}
         for node in xmlext.getTagByName(doc,"Package"):
             name = xmlext.getNodeText(node, 'Name')
@@ -144,7 +148,8 @@ class PackageDB(lazydb.LazyDB):
                 found.append(name)
         return found
 
-    def __get_version(self, meta_doc):
+    @staticmethod
+    def __get_version(meta_doc):
         history = xmlext.getNode(meta_doc, 'History')
         update = xmlext.getNode(history,'Update')
 
@@ -153,7 +158,8 @@ class PackageDB(lazydb.LazyDB):
 
         return version, release, None
 
-    def __get_distro_release(self, meta_doc):
+    @staticmethod
+    def __get_distro_release(meta_doc):
         distro = xmlext.getNodeText(meta_doc, 'Distribution')
         release = xmlext.getNodeText(meta_doc, 'DistributionRelease')
 
@@ -187,7 +193,8 @@ class PackageDB(lazydb.LazyDB):
     def get_obsoletes(self, repo=None):
         return self.odb.get_list_item(repo)
 
-    def get_isa_packages(self, isa):
+    @staticmethod
+    def get_isa_packages(isa):
         repodb = inary.db.repodb.RepoDB()
 
         packages = set()

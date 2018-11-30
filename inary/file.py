@@ -67,7 +67,7 @@ class File:
 
     @staticmethod
     def make_uri(uri):
-        "handle URI arg"
+        """handle URI arg"""
         if isinstance(uri, str):
             uri = inary.uri.URI(uri)
         elif not isinstance(uri, inary.uri.URI):
@@ -182,7 +182,7 @@ class File:
 
     def __init__(self, uri, mode, transfer_dir = "/tmp",
                  sha1sum = False, compress = None, sign = None):
-        "it is pointless to open a file without a URI and a mode"
+        """it is pointless to open a file without a URI and a mode"""
 
         self.transfer_dir = transfer_dir
         self.sha1sum = sha1sum
@@ -212,11 +212,11 @@ class File:
         self.localfile = localfile
 
     def local_file(self):
-        "returns the underlying file object"
+        """returns the underlying file object"""
         return self.__file__
 
     def close(self, delete_transfer = False):
-        "this method must be called at the end of operation"
+        """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:
             compressed_files = []

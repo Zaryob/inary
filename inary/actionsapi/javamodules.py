@@ -72,7 +72,7 @@ class DoJavadocError(inary.actionsapi.Error):
 
 
 def _dodoc(*source_files, **kw):
-    '''copy doc files to /usr/share/doc/src_name recursively'''
+    """copy doc files to /usr/share/doc/src_name recursively"""
 
     dest = util.join_path(get.docDIR(), kw.get('dest_dir', get.srcNAME()))
     destination = util.join_path(get.installDIR(), dest)
@@ -100,7 +100,7 @@ def _dodoc(*source_files, **kw):
 
 
 def _generate_classpath_file(classpath):
-    '''write classpath to environment file'''
+    """write classpath to environment file"""
 
     env_dir = util.join_path(get.installDIR(), '/etc/env.d')
     if not os.access(env_dir, os.F_OK):
@@ -118,7 +118,7 @@ def _generate_classpath_file(classpath):
 
 
 def _generate_exec_file(dest_dir, exe, java_args, exe_args):
-    '''generate executable file for executable jar'''
+    """generate executable file for executable jar"""
 
     exec_dir = util.join_path(get.installDIR(), '/usr/bin')
     if not os.access(exec_dir, os.F_OK):
@@ -141,7 +141,7 @@ def _generate_exec_file(dest_dir, exe, java_args, exe_args):
 
 
 def compile(argument='', parameters='', build_tool='ant'):
-    '''compile source with given build tool and related parameters'''
+    """compile source with given build tool and related parameters"""
 
     try:
         run(argument, parameters, build_tool)
@@ -150,13 +150,13 @@ def compile(argument='', parameters='', build_tool='ant'):
 
 
 def installExe(exe='', java_args='', exe_args='', dest_dir=''):
-    '''install executable jar to specified location and get jar prepared to
+    """install executable jar to specified location and get jar prepared to
     execute with given arguments.
 
     exe:        Path in work dir to executable jar
     java_args:  Arguments passed to jvm
     exe_args:   Arguments passed to executable jar
-    dest_dir:   Installation dir of executable jar'''
+    dest_dir:   Installation dir of executable jar"""
 
     if not dest_dir:
         dest_dir = 'usr/share/java/{}'.format(get.srcNAME())
@@ -178,12 +178,12 @@ def installExe(exe='', java_args='', exe_args='', dest_dir=''):
 
 
 def installLib(src='*.jar', dest='/usr/share/java'):
-    '''install compilation output that is mix of the utility classes as
+    """install compilation output that is mix of the utility classes as
     in jars or meta/data files to specified locations.
 
     src:    Source file pattern to be installed
     dest:   Destination dir where the source files to be installed
-    '''
+    """
 
     classpath = []
 
@@ -232,7 +232,7 @@ def installLib(src='*.jar', dest='/usr/share/java'):
 
 
 def dojavadoc(*source_files, **kw):
-    '''generate & copy javadoc files to /usr/share/doc/src_name recursively'''
+    """generate & copy javadoc files to /usr/share/doc/src_name recursively"""
 
     build_tool = kw.get('build_tool', 'ant')
     parameters = kw.get('parameters', '')
@@ -251,7 +251,7 @@ def dojavadoc(*source_files, **kw):
 
 
 def run(argument='', parameters='', build_tool='ant'):
-    '''run build tool with given parameters'''
+    """run build tool with given parameters"""
 
     export('JAVA_HOME', '/opt/sun-jre')
     # Otherwise, javadoc might be completed with errors

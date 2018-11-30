@@ -87,7 +87,8 @@ class FilesDB(lazydb.LazyDB):
             if key in self.filesdb:
                 del self.filesdb[key]
 
-    def destroy(self):
+    @staticmethod
+    def destroy():
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
         if os.path.exists(files_db):
             os.unlink(files_db)

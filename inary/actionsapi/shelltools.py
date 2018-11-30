@@ -35,15 +35,15 @@ from inary.util import run_logged
 from inary.util import join_path
 
 def can_access_file(filePath):
-    '''test the existence of file'''
+    """test the existence of file"""
     return os.access(filePath, os.F_OK)
 
 def can_access_directory(destinationDirectory):
-    '''test readability, writability and executablility of directory'''
+    """test readability, writability and executablility of directory"""
     return os.access(destinationDirectory, os.R_OK | os.W_OK | os.X_OK)
 
 def makedirs(destinationDirectory):
-    '''recursive directory creation function'''
+    """recursive directory creation function"""
     try:
         if not os.access(destinationDirectory, os.F_OK):
             os.makedirs(destinationDirectory)
@@ -59,7 +59,7 @@ def echo(destionationFile, content):
         error(_('ActionsAPI [echo]: Can\'t append to file {}.').format(destionationFile))
 
 def chmod(filePath, mode = 0o755):
-    '''change the mode of filePath to the mode'''
+    """change the mode of filePath to the mode"""
     filePathGlob = glob.glob(filePath)
     if len(filePathGlob) == 0:
         error(_("ActionsAPI [chmod]: No file matched pattern \"{}\".").format(filePath))
@@ -74,7 +74,7 @@ def chmod(filePath, mode = 0o755):
             ctx.ui.error(_('ActionsAPI [chmod]: File {} doesn\'t exists.').format(fileName))
 
 def chown(filePath, uid = 'root', gid = 'root'):
-    '''change the owner and group id of filePath to uid and gid'''
+    """change the owner and group id of filePath to uid and gid"""
     if can_access_file(filePath):
         try:
             os.chown(filePath, pwd.getpwnam(uid)[2], grp.getgrnam(gid)[2])
@@ -84,14 +84,14 @@ def chown(filePath, uid = 'root', gid = 'root'):
         ctx.ui.error(_('ActionsAPI [chown]: File {} doesn\'t exists.').format(filePath))
 
 def sym(source, destination):
-    '''creates symbolic link'''
+    """creates symbolic link"""
     try:
         os.symlink(source, destination)
     except OSError:
         ctx.ui.error(_('ActionsAPI [sym]: Permission denied: {0} to {1}').format(source, destination))
 
 def unlink(pattern):
-    '''remove the file path'''
+    """remove the file path"""
     filePathGlob = glob.glob(pattern)
     if len(filePathGlob) == 0:
         ctx.ui.error(_("No file matched pattern \"{}\". Remove operation failed.").format(pattern))
@@ -109,7 +109,7 @@ def unlink(pattern):
             ctx.ui.error(_('ActionsAPI [unlink]: File {} doesn\'t exists.').format(filePath))
 
 def unlinkDir(sourceDirectory):
-    '''delete an entire directory tree'''
+    """delete an entire directory tree"""
     if isDirectory(sourceDirectory) or isLink(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
@@ -121,7 +121,7 @@ def unlinkDir(sourceDirectory):
         error(_('ActionsAPI [unlinkDir]: Directory {} doesn\'t exists.').format(sourceDirectory))
 
 def move(source, destination):
-    '''recursively move a "source" file or directory to "destination"'''
+    """recursively move a "source" file or directory to "destination\""""
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
         error(_("ActionsAPI [move]: No file matched pattern \"{}\".").format(source))
@@ -137,7 +137,7 @@ def move(source, destination):
 
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
 def copy(source, destination, sym = True):
-    '''recursively copy a "source" file or directory to "destination"'''
+    """recursively copy a "source" file or directory to "destination\""""
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
         error(_("ActionsAPI [copy]: No file matched pattern \"{}\".").format(source))
@@ -166,7 +166,7 @@ def copy(source, destination, sym = True):
             error(_('ActionsAPI [copy]: File {} does not exist.').format(filePath))
 
 def copytree(source, destination, sym = True):
-    '''recursively copy an entire directory tree rooted at source'''
+    """recursively copy an entire directory tree rooted at source"""
     if isDirectory(source):
         if os.path.exists(destination):
             if isDirectory(destination):
@@ -183,7 +183,7 @@ def copytree(source, destination, sym = True):
         error(_('ActionsAPI [copytree]: Directory {} doesn\'t exists.').format(source))
 
 def touch(filePath):
-    '''changes the access time of the 'filePath', or creates it if it does not exist'''
+    """changes the access time of the 'filePath', or creates it if it does not exist"""
     filePathGlob = glob.glob(filePath)
 
     if filePathGlob:
@@ -200,7 +200,7 @@ def touch(filePath):
             error(_('ActionsAPI [touch]: Permission denied: {}').format(filePath))
 
 def cd(directoryName = ''):
-    '''change directory'''
+    """change directory"""
     current = os.getcwd()
     if directoryName:
         os.chdir(directoryName)
@@ -208,42 +208,42 @@ def cd(directoryName = ''):
         os.chdir(os.path.dirname(current))
 
 def ls(source):
-    '''listdir'''
+    """listdir"""
     if os.path.isdir(source):
         return os.listdir(source)
     else:
         return glob.glob(source)
 
 def export(key, value):
-    '''export environ variable'''
+    """export environ variable"""
     os.environ[key] = value
 
 def isLink(filePath):
-    '''return True if filePath refers to a symbolic link'''
+    """return True if filePath refers to a symbolic link"""
     return os.path.islink(filePath)
 
 def isFile(filePath):
-    '''return True if filePath is an existing regular file'''
+    """return True if filePath is an existing regular file"""
     return os.path.isfile(filePath)
 
 def isDirectory(filePath):
-    '''Return True if filePath is an existing directory'''
+    """Return True if filePath is an existing directory"""
     return os.path.isdir(filePath)
 
 def isEmpty(filePath):
-    '''Return True if filePath is an empty file'''
+    """Return True if filePath is an empty file"""
     return os.path.getsize(filePath) == 0
 
 def realPath(filePath):
-    '''return the canonical path of the specified filename, eliminating any symbolic links encountered in the path'''
+    """return the canonical path of the specified filename, eliminating any symbolic links encountered in the path"""
     return os.path.realpath(filePath)
 
 def baseName(filePath):
-    '''return the base name of pathname filePath'''
+    """return the base name of pathname filePath"""
     return os.path.basename(filePath)
 
 def dirName(filePath):
-    '''return the directory name of pathname path'''
+    """return the directory name of pathname path"""
     return os.path.dirname(filePath)
 
 ##FIXME:there are an important error in here please##

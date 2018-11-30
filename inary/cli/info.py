@@ -44,10 +44,7 @@ Usage: info <package1> <package2> ... <packagen>
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("info options"))
-        self.add_options(group)
-        self.parser.add_option_group(group)
 
-    def add_options(self, group):
         group.add_option("-f", "--files", action="store_true",
                                default=False,
                                help=_("Show a list of package files."))
@@ -60,6 +57,7 @@ Usage: info <package1> <package2> ... <packagen>
                                default=False, help=_("Do not show details"))
         group.add_option("--xml", action="store_true",
                                default=False, help=_("Output in xml format"))
+        self.parser.add_option_group(group)
 
     def run(self):
 
@@ -119,7 +117,8 @@ Usage: info <package1> <package2> ... <packagen>
             else:
                 print("/" + fileinfo.path)
 
-    def print_metadata(self, metadata, packagedb=None):
+    @staticmethod
+    def print_metadata(metadata, packagedb=None):
         if ctx.get_option('short'):
             pkg = metadata.package
             ctx.ui.formatted_output(" - ".join((pkg.name, str(pkg.summary))))
@@ -130,7 +129,8 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.formatted_output(" ".join((_("Reverse Dependencies:"), util.strlist(revdeps))))
                 print()
 
-    def print_specdata(self, spec, sourcedb=None):
+    @staticmethod
+    def print_specdata(spec, sourcedb=None):
         src = spec.source
         if ctx.get_option('short'):
             ctx.ui.formatted_output(" - ".join((src.name, str(src.summary))))

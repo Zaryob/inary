@@ -43,7 +43,8 @@ Finds the installed package which contains the specified file.
                                default=False, help=_("Show only package name"))
         self.parser.add_option_group(group)
 
-    def search_file(self, path):
+    @staticmethod
+    def search_file(path):
         found = search.search_file(path)
 
         if not found:

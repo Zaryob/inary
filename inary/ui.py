@@ -18,7 +18,7 @@
  downloading, packagestogo, updatingrepo, cached, desktopfile)  = list(range(13))
 
 class UI(object):
-    "Abstract class for UI operations, derive from this."
+    """Abstract class for UI operations, derive from this."""
 
     class Progress:
         def __init__(self, totalsize, existsize = 0):
@@ -44,7 +44,7 @@ class UI(object):
         self.warnings = 0
 
     def close(self):
-        "cleanup stuff here"
+        """cleanup stuff here"""
         pass
 
     def set_verbose(self, flag):
@@ -54,48 +54,48 @@ class UI(object):
         self.show_debug = flag
 
     def info(self, msg, verbose = False, noln = False,color='default'):
-        "give an informative message"
+        """give an informative message"""
         pass
 
     def ack(self, msg):
-        "inform the user of an important event and wait for acknowledgement"
+        """inform the user of an important event and wait for acknowledgement"""
         pass
 
     def debug(self, msg):
-        "show debugging info"
+        """show debugging info"""
         if self.show_debug:
             self.info(str('DEBUG: ' + msg))
 
     def warning(self,msg):
-        "warn the user"
+        """warn the user"""
         pass
 
     def error(self,msg):
-        "inform a (possibly fatal) error"
+        """inform a (possibly fatal) error"""
         pass
 
     #FIXME: merge this with info, this just means "important message"
     def action(self,msg):
-        "uh?"
+        """uh?"""
         pass
 
     def choose(self, msg, list):
-        "ask the user to choose from a list of alternatives"
+        """ask the user to choose from a list of alternatives"""
         pass
 
     def confirm(self, msg):
-        "ask a yes/no question"
+        """ask a yes/no question"""
         # default ui confirms everything
         return True
 
     def display_progress(self, **ka):
-        "display progress"
+        """display progress"""
         pass
 
     def status(self, msg = None):
-        "set status, if not given clear it"
+        """set status, if not given clear it"""
         pass
 
     def notify(self, event, **keywords):
-        "notify UI of a significant event"
+        """notify UI of a significant event"""
         pass

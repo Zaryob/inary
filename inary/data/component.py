@@ -41,7 +41,7 @@ class Distribution(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
 
 class Maintainer(xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    "representation for component responsibles"
+    """representation for component responsibles"""
 
     t_Name = [autoxml.LocalText, autoxml.mandatory]
     t_Email = [autoxml.String, autoxml.mandatory]
@@ -51,7 +51,7 @@ class Maintainer(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         return s
 
 class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    "representation for component declarations"
+    """representation for component declarations"""
 
     t_Name = [autoxml.String, autoxml.mandatory]     # fully qualified name
 
@@ -76,7 +76,7 @@ class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     t_Sources = [ [autoxml.String], autoxml.optional, "Parts/Source"]
 
 class Components(xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    "representation for component declarations"
+    """representation for component declarations"""
 
     tag = "INARY"
 

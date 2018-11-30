@@ -16,14 +16,14 @@ import inary.sxml.xmlfile as xmlfile
 import inary.sxml.autoxml as autoxml
 
 class Group(xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    "representation for group declarations"
+    """representation for group declarations"""
 
     t_Name = [autoxml.String, autoxml.mandatory]
     t_LocalName = [autoxml.LocalText, autoxml.mandatory]
     t_Icon = [ autoxml.String, autoxml.optional]
 
 class Groups(xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    "representation for component declarations"
+    """representation for component declarations"""
 
     tag = "INARY"
 

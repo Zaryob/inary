@@ -11,7 +11,7 @@
 #
 # Please read the COPYING file.
 
-'''supports globs in sourceFile arguments'''
+"""supports globs in sourceFile arguments"""
 
 
 # Standart Python Modules
@@ -52,7 +52,7 @@ class ArgumentError(inary.actionsapi.Error):
 
 #Tool functions
 def executable_insinto(destinationDirectory, *sourceFiles):
-    '''insert a executable file into destinationDirectory'''
+    """insert a executable file into destinationDirectory"""
 
     if not sourceFiles or not destinationDirectory:
         raise ArgumentError(_('Insufficient arguments.'))
@@ -70,7 +70,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
             system('install -m 0755 -o root -g root {0} {1}'.format(source, destinationDirectory))
 
 def readable_insinto(destinationDirectory, *sourceFiles):
-    '''inserts file list into destinationDirectory'''
+    """inserts file list into destinationDirectory"""
 
     if not sourceFiles or not destinationDirectory:
         raise ArgumentError(_('Insufficient arguments.'))
@@ -87,7 +87,7 @@ def readable_insinto(destinationDirectory, *sourceFiles):
             system('install -m 0644 "{0}" {1}'.format(source, destinationDirectory))
 
 def lib_insinto(sourceFile, destinationDirectory, permission = 644):
-    '''inserts a library fileinto destinationDirectory with given permission'''
+    """inserts a library fileinto destinationDirectory with given permission"""
 
     if not sourceFile or not destinationDirectory:
         raise ArgumentError(_('Insufficient arguments.'))
@@ -102,26 +102,26 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 644):
 
 # inarytools funtions
 def dobin(sourceFile, destinationDirectory = '/usr/bin'):
-    '''insert a executable file into /bin or /usr/bin'''
+    """insert a executable file into /bin or /usr/bin"""
     ''' example call: inarytools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
 def dopixmaps(sourceFile, destinationDirectory = '/usr/share/pixmaps'):
-    '''insert a data file into /usr/share/pixmaps'''
+    """insert a data file into /usr/share/pixmaps"""
     ''' example call: inarytools.dopixmaps("/usr/share/pixmaps/firefox", "firefox") '''
     readable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
 def dodir(destinationDirectory):
-    '''creates a directory tree'''
+    """creates a directory tree"""
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
 def dodoc(*sourceFiles, **kw):
-    '''inserts the files in the list of files into /usr/share/doc/PACKAGE'''
+    """inserts the files in the list of files into /usr/share/doc/PACKAGE"""
     destDir = kw.get("destDir", get.srcNAME())
     readable_insinto(join_path(get.installDIR(), get.docDIR(), destDir), *sourceFiles)
 
 def dohtml(*sourceFiles, **kw):
-    '''inserts the files in the list of files into /usr/share/doc/PACKAGE/html'''
+    """inserts the files in the list of files into /usr/share/doc/PACKAGE/html"""
 
     ''' example call: inarytools.dohtml("doc/doxygen/html/*")'''
     destDir = kw.get("destDir", get.srcNAME())
@@ -151,11 +151,11 @@ def dohtml(*sourceFiles, **kw):
                             system('install -m 0644 {0} {1}'.format(join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
 
 def doinfo(*sourceFiles):
-    '''inserts the into files in the list of files into /usr/share/info'''
+    """inserts the into files in the list of files into /usr/share/info"""
     readable_insinto(join_path(get.installDIR(), get.infoDIR()), *sourceFiles)
 
 def dolib(sourceFile, destinationDirectory = '/usr/lib', mode=755):
-    '''insert the library into /usr/lib'''
+    """insert the library into /usr/lib"""
     '''example call: inarytools.dolib("libz.a")'''
     '''example call: inarytools.dolib("libz.so")'''
     if mode==755 and sourceFile.endswith('.a'):
@@ -166,7 +166,7 @@ def dolib(sourceFile, destinationDirectory = '/usr/lib', mode=755):
     lib_insinto(sourceFile, destinationDirectory, mode)
 
 def doman(*sourceFiles):
-    '''inserts the man pages in the list of files into /usr/share/man/'''
+    """inserts the man pages in the list of files into /usr/share/man/"""
 
     '''example call: inarytools.doman("man.1", "sulin.*")'''
     manDIR = join_path(get.installDIR(), get.manDIR())
@@ -196,7 +196,7 @@ def doman(*sourceFiles):
                 uncompress(compressed, targetDir=manPDIR)
 
 def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/locale'):
-    '''inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES'''
+    """inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES"""
 
     '''example call: inarytools.domo("po/tr.po", "tr", "pam_login.mo")'''
 
@@ -205,7 +205,7 @@ def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/loca
     move('messages.mo', '{0}{1}/{2}/LC_MESSAGES/{3}'.format(get.installDIR(), localeDirPrefix, locale, destinationFile))
 
 def domove(sourceFile, destination, destinationFile = ''):
-    '''moves sourceFile/Directory into destinationFile/Directory'''
+    """moves sourceFile/Directory into destinationFile/Directory"""
 
     ''' example call: inarytools.domove("/usr/bin/bash", "/bin/bash")'''
     ''' example call: inarytools.domove("/usr/bin/", "/usr/sbin")'''
@@ -222,7 +222,7 @@ def domove(sourceFile, destination, destinationFile = ''):
             move(filePath, join_path(get.installDIR(), join_path(destination, destinationFile)))
 
 def rename(sourceFile, destinationFile):
-    ''' renames sourceFile as destinationFile'''
+    """ renames sourceFile as destinationFile"""
 
     ''' example call: inarytools.rename("/usr/bin/bash", "bash.old") '''
     ''' the result of the previous example would be "/usr/bin/bash.old" '''
@@ -235,7 +235,7 @@ def rename(sourceFile, destinationFile):
         error(_('ActionsAPI [rename]: {0}: {1}').format(e, sourceFile))
 
 def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLine = False, level = -1):
-    '''replaces patterns in sources'''
+    """replaces patterns in sources"""
 
     ''' example call: inarytools.dosed("/etc/passwd", "caglar", "cem")'''
     ''' example call: inarytools.dosed("/etc/passwd", "caglar")'''
@@ -290,13 +290,13 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
             raise FileError(_('File does not exist or permission denied: {}').format(sourceFile))
 
 def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
-    '''insert a executable file into /sbin or /usr/sbin'''
+    """insert a executable file into /sbin or /usr/sbin"""
 
     ''' example call: inarytools.dobin("bin/xloadimage", "/sbin") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
 def dosym(sourceFile, destinationFile):
-    '''creates soft link between sourceFile and destinationFile'''
+    """creates soft link between sourceFile and destinationFile"""
 
     ''' example call: inarytools.dosym("/usr/bin/bash", "/bin/bash")'''
     makedirs(join_path(get.installDIR(), os.path.dirname(destinationFile)))
@@ -307,7 +307,7 @@ def dosym(sourceFile, destinationFile):
         error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
 
 def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
-    '''insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions'''
+    """insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions"""
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
     if not destinationFile:
@@ -322,7 +322,7 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
         copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)), sym)
 
 def newdoc(sourceFile, destinationFile):
-    '''inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile'''
+    """inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile"""
     destinationDirectory = '' #490
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
@@ -331,13 +331,13 @@ def newdoc(sourceFile, destinationFile):
     readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcNAME(), destinationDirectory), destinationFile)
 
 def newman(sourceFile, destinationFile):
-    '''inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile'''
+    """inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile"""
     # Use copy instead of move or let build-install scream like file not found!
     copy(sourceFile, destinationFile)
     doman(destinationFile)
 
 def remove(sourceFile):
-    '''removes sourceFile'''
+    """removes sourceFile"""
     sourceFileGlob = glob.glob(join_path(get.installDIR(), sourceFile))
     if len(sourceFileGlob) == 0:
         raise FileError(_("No file matched pattern \"{}\". Remove operation failed.").format(sourceFile))
@@ -346,7 +346,7 @@ def remove(sourceFile):
         unlink(filePath)
 
 def removeDir(destinationDirectory):
-    '''removes destinationDirectory and its subtrees'''
+    """removes destinationDirectory and its subtrees"""
     destdirGlob = glob.glob(join_path(get.installDIR(), destinationDirectory))
     if len(destdirGlob) == 0:
         raise FileError(_("No directory matched pattern \"{}\". Remove directory operation failed.").format(destinationDirectory))

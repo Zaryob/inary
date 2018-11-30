@@ -19,15 +19,16 @@ import sys
 import atexit
 import logging
 import logging.handlers
-import imp
+import importlib
 
 __version__ = "1.0"
 
-__all__ = [ 'api', 'configfile', 'db', 'files', 'util']
+__all__ = ['api', 'configfile', 'db', 'files', 'util']
 
 import inary.api
 import inary.config
 import inary.context as ctx
+
 
 def init_logging():
     log_dir = os.path.join(ctx.config.dest_dir(), ctx.config.log_dir())
@@ -40,6 +41,7 @@ def init_logging():
         ctx.loghandler = handler
         ctx.log.setLevel(logging.DEBUG)
 
+
 def _cleanup():
     """Close the database cleanly and do other cleanup."""
     ctx.disable_keyboard_interrupts()
@@ -47,9 +49,9 @@ def _cleanup():
         ctx.loghandler.flush()
         ctx.log.removeHandler(ctx.loghandler)
 
-#    filesdb = inary.db.filesdb.FilesDB()
-#    if filesdb.is_initialized():
-#        filesdb.close()
+    #    filesdb = inary.db.filesdb.FilesDB()
+    #    if filesdb.is_initialized():
+    #        filesdb.close()
 
     if ctx.build_leftover and os.path.exists(ctx.build_leftover):
         os.unlink(ctx.build_leftover)
@@ -57,10 +59,10 @@ def _cleanup():
     ctx.ui.close()
     ctx.enable_keyboard_interrupts()
 
+
 # Hack for inary to work with non-patched Python. inary needs
 # lots of work for not doing this.
-imp.reload(sys)
-
+importlib.reload(sys)
 
 atexit.register(_cleanup)
 

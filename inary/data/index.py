@@ -76,7 +76,8 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             util.clean_dir(newtmpdir) # replace newtmpdir
             shutil.move(tmpdir, newtmpdir)
 
-    def check_signature(self, filename, repo):
+    @staticmethod
+    def check_signature(filename, repo):
         tmpdir = os.path.join(ctx.config.index_dir(), repo)
         inary.file.File.check_signature(filename, tmpdir)
 
