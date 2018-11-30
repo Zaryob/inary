@@ -16,12 +16,14 @@ import sys
 import locale
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.context as ctx
 import inary.ui
 import inary.util
+
 
 class Error(inary.errors.Error):
     pass
@@ -30,8 +32,9 @@ class Error(inary.errors.Error):
 class Exception(inary.errors.Exception):
     pass
 
-#in old releases used this printu function
-def printu(obj, err = False):
+
+# in old releases used this printu function
+def printu(obj, err=False):
     if not isinstance(obj, str):
         obj = str(obj)
     if err:
@@ -43,9 +46,9 @@ def printu(obj, err = False):
 
 
 class CLI(inary.ui.UI):
-    "Command Line Interface"
+    """Command Line Interface"""
 
-    def __init__(self, show_debug = False, show_verbose = False):
+    def __init__(self, show_debug=False, show_verbose=False):
         super(CLI, self).__init__(show_debug, show_verbose)
         self.warnings = 0
         self.errors = 0
@@ -53,17 +56,16 @@ class CLI(inary.ui.UI):
     def close(self):
         inary.util.xterm_title_reset()
 
-    def output(self, msg, err = False, verbose = False):
+    def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
-            if type(msg)==type(bytes()):
+            if type(msg) == type(bytes()):
                 msg = msg.decode('utf-8')
             if err:
                 sys.stderr.write(str(msg))
             else:
                 sys.stdout.write(str(msg))
 
-
-    def formatted_output(self, msg, verbose = False, noln = False, column=":"):
+    def formatted_output(self, msg, verbose=False, noln=False, column=":"):
         key_width = 20
         line_format = "%(key)-20s%(column)s%(rest)s"
         term_height, term_width = inary.util.get_terminal_size()
@@ -102,18 +104,18 @@ class CLI(inary.ui.UI):
         msg = new_msg
         self.output(str(msg), verbose=verbose)
 
-    def info(self, msg, verbose = False, noln = False, color='default'):
+    def info(self, msg, verbose=False, noln=False, color='default'):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         msg = inary.util.colorize(msg, color)
         if verbose:
             msg = inary.util.colorize(_('Verboses: '), 'white') + msg
         if not noln:
-            msg = '%s\n'%(msg)
+            msg = '{}\n'.format(msg)
 
         self.output(str(msg), verbose=verbose)
 
-    def warning(self, msg, verbose = False):
+    def warning(self, msg, verbose=False):
         msg = str(msg)
         self.warnings += 1
         if ctx.log:
@@ -133,8 +135,8 @@ class CLI(inary.ui.UI):
         else:
             self.output(inary.util.colorize(msg + '\n', 'brightred'), err=True)
 
-    def action(self, msg, verbose = False):
-        #TODO: this seems quite redundant?
+    def action(self, msg, verbose=False):
+        # TODO: this seems quite redundant?
         msg = str(msg)
         if ctx.log:
             ctx.log.info(msg)
@@ -143,7 +145,7 @@ class CLI(inary.ui.UI):
     def choose(self, msg, opts):
         msg = str(msg)
         endmsg = '\n Select one:'
-        prompt = msg + inary.util.colorize('[  %s  ]' %("  /   ".join(opts)), 'brightblue') + endmsg
+        prompt = msg + inary.util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
 
         while True:
             s = input(prompt)
@@ -174,7 +176,6 @@ class CLI(inary.ui.UI):
             if no_expr.search(s):
                 return False
 
-
     def display_progress(self, **ka):
         """ display progress of any operation """
         if ka['operation'] in ["removing", "rebuilding-db"]:
@@ -182,8 +183,8 @@ class CLI(inary.ui.UI):
         elif ka['operation'] == "fetching":
             totalsize = '%.1f %s' % inary.util.human_readable_size(ka['total_size'])
             out = '\r%-30.50s (%s)%3d%% %9.2f %s [%s]' % \
-                (ka['filename'], totalsize, ka['percent'],
-                 ka['rate'], ka['symbol'], ka['eta'])
+                  (ka['filename'], totalsize, ka['percent'],
+                   ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
         else:
             self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
@@ -191,7 +192,7 @@ class CLI(inary.ui.UI):
         if ka['percent'] == 100:
             self.output(inary.util.colorize(_('\n [complete]\n'), 'yellow'))
 
-    def status(self, msg = None):
+    def status(self, msg=None):
         if msg:
             msg = str(msg)
             self.output(inary.util.colorize(msg + '\n', 'brightgreen'))

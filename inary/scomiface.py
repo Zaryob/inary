@@ -192,9 +192,11 @@ def pre_remove(package_name, metapath, filepath):
                 raise Error(_("Script error: {}").format(exception))
 
 
-def post_remove(package_name, metapath, filepath, provided_scripts=[]):
+def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
 
+    if provided_scripts is None:
+        provided_scripts = []
     ctx.ui.info(_("Running post removal operations for {}").format(package_name))
     link = get_link()
 

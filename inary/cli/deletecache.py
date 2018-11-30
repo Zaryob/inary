@@ -50,7 +50,8 @@ consume a lot of disk space.""")
             util.clean_dir(dest_dir)
 
 
-    def delete_cache(self):
+    @staticmethod
+    def delete_cache():
         """
         Deletes cached packages, cached archives, build dirs, db caches
         """

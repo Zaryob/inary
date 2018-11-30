@@ -56,7 +56,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = '', installPrefix = '/{}'.format(get.defaultprefixDIR()), sourceDir = '.'):
-    '''configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... "'''
+    """configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... \""""
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
                       -DCMAKE_C_FLAGS="{1}" \
@@ -70,7 +70,7 @@ def configure(parameters = '', installPrefix = '/{}'.format(get.defaultprefixDIR
         raise ConfigureError(_('No configure script found for cmake.'))
 
 def make(parameters = ''):
-    '''build source with given parameters'''
+    """build source with given parameters"""
     if ctx.config.get_option("verbose") and ctx.config.get_option("debug"):
         command = 'make VERBOSE=1 {0} {1}'.format(get.makeJOBS(), parameters)
     else:
@@ -85,7 +85,7 @@ def fixInfoDir():
         unlink(infoDir)
 
 def install(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters'''
+    """install source into install directory with given parameters"""
     # You can't squeeze unix paths with things like 'bindir', 'datadir', etc with CMake
     # http://public.kitware.com/pipermail/cmake/2006-August/010748.html
     args = 'make DESTDIR="{0}" \
@@ -100,7 +100,7 @@ def install(parameters = '', argument = 'install'):
         fixInfoDir()
 
 def rawInstall(parameters = '', argument = 'install'):
-    '''install source into install directory with given parameters = PREFIX=get.installDIR()'''
+    """install source into install directory with given parameters = PREFIX=get.installDIR()"""
     if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
         if system('make {0} {1} '.format(parameters, argument)):
             raise InstallError(_('Install failed.'))

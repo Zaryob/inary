@@ -46,7 +46,8 @@ class GroupDB(lazydb.LazyDB):
         self.gdb = inary.db.itembyrepo.ItemByRepo(group_nodes)
         self.gcdb = inary.db.itembyrepo.ItemByRepo(group_components)
 
-    def __generate_components(self, doc):
+    @staticmethod
+    def __generate_components(doc):
         groups = {}
         components = xmlext.getTagByName(doc, "Component")
         for comp in components:
@@ -56,7 +57,8 @@ class GroupDB(lazydb.LazyDB):
 
         return groups
 
-    def __generate_groups(self, doc):
+    @staticmethod
+    def __generate_groups(doc):
         groups = {}
         group = xmlext.getTagByName(doc, "Group")
         for gr in group:

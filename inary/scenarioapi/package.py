@@ -26,7 +26,11 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 class Package:
-    def __init__(self, name, deps = [], cons = [], date = "2006-18-18", ver = "1.0", partOf="None"):
+    def __init__(self, name, deps=None, cons=None, date ="2006-18-18", ver ="1.0", partOf="None"):
+        if deps is None:
+            deps = []
+        if cons is None:
+            cons = []
         self.name = name
         self.dependencies = deps
         self.conflicts = cons
@@ -37,7 +41,8 @@ class Package:
         self.actions = None
         self.create_package()
 
-    def create_inary(self):
+    @staticmethod
+    def create_inary():
         os.system("inary build {0} -O {1} > /dev/null 2>&1".format(consts.pspec_path, consts.repo_path))
 
     def create_package(self):

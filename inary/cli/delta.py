@@ -45,10 +45,7 @@ class Delta(command.Command, metaclass=command.autocommand):
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("delta options"))
-        self.add_options(group)
-        self.parser.add_option_group(group)
 
-    def add_options(self, group):
         group.add_option("-t", "--newest-package",
                          action="store",
                          default=None,
@@ -65,6 +62,7 @@ class Delta(command.Command, metaclass=command.autocommand):
                          help=_("Create the binary package using the given "
                                 "format. Use '-F help' to see a list of "
                                 "supported formats."))
+        self.parser.add_option_group(group)
 
     def run(self):
         self.init(database=False, write=False)

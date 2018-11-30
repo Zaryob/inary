@@ -25,7 +25,7 @@ class autosuprop(autosuper, autoprop):
     pass
 
 class autoeq(type):
-    "useful for structures"
+    """useful for structures"""
     def __init__(cls, name, bases, dict):
         super(autoeq, cls).__init__(name, bases, dict)
         def equal(self, other):

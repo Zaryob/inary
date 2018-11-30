@@ -93,7 +93,7 @@ class Command(object):
         self.process_opts()
 
     def commonopts(self):
-        '''common options'''
+        """common options"""
         p = self.parser
 
         group = optparse.OptionGroup(self.parser, _("general options"))
@@ -189,7 +189,8 @@ class Command(object):
         print("{0}: {1}".format(self.format_name(), trans.gettext(self.__doc__)))
         print(self.parser.format_option_help())
 
-    def die(self):
+    @staticmethod
+    def die():
         """exit program"""
         ctx.ui.error(_('Command terminated abnormally.'))
         sys.exit(-1)

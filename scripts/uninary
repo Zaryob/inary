@@ -55,7 +55,7 @@ def main():
     package.extract_install(os.path.join(target, 'install'))
 
     # FIXME: There is a Inary bug, it already creates an install directory even its empty.
-    if os.listdir('install') == []:
+    if not os.listdir('install'):
         os.rmdir('install')
 
     return 0

@@ -218,7 +218,8 @@ def install_pkg_files(package_URIs, reinstall = False):
         install_pkg_names(extra_packages, reinstall=True, extra=True)
 
     class PackageDB:
-        def get_package(self, key, repo = None):
+        @staticmethod
+        def get_package(key, repo = None):
             return d_t[str(key)]
 
     packagedb = PackageDB()

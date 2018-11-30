@@ -12,7 +12,7 @@
 # Please read the COPYING file.
 
 class _constant:
-    "Constant members implementation"
+    """Constant members implementation"""
     class ConstError(TypeError):
         pass
 

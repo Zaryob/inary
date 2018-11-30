@@ -195,7 +195,7 @@ def verify_file(data_file, cert_file=None, signature_file=None, trust_dir=None):
         return SIGN_CORRUPTED
 
     # Check trustworthiness of certificate
-    if trust_dir != None and check_trust(cert_file, trust_dir) == CERT_UNTRUSTED:
+    if trust_dir is not None and check_trust(cert_file, trust_dir) == CERT_UNTRUSTED:
         return SIGN_UNTRUSTED
 
     # Keep public key in a temporary file

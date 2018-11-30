@@ -71,7 +71,8 @@ class InstallDB(lazydb.LazyDB):
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
-    def __generate_installed_extra(self):
+    @staticmethod
+    def __generate_installed_extra():
         ie = []
         ie_path = os.path.join(ctx.config.info_dir(), ctx.const.installed_extra)
         if os.path.isfile(ie_path):
@@ -79,14 +80,16 @@ class InstallDB(lazydb.LazyDB):
                  ie.extend(ie_file.read().strip().split("\n"))
         return ie
 
-    def __generate_installed_pkgs(self):
+    @staticmethod
+    def __generate_installed_pkgs():
         def split_name(dirname):
             name, version, release = dirname.rsplit("-", 2)
             return name, version + "-" + release
 
         return dict(list(map(split_name, os.listdir(ctx.config.packages_dir()))))
 
-    def __get_marked_packages(self, _type):
+    @staticmethod
+    def __get_marked_packages(_type):
         info_path = os.path.join(ctx.config.info_dir(), _type)
         if os.path.exists(info_path):
             return open(info_path, "r").read().split()
@@ -148,7 +151,8 @@ class InstallDB(lazydb.LazyDB):
 
         return found
 
-    def __get_version(self, meta_doc):
+    @staticmethod
+    def __get_version(meta_doc):
         package = xmlext.getNode(meta_doc,'Package')
         history = xmlext.getNode(package, 'History')
         update = xmlext.getNode(history,'Update')
@@ -158,14 +162,16 @@ class InstallDB(lazydb.LazyDB):
 
         return version, release, None
 
-    def __get_distro_release(self, meta_doc):
+    @staticmethod
+    def __get_distro_release(meta_doc):
         package = xmlext.getNode(meta_doc, 'Package')
         distro = xmlext.getNodeText(package, 'Distribution')
         release = xmlext.getNodeText(package, 'DistributionRelease')
 
         return distro, release
 
-    def __get_install_tar_hash(self, meta_doc):
+    @staticmethod
+    def __get_install_tar_hash(meta_doc):
         package = xmlext.getNode(meta_doc, 'Package')
         hash = xmlext.getNodeText(package, 'InstallTarHash')
         return hash
@@ -253,7 +259,8 @@ class InstallDB(lazydb.LazyDB):
                            ctime)
         return info
 
-    def __make_dependency(self, depStr):
+    @staticmethod
+    def __make_dependency(depStr):
 
         node = xmlext.parseString(depStr)
 
@@ -299,7 +306,8 @@ class InstallDB(lazydb.LazyDB):
         """
         return [x for x in self.installed_db if not self.get_rev_deps(x)]
 
-    def pkg_dir(self, pkg, version, release):
+    @staticmethod
+    def pkg_dir(pkg, version, release):
         return inary.util.join_path(ctx.config.packages_dir(), pkg + '-' + version + '-' + release)
 
     def get_package(self, package):
@@ -352,7 +360,8 @@ class InstallDB(lazydb.LazyDB):
     def list_needs_reboot(self):
         return self.__get_marked_packages(ctx.const.needs_reboot)
 
-    def __write_marked_packages(self, _type, packages):
+    @staticmethod
+    def __write_marked_packages(_type, packages):
         info_file = os.path.join(ctx.config.info_dir(), _type)
         config = open(info_file, "w")
         for pkg in set(packages):

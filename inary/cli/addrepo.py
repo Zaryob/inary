@@ -51,7 +51,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                                help=_("Add repository at given position (0 is first)"))
         self.parser.add_option_group(group)
 
-    def warn_and_remove(self, message, repo):
+    @staticmethod
+    def warn_and_remove(message, repo):
         ctx.ui.warning(message)
         repository.remove_repo(repo)
 

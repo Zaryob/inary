@@ -32,7 +32,7 @@ class Singleton(type):
         return cls.instance
 
 class _constant:
-    "Constant members implementation"
+    """Constant members implementation"""
     class ConstError(TypeError):
         pass
 
@@ -49,7 +49,7 @@ class _constant:
         raise NameError(name)
 
 class Constants(metaclass=Singleton):
-    "Inary Constants Singleton"
+    """Inary Constants Singleton"""
 
     __c = _constant()
 

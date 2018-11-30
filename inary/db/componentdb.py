@@ -46,7 +46,8 @@ class ComponentDB(lazydb.LazyDB):
         self.cpdb = inary.db.itembyrepo.ItemByRepo(component_packages)
         self.csdb = inary.db.itembyrepo.ItemByRepo(component_sources)
 
-    def __generate_packages(self, doc):
+    @staticmethod
+    def __generate_packages(doc):
         components = {}
         packages = xmlext.getTagByName(doc, "Package")
         for pkg in packages:
@@ -56,7 +57,8 @@ class ComponentDB(lazydb.LazyDB):
 
         return components
 
-    def __generate_sources(self, doc):
+    @staticmethod
+    def __generate_sources(doc):
         components = {}
         specfile = xmlext.getTagByName(doc, "SpecFile")
         for spec in specfile:
@@ -67,7 +69,8 @@ class ComponentDB(lazydb.LazyDB):
 
         return components
 
-    def __generate_components(self, doc):
+    @staticmethod
+    def __generate_components(doc):
         components = {}
         component = xmlext.getTagByName(doc, "Component")
         for comp in component:

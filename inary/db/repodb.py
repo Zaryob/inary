@@ -208,7 +208,8 @@ class RepoDB(lazydb.LazyDB):
         return Repo(inary.uri.URI(self.get_repo_url(repo)))
 
     #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
-    def get_repo_url(self, repo):
+    @staticmethod
+    def get_repo_url(repo):
         urifile_path = util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
         return uri.rstrip()
@@ -253,7 +254,7 @@ class RepoDB(lazydb.LazyDB):
         for x in self.repoorder.get_order():
             if not only_active:
                 temp.append(x)
-            elif self.repo_active(x) == True:
+            elif self.repo_active(x):
                 temp.append(x)
         return temp
 

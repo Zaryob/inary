@@ -51,7 +51,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def compile(parameters = ''):
-    '''compiling texlive packages'''
+    """compiling texlive packages"""
 
     # Move sources according to tplobj files
     if moveSources():
@@ -64,7 +64,7 @@ def compile(parameters = ''):
         raise CompileError(_('Building format files failed'))
 
 def install(parameters = ''):
-    '''Installing texlive packages'''
+    """Installing texlive packages"""
 
     # Create symlinks from format to engines
     if createSymlinksFormat2Engines():
@@ -87,7 +87,7 @@ def install(parameters = ''):
         raise Installing(_('Handle config files failed'))
 
 def createSymlinksFormat2Engines():
-    '''Create symlinks from format to engines'''
+    """Create symlinks from format to engines"""
     for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
         symfile = open(formatfile, "r")
         for line in symfile.readlines():
@@ -109,7 +109,7 @@ def createSymlinksFormat2Engines():
         symfile.close()
 
 def installDocFiles():
-    '''Installing docs'''
+    """Installing docs"""
     if "documentation" in get.srcNAME():
         if os.path.isdir("{}/texmf-doc".format(get.curDIR())):
             copytree("texmf-doc", "{}/usr/share/texmf-doc".format(get.installDIR()))
@@ -119,7 +119,7 @@ def installDocFiles():
                 shutil.rmtree("{0}/{1}/doc".format(get.curDIR(),removedir))
 
 def installTexmfFiles():
-    '''Installing texmf, texmf-dist, tlpkg, texmf-var'''
+    """Installing texmf, texmf-dist, tlpkg, texmf-var"""
     for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
         if os.path.isdir("{0}/{1}".format(get.curDIR(), installdoc)):
             if not installdoc == "texmf-var":
@@ -128,7 +128,7 @@ def installTexmfFiles():
                 copytree(installdoc, "{}/var/lib/texmf".format(get.installDIR()))
 
 def installConfigFiles():
-    '''Installing config files'''
+    """Installing config files"""
     if can_access_file("{0}/{1}.cfg".format(get.curDIR(), get.srcNAME())):
         insinto("/etc/texmf/updmap.d", "{0}/{1}.cfg".format(get.curDIR(), get.srcNAME()))
 
@@ -145,7 +145,7 @@ def installConfigFiles():
         insinto("/etc/texmf/language.dat.d", "{0}/language.{1}.dat".format(get.curDIR(), get.srcNAME()))
 
 def handleConfigFiles():
-    '''Handling config files'''
+    """Handling config files"""
     for root, dirs,files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
         if not ("config" in root or "doc" in root):
             for configFile in files:
@@ -159,7 +159,7 @@ def handleConfigFiles():
                     dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile), "/usr/share/texmf/{0}/{1}".format(dirname, configFile))
 
 def addFormat(parameters):
-    '''Add format files'''
+    """Add format files"""
     if not os.path.isdir("{}/texmf/fmtutil/".format(get.curDIR())):
         makedirs("{}/texmf/fmtutil/".format(get.curDIR()))
     if not os.path.isfile("{0}/texmf/fmtutil/format.{1}.cnf".format(get.curDIR(), get.srcNAME())):
@@ -201,7 +201,7 @@ def moveSources():
                 shutil.move("{}".format(path) , "{0}/{1}".format(reloc,dirname))
 
 def buildFormatFiles():
-    '''Build format files'''
+    """Build format files"""
     if os.path.isdir("{}/texmf/fmtutil/".format(get.curDIR())):
         for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
             makedirs("{}/texmf-var/web2c/".format(get.curDIR()))
@@ -211,7 +211,7 @@ def buildFormatFiles():
             system("env -u TEXINPUTS fmtutil --cnffile {} --fmtdir texmf-var/web2c --all".format(formatfile))
 
 def addLanguageDat(parameter):
-    '''Create language.*.dat files'''
+    """Create language.*.dat files"""
     parameter = parameter.split()
     para_dict={}
     for option in parameter:
@@ -229,7 +229,7 @@ def addLanguageDat(parameter):
         language_dat.close()
 
 def addLanguageDef(parameter):
-    '''Create language.*.def files'''
+    """Create language.*.def files"""
     parameter = parameter.split()
     para_dict={}
     for option in parameter:
@@ -252,7 +252,7 @@ def addLanguageDef(parameter):
         language_def.close()
 
 def generateConfigFiles():
-    '''Generate config files'''
+    """Generate config files"""
     for tlpobjfile in ls("{}/tlpkg/tlpobj/*".format(get.curDIR())):
         jobsfile=open(tlpobjfile, "r")
         for line in jobsfile.readlines():

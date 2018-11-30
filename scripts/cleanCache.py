@@ -45,7 +45,7 @@ def doit(root, listdir, clean, suffix = ""):
         target = os.path.join(root, "%s%s" % (f, suffix))
         if os.path.exists(target):
             print(("%s%s" % (f, suffix)))
-            if clean == True:
+            if clean:
                 try:
                     if os.path.isdir(target):
                         shutil.rmtree(target)

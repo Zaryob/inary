@@ -27,21 +27,21 @@ def cat(filename):
     return file(filename)
 
 class grep:
-    '''keep only lines that match the regexp'''
+    """keep only lines that match the regexp"""
     def __init__(self, pat, flags = 0):
         self.fun = re.compile(pat, flags).match
     def __ror__(self, input):
         return filter(self.fun, input)
 
 class tr:
-    '''apply arbitrary transform to each sequence element'''
+    """apply arbitrary transform to each sequence element"""
     def __init__(self, transform):
         self.tr = transform
     def __ror__(self, input):
         return map(self.tr, input)
 
 class printto:
-    '''print sequence elements one per line'''
+    """print sequence elements one per line"""
     def __init__(self, out = sys.stdout):
         self.out = out
     def __ror__(self,input):
