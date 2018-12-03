@@ -79,8 +79,8 @@ class XmlFile(object):
         st = io.StringIO()
 
         try:
-            from preprocess import preprocess, PreprocessError
-            preprocess(infile=localpath,outfile=st,defines=inary.config.Config().values.directives)
+            from inary.libraries import preprocess
+            preprocess.preprocess(infile=localpath,outfile=st,defines=inary.config.Config().values.directives)
             st.seek(0)
         except:
             st = open(localpath,'r')
