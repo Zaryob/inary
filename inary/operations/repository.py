@@ -28,7 +28,7 @@ import inary.db
 import inary.data
 import inary.util as util
 
-@operations.locked
+@util.locked
 def add_repo(name, indexuri, at = None):
     import re
     if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
@@ -46,7 +46,7 @@ def add_repo(name, indexuri, at = None):
         inary.db.flush_caches()
         ctx.ui.info(_('Repo {} added to system.').format(name))
 
-@operations.locked
+@util.locked
 def remove_repo(name):
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
@@ -57,7 +57,7 @@ def remove_repo(name):
     else:
         raise inary.errors.Error(_('Repository {} does not exist. Cannot remove.').format(name))
 
-@operations.locked
+@util.locked
 def set_repo_activity(name, active):
     """
     Changes the activity status of a  repository. Inactive repositories will have no effect on
@@ -73,7 +73,7 @@ def set_repo_activity(name, active):
     ctx.ui.info(_('Regenerating database caches...'), verbose= True)
     inary.db.regenerate_caches()
 
-@operations.locked
+@util.locked
 def update_repos(repos, force=False):
     inary.db.historydb.HistoryDB().create_history("repoupdate")
     updated = False
@@ -85,7 +85,7 @@ def update_repos(repos, force=False):
             ctx.ui.info(_('Regenerating database caches...'), verbose= True)
             inary.db.regenerate_caches()
 
-@operations.locked
+@util.locked
 def update_repo(repo, force=False):
     inary.db.historydb.HistoryDB().create_history("repoupdate")
     updated = __update_repo(repo, force)

@@ -35,6 +35,7 @@ _ = __trans.gettext
 
 # INARY
 import inary
+import inary.errors
 import inary.sxml.xmlext as xmlext
 import inary.sxml.xmlfile as xmlfile
 import inary.context as ctx
@@ -583,7 +584,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory variable {} not available').format(name))
 
-        return (name, init, decode, encode, errors, format)
+        return name, init, decode, encode, errors, format
 
     @staticmethod
     def mixed_case(identifier):
@@ -603,8 +604,8 @@ class autoxml(oo.autosuper, oo.autoprop):
         try:
             lastsep = tagpath.rindex('/')
         except ValueError as e:
-            return ('', tagpath)
-        return (tagpath[:lastsep], tagpath[lastsep+1:])
+            return '', tagpath
+        return tagpath[:lastsep], tagpath[lastsep + 1:]
 
     def parse_spec(cls, token, spec):
         """decompose member specification"""
@@ -735,7 +736,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        return (init, decode, encode, errors, format)
+        return init, decode, encode, errors, format
 
     def gen_list_tag(cls, tag, spec):
         """generate a list datatype. stores comps in tag/comp_tag"""
@@ -795,7 +796,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 format_item(node, f, errs)
                 f.add_literal_data(' ')
 
-        return (init, decode, encode, errors, format)
+        return init, decode, encode, errors, format
 
     def gen_insetclass_tag(cls, tag, spec):
         """generate a class datatype that is highly integrated
@@ -853,7 +854,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if req == mandatory:
                     errs.append(_('Mandatory argument not available'))
 
-        return (init, decode, encode, errors, format)
+        return init, decode, encode, errors, format
 
     basic_cons_map = {
         bytes : bytes,

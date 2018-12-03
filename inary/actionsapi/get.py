@@ -57,7 +57,7 @@ def curPERL():
 def ENV(environ):
     """returns any given environ variable"""
     try:
-        return os.environ[environ];
+        return os.environ[environ]
     except KeyError:
         return None
 

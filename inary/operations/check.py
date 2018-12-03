@@ -55,7 +55,7 @@ def check_files(files, check_config=False):
             try:
                 is_file_corrupted = file_corrupted(f)
 
-            except inary.util.FilePermissionDeniedError as e:
+            except inary.util.FilePermissionDeniedError:
                 # Can't read file, probably because of permissions, skip
                 results['denied'].append(f.path)
 

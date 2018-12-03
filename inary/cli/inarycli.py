@@ -79,7 +79,7 @@ class PreParser(optparse.OptionParser):
         self.opts = []
         self.rargs = self._get_args(args)
         self._process_args()
-        return (self.opts, self.args)
+        return self.opts, self.args
 
     def _process_args(self):
         args = []

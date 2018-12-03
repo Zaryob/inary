@@ -74,7 +74,7 @@ all repositories.
         if component:
             try:
                 l = self.componentdb.get_packages(component, repo=repo, walk=True)
-            except Exception as e:
+            except:
                 return
         else:
             l = operations.list_available(repo)

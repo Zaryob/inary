@@ -211,7 +211,7 @@ class PackageDB(lazydb.LazyDB):
     def get_rev_deps(self, name, repo=None):
         try:
             rvdb = self.rvdb.get_item(name, repo)
-        except Exception: #FIXME: what exception could we catch here, replace with that.
+        except: #FIXME: what exception could we catch here, replace with that.
             return []
 
         rev_deps = []

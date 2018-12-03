@@ -26,7 +26,7 @@ sig = inary.signalhandler.SignalHandler()
 config = None
 
 log = None
-
+loghandler = None
 # used for bug #10568
 locked = False
 

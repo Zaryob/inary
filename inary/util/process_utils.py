@@ -42,7 +42,7 @@ def run_batch(cmd, ui_debug=True):
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
     if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
-    return (p.returncode, out, err)
+    return p.returncode, out, err
 
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return

@@ -122,7 +122,7 @@ def find_upgrades(packages, replaces):
 
     return Ap
 
-@operations.locked
+@util.locked
 def upgrade(A=None, repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options.

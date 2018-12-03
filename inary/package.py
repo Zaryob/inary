@@ -53,7 +53,7 @@ class Package:
             archive_suffix = ctx.const.lzma_suffix
         else:
             # "1.0" format does not have an archive
-            return (None, None)
+            return None, None
 
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format

@@ -141,7 +141,7 @@ def list_repos(only_active=True):
     """
     return inary.db.repodb.RepoDB().list_repos(only_active)
 
-@operations.locked
+@util.locked
 def configure_pending(packages=None):
     # Import SCOM
     import inary.scomiface
@@ -182,7 +182,7 @@ def configure_pending(packages=None):
     except ImportError:
         raise inary.errors.Error(_("scom package is not fully installed"))
 
-@operations.locked
+@util.locked
 def clearCache(all=False):
 
     import glob

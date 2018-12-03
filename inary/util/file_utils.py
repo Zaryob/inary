@@ -154,7 +154,7 @@ def calculate_hash(path):
             clean_ar_timestamps(path)
         value = sha1_file(path)
 
-    return (path, value)
+    return path, value
 
 def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     """Yield (path, hash) tuples for given directory tree.
@@ -329,7 +329,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch ({}) failed").format((patchFile)))
+            raise Error(_("ERROR: patch ({}) failed").format(patchFile))
         else:
             raise Error(_("ERROR: patch ({0}) failed: {1}").format(patchFile, out))
 

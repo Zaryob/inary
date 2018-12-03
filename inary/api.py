@@ -140,7 +140,7 @@ def set_options(options):
     ctx.config.set_options(options)
 
 # FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
-@inary.operations.locked
+@inary.util.locked
 def rebuild_db():
 
     # save parameters and shutdown inary

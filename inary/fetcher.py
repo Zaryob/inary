@@ -178,10 +178,10 @@ class Fetcher:
             raise FetchError(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            raise FetchError(_('Access denied to write to destination directory: "%s"') % (self.destdir))
+            raise FetchError(_('Access denied to write to destination directory: "%s"') % self.destdir)
 
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
-            raise FetchError(_('Access denied to destination file: "%s"') % (self.archive_file))
+            raise FetchError(_('Access denied to destination file: "%s"') % self.archive_file)
 
         else:
             try:
@@ -218,7 +218,7 @@ class Fetcher:
                         handler.end(bytes_read)
 
             except OSError as e:
-                raise FetchError(_('Could not fetch destination file "%s":%s') % (self.url.get_uri(), e))
+                raise FetchError(_('Could not fetch destination file "{0}":{1}').format(self.url.get_uri(), e))
 
             except requests.exceptions.InvalidSchema:
                 # TODO: Add ftp downloader with ftplib

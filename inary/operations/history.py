@@ -18,7 +18,7 @@ _ = __trans.gettext
 
 import inary.errors
 import inary.context as ctx
-import inary.util
+import inary.util as util
 import inary.db
 import inary.fetcher
 import inary.operations as operations
@@ -57,7 +57,7 @@ def __listactions(actions):
 def __getpackageurl(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
-    pkg, ver = inary.util.parse_package_name(package)
+    pkg, ver = util.parse_package_name(package)
 
     reponame = None
     try:
@@ -76,7 +76,7 @@ def __getpackageurl(package):
 
     #return _possible_ url for this package
     return os.path.join(os.path.dirname(repourl),
-                        inary.util.parse_package_dir_path(package),
+                        util.parse_package_dir_path(package),
                         package)
 
 def fetch_remote_file(package, errors):
@@ -92,7 +92,7 @@ def fetch_remote_file(package, errors):
     if not os.path.exists(filepath):
         try:
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
-        except inary.fetcher.FetchError as e:
+        except inary.fetcher.FetchError:
             errors.append(package)
             ctx.ui.info(_("{} could not be found").format(package), color="red")
             return False
@@ -140,7 +140,7 @@ def plan_takeback(operation):
 
     return __listactions(actions)
 
-@operations.locked
+@util.locked
 def takeback(operation):
     """
     Takes back the system to a previous state. Uses inary history to find out which packages were
@@ -152,10 +152,10 @@ def takeback(operation):
     beinstalled, beremoved, configs = plan_takeback(operation)
 
     if beinstalled:
-        ctx.ui.info(_("Following packages will be installed:\n") + inary.util.strlist(beinstalled))
+        ctx.ui.info(_("Following packages will be installed:\n") + util.strlist(beinstalled))
 
     if beremoved:
-        ctx.ui.info(_("Following packages will be removed:\n") + inary.util.strlist(beremoved))
+        ctx.ui.info(_("Following packages will be removed:\n") + util.strlist(beremoved))
 
     if (beremoved or beinstalled) and not ctx.ui.confirm(_('Do you want to continue?')):
         return
@@ -170,7 +170,7 @@ def takeback(operation):
 
     if errors:
         ctx.ui.info(_("\nFollowing packages could not be found in repositories and are not cached:\n") +
-                    inary.util.strlist(errors))
+                    util.strlist(errors))
         if not ctx.ui.confirm(_('Do you want to continue?')):
             return
 
@@ -193,7 +193,7 @@ def get_takeback_plan(operation):
     beinstalled, beremoved, configs = plan_takeback(operation)
     return beinstalled, beremoved
 
-@operations.locked
+@util.locked
 def snapshot():
     """
     Takes snapshot of the system packages. The snapshot is only a record of which packages are currently

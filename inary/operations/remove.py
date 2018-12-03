@@ -28,7 +28,7 @@ import inary.operations as operations
 import inary.util as util
 import inary.ui as ui
 
-@operations.locked
+@util.locked
 def remove(A, ignore_dep = False, ignore_safety = False):
     """
     Removes the given packages from the system

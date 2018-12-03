@@ -20,9 +20,10 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+import inary.errors
 import inary.context as ctx
 import inary.ui
-import inary.util
+import inary.util as util
 
 
 class Error(inary.errors.Error):
@@ -54,7 +55,7 @@ class CLI(inary.ui.UI):
         self.errors = 0
 
     def close(self):
-        inary.util.xterm_title_reset()
+        util.xterm_title_reset()
 
     def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
@@ -68,7 +69,7 @@ class CLI(inary.ui.UI):
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
         key_width = 20
         line_format = "%(key)-20s%(column)s%(rest)s"
-        term_height, term_width = inary.util.get_terminal_size()
+        term_height, term_width = util.get_terminal_size()
 
         def find_whitespace(s, i):
             while s[i] not in (" ", "\t"):
@@ -107,9 +108,9 @@ class CLI(inary.ui.UI):
     def info(self, msg, verbose=False, noln=False, color='default'):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
-        msg = inary.util.colorize(msg, color)
+        msg = util.colorize(msg, color)
         if verbose:
-            msg = inary.util.colorize(_('Verboses: '), 'white') + msg
+            msg = util.colorize(_('Verboses: '), 'white') + msg
         if not noln:
             msg = '{}\n'.format(msg)
 
@@ -123,7 +124,7 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(inary.util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
+            self.output(util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = str(msg)
@@ -133,19 +134,19 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(inary.util.colorize(msg + '\n', 'brightred'), err=True)
+            self.output(util.colorize(msg + '\n', 'brightred'), err=True)
 
     def action(self, msg, verbose=False):
         # TODO: this seems quite redundant?
         msg = str(msg)
         if ctx.log:
             ctx.log.info(msg)
-        self.output(inary.util.colorize(msg + '\n', 'green'))
+        self.output(util.colorize(msg + '\n', 'green'))
 
     def choose(self, msg, opts):
         msg = str(msg)
         endmsg = '\n Select one:'
-        prompt = msg + inary.util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
+        prompt = msg + util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
 
         while True:
             s = input(prompt)
@@ -167,7 +168,7 @@ class CLI(inary.ui.UI):
 
         while True:
             tty.tcflush(sys.stdin.fileno(), 0)
-            prompt = msg + inary.util.colorize(_(' (yes'), 'green') + '/' + inary.util.colorize(_('no)'), 'red')
+            prompt = msg + util.colorize(_(' (yes'), 'green') + '/' + util.colorize(_('no)'), 'red')
             s = input(prompt)
 
             if yes_expr.search(s):
@@ -181,7 +182,7 @@ class CLI(inary.ui.UI):
         if ka['operation'] in ["removing", "rebuilding-db"]:
             return
         elif ka['operation'] == "fetching":
-            totalsize = '%.1f %s' % inary.util.human_readable_size(ka['total_size'])
+            totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
             out = '\r%-30.50s (%s)%3d%% %9.2f %s [%s]' % \
                   (ka['filename'], totalsize, ka['percent'],
                    ka['rate'], ka['symbol'], ka['eta'])
@@ -190,13 +191,13 @@ class CLI(inary.ui.UI):
             self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
 
         if ka['percent'] == 100:
-            self.output(inary.util.colorize(_('\n [complete]\n'), 'yellow'))
+            self.output(util.colorize(_('\n [complete]\n'), 'yellow'))
 
     def status(self, msg=None):
         if msg:
             msg = str(msg)
-            self.output(inary.util.colorize(msg + '\n', 'brightgreen'))
-            inary.util.xterm_title(msg)
+            self.output(util.colorize(msg + '\n', 'brightgreen'))
+            util.xterm_title(msg)
 
     def notify(self, event, **keywords):
         if event == inary.ui.installed:
@@ -212,6 +213,6 @@ class CLI(inary.ui.UI):
         else:
             msg = None
         if msg:
-            self.output(inary.util.colorize(msg + '\n', 'cyan'))
+            self.output(util.colorize(msg + '\n', 'cyan'))
             if ctx.log:
                 ctx.log.info(msg)
