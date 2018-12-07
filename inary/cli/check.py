@@ -19,7 +19,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.operations.check as check
-import inary.operations.operations as operations
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
@@ -70,7 +69,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
         component = ctx.get_option('component')
         if component:
-            installed = operations.list_installed()
+            installed = inary.db.installdb.InstallDB().list_installed()
             component_pkgs = self.componentdb.get_union_packages(component,
                                                                  walk=True)
             pkgs = list(set(installed) & set(component_pkgs))
@@ -78,7 +77,7 @@ class Check(command.Command, metaclass=command.autocommand):
             pkgs = self.args
         else:
             ctx.ui.info(_('Checking all installed packages') + '\n')
-            pkgs = operations.list_installed()
+            pkgs = inary.db.installdb.InstallDB().list_installed()
 
         necessary_permissions = True
 

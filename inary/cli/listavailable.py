@@ -22,7 +22,6 @@ import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
 import inary.db
-import inary.operations.operations as operations
 
 class ListAvailable(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List available packages in the repositories
@@ -64,7 +63,7 @@ all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in operations.list_repos():
+            for repo in inary.db.repodb.RepoDB().list_repos(only_active):
                 ctx.ui.info(_("\n Repository : {}\n").format(str(repo)), color="blue")
                 self.print_packages(repo)
 
@@ -77,9 +76,9 @@ all repositories.
             except:
                 return
         else:
-            l = operations.list_available(repo)
+            l = inary.db.packagedb.PackageDB().list_packages(repo)
 
-        installed_list = operations.list_installed()
+        installed_list = inary.db.installdb.InstallDB().list_installed()
 
         # maxlen is defined dynamically from the longest package name (#9021)
         if l:
