@@ -89,15 +89,15 @@ class GeneralDefaults:
 class BuildDefaults:
     """Default values for [build] section"""
     build_host = "localhost"
-    host = "x86_64-sulin-linux"
-    jobs = "-j3"
+    host = "x86_64-linux-gnu"
+    jobs = "-j1"
     generateDebug = False
     enableSandbox = True
-    cflags = "-mtune=generic -march=x86_64 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
-    cxxflags = "-mtune=generic -march=x86_64 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
+    cflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
+    cxxflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildhelper = None
-    compressionlevel = 1
+    compressionlevel = 9
     fallback = "http://www.sulin.com.tr/pub"
     ignored_build_types = ""
 

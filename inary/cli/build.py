@@ -99,18 +99,13 @@ class Build(command.Command, metaclass=command.autocommand):
                          help=_("Use quilt patch management system "
                                 "instead of GNU patch"))
 
-        group.add_option("--home-build",
-                         action="store_true",
-                         default=False,
-                         help=_("Do not use root user when packaging, "
-                                "make building under home folder"))
-
         group.add_option("--ignore-sandbox",
                          action="store_true",
                          default=False,
                          help=_("Do not constrain build process inside "
                                 "the build folder"))
-
+                                
+        self.parser.add_option_group(group)
         group = optparse.OptionGroup(self.parser, _("build steps"))
 
         group.add_option("--fetch",
@@ -158,8 +153,7 @@ class Build(command.Command, metaclass=command.autocommand):
                          const="package",
                          help=_("Create INARY package"))
 
-        self.parser.add_option_group(group)
-        self.add_options(group)
+
         self.parser.add_option_group(group)
 
     def run(self):
@@ -180,14 +174,6 @@ class Build(command.Command, metaclass=command.autocommand):
 
         if not ctx.get_option('output_dir'):
             ctx.config.options.output_dir = '.'
-
-        # IDEA: A little hack :)
-        if ctx.get_option('home_build'):
-            if os.environ['USER']== 'root': # For idiots
-                pass
-            else:
-                dest_dir = util.join_path(os.environ['HOME'], '.inary')
-                ctx.config.set_option('destdir', dest_dir)
 
         for x in self.args or ["pspec.xml"]:
             if ctx.get_option('until'):

@@ -15,6 +15,7 @@
 
 from .path_utils import join_path
 from .process_utils import run_batch
+from .type_utils import *
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -28,6 +29,7 @@ import os
 import time
 import shutil
 import hashlib
+import fnmatch
 
 class Error(inary.errors.Error):
     pass

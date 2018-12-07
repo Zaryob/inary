@@ -121,11 +121,14 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
-                 compresslevel=9,
+                 compresslevel = None,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
         """
+
+        if not compresslevel:
+            compresslevel = ctx.config.values.build.compressionlevel
 
         if len(mode) > 1 or mode not in "rw":
             raise ValueError("mode must be 'r' or 'w'.")
@@ -136,11 +139,12 @@ class TarFile(tarfile.TarFile):
             try:
                 from backports import lzma
             except ImportError:
-                raise tarfile.CompressionError("lzma module is not available")
+                raise tarfile.CompressionError("Lzma module is not available")
 
         if fileobj is not None:
             fileobj = _LZMAProxy(fileobj, mode)
         else:
+
             fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
 
         try:
@@ -475,9 +479,11 @@ class ArchiveTar(ArchiveBase):
         try:
             if oldwd:
                 os.chdir(oldwd)
+
         # Bug #6748
         except OSError:
             pass
+
         self.close()
 
     def add_to_archive(self, file_name, arc_name=None):
@@ -491,10 +497,11 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:bz2'
             elif self.type in ('tarlzma', 'tarxz'):
                 format = "xz" if self.type == "tarxz" else "alone"
-                level = int(ctx.config.values.build.compressionlevel)
+                compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
-                                            compressformat=format)
+                                            compresslevel=compresslevel
+                                            )
             else:
                 raise UnknownArchiveType
 
