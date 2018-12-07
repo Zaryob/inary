@@ -28,7 +28,6 @@ import inary.cli.addrepo
 import inary.cli.blame
 import inary.cli.build
 import inary.cli.check
-import inary.cli.clean
 import inary.cli.configurepending
 import inary.cli.deletecache
 import inary.cli.delta

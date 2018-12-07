@@ -173,7 +173,6 @@ from inary.operations.helper import calculate_download_sizes, get_package_requir
 from inary.operations.history import takeback, get_takeback_plan, snapshot
 from inary.operations.info import info
 from inary.operations.install import install, get_install_order
-from inary.operations.operations import *
 from inary.operations.remove import remove, get_remove_order
 from inary.operations.repository import *
 from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
