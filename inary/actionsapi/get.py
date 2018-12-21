@@ -14,6 +14,7 @@
 # Standart Python Modules
 import os
 import sys
+import multiprocessing
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -122,6 +123,13 @@ def LDFLAGS():
     return env.ldflags
 
 def makeJOBS():
+# Note: "auto" only works when /sys is mounted.
+    if env.jobs == "auto":
+        procs = 4
+        try:
+            procs = multiprocessing.cpu_count()
+        except Exception as e:
+            ctx.ui.warning("Unable to retrieve CPU count: %s" % e)
     return env.jobs
 
 def buildTYPE():

@@ -63,7 +63,7 @@ all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in inary.db.repodb.RepoDB().list_repos(only_active):
+            for repo in inary.db.repodb.RepoDB().list_repos(only_active=True):
                 ctx.ui.info(_("\n Repository : {}\n").format(str(repo)), color="blue")
                 self.print_packages(repo)
 

@@ -54,6 +54,33 @@ def __listactions(actions):
 
     return beinstalled, beremoved, configs
 
+def __getpackageurl_binman(package):
+    packagedb = inary.db.packagedb.PackageDB()
+    repodb = inary.db.repodb.RepoDB()
+    pkg, ver = inary.util.parse_package_name(package)
+
+    reponame = None
+    try:
+        reponame = packagedb.which_repo(pkg)
+    except Exception:
+        # Maybe this package is obsoluted from repository
+        for repo in repodb.get_binary_repos():
+            if pkg in packagedb.get_obsoletes(repo):
+                reponame = repo
+
+    if not reponame:
+        raise PackageNotFound
+
+    package_ = packagedb.get_package (pkg)
+    repourl = repodb.get_repo_url(reponame)
+    base_package = os.path.dirname (package_.packageURI)
+    repo_base = os.path.dirname (repourl)
+    possible_url = os.path.join (repo_base, base_package, package)
+    ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
+
+    #return _possible_ url for this package
+    return possible_url
+
 def __getpackageurl(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
@@ -80,8 +107,9 @@ def __getpackageurl(package):
                         package)
 
 def fetch_remote_file(package, errors):
+
     try:
-        uri = inary.file.File.make_uri(__getpackageurl(package))
+        uri = inary.file.File.make_uri(__getpackageurlbinman(package))
     except PackageNotFound:
         errors.append(package)
         ctx.ui.info(_("{} could not be found").format(package), color="red")
@@ -90,12 +118,22 @@ def fetch_remote_file(package, errors):
     dest = ctx.config.cached_packages_dir()
     filepath = os.path.join(dest, uri.filename())
     if not os.path.exists(filepath):
+        failed = True
         try:
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
         except inary.fetcher.FetchError:
             errors.append(package)
             ctx.ui.info(_("{} could not be found").format(package), color="red")
-            return False
+            failed = True
+        if failed:
+            try:
+                new_uri = inary.file.File.make_uri(__getpackageurl(package))
+                inary.fetcher.fetch_url(new_uri, dest, ctx.ui.Progress)
+            except:
+                errors.append(package)
+                ctx.ui.info(_("{} could not be found").format(package), "red")
+                return False
+
     else:
         ctx.ui.info(_('{} [cached]').format(uri.filename()))
     return True

@@ -257,7 +257,17 @@ class PackageDB(lazydb.LazyDB):
             since_date = datetime.datetime(*time.strptime(historydb.get_last_repo_update(), "%Y-%m-%d")[0:6])
 
         for pkg in self.list_packages(repo):
-            enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
+            failed = False
+            try:
+                enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%m-%d-%Y")[0:6])
+            except:
+                failed = True
+            if failed:
+                try:
+                    enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
+                except:
+                    enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%d-%m")[0:6])
+
             if enter_date >= since_date:
                 packages.append(pkg)
         return packages

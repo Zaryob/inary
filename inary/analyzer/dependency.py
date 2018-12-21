@@ -20,9 +20,13 @@ _ = __trans.gettext
 
 import inary.data.relation as relation
 from inary.db.packagedb import PackageDB
+import inary.sxml.autoxml as autoxml
 import os
 
-class Dependency(relation.Relation):
+class Dependency(relation.Relation, metaclass = autoxml.autoxml):
+
+    a_type = [autoxml.String, autoxml.optional]
+
     def __str__(self):
         s = self.package
         if self.versionFrom:
@@ -37,12 +41,15 @@ class Dependency(relation.Relation):
             s += _(" release <= ") + self.releaseTo
         if self.release:
             s += _(" release ") + self.release
+        if self.type:
+            s += " (" + self.type + ")"
         return s
 
     def name(self):
         return self.package
 
     def satisfied_by_dict_repo(self, dict_repo):
+
         if self.package not in dict_repo:
             return False
         else:

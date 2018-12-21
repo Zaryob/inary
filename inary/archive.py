@@ -121,17 +121,12 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
+                 compressformat = None,
                  compresslevel = None,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
         """
-
-        if not compresslevel:
-            compresslevel = ctx.config.values.build.compressionlevel
-
-        if len(mode) > 1 or mode not in "rw":
-            raise ValueError("mode must be 'r' or 'w'.")
 
         try:
             import lzma
@@ -141,11 +136,24 @@ class TarFile(tarfile.TarFile):
             except ImportError:
                 raise tarfile.CompressionError("Lzma module is not available")
 
-        if fileobj is not None:
-            fileobj = _LZMAProxy(fileobj, mode)
-        else:
+        if not compresslevel:
+            compresslevel = ctx.config.values.build.compressionlevel
 
-            fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
+
+        if len(mode) > 1 or mode not in "rw":
+            raise ValueError("mode must be 'r' or 'w'.")
+
+        if 'w' in mode:
+            if fileobj is not None:
+                fileobj = _LZMAProxy(fileobj, mode)
+            else:
+                fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
+
+        else:
+            if fileobj is not None:
+                fileobj = _LZMAProxy(fileobj, mode)
+            else:
+                fileobj = lzma.LZMAFile(name, mode)
 
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
@@ -290,6 +298,20 @@ class ArchiveTar(ArchiveBase):
         super(ArchiveTar, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
+    def maybe_nuke_pip(self, info):
+        if not info.name.endswith(".egg-info"):
+            return
+        if not "site-packages" in info.name:
+            return
+        if not "/python" in info.name:
+            return
+        if not info.isreg():
+            return
+        if not os.path.isdir(info.name):
+            return
+        print("Overwriting stale pip install: /{}".format(info.name))
+        shutil.rmtree(info.name)
+
     def unpack_dir(self, target_dir, callback=None):
         rmode = ""
         self.tar = None
@@ -431,7 +453,7 @@ class ArchiveTar(ArchiveBase):
                 # Try to extract again.
                 self.tar.extract(tarinfo)
 
-            except OSError as e:
+            except IOError as e:
                 # Handle the case where new path is file, but old path is directory
                 # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:
@@ -500,7 +522,8 @@ class ArchiveTar(ArchiveBase):
                 compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
-                                            compresslevel=compresslevel
+                                            compresslevel=compresslevel,
+                                            compressformat=format
                                             )
             else:
                 raise UnknownArchiveType

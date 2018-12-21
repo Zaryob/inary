@@ -79,7 +79,7 @@ You can also give the name of a component.
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
-        repos = inary.db.repodb.RepoDB().list_repos(only_active)
+        repos = inary.db.repodb.RepoDB().list_repos(only_active=True)
         repository.update_repos(repos, ctx.get_option('force'))
 
         emerge.emerge(emerge_up_list)

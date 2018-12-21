@@ -27,10 +27,14 @@ import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import system
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import unlink
+from inary.actionsapi.shelltools import export
 from inary.actionsapi.libtools import gnuconfig_update
 from inary.actionsapi.shelltools import isDirectory
 from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import dosed
+from inary.actionsapi.inarytools import removeDir
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import removeDir
 
 class ConfigureError(inary.actionsapi.Error):
@@ -80,6 +84,9 @@ def configure(parameters = ''):
                          get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
                          "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                          parameters)
+
+        if get.buildTYPE() == "emul32":
+            args += " --libdir=/usr/lib32"
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

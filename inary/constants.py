@@ -71,6 +71,7 @@ class Constants(metaclass=Singleton):
         # suffix for auto generated debug packages
         self.__c.debug_name_suffix = "-dbginfo"
         self.__c.debug_file_suffix = ".debug"
+        self.__c.debug_file_buildid = ".build-id"
 
         # suffix for auto generated ar packages
         self.__c.static_name_suffix = "-static"  # an admissible use of constant

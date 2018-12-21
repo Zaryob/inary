@@ -33,7 +33,8 @@ class Singleton(object):
         return self._the_instances[type(self).__name__]
 
     def _delete(self):
-        #FIXME: After invalidate, previously initialized db object becomes stale
+        #FIXME: After invalidate, previously initialized db object becomes
+        ctx.ui.debug("LazyDB: {0} invalidated.".format(self.__class__.__name__))
         del self._the_instances[type(self).__name__]
 
 class LazyDB(Singleton):
@@ -70,6 +71,8 @@ class LazyDB(Singleton):
             pickle.dump(self._instance().__dict__,
                          open(self.__cache_file(), 'wb'), 1)
 
+            ctx.ui.debug("LazyDB: {0} cached.".format(self.__class__.__name__))
+
     def cache_valid(self):
         if not self.cachedir:
             return True
@@ -96,6 +99,8 @@ class LazyDB(Singleton):
     def cache_flush(self):
         if os.path.exists(self.__cache_file()):
             os.unlink(self.__cache_file())
+            ctx.ui.debug("LazyDB: {0} cached.".format(self.__class__.__name__))
+
 
     def invalidate(self):
         self._delete()

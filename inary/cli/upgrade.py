@@ -21,7 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-from inary.operations import operations, remove, upgrade
+from inary.operations import remove, upgrade
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
