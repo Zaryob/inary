@@ -42,6 +42,7 @@ class Package:
 
     formats = ("1.0", "1.1", "1.2")
     default_format =  "1.2"
+    timestamp = None
 
     @staticmethod
     def archive_name_and_format(package_format):
@@ -53,7 +54,7 @@ class Package:
             archive_suffix = ctx.const.lzma_suffix
         else:
             # "1.0" format does not have an archive
-            return (None, None)
+            return None, None
 
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
@@ -153,6 +154,9 @@ class Package:
             self.install_archive.close()
             arcpath = self.install_archive_path
             arcname = os.path.basename(arcpath)
+            if self.timestamp is not None:
+                tstamp = self.timestamp
+                os.utime(arcpath, (tstamp, tstamp))
             self.add_to_package(arcpath, arcname)
 
         self.impl.close()

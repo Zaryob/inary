@@ -37,12 +37,12 @@ MIMEFILE_DIR = "usr/share/mime/packages"
 class Build(build):
     def run(self):
         #Preparing configure file
-        shutil.copy("config/inary.conf-{}".format(sys.arch), "config/inary.conf")
+        shutil.copy("config/inary.conf-{}".format(os.uname().machine), "config/inary.conf")
 
         build.run(self)
 
         self.mkpath(self.build_base)
-        
+
         for in_file in IN_FILES:
             name, ext = os.path.splitext(in_file)
             self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
@@ -115,14 +115,14 @@ class Install(install):
             print("Installing '{}' translations...".format(lang))
             os.system("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
             if not self.root:
-                self.root = "/"
+                self.root = "./"
             destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
             if not os.path.exists(destpath):
                 os.makedirs(destpath)
             shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
-        #self.root ='/'
+        self.root ='/'
         destpath = os.path.join(self.root, "usr/share/doc/inary")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
@@ -212,17 +212,11 @@ setup(name="inary",
                 'inary.cli',
                 'inary.data',
                 'inary.db',
+                'inary.libraries',
                 'inary.operations',
                 'inary.sxml',
                 'inary.scenarioapi',
                 'inary.util'],
-    scripts = ['inary-cli',
-               'scripts/lsinary',
-               'scripts/uninary',
-               'scripts/check-newconfigs.py',
-               'scripts/inarysh',
-               'tools/pspec2po'],
-   # include_package_data=True,
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,

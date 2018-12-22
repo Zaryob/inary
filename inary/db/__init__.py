@@ -17,6 +17,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+from . import *
 
 def invalidate_caches():
     # Invalidates inary caches in use and forces to re-fill caches from disk when needed

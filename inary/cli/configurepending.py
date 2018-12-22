@@ -18,8 +18,53 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from inary.operations import operations
+import inary.util as util
 import inary.cli.command as command
+import inary.db
+import inary.ui
+import inary.data
+import inary.errors
+import inary.context as ctx
+
+def configure_pending(packages=None):
+    # Import SCOM
+    import inary.scomiface
+
+    # start with pending packages
+    # configure them in reverse topological order of dependency
+    installdb = inary.db.installdb.InstallDB()
+    if not packages:
+        packages = installdb.list_pending()
+    else:
+        packages = set(packages).intersection(installdb.list_pending())
+
+    order = inary.data.pgraph.generate_pending_order(packages)
+    try:
+        for x in order:
+            if installdb.has_package(x):
+                pkginfo = installdb.get_package(x)
+                pkg_path = installdb.package_path(x)
+                m = inary.data.metadata.MetaData()
+                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+                m.read(metadata_path)
+                # FIXME: we need a full package info here!
+                pkginfo.name = x
+                ctx.ui.notify(inary.ui.configuring, package = pkginfo, files = None)
+                inary.scomiface.post_install(
+                    pkginfo.name,
+                    m.package.providesScom,
+                    util.join_path(pkg_path, ctx.const.scom_dir),
+                    util.join_path(pkg_path, ctx.const.metadata_xml),
+                    util.join_path(pkg_path, ctx.const.files_xml),
+                    None,
+                    None,
+                    m.package.version,
+                    m.package.release
+                )
+                ctx.ui.notify(inary.ui.configured, package = pkginfo, files = None)
+            installdb.clear_pending(x)
+    except ImportError:
+        raise inary.errors.Error(_("scom package is not fully installed"))
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Configure pending packages
@@ -41,6 +86,5 @@ configures those packages.
         self.parser.add_option_group(group)
 
     def run(self):
-
-        self.init()
-        operations.configure_pending(self.args)
+        self.init(database=True, write=False)
+        configure_pending(self.args)

@@ -134,7 +134,7 @@ class File:
                 #oldsha1 = file(oldsha1fn).readlines()[0]
             if sha1sum and os.path.exists(origfile):
                 oldsha1 = inary.util.sha1_file(origfile)
-                if (newsha1 == oldsha1):
+                if newsha1 == oldsha1:
                     # early terminate, we already got it ;)
                     raise AlreadyHaveException(uri, origfile)
 
@@ -167,7 +167,7 @@ class File:
                     pass
 
         if sha1sum:
-            if (inary.util.sha1_file(localfile) != newsha1):
+            if inary.util.sha1_file(localfile) != newsha1:
                 clean_temporary()
                 raise Error(_("File integrity of {} compromised.").format(uri))
 
@@ -215,7 +215,7 @@ class File:
         """returns the underlying file object"""
         return self.__file__
 
-    def close(self, delete_transfer = False):
+    def close(self, delete_transfer = False): #FIXME: look this parameter
         """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:

@@ -57,7 +57,7 @@ class HistoryDB(lazydb.LazyDB):
             return
 
         destdir = os.path.join(hist_dir, config_file[1:])
-        inary.util.copy_file_stat(config_file, destdir);
+        inary.util.copy_file_stat(config_file, destdir)
 
     def update_repo(self, repo, uri, operation = None):
         self.history.update_repo(repo, uri, operation)

@@ -28,7 +28,6 @@ import inary.cli.addrepo
 import inary.cli.blame
 import inary.cli.build
 import inary.cli.check
-import inary.cli.clean
 import inary.cli.configurepending
 import inary.cli.deletecache
 import inary.cli.delta
@@ -79,7 +78,7 @@ class PreParser(optparse.OptionParser):
         self.opts = []
         self.rargs = self._get_args(args)
         self._process_args()
-        return (self.opts, self.args)
+        return self.opts, self.args
 
     def _process_args(self):
         args = []

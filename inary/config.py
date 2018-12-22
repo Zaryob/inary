@@ -27,8 +27,7 @@ _ = __trans.gettext
 import inary.context as ctx
 import inary.configfile
 import inary.errors
-import inary.util
-from inary.util import Singleton
+import inary.util as util
 
 class Error(inary.errors.Error):
     pass
@@ -44,7 +43,7 @@ class Options(object):
             self.__dict__[name] = value
 
 
-class Config(object, metaclass=Singleton):
+class Config(object, metaclass=util.Singleton):
     """Config Singleton"""
 
     def __init__(self, options = Options()):
@@ -90,11 +89,11 @@ class Config(object, metaclass=Singleton):
         return self.__dest_dir
 
     def subdir(self, path):
-        subdir = inary.util.join_path(self.dest_dir(), path)
+        subdir = util.join_path(self.dest_dir(), path)
 
         # If the directory does not exist, try to create it.
         try:
-            inary.util.ensure_dirs(subdir)
+            util.ensure_dirs(subdir)
         except OSError:
             pass
 

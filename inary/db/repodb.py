@@ -53,7 +53,6 @@ class Repo:
 medias = (cd, usb, remote, local) = list(range(4))
 
 class RepoOrder:
-
     def __init__(self):
         self._doc = None
         self.repos = self._get_repos()
@@ -174,6 +173,7 @@ class RepoDB(lazydb.LazyDB):
     def init(self):
         self.repoorder = RepoOrder()
 
+
     def has_repo(self, name):
         return name in self.list_repos(only_active=False)
 
@@ -197,7 +197,6 @@ class RepoDB(lazydb.LazyDB):
         if not os.path.exists(index_path):
             ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
-
 
         try:
             return xmlext.parse(index_path)

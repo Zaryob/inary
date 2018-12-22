@@ -21,7 +21,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.operations.operations as operations
 import inary.util as util
 
 class ListSources(command.Command, metaclass=command.autocommand):
@@ -53,7 +52,7 @@ Gives a brief list of sources published in the repositories.
         if l:
             maxlen = max([len(_p) for _p in l])
 
-        installed_list = operations.list_installed()
+        installed_list = inary.db.sourcedb.SourceDB().list_sources()
         l.sort()
 
         for p in l:

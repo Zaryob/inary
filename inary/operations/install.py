@@ -314,7 +314,7 @@ def get_install_order(packages):
     i_graph, order = install_order(packages)
     return order
 
-@operations.locked
+@util.locked
 def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
     """
     Returns True if no errors occured during the operation

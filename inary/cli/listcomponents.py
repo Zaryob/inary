@@ -59,5 +59,5 @@ repositories.
                 lenp = len(p)
                 #if p in installed_list:
                 #    p = util.colorize(p, 'cyan')
-                p = p + ' ' * max(0, 15 - lenp)
+                #p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('{0} - {1} '.format(component.name, str(component.summary)))

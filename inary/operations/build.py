@@ -33,14 +33,13 @@ import inary.file
 import inary.context as ctx
 import inary.analyzer.dependency as dependency
 import inary.api
-import inary.sourcearchive
+import inary.archive
 import inary.data.files as Files
 import inary.fetcher
 import inary.uri
 import inary.data.metadata as Metadata
 import inary.package
 import inary.data.component as Component
-import inary.archive as archive
 import inary.actionsapi.variables
 import inary.db
 
@@ -225,7 +224,7 @@ class Builder:
 
         self.read_translations(self.specdir)
 
-        self.sourceArchives = inary.sourcearchive.SourceArchives(self.spec)
+        self.sourceArchives = inary.archive.SourceArchives(self.spec)
 
         self.build_types = self.get_build_types()
 

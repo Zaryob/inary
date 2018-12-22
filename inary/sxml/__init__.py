@@ -12,15 +12,12 @@
 # Please read the COPYING file.
 #
 
-import sys
-import locale
-
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 
 
 class Error(inary.errors.Error):

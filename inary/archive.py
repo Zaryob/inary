@@ -27,10 +27,16 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY modules
-import inary
+
+import inary.errors
 import inary.util as util
 import inary.context as ctx
+import inary.uri
+import inary.fetcher
+import inary.mirrors
 
+class SourceArchiveError(inary.errors.Error):
+    pass
 
 class UnknownArchiveType(Exception):
     pass
@@ -115,14 +121,12 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
-                 compresslevel=9,
+                 compressformat = None,
+                 compresslevel = None,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
         """
-
-        if len(mode) > 1 or mode not in "rw":
-            raise ValueError("mode must be 'r' or 'w'.")
 
         try:
             import lzma
@@ -130,17 +134,31 @@ class TarFile(tarfile.TarFile):
             try:
                 from backports import lzma
             except ImportError:
-                raise tarfile.CompressionError("lzma module is not available")
+                raise tarfile.CompressionError("Lzma module is not available")
 
-        if fileobj is not None:
-            fileobj = _LZMAProxy(fileobj, mode)
+        if not compresslevel:
+            compresslevel = ctx.config.values.build.compressionlevel
+
+
+        if len(mode) > 1 or mode not in "rw":
+            raise ValueError("mode must be 'r' or 'w'.")
+
+        if 'w' in mode:
+            if fileobj is not None:
+                fileobj = _LZMAProxy(fileobj, mode)
+            else:
+                fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
+
         else:
-            fileobj = lzma.LZMAFile(name, mode, preset=compresslevel)
+            if fileobj is not None:
+                fileobj = _LZMAProxy(fileobj, mode)
+            else:
+                fileobj = lzma.LZMAFile(name, mode)
 
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
         except IOError:
-            raise ReadError("not a lzma file")
+            raise ReadError(_(" {} is not a lzma file").format(name))
         t._extfileobj = False
         return t
 
@@ -199,7 +217,7 @@ class ArchiveBzip2(ArchiveBase):
         import bz2
         bz2_file = bz2.BZ2File(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(bz2_file.read())
+        output.write(bz2_file.read().decode("utf-8"))
         output.close()
         bz2_file.close()
 
@@ -225,7 +243,7 @@ class ArchiveGzip(ArchiveBase):
         import gzip
         gzip_file = gzip.GzipFile(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(gzip_file.read())
+        output.write(gzip_file.read().decode("utf-8"))
         output.close()
         gzip_file.close()
 
@@ -279,6 +297,20 @@ class ArchiveTar(ArchiveBase):
         """Unpack tar archive to a given target directory(target_dir)."""
         super(ArchiveTar, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
+
+    def maybe_nuke_pip(self, info):
+        if not info.name.endswith(".egg-info"):
+            return
+        if not "site-packages" in info.name:
+            return
+        if not "/python" in info.name:
+            return
+        if not info.isreg():
+            return
+        if not os.path.isdir(info.name):
+            return
+        print("Overwriting stale pip install: /{}".format(info.name))
+        shutil.rmtree(info.name)
 
     def unpack_dir(self, target_dir, callback=None):
         rmode = ""
@@ -421,7 +453,7 @@ class ArchiveTar(ArchiveBase):
                 # Try to extract again.
                 self.tar.extract(tarinfo)
 
-            except OSError as e:
+            except IOError as e:
                 # Handle the case where new path is file, but old path is directory
                 # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:
@@ -469,9 +501,11 @@ class ArchiveTar(ArchiveBase):
         try:
             if oldwd:
                 os.chdir(oldwd)
+
         # Bug #6748
         except OSError:
             pass
+
         self.close()
 
     def add_to_archive(self, file_name, arc_name=None):
@@ -485,10 +519,12 @@ class ArchiveTar(ArchiveBase):
                 wmode = 'w:bz2'
             elif self.type in ('tarlzma', 'tarxz'):
                 format = "xz" if self.type == "tarxz" else "alone"
-                level = int(ctx.config.values.build.compressionlevel)
+                compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
-                                            compressformat=format)
+                                            compresslevel=compresslevel,
+                                            compressformat=format
+                                            )
             else:
                 raise UnknownArchiveType
 
@@ -803,3 +839,112 @@ class Archive:
 
     def unpack_files(self, files, target_dir):
         self.archive.unpack_files(files, target_dir)
+
+class SourceArchives:
+    """This is a wrapper for supporting multiple SourceArchive objects."""
+    def __init__(self, spec):
+        self.sourceArchives = [SourceArchive(a) for a in spec.source.archive]
+
+    def fetch(self, interactive=True):
+        for archive in self.sourceArchives:
+            archive.fetch(interactive)
+
+    def unpack(self, target_dir, clean_dir=True):
+        self.sourceArchives[0].unpack(target_dir, clean_dir)
+        for archive in self.sourceArchives[1:]:
+            archive.unpack(target_dir, clean_dir=False)
+
+
+class SourceArchive:
+    """source archive. this is a class responsible for fetching
+    and unpacking a source archive"""
+    def __init__(self, archive):
+        self.url = inary.uri.URI(archive.uri)
+        self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
+        self.archive = archive
+
+    def fetch(self, interactive=True):
+        if not self.is_cached(interactive):
+            if interactive:
+                self.progress = ctx.ui.Progress
+            else:
+                self.progress = None
+
+            try:
+                ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
+                if self.url.get_uri().startswith("mirrors://"):
+                    self.fetch_from_mirror()
+                if self.url.get_uri().startswith("file://"):
+                    self.fetch_from_locale()
+                else:
+                    inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
+            except inary.fetcher.FetchError:
+                if ctx.config.values.build.fallback:
+                    self.fetch_from_fallback()
+                else:
+                    raise
+
+            ctx.ui.info(_("\nSource archive is stored: {0}/{1}").format(ctx.config.archives_dir(), self.url.filename()))
+
+    def fetch_from_fallback(self):
+        archive = os.path.basename(self.url.get_uri())
+        src = os.path.join(ctx.config.values.build.fallback, archive)
+        ctx.ui.warning(_('Trying fallback address: {}').format(src))
+        inary.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
+
+    def fetch_from_locale(self):
+        url = self.url.uri
+
+        if not os.access(url[7:], os.F_OK):
+            raise SourceArchiveError(_('No such file or no permission to read'))
+        shutil.copy(url[7:], self.archiveFile)
+
+
+    def fetch_from_mirror(self):
+        uri = self.url.get_uri()
+        sep = uri[len("mirrors://"):].split("/")
+        name = sep.pop(0)
+        archive = "/".join(sep)
+
+        mirrors = inary.mirrors.Mirrors().get_mirrors(name)
+        if not mirrors:
+            raise SourceArchiveError(_("{} mirrors are not defined.").format(name))
+
+        for mirror in mirrors:
+            try:
+                url = os.path.join(mirror, archive)
+                ctx.ui.warning(_('Fetching source from mirror: {}').format(url))
+                inary.fetcher.fetch_url(url, ctx.config.archives_dir(), self.progress)
+                return
+            except inary.fetcher.FetchError:
+                pass
+
+        raise inary.fetcher.FetchError(_('Could not fetch source from {} mirrors.').format(name))
+
+    def is_cached(self, interactive=True):
+        if not os.access(self.archiveFile, os.R_OK):
+            return False
+
+        # check hash
+        if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
+            if interactive:
+                ctx.ui.info(_('{} [cached]').format(self.archive.name))
+            return True
+
+        return False
+
+    def unpack(self, target_dir, clean_dir=True):
+
+        # check archive file's integrity
+        if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
+            raise SourceArchiveError(_("unpack: check_file_hash failed"))
+
+        try:
+            archive = Archive(self.archiveFile, self.archive.type)
+        except UnknownArchiveType:
+            raise SourceArchiveError(_("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
+        except ArchiveHandlerNotInstalled:
+            raise SourceArchiveError(_("Inary needs {} to unpack this archive but it is not installed.").format(self.archive.type))
+
+        target_dir = os.path.join(target_dir, self.archive.target or "")
+        archive.unpack(target_dir, clean_dir)

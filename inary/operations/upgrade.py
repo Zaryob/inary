@@ -122,7 +122,7 @@ def find_upgrades(packages, replaces):
 
     return Ap
 
-@operations.locked
+@util.locked
 def upgrade(A=None, repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options.
@@ -226,10 +226,13 @@ def upgrade(A=None, repo=None):
 
     operations.remove.remove_obsoleted_packages()
 
-    for path in paths:
-        ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), color="yellow")
-        install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
-        install_op.install(not ctx.get_option('compare_sha1sum'))
+    try:
+        for path in paths:
+            ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), color="yellow")
+            install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
+            install_op.install(not ctx.get_option('compare_sha1sum'))
+    except Exception as e:
+        raise(e)
 
 def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced

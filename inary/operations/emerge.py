@@ -26,7 +26,7 @@ import inary.ui as ui
 import inary.db
 import inary.data
 
-@operations.locked
+@util.locked
 def emerge(A):
     """
     Builds and installs the given packages from source

@@ -21,7 +21,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.operations.operations as operations
 
 class ListNewest(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List newest packages in the repositories
@@ -58,7 +57,7 @@ packages from all repositories.
                 self.print_packages(arg)
         else:
             # print for all repos
-            for repo in operations.list_repos():
+            for repo in inary.db.repodb.RepoDB().list_repos(only_active=True):
                 self.print_packages(repo)
 
     def print_packages(self, repo):
@@ -69,7 +68,7 @@ packages from all repositories.
         else:
             since = None
 
-        l = operations.list_newest(repo, since)
+        l = inary.db.packagedb.PackageDB().list_newest(repo, since)
         if not l:
             return
 

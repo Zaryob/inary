@@ -17,7 +17,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.context as ctx
 import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.component as Component

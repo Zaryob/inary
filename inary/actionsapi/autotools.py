@@ -27,10 +27,14 @@ import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import system
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import unlink
+from inary.actionsapi.shelltools import export
 from inary.actionsapi.libtools import gnuconfig_update
 from inary.actionsapi.shelltools import isDirectory
 from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import dosed
+from inary.actionsapi.inarytools import removeDir
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import removeDir
 
 class ConfigureError(inary.actionsapi.Error):
@@ -60,7 +64,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = ''):
-    """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull\""""
+    """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"""
 
     if can_access_file('configure'):
         gnuconfig_update()
@@ -81,13 +85,16 @@ def configure(parameters = ''):
                          "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                          parameters)
 
+        if get.buildTYPE() == "emul32":
+            args += " --libdir=/usr/lib32"
+
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
         raise ConfigureError(_('No configure script found.'))
 
 def rawConfigure(parameters = ''):
-    """configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls\""""
+    """configure source with given parameters = --prefix=/usr --libdir=/usr/lib --with-nls """
     if can_access_file('configure'):
         gnuconfig_update()
 

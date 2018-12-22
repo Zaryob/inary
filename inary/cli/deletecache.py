@@ -65,3 +65,4 @@ consume a lot of disk space.""")
             cache_file = util.join_path(ctx.config.cache_root_dir(), cache)
             ctx.ui.info(_("Removing cache file {}...").format(cache_file))
             os.unlink(cache_file)
+        #TODO: add lock cleaner

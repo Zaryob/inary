@@ -323,7 +323,6 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
 
 def newdoc(sourceFile, destinationFile):
     """inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile"""
-    destinationDirectory = '' #490
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
     # Use copy instead of move or let build-install scream like file not found!

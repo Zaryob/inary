@@ -1463,20 +1463,20 @@
     <define name="Provides">
         <element name="Provides">
             <oneOrMore>
-                <ref name="COMAR"/>
+                <ref name="SCOM"/>
             </oneOrMore>
         </element>
     </define>
 
-    <!-- COMAR -->
-    <define name="COMAR">
-        <element name="COMAR">
-            <ref name="attlist.COMAR"/>
+    <!-- SCOM -->
+    <define name="SCOM">
+        <element name="SCOM">
+            <ref name="attlist.SCOM"/>
             <text/>
         </element>
     </define>
-    <!-- attlist.COMAR -->
-    <define name="attlist.COMAR">
+    <!-- attlist.SCOM -->
+    <define name="attlist.SCOM">
         <optional>
             <attribute name="script"/>
         </optional>

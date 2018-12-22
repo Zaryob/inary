@@ -38,3 +38,33 @@ class Singleton(type):
             cls.instance = super(Singleton, cls).__call__(*args, **kw)
 
         return cls.instance
+
+def locked(func):
+    """
+    Decorator for synchronizing privileged functions
+    """
+    def wrapper(*__args,**__kw):
+        try:
+            lock = open(join_path(ctx.config.lock_dir(), 'inary'), 'w')
+        except IOError:
+            raise inary.errors.PrivilegeError(_("You have to be root for this operation."))
+
+        try:
+            import fcntl
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            ctx.locked = True
+        except IOError:
+            if not ctx.locked:
+                raise inary.errors.AnotherInstanceError(_("Another instance of Inary is running. Only one instance is allowed."))
+
+        try:
+            inary.db.invalidate_caches()
+            ctx.ui.info(_('Invalidating database caches...'), verbose= True)
+            ret = func(*__args,**__kw)
+            ctx.ui.info(_('Updating database caches...'), verbose= True)
+            inary.db.update_caches()
+            return ret
+        finally:
+            ctx.locked = False
+            lock.close()
+    return wrapper

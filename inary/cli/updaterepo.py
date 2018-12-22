@@ -18,10 +18,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+import inary.db
 import inary.cli.command as command
 import inary.context as ctx
 
-from inary.operations import operations, repository
+from inary.operations import repository
 
 class UpdateRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Update repository databases
@@ -55,6 +56,6 @@ If no repository is given, all repositories are updated.
         if self.args:
             repos = self.args
         else:
-            repos = operations.list_repos()
+            repos = inary.db.repodb.RepoDB().list_repos(only_active=True)
 
         repository.update_repos(repos, ctx.get_option('force'))

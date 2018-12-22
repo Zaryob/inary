@@ -67,6 +67,7 @@
 <!ATTLIST Dependency releaseFrom CDATA #IMPLIED>
 <!ATTLIST Dependency releaseTo CDATA #IMPLIED>
 <!ATTLIST Dependency release CDATA #IMPLIED>
+<!ATTLIST Dependency type CDATA #IMPLIED>
 
 <!ELEMENT Patches (Patch*)>
 
@@ -100,9 +101,9 @@
 )*>
 
 <!ELEMENT Provides (COMAR)+>
-<!ELEMENT COMAR (#PCDATA)>
-<!ATTLIST COMAR script CDATA #IMPLIED>
-<!ATTLIST COMAR name CDATA #IMPLIED>
+<!ELEMENT SCOM (#PCDATA)>
+<!ATTLIST SCOM script CDATA #IMPLIED>
+<!ATTLIST SCOM name CDATA #IMPLIED>
 
 <!ELEMENT Conflicts (Package)+>
 <!-- we have a problem here, this Package tag only contains a package name

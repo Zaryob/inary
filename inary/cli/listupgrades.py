@@ -22,7 +22,7 @@ import inary.cli.command as command
 import inary.blacklist
 import inary.context as ctx
 import inary.db
-import inary.operations.operations as operations
+import inary.operations as operations
 
 class ListUpgrades(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List packages to be upgraded
@@ -51,7 +51,15 @@ Lists the packages that will be upgraded.
 
     def run(self):
         self.init(database = True, write = False)
-        upgradable_pkgs = operations.list_upgradable()
+        installdb = inary.db.installdb.InstallDB()
+        is_upgradable = operations.upgrade.is_upgradable
+
+        upgradable_pkgs = list(filter(is_upgradable, installdb.list_installed()))
+        # replaced packages can not pass is_upgradable test, so we add them manually
+        upgradable_pkgs.extend(list_replaces())
+
+        # consider also blacklist filtering
+        upgradable_pkgs = inary.blacklist.exclude_from(upgradable_pkgs, ctx.const.blacklist)
 
         component = ctx.get_option('component')
         if component:

@@ -23,7 +23,7 @@ import importlib
 
 __version__ = "1.0"
 
-__all__ = ['api', 'configfile', 'db', 'files', 'util']
+__all__ = ['api', 'configfile', 'db', 'util', '_cleanup']
 
 import inary.api
 import inary.config
