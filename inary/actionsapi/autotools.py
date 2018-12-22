@@ -64,7 +64,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = ''):
-    """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull\""""
+    """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"""
 
     if can_access_file('configure'):
         gnuconfig_update()
@@ -94,7 +94,7 @@ def configure(parameters = ''):
         raise ConfigureError(_('No configure script found.'))
 
 def rawConfigure(parameters = ''):
-    """configure source with given parameters = "--prefix=/usr --libdir=/usr/lib --with-nls\""""
+    """configure source with given parameters = --prefix=/usr --libdir=/usr/lib --with-nls """
     if can_access_file('configure'):
         gnuconfig_update()
 

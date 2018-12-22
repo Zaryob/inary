@@ -217,7 +217,7 @@ class ArchiveBzip2(ArchiveBase):
         import bz2
         bz2_file = bz2.BZ2File(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(bz2_file.read())
+        output.write(bz2_file.read().decode("utf-8"))
         output.close()
         bz2_file.close()
 
@@ -243,7 +243,7 @@ class ArchiveGzip(ArchiveBase):
         import gzip
         gzip_file = gzip.GzipFile(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(gzip_file.read())
+        output.write(gzip_file.read().decode("utf-8"))
         output.close()
         gzip_file.close()
 
