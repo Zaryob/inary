@@ -302,7 +302,7 @@ def dosym(sourceFile, destinationFile):
     makedirs(join_path(get.installDIR(), os.path.dirname(destinationFile)))
 
     try:
-        os.symlink(join_path(get.installDIR(), sourceFile) , join_path(get.installDIR() ,destinationFile))
+        os.symlink(sourceFile, join_path(get.installDIR() ,destinationFile))
     except OSError:
         error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
 

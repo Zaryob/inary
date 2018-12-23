@@ -988,26 +988,21 @@ class Builder:
                     # FIXME: Better way?
                     if frpath == util.removepathprefix("/",afile.target):
                         # This is an additional file, uid and gid will change
-                        if afile.owner:
-                            try:
-                                _uid = str(pwd.getpwnam(afile.owner)[2])
-                            except KeyError:
-                                ctx.ui.warning(_("No user named '%s' found "
+                        if afile.owner is None:
+                            afile.owner="root"
+                        if afile.group is None:
+                            afile.group="root"
+
+                        try:
+                            _uid = str(pwd.getpwnam(afile.owner)[2])
+                        except KeyError:
+                            ctx.ui.warning(_("No user named '%s' found "
                                                  "on the system") % afile.owner)
-                        if afile.group:
-                            try:
-                                _gid = str(grp.getgrnam(afile.group)[2])
-                            except KeyError:
-                                ctx.ui.warning(_("No group named '%s' found "
+                        try:
+                            _gid = str(grp.getgrnam(afile.group)[2])
+                        except KeyError:
+                            ctx.ui.warning(_("No group named '%s' found "
                                                  "on the system") % afile.group)
-                        else:
-                            try:
-                                # Assume owner == root if no group is given
-                                _gid = str(grp.getgrnam(afile.owner)[2])
-                            except KeyError:
-                                ctx.ui.warning(_("No group named '%s' (value "
-                                                 "guessed from owner) found "
-                                                 "on the system") % afile.owner)
                         break
                 d[frpath] = Files.FileInfo(path=frpath, type=ftype, permanent=permanent,
                                      size=fsize, hash=fhash, uid=_uid, gid=_gid,
