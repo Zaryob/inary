@@ -193,10 +193,11 @@ class CLI(inary.ui.UI):
         if ka['percent'] == 100:
             self.output(util.colorize(_('\n [complete]\n'), 'yellow'))
 
-    def status(self, msg=None):
+    def status(self, msg=None, push_screen=True):
         if msg:
             msg = str(msg)
-            self.output(util.colorize(msg + '\n', 'brightgreen'))
+            if push_screen:
+                self.output(util.colorize(msg + '\n', 'brightgreen'))
             util.xterm_title(msg)
 
     def notify(self, event, **keywords):

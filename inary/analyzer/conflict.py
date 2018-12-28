@@ -41,7 +41,7 @@ class Conflict(relation.Relation):
 def installed_package_conflicts(confinfo):
     """determine if an installed package in *repository* conflicts with
 given conflicting spec"""
-    return inary.data.relation.installed_package_satisfies(confinfo)
+    return relation.installed_package_satisfies(confinfo)
 
 def package_conflicts(pkg, confs):
     for c in confs:

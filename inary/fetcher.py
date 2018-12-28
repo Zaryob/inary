@@ -217,12 +217,13 @@ class Fetcher:
                                 handler.update(bytes_read)
                         handler.end(bytes_read)
 
+
             except OSError as e:
-                raise FetchError(_('Could not fetch destination file "{0}":{1}').format(self.url.get_uri(), e))
+                ctx.ui.error(FetchError(_('Could not fetch destination file: "{0}"\n\nTraceBack:{1}').format(self.url.get_uri(), e)))
 
             except requests.exceptions.InvalidSchema:
                 # TODO: Add ftp downloader with ftplib
-                raise FetchError(_('Package manager not support downloding from ftp mirror'))
+                ctx.ui.error(FetchError(_('Package manager not support downloding from ftp mirror')))
 
             except requests.exceptions.MissingSchema:
                 ctx.ui.info(_("Copying local file {}").format(self.url.get_uri()))
@@ -230,7 +231,7 @@ class Fetcher:
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
-            raise FetchError(_('A problem occurred. Please check the archive address and/or permissions again.'))
+            ctx.ui.error(FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
 
         shutil.move(self.partial_file, self.archive_file)
 

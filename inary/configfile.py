@@ -73,8 +73,8 @@ class GeneralDefaults:
     destinationdirectory = "/"
     autoclean = False
     distribution = "Sulin"
-    distribution_release = "2018"
-    distribution_id = "s18"
+    distribution_release = "2019"
+    distribution_id = "s19"
     architecture = "x86_64"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None

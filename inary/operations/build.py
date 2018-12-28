@@ -324,8 +324,7 @@ class Builder:
                       architecture))
 
         ctx.ui.status(_("Building source package: {}").format(
-                        self.spec.source.name))
-
+                self.spec.source.name))
         # check if all patch files exists, if there are missing no need
         # to unpack!
         self.check_patches()
@@ -521,10 +520,12 @@ class Builder:
         self.spec.source.partOf = comp.name
 
     def fetch_source_archives(self):
+        ctx.ui.status(_("Building source package: {} [ Fetching Step ]").format(self.spec.source.name), push_screen=False)
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
         ctx.ui.action(_("Unpacking archive(s)..."))
+        ctx.ui.status(_("\n * Building source package: {} [ Unpacking Step ]").format(self.spec.source.name), push_screen=False)
         self.sourceArchives.unpack(self.pkg_work_dir())
 
         # Grab AdditionalFiles
@@ -532,26 +533,30 @@ class Builder:
 
         # apply the patches and prepare a source directory for build.
         if self.apply_patches():
-            ctx.ui.info(_(" unpacked ({})").format(self.pkg_work_dir()))
+            ctx.ui.info(_(" -> unpacked ({})").format(self.pkg_work_dir()))
             self.set_state("unpack")
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ctx.ui.action(_("Setting up source..."))
+        ctx.ui.status(_("Building source package: {} [ SetupAction Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.action(_("\n * Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
     def run_build_action(self):
-        ctx.ui.action(_("Building source..."))
+        ctx.ui.status(_("Building source package: {} [ BuildAction Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.action(_("\n * Building source..."))
         if self.run_action_function(ctx.const.build_func):
             self.set_state("buildaction")
 
     def run_check_action(self):
-        ctx.ui.action(_("Testing package..."))
+        ctx.ui.status(_("Building source package: [ CheckAction Step ] {}").format(self.spec.source.name), push_screen=False)
+        ctx.ui.action(_("\n * Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
-        ctx.ui.action(_("Installing..."))
+        ctx.ui.status(_("Building source package: [ InstallAction Step ] {}").format(self.spec.source.name), push_screen=False)
+        ctx.ui.action(_("\n * Installing..."))
 
         # Before the default install make sure install_dir is clean
         if not self.build_type and os.path.exists(self.pkg_install_dir()):

@@ -273,7 +273,7 @@ class ArchiveLzma(ArchiveBase):
             from backports import lzma
         lzma_file = lzma.LZMAFile(self.file_path, "r")
         output = open(output_path, "w")
-        output.write(lzma_file.read())
+        output.write(lzma_file.read().decode("utf-8"))
         output.close()
         lzma_file.close()
 
@@ -874,12 +874,12 @@ class SourceArchive:
                 ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
-                if self.url.get_uri().startswith("file://"):
+                elif self.url.get_uri().startswith("file://"):
                     self.fetch_from_locale()
                 else:
                     inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
             except inary.fetcher.FetchError:
-                if ctx.config.values.build.fallback:
+                if ctx.config.values.build.fallback and not self.is_cached(interactive=False):
                     self.fetch_from_fallback()
                 else:
                     raise

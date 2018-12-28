@@ -108,6 +108,7 @@ class Constants(metaclass=Singleton):
         self.__c.files_db = "files"
         self.__c.repos = "repos"
         self.__c.devel_package_end = "-devel"
+        self.__c.info_package_end = "-pages"
         self.__c.doc_package_end = "-docs?$"
         self.__c.assign_to_system_devel = ["system.base", "system.devel"]
         self.__c.system_devel_component = "system.devel"

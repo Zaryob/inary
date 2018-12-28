@@ -47,7 +47,6 @@ class Build(build):
             name, ext = os.path.splitext(in_file)
             self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
 
-
 class BuildPo(build):
     def run(self):
         build.run(self)
@@ -98,7 +97,6 @@ class BuildPo(build):
                 os.unlink(f)
             except OSError:
                 pass
-
 
 class Install(install):
     def run(self):
@@ -162,19 +160,6 @@ class Install(install):
                     inaryconf.write("{0[0]} = {0[1]}\n".format(member))
             inaryconf.write('\n')
 
-class Uninstall(Command):
-    user_options = []
-    def initialize_options(self):
-        pass
-    def finalize_options(self):
-        pass
-    def run(self):
-        print('Uninstalling ...')
-        project_dir = os.path.join(get_python_lib(), PROJECT)
-        if os.path.exists(project_dir):
-            print(' removing: ', project_dir)
-            shutil.rmtree(project_dir)
-
 class Test(Command):
     user_options = []
     def initialize_options(self):
@@ -197,6 +182,7 @@ datas = [
     ("/usr/lib/tmpfiles.d/", ["config/inary.conf-armv7h"])
 ]
 
+
 setup(name="inary",
     version= inary.__version__,
     description="Inary (Special Package Manager)",
@@ -206,6 +192,7 @@ setup(name="inary",
     author_email="zaryob.dev@gmail.com",
     url="https://github.com/Zaryob/inary",
     #package_dir = {'': ''},
+
     packages = ['inary',
                 'inary.actionsapi',
                 'inary.analyzer',
@@ -220,7 +207,6 @@ setup(name="inary",
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,
-                'uninstall' : Uninstall,
                 'test' : Test},
     data_files =datas
     )

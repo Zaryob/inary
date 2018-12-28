@@ -21,7 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-from inary.operations import remove, upgrade
+from inary.operations import repository, remove, upgrade
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
@@ -91,7 +91,7 @@ expanded to package names.
         else:
             ctx.ui.info(_('Will not update repositories'))
 
-        repository = ctx.get_option('repository')
+        reposit = ctx.get_option('repository')
         components = ctx.get_option('component')
         packages = []
         if components:
@@ -99,9 +99,9 @@ expanded to package names.
             for name in components:
                 if componentdb.has_component(name):
                     if repository:
-                        packages.extend(componentdb.get_packages(name, walk=True, repo=repository))
+                        packages.extend(componentdb.get_packages(name, walk=True, repo=reposit))
                     else:
                         packages.extend(componentdb.get_union_packages(name, walk=True))
         packages.extend(self.args)
 
-        upgrade.upgrade(packages, repository)
+        upgrade.upgrade(packages, reposit)
