@@ -77,7 +77,7 @@ Legend:
     + support URI's whereever a filename is supported
     + http server
     + https server
-    - ftp server
+    + ftp server
     + inary updatedb over internet
 
 3. Beta
@@ -122,11 +122,12 @@ Legend:
   + multiple package repository (eray)
     + decide how to implement
     + support repo order
+    - file conflict checker
   + refactor xml support and implement multiple backends
     + ciksemel based modules rewrite with xml.dom.minidom (Zaryob)
-  / partial caching and automatic resume for file download (meren)
+  + partial caching and automatic resume for file download (meren)
     + use a '.part' extension
-    - resume file downloading (Darara.... fetcher will rewrite with requests) (Zaryob)
+    + resume file downloading (pycurl) (Zaryob)
   + search-file command (eray)
   + exception handling (eray)
     + uniform exception hierarchy

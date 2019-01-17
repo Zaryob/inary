@@ -1,13 +1,17 @@
-2018-12-07 Suleyman POyraz <zaryob.dev@gmail.com>
+2018-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
+	* fetcher pycurl kullanılarak yeniden yazıldı. Bu sayede base sistemde
+	dependency yükü azaldı, partial file download özelliği getirildi.
+
+2018-12-07 Suleyman Poyraz <zaryob.dev@gmail.com>
         * inary.operations.operations isimli modül hem saçma hem gereksizdi. Silindi.
         * clean command was a useless command. And it was deleted.
         * Fixed archiving problem. Added file compression level.
         * Fixed util module errors.
 
-2018-12-03 Suleyman POyraz <zaryob.dev@gmail.com>
+2018-12-03 Suleyman Poyraz <zaryob.dev@gmail.com>
         * Preprocess module added into inary/libraries until when I rewrite xmlfile
 
-2018-12-01 Suleyman POyraz <zaryob.dev@gmail.com>
+2018-12-01 Suleyman Poyraz <zaryob.dev@gmail.com>
         * PEP-8 style edits:
 	        - spaces and
         * Unreachable return colums are deleted.

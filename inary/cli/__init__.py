@@ -181,10 +181,18 @@ class CLI(inary.ui.UI):
         """ display progress of any operation """
         if ka['operation'] in ["removing", "rebuilding-db"]:
             return
+
         elif ka['operation'] == "fetching":
             totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
-            out = '\r%-30.50s (%s)%3d%% %9.2f %s [%s]' % \
-                  (ka['filename'], totalsize, ka['percent'],
+            
+            barLength, status = 20, ""
+            progress = float(ka['downloaded_size'] / ka['total_size'])
+            if progress >= 1.:
+                progress, status = 1, "\r\n"
+            block = int(round(barLength * progress))
+        
+            out = '\r%-30.50s [%s]  (%s) %3d%% %9.2f %s [%s]' % \
+                  (ka['filename'], "#" * block + "-" * (barLength - block), totalsize, ka['percent'],
                    ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
         else:
