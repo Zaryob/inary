@@ -37,18 +37,8 @@ consume a lot of disk space.""")
     name = ("delete-cache", "dc")
 
     def run(self):
-        select = inary.cli.CLI().choose(str(_('Select cleaning directory:\n')) ,
-                                              ['a) All cache','b) home-build cache (~/.inary)'])
-        if select=='a) All cache':
-            self.init(database=False, write=True)
-            self.delete_cache()
-
-        else:
-            self.init()
-            dest_dir = util.join_path(os.environ['HOME'], '.inary')
-            ctx.ui.info(_("Cleaning home-build directory {}...").format(dest_dir))
-            util.clean_dir(dest_dir)
-
+        self.init(database=False, write=True)
+        self.delete_cache()
 
     @staticmethod
     def delete_cache():
@@ -65,4 +55,3 @@ consume a lot of disk space.""")
             cache_file = util.join_path(ctx.config.cache_root_dir(), cache)
             ctx.ui.info(_("Removing cache file {}...").format(cache_file))
             os.unlink(cache_file)
-        #TODO: add lock cleaner
