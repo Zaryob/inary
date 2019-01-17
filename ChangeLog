@@ -3,6 +3,8 @@
 	dependency yükü azaldı, partial file download özelliği getirildi.
 	* actionsapi modulleri elden geçirildi kararlılık sağlandı
 	* delete-cache komutu elden geçti.
+	* util içindeki retrieve yüzünden erişilemeyen fonksiyon yaşanması
+	hatası giderildi.
 
 2018-12-07 Suleyman Poyraz <zaryob.dev@gmail.com>
         * inary.operations.operations isimli modül hem saçma hem gereksizdi. Silindi.
