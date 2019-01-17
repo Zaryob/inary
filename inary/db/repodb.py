@@ -34,8 +34,8 @@ xmlext içine tag için remove eklenene kadar böyle
 """
 
 try:
-    import ciksemel
-    parser = "ciksemel"
+    import iksemel
+    parser = "iksemel"
 except:
     import xml.dom.minidom as minidom
     parser = "minidom"
@@ -76,7 +76,7 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-        if parser=="ciksemel":
+        if parser=="iksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     status_node = r.getTag("Status")
@@ -117,7 +117,7 @@ class RepoOrder:
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-        if parser=="ciksemel":
+        if parser=="iksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     r.hide()

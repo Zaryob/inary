@@ -63,11 +63,11 @@ class Digraph(object):
         """add edge u -> v"""
         if not u in self.__v:
             self.add_vertex(u, udata)
-            if not v in self.__v:
-                self.add_vertex(v, vdata)
-                self.__adj[u].add(v)
-                if edata is not None:
-                    self.__edata[u][v] = edata
+        if not v in self.__v:
+            self.add_vertex(v, vdata)
+        self.__adj[u].add(v)
+        if edata is not None:
+             self.__edata[u][v] = edata
 
     def add_biedge(self, u, v, edata = None):
         self.add_edge(u, v, edata)
