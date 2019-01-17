@@ -53,10 +53,10 @@ def configure(parameters = ''):
     """configure source with given parameters."""
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
-        if system('perl Build.PL installdirs=vendor destdir={}'.format(get.installDIR())):
+        if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(get.curPERL(), get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
     else:
-        if system('perl Makefile.PL {0} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={1}'.format(parameters, get.installDIR())):
+        if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters, get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
 
 def make(parameters = ''):
@@ -65,7 +65,7 @@ def make(parameters = ''):
         if system('make {}'.format(parameters)):
             raise MakeError(_('Make failed.'))
     else:
-        if system('perl Build {}'.format(parameters)):
+        if system('perl{0} Build {1}'.format(get.curPERL(), parameters)):
             raise MakeError(_('perl build failed.'))
 
 def install(parameters = 'install'):
@@ -74,7 +74,7 @@ def install(parameters = 'install'):
         if system('make {}'.format(parameters)):
             raise InstallError(_('Make failed.'))
     else:
-        if system('perl Build install'):
+        if system('perl{} Build install'.get.curPERL()):
             raise MakeError(_('perl install failed.'))
 
     removePacklist()

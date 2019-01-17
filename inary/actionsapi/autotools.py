@@ -27,14 +27,10 @@ import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import system
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import unlink
-from inary.actionsapi.shelltools import export
 from inary.actionsapi.libtools import gnuconfig_update
 from inary.actionsapi.shelltools import isDirectory
 from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import dosed
-from inary.actionsapi.inarytools import removeDir
-from inary.actionsapi.shelltools import isDirectory
-from inary.actionsapi.shelltools import ls
 from inary.actionsapi.inarytools import removeDir
 
 class ConfigureError(inary.actionsapi.Error):
@@ -46,6 +42,12 @@ class ConfigureError(inary.actionsapi.Error):
             ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 class MakeError(inary.actionsapi.Error):
+    def __init__(self, value=''):
+        inary.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error(value)
+
+class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
@@ -104,7 +106,8 @@ def rawConfigure(parameters = ''):
         raise ConfigureError(_('No configure script found.'))
 
 def compile(parameters = ''):
-    system('{0} {1} {2}'.format(get.CC(), get.CFLAGS(), parameters))
+    if system('{0} {1} {2}'.format(get.CC(), get.CFLAGS(), parameters)):
+        raise CompileError(_('Compiling failed.'))
 
 def make(parameters = ''):
     """make source with given parameters = "all" || "doc" etc."""

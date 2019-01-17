@@ -104,7 +104,8 @@ def unlink(pattern):
             except OSError:
                 ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: {}.').format(filePath))
         elif isDirectory(filePath):
-            pass
+            ctx.ui.warning(_('ActionsAPI [unlink]: %s is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.') % filePath)
+
         else:
             ctx.ui.error(_('ActionsAPI [unlink]: File {} doesn\'t exists.').format(filePath))
 
@@ -137,7 +138,7 @@ def move(source, destination):
 
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
 def copy(source, destination, sym = True):
-    """recursively copy a "source" file or directory to "destination\""""
+    """recursively copy a "source" file or directory to "destination\" """
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
         error(_("ActionsAPI [copy]: No file matched pattern \"{}\".").format(source))

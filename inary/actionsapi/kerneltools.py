@@ -27,7 +27,7 @@ import inary.context as ctx
 import inary.actionsapi
 import inary.actionsapi.get          as get
 import inary.actionsapi.autotools    as autotools
-import inary.actionsapi.inarytools    as inarytools
+import inary.actionsapi.inarytools   as inarytools
 import inary.actionsapi.shelltools   as shelltools
 
 
@@ -84,7 +84,7 @@ def __getExtraVersion():
         # if successful, this is something like:
         # .1 for 2.6.30.1
         # _rc8 for 2.6.30_rc8
-        extraversion = re.split("3.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
+        extraversion = re.split("4.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
     except IndexError:
         # e.g. if version == 2.6.30
         pass

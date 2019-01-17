@@ -41,6 +41,7 @@ def exportFlags():
     # http://liste.pardus.org.tr/gelistirici/2009-January/016442.html
     os.environ['CC'] = "{}-gcc".format(values.build.host)
     os.environ['CXX'] = "{}-g++".format(values.build.host)
+    os.environ['LD'] = "{}-ld".format(values.build.host)
 
 class Env(object):
     """General environment variables used in actions API"""

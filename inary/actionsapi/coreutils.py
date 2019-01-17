@@ -24,7 +24,7 @@ from itertools import filterfalse
 import inary.actionsapi
 
 def cat(filename):
-    return file(filename)
+    return open(filename)
 
 class grep:
     """keep only lines that match the regexp"""

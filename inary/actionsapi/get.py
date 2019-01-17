@@ -36,6 +36,7 @@ class BinutilsError(inary.actionsapi.Error):
 # Globals
 env = inary.actionsapi.variables.glb.env
 dirs = inary.actionsapi.variables.glb.dirs
+config = inary.actionsapi.variables.glb.config
 generals = inary.actionsapi.variables.glb.generals
 
 def curDIR():
@@ -53,6 +54,10 @@ def curPYTHON():
 
 def curPERL():
     """ returns currently used perl's version"""
+    #for i in os.listdir("/usr/bin"):
+    #    if i.startswith("perl"):
+    #        if i.split("perl")[1] 
+
     return os.path.realpath('/usr/bin/perl').split('perl')[1]
 
 def ENV(environ):
@@ -76,12 +81,15 @@ def installDIR():
     """returns the path of binary packages"""
     return env.install_dir
 
-# Pardus Related Functions
+# Sulin Related Functions
 
 def lsbINFO():
     """Returns a dictionary filled through /etc/lsb-release."""
     return dict([(l.split("=")[0], l.split("=")[1].strip("'\"")) \
                 for l in open("/etc/lsb-release", "r").read().strip().split("\n") if "=" in l])
+
+def kernelVERSION():
+    return env.src_version
 
 # PSPEC Related Functions
 

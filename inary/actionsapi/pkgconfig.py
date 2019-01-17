@@ -39,7 +39,7 @@ def getVariableForLibrary(library, variable):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -58,7 +58,7 @@ def getLibraryVersion(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -78,7 +78,7 @@ def getLibraryCFLAGS(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -98,7 +98,7 @@ def getLibraryLIBADD(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -117,7 +117,7 @@ def runManualCommand(*args):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("pkg-config is not installed on your system."))
+            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()

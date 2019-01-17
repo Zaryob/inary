@@ -56,7 +56,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error(value)
 
 def configure(parameters = '', installPrefix = '/{}'.format(get.defaultprefixDIR()), sourceDir = '.'):
-    """configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... \""""
+    """configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... " """
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
                       -DCMAKE_C_FLAGS="{1}" \

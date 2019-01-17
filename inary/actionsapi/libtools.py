@@ -66,7 +66,7 @@ def gen_usr_ldscript(dynamicLib):
     destinationFile = open('{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib), 'w')
     content = '''
 /* GNU ld script
-    Since Pardus has critical dynamic libraries
+    Since Sulin has critical dynamic libraries
     in /lib, and the static versions in /usr/lib,
     we need to have a "fake" dynamic lib in /usr/lib,
     otherwise we run into linking problems.
