@@ -1,7 +1,7 @@
 [build]
 build_host = localhost
 # buildhelper = None
-commonflags = -U_FORTIFY_SOURCE -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe 
+commonflags = -U_FORTIFY_SOURCE -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe
 cflags = %(commonflags)s
 cxxflags = %(commonflags)s
 host = armv7l-unknown-linux-gnueabihf
@@ -39,10 +39,14 @@ bandwidth_limit = 0
 destinationdirectory = /
 distribution = Sulin ARM
 distribution_release = 0.1
-distribution_id = cp
+distribution_id = s19
 # ftp_proxy = None
 # http_proxy = None
 # https_proxy = None
+allow_docs=True
+allow_pages=True
+allow_dbginfo=True
+allow_static=False
 ignore_delta = False
 ignore_safety = False
 package_cache = False

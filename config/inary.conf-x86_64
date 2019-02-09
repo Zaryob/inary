@@ -13,6 +13,7 @@ fallback = http://source.sulin.org/archives
 generateDebug = False
 jobs = -j5
 ldflags = -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
+#makeflags =
 ignored_build_types = pae
 
 [directories]
@@ -36,6 +37,10 @@ tmp_dir = /var/inary
 architecture = x86_64
 autoclean = False
 bandwidth_limit = 0
+allow_docs=True
+allow_pages=True
+allow_dbginfo=True
+allow_static=False
 destinationdirectory = /
 distribution = Sulin
 distribution_release = 2019
