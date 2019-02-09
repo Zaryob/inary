@@ -289,7 +289,7 @@ def plan_install_pkg_names(A):
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                ctx.ui.debug('checking {}'.format(str(dep)))
+                ctx.ui.debug(' -> checking {}'.format(str(dep)))
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo():
@@ -297,6 +297,27 @@ def plan_install_pkg_names(A):
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
+            if ctx.config.values.general.allow_docs:
+                dep=x+ctx.const.doc_package_end
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
+            if ctx.config.values.general.allow_pages:
+                dep=x+ctx.const.info_package_end
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
+            if ctx.config.values.general.allow_dbginfo:
+                dep=x+ctx.const.debug_name_suffix
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
+            if ctx.config.values.general.allow_static:
+                dep=x+ctx.const.static_name_suffix
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
+
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
@@ -305,12 +326,13 @@ def plan_install_pkg_names(A):
     return G_f, order
 
 def get_install_order(packages):
+    #LOOK: This function is important
     """
     Return a list of packages in the installation order with extra needed
     dependencies -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    install_order = operations.install.plan_install_pkg_names
+    install_order = plan_install_pkg_names
     i_graph, order = install_order(packages)
     return order
 

@@ -124,6 +124,26 @@ def plan_remove(A):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
+                    if ctx.config.values.general.allow_docs:
+                        doc_package=x+ctx.const.doc_package_end
+                        if packagedb.has_package(doc_package):
+                            Bp.add(doc_package)
+
+                    if ctx.config.values.general.allow_pages:
+                        info_package=x+ctx.const.info_package_end
+                        if packagedb.has_package(info_package):
+                            Bp.add(info_package)
+
+                    if ctx.config.values.general.allow_dbginfo:
+                        dbg_package=x+ctx.const.debug_name_suffix
+                        if packagedb.has_package(dbg_package):
+                            Bp.add(dbg_package)
+
+                    if ctx.config.values.general.allow_static:
+                        static_package=x+ctx.const.static_name_suffix
+                        if packagedb.has_package(static_package):
+                            Bp.add(static_package)
+
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)

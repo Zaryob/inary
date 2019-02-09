@@ -46,11 +46,9 @@ def ignorance_is_bliss(f):
         if pbas in _blessed_kernel_borks:
             return True
 
-    # Running eopkg as root will mutate .pyc files. Ignore them.
     if p.endswith(".pyc"):
+        #ignore python compiled file changes
         return True
-
-
 
 def file_corrupted(pfile):
     path = os.path.join(ctx.config.dest_dir(), pfile.path)

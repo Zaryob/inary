@@ -56,7 +56,6 @@ class AbandonedFilesException(inary.errors.Error):
 class ExcludedArchitectureException(Error):
     pass
 
-
 # Helper Functions
 def get_file_type(path, pinfo_list):
     """Return the file type of a path according to the given PathInfo
@@ -374,7 +373,7 @@ class Builder:
 
     def set_build_type(self, build_type):
         if build_type:
-            ctx.ui.action(_("Rebuilding for {}").format(build_type))
+            ctx.ui.action(_("Rebuilding source for build type: {}").format(build_type))
 
         self.build_type = build_type
         self.set_environment_vars()
@@ -402,6 +401,12 @@ class Builder:
             env["CFLAGS"] = os.getenv("CFLAGS").replace("-fPIC", "")
             env["CXXFLAGS"] = os.getenv("CXXFLAGS").replace("-fPIC", "")
             env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
+        if self.build_type == "clang":
+            env['CC'] = "clang"
+            env['CXX'] = "clang++"
+        if self.build_type == "clang32":
+            env['CC'] = "clang -m32"
+            env['CXX'] = "clang++ -m32"
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
@@ -524,8 +529,8 @@ class Builder:
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
-        ctx.ui.action(_("Unpacking archive(s)..."))
-        ctx.ui.status(_("\n * Building source package: {} [ Unpacking Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: {} [ Unpacking Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
         # Grab AdditionalFiles
@@ -539,24 +544,24 @@ class Builder:
     def run_setup_action(self):
         #  Run configure, build and install phase
         ctx.ui.status(_("Building source package: {} [ SetupAction Step ]").format(self.spec.source.name), push_screen=False)
-        ctx.ui.action(_("\n * Setting up source..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
     def run_build_action(self):
         ctx.ui.status(_("Building source package: {} [ BuildAction Step ]").format(self.spec.source.name), push_screen=False)
-        ctx.ui.action(_("\n * Building source..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Building source..."))
         if self.run_action_function(ctx.const.build_func):
             self.set_state("buildaction")
 
     def run_check_action(self):
         ctx.ui.status(_("Building source package: [ CheckAction Step ] {}").format(self.spec.source.name), push_screen=False)
-        ctx.ui.action(_("\n * Testing package..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
         ctx.ui.status(_("Building source package: [ InstallAction Step ] {}").format(self.spec.source.name), push_screen=False)
-        ctx.ui.action(_("\n * Installing..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Installing..."))
 
         # Before the default install make sure install_dir is clean
         if not self.build_type and os.path.exists(self.pkg_install_dir()):
@@ -893,7 +898,7 @@ class Builder:
         # FIXME: find a better way to deal with the summary and description constants.
         static_package_obj.summary['en'] = 'Ar files for {}'.format(self.spec.source.name)
         static_package_obj.description['en'] = 'Ar files for {}'.format(self.spec.source.name)
-        static_package_obj.partOf = self.spec.source.partOf
+        static_package_obj.partOf = "static"
         for f in ar_files:
             static_package_obj.files.append(Specfile.Path(path=f[len(self.pkg_install_dir()):], fileType="library"))
 
@@ -911,7 +916,7 @@ class Builder:
         # FIXME: find a better way to deal with the summary and description constants.
         debug_package_obj.summary['en'] = 'Debug files for {}'.format(package.name)
         debug_package_obj.description['en'] = 'Debug files for {}'.format(package.name)
-        debug_package_obj.partOf = package.partOf
+        debug_package_obj.partOf = "dbginfo"
 
         dependency = inary.analyzer.dependency.Dependency()
         dependency.package = package.name
