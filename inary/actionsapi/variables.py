@@ -35,6 +35,7 @@ def exportFlags():
     os.environ['LDFLAGS'] = values.build.ldflags
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
+    os.environ['MAKEFLAGS'] = values.build.makeflags
 
     os.environ['LD_AS_NEEDED'] = "1"
 
@@ -86,7 +87,7 @@ class Dirs:
     localstate = 'var'
     libexec = 'usr/libexec'
     defaultprefix = 'usr'
-    emul32prefix = 'emul32' 
+    emul32prefix = 'emul32'
 
     # These should be owned by object not the class. Or else Python
     # will bug us with NoneType errors because of uninitialized

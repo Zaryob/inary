@@ -104,7 +104,7 @@ def unlink(pattern):
             except OSError:
                 ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: {}.').format(filePath))
         elif isDirectory(filePath):
-            ctx.ui.warning(_('ActionsAPI [unlink]: %s is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.') % filePath)
+            ctx.ui.warning(_('ActionsAPI [unlink]: {} is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(filePath))
 
         else:
             ctx.ui.error(_('ActionsAPI [unlink]: File {} doesn\'t exists.').format(filePath))
@@ -251,7 +251,7 @@ def dirName(filePath):
 ##         fix here tomorrow (don't forget)         ##
 def system(command):
     #command an list but should be an str
-    sys.stdout.write(command)
+    sys.stdout.write(command+"\n")
 #    command = str.join(str.split(command))
     retValue = run_logged(command)
 
