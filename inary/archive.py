@@ -874,7 +874,7 @@ class SourceArchive:
                 ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
-                elif self.url.get_uri().startswith("file://"):
+                elif self.url.get_uri().startswith("file://") or self.url.get_uri().startswith("/"):
                     self.fetch_from_locale()
                 else:
                     inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)

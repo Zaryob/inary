@@ -183,9 +183,9 @@ class Install(AtomicOperation):
         """check system requirements"""
         # Check free space
         total_size, symbol = util.human_readable_size(util.free_space())
-        ctx.ui.debug(_("Free Space: %.2f %s "% (total_size, symbol))) # I DONT KNOW BETTER WAY
         if util.free_space() < self.installedSize:
             raise Error(_("Is there enought free space in your disk."))
+        ctx.ui.debug(_("Free Space: %.2f %s "% (total_size, symbol)))
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
@@ -550,7 +550,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package)
 
         # filesdb
-        ctx.ui.info(_('Adding \'{}\' to db...').format(self.metadata.package.name), color='purple')
+        ctx.ui.info(_('-> Adding \'{}\' to db...').format(self.metadata.package.name), color='purple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
