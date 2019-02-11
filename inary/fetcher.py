@@ -18,16 +18,13 @@ import sys
 import time
 import shutil
 
+#Gettext translation library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
 # Network libraries
 # import ftplib
-
-#Gettext translation library
-
 
 # inary modules
 import inary
@@ -92,7 +89,7 @@ class UIHandler:
             self.percent = (self.size * 100.0) / self.total_size
         else:
             self.percent = 0
-            
+
         if int(self.now()) != int(self.last_updated) and self.size > 0:
             try:
                 self.rate, self.symbol = util.human_readable_rate((self.size - self.exist_size) / (self.now() - self.s_time))
@@ -118,7 +115,7 @@ class UIHandler:
                                 symbol          = self.symbol)
 
         self.last_updated = self.now()
- 
+
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
@@ -156,7 +153,7 @@ class Fetcher:
 
     def fetch(self, verify=None, timeout=10):
         """Return value: Fetched file's full path.."""
-        
+
         if not verify:
             import ssl
             ssl._create_default_https_context = ssl._create_unverified_context
@@ -180,7 +177,7 @@ class Fetcher:
             # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
             c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
             c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
-            c.setopt(pycurl.CONNECTTIMEOUT, timeout) #This for waiting to establish connection 
+            c.setopt(pycurl.CONNECTTIMEOUT, timeout) #This for waiting to establish connection
            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
             c.setopt(pycurl.MAXREDIRS, 10)
             c.setopt(pycurl.NOSIGNAL, True)
@@ -196,19 +193,18 @@ class Fetcher:
                 ctx.ui.info(_("Download resuming..."))
             else:
                 file_id = open(self.partial_file, "wb")
-                
+
             # Function sets
             c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
             c.setopt(c.NOPROGRESS, False)
             c.setopt(c.XFERINFOFUNCTION, handler.update)
-            
+
             c.setopt(pycurl.FOLLOWLOCATION, 1)
             c.setopt(c.WRITEDATA, file_id)
 
             try:
                 c.perform()
                 c.close()
-                handler.end()
             except pycurl.error as x:
                 raise FetchError("Pycurl.Error: {}".format(x))
 
