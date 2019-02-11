@@ -158,8 +158,6 @@ class Fetcher:
             import ssl
             ssl._create_default_https_context = ssl._create_unverified_context
 
-        self.test()
-
         if not self.url.filename():
             raise FetchError(_('Filename error'))
 
