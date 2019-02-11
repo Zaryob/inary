@@ -91,8 +91,8 @@ class BuildDefaults:
     build_host = "localhost"
     host = "x86_64-linux-gnu"
     jobs = "-j1" 
-    generateDebug = False
-    enableSandbox = True
+    generateDebug = True
+    enableSandbox = False
     cflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     cxxflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
@@ -100,7 +100,7 @@ class BuildDefaults:
     allow_docs=True
     allow_pages=True
     allow_dbginfo=True
-    allow_static=False
+    allow_static=True
     buildhelper = None
     compressionlevel = 9
     fallback = "http://www.sulin.com.tr/pub"
