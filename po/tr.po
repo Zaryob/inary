@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 22:22+0300\n"
+"POT-Creation-Date: 2019-02-11 15:53+0300\n"
 "PO-Revision-Date: 2010-03-24 16:28+0200\n"
 "Last-Translator: Suleyman Poyraz <nipalensiaquila@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -94,9 +94,7 @@ msgstr "Seçenekler"
 
 #: inary-cli:49
 #, fuzzy
-msgid ""
-"\n"
-"Program terminated."
+msgid "Program terminated."
 msgstr "Program sonlandırıldı."
 
 #: inary-cli:51
@@ -456,9 +454,8 @@ msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Erişim reddedildi: {}."
 
 #: inary/actionsapi/shelltools.py:107
-#, python-format
-msgid "ActionsAPI [unlink]: {} is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories."
-msgstr "ActionsAPI [unlink]: {} bir dosya değildir, dizin ise \'unlinkDir\' ya da \'removeDir\' ile silebilirsiniz."
+msgid "ActionsAPI [unlink]: {} is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
+msgstr "ActionsAPI [unlink]: {} bir dosya değildir, dizin ise 'unlinkDir' ya da 'removeDir' ile silebilirsiniz."
 
 #: inary/actionsapi/shelltools.py:110
 #, fuzzy
@@ -841,7 +838,7 @@ msgstr "Paketin eski sürüme indirilmesi reddedildi."
 
 #: inary/atomicoperations.py:309
 msgid "* Added symlink '{}' "
-msgstr "* Sembolik link \'{}\' eklendi"
+msgstr "* Sembolik link '{}' eklendi"
 
 #: inary/atomicoperations.py:312
 #, fuzzy, python-brace-format
@@ -863,7 +860,7 @@ msgstr "Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddet
 msgid "Storing {}"
 msgstr "{} depolanıyor."
 
-#: inary/atomicoperations.py:553
+#: inary/atomicoperations.py:553 inary/db/filesdb.py:48
 #, fuzzy
 msgid "-> Adding '{}' to db..."
 msgstr "-> {} veritabanına ekleniyor... "
@@ -2693,11 +2690,6 @@ msgstr "{} bileşeni bulunamadı."
 msgid "Creating files database..."
 msgstr "Dosya veritabanını yeniden inşa et"
 
-#: inary/db/filesdb.py:48
-#, fuzzy
-msgid "-> Adding '{}' to db..."
-msgstr "-> {} veritabanına ekleniyor... "
-
 #: inary/db/filesdb.py:49
 #, fuzzy
 msgid ""
@@ -2819,27 +2811,27 @@ msgstr "Hedef dosyasına erişim reddedildi: \"{}\""
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:214
+#: inary/fetcher.py:213
 #, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr "Bir hata oluştu. Lütfen arşiv adresini ve/veya kullanıcı izinlerini kontrol edin."
 
-#: inary/fetcher.py:247
+#: inary/fetcher.py:246
 #, fuzzy
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr "{} protokolü için vekil yapılandırması bulundu."
 
-#: inary/fetcher.py:255
+#: inary/fetcher.py:254
 #, fuzzy
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr "Bant genişliği kullanımı {} KB/s ile sınırlı."
 
-#: inary/fetcher.py:280
+#: inary/fetcher.py:279
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} paketi {1} deposunda bulundu"
 
-#: inary/fetcher.py:284
+#: inary/fetcher.py:283
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "{} paketi zaten indirilmiş"
@@ -3842,7 +3834,7 @@ msgid ""
 "{}"
 msgstr ""
 "Çıktı: \n"
-""{}"
+"{}"
 
 #: inary/util.py:788
 #, fuzzy
@@ -3863,55 +3855,26 @@ msgstr "\"subprocess\" modulü içe aktarılamadı."
 msgid "Invalid version string: '{}'"
 msgstr "Hatalı sürüm dizgisi: {}"
 
+#~ msgid "WARNING:\n"
+#~ msgstr "UYARI:\n"
+
 #, fuzzy
 #~ msgid ""
+#~ "\tCiksemel XML Parser not found!!!\n"
+#~ "\tMinidom slower but\n"
+#~ "\tFalling back with minidom!!! :(\n"
 #~ "\n"
-#~ "!!! Please attach the config.log to your bug report:\n"
-#~ "{}/config.log"
 #~ msgstr ""
-#~ "\n"
-#~ "Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
-#~ "{}/config.log"
+#~ "\tCiksemel XML Parser bulunamadı!!!\n"
+#~ "\tMinidom yavaş olmasına rağmen\n"
+#~ "\tMinidom ile geri düşüm yapılıyor!!! :(\n"
 
 #, fuzzy
-#~ msgid "Extracting firmware list for {}..."
-#~ msgstr "{} dosyaları arşivden çıkartılıyor."
+#~ msgid "pkg-config is not installed on your system."
+#~ msgstr "Paket pkg-config kurulu değil."
 
-#, fuzzy
-#~ msgid "The following firmwares are not installed:"
-#~ msgstr "Aşağıdaki paketler kurulacak:"
-
-#~ msgid "Missing"
-#~ msgstr "Kayıp"
-
-#~ msgid "Please install requests"
-#~ msgstr "Lütfen python3-requests paketini kurunuz"
-
-#~ msgid "No group named '%s' (value guessed from owner) found on the system"
-#~ msgstr "(sahiplik adı atanmış) '%s' grubu sistemde bulunamadı"
-
-#, fuzzy
-#~ msgid "Rebuilding for {}"
-#~ msgstr "{} için tekrar inşa ediliyor"
-
-#, fuzzy
-#~ msgid "Copying local file {}"
-#~ msgstr "Önbellek dosyası {} siliniyor..."
-
-#~ msgid "Package manager not support downloding from ftp mirror"
-#~ msgstr "Paket yöneticisi ftp yansılarından dosya çekmeyi desteklemiyor"
-
-#, fuzzy
-#~ msgid "Could not fetch destination file \"%s\":%s"
-#~ msgstr "\"{0}\" hedef dosyasına erişilemedi: {1}"
-
-#, fuzzy
-#~ msgid "Cleaning home-build directory {}..."
-#~ msgstr "İnşa dizini temizleniyor..."
-
-#, fuzzy
-#~ msgid "Select cleaning directory:\n"
-#~ msgstr "İnşa dizini temizleniyor..."
+#~ msgid "Do not use root user when packaging, make building under home folder"
+#~ msgstr "root kullanıcısı olarak paket yapılmayacak, inşa işlemleri ev dizini altında gerçekleştirilecek."
 
 #~ msgid ""
 #~ "Clean stale locks\n"
@@ -3928,23 +3891,52 @@ msgstr "Hatalı sürüm dizgisi: {}"
 #~ "INARY veritabanı erişimini yönetmek için dosya kilitleri kullanır.\n"
 #~ "Bu komut, kullanılmayan kilit dosyalarını veritabanı dizininden kaldırır."
 
-#~ msgid "Do not use root user when packaging, make building under home folder"
-#~ msgstr "root kullanıcısı olarak paket yapılmayacak, inşa işlemleri ev dizini altında gerçekleştirilecek."
+#, fuzzy
+#~ msgid "Select cleaning directory:\n"
+#~ msgstr "İnşa dizini temizleniyor..."
 
 #, fuzzy
-#~ msgid "pkg-config is not installed on your system."
-#~ msgstr "Paket pkg-config kurulu değil."
+#~ msgid "Cleaning home-build directory {}..."
+#~ msgstr "İnşa dizini temizleniyor..."
+
+#, fuzzy
+#~ msgid "Could not fetch destination file \"%s\":%s"
+#~ msgstr "\"{0}\" hedef dosyasına erişilemedi: {1}"
+
+#~ msgid "Package manager not support downloding from ftp mirror"
+#~ msgstr "Paket yöneticisi ftp yansılarından dosya çekmeyi desteklemiyor"
+
+#, fuzzy
+#~ msgid "Copying local file {}"
+#~ msgstr "Önbellek dosyası {} siliniyor..."
+
+#, fuzzy
+#~ msgid "Rebuilding for {}"
+#~ msgstr "{} için tekrar inşa ediliyor"
+
+#~ msgid "No group named '%s' (value guessed from owner) found on the system"
+#~ msgstr "(sahiplik adı atanmış) '%s' grubu sistemde bulunamadı"
+
+#~ msgid "Please install requests"
+#~ msgstr "Lütfen python3-requests paketini kurunuz"
+
+#~ msgid "Missing"
+#~ msgstr "Kayıp"
+
+#, fuzzy
+#~ msgid "The following firmwares are not installed:"
+#~ msgstr "Aşağıdaki paketler kurulacak:"
+
+#, fuzzy
+#~ msgid "Extracting firmware list for {}..."
+#~ msgstr "{} dosyaları arşivden çıkartılıyor."
 
 #, fuzzy
 #~ msgid ""
-#~ "\tCiksemel XML Parser not found!!!\n"
-#~ "\tMinidom slower but\n"
-#~ "\tFalling back with minidom!!! :(\n"
 #~ "\n"
+#~ "!!! Please attach the config.log to your bug report:\n"
+#~ "{}/config.log"
 #~ msgstr ""
-#~ "\tCiksemel XML Parser bulunamadı!!!\n"
-#~ "\tMinidom yavaş olmasına rağmen\n"
-#~ "\tMinidom ile geri düşüm yapılıyor!!! :(\n"
-
-#~ msgid "WARNING:\n"
-#~ msgstr "UYARI:\n"
+#~ "\n"
+#~ "Lütfen hata raporunuza config.log dosyasını ekleyin:\n"
+#~ "{}/config.log"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 22:22+0300\n"
+"POT-Creation-Date: 2019-02-11 15:53+0300\n"
 "PO-Revision-Date: 2014-02-26 16:34+0000\n"
 "Last-Translator: obsoleteman <tulliana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/INARYLinux/language/pt_BR/)\n"
@@ -90,9 +90,7 @@ msgstr "Opções"
 
 #: inary-cli:49
 #, fuzzy
-msgid ""
-"\n"
-"Program terminated."
+msgid "Program terminated."
 msgstr "Program terminei."
 
 #: inary-cli:51
@@ -425,8 +423,7 @@ msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:107
-#, python-format
-msgid "ActionsAPI [unlink]: %s is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
+msgid "ActionsAPI [unlink]: {} is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:110
@@ -800,8 +797,8 @@ msgstr ""
 msgid "Storing {}"
 msgstr ""
 
-#: inary/atomicoperations.py:553
-msgid "Adding '{}' to db..."
+#: inary/atomicoperations.py:553 inary/db/filesdb.py:48
+msgid "-> Adding '{}' to db..."
 msgstr ""
 
 #: inary/atomicoperations.py:597
@@ -2301,10 +2298,6 @@ msgstr ""
 msgid "Creating files database..."
 msgstr ""
 
-#: inary/db/filesdb.py:48
-msgid "-> Adding '{}' to db..."
-msgstr ""
-
 #: inary/db/filesdb.py:49
 msgid ""
 "\n"
@@ -2410,24 +2403,24 @@ msgstr ""
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:214
+#: inary/fetcher.py:213
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: inary/fetcher.py:247
+#: inary/fetcher.py:246
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr ""
 
-#: inary/fetcher.py:255
+#: inary/fetcher.py:254
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr ""
 
-#: inary/fetcher.py:280
+#: inary/fetcher.py:279
 #, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr ""
 
-#: inary/fetcher.py:284
+#: inary/fetcher.py:283
 msgid "{} package already fetched"
 msgstr ""
 
@@ -3337,6 +3330,143 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
+#~ msgid "Copying local file {}"
+#~ msgstr "Execução de aclocal falhou."
+
+#~ msgid "Turkish"
+#~ msgstr "Turco"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Turco Q"
+
+#~ msgid "Turkish F"
+#~ msgstr "Turco F"
+
+#~ msgid "English"
+#~ msgstr "Inglês"
+
+#, fuzzy
+#~ msgid "English GB"
+#~ msgstr "Inglês"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Africâner"
+
+#~ msgid "Arabic"
+#~ msgstr "Árabe"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgo"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Búlgaro"
+
+#~ msgid "Catalan"
+#~ msgstr "Catalã"
+
+#~ msgid "Welsh"
+#~ msgstr "Galês"
+
+#~ msgid "Czech"
+#~ msgstr "Tcheco"
+
+#~ msgid "Danish"
+#~ msgstr "Dinamarquês"
+
+#~ msgid "German"
+#~ msgstr "Alemão"
+
+#~ msgid "Spanish"
+#~ msgstr "Espanhol"
+
+#~ msgid "Estonian"
+#~ msgstr "Estoniano"
+
+#~ msgid "Finnish"
+#~ msgstr "Finlandês"
+
+#~ msgid "French"
+#~ msgstr "Francês"
+
+#~ msgid "Greek"
+#~ msgstr "Grego"
+
+#~ msgid "Croatian"
+#~ msgstr "Croata"
+
+#~ msgid "Hungarian"
+#~ msgstr "Húngaro"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandês"
+
+#~ msgid "Italian"
+#~ msgstr "Italiano"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonês"
+
+#~ msgid "Macedonian"
+#~ msgstr "Macedônio"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malaiala"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norueguês"
+
+#~ msgid "Dutch"
+#~ msgstr "Holandês"
+
+#~ msgid "Polish"
+#~ msgstr "Polonês"
+
+#~ msgid "Portuguese"
+#~ msgstr "Português"
+
+#~ msgid "Brazilian"
+#~ msgstr "Português do Brasil"
+
+#~ msgid "Russian"
+#~ msgstr "Russo"
+
+#~ msgid "Slovak"
+#~ msgstr "Eslovaco"
+
+#~ msgid "Slovenian"
+#~ msgstr "Esloveno"
+
+#~ msgid "Serbian"
+#~ msgstr "Sérvio"
+
+#~ msgid "Swedish"
+#~ msgstr "Sueco"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ucraniano"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamita"
+
+#~ msgid "long integer"
+#~ msgstr "totalidade longo"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opção requer um argumento"
+
+#, fuzzy
+#~ msgid "  installed size {}"
+#~ msgstr "Instale falhou."
+
+#, fuzzy
+#~ msgid "    found {} packages"
+#~ msgstr "Configurar falhou."
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "%prog [optçaos]"
+
+#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "!!! Please attach the config.log to your bug report:\n"
@@ -3345,140 +3475,3 @@ msgstr ""
 #~ "\n"
 #~ "!!! Anexar o config.log ao seu relatório de erro, por favor:\n"
 #~ "{}/config.log"
-
-#, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "%prog [optçaos]"
-
-#, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Configurar falhou."
-
-#, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Instale falhou."
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opção requer um argumento"
-
-#~ msgid "long integer"
-#~ msgstr "totalidade longo"
-
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamita"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ucraniano"
-
-#~ msgid "Swedish"
-#~ msgstr "Sueco"
-
-#~ msgid "Serbian"
-#~ msgstr "Sérvio"
-
-#~ msgid "Slovenian"
-#~ msgstr "Esloveno"
-
-#~ msgid "Slovak"
-#~ msgstr "Eslovaco"
-
-#~ msgid "Russian"
-#~ msgstr "Russo"
-
-#~ msgid "Brazilian"
-#~ msgstr "Português do Brasil"
-
-#~ msgid "Portuguese"
-#~ msgstr "Português"
-
-#~ msgid "Polish"
-#~ msgstr "Polonês"
-
-#~ msgid "Dutch"
-#~ msgstr "Holandês"
-
-#~ msgid "Norwegian"
-#~ msgstr "Norueguês"
-
-#~ msgid "Malayalam"
-#~ msgstr "Malaiala"
-
-#~ msgid "Macedonian"
-#~ msgstr "Macedônio"
-
-#~ msgid "Japanese"
-#~ msgstr "Japonês"
-
-#~ msgid "Italian"
-#~ msgstr "Italiano"
-
-#~ msgid "Icelandic"
-#~ msgstr "Islandês"
-
-#~ msgid "Hungarian"
-#~ msgstr "Húngaro"
-
-#~ msgid "Croatian"
-#~ msgstr "Croata"
-
-#~ msgid "Greek"
-#~ msgstr "Grego"
-
-#~ msgid "French"
-#~ msgstr "Francês"
-
-#~ msgid "Finnish"
-#~ msgstr "Finlandês"
-
-#~ msgid "Estonian"
-#~ msgstr "Estoniano"
-
-#~ msgid "Spanish"
-#~ msgstr "Espanhol"
-
-#~ msgid "German"
-#~ msgstr "Alemão"
-
-#~ msgid "Danish"
-#~ msgstr "Dinamarquês"
-
-#~ msgid "Czech"
-#~ msgstr "Tcheco"
-
-#~ msgid "Welsh"
-#~ msgstr "Galês"
-
-#~ msgid "Catalan"
-#~ msgstr "Catalã"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Búlgaro"
-
-#~ msgid "Belgium"
-#~ msgstr "Belgo"
-
-#~ msgid "Arabic"
-#~ msgstr "Árabe"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Africâner"
-
-#, fuzzy
-#~ msgid "English GB"
-#~ msgstr "Inglês"
-
-#~ msgid "English"
-#~ msgstr "Inglês"
-
-#~ msgid "Turkish F"
-#~ msgstr "Turco F"
-
-#~ msgid "Turkish Q"
-#~ msgstr "Turco Q"
-
-#~ msgid "Turkish"
-#~ msgstr "Turco"
-
-#, fuzzy
-#~ msgid "Copying local file {}"
-#~ msgstr "Execução de aclocal falhou."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 22:22+0300\n"
+"POT-Creation-Date: 2019-02-11 15:53+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -94,9 +94,7 @@ msgstr "Opcije"
 
 #: inary-cli:49
 #, fuzzy
-msgid ""
-"\n"
-"Program terminated."
+msgid "Program terminated."
 msgstr "Program je prekinut."
 
 #: inary-cli:51
@@ -422,8 +420,7 @@ msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Dozvola odbijena: {}."
 
 #: inary/actionsapi/shelltools.py:107
-#, python-format
-msgid "ActionsAPI [unlink]: %s is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
+msgid "ActionsAPI [unlink]: {} is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:110
@@ -814,9 +811,9 @@ msgstr "Nije moguće premjestiti sljedeće datoteke. Preporučuje se ponovna ins
 msgid "Storing {}"
 msgstr "Pohranjujem {}"
 
-#: inary/atomicoperations.py:553
+#: inary/atomicoperations.py:553 inary/db/filesdb.py:48
 #, fuzzy
-msgid "Adding '{}' to db..."
+msgid "-> Adding '{}' to db..."
 msgstr "Dodajem {} u db... "
 
 #: inary/atomicoperations.py:597
@@ -2438,11 +2435,6 @@ msgstr "Komponenta {} nije nađena"
 msgid "Creating files database..."
 msgstr "Obnovi bazu podataka datoteka"
 
-#: inary/db/filesdb.py:48
-#, fuzzy
-msgid "-> Adding '{}' to db..."
-msgstr "Dodajem {} u db... "
-
 #: inary/db/filesdb.py:49
 #, fuzzy
 msgid ""
@@ -2557,26 +2549,26 @@ msgstr "Odbijen pristup odedišnoj datoteci: \"{}\" "
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:214
+#: inary/fetcher.py:213
 #, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr "Došlo je do greške.Provjerite adresu arhiva i/ili dozvole ponovno."
 
-#: inary/fetcher.py:247
+#: inary/fetcher.py:246
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr ""
 
-#: inary/fetcher.py:255
+#: inary/fetcher.py:254
 #, fuzzy
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr "Držite korištenje propusne moći pod određenim KB-a"
 
-#: inary/fetcher.py:280
+#: inary/fetcher.py:279
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0} paket nađen u {1} repozitoriju"
 
-#: inary/fetcher.py:284
+#: inary/fetcher.py:283
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "{} paket je već dohvaćen"
@@ -3550,55 +3542,86 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Extracting firmware list for {}..."
-#~ msgstr "Raspakiran datoteke od {}"
+#~ msgid "pkg-config is not installed on your system."
+#~ msgstr "Paket {} nije instaliran. Ne mogu ukloniti."
 
 #, fuzzy
-#~ msgid "The following firmwares are not installed:"
-#~ msgstr "Slijedeći paketi će biti instalirani:"
+#~ msgid "Cleaning home-build directory {}..."
+#~ msgstr "Čistim privremeni direktorij {}..."
 
 #, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "opcije listaj-najnovije"
+#~ msgid "Could not fetch destination file \"%s\":%s"
+#~ msgstr "Odbijen pristup odedišnoj datoteci: \"{}\" "
 
 #, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Dodajem grupe .xml u indeks"
-
-#~ msgid "OK."
-#~ msgstr "U redu"
+#~ msgid "Copying local file {}"
+#~ msgstr "Pokretanje aclocal nije uspjelo."
 
 #, fuzzy
-#~ msgid "Cleaning files database folder... "
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Operacija #{0}: {1}"
+
+#~ msgid "Date: {0.date} {0.time}"
+#~ msgstr "Datum: {0.date} {0.time}"
+
+#, fuzzy
+#~ msgid "File '{0}' has invalid XML: {1}"
+#~ msgstr "Datoteka {} ima neispravan XML"
+
+#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
+#~ msgstr "Poslužitelj ne podržava djelomična preuzimanja.Prethodno preuzeti dio datoteke biti će prebrisan."
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
 #~ msgstr "Obnovi bazu podataka datoteka"
 
 #, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "Name: {}, version: {}, release: {}\n"
+#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{} opcija zahtijeva argument"
+
+#~ msgid "INARY package"
+#~ msgstr "INARY paket"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "Unable to read file {}: {}"
+#~ msgstr "Nije moguće čitati datoteku  {}: {}"
 
 #, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Konfiguriram{} paket"
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Nadogradnja nije moguća."
 
 #, fuzzy
-#~ msgid "* Getting force install packages"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Slijedeći paketi će biti nadograđeni:"
 
 #, fuzzy
-#~ msgid "* Calculating disk space installed packages are using"
-#~ msgstr "Provjeravam sve instalirane pakete"
+#~ msgid "No packages to downgrade."
+#~ msgstr "Nema paketa za nadogradnju"
 
 #, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Instaliran {}"
+#~ msgid "Package {0.name} is already at the first release {0.release}."
+#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
 
 #, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Veličina paketa: {}"
+#~ msgid "Name of the to be downgraded packages' repository"
+#~ msgstr "Ime nadograđenog repozitorija paketa"
 
 #, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Želite li nastaviti?"
+#~ msgid "Downgrade component's and recursive components' packages"
+#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+
+#, fuzzy
+#~ msgid "Security related package downgrades only"
+#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "opcije nadogradnje"
 
 #, fuzzy
 #~ msgid ""
@@ -3630,83 +3653,56 @@ msgstr ""
 #~ "proširene na imena paketa.\n"
 
 #, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "opcije nadogradnje"
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Želite li nastaviti?"
 
 #, fuzzy
-#~ msgid "Security related package downgrades only"
-#~ msgstr "Nadogradi samo pakete vezane za sigurnost "
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Veličina paketa: {}"
 
 #, fuzzy
-#~ msgid "Downgrade component's and recursive components' packages"
-#~ msgstr "Nadogradnja komponente i rekurzivne pakete komponente "
+#~ msgid "  installed size {}"
+#~ msgstr "Instaliran {}"
 
 #, fuzzy
-#~ msgid "Name of the to be downgraded packages' repository"
-#~ msgstr "Ime nadograđenog repozitorija paketa"
+#~ msgid "* Calculating disk space installed packages are using"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "Package {0.name} is already at the first release {0.release}."
-#~ msgstr "Paket {0.name} je već najnovije izdanje {0.release}."
+#~ msgid "* Getting force install packages"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Nema paketa za nadogradnju"
+#~ msgid "    found {} packages"
+#~ msgstr "Konfiguriram{} paket"
 
 #, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Slijedeći paketi će biti nadograđeni:"
+#~ msgid "* Getting installed packages"
+#~ msgstr "Provjeravam sve instalirane pakete"
 
 #, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Nadogradnja nije moguća."
-
-#~ msgid "Unable to read file {}: {}"
-#~ msgstr "Nije moguće čitati datoteku  {}: {}"
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#~ msgid "INARY package"
-#~ msgstr "INARY paket"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{} opcija zahtijeva argument"
-
-#, fuzzy
-#~ msgid "Name: {}, version: {}, release: {}\n"
-#~ msgstr "Ime:{}, verzija{}, izdanje:%s\n"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
+#~ msgid "Cleaning files database folder... "
 #~ msgstr "Obnovi bazu podataka datoteka"
 
-#~ msgid "Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."
-#~ msgstr "Poslužitelj ne podržava djelomična preuzimanja.Prethodno preuzeti dio datoteke biti će prebrisan."
+#~ msgid "OK."
+#~ msgstr "U redu"
 
 #, fuzzy
-#~ msgid "File '{0}' has invalid XML: {1}"
-#~ msgstr "Datoteka {} ima neispravan XML"
-
-#~ msgid "Date: {0.date} {0.time}"
-#~ msgstr "Datum: {0.date} {0.time}"
+#~ msgid "Adding {} to source index"
+#~ msgstr "Dodajem grupe .xml u indeks"
 
 #, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Operacija #{0}: {1}"
+#~ msgid "dist-update options"
+#~ msgstr "opcije listaj-najnovije"
 
 #, fuzzy
-#~ msgid "Copying local file {}"
-#~ msgstr "Pokretanje aclocal nije uspjelo."
+#~ msgid "The following firmwares are not installed:"
+#~ msgstr "Slijedeći paketi će biti instalirani:"
 
 #, fuzzy
-#~ msgid "Could not fetch destination file \"%s\":%s"
-#~ msgstr "Odbijen pristup odedišnoj datoteci: \"{}\" "
+#~ msgid "Extracting firmware list for {}..."
+#~ msgstr "Raspakiran datoteke od {}"
 
 #, fuzzy
-#~ msgid "Cleaning home-build directory {}..."
-#~ msgstr "Čistim privremeni direktorij {}..."
-
-#, fuzzy
-#~ msgid "pkg-config is not installed on your system."
-#~ msgstr "Paket {} nije instaliran. Ne mogu ukloniti."
+#~ msgid "Adding '{}' to db..."
+#~ msgstr "Dodajem {} u db... "

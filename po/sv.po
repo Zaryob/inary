@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 22:22+0300\n"
+"POT-Creation-Date: 2019-02-11 15:53+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -90,9 +90,7 @@ msgstr "Alternativ"
 
 #: inary-cli:49
 #, fuzzy
-msgid ""
-"\n"
-"Program terminated."
+msgid "Program terminated."
 msgstr "Programmet avbröts."
 
 #: inary-cli:51
@@ -424,8 +422,7 @@ msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr "ActionsAPI [unlink]: Tillstånd nekas: {}."
 
 #: inary/actionsapi/shelltools.py:107
-#, python-format
-msgid "ActionsAPI [unlink]: %s is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
+msgid "ActionsAPI [unlink]: {} is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:110
@@ -812,9 +809,9 @@ msgstr ""
 msgid "Storing {}"
 msgstr "Lagrar {}"
 
-#: inary/atomicoperations.py:553
+#: inary/atomicoperations.py:553 inary/db/filesdb.py:48
 #, fuzzy
-msgid "Adding '{}' to db..."
+msgid "-> Adding '{}' to db..."
 msgstr "* Lägger till {} till db... "
 
 #: inary/atomicoperations.py:597
@@ -2363,11 +2360,6 @@ msgstr "Paketet {} hittades ej"
 msgid "Creating files database..."
 msgstr "Skapar {}... "
 
-#: inary/db/filesdb.py:48
-#, fuzzy
-msgid "-> Adding '{}' to db..."
-msgstr "* Lägger till {} till db... "
-
 #: inary/db/filesdb.py:49
 #, fuzzy
 msgid ""
@@ -2482,24 +2474,24 @@ msgstr ""
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:214
+#: inary/fetcher.py:213
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: inary/fetcher.py:247
+#: inary/fetcher.py:246
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr ""
 
-#: inary/fetcher.py:255
+#: inary/fetcher.py:254
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr ""
 
-#: inary/fetcher.py:280
+#: inary/fetcher.py:279
 #, fuzzy, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr "{0}-paketet finns i {1}-förrådet."
 
-#: inary/fetcher.py:284
+#: inary/fetcher.py:283
 #, fuzzy
 msgid "{} package already fetched"
 msgstr "Paketborttagning nekades"
@@ -3472,6 +3464,286 @@ msgid "Invalid version string: '{}'"
 msgstr "Ogiltig versionssträng: {}"
 
 #, fuzzy
+#~ msgid "pkg-config is not installed on your system."
+#~ msgstr "Paketet pkgconfig är inte installerat och kan därmed inte tas bort."
+
+#, fuzzy
+#~ msgid "Select cleaning directory:\n"
+#~ msgstr "Rensar byggkatalog..."
+
+#, fuzzy
+#~ msgid "Cleaning home-build directory {}..."
+#~ msgstr "Rensar byggkatalog..."
+
+#, fuzzy
+#~ msgid "Copying local file {}"
+#~ msgstr "Tar bort paketet {}"
+
+#, fuzzy
+#~ msgid "Rebuilding for {}"
+#~ msgstr "Söker efter {}"
+
+#, fuzzy
+#~ msgid "Operation #{0}: {1}"
+#~ msgstr "Åtgärd #{0}: {1}"
+
+#~ msgid "Turkish"
+#~ msgstr "Turkiska"
+
+#~ msgid "Turkish Q"
+#~ msgstr "Turkiska Q"
+
+#~ msgid "Turkish F"
+#~ msgstr "Turkiska F"
+
+#~ msgid "English"
+#~ msgstr "Engelska"
+
+#, fuzzy
+#~ msgid "English GB"
+#~ msgstr "Engelska"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
+
+#~ msgid "Arabic"
+#~ msgstr "Arabiska"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgien"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgarien"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanska"
+
+#~ msgid "Welsh"
+#~ msgstr "Kymriska"
+
+#~ msgid "Czech"
+#~ msgstr "Tjeckiska"
+
+#~ msgid "Danish"
+#~ msgstr "Danska"
+
+#~ msgid "German"
+#~ msgstr "Tyska"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanska"
+
+#~ msgid "Estonian"
+#~ msgstr "Estniska"
+
+#~ msgid "Finnish"
+#~ msgstr "Finska"
+
+#~ msgid "French"
+#~ msgstr "Franska"
+
+#~ msgid "Greek"
+#~ msgstr "Grekiska"
+
+#~ msgid "Croatian"
+#~ msgstr "Kroatiska"
+
+#~ msgid "Hungarian"
+#~ msgstr "Ungerska"
+
+#~ msgid "Icelandic"
+#~ msgstr "Isländska"
+
+#~ msgid "Italian"
+#~ msgstr "Italienska"
+
+#~ msgid "Japanese"
+#~ msgstr "Japanska"
+
+#~ msgid "Macedonian"
+#~ msgstr "Makedonska"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malayalam"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norska"
+
+#~ msgid "Dutch"
+#~ msgstr "Nederländska"
+
+#~ msgid "Polish"
+#~ msgstr "Polska"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugisiska"
+
+#~ msgid "Brazilian"
+#~ msgstr "Brasiliansk Portugisiska"
+
+#~ msgid "Russian"
+#~ msgstr "Ryska"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovakiska"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovenska"
+
+#~ msgid "Serbian"
+#~ msgstr "Serbiska"
+
+#~ msgid "Swedish"
+#~ msgstr "Svenska"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrainska"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamesiska"
+
+#, fuzzy
+#~ msgid "Cleaning files database folder...  "
+#~ msgstr "Rensar byggkatalog..."
+
+#~ msgid "long integer"
+#~ msgstr "långt heltal"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "{}-alternativet kräver ett argument"
+
+#, fuzzy
+#~ msgid "INARY package"
+#~ msgstr "Skapar INARY-paketet"
+
+#~ msgid "{} [{}]"
+#~ msgstr "{} [{}]"
+
+#~ msgid "* Checking {}... "
+#~ msgstr "* Kontrollerar {}... "
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} has changed config files."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet {} har förändrade konfigurationsfiler."
+
+#~ msgid ""
+#~ "\n"
+#~ "Package {} is corrupt."
+#~ msgstr ""
+#~ "\n"
+#~ "Paketet {} är trasigt."
+
+#~ msgid "Safety switch: system.devel is already installed"
+#~ msgstr "Säkerhetslås: system.devel är redan installerad"
+
+#~ msgid "Checking /{} "
+#~ msgstr "Kontrollerar /{} "
+
+#~ msgid "Storing {}, "
+#~ msgstr "Lagrar {}, "
+
+#~ msgid "Storing {}."
+#~ msgstr "Lagrar {}."
+
+#~ msgid "Safety switch: Following packages in system.base will be installed: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
+
+#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
+#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
+
+#~ msgid "Update INARY database for repository {}?"
+#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
+
+#~ msgid "Repository distribution does not match. Removing {} from system."
+#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
+
+#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
+#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
+
+#~ msgid "Creating delta INARY package between {} {}"
+#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
+
+#~ msgid "Cannot create delta for same package!"
+#~ msgstr "Kan inte skapa delta av samma paket!"
+
+#~ msgid "Generating {},"
+#~ msgstr "Skapar {},"
+
+#, fuzzy
+#~ msgid "Safety switch forces the downgrade of following packages:"
+#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
+
+#, fuzzy
+#~ msgid "Downgrade is not possible."
+#~ msgstr "Uppdatering ej möjlig."
+
+#, fuzzy
+#~ msgid "The following packages will be downgraded:"
+#~ msgstr "Följande paket kommer att uppdateras:"
+
+#, fuzzy
+#~ msgid "No packages to downgrade."
+#~ msgstr "Inga paket att uppdatera."
+
+#, fuzzy
+#~ msgid "downgrade options"
+#~ msgstr "upgrade-alternativ"
+
+#, fuzzy
+#~ msgid "Do you want make dist update?"
+#~ msgstr "Vill du fortsätta?"
+
+#, fuzzy
+#~ msgid "  biggest package size {}"
+#~ msgstr ", Paketstorlek: {}"
+
+#, fuzzy
+#~ msgid "  installed size {}"
+#~ msgstr "Installerat {}"
+
+#, fuzzy
+#~ msgid "    found {} packages"
+#~ msgstr "Anpassar paketet {}..."
+
+#, fuzzy
+#~ msgid "* Getting installed packages"
+#~ msgstr "Paketet är installerat:"
+
+#, fuzzy
+#~ msgid "    done"
+#~ msgstr "Klar."
+
+#, fuzzy
+#~ msgid "done."
+#~ msgstr "Klar."
+
+#, fuzzy
+#~ msgid "Cleaning files database folder... "
+#~ msgstr "Rensar byggkatalog..."
+
+#~ msgid "OK."
+#~ msgstr "OK."
+
+#, fuzzy
+#~ msgid "Adding {} to source index"
+#~ msgstr "Bygger paketet: {}"
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "list-upgrades-alternativ"
+
+#, fuzzy
+#~ msgid "The following firmwares are not installed:"
+#~ msgstr "Följande paket kommer att installeras: "
+
+#, fuzzy
+#~ msgid "Extracting firmware list for {}..."
+#~ msgstr "Packar upp filer för {}"
+
+#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "!!! Please attach the config.log to your bug report:\n"
@@ -3482,281 +3754,5 @@ msgstr "Ogiltig versionssträng: {}"
 #~ "{}/config.log"
 
 #, fuzzy
-#~ msgid "Extracting firmware list for {}..."
-#~ msgstr "Packar upp filer för {}"
-
-#, fuzzy
-#~ msgid "The following firmwares are not installed:"
-#~ msgstr "Följande paket kommer att installeras: "
-
-#, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "list-upgrades-alternativ"
-
-#, fuzzy
-#~ msgid "Adding {} to source index"
-#~ msgstr "Bygger paketet: {}"
-
-#~ msgid "OK."
-#~ msgstr "OK."
-
-#, fuzzy
-#~ msgid "Cleaning files database folder... "
-#~ msgstr "Rensar byggkatalog..."
-
-#, fuzzy
-#~ msgid "done."
-#~ msgstr "Klar."
-
-#, fuzzy
-#~ msgid "    done"
-#~ msgstr "Klar."
-
-#, fuzzy
-#~ msgid "* Getting installed packages"
-#~ msgstr "Paketet är installerat:"
-
-#, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Anpassar paketet {}..."
-
-#, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Installerat {}"
-
-#, fuzzy
-#~ msgid "  biggest package size {}"
-#~ msgstr ", Paketstorlek: {}"
-
-#, fuzzy
-#~ msgid "Do you want make dist update?"
-#~ msgstr "Vill du fortsätta?"
-
-#, fuzzy
-#~ msgid "downgrade options"
-#~ msgstr "upgrade-alternativ"
-
-#, fuzzy
-#~ msgid "No packages to downgrade."
-#~ msgstr "Inga paket att uppdatera."
-
-#, fuzzy
-#~ msgid "The following packages will be downgraded:"
-#~ msgstr "Följande paket kommer att uppdateras:"
-
-#, fuzzy
-#~ msgid "Downgrade is not possible."
-#~ msgstr "Uppdatering ej möjlig."
-
-#, fuzzy
-#~ msgid "Safety switch forces the downgrade of following packages:"
-#~ msgstr "Säkerhetsspärren påtvingar uppdatering av följande paket:"
-
-#~ msgid "Generating {},"
-#~ msgstr "Skapar {},"
-
-#~ msgid "Cannot create delta for same package!"
-#~ msgstr "Kan inte skapa delta av samma paket!"
-
-#~ msgid "Creating delta INARY package between {} {}"
-#~ msgstr "Skapar delta-INARY-paket mellan {} och {}"
-
-#~ msgid "Name: {}, version: {}, release: %s, build %s\n"
-#~ msgstr "Namn: {}, version: {}, utgåva: %s, bygge %s\n"
-
-#~ msgid "Repository distribution does not match. Removing {} from system."
-#~ msgstr "Förrådsdistributionen stämmer inte. Tar bort {} från systemet."
-
-#~ msgid "Update INARY database for repository {}?"
-#~ msgstr "Uppdatera INARY-databasen för {}-förrådet?"
-
-#~ msgid "Safety switch: Following packages in system.base will be upgraded: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att uppdateras: "
-
-#~ msgid "Safety switch: Following packages in system.base will be installed: "
-#~ msgstr "Säkerhetslås: följande paket i system.base kommer att installeras: "
-
-#~ msgid "Storing {}."
-#~ msgstr "Lagrar {}."
-
-#~ msgid "Storing {}, "
-#~ msgstr "Lagrar {}, "
-
-#~ msgid "Checking /{} "
-#~ msgstr "Kontrollerar /{} "
-
-#~ msgid "Safety switch: system.devel is already installed"
-#~ msgstr "Säkerhetslås: system.devel är redan installerad"
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} is corrupt."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet {} är trasigt."
-
-#~ msgid ""
-#~ "\n"
-#~ "Package {} has changed config files."
-#~ msgstr ""
-#~ "\n"
-#~ "Paketet {} har förändrade konfigurationsfiler."
-
-#~ msgid "* Checking {}... "
-#~ msgstr "* Kontrollerar {}... "
-
-#~ msgid "{} [{}]"
-#~ msgstr "{} [{}]"
-
-#, fuzzy
-#~ msgid "INARY package"
-#~ msgstr "Skapar INARY-paketet"
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "{}-alternativet kräver ett argument"
-
-#~ msgid "long integer"
-#~ msgstr "långt heltal"
-
-#, fuzzy
-#~ msgid "Cleaning files database folder...  "
-#~ msgstr "Rensar byggkatalog..."
-
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamesiska"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ukrainska"
-
-#~ msgid "Swedish"
-#~ msgstr "Svenska"
-
-#~ msgid "Serbian"
-#~ msgstr "Serbiska"
-
-#~ msgid "Slovenian"
-#~ msgstr "Slovenska"
-
-#~ msgid "Slovak"
-#~ msgstr "Slovakiska"
-
-#~ msgid "Russian"
-#~ msgstr "Ryska"
-
-#~ msgid "Brazilian"
-#~ msgstr "Brasiliansk Portugisiska"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugisiska"
-
-#~ msgid "Polish"
-#~ msgstr "Polska"
-
-#~ msgid "Dutch"
-#~ msgstr "Nederländska"
-
-#~ msgid "Norwegian"
-#~ msgstr "Norska"
-
-#~ msgid "Malayalam"
-#~ msgstr "Malayalam"
-
-#~ msgid "Macedonian"
-#~ msgstr "Makedonska"
-
-#~ msgid "Japanese"
-#~ msgstr "Japanska"
-
-#~ msgid "Italian"
-#~ msgstr "Italienska"
-
-#~ msgid "Icelandic"
-#~ msgstr "Isländska"
-
-#~ msgid "Hungarian"
-#~ msgstr "Ungerska"
-
-#~ msgid "Croatian"
-#~ msgstr "Kroatiska"
-
-#~ msgid "Greek"
-#~ msgstr "Grekiska"
-
-#~ msgid "French"
-#~ msgstr "Franska"
-
-#~ msgid "Finnish"
-#~ msgstr "Finska"
-
-#~ msgid "Estonian"
-#~ msgstr "Estniska"
-
-#~ msgid "Spanish"
-#~ msgstr "Spanska"
-
-#~ msgid "German"
-#~ msgstr "Tyska"
-
-#~ msgid "Danish"
-#~ msgstr "Danska"
-
-#~ msgid "Czech"
-#~ msgstr "Tjeckiska"
-
-#~ msgid "Welsh"
-#~ msgstr "Kymriska"
-
-#~ msgid "Catalan"
-#~ msgstr "Katalanska"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulgarien"
-
-#~ msgid "Belgium"
-#~ msgstr "Belgien"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabiska"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaans"
-
-#, fuzzy
-#~ msgid "English GB"
-#~ msgstr "Engelska"
-
-#~ msgid "English"
-#~ msgstr "Engelska"
-
-#~ msgid "Turkish F"
-#~ msgstr "Turkiska F"
-
-#~ msgid "Turkish Q"
-#~ msgstr "Turkiska Q"
-
-#~ msgid "Turkish"
-#~ msgstr "Turkiska"
-
-#, fuzzy
-#~ msgid "Operation #{0}: {1}"
-#~ msgstr "Åtgärd #{0}: {1}"
-
-#, fuzzy
-#~ msgid "Rebuilding for {}"
-#~ msgstr "Söker efter {}"
-
-#, fuzzy
-#~ msgid "Copying local file {}"
-#~ msgstr "Tar bort paketet {}"
-
-#, fuzzy
-#~ msgid "Cleaning home-build directory {}..."
-#~ msgstr "Rensar byggkatalog..."
-
-#, fuzzy
-#~ msgid "Select cleaning directory:\n"
-#~ msgstr "Rensar byggkatalog..."
-
-#, fuzzy
-#~ msgid "pkg-config is not installed on your system."
-#~ msgstr "Paketet pkgconfig är inte installerat och kan därmed inte tas bort."
+#~ msgid "Adding '{}' to db..."
+#~ msgstr "* Lägger till {} till db... "

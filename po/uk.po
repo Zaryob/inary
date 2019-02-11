@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 22:22+0300\n"
+"POT-Creation-Date: 2019-02-11 15:53+0300\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -91,9 +91,7 @@ msgstr "Параметри"
 
 #: inary-cli:49
 #, fuzzy
-msgid ""
-"\n"
-"Program terminated."
+msgid "Program terminated."
 msgstr "Програму перервано."
 
 #: inary-cli:51
@@ -430,8 +428,7 @@ msgid "ActionsAPI [unlink]: Permission denied: {}."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:107
-#, python-format
-msgid "ActionsAPI [unlink]: %s is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
+msgid "ActionsAPI [unlink]: {} is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:110
@@ -806,8 +803,8 @@ msgstr ""
 msgid "Storing {}"
 msgstr ""
 
-#: inary/atomicoperations.py:553
-msgid "Adding '{}' to db..."
+#: inary/atomicoperations.py:553 inary/db/filesdb.py:48
+msgid "-> Adding '{}' to db..."
 msgstr ""
 
 #: inary/atomicoperations.py:597
@@ -2311,10 +2308,6 @@ msgstr ""
 msgid "Creating files database..."
 msgstr ""
 
-#: inary/db/filesdb.py:48
-msgid "-> Adding '{}' to db..."
-msgstr ""
-
 #: inary/db/filesdb.py:49
 msgid ""
 "\n"
@@ -2420,24 +2413,24 @@ msgstr ""
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:214
+#: inary/fetcher.py:213
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr ""
 
-#: inary/fetcher.py:247
+#: inary/fetcher.py:246
 msgid "Proxy configuration has been found for '{}' protocol"
 msgstr ""
 
-#: inary/fetcher.py:255
+#: inary/fetcher.py:254
 msgid "Bandwidth usage is limited to {} KB/s"
 msgstr ""
 
-#: inary/fetcher.py:280
+#: inary/fetcher.py:279
 #, python-brace-format
 msgid "{0} package found in {1} repository"
 msgstr ""
 
-#: inary/fetcher.py:284
+#: inary/fetcher.py:283
 msgid "{} package already fetched"
 msgstr ""
 
@@ -3347,6 +3340,35 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
+#~ msgid "Cleaning home-build directory {}..."
+#~ msgstr "Неможливо створити каталог {}"
+
+#, fuzzy
+#~ msgid "Copying local file {}"
+#~ msgstr "Не вдалось запустити aclocal."
+
+#~ msgid "Date: {0.date} {0.time}"
+#~ msgstr "Date: {0.date} {0.time}"
+
+#~ msgid "long integer"
+#~ msgstr "довге ціле число"
+
+#~ msgid "{} option requires an argument"
+#~ msgstr "параметр {} потребує аргумент"
+
+#, fuzzy
+#~ msgid "  installed size {}"
+#~ msgstr "Не вдалось установити."
+
+#, fuzzy
+#~ msgid "    found {} packages"
+#~ msgstr "Не вдалось налаштувати."
+
+#, fuzzy
+#~ msgid "dist-update options"
+#~ msgstr "%prog [параметри]"
+
+#, fuzzy
 #~ msgid ""
 #~ "\n"
 #~ "!!! Please attach the config.log to your bug report:\n"
@@ -3355,32 +3377,3 @@ msgstr ""
 #~ "\n"
 #~ "!!! Будь ласка, долчіть config.log до звіту про ваду:\n"
 #~ "{}/config.log"
-
-#, fuzzy
-#~ msgid "dist-update options"
-#~ msgstr "%prog [параметри]"
-
-#, fuzzy
-#~ msgid "    found {} packages"
-#~ msgstr "Не вдалось налаштувати."
-
-#, fuzzy
-#~ msgid "  installed size {}"
-#~ msgstr "Не вдалось установити."
-
-#~ msgid "{} option requires an argument"
-#~ msgstr "параметр {} потребує аргумент"
-
-#~ msgid "long integer"
-#~ msgstr "довге ціле число"
-
-#~ msgid "Date: {0.date} {0.time}"
-#~ msgstr "Date: {0.date} {0.time}"
-
-#, fuzzy
-#~ msgid "Copying local file {}"
-#~ msgstr "Не вдалось запустити aclocal."
-
-#, fuzzy
-#~ msgid "Cleaning home-build directory {}..."
-#~ msgstr "Неможливо створити каталог {}"
