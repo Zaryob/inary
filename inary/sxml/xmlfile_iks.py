@@ -18,10 +18,10 @@
  high-level dom functions provided in xmlext module (and sorely lacking
  in xml.dom :( )
 
- function names are mixedCase for compatibility with ciksemel,
+ function names are mixedCase for compatibility with iksemel,
  an 'old library'
 
- this implementation uses ciksemel
+ this implementation uses iksemel
 """
 
 import gettext

@@ -1,29 +1,12 @@
+2019-01-08 Suleyman POYRAZ <zaryob.dev@gmail.com>
+   * dependency error --status: not fixed; flag: critical ---:
+   -> çalışma sırasında dependencylere göre paketler kurulum sıralamasına sokulmadığı içinde
+   error veriyor sonuç olarak kurulumun ortasında hata yiyoruz. Önceden beri var olan bu hata giderilmeli.
+   
 2018-05-05 Suleyman POYRAZ <zaryob.dev@gmail.com>
-    * inary.data.pgraph.py --status: not fixed; flag: critical ---:
+    * inary.data.pgraph.py --status: fixed; flag: critical ---:
     ->inary kurulum için mevcut dizin olarak farklı bir yer kulllanılınca pgraph.Digraph()
     sınıfındaki dfs fonksiyonlarından KeyError yükseliyor.
-    ```
-    Traceback (most recent call last):
-    File "/home/zaryob/Developing/Sulin/inary/tests/packageTests/testDependency.py", line 30, in testRepoSatisfiesDependency
-    inary.api.install(["uif2iso"])
-    File "/usr/local/lib/python3.5/dist-packages/inary/atomicoperations.py", line 742, in wrapper
-      ret = func(*__args,**__kw)
-    File "/usr/local/lib/python3.5/dist-packages/inary/atomicoperations.py", line 796, in install
-      return inary.operations.install.install_pkg_names(packages, reinstall)
-    File "/usr/local/lib/python3.5/dist-packages/inary/operations/install.py", line 58, in install_pkg_names
-      A |= operations.upgrade.upgrade_base(A)
-    File "/usr/local/lib/python3.5/dist-packages/inary/operations/upgrade.py", line 369, in upgrade_base
-      G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
-    File "/usr/local/lib/python3.5/dist-packages/inary/operations/install.py", line 302, in plan_install_pkg_names
-      order = G_f.topological_sort()
-    File "/usr/local/lib/python3.5/dist-packages/inary/data/pgraph.py", line 140, in topological_sort
-      self.dfs(lambda u: list.append(u))
-    File "/usr/local/lib/python3.5/dist-packages/inary/data/pgraph.py", line 107, in dfs
-      if self.color[u] == 'w':
-    KeyError: 'libidn'
-    ```
-    bu koddaki gibi
-
 
 2018-03-17 Suleyman POYRAZ <zaryob.dev@gmail.com>
     * inary.fetcher.py: --- status: fixed; flag: critical ---:

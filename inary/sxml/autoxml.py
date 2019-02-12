@@ -530,7 +530,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         assert type(tag_type) == type(type)
         def readtext(node, blah):
             try:
-                node.normalize() # ciksemel doesn't have this
+                node.normalize() # iksemel doesn't have this
             except:
                 pass
             return xmlext.getNodeText(node)

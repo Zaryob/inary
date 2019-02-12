@@ -14,14 +14,14 @@
 
 """
  xmlext is a helper module for accessing XML files using
- ciksemel . It is a convenient wrapper for some
+ iksemel . It is a convenient wrapper for some
  DOM functions, and provides path based get/add functions
  as in KDE API.
 
- function names are mixedCase for compatibility with ciksemel,
+ function names are mixedCase for compatibility with iksemel,
  an 'old library'
 
- this implementation uses ciksemel
+ this implementation uses iksemel
 """
 
 import gettext

@@ -136,21 +136,6 @@ class Fetcher:
 
         util.ensure_dirs(self.destdir)
 
-
-    def test(self, timeout=3):
-        try:
-            import urllib.request
-            if urllib.request.urlopen(self.url.get_uri()):
-                return True
-
-        except ValueError as e:
-            msg = _("Url Problem: \n {}").format(e)
-            raise FetchError(msg)
-
-        except FetchError as e:
-            msg = _("Can not avaible remote server: \n {}").format(e)
-            raise FetchError(msg)
-
     def fetch(self, verify=None, timeout=10):
         """Return value: Fetched file's full path.."""
 

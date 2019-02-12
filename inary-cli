@@ -32,17 +32,6 @@ gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-try:
-    import ciksemel
-except:
-    #FIXME: Gorunusu guzel olsa bile kodda anlamsizlik yaratiyor
-    warn = inary.util.colorize(_("WARNING:\n"),"blinkingblue")+ \
-           inary.util.colorize(_("\tCiksemel XML Parser not found!!!\n"
-                                 "\tMinidom slower but\n"
-                                 "\tFalling back with minidom!!! :(\n\n"), 'faintwhite')
-
-    sys.stdout.write(warn)
-
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
         exit()
@@ -57,7 +46,7 @@ def handle_exception(exception, value, tb):
     show_traceback = False
 
     if isinstance(value, inary.errors.Error):
-        ui.error(_("\nProgram terminated."))
+        ui.error(_("Program terminated."))
     elif isinstance(value, KeyboardInterrupt):
         ui.error(_("\nKeyboard Interrupt: Exiting..."))
         exit()

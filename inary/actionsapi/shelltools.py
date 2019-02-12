@@ -48,7 +48,7 @@ def makedirs(destinationDirectory):
         if not os.access(destinationDirectory, os.F_OK):
             os.makedirs(destinationDirectory)
     except OSError:
-        error(_('Cannot create directory {}').format(destinationDirectory))
+        error(_('ActionsAPI [makedirs]: Cannot create directory {}').format(destinationDirectory))
 
 def echo(destionationFile, content):
     try:
@@ -94,7 +94,7 @@ def unlink(pattern):
     """remove the file path"""
     filePathGlob = glob.glob(pattern)
     if len(filePathGlob) == 0:
-        ctx.ui.error(_("No file matched pattern \"{}\". Remove operation failed.").format(pattern))
+        ctx.ui.error(_("ActionsAPI [unlink]: No file matched pattern \"{}\". Remove operation failed.").format(pattern))
         return
 
     for filePath in filePathGlob:
@@ -257,6 +257,6 @@ def system(command):
 
     #if return value is different than 0, it means error, raise exception
     if retValue != 0:
-        error(_("Command \"{0}\" failed, return value was {1}.").format(command, retValue))
+        error(_("ActionsAPI [system]: Command \"{0}\" failed, return value was {1}.").format(command, retValue))
 
     return retValue

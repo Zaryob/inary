@@ -21,7 +21,7 @@
  function names are mixedCase for compatibility with minidom,
  an 'old library'
 
- this implementation uses ciksemel
+ this implementation uses minidom
 """
 
 import gettext
