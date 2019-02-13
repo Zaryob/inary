@@ -136,10 +136,10 @@ class Fetcher:
 
         util.ensure_dirs(self.destdir)
 
-    def fetch(self, verify=None, timeout=10):
+    def fetch(self, timeout=10):
         """Return value: Fetched file's full path.."""
 
-        if not verify:
+        if not ctx.config.values.general.ssl_verify:
             import ssl
             ssl._create_default_https_context = ssl._create_unverified_context
 

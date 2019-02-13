@@ -81,6 +81,7 @@ class GeneralDefaults:
     ftp_proxy = os.getenv("FTP_PROXY") or None
     package_cache = False
     package_cache_limit = 0
+    ssl_verify=True
     bandwidth_limit = 0
     ignore_safety = False
     ignore_delta = False
@@ -90,7 +91,7 @@ class BuildDefaults:
     """Default values for [build] section"""
     build_host = "localhost"
     host = "x86_64-linux-gnu"
-    jobs = "-j1" 
+    jobs = "-j1"
     generateDebug = True
     enableSandbox = False
     cflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
