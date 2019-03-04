@@ -87,9 +87,6 @@ def configure(parameters = ''):
                          "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                          parameters)
 
-        if get.buildTYPE() == "emul32":
-            args += " --libdir=/usr/lib32"
-
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
