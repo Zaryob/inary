@@ -59,10 +59,17 @@ def configure(parameters = '', installPrefix = '/{}'.format(get.defaultprefixDIR
     """configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... " """
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
-                      -DCMAKE_C_FLAGS="{1}" \
-                      -DCMAKE_CXX_FLAGS="{2}" \
-                      -DCMAKE_LD_FLAGS="{3}" \
-                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {4} {5}'.format(installPrefix, get.CFLAGS(), get.CXXFLAGS(), get.LDFLAGS(), parameters, sourceDir)
+                      -DCMAKE_INSTALL_LIBDIR={1} \
+                      -DCMAKE_C_FLAGS="{2}" \
+                      -DCMAKE_CXX_FLAGS="{3}" \
+                      -DCMAKE_LD_FLAGS="{4}" \
+                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} {6}'.format(installPrefix,
+                                                                        "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
+                                                                        get.CFLAGS(),
+                                                                        get.CXXFLAGS(),
+                                                                        get.LDFLAGS(),
+                                                                        parameters,
+                                                                        sourceDir)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

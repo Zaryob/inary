@@ -1,4 +1,5 @@
 import inary.actionsapi
+import inary.util as util
 from inary.actionsapi.shelltools import system
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi import get
@@ -11,7 +12,7 @@ class MesonError(inary.actionsapi.Error):
 
 def meson_configure(parameters=""):
     if can_access_file('meson.build'):
-        prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
+        prefix = get.defaultprefixDIR()
         args="meson \
               --prefix=/{0} \
               --buildtype=plain \
@@ -37,7 +38,8 @@ def ninja_build(parameters=""):
         raise MesonError(_("[Ninja]: Build failed."))
 
 def ninja_install(parameters=""):
-    if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(get.installDIR(),get.makeJOBS())):
+    insdir = util.join_path(get.installDIR(),"emul32") if get.buildTYPE() == "emul32" else get.installDIR()
+    if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir,get.makeJOBS())):
         raise MesonError(_("[Ninja]: Installation failed."))
 
 def ninja_check():

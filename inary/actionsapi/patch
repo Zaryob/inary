@@ -1,0 +1,48 @@
+diff --git i/inary/actionsapi/README-inarytools.flags.txt w/inary/actionsapi/README-inarytools.flags.txt
+old mode 100755
+new mode 100644
+diff --git i/inary/actionsapi/TODO w/inary/actionsapi/TODO
+old mode 100755
+new mode 100644
+diff --git i/inary/actionsapi/kerneltools.py w/inary/actionsapi/kerneltools.py
+index edcbbe43..ae934616 100644
+--- i/inary/actionsapi/kerneltools.py
++++ w/inary/actionsapi/kerneltools.py
+@@ -120,7 +120,7 @@ def getKernelVersion(flavour=None):
+ 
+ def configure():
+     # Copy the relevant configuration file
+-    shutil.copy("configs/kernel-{}-config".format(get.ARCH()), ".config")
++    # shutil.copy("files/configs/kernel-{}-config".format(get.ARCH()), ".config")
+ 
+     # Set EXTRAVERSION
+     inarytools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = {}".format(__getExtraVersion()))
+diff --git i/inary/actionsapi/mesontools.py w/inary/actionsapi/mesontools.py
+index b54db194..35558a81 100644
+--- i/inary/actionsapi/mesontools.py
++++ w/inary/actionsapi/mesontools.py
+@@ -1,4 +1,5 @@
+ import inary.actionsapi
++import inary.util as util
+ from inary.actionsapi.shelltools import system
+ from inary.actionsapi.shelltools import can_access_file
+ from inary.actionsapi import get
+@@ -11,7 +12,7 @@ class MesonError(inary.actionsapi.Error):
+ 
+ def meson_configure(parameters=""):
+     if can_access_file('meson.build'):
+-        prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
++        prefix = get.defaultprefixDIR()
+         args="meson \
+               --prefix=/{0} \
+               --buildtype=plain \
+@@ -37,7 +38,8 @@ def ninja_build(parameters=""):
+         raise MesonError(_("[Ninja]: Build failed."))
+ 
+ def ninja_install(parameters=""):
+-    if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(get.installDIR(),get.makeJOBS())):
++    insdir= get.installDIR() if get.buildTYPE() == "emul32" else util.join_path(get.defaultprefixDIR(),"emul32")
++    if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir,get.makeJOBS())):
+         raise MesonError(_("[Ninja]: Installation failed."))
+ 
+ def ninja_check():
