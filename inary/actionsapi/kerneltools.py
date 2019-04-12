@@ -217,7 +217,7 @@ def installHeaders(extraHeaders=None):
 
     # Install additional headers
     for headers in extras:
-        if not os.path.exist("{0}/{1}".format(destination, headers)):
+        if not os.path.exists("{0}/{1}".format(destination, headers)):
             shelltools.system("mkdir {0}/{1}".format(destination, headers))
         shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
 
