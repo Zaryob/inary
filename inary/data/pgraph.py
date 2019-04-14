@@ -48,7 +48,7 @@ class Digraph(object):
         for u in self.__v:
             for v in self.__adj[u]:
                 l.append( (u,v) )
-                return l
+        return l
 
     def add_vertex(self, u, data = None):
         """add vertex u, optionally with data"""
@@ -126,7 +126,7 @@ class Digraph(object):
         self.color[u] = 'b'             # mark black (completed)
         if finish_hook:
             finish_hook(u)
-            self.f[u] = self.time = self.time + 1
+        self.f[u] = self.time = self.time + 1
 
     def cycle_free(self):
         try:
