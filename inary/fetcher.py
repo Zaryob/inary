@@ -86,7 +86,10 @@ class UIHandler:
         self.size = total_downloaded
         self.total_size = total_to_download
         if self.total_size:
-            self.percent = (self.size * 100.0) / self.total_size
+            try:
+                 self.percent = (self.size * 100.0) / self.total_size
+            except:
+                self.percent = 0
         else:
             self.percent = 0
 
@@ -94,7 +97,7 @@ class UIHandler:
             try:
                 self.rate, self.symbol = util.human_readable_rate((self.size - self.exist_size) / (self.now() - self.s_time))
             except ZeroDivisionError:
-                return
+                self.rate, self.symbol = None, None
             if self.total_size:
                 self.eta  = '%02d:%02d:%02d' %\
                     tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
