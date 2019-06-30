@@ -208,9 +208,10 @@ class Install(AtomicOperation):
 
     def check_relations(self):
         # check dependencies
-        if not ctx.config.get_option('ignore_dependency'):
-            if not self.pkginfo.installable():
-                raise Error(_("{} package cannot be installed unless the dependencies are satisfied").format(self.pkginfo.name))
+        # Fixme: !!!
+        #if not ctx.config.get_option('ignore_dependency'):
+        #    if not self.pkginfo.installable():
+        #        raise Error(_("{} package cannot be installed unless the dependencies are satisfied").format(self.pkginfo.name))
 
         # If it is explicitly specified that package conflicts with this package and also
         # we passed check_conflicts tests in operations.py than this means a non-conflicting
