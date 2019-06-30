@@ -97,7 +97,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     paths = []
     extra_paths = {}
     for x in order:
-        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("\nDownloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):

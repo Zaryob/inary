@@ -928,7 +928,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('{} [cached]').format(self.archive.name))
+                ctx.ui.info(_('{} [cached]').format(self.archive.name),noln=True)
             return True
 
         return False
