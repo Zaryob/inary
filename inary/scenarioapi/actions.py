@@ -13,7 +13,6 @@
 #
 
 class Actions:
-
     template = """
 from inary.actionsapi import inarytools
 
