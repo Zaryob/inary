@@ -71,12 +71,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
             repository.add_repo(name, indexuri, ctx.get_option('at'))
 
-            if not ctx.get_option('no_fetch'):
-                try:
-                    repository.update_repo(name)
-                except (inary.errors.Error, IOError):
-                    warning = _("{0} repository could not be reached. Removing {0} from system.").format(name)
-                    self.warn_and_remove(warning, name)
         else:
             self.help()
             return
