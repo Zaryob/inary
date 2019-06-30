@@ -18,13 +18,10 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import os
 import inary.cli.command as command
 import inary.context as ctx
 import inary.package
 import inary.operations
-import inary.util as util
-
 
 usage = _("""Build INARY packages
 
@@ -39,7 +36,6 @@ to be downloaded from a repository containing sources.
 
 
 class Build(command.Command, metaclass=command.autocommand):
-
     __doc__ = usage
 
     def __init__(self, args):
@@ -69,8 +65,8 @@ class Build(command.Command, metaclass=command.autocommand):
                          help=_("Output directory for produced packages"))
 
         group.add_option("--ignore-action-errors",
-                               action="store_true", default=False,
-                               help=_("Bypass errors from ActionsAPI"))
+                         action="store_true", default=False,
+                         help=_("Bypass errors from ActionsAPI"))
 
         group.add_option("--ignore-safety",
                          action="store_true",
@@ -104,7 +100,7 @@ class Build(command.Command, metaclass=command.autocommand):
                          default=False,
                          help=_("Do not constrain build process inside "
                                 "the build folder"))
-                                
+
         self.parser.add_option_group(group)
         group = optparse.OptionGroup(self.parser, _("build steps"))
 
@@ -153,13 +149,11 @@ class Build(command.Command, metaclass=command.autocommand):
                          const="package",
                          help=_("Create INARY package"))
 
-
         self.parser.add_option_group(group)
 
     def run(self):
         if not self.options.quiet:
             self.options.debug = True
-
 
         if self.options.package_format == "help":
             ctx.ui.info(_("Supported package formats:"))

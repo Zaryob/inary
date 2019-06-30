@@ -15,14 +15,16 @@
 import signal
 
 exception = {
-    signal.SIGINT:KeyboardInterrupt
-    }
+    signal.SIGINT: KeyboardInterrupt
+}
+
 
 class Signal:
     def __init__(self, sig):
         self.signal = sig
         self.oldhandler = signal.getsignal(sig)
         self.pending = False
+
 
 class SignalHandler:
 

@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -12,14 +12,13 @@
 # Please read the COPYING file.
 #
 
+# Gettext translation library
 # python standard library modules
 import os
-import sys
-import time
-import shutil
 import pycurl
+import shutil
+import time
 
-#Gettext translation library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -37,45 +36,50 @@ import inary.uri
 
 from base64 import encodebytes
 
+
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
     pass
+
 
 # For raising errors when connecting to server
 class RangeError(inary.errors.Error):
     pass
 
+
 # For raising errors when opening files
 class FileError(inary.errors.Error):
     pass
+
 
 # For raising errors when connecting to server
 class RemoteError(inary.errors.Error):
     pass
 
+
 class UIHandler:
     def __init__(self):
-        self.filename        = None
-        self.url             = None
-        self.basename        = None
+        self.filename = None
+        self.url = None
+        self.basename = None
         self.downloaded_size = 0
-        self.percent         = None
-        self.rate            = 0.0
-        self.size            = 0
-        self.eta             = '--:--:--'
-        self.symbol          = '--/-'
-        self.last_updated    = 0
-        self.exist_size      = 0
+        self.percent = None
+        self.rate = 0.0
+        self.size = 0
+        self.eta = '--:--:--'
+        self.symbol = '--/-'
+        self.last_updated = 0
+        self.exist_size = 0
 
     def start(self, archive, url, basename, size=0):
         if os.path.exists(archive):
             self.exist_size = os.path.getsize(archive)
-        self.filename   = basename
-        self.url        = url
-        self.basename   = basename
+        self.filename = basename
+        self.url = url
+        self.basename = basename
         self.total_size = size or 0
 
-        self.now    = lambda: time.time()
+        self.now = lambda: time.time()
         self.t_diff = lambda: self.now() - self.s_time
 
         self.s_time = self.now()
@@ -88,7 +92,7 @@ class UIHandler:
         self.total_size = total_to_download
         if self.total_size:
             try:
-                 self.percent = (self.size * 100.0) / self.total_size
+                self.percent = (self.size * 100.0) / self.total_size
             except:
                 self.percent = 0
         else:
@@ -96,12 +100,13 @@ class UIHandler:
 
         if int(self.now()) != int(self.last_updated) and self.size > 0:
             try:
-                self.rate, self.symbol = util.human_readable_rate((self.size - self.exist_size) / (self.now() - self.s_time))
+                self.rate, self.symbol = util.human_readable_rate(
+                    (self.size - self.exist_size) / (self.now() - self.s_time))
             except ZeroDivisionError:
                 self.rate, self.symbol = None, None
             if self.total_size:
-                self.eta  = '%02d:%02d:%02d' %\
-                    tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
+                self.eta = '%02d:%02d:%02d' % \
+                           tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
         self._update_ui()
 
@@ -109,20 +114,22 @@ class UIHandler:
         pass
 
     def _update_ui(self):
-        ctx.ui.display_progress(operation       = "fetching",
-                                percent         = self.percent,
-                                filename        = self.filename,
-                                total_size      = self.total_size or self.size,
-                                downloaded_size = self.size,
-                                rate            = self.rate,
-                                eta             = self.eta,
-                                symbol          = self.symbol)
+        ctx.ui.display_progress(operation="fetching",
+                                percent=self.percent,
+                                filename=self.filename,
+                                total_size=self.total_size or self.size,
+                                downloaded_size=self.size,
+                                rate=self.rate,
+                                eta=self.eta,
+                                symbol=self.symbol)
 
         self.last_updated = self.now()
+
 
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
+
     def __init__(self, url, destdir="/tmp", destfile=None):
         if not isinstance(url, inary.uri.URI):
             url = inary.uri.URI(url)
@@ -163,15 +170,15 @@ class Fetcher:
             # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
             c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
             c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
-            c.setopt(pycurl.AUTOREFERER,1)
-            c.setopt(pycurl.CONNECTTIMEOUT, timeout) #This for waiting to establish connection
-           # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+            c.setopt(pycurl.AUTOREFERER, 1)
+            c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
+            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
             c.setopt(pycurl.MAXREDIRS, 10)
             c.setopt(pycurl.NOSIGNAL, True)
             # Header
-            #c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+            # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
-            handler=UIHandler()
+            handler = UIHandler()
             handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
 
             if os.path.exists(self.partial_file):
@@ -192,14 +199,15 @@ class Fetcher:
             try:
                 c.perform()
                 file_id.close()
-                ctx.ui.debug(_("Downloaded from:"+str(c.getinfo(c.EFFECTIVE_URL))))
+                ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()
             except pycurl.error as x:
                 raise FetchError("Pycurl.Error: {}".format(x))
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
-            ctx.ui.error(FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
+            ctx.ui.error(
+                FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
 
         shutil.move(self.partial_file, self.archive_file)
 
@@ -226,7 +234,8 @@ class Fetcher:
             proxies[inary.uri.URI(ctx.config.values.general.http_proxy).scheme()] = ctx.config.values.general.http_proxy
 
         if ctx.config.values.general.https_proxy and self.url.scheme() == "https":
-            proxies[inary.uri.URI(ctx.config.values.general.https_proxy).scheme()] = ctx.config.values.general.https_proxy
+            proxies[
+                inary.uri.URI(ctx.config.values.general.https_proxy).scheme()] = ctx.config.values.general.https_proxy
 
         if ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
             proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme()] = ctx.config.values.general.ftp_proxy
@@ -245,11 +254,13 @@ class Fetcher:
         else:
             return 0
 
+
 # helper function
 def fetch_url(url, destdir, progress=None, destfile=None):
     fetch = Fetcher(url, destdir, destfile)
     fetch.progress = progress
     fetch.fetch()
+
 
 # Operation function
 def fetch(packages=None, path=os.path.curdir):

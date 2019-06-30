@@ -12,13 +12,13 @@
 # Please read the COPYING file.
 #
 
-import os
 import fnmatch
+import os
 
 import inary.db
 
-def exclude_from(packages, exfrom):
 
+def exclude_from(packages, exfrom):
     if not os.path.exists(exfrom):
         return packages
 
@@ -31,6 +31,7 @@ def exclude_from(packages, exfrom):
             return exclude(packages, patterns)
 
     return packages
+
 
 def exclude(packages, patterns):
     packages = set(packages)

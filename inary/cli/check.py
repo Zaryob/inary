@@ -119,7 +119,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
                 for fpath in check_results['config']:
                     ctx.ui.info(_("Modified configuration file: /{}").format(fpath),
-                        color='brightyellow')
+                                color='brightyellow')
 
             else:
                 # Package is not installed

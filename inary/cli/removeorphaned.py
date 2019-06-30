@@ -23,6 +23,7 @@ import inary.context as ctx
 from inary.operations import remove
 import inary.db
 
+
 class RemoveOrphaned(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Remove orphaned packages
 
@@ -31,7 +32,7 @@ Usage: remove-orphaned
 Remove all orphaned packages from the system.
 """)
 
-    def __init__(self,args):
+    def __init__(self, args):
         super(RemoveOrphaned, self).__init__(args)
         self.installdb = inary.db.installdb.InstallDB()
 
@@ -42,13 +43,13 @@ Remove all orphaned packages from the system.
 
         super(RemoveOrphaned, self).options(group)
         group.add_option("-x", "--exclude", action="append",
-                     default=None, help=_("When removing orphaned, ignore packages and components whose basenames match pattern."))
+                         default=None, help=_(
+                "When removing orphaned, ignore packages and components whose basenames match pattern."))
 
         self.parser.add_option_group(group)
 
     def run(self):
-
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
         orphaned = self.installdb.get_orphaned()
         if ctx.get_option('exclude'):
             orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))

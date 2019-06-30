@@ -16,6 +16,7 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -35,28 +36,34 @@ xmlext içine tag için remove eklenene kadar böyle
 
 try:
     import iksemel
+
     parser = "iksemel"
 except:
     import xml.dom.minidom as minidom
+
     parser = "minidom"
+
 
 class RepoError(inary.errors.Error):
     pass
 
+
 class IncompatibleRepoError(RepoError):
     pass
+
 
 class Repo:
     def __init__(self, indexuri):
         self.indexuri = indexuri
 
+
 medias = (cd, usb, remote, local) = list(range(4))
+
 
 class RepoOrder:
     def __init__(self):
         self._doc = None
         self.repos = self._get_repos()
-
 
     def add(self, repo_name, repo_url, repo_type="remote"):
         repo_doc = self._get_doc()
@@ -76,7 +83,7 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-        if parser=="iksemel":
+        if parser == "iksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     status_node = r.getTag("Status")
@@ -99,7 +106,6 @@ class RepoOrder:
                             status_node.appendChild(repo_doc.createTextNode("active"))
                             r.appendChild(status_node)
 
-
         self._update(repo_doc)
 
     def get_status(self, repo_name):
@@ -117,7 +123,7 @@ class RepoOrder:
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-        if parser=="iksemel":
+        if parser == "iksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     r.hide()
@@ -131,7 +137,7 @@ class RepoOrder:
     def get_order(self):
         order = []
 
-        #FIXME: get media order from inary.conf
+        # FIXME: get media order from inary.conf
         for m in ["cd", "usb", "remote", "local"]:
             if m in self.repos:
                 order.extend(self.repos[m])
@@ -168,16 +174,16 @@ class RepoOrder:
 
         return order
 
+
 class RepoDB(lazydb.LazyDB):
 
     def init(self):
         self.repoorder = RepoOrder()
 
-
     def has_repo(self, name):
         return name in self.list_repos(only_active=False)
 
-    def has_repo_url(self, url, only_active = True):
+    def has_repo_url(self, url, only_active=True):
         return url in self.list_repo_urls(only_active)
 
     def get_repo_doc(self, repo_name):
@@ -185,11 +191,11 @@ class RepoDB(lazydb.LazyDB):
 
         index_path = repo.indexuri.get_uri()
 
-        #FIXME Local index files should also be cached.
+        # FIXME Local index files should also be cached.
         if File.is_compressed(index_path) or repo.indexuri.is_remote_file():
             index = os.path.basename(index_path)
             index_path = util.join_path(ctx.config.index_dir(),
-                                             repo_name, index)
+                                        repo_name, index)
 
             if File.is_compressed(index_path):
                 index_path = os.path.splitext(index_path)[0]
@@ -201,27 +207,29 @@ class RepoDB(lazydb.LazyDB):
         try:
             return xmlext.parse(index_path)
         except Exception as e:
-            raise RepoError(_("Error parsing repository index information: {} \n Index file does not exist or is malformed.").format(e))
+            raise RepoError(_(
+                "Error parsing repository index information: {} \n Index file does not exist or is malformed.").format(
+                e))
 
     def get_repo(self, repo):
         return Repo(inary.uri.URI(self.get_repo_url(repo)))
 
-    #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
+    # FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
     @staticmethod
     def get_repo_url(repo):
         urifile_path = util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
         return uri.rstrip()
 
-    def add_repo(self, name, repo_info, at = None):
+    def add_repo(self, name, repo_info, at=None):
         repo_path = util.join_path(ctx.config.index_dir(), name)
         ###########
         try:
             os.makedirs(repo_path)
         except:
             pass
-        #FIXME: FileExistError errno: 17
-        #When addind repo there are the same as name empty dirs it should remove it
+        # FIXME: FileExistError errno: 17
+        # When addind repo there are the same as name empty dirs it should remove it
         urifile_path = util.join_path(ctx.config.index_dir(), name, "uri")
         open(urifile_path, "w").write(repo_info.indexuri.get_uri())
         self.repoorder.add(name, repo_info.indexuri.get_uri())
@@ -291,7 +299,6 @@ class RepoDB(lazydb.LazyDB):
         distro = xmlext.getNode(doc, "Distribution")
         return distro and xmlext.getNodeText(distro, "Version")
 
-
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):
             return
@@ -310,4 +317,4 @@ class RepoDB(lazydb.LazyDB):
         if not compatible:
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
-                    _("Repository '{}' is not compatible with your distribution. Repository is disabled.").format(name))
+                _("Repository '{}' is not compatible with your distribution. Repository is disabled.").format(name))

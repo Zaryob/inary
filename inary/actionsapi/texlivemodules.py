@@ -11,26 +11,25 @@
 #
 # Please read the COPYING file.
 
+import gettext
 # standard python modules
 import os
-import glob
-import shutil
 import shlex
-import gettext
+import shutil
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
 import inary.actionsapi
 import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import *
-from inary.actionsapi.inarytools import dodoc, dodir, domove, dosym, insinto, removeDir
-
+from inary.actionsapi.inarytools import dodir, domove, dosym, insinto
 
 WorkDir = "{0}-{1}".format(get.srcNAME(), get.srcVERSION().split('_')[-1])
+
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -38,11 +37,13 @@ class CompileError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -50,7 +51,8 @@ class RunTimeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def compile(parameters = ''):
+
+def compile(parameters=''):
     """compiling texlive packages"""
 
     # Move sources according to tplobj files
@@ -63,7 +65,8 @@ def compile(parameters = ''):
     if buildFormatFiles():
         raise CompileError(_('Building format files failed'))
 
-def install(parameters = ''):
+
+def install(parameters=''):
     """Installing texlive packages"""
 
     # Create symlinks from format to engines
@@ -86,6 +89,7 @@ def install(parameters = ''):
     if handleConfigFiles():
         raise Installing(_('Handle config files failed'))
 
+
 def createSymlinksFormat2Engines():
     """Create symlinks from format to engines"""
     for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
@@ -94,7 +98,7 @@ def createSymlinksFormat2Engines():
             if not line.startswith("#"):
                 symbin = line.split(None)
                 if "cont-" in symbin[0] or "metafun" in symbin[0] or "mptopdf" in symbin[0]:
-                     ctx.ui.info(_('Symlink {} skipped (special case)').format(symbin[0]))
+                    ctx.ui.info(_('Symlink {} skipped (special case)').format(symbin[0]))
                 elif "mf" in symbin[0]:
                     ctx.ui.info(_('Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it.').format(symbin))
                 else:
@@ -108,6 +112,7 @@ def createSymlinksFormat2Engines():
                         sym(symbin[1], "{0}/usr/bin/{1}".format(get.installDIR(), symbin[0]))
         symfile.close()
 
+
 def installDocFiles():
     """Installing docs"""
     if "documentation" in get.srcNAME():
@@ -116,16 +121,18 @@ def installDocFiles():
     else:
         for removedir in ["texmf", "texmf-dist"]:
             if os.path.isdir("{0}/{1}/doc/".format(get.curDIR(), removedir)):
-                shutil.rmtree("{0}/{1}/doc".format(get.curDIR(),removedir))
+                shutil.rmtree("{0}/{1}/doc".format(get.curDIR(), removedir))
+
 
 def installTexmfFiles():
     """Installing texmf, texmf-dist, tlpkg, texmf-var"""
     for installdoc in ["texmf", "texmf-dist", "tlpkg", "texmf-var"]:
         if os.path.isdir("{0}/{1}".format(get.curDIR(), installdoc)):
             if not installdoc == "texmf-var":
-                shutil.copytree(installdoc, "{0}/usr/share/{1}".format(get.installDIR(),installdoc))
+                shutil.copytree(installdoc, "{0}/usr/share/{1}".format(get.installDIR(), installdoc))
             else:
                 copytree(installdoc, "{}/var/lib/texmf".format(get.installDIR()))
+
 
 def installConfigFiles():
     """Installing config files"""
@@ -144,19 +151,23 @@ def installConfigFiles():
     if can_access_file("{0}/language.{1}.dat".format(get.curDIR(), get.srcNAME())):
         insinto("/etc/texmf/language.dat.d", "{0}/language.{1}.dat".format(get.curDIR(), get.srcNAME()))
 
+
 def handleConfigFiles():
     """Handling config files"""
-    for root, dirs,files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
+    for root, dirs, files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
         if not ("config" in root or "doc" in root):
             for configFile in files:
                 if configFile.endswith(("cfg", "cnf")):
                     dirname = root.split("/")[-1]
-                    if not os.path.isdir("{0}/etc/texmf/{1}.d".format(get.installDIR(),dirname)):
+                    if not os.path.isdir("{0}/etc/texmf/{1}.d".format(get.installDIR(), dirname)):
                         ctx.ui.info(_('Creating /etc/texmf/{}.d').format(dirname))
                         dodir("/etc/texmf/{}.d".format(dirname))
-                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d').format(configFile,dirname))
-                    domove("/usr/share/texmf/{0}/{1}".format(dirname,configFile), "/etc/texmf/{}.d".format(dirname))
-                    dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile), "/usr/share/texmf/{0}/{1}".format(dirname, configFile))
+                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d').format(configFile,
+                                                                                                             dirname))
+                    domove("/usr/share/texmf/{0}/{1}".format(dirname, configFile), "/etc/texmf/{}.d".format(dirname))
+                    dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile),
+                          "/usr/share/texmf/{0}/{1}".format(dirname, configFile))
+
 
 def addFormat(parameters):
     """Add format files"""
@@ -168,16 +179,16 @@ def addFormat(parameters):
         cnf_file.close()
 
     # TODO: Use regex for code simplification
-    parameters = " ".join(parameters.split())   # Removing white-space characters
-    parameters = shlex.split(parameters)      # Split parameters until the value "option"
+    parameters = " ".join(parameters.split())  # Removing white-space characters
+    parameters = shlex.split(parameters)  # Split parameters until the value "option"
     para_dict = {}
     for option in parameters:
-        pair = option.strip()                   # Remove whitespaces before "options" value
-        pair = pair.split("=",1)                # The value "options" may have multiple "=", thus split just one time
-        if len(pair) == 2:                      # The list may contain values that are not pair
+        pair = option.strip()  # Remove whitespaces before "options" value
+        pair = pair.split("=", 1)  # The value "options" may have multiple "=", thus split just one time
+        if len(pair) == 2:  # The list may contain values that are not pair
             para_dict[pair[0]] = pair[1]
             if pair[0] == "patterns" and pair[1] == '':
-                para_dict["patterns"] = '-'     # Specified in the texlive-module.eclass
+                para_dict["patterns"] = '-'  # Specified in the texlive-module.eclass
             elif not pair[0] == 'patterns':
                 para_dict["patterns"] = '-'
 
@@ -185,20 +196,22 @@ def addFormat(parameters):
     cnf_file.write('{0[name]}\t{0[engine]}\t{0[patterns]}\t{0[options]}\n'.format(para_dict))
     cnf_file.close()
 
+
 def moveSources():
     reloc = "texmf-dist"
 
     for tlpobjfile in os.listdir("tlpkg/tlpobj/"):
-        jobsfile=open("tlpkg/tlpobj/{}".format(tlpobjfile), "r")
+        jobsfile = open("tlpkg/tlpobj/{}".format(tlpobjfile), "r")
         for line in jobsfile.readlines():
             if "RELOC" in line:
                 path = line.split("/", 1)[-1]
                 path = path.strip()
                 filename = path.split("/", -1)
                 dirname = os.path.dirname(path)
-                if not os.path.isdir("{0}/{1}".format(reloc,dirname)):
-                    os.system("mkdir -p {0}/{1}".format(reloc,dirname))
-                shutil.move("{}".format(path) , "{0}/{1}".format(reloc,dirname))
+                if not os.path.isdir("{0}/{1}".format(reloc, dirname)):
+                    os.system("mkdir -p {0}/{1}".format(reloc, dirname))
+                shutil.move("{}".format(path), "{0}/{1}".format(reloc, dirname))
+
 
 def buildFormatFiles():
     """Build format files"""
@@ -210,31 +223,33 @@ def buildFormatFiles():
             export("VARTEXFONTS", "fonts")
             system("env -u TEXINPUTS fmtutil --cnffile {} --fmtdir texmf-var/web2c --all".format(formatfile))
 
+
 def addLanguageDat(parameter):
     """Create language.*.dat files"""
     parameter = parameter.split()
-    para_dict={}
+    para_dict = {}
     for option in parameter:
         pair = option.split("=")
-        if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
+        if len(pair) == 2:  # That's just a caution, the pair should have two items, not more not less
             para_dict[pair[0]] = pair[1]
 
-    language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(), get.srcNAME())  , 'a')
+    language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(), get.srcNAME()), 'a')
     language_dat.write('{0[name]}\t{0[file]}\n"'.format(para_dict))
     language_dat.close()
 
     if "synonyms" in para_dict:
-        language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(),get.srcNAME())  , 'a')
+        language_dat = open('{0}/language.{1}.dat'.format(get.curDIR(), get.srcNAME()), 'a')
         language_dat.write("={}\n".format(para_dict["synonyms"]))
         language_dat.close()
+
 
 def addLanguageDef(parameter):
     """Create language.*.def files"""
     parameter = parameter.split()
-    para_dict={}
+    para_dict = {}
     for option in parameter:
         pair = option.split("=")
-        if len(pair) == 2: #That's just a caution, the pair should have two items, not more not less
+        if len(pair) == 2:  # That's just a caution, the pair should have two items, not more not less
             para_dict[pair[0]] = pair[1]
 
     if "lefthyphenmin" in para_dict and not para_dict["lefthyphenmin"]:
@@ -242,19 +257,22 @@ def addLanguageDef(parameter):
     if "righthyphenmin" in para_dict and not para_dict["righthyphenmin"]:
         para_dict["righthyphenmin"] = "3"
 
-    language_def = open('{0}/language.{1}.def'.format(get.curDIR(),get.srcNAME())  , 'a')
-    language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["name"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
+    language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
+    language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
+    para_dict["name"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
     language_def.close()
 
     if "synonyms" in para_dict:
-        language_def = open('{0}/language.{1}.def'.format(get.curDIR(),get.srcNAME())  , 'a')
-        language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (para_dict["synonyms"], para_dict["file"],  para_dict["lefthyphenmin"],  para_dict["righthyphenmin"]))
+        language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
+        language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
+        para_dict["synonyms"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
         language_def.close()
+
 
 def generateConfigFiles():
     """Generate config files"""
     for tlpobjfile in ls("{}/tlpkg/tlpobj/*".format(get.curDIR())):
-        jobsfile=open(tlpobjfile, "r")
+        jobsfile = open(tlpobjfile, "r")
         for line in jobsfile.readlines():
             splitline = line.split(" ", 2)
             if splitline[0] == "execute":
@@ -265,10 +283,12 @@ def generateConfigFiles():
                     ctx.ui.info(_('Map {0} is added to {1}/{2}.cfg').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addMixedMap":
                     echo("{0}/{1}.cfg".format(get.curDIR(), get.srcNAME()), "MixedMap {}".format(parameter))
-                    ctx.ui.info(_('MixedMap {0} is added to {1}/{2}.cfg').format(parameter, get.curDIR(), get.srcNAME()))
+                    ctx.ui.info(
+                        _('MixedMap {0} is added to {1}/{2}.cfg').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addDvipsMap":
                     echo("{0}/{1}-config.ps".format(get.curDIR(), get.srcNAME()), "p +{}".format(parameter))
-                    ctx.ui.info(_('p +{0} is added to {1}/{2}-config.ps').format(parameter, get.curDIR(), get.srcNAME()))
+                    ctx.ui.info(
+                        _('p +{0} is added to {1}/{2}-config.ps').format(parameter, get.curDIR(), get.srcNAME()))
                 elif command == "addDvipdfmMap":
                     echo("{0}/{1}-config".format(get.curDIR(), get.srcNAME()), "f {}".format(parameter))
                     ctx.ui.info(_('f {0} is added to {1}/{2}-config').format(parameter, get.curDIR(), get.srcNAME()))

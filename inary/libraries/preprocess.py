@@ -126,16 +126,13 @@
 __version_info__ = (1, 1, 0)
 __version__ = '.'.join(map(str, __version_info__))
 
-import os
-import sys
 import getopt
-import types
+import os
 import re
-import pprint
+import sys
 
 
-
-#---- exceptions
+# ---- exceptions
 
 class PreprocessError(Exception):
     def __init__(self, errmsg, file=None, lineno=None, line=None):
@@ -144,6 +141,7 @@ class PreprocessError(Exception):
         self.lineno = lineno
         self.line = line
         Exception.__init__(self, errmsg, file, lineno, line)
+
     def __str__(self):
         s = ""
         if self.file is not None:
@@ -153,13 +151,12 @@ class PreprocessError(Exception):
         if self.file is not None or self.lineno is not None:
             s += " "
         s += self.errmsg
-        #if self.line is not None:
+        # if self.line is not None:
         #    s += ": " + self.line
         return s
 
 
-
-#---- global data
+# ---- global data
 
 # Comment delimiter info.
 #   A mapping of content type to a list of 2-tuples defining the line
@@ -167,34 +164,34 @@ class PreprocessError(Exception):
 #   be a string (in which case it is transformed into a pattern allowing
 #   whitespace on either side) or a compiled regex.
 _commentGroups = {
-    "Python":     [ ('#', '') ],
-    "Perl":       [ ('#', '') ],
-    "PHP":        [ ('/*', '*/'), ('//', ''), ('#', '') ],
-    "Ruby":       [ ('#', '') ],
-    "Tcl":        [ ('#', '') ],
-    "Shell":      [ ('#', '') ],
+    "Python": [('#', '')],
+    "Perl": [('#', '')],
+    "PHP": [('/*', '*/'), ('//', ''), ('#', '')],
+    "Ruby": [('#', '')],
+    "Tcl": [('#', '')],
+    "Shell": [('#', '')],
     # Allowing for CSS and JavaScript comments in XML/HTML.
-    "XML":        [ ('<!--', '-->'), ('/*', '*/'), ('//', '') ],
-    "HTML":       [ ('<!--', '-->'), ('/*', '*/'), ('//', '') ],
-    "Makefile":   [ ('#', '') ],
-    "JavaScript": [ ('/*', '*/'), ('//', '') ],
-    "CSS":        [ ('/*', '*/') ],
-    "C":          [ ('/*', '*/') ],
-    "C++":        [ ('/*', '*/'), ('//', '') ],
-    "Java":       [ ('/*', '*/'), ('//', '') ],
-    "C#":         [ ('/*', '*/'), ('//', '') ],
-    "IDL":        [ ('/*', '*/'), ('//', '') ],
-    "Text":       [ ('#', '') ],
-    "Fortran":    [ (re.compile(r'^[a-zA-Z*$]\s*'), ''), ('!', '') ],
-    "TeX":        [ ('%', '') ],
+    "XML": [('<!--', '-->'), ('/*', '*/'), ('//', '')],
+    "HTML": [('<!--', '-->'), ('/*', '*/'), ('//', '')],
+    "Makefile": [('#', '')],
+    "JavaScript": [('/*', '*/'), ('//', '')],
+    "CSS": [('/*', '*/')],
+    "C": [('/*', '*/')],
+    "C++": [('/*', '*/'), ('//', '')],
+    "Java": [('/*', '*/'), ('//', '')],
+    "C#": [('/*', '*/'), ('//', '')],
+    "IDL": [('/*', '*/'), ('//', '')],
+    "Text": [('#', '')],
+    "Fortran": [(re.compile(r'^[a-zA-Z*$]\s*'), ''), ('!', '')],
+    "TeX": [('%', '')],
 }
 
 
-
-#---- internal logging facility
+# ---- internal logging facility
 
 class _Logger:
     DEBUG, INFO, WARN, ERROR, CRITICAL = list(range(5))
+
     def __init__(self, name, level=None, streamOrFileName=sys.stderr):
         self._name = name
         if level is None:
@@ -207,13 +204,17 @@ class _Logger:
         else:
             self.stream = streamOrFileName
             self._opennedStream = 0
+
     def __del__(self):
         if self._opennedStream:
             self.stream.close()
+
     def getLevel(self):
         return self.level
+
     def setLevel(self, level):
         self.level = level
+
     def _getLevelName(self, level):
         levelNameMap = {
             self.DEBUG: "DEBUG",
@@ -223,13 +224,25 @@ class _Logger:
             self.CRITICAL: "CRITICAL",
         }
         return levelNameMap[level]
+
     def isEnabled(self, level):
         return level >= self.level
-    def isDebugEnabled(self): return self.isEnabled(self.DEBUG)
-    def isInfoEnabled(self): return self.isEnabled(self.INFO)
-    def isWarnEnabled(self): return self.isEnabled(self.WARN)
-    def isErrorEnabled(self): return self.isEnabled(self.ERROR)
-    def isFatalEnabled(self): return self.isEnabled(self.FATAL)
+
+    def isDebugEnabled(self):
+        return self.isEnabled(self.DEBUG)
+
+    def isInfoEnabled(self):
+        return self.isEnabled(self.INFO)
+
+    def isWarnEnabled(self):
+        return self.isEnabled(self.WARN)
+
+    def isErrorEnabled(self):
+        return self.isEnabled(self.ERROR)
+
+    def isFatalEnabled(self):
+        return self.isEnabled(self.FATAL)
+
     def log(self, level, msg, *args):
         if level < self.level:
             return
@@ -237,31 +250,36 @@ class _Logger:
         message = message + (msg % args) + "\n"
         self.stream.write(message)
         self.stream.flush()
+
     def debug(self, msg, *args):
         self.log(self.DEBUG, msg, *args)
+
     def info(self, msg, *args):
         self.log(self.INFO, msg, *args)
+
     def warn(self, msg, *args):
         self.log(self.WARN, msg, *args)
+
     def error(self, msg, *args):
         self.log(self.ERROR, msg, *args)
+
     def fatal(self, msg, *args):
         self.log(self.CRITICAL, msg, *args)
+
 
 log = _Logger("preprocess", _Logger.WARN)
 
 
-
-#---- internal support stuff
+# ---- internal support stuff
 
 def _evaluate(expr, defines):
     """Evaluate the given expression string with the given context.
 
     WARNING: This runs eval() on a user string. This is unsafe.
     """
-    #interpolated = _interpolate(s, defines)
+    # interpolated = _interpolate(s, defines)
     try:
-        rv = eval(expr, {'defined':lambda v: v in defines}, defines)
+        rv = eval(expr, {'defined': lambda v: v in defines}, defines)
     except Exception as ex:
         msg = str(ex)
         if msg.startswith("name '") and msg.endswith("' is not defined"):
@@ -272,7 +290,7 @@ def _evaluate(expr, defines):
             varName = msg[len("name '"):-len("' is not defined")]
             if expr.find("defined(%s)" % varName) != -1:
                 # "defined(FOO)" in expr instead of "defined('FOO')"
-                msg += " (perhaps you want \"defined('%s')\" instead of "\
+                msg += " (perhaps you want \"defined('%s')\" instead of " \
                        "\"defined(%s)\")" % (varName, varName)
         elif msg.startswith("invalid syntax"):
             msg = "invalid syntax: '%s'" % expr
@@ -281,7 +299,7 @@ def _evaluate(expr, defines):
     return rv
 
 
-#---- module API
+# ---- module API
 
 def preprocess(infile, outfile=sys.stdout, defines=None,
                force=0, keepLines=0, includePath=None, substitute=0,
@@ -322,13 +340,13 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     if __preprocessedFiles is None:
         __preprocessedFiles = []
 
-    log.info("preprocess(infile=%r, outfile=%r, defines=%r, force=%r, "\
-             "keepLines=%r, includePath=%r, contentType=%r, "\
+    log.info("preprocess(infile=%r, outfile=%r, defines=%r, force=%r, " \
+             "keepLines=%r, includePath=%r, contentType=%r, " \
              "__preprocessedFiles=%r)", infile, outfile, defines, force,
              keepLines, includePath, contentType, __preprocessedFiles)
     absInfile = os.path.normpath(os.path.abspath(infile))
     if absInfile in __preprocessedFiles:
-        raise PreprocessError("detected recursive #include of '%s'"\
+        raise PreprocessError("detected recursive #include of '%s'" \
                               % infile)
     __preprocessedFiles.append(os.path.abspath(infile))
 
@@ -343,8 +361,8 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     try:
         cgs = _commentGroups[contentType]
     except KeyError:
-        raise PreprocessError("don't know comment delimiters for content "\
-                              "type '%s' (file '%s')"\
+        raise PreprocessError("don't know comment delimiters for content " \
+                              "type '%s' (file '%s')" \
                               % (contentType, infile))
 
     # Generate statement parsing regexes. Basic format:
@@ -366,7 +384,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
              '#\s*(?P<op>undef)\s+(?P<var>[^\s]*?)',
              '#\s*(?P<op>include)\s+"(?P<fname>.*?)"',
              r'#\s*(?P<op>include)\s+(?P<var>[^\s]+?)',
-            ]
+             ]
     patterns = []
     for stmt in stmts:
         # The comment group prefix and suffix can either be just a
@@ -399,10 +417,10 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
         fout = outfile
 
     defines['__FILE__'] = infile
-    SKIP, EMIT = list(range(2)) # states
-    states = [(EMIT,   # a state is (<emit-or-skip-lines-in-this-section>,
-               0,      #             <have-emitted-in-this-if-block>,
-               0)]     #             <have-seen-'else'-in-this-if-block>)
+    SKIP, EMIT = list(range(2))  # states
+    states = [(EMIT,  # a state is (<emit-or-skip-lines-in-this-section>,
+               0,  # <have-emitted-in-this-if-block>,
+               0)]  # <have-seen-'else'-in-this-if-block>)
     lineNum = 0
     for line in lines:
         lineNum += 1
@@ -410,7 +428,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
         defines['__LINE__'] = lineNum
 
         # Is this line a preprocessor stmt line?
-        #XXX Could probably speed this up by optimizing common case of
+        # XXX Could probably speed this up by optimizing common case of
         #    line NOT being a preprocessor stmt line.
         for stmtRe in stmtRes:
             match = stmtRe.match(line)
@@ -449,18 +467,18 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         # This is the first include form: #include "path"
                         f = match.group("fname")
-                        
+
                     for d in [os.path.dirname(infile)] + includePath:
                         fname = os.path.normpath(os.path.join(d, f))
                         if os.path.exists(fname):
                             break
                     else:
-                        raise PreprocessError("could not find #include'd file "\
-                                              "\"%s\" on include path: %r"\
+                        raise PreprocessError("could not find #include'd file " \
+                                              "\"%s\" on include path: %r" \
                                               % (f, includePath))
                     defines = preprocess(fname, fout, defines, force,
                                          keepLines, includePath, substitute,
-                                         contentTypesRegistry=contentTypesRegistry, 
+                                         contentTypesRegistry=contentTypesRegistry,
                                          __preprocessedFiles=__preprocessedFiles)
             elif op in ("if", "ifdef", "ifndef"):
                 if op == "if":
@@ -478,17 +496,17 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states.append((SKIP, 0, 0))
                 except KeyError:
-                    raise PreprocessError("use of undefined variable in "\
+                    raise PreprocessError("use of undefined variable in " \
                                           "#%s stmt" % op, defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "elif":
                 expr = match.group("expr")
                 try:
-                    if states[-1][2]: # already had #else in this if-block
-                        raise PreprocessError("illegal #elif after #else in "\
-                            "same #if block", defines['__FILE__'],
-                            defines['__LINE__'], line)
-                    elif states[-1][1]: # if have emitted in this if-block
+                    if states[-1][2]:  # already had #else in this if-block
+                        raise PreprocessError("illegal #elif after #else in " \
+                                              "same #if block", defines['__FILE__'],
+                                              defines['__LINE__'], line)
+                    elif states[-1][1]:  # if have emitted in this if-block
                         states[-1] = (SKIP, 1, 0)
                     elif states[:-1] and states[-2][0] == SKIP:
                         # Were are nested in a SKIP-portion of an if-block.
@@ -498,16 +516,16 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states[-1] = (SKIP, 0, 0)
                 except IndexError:
-                    raise PreprocessError("#elif stmt without leading #if "\
+                    raise PreprocessError("#elif stmt without leading #if " \
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "else":
                 try:
-                    if states[-1][2]: # already had #else in this if-block
-                        raise PreprocessError("illegal #else after #else in "\
-                            "same #if block", defines['__FILE__'],
-                            defines['__LINE__'], line)
-                    elif states[-1][1]: # if have emitted in this if-block
+                    if states[-1][2]:  # already had #else in this if-block
+                        raise PreprocessError("illegal #else after #else in " \
+                                              "same #if block", defines['__FILE__'],
+                                              defines['__LINE__'], line)
+                    elif states[-1][1]:  # if have emitted in this if-block
                         states[-1] = (SKIP, 1, 1)
                     elif states[:-1] and states[-2][0] == SKIP:
                         # Were are nested in a SKIP-portion of an if-block.
@@ -515,20 +533,20 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states[-1] = (EMIT, 1, 1)
                 except IndexError:
-                    raise PreprocessError("#else stmt without leading #if "\
+                    raise PreprocessError("#else stmt without leading #if " \
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "endif":
                 try:
                     states.pop()
                 except IndexError:
-                    raise PreprocessError("#endif stmt without leading #if"\
+                    raise PreprocessError("#endif stmt without leading #if" \
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "error":
                 if not (states and states[-1][0] == SKIP):
                     error = match.group("error")
-                    raise PreprocessError("#error: "+error, defines['__FILE__'],
+                    raise PreprocessError("#error: " + error, defines['__FILE__'],
                                           defines['__LINE__'], line)
             log.debug("states: %r", states)
             if keepLines:
@@ -568,7 +586,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     return defines
 
 
-#---- content-type handling
+# ---- content-type handling
 
 _gDefaultContentTypes = """
     # Default file types understood by "preprocess.py".
@@ -639,6 +657,7 @@ _gDefaultContentTypes = """
     Text                .kkf  # Keybinding schemes files
 """
 
+
 class ContentTypesRegistry:
     """A class that handles determining the filetype of a given path.
 
@@ -686,7 +705,7 @@ class ContentTypesRegistry:
             contentType, patterns = words[0], words[1:]
             if not patterns:
                 if line[-1] == '\n': line = line[:-1]
-                raise PreprocessError("bogus content.types line, there must "\
+                raise PreprocessError("bogus content.types line, there must " \
                                       "be one or more patterns: '%s'" % line)
             for pattern in patterns:
                 if pattern.startswith('.'):
@@ -712,7 +731,7 @@ class ContentTypesRegistry:
         # Try to determine from the path.
         if not contentType and basename in self.filenameMap:
             contentType = self.filenameMap[basename]
-            log.debug("Content type of '%s' is '%s' (determined from full "\
+            log.debug("Content type of '%s' is '%s' (determined from full " \
                       "path).", path, contentType)
         # Try to determine from the suffix.
         if not contentType and '.' in basename:
@@ -722,7 +741,7 @@ class ContentTypesRegistry:
                 suffix = suffix.lower()
             if suffix in self.suffixMap:
                 contentType = self.suffixMap[suffix]
-                log.debug("Content type of '%s' is '%s' (determined from "\
+                log.debug("Content type of '%s' is '%s' (determined from " \
                           "suffix '%s').", path, contentType, suffix)
         # Try to determine from the registered set of regex patterns.
         if not contentType:
@@ -738,7 +757,10 @@ class ContentTypesRegistry:
             contentType = "XML"
         return contentType
 
+
 _gDefaultContentTypesRegistry = None
+
+
 def getDefaultContentTypesRegistry():
     global _gDefaultContentTypesRegistry
     if _gDefaultContentTypesRegistry is None:
@@ -746,8 +768,8 @@ def getDefaultContentTypesRegistry():
     return _gDefaultContentTypesRegistry
 
 
-#---- internal support stuff
-#TODO: move other internal stuff down to this section
+# ---- internal support stuff
+# TODO: move other internal stuff down to this section
 
 try:
     reversed
@@ -772,15 +794,15 @@ except NameError:
             yield item
 
 
-#---- mainline
+# ---- mainline
 
 def main(argv):
     try:
         optlist, args = getopt.getopt(argv[1:], 'hVvo:D:fkI:sc:',
-            ['help', 'version', 'verbose', 'force', 'keep-lines',
-             'substitute', 'content-types-path='])
+                                      ['help', 'version', 'verbose', 'force', 'keep-lines',
+                                       'substitute', 'content-types-path='])
     except getopt.GetoptError as msg:
-        sys.stderr.write("preprocess: error: %s. Your invocation was: %s\n"\
+        sys.stderr.write("preprocess: error: %s. Your invocation was: %s\n" \
                          % (msg, argv))
         sys.stderr.write("See 'preprocess --help'.\n")
         return 1
@@ -824,7 +846,7 @@ def main(argv):
             contentTypesPaths.append(optarg)
 
     if len(args) != 1:
-        sys.stderr.write("preprocess: error: incorrect number of "\
+        sys.stderr.write("preprocess: error: incorrect number of " \
                          "arguments: argv=%r\n" % argv)
         return 1
     else:
@@ -842,7 +864,7 @@ def main(argv):
             sys.stderr.write("preprocess: error: %s\n" % str(ex))
         return 1
 
+
 if __name__ == "__main__":
     __file__ = sys.argv[0]
-    sys.exit( main(sys.argv) )
-
+    sys.exit(main(sys.argv))

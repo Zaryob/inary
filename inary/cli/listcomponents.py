@@ -40,14 +40,14 @@ repositories.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-components options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format"))
         group.add_option("-r", "--repository", action="store",
-                               type="string", default=None, help=_('Name of the source or package repository'))
+                         type="string", default=None, help=_('Name of the source or package repository'))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         l = self.componentdb.list_components(ctx.get_option('repository'))
         l.sort()
@@ -57,7 +57,7 @@ repositories.
                 ctx.ui.info(str(component))
             else:
                 lenp = len(p)
-                #if p in installed_list:
+                # if p in installed_list:
                 #    p = util.colorize(p, 'cyan')
-                #p = p + ' ' * max(0, 15 - lenp)
+                # p = p + ' ' * max(0, 15 - lenp)
                 ctx.ui.info('{0} - {1} '.format(component.name, str(component.summary)))

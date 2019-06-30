@@ -30,11 +30,14 @@ loghandler = None
 # used for bug #10568
 locked = False
 
+
 def set_option(opt, val):
     config.set_option(opt, val)
 
+
 def get_option(opt):
     return config and config.get_option(opt)
+
 
 ui = inary.ui.UI()
 
@@ -45,7 +48,7 @@ stderr = None
 scom = True
 scom_updated = False
 dbus_sockname = None
-dbus_timeout = 60 * 60 # in seconds
+dbus_timeout = 60 * 60  # in seconds
 
 # Bug #2879
 # FIXME: Maybe we can create a simple rollback mechanism. There are other
@@ -53,16 +56,21 @@ dbus_timeout = 60 * 60 # in seconds
 # this is needed in build process to clean after if something goes wrong.
 build_leftover = None
 
+
 def disable_keyboard_interrupts():
     sig and sig.disable_signal(signal.SIGINT)
+
 
 def enable_keyboard_interrupts():
     sig and sig.enable_signal(signal.SIGINT)
 
+
 def keyboard_interrupt_disabled():
     return sig and sig.signal_disabled(signal.SIGINT)
 
+
 def keyboard_interrupt_pending():
     return sig and sig.signal_pending(signal.SIGINT)
+
 
 filesdb = None

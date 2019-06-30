@@ -11,9 +11,9 @@
 #
 # Please read the COPYING file.
 
+from inary.actionsapi import cmaketools
 # ActionsAPI Modules
 from inary.actionsapi import get
-from inary.actionsapi import cmaketools
 from inary.actionsapi import shelltools
 
 basename = "kde5"
@@ -32,7 +32,7 @@ plugindir = "{}/lib/qt5/plugins".format(prefix)
 moduledir = "{}/lib/qt5/mkspecs/modules".format(prefix)
 pythondir = "{}/bin/python".format(prefix)
 appsdir = "{}".format(sharedir)
-sysconfdir= "/etc"
+sysconfdir = "/etc"
 configdir = "{}/xdg".format(sysconfdir)
 servicesdir = "{}/services".format(sharedir)
 servicetypesdir = "{}/servicetypes".format(sharedir)
@@ -41,7 +41,8 @@ docdir = "/{0}/{1}".format(get.docDIR(), basename)
 htmldir = "{}/html".format(docdir)
 wallpapersdir = "{}/share/wallpapers".format(prefix)
 
-def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
+
+def configure(parameters='', installPrefix=prefix, sourceDir='..'):
     """ parameters -DLIB_INSTALL_DIR="hede" -DSOMETHING_USEFUL=1"""
 
     shelltools.makedirs("build")
@@ -59,12 +60,15 @@ def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
                           -DKDE_INSTALL_LIBDIR=lib \
                           -Wno-dev \
                           -DCMAKE_INSTALL_PREFIX={5} \
-                         {6}".format(libexecdir, qmldir, sysconfdir, plugindir, moduledir, prefix,parameters), installPrefix, sourceDir)
+                         {6}".format(libexecdir, qmldir, sysconfdir, plugindir, moduledir, prefix, parameters),
+                         installPrefix, sourceDir)
 
     shelltools.cd("..")
 
-def make(parameters = ''):
+
+def make(parameters=''):
     cmaketools.make('-C build {}'.format(parameters))
 
-def install(parameters = '', argument = 'install'):
+
+def install(parameters='', argument='install'):
     cmaketools.install('-C build {}'.format(parameters), argument)

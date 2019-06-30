@@ -15,8 +15,9 @@
 """Simplifies working with URLs, purl module provides common URL
 parsing and processing"""
 
-import urllib.parse
+import gettext
 import os.path
+import urllib.parse
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)

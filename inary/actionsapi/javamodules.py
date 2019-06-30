@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -129,9 +129,9 @@ def _generate_exec_file(dest_dir, exe, java_args, exe_args):
                         os.O_CREAT | os.O_WRONLY,
                         0o755)
     os.write(exec_file, EXEC_TEMPLATE.format(util.join_path('/', dest_dir),
-                                         java_args,
-                                         exe,
-                                         exe_args))
+                                             java_args,
+                                             exe,
+                                             exe_args))
     os.close(exec_file)
 
 

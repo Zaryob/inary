@@ -12,12 +12,12 @@
 # Please read the COPYING file.
 #
 
-import inary.version
 import inary.db
 import inary.sxml.autoxml as autoxml
+import inary.version
+
 
 class Relation(metaclass=autoxml.autoxml):
-
     s_Package = [autoxml.String, autoxml.mandatory]
     a_version = [autoxml.String, autoxml.optional]
     a_versionFrom = [autoxml.String, autoxml.optional]
@@ -52,6 +52,7 @@ class Relation(metaclass=autoxml.autoxml):
                 return False
 
         return True
+
 
 def installed_package_satisfies(relation):
     installdb = inary.db.installdb.InstallDB()

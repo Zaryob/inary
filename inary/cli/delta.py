@@ -35,7 +35,6 @@ a delta package with the changed files.
 
 
 class Delta(command.Command, metaclass=command.autocommand):
-
     __doc__ = usage
 
     def __init__(self, args):

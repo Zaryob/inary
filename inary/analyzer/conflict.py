@@ -15,12 +15,15 @@
 """conflict analyzer"""
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.data.relation as relation
 
 """ Conflict relation """
+
+
 class Conflict(relation.Relation):
     def __str__(self):
         s = self.package
@@ -38,10 +41,12 @@ class Conflict(relation.Relation):
             s += _(" release ") + self.release
         return s
 
+
 def installed_package_conflicts(confinfo):
     """determine if an installed package in *repository* conflicts with
 given conflicting spec"""
     return relation.installed_package_satisfies(confinfo)
+
 
 def package_conflicts(pkg, confs):
     for c in confs:
@@ -50,11 +55,13 @@ def package_conflicts(pkg, confs):
 
     return None
 
+
 def calculate_conflicts(order, packagedb):
     """
     Return a tuple of the conflicting packages information -> tuple
     @param packages: list of package names -> list_of_strings
     """
+
     # check conflicting packages in the installed system
     def check_installed(pkg, order):
         conflicts = []

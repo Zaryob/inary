@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -16,45 +16,54 @@ import re
 import sys
 
 
-from itertools import count
-
-from itertools import filterfalse
-
 # ActionsAPI
-import inary.actionsapi
+
 
 def cat(filename):
     return open(filename)
 
+
 class grep:
     """keep only lines that match the regexp"""
-    def __init__(self, pat, flags = 0):
+
+    def __init__(self, pat, flags=0):
         self.fun = re.compile(pat, flags).match
+
     def __ror__(self, input):
         return filter(self.fun, input)
 
+
 class tr:
     """apply arbitrary transform to each sequence element"""
+
     def __init__(self, transform):
         self.tr = transform
+
     def __ror__(self, input):
         return map(self.tr, input)
 
+
 class printto:
     """print sequence elements one per line"""
-    def __init__(self, out = sys.stdout):
+
+    def __init__(self, out=sys.stdout):
         self.out = out
-    def __ror__(self,input):
+
+    def __ror__(self, input):
         for line in input:
             print(line, file=self.out)
 
+
 printlines = printto(sys.stdout)
 
+
 class terminator:
-    def __init__(self,method):
+    def __init__(self, method):
         self.process = method
-    def __ror__(self,input):
+
+    def __ror__(self, input):
         return self.process(input)
+
 
 aslist = terminator(list)
 asdict = terminator(dict)
@@ -62,15 +71,19 @@ astuple = terminator(tuple)
 join = terminator(''.join)
 enum = terminator(enumerate)
 
+
 class sort:
-    def __ror__(self,input):
+    def __ror__(self, input):
         ll = list(input)
         ll.sort()
         return ll
+
+
 sort = sort()
 
+
 class uniq:
-    def __ror__(self,input):
+    def __ror__(self, input):
         for i in input:
             try:
                 if i == prev:
@@ -79,4 +92,6 @@ class uniq:
                 pass
             prev = i
             yield i
+
+
 uniq = uniq()

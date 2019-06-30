@@ -43,26 +43,26 @@ database.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("search options"))
         group.add_option("-l", "--language", action="store",
-                               type="string", default=None, help=_('Summary and description language'))
+                         type="string", default=None, help=_('Summary and description language'))
         group.add_option("-r", "--repository", action="store",
-                               type="string", default=None, help=_('Name of the source or package repository'))
+                         type="string", default=None, help=_('Name of the source or package repository'))
         group.add_option("-i", "--installdb", action="store_true",
-                               default=False, help=_("Search in installdb"))
+                         default=False, help=_("Search in installdb"))
         group.add_option("-s", "--sourcedb", action="store_true",
-                               default=False, help=_("Search in sourcedb"))
+                         default=False, help=_("Search in sourcedb"))
         group.add_option("-c", "--case-sensitive", action="store_true",
-                               default=False, help=_("Case sensitive search"))
+                         default=False, help=_("Case sensitive search"))
         group.add_option("--name", action="store_true",
-                               default=False, help=_('Search in the package name'))
+                         default=False, help=_('Search in the package name'))
         group.add_option("--summary", action="store_true",
-                               default=False, help=_('Search in the package summary'))
+                         default=False, help=_('Search in the package summary'))
         group.add_option("--description", action="store_true",
-                               default=False, help=_('Search in the package description'))
+                         default=False, help=_('Search in the package description'))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         if not self.args:
             self.help()
@@ -83,17 +83,17 @@ database.
             db = inary.db.installdb.InstallDB()
             pkgs = db.search_package(self.args, lang, fields, cs)
             get_info = db.get_package
-            get_name_sum = lambda pkg:(pkg.name, pkg.summary)
+            get_name_sum = lambda pkg: (pkg.name, pkg.summary)
         elif ctx.get_option('sourcedb'):
             db = inary.db.sourcedb.SourceDB()
             pkgs = db.search_spec(self.args, lang, repo, fields, cs)
             get_info = db.get_spec
-            get_name_sum = lambda pkg:(pkg.source.name, pkg.source.summary)
+            get_name_sum = lambda pkg: (pkg.source.name, pkg.source.summary)
         else:
             db = inary.db.packagedb.PackageDB()
             pkgs = db.search_package(self.args, lang, repo, fields, cs)
             get_info = db.get_package
-            get_name_sum = lambda pkg:(pkg.name, pkg.summary)
+            get_name_sum = lambda pkg: (pkg.name, pkg.summary)
 
         if pkgs:
             maxlen = max([len(_pkg) for _pkg in pkgs])

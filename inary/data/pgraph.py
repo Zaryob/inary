@@ -14,14 +14,16 @@
 
 """INARY package relation graph that represents the state of packagedb"""
 
+
 import inary.context as ctx
-import inary.operations.helper as op_helper
 import inary.db
 import inary.errors
+import inary.operations.helper as op_helper
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class CycleException(inary.errors.Exception):
     def __init__(self, cycle):
@@ -29,6 +31,7 @@ class CycleException(inary.errors.Exception):
 
     def __str__(self):
         return _('Encountered cycle {}').format(self.cycle)
+
 
 class Digraph(object):
 
@@ -47,10 +50,10 @@ class Digraph(object):
         l = []
         for u in self.__v:
             for v in self.__adj[u]:
-                l.append( (u,v) )
+                l.append((u, v))
         return l
 
-    def add_vertex(self, u, data = None):
+    def add_vertex(self, u, data=None):
         """add vertex u, optionally with data"""
         assert not u in self.__v
         self.__v.add(u)
@@ -59,7 +62,7 @@ class Digraph(object):
             self.__vdata[u] = data
             self.__edata[u] = {}
 
-    def add_edge(self, u, v, edata = None, udata = None, vdata = None):
+    def add_edge(self, u, v, edata=None, udata=None, vdata=None):
         """add edge u -> v"""
         if not u in self.__v:
             self.add_vertex(u, udata)
@@ -67,9 +70,9 @@ class Digraph(object):
             self.add_vertex(v, vdata)
         self.__adj[u].add(v)
         if edata is not None:
-             self.__edata[u][v] = edata
+            self.__edata[u][v] = edata
 
-    def add_biedge(self, u, v, edata = None):
+    def add_biedge(self, u, v, edata=None):
         self.add_edge(u, v, edata)
         self.add_edge(v, u, edata)
 
@@ -85,7 +88,7 @@ class Digraph(object):
     def has_vertex(self, u):
         return u in self.__v
 
-    def has_edge(self, u,v):
+    def has_edge(self, u, v):
         if u in self.__v:
             return v in self.__adj[u]
         else:
@@ -94,13 +97,13 @@ class Digraph(object):
     def adj(self, u):
         return self.__adj[u]
 
-    def dfs(self, finish_hook = None):
+    def dfs(self, finish_hook=None):
         self.color = {}
         self.p = {}
         self.d = {}
         self.f = {}
         for u in self.__v:
-            self.color[u] = 'w'         # mark white (unexplored)
+            self.color[u] = 'w'  # mark white (unexplored)
             self.p[u] = None
         self.time = 0
         for u in self.__v:
@@ -108,10 +111,10 @@ class Digraph(object):
                 self.dfs_visit(u, finish_hook)
 
     def dfs_visit(self, u, finish_hook):
-        self.color[u] = 'g'             # mark green (discovered)
+        self.color[u] = 'g'  # mark green (discovered)
         self.d[u] = self.time = self.time + 1
         for v in self.adj(u):
-            if self.color[v] == 'w':    # explore unexplored vertices
+            if self.color[v] == 'w':  # explore unexplored vertices
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
             elif self.color[v] == 'g':  # cycle detected
@@ -123,7 +126,7 @@ class Digraph(object):
                         break
                 cycle.reverse()
                 raise CycleException(cycle)
-        self.color[u] = 'b'             # mark black (completed)
+        self.color[u] = 'b'  # mark black (completed)
         if finish_hook:
             finish_hook(u)
         self.f[u] = self.time = self.time + 1
@@ -156,7 +159,7 @@ class Digraph(object):
         f.write('\n')
         for u in self.vertices():
             for v in self.adj(u):
-                f.write( self.id_str(u) + ' -> ' + self.id_str(v))
+                f.write(self.id_str(u) + ' -> ' + self.id_str(v))
                 self.write_graphviz_elabel(f, u, v)
                 f.write(';\n')
         f.write('\n')
@@ -167,7 +170,6 @@ class Digraph(object):
 
     def write_graphviz_elabel(self, f, u, v):
         pass
-
 
 
 # Cache the results from packagedb queries in a graph
@@ -192,7 +194,7 @@ class PGraph(Digraph):
             pkg2 = self.packagedb.get_package(pkg2name)
             pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(pkg1name), str(pkg2name), ('d', None),
-                      pkg1data, pkg2data )
+                      pkg1data, pkg2data)
 
     def add_dep(self, pkg, depinfo):
         pkg1data = None
@@ -204,15 +206,16 @@ class PGraph(Digraph):
             pkg2 = self.packagedb.get_package(depinfo.package)
             pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(pkg), str(depinfo.package), ('d', depinfo),
-                      pkg1data, pkg2data )
+                      pkg1data, pkg2data)
 
     def write_graphviz_vlabel(self, f, u):
         (v, r) = self.vertex_data(u)
         f.write('[ label = \"' + str(u) + '(' + str(v) + ',' + str(r) + ')\" ]')
 
+
 # ****** Danger Zone Below! Tressspassers' eyes will explode! ********** #
 
-def package_graph(A, packagedb, ignore_installed = False, reverse=False):
+def package_graph(A, packagedb, ignore_installed=False, reverse=False):
     """Construct a package relations graph.
 
     Graph will contain all dependencies of packages A, if ignore_installed
@@ -225,21 +228,21 @@ def package_graph(A, packagedb, ignore_installed = False, reverse=False):
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    G_f = PGraph(packagedb)             # construct G_f
+    G_f = PGraph(packagedb)  # construct G_f
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
     B = A
-    #state = {}
+    # state = {}
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            #print pkg
+            # print pkg
             if reverse:
-                for name,dep in packagedb.get_rev_deps(x):
+                for name, dep in packagedb.get_rev_deps(x):
                     if ignore_installed:
                         if dep.satisfied_by_installed():
                             continue
@@ -257,10 +260,11 @@ def package_graph(A, packagedb, ignore_installed = False, reverse=False):
         B = Bp
     return G_f
 
+
 def generate_pending_order(A):
     # returns pending package list in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
-    G_f = PGraph(installdb) # construct G_f
+    G_f = PGraph(installdb)  # construct G_f
     for x in A:
         G_f.add_package(x)
     B = A

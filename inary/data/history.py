@@ -22,8 +22,8 @@ import inary.sxml.autoxml as autoxml
 import inary.sxml.xmlfile as xmlfile
 import inary.context as ctx
 
-class PackageInfo(metaclass = autoxml.autoxml):
 
+class PackageInfo(metaclass=autoxml.autoxml):
     a_version = [autoxml.String, autoxml.mandatory]
     a_release = [autoxml.String, autoxml.mandatory]
 
@@ -34,7 +34,8 @@ class PackageInfo(metaclass = autoxml.autoxml):
 
         return "-".join((self.version, self.release, distro_id, arch))
 
-class Repo(metaclass = autoxml.autoxml):
+
+class Repo(metaclass=autoxml.autoxml):
     a_operation = [autoxml.String, autoxml.mandatory]
 
     t_Name = [autoxml.String, autoxml.mandatory]
@@ -46,12 +47,12 @@ class Repo(metaclass = autoxml.autoxml):
         if self.operation == "update":
             return _("{0} repository is updated.").format(self.name)
         elif self.operation == "add":
-            pass # TBD
+            pass  # TBD
         elif self.operation == "remove":
-            pass # TBD
+            pass  # TBD
 
-class Package(metaclass = autoxml.autoxml):
 
+class Package(metaclass=autoxml.autoxml):
     a_operation = [autoxml.String, autoxml.mandatory]
     a_type = [autoxml.String, autoxml.optional]
 
@@ -78,27 +79,28 @@ class Package(metaclass = autoxml.autoxml):
         else:
             return ""
 
-class Operation(metaclass = autoxml.autoxml):
 
+class Operation(metaclass=autoxml.autoxml):
     a_type = [autoxml.String, autoxml.mandatory]
     a_date = [autoxml.String, autoxml.mandatory]
     a_time = [autoxml.String, autoxml.mandatory]
 
-    t_Packages = [ [Package], autoxml.optional, "Package"]
-    t_Repos = [ [Repo], autoxml.optional, "Repository"]
+    t_Packages = [[Package], autoxml.optional, "Package"]
+    t_Repos = [[Repo], autoxml.optional, "Repository"]
 
     def __str__(self):
         return self.type
 
-class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
+class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     tag = "INARY"
 
     t_Operation = [Operation, autoxml.mandatory]
 
     def create(self, operation):
 
-        if operation not in ["downgrade" , "upgrade", "remove", "emerge", "install", "snapshot", "takeback", "repoupdate"]:
+        if operation not in ["downgrade", "upgrade", "remove", "emerge", "install", "snapshot", "takeback",
+                             "repoupdate"]:
             raise Exception(_("Unknown package operation"))
 
         opno = self._get_latest()
@@ -151,7 +153,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         if not files:
             return "0o01"
 
-        #files.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
-        files.sort(key=lambda x:int(x.split("_")[0].replace("0o","0")))
-        no, osxml = files[-1].replace("0o","0").split("_")
+        # files.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+        files.sort(key=lambda x: int(x.split("_")[0].replace("0o", "0")))
+        no, osxml = files[-1].replace("0o", "0").split("_")
         return "%03d" % (int(no) + 1)

@@ -23,6 +23,7 @@ import inary.data.component as Component
 import inary.db.lazydb as lazydb
 from inary.sxml import autoxml, xmlext
 
+
 class ComponentDB(lazydb.LazyDB):
 
     def __init__(self):
@@ -51,7 +52,7 @@ class ComponentDB(lazydb.LazyDB):
         packages = xmlext.getTagByName(doc, "Package")
         for pkg in packages:
             name = xmlext.getNodeText(pkg, "Name")
-            partof = xmlext.getNodeText(pkg,"PartOf")
+            partof = xmlext.getNodeText(pkg, "PartOf")
             components.setdefault(partof, []).append(name)
 
         return components
@@ -78,7 +79,7 @@ class ComponentDB(lazydb.LazyDB):
 
         return components
 
-    def has_component(self, name, repo = None):
+    def has_component(self, name, repo=None):
         return self.cdb.has_item(name, repo)
 
     def list_components(self, repo=None):
@@ -93,14 +94,15 @@ class ComponentDB(lazydb.LazyDB):
             lang = autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.cdb.get_items_iter(repo):
-            if name not in found and terms == [term for term in terms if re.compile(rename.format(lang, term), re.I).search(xml) or \
-                                                         re.compile(resum.format(lang, term), re.I).search(xml) or \
-                                                         re.compile(redesc.format(lang, term), re.I).search(xml)]:
+            if name not in found and terms == [term for term in terms if
+                                               re.compile(rename.format(lang, term), re.I).search(xml) or \
+                                               re.compile(resum.format(lang, term), re.I).search(xml) or \
+                                               re.compile(redesc.format(lang, term), re.I).search(xml)]:
                 found.append(name)
         return found
 
     # Returns the component in given repo or first found component in repo order if repo is None
-    def get_component(self, component_name, repo = None):
+    def get_component(self, component_name, repo=None):
 
         if not self.has_component(component_name, repo):
             raise Exception(_('Component {} not found').format(component_name))
@@ -110,12 +112,12 @@ class ComponentDB(lazydb.LazyDB):
 
         try:
             component.packages = self.cpdb.get_item(component_name, repo)
-        except Exception: #FIXME: what exception could we catch here, replace with that.
+        except Exception:  # FIXME: what exception could we catch here, replace with that.
             pass
 
         try:
             component.sources = self.csdb.get_item(component_name, repo)
-        except Exception: #FIXME: what exception could we catch here, replace with that.
+        except Exception:  # FIXME: what exception could we catch here, replace with that.
             pass
 
         return component
@@ -129,12 +131,12 @@ class ComponentDB(lazydb.LazyDB):
         for repo in inary.db.repodb.RepoDB().list_repos():
             try:
                 component.packages.extend(self.cpdb.get_item(component_name, repo))
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
             try:
                 component.sources.extend(self.csdb.get_item(component_name, repo))
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
         return component
@@ -151,11 +153,11 @@ class ComponentDB(lazydb.LazyDB):
         packages = []
         packages.extend(component.packages)
 
-        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name+".")]
+        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 packages.extend(self.get_component(sub, repo).packages)
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
         return packages
@@ -171,11 +173,11 @@ class ComponentDB(lazydb.LazyDB):
         packages = []
         packages.extend(component.packages)
 
-        sub_components = [x for x in self.list_components() if x.startswith(component_name+".")]
+        sub_components = [x for x in self.list_components() if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 packages.extend(self.get_union_component(sub).packages)
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
         return packages
@@ -192,11 +194,11 @@ class ComponentDB(lazydb.LazyDB):
         sources = []
         sources.extend(component.sources)
 
-        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name+".")]
+        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 sources.extend(self.get_component(sub, repo).sources)
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
         return sources
@@ -212,11 +214,11 @@ class ComponentDB(lazydb.LazyDB):
         sources = []
         sources.extend(component.sources)
 
-        sub_components = [x for x in self.list_components() if x.startswith(component_name+".")]
+        sub_components = [x for x in self.list_components() if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 sources.extend(self.get_union_component(sub).sources)
-            except Exception: #FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
         return sources

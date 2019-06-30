@@ -38,7 +38,6 @@ everything in a single index file.
 
 
 class Index(command.Command, metaclass=command.autocommand):
-
     __doc__ = usage
 
     def __init__(self, args):
@@ -89,6 +88,6 @@ class Index(command.Command, metaclass=command.autocommand):
             compression |= ctypes.get(type_str, 0)
 
         index.index(self.args or ["."], ctx.get_option('output'),
-              skip_sources=ctx.get_option('skip_sources'),
-              skip_signing=ctx.get_option('skip_signing'),
-              compression=compression)
+                    skip_sources=ctx.get_option('skip_sources'),
+                    skip_signing=ctx.get_option('skip_signing'),
+                    compression=compression)

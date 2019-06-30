@@ -47,17 +47,17 @@ You can also give the name of a component.
         group = optparse.OptionGroup(self.parser, _("emergeup options"))
         super(EmergeUp, self).add_options(group)
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("Emerge available packages under given component"))
+                         default=None, help=_("Emerge available packages under given component"))
         group.add_option("--ignore-file-conflicts", action="store_true",
-                     default=False, help=_("Ignore file conflicts"))
+                         default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
-                     default=False, help=_("Ignore package conflicts"))
+                         default=False, help=_("Ignore package conflicts"))
         group.add_option("--ignore-scom", action="store_true",
-                               default=False, help=_("Bypass scom configuration agent"))
+                         default=False, help=_("Bypass scom configuration agent"))
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init(database = True)
+        self.init(database=True)
 
         source = inary.db.sourcedb.SourceDB()
 

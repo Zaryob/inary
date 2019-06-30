@@ -51,10 +51,10 @@
 # kde5_dir =
 # qt5_dir =
 
+import configparser
+import io
 import os
 import re
-import io
-import configparser
 
 import gettext
 
@@ -81,7 +81,7 @@ class GeneralDefaults:
     ftp_proxy = os.getenv("FTP_PROXY") or None
     package_cache = False
     package_cache_limit = 0
-    ssl_verify=True
+    ssl_verify = True
     bandwidth_limit = 0
     ignore_safety = False
     ignore_delta = False
@@ -98,10 +98,10 @@ class BuildDefaults:
     cxxflags = "-mtune=generic -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     makeflags = ""
-    allow_docs=True
-    allow_pages=True
-    allow_dbginfo=True
-    allow_static=True
+    allow_docs = True
+    allow_pages = True
+    allow_dbginfo = True
+    allow_static = True
     buildhelper = None
     compressionlevel = 9
     fallback = "http://www.sulin.com.tr/pub"

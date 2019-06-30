@@ -14,9 +14,9 @@
 
 import re
 import gzip
+import re
 
 import inary.analyzer
-import inary.context as ctx
 import inary.data.specfile as Specfile
 import inary.db
 import inary.db.lazydb as lazydb
@@ -25,6 +25,7 @@ from inary.sxml import autoxml, xmlext
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class SourceDB(lazydb.LazyDB):
 
@@ -113,11 +114,13 @@ class SourceDB(lazydb.LazyDB):
         found = []
         for name, xml in self.sdb.get_items_iter(repo):
             if terms == [term for term in terms if (fields['name'] and \
-                    re.compile(term, re.I).search(name)) or \
-                    (fields['summary'] and \
-                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
-                    (fields['desc'] and \
-                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
+                                                    re.compile(term, re.I).search(name)) or \
+                                                   (fields['summary'] and \
+                                                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(
+                                                        xml)) or \
+                                                   (fields['desc'] and \
+                                                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
+                                                        xml))]:
                 found.append(name)
         return found
 
@@ -133,7 +136,7 @@ class SourceDB(lazydb.LazyDB):
     def get_rev_deps(self, name, repo=None):
         try:
             rvdb = self.rvdb.get_item(name, repo)
-        except Exception: #FIXME: what exception could we catch here, replace with that.
+        except Exception:  # FIXME: what exception could we catch here, replace with that.
             return []
 
         rev_deps = []
@@ -144,7 +147,7 @@ class SourceDB(lazydb.LazyDB):
             dependency.package = xmlext.getNodeText(node)
             if xmlext.getAttributeList(node):
                 attr = xmlext.getAttributeList(node)[0]
-                dependency.__dict__[attr] = xmlext.getNodeAttribute(node,attr)
+                dependency.__dict__[attr] = xmlext.getNodeAttribute(node, attr)
                 rev_deps.append((pkg, dependency))
 
         return rev_deps

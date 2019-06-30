@@ -20,11 +20,11 @@ _ = __trans.gettext
 
 import inary.util as util
 import inary.cli.command as command
-import inary.db
 import inary.ui
 import inary.data
 import inary.errors
 import inary.context as ctx
+
 
 def configure_pending(packages=None):
     # Import SCOM
@@ -49,7 +49,7 @@ def configure_pending(packages=None):
                 m.read(metadata_path)
                 # FIXME: we need a full package info here!
                 pkginfo.name = x
-                ctx.ui.notify(inary.ui.configuring, package = pkginfo, files = None)
+                ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
                 inary.scomiface.post_install(
                     pkginfo.name,
                     m.package.providesScom,
@@ -61,10 +61,11 @@ def configure_pending(packages=None):
                     m.package.version,
                     m.package.release
                 )
-                ctx.ui.notify(inary.ui.configured, package = pkginfo, files = None)
+                ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
     except ImportError:
         raise inary.errors.Error(_("scom package is not fully installed"))
+
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Configure pending packages

@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -11,12 +11,12 @@
 #
 # Please read the COPYING file.
 
+import glob
+import grp
 # Standart Python Modules
 import os
-import glob
-import shutil
 import pwd
-import grp
+import shutil
 import sys
 
 import gettext
@@ -27,20 +27,21 @@ _ = __trans.gettext
 import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get
 
 from inary.actionsapi import error
 from inary.util import run_logged
 from inary.util import join_path
 
+
 def can_access_file(filePath):
     """test the existence of file"""
     return os.access(filePath, os.F_OK)
 
+
 def can_access_directory(destinationDirectory):
     """test readability, writability and executablility of directory"""
     return os.access(destinationDirectory, os.R_OK | os.W_OK | os.X_OK)
+
 
 def makedirs(destinationDirectory):
     """recursive directory creation function"""
@@ -50,6 +51,7 @@ def makedirs(destinationDirectory):
     except OSError:
         error(_('ActionsAPI [makedirs]: Cannot create directory {}').format(destinationDirectory))
 
+
 def echo(destionationFile, content):
     try:
         f = open(destionationFile, 'a')
@@ -58,7 +60,8 @@ def echo(destionationFile, content):
     except IOError:
         error(_('ActionsAPI [echo]: Can\'t append to file {}.').format(destionationFile))
 
-def chmod(filePath, mode = 0o755):
+
+def chmod(filePath, mode=0o755):
     """change the mode of filePath to the mode"""
     filePathGlob = glob.glob(filePath)
     if len(filePathGlob) == 0:
@@ -73,15 +76,18 @@ def chmod(filePath, mode = 0o755):
         else:
             ctx.ui.error(_('ActionsAPI [chmod]: File {} doesn\'t exists.').format(fileName))
 
-def chown(filePath, uid = 'root', gid = 'root'):
+
+def chown(filePath, uid='root', gid='root'):
     """change the owner and group id of filePath to uid and gid"""
     if can_access_file(filePath):
         try:
             os.chown(filePath, pwd.getpwnam(uid)[2], grp.getgrnam(gid)[2])
         except OSError:
-            ctx.ui.error(_('ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})').format(filePath, uid, gid))
+            ctx.ui.error(
+                _('ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})').format(filePath, uid, gid))
     else:
         ctx.ui.error(_('ActionsAPI [chown]: File {} doesn\'t exists.').format(filePath))
+
 
 def sym(source, destination):
     """creates symbolic link"""
@@ -89,6 +95,7 @@ def sym(source, destination):
         os.symlink(source, destination)
     except OSError:
         ctx.ui.error(_('ActionsAPI [sym]: Permission denied: {0} to {1}').format(source, destination))
+
 
 def unlink(pattern):
     """remove the file path"""
@@ -104,10 +111,13 @@ def unlink(pattern):
             except OSError:
                 ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: {}.').format(filePath))
         elif isDirectory(filePath):
-            ctx.ui.warning(_('ActionsAPI [unlink]: {} is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(filePath))
+            ctx.ui.warning(_(
+                'ActionsAPI [unlink]: {} is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(
+                filePath))
 
         else:
             ctx.ui.error(_('ActionsAPI [unlink]: File {} doesn\'t exists.').format(filePath))
+
 
 def unlinkDir(sourceDirectory):
     """delete an entire directory tree"""
@@ -120,6 +130,7 @@ def unlinkDir(sourceDirectory):
         pass
     else:
         error(_('ActionsAPI [unlinkDir]: Directory {} doesn\'t exists.').format(sourceDirectory))
+
 
 def move(source, destination):
     """recursively move a "source" file or directory to "destination\""""
@@ -136,8 +147,9 @@ def move(source, destination):
         else:
             error(_('ActionsAPI [move]: File {} doesn\'t exists.').format(filePath))
 
+
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
-def copy(source, destination, sym = True):
+def copy(source, destination, sym=True):
     """recursively copy a "source" file or directory to "destination\" """
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
@@ -166,7 +178,8 @@ def copy(source, destination, sym = True):
         else:
             error(_('ActionsAPI [copy]: File {} does not exist.').format(filePath))
 
-def copytree(source, destination, sym = True):
+
+def copytree(source, destination, sym=True):
     """recursively copy an entire directory tree rooted at source"""
     if isDirectory(source):
         if os.path.exists(destination):
@@ -182,6 +195,7 @@ def copytree(source, destination, sym = True):
             error(_('ActionsAPI [copytree] {0} to {1}: {2}').format(source, destination, e))
     else:
         error(_('ActionsAPI [copytree]: Directory {} doesn\'t exists.').format(source))
+
 
 def touch(filePath):
     """changes the access time of the 'filePath', or creates it if it does not exist"""
@@ -200,13 +214,15 @@ def touch(filePath):
         except IOError:
             error(_('ActionsAPI [touch]: Permission denied: {}').format(filePath))
 
-def cd(directoryName = ''):
+
+def cd(directoryName=''):
     """change directory"""
     current = os.getcwd()
     if directoryName:
         os.chdir(directoryName)
     else:
         os.chdir(os.path.dirname(current))
+
 
 def ls(source):
     """listdir"""
@@ -215,47 +231,56 @@ def ls(source):
     else:
         return glob.glob(source)
 
+
 def export(key, value):
     """export environ variable"""
     os.environ[key] = value
+
 
 def isLink(filePath):
     """return True if filePath refers to a symbolic link"""
     return os.path.islink(filePath)
 
+
 def isFile(filePath):
     """return True if filePath is an existing regular file"""
     return os.path.isfile(filePath)
+
 
 def isDirectory(filePath):
     """Return True if filePath is an existing directory"""
     return os.path.isdir(filePath)
 
+
 def isEmpty(filePath):
     """Return True if filePath is an empty file"""
     return os.path.getsize(filePath) == 0
+
 
 def realPath(filePath):
     """return the canonical path of the specified filename, eliminating any symbolic links encountered in the path"""
     return os.path.realpath(filePath)
 
+
 def baseName(filePath):
     """return the base name of pathname filePath"""
     return os.path.basename(filePath)
+
 
 def dirName(filePath):
     """return the directory name of pathname path"""
     return os.path.dirname(filePath)
 
+
 ##FIXME:there are an important error in here please##
 ##         fix here tomorrow (don't forget)         ##
 def system(command):
-    #command an list but should be an str
-    sys.stdout.write(command+"\n")
-#    command = str.join(str.split(command))
+    # command an list but should be an str
+    sys.stdout.write(command + "\n")
+    #    command = str.join(str.split(command))
     retValue = run_logged(command)
 
-    #if return value is different than 0, it means error, raise exception
+    # if return value is different than 0, it means error, raise exception
     if retValue != 0:
         error(_("ActionsAPI [system]: Command \"{0}\" failed, return value was {1}.").format(command, retValue))
 

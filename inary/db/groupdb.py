@@ -13,10 +13,10 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.context as ctx
 import inary.db.repodb
 import inary.db.itembyrepo
 import inary.data.group as Group
@@ -26,6 +26,7 @@ from inary.sxml import xmlext
 
 class GroupNotFound(Exception):
     pass
+
 
 class GroupDB(lazydb.LazyDB):
 
@@ -67,13 +68,13 @@ class GroupDB(lazydb.LazyDB):
 
         return groups
 
-    def has_group(self, name, repo = None):
+    def has_group(self, name, repo=None):
         return self.gdb.has_item(name, repo)
 
     def list_groups(self, repo=None):
         return self.gdb.get_item_keys(repo)
 
-    def get_group(self, name, repo = None):
+    def get_group(self, name, repo=None):
 
         if not self.has_group(name, repo):
             raise GroupNotFound(_('Group {} not found').format(name))

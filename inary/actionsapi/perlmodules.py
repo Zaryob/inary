@@ -13,7 +13,6 @@
 
 # standard python modules
 import os
-import glob
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -31,11 +30,13 @@ from inary.actionsapi.shelltools import export
 from inary.actionsapi.shelltools import unlink
 from inary.actionsapi.shelltools import unlinkDir
 
+
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -43,23 +44,27 @@ class MakeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
 
-def configure(parameters = ''):
+
+def configure(parameters=''):
     """configure source with given parameters."""
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
         if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(get.curPERL(), get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
     else:
-        if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters, get.installDIR())):
+        if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters,
+                                                                                              get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
 
-def make(parameters = ''):
+
+def make(parameters=''):
     """make source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
@@ -68,7 +73,8 @@ def make(parameters = ''):
         if system('perl{0} Build {1}'.format(get.curPERL(), parameters)):
             raise MakeError(_('perl build failed.'))
 
-def install(parameters = 'install'):
+
+def install(parameters='install'):
     """install source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
@@ -80,7 +86,8 @@ def install(parameters = 'install'):
     removePacklist()
     removePodfiles()
 
-def removePacklist(path = 'usr/lib/perl5/'):
+
+def removePacklist(path='usr/lib/perl5/'):
     """ cleans .packlist file from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
@@ -90,7 +97,8 @@ def removePacklist(path = 'usr/lib/perl5/'):
                     unlink('{0}/{1}'.format(root, packFile))
                     removeEmptydirs(root)
 
-def removePodfiles(path = 'usr/lib/perl5/'):
+
+def removePodfiles(path='usr/lib/perl5/'):
     """ cleans *.pod files from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
@@ -99,6 +107,7 @@ def removePodfiles(path = 'usr/lib/perl5/'):
                 if can_access_file('{0}/{1}'.format(root, packFile)):
                     unlink('{0}/{1}'.format(root, packFile))
                     removeEmptydirs(root)
+
 
 def removeEmptydirs(d):
     """ remove empty dirs from perl package if exists after deletion .pod and .packlist files """

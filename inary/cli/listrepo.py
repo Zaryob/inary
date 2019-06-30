@@ -13,13 +13,14 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.util as util
+
 
 class ListRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List repositories
@@ -37,7 +38,7 @@ Lists currently tracked repositories.
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
         for repo in self.repodb.list_repos(only_active=False):
             active = _("active") if self.repodb.repo_active(repo) else _("inactive")
             if active == _("active"):

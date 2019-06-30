@@ -12,33 +12,35 @@
 # Please read the COPYING file.
 #
 
-import inary.sxml.xmlfile as xmlfile
 import inary.sxml.autoxml as autoxml
+import inary.sxml.xmlfile as xmlfile
+
 
 class Error(object, metaclass=autoxml.autoxml):
     pass
 
-class Obsolete(metaclass=autoxml.autoxml):
 
+class Obsolete(metaclass=autoxml.autoxml):
     s_Package = [autoxml.String, autoxml.mandatory]
 
     def __str__(self):
         return self.package
 
-class Distribution(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
+class Distribution(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     tag = "INARY"
 
-    t_SourceName = [autoxml.String, autoxml.mandatory] # name of distribution (source)
+    t_SourceName = [autoxml.String, autoxml.mandatory]  # name of distribution (source)
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.optional]
-    t_Type =  [autoxml.String, autoxml.mandatory]
-    t_Dependencies = [ [autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
+    t_Type = [autoxml.String, autoxml.mandatory]
+    t_Dependencies = [[autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
 
-    t_BinaryName = [autoxml.LocalText, autoxml.optional] # name of repository (binary distro)
-    t_Architecture = [autoxml.Text, autoxml.optional] # architecture identifier
+    t_BinaryName = [autoxml.LocalText, autoxml.optional]  # name of repository (binary distro)
+    t_Architecture = [autoxml.Text, autoxml.optional]  # architecture identifier
 
-    t_Obsoletes = [ [Obsolete], autoxml.optional, "Obsoletes/Package"]
+    t_Obsoletes = [[Obsolete], autoxml.optional, "Obsoletes/Package"]
+
 
 class Maintainer(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     """representation for component responsibles"""
@@ -50,10 +52,11 @@ class Maintainer(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         s = "{0} <{1}>".format(self.name, self.email)
         return s
 
+
 class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     """representation for component declarations"""
 
-    t_Name = [autoxml.String, autoxml.mandatory]     # fully qualified name
+    t_Name = [autoxml.String, autoxml.mandatory]  # fully qualified name
 
     # component name in other languages, for instance in Turkish
     # LocalName for system.base could be sistem.taban or "Taban Sistem",
@@ -71,20 +74,21 @@ class Component(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
     # the parts of this component.
     # to be filled by the component database, thus it is optional.
-    t_Packages = [ [autoxml.String], autoxml.optional, "Parts/Package"]
+    t_Packages = [[autoxml.String], autoxml.optional, "Parts/Package"]
 
-    t_Sources = [ [autoxml.String], autoxml.optional, "Parts/Source"]
+    t_Sources = [[autoxml.String], autoxml.optional, "Parts/Source"]
+
 
 class Components(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     """representation for component declarations"""
 
     tag = "INARY"
 
-    t_Components = [ [Component], autoxml.optional, "Components/Component" ]
+    t_Components = [[Component], autoxml.optional, "Components/Component"]
+
 
 # FIXME: there will be no component.xml only components.xml
 class CompatComponent(Component):
-
     tag = "INARY"
 
     t_VisibleTo = [autoxml.String, autoxml.optional]

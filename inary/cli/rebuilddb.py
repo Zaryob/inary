@@ -39,11 +39,10 @@ dirs under /var/lib/inary
     name = ("rebuild-db", "rdb")
 
     def options(self):
-
         group = optparse.OptionGroup(self.parser, _("rebuild-db options"))
 
         group.add_option("-f", "--files", action="store_true",
-                               default=False, help=_("Rebuild files database"))
+                         default=False, help=_("Rebuild files database"))
 
         self.parser.add_option_group(group)
 

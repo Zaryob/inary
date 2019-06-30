@@ -35,24 +35,25 @@ import inary.data.component as component
 import inary.data.group as group
 import inary.operations.build
 
+
 class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     tag = "INARY"
 
-    t_Distribution = [ component.Distribution, autoxml.optional ]
-    t_Specs = [ [specfile.SpecFile], autoxml.optional, "SpecFile"]
-    t_Packages = [ [metadata.Package], autoxml.optional, "Package"]
-    #t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
-    t_Components = [ [component.Component], autoxml.optional, "Component"]
-    t_Groups = [ [group.Group], autoxml.optional, "Group"]
+    t_Distribution = [component.Distribution, autoxml.optional]
+    t_Specs = [[specfile.SpecFile], autoxml.optional, "SpecFile"]
+    t_Packages = [[metadata.Package], autoxml.optional, "Package"]
+    # t_Metadatas = [ [metadata.MetaData], autoxml.optional, "MetaData"]
+    t_Components = [[component.Component], autoxml.optional, "Component"]
+    t_Groups = [[group.Group], autoxml.optional, "Group"]
 
-    def read_uri(self, uri, tmpdir, force = False):
+    def read_uri(self, uri, tmpdir, force=False):
         return self.read(uri, tmpDir=tmpdir, sha1sum=not force,
                          compress=inary.file.File.COMPRESSION_TYPE_AUTO,
                          sign=inary.file.File.detached,
                          copylocal=True, nodecode=True)
 
     # read index for a given repo, force means download even if remote not updated
-    def read_uri_of_repo(self, uri, repo = None, force = False):
+    def read_uri_of_repo(self, uri, repo=None, force=False):
         """Read PSPEC file"""
         if repo:
             tmpdir = os.path.join(ctx.config.index_dir(), repo)
@@ -64,7 +65,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         # write uri
         urlfile = open(util.join_path(tmpdir, 'uri'), 'w')
-        urlfile.write(uri) # uri
+        urlfile.write(uri)  # uri
         urlfile.close()
 
         doc = self.read_uri(uri, tmpdir, force)
@@ -73,7 +74,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             repo = self.distribution.name()
             # and what do we do with it? move it to index dir properly
             newtmpdir = os.path.join(ctx.config.index_dir(), repo)
-            util.clean_dir(newtmpdir) # replace newtmpdir
+            util.clean_dir(newtmpdir)  # replace newtmpdir
             shutil.move(tmpdir, newtmpdir)
 
     @staticmethod
@@ -95,7 +96,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                                        util.parse_package_dir_path(fn))
                 if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
                 ctx.ui.info("%-80.80s\r" % (_('Sorting:  {}').format(fn)),
-                            noln = False if ctx.config.get_option("verbose") else True)
+                            noln=False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))
                 pkgs_sorted = True
@@ -187,17 +188,18 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     ctx.ui.info("")
                     raise
                 ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory {}... done.".format(key))),
-                            noln = False if ctx.config.get_option("verbose") else True)
+                            noln=False if ctx.config.get_option("verbose") else True)
 
         ctx.ui.info("")
         pool.close()
         pool.join()
 
+
 def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln = True)
+        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln=True)
 
         package = inary.package.Package(path, 'r')
         md = package.get_metadata()
@@ -221,11 +223,11 @@ def add_package(params):
 
             if md.package.name in deltas:
                 name, version, release, distro_id, arch = \
-                        util.split_package_filename(path)
+                    util.split_package_filename(path)
 
                 for delta_path in deltas[md.package.name]:
                     src_release, dst_release, delta_distro_id, delta_arch = \
-                            util.split_delta_package_filename(delta_path)[1:]
+                        util.split_delta_package_filename(delta_path)[1:]
 
                     # Add only delta to latest build of the package
                     if dst_release != md.package.release or \
@@ -256,36 +258,40 @@ def add_package(params):
 
         raise Exception
 
+
 def add_groups(path):
     ctx.ui.info(_('Adding groups.xml to index'))
     groups_xml = group.Groups()
     groups_xml.read(path)
     return groups_xml.groups
 
+
 def add_components(path):
     ctx.ui.info(_('Adding components.xml to index'))
     components_xml = component.Components()
     components_xml.read(path)
-    #try:
+    # try:
     return components_xml.components
-    #except:
+    # except:
     #    raise Error(_('Component in {} is corrupt').format(path))
-    #ctx.ui.error(str(Error(*errs)))
+    # ctx.ui.error(str(Error(*errs)))
+
 
 def add_distro(path):
     ctx.ui.info(_('Adding distribution.xml to index'))
     distro = component.Distribution()
-    #try:
+    # try:
     distro.read(path)
     return distro
-    #except:
+    # except:
     #    raise Error(_('Distribution in {} is corrupt').format(path))
-    #ctx.ui.error(str(Error(*errs)))
+    # ctx.ui.error(str(Error(*errs)))
+
 
 def add_spec(params):
     try:
         path, repo_uri = params
-        #TODO: may use try/except to handle this
+        # TODO: may use try/except to handle this
         builder = inary.operations.build.Builder(path)
         builder.fetch_component()
         sf = builder.spec
@@ -295,12 +301,13 @@ def add_spec(params):
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
         ctx.ui.info("%-80.80s\r" % (_('Adding source to index: {}').format(path)),
-                                    noln = False if ctx.config.get_option("verbose") else True)
+                    noln=False if ctx.config.get_option("verbose") else True)
         return sf
 
     except KeyboardInterrupt:
         # Multiprocessing hack, see add_package method for explanation
         raise Exception
+
 
 # INDEXER
 def index(dirs=None, output='inary-index.xml',

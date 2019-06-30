@@ -15,16 +15,16 @@
 """dependency analyzer"""
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.data.relation as relation
 from inary.db.packagedb import PackageDB
 import inary.sxml.autoxml as autoxml
-import os
 
-class Dependency(relation.Relation, metaclass = autoxml.autoxml):
 
+class Dependency(relation.Relation, metaclass=autoxml.autoxml):
     a_type = [autoxml.String, autoxml.optional]
 
     def __str__(self):

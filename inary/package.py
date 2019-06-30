@@ -41,7 +41,7 @@ class Package:
     file)."""
 
     formats = ("1.0", "1.1", "1.2")
-    default_format =  "1.2"
+    default_format = "1.2"
     timestamp = None
 
     @staticmethod
@@ -104,7 +104,9 @@ class Package:
             except fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
-                    raise Error(_("There was a problem while fetching '{}'.\nThe package may have been upgraded. Please try to upgrade the package.").format(url))
+                    raise Error(_(
+                        "There was a problem while fetching '{}'.\nThe package may have been upgraded. Please try to upgrade the package.").format(
+                        url))
                 raise
         else:
             ctx.ui.info(_('{} [cached]').format(url.filename()))
@@ -126,13 +128,13 @@ class Package:
 
         if self.install_archive is None:
             archive_name, archive_format = \
-                    self.archive_name_and_format(self.format)
+                self.archive_name_and_format(self.format)
             self.install_archive_path = util.join_path(self.tmp_dir,
                                                        archive_name)
             ctx.build_leftover = self.install_archive_path
             self.install_archive = archive.ArchiveTar(
-                                            self.install_archive_path,
-                                            archive_format)
+                self.install_archive_path,
+                archive_format)
 
         self.install_archive.add_to_archive(name, arcname)
 
@@ -167,7 +169,7 @@ class Package:
 
     def get_install_archive(self):
         archive_name, archive_format = \
-                self.archive_name_and_format(self.format)
+            self.archive_name_and_format(self.format)
 
         if archive_name is None or not self.impl.has_file(archive_name):
             return
@@ -182,7 +184,7 @@ class Package:
 
     def extract(self, outdir):
         """Extract entire package contents to directory"""
-        self.extract_dir('', outdir)         # means package root
+        self.extract_dir('', outdir)  # means package root
 
     def extract_files(self, paths, outdir):
         """Extract paths to outdir"""
@@ -231,7 +233,6 @@ class Package:
                 if tarinfo.name.endswith(".desktop"):
                     ctx.ui.notify(inary.ui.desktopfile, desktopfile=tarinfo.name)
 
-
         tar = self.get_install_archive()
 
         if tar:
@@ -245,7 +246,7 @@ class Package:
         this is the function used by the installer"""
         self.impl.unpack_dir_flat(dir, outdir)
 
-    def extract_to(self, outdir, clean_dir = False):
+    def extract_to(self, outdir, clean_dir=False):
         """Extracts contents of the archive to outdir. Before extracting if clean_dir
         is set, outdir is deleted with its contents"""
         self.impl.unpack(outdir, clean_dir)

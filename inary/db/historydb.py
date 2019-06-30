@@ -15,9 +15,10 @@
 import os
 
 import inary.context as ctx
-import inary.db.lazydb as lazydb
 import inary.data.history as History
+import inary.db.lazydb as lazydb
 import inary.util
+
 
 class HistoryDB(lazydb.LazyDB):
 
@@ -28,8 +29,8 @@ class HistoryDB(lazydb.LazyDB):
     @staticmethod
     def __generate_history():
         logs = [x for x in os.listdir(ctx.config.history_dir()) if x.endswith(".xml")]
-        #logs.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
-        logs.sort(key=lambda x:int(x.split("_")[0].replace("0o","0")))
+        # logs.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+        logs.sort(key=lambda x: int(x.split("_")[0].replace("0o", "0")))
         logs.reverse()
         return logs
 
@@ -59,7 +60,7 @@ class HistoryDB(lazydb.LazyDB):
         destdir = os.path.join(hist_dir, config_file[1:])
         inary.util.copy_file_stat(config_file, destdir)
 
-    def update_repo(self, repo, uri, operation = None):
+    def update_repo(self, repo, uri, operation=None):
         self.history.update_repo(repo, uri, operation)
         self.update_history()
 
@@ -70,7 +71,7 @@ class HistoryDB(lazydb.LazyDB):
         for log in self.__logs:
             if log.startswith("%03d_" % operation):
                 hist = History.History(os.path.join(ctx.config.history_dir(), log))
-                hist.operation.no = int(log.split("_")[0].replace("0o","0"))
+                hist.operation.no = int(log.split("_")[0].replace("0o", "0"))
                 return hist.operation
         return None
 
@@ -108,14 +109,14 @@ class HistoryDB(lazydb.LazyDB):
                 return
 
             hist = History.History(os.path.join(ctx.config.history_dir(), log))
-            hist.operation.no = int(log.split("_")[0].replace("0o","0"))
+            hist.operation.no = int(log.split("_")[0].replace("0o", "0"))
             yield hist.operation
 
     def get_last(self, count=0):
         count = count or len(self.__logs)
         for log in self.__logs[:count]:
             hist = History.History(os.path.join(ctx.config.history_dir(), log))
-            hist.operation.no = int(log.split("_")[0].replace("0o","0"))
+            hist.operation.no = int(log.split("_")[0].replace("0o", "0"))
             yield hist.operation
 
     def get_last_repo_update(self, last=1):

@@ -14,12 +14,12 @@
 
 # INARY version
 
-import os
-import sys
 import atexit
+import importlib
 import logging
 import logging.handlers
-import importlib
+import os
+import sys
 
 __version__ = "1.0"
 

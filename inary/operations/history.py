@@ -23,8 +23,10 @@ import inary.db
 import inary.fetcher
 import inary.operations as operations
 
+
 class PackageNotFound(inary.errors.Error):
     pass
+
 
 def __pkg_already_installed(name, pkginfo):
     installdb = inary.db.installdb.InstallDB()
@@ -34,8 +36,8 @@ def __pkg_already_installed(name, pkginfo):
     ver, rel = str(pkginfo).split("-")[:2]
     return (ver, rel) == installdb.get_version(name)[:-1]
 
-def __listactions(actions):
 
+def __listactions(actions):
     beinstalled = []
     beremoved = []
     configs = []
@@ -54,6 +56,7 @@ def __listactions(actions):
 
     return beinstalled, beremoved, configs
 
+
 def __getpackageurl_binman(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
@@ -71,15 +74,16 @@ def __getpackageurl_binman(package):
     if not reponame:
         raise PackageNotFound
 
-    package_ = packagedb.get_package (pkg)
+    package_ = packagedb.get_package(pkg)
     repourl = repodb.get_repo_url(reponame)
-    base_package = os.path.dirname (package_.packageURI)
-    repo_base = os.path.dirname (repourl)
-    possible_url = os.path.join (repo_base, base_package, package)
+    base_package = os.path.dirname(package_.packageURI)
+    repo_base = os.path.dirname(repourl)
+    possible_url = os.path.join(repo_base, base_package, package)
     ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
 
-    #return _possible_ url for this package
+    # return _possible_ url for this package
     return possible_url
+
 
 def __getpackageurl(package):
     packagedb = inary.db.packagedb.PackageDB()
@@ -101,13 +105,13 @@ def __getpackageurl(package):
     repourl = repodb.get_repo_url(reponame)
     ctx.ui.info(_("Package {0} found in repository {1}").format(pkg, reponame))
 
-    #return _possible_ url for this package
+    # return _possible_ url for this package
     return os.path.join(os.path.dirname(repourl),
                         util.parse_package_dir_path(package),
                         package)
 
-def fetch_remote_file(package, errors):
 
+def fetch_remote_file(package, errors):
     try:
         uri = inary.file.File.make_uri(__getpackageurlbinman(package))
     except PackageNotFound:
@@ -138,6 +142,7 @@ def fetch_remote_file(package, errors):
         ctx.ui.info(_('{} [cached]').format(uri.filename()))
     return True
 
+
 def get_snapshot_actions(operation):
     actions = {}
     snapshot_pkgs = set()
@@ -151,6 +156,7 @@ def get_snapshot_actions(operation):
         actions[pkg] = ("remove", None, None)
 
     return actions
+
 
 def get_takeback_actions(operation):
     actions = {}
@@ -168,6 +174,7 @@ def get_takeback_actions(operation):
 
     return actions
 
+
 def plan_takeback(operation):
     historydb = inary.db.historydb.HistoryDB()
     op = historydb.get_operation(operation)
@@ -177,6 +184,7 @@ def plan_takeback(operation):
         actions = get_takeback_actions(operation)
 
     return __listactions(actions)
+
 
 @util.locked
 def takeback(operation):
@@ -201,7 +209,7 @@ def takeback(operation):
     errors = []
     paths = []
     for pkg in beinstalled:
-        ctx.ui.info(_("Downloading %d / %d") % (beinstalled.index(pkg)+1, len(beinstalled)), color="yellow")
+        ctx.ui.info(_("Downloading %d / %d") % (beinstalled.index(pkg) + 1, len(beinstalled)), color="yellow")
         pkg += ctx.const.package_suffix
         if fetch_remote_file(pkg, errors):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))
@@ -221,6 +229,7 @@ def takeback(operation):
     for pkg, operation in configs:
         historydb.load_config(operation, pkg)
 
+
 def get_takeback_plan(operation):
     """
     Calculates and returns the plan of the takeback operation that contains information of which
@@ -230,6 +239,7 @@ def get_takeback_plan(operation):
 
     beinstalled, beremoved, configs = plan_takeback(operation)
     return beinstalled, beremoved
+
 
 @util.locked
 def snapshot():
@@ -257,8 +267,8 @@ def snapshot():
                 historydb.save_config(name, fpath)
 
         processed += 1
-        ctx.ui.display_progress(operation = "snapshot",
-                                percent = progress.update(processed),
-                                info = _("Taking snapshot of the system"))
+        ctx.ui.display_progress(operation="snapshot",
+                                percent=progress.update(processed),
+                                info=_("Taking snapshot of the system"))
 
     historydb.update_history()

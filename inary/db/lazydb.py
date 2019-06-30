@@ -15,6 +15,7 @@
 import os
 import pickle
 import time
+
 import inary.context as ctx
 import inary.util as util
 
@@ -24,6 +25,7 @@ lower_map = str.maketrans(util.ascii_uppercase, util.ascii_lowercase)
 
 class Singleton(object):
     _the_instances = {}
+
     def __new__(type):
         if not type.__name__ in Singleton._the_instances:
             Singleton._the_instances[type.__name__] = object.__new__(type)
@@ -33,12 +35,12 @@ class Singleton(object):
         return self._the_instances[type(self).__name__]
 
     def _delete(self):
-        #FIXME: After invalidate, previously initialized db object becomes
+        # FIXME: After invalidate, previously initialized db object becomes
         ctx.ui.debug("LazyDB: {0} invalidated.".format(self.__class__.__name__))
         del self._the_instances[type(self).__name__]
 
-class LazyDB(Singleton):
 
+class LazyDB(Singleton):
     cache_version = "1.0"
 
     def __init__(self, cacheable=False, cachedir=None):
@@ -51,7 +53,8 @@ class LazyDB(Singleton):
         return self.initialized
 
     def __cache_file(self):
-        return util.join_path(ctx.config.cache_root_dir(), "{}.cache".format(self.__class__.__name__.translate(lower_map)))
+        return util.join_path(ctx.config.cache_root_dir(),
+                              "{}.cache".format(self.__class__.__name__.translate(lower_map)))
 
     def __cache_version_file(self):
         return "{}.version".format(self.__cache_file())
@@ -69,7 +72,7 @@ class LazyDB(Singleton):
                 f.flush()
                 os.fsync(f.fileno())
             pickle.dump(self._instance().__dict__,
-                         open(self.__cache_file(), 'wb'), 1)
+                        open(self.__cache_file(), 'wb'), 1)
 
             ctx.ui.debug("LazyDB: {0} cached.".format(self.__class__.__name__))
 
@@ -100,7 +103,6 @@ class LazyDB(Singleton):
         if os.path.exists(self.__cache_file()):
             os.unlink(self.__cache_file())
             ctx.ui.debug("LazyDB: {0} cached.".format(self.__class__.__name__))
-
 
     def invalidate(self):
         self._delete()

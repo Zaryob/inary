@@ -12,22 +12,24 @@
 # Please read the COPYING file.
 #
 
+import optparse
 import os
 import sys
-import optparse
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from inary.operations import history 
+from inary.operations import history
 import inary.db
 import inary.context as ctx
 import inary.util as util
 import inary.cli.command as command
 
 # Operation names for translation
-opttrans = {"upgrade":_("upgrade"),"remove":_("remove"),"emerge":_("emerge"), "install":_("install"), "snapshot":_("snapshot"), "takeback":_("takeback"), "repoupdate":_("repository update")}
+opttrans = {"upgrade": _("upgrade"), "remove": _("remove"), "emerge": _("emerge"), "install": _("install"),
+            "snapshot": _("snapshot"), "takeback": _("takeback"), "repoupdate": _("repository update")}
+
 
 class History(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""History of inary operations
@@ -67,25 +69,25 @@ Lists previous operations.""")
         for operation in self.historydb.get_last(ctx.get_option('last')):
 
             msg_oprt = util.colorize(_("Operation "), 'yellow') \
-                     + util.colorize("#{}: ".format(operation.no), "blue")\
-                     + util.colorize("{}:".format(opttrans[operation.type]), "white")
+                       + util.colorize("#{}: ".format(operation.no), "blue") \
+                       + util.colorize("{}:".format(opttrans[operation.type]), "white")
 
-            date_and_time = util.colorize(_("Date: "), "cyan" )+ "{0.date} {0.time}".format(operation)
+            date_and_time = util.colorize(_("Date: "), "cyan") + "{0.date} {0.time}".format(operation)
             print(msg_oprt)
             print(date_and_time)
 
             if operation.type == "snapshot":
                 msg_snap = util.colorize(
-                _("    * There are {} packages in this snapshot.").format(len(operation.packages)),
-                "purple")
+                    _("    * There are {} packages in this snapshot.").format(len(operation.packages)),
+                    "purple")
 
                 print(msg_snap)
             elif operation.type == "repoupdate":
                 for repo in operation.repos:
-                    print("    *",  repo)
+                    print("    *", repo)
             else:
                 for pkg in operation.packages:
-                    print("    *",  pkg)
+                    print("    *", pkg)
             print()
 
     def redirect_output(self, func):
@@ -97,7 +99,7 @@ Lists previous operations.""")
                 def __init__(self):
                     import subprocess
                     self.less = subprocess.Popen(["less", "-K -R", "-"],
-                                            stdin=subprocess.PIPE)
+                                                 stdin=subprocess.PIPE)
 
                 def __del__(self):
                     self.less.stdin.close()
@@ -125,7 +127,7 @@ Lists previous operations.""")
             func()
 
     def run(self):
-        self.init(database = False, write = False)
+        self.init(database=False, write=False)
         if ctx.get_option('snapshot'):
             self.take_snapshot()
             return

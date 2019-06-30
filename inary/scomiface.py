@@ -24,8 +24,10 @@ import inary.context as ctx
 import inary.errors
 import inary.util as util
 
+
 class Error(inary.errors.Error):
     pass
+
 
 try:
     import scom
@@ -34,9 +36,11 @@ try:
 except ImportError:
     raise Error(_("scom-api package is not fully installed"))
 
+
 def is_char_valid(char):
     """Test if char is valid object path character."""
     return char in util.ascii_letters + util.digits + "_"
+
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in SCOM script"""
@@ -44,6 +48,7 @@ def is_method_missing(exception):
                                       "tr.org.sulin.scom.Missing"):
         return True
     return False
+
 
 def safe_script_name(package):
     """Generates DBus-safe object name for package script names."""
@@ -54,6 +59,7 @@ def safe_script_name(package):
     if object[0].isdigit():
         object = '_{}'.format(object)
     return object
+
 
 def get_link():
     """Connect to the SCOM daemon and return the link."""
@@ -118,7 +124,7 @@ def post_install(package_name, provided_scripts,
     for script in provided_scripts:
         ctx.ui.debug(_("Registering {} scom script").format(script.om))
         script_name = safe_script_name(script.name) \
-                if script.name else package_name
+            if script.name else package_name
         if script.om == "System.Package":
             self_post = True
         try:
@@ -136,9 +142,9 @@ def post_install(package_name, provided_scripts,
     for handler in link.System.PackageHandler:
         try:
             link.System.PackageHandler[handler].setupPackage(
-                    metapath,
-                    filepath,
-                    timeout=ctx.dbus_timeout)
+                metapath,
+                filepath,
+                timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if setupPackage method is not defined
             # in package script
@@ -154,8 +160,8 @@ def post_install(package_name, provided_scripts,
         ctx.ui.debug(_("Running package's post install script"))
         try:
             link.System.Package[package_name].postInstall(
-                    fromVersion, fromRelease, toVersion, toRelease,
-                    timeout=ctx.dbus_timeout)
+                fromVersion, fromRelease, toVersion, toRelease,
+                timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if postInstall method is not defined in package script
             if not is_method_missing(exception):
@@ -174,7 +180,7 @@ def pre_remove(package_name, metapath, filepath):
         ctx.ui.debug(_("Running package's pre remove script"))
         try:
             link.System.Package[package_name].preRemove(
-                    timeout=ctx.dbus_timeout)
+                timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if preRemove method is not defined in package script
             if not is_method_missing(exception):
@@ -184,7 +190,7 @@ def pre_remove(package_name, metapath, filepath):
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].cleanupPackage(
-                    metapath, filepath, timeout=ctx.dbus_timeout)
+                metapath, filepath, timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if cleanupPackage method is not defined
             # in package script
@@ -202,14 +208,14 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
 
     package_name = safe_script_name(package_name)
     scripts = set([safe_script_name(s.name) for s \
-            in provided_scripts if s.name])
+                   in provided_scripts if s.name])
     scripts.add(package_name)
 
     if package_name in list(link.System.Package):
         ctx.ui.debug(_("Running package's postremove script"))
         try:
             link.System.Package[package_name].postRemove(
-                    timeout=ctx.dbus_timeout)
+                timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if postRemove method is not defined in package script
             if not is_method_missing(exception):
@@ -219,7 +225,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].postCleanupPackage(
-                    metapath, filepath, timeout=ctx.dbus_timeout)
+                metapath, filepath, timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             # Do nothing if postCleanupPackage method is not defined
             # in package script

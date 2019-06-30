@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 #
 
-import inary
 try:
     from .xmlext_iks import *
 

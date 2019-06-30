@@ -32,14 +32,17 @@ class autocommand(type):
         if name is None:
             raise inary.cli.Error(_('Command lacks name'))
         longname, shortname = name
+
         def add_cmd(cmd):
             if cmd in Command.cmd_dict:
                 raise inary.cli.Error(_('Duplicate command {}').format(cmd))
             else:
                 Command.cmd_dict[cmd] = cls
+
         add_cmd(longname)
         if shortname:
             add_cmd(shortname)
+
 
 class Command(object):
     """generic help string for any command"""
@@ -61,7 +64,7 @@ class Command(object):
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' ({})'.format(commandcls.name[1])
-            s += util.colorize(' %23s '% name , 'blue') + '- %s\n' % summary
+            s += util.colorize(' %23s ' % name, 'blue') + '- %s\n' % summary
         return s
 
     @staticmethod
@@ -77,7 +80,7 @@ class Command(object):
 
     # instance variabes
 
-    def __init__(self, args = None):
+    def __init__(self, args=None):
         # now for the real parser
         import inary
         self.scom = False
@@ -88,7 +91,7 @@ class Command(object):
         self.commonopts()
         (self.options, self.args) = self.parser.parse_args(args)
         if self.args:
-            self.args.pop(0)                # exclude command arg
+            self.args.pop(0)  # exclude command arg
 
         self.process_opts()
 
@@ -98,21 +101,21 @@ class Command(object):
 
         group = optparse.OptionGroup(self.parser, _("general options"))
 
-        group.add_option("-D", "--destdir", action="store", default = None,
-                     help = _("Change the system root for INARY commands"))
+        group.add_option("-D", "--destdir", action="store", default=None,
+                         help=_("Change the system root for INARY commands"))
         group.add_option("-y", "--yes-all", action="store_true",
-                     default=False, help = _("Assume yes in all yes/no queries"))
+                         default=False, help=_("Assume yes in all yes/no queries"))
         group.add_option("-u", "--username", action="store")
         group.add_option("-p", "--password", action="store")
-        group.add_option("-L", "--bandwidth-limit", action="store", default = 0,
-                     help = _("Keep bandwidth usage under specified KB's"))
+        group.add_option("-L", "--bandwidth-limit", action="store", default=0,
+                         help=_("Keep bandwidth usage under specified KB's"))
         group.add_option("-v", "--verbose", action="store_true",
-                     dest="verbose", default=False,
-                     help=_("Detailed output"))
+                         dest="verbose", default=False,
+                         help=_("Detailed output"))
         group.add_option("-d", "--debug", action="store_true",
-                     default=False, help=_("Show debugging information"))
+                         default=False, help=_("Show debugging information"))
         group.add_option("-N", "--no-color", action="store_true", default=False,
-                     help = _("Suppresses all coloring of INARY's output"))
+                         help=_("Suppresses all coloring of INARY's output"))
 
         p.add_option_group(group)
 
@@ -157,7 +160,7 @@ class Command(object):
         else:
             self.options.authinfo = None
 
-    def init(self, database = True, write = True, locked = False):
+    def init(self, database=True, write=True, locked=False):
         """initialize INARY components"""
 
         if self.options:
@@ -166,7 +169,8 @@ class Command(object):
             ui = inary.cli.CLI()
 
         if (write and not os.access(inary.context.config.packages_dir(), os.W_OK) or \
-            ('sf' == self.get_name() or 'cp' == self.get_name() and not os.access(os.path.join(ctx.config.info_dir(), ctx.const.files_db), os.W_OK))):
+                ('sf' == self.get_name() or 'cp' == self.get_name() and not os.access(
+                    os.path.join(ctx.config.info_dir(), ctx.const.files_db), os.W_OK))):
             raise inary.cli.Error(_("You have to be root for this operation."))
 
         inary.api.set_scom(self.scom and not ctx.get_option('ignore_scom'))
@@ -195,6 +199,7 @@ class Command(object):
         ctx.ui.error(_('Command terminated abnormally.'))
         sys.exit(-1)
 
+
 class PackageOp(Command):
     """Abstract package operation command"""
 
@@ -204,17 +209,18 @@ class PackageOp(Command):
 
     def options(self, group):
         group.add_option("--ignore-dependency", action="store_true",
-                     default=False,
-                     help=_("Do not take dependency information into account"))
+                         default=False,
+                         help=_("Do not take dependency information into account"))
         group.add_option("--ignore-safety", action="store_true",
-                     default=False, help=_("Bypass safety switch"))
+                         default=False, help=_("Bypass safety switch"))
         group.add_option("--ignore-scom", action="store_true",
-                     default=False, help=_("Bypass scom configuration agent"))
+                         default=False, help=_("Bypass scom configuration agent"))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
-                     help = _("Do not perform any action, just show what would be done"))
+                         help=_("Do not perform any action, just show what would be done"))
 
     def init(self, database=True, write=True):
         super(PackageOp, self).init(database, write)
+
 
 class InaryHelpFormatter(optparse.HelpFormatter):
     def __init__(self,
@@ -263,7 +269,7 @@ class InaryHelpFormatter(optparse.HelpFormatter):
         if len(opts) > opt_width:
             opts = "%*s%s\n" % (self.current_indent, "", opts)
             indent_first = self.help_position
-        else:                       # start help on same line as opts
+        else:  # start help on same line as opts
             opts = "%*s%-*s  " % (self.current_indent, "", opt_width, opts)
             indent_first = 0
         result.append(opts)

@@ -20,6 +20,7 @@ a package index.
 """
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -28,33 +29,36 @@ import inary.sxml.xmlfile as xmlfile
 import inary.sxml.autoxml as autoxml
 import inary.util as util
 
+
 class Delta(metaclass=autoxml.autoxml):
-    t_PackageURI = [ autoxml.String, autoxml.optional]
-    t_PackageSize = [ autoxml.Long, autoxml.optional]
-    t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
+    t_PackageURI = [autoxml.String, autoxml.optional]
+    t_PackageSize = [autoxml.Long, autoxml.optional]
+    t_PackageHash = [autoxml.String, autoxml.optional, "SHA1Sum"]
     a_buildFrom = [autoxml.String, autoxml.optional]
     a_releaseFrom = [autoxml.String, autoxml.optional]
+
 
 class Source(metaclass=autoxml.autoxml):
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [specfile.Packager, autoxml.mandatory]
 
-class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
-    t_Build = [ autoxml.Integer, autoxml.optional]
-    t_BuildHost = [autoxml.String, autoxml.optional]
-    t_Distribution = [ autoxml.String, autoxml.mandatory]
-    t_DistributionRelease = [ autoxml.String, autoxml.mandatory]
-    t_Architecture = [ autoxml.String, autoxml.mandatory]
-    t_InstalledSize = [ autoxml.Long, autoxml.mandatory]
-    t_PackageSize = [ autoxml.Long, autoxml.optional]
-    t_PackageHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
-    t_InstallTarHash = [ autoxml.String, autoxml.optional, "SHA1Sum" ]
-    t_PackageURI = [ autoxml.String, autoxml.optional]
-    t_DeltaPackages = [ [Delta], autoxml.optional]
-    t_PackageFormat = [ autoxml.String, autoxml.optional]
 
-    t_Source = [ Source, autoxml.optional]
+class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
+    t_Build = [autoxml.Integer, autoxml.optional]
+    t_BuildHost = [autoxml.String, autoxml.optional]
+    t_Distribution = [autoxml.String, autoxml.mandatory]
+    t_DistributionRelease = [autoxml.String, autoxml.mandatory]
+    t_Architecture = [autoxml.String, autoxml.mandatory]
+    t_InstalledSize = [autoxml.Long, autoxml.mandatory]
+    t_PackageSize = [autoxml.Long, autoxml.optional]
+    t_PackageHash = [autoxml.String, autoxml.optional, "SHA1Sum"]
+    t_InstallTarHash = [autoxml.String, autoxml.optional, "SHA1Sum"]
+    t_PackageURI = [autoxml.String, autoxml.optional]
+    t_DeltaPackages = [[Delta], autoxml.optional]
+    t_PackageFormat = [autoxml.String, autoxml.optional]
+
+    t_Source = [Source, autoxml.optional]
 
     def get_delta(self, release):
         for delta in self.deltaPackages:
@@ -73,9 +77,9 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
         size = "%.2f %s" % (i_size[0], i_size[1])
 
         s += _('Distribution: {0}, Dist. Release: {1}\n').format(
-               self.distribution, self.distributionRelease)
+            self.distribution, self.distributionRelease)
         s += _('Architecture: {0}, Installed Size: {1}').format(
-               self.architecture, size)
+            self.architecture, size)
 
         if self.packageSize:
             p_size = util.human_readable_size(self.packageSize)
@@ -86,22 +90,24 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         return s
 
+
 class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     """Package metadata. Metadata is composed of Specfile and various
     other information. A metadata has two parts, Source and Package."""
 
     tag = "INARY"
 
-    t_Source = [ Source, autoxml.mandatory]
-    t_Package = [ Package, autoxml.mandatory]
-    #t_History = [ [Update], autoxml.mandatory]
+    t_Source = [Source, autoxml.mandatory]
+    t_Package = [Package, autoxml.mandatory]
+
+    # t_History = [ [Update], autoxml.mandatory]
 
     def from_spec(self, src, pkg, history):
         # this just copies fields, it doesn't fix every necessary field
         self.source.name = src.name
         self.source.homepage = src.homepage
         self.source.packager = src.packager
-        self.package.source = self.source # FIXME: I know that replication sucks here, but this is the easiest for now
+        self.package.source = self.source  # FIXME: I know that replication sucks here, but this is the easiest for now
         self.package.name = pkg.name
         self.package.summary = pkg.summary
         self.package.description = pkg.description
