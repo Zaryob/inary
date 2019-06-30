@@ -88,7 +88,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-    ignore_dep = ctx.config.get_option('ignore_dependency')
+    ignore_dep = ctx.config.get_option('ignore_dependency') # Fixme: Fuck
 
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):

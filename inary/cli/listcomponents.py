@@ -50,14 +50,13 @@ repositories.
         self.init(database=True, write=False)
 
         l = self.componentdb.list_components(ctx.get_option('repository'))
+        if l:
+            maxlen = max([len(_p) for _p in l])
         l.sort()
         for p in l:
             component = self.componentdb.get_component(p)
             if self.options.long:
                 ctx.ui.info(str(component))
             else:
-                lenp = len(p)
-                # if p in installed_list:
-                #    p = util.colorize(p, 'cyan')
-                # p = p + ' ' * max(0, 15 - lenp)
+                component.name += ' ' * max(0, maxlen - len(p))
                 ctx.ui.info('{0} - {1} '.format(component.name, str(component.summary)))

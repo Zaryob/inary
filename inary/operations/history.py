@@ -113,7 +113,7 @@ def __getpackageurl(package):
 
 def fetch_remote_file(package, errors):
     try:
-        uri = inary.file.File.make_uri(__getpackageurlbinman(package))
+        uri = inary.file.File.make_uri(__getpackageurl_binman(package))
     except PackageNotFound:
         errors.append(package)
         ctx.ui.info(_("{} could not be found").format(package), color="red")

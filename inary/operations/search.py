@@ -72,6 +72,7 @@ def search_file(term):
     packages -> list_of_tuples
     @param term: used to search file -> list_of_strings
 
+    >>> import inary.operations
     >>> files = inary.operation.search.search_file("kvm-")
 
     >>> print files

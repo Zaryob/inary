@@ -35,7 +35,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY
-import inary
 import inary.errors
 import inary.sxml.xmlext as xmlext
 import inary.sxml.xmlfile as xmlfile

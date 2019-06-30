@@ -68,7 +68,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         urlfile.write(uri)  # uri
         urlfile.close()
 
-        doc = self.read_uri(uri, tmpdir, force)
+        doc = self.read_uri(uri, tmpdir, force) # Fixme: Fuck
 
         if not repo:
             repo = self.distribution.name()
@@ -215,7 +215,7 @@ def add_package(params):
         if md.errors():
             ctx.ui.info("")
             ctx.ui.error(_('Package {}: metadata corrupt, skipping...').format(md.package.name))
-            ctx.ui.error(str(Error(*errs)))
+            ctx.ui.error(str(*errs))
         else:
             # No need to carry these with index (#3965)
             md.package.files = None
