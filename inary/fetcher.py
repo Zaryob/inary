@@ -17,6 +17,7 @@ import os
 import sys
 import time
 import shutil
+import pycurl
 
 #Gettext translation library
 import gettext
@@ -156,13 +157,13 @@ class Fetcher:
             raise FetchError(_('Access denied to destination file: "%s"') % self.archive_file)
 
         else:
-            import pycurl
             c = pycurl.Curl()
             c.protocol = self.url.scheme()
             c.setopt(c.URL, self.url.get_uri())
             # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
             c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
             c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+            c.setopt(pycurl.AUTOREFERER,1)
             c.setopt(pycurl.CONNECTTIMEOUT, timeout) #This for waiting to establish connection
            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
             c.setopt(pycurl.MAXREDIRS, 10)
@@ -190,6 +191,8 @@ class Fetcher:
 
             try:
                 c.perform()
+                file_id.close()
+                ctx.ui.debug(_("Downloaded from:"+str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()
             except pycurl.error as x:
                 raise FetchError("Pycurl.Error: {}".format(x))
