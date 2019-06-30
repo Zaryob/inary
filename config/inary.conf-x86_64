@@ -1,7 +1,7 @@
 [build]
 build_host = localhost
 # buildhelper = None
-commonflags = -mtune=generic -O2 -pipe -fstack-protector -D_FORTIFY_SOURCE=2 -g -fPIC
+commonflags = -mtune=generic -O3 -s -pipe -fstack-protector -D_FORTIFY_SOURCE=2 -g -fPIC
 cflags = %(commonflags)s
 cxxflags = %(commonflags)s
 host = x86_64-pc-linux-gnu

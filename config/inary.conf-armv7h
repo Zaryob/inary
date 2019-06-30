@@ -1,7 +1,7 @@
 [build]
 build_host = localhost
 # buildhelper = None
-commonflags = -U_FORTIFY_SOURCE -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O2 -pipe
+commonflags = -U_FORTIFY_SOURCE -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O3 -s -pipe
 cflags = %(commonflags)s
 cxxflags = %(commonflags)s
 host = armv7l-unknown-linux-gnueabihf
