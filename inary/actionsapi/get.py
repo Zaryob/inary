@@ -160,6 +160,7 @@ def makeJOBS():
         procs = 4
         try:
             procs = multiprocessing.cpu_count()
+            env.jobs = procs
         except Exception as e:
             ctx.ui.warning("Unable to retrieve CPU count: %s" % e)
     return env.jobs

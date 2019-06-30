@@ -21,6 +21,7 @@ import fnmatch
 import hashlib
 import operator
 import os
+import platform
 import re
 import shutil
 import struct
@@ -1120,7 +1121,6 @@ def get_vm_info():
         import subprocess
     except ImportError:
         raise Exception(_("Module: \"subprocess\" can not import"))
-
     if platform.system() == 'Linux':
         try:
             proc = subprocess.Popen(["free"],

@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-import re
 import gzip
 import re
 
@@ -113,12 +112,12 @@ class SourceDB(lazydb.LazyDB):
             lang = autoxml.LocalText.get_lang()
         found = []
         for name, xml in self.sdb.get_items_iter(repo):
-            if terms == [term for term in terms if (fields['name'] and \
+            if terms == [term for term in terms if (fields['name'] and
                                                     re.compile(term, re.I).search(name)) or \
-                                                   (fields['summary'] and \
+                                                   (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
                                                         xml)) or \
-                                                   (fields['desc'] and \
+                                                   (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
                 found.append(name)

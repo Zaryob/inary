@@ -13,6 +13,7 @@
 #
 
 import optparse
+import sys
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -57,7 +58,7 @@ Lists the packages that will be upgraded.
 
         upgradable_pkgs = list(filter(is_upgradable, installdb.list_installed()))
         # replaced packages can not pass is_upgradable test, so we add them manually
-        upgradable_pkgs.extend(list_replaces())
+        #upgradable_pkgs.extend(list_replaces())
 
         # consider also blacklist filtering
         upgradable_pkgs = inary.blacklist.exclude_from(upgradable_pkgs, ctx.const.blacklist)

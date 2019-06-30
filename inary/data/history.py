@@ -43,7 +43,6 @@ class Repo(metaclass=autoxml.autoxml):
 
     def __str__(self):
         # "update", "remove", "add"
-        operation = ""
         if self.operation == "update":
             return _("{0} repository is updated.").format(self.name)
         elif self.operation == "add":
@@ -62,7 +61,6 @@ class Package(metaclass=autoxml.autoxml):
 
     def __str__(self):
         # "upgrade", "remove", "install", "reinstall", "downgrade"
-        operation = ""
         if self.operation == "upgrade":
             if self.type == "delta":
                 return _("{0} is upgraded from {1} to {2} with delta.").format(self.name, self.before, self.after)

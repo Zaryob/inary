@@ -35,9 +35,9 @@ xmlext içine tag için remove eklenene kadar böyle
 """
 
 try:
-    import iksemel
+    import ciksemel
 
-    parser = "iksemel"
+    parser = "ciksemel"
 except:
     import xml.dom.minidom as minidom
 
@@ -83,7 +83,7 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-        if parser == "iksemel":
+        if parser == "ciksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     status_node = r.getTag("Status")
@@ -123,7 +123,7 @@ class RepoOrder:
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-        if parser == "iksemel":
+        if parser == "ciksemel":
             for r in repo_doc.tags("Repo"):
                 if r.getTagData("Name") == repo_name:
                     r.hide()
@@ -222,6 +222,7 @@ class RepoDB(lazydb.LazyDB):
         return uri.rstrip()
 
     def add_repo(self, name, repo_info, at=None):
+        #Fixme: Fucking at
         repo_path = util.join_path(ctx.config.index_dir(), name)
         ###########
         try:
