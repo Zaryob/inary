@@ -22,7 +22,6 @@
 """
 
 import formatter
-import sys
 import inspect
 import io
 # System
