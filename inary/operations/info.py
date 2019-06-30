@@ -12,31 +12,33 @@
 
 import os
 
+import inary.context as ctx
+import inary.data
+import inary.db
 import inary.errors
 import inary.package
-import inary.context as ctx
-import inary.db
-import inary.data
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-def info(package, installed = False):
+
+def info(package, installed=False):
     if package.endswith(ctx.const.package_suffix):
         return info_file(package)
     else:
         metadata, files, repo = info_name(package, installed)
         return metadata, files
 
-def info_file(package_fn):
 
+def info_file(package_fn):
     if not os.path.exists(package_fn):
-        raise inary.errors.Error (_('File {} not found').format(package_fn))
+        raise inary.errors.Error(_('File {} not found').format(package_fn))
 
     package = inary.package.Package(package_fn)
     package.read()
     return package.metadata, package.files
+
 
 def info_name(package_name, useinstalldb=False):
     """Fetch package information for the given package."""
@@ -51,9 +53,9 @@ def info_name(package_name, useinstalldb=False):
 
     metadata = inary.data.metadata.MetaData()
     metadata.package = package
-    #FIXME: get it from sourcedb if available
+    # FIXME: get it from sourcedb if available
     metadata.source = None
-    #TODO: fetch the files from server if possible (wow, you maniac -- future exa)
+    # TODO: fetch the files from server if possible (wow, you maniac -- future exa)
     if useinstalldb and installdb.has_package(package.name):
         try:
             files = installdb.get_files(package.name)

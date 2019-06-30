@@ -24,6 +24,7 @@ import inary.context as ctx
 import inary.db
 import inary.errors
 
+
 class AddRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Add a repository
 
@@ -44,11 +45,13 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("add-repo options"))
-        group.add_option("--ignore-check", action="store_true", default=False, help=_("Ignore repository distribution check"))
-        group.add_option("--no-fetch", action="store_true", default=False, help=_("Does not fetch repository index and does not check distribution match"))
+        group.add_option("--ignore-check", action="store_true", default=False,
+                         help=_("Ignore repository distribution check"))
+        group.add_option("--no-fetch", action="store_true", default=False,
+                         help=_("Does not fetch repository index and does not check distribution match"))
         group.add_option("--at", action="store",
-                               type="int", default=None,
-                               help=_("Add repository at given position (0 is first)"))
+                         type="int", default=None,
+                         help=_("Add repository at given position (0 is first)"))
         self.parser.add_option_group(group)
 
     @staticmethod

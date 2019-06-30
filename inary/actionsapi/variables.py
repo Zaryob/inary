@@ -17,6 +17,7 @@ import os
 # Inary-Core Modules
 import inary.context as ctx
 
+
 # Set individual information, that are generally needed for ActionsAPI
 
 def exportFlags():
@@ -29,7 +30,7 @@ def exportFlags():
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
     values = ctx.config.values
-    os.environ['HOST'] =  values.build.host
+    os.environ['HOST'] = values.build.host
     os.environ['CFLAGS'] = values.build.cflags
     os.environ['CXXFLAGS'] = values.build.cxxflags
     os.environ['LDFLAGS'] = values.build.ldflags
@@ -44,8 +45,10 @@ def exportFlags():
     os.environ['CXX'] = "{}-g++".format(values.build.host)
     os.environ['LD'] = "ld"
 
+
 class Env(object):
     """General environment variables used in actions API"""
+
     def __init__(self):
 
         exportFlags()
@@ -74,6 +77,7 @@ class Env(object):
         else:
             return None
 
+
 class Dirs:
     """General directories used in actions API."""
     # TODO: Eventually we should consider getting these from a/the
@@ -97,6 +101,7 @@ class Dirs:
         self.kde = self.values.dirs.kde_dir
         self.qt = self.values.dirs.qt_dir
 
+
 class Generals:
     """General informations from /etc/inary/inary.conf"""
 
@@ -106,6 +111,7 @@ class Generals:
         self.distribution = self.values.general.distribution
         self.distribution_release = self.values.general.distribution_release
 
+
 # As we import this module from build.py, we can't init glb as a
 # singleton here.  Or else Python will bug us with NoneType errors
 # because of uninitialized context (ctx) because of exportFlags().
@@ -114,6 +120,7 @@ class Generals:
 # for each build.
 # See bug #2575
 glb = None
+
 
 def initVariables():
     global glb

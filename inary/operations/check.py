@@ -47,8 +47,9 @@ def ignorance_is_bliss(f):
             return True
 
     if p.endswith(".pyc"):
-        #ignore python compiled file changes
+        # ignore python compiled file changes
         return True
+
 
 def file_corrupted(pfile):
     path = os.path.join(ctx.config.dest_dir(), pfile.path)
@@ -63,13 +64,14 @@ def file_corrupted(pfile):
             raise e
     return False
 
+
 def check_files(files, check_config=False):
     results = {
-                'missing'   :   [],
-                'corrupted' :   [],
-                'denied'    :   [],
-                'config'    :   [],
-              }
+        'missing': [],
+        'corrupted': [],
+        'denied': [],
+        'config': [],
+    }
 
     for f in files:
         if not check_config and f.type == "config":
@@ -78,7 +80,6 @@ def check_files(files, check_config=False):
             continue
         if ignorance_is_bliss(f.path):
             continue
-
 
         is_file_corrupted = False
 
@@ -105,13 +106,16 @@ def check_files(files, check_config=False):
 
     return results
 
+
 def check_config_files(package):
     config_files = inary.db.installdb.InstallDB().get_config_files(package)
     return check_files(config_files, True)
 
+
 def check_package_files(package):
     files = inary.db.installdb.InstallDB().get_files(package).list
     return check_files(files)
+
 
 def check(package, config=False):
     """

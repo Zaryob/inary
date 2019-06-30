@@ -13,6 +13,7 @@
 import sys
 import glob
 import os
+import sys
 import threading
 
 import gettext
@@ -22,10 +23,12 @@ _ = __trans.gettext
 from ctypes import c_char_p, c_int, c_size_t, c_void_p
 import ctypes.util
 
+
 class MagicException(Exception):
     def __init__(self, message):
         super(MagicException, self).__init__(message)
         self.message = message
+
 
 libmagic = None
 dll = ctypes.util.find_library('magic') or ctypes.util.find_library('magic1') or ctypes.util.find_library('cygmagic-1')
@@ -35,11 +38,11 @@ if dll:
 
 if not libmagic or not libmagic._name:
     magic_dlls = {'darwin': ['/opt/local/lib/libmagic.dylib',
-                                  '/usr/local/lib/libmagic.dylib',
-                                  glob.glob('/usr/local/Cellar/libmagic/*/lib/libmagic.dylib')],
-                       'win32': ['magic1.dll','cygmagic-1.dll'],
-                       'linux': ['libmagic.so.1'],
-                      }
+                             '/usr/local/lib/libmagic.dylib',
+                             glob.glob('/usr/local/Cellar/libmagic/*/lib/libmagic.dylib')],
+                  'win32': ['magic1.dll', 'cygmagic-1.dll'],
+                  'linux': ['libmagic.so.1'],
+                  }
 
     if sys.platform.startswith('linux'):
         platform = 'linux'
@@ -52,7 +55,7 @@ if not libmagic or not libmagic._name:
             break
         except OSError:
             pass
-#Magic Flags from libmagic.so
+# Magic Flags from libmagic.so
 
 MAGIC_CONTINUE = 0x000020
 MAGIC_COMPRESS = 0x000004
@@ -65,7 +68,8 @@ _instances = {}
 # Magic function
 magic_t = ctypes.c_void_p
 
-#Error Checking Function
+
+# Error Checking Function
 def errorcheck(result, func, args):
     if result is None:
         err = magic_error(args[0])
@@ -75,6 +79,7 @@ def errorcheck(result, func, args):
         raise Exception(err)
     else:
         return result
+
 
 # Declarations
 magic_file = libmagic.magic_file
@@ -100,16 +105,19 @@ magic_load.restype = c_int
 magic_load.argtypes = [magic_t, c_char_p]
 magic_load.errcheck = errorcheck
 
-#Standart Functions
+
+# Standart Functions
 def _get_wrapper(mime):
     i = _instances.get(mime)
     if i is None:
         i = _instances[mime] = Magic(mime=mime)
     return i
 
+
 def file_type(data, mime=False):
     m = _get_wrapper(mime)
     return m.get_file_type(data)
+
 
 # Magic Class
 class Magic:
@@ -147,7 +155,7 @@ class Magic:
                         buf = data.encode('utf-8', errors='replace')
                     return magic_buffer(self.cookie, data, len(data)).decode('utf-8')
         except MagicException as err:
-            raise(_("Can't load file or buffer {}").format(err))
+            raise (_("Can't load file or buffer {}").format(err))
 
     def __del__(self):
         if self.cookie and magic_close:

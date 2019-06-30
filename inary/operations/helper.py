@@ -24,8 +24,8 @@ import inary.ui as ui
 import inary.analyzer.conflict
 import inary.db
 
-def reorder_base_packages(order):
 
+def reorder_base_packages(order):
     componentdb = inary.db.componentdb.ComponentDB()
 
     """system.base packages must be first in order"""
@@ -40,6 +40,7 @@ def reorder_base_packages(order):
             nonbase_order.append(pkg)
 
     return systembase_order + nonbase_order
+
 
 def check_conflicts(order, packagedb):
     """check if upgrading to the latest versions will cause havoc
@@ -63,6 +64,7 @@ def check_conflicts(order, packagedb):
 
     return list(C)
 
+
 def expand_src_components(A):
     componentdb = inary.db.componentdb.ComponentDB()
     Ap = set()
@@ -72,6 +74,7 @@ def expand_src_components(A):
         else:
             Ap.add(x)
     return Ap
+
 
 def calculate_download_sizes(order):
     total_size = cached_size = 0
@@ -118,6 +121,7 @@ def calculate_download_sizes(order):
     ctx.ui.notify(ui.cached, total=total_size, cached=cached_size)
     return total_size, cached_size
 
+
 def get_package_requirements(packages):
     """
     Returns a dict with two keys - systemRestart, serviceRestart - with package lists as their values
@@ -141,7 +145,7 @@ def get_package_requirements(packages):
     for i_pkg in packages:
         try:
             pkg = packagedb.get_package(i_pkg)
-        except Exception: #FIXME: Should catch RepoItemNotFound exception
+        except Exception:  # FIXME: Should catch RepoItemNotFound exception
             pass
 
         version, release, build = installdb.get_version(i_pkg)

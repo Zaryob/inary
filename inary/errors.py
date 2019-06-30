@@ -14,6 +14,7 @@
 # FIXME: Exception shadows builtin Exception. This is no good.
 class Exception(Exception):
     """Class of exceptions that must be caught and handled within INARY"""
+
     def __str__(self):
         s = ''
         for x in self.args:
@@ -22,12 +23,15 @@ class Exception(Exception):
             s += str(x)
         return str(s)
 
+
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
 
+
 class AnotherInstanceError(Exception):
     pass
+
 
 class PrivilegeError(Exception):
     pass

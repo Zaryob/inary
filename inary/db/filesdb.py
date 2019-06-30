@@ -10,19 +10,19 @@
 # Please read the COPYING file.
 #
 
+import hashlib
 import os
 import re
 import shelve
-import hashlib
 
 import inary.context as ctx
 import inary.db
 import inary.db.lazydb as lazydb
-import inary.util as util
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 # FIXME:
 # We could traverse through files.xml files of the packages to find the path and
@@ -49,11 +49,11 @@ class FilesDB(lazydb.LazyDB):
         ctx.ui.info(_('\nAdded files database...'), color='green')
 
     def get_file(self, path):
-        key=hashlib.md5(path.encode('utf-8')).hexdigest()
+        key = hashlib.md5(path.encode('utf-8')).hexdigest()
         return self.filesdb.get(key), path
 
     def has_file(self, path):
-        key=hashlib.md5(path.encode('utf-8')).hexdigest()
+        key = hashlib.md5(path.encode('utf-8')).hexdigest()
         if key in self.filesdb:
             return True
         else:
@@ -62,7 +62,7 @@ class FilesDB(lazydb.LazyDB):
     def search_file(self, term):
         pkg, path = self.get_file(term)
         if pkg:
-            return [(pkg,[path])]
+            return [(pkg, [path])]
 
         installdb = inary.db.installdb.InstallDB()
         found = []
@@ -77,13 +77,13 @@ class FilesDB(lazydb.LazyDB):
         self.__check_filesdb()
 
         for f in files.list:
-            key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
+            key = hashlib.md5(f.path.encode('utf-8')).hexdigest()
             self.filesdb[key] = pkg
 
     def remove_files(self, files):
         ctx.ui.info(_('Removing files from database'), color='green')
         for f in files:
-            key=hashlib.md5(f.path.encode('utf-8')).hexdigest()
+            key = hashlib.md5(f.path.encode('utf-8')).hexdigest()
             if key in self.filesdb:
                 del self.filesdb[key]
 
@@ -106,7 +106,7 @@ class FilesDB(lazydb.LazyDB):
         if not os.path.exists(files_db):
             flag = "n"
 
-        elif os.access(files_db , os.W_OK):
+        elif os.access(files_db, os.W_OK):
             flag = "w"
         else:
             flag = "r"

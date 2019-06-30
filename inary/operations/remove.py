@@ -24,12 +24,12 @@ import inary.context as ctx
 import inary.data.pgraph as pgraph
 import inary.db
 import inary.errors
-import inary.operations as operations
 import inary.util as util
 import inary.ui as ui
 
+
 @util.locked
-def remove(A, ignore_dep = False, ignore_safety = False):
+def remove(A, ignore_dep=False, ignore_safety=False):
     """
     Removes the given packages from the system
     @param packages: list of package names -> list_of_strings
@@ -51,8 +51,8 @@ def remove(A, ignore_dep = False, ignore_safety = False):
             refused = A.intersection(systembase)
             if refused:
                 raise inary.errors.Error(_("Safety switch prevents the removal of "
-                                   "following packages:\n") +
-                                    util.format_by_columns(sorted(refused)))
+                                           "following packages:\n") +
+                                         util.format_by_columns(sorted(refused)))
                 A = A - systembase
         else:
             ctx.ui.warning(_("Safety switch: The component system.base cannot be found."))
@@ -65,7 +65,7 @@ def remove(A, ignore_dep = False, ignore_safety = False):
             ctx.ui.info(_('Package {} does not exist. Cannot remove.').format(x))
     A = set(Ap)
 
-    if len(A)==0:
+    if len(A) == 0:
         ctx.ui.info(_('No packages to remove.'))
         return False
 
@@ -86,7 +86,7 @@ in the respective order to satisfy dependencies:
     if ctx.get_option('dry_run'):
         return
 
-    ctx.ui.notify(ui.packagestogo, order = order)
+    ctx.ui.notify(ui.packagestogo, order=order)
 
     for x in order:
         if installdb.has_package(x):
@@ -99,13 +99,14 @@ in the respective order to satisfy dependencies:
         else:
             ctx.ui.info(_('Package {} is not installed. Cannot remove.').format(x))
 
+
 def plan_remove(A):
     # try to construct a inary graph of packages to
     # install / reinstall
 
     installdb = inary.db.installdb.InstallDB()
 
-    G_f = pgraph.PGraph(installdb)               # construct G_f
+    G_f = pgraph.PGraph(installdb)  # construct G_f
 
     # find the (install closure) graph of G_f by package
     # set A using packagedb
@@ -120,27 +121,29 @@ def plan_remove(A):
                 # we don't deal with uninstalled rev deps
                 # and unsatisfied dependencies (this is important, too)
                 # satisfied_by_any_installed_other_than is for AnyDependency
-                if installdb.has_package(rev_dep) and depinfo.satisfied_by_installed() and not depinfo.satisfied_by_any_installed_other_than(x):
+                if installdb.has_package(
+                        rev_dep) and depinfo.satisfied_by_installed() and not depinfo.satisfied_by_any_installed_other_than(
+                        x):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
                     if ctx.config.values.general.allow_docs:
-                        doc_package=x+ctx.const.doc_package_end
+                        doc_package = x + ctx.const.doc_package_end
                         if packagedb.has_package(doc_package):
                             Bp.add(doc_package)
 
                     if ctx.config.values.general.allow_pages:
-                        info_package=x+ctx.const.info_package_end
+                        info_package = x + ctx.const.info_package_end
                         if packagedb.has_package(info_package):
                             Bp.add(info_package)
 
                     if ctx.config.values.general.allow_dbginfo:
-                        dbg_package=x+ctx.const.debug_name_suffix
+                        dbg_package = x + ctx.const.debug_name_suffix
                         if packagedb.has_package(dbg_package):
                             Bp.add(dbg_package)
 
                     if ctx.config.values.general.allow_static:
-                        static_package=x+ctx.const.static_name_suffix
+                        static_package = x + ctx.const.static_name_suffix
                         if packagedb.has_package(static_package):
                             Bp.add(static_package)
 
@@ -150,9 +153,11 @@ def plan_remove(A):
     order = G_f.topological_sort()
     return G_f, order
 
+
 def remove_conflicting_packages(conflicts):
     if remove(conflicts, ignore_dep=True, ignore_safety=True):
         raise Exception(_("Conflicts remain"))
+
 
 def remove_obsoleted_packages():
     installdb = inary.db.installdb.InstallDB()
@@ -162,9 +167,11 @@ def remove_obsoleted_packages():
         if remove(obsoletes, ignore_dep=True, ignore_safety=True):
             raise Exception(_("Obsoleted packages remaining"))
 
+
 def remove_replaced_packages(replaced):
     if remove(replaced, ignore_dep=True, ignore_safety=True):
         raise Exception(_("Replaced package remains"))
+
 
 def get_remove_order(packages):
     """

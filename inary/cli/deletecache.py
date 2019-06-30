@@ -13,14 +13,15 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import os
 import inary.util as util
 import inary.context as ctx
-import inary.cli
 import inary.cli.command as command
+
 
 class DeleteCache(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Delete cache files

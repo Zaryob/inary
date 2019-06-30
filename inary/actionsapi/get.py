@@ -27,11 +27,13 @@ import inary.context as ctx
 # ActionsAPI Modules
 import inary.actionsapi.variables
 
+
 class BinutilsError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 # Globals
 env = inary.actionsapi.variables.glb.env
@@ -39,26 +41,31 @@ dirs = inary.actionsapi.variables.glb.dirs
 config = inary.actionsapi.variables.glb.config
 generals = inary.actionsapi.variables.glb.generals
 
+
 def curDIR():
     """returns current work directory's path"""
     return os.getcwd()
 
+
 def curKERNEL():
     """returns currently running kernel's version"""
     return os.uname()[2]
+
 
 def curPYTHON():
     """ returns currently used python's version"""
     (a, b, c, x, y) = sys.version_info
     return 'python{0}.{1}'.format(a, b)
 
+
 def curPERL():
     """ returns currently used perl's version"""
-    #for i in os.listdir("/usr/bin"):
+    # for i in os.listdir("/usr/bin"):
     #    if i.startswith("perl"):
     #        if i.split("perl")[1] 
 
     return os.path.realpath('/usr/bin/perl').split('perl')[1]
+
 
 def ENV(environ):
     """returns any given environ variable"""
@@ -67,6 +74,7 @@ def ENV(environ):
     except KeyError:
         return None
 
+
 # PİSİ Related Functions
 
 def pkgDIR():
@@ -74,64 +82,80 @@ def pkgDIR():
     '''Default: /var/cache/inary/packages'''
     return env.pkg_dir
 
+
 def workDIR():
     return env.work_dir
+
 
 def installDIR():
     """returns the path of binary packages"""
     return env.install_dir
+
 
 # Sulin Related Functions
 
 def lsbINFO():
     """Returns a dictionary filled through /etc/lsb-release."""
     return dict([(l.split("=")[0], l.split("=")[1].strip("'\"")) \
-                for l in open("/etc/lsb-release", "r").read().strip().split("\n") if "=" in l])
+                 for l in open("/etc/lsb-release", "r").read().strip().split("\n") if "=" in l])
+
 
 def kernelVERSION():
     return env.src_version
+
 
 # PSPEC Related Functions
 
 def srcNAME():
     return env.src_name
 
+
 def srcVERSION():
     return env.src_version
+
 
 def srcRELEASE():
     return env.src_release
 
+
 def srcTAG():
     return '{0}-{1}-{2}'.format(env.src_name, env.src_version, env.src_release)
 
+
 def srcDIR():
     return '{0}-{1}'.format(env.src_name, env.src_version)
+
 
 # Build Related Functions
 
 def ARCH():
     return generals.architecture
 
+
 def HOST():
     return env.host
+
 
 def CHOST():
     # FIXME: Currently it behave same as HOST,
     # but will be used for cross-compiling when inary ready...
     return env.host
 
+
 def CFLAGS():
     return env.cflags
+
 
 def CXXFLAGS():
     return env.cxxflags
 
+
 def LDFLAGS():
     return env.ldflags
 
+
 def makeJOBS():
-# Note: "auto" only works when /sys is mounted.
+    # Note: "auto" only works when /sys is mounted.
     if env.jobs == "auto":
         procs = 4
         try:
@@ -140,47 +164,61 @@ def makeJOBS():
             ctx.ui.warning("Unable to retrieve CPU count: %s" % e)
     return env.jobs
 
+
 def buildTYPE():
     """returns the current build type"""
     return env.build_type
+
 
 # Directory Related Functions
 
 def docDIR():
     return dirs.doc
 
+
 def sbinDIR():
     return dirs.sbin
+
 
 def infoDIR():
     return dirs.info
 
+
 def manDIR():
     return dirs.man
+
 
 def dataDIR():
     return dirs.data
 
+
 def confDIR():
     return dirs.conf
+
 
 def localstateDIR():
     return dirs.localstate
 
+
 def libexecDIR():
     return dirs.libexec
+
 
 def defaultprefixDIR():
     return dirs.defaultprefix
 
+
 def emul32prefixDIR():
     return dirs.emul32prefix
+
 
 def kdeDIR():
     return dirs.kde
 
+
 def qtDIR():
     return dirs.qt
+
 
 # Binutils Variables
 
@@ -191,6 +229,7 @@ def existBinary(bin):
         if os.path.exists(os.path.join(directory, bin)):
             return True
     return False
+
 
 def getBinutilsInfo(util):
     cross_build_name = '{0}-{1}'.format(HOST(), util)
@@ -203,29 +242,38 @@ def getBinutilsInfo(util):
     else:
         return cross_build_name
 
+
 def AR():
     return getBinutilsInfo('ar')
+
 
 def AS():
     return getBinutilsInfo('as')
 
+
 def CC():
     return getBinutilsInfo('gcc')
+
 
 def CXX():
     return getBinutilsInfo('g++')
 
+
 def LD():
     return getBinutilsInfo('ld')
+
 
 def NM():
     return getBinutilsInfo('nm')
 
+
 def RANLIB():
     return getBinutilsInfo('ranlib')
 
+
 def F77():
     return getBinutilsInfo('g77')
+
 
 def GCJ():
     return getBinutilsInfo('gcj')

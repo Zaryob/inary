@@ -24,6 +24,7 @@ import inary.context as ctx
 import inary.db
 import inary.operations as operations
 
+
 class ListUpgrades(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List packages to be upgraded
 
@@ -42,15 +43,15 @@ Lists the packages that will be upgraded.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-upgrades options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("List upgradable packages under given component"))
+                         default=None, help=_("List upgradable packages under given component"))
         group.add_option("-i", "--install-info", action="store_true",
-                               default=False, help=_("Show detailed install info"))
+                         default=False, help=_("Show detailed install info"))
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
         is_upgradable = operations.upgrade.is_upgradable
 
@@ -63,7 +64,7 @@ Lists the packages that will be upgraded.
 
         component = ctx.get_option('component')
         if component:
-            #FIXME: INARY api is insufficient to do this
+            # FIXME: INARY api is insufficient to do this
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 

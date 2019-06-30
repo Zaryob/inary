@@ -14,6 +14,7 @@
 """Atomic package operations such as install/remove/upgrade"""
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -36,20 +37,22 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
-import inary.data.pgraph as pgraph
+
 
 class Error(inary.errors.Error):
     pass
 
+
 class NotfoundError(inary.errors.Error):
     pass
+
 
 # single package operations
 
 class AtomicOperation(object):
 
-    def __init__(self, ignore_dep = None):
-        #self.package = package
+    def __init__(self, ignore_dep=None):
+        # self.package = package
         if ignore_dep is None:
             self.ignore_dep = ctx.config.get_option('ignore_dependency')
         else:
@@ -61,15 +64,17 @@ class AtomicOperation(object):
         """perform an atomic package operation"""
         pass
 
+
 # possible paths of install operation
 (INSTALL, REINSTALL, UPGRADE, DOWNGRADE, REMOVE) = list(range(5))
-opttostr = {INSTALL:"install", REMOVE:"remove", REINSTALL:"reinstall", UPGRADE:"upgrade", DOWNGRADE:"downgrade"}
+opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRADE: "upgrade", DOWNGRADE: "downgrade"}
+
 
 class Install(AtomicOperation):
     """Install class, provides install routines for inary packages"""
 
     @staticmethod
-    def from_name(name, ignore_dep = None):
+    def from_name(name, ignore_dep=None):
         packagedb = inary.db.packagedb.PackageDB()
         # download package and return an installer object
         # find package in repository
@@ -127,7 +132,7 @@ class Install(AtomicOperation):
         else:
             raise Error(_("Package {} not found in any active repository.").format(name))
 
-    def __init__(self, package_fname, ignore_dep = None, ignore_file_conflicts = None):
+    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
         if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
@@ -148,7 +153,7 @@ class Install(AtomicOperation):
         self.operation = INSTALL
         self.store_old_paths = None
 
-    def install(self, ask_reinstall = True):
+    def install(self, ask_reinstall=True):
 
         # Any package should remove the package it replaces before
         self.check_replaces()
@@ -177,7 +182,7 @@ class Install(AtomicOperation):
             event = inary.ui.upgraded
         else:
             event = inary.ui.installed
-        ctx.ui.notify(event, package = self.pkginfo, files = self.files)
+        ctx.ui.notify(event, package=self.pkginfo, files=self.files)
 
     def check_requirements(self):
         """check system requirements"""
@@ -185,7 +190,7 @@ class Install(AtomicOperation):
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
             raise Error(_("Is there enought free space in your disk."))
-        ctx.ui.debug(_("Free Space: %.2f %s "% (total_size, symbol)))
+        ctx.ui.debug(_("Free Space: %.2f %s " % (total_size, symbol)))
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
@@ -209,7 +214,7 @@ class Install(AtomicOperation):
     def check_relations(self):
         # check dependencies
         # Fixme: !!!
-        #if not ctx.config.get_option('ignore_dependency'):
+        # if not ctx.config.get_option('ignore_dependency'):
         #    if not self.pkginfo.installable():
         #        raise Error(_("{} package cannot be installed unless the dependencies are satisfied").format(self.pkginfo.name))
 
@@ -230,7 +235,7 @@ class Install(AtomicOperation):
             if pkg:
                 dst = util.join_path(ctx.config.dest_dir(), f.path)
                 if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
-                    file_conflicts.append( (pkg, existing_file) )
+                    file_conflicts.append((pkg, existing_file))
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
@@ -246,7 +251,7 @@ class Install(AtomicOperation):
         self.old_pkginfo = None
         pkg = self.pkginfo
 
-        if self.installdb.has_package(pkg.name): # is this a reinstallation?
+        if self.installdb.has_package(pkg.name):  # is this a reinstallation?
             ipkg = self.installdb.get_package(pkg.name)
             (iversion_s, irelease_s, ibuild) = self.installdb.get_version(pkg.name)
 
@@ -279,7 +284,7 @@ class Install(AtomicOperation):
                 # is this a downgrade? confirm this action.
                 if not self.operation == UPGRADE:
                     if pkg_version < iversion:
-                        #x = _('Downgrade to old upstream version?')
+                        # x = _('Downgrade to old upstream version?')
                         x = None
                     elif pkg_release < irelease:
                         x = _('Downgrade to old distribution release?')
@@ -293,7 +298,7 @@ class Install(AtomicOperation):
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
-            self.remove_old = Remove(pkg.name, store_old_paths = self.store_old_paths)
+            self.remove_old = Remove(pkg.name, store_old_paths=self.store_old_paths)
             self.remove_old.run_preremove()
             self.remove_old.run_postremove()
 
@@ -322,7 +327,7 @@ class Install(AtomicOperation):
                 else:
                     fromVersion = None
                     fromRelease = None
-                ctx.ui.notify(inary.ui.configuring, package = self.pkginfo, files = self.files)
+                ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
                 inary.scomiface.post_install(
                     self.pkginfo.name,
                     self.metadata.package.providesScom,
@@ -333,8 +338,8 @@ class Install(AtomicOperation):
                     fromRelease,
                     self.metadata.package.version,
                     self.metadata.package.release
-                    )
-                ctx.ui.notify(inary.ui.configured, package = self.pkginfo, files = self.files)
+                )
+                ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
             except inary.scomiface.Error:
                 ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
                 self.config_later = True
@@ -344,9 +349,10 @@ class Install(AtomicOperation):
     def extract_install(self):
         """unzip package in place"""
 
-        ctx.ui.notify(inary.ui.extracting, package = self.pkginfo, files = self.files)
+        ctx.ui.notify(inary.ui.extracting, package=self.pkginfo, files=self.files)
 
         config_changed = []
+
         def check_config_changed(config):
             fpath = util.join_path(ctx.config.dest_dir(), config.path)
             if util.config_changed(config):
@@ -427,7 +433,8 @@ class Install(AtomicOperation):
                     shutil.copy(old_path, new_path)
 
             if missing_old_files:
-                ctx.ui.warning(_("Unable to relocate following files. Reinstallation of this package is strongly recommended."))
+                ctx.ui.warning(
+                    _("Unable to relocate following files. Reinstallation of this package is strongly recommended."))
                 for f in sorted(missing_old_files):
                     ctx.ui.warning("    - {}".format(f))
 
@@ -480,7 +487,7 @@ class Install(AtomicOperation):
 
         if self.reinstall():
             # get 'config' typed file objects replace is not set
-            #new = [x for x in self.files.list if x.type == 'config' and not x.replace, self.files.list]
+            # new = [x for x in self.files.list if x.type == 'config' and not x.replace, self.files.list]
             new = [x for x in self.files.list if x.type == 'config']
             old = [x for x in self.old_files.list if x.type == 'config']
 
@@ -510,7 +517,6 @@ class Install(AtomicOperation):
 
         if self.reinstall():
             clean_leftovers()
-
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, scom scripts
@@ -558,9 +564,11 @@ class Install(AtomicOperation):
         self.installdb.add_package(self.pkginfo)
 
         otype = "delta" if self.package_fname.endswith(ctx.const.delta_package_suffix) else None
-        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo, operation=opttostr[self.operation], otype=otype)
+        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
+                                      operation=opttostr[self.operation], otype=otype)
 
-def install_single(pkg, upgrade = False):
+
+def install_single(pkg, upgrade=False):
     """install a single package from URI or ID"""
     url = inary.uri.URI(pkg)
     # Check if we are dealing with a remote file or a real path of
@@ -571,19 +579,22 @@ def install_single(pkg, upgrade = False):
     else:
         install_single_name(pkg, upgrade)
 
+
 # FIXME: Here and elsewhere pkg_location must be a URI
-def install_single_file(pkg_location, upgrade = False):
+def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
     Install(pkg_location).install(not upgrade)
 
-def install_single_name(name, upgrade = False):
+
+def install_single_name(name, upgrade=False):
     """install a single package from ID"""
     install = Install.from_name(name)
     install.install(not upgrade)
 
+
 class Remove(AtomicOperation):
 
-    def __init__(self, package_name, ignore_dep = None, store_old_paths = None):
+    def __init__(self, package_name, ignore_dep=None, store_old_paths=None):
         if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
         super(Remove, self).__init__(ignore_dep)
         self.installdb = inary.db.installdb.InstallDB()
@@ -602,7 +613,7 @@ class Remove(AtomicOperation):
         """Remove a single package"""
 
         ctx.ui.status(_('Removing package {}').format(self.package_name))
-        ctx.ui.notify(inary.ui.removing, package = self.package, files = self.files)
+        ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
@@ -619,12 +630,12 @@ class Remove(AtomicOperation):
 
         self.remove_inary_files()
         ctx.ui.close()
-        ctx.ui.notify(inary.ui.removed, package = self.package, files = self.files)
+        ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
 
     def check_dependencies(self):
-        #FIXME: why is this not implemented? -- exa
-        #we only have to check the dependencies to ensure the
-        #system will be consistent after this removal
+        # FIXME: why is this not implemented? -- exa
+        # we only have to check the dependencies to ensure the
+        # system will be consistent after this removal
         pass
         # is there any package who depends on this package?
 
@@ -673,7 +684,8 @@ class Remove(AtomicOperation):
             elif os.path.isdir(fpath) and not os.listdir(fpath):
                 os.rmdir(fpath)
             else:
-                ctx.ui.warning(_('Installed file {} does not exist on system [Probably you manually deleted]').format(fpath))
+                ctx.ui.warning(
+                    _('Installed file {} does not exist on system [Probably you manually deleted]').format(fpath))
                 return
 
         # remove emptied directories
@@ -711,6 +723,8 @@ class Remove(AtomicOperation):
     def remove_db(self):
         self.installdb.remove_package(self.package_name)
         ctx.filesdb.remove_files(self.files.list)
+
+
 # FIX:DB
 #         # FIXME: something goes wrong here, if we use ctx operations ends up with segmentation fault!
 #         inary.db.packagedb.remove_tracking_package(self.package_name)

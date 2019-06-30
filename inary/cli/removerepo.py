@@ -13,11 +13,13 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 from inary.operations import repository
+
 
 class RemoveRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Remove repositories
@@ -27,14 +29,14 @@ Usage: remove-repo <repo1> <repo2> ... <repon>
 Remove all repository information from the system.
 """)
 
-    def __init__(self,args):
+    def __init__(self, args):
         super(RemoveRepo, self).__init__(args)
 
     name = ("remove-repo", "rr")
 
     def run(self):
 
-        if len(self.args)>=1:
+        if len(self.args) >= 1:
             self.init()
             for repo in self.args:
                 repository.remove_repo(repo)

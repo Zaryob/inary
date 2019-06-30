@@ -13,12 +13,14 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli
 import inary.cli.command as command
 import inary.context as ctx
+
 
 class Help(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Prints help for given commands
@@ -27,7 +29,7 @@ Usage: help [ <command1> <command2> ... <commandn> ]
 
 If run without parameters, it prints the general help.""")
 
-    def __init__(self, args = None):
+    def __init__(self, args=None):
         super(Help, self).__init__(args)
 
     name = ("help", "?")
@@ -39,12 +41,13 @@ If run without parameters, it prints the general help.""")
             inary.cli.printu(self.parser.format_help())
             return
 
-        self.init(database = False, write = False)
+        self.init(database=False, write=False)
 
         for arg in self.args:
             obj = command.Command.get_command(arg, True)
             obj.help()
             ctx.ui.info('')
+
 
 usage_text1 = _("""%prog [options] <command> [arguments]
 

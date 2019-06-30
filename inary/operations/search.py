@@ -15,6 +15,7 @@
 import inary.context as ctx
 import inary.db
 
+
 def search_package(terms, lang=None, repo=None):
     """
     Return a list of packages that contains all the given terms either in its name, summary or
@@ -26,6 +27,7 @@ def search_package(terms, lang=None, repo=None):
     """
     packagedb = inary.db.packagedb.PackageDB()
     return packagedb.search_package(terms, lang, repo)
+
 
 def search_installed(terms, lang=None):
     """
@@ -50,6 +52,7 @@ def search_source(terms, lang=None, repo=None):
     sourcedb = inary.db.sourcedb.SourceDB()
     return sourcedb.search_spec(terms, lang, repo)
 
+
 def search_component(terms, lang=None, repo=None):
     """
     Return a list of components that contains all the given terms either in its name, summary or
@@ -61,6 +64,7 @@ def search_component(terms, lang=None, repo=None):
     """
     componentdb = inary.db.componentdb.ComponentDB()
     return componentdb.search_component(terms, lang, repo)
+
 
 def search_file(term):
     """
@@ -74,6 +78,6 @@ def search_file(term):
 
     >>> [("kvm", (["lib/modules/2.6.18.8-86/extra/kvm-amd.ko","lib/modules/2.6.18.8-86/extra/kvm-intel.ko"])),]
     """
-    if term.startswith("/"): # FIXME: why? why?
+    if term.startswith("/"):  # FIXME: why? why?
         term = term[1:]
     return ctx.filesdb.search_file(term)

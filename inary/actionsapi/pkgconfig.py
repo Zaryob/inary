@@ -22,11 +22,13 @@ _ = __trans.gettext
 import inary.context as ctx
 import inary.actionsapi
 
+
 class PkgconfigError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 def getVariableForLibrary(library, variable):
     # Returns a specific variable provided in the library .pc file
@@ -34,8 +36,8 @@ def getVariableForLibrary(library, variable):
         proc = subprocess.Popen(["pkg-config",
                                  "--variable={}".format(variable),
                                  "{}".format(library)],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
@@ -47,14 +49,15 @@ def getVariableForLibrary(library, variable):
             # Command failed
             raise PkgconfigError(proc.stderr.read().strip())
 
+
 def getLibraryVersion(library):
     """Returns the module version provided in the library .pc file."""
     try:
         proc = subprocess.Popen(["pkg-config",
                                  "--modversion",
                                  library],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
@@ -65,6 +68,7 @@ def getLibraryVersion(library):
         else:
             # Command failed
             raise PkgconfigError(proc.stderr.read().strip())
+
 
 def getLibraryCFLAGS(library):
     """Returns compiler flags for compiling with this library.
@@ -73,8 +77,8 @@ def getLibraryCFLAGS(library):
         proc = subprocess.Popen(["pkg-config",
                                  "--cflags",
                                  "{}".format(library)],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
@@ -86,6 +90,7 @@ def getLibraryCFLAGS(library):
             # Command failed
             raise PkgconfigError(proc.stderr.read().strip())
 
+
 def getLibraryLIBADD(library):
     """Returns linker flags for linking with this library.
     Ex: -lpng14"""
@@ -93,8 +98,8 @@ def getLibraryLIBADD(library):
         proc = subprocess.Popen(["pkg-config",
                                  "--libs",
                                  "{}".format(library)],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
@@ -105,6 +110,7 @@ def getLibraryLIBADD(library):
         else:
             # Command failed
             raise PkgconfigError(proc.stderr.read().strip())
+
 
 def runManualCommand(*args):
     """Runs the given command and returns the output."""
@@ -131,8 +137,8 @@ def libraryExists(library):
     result = None
     try:
         result = subprocess.call(["pkg-config",
-                                   "--exists",
-                                   "{}".format(library)])
+                                  "--exists",
+                                  "{}".format(library)])
     except OSError as exception:
         if exception.errno == 2:
             raise PkgconfigError(_("Package pkgconfig is not installed on your system."))

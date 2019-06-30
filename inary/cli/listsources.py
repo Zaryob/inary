@@ -23,6 +23,7 @@ import inary.context as ctx
 import inary.db
 import inary.util as util
 
+
 class ListSources(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List available sources
 
@@ -40,12 +41,12 @@ Gives a brief list of sources published in the repositories.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-sources options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format"))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         l = self.sourcedb.list_sources()
 

@@ -13,12 +13,15 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.data.relation as relation
 
 """ Replace relation """
+
+
 class Replace(relation.Relation):
     def __str__(self):
         s = self.package
@@ -35,6 +38,7 @@ class Replace(relation.Relation):
         if self.release:
             s += _(" release ") + self.release
         return s
+
 
 def installed_package_replaced(repinfo):
     """determine if an installed package in *repository* replaced with

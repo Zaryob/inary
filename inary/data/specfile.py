@@ -19,6 +19,7 @@
 """
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -42,8 +43,8 @@ import inary.db
 class Error(inary.errors.Error):
     pass
 
-class Packager(metaclass= autoxml.autoxml):
 
+class Packager(metaclass=autoxml.autoxml):
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Email = [autoxml.String, autoxml.mandatory]
 
@@ -52,8 +53,7 @@ class Packager(metaclass= autoxml.autoxml):
         return s
 
 
-class AdditionalFile(metaclass= autoxml.autoxml):
-
+class AdditionalFile(metaclass=autoxml.autoxml):
     s_Filename = [autoxml.String, autoxml.mandatory]
     a_target = [autoxml.String, autoxml.mandatory]
     a_permission = [autoxml.String, autoxml.optional]
@@ -66,35 +66,35 @@ class AdditionalFile(metaclass= autoxml.autoxml):
             s += '({})'.format(self.permission)
         return s
 
-class Type(metaclass= autoxml.autoxml):
 
+class Type(metaclass=autoxml.autoxml):
     s_type = [autoxml.String, autoxml.mandatory]
     a_package = [autoxml.String, autoxml.optional]
 
-class Action(metaclass= autoxml.autoxml):
 
+class Action(metaclass=autoxml.autoxml):
     # Valid actions:
     #
     # reverseDependencyUpdate
     # systemRestart
     # serviceRestart
 
-    s_action  = [autoxml.String, autoxml.mandatory]
+    s_action = [autoxml.String, autoxml.mandatory]
     a_package = [autoxml.String, autoxml.optional]
-    a_target  = [autoxml.String, autoxml.optional]
+    a_target = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         return self.action
 
-class Patch(metaclass= autoxml.autoxml):
 
+class Patch(metaclass=autoxml.autoxml):
     s_Filename = [autoxml.String, autoxml.mandatory]
     a_compressionType = [autoxml.String, autoxml.optional]
     a_level = [autoxml.Integer, autoxml.optional]
     a_reverse = [autoxml.String, autoxml.optional]
 
-    #FIXME: what's the cleanest way to give a default value for reading level?
-    #def decode_hook(self, node, errs, where):
+    # FIXME: what's the cleanest way to give a default value for reading level?
+    # def decode_hook(self, node, errs, where):
     #    if self.level == None:
     #        self.level = 0
 
@@ -106,8 +106,8 @@ class Patch(metaclass= autoxml.autoxml):
             s += ' level:' + self.level
         return s
 
-class Update(metaclass= autoxml.autoxml):
 
+class Update(metaclass=autoxml.autoxml):
     a_release = [autoxml.String, autoxml.mandatory]
     # 'type' attribute is here to keep backward compatibility
     a_type = [autoxml.String, autoxml.optional]
@@ -127,12 +127,12 @@ class Update(metaclass= autoxml.autoxml):
             s += ", type=" + self.type
         return s
 
-class Path(metaclass= autoxml.autoxml):
 
+class Path(metaclass=autoxml.autoxml):
     s_Path = [autoxml.String, autoxml.mandatory]
-    a_fileType =  [autoxml.String, autoxml.optional]
-    a_permanent =  [autoxml.String, autoxml.optional]
-    a_replace =  [autoxml.String, autoxml.optional]
+    a_fileType = [autoxml.String, autoxml.optional]
+    a_permanent = [autoxml.String, autoxml.optional]
+    a_replace = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         s = self.path
@@ -140,8 +140,7 @@ class Path(metaclass= autoxml.autoxml):
         return s
 
 
-class ScomProvide(metaclass= autoxml.autoxml):
-
+class ScomProvide(metaclass=autoxml.autoxml):
     s_om = [autoxml.String, autoxml.mandatory]
     a_script = [autoxml.String, autoxml.mandatory]
     a_name = [autoxml.String, autoxml.optional]
@@ -152,12 +151,12 @@ class ScomProvide(metaclass= autoxml.autoxml):
         s += ' (' + self.om + '{}'.format(' for {}'.format(self.name) if self.name else '') + ')'
         return s
 
-class Archive(metaclass= autoxml.autoxml):
 
-    s_uri = [ autoxml.String, autoxml.mandatory ]
-    a_type = [ autoxml.String, autoxml.optional ]
-    a_sha1sum =[ autoxml.String, autoxml.mandatory ]
-    a_target =[ autoxml.String, autoxml.optional ]
+class Archive(metaclass=autoxml.autoxml):
+    s_uri = [autoxml.String, autoxml.mandatory]
+    a_type = [autoxml.String, autoxml.optional]
+    a_sha1sum = [autoxml.String, autoxml.mandatory]
+    a_target = [autoxml.String, autoxml.optional]
 
     def decode_hook(self, node, errs, where):
         self.name = os.path.basename(str(self.uri))
@@ -166,29 +165,31 @@ class Archive(metaclass= autoxml.autoxml):
         s = _('URI: {0}, type: {1}, sha1sum: {2}').format(self.uri, self.type, self.sha1sum)
         return s
 
-class Source(metaclass= autoxml.autoxml):
+
+class Source(metaclass=autoxml.autoxml):
     t_Name = [autoxml.String, autoxml.mandatory]
     t_Homepage = [autoxml.String, autoxml.optional]
     t_Packager = [Packager, autoxml.mandatory]
-    t_ExcludeArch = [ [autoxml.String], autoxml.optional]
-    t_License = [ [autoxml.String], autoxml.mandatory]
-    t_IsA = [ [autoxml.String], autoxml.optional]
+    t_ExcludeArch = [[autoxml.String], autoxml.optional]
+    t_License = [[autoxml.String], autoxml.mandatory]
+    t_IsA = [[autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
     t_Summary = [autoxml.LocalText, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
-    t_Icon = [ autoxml.String, autoxml.optional]
-    t_Archive = [ [Archive], autoxml.mandatory, "Archive" ]
-    t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
-    t_BuildDependencies = [ [inary.analyzer.dependency.Dependency], autoxml.optional]
-    t_Patches = [ [Patch], autoxml.optional]
-    t_Version = [ autoxml.String, autoxml.optional]
-    t_Release = [ autoxml.String, autoxml.optional]
-    t_SourceURI = [ autoxml.String, autoxml.optional ] # used in index
+    t_Icon = [autoxml.String, autoxml.optional]
+    t_Archive = [[Archive], autoxml.mandatory, "Archive"]
+    t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
+    t_BuildDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional]
+    t_Patches = [[Patch], autoxml.optional]
+    t_Version = [autoxml.String, autoxml.optional]
+    t_Release = [autoxml.String, autoxml.optional]
+    t_SourceURI = [autoxml.String, autoxml.optional]  # used in index
 
     def buildtimeDependencies(self):
         return self.buildDependencies
 
-class AnyDependency(metaclass= autoxml.autoxml):
+
+class AnyDependency(metaclass=autoxml.autoxml):
     t_Dependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional, "Dependency"]
 
     def __str__(self):
@@ -224,27 +225,27 @@ class AnyDependency(metaclass= autoxml.autoxml):
                 return True
         return False
 
-class Package(metaclass= autoxml.autoxml):
 
-    t_Name = [ autoxml.String, autoxml.mandatory ]
-    t_Summary = [ autoxml.LocalText, autoxml.optional ]
-    t_Description = [ autoxml.LocalText, autoxml.optional ]
-    t_IsA = [ [autoxml.String], autoxml.optional]
+class Package(metaclass=autoxml.autoxml):
+    t_Name = [autoxml.String, autoxml.mandatory]
+    t_Summary = [autoxml.LocalText, autoxml.optional]
+    t_Description = [autoxml.LocalText, autoxml.optional]
+    t_IsA = [[autoxml.String], autoxml.optional]
     t_PartOf = [autoxml.String, autoxml.optional]
-    t_License = [ [autoxml.String], autoxml.optional]
-    t_Icon = [ autoxml.String, autoxml.optional]
+    t_License = [[autoxml.String], autoxml.optional]
+    t_Icon = [autoxml.String, autoxml.optional]
     t_BuildFlags = [[autoxml.String], autoxml.optional, "BuildFlags/Flag"]
-    t_BuildType = [ autoxml.String, autoxml.optional ]
+    t_BuildType = [autoxml.String, autoxml.optional]
     t_BuildDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional]
-    t_PackageDependencies = [ [inary.analyzer.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
+    t_PackageDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
     t_PackageAnyDependencies = [[AnyDependency], autoxml.optional, "RuntimeDependencies/AnyDependency"]
-    t_ComponentDependencies = [ [autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
-    t_Files = [ [Path], autoxml.optional]
-    t_Conflicts = [ [inary.analyzer.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
-    t_Replaces = [ [inary.data.replace.Replace], autoxml.optional, "Replaces/Package"]
-    t_ProvidesScom = [ [ScomProvide], autoxml.optional, "Provides/SCOM"]
-    t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
-    t_History = [ [Update], autoxml.optional]
+    t_ComponentDependencies = [[autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
+    t_Files = [[Path], autoxml.optional]
+    t_Conflicts = [[inary.analyzer.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
+    t_Replaces = [[inary.data.replace.Replace], autoxml.optional, "Replaces/Package"]
+    t_ProvidesScom = [[ScomProvide], autoxml.optional, "Provides/SCOM"]
+    t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
+    t_History = [[Update], autoxml.optional]
 
     # FIXME: needed in build process, to distinguish dynamically generated debug packages.
     # find a better way to do this.
@@ -369,33 +370,33 @@ class Package(metaclass= autoxml.autoxml):
 
     def __str__(self):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(
-              self.name, self.version, self.release)
+            self.name, self.version, self.release)
         s += _('Summary: {}\n').format(str(self.summary))
         s += _('Description: {}\n').format(str(self.description))
         s += _('Licenses: {}\n').format(", ".join(self.license))
         s += _('Component: {}\n').format(str(self.partOf))
         s += _('Provides: ')
         for x in self.providesScom:
-           s += x.om + ' '
+            s += x.om + ' '
         s += '\n'
         s += _('Dependencies: ')
         for x in self.componentDependencies:
-           s += x + ' '
+            s += x + ' '
         for x in self.packageDependencies:
-           s += x.name() + ' '
+            s += x.name() + ' '
         for x in self.packageAnyDependencies:
-           s += x.name() + ' '
+            s += x.name() + ' '
         return s + '\n'
 
 
 class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     tag = "INARY"
 
-    t_Source = [ Source, autoxml.mandatory]
-    t_Packages = [ [Package], autoxml.mandatory, "Package"]
-    t_History = [ [Update], autoxml.mandatory]
-    t_Components = [ [component.Component], autoxml.optional, "Component"]
-    t_Groups = [ [group.Group], autoxml.optional, "Group"]
+    t_Source = [Source, autoxml.mandatory]
+    t_Packages = [[Package], autoxml.mandatory, "Package"]
+    t_History = [[Update], autoxml.mandatory]
+    t_Components = [[component.Component], autoxml.optional, "Component"]
+    t_Groups = [[group.Group], autoxml.optional, "Group"]
 
     def decode_hook(self, node, errs, where):
         current_version = self.history[0].version
@@ -415,7 +416,6 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
                     elif attr_name.startswith("release"):
                         dep.__dict__[attr_name] = current_release
-
 
     def getSourceVersion(self):
         return self.history[0].version
@@ -451,12 +451,12 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
     def __str__(self):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(
-              self.source.name, self.history[0].version, self.history[0].release)
+            self.source.name, self.history[0].version, self.history[0].release)
         s += _('Summary: {}\n').format(str(self.source.summary))
         s += _('Description: {}\n').format(str(self.source.description))
         s += _('Licenses: {}\n').format(", ".join(self.source.license))
         s += _('Component: {}\n').format(str(self.source.partOf))
         s += _('Build Dependencies: ')
         for x in self.source.buildDependencies:
-           s += x.package + ' '
+            s += x.package + ' '
         return s

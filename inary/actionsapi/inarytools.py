@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -13,22 +13,20 @@
 
 """supports globs in sourceFile arguments"""
 
-
+import filecmp
+import fileinput
+import glob
 # Standart Python Modules
 import os
-import glob
-import sys
-import fileinput
 import re
-import filecmp
+import sys
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
-from inary.util import join_path, remove_prefix, uncompress
+from inary.util import remove_prefix, uncompress
 
 # ActionsAPI Modules
 import inary.actionsapi
@@ -37,6 +35,7 @@ from inary.actionsapi.shelltools import *
 
 from inary.actionsapi import error
 
+
 # Error Classes
 class FileError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -44,13 +43,15 @@ class FileError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+
 class ArgumentError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
 
-#Tool functions
+
+# Tool functions
 def executable_insinto(destinationDirectory, *sourceFiles):
     """insert a executable file into destinationDirectory"""
 
@@ -69,6 +70,7 @@ def executable_insinto(destinationDirectory, *sourceFiles):
             # FIXME: use an internal install routine for these
             system('install -m 0755 -o root -g root {0} {1}'.format(source, destinationDirectory))
 
+
 def readable_insinto(destinationDirectory, *sourceFiles):
     """inserts file list into destinationDirectory"""
 
@@ -86,7 +88,8 @@ def readable_insinto(destinationDirectory, *sourceFiles):
         for source in sourceFileGlob:
             system('install -m 0644 "{0}" {1}'.format(source, destinationDirectory))
 
-def lib_insinto(sourceFile, destinationDirectory, permission = 644):
+
+def lib_insinto(sourceFile, destinationDirectory, permission=644):
     """inserts a library fileinto destinationDirectory with given permission"""
 
     if not sourceFile or not destinationDirectory:
@@ -100,25 +103,30 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 644):
     else:
         system('install -m 0{0} {1} {2}'.format(permission, sourceFile, destinationDirectory))
 
+
 # inarytools funtions
-def dobin(sourceFile, destinationDirectory = '/usr/bin'):
+def dobin(sourceFile, destinationDirectory='/usr/bin'):
     """insert a executable file into /bin or /usr/bin"""
     ''' example call: inarytools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
-def dopixmaps(sourceFile, destinationDirectory = '/usr/share/pixmaps'):
+
+def dopixmaps(sourceFile, destinationDirectory='/usr/share/pixmaps'):
     """insert a data file into /usr/share/pixmaps"""
     ''' example call: inarytools.dopixmaps("/usr/share/pixmaps/firefox", "firefox") '''
     readable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
+
 
 def dodir(destinationDirectory):
     """creates a directory tree"""
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
+
 def dodoc(*sourceFiles, **kw):
     """inserts the files in the list of files into /usr/share/doc/PACKAGE"""
     destDir = kw.get("destDir", get.srcNAME())
     readable_insinto(join_path(get.installDIR(), get.docDIR(), destDir), *sourceFiles)
+
 
 def dohtml(*sourceFiles, **kw):
     """inserts the files in the list of files into /usr/share/doc/PACKAGE/html"""
@@ -148,22 +156,27 @@ def dohtml(*sourceFiles, **kw):
                     for sourcename in files:
                         if os.path.splitext(sourcename)[1] in allowed_extensions:
                             makedirs(join_path(destionationDirectory, newRoot))
-                            system('install -m 0644 {0} {1}'.format(join_path(root, sourcename), join_path(destionationDirectory, newRoot, sourcename)))
+                            system('install -m 0644 {0} {1}'.format(join_path(root, sourcename),
+                                                                    join_path(destionationDirectory, newRoot,
+                                                                              sourcename)))
+
 
 def doinfo(*sourceFiles):
     """inserts the into files in the list of files into /usr/share/info"""
     readable_insinto(join_path(get.installDIR(), get.infoDIR()), *sourceFiles)
 
-def dolib(sourceFile, destinationDirectory = '/usr/lib', mode=755):
+
+def dolib(sourceFile, destinationDirectory='/usr/lib', mode=755):
     """insert the library into /usr/lib"""
     '''example call: inarytools.dolib("libz.a")'''
     '''example call: inarytools.dolib("libz.so")'''
-    if mode==755 and sourceFile.endswith('.a'):
-        mode=644
+    if mode == 755 and sourceFile.endswith('.a'):
+        mode = 644
     sourceFile = join_path(os.getcwd(), sourceFile)
     destinationDirectory = join_path(get.installDIR(), destinationDirectory)
 
     lib_insinto(sourceFile, destinationDirectory, mode)
+
 
 def doman(*sourceFiles):
     """inserts the man pages in the list of files into /usr/share/man/"""
@@ -184,7 +197,7 @@ def doman(*sourceFiles):
                 source = source[:-3]
             try:
                 pageName, pageDirectory = source[:source.rindex('.')], \
-                                          source[source.rindex('.')+1:]
+                                          source[source.rindex('.') + 1:]
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: {}').format(source))
 
@@ -195,7 +208,8 @@ def doman(*sourceFiles):
             else:
                 uncompress(compressed, targetDir=manPDIR)
 
-def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/locale'):
+
+def domo(sourceFile, locale, destinationFile, localeDirPrefix='/usr/share/locale'):
     """inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES"""
 
     '''example call: inarytools.domo("po/tr.po", "tr", "pam_login.mo")'''
@@ -204,7 +218,8 @@ def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/loca
     makedirs('{0}{1}/{2}/LC_MESSAGES/'.format(get.installDIR(), localeDirPrefix, locale))
     move('messages.mo', '{0}{1}/{2}/LC_MESSAGES/{3}'.format(get.installDIR(), localeDirPrefix, locale, destinationFile))
 
-def domove(sourceFile, destination, destinationFile = ''):
+
+def domove(sourceFile, destination, destinationFile=''):
     """moves sourceFile/Directory into destinationFile/Directory"""
 
     ''' example call: inarytools.domove("/usr/bin/bash", "/bin/bash")'''
@@ -221,6 +236,7 @@ def domove(sourceFile, destination, destinationFile = ''):
         else:
             move(filePath, join_path(get.installDIR(), join_path(destination, destinationFile)))
 
+
 def rename(sourceFile, destinationFile):
     """ renames sourceFile as destinationFile"""
 
@@ -234,7 +250,8 @@ def rename(sourceFile, destinationFile):
     except OSError as e:
         error(_('ActionsAPI [rename]: {0}: {1}').format(e, sourceFile))
 
-def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLine = False, level = -1):
+
+def dosed(sources, findPattern, replacePattern='', filePattern='', deleteLine=False, level=-1):
     """replaces patterns in sources"""
 
     ''' example call: inarytools.dosed("/etc/passwd", "caglar", "cem")'''
@@ -267,15 +284,16 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
         else:
             sourceFiles.append(source)
 
-    #if there is no match, raise exception
+    # if there is no match, raise exception
     if len(sourceFiles) == 0:
-        raise FileError(_('No such file matching pattern: "{}". \'dosed\' operation failed.').format(filePattern if filePattern else sources))
+        raise FileError(_('No such file matching pattern: "{}". \'dosed\' operation failed.').format(
+            filePattern if filePattern else sources))
 
     for sourceFile in sourceFiles:
         if can_access_file(sourceFile):
             backupFile = "{0}{1}".format(sourceFile, backupExtension)
-            for line in fileinput.input(sourceFile, inplace = 1, backup = backupExtension):
-                #FIXME: In-place filtering is disabled when standard input is read
+            for line in fileinput.input(sourceFile, inplace=1, backup=backupExtension):
+                # FIXME: In-place filtering is disabled when standard input is read
                 if re.search(findPattern, line):
                     line = "" if deleteLine else re.sub(findPattern, replacePattern, line)
                 sys.stdout.write(line)
@@ -284,16 +302,19 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
                 # shallow=False tells cmp() to look file content.
                 if filecmp.cmp(sourceFile, backupFile, shallow=False):
                     ctx.ui.warning(_('dosed method has not changed file \'{}\'.').format(sourceFile))
-                else: ctx.ui.info(_("{} has been changed by dosed method.").format(sourceFile), verbose=True)
+                else:
+                    ctx.ui.info(_("{} has been changed by dosed method.").format(sourceFile), verbose=True)
                 os.unlink(backupFile)
         else:
             raise FileError(_('File does not exist or permission denied: {}').format(sourceFile))
 
-def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
+
+def dosbin(sourceFile, destinationDirectory='/usr/sbin'):
     """insert a executable file into /sbin or /usr/sbin"""
 
     ''' example call: inarytools.dobin("bin/xloadimage", "/sbin") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
+
 
 def dosym(sourceFile, destinationFile):
     """creates soft link between sourceFile and destinationFile"""
@@ -302,11 +323,12 @@ def dosym(sourceFile, destinationFile):
     makedirs(join_path(get.installDIR(), os.path.dirname(destinationFile)))
 
     try:
-        os.symlink(sourceFile, join_path(get.installDIR() ,destinationFile))
+        os.symlink(sourceFile, join_path(get.installDIR(), destinationFile))
     except OSError:
         error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
 
-def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
+
+def insinto(destinationDirectory, sourceFile, destinationFile='', sym=True):
     """insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions"""
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
@@ -317,9 +339,11 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
 
         for filePath in sourceFileGlob:
             if can_access_file(filePath):
-                copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))), sym)
+                copy(filePath, join_path(get.installDIR(), join_path(destinationDirectory, os.path.basename(filePath))),
+                     sym)
     else:
         copy(sourceFile, join_path(get.installDIR(), join_path(destinationDirectory, destinationFile)), sym)
+
 
 def newdoc(sourceFile, destinationFile):
     """inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile"""
@@ -329,11 +353,13 @@ def newdoc(sourceFile, destinationFile):
     copy(sourceFile, destinationFile)
     readable_insinto(join_path(get.installDIR(), 'usr/share/doc', get.srcNAME(), destinationDirectory), destinationFile)
 
+
 def newman(sourceFile, destinationFile):
     """inserts a sourceFile into /usr/share/man/manPREFIX/ directory as a destinationFile"""
     # Use copy instead of move or let build-install scream like file not found!
     copy(sourceFile, destinationFile)
     doman(destinationFile)
+
 
 def remove(sourceFile):
     """removes sourceFile"""
@@ -344,14 +370,17 @@ def remove(sourceFile):
     for filePath in sourceFileGlob:
         unlink(filePath)
 
+
 def removeDir(destinationDirectory):
     """removes destinationDirectory and its subtrees"""
     destdirGlob = glob.glob(join_path(get.installDIR(), destinationDirectory))
     if len(destdirGlob) == 0:
-        raise FileError(_("No directory matched pattern \"{}\". Remove directory operation failed.").format(destinationDirectory))
+        raise FileError(
+            _("No directory matched pattern \"{}\". Remove directory operation failed.").format(destinationDirectory))
 
     for directory in destdirGlob:
         unlinkDir(directory)
+
 
 class Flags:
     def __init__(self, *evars):
@@ -376,6 +405,7 @@ class Flags:
     def reset(self):
         for evar in self.evars:
             os.environ[evar] = ""
+
 
 cflags = Flags("CFLAGS")
 ldflags = Flags("LDFLAGS")

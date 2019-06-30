@@ -19,13 +19,12 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary-Core Modules
-import inary.context as ctx
-from inary.util import join_path
 
 # ActionsAPI Modules
 import inary.actionsapi
 from inary.actionsapi.shelltools import *
 import inary.actionsapi.get as get
+
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -33,11 +32,13 @@ class RunTimeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def preplib(sourceDirectory = '/usr/lib'):
+
+def preplib(sourceDirectory='/usr/lib'):
     sourceDirectory = join_path(get.installDIR(), sourceDirectory)
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N {}'.format(sourceDirectory)):
             raise RunTimeError(_('Running ldconfig failed.'))
+
 
 def gnuconfig_update():
     """ copy newest config.* onto source\'s """
@@ -55,12 +56,13 @@ def gnuconfig_update():
                 else:
                     ctx.ui.info(_('GNU Config Update Finished.'))
 
-def libtoolize(parameters = ''):
+
+def libtoolize(parameters=''):
     if system('/usr/bin/libtoolize {}'.format(parameters)):
         raise RunTimeError(_('Running libtoolize failed.'))
 
-def gen_usr_ldscript(dynamicLib):
 
+def gen_usr_ldscript(dynamicLib):
     makedirs('{}/usr/lib'.format(get.installDIR()))
 
     destinationFile = open('{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib), 'w')

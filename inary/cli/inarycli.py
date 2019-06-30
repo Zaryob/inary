@@ -14,6 +14,7 @@
 
 import sys
 import optparse
+import sys
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -59,11 +60,13 @@ import inary.cli.search
 import inary.cli.updaterepo
 import inary.cli.upgrade
 
-#FIXME: why does this has to be imported last
+# FIXME: why does this has to be imported last
 import inary.cli.help
+
 
 class ParserError(inary.errors.Exception):
     pass
+
 
 class PreParser(optparse.OptionParser):
     """consumes any options, and finds arguments from command line"""
@@ -87,6 +90,7 @@ class PreParser(optparse.OptionParser):
             first_arg = False
         while rargs:
             arg = rargs[0]
+
             def option():
                 if not self.allow_interspersed_args and first_arg:
                     self.error(_('Options must precede non-option arguments'))
@@ -97,6 +101,7 @@ class PreParser(optparse.OptionParser):
                     self.opts.append(arg[1:])
                 del rargs[0]
                 return
+
             # We handle bare "--" explicitly, and bare "-" is handled by the
             # standard arg handler since the short arg case ensures that the
             # len of the opt string is greater than 1.
@@ -110,7 +115,7 @@ class PreParser(optparse.OptionParser):
                 # process a cluster of short options (possibly with
                 # value(s) for the last one only)
                 option()
-            else: # then it must be an argument
+            else:  # then it must be an argument
                 args.append(arg)
                 del rargs[0]
         self.args = args
@@ -125,7 +130,7 @@ class InaryCLI(object):
         self.parser = PreParser(version="%prog " + inary.__version__)
         try:
             opts, args = self.parser.parse_args(args=orig_args)
-            if len(args)==0: # more explicit than using IndexError
+            if len(args) == 0:  # more explicit than using IndexError
                 if 'version' in opts:
                     self.parser.print_version()
                     sys.exit(0)

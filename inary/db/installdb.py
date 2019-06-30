@@ -34,9 +34,9 @@ import inary.util
 class InstallDBError(inary.errors.Error):
     pass
 
-class InstallInfo:
 
-    state_map = { 'i': _('installed'), 'ip':_('installed-pending') }
+class InstallInfo:
+    state_map = {'i': _('installed'), 'ip': _('installed-pending')}
 
     def __init__(self, state, version, release, distribution, time):
         self.state = state
@@ -58,8 +58,9 @@ class InstallInfo:
         import time
         time_str = time.strftime("%d %b %Y %H:%M", self.time)
         s += _('Distribution: {0}, Install Time: {1}\n').format(self.distribution,
-                                                          time_str)
+                                                                time_str)
         return s
+
 
 class InstallDB(lazydb.LazyDB):
 
@@ -76,8 +77,8 @@ class InstallDB(lazydb.LazyDB):
         ie = []
         ie_path = os.path.join(ctx.config.info_dir(), ctx.const.installed_extra)
         if os.path.isfile(ie_path):
-             with open(ie_path) as ie_file:
-                 ie.extend(ie_file.read().strip().split("\n"))
+            with open(ie_path) as ie_file:
+                ie.extend(ie_file.read().strip().split("\n"))
         return ie
 
     @staticmethod
@@ -111,10 +112,9 @@ class InstallDB(lazydb.LazyDB):
             del self.installed_db[package]
             return
 
-        deps= xmlext.getTagByName(meta_doc, 'RuntimeDependencies')
+        deps = xmlext.getTagByName(meta_doc, 'RuntimeDependencies')
         if deps:
             for dep in xmlext.getTagByName(deps, 'Dependency'):
-
                 revdep = revdeps.setdefault(xmlext.getNodeText(dep), {})
                 revdep[package] = xmlext.toString(dep)
 
@@ -153,9 +153,9 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def __get_version(meta_doc):
-        package = xmlext.getNode(meta_doc,'Package')
+        package = xmlext.getNode(meta_doc, 'Package')
         history = xmlext.getNode(package, 'History')
-        update = xmlext.getNode(history,'Update')
+        update = xmlext.getNode(history, 'Update')
 
         version = xmlext.getNodeText(update, 'Version')
         release = xmlext.getNodeAttribute(update, 'release')
@@ -227,11 +227,13 @@ class InstallDB(lazydb.LazyDB):
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
             if terms == [term for term in terms if (fields['name'] and \
-                    re.compile(term, re.I).search(name)) or \
-                    (fields['summary'] and \
-                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
-                    (fields['desc'] and \
-                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
+                                                    re.compile(term, re.I).search(name)) or \
+                                                   (fields['summary'] and \
+                                                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(
+                                                        xml)) or \
+                                                   (fields['desc'] and \
+                                                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
+                                                        xml))]:
                 found.append(name)
         return found
 

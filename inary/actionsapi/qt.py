@@ -11,8 +11,9 @@
 #
 # Please read the COPYING file.
 
-import glob
 import gettext
+import glob
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -32,7 +33,7 @@ basename = "qt5"
 prefix = "/{}".format(get.defaultprefixDIR())
 libdir = "{}/lib".format(prefix)
 libexecdir = "{}/libexec".format(prefix)
-sysconfdir= "/etc"
+sysconfdir = "/etc"
 bindir = "{}/bin".format(prefix)
 includedir = "{}/include".format(prefix)
 
@@ -51,11 +52,13 @@ translationdir = "{0}/translations".format(datadir)
 
 qmake = "{}/qmake-qt5".format(bindir)
 
+
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
@@ -63,12 +66,21 @@ def configure(projectfile='', parameters='', installPrefix=prefix):
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
-        raise ConfigureError(_("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(", ".join(profiles)))
+        raise ConfigureError(
+            _("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(
+                ", ".join(profiles)))
 
-    shelltools.system("{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3}' QMAKE_CXXFLAGS+='{4}' {5}".format(qmake, projectfile, installPrefix, get.CFLAGS(), get.CXXFLAGS(), parameters))
+    shelltools.system(
+        "{0} -makefile {1} PREFIX='{2}' QMAKE_CFLAGS+='{3}' QMAKE_CXXFLAGS+='{4}' {5}".format(qmake, projectfile,
+                                                                                              installPrefix,
+                                                                                              get.CFLAGS(),
+                                                                                              get.CXXFLAGS(),
+                                                                                              parameters))
+
 
 def make(parameters=''):
     cmaketools.make(parameters)
+
 
 def install(parameters='', argument='install'):
     cmaketools.install('INSTALL_ROOT="{0}" {1}'.format(get.installDIR(), parameters), argument)

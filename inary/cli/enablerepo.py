@@ -13,12 +13,14 @@
 #
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.db
 import inary.cli.command as command
 from inary.operations import repository
+
 
 class EnableRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Enable repository
@@ -30,14 +32,14 @@ Usage: enable-repo [<repo1> <repo2> ... <repon>]
 Disabled repositories are not taken into account in operations
 """)
 
-    def __init__(self,args):
+    def __init__(self, args):
         super(EnableRepo, self).__init__(args)
         self.repodb = inary.db.repodb.RepoDB()
 
     name = ("enable-repo", "er")
 
     def run(self):
-        self.init(database = True)
+        self.init(database=True)
 
         if not self.args:
             self.help()

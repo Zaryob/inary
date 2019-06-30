@@ -23,6 +23,7 @@ import inary.context as ctx
 import inary.util as util
 import inary.db
 
+
 class ListAvailable(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List available packages in the repositories
 
@@ -44,16 +45,16 @@ all repositories.
 
         group = optparse.OptionGroup(self.parser, _("list-available options"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("List available packages under given component"))
+                         default=None, help=_("List available packages under given component"))
         group.add_option("-U", "--uninstalled", action="store_true",
-                               default=False, help=_("Show uninstalled packages only"))
+                         default=False, help=_("Show uninstalled packages only"))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
             ctx.ui.info(_('Installed packages are shown in this color'), color='green')
@@ -97,7 +98,7 @@ all repositories.
                 package.name = util.colorize(package.name, 'brightwhite')
 
             if self.options.long:
-                ctx.ui.info(str(package)+'\n')
+                ctx.ui.info(str(package) + '\n')
             else:
                 package.name += ' ' * max(0, maxlen - len(p))
                 ctx.ui.info('{0} - {1} '.format(package.name, str(package.summary)))

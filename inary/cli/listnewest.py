@@ -43,14 +43,16 @@ packages from all repositories.
 
         group = optparse.OptionGroup(self.parser, _("list-newest options"))
         group.add_option("-s", "--since", action="store",
-                               default=None, help=_("List new packages added to repository after this given date formatted as yyyy-mm-dd"))
+                         default=None,
+                         help=_("List new packages added to repository after this given date formatted as yyyy-mm-dd"))
         group.add_option("-l", "--last", action="store",
-                               default=None, help=_("List new packages added to repository after last nth previous repository update"))
+                         default=None,
+                         help=_("List new packages added to repository after last nth previous repository update"))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         if self.args:
             for arg in self.args:

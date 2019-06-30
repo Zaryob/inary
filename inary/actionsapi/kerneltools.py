@@ -37,11 +37,13 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+
 # Internal helpers
 
 def __getAllSupportedFlavours():
     if os.path.exists("/etc/kernel"):
         return os.listdir("/etc/kernel")
+
 
 #################
 # Other helpers #
@@ -55,6 +57,7 @@ def __getFlavour():
     else:
         return flavour
 
+
 def __getModuleFlavour():
     for fl in [_f for _f in __getAllSupportedFlavours() if "-" in _f]:
         try:
@@ -67,9 +70,11 @@ def __getModuleFlavour():
 
     return "kernel"
 
+
 def __getKernelARCH():
     """i386 is relevant for our i686 architecture."""
     return get.ARCH().replace("i686", "i386")
+
 
 def __getSuffix():
     """Read and return the value read from .suffix file."""
@@ -77,6 +82,7 @@ def __getSuffix():
     if __getFlavour():
         suffix += "-{}".format(__getFlavour())
     return suffix
+
 
 def __getExtraVersion():
     extraversion = ""
@@ -94,6 +100,7 @@ def __getExtraVersion():
         extraversion += "-{}".format(__getFlavour())
 
     return extraversion
+
 
 #######################
 # Configuration stuff #
@@ -118,6 +125,7 @@ def getKernelVersion(flavour=None):
         # Fail
         raise ConfigureError(_("Can't find kernel version information file {}.").format(kverfile))
 
+
 def configure():
     # Copy the relevant configuration file
     shutil.copy("configs/kernel-{}-config".format(get.ARCH()), ".config")
@@ -134,6 +142,7 @@ def configure():
         autotools.make("ARCH={} listnewconfig".format(__getKernelARCH()))
     except:
         pass
+
 
 ###################################
 # Building and installation stuff #
@@ -209,9 +218,9 @@ def installHeaders(extraHeaders=None):
 
     # First create the skel
     find_cmd = "find . -path {0} -prune -o -type f \( -name {1} \) -print".format(
-                    " -prune -o -path ".join(["'./{}/*'".format(l for l in pruned)]),
-                    " -o -name ".join(["'{}'".format(k for k in wanted)])
-                ) + " | cpio -pVd --preserve-modification-time {}".format(destination)
+        " -prune -o -path ".join(["'./{}/*'".format(l for l in pruned)]),
+        " -o -name ".join(["'{}'".format(k for k in wanted)])
+    ) + " | cpio -pVd --preserve-modification-time {}".format(destination)
 
     shelltools.system(find_cmd)
 
@@ -260,12 +269,12 @@ def installLibcHeaders(excludes=None):
     shelltools.makedirs(headers_dir)
 
     ###################Workaround begins here ...
-    #Workaround information -- http://patches.openembedded.org/patch/33433/
-    cpy_src="{}/linux-*/arch/x86/include/generated".format(get.workDIR())
-    cpy_tgt="{}/arch/x86/include".format(headers_tmp)
+    # Workaround information -- http://patches.openembedded.org/patch/33433/
+    cpy_src = "{}/linux-*/arch/x86/include/generated".format(get.workDIR())
+    cpy_tgt = "{}/arch/x86/include".format(headers_tmp)
     shelltools.makedirs(cpy_tgt)
 
-    copy_cmd ="cp -Rv {0} {1} ".format(cpy_src, cpy_tgt)
+    copy_cmd = "cp -Rv {0} {1} ".format(cpy_src, cpy_tgt)
 
     shelltools.system(copy_cmd)
     #######################Workaround ends here ...
@@ -285,7 +294,8 @@ def installLibcHeaders(excludes=None):
 
     # Remove possible excludes given by actions.py
     if excludes:
-        shelltools.system("rm -rf {}" .format(" ".join(["{0}/{1}".format(headers_dir, exc.strip("/")) for exc in excludes])))
+        shelltools.system(
+            "rm -rf {}".format(" ".join(["{0}/{1}".format(headers_dir, exc.strip("/")) for exc in excludes])))
 
     shelltools.cd(oldwd)
 

@@ -26,6 +26,7 @@ import inary.ui as ui
 import inary.db
 import inary.data
 
+
 @util.locked
 def emerge(A):
     """
@@ -39,11 +40,11 @@ def emerge(A):
     A_0 = A = inary.operations.helper.expand_src_components(set(A))
     ctx.ui.debug('A = {}'.format(str(A)))
 
-    if len(A)==0:
+    if len(A) == 0:
         ctx.ui.info(_('No packages to emerge.'))
         return
 
-    #A |= upgrade_base(A)
+    # A |= upgrade_base(A)
 
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
@@ -69,16 +70,16 @@ installed in the respective order to satisfy dependencies:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
-    ctx.ui.notify(ui.packagestogo, order = order_inst)
+    ctx.ui.notify(ui.packagestogo, order=order_inst)
 
     for x in order_inst:
         atomicoperations.install_single_name(x)
 
-    #ctx.ui.notify(ui.packagestogo, order = order_build)
+    # ctx.ui.notify(ui.packagestogo, order = order_build)
 
     for x in order_build:
         package_names = operations.build.build(x).new_packages
-        inary.operations.install.install_pkg_files(package_names, reinstall=True) # handle inter-package deps here
+        inary.operations.install.install_pkg_files(package_names, reinstall=True)  # handle inter-package deps here
         # reset counts between builds
         ctx.ui.errors = ctx.ui.warnings = 0
 
@@ -87,8 +88,8 @@ installed in the respective order to satisfy dependencies:
     U = set(order_build)
     U.update(order_inst)
 
-def plan_emerge(A):
 
+def plan_emerge(A):
     sourcedb = inary.db.sourcedb.SourceDB()
 
     # try to construct a inary graph of packages to
@@ -101,17 +102,20 @@ def plan_emerge(A):
             return sourcedb.get_spec(name)
         else:
             raise Exception(_('Cannot find source package: {}').format(name))
+
     def get_src(name):
         return get_spec(name).source
+
     def add_src(src):
         if not str(src.name) in G_f.vertices():
             G_f.add_vertex(str(src.name), (src.version, src.release))
+
     def pkgtosrc(pkg):
         return sourcedb.pkgtosrc(pkg)
 
     # setup first
-    #specfiles = [ sourcedb.get_source(x)[1] for x in A ]
-    #pkgtosrc = {}
+    # specfiles = [ sourcedb.get_source(x)[1] for x in A ]
+    # pkgtosrc = {}
     B = A
 
     install_list = set()
@@ -134,7 +138,7 @@ def plan_emerge(A):
                     if not srcdep in G_f.vertices():
                         Bp.add(srcdep)
                         add_src(get_src(srcdep))
-                    if not src.name == srcdep: # firefox - firefox-devel thing
+                    if not src.name == srcdep:  # firefox - firefox-devel thing
                         G_f.add_edge(src.name, srcdep)
 
             for builddep in src.buildDependencies:

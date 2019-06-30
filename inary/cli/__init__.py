@@ -12,9 +12,8 @@
 # Please read the COPYING file.
 #
 
-import sys
 import locale
-
+import sys
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)

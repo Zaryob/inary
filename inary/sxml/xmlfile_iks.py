@@ -25,6 +25,7 @@
 """
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -34,10 +35,11 @@ import ciksemel as iks
 import inary.errors
 import inary.config
 from inary.file import File
-from inary.util import join_path as join
+
 
 class Error(inary.errors.Error):
     pass
+
 
 class XmlFile(object):
     """A class to help reading and writing an XML file"""
@@ -59,39 +61,38 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
-            if type(file)==bytes:
+            if type(file) == bytes:
                 file.decode('utf-8')
             self.doc = iks.parseString(str(file))
             return self.doc
         except Exception as e:
-            raise Error(_("File '{}' has invalid XML").format(file) )
-
+            raise Error(_("File '{}' has invalid XML").format(file))
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
-                compress=None, sign=None, copylocal = False):
+                compress=None, sign=None, copylocal=False):
         uri = File.make_uri(uri)
         try:
             localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
-                                  compress=compress,sign=sign, copylocal=copylocal)
+                                      compress=compress, sign=sign, copylocal=copylocal)
         except IOError as e:
-            raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)) )
+            raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)))
 
         st = io.StringIO()
 
         try:
             from inary.libraries.preprocess import preprocess
-            preprocess.preprocess(infile=localpath,outfile=st,defines=inary.config.Config().values.directives)
+            preprocess.preprocess(infile=localpath, outfile=st, defines=inary.config.Config().values.directives)
             st.seek(0)
         except:
-            st = open(localpath,'r')
+            st = open(localpath, 'r')
 
         try:
             self.doc = iks.parse(localpath)
             return self.doc
         except Exception as e:
-            raise Error(_("File '{}' has invalid XML").format(localpath) )
+            raise Error(_("File '{}' has invalid XML").format(localpath))
 
-    def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
+    def writexml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None, sign=None):
         f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()

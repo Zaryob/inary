@@ -23,6 +23,7 @@ import inary.context as ctx
 from inary.operations import install
 import inary.db
 
+
 class Install(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Install INARY packages
 
@@ -47,28 +48,30 @@ expanded to package names.
         super(Install, self).options(group)
 
         group.add_option("--reinstall", action="store_true",
-                     default=False, help=_("Reinstall already installed packages"))
+                         default=False, help=_("Reinstall already installed packages"))
         group.add_option("--ignore-check", action="store_true",
-                     default=False, help=_("Skip distribution release and architecture check"))
+                         default=False, help=_("Skip distribution release and architecture check"))
         group.add_option("--ignore-file-conflicts", action="store_true",
-                     default=False, help=_("Ignore file conflicts"))
+                         default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
-                     default=False, help=_("Ignore package conflicts"))
+                         default=False, help=_("Ignore package conflicts"))
         group.add_option("-c", "--component", action="append",
-                               default=None, help=_("Install component's and recursive components' packages"))
+                         default=None, help=_("Install component's and recursive components' packages"))
         group.add_option("-r", "--repository", action="store",
-                               type="string", default=None, help=_('Name of the component\'s repository'))
+                         type="string", default=None, help=_('Name of the component\'s repository'))
         group.add_option("-f", "--fetch-only", action="store_true",
-                     default=False, help=_("Fetch upgrades but do not install."))
+                         default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
-                     default=None, help=_("When installing packages, ignore packages and components whose basenames match pattern."))
+                         default=None, help=_(
+                "When installing packages, ignore packages and components whose basenames match pattern."))
         group.add_option("--exclude-from", action="store",
-                     default=None,
-                     help=_("When installing packages, ignore packages "
-                            "and components whose basenames match "
-                            "any pattern contained in file."))
+                         default=None,
+                         help=_("When installing packages, ignore packages "
+                                "and components whose basenames match "
+                                "any pattern contained in file."))
         group.add_option("-s", "--store-lib-info", action="store_true",
-                     default=False, help=_("Store previous libraries info when package is updating to newer version."))
+                         default=False,
+                         help=_("Store previous libraries info when package is updating to newer version."))
         self.parser.add_option_group(group)
 
     def run(self):

@@ -12,23 +12,22 @@
 # Please read the COPYING file.
 #
 
+import datetime
+import gzip
 import re
 import time
-import gzip
-import gettext
-import datetime
 
-import inary.db
-import inary.data.metadata
 import inary.analyzer.dependency
+import inary.data.metadata
+import inary.db
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
-import inary.context as ctx
 from inary.sxml import xmlext
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class PackageDB(lazydb.LazyDB):
 
@@ -37,10 +36,10 @@ class PackageDB(lazydb.LazyDB):
         self.init()
 
     def init(self):
-        self.__package_nodes = {} # Packages
-        self.__revdeps = {}       # Reverse dependencies
-        self.__obsoletes = {}     # Obsoletes
-        self.__replaces = {}      # Replaces
+        self.__package_nodes = {}  # Packages
+        self.__revdeps = {}  # Reverse dependencies
+        self.__obsoletes = {}  # Obsoletes
+        self.__replaces = {}  # Replaces
 
         repodb = inary.db.repodb.RepoDB()
 
@@ -55,7 +54,6 @@ class PackageDB(lazydb.LazyDB):
         self.rvdb = inary.db.itembyrepo.ItemByRepo(self.__revdeps)
         self.odb = inary.db.itembyrepo.ItemByRepo(self.__obsoletes)
         self.rpdb = inary.db.itembyrepo.ItemByRepo(self.__replaces)
-
 
     ## Generate functions look sooo ugly
     @staticmethod
@@ -79,7 +77,7 @@ class PackageDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_packages(doc):
-        pdict={}
+        pdict = {}
 
         for x in xmlext.getTagByName(doc, "Package"):
             name = xmlext.getNodeText(x, "Name")
@@ -91,7 +89,7 @@ class PackageDB(lazydb.LazyDB):
     @staticmethod
     def __generate_revdeps(doc):
         revdeps = {}
-        for node in xmlext.getTagByName(doc,"Package"):
+        for node in xmlext.getTagByName(doc, "Package"):
             name = xmlext.getNodeText(node, 'Name')
             deps = xmlext.getNode(node, 'RuntimeDependencies')
             if deps:
@@ -116,8 +114,8 @@ class PackageDB(lazydb.LazyDB):
         for name in packages:
             xml = self.pdb.get_item(name)
             if terms == [term for term in terms if re.compile(term, re.I).search(name) or \
-                                            re.compile(resum.format(lang, term), re.I).search(xml) or \
-                                            re.compile(redesc.format(lang, term), re.I).search(xml)]:
+                                                   re.compile(resum.format(lang, term), re.I).search(xml) or \
+                                                   re.compile(redesc.format(lang, term), re.I).search(xml)]:
                 found.append(name)
         return found
 
@@ -140,18 +138,20 @@ class PackageDB(lazydb.LazyDB):
         found = []
         for name, xml in self.pdb.get_items_iter(repo):
             if terms == [term for term in terms if (fields['name'] and \
-                    re.compile(term, re.I).search(name)) or \
-                    (fields['summary'] and \
-                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(xml)) or \
-                    (fields['desc'] and \
-                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(xml))]:
+                                                    re.compile(term, re.I).search(name)) or \
+                                                   (fields['summary'] and \
+                                                    re.compile(resum.format(lang, term), 0 if cs else re.I).search(
+                                                        xml)) or \
+                                                   (fields['desc'] and \
+                                                    re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
+                                                        xml))]:
                 found.append(name)
         return found
 
     @staticmethod
     def __get_version(meta_doc):
         history = xmlext.getNode(meta_doc, 'History')
-        update = xmlext.getNode(history,'Update')
+        update = xmlext.getNode(history, 'Update')
 
         version = xmlext.getNodeText(update, 'Version')
         release = xmlext.getNodeAttribute(update, 'release')
@@ -211,7 +211,7 @@ class PackageDB(lazydb.LazyDB):
     def get_rev_deps(self, name, repo=None):
         try:
             rvdb = self.rvdb.get_item(name, repo)
-        except: #FIXME: what exception could we catch here, replace with that.
+        except:  # FIXME: what exception could we catch here, replace with that.
             return []
 
         rev_deps = []
@@ -264,9 +264,11 @@ class PackageDB(lazydb.LazyDB):
                 failed = True
             if failed:
                 try:
-                    enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
+                    enter_date = datetime.datetime(
+                        *time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
                 except:
-                    enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%Y-%d-%m")[0:6])
+                    enter_date = datetime.datetime(
+                        *time.strptime(self.get_package(pkg).history[-1].date, "%Y-%d-%m")[0:6])
 
             if enter_date >= since_date:
                 packages.append(pkg)

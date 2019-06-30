@@ -28,6 +28,7 @@ import inary.util as util
 import inary.db
 import inary.blacklist
 
+
 def check_update_actions(packages):
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
@@ -64,6 +65,7 @@ def check_update_actions(packages):
             ctx.ui.info("    - {}".format(package))
 
     return has_actions
+
 
 def find_upgrades(packages, replaces):
     packagedb = inary.db.packagedb.PackageDB()
@@ -108,19 +110,20 @@ def find_upgrades(packages, replaces):
             if int(release) < int(pkg.release):
                 Ap.append(i_pkg)
             elif comparesha1sum and \
-                int(release) == int(pkg.release) and \
-                not pkg.installTarHash == hash:
+                    int(release) == int(pkg.release) and \
+                    not pkg.installTarHash == hash:
                 Ap.append(i_pkg)
                 ds.append(i_pkg)
             else:
                 ctx.ui.info(_('Package {0.name} is already at the latest release {0.release}.').format(
-                             pkg), True)
+                    pkg), True)
 
     if debug and ds:
         ctx.ui.status(_('The following packages have different sha1sum:'))
         ctx.ui.info(util.format_by_columns(sorted(ds)))
 
     return Ap
+
 
 @util.locked
 def upgrade(A=None, repo=None):
@@ -166,7 +169,7 @@ def upgrade(A=None, repo=None):
 
     ctx.ui.debug('A = {}'.format(str(A)))
 
-    if len(A)==0:
+    if len(A) == 0:
         ctx.ui.info(_('No packages to upgrade.'))
         return True
 
@@ -205,7 +208,7 @@ def upgrade(A=None, repo=None):
             not ctx.ui.confirm(_("Do you want to continue?")):
         return False
 
-    ctx.ui.notify(ui.packagestogo, order = order)
+    ctx.ui.notify(ui.packagestogo, order=order)
 
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
@@ -213,7 +216,7 @@ def upgrade(A=None, repo=None):
 
     paths = []
     for x in order:
-        ctx.ui.info(_("Downloading %d / %d") % (order.index(x)+1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
@@ -228,11 +231,12 @@ def upgrade(A=None, repo=None):
 
     try:
         for path in paths:
-            ctx.ui.info(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), color="yellow")
-            install_op = atomicoperations.Install(path, ignore_file_conflicts = True)
+            ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
+            install_op = atomicoperations.Install(path, ignore_file_conflicts=True)
             install_op.install(not ctx.get_option('compare_sha1sum'))
     except Exception as e:
-        raise(e)
+        raise (e)
+
 
 def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced
@@ -241,7 +245,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 
     packagedb = inary.db.packagedb.PackageDB()
 
-    G_f = pgraph.PGraph(packagedb)               # construct G_f
+    G_f = pgraph.PGraph(packagedb)  # construct G_f
 
     A = set(A)
 
@@ -364,6 +368,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     order.reverse()
     return G_f, order
 
+
 def upgrade_base(A=None):
     if A is None:
         A = set()
@@ -398,9 +403,9 @@ def upgrade_base(A=None):
                 ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
                 G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
 
-            #no-need-for-upgrade-order patch
-            #extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
-            #return set(extra_installs + extra_upgrades)
+            # no-need-for-upgrade-order patch
+            # extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
+            # return set(extra_installs + extra_upgrades)
 
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
@@ -408,8 +413,8 @@ def upgrade_base(A=None):
             ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
     return set()
 
-def is_upgradable(name):
 
+def is_upgradable(name):
     installdb = inary.db.installdb.InstallDB()
 
     if not installdb.has_package(name):
@@ -420,10 +425,12 @@ def is_upgradable(name):
     packagedb = inary.db.packagedb.PackageDB()
 
     try:
-        version, release, build, distro, distro_release = packagedb.get_version_and_distro_release(name, packagedb.which_repo(name))
+        version, release, build, distro, distro_release = packagedb.get_version_and_distro_release(name,
+                                                                                                   packagedb.which_repo(
+                                                                                                       name))
     except KeyboardInterrupt:
         raise
-    except Exception: #FIXME: what exception could we catch here, replace with that.
+    except Exception:  # FIXME: what exception could we catch here, replace with that.
         return False
 
     if distro == i_distro and \
@@ -431,6 +438,7 @@ def is_upgradable(name):
         return True
 
     return int(i_release) < int(release)
+
 
 def get_upgrade_order(packages):
     """
@@ -441,6 +449,7 @@ def get_upgrade_order(packages):
     upgrade_order = inary.operations.upgrade.plan_upgrade
     i_graph, order = upgrade_order(packages)
     return order
+
 
 def get_base_upgrade_order(packages):
     """

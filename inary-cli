@@ -12,19 +12,19 @@
 # Please read the COPYING file.
 #
 
-import sys
 import errno
 import traceback
 import signal
+import sys
+import traceback
 
 import inary
-import inary.context as ctx
 import inary.cli
-from inary.cli import inarycli
+import inary.context as ctx
 import inary.db
 import inary.errors
 import inary.util
-
+from inary.cli import inarycli
 
 import gettext
 gettext.bindtextdomain('inary', "/usr/share/locale")
@@ -32,17 +32,19 @@ gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
         exit()
 
+
 def exit():
     sys.exit(1)
 
-def handle_exception(exception, value, tb):
 
-    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
-    ui = inary.cli.CLI() # make a temporary UI
+def handle_exception(exception, value, tb):
+    signal.signal(signal.SIGINT, signal.SIG_IGN)  # disable further interrupts
+    ui = inary.cli.CLI()  # make a temporary UI
     show_traceback = False
 
     if isinstance(value, inary.errors.Error):
@@ -82,6 +84,7 @@ def handle_exception(exception, value, tb):
         ui.info(_("Use --debug to see a traceback."))
 
     exit()
+
 
 if __name__ == "__main__":
     sys.excepthook = handle_exception

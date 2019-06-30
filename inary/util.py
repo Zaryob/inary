@@ -16,23 +16,25 @@
 
 # standard python modules
 
-import os
-import re
-import sys
 import fcntl
-import shutil
-import struct
 import fnmatch
 import hashlib
-import termios
 import operator
+import os
+import re
+import shutil
+import struct
 import subprocess
+import sys
+import termios
 import unicodedata
 
 import gettext
 from functools import reduce
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class Singleton(type):
     def __init__(cls, name, bases, dict):
@@ -45,25 +47,31 @@ class Singleton(type):
 
         return cls.instance
 
+
 # inary modules
 import inary
 import inary.errors
 import inary.context as ctx
 
+
 class Error(inary.errors.Error):
     pass
+
 
 class FileError(Error):
     pass
 
+
 class FilePermissionDeniedError(Error):
     pass
+
 
 def locked(func):
     """
     Decorator for synchronizing privileged functions
     """
-    def wrapper(*__args,**__kw):
+
+    def wrapper(*__args, **__kw):
         try:
             lock = open(join_path(ctx.config.lock_dir(), 'inary'), 'w')
         except IOError:
@@ -74,19 +82,22 @@ def locked(func):
             ctx.locked = True
         except IOError:
             if not ctx.locked:
-                raise inary.errors.AnotherInstanceError(_("Another instance of Inary is running. Only one instance is allowed."))
+                raise inary.errors.AnotherInstanceError(
+                    _("Another instance of Inary is running. Only one instance is allowed."))
 
         try:
             inary.db.invalidate_caches()
-            ctx.ui.info(_('Invalidating database caches...'), verbose= True)
-            ret = func(*__args,**__kw)
-            ctx.ui.info(_('Updating database caches...'), verbose= True)
+            ctx.ui.info(_('Invalidating database caches...'), verbose=True)
+            ret = func(*__args, **__kw)
+            ctx.ui.info(_('Updating database caches...'), verbose=True)
             inary.db.update_caches()
             return ret
         finally:
             ctx.locked = False
             lock.close()
+
     return wrapper
+
 
 #########################
 # string/list/functional#
@@ -102,18 +113,23 @@ octdigits = '01234567'
 punctuation = """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
 printable = digits + ascii_letters + punctuation + whitespace
 
+
 def every(pred, seq):
     return reduce(operator.and_, list(map(pred, seq)), True)
+
 
 def any(pred, seq):
     return reduce(operator.or_, list(map(pred, seq)), False)
 
+
 def unzip(seq):
     return list(zip(*seq))
 
+
 def concat(l):
     """Concatenate a list of lists."""
-    return reduce( operator.concat, l )
+    return reduce(operator.concat, l)
+
 
 def multisplit(str, chars):
     """Split str with any of the chars."""
@@ -122,19 +138,22 @@ def multisplit(str, chars):
         l = concat([x.split(c) for x in l])
     return l
 
+
 def same(l):
     """Check if all elements of a sequence are equal."""
-    if len(l)==0:
+    if len(l) == 0:
         return True
     else:
         last = l.pop()
         for x in l:
-            if x!=last:
+            if x != last:
                 return False
         return True
 
+
 def any(pred, seq):
     return reduce(operator.or_, list(map(pred, seq)), False)
+
 
 def flatten_list(l):
     """Flatten a list of lists."""
@@ -142,9 +161,11 @@ def flatten_list(l):
     # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
     return [item for sublist in l for item in sublist]
 
+
 def strlist(l):
     """Concatenate string reps of l's elements."""
     return "".join([str(x) + ' ' for x in l])
+
 
 def prefix(a, b):
     """Check if sequence a is a prefix of sequence b."""
@@ -155,10 +176,12 @@ def prefix(a, b):
             return False
     return True
 
+
 def remove_prefix(a, b):
     """Remove prefix a from sequence b."""
     assert prefix(a, b)
     return b[len(a):]
+
 
 def suffix(a, b):
     """Check if sequence a is a suffix of sequence b."""
@@ -169,12 +192,14 @@ def suffix(a, b):
             return False
     return True
 
+
 def remove_suffix(a, b):
     """Remove suffix a from sequence b."""
     assert suffix(a, b)
     return b[:-len(a)]
 
-def human_readable_size(size = 0):
+
+def human_readable_size(size=0):
     symbols, depth = [' B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 0
 
     while size > 1000 and depth < 8:
@@ -183,9 +208,11 @@ def human_readable_size(size = 0):
 
     return size, symbols[depth]
 
-def human_readable_rate(size = 0):
+
+def human_readable_rate(size=0):
     x = human_readable_size(size)
     return x[0], x[1] + '/s'
+
 
 def format_by_columns(strings, sep_width=2):
     longest_str_len = len(max(strings, key=len))
@@ -243,6 +270,7 @@ def format_by_columns(strings, sep_width=2):
 
     return "\n".join(lines)
 
+
 ##############################
 # Process Releated Functions #
 ##############################
@@ -255,6 +283,7 @@ def search_executable(executable):
             return full_path
     return None
 
+
 def run_batch(cmd, ui_debug=True):
     """Run command and report return value and output."""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
@@ -263,6 +292,7 @@ def run_batch(cmd, ui_debug=True):
     out, err = p.communicate()
     if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
     return p.returncode, out.decode('utf-8'), err
+
 
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
@@ -291,6 +321,7 @@ def run_logged(cmd):
 
     return p.returncode
 
+
 ######################
 # Terminal functions #
 ######################
@@ -305,20 +336,23 @@ def get_terminal_size():
 
     return struct.unpack("hh", ret)
 
+
 def xterm_title(message):
     """Set message as console window title."""
     if "TERM" in os.environ and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
         for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
             if terminalType.startswith(term):
-                sys.stderr.write("\x1b]2;"+str(message)+"\x07")
+                sys.stderr.write("\x1b]2;" + str(message) + "\x07")
                 sys.stderr.flush()
                 break
+
 
 def xterm_title_reset():
     """Reset console window title."""
     if "TERM" in os.environ:
         xterm_title("")
+
 
 #############################
 # Path Processing Functions #
@@ -328,29 +362,34 @@ def splitpath(a):
     """split path into components and return as a list
     os.path.split doesn't do what I want like removing trailing /"""
     comps = a.split(os.path.sep)
-    if comps[len(comps)-1]=='':
+    if comps[len(comps) - 1] == '':
         comps.pop()
     return comps
 
-def makepath(comps, relative = False, sep = os.path.sep):
+
+def makepath(comps, relative=False, sep=os.path.sep):
     """Reconstruct a path from components."""
-    path = reduce(lambda x,y: x + sep + y, comps, '')
+    path = reduce(lambda x, y: x + sep + y, comps, '')
     if relative:
         return path[len(sep):]
     else:
         return path
 
-def parentpath(a, sep = os.path.sep):
+
+def parentpath(a, sep=os.path.sep):
     # remove trailing '/'
     a = a.rstrip(sep)
     return a[:a.rfind(sep)]
 
+
 def parenturi(a):
     return parentpath(a, '/')
+
 
 def subpath(a, b):
     """Find if path a is before b in the directory tree."""
     return prefix(splitpath(a), splitpath(b))
+
 
 def removepathprefix(prefix, path):
     """Remove path prefix a from b, finding the pathname rooted at a."""
@@ -360,6 +399,7 @@ def removepathprefix(prefix, path):
     else:
         return ""
 
+
 def join_path(a, *p):
     """Join two or more pathname components.
     Python os.path.join cannot handle '/' at the start of latter components.
@@ -368,30 +408,34 @@ def join_path(a, *p):
     for b in p:
         b = b.lstrip('/')
         if path == '' or path.endswith('/'):
-            path +=  b
+            path += b
         else:
             path += '/' + b
     return path
+
 
 ####################################
 # File/Directory Related Functions #
 ####################################
 
-def check_file(_file, mode = os.F_OK):
+def check_file(_file, mode=os.F_OK):
     """Shorthand to check if a file exists."""
     if not os.access(_file, mode):
         raise FileError("File " + _file + " not found")
     return True
+
 
 def ensure_dirs(path):
     """Make sure the given directory path exists."""
     if not os.path.exists(path):
         os.makedirs(path)
 
+
 def clean_dir(path):
     """Remove all content of a directory."""
     if os.path.exists(path):
         shutil.rmtree(path)
+
 
 def creation_time(_file):
     """Return the creation time of the given file."""
@@ -399,6 +443,7 @@ def creation_time(_file):
         import time
         st = os.stat(_file)
         return time.localtime(st.st_ctime)
+
 
 def dir_size(_dir):
     """Calculate the size of files under a directory."""
@@ -409,7 +454,7 @@ def dir_size(_dir):
     # Not really, du calculates size on disk, this is much better
 
     if os.path.exists(_dir) and (not os.path.isdir(_dir) and not os.path.islink(_dir)):
-        #so, this is not a directory but file..
+        # so, this is not a directory but file..
         return os.path.getsize(_dir)
 
     if os.path.islink(_dir):
@@ -417,20 +462,25 @@ def dir_size(_dir):
 
     def sizes():
         for root, dirs, files in os.walk(_dir):
-            yield sum([os.path.getsize(join_path(root, name)) for name in files if not os.path.islink(join_path(root, name))])
+            yield sum(
+                [os.path.getsize(join_path(root, name)) for name in files if not os.path.islink(join_path(root, name))])
+
     return sum(sizes())
 
-def copy_file(src,dest):
+
+def copy_file(src, dest):
     """Copy source file to the destination file."""
     check_file(src)
     ensure_dirs(os.path.dirname(dest))
     shutil.copyfile(src, dest)
 
-def copy_file_stat(src,dest):
+
+def copy_file_stat(src, dest):
     """Copy source file to the destination file with all stat info."""
     check_file(src)
     ensure_dirs(os.path.dirname(dest))
     shutil.copy2(src, dest)
+
 
 def free_space(directory=None):
     """Returns the free space (x Byte) in the device. """
@@ -442,6 +492,7 @@ def free_space(directory=None):
 
     return free_space
 
+
 def read_link(link):
     """Return the normalized path which is pointed by the symbolic link."""
     # tarfile module normalizes the paths pointed by symbolic links. This
@@ -449,8 +500,10 @@ def read_link(link):
     # this normalization.
     return os.path.normpath(os.readlink(link))
 
+
 def is_ar_file(file_path):
     return open(file_path, 'rb').read(8) == '!<arch>\n'
+
 
 def clean_ar_timestamps(ar_file):
     """Zero all timestamps in the ar files."""
@@ -461,9 +514,10 @@ def clean_ar_timestamps(ar_file):
     for line in content:
         pos = line.rfind(chr(32) + chr(96))
         if pos > -1 and line[pos - 57:pos + 2].find(chr(47)) > -1:
-             line = line[:pos - 41] + '0000000000' + line[pos - 31:]
+            line = line[:pos - 41] + '0000000000' + line[pos - 31:]
         fp.write(line)
     fp.close()
+
 
 def calculate_hash(path):
     """Return a (path, hash) tuple for given path."""
@@ -484,6 +538,7 @@ def calculate_hash(path):
 
     return path, value
 
+
 def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     """Yield (path, hash) tuples for given directory tree.
 
@@ -494,6 +549,7 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
     used to remove prefix from filePath while matching excludes, if
     given.
     """
+
     def is_included(path):
         if excludePrefix:
             temp = remove_prefix(removePrefix, path)
@@ -532,9 +588,11 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
             if is_included(root):
                 yield calculate_hash(root)
 
+
 def check_file_hash(filename, hash):
     """Check the file's integrity with a given hash."""
     return sha1_file(filename) == hash
+
 
 def sha1_file(filename):
     """Calculate sha1 hash of file."""
@@ -563,11 +621,13 @@ def sha1_file(filename):
         else:
             raise FileError(_("Cannot calculate SHA1 hash of {}").format(filename))
 
+
 def sha1_data(data):
     """Calculate sha1 hash of given data."""
     m = hashlib.sha1()
     m.update(data.encode('utf-8'))
     return m.hexdigest()
+
 
 def uncompress(patchFile, compressType="gz", targetDir=""):
     """Uncompress the file and return the new path."""
@@ -589,13 +649,15 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
     extension = extensions.get(compressType, compressType)
     return filePath.split(".{}".format(extension))[0]
 
+
 def check_patch_level(workdir, path):
     level = 0
     while path:
         if os.path.isfile("{0}/{1}".format(workdir, path)): return level
         if path.find("/") == -1: return None
         level += 1
-        path = path[path.find("/")+1:]
+        path = path[path.find("/") + 1:]
+
 
 def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     """Apply given patch to the sourceDir."""
@@ -627,9 +689,9 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                         pass
 
                 for path_p, path_m in zip(paths_p, paths_m):
-                    if "/dev/null" in path_m and not len(paths_p) -1 == paths_p.index(path_p): continue
+                    if "/dev/null" in path_m and not len(paths_p) - 1 == paths_p.index(path_p): continue
                     level = check_patch_level(sourceDir, path_p)
-                    if level is None and len(paths_m) -1 == paths_m.index(path_m):
+                    if level is None and len(paths_m) - 1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
                     if not level is None:
                         ctx.ui.debug("Detected patch level={0} for {1}".format(level, os.path.basename(patchFile)))
@@ -647,12 +709,15 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import {0} -p {1} -P {2} \"{3}\"'.format(("-R" if reverse else ""), level, name, patchFile))
+        (ret, out, err) = run_batch(
+            'quilt import {0} -p {1} -P {2} \"{3}\"'.format(("-R" if reverse else ""), level, name, patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
         # run GNU patch to apply original patch into tree
-        (ret, out, err) = run_batch("patch --remove-empty-files --no-backup-if-mismatch {0} -p{1} -i \"{2}\"".format(("-R" if reverse else ""), level, patchFile))
+        (ret, out, err) = run_batch(
+            "patch --remove-empty-files --no-backup-if-mismatch {0} -p{1} -i \"{2}\"".format(("-R" if reverse else ""),
+                                                                                             level, patchFile))
 
     if ret:
         if out is None and err is None:
@@ -663,8 +728,10 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
 
     os.chdir(cwd)
 
+
 def strip_file(filepath, fileinfo, outpath):
     """Strip an elf file from debug symbols."""
+
     def run_strip(f, flags=""):
         p = os.popen("strip {0} {1}".format(flags, f))
         ret = p.close()
@@ -721,10 +788,12 @@ def strip_file(filepath, fileinfo, outpath):
 
     return False
 
+
 def partition_freespace(directory):
     """Return free space of given directory's partition."""
     st = os.statvfs(directory)
     return st[os.fstatvfs.F_BSIZE] * st[os.fstatvfs.F_BFREE]
+
 
 ########################################
 # Package/Repository Related Functions #
@@ -744,6 +813,7 @@ def package_filename(name, version, release, distro_id=None, arch=None):
 
     return fn
 
+
 def parse_package_name_legacy(package_name):
     """Separate package name and version string for package formats <= 1.1.
 
@@ -761,6 +831,7 @@ def parse_package_name_legacy(package_name):
 
     return name, version
 
+
 def parse_package_name(package_name):
     """Separate package name and version string.
 
@@ -770,7 +841,6 @@ def parse_package_name(package_name):
     # Strip extension if exists
     if package_name.endswith(ctx.const.package_suffix):
         package_name = remove_suffix(ctx.const.package_suffix, package_name)
-
 
     try:
         name, version, release, distro_id, arch = package_name.rsplit("-", 4)
@@ -789,10 +859,14 @@ def parse_package_name(package_name):
 
     return name, "{0}-{1}".format(version, release)
 
+
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
-    if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo", "userspace"]: name = name[:-1 - len(name.split("-").pop())]
-    return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0], name.lower())
+    if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo",
+                                 "userspace"]: name = name[:-1 - len(name.split("-").pop())]
+    return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0],
+                            name.lower())
+
 
 def parse_delta_package_name_legacy(package_name):
     """Separate delta package name and release infos for package formats <= 1.1.
@@ -804,6 +878,7 @@ def parse_delta_package_name_legacy(package_name):
     buildFrom, buildTo = build.split("-")
 
     return name, buildFrom, buildTo
+
 
 def parse_delta_package_name(package_name):
     """Separate delta package name and release infos
@@ -818,7 +893,7 @@ def parse_delta_package_name(package_name):
 
     try:
         name, source_release, target_release, distro_id, arch = \
-                package_name.rsplit("-", 4)
+            package_name.rsplit("-", 4)
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format. Raise here to call
@@ -833,6 +908,7 @@ def parse_delta_package_name(package_name):
             raise Error(_("Invalid delta package name: {}").format(package_name))
 
     return name, source_release, target_release
+
 
 def split_package_filename(filename):
     """Split fields in package filename.
@@ -859,6 +935,7 @@ def split_package_filename(filename):
 
     return name, version, release, distro_id, arch
 
+
 def split_delta_package_filename(filename):
     """Split fields in delta package filename.
 
@@ -871,7 +948,7 @@ def split_delta_package_filename(filename):
 
     try:
         name, source_release, target_release, distro_id, arch = \
-                filename.rsplit("-", 4)
+            filename.rsplit("-", 4)
 
         # Arch field cannot start with a digit. If a digit is found,
         # the package might have an old format.
@@ -885,6 +962,7 @@ def split_delta_package_filename(filename):
 
     return name, source_release, target_release, distro_id, arch
 
+
 def split_version(package_version):
     """Split version, release and build parts of a package version
 
@@ -893,6 +971,7 @@ def split_version(package_version):
     version, sep, release_and_build = package_version.partition("-")
     release, sep, build = release_and_build.partition("-")
     return version, release, build
+
 
 def filter_latest_packages(package_paths):
     """ For a given inary package paths list where there may also be multiple versions
@@ -938,12 +1017,14 @@ def filter_latest_packages(package_paths):
 
     return [x[0] for x in list(latest.values())]
 
+
 def colorize(msg, color):
     """Colorize the given message for console output"""
     if color in ctx.const.colors and not ctx.get_option('no_color'):
         return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
     else:
         return str(msg)
+
 
 def config_changed(config_file):
     fpath = join_path(ctx.config.dest_dir(), config_file.path)
@@ -957,12 +1038,14 @@ def config_changed(config_file):
                 return True
     return False
 
+
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
     if os.path.isdir(dirpath) and not os.listdir(dirpath):
         ctx.ui.debug("Removing empty dir: {}".format(dirpath))
         os.rmdir(dirpath)
         rmdirs(os.path.dirname(dirpath))
+
 
 # Python regex sucks
 # http://mail.python.org/pipermail/python-list/2009-January/523704.html
@@ -983,6 +1066,7 @@ def letters():
                 result.append(start + "-" + end)
             start = None
     return ''.join(result)
+
 
 def get_kernel_option(option):
     """Get a dictionary of args for the given kernel command line option"""
@@ -1011,6 +1095,7 @@ def get_kernel_option(option):
 
     return args
 
+
 def get_cpu_count():
     """
     This function part of portage
@@ -1026,6 +1111,7 @@ def get_cpu_count():
         return multiprocessing.cpu_count()
     except (ImportError, NotImplementedError):
         return None
+
 
 def get_vm_info():
     vm_info = {}

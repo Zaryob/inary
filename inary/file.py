@@ -39,27 +39,30 @@ class AlreadyHaveException(inary.errors.Exception):
         self.url = url
         self.localfile = localfile
 
+
 class NoSignatureFound(inary.errors.Exception):
     def __init__(self, url):
         inary.errors.Exception.__init__(self, _("No signature found for {}").format(url))
         self.url = url
 
+
 class Error(inary.errors.Error):
     pass
+
 
 class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
         inary.errors.Exception.__init__(self, _(" invalid for {}").format(url))
         self.url = url
 
-class File:
 
+class File:
     # Compression types
     COMPRESSION_TYPE_AUTO = 0
     COMPRESSION_TYPE_BZ2 = 1
     COMPRESSION_TYPE_XZ = 2
 
-    (read, write) = list(range(2))            # modes
+    (read, write) = list(range(2))  # modes
     (detached, whatelse) = list(range(2))
 
     __compressed_file_extensions = {".xz": COMPRESSION_TYPE_XZ,
@@ -107,8 +110,8 @@ class File:
         return localfile
 
     @staticmethod
-    def download(uri, transfer_dir = "/tmp", sha1sum = False,
-                 compress = None, sign = None, copylocal = False):
+    def download(uri, transfer_dir="/tmp", sha1sum=False,
+                 compress=None, sign=None, copylocal=False):
 
         assert isinstance(uri, inary.uri.URI)
 
@@ -129,9 +132,9 @@ class File:
             localfile = inary.util.join_path(transfer_dir, tmpfile or uri.filename())
 
             # TODO: code to use old .sha1sum file, is this a necessary optimization?
-            #oldsha1fn = localfile + '.sha1sum'
-            #if os.exists(oldsha1fn):
-                #oldsha1 = file(oldsha1fn).readlines()[0]
+            # oldsha1fn = localfile + '.sha1sum'
+            # if os.exists(oldsha1fn):
+            # oldsha1 = file(oldsha1fn).readlines()[0]
             if sha1sum and os.path.exists(origfile):
                 oldsha1 = inary.util.sha1_file(origfile)
                 if newsha1 == oldsha1:
@@ -146,7 +149,7 @@ class File:
                 ctx.ui.info(_("Copying {} to transfer dir").format(uri.get_uri()), verbose=True)
                 shutil.copy(uri.get_uri(), localfile)
         else:
-            localfile = uri.get_uri() #TODO: use a special function here?
+            localfile = uri.get_uri()  # TODO: use a special function here?
             if not os.path.exists(localfile):
                 raise IOError(_("File '{}' not found.").format(localfile))
             if not os.access(localfile, os.W_OK):
@@ -179,9 +182,8 @@ class File:
 
         return localfile
 
-
-    def __init__(self, uri, mode, transfer_dir = "/tmp",
-                 sha1sum = False, compress = None, sign = None):
+    def __init__(self, uri, mode, transfer_dir="/tmp",
+                 sha1sum=False, compress=None, sign=None):
         """it is pointless to open a file without a URI and a mode"""
 
         self.transfer_dir = transfer_dir
@@ -190,7 +192,7 @@ class File:
         self.sign = sign
 
         uri = File.make_uri(uri)
-        if mode==File.read or mode==File.write:
+        if mode == File.read or mode == File.write:
             self.mode = mode
         else:
             raise Error(_("File mode must be either File.read or File.write"))
@@ -215,7 +217,7 @@ class File:
         """returns the underlying file object"""
         return self.__file__
 
-    def close(self, delete_transfer = False): #FIXME: look this parameter
+    def close(self, delete_transfer=False):  # FIXME: look this parameter
         """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:
@@ -249,7 +251,7 @@ class File:
                     cs.write(sha1)
                     cs.close()
 
-            if self.sign==File.detached:
+            if self.sign == File.detached:
                 if inary.util.run_batch('gpg --detach-sig ' + self.localfile)[0]:
                     raise Error(_("ERROR: gpg --detach-sig {} failed").format(self.localfile))
                 for compressed_file in compressed_files:
@@ -258,15 +260,15 @@ class File:
 
     @staticmethod
     def check_signature(uri, transfer_dir, sign=detached):
-        if sign==File.detached:
+        if sign == File.detached:
             try:
                 sigfilename = File.download(inary.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
-            except Exception as e: #FIXME: what exception could we catch here, replace with that.
+            except Exception as e:  # FIXME: what exception could we catch here, replace with that.
                 raise NoSignatureFound(uri)
             if os.system('gpg --verify ' + sigfilename) != 0:
-                raise InvalidSignature(uri) # everything is all right here
+                raise InvalidSignature(uri)  # everything is all right here
 
     def flush(self):
         self.__file__.flush()
@@ -280,19 +282,19 @@ class File:
     def __next__(self):
         return next(self.__file__)
 
-    def read(self, size = None):
+    def read(self, size=None):
         if size:
             return self.__file__.read(size)
         else:
             return self.__file__.read()
 
-    def readline(self, size = None):
+    def readline(self, size=None):
         if size:
             return self.__file__.readline(size)
         else:
             return self.__file__.readline()
 
-    def readlines(self, size = None):
+    def readlines(self, size=None):
         if size:
             return self.__file__.readlines(size)
         else:

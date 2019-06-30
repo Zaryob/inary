@@ -24,6 +24,7 @@ import inary.util as util
 import inary.db
 import inary.operations.info as info_operation
 
+
 class Info(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Display package information
 
@@ -46,22 +47,22 @@ Usage: info <package1> <package2> ... <packagen>
         group = optparse.OptionGroup(self.parser, _("info options"))
 
         group.add_option("-f", "--files", action="store_true",
-                               default=False,
-                               help=_("Show a list of package files."))
+                         default=False,
+                         help=_("Show a list of package files."))
         group.add_option("-c", "--component", action="append",
-                               default=None, help=_("Info about the given component"))
+                         default=None, help=_("Info about the given component"))
         group.add_option("-F", "--files-path", action="store_true",
-                               default=False,
-                               help=_("Show only paths."))
+                         default=False,
+                         help=_("Show only paths."))
         group.add_option("-s", "--short", action="store_true",
-                               default=False, help=_("Do not show details"))
+                         default=False, help=_("Do not show details"))
         group.add_option("--xml", action="store_true",
-                               default=False, help=_("Output in xml format"))
+                         default=False, help=_("Output in xml format"))
         self.parser.add_option_group(group)
 
     def run(self):
 
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         components = ctx.get_option('component')
         if not components and not self.args:
@@ -110,7 +111,7 @@ Usage: info <package1> <package2> ... <packagen>
         self.sourcedb_info(arg)
 
     def print_files(self, files):
-        files.list.sort(key = lambda x:x.path)
+        files.list.sort(key=lambda x: x.path)
         for fileinfo in files.list:
             if self.options.files:
                 print(fileinfo)
@@ -125,7 +126,7 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.formatted_output(str(metadata.package))
             if packagedb:
-                revdeps =  [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
+                revdeps = [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
                 ctx.ui.formatted_output(" ".join((_("Reverse Dependencies:"), util.strlist(revdeps))))
                 print()
 
@@ -137,7 +138,7 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.formatted_output(str(spec))
             if sourcedb:
-                revdeps =  [name for name, dep in sourcedb.get_rev_deps(spec.source.name)]
+                revdeps = [name for name, dep in sourcedb.get_rev_deps(spec.source.name)]
                 print(_('Reverse Build Dependencies:'), util.strlist(revdeps))
                 print()
 

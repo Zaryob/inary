@@ -24,11 +24,13 @@ import inary.actionsapi
 import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import system
 
+
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error(value)
+
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -36,10 +38,12 @@ class InstallError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-def make(parameters = ''):
+
+def make(parameters=''):
     if system('scons {0} {1}'.format(get.makeJOBS(), parameters)):
         raise MakeError(_('Make failed.'))
 
-def install(parameters = 'install', prefix = get.installDIR(), argument='prefix'):
+
+def install(parameters='install', prefix=get.installDIR(), argument='prefix'):
     if system('scons {0}={1} {2}'.format(argument, prefix, parameters)):
         raise InstallError(_('Install failed.'))

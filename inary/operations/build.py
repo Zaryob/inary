@@ -13,14 +13,14 @@
 
 """package building code"""
 
+import fnmatch
+import glob
+import grp
 # python standard library
 import os
-import re
-import glob
-import stat
 import pwd
-import grp
-import fnmatch
+import re
+import stat
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -47,14 +47,18 @@ import inary.db
 class Error(inary.errors.Error):
     pass
 
+
 class ActionScriptException(Error):
     pass
+
 
 class AbandonedFilesException(inary.errors.Error):
     pass
 
+
 class ExcludedArchitectureException(Error):
     pass
+
 
 # Helper Functions
 def get_file_type(path, pinfo_list):
@@ -81,6 +85,7 @@ def get_file_type(path, pinfo_list):
         info = glob_match or parent_match
 
     return info.fileType, info.permanent
+
 
 def check_path_collision(package, pkgList):
     """This function will check for collision of paths in a package with
@@ -114,11 +119,12 @@ def check_path_collision(package, pkgList):
                     ctx.ui.debug(_('Path {} belongs in multiple packages').format(path.path))
     return collisions
 
+
 def exclude_special_files(filepath, fileinfo, ag):
     keeplist = ag.get("KeepSpecial", [])
     patterns = {"libtool": "libtool library file",
-                "python":  "python.*byte-compiled",
-                "perl":    "Perl POD document text"}
+                "python": "python.*byte-compiled",
+                "perl": "Perl POD document text"}
 
     if "libtool" in keeplist:
         # Some upstream sources have buggy libtool and ltmain.sh with them,
@@ -148,6 +154,7 @@ def exclude_special_files(filepath, fileinfo, ag):
             # Remove dir if it becomes empty (Bug #11588)
             util.rmdirs(os.path.dirname(filepath))
 
+
 def strip_debug_action(filepath, fileinfo, install_dir, ag):
     excludelist = tuple(ag.get("NoStrip", []))
 
@@ -165,9 +172,11 @@ def strip_debug_action(filepath, fileinfo, install_dir, ag):
     if util.strip_file(filepath, fileinfo, outputpath):
         ctx.ui.debug("{0} [{1}]".format(path, "stripped"))
 
+
 class Builder:
     """Provides the package build and creation routines"""
-    #FIXME: this class and every other class must use URLs as paths!
+
+    # FIXME: this class and every other class must use URLs as paths!
 
     @staticmethod
     def from_name(name):
@@ -184,10 +193,10 @@ class Builder:
                 src_path = str(src_uri)
             else:
                 repo = repodb.get_repo(reponame)
-                #FIXME: don't use dirname to work on URLs
+                # FIXME: don't use dirname to work on URLs
                 src_path = os.path.join(
-                                    os.path.dirname(repo.indexuri.get_uri()),
-                                    str(src_uri.path()))
+                    os.path.dirname(repo.indexuri.get_uri()),
+                    str(src_uri.path()))
 
             ctx.ui.debug(_("Source URI: {}").format(src_path))
 
@@ -219,7 +228,7 @@ class Builder:
 
         # Check package format
         self.target_package_format = ctx.get_option("package_format") \
-                                        or inary.package.Package.default_format
+                                     or inary.package.Package.default_format
 
         self.read_translations(self.specdir)
 
@@ -257,7 +266,7 @@ class Builder:
 
     def read_translations(self, specdir):
         self.spec.read_translations(util.join_path(specdir,
-                                    ctx.const.translations_file))
+                                                   ctx.const.translations_file))
 
     def package_filename(self, package_info, release_info=None,
                          distro_id=None, with_extension=True):
@@ -292,7 +301,6 @@ class Builder:
                               ctx.config.tmp_dir(),
                               packageDir)
 
-
     def pkg_work_dir(self):
         suffix = "-{}".format(self.build_type) if self.build_type else ""
         return self.pkg_dir() + ctx.const.work_dir_suffix + suffix
@@ -319,11 +327,11 @@ class Builder:
         architecture = ctx.config.values.general.architecture
         if architecture in self.spec.source.excludeArch:
             raise ExcludedArchitectureException(
-                    _("pspec.xml avoids this package from building for '{}'").format(
-                      architecture))
+                _("pspec.xml avoids this package from building for '{}'").format(
+                    architecture))
 
         ctx.ui.status(_("Building source package: {}").format(
-                self.spec.source.name))
+            self.spec.source.name))
         # check if all patch files exists, if there are missing no need
         # to unpack!
         self.check_patches()
@@ -353,7 +361,7 @@ class Builder:
 
     def get_build_types(self):
         ignored_build_types = \
-                ctx.config.values.build.ignored_build_types.split(",")
+            ctx.config.values.build.ignored_build_types.split(",")
         build_types = [""]
         packages = []
 
@@ -410,7 +418,7 @@ class Builder:
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
-        #TODO: Add support for using both of them
+        # TODO: Add support for using both of them
         if ctx.config.values.build.buildhelper == "icecream":
             if os.path.exists("/opt/icecream/bin/gcc"):
                 self.has_icecream = True
@@ -429,7 +437,7 @@ class Builder:
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
         pkgname = os.path.basename(self.specdiruri)
         self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
-        #self.location = os.path.dirname(self.url.uri)
+        # self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
         self.check_build_dependencies()
@@ -473,7 +481,7 @@ class Builder:
                 file_name = os.path.basename(afile.filename)
                 dir_name = os.path.dirname(afile.filename)
                 afileuri = util.join_path(self.specdiruri,
-                                ctx.const.files_dir, dir_name, file_name)
+                                          ctx.const.files_dir, dir_name, file_name)
                 self.download(afileuri, util.join_path(self.destdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
@@ -482,11 +490,10 @@ class Builder:
         for package in self.spec.packages:
             for pscom in package.providesScom:
                 scomuri = util.join_path(self.specdiruri,
-                                ctx.const.scom_dir, pscom.script)
+                                         ctx.const.scom_dir, pscom.script)
                 self.download(scomuri, util.join_path(self.specdir,
-                                                       ctx.const.scom_dir))
+                                                      ctx.const.scom_dir))
                 ctx.ui.info("Scom Script Fetched {}".format(pscom.script))
-
 
     @staticmethod
     def download(uri, transferdir):
@@ -525,11 +532,13 @@ class Builder:
         self.spec.source.partOf = comp.name
 
     def fetch_source_archives(self):
-        ctx.ui.status(_("Building source package: {} [ Fetching Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: {} [ Fetching Step ]").format(self.spec.source.name),
+                      push_screen=False)
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
-        ctx.ui.status(_("Building source package: {} [ Unpacking Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: {} [ Unpacking Step ]").format(self.spec.source.name),
+                      push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
@@ -543,24 +552,28 @@ class Builder:
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ctx.ui.status(_("Building source package: {} [ SetupAction Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: {} [ SetupAction Step ]").format(self.spec.source.name),
+                      push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
     def run_build_action(self):
-        ctx.ui.status(_("Building source package: {} [ BuildAction Step ]").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: {} [ BuildAction Step ]").format(self.spec.source.name),
+                      push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Building source..."))
         if self.run_action_function(ctx.const.build_func):
             self.set_state("buildaction")
 
     def run_check_action(self):
-        ctx.ui.status(_("Building source package: [ CheckAction Step ] {}").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: [ CheckAction Step ] {}").format(self.spec.source.name),
+                      push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
-        ctx.ui.status(_("Building source package: [ InstallAction Step ] {}").format(self.spec.source.name), push_screen=False)
+        ctx.ui.status(_("Building source package: [ InstallAction Step ] {}").format(self.spec.source.name),
+                      push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Installing..."))
 
         # Before the default install make sure install_dir is clean
@@ -587,8 +600,8 @@ class Builder:
         def is_included(path1, path2):
             """Return True if path2 includes path1"""
             return path1 == path2 \
-                    or fnmatch.fnmatch(path1, path2) \
-                    or (not os.path.isfile(path2) and fnmatch.fnmatch(path1, util.join_path(path2, "*")))
+                   or fnmatch.fnmatch(path1, path2) \
+                   or (not os.path.isfile(path2) and fnmatch.fnmatch(path1, util.join_path(path2, "*")))
 
         for root, dirs, files in os.walk(install_dir):
             if not dirs and not files:
@@ -641,10 +654,10 @@ class Builder:
             return compile(buf, fname, "exec")
         except IOError as e:
             raise Error(_("Unable to read Actions Script ({0}): {1}").format(
-                          fname, e))
+                fname, e))
         except SyntaxError as e:
             raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
-                          fname, e))
+                fname, e))
 
     def load_action_script(self):
         """Compiles and executes the action script"""
@@ -653,9 +666,9 @@ class Builder:
 
         try:
             localSymbols = globalSymbols = {}
-            exec(compiled_script, localSymbols, globalSymbols)
+            exec (compiled_script, localSymbols, globalSymbols)
         except Exception as e:
-            raise(e)
+            raise (e)
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
@@ -665,17 +678,18 @@ class Builder:
         for package in self.spec.packages:
             for pscom in package.providesScom:
                 fname = util.join_path(self.specdir, ctx.const.scom_dir,
-                                     pscom.script)
+                                       pscom.script)
 
                 try:
                     buf = open(fname).read()
                     compile(buf, "error", "exec")
                 except IOError as e:
                     raise Error(_("Unable to read SCOM script ({0}): {1}").format(
-                                  fname, e))
+                        fname, e))
                 except SyntaxError as e:
                     raise Error(_("SyntaxError in SCOM file ({0}): {1}").format(
-                                  fname, e))
+                        fname, e))
+
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
 
@@ -702,7 +716,8 @@ class Builder:
                 if not ext:
                     break
             if not os.path.exists(src_dir):
-                src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).__next__()[1] if not d.startswith(".")][0])
+                src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).__next__()[1] if
+                                                               not d.startswith(".")][0])
                 if self.get_state() == "unpack": ctx.ui.debug("Using {} as  WorkDir".format(src_dir))
 
         return src_dir
@@ -710,8 +725,8 @@ class Builder:
     @staticmethod
     def log_sandbox_violation(operation, path, canonical_path):
         ctx.ui.error(_("Sandbox violation: {0} ({1} -> {2})").format(operation,
-                                                              path,
-                                                              canonical_path))
+                                                                     path,
+                                                                     canonical_path))
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
@@ -762,8 +777,8 @@ class Builder:
                     ctx.ui.error(_("Sandbox violation result:"))
                     for result in ret.violations:
                         ctx.ui.error("{0} ({1} -> {2})".format(result[0],
-                                                        result[1],
-                                                        result[2]))
+                                                               result[1],
+                                                               result[2]))
                     raise Error(_("Sandbox violations!"))
 
                 if ret.code == 1:
@@ -817,7 +832,7 @@ class Builder:
                 extra_names = [x for x in extra_names if not self.installdb.has_package(x)]
                 if extra_names:
                     ctx.ui.warning(_('Safety switch: following extra packages in system.devel will be installed: ') +
-                               util.strlist(extra_names))
+                                   util.strlist(extra_names))
                     extra_deps = [dependency.Dependency(package=x) for x in extra_names]
                     build_deps.extend(extra_deps)
             else:
@@ -841,7 +856,7 @@ class Builder:
                     if not dep.satisfied_by_repo():
                         raise Error(_('Build dependency {} cannot be satisfied').format(str(dep)))
                 if ctx.ui.confirm(
-                _('Do you want to install the unsatisfied build dependencies')):
+                        _('Do you want to install the unsatisfied build dependencies')):
                     ctx.ui.info(_('Installing build dependencies.'))
                     if not inary.api.install([dep.package for dep in dep_unsatis], reinstall=True):
                         fail()
@@ -854,7 +869,7 @@ class Builder:
         """check existence of patch files and their sizes."""
 
         files_dir = os.path.abspath(util.join_path(self.specdir,
-                                                 ctx.const.files_dir))
+                                                   ctx.const.files_dir))
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
@@ -864,7 +879,7 @@ class Builder:
 
     def apply_patches(self):
         files_dir = os.path.abspath(util.join_path(self.specdir,
-                                                 ctx.const.files_dir))
+                                                   ctx.const.files_dir))
 
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
@@ -978,9 +993,9 @@ class Builder:
             # add the files under material path
             for fpath, fhash in util.get_file_hashes(path, collisions, install_dir):
                 if ctx.get_option('create_static') \
-                    and fpath.endswith(ctx.const.ar_file_suffix) \
-                    and not package.name.endswith(ctx.const.static_name_suffix) \
-                    and util.is_ar_file(fpath):
+                        and fpath.endswith(ctx.const.ar_file_suffix) \
+                        and not package.name.endswith(ctx.const.static_name_suffix) \
+                        and util.is_ar_file(fpath):
                     # if this is an ar file, and this package is not a static package,
                     # don't include this file into the package.
                     continue
@@ -996,27 +1011,27 @@ class Builder:
 
                 for afile in package.additionalFiles:
                     # FIXME: Better way?
-                    if frpath == util.removepathprefix("/",afile.target):
+                    if frpath == util.removepathprefix("/", afile.target):
                         # This is an additional file, uid and gid will change
                         if afile.owner is None:
-                            afile.owner="root"
+                            afile.owner = "root"
                         if afile.group is None:
-                            afile.group="root"
+                            afile.group = "root"
 
                         try:
                             _uid = str(pwd.getpwnam(afile.owner)[2])
                         except KeyError:
                             ctx.ui.warning(_("No user named '%s' found "
-                                                 "on the system") % afile.owner)
+                                             "on the system") % afile.owner)
                         try:
                             _gid = str(grp.getgrnam(afile.group)[2])
                         except KeyError:
                             ctx.ui.warning(_("No group named '%s' found "
-                                                 "on the system") % afile.group)
+                                             "on the system") % afile.group)
                         break
                 d[frpath] = Files.FileInfo(path=frpath, type=ftype, permanent=permanent,
-                                     size=fsize, hash=fhash, uid=_uid, gid=_gid,
-                                     mode=oct(stat.S_IMODE(st.st_mode)))
+                                           size=fsize, hash=fhash, uid=_uid, gid=_gid,
+                                           mode=oct(stat.S_IMODE(st.st_mode)))
 
                 if stat.S_IMODE(st.st_mode) & stat.S_ISUID:
                     ctx.ui.warning(_("/{} has suid bit set").format(frpath))
@@ -1084,8 +1099,8 @@ class Builder:
             for afile in package.additionalFiles:
                 src = os.path.join(ctx.const.files_dir, afile.filename)
                 dest = os.path.join(
-                        install_dir + os.path.dirname(afile.target),
-                        os.path.basename(afile.target))
+                    install_dir + os.path.dirname(afile.target),
+                    os.path.basename(afile.target))
                 util.copy_file(src, dest)
 
                 # FIXME: Check that chmodding is safe for non-root builds
@@ -1157,8 +1172,8 @@ class Builder:
             ctx.ui.info(_("Creating {}...").format(name))
 
             pkg = inary.package.Package(name, "w",
-                                       format=self.target_package_format,
-                                       tmp_dir=self.pkg_dir())
+                                        format=self.target_package_format,
+                                        tmp_dir=self.pkg_dir())
 
             # add config files to package
             os.chdir(self.specdir)
@@ -1190,7 +1205,8 @@ class Builder:
                 # "1.0" format does not have an archive
                 archive_format = ""
 
-            self.metadata.package.installTarHash = util.sha1_file("{0}/install{1}".format(self.pkg_dir(), archive_format))
+            self.metadata.package.installTarHash = util.sha1_file(
+                "{0}/install{1}".format(self.pkg_dir(), archive_format))
             self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
             pkg.add_metadata_xml(ctx.const.metadata_xml)
 
@@ -1215,7 +1231,6 @@ class Builder:
             util.clean_dir(self.pkg_dir())
         else:
             ctx.ui.info(_("Keeping build directory"))
-
 
         # reset environment variables after build.  this one is for
         # buildfarm actually. buildfarm re-inits inary for each build
@@ -1308,8 +1323,9 @@ def build(pspec):
     finally:
         if ctx.ui.errors or ctx.ui.warnings:
             ctx.ui.warning(_("*** %d error(s), %d warning(s)") \
-                            % (ctx.ui.errors, ctx.ui.warnings))
+                           % (ctx.ui.errors, ctx.ui.warnings))
     return pb
+
 
 order = {"none": 0,
          "fetch": 1,
@@ -1319,41 +1335,44 @@ order = {"none": 0,
          "installaction": 5,
          "buildpackages": 6}
 
+
 def __buildState_fetch(pb):
     # fetch is the first state to run.
     pb.check_patches()
     pb.fetch_source_archives()
+
 
 def __buildState_unpack(pb, last):
     if order[last] < order["fetch"]:
         __buildState_fetch(pb)
     pb.unpack_source_archives()
 
+
 def __buildState_setupaction(pb, last):
     if order[last] < order["unpack"]:
         __buildState_unpack(pb, last)
     pb.run_setup_action()
 
-def __buildState_buildaction(pb, last):
 
+def __buildState_buildaction(pb, last):
     if order[last] < order["setupaction"]:
         __buildState_setupaction(pb, last)
     pb.run_build_action()
 
-def __buildState_checkaction(pb, last):
 
+def __buildState_checkaction(pb, last):
     if order[last] < order["buildaction"]:
         __buildState_buildaction(pb, last)
     pb.run_check_action()
 
-def __buildState_installaction(pb, last):
 
+def __buildState_installaction(pb, last):
     if order[last] < order["buildaction"]:
         __buildState_buildaction(pb, last)
     pb.run_install_action()
 
-def __buildState_buildpackages(pb):
 
+def __buildState_buildpackages(pb):
     for build_type in pb.build_types:
         pb.set_build_type(build_type)
         last = pb.get_state() or "none"
@@ -1362,6 +1381,7 @@ def __buildState_buildpackages(pb):
             __buildState_installaction(pb, last)
 
     pb.build_packages()
+
 
 def build_until(pspec, state):
     if pspec.endswith('.xml'):

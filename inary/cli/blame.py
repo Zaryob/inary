@@ -39,7 +39,7 @@ Usage: blame <package> ... <package>
         group = optparse.OptionGroup(self.parser, _("blame options"))
         group.add_option("-r", "--release", action="store", type="int", help=_("Blame for the given release"))
         group.add_option("-a", "--all", action="store_true", default=False,
-                help=_("Blame for all of the releases"))
+                         help=_("Blame for all of the releases"))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -67,8 +67,9 @@ Usage: blame <package> ... <package>
     @staticmethod
     def print_package_info(package, hno=0):
         s = _('Name: {0}, version: {1}, release: {2}\n').format(
-              package.name, package.history[hno].version, package.history[hno].release)
-        s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name), package.source.packager.email)
+            package.name, package.history[hno].version, package.history[hno].release)
+        s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name),
+                                                         package.source.packager.email)
         s += _('Release Updater: {0.name} <{0.email}>\n').format(package.history[hno])
         s += _('Update Date: {}\n').format(package.history[hno].date)
         s += '\n{}\n'.format(package.history[hno].comment)

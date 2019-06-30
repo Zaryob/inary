@@ -29,8 +29,10 @@ import inary.configfile
 import inary.errors
 import inary.util as util
 
+
 class Error(inary.errors.Error):
     pass
+
 
 class Options(object):
     def __getattr__(self, name):
@@ -40,13 +42,13 @@ class Options(object):
             return self.__dict__[name]
 
     def __setattr__(self, name, value):
-            self.__dict__[name] = value
+        self.__dict__[name] = value
 
 
 class Config(object, metaclass=util.Singleton):
     """Config Singleton"""
 
-    def __init__(self, options = Options()):
+    def __init__(self, options=Options()):
         self.set_options(options)
         self.values = inary.configfile.ConfigurationFile("/etc/inary/inary.conf")
 
@@ -155,5 +157,6 @@ class Config(object, metaclass=util.Singleton):
         else:
             return userdir
 
-#TODO: remove this
+
+# TODO: remove this
 config = Config()

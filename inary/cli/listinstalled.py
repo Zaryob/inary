@@ -23,6 +23,7 @@ import inary.context as ctx
 import inary.db
 import sys
 
+
 class ListInstalled(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Print the list of all installed packages
 
@@ -46,16 +47,16 @@ Usage: list-installed
                          help=_("Only list the installed packages built "
                                 "by the given host"))
         group.add_option("-l", "--long", action="store_true",
-                               default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                               default=None, help=_("List installed packages under given component"))
+                         default=None, help=_("List installed packages under given component"))
         group.add_option("-i", "--install-info", action="store_true",
-                               default=False, help=_("Show detailed install info"))
+                         default=False, help=_("Show detailed install info"))
 
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init(database = True, write = False)
+        self.init(database=True, write=False)
 
         build_host = ctx.get_option("with_build_host")
         if build_host is None:

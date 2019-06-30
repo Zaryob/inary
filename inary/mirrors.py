@@ -13,12 +13,13 @@
 
 import os.path
 
-import inary.errors
 import inary.context as ctx
+import inary.errors
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class Mirrors:
     def __init__(self, config=ctx.const.mirrors_conf):
@@ -41,9 +42,9 @@ class Mirrors:
         if os.path.exists(config):
             for line in open(config, "r").readlines():
                 if not line.startswith('#') and not line == '\n':
-                  mirror = line.strip().split()
-                  if len(mirror) == 2:
-                      (name, url) = mirror
-                      self._add_mirror(name, url)
+                    mirror = line.strip().split()
+                    if len(mirror) == 2:
+                        (name, url) = mirror
+                        self._add_mirror(name, url)
         else:
             raise inary.errors.Error(_('Mirrors file {} does not exist. Could not resolve mirrors://').format(config))
