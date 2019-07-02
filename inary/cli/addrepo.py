@@ -23,14 +23,14 @@ import inary.cli.command as command
 import inary.context as ctx
 import inary.db
 import inary.errors
+import inary.misc.epoch2string as e2s
 
 
 class AddRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Add a repository
 
-Usage: add-repo <repo> <indexuri>
+Usage: add-repo <indexuri>
 
-<repo>: name of repository to add
 <indexuri>: URI of index file
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
@@ -60,10 +60,12 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         repository.remove_repo(repo)
 
     def run(self):
-
-        if len(self.args) == 2:
+        if len(self.args) == 1:
+            #We need time based random name.
+            name=e2s.nextString()
+            indexuri = self.args[0]
             self.init()
-            name, indexuri = self.args
+            ctx.ui.debug(name+" "+indexuri)
 
             if ctx.get_option('no_fetch'):
                 if not ctx.ui.confirm(_('Add {} repository without updating the database?\nBy confirming '
@@ -73,7 +75,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                     return
 
             repository.add_repo(name, indexuri, ctx.get_option('at'))
-
+            
         else:
             self.help()
             return
