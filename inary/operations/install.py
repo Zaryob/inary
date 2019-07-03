@@ -28,7 +28,6 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
-from inary.misc.uniq import uniq
 
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
