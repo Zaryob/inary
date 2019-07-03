@@ -10,7 +10,6 @@
 # Please read the COPYING file.
 #
 
-import sys
 import glob
 import os
 import sys

@@ -21,6 +21,7 @@ import fnmatch
 import hashlib
 import operator
 import os
+import platform
 import re
 import shutil
 import struct
@@ -160,6 +161,28 @@ def flatten_list(l):
     # Fastest solution is list comprehension
     # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
     return [item for sublist in l for item in sublist]
+
+def uniq(list, sort=False):
+    """Uniq is a list generation algorithm to delete againist arguments by Ali Rıza"""
+    newlist=[]
+    if list != []:
+        if sort:
+            list.sort()
+            mcout=len(list)
+            cout=0
+            newlist.append(list[0])
+            while cout < mcout-1:
+                if list[cout+1] != list[cout]:
+                    newlist.append(list[cout])
+                cout=cout+1
+        else:
+            for item in list:
+                if item not in newlist:
+                    newlist.append(item)
+    else:
+        newlist=[]
+    return newlist
+
 
 
 def strlist(l):
@@ -1120,7 +1143,6 @@ def get_vm_info():
         import subprocess
     except ImportError:
         raise Exception(_("Module: \"subprocess\" can not import"))
-
     if platform.system() == 'Linux':
         try:
             proc = subprocess.Popen(["free"],

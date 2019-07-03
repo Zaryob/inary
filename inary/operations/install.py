@@ -28,7 +28,6 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
-from inary.misc.uniq import uniq
 
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
@@ -88,7 +87,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-    ignore_dep = ctx.config.get_option('ignore_dependency')
+    ignore_dep = ctx.config.get_option('ignore_dependency') # Fixme: Fuck
 
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
@@ -296,7 +295,7 @@ def plan_install_pkg_names(A):
             uniqdep=[]
             for dep in pkg.runtimeDependencies():
                    uniqdep.append(dep)
-            uniqdep=uniq(uniqdep)
+            uniqdep=util.uniq(uniqdep)
             for dep in uniqdep:
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
                 if not dep.satisfied_by_installed():

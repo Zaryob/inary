@@ -199,6 +199,7 @@ class Fetcher:
             try:
                 c.perform()
                 file_id.close()
+                ctx.ui.info("\n")
                 ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()
             except pycurl.error as x:
@@ -223,7 +224,7 @@ class Fetcher:
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = encodesbytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+            enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return headers
 
@@ -283,7 +284,7 @@ def fetch(packages=None, path=os.path.curdir):
             ctx.ui.warning(_("{} package already fetched").format(uri.path()))
             continue
         if uri.is_absolute_path():
-            url = str(pkg_uri)
+            url = str(uri.path())
         else:
             url = os.path.join(os.path.dirname(repodb.get_repo_url(repo)), str(uri.path()))
 

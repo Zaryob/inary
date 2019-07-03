@@ -1,9 +1,14 @@
 import inary.actionsapi
 import inary.util as util
+import inary.context as ctx
 from inary.actionsapi import get
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
 
+
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
 
 class MesonError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -48,5 +53,5 @@ def ninja_install(parameters=""):
 
 
 def ninja_check():
-    if system('ninja test {} -C inaryPackageBuild'.format(get.makeJobs())):
+    if system('ninja test {} -C inaryPackageBuild'.format(get.makeJOBS())):
         raise MesonError(_("[Ninja]: Test failed"))

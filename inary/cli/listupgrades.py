@@ -13,6 +13,7 @@
 #
 
 import optparse
+import sys
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -57,14 +58,13 @@ Lists the packages that will be upgraded.
 
         upgradable_pkgs = list(filter(is_upgradable, installdb.list_installed()))
         # replaced packages can not pass is_upgradable test, so we add them manually
-        upgradable_pkgs.extend(list_replaces())
+        #upgradable_pkgs.extend(list_replaces())
 
         # consider also blacklist filtering
         upgradable_pkgs = inary.blacklist.exclude_from(upgradable_pkgs, ctx.const.blacklist)
 
         component = ctx.get_option('component')
         if component:
-            # FIXME: INARY api is insufficient to do this
             component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 

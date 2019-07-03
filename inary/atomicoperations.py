@@ -252,7 +252,6 @@ class Install(AtomicOperation):
         pkg = self.pkginfo
 
         if self.installdb.has_package(pkg.name):  # is this a reinstallation?
-            ipkg = self.installdb.get_package(pkg.name)
             (iversion_s, irelease_s, ibuild) = self.installdb.get_version(pkg.name)
 
             # determine if same version
@@ -551,10 +550,10 @@ class Install(AtomicOperation):
             actions = self.pkginfo.get_update_actions("1")
 
         for package_name in actions.get("serviceRestart", []):
-            inary.db.installdb.InstallDB().mark_needs_restart(package)
+            inary.db.installdb.InstallDB().mark_needs_restart(package_name)
 
         for package_name in actions.get("systemRestart", []):
-            inary.db.installdb.InstallDB().mark_needs_reboot(package)
+            inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
         ctx.ui.info(_('-> Adding \'{}\' to db...').format(self.metadata.package.name), color='purple')
