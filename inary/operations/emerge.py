@@ -44,10 +44,9 @@ def emerge(A):
         ctx.ui.info(_('No packages to emerge.'))
         return
 
-    # A |= upgrade_base(A)
+    #A |= upgrade_base(A)
 
-    # FIXME: Errr... order_build changes type conditionally and this
-    # is not good. - baris
+    # FIXME: Errr... order_build changes type conditionally and this is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A)
     else:
