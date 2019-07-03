@@ -34,16 +34,6 @@ import inary.util as util
 xmlext içine tag için remove eklenene kadar böyle
 """
 
-try:
-    import ciksemel
-
-    parser = "ciksemel"
-except:
-    import xml.dom.minidom as minidom
-
-    parser = "minidom"
-
-
 class RepoError(inary.errors.Error):
     pass
 
@@ -82,29 +72,15 @@ class RepoOrder:
 
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
+        for r in xmlext.getTagByName(repo_doc, "Repo"):
+            if xmlext.getNodeText(r, "Name") == repo_name:
+                status_node = xmlext.getNode(r, "Status")
+                if status_node:
+                    xmlext.removeChild(status_node, r)
+                    xmlext.addText(r, "Status", status)
+                else:
+                    xmlext.addText(r, "Status", status)
 
-        if parser == "ciksemel":
-            for r in repo_doc.tags("Repo"):
-                if r.getTagData("Name") == repo_name:
-                    status_node = r.getTag("Status")
-                    if status_node:
-                        status_node.firstChild().hide()
-                        status_node.insertData(status)
-                    else:
-                        status_node = r.insertTag("Status")
-                        status_node.insertData(status)
-
-        else:
-            for r in repo_doc.childNodes:
-                if r.nodeType == r.ELEMENT_NODE and r.tagName == "Repo":
-                    if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                        status_node = r.getElementsByTagName("Status")[0]
-                        if status_node:
-                            status_node.childNodes[0].nodeValue = status
-                        else:
-                            status_node = repo_node.createElement("Status")
-                            status_node.appendChild(repo_doc.createTextNode("active"))
-                            r.appendChild(status_node)
 
         self._update(repo_doc)
 
@@ -120,17 +96,12 @@ class RepoOrder:
 
         return "inactive"
 
+
     def remove(self, repo_name):
         repo_doc = self._get_doc()
-
-        if parser == "ciksemel":
-            for r in repo_doc.tags("Repo"):
-                if r.getTagData("Name") == repo_name:
-                    r.hide()
-        else:
-            for r in repo_doc.getElementsByTagName("Repo"):
-                if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
-                    repo_doc.removeChild(r)
+        for r in xmlext.getChildElts(repo_doc):
+            if xmlext.getNodeText(r, "Name") == repo_name:
+                xmlext.removeChild(r, repo_doc)
 
         self._update(repo_doc)
 
