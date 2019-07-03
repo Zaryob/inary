@@ -28,7 +28,6 @@ import inary.util as util
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-from inary.misc.uniq import uniq
 
 class PackageDB(lazydb.LazyDB):
 

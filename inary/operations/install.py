@@ -28,7 +28,6 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
-from inary.misc.uniq import uniq
 
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
@@ -97,7 +96,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
     paths = []
     extra_paths = {}
     for x in order:
-        ctx.ui.info(_("\nDownloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
+        util.xterm_title(_("Downloading %d / %d") % (order.index(x) + 1, len(order)))
+        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
@@ -115,6 +115,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         operations.remove.remove_conflicting_packages(conflicts)
 
     for path in paths:
+        util.xterm_title(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)))
         ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
         install_op = atomicoperations.Install(path)
         install_op.install(False)
@@ -124,7 +125,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
-
+    util.xterm_title_reset()
     return True
 
 
