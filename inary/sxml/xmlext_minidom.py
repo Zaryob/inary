@@ -215,12 +215,12 @@ def addText(node, tagPath, text, branch=True):
     return addNode(node, tagPath, newnode, branch=branch)
 
 
-def removeChild(node, tag):
-    node.removeChild(tag)
+def removeChild(node, doc):
+    doc.removeChild(node)
 
 
 def removeChildText(node):
-    pass
+    node.childNodes[0].nodeValue = ""
 
 
 def removeAttribute(node):

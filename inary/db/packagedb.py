@@ -23,11 +23,11 @@ import inary.db
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
 from inary.sxml import xmlext
+import inary.util as util
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-from inary.misc.uniq import uniq
 
 class PackageDB(lazydb.LazyDB):
 
@@ -63,7 +63,7 @@ class PackageDB(lazydb.LazyDB):
         for node in packages:
             if xmlext.getNodeText(node, "Replaces"):
                 replaces.append(xmlext.getNodeText(node, "Name"))
-        return uniq(replaces)
+        return util.uniq(replaces)
 
     @staticmethod
     def __generate_obsoletes(doc):
@@ -137,12 +137,12 @@ class PackageDB(lazydb.LazyDB):
             fields = {'name': True, 'summary': True, 'desc': True}
         found = []
         for name, xml in self.pdb.get_items_iter(repo):
-            if terms == [term for term in terms if (fields['name'] and \
+            if terms == [term for term in terms if (fields['name'] and
                                                     re.compile(term, re.I).search(name)) or \
-                                                   (fields['summary'] and \
+                                                   (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
                                                         xml)) or \
-                                                   (fields['desc'] and \
+                                                   (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
                 found.append(name)
@@ -272,4 +272,4 @@ class PackageDB(lazydb.LazyDB):
 
             if enter_date >= since_date:
                 packages.append(pkg)
-        return uniq(packages)
+        return util.uniq(packages)

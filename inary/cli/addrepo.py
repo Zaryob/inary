@@ -29,8 +29,11 @@ import inary.misc.epoch2string as e2s
 class AddRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Add a repository
 
-Usage: add-repo <indexuri>
+Usage: add-repo <repo-name> <indexuri>
+       add-repo <indexuri>
 
+<repo-name>: It is the optional parameter that using to define repository name.
+             Unless defined, random data will be used as repository name.
 <indexuri>: URI of index file
 
 NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
@@ -60,22 +63,28 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         repository.remove_repo(repo)
 
     def run(self):
+        name, indexuri = None, None
         if len(self.args) == 1:
             #We need time based random name.
-            name=e2s.nextString()
+            name = e2s.nextString()
             indexuri = self.args[0]
-            self.init()
-            ctx.ui.debug(name+" "+indexuri)
 
-            if ctx.get_option('no_fetch'):
-                if not ctx.ui.confirm(_('Add {} repository without updating the database?\nBy confirming '
-                                        'this you are also adding the repository to your system without '
-                                        'checking the distribution of the repository.\n'
-                                        'Do you want to continue?').format(name)):
-                    return
+        elif len(self.args) == 2:
+            name, indexuri = self.args
 
-            repository.add_repo(name, indexuri, ctx.get_option('at'))
-            
         else:
             self.help()
             return
+
+        self.init()
+        ctx.ui.debug(_("The repository: {} \tIndex URI: {} "))
+
+
+        if ctx.get_option('no_fetch'):
+            if not ctx.ui.confirm(_('Add {} repository without updating the database?\nBy confirming '
+                                'this you are also adding the repository to your system without '
+                                'checking the distribution of the repository.\n'
+                                'Do you want to continue?').format(name)):
+                return
+
+        repository.add_repo(name, indexuri, ctx.get_option('at'))

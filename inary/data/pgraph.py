@@ -55,7 +55,11 @@ class Digraph(object):
 
     def add_vertex(self, u, data=None):
         """add vertex u, optionally with data"""
-        assert not u in self.__v
+        try:
+            assert not u in self.__v
+        except:
+            ctx.ui.debug(_("Package {} not in vertex list.".format(u)))
+
         self.__v.add(u)
         self.__adj[u] = set()
         if data:

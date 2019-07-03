@@ -17,11 +17,15 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.errors
 import inary.context as ctx
 import inary.db
 import inary.data
+import inary.errors
+import inary.file
+import inary.ui
+import inary.uri
 import inary.util as util
+
 
 
 @util.locked
@@ -103,7 +107,7 @@ def __update_repo(repo, force=False):
         repouri = repodb.get_repo(repo).indexuri.get_uri()
         try:
             index.read_uri_of_repo(repouri, repo)
-        except inary.file.AlreadyHaveException as e:
+        except inary.file.AlreadyHaveException:
             ctx.ui.info(_('{} repository information is up-to-date.').format(repo))
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))

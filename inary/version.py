@@ -20,6 +20,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary
+import inary.errors
 
 # Basic rule is:
 # p > (no suffix) > m > rc > pre > beta > alpha

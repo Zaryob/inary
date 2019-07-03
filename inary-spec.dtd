@@ -100,7 +100,7 @@
 	Provides
 )*>
 
-<!ELEMENT Provides (COMAR)+>
+<!ELEMENT Provides (SCOM)+>
 <!ELEMENT SCOM (#PCDATA)>
 <!ATTLIST SCOM script CDATA #IMPLIED>
 <!ATTLIST SCOM name CDATA #IMPLIED>
