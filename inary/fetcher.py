@@ -199,6 +199,7 @@ class Fetcher:
             try:
                 c.perform()
                 file_id.close()
+                ctx.ui.info("\n")
                 ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()
             except pycurl.error as x:
