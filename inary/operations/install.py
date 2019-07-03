@@ -295,7 +295,7 @@ def plan_install_pkg_names(A):
             uniqdep=[]
             for dep in pkg.runtimeDependencies():
                    uniqdep.append(dep)
-            uniqdep=uniq(uniqdep)
+            uniqdep=util.uniq(uniqdep)
             for dep in uniqdep:
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
                 if not dep.satisfied_by_installed():
