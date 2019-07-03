@@ -28,7 +28,7 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
-
+from inary.misc.uniq import uniq
 
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
@@ -292,11 +292,15 @@ def plan_install_pkg_names(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
+            # removed same depencies for checking
+            uniqdep=[]
             for dep in pkg.runtimeDependencies():
+                   uniqdep.append(dep)
+            uniqdep=uniq(uniqdep)
+            for dep in uniqdep:
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
-                # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo():
+                    if not dep.satisfied_by_repo(packagedb):
                         raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
