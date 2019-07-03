@@ -612,9 +612,9 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 yield calculate_hash(root)
 
 
-def check_file_hash(filename, hash):
+def check_file_hash(filename, hash,skip=False):
     """Check the file's integrity with a given hash."""
-    return sha1_file(filename) == hash
+    return sha1_file(filename) == hash or skip
 
 
 def sha1_file(filename):
@@ -1123,6 +1123,7 @@ def get_cpu_count():
     """
     This function part of portage
     Copyright 2015 Gentoo Foundation
+    Copyright 2019 Sulin Community
     Distributed under the terms of the GNU General Public License v2
 
     Using:
@@ -1133,8 +1134,13 @@ def get_cpu_count():
         import multiprocessing
         return multiprocessing.cpu_count()
     except (ImportError, NotImplementedError):
-        return None
-
+        #read cpuinfo and get "cpu cores\t: x"
+        cpuinfo=open("/proc/cpuinfo","r").readlines()
+        for line in cpuinfo:
+            if "cpu cores\t:" in line:
+                return line[:len(line)-1].split(": ")[1]
+                break
+        return 1
 
 def get_vm_info():
     vm_info = {}

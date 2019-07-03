@@ -118,12 +118,13 @@ def __update_repo(repo, force=False):
         inary.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
 
         repodb.check_distribution(repo)
-
-        try:
-            index.check_signature(repouri, repo)
-        except inary.file.NoSignatureFound as e:
-            ctx.ui.warning(e)
-
+        if force == False:
+            try:
+                index.check_signature(repouri, repo)
+            except inary.file.NoSignatureFound as e:
+                ctx.ui.warning(e)
+        else:
+            ctx.ui.warning(_('Signature check disabled for {} !').format(repo))
         ctx.ui.info(_('Package database updated.'))
     else:
         raise inary.errors.Error(_('No repository named {} found.').format(repo))

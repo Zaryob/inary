@@ -38,6 +38,7 @@ import inary.ui
 import inary.util as util
 import inary.version
 
+from inary.db.repodb import RepoDB as repodb
 
 class Error(inary.errors.Error):
     pass
@@ -73,6 +74,27 @@ opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRAD
 class Install(AtomicOperation):
     """Install class, provides install routines for inary packages"""
 
+    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
+        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
+        "initialize from a file name"
+        super(Install, self).__init__(ignore_dep)
+        if not ignore_file_conflicts:
+            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
+        self.ignore_file_conflicts = ignore_file_conflicts
+        self.package_fname = package_fname
+        try:
+            self.package = inary.package.Package(package_fname)
+            self.package.read()
+        except zipfile.BadZipfile:
+            raise zipfile.BadZipfile(self.package_fname)
+        self.metadata = self.package.metadata
+        self.files = self.package.files
+        self.pkginfo = self.metadata.package
+        self.installedSize = self.metadata.package.installedSize
+        self.installdb = inary.db.installdb.InstallDB()
+        self.operation = INSTALL
+        self.store_old_paths = None
+
     @staticmethod
     def from_name(name, ignore_dep=None):
         packagedb = inary.db.packagedb.PackageDB()
@@ -80,14 +102,13 @@ class Install(AtomicOperation):
         # find package in repository
         repo = packagedb.which_repo(name)
         if repo:
-            repodb = inary.db.repodb.RepoDB()
+            
             ctx.ui.info(_("Package {0} found in repository {1}").format(name, repo))
-
-            repo = repodb.get_repo(repo)
+            installdb = inary.db.installdb.InstallDB()
+            repo = repodb.get_repo(repodb,repo)
             pkg = packagedb.get_package(name)
             delta = None
 
-            installdb = inary.db.installdb.InstallDB()
             # Package is installed. This is an upgrade. Check delta.
             if installdb.has_package(pkg.name):
                 (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
@@ -132,26 +153,6 @@ class Install(AtomicOperation):
         else:
             raise Error(_("Package {} not found in any active repository.").format(name))
 
-    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
-        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
-        "initialize from a file name"
-        super(Install, self).__init__(ignore_dep)
-        if not ignore_file_conflicts:
-            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
-        self.ignore_file_conflicts = ignore_file_conflicts
-        self.package_fname = package_fname
-        try:
-            self.package = inary.package.Package(package_fname)
-            self.package.read()
-        except zipfile.BadZipfile:
-            raise zipfile.BadZipfile(self.package_fname)
-        self.metadata = self.package.metadata
-        self.files = self.package.files
-        self.pkginfo = self.metadata.package
-        self.installedSize = self.metadata.package.installedSize
-        self.installdb = inary.db.installdb.InstallDB()
-        self.operation = INSTALL
-        self.store_old_paths = None
 
     def install(self, ask_reinstall=True):
 
