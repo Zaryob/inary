@@ -27,7 +27,7 @@ from inary.sxml import xmlext
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
+from inary.misc.uniq import uniq
 
 class PackageDB(lazydb.LazyDB):
 
@@ -63,7 +63,7 @@ class PackageDB(lazydb.LazyDB):
         for node in packages:
             if xmlext.getNodeText(node, "Replaces"):
                 replaces.append(xmlext.getNodeText(node, "Name"))
-        return replaces
+        return uniq(replaces)
 
     @staticmethod
     def __generate_obsoletes(doc):
@@ -272,4 +272,4 @@ class PackageDB(lazydb.LazyDB):
 
             if enter_date >= since_date:
                 packages.append(pkg)
-        return packages
+        return uniq(packages)
