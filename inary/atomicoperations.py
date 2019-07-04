@@ -96,15 +96,16 @@ class Install(AtomicOperation):
         self.store_old_paths = None
 
     @staticmethod
-    def from_name(name, ignore_dep=None):
-        packagedb = inary.db.packagedb.PackageDB()
+    def from_name(name,ignore_dep=None,packagedb=None,installdb=None):
+        if packagedb == None:
+            packagedb = inary.db.packagedb.PackageDB()
+        if installdb == None:
+            installdb = inary.db.installdb.InstallDB()
         # download package and return an installer object
         # find package in repository
         repo = packagedb.which_repo(name)
         if repo:
-            
             ctx.ui.info(_("Package {0} found in repository {1}").format(name, repo))
-            installdb = inary.db.installdb.InstallDB()
             repo = repodb.get_repo(repodb,repo)
             pkg = packagedb.get_package(name)
             delta = None
@@ -169,14 +170,11 @@ class Install(AtomicOperation):
         self.check_relations()
         self.check_operation()
 
-        ctx.disable_keyboard_interrupts()
-
         self.extract_install()
         self.store_inary_files()
         self.postinstall()
         self.update_databases()
 
-        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
