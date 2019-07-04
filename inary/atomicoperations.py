@@ -74,8 +74,16 @@ opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRAD
 class Install(AtomicOperation):
     """Install class, provides install routines for inary packages"""
 
-    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
-        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
+    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None,installdb=None,filesdb=None):
+        if installdb == None:
+            self.installdb = inary.db.installdb.InstallDB()
+        else:
+            self.installdb = installdb
+        if filesdb == None:
+            self.filesdb = inary.db.filesdb.FilesDB()
+        else:
+            self.filesdb = filesdb
+        if not ctx.filesdb: ctx.filesdb = self.filesdb
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
         if not ignore_file_conflicts:
@@ -91,16 +99,18 @@ class Install(AtomicOperation):
         self.files = self.package.files
         self.pkginfo = self.metadata.package
         self.installedSize = self.metadata.package.installedSize
-        self.installdb = inary.db.installdb.InstallDB()
+
         self.operation = INSTALL
         self.store_old_paths = None
 
     @staticmethod
-    def from_name(name,ignore_dep=None,packagedb=None,installdb=None):
+    def from_name(name,ignore_dep=None,packagedb=None,installdb=None,filesdb=None):
         if packagedb == None:
             packagedb = inary.db.packagedb.PackageDB()
         if installdb == None:
             installdb = inary.db.installdb.InstallDB()
+        if filesdb == None:
+            filesdb = inary.db.filesdb.FilesDB()
         # download package and return an installer object
         # find package in repository
         repo = packagedb.which_repo(name)
@@ -141,9 +151,7 @@ class Install(AtomicOperation):
             if cached_file and util.sha1_file(cached_file) != pkg_hash:
                 os.unlink(cached_file)
                 cached_file = None
-
-            install_op = Install(pkg_path, ignore_dep)
-
+            install_op = Install(pkg_path, ignore_dep,installdb,filesdb)
             # Bug 4113
             if not cached_file:
                 downloaded_file = install_op.package.filepath
