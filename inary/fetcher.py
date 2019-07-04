@@ -141,7 +141,7 @@ class Fetcher:
         self.destdir = destdir
         self.destfile = destfile
         self.progress = None
-
+        self.c = pycurl.Curl()
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
 
@@ -164,44 +164,43 @@ class Fetcher:
             raise FetchError(_('Access denied to destination file: "%s"') % self.archive_file)
 
         else:
-            c = pycurl.Curl()
-            c.protocol = self.url.scheme()
-            c.setopt(c.URL, self.url.get_uri())
+            self.c.protocol = self.url.scheme()
+            self.c.setopt(self.c.URL, self.url.get_uri())
             # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
-            c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
-            c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
-            c.setopt(pycurl.AUTOREFERER, 1)
-            c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
-            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
-            c.setopt(pycurl.MAXREDIRS, 10)
-            c.setopt(pycurl.NOSIGNAL, True)
+            self.c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
+            self.c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+            self.c.setopt(pycurl.AUTOREFERER, 1)
+            self.c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
+            # self.c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+            self.c.setopt(pycurl.MAXREDIRS, 10)
+            self.c.setopt(pycurl.NOSIGNAL, True)
             # Header
-            # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+            # self.c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
             handler = UIHandler()
             handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
 
             if os.path.exists(self.partial_file):
                 file_id = open(self.partial_file, "ab")
-                c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
+                self.c.setopt(self.c.RESUME_FROM, os.path.getsize(self.partial_file))
                 ctx.ui.info(_("Download resuming..."))
             else:
                 file_id = open(self.partial_file, "wb")
 
             # Function sets
-            c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
-            c.setopt(c.NOPROGRESS, False)
-            c.setopt(c.XFERINFOFUNCTION, handler.update)
+            self.c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
+            self.c.setopt(self.c.NOPROGRESS, False)
+            self.c.setopt(self.c.XFERINFOFUNCTION, handler.update)
 
-            c.setopt(pycurl.FOLLOWLOCATION, 1)
-            c.setopt(c.WRITEDATA, file_id)
+            self.c.setopt(pycurl.FOLLOWLOCATION, 1)
+            self.c.setopt(self.c.WRITEDATA, file_id)
 
             try:
-                c.perform()
+                self.c.perform()
                 file_id.close()
                 ctx.ui.info("\n")
-                ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
-                c.close()
+                ctx.ui.debug(_("Downloaded from:" + str(self.c.getinfo(self.c.EFFECTIVE_URL))))
+                self.c.close()
             except pycurl.error as x:
                 raise FetchError("Pycurl.Error: {}".format(x))
 

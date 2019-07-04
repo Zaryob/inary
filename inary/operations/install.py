@@ -36,6 +36,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
+    filesdb   = inary.db.filesdb.FilesDB()
 
     A = [str(x) for x in A]  # FIXME: why do we still get unicode input here? :/
     # A was a list, remove duplicates
@@ -96,7 +97,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     extra_paths = {}
     for x in order:
         ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
-        install_op = atomicoperations.Install.from_name(x,ignore_dep,packagedb,installdb)
+        install_op = atomicoperations.Install.from_name(x,ignore_dep,packagedb,installdb,filesdb)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
             extra_paths[install_op.package_fname] = x

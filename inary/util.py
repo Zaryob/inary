@@ -1048,6 +1048,13 @@ def colorize(msg, color):
     else:
         return str(msg)
 
+def colorize_percent(msg,percent,color='backgroundgreen',color2='backgroundyellow'):
+    if len(msg)<1:
+        return str(msg)
+    lmsg=int((len(msg)*percent)/100)+1
+    if lmsg>=len(msg):
+       return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
+    return str(ctx.const.colors[color]+ msg[:lmsg]+ctx.const.colors[color2]+msg[lmsg:]+ctx.const.colors['default'])
 
 def config_changed(config_file):
     fpath = join_path(ctx.config.dest_dir(), config_file.path)
