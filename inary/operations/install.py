@@ -55,9 +55,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(_('No packages to install.'))
         return True
 
-    A |= operations.upgrade.upgrade_base(A)
-
-    if not ctx.config.get_option('ignore_dependency'):
+    A |= set()
+    ignore_dep = ctx.config.get_option('ignore_dependency')
+    if not ignore_dep:
         G_f, order = plan_install_pkg_names(A)
     else:
         G_f = None
@@ -87,7 +87,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-    ignore_dep = ctx.config.get_option('ignore_dependency') # Fixme: Fuck
 
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
@@ -96,9 +95,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
     paths = []
     extra_paths = {}
     for x in order:
-        util.xterm_title(_("Downloading %d / %d") % (order.index(x) + 1, len(order)))
         ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
-        install_op = atomicoperations.Install.from_name(x)
+        install_op = atomicoperations.Install.from_name(x,ignore_dep,packagedb,installdb)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
             extra_paths[install_op.package_fname] = x
@@ -113,10 +111,10 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
-
+    ctx.disable_keyboard_interrupts()
     for path in paths:
-        util.xterm_title(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)))
         ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
+        util.xterm_title(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)))
         install_op = atomicoperations.Install(path)
         install_op.install(False)
         try:
@@ -125,6 +123,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
+    ctx.enable_keyboard_interrupts()
     util.xterm_title_reset()
     return True
 

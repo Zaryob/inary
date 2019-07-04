@@ -23,6 +23,7 @@ import inary.errors
 import inary.context as ctx
 import inary.ui
 import inary.util as util
+import re, tty
 
 
 class Error(inary.errors.Error):
@@ -158,23 +159,16 @@ class CLI(inary.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
 
-        import re, tty
 
         locale.setlocale(locale.LC_ALL, "")
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
-        no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
         locale.setlocale(locale.LC_ALL, "C")
 
         while True:
             tty.tcflush(sys.stdin.fileno(), 0)
-            prompt = msg + util.colorize(_(' (yes'), 'green') + '/' + util.colorize(_('no)'), 'red')
+            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red')
             s = input(prompt)
-
-            if yes_expr.search(s):
-                return True
-
-            if no_expr.search(s):
-                return False
+            return yes_expr.search(s)
 
     def display_progress(self, **ka):
         """ display progress of any operation """
@@ -188,8 +182,10 @@ class CLI(inary.ui.UI):
                   (ka['filename'], totalsize, ka['percent'],
                    ka['rate'], ka['symbol'], ka['eta'])
             self.output(out)
+            util.xterm_title("%s (%d%%)" % (ka['filename'], ka['percent']))
         else:
             self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
+            util.xterm_title("%s (%d%%)" % (ka['info'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):
         if msg:
