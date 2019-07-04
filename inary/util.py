@@ -1053,7 +1053,7 @@ def colorize_percent(msg,percent,color='backgroundgreen',color2='backgroundyello
         return str(msg)
     lmsg=int((len(msg)*percent)/100)+1
     if lmsg>=len(msg):
-       return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
+       lmsg=len(msg)
     return str(ctx.const.colors[color]+ msg[:lmsg]+ctx.const.colors[color2]+msg[lmsg:]+ctx.const.colors['default'])
 
 def config_changed(config_file):
