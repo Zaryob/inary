@@ -178,13 +178,13 @@ class CLI(inary.ui.UI):
         elif ka['operation'] == "fetching":
             totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
 
-            out = '%-30.50s(%s)%3d%% %9.2f %s[%s]' % \
-                  (ka['filename'], totalsize, ka['percent'],
-                   ka['rate'], ka['symbol'], ka['eta'])
-            self.output('\r\033[2K'+util.colorize_percent(out,ka['percent']))
+            out = '%-30.50s(%s)' % (ka['filename'], totalsize)
+            out2= '%3d%% %9.2f%s [%s]' % (ka['percent'], ka['rate'],ka['symbol'], ka['eta'])
+
+            self.output('\r\033[2K'+util.colorize_percent(out,ka['percent'],out2))
             util.xterm_title("%s (%d%%)" % (ka['filename'], ka['percent']))
         else:
-            self.output("\r\033[2K"+colorize_percent("%s (%d%%)" % (ka['info'], ka['percent']),ka['percent']))
+            self.output("\r\033[2K"+colorize_percent(("%s" % ka['info']),ka['percent'],("(%d%%)" % ka['percent'])))
             util.xterm_title("%s (%d%%)" % (ka['info'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):

@@ -1048,7 +1048,12 @@ def colorize(msg, color):
     else:
         return str(msg)
 
-def colorize_percent(msg,percent,color='backgroundgreen',color2='backgroundyellow',color3='brightblue'):
+def colorize_percent(message,percent=0,message2=' ',color='backgroundgreen',color2='backgroundyellow',color3='brightblue'):
+    term_rows, term_columns = get_terminal_size()
+    spacenum=(term_columns-(len(message)+len(message2)))
+    if spacenum < 1:
+       spacenum=0
+    msg=message+spacenum*' '+message2
     if len(msg)<1:
         return str(msg)
     lmsg=int((len(msg)*percent)/100)+1
