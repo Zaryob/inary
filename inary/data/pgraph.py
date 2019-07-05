@@ -19,6 +19,8 @@ import inary.context as ctx
 import inary.db
 import inary.errors
 import inary.operations.helper as op_helper
+import inary.util as util
+import inary.misc.sort as sort
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -101,53 +103,14 @@ class Digraph(object):
     def adj(self, u):
         return self.__adj[u]
 
-    def dfs(self, finish_hook=None):
-        self.color = {}
-        self.p = {}
-        self.d = {}
-        self.f = {}
-        for u in self.__v:
-            self.color[u] = 'w'  # mark white (unexplored)
-            self.p[u] = None
-        self.time = 0
-        for u in self.__v:
-            if self.color[u] == 'w':
-                self.dfs_visit(u, finish_hook)
-
-    def dfs_visit(self, u, finish_hook):
-        self.color[u] = 'g'  # mark green (discovered)
-        self.d[u] = self.time = self.time + 1
-        for v in self.adj(u):
-            if self.color[v] == 'w':  # explore unexplored vertices
-                self.p[v] = u
-                self.dfs_visit(v, finish_hook)
-            elif self.color[v] == 'g':  # cycle detected
-                cycle = [u]
-                while self.p[u]:
-                    u = self.p[u]
-                    cycle.append(u)
-                    if self.has_edge(cycle[0], u):
-                        break
-                cycle.reverse()
-                raise CycleException(cycle)
-        self.color[u] = 'b'  # mark black (completed)
-        if finish_hook:
-            finish_hook(u)
-        self.f[u] = self.time = self.time + 1
-
-    def cycle_free(self):
-        try:
-            self.dfs()
-            return True
-        except CycleException:
-            return False
-
-    def topological_sort(self):
+    def get_vertex(self):
         list = []
-        self.dfs(lambda u: list.append(u))
-        list.reverse()
-        return list
+        for u in self.__v:
+            list.append(u)
+        return util.uniq(list)
 
+    def sort(self,reverse=False):
+            return sort.sort_auto(self.get_vertex(),reverse)
     @staticmethod
     def id_str(u):
         # Graph format only accepts underscores as key values
@@ -283,8 +246,7 @@ def generate_pending_order(A):
     if ctx.get_option('debug'):
         import sys
         G_f.write_graphviz(sys.stdout)
-    order = G_f.topological_sort()
-    order.reverse()
+    order = G_f.sort()
 
     componentdb = inary.db.componentdb.ComponentDB()
     # Bug 4211

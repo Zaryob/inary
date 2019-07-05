@@ -150,8 +150,7 @@ def plan_emerge(A):
 
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order_build = G_f.topological_sort()
-    order_build.reverse()
+    order_build = G_f.sort()
 
     G_f2, order_inst = inary.operations.install.plan_install_pkg_names(install_list)
 

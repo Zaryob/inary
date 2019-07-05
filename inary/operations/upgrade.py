@@ -364,8 +364,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
 
-    order = G_f.topological_sort()
-    order.reverse()
+    order = G_f.sort()
     return G_f, order
 
 
