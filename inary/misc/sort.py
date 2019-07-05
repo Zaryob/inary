@@ -1,4 +1,10 @@
-def sort_bubble(array=[]):
+def sort_auto(array=[],reverse=False):
+    if len(array) <= 1000:
+        return sort_bubble(array,reverse)
+    else:
+        return sort_merge(array,reverse)
+
+def sort_bubble(array=[],reverse=False):
     mlen=len(array)
     cout_i=0
     while cout_i<mlen:
@@ -10,9 +16,11 @@ def sort_bubble(array=[]):
                 array[cout_j]=tmp
             cout_j=cout_j+1
         cout_i=cout_i+1
+    if reverse:
+        array.reverse()
     return array
 
-def sort_merge(x):
+def sort_merge(x,reverse=False):
     result = []
     if len(x) < 2:
         return x
@@ -35,4 +43,6 @@ def sort_merge(x):
             for i in y:
                 result.append(i)
                 y.pop(0)
+    if reverse:
+        result.reverse()
     return result

@@ -151,7 +151,7 @@ def plan_remove(A):
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.topological_sort()
+    order = G_f.sort(True)
     return G_f, order
 
 

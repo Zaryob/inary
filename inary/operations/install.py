@@ -256,12 +256,11 @@ def install_pkg_files(package_URIs, reinstall=False):
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.topological_sort()
+    order = G_f.sort()
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = operations.helper.check_conflicts(order, packagedb)
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
-    order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order))
 
     if ctx.get_option('dry_run'):
@@ -330,8 +329,7 @@ def plan_install_pkg_names(A):
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.topological_sort()
-    order.reverse()
+    order = G_f.sort()
     return G_f, order
 
 
