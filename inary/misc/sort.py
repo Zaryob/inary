@@ -1,12 +1,24 @@
-# -*- coding:utf-8 -*-
-#Merge sort by sulincix
-def msort(x):
+def sort_bubble(array=[]):
+    mlen=len(array)
+    cout_i=0
+    while cout_i<mlen:
+        cout_j=0
+        while cout_j<mlen-1:
+            if array[cout_j-1] > array[cout_j]:
+                tmp=array[cout_j-1]
+                array[cout_j-1]=array[cout_j]
+                array[cout_j]=tmp
+            cout_j=cout_j+1
+        cout_i=cout_i+1
+    return array
+
+def sort_merge(x):
     result = []
     if len(x) < 2:
         return x
     mid = int(len(x)/2)
-    y = msort(x[:mid])
-    z = msort(x[mid:])
+    y = sort_merge(x[:mid])
+    z = sort_merge(x[mid:])
     while (len(y) > 0) or (len(z) > 0):
         if len(y) > 0 and len(z) > 0:
             if y[0] > z[0]:
