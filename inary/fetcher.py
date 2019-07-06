@@ -170,6 +170,9 @@ class Fetcher:
             self.c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
             self.c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
             self.c.setopt(pycurl.AUTOREFERER, 1)
+            # We does not need ssl verify.
+            self.c.setopt(pycurl.SSL_VERIFYPEER, 0)   
+            self.c.setopt(pycurl.SSL_VERIFYHOST, 0)
             self.c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
             # self.c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
             self.c.setopt(pycurl.MAXREDIRS, 10)
