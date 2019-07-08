@@ -612,9 +612,12 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 yield calculate_hash(root)
 
 
-def check_file_hash(filename, hash,skip=False):
+def check_file_hash(filename, hash,skip=True):
     """Check the file's integrity with a given hash."""
-    return sha1_file(filename) == hash or skip
+    if skip == False:
+        return sha1_file(filename) == hash or skip
+    else:
+        return True
 
 
 def sha1_file(filename):
