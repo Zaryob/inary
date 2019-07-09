@@ -18,6 +18,7 @@ import os
 import pycurl
 import shutil
 import time
+import ssl
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -151,7 +152,6 @@ class Fetcher:
         """Return value: Fetched file's full path.."""
 
         if not ctx.config.values.general.ssl_verify:
-            import ssl
             ssl._create_default_https_context = ssl._create_unverified_context
 
         if not self.url.filename():

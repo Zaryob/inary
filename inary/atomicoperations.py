@@ -309,7 +309,7 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def postinstall(self):
-        self.config_later = False
+        self.config_later = True
 
         # Chowning for additional files
         for _file in self.package.get_files().list:
@@ -319,30 +319,6 @@ class Install(AtomicOperation):
             else:
                 ctx.ui.debug(_("* Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid))
                 os.chown(fpath, int(_file.uid), int(_file.gid))
-
-        try:
-            if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                fromVersion = self.old_pkginfo.version
-                fromRelease = self.old_pkginfo.release
-            else:
-                fromVersion = None
-                fromRelease = None
-            ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
-            inary.reactor.post_install(
-                self.pkginfo.name,
-                self.metadata.package.providesScom,
-                self.package.scom_dir(),
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                fromVersion,
-                fromRelease,
-                self.metadata.package.version,
-                self.metadata.package.release
-            )
-            ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-        except:
-            ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
-            self.config_later = True
 
     def extract_install(self):
         """unzip package in place"""
