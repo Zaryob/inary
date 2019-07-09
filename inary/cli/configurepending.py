@@ -24,11 +24,10 @@ import inary.ui
 import inary.data
 import inary.errors
 import inary.context as ctx
+import inary.reactor
 
 
 def configure_pending(packages=None):
-    # Import SCOM
-    import inary.scomiface
 
     # start with pending packages
     # configure them in reverse topological order of dependency
@@ -39,7 +38,7 @@ def configure_pending(packages=None):
         packages = set(packages).intersection(installdb.list_pending())
 
     order = inary.data.pgraph.generate_pending_order(packages)
-    try:
+    if True:
         for x in order:
             if installdb.has_package(x):
                 pkginfo = installdb.get_package(x)
@@ -50,7 +49,7 @@ def configure_pending(packages=None):
                 # FIXME: we need a full package info here!
                 pkginfo.name = x
                 ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-                inary.scomiface.post_install(
+                inary.reactor.post_install(
                     pkginfo.name,
                     m.package.providesScom,
                     util.join_path(pkg_path, ctx.const.scom_dir),
@@ -63,9 +62,6 @@ def configure_pending(packages=None):
                 )
                 ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
-    except ImportError:
-        raise inary.errors.Error(_("scom package is not fully installed"))
-
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Configure pending packages

@@ -76,11 +76,12 @@ def expand_src_components(A):
     return Ap
 
 
-def calculate_download_sizes(order):
+def calculate_download_sizes(order,installdb=None,packagedb=None):
     total_size = cached_size = 0
-
-    installdb = inary.db.installdb.InstallDB()
-    packagedb = inary.db.packagedb.PackageDB()
+    if installdb == None:
+        installdb = inary.db.installdb.InstallDB()
+    if packagedb == None:
+        packagedb = inary.db.packagedb.PackageDB()
 
     try:
         cached_packages_dir = ctx.config.cached_packages_dir()
