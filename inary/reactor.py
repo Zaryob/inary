@@ -21,6 +21,7 @@ def post_install(package_name, provided_scripts,
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
         import package as package_py
         package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
+        del package_py
         sys.path.pop(0)
 
 def post_install(package_name, provided_scripts,
@@ -34,6 +35,7 @@ def post_install(package_name, provided_scripts,
         import package as package_py
         if "postInstall" in dir(package_py):
             package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
+        del package_py
         sys.path.pop(0)
 
 def post_remove(package_name, metapath, filepath, provided_scripts=None):
@@ -43,6 +45,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
         import package as package_py
         if "postInstall" in dir(package_py):
             package_py.postRemove(timeout=ctx.dbus_timeout)
+        del package_py
         sys.path.pop(0)
 
 def pre_remove(package_name, metapath, filepath):
@@ -52,4 +55,5 @@ def pre_remove(package_name, metapath, filepath):
         import package as package_py
         if "postInstall" in dir(package_py):
             package_py.preRemove(timeout=ctx.dbus_timeout)
+        del package_py
         sys.path.pop(0)
