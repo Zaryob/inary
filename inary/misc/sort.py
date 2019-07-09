@@ -1,10 +1,3 @@
-def sort_auto(array=[],reverse=False):
-    if len(array) <= 100:
-        return sort_buble(array,reverse)
-    elif len(array) <= 1000:
-        return sort_min_max(array,reverse)
-    else:
-        return sort_merge(array,reverse)
 
 def sort_bubble(array=[],reverse=False):
     mlen=len(array)
@@ -69,3 +62,12 @@ def sort_min_max(x,reverse=False):
     if reverse:
         array.reverse()
     return array
+
+def sort_auto(array=[],reverse=False):
+    if len(array) <= 100:
+        return sort_bubble(array,reverse)
+    elif len(array) <= 1000:
+        return sort_min_max(array,reverse)
+    else:
+        return sort_merge(array,reverse)
+

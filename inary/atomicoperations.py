@@ -37,6 +37,7 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
+import inary.reactor
 
 from inary.db.repodb import RepoDB as repodb
 
@@ -200,10 +201,6 @@ class Install(AtomicOperation):
         ctx.ui.debug(_("Free Space: %.2f %s " % (total_size, symbol)))
 
         # what to do if / is split into /usr, /var, etc.
-        # check scom
-        if self.metadata.package.providesScom and ctx.scom:
-            import inary.scomiface as scomiface
-            scomiface.get_link()
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -319,37 +316,32 @@ class Install(AtomicOperation):
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
             if os.path.islink(fpath):
                 ctx.ui.debug(_("* Added symlink '{}' ").format(fpath))
-                # Kontrol et
             else:
                 ctx.ui.debug(_("* Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid))
                 os.chown(fpath, int(_file.uid), int(_file.gid))
 
-        if ctx.scom:
-            import inary.scomiface
-            try:
-                if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                    fromVersion = self.old_pkginfo.version
-                    fromRelease = self.old_pkginfo.release
-                else:
-                    fromVersion = None
-                    fromRelease = None
-                ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
-                inary.scomiface.post_install(
-                    self.pkginfo.name,
-                    self.metadata.package.providesScom,
-                    self.package.scom_dir(),
-                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                    fromVersion,
-                    fromRelease,
-                    self.metadata.package.version,
-                    self.metadata.package.release
-                )
-                ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-            except inary.scomiface.Error:
-                ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
-                self.config_later = True
-        else:
+        try:
+            if self.operation == UPGRADE or self.operation == DOWNGRADE:
+                fromVersion = self.old_pkginfo.version
+                fromRelease = self.old_pkginfo.release
+            else:
+                fromVersion = None
+                fromRelease = None
+            ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
+            inary.reactor.post_install(
+                self.pkginfo.name,
+                self.metadata.package.providesScom,
+                self.package.scom_dir(),
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                fromVersion,
+                fromRelease,
+                self.metadata.package.version,
+                self.metadata.package.release
+            )
+            ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
+        except:
+            ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
             self.config_later = True
 
     def extract_install(self):
@@ -701,23 +693,19 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if ctx.scom:
-            import inary.scomiface
-            inary.scomiface.pre_remove(
-                self.package_name,
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-            )
+        inary.reactor.pre_remove(
+            self.package_name,
+            os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+            os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+        )
 
     def run_postremove(self):
-        if ctx.scom:
-            import inary.scomiface
-            inary.scomiface.post_remove(
-                self.package_name,
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                provided_scripts=self.package.providesScom,
-            )
+        inary.reactor.post_remove(
+            self.package_name,
+            os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+            os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+            provided_scripts=self.package.providesScom,
+        )
 
     def update_databases(self):
         self.remove_db()
