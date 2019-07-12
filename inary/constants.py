@@ -101,6 +101,7 @@ class Constants(metaclass=Singleton):
         self.__c.metadata_dir = "metadata"
         self.__c.translations_file = "translations.xml"
         self.__c.scom_dir = "scom"
+        self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
         self.__c.install_tar = "install.tar"

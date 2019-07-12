@@ -36,7 +36,7 @@ Remove all orphaned packages from the system.
         super(RemoveOrphaned, self).__init__(args)
         self.installdb = inary.db.installdb.InstallDB()
 
-    name = ("remove-orphaned", "ro")
+    name = (_("remove-orphaned"), "ro")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("remove-orphaned options"))

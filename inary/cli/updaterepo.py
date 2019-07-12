@@ -39,7 +39,7 @@ If no repository is given, all repositories are updated.
     def __init__(self, args):
         super(UpdateRepo, self).__init__(args)
 
-    name = ("update-repo", "ur")
+    name = (_("update-repo"), "ur")
 
     def options(self):
 

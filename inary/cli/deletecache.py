@@ -35,7 +35,7 @@ consume a lot of disk space.""")
     def __init__(self, args=None):
         super(DeleteCache, self).__init__(args)
 
-    name = ("delete-cache", "dc")
+    name = (_("delete-cache"), "dc")
 
     def run(self):
         self.init(database=False, write=True)

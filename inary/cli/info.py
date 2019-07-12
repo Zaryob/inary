@@ -40,7 +40,7 @@ Usage: info <package1> <package2> ... <packagen>
         self.packagedb = inary.db.packagedb.PackageDB()
         self.sourcedb = inary.db.sourcedb.SourceDB()
 
-    name = ("info", None)
+    name = (_("info"), None)
 
     def options(self):
 

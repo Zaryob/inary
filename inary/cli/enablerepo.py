@@ -36,7 +36,7 @@ Disabled repositories are not taken into account in operations
         super(EnableRepo, self).__init__(args)
         self.repodb = inary.db.repodb.RepoDB()
 
-    name = ("enable-repo", "er")
+    name = (_("enable-repo"), "er")
 
     def run(self):
         self.init(database=True)

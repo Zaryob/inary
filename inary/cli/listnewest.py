@@ -37,7 +37,7 @@ packages from all repositories.
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.packagedb = inary.db.packagedb.PackageDB()
 
-    name = ("list-newest", "ln")
+    name = (_("list-newest"), "ln")
 
     def options(self):
 

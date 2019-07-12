@@ -42,7 +42,7 @@ Lists previous operations.""")
         super(History, self).__init__(args)
         self.historydb = inary.db.historydb.HistoryDB()
 
-    name = ("history", "hs")
+    name = (_("history"), "hs")
 
     def options(self):
 

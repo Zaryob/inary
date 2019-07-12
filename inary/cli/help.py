@@ -32,7 +32,7 @@ If run without parameters, it prints the general help.""")
     def __init__(self, args=None):
         super(Help, self).__init__(args)
 
-    name = ("help", "?")
+    name = (_("help"), "?")
 
     def run(self):
 

@@ -39,7 +39,7 @@ all repositories.
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.packagedb = inary.db.packagedb.PackageDB()
 
-    name = ("list-available", "la")
+    name = (_("list-available"), "la")
 
     def options(self):
 

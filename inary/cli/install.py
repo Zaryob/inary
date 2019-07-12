@@ -40,7 +40,7 @@ expanded to package names.
         super(Install, self).__init__(args)
         self.componentdb = inary.db.componentdb.ComponentDB()
 
-    name = "install", "it"
+    name = (_("install"), "it")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("install options"))

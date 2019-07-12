@@ -60,7 +60,7 @@ the package in graphviz format to 'pgraph.dot'.
 
         self.parser.add_option_group(group)
 
-    name = ("graph", None)
+    name = (_("graph"), None)
 
     def run(self):
         self.init(write=False)
