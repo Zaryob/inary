@@ -36,7 +36,7 @@ dirs under /var/lib/inary
     def __init__(self, args):
         super(RebuildDb, self).__init__(args)
 
-    name = (_("rebuild-db"), "rdb")
+    name = (_("rebuild-db"), "rd")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("rebuild-db options"))
