@@ -40,7 +40,7 @@ class Delta(command.Command, metaclass=command.autocommand):
     def __init__(self, args):
         super(Delta, self).__init__(args)
 
-    name = ("delta", "dt")
+    name = (_("delta"), "dt")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("delta options"))

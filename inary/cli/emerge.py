@@ -40,7 +40,7 @@ You can also give the name of a component.
         super(Emerge, self).__init__(args)
         self.scom = True
 
-    name = ("emerge", "em")
+    name = (_("emerge"), "em")
 
     def options(self):
 

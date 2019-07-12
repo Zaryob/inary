@@ -34,7 +34,7 @@ Lists currently tracked repositories.
         super(ListRepo, self).__init__(args)
         self.repodb = inary.db.repodb.RepoDB()
 
-    name = ("list-repo", "lr")
+    name = (_("list-repo"), "lr")
 
     def run(self):
 

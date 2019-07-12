@@ -42,7 +42,7 @@ class Build(command.Command, metaclass=command.autocommand):
         super(Build, self).__init__(args)
         self.scom = True
 
-    name = ("build", "bi")
+    name = (_("build"), "bi")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("build options"))

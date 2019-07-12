@@ -30,7 +30,7 @@ import inary.reactor
 def configure_pending(packages=None):
 
     # start with pending packages
-    # configure them in reverse topological order of dependency
+    # configure them in reverse order of dependency
     installdb = inary.db.installdb.InstallDB()
     if not packages:
         packages = installdb.list_pending()
@@ -40,31 +40,10 @@ def configure_pending(packages=None):
     order = inary.data.pgraph.generate_pending_order(packages)
     if True:
         for x in order:
-            if installdb.has_package(x):
-                pkginfo = installdb.get_package(x)
-                pkg_path = installdb.package_path(x)
-                m = inary.data.metadata.MetaData()
-                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-                m.read(metadata_path)
-                # FIXME: we need a full package info here!
-                pkginfo.name = x
-                ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-                inary.reactor.post_install(
-                    pkginfo.name,
-                    m.package.providesScom,
-                    util.join_path(pkg_path, ctx.const.scom_dir),
-                    util.join_path(pkg_path, ctx.const.metadata_xml),
-                    util.join_path(pkg_path, ctx.const.files_xml),
-                    None,
-                    None,
-                    m.package.version,
-                    m.package.release
-                )
-                ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
-    __doc__ = _("""Configure pending packages
+    __doc__ = _("""Remove Configure Event
 
 If SCOM configuration of some packages were not
 done at installation time, they are added to a list
@@ -75,7 +54,7 @@ configures those packages.
     def __init__(self, args):
         super(ConfigurePending, self).__init__(args)
 
-    name = (_("configure-pending"), "cp")
+    name = (_("remove-configure"), "rc")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("configure-pending options"))

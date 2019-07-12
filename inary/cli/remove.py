@@ -39,7 +39,7 @@ expanded to package names.
         super(Remove, self).__init__(args)
         self.componentdb = inary.db.componentdb.ComponentDB()
 
-    name = ("remove", "rm")
+    name = (_("remove"), "rm")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("remove options"))

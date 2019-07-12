@@ -35,7 +35,7 @@ Usage: list-installed
         self.installdb = inary.db.installdb.InstallDB()
         self.componentdb = inary.db.componentdb.ComponentDB()
 
-    name = ("list-installed", "li")
+    name = (_("list-installed"), "li")
 
     def options(self):
 

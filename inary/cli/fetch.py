@@ -36,7 +36,7 @@ Downloads the given inary packages to working directory
     def __init__(self, args):
         super(Fetch, self).__init__(args)
 
-    name = ("fetch", "fc")
+    name = (_("fetch"), "fc")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("fetch options"))

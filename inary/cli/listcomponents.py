@@ -35,7 +35,7 @@ repositories.
         super(ListComponents, self).__init__(args)
         self.componentdb = inary.db.componentdb.ComponentDB()
 
-    name = ("list-components", "lc")
+    name = (_("list-components"), "lc")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-components options"))

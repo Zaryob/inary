@@ -33,7 +33,7 @@ Usage: blame <package> ... <package>
         super(Blame, self).__init__(args)
         self.installdb = inary.db.installdb.InstallDB()
 
-    name = ("blame", "bl")
+    name = (_("blame"), "bl")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("blame options"))
