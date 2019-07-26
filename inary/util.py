@@ -32,6 +32,7 @@ import unicodedata
 
 import gettext
 from functools import reduce
+from inary.misc import sort as sort
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -167,7 +168,7 @@ def uniq(list, sort=False):
     newlist=[]
     if list != []:
         if sort:
-            list.sort()
+            sort.sort_auto(list)
             mcout=len(list)
             cout=0
             newlist.append(list[0])
