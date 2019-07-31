@@ -17,21 +17,24 @@ import inary.db
 import inary.util as util
 import os
 import sys
+pkg_path=None
 
-
-def post_install(package_name, provided_scripts,
+def pre_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
              fromVersion, fromRelease, toVersion, toRelease):
-    """Do package's post install operations"""
+    """Do package's pre install operations"""
+    installdb = inary.db.installdb.InstallDB()
     pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.comar_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.comar_dir)
     else:
+        ctx.ui.debug(_("SKIP: "+package_name))
         return 0
     import package as package_py
-    package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
+    if "preInstall" in dir(package_py):
+        package_py.preInstall(fromVersion, fromRelease, toVersion, toRelease)
     del package_py
     sys.path.pop(0)
 
@@ -46,6 +49,7 @@ def post_install(package_name, provided_scripts,
     elif(os.path.isfile(pkg_path+"/"+ctx.const.comar_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.comar_dir)
     else:
+        ctx.ui.debug(_("SKIP: "+package_name))
         return 0
     import package as package_py
     if "postInstall" in dir(package_py):
@@ -55,28 +59,34 @@ def post_install(package_name, provided_scripts,
 
 def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
+    installdb = inary.db.installdb.InstallDB()
+    pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.comar_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.comar_dir)
     else:
+        ctx.ui.debug(_("SKIP: "+package_name))
         return 0
     import package as package_py
-    if "postInstall" in dir(package_py):
+    if "postRemove" in dir(package_py):
         package_py.postRemove(timeout=ctx.dbus_timeout)
     del package_py
     sys.path.pop(0)
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's post removal operations"""
+    installdb = inary.db.installdb.InstallDB()
+    pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.comar_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.comar_dir)
     else:
+        ctx.ui.debug(_("SKIP: "+package_name))
         return 0
     import package as package_py
-    if "postInstall" in dir(package_py):
+    if "preRemove" in dir(package_py):
         package_py.preRemove(timeout=ctx.dbus_timeout)
     del package_py
     sys.path.pop(0)

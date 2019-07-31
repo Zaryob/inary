@@ -29,12 +29,11 @@ import inary.ui as ui
 
 
 @util.locked
-def remove(A, ignore_dep=False, ignore_safety=False):
+def remove(A, ignore_dep=False):
     """
     Removes the given packages from the system
     @param A: list of package names -> list_of_strings
     @param ignore_dep: removes packages without looking into theirs reverse deps if True
-    @param ignore_safety: system.base packages can also be removed if True
     """
     inary.db.historydb.HistoryDB().create_history("remove")
     componentdb = inary.db.componentdb.ComponentDB()
@@ -44,18 +43,6 @@ def remove(A, ignore_dep=False, ignore_safety=False):
 
     # filter packages that are not installed
     A_0 = A = set(A)
-
-    if not ctx.get_option('ignore_safety') and not ctx.config.values.general.ignore_safety and not ignore_safety:
-        if componentdb.has_component('system.base'):
-            systembase = set(componentdb.get_union_component('system.base').packages)
-            refused = A.intersection(systembase)
-            if refused:
-                raise inary.errors.Error(_("Safety switch prevents the removal of "
-                                           "following packages:\n") +
-                                         util.format_by_columns(sorted(refused)))
-                A = A - systembase
-        else:
-            ctx.ui.warning(_("Safety switch: The component system.base cannot be found."))
 
     Ap = []
     for x in A:
@@ -156,7 +143,7 @@ def plan_remove(A):
 
 
 def remove_conflicting_packages(conflicts):
-    if remove(conflicts, ignore_dep=True, ignore_safety=True):
+    if remove(conflicts, ignore_dep=True):
         raise Exception(_("Conflicts remain"))
 
 
@@ -165,12 +152,12 @@ def remove_obsoleted_packages():
     packagedb = inary.db.packagedb.PackageDB()
     obsoletes = list(filter(installdb.has_package, packagedb.get_obsoletes()))
     if obsoletes:
-        if remove(obsoletes, ignore_dep=True, ignore_safety=True):
+        if remove(obsoletes, ignore_dep=True):
             raise Exception(_("Obsoleted packages remaining"))
 
 
 def remove_replaced_packages(replaced):
-    if remove(replaced, ignore_dep=True, ignore_safety=True):
+    if remove(replaced, ignore_dep=True):
         raise Exception(_("Replaced package remains"))
 
 
