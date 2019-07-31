@@ -1,3 +1,8 @@
+import gettext
+
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+import inary.context as ctx
 
 def sort_bubble(array=[],reverse=False):
     mlen=len(array)
@@ -64,7 +69,10 @@ def sort_min_max(x,reverse=False):
     return array
 
 def sort_auto(array=[],reverse=False):
-    if len(array) <= 100:
+    ctx.ui.debug(_("Sort starting for {} items.".format(str(len(array)))))
+    if len(array) <= 0:
+        return array
+    elif len(array) <= 100:
         return sort_bubble(array,reverse)
     elif len(array) <= 1000:
         return sort_min_max(array,reverse)

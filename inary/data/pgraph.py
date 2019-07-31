@@ -148,6 +148,7 @@ class PGraph(Digraph):
         self.packagedb = packagedb
 
     def add_package(self, pkg):
+        ctx.ui.debug(_("Package {} added in list.".format(pkg)))
         pkg1 = self.packagedb.get_package(pkg)
         self.add_vertex(str(pkg), (pkg1.version, pkg1.release))
 
@@ -228,9 +229,9 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
     return G_f
 
 
-def generate_pending_order(A):
-    # returns pending package list in reverse topological order of dependency
-    installdb = inary.db.installdb.InstallDB()
+def generate_pending_order(A,installdb=None):
+    if installdb == None:
+        installdb = inary.db.installdb.InstallDB()
     G_f = PGraph(installdb)  # construct G_f
     for x in A:
         G_f.add_package(x)
@@ -247,10 +248,5 @@ def generate_pending_order(A):
         import sys
         G_f.write_graphviz(sys.stdout)
     order = G_f.sort()
-
-    componentdb = inary.db.componentdb.ComponentDB()
-    # Bug 4211
-    if componentdb.has_component('system.base'):
-        order = op_helper.reorder_base_packages(order)
 
     return order

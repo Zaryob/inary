@@ -86,13 +86,6 @@ expanded to package names.
         else:
             self.init()
 
-        if not ctx.get_option('bypass_update_repo'):
-            ctx.ui.info(_('Updating repositories'))
-            repos = inary.db.repodb.RepoDB().list_repos(only_active=True)
-            repository.update_repos(repos)
-        else:
-            ctx.ui.info(_('Will not update repositories'))
-
         reposit = ctx.get_option('repository')
         components = ctx.get_option('component')
         packages = []
