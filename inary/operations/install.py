@@ -66,9 +66,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     componentdb = inary.db.componentdb.ComponentDB()
 
-    # Bug 4211
-    if componentdb.has_component('system.base'):
-        order = operations.helper.reorder_base_packages(order)
 
     if len(order) > 1:
         ctx.ui.info(_("Following packages will be installed:"), color="brightblue")
