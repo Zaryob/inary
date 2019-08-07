@@ -18,10 +18,11 @@ from inary.actionsapi import get
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
 
-
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class MesonError(inary.actionsapi.Error):
     def __init__(self, value=''):

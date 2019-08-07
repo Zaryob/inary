@@ -14,13 +14,13 @@
 
 """INARY package relation graph that represents the state of packagedb"""
 
-
 import inary.context as ctx
 import inary.db
 import inary.errors
 import inary.operations.helper as op_helper
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

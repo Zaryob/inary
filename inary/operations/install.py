@@ -17,6 +17,7 @@ import sys
 import zipfile
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -28,6 +29,7 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
+
 
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from

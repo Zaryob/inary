@@ -34,6 +34,7 @@ import inary.util as util
 xmlext içine tag için remove eklenene kadar böyle
 """
 
+
 class RepoError(inary.errors.Error):
     pass
 
@@ -81,7 +82,6 @@ class RepoOrder:
                 else:
                     xmlext.addText(r, "Status", status)
 
-
         self._update(repo_doc)
 
     def get_status(self, repo_name):
@@ -95,7 +95,6 @@ class RepoOrder:
                         return status
 
         return "inactive"
-
 
     def remove(self, repo_name):
         repo_doc = self._get_doc()

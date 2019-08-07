@@ -60,7 +60,7 @@ def parseString(fileString):
         return dom.documentElement
     except ExpatError as inst:
         raise XMLError(_("FileString is an invalid XML: {}\nFileScript: {}\n").format(
-                                                                   str(inst),fileString))
+            str(inst), fileString))
 
 
 def getAllNodes(node, tagPath):
@@ -206,6 +206,7 @@ def addNode(node, tagpath, newnode=None, branch=True):
     else:
         # had only one tag..
         return addTagPath(node, tags, newnode)
+
 
 def addText(node, tagPath, text, branch=True):
     newnode = node.ownerDocument.createTextNode(text)

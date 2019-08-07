@@ -20,6 +20,7 @@ import shutil
 import time
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -198,8 +199,8 @@ class Fetcher:
 
             try:
                 c.perform()
-                ctx.ui.info("\n", noln=True) #This is not a bug. This is a new feature. ŞAka bir yana bu hata
-                                             #pycurl yüzünden kaynaklanıyor
+                ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+                # pycurl yüzünden kaynaklanıyor
                 file_id.close()
                 ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()

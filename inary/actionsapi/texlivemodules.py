@@ -259,13 +259,13 @@ def addLanguageDef(parameter):
 
     language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
     language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
-    para_dict["name"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
+        para_dict["name"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
     language_def.close()
 
     if "synonyms" in para_dict:
         language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
         language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
-        para_dict["synonyms"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
+            para_dict["synonyms"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
         language_def.close()
 
 

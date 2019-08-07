@@ -17,6 +17,7 @@ from glob import glob
 from shutil import copy, copytree
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

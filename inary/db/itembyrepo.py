@@ -14,10 +14,12 @@
 
 import gzip
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.db
+
 
 class ItemByRepo:
     def __init__(self, dbobj, compressed=False):

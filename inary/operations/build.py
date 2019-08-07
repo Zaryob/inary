@@ -23,6 +23,7 @@ import re
 import stat
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -666,7 +667,7 @@ class Builder:
 
         try:
             localSymbols = globalSymbols = {}
-            exec (compiled_script, localSymbols, globalSymbols)
+            exec(compiled_script, localSymbols, globalSymbols)
         except Exception as e:
             raise (e)
 
