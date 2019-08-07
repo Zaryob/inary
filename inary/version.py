@@ -19,7 +19,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 import inary.errors
 
 # Basic rule is:
@@ -90,10 +89,11 @@ class Version(object):
         return self.__version_string
 
     def compare(self, ver):
+        # In old code it was written with cmp().
         if isinstance(ver, str):
-            return cmp(self.__version, make_version(ver))
+            return (self.__version > make_version(ver)) - (self.__version < make_version(ver))
 
-        return cmp(self.__version, ver.__version)
+        return (self.__version > ver.__version) - (self.__version < ver.__version)
 
     def __lt__(self, rhs):
         if isinstance(rhs, str):

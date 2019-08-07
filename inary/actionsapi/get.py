@@ -157,12 +157,12 @@ def LDFLAGS():
 def makeJOBS():
     # Note: "auto" only works when /sys is mounted.
     if env.jobs == "auto":
-        procs = 4
         try:
             procs = multiprocessing.cpu_count()
             env.jobs = procs
         except Exception as e:
             ctx.ui.warning("Unable to retrieve CPU count: %s" % e)
+            env.jobs = 4
     return env.jobs
 
 
