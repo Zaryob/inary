@@ -102,7 +102,7 @@ class Install(install):
     def run(self):
         install.run(self)
         self.installi18n()
-        self.installdoc()
+        #self.installdoc()
         self.generateConfigFile()
 
     def installi18n(self):
@@ -201,8 +201,7 @@ setup(name="inary",
                 'inary.db',
                 'inary.libraries',
                 'inary.operations',
-                'inary.sxml',
-                'inary.scenarioapi'],
+                'inary.sxml'],
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
                 'install' : Install,

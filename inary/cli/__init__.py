@@ -14,16 +14,15 @@
 
 import locale
 import sys
-import gettext
-
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
 
 import inary.errors
 import inary.context as ctx
 import inary.ui
 import inary.util as util
 
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
 
 class Error(inary.errors.Error):
     pass

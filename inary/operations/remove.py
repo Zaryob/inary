@@ -53,7 +53,7 @@ def remove(A, ignore_dep=False, ignore_safety=False):
                 raise inary.errors.Error(_("Safety switch prevents the removal of "
                                            "following packages:\n") +
                                          util.format_by_columns(sorted(refused)))
-                A = A - systembase
+                A -= systembase
         else:
             ctx.ui.warning(_("Safety switch: The component system.base cannot be found."))
 

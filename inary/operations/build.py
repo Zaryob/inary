@@ -26,7 +26,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 import inary.data.specfile as Specfile
 import inary.util as util
 import inary.file

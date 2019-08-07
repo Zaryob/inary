@@ -59,8 +59,8 @@ def parseString(fileString):
         dom = minidom.parseString(fileString)
         return dom.documentElement
     except ExpatError as inst:
-        raise XMLError(_("File '{}' has invalid XML: {}\n").format(fileName,
-                                                                   str(inst)))
+        raise XMLError(_("FileString is an invalid XML: {}\nFileScript: {}\n").format(
+                                                                   str(inst),fileString))
 
 
 def getAllNodes(node, tagPath):
@@ -206,9 +206,6 @@ def addNode(node, tagpath, newnode=None, branch=True):
     else:
         # had only one tag..
         return addTagPath(node, tags, newnode)
-
-    return node
-
 
 def addText(node, tagPath, text, branch=True):
     newnode = node.ownerDocument.createTextNode(text)

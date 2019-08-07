@@ -340,8 +340,8 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     if __preprocessedFiles is None:
         __preprocessedFiles = []
 
-    log.info("preprocess(infile=%r, outfile=%r, defines=%r, force=%r, " \
-             "keepLines=%r, includePath=%r, contentType=%r, " \
+    log.info("preprocess(infile=%r, outfile=%r, defines=%r, force=%r, "
+             "keepLines=%r, includePath=%r, contentType=%r, "
              "__preprocessedFiles=%r)", infile, outfile, defines, force,
              keepLines, includePath, contentType, __preprocessedFiles)
     absInfile = os.path.normpath(os.path.abspath(infile))
@@ -503,7 +503,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                 expr = match.group("expr")
                 try:
                     if states[-1][2]:  # already had #else in this if-block
-                        raise PreprocessError("illegal #elif after #else in " \
+                        raise PreprocessError("illegal #elif after #else in "
                                               "same #if block", defines['__FILE__'],
                                               defines['__LINE__'], line)
                     elif states[-1][1]:  # if have emitted in this if-block
@@ -516,13 +516,13 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states[-1] = (SKIP, 0, 0)
                 except IndexError:
-                    raise PreprocessError("#elif stmt without leading #if " \
+                    raise PreprocessError("#elif stmt without leading #if "
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "else":
                 try:
                     if states[-1][2]:  # already had #else in this if-block
-                        raise PreprocessError("illegal #else after #else in " \
+                        raise PreprocessError("illegal #else after #else in "
                                               "same #if block", defines['__FILE__'],
                                               defines['__LINE__'], line)
                     elif states[-1][1]:  # if have emitted in this if-block
@@ -533,14 +533,14 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states[-1] = (EMIT, 1, 1)
                 except IndexError:
-                    raise PreprocessError("#else stmt without leading #if " \
+                    raise PreprocessError("#else stmt without leading #if "
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "endif":
                 try:
                     states.pop()
                 except IndexError:
-                    raise PreprocessError("#endif stmt without leading #if" \
+                    raise PreprocessError("#endif stmt without leading #if"
                                           "stmt", defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "error":
@@ -731,7 +731,7 @@ class ContentTypesRegistry:
         # Try to determine from the path.
         if not contentType and basename in self.filenameMap:
             contentType = self.filenameMap[basename]
-            log.debug("Content type of '%s' is '%s' (determined from full " \
+            log.debug("Content type of '%s' is '%s' (determined from full "
                       "path).", path, contentType)
         # Try to determine from the suffix.
         if not contentType and '.' in basename:
@@ -741,7 +741,7 @@ class ContentTypesRegistry:
                 suffix = suffix.lower()
             if suffix in self.suffixMap:
                 contentType = self.suffixMap[suffix]
-                log.debug("Content type of '%s' is '%s' (determined from " \
+                log.debug("Content type of '%s' is '%s' (determined from "
                           "suffix '%s').", path, contentType, suffix)
         # Try to determine from the registered set of regex patterns.
         if not contentType:

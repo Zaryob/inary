@@ -87,8 +87,7 @@ def configure(parameters=''):
                 --sysconfdir=/{5} \
                 --localstatedir=/{6} \
                 --libexecdir=/{7} \
-                {8}{9}'.format(prefix, \
-                               get.HOST(), get.manDIR(), get.infoDIR(),
+                {8}{9}'.format(prefix, get.HOST(), get.manDIR(), get.infoDIR(),
                                get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
                                "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
                                parameters)

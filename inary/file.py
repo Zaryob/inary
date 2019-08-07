@@ -20,6 +20,7 @@ like all inary classes, it has been programmed in a non-restrictive way
 """
 
 import os
+import lzma
 import shutil
 
 import gettext
@@ -96,11 +97,6 @@ class File:
     def decompress(localfile, compress):
         compress = File.choose_method(localfile, compress)
         if compress == File.COMPRESSION_TYPE_XZ:
-            try:
-                import lzma
-            except:
-                from backports import lzma
-
             open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read().decode('utf-8'))
             localfile = localfile[:-3]
         elif compress == File.COMPRESSION_TYPE_BZ2:
@@ -224,10 +220,6 @@ class File:
             compressed_files = []
             ctypes = self.compress or 0
             if ctypes & File.COMPRESSION_TYPE_XZ:
-                try:
-                    import lzma
-                except:
-                    from backports import lzma
                 compressed_file = self.localfile + ".xz"
                 compressed_files.append(compressed_file)
                 lzma_file = lzma.LZMAFile(compressed_file, "w")
@@ -265,7 +257,7 @@ class File:
                 sigfilename = File.download(inary.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
-            except Exception as e:  # FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 raise NoSignatureFound(uri)
             if os.system('gpg --verify ' + sigfilename) != 0:
                 raise InvalidSignature(uri)  # everything is all right here

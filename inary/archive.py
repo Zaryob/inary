@@ -16,6 +16,7 @@
 
 # standard library modules
 import os
+import lzma
 import stat
 import errno
 import shutil
@@ -64,10 +65,6 @@ class _LZMAProxy(object):
         self.init()
 
     def init(self):
-        try:
-            import lzma
-        except ImportError:
-            from backports import lzma
         self.pos = 0
         if self.mode == "r":
             self.lzmaobj = lzma.LZMADecompressor()
@@ -266,10 +263,6 @@ class ArchiveLzma(ArchiveBase):
         if output_path.endswith(ext):
             output_path = output_path[:-len(ext)]
 
-        try:
-            import lzma
-        except:
-            from backports import lzma
         lzma_file = lzma.LZMAFile(self.file_path, "r")
         output = open(output_path, "w")
         output.write(lzma_file.read().decode("utf-8"))
@@ -520,8 +513,7 @@ class ArchiveTar(ArchiveBase):
                 compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
-                                            compresslevel=compresslevel,
-                                            compressformat=format
+                                            compresslevel=compresslevel
                                             )
             else:
                 raise UnknownArchiveType

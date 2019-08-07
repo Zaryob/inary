@@ -73,7 +73,7 @@ def search_file(term):
     @param term: used to search file -> list_of_strings
 
     >>> import inary.operations
-    >>> files = inary.operation.search.search_file("kvm-")
+    >>> files = inary.operations.search.search_file("kvm-")
 
     >>> print files
 

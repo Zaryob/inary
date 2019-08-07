@@ -168,7 +168,7 @@ class Command(object):
         else:
             ui = inary.cli.CLI()
 
-        if (write and not os.access(inary.context.config.packages_dir(), os.W_OK) or \
+        if (write and not os.access(inary.context.config.packages_dir(), os.W_OK) or
                 ('sf' == self.get_name() or 'cp' == self.get_name() and not os.access(
                     os.path.join(ctx.config.info_dir(), ctx.const.files_db), os.W_OK))):
             raise inary.cli.Error(_("You have to be root for this operation."))

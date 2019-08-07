@@ -93,7 +93,7 @@ class InstallDB(lazydb.LazyDB):
     def __get_marked_packages(_type):
         info_path = os.path.join(ctx.config.info_dir(), _type)
         if os.path.exists(info_path):
-            return open(info_path, "r").read().split()
+            return open(info_path).read().split()
         return []
 
     def __add_to_revdeps(self, package, revdeps):
