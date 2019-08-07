@@ -87,8 +87,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-    ignore_dep = ctx.config.get_option('ignore_dependency') # Fixme: Fuck
-
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = operations.helper.check_conflicts(order, packagedb)
@@ -180,7 +178,7 @@ def install_pkg_files(package_URIs, reinstall=False):
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
                 raise Exception(_('Package {0} is not compatible with your distribution release {1} {2}.').format(
-                    x, ctx.config.values.general.distribution, \
+                    x, ctx.config.values.general.distribution,
                     ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
                 raise Exception(

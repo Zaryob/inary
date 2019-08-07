@@ -252,7 +252,7 @@ class ConfigurationFile(object):
                 break
             # Comment or blank line?
             if line.strip() == '' or line[0] in '#;' or \
-                    (line.split(None, 1)[0].lower() == 'rem' and \
+                    (line.split(None, 1)[0].lower() == 'rem' and
                      line[0] in "rR"):
                 current.write(line)
                 continue
