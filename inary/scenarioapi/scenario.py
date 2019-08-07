@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -15,15 +15,13 @@
 
 import os
 
-from inary.scenarioapi.constants import *
-from inary.scenarioapi.inaryops import *
 from inary.scenarioapi.repoops import *
-
+from inary.scenarioapi.inaryops import *
+from inary.scenarioapi.constants import *
 
 def let_repo_had(package, *args):
     repo_added_package(package, *args)
     repo_updated_index()
-
 
 def let_inary_had(*args):
     url = os.path.join(os.getcwd(), consts.repo_url)

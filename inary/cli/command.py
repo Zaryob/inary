@@ -205,7 +205,7 @@ class PackageOp(Command):
 
     def __init__(self, args):
         super(PackageOp, self).__init__(args)
-        self.scom = False
+        self.scom = True
 
     def options(self, group):
         group.add_option("--ignore-dependency", action="store_true",

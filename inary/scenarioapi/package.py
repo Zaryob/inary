@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -13,21 +13,20 @@
 # Please read the COPYING file.
 #
 
-import gettext
-import glob
 import os
+import glob
 
+from inary.scenarioapi.pspec import Pspec
 from inary.scenarioapi.actions import Actions
 from inary.scenarioapi.constants import *
-from inary.scenarioapi.pspec import Pspec
 from inary.scenarioapi.withops import *
 
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
 class Package:
-    def __init__(self, name, deps=None, cons=None, date="2006-18-18", ver="1.0", partOf="None"):
+    def __init__(self, name, deps=None, cons=None, date ="2006-18-18", ver ="1.0", partOf="None"):
         if deps is None:
             deps = []
         if cons is None:
@@ -102,7 +101,6 @@ class Package:
         self.actions.name = self.name
         self.actions.write()
         self.create_inary()
-
 
 if __name__ == "__main__":
     p = Package("w0rmux", [], [], "0.7")
