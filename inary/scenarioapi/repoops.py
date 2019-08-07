@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -13,18 +13,17 @@
 # Please read the COPYING file.
 #
 
-import gettext
 import os
 
-from inary.scenarioapi.constants import *
 from inary.scenarioapi.package import Package
 from inary.scenarioapi.withops import *
+from inary.scenarioapi.constants import *
 
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 repodb = {}
-
 
 def repo_added_package(package, *args):
     if package in repodb:
@@ -50,14 +49,12 @@ def repo_added_package(package, *args):
 
     repodb[package] = Package(package, dependencies, conflicts, ver=version, partOf=partOf)
 
-
 def repo_removed_package(package):
     if package not in repodb:
         raise Exception(_("Repo does not have package named {}.").format(package))
 
     os.unlink(os.path.join(consts.repo_path, repodb[package].get_file_name()))
     del repodb[package]
-
 
 def repo_version_bumped(package, *args):
     if package not in repodb:
@@ -67,14 +64,12 @@ def repo_version_bumped(package, *args):
     repodb[package].version_bump(*args)
     os.unlink(os.path.join(consts.repo_path, old_file))
 
-
 def repo_updated_index():
     cur = os.getcwd()
     path = os.path.join(cur, consts.repo_path)
     os.chdir(consts.repo_path)
     os.system("inary index --skip-signing {} >/dev/null 2>&1".format(path))
     os.chdir(cur)
-
 
 def repo_get_url():
     return "."
