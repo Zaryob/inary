@@ -87,7 +87,7 @@ def install(parameters=''):
 
     # Handle config files
     if handleConfigFiles():
-        raise Installing(_('Handle config files failed'))
+        raise InstallError(_('Handle config files failed'))
 
 
 def createSymlinksFormat2Engines():

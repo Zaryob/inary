@@ -55,12 +55,12 @@ class Digraph(object):
 
     def add_vertex(self, u, data=None):
         """add vertex u, optionally with data"""
-        assert not u in self.__v
-        self.__v.add(u)
-        self.__adj[u] = set()
-        if data:
-            self.__vdata[u] = data
-            self.__edata[u] = {}
+        if not u in self.__v:
+            self.__v.add(u)
+            self.__adj[u] = set()
+            if data:
+                self.__vdata[u] = data
+                self.__edata[u] = {}
 
     def add_edge(self, u, v, edata=None, udata=None, vdata=None):
         """add edge u -> v"""

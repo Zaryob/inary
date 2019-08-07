@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
@@ -13,10 +13,12 @@
 # Please read the COPYING file.
 #
 
-from inary.specfile import SpecFile, Package, Update, Path, Action, Archive, AnyDependency
-from inary.dependency import Dependency
 from inary.conflict import Conflict
+from inary.dependency import Dependency
+from inary.specfile import SpecFile, Package, Update, Path, Action, Archive
+
 from inary.sxml.autoxml import LocalText
+
 
 class Pspec:
     def __init__(self, pkgname, filepath):
@@ -158,7 +160,7 @@ class Pspec:
 
         self.pspec.packages.append(self.package)
 
-    def set_history(self, date, version, comment = "No Comment", release = "1"):
+    def set_history(self, date, version, comment="No Comment", release="1"):
         self.update.date = date
         self.update.version = version
         self.update.comment = comment

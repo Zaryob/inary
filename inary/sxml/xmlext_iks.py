@@ -191,13 +191,12 @@ def addText(node, tagpath, text):
     node.insertData(text)
 
 
-def removeChild(node, tag):
-    r = node.getTag(tag)
-    r.hide()
+def removeChild(node, doc):
+    node.hide()
 
 
-def removeChildText(node):
-    pass
+def removeChildText(node, text):
+    node.firstChild().hide()
 
 
 def removeAttribute(node):
