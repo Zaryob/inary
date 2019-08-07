@@ -29,7 +29,6 @@ import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
 
-
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
@@ -88,7 +87,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-    ignore_dep = ctx.config.get_option('ignore_dependency')
+    ignore_dep = ctx.config.get_option('ignore_dependency') # Fixme: Fuck
 
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
@@ -296,7 +295,7 @@ def plan_install_pkg_names(A):
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo():
+                    if not dep.satisfied_by_repo(packagedb=packagedb):
                         raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))

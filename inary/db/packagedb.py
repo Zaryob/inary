@@ -137,12 +137,12 @@ class PackageDB(lazydb.LazyDB):
             fields = {'name': True, 'summary': True, 'desc': True}
         found = []
         for name, xml in self.pdb.get_items_iter(repo):
-            if terms == [term for term in terms if (fields['name'] and \
+            if terms == [term for term in terms if (fields['name'] and
                                                     re.compile(term, re.I).search(name)) or \
-                                                   (fields['summary'] and \
+                                                   (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
                                                         xml)) or \
-                                                   (fields['desc'] and \
+                                                   (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
                 found.append(name)

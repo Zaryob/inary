@@ -21,6 +21,7 @@ import fnmatch
 import hashlib
 import operator
 import os
+import platform
 import re
 import shutil
 import struct

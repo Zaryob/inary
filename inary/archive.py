@@ -121,7 +121,6 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
-                 compressformat = None,
                  compresslevel = None,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
@@ -158,7 +157,7 @@ class TarFile(tarfile.TarFile):
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
         except IOError:
-            raise ReadError(_(" {} is not a lzma file").format(name))
+            raise tarfile.ReadError(_(" {} is not a lzma file").format(name))
         t._extfileobj = False
         return t
 
@@ -453,7 +452,6 @@ class ArchiveTar(ArchiveBase):
                 # Try to extract again.
                 self.tar.extract(tarinfo)
 
-            except IOError as e:
                 # Handle the case where new path is file, but old path is directory
                 # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:
@@ -928,7 +926,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('{} [cached]').format(self.archive.name))
+                ctx.ui.info(_('{} [cached]').format(self.archive.name),noln=True)
             return True
 
         return False

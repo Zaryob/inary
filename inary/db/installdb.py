@@ -226,12 +226,12 @@ class InstallDB(lazydb.LazyDB):
         found = []
         for name in self.list_installed():
             xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
-            if terms == [term for term in terms if (fields['name'] and \
+            if terms == [term for term in terms if (fields['name'] and
                                                     re.compile(term, re.I).search(name)) or \
-                                                   (fields['summary'] and \
+                                                   (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
                                                         xml)) or \
-                                                   (fields['desc'] and \
+                                                   (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
                 found.append(name)
