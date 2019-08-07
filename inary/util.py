@@ -793,7 +793,7 @@ def strip_file(filepath, fileinfo, outpath):
 def partition_freespace(directory):
     """Return free space of given directory's partition."""
     st = os.statvfs(directory)
-    return st[os.fstatvfs.F_BSIZE] * st[os.fstatvfs.F_BFREE]
+    return st.f_frsize * st.f_bfree
 
 
 ########################################

@@ -22,6 +22,7 @@ import inary.cli.command as command
 import inary.context as ctx
 from inary.operations import remove
 import inary.db
+import inary.blacklist
 
 
 class RemoveOrphaned(command.PackageOp, metaclass=command.autocommand):

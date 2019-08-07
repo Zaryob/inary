@@ -23,7 +23,6 @@ class ItemByRepo:
     def __init__(self, dbobj, compressed=False):
         self.dbobj = dbobj
         self.compressed = compressed
-        self.repolist = inary.db.repodb.RepoDB().list_repos()
 
     def has_repo(self, repo):
         return repo in self.dbobj
@@ -36,7 +35,7 @@ class ItemByRepo:
         return False
 
     def which_repo(self, item):
-        for r in self.repolist:
+        for r in inary.db.repodb.RepoDB().list_repos():
             if r in self.dbobj and item in self.dbobj[r]:
                 return r
 
@@ -95,4 +94,4 @@ class ItemByRepo:
             repos = [repo]
             return repos
         else:
-            return self.repolist
+            return inary.db.repodb.RepoDB().list_repos()
