@@ -202,7 +202,7 @@ def add_package(params):
 
         ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln=True)
 
-        package = inary.package.Package(path, 'r')
+        package = inary.package.Package(path)
         md = package.get_metadata()
         md.package.packageSize = int(os.path.getsize(path))
         md.package.packageHash = util.sha1_file(path)

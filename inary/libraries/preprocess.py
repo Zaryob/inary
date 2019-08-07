@@ -405,7 +405,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     # Process the input file.
     # (Would be helpful if I knew anything about lexing and parsing
     # simple grammars.)
-    fin = open(infile, 'r')
+    fin = open(infile)
     lines = fin.readlines()
     fin.close()
     if type(outfile) in str:
@@ -682,10 +682,10 @@ class ContentTypesRegistry:
         localContentTypesPath = join(dirname(__file__), "content.types")
         if exists(localContentTypesPath):
             log.debug("load content types file: `%r'" % localContentTypesPath)
-            self._loadContentType(open(localContentTypesPath, 'r').read())
+            self._loadContentType(open(localContentTypesPath).read())
         for path in (self.contentTypesPaths or []):
             log.debug("load content types file: `%r'" % path)
-            self._loadContentType(open(path, 'r').read())
+            self._loadContentType(open(path).read())
 
     def _loadContentType(self, content, path=None):
         """Return the registry for the given content.types file.
@@ -789,7 +789,7 @@ except NameError:
         identity = lambda x: x
         key_func = (key or identity)
         sseq = list(seq)
-        sseq.sort(lambda self, other: cmp(key_func(self), key_func(other)))
+        sseq.sort(lambda self, other: (key_func(self) > key_func(other))- (key_func(self) < key_func(other)))
         for item in sseq:
             yield item
 

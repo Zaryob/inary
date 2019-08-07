@@ -121,7 +121,7 @@ def getKernelVersion(flavour=None):
     kverfile = os.path.join("/etc/kernel", flavour)
 
     if os.path.exists(kverfile):
-        return open(kverfile, "r").read().strip()
+        return open(kverfile).read().strip()
     else:
         # Fail
         raise ConfigureError(_("Can't find kernel version information file {}.").format(kverfile))

@@ -93,7 +93,7 @@ def install(parameters=''):
 def createSymlinksFormat2Engines():
     """Create symlinks from format to engines"""
     for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
-        symfile = open(formatfile, "r")
+        symfile = open(formatfile)
         for line in symfile.readlines():
             if not line.startswith("#"):
                 symbin = line.split(None)
@@ -201,7 +201,7 @@ def moveSources():
     reloc = "texmf-dist"
 
     for tlpobjfile in os.listdir("tlpkg/tlpobj/"):
-        jobsfile = open("tlpkg/tlpobj/{}".format(tlpobjfile), "r")
+        jobsfile = open("tlpkg/tlpobj/{}".format(tlpobjfile))
         for line in jobsfile.readlines():
             if "RELOC" in line:
                 path = line.split("/", 1)[-1]
@@ -272,7 +272,7 @@ def addLanguageDef(parameter):
 def generateConfigFiles():
     """Generate config files"""
     for tlpobjfile in ls("{}/tlpkg/tlpobj/*".format(get.curDIR())):
-        jobsfile = open(tlpobjfile, "r")
+        jobsfile = open(tlpobjfile)
         for line in jobsfile.readlines():
             splitline = line.split(" ", 2)
             if splitline[0] == "execute":

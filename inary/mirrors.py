@@ -40,7 +40,7 @@ class Mirrors:
 
     def _parse(self, config):
         if os.path.exists(config):
-            for line in open(config, "r").readlines():
+            for line in open(config).readlines():
                 if not line.startswith('#') and not line == '\n':
                     mirror = line.strip().split()
                     if len(mirror) == 2:
