@@ -24,7 +24,7 @@ def exclude_from(packages, exfrom):
 
     patterns = []
     if os.path.exists(exfrom):
-        for line in open(exfrom, "r").readlines():
+        for line in open(exfrom).readlines():
             if not line.startswith('#') and not line == '\n':
                 patterns.append(line.strip())
         if patterns:

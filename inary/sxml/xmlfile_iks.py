@@ -84,7 +84,7 @@ class XmlFile(object):
             preprocess.preprocess(infile=localpath, outfile=st, defines=inary.config.Config().values.directives)
             st.seek(0)
         except:
-            st = open(localpath, 'r')
+            st = open(localpath)
 
         try:
             self.doc = iks.parse(localpath)

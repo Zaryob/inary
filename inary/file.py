@@ -231,7 +231,7 @@ class File:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
                 compressed_files.append(compressed_file)
-                bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
+                bz2.BZ2File(compressed_file, "w").write(open(self.localfile).read())
 
             if self.sha1sum:
                 sha1 = inary.util.sha1_file(self.localfile)

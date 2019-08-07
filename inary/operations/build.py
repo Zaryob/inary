@@ -320,7 +320,7 @@ class Builder:
         stateFile = util.join_path(self.pkg_work_dir(), "inaryBuildState")
         if not os.path.exists(stateFile):  # no state
             return None
-        return open(stateFile, "r").read()
+        return open(stateFile).read()
 
     def build(self):
         """Build the package in one shot."""

@@ -217,7 +217,7 @@ class ArchiveBzip2(ArchiveBase):
             output_path = output_path[:-4]
 
         import bz2
-        bz2_file = bz2.BZ2File(self.file_path, "r")
+        bz2_file = bz2.BZ2File(self.file_path)
         output = open(output_path, "w")
         output.write(bz2_file.read().decode("utf-8"))
         output.close()
@@ -269,7 +269,7 @@ class ArchiveLzma(ArchiveBase):
         if output_path.endswith(ext):
             output_path = output_path[:-len(ext)]
 
-        lzma_file = lzma.LZMAFile(self.file_path, "r")
+        lzma_file = lzma.LZMAFile(self.file_path)
         output = open(output_path, "w")
         output.write(lzma_file.read().decode("utf-8"))
         output.close()
