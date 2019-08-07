@@ -16,6 +16,7 @@ import os
 import time
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

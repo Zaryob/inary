@@ -15,12 +15,14 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+
 
 class Blame(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Information about the package owner and release

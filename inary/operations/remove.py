@@ -16,6 +16,7 @@ import os
 import sys
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -124,7 +125,7 @@ def plan_remove(A):
                 # satisfied_by_any_installed_other_than is for AnyDependency
                 if installdb.has_package(
                         rev_dep) and depinfo.satisfied_by_installed() and not depinfo.satisfied_by_any_installed_other_than(
-                        x):
+                    x):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)

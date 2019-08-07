@@ -15,6 +15,7 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -24,8 +25,8 @@ import inary.context as ctx
 import inary.util as util
 import inary.db
 
-class Check(command.Command, metaclass=command.autocommand):
 
+class Check(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Verify installation
 
     Usage: check [<package1> <package2> ... <packagen>]

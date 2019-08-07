@@ -20,6 +20,7 @@ import shutil
 import multiprocessing
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -68,7 +69,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         urlfile.write(uri)  # uri
         urlfile.close()
 
-        doc = self.read_uri(uri, tmpdir, force) # Fixme: Fuck
+        doc = self.read_uri(uri, tmpdir, force)  # Fixme: Fuck
 
         if not repo:
             repo = self.distribution.name()

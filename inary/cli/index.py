@@ -15,13 +15,13 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.data.index as index
-
 
 usage = _("""Index INARY files in a given directory
 

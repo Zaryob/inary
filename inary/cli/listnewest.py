@@ -15,12 +15,14 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+
 
 class ListNewest(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List newest packages in the repositories

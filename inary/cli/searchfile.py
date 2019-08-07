@@ -15,12 +15,14 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.operations.search as search
 import inary.context as ctx
 import inary.cli.command as command
+
 
 class SearchFile(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Search for a file

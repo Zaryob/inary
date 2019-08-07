@@ -27,7 +27,6 @@ import inary.uri
 import inary.util as util
 
 
-
 @util.locked
 def add_repo(name, indexuri, at=None):
     import re
