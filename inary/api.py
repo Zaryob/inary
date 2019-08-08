@@ -148,30 +148,10 @@ def set_options(options):
     ctx.config.set_options(options)
 
 
-# FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
-@inary.util.locked
-def rebuild_db():
-    # save parameters and shutdown inary
-    options = ctx.config.options
-    ui = ctx.ui
-    scom = ctx.scom
-    from inary import _cleanup
-    _cleanup()
-
-    ctx.filesdb.close()
-    ctx.filesdb.destroy()
-    ctx.filesdb = inary.db.filesdb.FilesDB()
-    ctx.filesdb.update()
-
-    # reinitialize everything
-    ctx.ui = ui
-    ctx.config.set_options(options)
-    ctx.scom = scom
-
-
 # The following are INARY operations which constitute the INARY API
 # Within functions
 from inary.analyzer.conflict import calculate_conflicts
+from inary.db.filesdb import rebuild_db
 from inary.data.index import index
 from inary.data.pgraph import package_graph
 from inary.fetcher import fetch

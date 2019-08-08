@@ -272,9 +272,6 @@ def dirName(filePath):
     """return the directory name of pathname path"""
     return os.path.dirname(filePath)
 
-
-##FIXME:there are an important error in here please##
-##         fix here tomorrow (don't forget)         ##
 def system(command):
     # command an list but should be an str
     sys.stdout.write(command + "\n")

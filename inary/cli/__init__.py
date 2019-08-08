@@ -62,7 +62,7 @@ class CLI(inary.ui.UI):
 
     def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
-            if isinstance(type(msg), type(bytes)):
+            if isinstance(msg, bytes):
                 msg = msg.decode('utf-8')
             if err:
                 sys.stderr.write(str(msg))

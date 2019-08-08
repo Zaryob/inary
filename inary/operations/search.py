@@ -79,6 +79,6 @@ def search_file(term):
 
     >>> [("kvm", (["lib/modules/2.6.18.8-86/extra/kvm-amd.ko","lib/modules/2.6.18.8-86/extra/kvm-intel.ko"])),]
     """
-    if term.startswith("/"):  # FIXME: why? why?
+    if term.startswith("/"):
         term = term[1:]
     return ctx.filesdb.search_file(term)
