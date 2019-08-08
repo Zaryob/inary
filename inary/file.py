@@ -54,7 +54,7 @@ class Error(inary.errors.Error):
 
 class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _(" invalid for {}").format(url))
+        inary.errors.Exception.__init__(self, _("GPG Signature is invalid for {}").format(url))
         self.url = url
 
 

@@ -72,8 +72,11 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                                         'checking the distribution of the repository.\n'
                                         'Do you want to continue?').format(name)):
                     return
+            if indexuri.endswith(".xml.xz") or indexuri.endswith(".xml"):
+                repository.add_repo(name, indexuri, ctx.get_option('at'))
+            else:
+                raise Exception(_("Extension of URI must be \".xml.xz\" or \".xml\"  "))
 
-            repository.add_repo(name, indexuri, ctx.get_option('at'))
 
         else:
             self.help()

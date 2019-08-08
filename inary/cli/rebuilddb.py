@@ -21,7 +21,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-import inary.api
+import inary.db.filesdb
 
 
 class RebuildDb(command.Command, metaclass=command.autocommand):
@@ -51,4 +51,4 @@ dirs under /var/lib/inary
     def run(self):
         self.init(database=True)
         if ctx.ui.confirm(str(_('Rebuild INARY databases?'))):
-            inary.api.rebuild_db()
+            inary.db.filesdb.rebuild_db()
