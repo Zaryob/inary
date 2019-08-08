@@ -221,9 +221,14 @@ class PackageDB(lazydb.LazyDB):
             node = xmlext.parseString(dep)
             dependency = inary.analyzer.dependency.Dependency()
             dependency.package = xmlext.getNodeText(node)
-            if node.attributes():
-                attr = xmlext.getAttributeList(node)[0]
-                dependency.__dict__[attr] = xmlext.getNodeAttribute(node, str(attr))
+
+            if xmlext.getAttributeList(node):
+                if xmlext.getNodeAttribute(node, "version"):
+                    dependency.__dict__["version"] = xmlext.getNodeAttribute(node, "version")
+                elif xmlext.getNodeAttribute(node, "release"):
+                    dependency.__dict__["release"] = xmlext.getNodeAttribute(node, "release")
+                else:
+                    pass #FIXME: ugly
             rev_deps.append((pkg, dependency))
 
         return rev_deps
