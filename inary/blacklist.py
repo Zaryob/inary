@@ -40,11 +40,11 @@ def exclude(packages, patterns):
     for pattern in patterns:
         # match pattern in package names
         match = fnmatch.filter(packages, pattern)
-        packages = packages - set(match)
+        packages -= set(match)
 
         if not match:
             # match pattern in component names
             for compare in fnmatch.filter(componentdb.list_components(), pattern):
-                packages = packages - set(componentdb.get_union_packages(compare, walk=True))
+                packages -= set(componentdb.get_union_packages(compare, walk=True))
 
     return list(packages)
