@@ -88,7 +88,7 @@ packages from all repositories.
         for p in l:
             package = self.packagedb.get_package(p, repo)
             lenp = len(p)
-            p = p + ' ' * max(0, maxlen - lenp)
+            p += ' ' * max(0, maxlen - lenp)
             ctx.ui.info('{0} - {1} '.format(p, str(package.summary)))
 
         print()

@@ -89,6 +89,6 @@ Usage: list-installed
                 ctx.ui.info('%-20s  ' % package.name, color='white', noln=True)
                 ctx.ui.info('|%s' % inst_info.one_liner())
             else:
-                package.name = package.name + ' ' * (maxlen - len(package.name))
+                package.name += ' ' * (maxlen - len(package.name))
                 ctx.ui.info('{} '.format(package.name), color='white', noln=True)
                 ctx.ui.info('- {}'.format(str(package.summary)))

@@ -175,7 +175,7 @@ class Writer(formatter.DumbWriter):
             self.col = 0
             data = data[i + 1:]
         data = data.expandtabs()
-        self.col = self.col + len(data)
+        self.col += len(data)
         self.atbreak = 0
 
 
