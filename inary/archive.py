@@ -790,21 +790,21 @@ class Archive:
         if not arch_type:
             arch_type = self._guess_archive_type(file_path)
 
-        handlers = {'targz': ArchiveTar,
-                    'tarbz2': ArchiveTar,
-                    'tarlzma': ArchiveTar,
-                    'tarxz': ArchiveTar,
-                    'tarZ': ArchiveTarZ,
-                    'tar': ArchiveTar,
-                    'zip': ArchiveZip,
-                    'gz': ArchiveGzip,
-                    'gzip': ArchiveGzip,
-                    'bz2': ArchiveBzip2,
-                    'bzip2': ArchiveBzip2,
-                    'lzma': ArchiveLzma,
-                    'xz': ArchiveLzma,
-                    '7z': Archive7Zip,
-                    'binary': ArchiveBinary}
+        handlers = {'targz':    ArchiveTar,
+                    'tarbz2':   ArchiveTar,
+                    'tarlzma':  ArchiveTar,
+                    'tarxz':    ArchiveTar,
+                    'tarZ':     ArchiveTarZ,
+                    'tar':      ArchiveTar,
+                    'zip':      ArchiveZip,
+                    'gz':       ArchiveGzip,
+                    'gzip':     ArchiveGzip,
+                    'bz2':      ArchiveBzip2,
+                    'bzip2':    ArchiveBzip2,
+                    'lzma':     ArchiveLzma,
+                    'xz':       ArchiveLzma,
+                    '7z':       Archive7Zip,
+                    'binary':   ArchiveBinary}
 
         handler = handlers.get(arch_type)
         if handler is None:
@@ -814,19 +814,19 @@ class Archive:
 
     @staticmethod
     def _guess_archive_type(file_path):
-        types = (("targz", (".tar.gz", ".tgz")),
-                 ("tarbz2", (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
-                 ("tarlzma", (".tar.lzma", ".tlz")),
-                 ("tarxz", (".tar.xz", ".txz")),
-                 ("tarZ", (".tar.Z",)),
-                 ("tar", (".tar",)),
-                 ("zip", (".zip", ".ZIP")),
-                 ("gz", (".gz",)),
-                 ("bz2", (".bz2", ".bz")),
-                 ("lzma", (".lzma",)),
-                 ("xz", (".xz",)),
-                 ("7z", (".7z",)),
-                 ("binary", (".bin", ".run", ".sh")))
+        types = (("targz",      (".tar.gz", ".tgz")),
+                 ("tarbz2",     (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
+                 ("tarlzma",    (".tar.lzma", ".tlz")),
+                 ("tarxz",      (".tar.xz", ".txz")),
+                 ("tarZ",       (".tar.Z",)),
+                 ("tar",        (".tar",)),
+                 ("zip",        (".zip", ".ZIP")),
+                 ("gz",         (".gz",)),
+                 ("bz2",        (".bz2", ".bz")),
+                 ("lzma",       (".lzma",)),
+                 ("xz",         (".xz",)),
+                 ("7z",         (".7z",)),
+                 ("binary",     (".bin", ".run", ".sh")))
 
         for _type, extensions in types:
             if file_path.endswith(extensions):

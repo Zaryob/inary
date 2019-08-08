@@ -34,7 +34,7 @@ class PackageDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
-        self.init()
+        # self.init()
 
     def init(self):
         self.__package_nodes = {}  # Packages
