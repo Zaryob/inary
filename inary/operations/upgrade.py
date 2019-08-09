@@ -132,7 +132,7 @@ def upgrade(A=None, repo=None):
     a minimum or maximum number of upgrades according to options.
 
     Upgrades the given packages, if no package given upgrades all the packages
-    @param packages (A): list of package names -> list_of_strings
+    @param A: list of package names -> list_of_strings
     @param repo: name of the repository that only the packages from that repo going to be upgraded
     """
     if A is None:

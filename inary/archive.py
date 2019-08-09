@@ -171,14 +171,13 @@ class ArchiveBase(object):
         self.type = atype
 
     def unpack(self, target_dir, clean_dir=False):
-        self.target_dir = target_dir
         # first we check if we need to clean-up our working env.
-        if os.path.exists(self.target_dir):
+        if os.path.exists(target_dir):
             if clean_dir:
-                util.clean_dir(self.target_dir)
+                util.clean_dir(target_dir)
 
-        if not os.path.exists(self.target_dir):
-            os.makedirs(self.target_dir)
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
 
 
 class ArchiveBinary(ArchiveBase):
@@ -865,13 +864,12 @@ class SourceArchive:
         self.url = inary.uri.URI(archive.uri)
         self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
         self.archive = archive
+        self.progress = None
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
             if interactive:
                 self.progress = ctx.ui.Progress
-            else:
-                self.progress = None
 
             try:
                 ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
