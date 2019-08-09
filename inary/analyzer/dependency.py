@@ -59,9 +59,10 @@ class Dependency(relation.Relation, metaclass=autoxml.autoxml):
     def satisfied_by_installed(self):
         return relation.installed_package_satisfies(self)
 
-    def satisfied_by_repo(self,packagedb=None):
-        if packagedb == None:
+    def satisfied_by_repo(self, packagedb=None):
+        if not packagedb:
             packagedb = PackageDB()
+
         if not packagedb.has_package(self.package):
             return False
         else:

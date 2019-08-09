@@ -20,6 +20,7 @@ import shutil
 import multiprocessing
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -68,7 +69,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         urlfile.write(uri)  # uri
         urlfile.close()
 
-        doc = self.read_uri(uri, tmpdir, force) # Fixme: Fuck
+        doc = self.read_uri(uri, tmpdir, force)  # Fixme: Fuck
 
         if not repo:
             repo = self.distribution.name()
@@ -201,7 +202,7 @@ def add_package(params):
 
         ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln=True)
 
-        package = inary.package.Package(path, 'r')
+        package = inary.package.Package(path)
         md = package.get_metadata()
         md.package.packageSize = int(os.path.getsize(path))
         md.package.packageHash = util.sha1_file(path)

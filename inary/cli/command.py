@@ -17,12 +17,14 @@ import sys
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.api
 import inary.util as util
 import inary.context as ctx
+
 
 class autocommand(type):
     def __init__(cls, name, bases, dict):

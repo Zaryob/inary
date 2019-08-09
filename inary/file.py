@@ -20,9 +20,11 @@ like all inary classes, it has been programmed in a non-restrictive way
 """
 
 import os
+import lzma
 import shutil
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -52,7 +54,7 @@ class Error(inary.errors.Error):
 
 class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _(" invalid for {}").format(url))
+        inary.errors.Exception.__init__(self, _("GPG Signature is invalid for {}").format(url))
         self.url = url
 
 
@@ -96,11 +98,6 @@ class File:
     def decompress(localfile, compress):
         compress = File.choose_method(localfile, compress)
         if compress == File.COMPRESSION_TYPE_XZ:
-            try:
-                import lzma
-            except:
-                from backports import lzma
-
             open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read().decode('utf-8'))
             localfile = localfile[:-3]
         elif compress == File.COMPRESSION_TYPE_BZ2:
@@ -224,10 +221,6 @@ class File:
             compressed_files = []
             ctypes = self.compress or 0
             if ctypes & File.COMPRESSION_TYPE_XZ:
-                try:
-                    import lzma
-                except:
-                    from backports import lzma
                 compressed_file = self.localfile + ".xz"
                 compressed_files.append(compressed_file)
                 lzma_file = lzma.LZMAFile(compressed_file, "w")
@@ -238,7 +231,7 @@ class File:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
                 compressed_files.append(compressed_file)
-                bz2.BZ2File(compressed_file, "w").write(open(self.localfile, "r").read())
+                bz2.BZ2File(compressed_file, "w").write(open(self.localfile).read())
 
             if self.sha1sum:
                 sha1 = inary.util.sha1_file(self.localfile)
@@ -265,7 +258,7 @@ class File:
                 sigfilename = File.download(inary.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
-            except Exception as e:  # FIXME: what exception could we catch here, replace with that.
+            except Exception:  # FIXME: what exception could we catch here, replace with that.
                 raise NoSignatureFound(uri)
             if os.system('gpg --verify ' + sigfilename) != 0:
                 raise InvalidSignature(uri)  # everything is all right here

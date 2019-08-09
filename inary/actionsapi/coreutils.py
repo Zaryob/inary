@@ -54,7 +54,7 @@ class printto:
             print(line, file=self.out)
 
 
-printlines = printto(sys.stdout)
+printlines = printto()
 
 
 class terminator:

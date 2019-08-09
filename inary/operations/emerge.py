@@ -15,6 +15,7 @@
 import sys
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -31,7 +32,7 @@ import inary.data
 def emerge(A):
     """
     Builds and installs the given packages from source
-    @param packages: list of package names -> list_of_strings
+    @param A: list of package names -> list_of_strings
     """
     inary.db.historydb.HistoryDB().create_history("emerge")
 

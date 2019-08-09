@@ -18,6 +18,7 @@
 import os
 import re
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -66,6 +67,7 @@ class InstallDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True, cachedir=ctx.config.packages_dir())
+        # self.init()
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
@@ -83,6 +85,7 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_installed_pkgs():
+
         def split_name(dirname):
             name, version, release = dirname.rsplit("-", 2)
             return name, version + "-" + release
@@ -93,7 +96,7 @@ class InstallDB(lazydb.LazyDB):
     def __get_marked_packages(_type):
         info_path = os.path.join(ctx.config.info_dir(), _type)
         if os.path.exists(info_path):
-            return open(info_path, "r").read().split()
+            return open(info_path).read().split()
         return []
 
     def __add_to_revdeps(self, package, revdeps):
@@ -112,7 +115,7 @@ class InstallDB(lazydb.LazyDB):
             del self.installed_db[package]
             return
 
-        deps = xmlext.getTagByName(meta_doc, 'RuntimeDependencies')
+        deps = xmlext.getNode(pkg, 'RuntimeDependencies')
         if deps:
             for dep in xmlext.getTagByName(deps, 'Dependency'):
                 revdep = revdeps.setdefault(xmlext.getNodeText(dep), {})
@@ -270,9 +273,12 @@ class InstallDB(lazydb.LazyDB):
         dependency.package = xmlext.getNodeText(node)
 
         if xmlext.getAttributeList(node):
-            attr = xmlext.getAttributeList(node)[0]
-            dependency.__dict__[str(attr)] = xmlext.getNodeAttribute(node.str(attr))
-
+            if xmlext.getNodeAttribute(node, "version"):
+                dependency.__dict__["version"] = xmlext.getNodeAttribute(node, "version")
+            elif xmlext.getNodeAttribute(node, "release"):
+                dependency.__dict__["release"] = xmlext.getNodeAttribute(node, "release")
+            else:
+                pass #FIXME: ugly
         return dependency
 
     def __create_dependency(self, depStr):

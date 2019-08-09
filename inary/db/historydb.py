@@ -22,6 +22,7 @@ import inary.util
 
 class HistoryDB(lazydb.LazyDB):
 
+    # noinspection PyArgumentList
     def init(self):
         self.__logs = self.__generate_history()
         self.history = History.History()

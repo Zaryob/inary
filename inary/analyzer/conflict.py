@@ -59,7 +59,8 @@ def package_conflicts(pkg, confs):
 def calculate_conflicts(order, packagedb):
     """
     Return a tuple of the conflicting packages information -> tuple
-    @param packages: list of package names -> list_of_strings
+    @param order: list of package names -> list_of_strings
+    @param packagedb: package database
     """
 
     # check conflicting packages in the installed system

@@ -17,6 +17,7 @@ import sys
 import zipfile
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -36,9 +37,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
-    filesdb   = inary.db.filesdb.FilesDB()
-
-    A = [str(x) for x in A]  # FIXME: why do we still get unicode input here? :/
     # A was a list, remove duplicates
     A_0 = A = set(A)
 
@@ -85,7 +83,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
-
     conflicts = []
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = operations.helper.check_conflicts(order, packagedb)
@@ -94,7 +91,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     extra_paths = {}
     for x in order:
         ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
-        install_op = atomicoperations.Install.from_name(x,ignore_dep,packagedb,installdb,filesdb)
+        install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
             extra_paths[install_op.package_fname] = x
@@ -179,7 +176,7 @@ def install_pkg_files(package_URIs, reinstall=False):
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
                 raise Exception(_('Package {0} is not compatible with your distribution release {1} {2}.').format(
-                    x, ctx.config.values.general.distribution, \
+                    x, ctx.config.values.general.distribution,
                     ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
                 raise Exception(
@@ -297,7 +294,7 @@ def plan_install_pkg_names(A):
             for dep in uniqdep:
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
                 if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo(packagedb):
+                    if not dep.satisfied_by_repo(packagedb=packagedb):
                         raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))

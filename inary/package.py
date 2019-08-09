@@ -17,6 +17,7 @@
 import os.path
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -109,7 +110,7 @@ class Package:
                         url))
                 raise
         else:
-            ctx.ui.info(util.colorize(_('{} [cached]').format(url.filename()),'blue'))
+            ctx.ui.info(_('{} [cached]').format(url.filename()))
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""

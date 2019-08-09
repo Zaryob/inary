@@ -93,7 +93,7 @@ def install(parameters=''):
 def createSymlinksFormat2Engines():
     """Create symlinks from format to engines"""
     for formatfile in ls("{}/texmf/fmtutil/format*.cnf".format(get.curDIR())):
-        symfile = open(formatfile, "r")
+        symfile = open(formatfile)
         for line in symfile.readlines():
             if not line.startswith("#"):
                 symbin = line.split(None)
@@ -201,7 +201,7 @@ def moveSources():
     reloc = "texmf-dist"
 
     for tlpobjfile in os.listdir("tlpkg/tlpobj/"):
-        jobsfile = open("tlpkg/tlpobj/{}".format(tlpobjfile), "r")
+        jobsfile = open("tlpkg/tlpobj/{}".format(tlpobjfile))
         for line in jobsfile.readlines():
             if "RELOC" in line:
                 path = line.split("/", 1)[-1]
@@ -259,20 +259,20 @@ def addLanguageDef(parameter):
 
     language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
     language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
-    para_dict["name"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
+        para_dict["name"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
     language_def.close()
 
     if "synonyms" in para_dict:
         language_def = open('{0}/language.{1}.def'.format(get.curDIR(), get.srcNAME()), 'a')
         language_def.write("\\addlanguage{%s}{%s}{}{%s}{%s}\n" % (
-        para_dict["synonyms"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
+            para_dict["synonyms"], para_dict["file"], para_dict["lefthyphenmin"], para_dict["righthyphenmin"]))
         language_def.close()
 
 
 def generateConfigFiles():
     """Generate config files"""
     for tlpobjfile in ls("{}/tlpkg/tlpobj/*".format(get.curDIR())):
-        jobsfile = open(tlpobjfile, "r")
+        jobsfile = open(tlpobjfile)
         for line in jobsfile.readlines():
             splitline = line.split(" ", 2)
             if splitline[0] == "execute":

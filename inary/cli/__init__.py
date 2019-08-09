@@ -12,18 +12,22 @@
 # Please read the COPYING file.
 #
 
-import locale
+import re
 import sys
+import tty
+import locale
+
+
+import inary.ui
+import inary.errors
+import inary.context as ctx
+import inary.util as util
+import re, tty
+
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.errors
-import inary.context as ctx
-import inary.ui
-import inary.util as util
-import re, tty
 
 
 class Error(inary.errors.Error):
@@ -59,7 +63,7 @@ class CLI(inary.ui.UI):
 
     def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
-            if type(msg) == type(bytes()):
+            if isinstance(msg, bytes):
                 msg = msg.decode('utf-8')
             if err:
                 sys.stderr.write(str(msg))
@@ -158,7 +162,6 @@ class CLI(inary.ui.UI):
         msg = str(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True
-
 
         locale.setlocale(locale.LC_ALL, "")
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))

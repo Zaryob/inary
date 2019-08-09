@@ -37,6 +37,7 @@ import inary.analyzer.conflict
 import inary.data.component as component
 import inary.data.group as group
 import inary.util as util
+import inary.errors
 import inary.db
 
 

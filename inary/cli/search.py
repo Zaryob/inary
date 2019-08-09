@@ -16,12 +16,14 @@ import optparse
 import re
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+
 
 class Search(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Search packages

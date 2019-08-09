@@ -15,15 +15,16 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
 
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
 import inary.db
 from inary.operations import repository, emerge
+
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and upgrade INARY source packages from repository

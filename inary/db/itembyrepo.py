@@ -14,10 +14,12 @@
 
 import gzip
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.db
+
 
 class ItemByRepo:
     def __init__(self, dbobj, compressed=False):
@@ -90,9 +92,9 @@ class ItemByRepo:
                 for item in list(self.dbobj[r].keys()):
                     yield str(item), str(self.dbobj[r][item])
 
-    def item_repos(self,repo=None):
+    def item_repos(self, repo=None):
         if repo:
             repos = [repo]
             return repos
         else:
-            return self.repolist
+            return inary.db.repodb.RepoDB().list_repos()

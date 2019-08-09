@@ -16,6 +16,7 @@
 
 # standard library modules
 import os
+import lzma
 import stat
 import errno
 import shutil
@@ -23,6 +24,7 @@ import tarfile
 import zipfile
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -35,11 +37,14 @@ import inary.uri
 import inary.fetcher
 import inary.mirrors
 
+
 class SourceArchiveError(inary.errors.Error):
     pass
 
+
 class UnknownArchiveType(Exception):
     pass
+
 
 class ArchiveHandlerNotInstalled(Exception):
     pass
@@ -64,14 +69,10 @@ class _LZMAProxy(object):
         self.init()
 
     def init(self):
-        try:
-            import lzma
-        except ImportError:
-            from backports import lzma
         self.pos = 0
         if self.mode == "r":
             self.lzmaobj = lzma.LZMADecompressor()
-            #self.fileobj.seek(0)
+            # self.fileobj.seek(0)
             self.buf = b""
         else:
             self.lzmaobj = lzma.LZMACompressor()
@@ -114,6 +115,7 @@ class _LZMAProxy(object):
             raw = self.lzmaobj.flush()
             self.fileobj.write(raw)
 
+
 class TarFile(tarfile.TarFile):
 
     @classmethod
@@ -121,7 +123,7 @@ class TarFile(tarfile.TarFile):
                  name=None,
                  mode="r",
                  fileobj=None,
-                 compresslevel = None,
+                 compresslevel=None,
                  **kwargs):
         """Open lzma/xz compressed tar archive name for reading or writing.
            Appending is not allowed.
@@ -137,7 +139,6 @@ class TarFile(tarfile.TarFile):
 
         if not compresslevel:
             compresslevel = ctx.config.values.build.compressionlevel
-
 
         if len(mode) > 1 or mode not in "rw":
             raise ValueError("mode must be 'r' or 'w'.")
@@ -164,24 +165,25 @@ class TarFile(tarfile.TarFile):
 
 class ArchiveBase(object):
     """Base class for Archive classes."""
+
     def __init__(self, file_path, atype):
         self.file_path = file_path
         self.type = atype
 
     def unpack(self, target_dir, clean_dir=False):
-        self.target_dir = target_dir
         # first we check if we need to clean-up our working env.
-        if os.path.exists(self.target_dir):
+        if os.path.exists(target_dir):
             if clean_dir:
-                util.clean_dir(self.target_dir)
+                util.clean_dir(target_dir)
 
-        if not os.path.exists(self.target_dir):
-            os.makedirs(self.target_dir)
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
 
 
 class ArchiveBinary(ArchiveBase):
     """ArchiveBinary handles binary archive files (usually distributed as
     .bin files)"""
+
     def __init__(self, file_path, arch_type="binary"):
         super(ArchiveBinary, self).__init__(file_path, arch_type)
 
@@ -214,7 +216,7 @@ class ArchiveBzip2(ArchiveBase):
             output_path = output_path[:-4]
 
         import bz2
-        bz2_file = bz2.BZ2File(self.file_path, "r")
+        bz2_file = bz2.BZ2File(self.file_path)
         output = open(output_path, "w")
         output.write(bz2_file.read().decode("utf-8"))
         output.close()
@@ -266,11 +268,7 @@ class ArchiveLzma(ArchiveBase):
         if output_path.endswith(ext):
             output_path = output_path[:-len(ext)]
 
-        try:
-            import lzma
-        except:
-            from backports import lzma
-        lzma_file = lzma.LZMAFile(self.file_path, "r")
+        lzma_file = lzma.LZMAFile(self.file_path)
         output = open(output_path, "w")
         output.write(lzma_file.read().decode("utf-8"))
         output.close()
@@ -282,10 +280,11 @@ class ArchiveTar(ArchiveBase):
     type. Provides access to tar, tar.gz and tar.bz2 files.
 
     This class provides the unpack magic for tar archives."""
+
     def __init__(self, file_path=None, arch_type="tar",
-                        no_same_permissions=True,
-                        no_same_owner=False,
-                        fileobj=None):
+                 no_same_permissions=True,
+                 no_same_owner=False,
+                 fileobj=None):
         super(ArchiveTar, self).__init__(file_path, arch_type)
         self.tar = None
         self.no_same_permissions = no_same_permissions
@@ -372,7 +371,9 @@ class ArchiveTar(ArchiveBase):
                             # try in other way
                             if e.errno == errno.EXDEV:
                                 if tarinfo.linkname.startswith(".."):
-                                    new_path = util.join_path(os.path.normpath(os.path.join(os.path.dirname(tarinfo.name), tarinfo.linkname)), filename)
+                                    new_path = util.join_path(
+                                        os.path.normpath(os.path.join(os.path.dirname(tarinfo.name), tarinfo.linkname)),
+                                        filename)
                                 if not old_path.startswith("/"):
                                     old_path = "/" + old_path
                                 if not new_path.startswith("/"):
@@ -485,7 +486,6 @@ class ArchiveTar(ArchiveBase):
                 uid = os.getuid()
                 gid = os.getgid()
 
-
                 if not os.path.islink(tarinfo.name):
                     ctx.ui.debug(_("* Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid))
                     os.chown(tarinfo.name, uid, gid)
@@ -520,8 +520,7 @@ class ArchiveTar(ArchiveBase):
                 compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
-                                            compresslevel=compresslevel,
-                                            compressformat=format
+                                            compresslevel=compresslevel
                                             )
             else:
                 raise UnknownArchiveType
@@ -540,8 +539,9 @@ class ArchiveTarZ(ArchiveBase):
     """ArchiveTar handles tar.Z archives.
 
     This class provides the unpack magic for tar.Z archives."""
+
     def __init__(self, file_path, arch_type="tarZ",
-                        no_same_permissions=True, no_same_owner=True):
+                 no_same_permissions=True, no_same_owner=True):
         super(ArchiveTarZ, self).__init__(file_path, arch_type)
         self.tar = None
         self.no_same_permissions = no_same_permissions
@@ -556,7 +556,7 @@ class ArchiveTarZ(ArchiveBase):
         self.file_path = util.remove_suffix(".Z", self.file_path)
 
         ret, out, err = util.run_batch(
-                "uncompress -cf {0}.Z > {0}".format(self.file_path))
+            "uncompress -cf {0}.Z > {0}".format(self.file_path))
         if ret != 0:
             raise RuntimeError(_("Problem occured while uncompressing {}.Z file").format(self.file_path))
 
@@ -601,6 +601,7 @@ class ArchiveTarZ(ArchiveBase):
         except OSError:
             pass
         self.tar.close()
+
 
 class Archive7Zip(ArchiveBase):
     """Archive7Zip handles 7-Zip archives."""
@@ -705,7 +706,7 @@ class ArchiveZip(ArchiveBase):
         from archive_root, treating it as the archive root"""
         zip_obj = self.zip_obj
         for info in zip_obj.infolist():
-            if pred(info.filename):   # check if condition holds
+            if pred(info.filename):  # check if condition holds
 
                 # below code removes that, so we find it here
                 is_dir = info.filename.endswith('/')
@@ -719,11 +720,11 @@ class ArchiveZip(ArchiveBase):
                         outpath = util.removepathprefix(archive_root,
                                                         info.filename)
                     else:
-                        continue        # don't extract if not under
+                        continue  # don't extract if not under
 
                 ofile = os.path.join(target_dir, outpath)
 
-                if is_dir:               # this is a directory
+                if is_dir:  # this is a directory
                     if not os.path.isdir(ofile):
                         os.makedirs(ofile)
                         perm = info.external_attr
@@ -838,8 +839,10 @@ class Archive:
     def unpack_files(self, files, target_dir):
         self.archive.unpack_files(files, target_dir)
 
+
 class SourceArchives:
     """This is a wrapper for supporting multiple SourceArchive objects."""
+
     def __init__(self, spec):
         self.sourceArchives = [SourceArchive(a) for a in spec.source.archive]
 
@@ -856,17 +859,17 @@ class SourceArchives:
 class SourceArchive:
     """source archive. this is a class responsible for fetching
     and unpacking a source archive"""
+
     def __init__(self, archive):
         self.url = inary.uri.URI(archive.uri)
         self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
         self.archive = archive
+        self.progress = None
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
             if interactive:
                 self.progress = ctx.ui.Progress
-            else:
-                self.progress = None
 
             try:
                 ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
@@ -897,7 +900,6 @@ class SourceArchive:
             raise SourceArchiveError(_('No such file or no permission to read'))
         shutil.copy(url[7:], self.archiveFile)
 
-
     def fetch_from_mirror(self):
         uri = self.url.get_uri()
         sep = uri[len("mirrors://"):].split("/")
@@ -926,7 +928,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('{} [cached]').format(self.archive.name),noln=True)
+                ctx.ui.info(_('{} [cached]').format(self.archive.name), noln=True)
             return True
 
         return False
@@ -940,9 +942,11 @@ class SourceArchive:
         try:
             archive = Archive(self.archiveFile, self.archive.type)
         except UnknownArchiveType:
-            raise SourceArchiveError(_("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
+            raise SourceArchiveError(
+                _("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
         except ArchiveHandlerNotInstalled:
-            raise SourceArchiveError(_("Inary needs {} to unpack this archive but it is not installed.").format(self.archive.type))
+            raise SourceArchiveError(
+                _("Inary needs {} to unpack this archive but it is not installed.").format(self.archive.type))
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

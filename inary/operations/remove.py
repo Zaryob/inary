@@ -16,6 +16,7 @@ import os
 import sys
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -34,6 +35,7 @@ def remove(A, ignore_dep=False):
     Removes the given packages from the system
     @param A: list of package names -> list_of_strings
     @param ignore_dep: removes packages without looking into theirs reverse deps if True
+    @param ignore_safety: system.base packages can also be removed if True
     """
     inary.db.historydb.HistoryDB().create_history("remove")
     componentdb = inary.db.componentdb.ComponentDB()
@@ -111,7 +113,7 @@ def plan_remove(A):
                 # satisfied_by_any_installed_other_than is for AnyDependency
                 if installdb.has_package(
                         rev_dep) and depinfo.satisfied_by_installed() and not depinfo.satisfied_by_any_installed_other_than(
-                        x):
+                    x):
                     if not rev_dep in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)

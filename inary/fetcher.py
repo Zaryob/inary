@@ -21,6 +21,7 @@ import time
 import ssl
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -199,7 +200,9 @@ class Fetcher:
             self.c.setopt(self.c.WRITEDATA, file_id)
 
             try:
-                self.c.perform()
+                c.perform()
+                ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+                # pycurl yüzünden kaynaklanıyor
                 file_id.close()
                 ctx.ui.info("\n")
                 ctx.ui.debug(_("Downloaded from:" + str(self.c.getinfo(self.c.EFFECTIVE_URL))))

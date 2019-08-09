@@ -697,7 +697,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     check_file(patchFile)
 
     if level is None:
-        with open(patchFile, "r") as patchfile:
+        with open(patchFile) as patchfile:
             lines = patchfile.readlines()
             try:
                 paths_m = [l.strip().split()[1] for l in lines if l.startswith("---") and "/" in l]
@@ -749,7 +749,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch ({}) failed").format((patchFile)))
+            raise Error(_("ERROR: patch ({}) failed").format(patchFile))
         else:
             raise Error(_("ERROR: patch ({0}) failed: {1}").format(patchFile, out))
 
@@ -819,7 +819,7 @@ def strip_file(filepath, fileinfo, outpath):
 def partition_freespace(directory):
     """Return free space of given directory's partition."""
     st = os.statvfs(directory)
-    return st[os.fstatvfs.F_BSIZE] * st[os.fstatvfs.F_BFREE]
+    return st.f_frsize * st.f_bfree
 
 
 ########################################

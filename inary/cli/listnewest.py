@@ -15,12 +15,14 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
+
 
 class ListNewest(command.Command, metaclass=command.autocommand):
     __doc__ = _("""List newest packages in the repositories
@@ -86,7 +88,7 @@ packages from all repositories.
         for p in l:
             package = self.packagedb.get_package(p, repo)
             lenp = len(p)
-            p = p + ' ' * max(0, maxlen - lenp)
+            p += ' ' * max(0, maxlen - lenp)
             ctx.ui.info('{0} - {1} '.format(p, str(package.summary)))
 
         print()
