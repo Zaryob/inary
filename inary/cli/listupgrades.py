@@ -40,7 +40,7 @@ Lists the packages that will be upgraded.
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
 
-    name = (_("list-upgrades"), "lu")
+    name = ("list-upgrades", "lu")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-upgrades options"))

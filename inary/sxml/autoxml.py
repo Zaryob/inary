@@ -107,11 +107,7 @@ class LocalText(dict):
             (lang, encoding) = locale.getlocale()
             if not lang:
                 (lang, encoding) = locale.getdefaultlocale()
-<<<<<<< HEAD
             if lang is None:  # stupid python means it is C locale
-=======
-            if lang is None: # stupid python means it is C locale
->>>>>>> master
                 return 'en'
             else:
                 return lang[0:2]
@@ -423,11 +419,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             def equal(self, other):
                 # handle None
                 if other is None:
-<<<<<<< HEAD
                     return False  # well, must be False at this point :)
-=======
-                    return False # well, must be False at this point :)
->>>>>>> master
                 for name in names:
                     try:
                         if getattr(self, name) != getattr(other, name):
@@ -445,11 +437,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             cls.__ne__ = notequal
 
         if xmlfile_support:
-<<<<<<< HEAD
             def parse(self, xml, keepDoc=False):
-=======
-            def parse(self, xml, keepDoc = False):
->>>>>>> master
                 """parse XML string and decode it into a python object"""
                 self.parsexml(xml)
                 errs = []
@@ -467,23 +455,14 @@ class autoxml(oo.autosuper, oo.autoprop):
                 if errs:
                     errs.append(_("autoxml.parse: String '{}' has errors").format(xml))
 
-<<<<<<< HEAD
             def read(self, uri, keepDoc=False, tmpDir='/tmp',
                      sha1sum=False, compress=None, sign=None, copylocal=False, nodecode=False):
-=======
-            def read(self, uri, keepDoc = False, tmpDir = '/tmp',
-                     sha1sum = False, compress = None, sign = None, copylocal = False, nodecode = False):
->>>>>>> master
                 """read XML file and decode it into a python object"""
                 read_xml = self.readxml(uri, tmpDir, sha1sum=sha1sum,
                                         compress=compress, sign=sign, copylocal=copylocal)
 
                 if nodecode:
-<<<<<<< HEAD
                     return read_xml
-=======
-                   return read_xml
->>>>>>> master
 
                 errs = []
                 self.decode(self.rootNode(), errs)
@@ -501,13 +480,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                     errs.append(_("autoxml.read: File '{}' has errors").format(uri))
                     raise Error(*errs)
 
-<<<<<<< HEAD
             def write(self, uri, keepDoc=False, tmpDir='/tmp',
                       sha1sum=False, compress=None, sign=None):
-=======
-            def write(self, uri, keepDoc = False, tmpDir = '/tmp',
-                      sha1sum = False, compress = None, sign = None):
->>>>>>> master
                 """encode the contents of the python object into an XML file"""
                 errs = self.errors()
                 if errs:
@@ -623,11 +597,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             """return errors in the object"""
             errs = []
             if hasattr(self, name) and getattr(self, name) is not None:
-<<<<<<< HEAD
                 value = getattr(self, name)
-=======
-                value = getattr(self,name)
->>>>>>> master
                 errs.extend(errors_a(value, where + '.' + name))
             else:
                 if req == mandatory:
@@ -918,16 +888,8 @@ class autoxml(oo.autosuper, oo.autoprop):
         return init, decode, encode, errors, format
 
     basic_cons_map = {
-<<<<<<< HEAD
         bytes: bytes,
         str: str,
         int: int,
         float: float
     }
-=======
-        bytes : bytes,
-        str : str,
-        int : int,
-        float : float
-        }
->>>>>>> master

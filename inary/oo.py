@@ -29,10 +29,7 @@ class autosuprop(autosuper, autoprop):
 
 class autoeq(type):
     """useful for structures"""
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     def __init__(cls, name, bases, dict):
         super(autoeq, cls).__init__(name, bases, dict)
 

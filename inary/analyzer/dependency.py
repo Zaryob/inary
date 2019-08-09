@@ -70,11 +70,5 @@ class Dependency(relation.Relation, metaclass=autoxml.autoxml):
             return self.satisfies_relation(pkg.version, pkg.release)
 
     # Added for AnyDependency, single Dependency always returns False
-<<<<<<< HEAD
     def satisfied_by_any_installed_other_than(self):
         pass
-=======
-    @staticmethod
-    def satisfied_by_any_installed_other_than(package):
-        return False
->>>>>>> master

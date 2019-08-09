@@ -40,7 +40,7 @@ database.
     def __init__(self, args):
         super(Search, self).__init__(args)
 
-    name = (_("search"), "sr")
+    name = ("search", "sr")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("search options"))

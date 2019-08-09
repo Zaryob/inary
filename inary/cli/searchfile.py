@@ -35,7 +35,7 @@ Finds the installed package which contains the specified file.
     def __init__(self, args):
         super(SearchFile, self).__init__(args)
 
-    name = (_("search-file"), "sf")
+    name = ("search-file", "sf")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("search-file options"))

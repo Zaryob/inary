@@ -37,9 +37,7 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
-import inary.reactor
 
-from inary.db.repodb import RepoDB as repodb
 
 class Error(inary.errors.Error):
     pass
@@ -53,13 +51,8 @@ class NotfoundError(inary.errors.Error):
 
 class AtomicOperation(object):
 
-<<<<<<< HEAD
     def __init__(self, ignore_dep=None):
         # self.package = package
-=======
-    def __init__(self, ignore_dep = None):
-        #self.package = package
->>>>>>> master
         if ignore_dep is None:
             self.ignore_dep = ctx.config.get_option('ignore_dependency')
         else:
@@ -79,56 +72,22 @@ opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRAD
 
 class Install(AtomicOperation):
     """Install class, provides install routines for inary packages"""
-<<<<<<< HEAD
-
-    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None,installdb=None,filesdb=None):
-        if installdb == None:
-            self.installdb = inary.db.installdb.InstallDB()
-        else:
-            self.installdb = installdb
-        if filesdb == None:
-            self.filesdb = inary.db.filesdb.FilesDB()
-        else:
-            self.filesdb = filesdb
-        if not ctx.filesdb: ctx.filesdb = self.filesdb
-        "initialize from a file name"
-        super(Install, self).__init__(ignore_dep)
-        if not ignore_file_conflicts:
-            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
-        self.ignore_file_conflicts = ignore_file_conflicts
-        self.package_fname = package_fname
-        try:
-            self.package = inary.package.Package(package_fname)
-            self.package.read()
-        except zipfile.BadZipfile:
-            raise zipfile.BadZipfile(self.package_fname)
-        self.metadata = self.package.metadata
-        self.files = self.package.files
-        self.pkginfo = self.metadata.package
-        self.installedSize = self.metadata.package.installedSize
-
-        self.operation = INSTALL
-        self.store_old_paths = None
-=======
->>>>>>> master
 
     @staticmethod
-    def from_name(name,ignore_dep=None,packagedb=None,installdb=None,filesdb=None):
-        if packagedb == None:
-            packagedb = inary.db.packagedb.PackageDB()
-        if installdb == None:
-            installdb = inary.db.installdb.InstallDB()
-        if filesdb == None:
-            filesdb = inary.db.filesdb.FilesDB()
+    def from_name(name, ignore_dep=None):
+        packagedb = inary.db.packagedb.PackageDB()
         # download package and return an installer object
         # find package in repository
         repo = packagedb.which_repo(name)
         if repo:
+            repodb = inary.db.repodb.RepoDB()
             ctx.ui.info(_("Package {0} found in repository {1}").format(name, repo))
-            repo = repodb.get_repo(repodb,repo)
+
+            repo = repodb.get_repo(repo)
             pkg = packagedb.get_package(name)
             delta = None
 
+            installdb = inary.db.installdb.InstallDB()
             # Package is installed. This is an upgrade. Check delta.
             if installdb.has_package(pkg.name):
                 (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
@@ -160,7 +119,9 @@ class Install(AtomicOperation):
             if cached_file and util.sha1_file(cached_file) != pkg_hash:
                 os.unlink(cached_file)
                 cached_file = None
-            install_op = Install(pkg_path, ignore_dep,installdb,filesdb)
+
+            install_op = Install(pkg_path, ignore_dep)
+
             # Bug 4113
             if not cached_file:
                 downloaded_file = install_op.package.filepath
@@ -171,6 +132,26 @@ class Install(AtomicOperation):
         else:
             raise Error(_("Package {} not found in any active repository.").format(name))
 
+    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
+        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
+        "initialize from a file name"
+        super(Install, self).__init__(ignore_dep)
+        if not ignore_file_conflicts:
+            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
+        self.ignore_file_conflicts = ignore_file_conflicts
+        self.package_fname = package_fname
+        try:
+            self.package = inary.package.Package(package_fname)
+            self.package.read()
+        except zipfile.BadZipfile:
+            raise zipfile.BadZipfile(self.package_fname)
+        self.metadata = self.package.metadata
+        self.files = self.package.files
+        self.pkginfo = self.metadata.package
+        self.installedSize = self.metadata.package.installedSize
+        self.installdb = inary.db.installdb.InstallDB()
+        self.operation = INSTALL
+        self.store_old_paths = None
 
     def install(self, ask_reinstall=True):
 
@@ -187,11 +168,14 @@ class Install(AtomicOperation):
         self.check_relations()
         self.check_operation()
 
+        ctx.disable_keyboard_interrupts()
+
         self.extract_install()
         self.store_inary_files()
         self.postinstall()
         self.update_databases()
 
+        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
@@ -209,6 +193,10 @@ class Install(AtomicOperation):
         ctx.ui.debug(_("Free Space: %.2f %s " % (total_size, symbol)))
 
         # what to do if / is split into /usr, /var, etc.
+        # check scom
+        if self.metadata.package.providesScom and ctx.scom:
+            import inary.scomiface as scomiface
+            scomiface.get_link()
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -317,16 +305,45 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def postinstall(self):
-        self.config_later = True
+        self.config_later = False
 
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
             if os.path.islink(fpath):
                 ctx.ui.debug(_("* Added symlink '{}' ").format(fpath))
+                # Kontrol et
             else:
                 ctx.ui.debug(_("* Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid))
                 os.chown(fpath, int(_file.uid), int(_file.gid))
+
+        if ctx.scom:
+            import inary.scomiface
+            try:
+                if self.operation == UPGRADE or self.operation == DOWNGRADE:
+                    fromVersion = self.old_pkginfo.version
+                    fromRelease = self.old_pkginfo.release
+                else:
+                    fromVersion = None
+                    fromRelease = None
+                ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
+                inary.scomiface.post_install(
+                    self.pkginfo.name,
+                    self.metadata.package.providesScom,
+                    self.package.scom_dir(),
+                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                    fromVersion,
+                    fromRelease,
+                    self.metadata.package.version,
+                    self.metadata.package.release
+                )
+                ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
+            except inary.scomiface.Error:
+                ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
+                self.config_later = True
+        else:
+            self.config_later = True
 
     def extract_install(self):
         """unzip package in place"""
@@ -677,19 +694,23 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        inary.reactor.pre_remove(
-            self.package_name,
-            os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-            os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-        )
+        if ctx.scom:
+            import inary.scomiface
+            inary.scomiface.pre_remove(
+                self.package_name,
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+            )
 
     def run_postremove(self):
-        inary.reactor.post_remove(
-            self.package_name,
-            os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-            os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-            provided_scripts=self.package.providesScom,
-        )
+        if ctx.scom:
+            import inary.scomiface
+            inary.scomiface.post_remove(
+                self.package_name,
+                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                provided_scripts=self.package.providesScom,
+            )
 
     def update_databases(self):
         self.remove_db()

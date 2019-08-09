@@ -43,7 +43,7 @@ class Index(command.Command, metaclass=command.autocommand):
     def __init__(self, args):
         super(Index, self).__init__(args)
 
-    name = (_("index"), "ix")
+    name = ("index", "ix")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("index options"))

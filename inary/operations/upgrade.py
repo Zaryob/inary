@@ -68,11 +68,9 @@ def check_update_actions(packages):
     return has_actions
 
 
-def find_upgrades(packages, replaces,packagedb=None,installdb=None):
-    if packagedb==None:
-        packagedb=inary.db.packagedb.PackageDB()
-    if installdb==None: 
-        installdb=inary.db.installdb.InstallDB()
+def find_upgrades(packages, replaces):
+    packagedb = inary.db.packagedb.PackageDB()
+    installdb = inary.db.installdb.InstallDB()
 
     debug = ctx.config.get_option("debug")
     security_only = ctx.get_option('security_only')
@@ -127,12 +125,8 @@ def find_upgrades(packages, replaces,packagedb=None,installdb=None):
 
     return Ap
 
-<<<<<<< HEAD
 
 @util.locked
-=======
-@operations.locked
->>>>>>> master
 def upgrade(A=None, repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options.
@@ -157,13 +151,17 @@ def upgrade(A=None, repo=None):
         A = set(A).intersection(repo_packages)
 
     A_0 = A = set(A)
-    Ap = find_upgrades(A, replaces,packagedb,installdb)
+    Ap = find_upgrades(A, replaces)
     A = set(Ap)
 
     # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
     A |= set(inary.util.flatten_list(list(replaces.values())))
+
+    A |= upgrade_base(A)
+
     A = inary.blacklist.exclude_from(A, ctx.const.blacklist)
+
     if ctx.get_option('exclude_from'):
         A = inary.blacklist.exclude_from(A, ctx.get_option('exclude_from'))
 
@@ -186,6 +184,9 @@ def upgrade(A=None, repo=None):
 
     componentdb = inary.db.componentdb.ComponentDB()
 
+    # Bug 4211
+    if componentdb.has_component('system.base'):
+        order = operations.helper.reorder_base_packages(order)
 
     ctx.ui.status(_('The following packages will be upgraded:'))
     ctx.ui.info(util.format_by_columns(sorted(order)))
@@ -364,11 +365,11 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
 
-    order = G_f.sort()
+    order = G_f.topological_sort()
+    order.reverse()
     return G_f, order
 
-<<<<<<< HEAD
-=======
+
 def upgrade_base(A=None):
     if A is None:
         A = set()
@@ -403,16 +404,15 @@ def upgrade_base(A=None):
                 ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
                 G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
 
-            #no-need-for-upgrade-order patch
-            #extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
-            #return set(extra_installs + extra_upgrades)
+            # no-need-for-upgrade-order patch
+            # extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
+            # return set(extra_installs + extra_upgrades)
 
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
         else:
             ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
     return set()
->>>>>>> master
 
 
 def is_upgradable(name):
@@ -452,3 +452,13 @@ def get_upgrade_order(packages):
     return order
 
 
+def get_base_upgrade_order(packages):
+    """
+    Return a list of packages of the system.base component that needs to be upgraded
+    or installed in install order -> list_of_strings
+    All the packages of the system.base component must be installed on the system
+    @param packages: list of package names -> list_of_strings
+    """
+    upgrade_order = inary.operations.upgrade.upgrade_base
+    order = upgrade_order(packages)
+    return list(order)

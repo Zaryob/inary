@@ -12,10 +12,6 @@
 # Please read the COPYING file.
 
 """supports globs in sourceFile arguments"""
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 import filecmp
 import fileinput
@@ -93,12 +89,8 @@ def readable_insinto(destinationDirectory, *sourceFiles):
         for source in sourceFileGlob:
             system('install -m 0644 "{0}" {1}'.format(source, destinationDirectory))
 
-<<<<<<< HEAD
 
 def lib_insinto(sourceFile, destinationDirectory, permission=644):
-=======
-def lib_insinto(sourceFile, destinationDirectory, permission = 644):
->>>>>>> master
     """inserts a library fileinto destinationDirectory with given permission"""
 
     if not sourceFile or not destinationDirectory:
@@ -114,21 +106,13 @@ def lib_insinto(sourceFile, destinationDirectory, permission = 644):
 
 
 # inarytools funtions
-<<<<<<< HEAD
 def dobin(sourceFile, destinationDirectory='/usr/bin'):
-=======
-def dobin(sourceFile, destinationDirectory = '/usr/bin'):
->>>>>>> master
     """insert a executable file into /bin or /usr/bin"""
     ''' example call: inarytools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
-<<<<<<< HEAD
 
 def dopixmaps(sourceFile, destinationDirectory='/usr/share/pixmaps'):
-=======
-def dopixmaps(sourceFile, destinationDirectory = '/usr/share/pixmaps'):
->>>>>>> master
     """insert a data file into /usr/share/pixmaps"""
     ''' example call: inarytools.dopixmaps("/usr/share/pixmaps/firefox", "firefox") '''
     readable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
@@ -182,12 +166,8 @@ def doinfo(*sourceFiles):
     """inserts the into files in the list of files into /usr/share/info"""
     readable_insinto(join_path(get.installDIR(), get.infoDIR()), *sourceFiles)
 
-<<<<<<< HEAD
 
 def dolib(sourceFile, destinationDirectory='/usr/lib', mode=755):
-=======
-def dolib(sourceFile, destinationDirectory = '/usr/lib', mode=755):
->>>>>>> master
     """insert the library into /usr/lib"""
     '''example call: inarytools.dolib("libz.a")'''
     '''example call: inarytools.dolib("libz.so")'''
@@ -229,12 +209,8 @@ def doman(*sourceFiles):
             else:
                 uncompress(compressed, targetDir=manPDIR)
 
-<<<<<<< HEAD
 
 def domo(sourceFile, locale, destinationFile, localeDirPrefix='/usr/share/locale'):
-=======
-def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/locale'):
->>>>>>> master
     """inserts the mo files in the list of files into /usr/share/locale/LOCALE/LC_MESSAGES"""
 
     '''example call: inarytools.domo("po/tr.po", "tr", "pam_login.mo")'''
@@ -243,12 +219,8 @@ def domo(sourceFile, locale, destinationFile, localeDirPrefix = '/usr/share/loca
     makedirs('{0}{1}/{2}/LC_MESSAGES/'.format(get.installDIR(), localeDirPrefix, locale))
     move('messages.mo', '{0}{1}/{2}/LC_MESSAGES/{3}'.format(get.installDIR(), localeDirPrefix, locale, destinationFile))
 
-<<<<<<< HEAD
 
 def domove(sourceFile, destination, destinationFile=''):
-=======
-def domove(sourceFile, destination, destinationFile = ''):
->>>>>>> master
     """moves sourceFile/Directory into destinationFile/Directory"""
 
     ''' example call: inarytools.domove("/usr/bin/bash", "/bin/bash")'''
@@ -279,12 +251,8 @@ def rename(sourceFile, destinationFile):
     except OSError as e:
         error(_('ActionsAPI [rename]: {0}: {1}').format(e, sourceFile))
 
-<<<<<<< HEAD
 
 def dosed(sources, findPattern, replacePattern='', filePattern='', deleteLine=False, level=-1):
-=======
-def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLine = False, level = -1):
->>>>>>> master
     """replaces patterns in sources"""
 
     ''' example call: inarytools.dosed("/etc/passwd", "caglar", "cem")'''
@@ -341,12 +309,8 @@ def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLin
         else:
             raise FileError(_('File does not exist or permission denied: {}').format(sourceFile))
 
-<<<<<<< HEAD
 
 def dosbin(sourceFile, destinationDirectory='/usr/sbin'):
-=======
-def dosbin(sourceFile, destinationDirectory = '/usr/sbin'):
->>>>>>> master
     """insert a executable file into /sbin or /usr/sbin"""
 
     ''' example call: inarytools.dobin("bin/xloadimage", "/sbin") '''
@@ -364,12 +328,8 @@ def dosym(sourceFile, destinationFile):
     except OSError:
         error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
 
-<<<<<<< HEAD
 
 def insinto(destinationDirectory, sourceFile, destinationFile='', sym=True):
-=======
-def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True):
->>>>>>> master
     """insert a sourceFile into destinationDirectory as a destinationFile with same uid/guid/permissions"""
     makedirs(join_path(get.installDIR(), destinationDirectory))
 
@@ -388,10 +348,6 @@ def insinto(destinationDirectory, sourceFile,  destinationFile = '', sym = True)
 
 def newdoc(sourceFile, destinationFile):
     """inserts a sourceFile into /usr/share/doc/PACKAGE/ directory as a destinationFile"""
-<<<<<<< HEAD
-=======
-    destinationDirectory = '' #490
->>>>>>> master
     destinationDirectory = os.path.dirname(destinationFile)
     destinationFile = os.path.basename(destinationFile)
     # Use copy instead of move or let build-install scream like file not found!

@@ -52,12 +52,8 @@ class InstallError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
-<<<<<<< HEAD
 
 def configure(parameters=''):
-=======
-def configure(parameters = ''):
->>>>>>> master
     """configure source with given parameters."""
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
@@ -68,12 +64,8 @@ def configure(parameters = ''):
                                                                                               get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
 
-<<<<<<< HEAD
 
 def make(parameters=''):
-=======
-def make(parameters = ''):
->>>>>>> master
     """make source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
@@ -82,12 +74,8 @@ def make(parameters = ''):
         if system('perl{0} Build {1}'.format(get.curPERL(), parameters)):
             raise MakeError(_('perl build failed.'))
 
-<<<<<<< HEAD
 
 def install(parameters='install'):
-=======
-def install(parameters = 'install'):
->>>>>>> master
     """install source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
@@ -99,12 +87,8 @@ def install(parameters = 'install'):
     removePacklist()
     removePodfiles()
 
-<<<<<<< HEAD
 
 def removePacklist(path='usr/lib/perl5/'):
-=======
-def removePacklist(path = 'usr/lib/perl5/'):
->>>>>>> master
     """ cleans .packlist file from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):
@@ -114,12 +98,8 @@ def removePacklist(path = 'usr/lib/perl5/'):
                     unlink('{0}/{1}'.format(root, packFile))
                     removeEmptydirs(root)
 
-<<<<<<< HEAD
 
 def removePodfiles(path='usr/lib/perl5/'):
-=======
-def removePodfiles(path = 'usr/lib/perl5/'):
->>>>>>> master
     """ cleans *.pod files from perl packages """
     full_path = '{0}/{1}'.format(get.installDIR(), path)
     for root, dirs, files in os.walk(full_path):

@@ -1,0 +1,1058 @@
+Fri Mar 9 16:38:07 2018 +0300 996fd38a Patched "delete-runtime-dependency-ciksemel"  [Suleyman Poyraz]
+diff --git a/inary/analyzer/urgent-packages.py b/inary/analyzer/urgent-packages.py
+index 02712542..0e772ddc 100644
+--- a/inary/analyzer/urgent-packages.py
++++ b/inary/analyzer/urgent-packages.py
+@@ -10,7 +10,7 @@
+ # Please read the COPYING file.
+ #
+ 
+-import ciksemel
++import xml.dom.minidom as minidom
+ import bz2
+ import sys
+ import os
+@@ -28,22 +28,22 @@ def loadFile(_file):
+ 
+ def getXmlData(_file):
+     if os.path.exists(_file):
+-        return ciksemel.parse(_file)
++        return minidom.parse(_file).documentElement
+     elif os.path.exists("{}.bz2".format(_file)):
+         indexdata = bz2.decompress(open("{}.bz2".format(_file)).read())
+-        return ciksemel.parseString(indexdata)
++        return minidom.parseString(indexdata).documentElement
+     else:
+         print("{} not found".format(indexfile))
+         sys.exit(1)
+ 
+ def fillPackageDict(tag, _hasSpecFile, packageOf):
+-        PackagePartOf = tag.getTagData("PartOf")
+-        PackageName = tag.getTagData("Name")
++        PackagePartOf = tag.getElementsByTagName("PartOf")[0]
++        PackageName = tag.getElementsByTagName("Name")[0]
+ 
+         if _hasSpecFile:
+-            PackagePackagerName = tag.getTag("Packager").getTagData("Name")
++            PackagePackagerName = tag.getElementsByTagName("Packager")[0].getElementsByTagName("Name")[0].firstChild.data
+         else:
+-            PackagePackagerName = tag.getTag("Source").getTag("Packager").getTagData("Name")
++            PackagePackagerName = tag.getElementsByTagName("Source")[0].getElementsByTagName("Packager")[0].getElementsByTagName("Name")[0].firstChild.data
+ 
+         fullpath = "{0}/{1}".format(PackagePartOf.replace(".", "/"), PackageName)
+ 
+@@ -53,13 +53,13 @@ def fillPackageDict(tag, _hasSpecFile, packageOf):
+ 
+ def parseXmlData(_index):
+     packageOf = {}
+-    hasSpecFile = _index.getTag("SpecFile")
++    hasSpecFile = _index.getElementsByTagName("SpecFile")
+     if hasSpecFile:
+-        for i in _index.tags("SpecFile"):
+-            parent = i.getTag("Source")
++        for i in hasSpecFile:
++            parent = i.getElementsByTagName("Source")[0]
+             fillPackageDict(parent, hasSpecFile, packageOf)
+     else:
+-        for parent in _index.tags("Package"):
++        for parent in _index.getElementsByTagName("Package"):
+             fillPackageDict(parent, hasSpecFile, packageOf)
+ 
+     return packageOf
+@@ -93,4 +93,3 @@ def urgent_packages(index, packages):
+ #        print("-> %s" % i)
+ #        for k in requiredPackages[i]:
+ #             print("\t%s" % k)
+-
+diff --git a/inary/data/specfile.py b/inary/data/specfile.py
+index 84bfdffa..91edfc00 100644
+--- a/inary/data/specfile.py
++++ b/inary/data/specfile.py
+@@ -22,7 +22,10 @@ _ = __trans.gettext
+ 
+ # standard python modules
+ import os.path
+-import ciksemel
++
++#for compability cross platform package managing
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
+ 
+ # inary modules
+ import inary.sxml.xmlfile as xmlfile
+@@ -171,8 +174,8 @@ class Source(metaclass= autoxml.autoxml):
+     t_License = [ [autoxml.String], autoxml.mandatory]
+     t_IsA = [ [autoxml.String], autoxml.optional]
+     t_PartOf = [autoxml.String, autoxml.optional]
+-    t_Summary = [autoxml.LocalText, autoxml.mandatory] ## FIXME autoxml.LocalText should be typed with bytes
+-    t_Description = [autoxml.LocalText, autoxml.mandatory] 
++    t_Summary = [autoxml.LocalText, autoxml.mandatory]
++    t_Description = [autoxml.LocalText, autoxml.mandatory]
+     t_Icon = [ autoxml.String, autoxml.optional]
+     t_Archive = [ [Archive], autoxml.mandatory, "Archive" ]
+     t_AdditionalFiles = [ [AdditionalFile], autoxml.optional]
+@@ -422,10 +425,10 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
+ 
+     def _set_i18n(self, tag, inst):
+         try:
+-            for summary in tag.tags("Summary"):
+-                inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
+-            for desc in tag.tags("Description"):
+-                inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
++            for summary in tag.getElementsByTagName("Summary"):
++                inst.summary[summary.getAttribute("xml:lang")] = summary.childNodes[0].data
++            for desc in tag.getElementsByTagName("Description"):
++                inst.description[desc.getAttribute("xml:lang")] = desc.childNodes[0].data
+         except AttributeError:
+             raise Error(_("translations.xml file is badly formed."))
+ 
+@@ -434,19 +437,21 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
+         if not os.path.exists(path):
+             return
+         try:
+-            doc = ciksemel.parse(path)
+-        except Exception as e:
+-            raise Error(_("File '{}' has invalid XML").format(path) )
++            doc = minidom.parse(path).documentElement
++        except ExpatError as err:
++            raise Error(_("File '{0}' has invalid XML: {1}").format(path, err) )
+ 
+-        if doc.getTag("Source").getTagData("Name") == self.source.name:
++        if doc.getElementsByTagName("Source")[0].getElementsByTagName("Name")[0].firstChild.data == self.source.name:
+             # Set source package translations
+-            self._set_i18n(doc.getTag("Source"), self.source)
++            self._set_i18n(doc.getElementsByTagName("Source")[0], self.source)
+ 
+-        for pak in doc.tags("Package"):
+-            for inst in self.packages:
+-                if inst.name == pak.getTagData("Name"):
+-                    self._set_i18n(pak, inst)
+-                    break
++        #FIXME: How can we fix it
++        for pak in doc.childNodes:
++            if pak.nodeType == pak.ELEMENT_NODE and pak.tagName == "Package":
++                for inst in self.packages:
++                    if inst.name == pak.getElementsByTagName("Name")[0].firstChild.data:
++                        self._set_i18n(pak, inst)
++                        break
+ 
+     def __str__(self):
+         s = _('Name: {0}, version: {1}, release: {2}\n').format(
+diff --git a/inary/db/componentdb.py b/inary/db/componentdb.py
+index 370cafe9..28e6a10d 100644
+--- a/inary/db/componentdb.py
++++ b/inary/db/componentdb.py
+@@ -45,19 +45,19 @@ class ComponentDB(lazydb.LazyDB):
+ 
+     def __generate_packages(self, doc):
+         components = {}
+-        for pkg in doc.tags("Package"):
+-            components.setdefault(pkg.getTagData("PartOf"), []).append(pkg.getTagData("Name"))
++        for pkg in doc.getElementsByTagName("Package"):
++            components.setdefault(pkg.getElementsByTagName("PartOf")[0].firstChild.data, []).append(pkg.getElementsByTagName("Name")[0].firstChild.data)
+         return components
+ 
+     def __generate_sources(self, doc):
+         components = {}
+-        for spec in doc.tags("SpecFile"):
+-            src = spec.getTag("Source")
+-            components.setdefault(src.getTagData("PartOf"), []).append(src.getTagData("Name"))
++        for spec in doc.getElementsByTagName("SpecFile"):
++            src = spec.getElementsByTagName("Source")[0]
++            components.setdefault(src.getElementsByTagName("PartOf")[0].firstChild.data, []).append(src.getElementsByTagName("Name")[0].firstChild.data)
+         return components
+ 
+     def __generate_components(self, doc):
+-        return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Component")])
++        return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml()) for x in doc.getElementsByTagName("Component")])
+ 
+     def has_component(self, name, repo = None):
+         return self.cdb.has_item(name, repo)
+@@ -106,7 +106,7 @@ class ComponentDB(lazydb.LazyDB):
+ 
+         component = Component.Component()
+         component.parse(self.cdb.get_item(component_name))
+-        
++
+         for repo in inary.db.repodb.RepoDB().list_repos():
+             try:
+                 component.packages.extend(self.cpdb.get_item(component_name, repo))
+@@ -117,11 +117,11 @@ class ComponentDB(lazydb.LazyDB):
+                 component.sources.extend(self.csdb.get_item(component_name, repo))
+             except Exception: #FIXME: what exception could we catch here, replace with that.
+                 pass
+-            
++
+         return component
+ 
+     # Returns packages of given component from given repo or first found component's packages in repo
+-    # order if repo is None. 
++    # order if repo is None.
+     # If walk is True than also the sub components' packages are returned
+     def get_packages(self, component_name, repo=None, walk=False):
+ 
+@@ -162,7 +162,7 @@ class ComponentDB(lazydb.LazyDB):
+         return packages
+ 
+     # Returns sources of given component from given repo or first found component's packages in repo
+-    # order if repo is None. 
++    # order if repo is None.
+     # If walk is True than also the sub components' packages are returned
+     def get_sources(self, component_name, repo=None, walk=False):
+ 
+@@ -201,4 +201,3 @@ class ComponentDB(lazydb.LazyDB):
+                 pass
+ 
+         return sources
+-
+diff --git a/inary/db/groupdb.py b/inary/db/groupdb.py
+index 97beaf8c..252133a3 100644
+--- a/inary/db/groupdb.py
++++ b/inary/db/groupdb.py
+@@ -44,15 +44,15 @@ class GroupDB(lazydb.LazyDB):
+ 
+     def __generate_components(self, doc):
+         groups = {}
+-        for c in doc.tags("Component"):
+-            group = c.getTagData("Group")
++        for c in doc.getElementsByTagName("Component"):
++            group = c.getElementsByTagName("Group")[0]
+             if not group:
+                 group = "unknown"
+-            groups.setdefault(group, []).append(c.getTagData("Name"))
++            groups.setdefault(group.firstChild.data, []).append(c.getElementsByTagName("Name")[0].firstChild.data)
+         return groups
+ 
+     def __generate_groups(self, doc):
+-        return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Group")])
++        return dict([(x.getElementsByTagName("Name")[0].firstChild.data, x.toxml()) for x in doc.getElementsByTagName("Group")])
+ 
+     def has_group(self, name, repo = None):
+         return self.gdb.has_item(name, repo)
+diff --git a/inary/db/installdb.py b/inary/db/installdb.py
+index 25d0c698..b09ccaed 100644
+--- a/inary/db/installdb.py
++++ b/inary/db/installdb.py
+@@ -19,7 +19,8 @@ import gettext
+ __trans = gettext.translation('inary', fallback=True)
+ _ = __trans.gettext
+ 
+-import ciksemel
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
+ 
+ # INARY
+ import inary
+@@ -67,7 +68,7 @@ class InstallDB(lazydb.LazyDB):
+     def init(self):
+         self.installed_db = self.__generate_installed_pkgs()
+         self.rev_deps_db = self.__generate_revdeps()
+-        self.installed_extra = self.__generate_installed_extra() 
++        self.installed_extra = self.__generate_installed_extra()
+ 
+     def __generate_installed_extra(self):
+         ie = []
+@@ -93,8 +94,8 @@ class InstallDB(lazydb.LazyDB):
+     def __add_to_revdeps(self, package, revdeps):
+         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+         try:
+-            meta_doc = ciksemel.parse(metadata_xml)
+-            pkg = meta_doc.getTag("Package")
++            meta_doc = minidom.parse(metadata_xml).documentElement
++            pkg = meta_doc.getElementsByTagName("Package")[0]
+         except:
+             pkg = None
+ 
+@@ -105,15 +106,15 @@ class InstallDB(lazydb.LazyDB):
+             del self.installed_db[package]
+             return
+ 
+-        deps = pkg.getTag('RuntimeDependencies')
++        deps = pkg.getElementsByTagName('RuntimeDependencies')
+         if deps:
+-            for dep in deps.tags("Dependency"):
+-                revdep = revdeps.setdefault(dep.firstChild().data(), {})
+-                revdep[package] = dep.toString()
+-            for anydep in deps.tags("AnyDependency"):
+-                for dep in anydep.tags("Dependency"):
+-                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
+-                    revdep[package] = anydep.toString()
++            for dep in deps.getElementsByTagName("Dependency"):
++                revdep = revdeps.setdefault(dep.childNodes[0].data, {})
++                revdep[package] = dep.toxml('utf-8')
++            for anydep in deps.getElementsByTagName("AnyDependency"):
++                for dep in anydep.getElementsByTagName ("Dependency"):
++                    revdep = revdeps.setdefault(dep.firstChild.data, {})
++                    revdep[package] = anydep.toxml('utf-8')
+ 
+     def __generate_revdeps(self):
+         revdeps = {}
+@@ -144,37 +145,34 @@ class InstallDB(lazydb.LazyDB):
+         return found
+ 
+     def __get_version(self, meta_doc):
+-        history = meta_doc.getTag("Package").getTag("History")
+-        version = history.getTag("Update").getTagData("Version")
+-        release = history.getTag("Update").getAttribute("release")
+-
++        history = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("History")[0].firstChild.data
++        version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
++        release = history.getElementsByTagName("Update")[0].getAttribute("release")[0].firstChild.data
+         # TODO Remove None
+         return version, release, None
+ 
+     def __get_distro_release(self, meta_doc):
+-        distro = meta_doc.getTag("Package").getTagData("Distribution")
+-        release = meta_doc.getTag("Package").getTagData("DistributionRelease")
+-
++        distro = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("Distribution")[0].firstChild.data
++        release = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("DistributionRelease")[0].firstChild.data
+         return distro, release
+ 
+     def __get_install_tar_hash(self, meta_doc):
+-        hash = meta_doc.getTag("Package").getTagData("InstallTarHash")
+-
++        hash = meta_doc.getElementsByTagName("Package")[0].getElementsByTagName("InstallTarHash")[0].firstChild.data
+         return hash
+ 
+     def get_install_tar_hash(self, package):
+         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+-        meta_doc = ciksemel.parse(metadata_xml)
++        meta_doc = minidom.parse(metadata_xml).documentElement
+         return self.__get_install_tar_hash(meta_doc)
+ 
+     def get_version_and_distro_release(self, package):
+         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+-        meta_doc = ciksemel.parse(metadata_xml)
++        meta_doc = minidom.parse(metadata_xml).documentElement
+         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
+ 
+     def get_version(self, package):
+         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+-        meta_doc = ciksemel.parse(metadata_xml)
++        meta_doc = minidom.parse(metadata_xml).documentElement
+         return self.__get_version(meta_doc)
+ 
+     def get_files(self, package):
+@@ -240,11 +238,12 @@ class InstallDB(lazydb.LazyDB):
+         return info
+ 
+     def __make_dependency(self, depStr):
+-        node = ciksemel.parseString(depStr)
++        node = minidom.parseString(depStr).documentElement
+         dependency = inary.analyzer.dependency.Dependency()
+-        dependency.package = node.firstChild().data()
++        dependency.package = node.childNodes[0]
++        #FIXME: Bir sakatlık çıkacak
+         if node.attributes():
+-            attr = node.attributes()[0]
++            attr = node.attributes[0]
+             dependency.__dict__[str(attr)] = node.getAttribute(str(attr))
+         return dependency
+ 
+diff --git a/inary/db/packagedb.py b/inary/db/packagedb.py
+index 388ea201..62febd63 100644
+--- a/inary/db/packagedb.py
++++ b/inary/db/packagedb.py
+@@ -18,7 +18,8 @@ import datetime
+ __trans = gettext.translation('inary', fallback=True)
+ _ = __trans.gettext
+ 
+-import ciksemel
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
+ 
+ import inary.db
+ import inary.data.metadata as Metadata
+@@ -53,32 +54,36 @@ class PackageDB(lazydb.LazyDB):
+         self.rpdb = inary.db.itembyrepo.ItemByRepo(self.__replaces)
+ 
+     def __generate_replaces(self, doc):
+-        return [x.getTagData("Name") for x in doc.tags("Package") if x.getTagData("Replaces")]
++        for x in doc.getElementsByTagName("Package"):
++            if x.getElementsByTagName("Replaces")[0]:
++                return x.getElementsByTagName("Name")[0].firstChild.data
+ 
+     def __generate_obsoletes(self, doc):
+-        distribution = doc.getTag("Distribution")
+-        obsoletes = distribution and distribution.getTag("Obsoletes")
+-        src_repo = doc.getTag("SpecFile") is not None
++        distribution = doc.getElementsByTagName("Distribution")[0]
++        obsoletes = distribution and distribution.getElementsByTagName("Obsoletes")[0].firstChild.data
++        src_repo = doc.getElementsByTagName("SpecFile")[0].firstChild.data is not None
+ 
+         if not obsoletes or src_repo:
+             return []
+ 
+-        return [x.firstChild().data() for x in obsoletes.tags("Package")]
++        return [x.childNodes[0].data for x in obsoletes.getElementsByTagName("Package")]
+ 
+     def __generate_packages(self, doc):
+         pdict={}
+-        for x in doc.tags("Package"):
+-            pdict[x.getTagData("Name")]= gzip.zlib.compress(x.toString().encode('utf-8'))
++        for x in doc.getElementsByTagName("Package"):
++            pdict[x.getElementsByTagName("Name")[0].firstChild.data]= gzip.zlib.compress(x.toxml('utf-8'))
+         return pdict
+ 
+     def __generate_revdeps(self, doc):
+         revdeps = {}
+-        for node in doc.tags("Package"):
+-            name = node.getTagData('Name')
+-            deps = node.getTag('RuntimeDependencies')
+-            if deps:
+-                for dep in deps.tags("Dependency"):
+-                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
++        for node in doc.childNodes:
++            if node.nodeType == node.ELEMENT_NODE and node.tagName == "Package":
++                name = node.getElementsByTagName('Name')[0].firstChild.data
++                deps = node.getElementsByTagName('RuntimeDependencies')
++                if deps:
++                    for dep in deps.getElementsByTagName("Dependency"):
++                        revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toString()))
++
+         return revdeps
+ 
+     def has_package(self, name, repo=None):
+@@ -130,16 +135,16 @@ class PackageDB(lazydb.LazyDB):
+         return found
+ 
+     def __get_version(self, meta_doc):
+-        history = meta_doc.getTag("History")
+-        version = history.getTag("Update").getTagData("Version")
+-        release = history.getTag("Update").getAttribute("release")
++        history = meta_doc.getElementsByTagName("History")[0]
++        version = history.getElementsByTagName("Update")[0].getElementsByTagName("Version")[0].firstChild.data
++        release = history.getElementsByTagName("Update")[0].getAttribute["release"]
+ 
+         # TODO Remove None
+         return version, release, None
+ 
+     def __get_distro_release(self, meta_doc):
+-        distro = meta_doc.getTagData("Distribution")
+-        release = meta_doc.getTagData("DistributionRelease")
++        distro = meta_doc.getElementsByTagName("Distribution")[0].firstChild.data
++        release = meta_doc.getElementsByTagName("DistributionRelease")[0].firstChild.data
+ 
+         return distro, release
+ 
+@@ -147,14 +152,14 @@ class PackageDB(lazydb.LazyDB):
+         if not self.has_package(name, repo):
+             raise Exception(_('Package {} not found.').format(name))
+ 
+-        pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
++        pkg_doc = minidom.parseString(self.pdb.get_item(name, repo))
+         return self.__get_version(pkg_doc) + self.__get_distro_release(pkg_doc)
+ 
+     def get_version(self, name, repo):
+         if not self.has_package(name, repo):
+             raise Exception(_('Package {} not found.').format(name))
+ 
+-        pkg_doc = ciksemel.parseString(self.pdb.get_item(name, repo))
++        pkg_doc = minidom.parseString(self.pdb.get_item(name, repo)).documentElement
+         return self.__get_version(pkg_doc)
+ 
+     def get_package_repo(self, name, repo=None):
+@@ -175,11 +180,11 @@ class PackageDB(lazydb.LazyDB):
+         packages = set()
+         for repo in repodb.list_repos():
+             doc = repodb.get_repo_doc(repo)
+-            for package in doc.tags("Package"):
+-                if package.getTagData("IsA"):
+-                    for node in package.tags("IsA"):
+-                        if node.firstChild().data() == isa:
+-                            packages.add(package.getTagData("Name"))
++            for package in doc.getElementsByTagName("Package"):
++                if package.getElementsByTagName("IsA"):
++                    for node in package.getElementsByTagName("IsA"):
++                        if node.childNodes[0].data == isa:
++                            packages.add(package.getElementsByTagName("Name")[0].firstChild.data)
+         return list(packages)
+ 
+     def get_rev_deps(self, name, repo=None):
+@@ -190,9 +195,10 @@ class PackageDB(lazydb.LazyDB):
+ 
+         rev_deps = []
+         for pkg, dep in rvdb:
+-            node = ciksemel.parseString(dep)
++            node = minidom.parseString(dep).documentElement
+             dependency = inary.analyzer.dependency.Dependency()
+-            dependency.package = node.firstChild().data()
++            dependency.package = node.firstChild.data
++            #FIXME
+             if node.attributes():
+                 attr = node.attributes()[0]
+                 dependency.__dict__[attr] = node.getAttribute(attr)
+@@ -205,10 +211,10 @@ class PackageDB(lazydb.LazyDB):
+ 
+         for pkg_name in self.rpdb.get_list_item():
+             xml = self.pdb.get_item(pkg_name, repo)
+-            package = ciksemel.parseString(xml)
+-            replaces_tag = package.getTag("Replaces")
++            package = minidom.parseString(xml).documentElement
++            replaces_tag = package.getElementsByTagName("Replaces")
+             if replaces_tag:
+-                for node in replaces_tag.tags("Package"):
++                for node in replaces_tag.getElementsByTagName("Package"):
+                     r = inary.relation.Relation()
+                     # XXX Is there a better way to do this?
+                     r.decode(node, [])
+diff --git a/inary/db/repodb.py b/inary/db/repodb.py
+index 1ed56b04..5aa219a9 100644
+--- a/inary/db/repodb.py
++++ b/inary/db/repodb.py
+@@ -16,7 +16,8 @@ _ = __trans.gettext
+ 
+ import os
+ 
+-import ciksemel
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
+ 
+ import inary
+ import inary.uri
+@@ -47,33 +48,39 @@ class RepoOrder:
+         repo_doc = self._get_doc()
+ 
+         try:
+-            node = [x for x in repo_doc.tags("Repo")][-1]
+-            repo_node = node.appendTag("Repo")
+-        except IndexError:
+-            repo_node = repo_doc.insertTag("Repo")
++            #FIXME:Burada bir sakatlık çıkacak
++            node = [x for x in repo_doc.getElementsByTagName("Repo")][-1]
++            repo_node = node.createElement("Repo")
++        except ExpatError as err:
++            raise("Can not created Repo tag: {}".format(err))
+ 
+-        name_node = repo_node.insertTag("Name")
+-        name_node.insertData(repo_name)
++        name_node = repo_node.createElement("Name")
++        name_node.appendChild(node.createTextNode(repo_name))
++        repo_node.appendChild(name_node)
+ 
+-        url_node = repo_node.insertTag("Url")
+-        url_node.insertData(repo_url)
++        url_node = repo_node.createElement("Url")
++        url_node.appendChild(node.createTextNode(repo_url))
++        repo_node.appendChild(url_node)
+ 
+-        name_node = repo_node.insertTag("Status")
+-        name_node.insertData("active")
++        status_node = repo_node.createElement("Status")
++        status_node.appendChild(node.createTextNode("active"))
++        repo_node.appendChild(status_node)
+ 
+-        media_node = repo_node.insertTag("Media")
+-        media_node.insertData(repo_type)
++        media_node = repo_node.createElement("Media")
++        media_node.appendChild(node.createTextNode(repo_type))
++        repo_node.appendChild(media_node)
+ 
+         self._update(repo_doc)
+ 
+     def set_status(self, repo_name, status):
+         repo_doc = self._get_doc()
+ 
+-        for r in repo_doc.tags("Repo"):
+-            if r.getTagData("Name") == repo_name:
+-                status_node = r.getTag("Status")
++        for r in repo_doc.getElementsByTagName("Repo"):
++            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
++                status_node = r.getElementsByTagName("Status")[0].firstChild.data
++                #FIXME: Program burda göt olacak
+                 if status_node:
+-                    status_node.firstChild().hide()
++                    status_node.childNodes[0].hide()
+                     status_node.insertData(status)
+                 else:
+                     status_node = r.insertTag("Status")
+@@ -83,11 +90,11 @@ class RepoOrder:
+ 
+     def get_status(self, repo_name):
+         repo_doc = self._get_doc()
+-        for r in repo_doc.tags("Repo"):
+-            if r.getTagData("Name") == repo_name:
+-                status_node = r.getTag("Status")
++        for r in repo_doc.getElementsByTagName("Repo"):
++            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
++                status_node = r.getElementsByTagName("Status").firstChild.data
+                 if status_node:
+-                    status = status_node.firstChild().data()
++                    status = status_node.childNodes[0].data
+                     if status in ["active", "inactive"]:
+                         return status
+         return "inactive"
+@@ -95,8 +102,8 @@ class RepoOrder:
+     def remove(self, repo_name):
+         repo_doc = self._get_doc()
+ 
+-        for r in repo_doc.tags("Repo"):
+-            if r.getTagData("Name") == repo_name:
++        for r in repo_doc.getElementsByTagName("Repo"):
++            if r.getElementsByTagName("Name")[0].firstChild.data == repo_name:
+                 r.hide()
+ 
+         self._update(repo_doc)
+@@ -113,7 +120,7 @@ class RepoOrder:
+ 
+     def _update(self, doc):
+         repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
+-        open(repos_file, "w").write("{}\n".format(doc.toPrettyString()))
++        open(repos_file, "w").write("{}\n".format(doc.toprettyxml()))
+         self._doc = None
+         self.repos = self._get_repos()
+ 
+@@ -121,9 +128,11 @@ class RepoOrder:
+         if self._doc is None:
+             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
+             if os.path.exists(repos_file):
+-                self._doc = ciksemel.parse(repos_file)
++                self._doc = minidom.parse(repos_file).documentElement
+             else:
+-                self._doc = ciksemel.newDocument("REPOS")
++                impl = minidom.getDOMImplementation()
++                dom = impl.createDocument(None, "REPOS", None)
++                self._doc = dom.documentElement
+ 
+         return self._doc
+ 
+@@ -131,10 +140,10 @@ class RepoOrder:
+         repo_doc = self._get_doc()
+         order = {}
+ 
+-        for r in repo_doc.tags("Repo"):
+-            media = r.getTagData("Media")
+-            name = r.getTagData("Name")
+-            status = r.getTagData("Status")
++        for r in repo_doc.getElementsByTagName("Repo"):
++            media = r.getElementsByTagName("Media")[0].firstChild.data
++            name = r.getElementsByTagName("Name")[0].firstChild.data
++            status = r.getElementsByTagName("Status")[0].firstChild.data
+             order.setdefault(media, []).append(name)
+ 
+         return order
+@@ -166,11 +175,13 @@ class RepoDB(lazydb.LazyDB):
+ 
+         if not os.path.exists(index_path):
+             ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
+-            return ciksemel.newDocument("INARY")
++            impl = minidom.getDOMImplementation()
++            dom = impl.createDocument(None, "INARY", None)
++            return dom.documentElement
+ 
+         try:
+-            return ciksemel.parse(index_path)
+-        except Exception as e:
++            return minidom.parse(index_path)
++        except ExpatError as e:
+             raise RepoError(_("Error parsing repository index information. Index file does not exist or is malformed."))
+ 
+     def get_repo(self, repo):
+@@ -196,25 +207,25 @@ class RepoDB(lazydb.LazyDB):
+     def get_source_repos(self, only_active=True):
+         repos = []
+         for r in self.list_repos(only_active):
+-            if self.get_repo_doc(r).getTag("SpecFile"):
++            if self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
+                 repos.append(r)
+         return repos
+ 
+     def get_binary_repos(self, only_active=True):
+         repos = []
+         for r in self.list_repos(only_active):
+-            if not self.get_repo_doc(r).getTag("SpecFile"):
++            if not self.get_repo_doc(r).getElementsByTagName("SpecFile")[0]:
+                 repos.append(r)
+         return repos
+ 
+-    def list_repos(self, only_active=True): 
++    def list_repos(self, only_active=True):
+         temp = []
+         for x in self.repoorder.get_order():
+             if not only_active:
+                 temp.append(x)
+             elif self.repo_active(x) == True:
+                 temp.append(x)
+-        return temp 
++        return temp
+ 
+     def list_repo_urls(self, only_active=True):
+         repos = []
+@@ -241,13 +252,13 @@ class RepoDB(lazydb.LazyDB):
+ 
+     def get_distribution(self, name):
+         doc = self.get_repo_doc(name)
+-        distro = doc.getTag("Distribution")
+-        return distro and distro.getTagData("SourceName")
++        distro = doc.getElementsByTagName("Distribution")[0]
++        return distro.firstChild.data and distro.getElementsByTagName("SourceName")[0].firstChild.data
+ 
+     def get_distribution_release(self, name):
+         doc = self.get_repo_doc(name)
+-        distro = doc.getTag("Distribution")
+-        return distro and distro.getTagData("Version")
++        distro = doc.getElementsByTagName("Distribution")[0]
++        return distro.firstChild.data and distro.getElementsByTagName("Version")[0].firstChild.data
+ 
+     def check_distribution(self, name):
+         if ctx.get_option('ignore_check'):
+@@ -268,4 +279,3 @@ class RepoDB(lazydb.LazyDB):
+             self.deactivate_repo(name)
+             raise IncompatibleRepoError(
+                     _("Repository '{}' is not compatible with your distribution. Repository is disabled.").format(name))
+-
+diff --git a/inary/db/sourcedb.py b/inary/db/sourcedb.py
+index 15eb1657..42f14fd6 100644
+--- a/inary/db/sourcedb.py
++++ b/inary/db/sourcedb.py
+@@ -13,7 +13,7 @@
+ import re
+ import gzip
+ 
+-import ciksemel
++import xml.dom.minidom as minidom
+ 
+ import inary
+ import inary.data.specfile as Specfile
+@@ -44,22 +44,23 @@ class SourceDB(lazydb.LazyDB):
+         sources = {}
+         pkgstosrc = {}
+ 
+-        for spec in doc.tags("SpecFile"):
+-            src_name = spec.getTag("Source").getTagData("Name")
+-            sources[src_name] = gzip.zlib.compress(spec.toString().encode('utf-8'))
+-            for package in spec.tags("Package"):
+-                pkgstosrc[package.getTagData("Name")] = src_name
++        for spec in doc.getElementsByTagName("SpecFile"):
++            src_name = spec.getElementsByTagName("Source")[0].getElementsByTagName("Name").firstChild.data
++            sources[src_name] = gzip.zlib.compress(spec.toxml('utf-8'))
++            for package in spec.getElementsByTagName("Package"):
++                pkgstosrc[package.getElementsByTagName("Name")[0].firstChild.data] = src_name
+ 
+         return sources, pkgstosrc
+ 
+     def __generate_revdeps(self, doc):
+         revdeps = {}
+-        for spec in doc.tags("SpecFile"):
+-            name = spec.getTag("Source").getTagData("Name")
+-            deps = spec.getTag("Source").getTag("BuildDependencies")
++        for spec in doc.getElementsByTagName("SpecFile"):
++            source = spec.getElementsByTagName("Source")[0]
++            name = source.getElementsByTagName("Name")[0].firstChild.data
++            deps = source.getElementsByTagName("BuildDependencies")[0].firstChild.data
+             if deps:
+-                for dep in deps.tags("Dependency"):
+-                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
++                for dep in deps.getElementsByTagName("Dependency"):
++                    revdeps.setdefault(dep.childNodes[0].data, set()).add((name, dep.toxml()))
+         return revdeps
+ 
+     def list_sources(self, repo=None):
+@@ -123,9 +124,9 @@ class SourceDB(lazydb.LazyDB):
+ 
+         rev_deps = []
+         for pkg, dep in rvdb:
+-            node = ciksemel.parseString(dep)
++            node = minidom.parseString(dep)
+             dependency = inary.analyzer.dependency.Dependency()
+-            dependency.package = node.firstChild().data()
++            dependency.package = node.childNodes[0].data
+             if node.attributes():
+                 attr = node.attributes()[0]
+                 dependency.__dict__[attr] = node.getAttribute(attr)
+diff --git a/inary/sxml/autoxml.py b/inary/sxml/autoxml.py
+index 05022695..9101a9d9 100644
+--- a/inary/sxml/autoxml.py
++++ b/inary/sxml/autoxml.py
+@@ -528,7 +528,7 @@ class autoxml(oo.autosuper, oo.autoprop):
+         tag_type = spec[0]
+         assert type(tag_type) == type(type)
+         def readtext(node, blah):
+-            #node.normalize() # ciksemel doesn't have this
++            node.normalize() # minidom have this :D
+             return xmlext.getNodeText(node)
+         def writetext(node, blah, text):
+             xmlext.addText(node, "", text)
+@@ -704,7 +704,6 @@ class autoxml(oo.autosuper, oo.autoprop):
+         def encode(node, obj, errs):
+             if node and obj:
+                 try:
+-                    #FIXME: this doesn't look pretty
+                     classnode = xmlext.newNode(node, tag)
+                     obj.encode(classnode, errs)
+                     xmlext.addNode(node, '', classnode)
+@@ -824,7 +823,6 @@ class autoxml(oo.autosuper, oo.autoprop):
+         def encode(node, obj, errs):
+             if node and obj:
+                 try:
+-                    #FIXME: this doesn't look pretty
+                     obj.encode(node, errs)
+                 except Error:
+                     if req == mandatory:
+diff --git a/inary/sxml/xmlext.py b/inary/sxml/xmlext.py
+index 24295bd1..657895d1 100644
+--- a/inary/sxml/xmlext.py
++++ b/inary/sxml/xmlext.py
+@@ -27,10 +27,23 @@ __trans = gettext.translation('inary', fallback=True)
+ _ = __trans.gettext
+ 
+ import inary
+-import ciksemel as iks
+ 
+-parse = iks.parse
+-newDocument = iks.newDocument
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
++
++
++def newDocument(tag):
++    impl = minidom.getDOMImplementation()
++    dom = impl.createDocument(None, tag, None)
++    return dom.documentElement
++
++def parse(fileName):
++    try:
++        dom = minidom.parse(fileName)
++        return dom.documentElement
++    except ExpatError, inst:
++        raise Error(_("File '{}' has invalid XML: {}\n").format(fileName,
++                                                            str(inst)))
+ 
+ def getAllNodes(node, tagPath):
+     """retrieve all nodes that match a given tag path."""
+@@ -50,6 +63,8 @@ def getAllNodes(node, tagPath):
+ 
+ def getNodeAttribute(node, attrname):
+     """get named attribute from DOM node"""
++    if not node.hasAttribute(attrname):
++        return None
+     return node.getAttribute(attrname)
+ 
+ def setNodeAttribute(node, attrname, value):
+@@ -58,25 +73,25 @@ def setNodeAttribute(node, attrname, value):
+ 
+ def getChildElts(parent):
+     """get only child elements"""
+-    return [x for x in parent.tags()]
++    return [x for x in parent.childNodes if x.nodeType == x.ELEMENT_NODE]
+ 
+ def getTagByName(parent, childName):
+-    return [x for x in parent.tags(childName)]
++    return [x for x in parent.childNodes
++            if x.nodeType == x.ELEMENT_NODE and x.tagName == childName]
+ 
+ def getNodeText(node, tagpath = ""):
+     """get the first child and expect it to be text!"""
+     if tagpath!="":
+         node = getNode(node, tagpath)
+-        if not node:
+-            return None
+-    child = node.firstChild()
+-    if not child:
++    try:
++        child = node.childNodes[0]
++    except IndexError:
+         return None
+-    if child.type() == iks.DATA:
+-        # KLUDGE: FIXME: python 2.x bug: force decoding as UTF-8
+-        child_data = str(child.data())
++    except AttributeError: # no node by that name
++        return None
++    if child.nodeType == child.TEXT_NODE:
+         #print('child_data=', child_data.strip())
+-        return str(child_data.strip()) # in any case, strip whitespaces...
++        return child.data.strip()  # in any case, strip whitespaces...
+     else:
+         raise XmlError(_("getNodeText: Expected text node, got something else!"))
+ 
+@@ -92,7 +107,7 @@ def getNode(node, tagpath):
+ 
+     if tagpath == "":
+         return node
+-    
++
+     assert type(tagpath)==str
+     tags = tagpath.split('/')
+     assert len(tags)>0
+@@ -100,8 +115,8 @@ def getNode(node, tagpath):
+     # iterative code to search for the path
+     for tag in tags:
+         currentNode = None
+-        for child in node.tags():
+-            if child.name() == tag:
++        for child in node.childNodes:
++            if child.nodeType == node.ELEMENT_NODE and child.tagName == tag:
+                 currentNode = child
+                 break
+         if not currentNode:
+@@ -115,15 +130,16 @@ def createTagPath(node, tags):
+     no matter what"""
+     if len(tags)==0:
+         return node
++    dom = node.ownerDocument
+     for tag in tags:
+-        node = node.insertTag(tag)
++        node = node.appendChild(dom.createElement(tag))
+     return node
+ 
+ def addTagPath(node, tags, newnode=None):
+     """add newnode at the end of a tag chain, smart one"""
+     node = createTagPath(node, tags)
+     if newnode:                     # node to add specified
+-        node.insertNode(newnode)
++        node.appendChild(newnode)
+     return node
+ 
+ def addNode(node, tagpath, newnode = None, branch=True):
+@@ -136,8 +152,8 @@ def addNode(node, tagpath, newnode = None, branch=True):
+         tags = tagpath.split('/')           # tag chain
+     else:
+         addTagPath(node, [], newnode)
+-        return node #FIXME: is this correct!?!?
+-        
++        return node
++
+     assert len(tags)>0                  # we want a chain
+ 
+     # iterative code to search for the path
+@@ -161,9 +177,9 @@ def addNode(node, tagpath, newnode = None, branch=True):
+ 
+     return node
+ 
+-def addText(node, tagpath, text):
+-    node = addNode(node, tagpath)
+-    node.insertData(text)
++def addText(node, tagPath, text, branch = True):
++    newnode = node.ownerDocument.createTextNode(text)
++    return addNode(node, tagPath, newnode, branch = branch)
+ 
+ def newNode(node, tag):
+-    return iks.newDocument(tag)
++    return node.ownerDocument.createElement(tag)
+diff --git a/inary/sxml/xmlfile.py b/inary/sxml/xmlfile.py
+index 55d25fbe..ce7e7679 100644
+--- a/inary/sxml/xmlfile.py
++++ b/inary/sxml/xmlfile.py
+@@ -19,16 +19,15 @@
+  function names are mixedCase for compatibility with minidom,
+  an 'old library'
+ 
+- this implementation uses pciksemel
+ """
+ 
+ import gettext
+ __trans = gettext.translation('inary', fallback=True)
+ _ = __trans.gettext
+ 
+-import codecs
+ import io
+-import ciksemel as iks
++import xml.dom.minidom as minidom
++from xml.parsers.expat import ExpatError
+ 
+ import inary
+ from inary.file import File
+@@ -45,35 +44,37 @@ class XmlFile(object):
+ 
+     def newDocument(self):
+         """clear DOM"""
+-        self.doc = iks.newDocument(self.rootTag)
++        impl = minidom.getDOMImplementation()
++        self.doc = impl.createDocument(None, self.rootTag, None)
+ 
+     def unlink(self):
+         """deallocate DOM structure"""
++        self.doc.unlink()
+         del self.doc
+ 
+     def rootNode(self):
+         """returns root document element"""
+-        return self.doc
+-        
++        return self.doc.documentElement
++
+     def parsexml(self, file):
+-        #try:
+-        self.doc = iks.parseString(str(file))
+-        return self.doc
+-        #except Exception as e:
+-            #raise Error(_("File '{}' has invalid XML").format(file) )
++        try:
++            self.doc = minidom.parseString(file)
++            return self.doc.documentElement
++        except Exception as e:
++            raise Error(_("File '{}' has invalid XML").format(file) )
+ 
+ 
+-    def readxml(self, uri, tmpDir='/tmp', sha1sum=False, 
++    def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
+                 compress=None, sign=None, copylocal = False):
+         uri = File.make_uri(uri)
+         try:
+-            localpath = File.download(uri, tmpDir, sha1sum=sha1sum, 
++            localpath = File.download(uri, tmpDir, sha1sum=sha1sum,
+                                   compress=compress,sign=sign, copylocal=copylocal)
+         except IOError as e:
+             raise Error(_("Cannot read URI {0}: {1}").format(uri, str(e)) )
+-        
++
+         st = io.StringIO()
+-        
++
+         try:
+             from preprocess import preprocess, PreprocessError
+             preprocess(infile=localpath,outfile=st,defines=inary.config.Config().values.directives)
+@@ -82,15 +83,15 @@ class XmlFile(object):
+             st = open(localpath,'r')
+ 
+         try:
+-            self.doc = iks.parse(localpath)
+-            return self.doc
+-        except Exception as e:
+-            raise Error(_("File '{}' has invalid XML").format(localpath) )
+-
++            self.doc = minidom.parse(localpath)
++            return self.doc.documentElement
++        except ExpatError as err:
++            raise Error(_("File '{}' has invalid XML: {}\n").format(localpath,
++                                                                    str(err)))
+     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
+         f = inary.file.File(uri, inary.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+-        f.write(self.doc.toPrettyString())
++        f.write(self.doc.toprettyxml())
+         f.close()
+ 
+     def writexmlfile(self, f):
+-        f.write(self.doc.toPrettyString())
++        f.write(self.doc.toprettyxml())
+diff --git a/tools/inary.vim b/tools/inary.vim
+index 4dcce7db..91ede472 100644
+--- a/tools/inary.vim
++++ b/tools/inary.vim
+@@ -238,14 +238,16 @@ python << EOF
+ import re
+ import os
+ import vim
+-import ciksemel
++import xml.dom.minidom
+ 
+ def normal(str):
+     vim.command("normal "+str)
+ 
+-pspec = ciksemel.parse("pspec.xml")
+-comment_data = pspec.getTag("History").getTag("Update").getTagData("Comment")
+-
++try:
++    pspec = xml.dom.minidom.parse("pspec.xml")
++except:
++    raise Exception("Can Not Parsed File: pspec.xml")
++comment_data = pspec.getElementsByTagName("History")[0].getElementsByTagName("Update")[0].getElementsByTagName("Comment")[0].firstChild.data
+ file_name = "commit-msg.tmp"
+ if os.path.exists(file_name):
+     os.unlink(file_name)
+@@ -274,4 +276,3 @@ vim.command(":!svn ci --file commit-msg.tmp")
+ os.system("rm commit-msg.tmp")
+ EOF
+ endfunction
+-

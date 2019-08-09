@@ -37,7 +37,7 @@ Gives a brief list of sources published in the repositories.
         super(ListSources, self).__init__(args)
         self.sourcedb = inary.db.sourcedb.SourceDB()
 
-    name = (_("list-sources"), "ls")
+    name = ("list-sources", "ls")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-sources options"))

@@ -32,7 +32,7 @@ If run without parameters, it prints the general help.""")
     def __init__(self, args=None):
         super(Help, self).__init__(args)
 
-    name = (_("help"), "?")
+    name = ("help", "?")
 
     def run(self):
 
@@ -47,6 +47,7 @@ If run without parameters, it prints the general help.""")
             obj = command.Command.get_command(arg, True)
             obj.help()
             ctx.ui.info('')
+
 
 usage_text1 = _("""%prog [options] <command> [arguments]
 

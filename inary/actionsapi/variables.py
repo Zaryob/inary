@@ -48,10 +48,7 @@ def exportFlags():
 
 class Env(object):
     """General environment variables used in actions API"""
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     def __init__(self):
 
         exportFlags()

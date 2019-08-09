@@ -96,7 +96,6 @@ class RepoOrder:
 
         return "inactive"
 
-
     def remove(self, repo_name):
         repo_doc = self._get_doc()
         for r in xmlext.getChildElts(repo_doc):
@@ -185,20 +184,13 @@ class RepoDB(lazydb.LazyDB):
     def get_repo(self, repo):
         return Repo(inary.uri.URI(self.get_repo_url(repo)))
 
-<<<<<<< HEAD
     # FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
     def get_repo_url(self, repo):
-=======
-    #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
-    @staticmethod
-    def get_repo_url(repo):
->>>>>>> master
         urifile_path = util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path).read()
         return uri.rstrip()
 
     def add_repo(self, name, repo_info, at=None):
-        #Fixme: Fucking at
         repo_path = util.join_path(ctx.config.index_dir(), name)
         ###########
         try:

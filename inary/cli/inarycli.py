@@ -31,7 +31,6 @@ import inary.cli.blame
 import inary.cli.build
 import inary.cli.check
 import inary.cli.configurepending
-import inary.cli.deleteconfigurepending
 import inary.cli.deletecache
 import inary.cli.delta
 import inary.cli.emerge
@@ -52,7 +51,6 @@ import inary.cli.listrepo
 import inary.cli.listsources
 import inary.cli.listupgrades
 import inary.cli.rebuilddb
-import inary.cli.reconfigure
 import inary.cli.remove
 import inary.cli.removerepo
 import inary.cli.removeorphaned

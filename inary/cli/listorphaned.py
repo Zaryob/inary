@@ -37,7 +37,7 @@ Lists packages installed as dependency, but no longer needed by any other instal
         super(ListOrphaned, self).__init__(args)
         self.installdb = inary.db.installdb.InstallDB()
 
-    name = (_("list-orphaned"), "lo")
+    name = ("list-orphaned", "lo")
 
     def options(self):
 

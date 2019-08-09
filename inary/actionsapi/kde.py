@@ -41,12 +41,8 @@ docdir = "/{0}/{1}".format(get.docDIR(), basename)
 htmldir = "{}/html".format(docdir)
 wallpapersdir = "{}/share/wallpapers".format(prefix)
 
-<<<<<<< HEAD
 
 def configure(parameters='', installPrefix=prefix, sourceDir='..'):
-=======
-def configure(parameters = '', installPrefix = prefix, sourceDir = '..'):
->>>>>>> master
     """ parameters -DLIB_INSTALL_DIR="hede" -DSOMETHING_USEFUL=1"""
 
     shelltools.makedirs("build")

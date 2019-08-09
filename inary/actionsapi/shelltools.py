@@ -61,12 +61,8 @@ def echo(destionationFile, content):
     except IOError:
         error(_('ActionsAPI [echo]: Can\'t append to file {}.').format(destionationFile))
 
-<<<<<<< HEAD
 
 def chmod(filePath, mode=0o755):
-=======
-def chmod(filePath, mode = 0o755):
->>>>>>> master
     """change the mode of filePath to the mode"""
     filePathGlob = glob.glob(filePath)
     if len(filePathGlob) == 0:
@@ -81,12 +77,8 @@ def chmod(filePath, mode = 0o755):
         else:
             ctx.ui.error(_('ActionsAPI [chmod]: File {} doesn\'t exists.').format(fileName))
 
-<<<<<<< HEAD
 
 def chown(filePath, uid='root', gid='root'):
-=======
-def chown(filePath, uid = 'root', gid = 'root'):
->>>>>>> master
     """change the owner and group id of filePath to uid and gid"""
     if can_access_file(filePath):
         try:
@@ -158,13 +150,8 @@ def move(source, destination):
 
 
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
-<<<<<<< HEAD
 def copy(source, destination, sym=True):
     """recursively copy a "source" file or directory to "destination\" """
-=======
-def copy(source, destination, sym = True):
-    """recursively copy a "source" file or directory to "destination\""""
->>>>>>> master
     sourceGlob = glob.glob(source)
     if len(sourceGlob) == 0:
         error(_("ActionsAPI [copy]: No file matched pattern \"{}\".").format(source))
@@ -192,12 +179,8 @@ def copy(source, destination, sym = True):
         else:
             error(_('ActionsAPI [copy]: File {} does not exist.').format(filePath))
 
-<<<<<<< HEAD
 
 def copytree(source, destination, sym=True):
-=======
-def copytree(source, destination, sym = True):
->>>>>>> master
     """recursively copy an entire directory tree rooted at source"""
     if isDirectory(source):
         if os.path.exists(destination):
@@ -232,12 +215,8 @@ def touch(filePath):
         except IOError:
             error(_('ActionsAPI [touch]: Permission denied: {}').format(filePath))
 
-<<<<<<< HEAD
 
 def cd(directoryName=''):
-=======
-def cd(directoryName = ''):
->>>>>>> master
     """change directory"""
     current = os.getcwd()
     if directoryName:

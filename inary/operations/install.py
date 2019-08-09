@@ -30,6 +30,7 @@ import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
 
+
 def install_pkg_names(A, reinstall=False, extra=False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
@@ -54,9 +55,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(_('No packages to install.'))
         return True
 
-    A |= set()
-    ignore_dep = ctx.config.get_option('ignore_dependency')
-    if not ignore_dep:
+    A |= operations.upgrade.upgrade_base(A)
+
+    if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_install_pkg_names(A)
     else:
         G_f = None
@@ -64,6 +65,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     componentdb = inary.db.componentdb.ComponentDB()
 
+    # Bug 4211
+    if componentdb.has_component('system.base'):
+        order = operations.helper.reorder_base_packages(order)
 
     if len(order) > 1:
         ctx.ui.info(_("Following packages will be installed:"), color="brightblue")
@@ -106,10 +110,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
-    ctx.disable_keyboard_interrupts()
+
     for path in paths:
         ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
-        util.xterm_title(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)))
         install_op = atomicoperations.Install(path)
         install_op.install(False)
         try:
@@ -118,8 +121,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
-    ctx.enable_keyboard_interrupts()
-    util.xterm_title_reset()
+
     return True
 
 
@@ -217,11 +219,7 @@ def install_pkg_files(package_URIs, reinstall=False):
 
     class PackageDB:
         @staticmethod
-<<<<<<< HEAD
         def get_package(key, repo=None):
-=======
-        def get_package(key, repo = None):
->>>>>>> master
             return d_t[str(key)]
 
     packagedb = PackageDB()
@@ -254,11 +252,12 @@ def install_pkg_files(package_URIs, reinstall=False):
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.sort()
+    order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = operations.helper.check_conflicts(order, packagedb)
         if conflicts:
             operations.remove.remove_conflicting_packages(conflicts)
+    order.reverse()
     ctx.ui.info(_('Installation order: ') + util.strlist(order))
 
     if ctx.get_option('dry_run'):
@@ -290,13 +289,9 @@ def plan_install_pkg_names(A):
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            # removed same depencies for checking
-            uniqdep=[]
             for dep in pkg.runtimeDependencies():
-                   uniqdep.append(dep)
-            uniqdep=util.uniq(uniqdep)
-            for dep in uniqdep:
                 ctx.ui.debug(' -> checking {}'.format(str(dep)))
+                # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo(packagedb=packagedb):
                         raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
@@ -327,7 +322,8 @@ def plan_install_pkg_names(A):
         B = Bp
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
-    order = G_f.sort()
+    order = G_f.topological_sort()
+    order.reverse()
     return G_f, order
 
 

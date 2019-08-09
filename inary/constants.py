@@ -36,10 +36,7 @@ class Singleton(type):
 
 class _constant:
     """Constant members implementation"""
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     class ConstError(TypeError):
         pass
 
@@ -104,7 +101,6 @@ class Constants(metaclass=Singleton):
         self.__c.metadata_dir = "metadata"
         self.__c.translations_file = "translations.xml"
         self.__c.scom_dir = "scom"
-        self.__c.comar_dir = "comar"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
         self.__c.install_tar = "install.tar"
@@ -161,14 +157,6 @@ class Constants(metaclass=Singleton):
                            'brightmagenta': "\033[01;35m",
                            'brightcyan': "\033[01;36m",
                            'brightwhite': "\033[01;37m",
-                           'backgroundblack': "\033[01;40m",
-                           'backgroundred': "\033[01;41m",
-                           'backgroundgreen': "\033[01;42m",
-                           'backgroundyellow': "\033[01;43m",
-                           'backgroundblue': "\033[01;44m",
-                           'backgroundmagenta': "\033[01;45m",
-                           'backgroundcyan': "\033[01;46m",
-                           'backgroundwhite': "\033[01;47m",
                            'faintblack': "\033[02;30m",
                            'faintred': "\033[02;31m",
                            'faintgreen': "\033[02;32m",

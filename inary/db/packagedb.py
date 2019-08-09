@@ -23,12 +23,12 @@ import inary.db
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
 from inary.sxml import xmlext
-import inary.util as util
 
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class PackageDB(lazydb.LazyDB):
 
@@ -64,7 +64,7 @@ class PackageDB(lazydb.LazyDB):
         for node in packages:
             if xmlext.getNodeText(node, "Replaces"):
                 replaces.append(xmlext.getNodeText(node, "Name"))
-        return util.uniq(replaces)
+        return replaces
 
     @staticmethod
     def __generate_obsoletes(doc):
@@ -78,11 +78,7 @@ class PackageDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_packages(doc):
-<<<<<<< HEAD
         pdict = {}
-=======
-        pdict={}
->>>>>>> master
 
         for x in xmlext.getTagByName(doc, "Package"):
             name = xmlext.getNodeText(x, "Name")
@@ -282,4 +278,4 @@ class PackageDB(lazydb.LazyDB):
 
             if enter_date >= since_date:
                 packages.append(pkg)
-        return util.uniq(packages)
+        return packages
