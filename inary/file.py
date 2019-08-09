@@ -179,14 +179,8 @@ class File:
 
         return localfile
 
-<<<<<<< HEAD
     def __init__(self, uri, mode, transfer_dir="/tmp",
                  sha1sum=False, compress=None, sign=None):
-=======
-
-    def __init__(self, uri, mode, transfer_dir = "/tmp",
-                 sha1sum = False, compress = None, sign = None):
->>>>>>> master
         """it is pointless to open a file without a URI and a mode"""
 
         self.transfer_dir = transfer_dir
@@ -220,11 +214,7 @@ class File:
         """returns the underlying file object"""
         return self.__file__
 
-<<<<<<< HEAD
     def close(self, delete_transfer=False):  # FIXME: look this parameter
-=======
-    def close(self, delete_transfer = False):
->>>>>>> master
         """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:

@@ -37,7 +37,7 @@ Downloads the given inary packages to working directory
     def __init__(self, args):
         super(Fetch, self).__init__(args)
 
-    name = (_("fetch"), "fc")
+    name = ("fetch", "fc")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("fetch options"))
@@ -46,8 +46,6 @@ Downloads the given inary packages to working directory
                          help=_("Output directory for the fetched packages"))
         group.add_option("--runtime-deps", action="store_true", default=None,
                          help=_("Download with runtime dependencies."))
-
-        self.parser.add_option_group(group)
 
         self.parser.add_option_group(group)
 

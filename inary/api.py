@@ -164,5 +164,5 @@ from inary.operations.info import info
 from inary.operations.install import install, get_install_order
 from inary.operations.remove import remove, get_remove_order
 from inary.operations.repository import *
-from inary.operations.upgrade import upgrade, get_upgrade_order
+from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
 from inary.operations.search import *

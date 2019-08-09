@@ -18,7 +18,6 @@ import os
 import pycurl
 import shutil
 import time
-import ssl
 
 import gettext
 
@@ -38,17 +37,6 @@ import inary.uri
 
 from base64 import encodebytes
 
-<<<<<<< HEAD
-=======
-try:
-    import requests
-except ImportError:
-    sys.stdout.write(inary.util.colorize(_("ERROR:\n"),"blinkingred")+ \
-                     _("\tCan't imported requests module.\n"
-                       "\tWhether want the download packages please install\n"
-                       "\t'python3-requests' package from repository.\n"))
-from base64 import encodebytes
->>>>>>> master
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
@@ -154,45 +142,17 @@ class Fetcher:
         self.destdir = destdir
         self.destfile = destfile
         self.progress = None
-        self.c = pycurl.Curl()
+
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
 
         util.ensure_dirs(self.destdir)
-<<<<<<< HEAD
 
-    def fetch(self, timeout=100):
-=======
-        self.headers_dict = {'user-agent' : 'Inary Fetcher/' + inary.__version__,
-                             'http-headers' : self._get_http_headers(),
-                             'ftp-headers' : self._get_ftp_headers()
-                             }
-
-
-    def test(self, timeout=3):
-        try:
-            requests.get(self.url.get_uri(),
-                           proxies=self._get_proxies(),
-                           timeout=timeout,
-                           headers=self.headers_dict
-                           )
-
-        except ValueError as e:
-            msg = _("Url Problem: \n {}").format(e)
-            raise FetchError(msg)
-
-        except FetchError as e:
-            msg = _("Can not avaible remote server: \n {}").format(e)
-            raise FetchError(msg)
-
-
-        return True
-
-    def fetch(self, verify=None):
->>>>>>> master
+    def fetch(self, timeout=10):
         """Return value: Fetched file's full path.."""
 
         if not ctx.config.values.general.ssl_verify:
+            import ssl
             ssl._create_default_https_context = ssl._create_unverified_context
 
         if not self.url.filename():
@@ -205,48 +165,45 @@ class Fetcher:
             raise FetchError(_('Access denied to destination file: "%s"') % self.archive_file)
 
         else:
-            self.c.protocol = self.url.scheme()
-            self.c.setopt(self.c.URL, self.url.get_uri())
+            c = pycurl.Curl()
+            c.protocol = self.url.scheme()
+            c.setopt(c.URL, self.url.get_uri())
             # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
-            self.c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
-            self.c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
-            self.c.setopt(pycurl.AUTOREFERER, 1)
-            # We does not need ssl verify.
-            #self.c.setopt(pycurl.SSL_VERIFYPEER, 0)   
-            #self.c.setopt(pycurl.SSL_VERIFYHOST, 0)
-            self.c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
-            # self.c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
-            self.c.setopt(pycurl.MAXREDIRS, 10)
-            self.c.setopt(pycurl.NOSIGNAL, True)
+            c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
+            c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+            c.setopt(pycurl.AUTOREFERER, 1)
+            c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
+            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+            c.setopt(pycurl.MAXREDIRS, 10)
+            c.setopt(pycurl.NOSIGNAL, True)
             # Header
-            # self.c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+            # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
             handler = UIHandler()
             handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
 
             if os.path.exists(self.partial_file):
                 file_id = open(self.partial_file, "ab")
-                self.c.setopt(self.c.RESUME_FROM, os.path.getsize(self.partial_file))
+                c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
                 ctx.ui.info(_("Download resuming..."))
             else:
                 file_id = open(self.partial_file, "wb")
 
             # Function sets
-            self.c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
-            self.c.setopt(self.c.NOPROGRESS, False)
-            self.c.setopt(self.c.XFERINFOFUNCTION, handler.update)
+            c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
+            c.setopt(c.NOPROGRESS, False)
+            c.setopt(c.XFERINFOFUNCTION, handler.update)
 
-            self.c.setopt(pycurl.FOLLOWLOCATION, 1)
-            self.c.setopt(self.c.WRITEDATA, file_id)
+            c.setopt(pycurl.FOLLOWLOCATION, 1)
+            c.setopt(c.WRITEDATA, file_id)
 
             try:
                 c.perform()
                 ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
                 # pycurl yüzünden kaynaklanıyor
                 file_id.close()
-                ctx.ui.info("\n")
-                ctx.ui.debug(_("Downloaded from:" + str(self.c.getinfo(self.c.EFFECTIVE_URL))))
-                self.c.close()
+                ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
+                c.close()
             except pycurl.error as x:
                 raise FetchError("Pycurl.Error: {}".format(x))
 
@@ -269,11 +226,7 @@ class Fetcher:
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-<<<<<<< HEAD
             enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
-=======
-            enc = encodesbytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
->>>>>>> master
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return headers
 

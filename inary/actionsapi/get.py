@@ -61,13 +61,10 @@ def curPYTHON():
 
 def curPERL():
     """ returns currently used perl's version"""
-<<<<<<< HEAD
     # for i in os.listdir("/usr/bin"):
     #    if i.startswith("perl"):
     #        if i.split("perl")[1] 
 
-=======
->>>>>>> master
     return os.path.realpath('/usr/bin/perl').split('perl')[1]
 
 

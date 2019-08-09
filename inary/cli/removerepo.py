@@ -32,7 +32,7 @@ Remove all repository information from the system.
     def __init__(self, args):
         super(RemoveRepo, self).__init__(args)
 
-    name = (_("remove-repo"), "rr")
+    name = ("remove-repo", "rr")
 
     def run(self):
 

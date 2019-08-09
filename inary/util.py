@@ -32,7 +32,6 @@ import unicodedata
 
 import gettext
 from functools import reduce
-from inary.misc import sort as sort
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -162,28 +161,6 @@ def flatten_list(l):
     # Fastest solution is list comprehension
     # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
     return [item for sublist in l for item in sublist]
-
-def uniq(list, sort=False):
-    """Uniq is a list generation algorithm to delete againist arguments by Ali Rıza"""
-    newlist=[]
-    if list != []:
-        if sort:
-            sort.sort_auto(list)
-            mcout=len(list)
-            cout=0
-            newlist.append(list[0])
-            while cout < mcout-1:
-                if list[cout+1] != list[cout]:
-                    newlist.append(list[cout])
-                cout=cout+1
-        else:
-            for item in list:
-                if item not in newlist:
-                    newlist.append(item)
-    else:
-        newlist=[]
-    return newlist
-
 
 
 def strlist(l):
@@ -613,12 +590,9 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
                 yield calculate_hash(root)
 
 
-def check_file_hash(filename, hash,skip=True):
+def check_file_hash(filename, hash):
     """Check the file's integrity with a given hash."""
-    if skip == False:
-        return sha1_file(filename) == hash or skip
-    else:
-        return True
+    return sha1_file(filename) == hash
 
 
 def sha1_file(filename):
@@ -1052,18 +1026,6 @@ def colorize(msg, color):
     else:
         return str(msg)
 
-def colorize_percent(message,percent=0,message2=' ',color='backgroundgreen',color2='backgroundyellow',color3='brightblue'):
-    term_rows, term_columns = get_terminal_size()
-    spacenum=(term_columns-(len(message)+len(message2)))
-    if spacenum < 1:
-       spacenum=0
-    msg=message+spacenum*' '+message2
-    if len(msg)<1:
-        return str(msg)
-    lmsg=int((len(msg)*percent)/100)+1
-    if lmsg>=len(msg):
-        return str(ctx.const.colors[color3] + msg + ctx.const.colors['default'])
-    return str(ctx.const.colors[color]+ msg[:lmsg]+ctx.const.colors[color2]+msg[lmsg:]+ctx.const.colors['default'])
 
 def config_changed(config_file):
     fpath = join_path(ctx.config.dest_dir(), config_file.path)
@@ -1139,7 +1101,6 @@ def get_cpu_count():
     """
     This function part of portage
     Copyright 2015 Gentoo Foundation
-    Copyright 2019 Sulin Community
     Distributed under the terms of the GNU General Public License v2
 
     Using:
@@ -1150,13 +1111,8 @@ def get_cpu_count():
         import multiprocessing
         return multiprocessing.cpu_count()
     except (ImportError, NotImplementedError):
-        #read cpuinfo and get "cpu cores\t: x"
-        cpuinfo=open("/proc/cpuinfo","r").readlines()
-        for line in cpuinfo:
-            if "cpu cores\t:" in line:
-                return line[:len(line)-1].split(": ")[1]
-                break
-        return 1
+        return None
+
 
 def get_vm_info():
     vm_info = {}
@@ -1165,6 +1121,7 @@ def get_vm_info():
         import subprocess
     except ImportError:
         raise Exception(_("Module: \"subprocess\" can not import"))
+
     if platform.system() == 'Linux':
         try:
             proc = subprocess.Popen(["free"],

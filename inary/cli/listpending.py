@@ -32,7 +32,7 @@ Lists packages waiting to be configured.
     def __init__(self, args):
         super(ListPending, self).__init__(args)
 
-    name = (_("list-pending"), "lp")
+    name = ("list-pending", "lp")
 
     def run(self):
         self.init(database=True, write=False)

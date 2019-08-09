@@ -41,7 +41,7 @@ Usage: info <package1> <package2> ... <packagen>
         self.packagedb = inary.db.packagedb.PackageDB()
         self.sourcedb = inary.db.sourcedb.SourceDB()
 
-    name = (_("info"), None)
+    name = ("info", None)
 
     def options(self):
 
@@ -58,11 +58,7 @@ Usage: info <package1> <package2> ... <packagen>
         group.add_option("-s", "--short", action="store_true",
                          default=False, help=_("Do not show details"))
         group.add_option("--xml", action="store_true",
-<<<<<<< HEAD
                          default=False, help=_("Output in xml format"))
-=======
-                               default=False, help=_("Output in xml format"))
->>>>>>> master
         self.parser.add_option_group(group)
 
     def run(self):

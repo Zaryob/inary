@@ -46,7 +46,7 @@ class Check(command.Command, metaclass=command.autocommand):
         self.installdb = inary.db.installdb.InstallDB()
         self.componentdb = inary.db.componentdb.ComponentDB()
 
-    name = (_("check"), None)
+    name = ("check", None)
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("check options"))
