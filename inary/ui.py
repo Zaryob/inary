@@ -54,7 +54,11 @@ class UI(object):
     def set_debug(self, flag):
         self.show_debug = flag
 
+<<<<<<< HEAD
     def info(self, msg, verbose=False, noln=False, color='default'):
+=======
+    def info(self, msg, verbose = False, noln = False,color='default'):
+>>>>>>> master
         """give an informative message"""
         pass
 
@@ -67,6 +71,7 @@ class UI(object):
         if self.show_debug:
             self.info(str('DEBUG: ' + msg))
 
+<<<<<<< HEAD
     def warning(self, msg):
         """warn the user"""
         pass
@@ -77,6 +82,18 @@ class UI(object):
 
     # FIXME: merge this with info, this just means "important message"
     def action(self, msg):
+=======
+    def warning(self,msg):
+        """warn the user"""
+        pass
+
+    def error(self,msg):
+        """inform a (possibly fatal) error"""
+        pass
+
+    #FIXME: merge this with info, this just means "important message"
+    def action(self,msg):
+>>>>>>> master
         """uh?"""
         pass
 
@@ -93,7 +110,11 @@ class UI(object):
         """display progress"""
         pass
 
+<<<<<<< HEAD
     def status(self, msg=None):
+=======
+    def status(self, msg = None):
+>>>>>>> master
         """set status, if not given clear it"""
         pass
 

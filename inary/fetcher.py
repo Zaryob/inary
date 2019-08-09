@@ -38,6 +38,17 @@ import inary.uri
 
 from base64 import encodebytes
 
+<<<<<<< HEAD
+=======
+try:
+    import requests
+except ImportError:
+    sys.stdout.write(inary.util.colorize(_("ERROR:\n"),"blinkingred")+ \
+                     _("\tCan't imported requests module.\n"
+                       "\tWhether want the download packages please install\n"
+                       "\t'python3-requests' package from repository.\n"))
+from base64 import encodebytes
+>>>>>>> master
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
@@ -148,8 +159,37 @@ class Fetcher:
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
 
         util.ensure_dirs(self.destdir)
+<<<<<<< HEAD
 
     def fetch(self, timeout=100):
+=======
+        self.headers_dict = {'user-agent' : 'Inary Fetcher/' + inary.__version__,
+                             'http-headers' : self._get_http_headers(),
+                             'ftp-headers' : self._get_ftp_headers()
+                             }
+
+
+    def test(self, timeout=3):
+        try:
+            requests.get(self.url.get_uri(),
+                           proxies=self._get_proxies(),
+                           timeout=timeout,
+                           headers=self.headers_dict
+                           )
+
+        except ValueError as e:
+            msg = _("Url Problem: \n {}").format(e)
+            raise FetchError(msg)
+
+        except FetchError as e:
+            msg = _("Can not avaible remote server: \n {}").format(e)
+            raise FetchError(msg)
+
+
+        return True
+
+    def fetch(self, verify=None):
+>>>>>>> master
         """Return value: Fetched file's full path.."""
 
         if not ctx.config.values.general.ssl_verify:
@@ -229,7 +269,11 @@ class Fetcher:
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
+<<<<<<< HEAD
             enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+=======
+            enc = encodesbytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+>>>>>>> master
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return headers
 

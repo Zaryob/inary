@@ -85,7 +85,10 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_installed_pkgs():
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         def split_name(dirname):
             name, version, release = dirname.rsplit("-", 2)
             return name, version + "-" + release
@@ -156,7 +159,11 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def __get_version(meta_doc):
+<<<<<<< HEAD
         package = xmlext.getNode(meta_doc, 'Package')
+=======
+        package = xmlext.getNode(meta_doc,'Package')
+>>>>>>> master
         history = xmlext.getNode(package, 'History')
         update = xmlext.getNode(history, 'Update')
 

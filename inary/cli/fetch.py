@@ -49,6 +49,8 @@ Downloads the given inary packages to working directory
 
         self.parser.add_option_group(group)
 
+        self.parser.add_option_group(group)
+
     def run(self):
         packages = inary.db.packagedb.PackageDB()
         self.init(database=False, write=False)

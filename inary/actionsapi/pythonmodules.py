@@ -57,20 +57,32 @@ class RunTimeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+<<<<<<< HEAD
 
 def configure(parameters='', pyVer=''):
+=======
+def configure(parameters = '', pyVer = ''):
+>>>>>>> master
     """does python setup.py configure"""
     if system('python{0} setup.py configure {1}'.format(pyVer, parameters)):
         raise ConfigureError(_('Configuration failed.'))
 
 
+<<<<<<< HEAD
 def compile(parameters='', pyVer=''):
+=======
+def compile(parameters = '', pyVer = ''):
+>>>>>>> master
     """compile source with given parameters."""
     if system('python{0} setup.py build {1}'.format(pyVer, parameters)):
         raise CompileError(_('Make failed.'))
 
+<<<<<<< HEAD
 
 def install(parameters='', pyVer=''):
+=======
+def install(parameters = '', pyVer = ''):
+>>>>>>> master
     """does python setup.py install"""
     if system('python{0} setup.py install --root={1} --no-compile -O0 {2}'.format(pyVer, get.installDIR(), parameters)):
         raise InstallError(_('Install failed.'))
@@ -84,16 +96,26 @@ def install(parameters='', pyVer=''):
             if not isEmpty(doc):
                 dodoc(doc)
 
+<<<<<<< HEAD
 
 def run(parameters='', pyVer=''):
+=======
+def run(parameters = '', pyVer = ''):
+>>>>>>> master
     """executes parameters with python"""
     if system('python{0} {1}'.format(pyVer, parameters)):
         raise RunTimeError(_('Running {} failed.').format(parameters))
 
+<<<<<<< HEAD
 
 def fixCompiledPy(lookInto='/usr/lib/{}/'.format(get.curPYTHON())):
     """ cleans *.py[co] from packages """
     for root, dirs, files in os.walk('{0}/{1}'.format(get.installDIR(), lookInto)):
+=======
+def fixCompiledPy(lookInto = '/usr/lib/{}/'.format(get.curPYTHON())):
+    """ cleans *.py[co] from packages """
+    for root, dirs, files in os.walk('{0}/{1}'.format(get.installDIR(),lookInto)):
+>>>>>>> master
         for compiledFile in files:
             if compiledFile.endswith('.pyc') or compiledFile.endswith('.pyo'):
                 if can_access_file('{0}/{1}'.format(root, compiledFile)):

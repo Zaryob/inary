@@ -30,6 +30,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
+
 class Error(inary.errors.Error):
     pass
 
@@ -63,7 +64,11 @@ class CLI(inary.ui.UI):
 
     def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
+<<<<<<< HEAD
             if isinstance(msg, bytes):
+=======
+            if type(msg) == type(bytes()):
+>>>>>>> master
                 msg = msg.decode('utf-8')
             if err:
                 sys.stderr.write(str(msg))
@@ -150,7 +155,11 @@ class CLI(inary.ui.UI):
     def choose(self, msg, opts):
         msg = str(msg)
         endmsg = '\n Select one:'
+<<<<<<< HEAD
         prompt = msg + util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
+=======
+        prompt = msg + inary.util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
+>>>>>>> master
 
         while True:
             s = input(prompt)
@@ -171,7 +180,16 @@ class CLI(inary.ui.UI):
             tty.tcflush(sys.stdin.fileno(), 0)
             prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red')
             s = input(prompt)
+<<<<<<< HEAD
             return yes_expr.search(s)
+=======
+
+            if yes_expr.search(s):
+                return True
+
+            if no_expr.search(s):
+                return False
+>>>>>>> master
 
     def display_progress(self, **ka):
         """ display progress of any operation """
@@ -179,7 +197,17 @@ class CLI(inary.ui.UI):
             return
 
         elif ka['operation'] == "fetching":
+<<<<<<< HEAD
             totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
+=======
+            totalsize = '%.1f %s' % inary.util.human_readable_size(ka['total_size'])
+            out = '\r%-30.50s (%s)%3d%% %9.2f %s [%s]' % \
+                  (ka['filename'], totalsize, ka['percent'],
+                   ka['rate'], ka['symbol'], ka['eta'])
+            self.output(out)
+        else:
+            self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
+>>>>>>> master
 
             out = '%-30.50s(%s)' % (ka['filename'], totalsize)
             out2= '%3d%% %9.2f%s [%s]' % (ka['percent'], ka['rate'],ka['symbol'], ka['eta'])
@@ -190,7 +218,11 @@ class CLI(inary.ui.UI):
             self.output("\r\033[2K"+colorize_percent(("%s" % ka['info']),ka['percent'],("(%d%%)" % ka['percent'])))
             util.xterm_title("%s (%d%%)" % (ka['info'], ka['percent']))
 
+<<<<<<< HEAD
     def status(self, msg=None, push_screen=True):
+=======
+    def status(self, msg=None):
+>>>>>>> master
         if msg:
             msg = str(msg)
             if push_screen:

@@ -453,6 +453,10 @@ class ArchiveTar(ArchiveBase):
                 # Try to extract again.
                 self.tar.extract(tarinfo)
 
+<<<<<<< HEAD
+=======
+            except OSError as e:
+>>>>>>> master
                 # Handle the case where new path is file, but old path is directory
                 # due to not possible touch file c in /a/b if directory /a/b/c exists.
                 if not e.errno == errno.EISDIR:

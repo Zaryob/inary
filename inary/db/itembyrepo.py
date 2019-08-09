@@ -92,7 +92,13 @@ class ItemByRepo:
                 for item in list(self.dbobj[r].keys()):
                     yield str(item), str(self.dbobj[r][item])
 
+<<<<<<< HEAD
     def item_repos(self, repo=None):
+=======
+    @staticmethod
+    def item_repos(repo=None):
+        repos = inary.db.repodb.RepoDB().list_repos()
+>>>>>>> master
         if repo:
             repos = [repo]
             return repos

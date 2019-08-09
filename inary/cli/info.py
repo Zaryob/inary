@@ -58,7 +58,11 @@ Usage: info <package1> <package2> ... <packagen>
         group.add_option("-s", "--short", action="store_true",
                          default=False, help=_("Do not show details"))
         group.add_option("--xml", action="store_true",
+<<<<<<< HEAD
                          default=False, help=_("Output in xml format"))
+=======
+                               default=False, help=_("Output in xml format"))
+>>>>>>> master
         self.parser.add_option_group(group)
 
     def run(self):

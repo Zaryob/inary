@@ -52,6 +52,7 @@ class Digraph(object):
         l = []
         for u in self.__v:
             for v in self.__adj[u]:
+<<<<<<< HEAD
                 l.append((u, v))
         return l
 
@@ -73,6 +74,29 @@ class Digraph(object):
         self.__adj[u].add(v)
         if edata is not None:
             self.__edata[u][v] = edata
+=======
+                l.append( (u,v) )
+                return l
+
+    def add_vertex(self, u, data = None):
+        """add vertex u, optionally with data"""
+        assert not u in self.__v
+        self.__v.add(u)
+        self.__adj[u] = set()
+        if data:
+            self.__vdata[u] = data
+            self.__edata[u] = {}
+
+    def add_edge(self, u, v, edata = None, udata = None, vdata = None):
+        """add edge u -> v"""
+        if not u in self.__v:
+            self.add_vertex(u, udata)
+            if not v in self.__v:
+                self.add_vertex(v, vdata)
+                self.__adj[u].add(v)
+                if edata is not None:
+                    self.__edata[u][v] = edata
+>>>>>>> master
 
     def add_biedge(self, u, v, edata=None):
         self.add_edge(u, v, edata)
@@ -99,14 +123,62 @@ class Digraph(object):
     def adj(self, u):
         return self.__adj[u]
 
+<<<<<<< HEAD
     def get_vertex(self):
+=======
+    def dfs(self, finish_hook = None):
+        self.color = {}
+        self.p = {}
+        self.d = {}
+        self.f = {}
+        for u in self.__v:
+            self.color[u] = 'w'         # mark white (unexplored)
+            self.p[u] = None
+        self.time = 0
+        for u in self.__v:
+            if self.color[u] == 'w':
+                self.dfs_visit(u, finish_hook)
+
+    def dfs_visit(self, u, finish_hook):
+        self.color[u] = 'g'             # mark green (discovered)
+        self.d[u] = self.time = self.time + 1
+        for v in self.adj(u):
+            if self.color[v] == 'w':    # explore unexplored vertices
+                self.p[v] = u
+                self.dfs_visit(v, finish_hook)
+            elif self.color[v] == 'g':  # cycle detected
+                cycle = [u]
+                while self.p[u]:
+                    u = self.p[u]
+                    cycle.append(u)
+                    if self.has_edge(cycle[0], u):
+                        break
+                cycle.reverse()
+                raise CycleException(cycle)
+        self.color[u] = 'b'             # mark black (completed)
+        if finish_hook:
+            finish_hook(u)
+            self.f[u] = self.time = self.time + 1
+
+    def cycle_free(self):
+        try:
+            self.dfs()
+            return True
+        except CycleException:
+            return False
+
+    def topological_sort(self):
+>>>>>>> master
         list = []
         for u in self.__v:
             list.append(u)
         return util.uniq(list)
 
+<<<<<<< HEAD
     def sort(self,reverse=False):
             return sort.sort_auto(self.get_vertex(),reverse)
+=======
+>>>>>>> master
     @staticmethod
     def id_str(u):
         # Graph format only accepts underscores as key values
@@ -122,7 +194,11 @@ class Digraph(object):
         f.write('\n')
         for u in self.vertices():
             for v in self.adj(u):
+<<<<<<< HEAD
                 f.write(self.id_str(u) + ' -> ' + self.id_str(v))
+=======
+                f.write( self.id_str(u) + ' -> ' + self.id_str(v))
+>>>>>>> master
                 self.write_graphviz_elabel(f, u, v)
                 f.write(';\n')
         f.write('\n')
