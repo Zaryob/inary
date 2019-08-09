@@ -14,6 +14,10 @@
 
 """Files module provides access to files.xml. files.xml is generated
 during the build process of a package and used in installation."""
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 import inary.sxml.autoxml as autoxml
 

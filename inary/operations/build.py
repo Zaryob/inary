@@ -496,6 +496,10 @@ class Builder:
                                                       ctx.const.scom_dir))
                 ctx.ui.info("Scom Script Fetched {}".format(pscom.script))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     @staticmethod
     def download(uri, transferdir):
         # fix auth info and download

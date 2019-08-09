@@ -36,7 +36,10 @@ class Singleton(type):
 
 class _constant:
     """Constant members implementation"""
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     class ConstError(TypeError):
         pass
 

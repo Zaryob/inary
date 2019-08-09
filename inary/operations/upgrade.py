@@ -127,8 +127,12 @@ def find_upgrades(packages, replaces,packagedb=None,installdb=None):
 
     return Ap
 
+<<<<<<< HEAD
 
 @util.locked
+=======
+@operations.locked
+>>>>>>> master
 def upgrade(A=None, repo=None):
     """Re-installs packages from the repository, trying to perform
     a minimum or maximum number of upgrades according to options.
@@ -363,6 +367,52 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     order = G_f.sort()
     return G_f, order
 
+<<<<<<< HEAD
+=======
+def upgrade_base(A=None):
+    if A is None:
+        A = set()
+    installdb = inary.db.installdb.InstallDB()
+    componentdb = inary.db.componentdb.ComponentDB()
+    if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
+        if componentdb.has_component('system.base'):
+            systembase = set(componentdb.get_union_component('system.base').packages)
+            extra_installs = [x for x in systembase - set(A) if not installdb.has_package(x)]
+            extra_installs = inary.blacklist.exclude_from(extra_installs, ctx.const.blacklist)
+            if extra_installs:
+                ctx.ui.warning(_("Safety switch forces the installation of "
+                                 "following packages:"))
+                ctx.ui.info(util.format_by_columns(sorted(extra_installs)))
+
+            # Will delete G_F and extra_upgrades
+            G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
+            extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x)]
+            upgrade_order = []
+
+            extra_upgrades = inary.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
+
+            if ctx.get_option('exclude_from'):
+                extra_upgrades = inary.blacklist.exclude_from(extra_upgrades, ctx.get_option('exclude_from'))
+
+            if ctx.get_option('exclude'):
+                extra_upgrades = inary.blacklist.exclude(extra_upgrades, ctx.get_option('exclude'))
+
+            if extra_upgrades:
+                ctx.ui.warning(_("Safety switch forces the upgrade of "
+                                 "following packages:"))
+                ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
+                G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
+
+            #no-need-for-upgrade-order patch
+            #extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
+            #return set(extra_installs + extra_upgrades)
+
+            # return packages that must be added to any installation
+            return set(install_order + upgrade_order)
+        else:
+            ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
+    return set()
+>>>>>>> master
 
 
 def is_upgradable(name):

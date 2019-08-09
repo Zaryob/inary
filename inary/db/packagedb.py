@@ -78,7 +78,11 @@ class PackageDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_packages(doc):
+<<<<<<< HEAD
         pdict = {}
+=======
+        pdict={}
+>>>>>>> master
 
         for x in xmlext.getTagByName(doc, "Package"):
             name = xmlext.getNodeText(x, "Name")

@@ -51,8 +51,12 @@ class RunTimeError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error(value)
 
+<<<<<<< HEAD
 
 def compile(parameters=''):
+=======
+def compile(parameters = ''):
+>>>>>>> master
     """compiling texlive packages"""
 
     # Move sources according to tplobj files
@@ -65,8 +69,12 @@ def compile(parameters=''):
     if buildFormatFiles():
         raise CompileError(_('Building format files failed'))
 
+<<<<<<< HEAD
 
 def install(parameters=''):
+=======
+def install(parameters = ''):
+>>>>>>> master
     """Installing texlive packages"""
 
     # Create symlinks from format to engines
@@ -154,7 +162,11 @@ def installConfigFiles():
 
 def handleConfigFiles():
     """Handling config files"""
+<<<<<<< HEAD
     for root, dirs, files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
+=======
+    for root, dirs,files in os.walk("{}/usr/share/texmf".format(get.installDIR())):
+>>>>>>> master
         if not ("config" in root or "doc" in root):
             for configFile in files:
                 if configFile.endswith(("cfg", "cnf")):

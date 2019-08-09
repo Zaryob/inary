@@ -53,8 +53,13 @@ class NotfoundError(inary.errors.Error):
 
 class AtomicOperation(object):
 
+<<<<<<< HEAD
     def __init__(self, ignore_dep=None):
         # self.package = package
+=======
+    def __init__(self, ignore_dep = None):
+        #self.package = package
+>>>>>>> master
         if ignore_dep is None:
             self.ignore_dep = ctx.config.get_option('ignore_dependency')
         else:
@@ -74,6 +79,7 @@ opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRAD
 
 class Install(AtomicOperation):
     """Install class, provides install routines for inary packages"""
+<<<<<<< HEAD
 
     def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None,installdb=None,filesdb=None):
         if installdb == None:
@@ -103,6 +109,8 @@ class Install(AtomicOperation):
 
         self.operation = INSTALL
         self.store_old_paths = None
+=======
+>>>>>>> master
 
     @staticmethod
     def from_name(name,ignore_dep=None,packagedb=None,installdb=None,filesdb=None):
