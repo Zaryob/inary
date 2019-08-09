@@ -183,8 +183,6 @@ def addNode(node, tagpath, newnode=None, branch=True):
         # had only one tag..
         return addTagPath(node, tags, newnode)
 
-    return node
-
 
 def addText(node, tagpath, text):
     node = addNode(node, tagpath)

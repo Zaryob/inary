@@ -13,6 +13,7 @@
 
 import os
 import gettext
+
 __trans = gettext.translation("inary", fallback=True)
 _ = __trans.gettext
 
@@ -209,7 +210,7 @@ def takeback(operation):
     errors = []
     paths = []
     for pkg in beinstalled:
-        ctx.ui.info(_("\nDownloading %d / %d") % (beinstalled.index(pkg) + 1, len(beinstalled)), color="yellow")
+        ctx.ui.info(_("Downloading %d / %d") % (beinstalled.index(pkg) + 1, len(beinstalled)), color="yellow")
         pkg += ctx.const.package_suffix
         if fetch_remote_file(pkg, errors):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))

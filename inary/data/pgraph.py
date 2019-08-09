@@ -14,7 +14,6 @@
 
 """INARY package relation graph that represents the state of packagedb"""
 
-
 import inary.context as ctx
 import inary.db
 import inary.errors
@@ -23,6 +22,7 @@ import inary.util as util
 import inary.misc.sort as sort
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -57,16 +57,12 @@ class Digraph(object):
 
     def add_vertex(self, u, data=None):
         """add vertex u, optionally with data"""
-        try:
-            assert not u in self.__v
-        except:
-            ctx.ui.debug(_("Package {} not in vertex list.".format(u)))
-
-        self.__v.add(u)
-        self.__adj[u] = set()
-        if data:
-            self.__vdata[u] = data
-            self.__edata[u] = {}
+        if not u in self.__v:
+            self.__v.add(u)
+            self.__adj[u] = set()
+            if data:
+                self.__vdata[u] = data
+                self.__edata[u] = {}
 
     def add_edge(self, u, v, edata=None, udata=None, vdata=None):
         """add edge u -> v"""

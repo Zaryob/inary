@@ -23,10 +23,11 @@ import re
 import stat
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.errors
 import inary.data.specfile as Specfile
 import inary.util as util
 import inary.file
@@ -319,7 +320,7 @@ class Builder:
         stateFile = util.join_path(self.pkg_work_dir(), "inaryBuildState")
         if not os.path.exists(stateFile):  # no state
             return None
-        return open(stateFile, "r").read()
+        return open(stateFile).read()
 
     def build(self):
         """Build the package in one shot."""
@@ -666,7 +667,7 @@ class Builder:
 
         try:
             localSymbols = globalSymbols = {}
-            exec (compiled_script, localSymbols, globalSymbols)
+            exec(compiled_script, localSymbols, globalSymbols)
         except Exception as e:
             raise (e)
 

@@ -14,6 +14,7 @@
 from . import fetcher
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -24,13 +25,13 @@ import inary.blacklist
 import inary.config
 import inary.context as ctx
 
-#DataFile Libraries
+# DataFile Libraries
 import inary.data
 import inary.data.index
 import inary.data.metadata
 import inary.data.pgraph
 
-#DataBase Libraries
+# DataBase Libraries
 import inary.db.componentdb
 import inary.db.packagedb
 import inary.db.repodb
@@ -44,7 +45,7 @@ import inary.db.groupdb
 import inary.errors
 import inary.file
 
-#Operation Libraries
+# Operation Libraries
 import inary.operations.build
 import inary.operations.check
 import inary.operations.emerge
@@ -57,9 +58,9 @@ import inary.operations.repository
 import inary.operations.search
 import inary.operations.upgrade
 
-
 import inary.uri
 import inary.util
+
 
 def set_scom(enable):
     """
@@ -69,6 +70,7 @@ def set_scom(enable):
     """
     ctx.scom = enable
 
+
 def set_scom_updated(updated):
     """
     Set scom package update status
@@ -76,12 +78,14 @@ def set_scom_updated(updated):
     """
     ctx.scom_updated = updated
 
+
 def set_userinterface(ui):
     """
     Set the user interface where the status information will be send
     @param ui: User interface
     """
     ctx.ui = ui
+
 
 def set_io_streams(stdout=None, stderr=None):
     """
@@ -95,6 +99,7 @@ def set_io_streams(stdout=None, stderr=None):
     if stderr:
         ctx.stderr = stderr
 
+
 def set_dbus_sockname(sockname):
     """
     Set dbus socket file
@@ -103,6 +108,7 @@ def set_dbus_sockname(sockname):
     """
     ctx.dbus_sockname = sockname
 
+
 def set_dbus_timeout(timeout):
     """
     Set dbus timeout
@@ -110,6 +116,7 @@ def set_dbus_timeout(timeout):
     @param timeout: Timeout in seconds
     """
     ctx.dbus_timeout = timeout
+
 
 def set_signal_handling(enable):
     """
@@ -122,6 +129,7 @@ def set_signal_handling(enable):
         ctx.sig = inary.signalhandler.SignalHandler()
     else:
         ctx.sig = None
+
 
 def set_options(options):
     """
@@ -139,30 +147,11 @@ def set_options(options):
     """
     ctx.config.set_options(options)
 
-# FIXME: rebuild_db is only here for filesdb and it really is ugly. we should not need any rebuild.
-@inary.util.locked
-def rebuild_db():
-
-    # save parameters and shutdown inary
-    options = ctx.config.options
-    ui = ctx.ui
-    scom = ctx.scom
-    from inary import _cleanup
-    _cleanup()
-
-    ctx.filesdb.close()
-    ctx.filesdb.destroy()
-    ctx.filesdb = inary.db.filesdb.FilesDB()
-    ctx.filesdb.update()
-
-    # reinitialize everything
-    ctx.ui = ui
-    ctx.config.set_options(options)
-    ctx.scom = scom
 
 # The following are INARY operations which constitute the INARY API
 # Within functions
 from inary.analyzer.conflict import calculate_conflicts
+from inary.db.filesdb import rebuild_db
 from inary.data.index import index
 from inary.data.pgraph import package_graph
 from inary.fetcher import fetch

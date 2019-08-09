@@ -15,10 +15,11 @@
 import optparse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
+import inary.db
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx

@@ -15,6 +15,7 @@
 import sys
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -133,7 +134,7 @@ def upgrade(A=None, repo=None):
     a minimum or maximum number of upgrades according to options.
 
     Upgrades the given packages, if no package given upgrades all the packages
-    @param packages (A): list of package names -> list_of_strings
+    @param A: list of package names -> list_of_strings
     @param repo: name of the repository that only the packages from that repo going to be upgraded
     """
     if A is None:
@@ -211,7 +212,7 @@ def upgrade(A=None, repo=None):
 
     paths = []
     for x in order:
-        ctx.ui.info(_("\nDownloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 

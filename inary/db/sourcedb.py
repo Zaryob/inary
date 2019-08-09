@@ -22,6 +22,7 @@ import inary.db.lazydb as lazydb
 from inary.sxml import autoxml, xmlext
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -30,6 +31,7 @@ class SourceDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
+        # self.init()
 
     def init(self):
         self.__source_nodes = {}
@@ -144,9 +146,14 @@ class SourceDB(lazydb.LazyDB):
             node = xmlext.parseString(dep)
             dependency = inary.analyzer.dependency.Dependency()
             dependency.package = xmlext.getNodeText(node)
+
             if xmlext.getAttributeList(node):
-                attr = xmlext.getAttributeList(node)[0]
-                dependency.__dict__[attr] = xmlext.getNodeAttribute(node, attr)
-                rev_deps.append((pkg, dependency))
+                if xmlext.getNodeAttribute(node, "version"):
+                    dependency.__dict__["version"] = xmlext.getNodeAttribute(node, "version")
+                elif xmlext.getNodeAttribute(node, "release"):
+                    dependency.__dict__["release"] = xmlext.getNodeAttribute(node, "release")
+                else:
+                    pass #FIXME: ugly
+            rev_deps.append((pkg, dependency))
 
         return rev_deps

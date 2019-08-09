@@ -18,6 +18,7 @@ import shelve
 import inary.context as ctx
 import inary.db
 import inary.db.lazydb as lazydb
+import inary.util
 
 import gettext
 __trans = gettext.translation('inary', fallback=True)
@@ -119,3 +120,22 @@ class FilesDB(lazydb.LazyDB):
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
         os.remove(files_db)
         self.__check_filesdb()
+
+@inary.util.locked
+def rebuild_db():
+    # save parameters and shutdown inary
+    options = ctx.config.options
+    ui = ctx.ui
+    scom = ctx.scom
+    from inary import _cleanup
+    _cleanup()
+
+    ctx.filesdb.close()
+    ctx.filesdb.destroy()
+    ctx.filesdb = inary.db.filesdb.FilesDB()
+    ctx.filesdb.update()
+
+    # reinitialize everything
+    ctx.ui = ui
+    ctx.config.set_options(options)
+    ctx.scom = scom

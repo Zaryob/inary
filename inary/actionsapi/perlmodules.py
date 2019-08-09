@@ -15,6 +15,7 @@
 import os
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -80,7 +81,7 @@ def install(parameters='install'):
         if system('make {}'.format(parameters)):
             raise InstallError(_('Make failed.'))
     else:
-        if system('perl{} Build install'.get.curPERL()):
+        if system('perl{} Build install'.format(get.curPERL())):
             raise MakeError(_('perl install failed.'))
 
     removePacklist()

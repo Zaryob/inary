@@ -17,6 +17,7 @@ import sys
 import multiprocessing
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -97,7 +98,7 @@ def installDIR():
 def lsbINFO():
     """Returns a dictionary filled through /etc/lsb-release."""
     return dict([(l.split("=")[0], l.split("=")[1].strip("'\"")) \
-                 for l in open("/etc/lsb-release", "r").read().strip().split("\n") if "=" in l])
+                 for l in open("/etc/lsb-release").read().strip().split("\n") if "=" in l])
 
 
 def kernelVERSION():
@@ -157,12 +158,12 @@ def LDFLAGS():
 def makeJOBS():
     # Note: "auto" only works when /sys is mounted.
     if env.jobs == "auto":
-        procs = 4
         try:
             procs = multiprocessing.cpu_count()
             env.jobs = procs
         except Exception as e:
             ctx.ui.warning("Unable to retrieve CPU count: %s" % e)
+            env.jobs = 4
     return env.jobs
 
 

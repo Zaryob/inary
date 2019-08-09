@@ -36,7 +36,7 @@ MIMEFILE_DIR = "usr/share/mime/packages"
 
 class Build(build):
     def run(self):
-        #Preparing configure file
+        # Preparing configure file
         shutil.copy("config/inary.conf-{}".format(os.uname().machine), "config/inary.conf")
 
         build.run(self)
@@ -46,6 +46,7 @@ class Build(build):
         for in_file in IN_FILES:
             name, ext = os.path.splitext(in_file)
             self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
+
 
 class BuildPo(build):
     def run(self):
@@ -65,7 +66,7 @@ class BuildPo(build):
         for filename in IN_FILES:
             os.system("intltool-extract --type=gettext/xml {}".format(filename))
 
-        for root,dirs,filenames in os.walk("inary"):
+        for root, dirs, filenames in os.walk("inary"):
             for filename in filenames:
                 if filename.endswith(".py"):
                     filelist.append(os.path.join(root, filename))
@@ -98,11 +99,12 @@ class BuildPo(build):
             except OSError:
                 pass
 
+
 class Install(install):
     def run(self):
         install.run(self)
         self.installi18n()
-        self.installdoc()
+        # self.installdoc()
         self.generateConfigFile()
 
     def installi18n(self):
@@ -120,7 +122,7 @@ class Install(install):
             shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
     def installdoc(self):
-        self.root ='/'
+        self.root = '/'
         destpath = os.path.join(self.root, "usr/share/doc/inary")
         if not os.path.exists(destpath):
             os.makedirs(destpath)
@@ -137,7 +139,7 @@ class Install(install):
             os.makedirs(destpath)
 
         confFile = os.path.join(destpath, "inary.conf")
-        if os.path.isfile(confFile): # Don't overwrite existing inary.conf
+        if os.path.isfile(confFile):  # Don't overwrite existing inary.conf
             return
 
         inaryconf = open(confFile, "w")
@@ -160,10 +162,13 @@ class Install(install):
                     inaryconf.write("{0[0]} = {0[1]}\n".format(member))
             inaryconf.write('\n')
 
+
 class Test(Command):
     user_options = []
+
     def initialize_options(self):
         pass
+
     def finalize_options(self):
         pass
 
@@ -177,23 +182,22 @@ class Test(Command):
 
 
 datas = [
-    ("/etc/inary/" ,["config/inary.conf","config/mirrors.conf", "config/sandbox.conf"]),
+    ("/etc/inary/", ["config/inary.conf", "config/mirrors.conf", "config/sandbox.conf"]),
     ("/usr/share/mime/packages/", ["build/inary.xml"]),
     ("/usr/lib/tmpfiles.d/", ["config/inary.conf-armv7h"])
 ]
 
-
 setup(name="inary",
-    version= inary.__version__,
-    description="Inary (Special Package Manager)",
-    long_description="Inary is the package management system of Sulin Linux.",
-    license="GNU GPL2",
-    author="Zaryob",
-    author_email="zaryob.dev@gmail.com",
-    url="https://github.com/Zaryob/inary",
-    #package_dir = {'': ''},
+      version=inary.__version__,
+      description="Inary (Special Package Manager)",
+      long_description="Inary is the package management system of Sulin Linux.",
+      license="GNU GPL2",
+      author="Zaryob",
+      author_email="zaryob.dev@gmail.com",
+      url="https://github.com/Zaryob/inary",
+      # package_dir = {'': ''},
 
-    packages = ['inary',
+      packages=['inary',
                 'inary.actionsapi',
                 'inary.analyzer',
                 'inary.cli',
@@ -202,20 +206,20 @@ setup(name="inary",
                 'inary.db',
                 'inary.libraries',
                 'inary.operations',
-                'inary.sxml',
-                'inary.scenarioapi'],
-    cmdclass = {'build' : Build,
-                'build_po' : BuildPo,
-                'install' : Install,
-                'test' : Test},
-    data_files =datas
-    )
+                'inary.sxml'],
+      cmdclass={'build': Build,
+                'build_po': BuildPo,
+                'install': Install,
+                'test': Test},
+      data_files=datas
+      )
 
 # the below stuff is really nice but we already have a version
 # we can use this stuff for svn snapshots in a separate
 # script, or with a parameter I don't know -- exa
 
 INARY_VERSION = inary.__version__
+
 
 def getRevision():
     import os
@@ -230,6 +234,7 @@ def getRevision():
 
     # doesn't working in a Subversion directory
     return None
+
 
 def getVersion():
     rev = getRevision()

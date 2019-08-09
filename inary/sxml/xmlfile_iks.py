@@ -66,7 +66,7 @@ class XmlFile(object):
             self.doc = iks.parseString(str(file))
             return self.doc
         except Exception as e:
-            raise Error(_("File '{}' has invalid XML: {}").format(file,e))
+            raise Error(_("File '{}' has invalid XML: {}").format(file, e))
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal=False):
@@ -84,7 +84,7 @@ class XmlFile(object):
             preprocess.preprocess(infile=localpath, outfile=st, defines=inary.config.Config().values.directives)
             st.seek(0)
         except:
-            st = open(localpath, 'r')
+            st = open(localpath)
 
         try:
             self.doc = iks.parse(localpath)

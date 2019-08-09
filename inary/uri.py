@@ -15,13 +15,14 @@
 """Simplifies working with URLs, purl module provides common URL
 parsing and processing"""
 
-import gettext
 import os.path
 import urllib.parse
 
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class URI(object):
     """URI class provides a URL parser and simplifies working with
