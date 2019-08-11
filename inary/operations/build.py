@@ -1052,9 +1052,10 @@ class Builder:
 
     def file_actions(self):
         install_dir = self.pkg_install_dir()
-
-        import inary.analyzer.magic as magic
-
+        try:
+            import magic
+        except:
+            raise Error(_("\'magic\' library of python3 not found. Please check python3-filemagic package"))
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = util.join_path(root, fn)
