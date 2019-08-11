@@ -52,37 +52,37 @@ class Build(command.Command, metaclass=command.autocommand):
                          action="store_true",
                          default=False,
                          help=_("Run inary build operation without printing "
-                                "extra debug information"))
+                                "extra debug information."))
 
         group.add_option("--ignore-dependency",
                          action="store_true",
                          default=False,
                          help=_("Do not take dependency information into "
-                                "account"))
+                                "account."))
 
         group.add_option("-O", "--output-dir",
                          action="store",
                          default=None,
-                         help=_("Output directory for produced packages"))
+                         help=_("Output directory for produced packages."))
 
         group.add_option("--ignore-action-errors",
                          action="store_true", default=False,
-                         help=_("Bypass errors from ActionsAPI"))
+                         help=_("Bypass errors from ActionsAPI."))
 
         group.add_option("--ignore-safety",
                          action="store_true",
                          default=False,
-                         help=_("Bypass safety switch"))
+                         help=_("Bypass safety switch."))
 
         group.add_option("--ignore-check",
                          action="store_true",
                          default=False,
-                         help=_("Bypass testing step"))
+                         help=_("Bypass testing step."))
 
         group.add_option("--create-static",
                          action="store_true",
                          default=False,
-                         help=_("Create a static package with ar files"))
+                         help=_("Create a static package with ar files."))
 
         group.add_option("-F", "--package-format",
                          action="store",
@@ -94,13 +94,13 @@ class Build(command.Command, metaclass=command.autocommand):
                          action="store_true",
                          default=False,
                          help=_("Use quilt patch management system "
-                                "instead of GNU patch"))
+                                "instead of GNU patch."))
 
         group.add_option("--ignore-sandbox",
                          action="store_true",
                          default=False,
                          help=_("Do not constrain build process inside "
-                                "the build folder"))
+                                "the build folder."))
 
         self.parser.add_option_group(group)
         group = optparse.OptionGroup(self.parser, _("build steps"))
@@ -110,7 +110,7 @@ class Build(command.Command, metaclass=command.autocommand):
                          action="store_const",
                          const="fetch",
                          help=_("Break build after fetching the source "
-                                "archive"))
+                                "archive."))
 
         group.add_option("--unpack",
                          dest="until",
@@ -118,7 +118,7 @@ class Build(command.Command, metaclass=command.autocommand):
                          const="unpack",
                          help=_("Break build after unpacking the source "
                                 "archive, checking sha1sum and applying "
-                                "patches"))
+                                "patches."))
 
         group.add_option("--setup",
                          dest="until",
@@ -130,25 +130,25 @@ class Build(command.Command, metaclass=command.autocommand):
                          dest="until",
                          action="store_const",
                          const="build",
-                         help=_("Break build after running compile step"))
+                         help=_("Break build after running compile step."))
 
         group.add_option("--check",
                          dest="until",
                          action="store_const",
                          const="check",
-                         help=_("Break build after running check step"))
+                         help=_("Break build after running check step."))
 
         group.add_option("--install",
                          dest="until",
                          action="store_const",
                          const="install",
-                         help=_("Break build after running install step"))
+                         help=_("Break build after running install step."))
 
         group.add_option("--package",
                          dest="until",
                          action="store_const",
                          const="package",
-                         help=_("Create INARY package"))
+                         help=_("Create INARY package."))
 
         self.parser.add_option_group(group)
 

@@ -158,7 +158,7 @@ class TarFile(tarfile.TarFile):
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
         except IOError:
-            raise tarfile.ReadError(_(" \"{}\" is not a lzma file").format(name))
+            raise tarfile.ReadError(_(" \"{}\" is not a lzma file.").format(name))
         t._extfileobj = False
         return t
 
@@ -897,7 +897,7 @@ class SourceArchive:
         url = self.url.uri
 
         if not os.access(url[7:], os.F_OK):
-            raise SourceArchiveError(_('No such file or no permission to read'))
+            raise SourceArchiveError(_('No such file or no permission to read.'))
         shutil.copy(url[7:], self.archiveFile)
 
     def fetch_from_mirror(self):

@@ -53,17 +53,17 @@ expanded to package names.
 
         super(Upgrade, self).options(group)
         group.add_option("--security-only", action="store_true",
-                         default=False, help=_("Security related package upgrades only"))
+                         default=False, help=_("Security related package upgrades only."))
         group.add_option("-b", "--bypass-update-repo", action="store_true",
-                         default=False, help=_("Do not update repositories"))
+                         default=False, help=_("Do not update repositories."))
         group.add_option("--ignore-file-conflicts", action="store_true",
-                         default=False, help=_("Ignore file conflicts"))
+                         default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
-                         default=False, help=_("Ignore package conflicts"))
+                         default=False, help=_("Ignore package conflicts."))
         group.add_option("-c", "--component", action="append",
-                         default=None, help=_("Upgrade component's and recursive components' packages"))
+                         default=None, help=_("Upgrade component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",
-                         type="string", default=None, help=_('Name of the to be upgraded packages\' repository'))
+                         type="string", default=None, help=_('Name of the to be upgraded packages\' repository.'))
         group.add_option("-f", "--fetch-only", action="store_true",
                          default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
@@ -75,7 +75,7 @@ expanded to package names.
                                 "and components whose basenames match "
                                 "any pattern contained in file."))
         group.add_option("-s", "--compare-sha1sum", action="store_true",
-                         default=False, help=_("compare sha1sum repo and installed packages"))
+                         default=False, help=_("compare sha1sum repo and installed packages."))
 
         self.parser.add_option_group(group)
 

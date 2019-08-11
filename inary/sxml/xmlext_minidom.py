@@ -59,7 +59,7 @@ def parseString(fileString):
         dom = minidom.parseString(fileString)
         return dom.documentElement
     except ExpatError as inst:
-        raise XMLError(_("FileString is an invalid XML: {}\n\nFileScript: {}\n").format(
+        raise XMLError(_("FileString is an invalid XML: {}\n\nFileString: {}\n").format(
             str(inst), fileString))
 
 
