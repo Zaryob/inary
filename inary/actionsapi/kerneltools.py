@@ -36,7 +36,7 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[KernelTools]" + value)
 
 
 # Internal helpers
@@ -124,7 +124,7 @@ def getKernelVersion(flavour=None):
         return open(kverfile).read().strip()
     else:
         # Fail
-        raise ConfigureError(_("Can't find kernel version information file {}.").format(kverfile))
+        raise ConfigureError(_("Can't find kernel version information file \"{}\".").format(kverfile))
 
 
 def configure():

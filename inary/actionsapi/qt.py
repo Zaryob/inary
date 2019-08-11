@@ -57,17 +57,17 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[QTTools]: " + value)
 
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
-        raise ConfigureError(_("Project file '{}' not found.").format(projectfile))
+        raise ConfigureError(_("Project file \"{}\" not found.").format(projectfile))
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
         raise ConfigureError(
-            _("It seems there are more than one .pro file, you must specify one. (Possible .pro files: {})").format(
+            _("It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")").format(
                 ", ".join(profiles)))
 
     shelltools.system(

@@ -35,7 +35,7 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[CMakeTools]: " + value)
         if can_access_file('config.log'):
             ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
@@ -44,21 +44,21 @@ class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[CMakeTools]: " + value)
 
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[CMakeTools]: " + value)
 
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[CMakeTools]: " + value)
 
 
 def configure(parameters='', installPrefix='/{}'.format(get.defaultprefixDIR()), sourceDir='.'):
@@ -80,7 +80,7 @@ def configure(parameters='', installPrefix='/{}'.format(get.defaultprefixDIR()),
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found for cmake.'))
+        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
 
 
 def make(parameters=''):
@@ -110,10 +110,13 @@ def install(parameters='', argument='install'):
                              parameters,
                              argument)
 
-    if system(args):
-        raise InstallError(_('Install failed.'))
+    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
+        if system('make {0} {1} '.format(parameters, argument)):
+            raise InstallError(_('Install failed.'))
+        else:
+            fixInfoDir()
     else:
-        fixInfoDir()
+        raise InstallError(_('No Makefile found.'))
 
 
 def rawInstall(parameters='', argument='install'):

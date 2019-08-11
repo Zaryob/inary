@@ -50,7 +50,7 @@ def makedirs(destinationDirectory):
         if not os.access(destinationDirectory, os.F_OK):
             os.makedirs(destinationDirectory)
     except OSError:
-        error(_('ActionsAPI [makedirs]: Cannot create directory {}').format(destinationDirectory))
+        error(_('ActionsAPI [makedirs]: Cannot create directory \"{}\"').format(destinationDirectory))
 
 
 def echo(destionationFile, content):
@@ -59,14 +59,14 @@ def echo(destionationFile, content):
         f.write('{}\n'.format(content))
         f.close()
     except IOError:
-        error(_('ActionsAPI [echo]: Can\'t append to file {}.').format(destionationFile))
+        error(_('ActionsAPI [echo]: Can\'t append to file \"{}\"').format(destionationFile))
 
 
 def chmod(filePath, mode=0o755):
     """change the mode of filePath to the mode"""
     filePathGlob = glob.glob(filePath)
     if len(filePathGlob) == 0:
-        error(_("ActionsAPI [chmod]: No file matched pattern \"{}\".").format(filePath))
+        error(_("ActionsAPI [chmod]: No file matched pattern \"{}\"").format(filePath))
 
     for fileName in filePathGlob:
         if can_access_file(fileName):
@@ -75,7 +75,7 @@ def chmod(filePath, mode=0o755):
             except OSError:
                 ctx.ui.error(_('ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})').format(fileName, mode))
         else:
-            ctx.ui.error(_('ActionsAPI [chmod]: File {} doesn\'t exists.').format(fileName))
+            ctx.ui.error(_('ActionsAPI [chmod]: File \"{}\" doesn\'t exists.').format(fileName))
 
 
 def chown(filePath, uid='root', gid='root'):
@@ -85,9 +85,9 @@ def chown(filePath, uid='root', gid='root'):
             os.chown(filePath, pwd.getpwnam(uid)[2], grp.getgrnam(gid)[2])
         except OSError:
             ctx.ui.error(
-                _('ActionsAPI [chown]: Operation not permitted: {0} (uid: {1}, gid: {2})').format(filePath, uid, gid))
+                _('ActionsAPI [chown]: Permission denied: {0} (uid: {1}, gid: {2})').format(filePath, uid, gid))
     else:
-        ctx.ui.error(_('ActionsAPI [chown]: File {} doesn\'t exists.').format(filePath))
+        ctx.ui.error(_('ActionsAPI [chown]: File \"{}\" doesn\'t exists.').format(filePath))
 
 
 def sym(source, destination):
@@ -95,7 +95,7 @@ def sym(source, destination):
     try:
         os.symlink(source, destination)
     except OSError:
-        ctx.ui.error(_('ActionsAPI [sym]: Permission denied: {0} to {1}').format(source, destination))
+        ctx.ui.error(_('ActionsAPI [sym]: Permission denied: \"{0}\" to \"{1}\"').format(source, destination))
 
 
 def unlink(pattern):
@@ -110,14 +110,14 @@ def unlink(pattern):
             try:
                 os.unlink(filePath)
             except OSError:
-                ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: {}.').format(filePath))
+                ctx.ui.error(_('ActionsAPI [unlink]: Permission denied: \"{}\"').format(filePath))
         elif isDirectory(filePath):
             ctx.ui.warning(_(
-                'ActionsAPI [unlink]: {} is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(
+                'ActionsAPI [unlink]: \"{}\" is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(
                 filePath))
 
         else:
-            ctx.ui.error(_('ActionsAPI [unlink]: File {} doesn\'t exists.').format(filePath))
+            ctx.ui.error(_('ActionsAPI [unlink]: File \"{}\" doesn\'t exists.').format(filePath))
 
 
 def unlinkDir(sourceDirectory):
@@ -126,11 +126,11 @@ def unlinkDir(sourceDirectory):
         try:
             shutil.rmtree(sourceDirectory)
         except OSError:
-            error(_('ActionsAPI [unlinkDir]: Operation not permitted: {}').format(sourceDirectory))
+            error(_('ActionsAPI [unlinkDir]: Operation not permitted: \"{}\"').format(sourceDirectory))
     elif isFile(sourceDirectory):
         pass
     else:
-        error(_('ActionsAPI [unlinkDir]: Directory {} doesn\'t exists.').format(sourceDirectory))
+        error(_('ActionsAPI [unlinkDir]: Directory \"{}\" doesn\'t exists.').format(sourceDirectory))
 
 
 def move(source, destination):
@@ -144,9 +144,9 @@ def move(source, destination):
             try:
                 shutil.move(filePath, destination)
             except OSError:
-                error(_('ActionsAPI [move]: Permission denied: {0} to {1}').format(filePath, destination))
+                error(_('ActionsAPI [move]: Permission denied: \"{0}\" to \"{1}\"').format(filePath, destination))
         else:
-            error(_('ActionsAPI [move]: File {} doesn\'t exists.').format(filePath))
+            error(_('ActionsAPI [move]: File \"{}\" doesn\'t exists.').format(filePath))
 
 
 # FIXME: instead of passing a sym parameter, split copy and copytree into 4 different function
@@ -161,7 +161,7 @@ def copy(source, destination, sym=True):
             try:
                 shutil.copy(filePath, destination)
             except IOError:
-                error(_('ActionsAPI [copy]: Permission denied: {0} to {1}').format(filePath, destination))
+                error(_('ActionsAPI [copy]: Permission denied: \"{0}\" to \"{1}\"').format(filePath, destination))
         elif isLink(filePath) and sym:
             if isDirectory(destination):
                 os.symlink(os.readlink(filePath), join_path(destination, os.path.basename(filePath)))
@@ -177,7 +177,7 @@ def copy(source, destination, sym=True):
         elif isDirectory(filePath):
             copytree(filePath, destination, sym)
         else:
-            error(_('ActionsAPI [copy]: File {} does not exist.').format(filePath))
+            error(_('ActionsAPI [copy]: File \"{}\" does not exist.').format(filePath))
 
 
 def copytree(source, destination, sym=True):
@@ -193,9 +193,9 @@ def copytree(source, destination, sym=True):
         try:
             shutil.copytree(source, destination, sym)
         except OSError as e:
-            error(_('ActionsAPI [copytree] {0} to {1}: {2}').format(source, destination, e))
+            error(_('ActionsAPI [copytree] \"{0}\" to \"{1}\": {2}').format(source, destination, e))
     else:
-        error(_('ActionsAPI [copytree]: Directory {} doesn\'t exists.').format(source))
+        error(_('ActionsAPI [copytree]: Directory \"{}\" doesn\'t exists.').format(source))
 
 
 def touch(filePath):
@@ -213,7 +213,7 @@ def touch(filePath):
             f = open(filePath, 'w')
             f.close()
         except IOError:
-            error(_('ActionsAPI [touch]: Permission denied: {}').format(filePath))
+            error(_('ActionsAPI [touch]: Permission denied: \"{}\"').format(filePath))
 
 
 def cd(directoryName=''):
@@ -280,6 +280,6 @@ def system(command):
 
     # if return value is different than 0, it means error, raise exception
     if retValue != 0:
-        error(_("ActionsAPI [system]: Command \"{0}\" failed, return value was {1}.").format(command, retValue))
+        error(_("ActionsAPI [system]: Command \'{0}\' failed, return value was {1}.").format(command, retValue))
 
     return retValue

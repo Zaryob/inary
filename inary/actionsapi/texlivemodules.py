@@ -35,21 +35,21 @@ class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[TexLife]: " + value)
 
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[TexLife]: " + value)
 
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[TexLife]: " + value)
 
 
 def compile(parameters=''):
@@ -98,14 +98,14 @@ def createSymlinksFormat2Engines():
             if not line.startswith("#"):
                 symbin = line.split(None)
                 if "cont-" in symbin[0] or "metafun" in symbin[0] or "mptopdf" in symbin[0]:
-                    ctx.ui.info(_('Symlink {} skipped (special case)').format(symbin[0]))
+                    ctx.ui.info(_('Symlink \"{}\" skipped (special case)').format(symbin[0]))
                 elif "mf" in symbin[0]:
-                    ctx.ui.info(_('Symlink {0[0]} -> {0[1]} skipped (texlive-core takes care of it.').format(symbin))
+                    ctx.ui.info(_('Symlink \"{0[0]}\" -> \"{0[1]}\" skipped (texlive-core takes care of it.').format(symbin))
                 else:
                     if symbin[0] == symbin[1]:
-                        ctx.ui.info(_('Symlink {0[0]} -> {0[1]} skipped.').format(symbin))
+                        ctx.ui.info(_('Symlink \"{0[0]}\" -> \"{0[1]}\" skipped.').format(symbin))
                     elif can_access_file("{0}/usr/bin/{1}".format(get.installDIR(), symbin[0])):
-                        ctx.ui.info(_('Symlink {} skipped (file exists.)').format(symbin[0]))
+                        ctx.ui.info(_('Symlink \"{}\" skipped (file exists.)').format(symbin[0]))
                     else:
                         ctx.ui.info(_('Making symlink from {0[0]} to {0[1]}').format(symbin))
                         dodir("/usr/bin")
@@ -160,9 +160,9 @@ def handleConfigFiles():
                 if configFile.endswith(("cfg", "cnf")):
                     dirname = root.split("/")[-1]
                     if not os.path.isdir("{0}/etc/texmf/{1}.d".format(get.installDIR(), dirname)):
-                        ctx.ui.info(_('Creating /etc/texmf/{}.d').format(dirname))
+                        ctx.ui.info(_('Creating \"/etc/texmf/{}.d\"').format(dirname))
                         dodir("/etc/texmf/{}.d".format(dirname))
-                    ctx.ui.info(_('Moving (and symlinking) /usr/share/texmf/{0} to /etc/texmf/{1}.d').format(configFile,
+                    ctx.ui.info(_('Moving (and symlinking) \"/usr/share/texmf/{0}\" to \"/etc/texmf/{1}.d\"').format(configFile,
                                                                                                              dirname))
                     domove("/usr/share/texmf/{0}/{1}".format(dirname, configFile), "/etc/texmf/{}.d".format(dirname))
                     dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile),

@@ -28,8 +28,7 @@ class PkgconfigError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
-
+        ctx.ui.error("[pkgconfig]: " + value)
 
 def getVariableForLibrary(library, variable):
     # Returns a specific variable provided in the library .pc file

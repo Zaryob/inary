@@ -34,28 +34,28 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PythonTools]: " + value)
 
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PythonTools]: " + value)
 
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PythonTools]: " + value)
 
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PythonTools]: " + value)
 
 
 def configure(parameters='', pyVer=''):
@@ -88,7 +88,7 @@ def install(parameters='', pyVer=''):
 def run(parameters='', pyVer=''):
     """executes parameters with python"""
     if system('python{0} {1}'.format(pyVer, parameters)):
-        raise RunTimeError(_('Running {} failed.').format(parameters))
+        raise RunTimeError(_('Running \"{}\" failed.').format(parameters))
 
 
 def fixCompiledPy(lookInto='/usr/lib/{}/'.format(get.curPYTHON())):

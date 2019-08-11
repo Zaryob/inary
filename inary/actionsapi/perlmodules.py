@@ -36,21 +36,21 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PerlTools]: " + value)
 
 
 class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PerlTools]: " + value)
 
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[PerlTools]: " + value)
 
 
 def configure(parameters=''):
@@ -59,10 +59,13 @@ def configure(parameters=''):
     if can_access_file('Build.PL'):
         if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(get.curPERL(), get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
-    else:
+    elif can_access_file('Build.PL'):
         if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters,
                                                                                               get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
+    else:
+            raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("Build.PL/Makefile.PL")))
+
 
 
 def make(parameters=''):
@@ -72,17 +75,17 @@ def make(parameters=''):
             raise MakeError(_('Make failed.'))
     else:
         if system('perl{0} Build {1}'.format(get.curPERL(), parameters)):
-            raise MakeError(_('perl build failed.'))
+            raise MakeError(_('\'perl build\' failed.'))
 
 
 def install(parameters='install'):
     """install source with given parameters."""
     if can_access_file('Makefile'):
         if system('make {}'.format(parameters)):
-            raise InstallError(_('Make failed.'))
+            raise InstallError(_('Install failed.'))
     else:
         if system('perl{} Build install'.format(get.curPERL())):
-            raise MakeError(_('perl install failed.'))
+            raise MakeError(_('\'perl install\' failed.'))
 
     removePacklist()
     removePodfiles()

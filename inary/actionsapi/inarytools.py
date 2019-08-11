@@ -42,14 +42,14 @@ class FileError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[InaryTools]: " + value)
 
 
 class ArgumentError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[InaryTools]: " + value)
 
 
 # Tool functions
@@ -200,7 +200,7 @@ def doman(*sourceFiles):
                 pageName, pageDirectory = source[:source.rindex('.')], \
                                           source[source.rindex('.') + 1:]
             except ValueError:
-                error(_('ActionsAPI [doman]: Wrong man page file: {}').format(source))
+                error(_('ActionsAPI [doman]: Wrong man page file: \"{}\"').format(source))
 
             manPDIR = join_path(manDIR, '/man{}'.format(pageDirectory))
             makedirs(manPDIR)
@@ -249,7 +249,7 @@ def rename(sourceFile, destinationFile):
     try:
         os.rename(join_path(get.installDIR(), sourceFile), join_path(get.installDIR(), baseDir, destinationFile))
     except OSError as e:
-        error(_('ActionsAPI [rename]: {0}: {1}').format(e, sourceFile))
+        error(_('ActionsAPI [rename]: \"{0}\": \"{1}\"').format(e, sourceFile))
 
 
 def dosed(sources, findPattern, replacePattern='', filePattern='', deleteLine=False, level=-1):
@@ -287,7 +287,7 @@ def dosed(sources, findPattern, replacePattern='', filePattern='', deleteLine=Fa
 
     # if there is no match, raise exception
     if len(sourceFiles) == 0:
-        raise FileError(_('No such file matching pattern: "{}". \'dosed\' operation failed.').format(
+        raise FileError(_('No such file matching pattern: \"{}\". \'dosed\' operation failed.').format(
             filePattern if filePattern else sources))
 
     for sourceFile in sourceFiles:
@@ -302,12 +302,12 @@ def dosed(sources, findPattern, replacePattern='', filePattern='', deleteLine=Fa
                 # By default, filecmp.cmp() compares two files by looking file sizes.
                 # shallow=False tells cmp() to look file content.
                 if filecmp.cmp(sourceFile, backupFile, shallow=False):
-                    ctx.ui.warning(_('dosed method has not changed file \'{}\'.').format(sourceFile))
+                    ctx.ui.warning(_('dosed method has not changed file \"{}\".').format(sourceFile))
                 else:
-                    ctx.ui.info(_("{} has been changed by dosed method.").format(sourceFile), verbose=True)
+                    ctx.ui.info(_("\"{}\" has been changed by dosed method.").format(sourceFile), verbose=True)
                 os.unlink(backupFile)
         else:
-            raise FileError(_('File does not exist or permission denied: {}').format(sourceFile))
+            raise FileError(_('File does not exist or permission denied: \"{}\"').format(sourceFile))
 
 
 def dosbin(sourceFile, destinationDirectory='/usr/sbin'):
@@ -326,7 +326,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, join_path(get.installDIR(), destinationFile))
     except OSError:
-        error(_('ActionsAPI [dosym]: File already exists: {}').format(destinationFile))
+        error(_('ActionsAPI [dosym]: File already exists: \"{}\"').format(destinationFile))
 
 
 def insinto(destinationDirectory, sourceFile, destinationFile='', sym=True):
