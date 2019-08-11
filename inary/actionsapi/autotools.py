@@ -39,7 +39,7 @@ class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[AutoTools]: " + value)
         if can_access_file('config.log'):
             ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
@@ -48,28 +48,28 @@ class MakeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[AutoTools]: " + value)
 
 
 class CompileError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[AutoTools]: " + value)
 
 
 class InstallError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[AutoTools]: " + value)
 
 
 class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[AutoTools]: " + value)
 
 
 def configure(parameters=''):
@@ -96,7 +96,7 @@ def configure(parameters=''):
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found.'))
+        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("configure")))
 
 
 def rawConfigure(parameters=''):
@@ -107,7 +107,7 @@ def rawConfigure(parameters=''):
         if system('./configure {}'.format(parameters)):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found.'))
+        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("configure")))
 
 
 def compile(parameters=''):
@@ -179,28 +179,28 @@ def rawInstall(parameters='', argument='install'):
 def aclocal(parameters=''):
     """generates an aclocal.m4 based on the contents of configure.in."""
     if system('aclocal {}'.format(parameters)):
-        raise RunTimeError(_('Running aclocal failed.'))
+        raise RunTimeError(_('Running \'aclocal\' failed.'))
 
 
 def autoconf(parameters=''):
     """generates a configure script"""
     if system('autoconf {}'.format(parameters)):
-        raise RunTimeError(_('Running autoconf failed.'))
+        raise RunTimeError(_('Running \'autoconf\' failed.'))
 
 
 def autoreconf(parameters=''):
     """re-generates a configure script"""
     if system('autoreconf {}'.format(parameters)):
-        raise RunTimeError(_('Running autoreconf failed.'))
+        raise RunTimeError(_('Running \'autoreconf\' failed.'))
 
 
 def automake(parameters=''):
     """generates a makefile"""
     if system('automake {}'.format(parameters)):
-        raise RunTimeError(_('Running automake failed.'))
+        raise RunTimeError(_('Running \'automake\' failed.'))
 
 
 def autoheader(parameters=''):
     """generates templates for configure"""
     if system('autoheader {}'.format(parameters)):
-        raise RunTimeError(_('Running autoheader failed.'))
+        raise RunTimeError(_('Running \'autoheader\' failed.'))

@@ -33,7 +33,7 @@ class BinutilsError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[Binutils]: "+ value)
 
 
 # Globals
@@ -63,7 +63,7 @@ def curPERL():
     """ returns currently used perl's version"""
     # for i in os.listdir("/usr/bin"):
     #    if i.startswith("perl"):
-    #        if i.split("perl")[1] 
+    #        if i.split("perl")[1]
 
     return os.path.realpath('/usr/bin/perl').split('perl')[1]
 
@@ -237,9 +237,9 @@ def getBinutilsInfo(util):
     cross_build_name = '{0}-{1}'.format(HOST(), util)
     if not existBinary(cross_build_name):
         if not existBinary(util):
-            raise BinutilsError(_('Util {} cannot be found').format(util))
+            raise BinutilsError(_('Util \'{}\' cannot be found').format(util))
         else:
-            ctx.ui.debug(_('Warning: {0} does not exist, using plain name {1}').format(cross_build_name, util))
+            ctx.ui.debug(_('Warning: \'{0}\' does not exist, using plain name \'{1}\'').format(cross_build_name, util))
             return util
     else:
         return cross_build_name

@@ -31,14 +31,14 @@ class RunTimeError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[LibTools]: " + value)
 
 
 def preplib(sourceDirectory='/usr/lib'):
     sourceDirectory = join_path(get.installDIR(), sourceDirectory)
     if can_access_directory(sourceDirectory):
         if system('/sbin/ldconfig -n -N {}'.format(sourceDirectory)):
-            raise RunTimeError(_('Running ldconfig failed.'))
+            raise RunTimeError(_('Running \'ldconfig\' failed.'))
 
 
 def gnuconfig_update():
@@ -53,14 +53,16 @@ def gnuconfig_update():
                 try:
                     copy('/usr/share/gnuconfig/{}'.format(fileName), join_path(root, fileName))
                 except:
-                    ctx.ui.info(_('Can not make GNU Config Update... Passing...'))
+                    ctx.ui.info(_('GNU Config Update Failed.'))
+                    if not ctx.ui.confirm(_('Would you like to continue? (it may be dangerous!!!):')):
+                        raise RunTimeError(_('GNU Config Update Failed. Please check your gnuconfig scripts.s (/usr/share/gnuconfig)'))
                 else:
                     ctx.ui.info(_('GNU Config Update Finished.'))
 
 
 def libtoolize(parameters=''):
     if system('/usr/bin/libtoolize {}'.format(parameters)):
-        raise RunTimeError(_('Running libtoolize failed.'))
+        raise RunTimeError(_('Running \"libtoolize\" failed.'))
 
 
 def gen_usr_ldscript(dynamicLib):

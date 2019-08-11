@@ -28,7 +28,19 @@ class MesonError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error(value)
+        ctx.ui.error("[MesonTools]: " + value)
+
+class ConfigureError(inary.actionsapi.Error):
+    def __init__(self, value=''):
+        inary.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[MesonTools]: " + value)
+
+class NinjaBuildError(inary.actionsapi.Error):
+    def __init__(self, value=''):
+        inary.actionsapi.Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[MesonTools]: " + value)
 
 
 def meson_configure(parameters=""):
@@ -50,22 +62,22 @@ def meson_configure(parameters=""):
             parameters)
 
         if system(args):
-            raise MesonError(_('[Meson]: Configure failed.'))
+            raise MesonError(_('Configure failed.'))
     else:
-        raise MesonError(_('[Meson]: Configure script cannot be reached'))
+        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("meson.build")))
 
 
 def ninja_build(parameters=""):
     if system("ninja {} {} -C inaryPackageBuild".format(get.makeJOBS(), parameters)):
-        raise MesonError(_("[Ninja]: Build failed."))
+        raise NinjaBuildError(_("Build failed."))
 
 
 def ninja_install(parameters=""):
     insdir = util.join_path(get.installDIR(), "emul32") if get.buildTYPE() == "emul32" else get.installDIR()
     if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir, get.makeJOBS())):
-        raise MesonError(_("[Ninja]: Installation failed."))
+        raise NinjaBuildError(_("Install failed."))
 
 
 def ninja_check():
     if system('ninja test {} -C inaryPackageBuild'.format(get.makeJOBS())):
-        raise MesonError(_("[Ninja]: Test failed"))
+        raise MesonError(_("Check failed"))
