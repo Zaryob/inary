@@ -202,15 +202,15 @@ class CLI(inary.ui.UI):
 
     def notify(self, event, **keywords):
         if event == inary.ui.installed:
-            msg = _('Installed {}').format(keywords['package'].name)
+            msg = _('Installed \"{}\"').format(keywords['package'].name)
         elif event == inary.ui.removed:
-            msg = _('Removed {}').format(keywords['package'].name)
+            msg = _('Removed \"{}\"').format(keywords['package'].name)
         elif event == inary.ui.upgraded:
-            msg = _('Upgraded {}').format(keywords['package'].name)
+            msg = _('Upgraded \"{}\"').format(keywords['package'].name)
         elif event == inary.ui.configured:
-            msg = _('Configured {}').format(keywords['package'].name)
+            msg = _('Configured \"{}\"').format(keywords['package'].name)
         elif event == inary.ui.extracting:
-            msg = _('Extracting the files of {}').format(keywords['package'].name)
+            msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
         else:
             msg = None
         if msg:

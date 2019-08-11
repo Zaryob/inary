@@ -33,7 +33,7 @@ def info(package, installed=False):
 
 def info_file(package_fn):
     if not os.path.exists(package_fn):
-        raise inary.errors.Error(_('File {} not found').format(package_fn))
+        raise inary.errors.Error(_('File \"{}\" not found').format(package_fn))
 
     package = inary.package.Package(package_fn)
     package.read()

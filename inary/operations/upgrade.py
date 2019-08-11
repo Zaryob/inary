@@ -89,11 +89,11 @@ def find_upgrades(packages, replaces):
             ctx.ui.debug(_("Warning: package *name* ends with '.inary'"))
 
         if not installdb.has_package(i_pkg):
-            ctx.ui.info(_('Package {} is not installed.').format(i_pkg), True)
+            ctx.ui.info(_('Package \"{}\" is not installed.').format(i_pkg), True)
             continue
 
         if not packagedb.has_package(i_pkg):
-            ctx.ui.info(_('Package {} is not available in repositories.').format(i_pkg), True)
+            ctx.ui.info(_('Package \"{}\" is not available in repositories.').format(i_pkg), True)
             continue
 
         pkg = packagedb.get_package(i_pkg)
@@ -116,7 +116,7 @@ def find_upgrades(packages, replaces):
                 Ap.append(i_pkg)
                 ds.append(i_pkg)
             else:
-                ctx.ui.info(_('Package {0.name} is already at the latest release {0.release}.').format(
+                ctx.ui.info(_('Package \"{0.name}\" is already at the latest release {0.release}.').format(
                     pkg), True)
 
     if debug and ds:
@@ -283,7 +283,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 # previous ones.
                 G_f.add_dep(pkg.name, dep)
             else:
-                ctx.ui.error(_('Dependency {0} of {1} cannot be satisfied').format(dep, pkg.name))
+                ctx.ui.error(_('Dependency \"{0}\" of \"{1}\" cannot be satisfied').format(dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):

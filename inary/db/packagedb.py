@@ -168,7 +168,7 @@ class PackageDB(lazydb.LazyDB):
 
     def get_version_and_distro_release(self, name, repo):
         if not self.has_package(name, repo):
-            raise Exception(_('Package {} not found.').format(name))
+            raise Exception(_('Package \"{}\" not found.').format(name))
 
         pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
 
@@ -176,7 +176,7 @@ class PackageDB(lazydb.LazyDB):
 
     def get_version(self, name, repo):
         if not self.has_package(name, repo):
-            raise Exception(_('Package {} not found.').format(name))
+            raise Exception(_('Package \"{}\" not found.').format(name))
 
         pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
 

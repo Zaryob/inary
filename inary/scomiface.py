@@ -102,7 +102,7 @@ def get_link():
                 exceptions.append(str(e))
         time.sleep(0.2)
         timeout -= 0.2
-    raise Error(_("Cannot connect to SCOM: \n  {}\n").format("\n  ".join(exceptions)))
+    raise Error(_("Cannot connect to SCOM: \n  \"{}\"\n").format("\n  ".join(exceptions)))
 
 
 def post_install(package_name, provided_scripts,
@@ -110,7 +110,7 @@ def post_install(package_name, provided_scripts,
                  fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
 
-    ctx.ui.info(_("Configuring {} package").format(package_name))
+    ctx.ui.info(_("Configuring \"{}\" package".).format(package_name))
     self_post = False
 
     package_name = safe_script_name(package_name)
@@ -123,7 +123,7 @@ def post_install(package_name, provided_scripts,
     link = get_link()
 
     for script in provided_scripts:
-        ctx.ui.debug(_("Registering {} scom script").format(script.om))
+        ctx.ui.debug(_("Registering \"{}\" named scom script.").format(script.om))
         script_name = safe_script_name(script.name) \
             if script.name else package_name
         if script.om == "System.Package":
@@ -139,7 +139,7 @@ def post_install(package_name, provided_scripts,
             except dbus.exceptions.DBusException as exception:
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling post install handlers"))
+    ctx.ui.debug(_("Calling post install handlers."))
     for handler in link.System.PackageHandler:
         try:
             link.System.PackageHandler[handler].setupPackage(
@@ -158,7 +158,7 @@ def post_install(package_name, provided_scripts,
         if not fromRelease:
             fromRelease = ""
 
-        ctx.ui.debug(_("Running package's post install script"))
+        ctx.ui.debug(_("Running package's post install script."))
         try:
             link.System.Package[package_name].postInstall(
                 fromVersion, fromRelease, toVersion, toRelease,
@@ -172,13 +172,13 @@ def post_install(package_name, provided_scripts,
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
 
-    ctx.ui.info(_("Running pre removal operations for {}").format(package_name))
+    ctx.ui.info(_("Running pre removal operations for \"{}\".").format(package_name))
     link = get_link()
 
     package_name = safe_script_name(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's pre remove script"))
+        ctx.ui.debug(_("Running package's pre remove script."))
         try:
             link.System.Package[package_name].preRemove(
                 timeout=ctx.dbus_timeout)
@@ -187,7 +187,7 @@ def pre_remove(package_name, metapath, filepath):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling pre remove handlers"))
+    ctx.ui.debug(_("Calling pre remove handlers."))
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].cleanupPackage(
@@ -204,7 +204,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
 
     if provided_scripts is None:
         provided_scripts = []
-    ctx.ui.info(_("Running post removal operations for {}").format(package_name))
+    ctx.ui.info(_("Running post removal operations for \"{}\" package.").format(package_name))
     link = get_link()
 
     package_name = safe_script_name(package_name)
@@ -213,7 +213,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
     scripts.add(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's postremove script"))
+        ctx.ui.debug(_("Running package's postremove script."))
         try:
             link.System.Package[package_name].postRemove(
                 timeout=ctx.dbus_timeout)
@@ -222,7 +222,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling post remove handlers"))
+    ctx.ui.debug(_("Calling post remove handlers."))
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].postCleanupPackage(
@@ -233,7 +233,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Unregistering scom scripts"))
+    ctx.ui.debug(_("Unregistering scom scripts."))
     for scr in scripts:
         try:
             link.remove(scr, timeout=ctx.dbus_timeout)

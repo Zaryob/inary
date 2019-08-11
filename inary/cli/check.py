@@ -86,7 +86,7 @@ class Check(command.Command, metaclass=command.autocommand):
         check_config = ctx.get_option('config')
 
         # Line prefix
-        prefix = _('Checking integrity of {}')
+        prefix = _('Checking integrity of \"{}\"')
 
         # Determine maximum length of messages for proper formatting
         maxpkglen = max([len(_p) for _p in pkgs])
@@ -110,21 +110,21 @@ class Check(command.Command, metaclass=command.autocommand):
 
                 # Dump per file stuff
                 for fpath in check_results['missing']:
-                    ctx.ui.info(_("Missing file: /{}").format(fpath), color='brightred')
+                    ctx.ui.info(_("Missing file: \"/{}\"").format(fpath), color='brightred')
 
                 for fpath in check_results['denied']:
-                    ctx.ui.info(_("Access denied: /{}").format(fpath), color='yellow')
+                    ctx.ui.info(_("Access denied: \"/{}\"").format(fpath), color='yellow')
 
                 for fpath in check_results['corrupted']:
-                    ctx.ui.info(_("Corrupted file: /{}").format(fpath), color='brightyellow')
+                    ctx.ui.info(_("Corrupted file: \"/{}\"").format(fpath), color='brightyellow')
 
                 for fpath in check_results['config']:
-                    ctx.ui.info(_("Modified configuration file: /{}").format(fpath),
+                    ctx.ui.info(_("Modified configuration file: \"/{}\"").format(fpath),
                                 color='brightyellow')
 
             else:
                 # Package is not installed
-                ctx.ui.info(_('Package {} not installed').format(pkg))
+                ctx.ui.info(_('Package \"{}\" not installed').format(pkg))
 
         if not necessary_permissions:
             ctx.ui.info("")

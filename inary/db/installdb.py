@@ -110,7 +110,7 @@ class InstallDB(lazydb.LazyDB):
 
         if pkg is None:
             # If package info is broken or not available, skip it.
-            ctx.ui.warning(_("Installation info for package '{}' is broken. "
+            ctx.ui.warning(_("Installation info for package \"{}\" is broken. "
                              "Reinstall it to fix this problem.").format(package))
             del self.installed_db[package]
             return
@@ -399,4 +399,4 @@ class InstallDB(lazydb.LazyDB):
         if package in self.installed_db:
             return os.path.join(ctx.config.packages_dir(), "{0}-{1}".format(package, self.installed_db[package]))
 
-        raise Exception(_('Package {} is not installed').format(package))
+        raise Exception(_('Package \"{}\" is not installed').format(package))

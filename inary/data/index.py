@@ -96,7 +96,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 pkgpath = os.path.join(repo_uri,
                                        util.parse_package_dir_path(fn))
                 if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
-                ctx.ui.info("%-80.80s\r" % (_('Sorting:  {}').format(fn)),
+                ctx.ui.info("%-80.80s\r" % (_('Sorting:  \"{}\"').format(fn)),
                             noln=False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))
@@ -179,7 +179,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     sorted_pkgs[key] = [pkg]
             self.packages = []
             for key, pkgs in sorted(sorted_pkgs.items()):
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory {}... ".format(key))), noln=True)
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory \"{}\"... ".format(key))), noln=True)
                 try:
                     # Add binary packages to index using a process pool
                     self.packages.extend(pool.map(add_package, pkgs))
@@ -188,7 +188,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     pool.join()
                     ctx.ui.info("")
                     raise
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory {}... done.".format(key))),
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory \"{}\"... done.".format(key))),
                             noln=False if ctx.config.get_option("verbose") else True)
 
         ctx.ui.info("")
@@ -200,7 +200,7 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: {}').format(os.path.basename(path))), noln=True)
+        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: \"{}\"').format(os.path.basename(path))), noln=True)
 
         package = inary.package.Package(path)
         md = package.get_metadata()
@@ -215,7 +215,7 @@ def add_package(params):
         errs = md.errors()
         if md.errors():
             ctx.ui.info("")
-            ctx.ui.error(_('Package {}: metadata corrupt, skipping...').format(md.package.name))
+            ctx.ui.error(_('Package \"{}\": metadata corrupt, skipping...').format(md.package.name))
             ctx.ui.error(str(*errs))
         else:
             # No need to carry these with index (#3965)
@@ -268,7 +268,7 @@ def add_groups(path):
 
 
 def add_components(path):
-    ctx.ui.info(_('Adding components.xml to index'))
+    ctx.ui.info(_('Adding \"components.xml\" to index'))
     components_xml = component.Components()
     components_xml.read(path)
     # try:
@@ -279,7 +279,7 @@ def add_components(path):
 
 
 def add_distro(path):
-    ctx.ui.info(_('Adding distribution.xml to index'))
+    ctx.ui.info(_('Adding \"distribution.xml\" to index'))
     distro = component.Distribution()
     # try:
     distro.read(path)
@@ -301,7 +301,7 @@ def add_spec(params):
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding source to index: {}').format(path)),
+        ctx.ui.info("%-80.80s\r" % (_('Adding source to index: \"{}\"').format(path)),
                     noln=False if ctx.config.get_option("verbose") else True)
         return sf
 
@@ -321,9 +321,9 @@ def index(dirs=None, output='inary-index.xml',
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('Building index of Inary files under {}').format(repo_dir))
+        ctx.ui.info(_('Building index of Inary files under \"{}\"').format(repo_dir))
         index.index(repo_dir, skip_sources)
 
     sign = None if skip_signing else inary.file.File.detached
     index.write(output, sha1sum=True, compress=compression, sign=sign)
-    ctx.ui.info(_('Index file written'))
+    ctx.ui.info(_('Index file written.'))

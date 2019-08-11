@@ -205,7 +205,7 @@ class Fetcher:
                 ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
                 c.close()
             except pycurl.error as x:
-                raise FetchError("Pycurl.Error: {}".format(x))
+                    raise FetchError("{}".format(x.args[1]))
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
@@ -279,11 +279,11 @@ def fetch(packages=None, path=os.path.curdir):
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
         package, repo = packagedb.get_package_repo(name)
-        ctx.ui.info(_("{0} package found in {1} repository").format(package.name, repo))
+        ctx.ui.info(_("\"{0}\" package found in \"{1}\" repository").format(package.name, repo))
         uri = inary.uri.URI(package.packageURI)
         output = os.path.join(path, uri.path())
         if os.path.exists(output) and package.packageHash == inary.util.sha1_file(output):
-            ctx.ui.warning(_("{} package already fetched").format(uri.path()))
+            ctx.ui.warning(_("\"{}\" package already fetched").format(uri.path()))
             continue
         if uri.is_absolute_path():
             url = str(uri.path())

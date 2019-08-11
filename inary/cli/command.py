@@ -37,7 +37,7 @@ class autocommand(type):
 
         def add_cmd(cmd):
             if cmd in Command.cmd_dict:
-                raise inary.cli.Error(_('Duplicate command {}').format(cmd))
+                raise inary.cli.Error(_('Duplicate command \'{}\'').format(cmd))
             else:
                 Command.cmd_dict[cmd] = cls
 
@@ -76,7 +76,7 @@ class Command(object):
             return Command.cmd_dict[cmd](args)
 
         if fail:
-            raise inary.cli.Error(_("Unrecognized command: {}").format(cmd))
+            raise inary.cli.Error(_("Unrecognized command: \'{}\'").format(cmd))
         else:
             return None
 
@@ -135,7 +135,7 @@ class Command(object):
         if self.options.destdir:
             d = str(self.options.destdir)
             if not os.path.exists(d):
-                inary.cli.printu(_('Destination directory {} does not exist. Creating directory.\n').format(d))
+                inary.cli.printu(_('Destination directory \"{}\" does not exist. Creating directory.\n').format(d))
                 os.makedirs(d)
             self.options.destdir = os.path.realpath(d)
 

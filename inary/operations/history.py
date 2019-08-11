@@ -80,7 +80,7 @@ def __getpackageurl_binman(package):
     base_package = os.path.dirname(package_.packageURI)
     repo_base = os.path.dirname(repourl)
     possible_url = os.path.join(repo_base, base_package, package)
-    ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
+    ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\"").format(pkg, reponame))
 
     # return _possible_ url for this package
     return possible_url
@@ -104,7 +104,7 @@ def __getpackageurl(package):
         raise PackageNotFound
 
     repourl = repodb.get_repo_url(reponame)
-    ctx.ui.info(_("Package {0} found in repository {1}").format(pkg, reponame))
+    ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\"").format(pkg, reponame))
 
     # return _possible_ url for this package
     return os.path.join(os.path.dirname(repourl),
@@ -117,7 +117,7 @@ def fetch_remote_file(package, errors):
         uri = inary.file.File.make_uri(__getpackageurl_binman(package))
     except PackageNotFound:
         errors.append(package)
-        ctx.ui.info(_("{} could not be found").format(package), color="red")
+        ctx.ui.info(_("\"{}\" could not be found").format(package), color="red")
         return False
 
     dest = ctx.config.cached_packages_dir()
@@ -128,7 +128,7 @@ def fetch_remote_file(package, errors):
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
         except inary.fetcher.FetchError:
             errors.append(package)
-            ctx.ui.info(_("{} could not be found").format(package), color="red")
+            ctx.ui.info(_("\"{}\" could not be found").format(package), color="red")
             failed = True
         if failed:
             try:
@@ -136,11 +136,11 @@ def fetch_remote_file(package, errors):
                 inary.fetcher.fetch_url(new_uri, dest, ctx.ui.Progress)
             except:
                 errors.append(package)
-                ctx.ui.info(_("{} could not be found").format(package), "red")
+                ctx.ui.info(_("\"{}\" could not be found").format(package), "red")
                 return False
 
     else:
-        ctx.ui.info(_('{} [cached]').format(uri.filename()))
+        ctx.ui.info(_('\"{}\" [cached]').format(uri.filename()))
     return True
 
 

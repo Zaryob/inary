@@ -34,16 +34,16 @@ def add_repo(name, indexuri, at=None):
         raise inary.errors.Error(_('Not a valid repo name.'))
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
-        raise inary.errors.Error(_('Repo {} already present.').format(name))
+        raise inary.errors.Error(_('Repo \"{}\" already present.').format(name))
     elif repodb.has_repo_url(indexuri, only_active=False):
         repo = repodb.get_repo_by_url(indexuri)
-        raise inary.errors.Error(_('Repo already present with name {}.').format(repo))
+        raise inary.errors.Error(_('Repo \"{}\" already present with name \"{}\".').format(name, repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at=at)
         ctx.ui.info(_('Flushing database caches...'), verbose=True)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo {} added to system.').format(name))
+        ctx.ui.info(_('Repo \"{}\" added to system.').format(name))
 
 
 @util.locked
@@ -53,9 +53,9 @@ def remove_repo(name):
         repodb.remove_repo(name)
         ctx.ui.info(_('Flushing database caches...'), verbose=True)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo {} removed from system.').format(name))
+        ctx.ui.info(_('Repo \"{}\" removed from system.').format(name))
     else:
-        raise inary.errors.Error(_('Repository {} does not exist. Cannot remove.').format(name))
+        raise inary.errors.Error(_('Repository \"{}\" does not exist. Cannot remove.').format(name))
 
 
 @util.locked
@@ -98,7 +98,7 @@ def update_repo(repo, force=False):
 
 
 def __update_repo(repo, force=False):
-    ctx.ui.action(_('Updating repository: {}').format(repo))
+    ctx.ui.action(_('Updating repository: \"{}\"').format(repo))
     ctx.ui.notify(inary.ui.updatingrepo, name=repo)
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()
@@ -107,7 +107,7 @@ def __update_repo(repo, force=False):
         try:
             index.read_uri_of_repo(repouri, repo)
         except inary.file.AlreadyHaveException:
-            ctx.ui.info(_('{} repository information is up-to-date.').format(repo))
+            ctx.ui.info(_('\"{}\" repository information is up-to-date.').format(repo))
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested'))
                 index.read_uri_of_repo(repouri, repo, force=force)
@@ -125,6 +125,6 @@ def __update_repo(repo, force=False):
 
         ctx.ui.info(_('Package database updated.'))
     else:
-        raise inary.errors.Error(_('No repository named {} found.').format(repo))
+        raise inary.errors.Error(_('No repository named \"{}\" found.').format(repo))
 
     return True

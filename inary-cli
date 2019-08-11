@@ -50,7 +50,7 @@ def handle_exception(exception, value, tb):
     if isinstance(value, inary.errors.Error):
         ui.error(_("Program terminated."))
     elif isinstance(value, KeyboardInterrupt):
-        ui.error(_("\nKeyboard Interrupt: Exiting..."))
+        ui.error(_("\nKeyboard Interrupt [Ctrl-C]: Exiting..."))
         exit()
     elif isinstance(value, EOFError):
         ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
@@ -66,7 +66,7 @@ def handle_exception(exception, value, tb):
         # For any other exception (possibly Python exceptions) show
         # the traceback!
         show_traceback = ctx.get_option('debug')
-        ui.error(_("\nSystem error. Program terminated."))
+        ui.error(_("System error. Program terminated."))
 
     if show_traceback:
         ui.error("{}: {}".format(exception, str(value)))

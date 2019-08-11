@@ -51,12 +51,12 @@ def check_conflicts(order, packagedb):
     (C, D, pkg_conflicts) = inary.analyzer.conflict.calculate_conflicts(order, packagedb)
 
     if D:
-        raise Exception(_("Selected packages [{}] are in conflict with each other.").format(util.strlist(list(D))))
+        raise Exception(_("Selected packages \"[{}]\" are in conflict with each other.").format(util.strlist(list(D))))
 
     if pkg_conflicts:
         conflicts = ""
         for pkg in list(pkg_conflicts.keys()):
-            conflicts += _("[{0} conflicts with: {1}]\n").format(pkg, util.strlist(pkg_conflicts[pkg]))
+            conflicts += _(" - [\"{0}\" conflicts with: \"{1}\"]\n").format(pkg, util.strlist(pkg_conflicts[pkg]))
 
         ctx.ui.info(_("The following packages have conflicts:\n{}").format(conflicts))
 

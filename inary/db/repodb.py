@@ -286,4 +286,4 @@ class RepoDB(lazydb.LazyDB):
         if not compatible:
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
-                _("Repository '{}' is not compatible with your distribution. Repository is disabled.").format(name))
+                _("Repository \"{}\" is not compatible with your distribution. Repository is disabled.").format(name))

@@ -102,7 +102,7 @@ def plan_emerge(A):
         if sourcedb.has_spec(name):
             return sourcedb.get_spec(name)
         else:
-            raise Exception(_('Cannot find source package: {}').format(name))
+            raise Exception(_('Cannot find source package: \"{}\"').format(name))
 
     def get_src(name):
         return get_spec(name).source

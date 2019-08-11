@@ -77,9 +77,9 @@ packages from all repositories.
             return
 
         if since:
-            ctx.ui.info(_("Packages added to {0} since {1}:\n").format(repo, since))
+            ctx.ui.info(_("Packages added to \'{0}\' since \"{1}\":\n").format(repo, since))
         else:
-            ctx.ui.info(_("Packages added to {}:").format(repo))
+            ctx.ui.info(_("Packages added to \'{}\:").format(repo))
 
         # maxlen is defined dynamically from the longest package name (#9021)
         maxlen = max([len(_p) for _p in l])

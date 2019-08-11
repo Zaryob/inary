@@ -117,7 +117,7 @@ def check_path_collision(package, pkgList):
 
                 if util.subpath(pinfo.path, path.path):
                     collisions.append(path.path.rstrip("/"))
-                    ctx.ui.debug(_('Path {} belongs in multiple packages').format(path.path))
+                    ctx.ui.debug(_('Path \"{}\" belongs in multiple packages').format(path.path))
     return collisions
 
 
@@ -147,10 +147,10 @@ def exclude_special_files(filepath, fileinfo, ag):
             continue
 
         if fileinfo is None:
-            ctx.ui.warning(_("Removing special file skipped for: {}").format(filepath))
+            ctx.ui.warning(_("Removing special file skipped for: \"{}\"").format(filepath))
             return
         elif re.match(pattern, fileinfo):
-            ctx.ui.debug("Removing special {0} file: {1}".format(name, filepath))
+            ctx.ui.debug("Removing special \"{0}\" file: \"{1}\"".format(name, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
             util.rmdirs(os.path.dirname(filepath))
@@ -203,7 +203,7 @@ class Builder:
 
             return Builder(src_path)
         else:
-            raise Error(_("Source {} not found in any active repository.").format(name))
+            raise Error(_("Source \"{}\" not found in any active repository.").format(name))
 
     def __init__(self, specuri):
 
@@ -328,10 +328,10 @@ class Builder:
         architecture = ctx.config.values.general.architecture
         if architecture in self.spec.source.excludeArch:
             raise ExcludedArchitectureException(
-                _("pspec.xml avoids this package from building for '{}'").format(
+                _("pspec.xml avoids this package from building for \"{}\"").format(
                     architecture))
 
-        ctx.ui.status(_("Building source package: {}").format(
+        ctx.ui.status(_("Building source package: \"{}\"").format(
             self.spec.source.name))
         # check if all patch files exists, if there are missing no need
         # to unpack!
@@ -786,7 +786,7 @@ class Builder:
                     raise ActionScriptException
         else:
             if mandatory:
-                raise Error(_("unable to call function from actions: {}").format(func))
+                raise Error(_("unable to call function from actions: \'{}\'").format(func))
 
         os.chdir(curDir)
         return True
@@ -855,7 +855,7 @@ class Builder:
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
                     if not dep.satisfied_by_repo():
-                        raise Error(_('Build dependency {} cannot be satisfied').format(str(dep)))
+                        raise Error(_('Build dependency \"{}\" cannot be satisfied').format(str(dep)))
                 if ctx.ui.confirm(
                         _('Do you want to install the unsatisfied build dependencies')):
                     ctx.ui.info(_('Installing build dependencies.'))
@@ -874,9 +874,9 @@ class Builder:
         for patch in self.spec.source.patches:
             patchFile = util.join_path(files_dir, patch.filename)
             if not os.access(patchFile, os.F_OK):
-                raise Error(_("Patch file is missing: {}\n").format(patch.filename))
+                raise Error(_("Patch file is missing: \"{}\"\n").format(patch.filename))
             if os.stat(patchFile).st_size == 0:
-                ctx.ui.warning(_('Patch file is empty: {}').format(patch.filename))
+                ctx.ui.warning(_('Patch file is empty: \"{}\"').format(patch.filename))
 
     def apply_patches(self):
         files_dir = os.path.abspath(util.join_path(self.specdir,
@@ -1151,10 +1151,10 @@ class Builder:
 
             if not self.files.list:
                 if not package.debug_package:
-                    ctx.ui.warning(_("Ignoring empty package {}").format(package.name))
+                    ctx.ui.warning(_("Ignoring empty package: \"{}\"").format(package.name))
                 continue
 
-            ctx.ui.action(_("Building package: {}").format(package.name))
+            ctx.ui.action(_("Building package: \"{}\"").format(package.name))
 
             self.gen_metadata_xml(package)
 
@@ -1171,7 +1171,7 @@ class Builder:
             else:
                 self.new_packages.append(name)
 
-            ctx.ui.info(_("Creating {}...").format(name))
+            ctx.ui.info(_("Creating \"{}\"...").format(name))
 
             pkg = inary.package.Package(name, "w",
                                         format=self.target_package_format,

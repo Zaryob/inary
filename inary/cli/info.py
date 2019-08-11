@@ -145,7 +145,7 @@ Usage: info <package1> <package2> ... <packagen>
 
     def inaryfile_info(self, package):
         metadata, files = info_operation.info_file(package)
-        ctx.ui.formatted_output(_("Package file: {}").format(package))
+        ctx.ui.formatted_output(_("Package file: \"{}\"").format(package))
 
         self.print_metadata(metadata)
         if self.options.files or self.options.files_path:
@@ -166,7 +166,7 @@ Usage: info <package1> <package2> ... <packagen>
 
             self.print_metadata(metadata, self.installdb)
         else:
-            ctx.ui.info(_("{} package is not installed").format(package))
+            ctx.ui.info(_("\"{}\" package is not installed").format(package))
 
     def packagedb_info(self, package):
         if self.packagedb.has_package(package):
@@ -174,10 +174,10 @@ Usage: info <package1> <package2> ... <packagen>
             if self.options.short:
                 ctx.ui.formatted_output(_("[binary] "), noln=True, column=" ")
             else:
-                ctx.ui.info(_('Package found in {} repository:').format(repo))
+                ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
             self.print_metadata(metadata, self.packagedb)
         else:
-            ctx.ui.info(_("{} package is not found in binary repositories").format(package))
+            ctx.ui.info(_("\"{}\" package is not found in binary repositories").format(package))
 
     def sourcedb_info(self, package):
         if self.sourcedb.has_spec(package):
@@ -186,7 +186,7 @@ Usage: info <package1> <package2> ... <packagen>
             if self.options.short:
                 ctx.ui.formatted_output(_("[source] "), noln=True, column=" ")
             else:
-                ctx.ui.info(_('Package found in {} repository:').format(repo))
+                ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
             self.print_specdata(spec, self.sourcedb)
         else:
-            ctx.ui.info(_("{} package is not found in source repositories").format(package))
+            ctx.ui.info(_("\"{}\" package is not found in source repositories").format(package))
