@@ -25,7 +25,11 @@ import platform
 import re
 import shutil
 import struct
-import subprocess
+try:
+    import subprocess
+except ImportError:
+    raise Exception(_("Module: \'subprocess\' can not imported."))
+
 import sys
 import termios
 import unicodedata
@@ -1116,11 +1120,6 @@ def get_cpu_count():
 
 def get_vm_info():
     vm_info = {}
-
-    try:
-        import subprocess
-    except ImportError:
-        raise Exception(_("Module: \"subprocess\" can not import"))
 
     if platform.system() == 'Linux':
         try:
