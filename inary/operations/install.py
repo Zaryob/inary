@@ -177,12 +177,12 @@ def install_pkg_files(package_URIs, reinstall=False):
         for x in list(d_t.keys()):
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
-                raise Exception(_('Package {0} is not compatible with your distribution release {1} {2}.').format(
+                raise Exception(_('Package \"{0}\" is not compatible with your distribution release \'{1}\' \'{2}\'.').format(
                     x, ctx.config.values.general.distribution,
                     ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
                 raise Exception(
-                    _('Package {0} ({1}) is not compatible with your {2} architecture.').format(x, pkg.architecture,
+                    _('Package \"{0}\" (\'{1}\') is not compatible with your \'{2}\' architecture.').format(x, pkg.architecture,
                                                                                                 ctx.config.values.general.architecture))
 
     def satisfiesDep(dep):
@@ -205,7 +205,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo():
-            raise Exception(_('External dependencies not satisfied: {}').format(dep))
+            raise Exception(_('External dependencies not satisfied: \"{}\"').format(dep))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -294,7 +294,7 @@ def plan_install_pkg_names(A):
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo(packagedb=packagedb):
-                        raise Exception(_('{0} dependency of package {1} is not satisfied').format(dep, pkg.name))
+                        raise Exception(_('\"{0}\" dependency of package \"{1}\" is not satisfied').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)

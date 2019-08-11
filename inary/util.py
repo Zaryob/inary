@@ -530,9 +530,9 @@ def calculate_hash(path):
         # For symlinks, path string is hashed instead of the content
         value = sha1_data(read_link(path))
         if not os.path.exists(path):
-            ctx.ui.info(_("Including external link '{}'").format(path))
+            ctx.ui.info(_("Including external link \"{}\"").format(path))
     elif os.path.isdir(path):
-        ctx.ui.info(_("Including directory '{}'").format(path))
+        ctx.ui.info(_("Including directory \"{}\"").format(path))
         value = None
     else:
         if path.endswith('.a'):
@@ -624,7 +624,7 @@ def sha1_file(filename):
             # Permission denied, the file doesn't have read permissions, skip
             raise FilePermissionDeniedError(_("You don't have necessary read permissions"))
         else:
-            raise FileError(_("Cannot calculate SHA1 hash of {}").format(filename))
+            raise FileError(_("Cannot calculate SHA1 hash of \"{}\"").format(filename))
 
 
 def sha1_data(data):
@@ -644,7 +644,7 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
     try:
         archive.unpack(targetDir)
     except Exception as msg:
-        raise Error(_("Error while decompressing {0}: {1}").format(patchFile, msg))
+        raise Error(_("Error while decompressing \"{0}\": {1}").format(patchFile, msg))
 
     # FIXME: Get file path from Archive instance
     filePath = join_path(targetDir, os.path.basename(patchFile))
@@ -727,9 +727,9 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch ({}) failed").format(patchFile))
+            raise Error(_("ERROR: patch (\"{}\") failed").format(patchFile))
         else:
-            raise Error(_("ERROR: patch ({0}) failed: {1}").format(patchFile, out))
+            raise Error(_("ERROR: patch (\"{0}\") failed: {1}").format(patchFile, out))
 
     os.chdir(cwd)
 
@@ -741,32 +741,32 @@ def strip_file(filepath, fileinfo, outpath):
         p = os.popen("strip {0} {1}".format(flags, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("strip command failed for file '{}'!").format(f))
+            ctx.ui.warning(_("\'strip\' command failed for file \"{}\"!").format(f))
 
     def run_chrpath(f):
         """ remove rpath info from binary """
         p = os.popen("chrpath -d {}".format(f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("chrpath command failed for file '{}'!").format(f))
+            ctx.ui.warning(_("\'chrpath\' command failed for file \"{}\"!").format(f))
 
     def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
         p = os.popen("objcopy --only-keep-debug {0} {1}{2}".format(f, o, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("objcopy (keep-debug) command failed for file '{}'!").format(f))
+            ctx.ui.warning(_("\'objcopy\' (keep-debug) command failed for file \"{}\"!").format(f))
 
         """mark binary/shared objects to use file.debug"""
         p = os.popen("objcopy --add-gnu-debuglink={0}{1} {2}".format(o, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("objcopy (add-debuglink) command failed for file '{}'!").format(f))
+            ctx.ui.warning(_("\'objcopy\' (add-debuglink) command failed for file \"{}\"!").format(f))
 
     if fileinfo is None:
         ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
         if ret:
-            ctx.ui.warning(_("file command failed with return code {0} for file: {1}").format(ret, filepath))
+            ctx.ui.warning(_("file command failed with return code {0} for file: \"{1}\"").format(ret, filepath))
             ctx.ui.info(_("Output:\n{}").format(out), verbose=True)
 
     elif "current ar archive" in fileinfo:
@@ -860,7 +860,7 @@ def parse_package_name(package_name):
         try:
             return parse_package_name_legacy(package_name)
         except:
-            raise Error(_("Invalid package name: {}").format(package_name))
+            raise Error(_("Invalid package name: \"{}\"").format(package_name))
 
     return name, "{0}-{1}".format(version, release)
 
@@ -910,7 +910,7 @@ def parse_delta_package_name(package_name):
         try:
             return parse_delta_package_name_legacy(package_name)
         except:
-            raise Error(_("Invalid delta package name: {}").format(package_name))
+            raise Error(_("Invalid delta package name: \"{}\"").format(package_name))
 
     return name, source_release, target_release
 
@@ -1047,7 +1047,7 @@ def config_changed(config_file):
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
     if os.path.isdir(dirpath) and not os.listdir(dirpath):
-        ctx.ui.debug("Removing empty dir: {}".format(dirpath))
+        ctx.ui.debug("Removing empty dir: \"{}\"".format(dirpath))
         os.rmdir(dirpath)
         rmdirs(os.path.dirname(dirpath))
 

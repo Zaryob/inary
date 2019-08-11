@@ -81,7 +81,7 @@ class Install(AtomicOperation):
         repo = packagedb.which_repo(name)
         if repo:
             repodb = inary.db.repodb.RepoDB()
-            ctx.ui.info(_("Package {0} found in repository {1}").format(name, repo))
+            ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\"").format(name, repo))
 
             repo = repodb.get_repo(repo)
             pkg = packagedb.get_package(name)
@@ -112,7 +112,7 @@ class Install(AtomicOperation):
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(uri.path()))
 
-            ctx.ui.info(_("Package URI: {}").format(pkg_path), verbose=True)
+            ctx.ui.info(_("Package URI: \"{}\"").format(pkg_path), verbose=True)
 
             # Bug 4113
             cached_file = inary.package.Package.is_cached(pkg_path)
@@ -130,7 +130,7 @@ class Install(AtomicOperation):
 
             return install_op
         else:
-            raise Error(_("Package {} not found in any active repository.").format(name))
+            raise Error(_("Package \"{}\" not found in any active repository.").format(name))
 
     def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
         if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
@@ -239,8 +239,8 @@ class Install(AtomicOperation):
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("/{0} from {1} package\n").format(existing_file, pkg)
-            msg = _('File conflicts:\n{}').format(file_conflicts_str)
+                file_conflicts_str += _("\"/{0}\" from \"{1}\" package\n").format(existing_file, pkg)
+            msg = _('File conflicts:\n\"{}\"').format(file_conflicts_str)
             if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
             else:
@@ -340,7 +340,7 @@ class Install(AtomicOperation):
                 )
                 ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
             except inary.scomiface.Error:
-                ctx.ui.warning(_('{} configuration failed.').format(self.pkginfo.name))
+                ctx.ui.warning(_('Configuration of \"{}\" named package failed.').format(self.pkginfo.name))
                 self.config_later = True
         else:
             self.config_later = True
@@ -531,7 +531,7 @@ class Install(AtomicOperation):
             fpath = os.path.join(ctx.const.scom_dir, pscom.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing {}').format(fpath), verbose=True)
+            ctx.ui.info(_('Storing files of \"{}\" named package.').format(fpath), verbose=True)
             self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
@@ -556,7 +556,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('-> Adding \'{}\' to db...').format(self.metadata.package.name), color='purple')
+        ctx.ui.info(_('-> Adding files of \"{}\" named package to db...').format(self.metadata.package.name), color='purple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -605,13 +605,13 @@ class Remove(AtomicOperation):
         except inary.errors.Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
-            ctx.ui.warning(_('File list could not be read for package {}, continuing removal.').format(package_name))
+            ctx.ui.warning(_('File list could not be read for \"{}\" named package, continuing removal.').format(package_name))
             self.files = inary.data.files.Files()
 
     def run(self):
         """Remove a single package"""
 
-        ctx.ui.status(_('Removing package {}').format(self.package_name))
+        ctx.ui.status(_('Removing package \"{}\"').format(self.package_name))
         ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
@@ -653,7 +653,7 @@ class Remove(AtomicOperation):
         # another as in #2911)
         pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
         if pkg and pkg != package_name:
-            ctx.ui.warning(_('Not removing conflicted file : {}').format(fpath))
+            ctx.ui.warning(_('Not removing conflicted file : \"{}\"').format(fpath))
             return
 
         if fileinfo.type == ctx.const.conf:
@@ -684,7 +684,7 @@ class Remove(AtomicOperation):
                 os.rmdir(fpath)
             else:
                 ctx.ui.warning(
-                    _('Installed file {} does not exist on system [Probably you manually deleted]').format(fpath))
+                    _('Installed file \"{}\" does not exist on system [Probably you manually deleted]').format(fpath))
                 return
 
         # remove emptied directories

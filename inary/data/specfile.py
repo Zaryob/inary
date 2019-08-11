@@ -274,7 +274,7 @@ class Package(metaclass=autoxml.autoxml):
     def satisfies_runtime_dependencies(self):
         for dep in self.runtimeDependencies():
             if not dep.satisfied_by_installed():
-                ctx.ui.error(_('{0} dependency of package {1} is not satisfied').format(dep, self.name))
+                ctx.ui.error(_('\"{0}\" dependency of package \"{1}\" is not satisfied').format(dep, self.name))
                 return False
         return True
 
@@ -432,7 +432,7 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             for desc in xmlext.getTagByName(tag, "Description"):
                 inst.description[xmlext.getNodeAttribute(desc, "xml:lang")] = xmlext.getNodeText(desc)
         except AttributeError as e:
-            raise Error(_("translations.xml {} file is badly formed.").format(e))
+            raise Error(_("translations.xml file is badly formed.: {}").format(e))
 
     def read_translations(self, path):
         if not os.path.exists(path):

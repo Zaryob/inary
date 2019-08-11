@@ -63,7 +63,7 @@ def remove(A, ignore_dep=False, ignore_safety=False):
         if installdb.has_package(x):
             Ap.append(x)
         else:
-            ctx.ui.info(_('Package {} does not exist. Cannot remove.').format(x))
+            ctx.ui.info(_('Package \"{}\" does not exist. Cannot remove.').format(x))
     A = set(Ap)
 
     if len(A) == 0:
@@ -98,7 +98,7 @@ in the respective order to satisfy dependencies:
                     ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
 
         else:
-            ctx.ui.info(_('Package {} is not installed. Cannot remove.').format(x))
+            ctx.ui.info(_('Package \"{}\" is not installed. Cannot remove.').format(x))
 
 
 def plan_remove(A):

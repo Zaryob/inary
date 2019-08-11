@@ -50,11 +50,11 @@ Finds the installed package which contains the specified file.
         found = search.search_file(path)
 
         if not found:
-            ctx.ui.error(_("Path '{}' does not belong to an installed package").format(path))
+            ctx.ui.error(_("Path \"{}\" does not belong to an installed package").format(path))
 
         for pkg, files in found:
             for pkg_file in files:
-                ctx.ui.info(_("Package {0} has file /{1}").format(pkg, pkg_file))
+                ctx.ui.info(_("Package \"{0}\" has file \"/{1}\"").format(pkg, pkg_file))
 
     def run(self):
 
@@ -67,5 +67,5 @@ Finds the installed package which contains the specified file.
         # search among existing files
         for path in self.args:
             if not ctx.config.options.quiet:
-                ctx.ui.info(_('Searching for {}').format(path))
+                ctx.ui.info(_('Searching for \"{}\"').format(path))
             self.search_file(path)

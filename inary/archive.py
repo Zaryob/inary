@@ -158,7 +158,7 @@ class TarFile(tarfile.TarFile):
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
         except IOError:
-            raise tarfile.ReadError(_(" {} is not a lzma file").format(name))
+            raise tarfile.ReadError(_(" \"{}\" is not a lzma file").format(name))
         t._extfileobj = False
         return t
 
@@ -335,7 +335,7 @@ class ArchiveTar(ArchiveBase):
         except OSError:
             pass
 
-        ctx.ui.debug(_("* Target DIR: {}").format(target_dir))
+        ctx.ui.debug(_("* Target DIR: \"{}\"").format(target_dir))
         os.chdir(target_dir)
 
         for tarinfo in self.tar:
@@ -558,7 +558,7 @@ class ArchiveTarZ(ArchiveBase):
         ret, out, err = util.run_batch(
             "uncompress -cf {0}.Z > {0}".format(self.file_path))
         if ret != 0:
-            raise RuntimeError(_("Problem occured while uncompressing {}.Z file").format(self.file_path))
+            raise RuntimeError(_("Problem occured while uncompressing \"{}.Z\" file").format(self.file_path))
 
         self.tar = tarfile.open(self.file_path)
 
@@ -637,7 +637,7 @@ class ArchiveZip(ArchiveBase):
         try:
             self.zip_obj = zipfile.ZipFile(self.file_path, mode)
         except zipfile.BadZipFile:
-            raise UnknownArchiveType(_("File is not a zip file {}").format(self.file_path))
+            raise UnknownArchiveType(_("File \"{}\" is not a zip file.").format(self.file_path))
 
     def open(self, file_path, mode="r"):
         return self.zip_obj.open(file_path, mode)
@@ -872,7 +872,7 @@ class SourceArchive:
                 self.progress = ctx.ui.Progress
 
             try:
-                ctx.ui.info(_("Fetching source from: {}").format(self.url.uri))
+                ctx.ui.info(_("Fetching source from: \"{}\"").format(self.url.uri))
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
                 elif self.url.get_uri().startswith("file://") or self.url.get_uri().startswith("/"):
@@ -885,12 +885,12 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("\nSource archive is stored: {0}/{1}").format(ctx.config.archives_dir(), self.url.filename()))
+            ctx.ui.info(_("\nSource archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
         archive = os.path.basename(self.url.get_uri())
         src = os.path.join(ctx.config.values.build.fallback, archive)
-        ctx.ui.warning(_('Trying fallback address: {}').format(src))
+        ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
         inary.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
 
     def fetch_from_locale(self):
@@ -908,18 +908,18 @@ class SourceArchive:
 
         mirrors = inary.mirrors.Mirrors().get_mirrors(name)
         if not mirrors:
-            raise SourceArchiveError(_("{} mirrors are not defined.").format(name))
+            raise SourceArchiveError(_("\"{}\" mirrors are not defined.").format(name))
 
         for mirror in mirrors:
             try:
                 url = os.path.join(mirror, archive)
-                ctx.ui.warning(_('Fetching source from mirror: {}').format(url))
+                ctx.ui.warning(_('Fetching source from mirror: \"{}\"').format(url))
                 inary.fetcher.fetch_url(url, ctx.config.archives_dir(), self.progress)
                 return
             except inary.fetcher.FetchError:
                 pass
 
-        raise inary.fetcher.FetchError(_('Could not fetch source from {} mirrors.').format(name))
+        raise inary.fetcher.FetchError(_('Could not fetch source from \"{}\" mirrors.').format(name))
 
     def is_cached(self, interactive=True):
         if not os.access(self.archiveFile, os.R_OK):
@@ -928,7 +928,7 @@ class SourceArchive:
         # check hash
         if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
             if interactive:
-                ctx.ui.info(_('{} [cached]').format(self.archive.name), noln=True)
+                ctx.ui.info(_('\"{}\" [cached]').format(self.archive.name))
             return True
 
         return False
@@ -946,7 +946,7 @@ class SourceArchive:
                 _("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
         except ArchiveHandlerNotInstalled:
             raise SourceArchiveError(
-                _("Inary needs {} to unpack this archive but it is not installed.").format(self.archive.type))
+                _("Inary needs \'{}\' to unpack this archive but it is not installed.").format(self.archive.type))
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

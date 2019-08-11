@@ -37,14 +37,14 @@ import inary.util
 
 class AlreadyHaveException(inary.errors.Exception):
     def __init__(self, url, localfile):
-        inary.errors.Exception.__init__(self, _("URL {0} already downloaded as {1}").format(url, localfile))
+        inary.errors.Exception.__init__(self, _("URL \"{0}\" already downloaded as \"{1}\"").format(url, localfile))
         self.url = url
         self.localfile = localfile
 
 
 class NoSignatureFound(inary.errors.Exception):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _("No signature found for {}").format(url))
+        inary.errors.Exception.__init__(self, _("No signature found for \"{}\"").format(url))
         self.url = url
 
 
@@ -54,7 +54,7 @@ class Error(inary.errors.Error):
 
 class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _("GPG Signature is invalid for {}").format(url))
+        inary.errors.Exception.__init__(self, _("GPG Signature is invalid for \"{}\"").format(url))
         self.url = url
 
 
@@ -143,12 +143,12 @@ class File:
                 inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile)
             else:
                 # copy to transfer dir
-                ctx.ui.info(_("Copying {} to transfer dir").format(uri.get_uri()), verbose=True)
+                ctx.ui.info(_("Copying \"{}\" to transfer dir").format(uri.get_uri()), verbose=True)
                 shutil.copy(uri.get_uri(), localfile)
         else:
             localfile = uri.get_uri()  # TODO: use a special function here?
             if not os.path.exists(localfile):
-                raise IOError(_("File '{}' not found.").format(localfile))
+                raise IOError(_("File \"{}\" not found.").format(localfile))
             if not os.access(localfile, os.W_OK):
                 oldfn = localfile
                 localfile = inary.util.join_path(transfer_dir, os.path.basename(localfile))
@@ -169,7 +169,7 @@ class File:
         if sha1sum:
             if inary.util.sha1_file(localfile) != newsha1:
                 clean_temporary()
-                raise Error(_("File integrity of {} compromised.").format(uri))
+                raise Error(_("File integrity of \"{}\" compromised.").format(uri))
 
         if check_integrity:
             shutil.move(localfile, origfile)
@@ -246,10 +246,10 @@ class File:
 
             if self.sign == File.detached:
                 if inary.util.run_batch('gpg --detach-sig ' + self.localfile)[0]:
-                    raise Error(_("ERROR: gpg --detach-sig {} failed").format(self.localfile))
+                    raise Error(_("ERROR: \'gpg --detach-sig {}\' failed").format(self.localfile))
                 for compressed_file in compressed_files:
                     if inary.util.run_batch('gpg --detach-sig ' + compressed_file)[0]:
-                        raise Error(_("ERROR: gpg --detach-sig {} failed").format(compressed_file))
+                        raise Error(_("ERROR: \'gpg --detach-sig {}\' failed").format(compressed_file))
 
     @staticmethod
     def check_signature(uri, transfer_dir, sign=detached):

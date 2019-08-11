@@ -70,7 +70,7 @@ class Package:
         try:
             self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)
         except IOError as e:
-            raise Error(_("Cannot open package file: {}").format(e))
+            raise Error(_("Cannot open package file: \"{}\"").format(e))
 
         self.install_archive = None
 
@@ -106,7 +106,7 @@ class Package:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
                     raise Error(_(
-                        "There was a problem while fetching '{}'.\nThe package may have been upgraded. Please try to upgrade the package.").format(
+                        "There was a problem while fetching \"{}\".\nThe package may have been upgraded. Please try to upgrade the package.").format(
                         url))
                 raise
         else:

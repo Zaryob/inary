@@ -71,7 +71,7 @@ the package in graphviz format to 'pgraph.dot'.
 
             if ctx.get_option('repository'):
                 repo = ctx.get_option('repository')
-                ctx.ui.info(_('Plotting packages in repository {}').format(repo))
+                ctx.ui.info(_('Plotting packages in repository \"{}\"').format(repo))
             else:
                 repo = None
                 ctx.ui.info(_('Plotting a graph of relations among all repository packages'))
