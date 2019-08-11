@@ -49,17 +49,17 @@ expanded to package names.
         super(Install, self).options(group)
 
         group.add_option("--reinstall", action="store_true",
-                         default=False, help=_("Reinstall already installed packages"))
+                         default=False, help=_("Reinstall already installed packages."))
         group.add_option("--ignore-check", action="store_true",
-                         default=False, help=_("Skip distribution release and architecture check"))
+                         default=False, help=_("Skip distribution release and architecture check."))
         group.add_option("--ignore-file-conflicts", action="store_true",
                          default=False, help=_("Ignore file conflicts"))
         group.add_option("--ignore-package-conflicts", action="store_true",
                          default=False, help=_("Ignore package conflicts"))
         group.add_option("-c", "--component", action="append",
-                         default=None, help=_("Install component's and recursive components' packages"))
+                         default=None, help=_("Install component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",
-                         type="string", default=None, help=_('Name of the component\'s repository'))
+                         type="string", default=None, help=_('Name of the component\'s repository.'))
         group.add_option("-f", "--fetch-only", action="store_true",
                          default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",

@@ -57,13 +57,13 @@ def compile(parameters=''):
 
     # Move sources according to tplobj files
     if moveSources():
-        raise CompileError(_('Moving source files failed'))
+        raise CompileError(_('Moving source files failed.'))
     # Generate config files
     if generateConfigFiles():
-        raise CompileError(_('Generate config files failed'))
+        raise CompileError(_('Generate config files failed.'))
     # Build format files
     if buildFormatFiles():
-        raise CompileError(_('Building format files failed'))
+        raise CompileError(_('Building format files failed.'))
 
 
 def install(parameters=''):
@@ -71,23 +71,23 @@ def install(parameters=''):
 
     # Create symlinks from format to engines
     if createSymlinksFormat2Engines():
-        raise InstallError(_('Creating symlinks from format to engines failed'))
+        raise InstallError(_('Creating symlinks from format to engines failed.'))
 
     # Installing docs
     if installDocFiles():
-        raise InstallError(_('Installing docs failed'))
+        raise InstallError(_('Installing docs failed.'))
 
     # Installing texmf, texmf-dist, tlpkg, texmf-var
     if installTexmfFiles():
-        raise InstallError(_('Installing texmf files failed'))
+        raise InstallError(_('Installing texmf files failed.'))
 
     # Installing config files
     if installConfigFiles():
-        raise InstallError(_('Installing config files failed'))
+        raise InstallError(_('Installing config files failed.'))
 
     # Handle config files
     if handleConfigFiles():
-        raise InstallError(_('Handle config files failed'))
+        raise InstallError(_('Handle config files failed.'))
 
 
 def createSymlinksFormat2Engines():

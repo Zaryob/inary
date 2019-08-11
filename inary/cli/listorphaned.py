@@ -43,7 +43,7 @@ Lists packages installed as dependency, but no longer needed by any other instal
 
         group = optparse.OptionGroup(self.parser, _("list-orphaned options"))
         group.add_option("-a", "--all", action="store_true",
-                         default=False, help=_("Show all packages without reverse dependencies"))
+                         default=False, help=_("Show all packages without reverse dependencies."))
         group.add_option("-x", "--exclude", action="append",
                          default=None, help=_("Ignore packages and components whose basenames match pattern."))
         self.parser.add_option_group(group)

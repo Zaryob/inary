@@ -46,13 +46,13 @@ Usage: list-installed
                          action="store",
                          default=None,
                          help=_("Only list the installed packages built "
-                                "by the given host"))
+                                "by the given host."))
         group.add_option("-l", "--long", action="store_true",
                          default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
-                         default=None, help=_("List installed packages under given component"))
+                         default=None, help=_("List installed packages under given component."))
         group.add_option("-i", "--install-info", action="store_true",
-                         default=False, help=_("Show detailed install info"))
+                         default=False, help=_("Show detailed install info."))
 
         self.parser.add_option_group(group)
 

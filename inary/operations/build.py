@@ -1022,13 +1022,13 @@ class Builder:
                         try:
                             _uid = str(pwd.getpwnam(afile.owner)[2])
                         except KeyError:
-                            ctx.ui.warning(_("No user named '%s' found "
-                                             "on the system") % afile.owner)
+                            ctx.ui.warning(_("No user named '{}' found "
+                                             "on the system").format(afile.owner))
                         try:
                             _gid = str(grp.getgrnam(afile.group)[2])
                         except KeyError:
-                            ctx.ui.warning(_("No group named '%s' found "
-                                             "on the system") % afile.group)
+                            ctx.ui.warning(_("No group named '{}' found "
+                                             "on the system").format(afile.group))
                         break
                 d[frpath] = Files.FileInfo(path=frpath, type=ftype, permanent=permanent,
                                            size=fsize, hash=fhash, uid=_uid, gid=_gid,

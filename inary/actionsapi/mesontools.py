@@ -80,4 +80,4 @@ def ninja_install(parameters=""):
 
 def ninja_check():
     if system('ninja test {} -C inaryPackageBuild'.format(get.makeJOBS())):
-        raise MesonError(_("Check failed"))
+        raise MesonError(_("Check failed."))
