@@ -1,4 +1,32 @@
-2018-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
+2019-08-12 Suleyman Poyraz <zaryob.dev@gmail.com>
+	* Uzun zamandır ağız tadı ile bir ChangeLog yazamadım.
+	* gericekme branchi hakkında:
+		- kod üzerinde bazı deneysel işler ali rıza keskin tarafından yapıldı.
+			ancak yapılan değişiklikler beni rahatsız etti. asıl kodun mantığı ve
+			inary algoritmasının taa pisi dönemlerine uzanan avantajlarına gölge
+			düşüren bu kodlar arasından işe yarar nitelikte olanları alındı. Ancak
+			şunu açıkca ifade etmeliyim ki tüm değişiklikler herkesin gözle
+			görebileceği şekilde ortaya kondu.
+		- işe yarayabilecek 1-2 yama harici atıldı.
+		- bu branch üzerinde öğrendiğim şu topological sort algoritması yavaş Ancak
+		  iyileştirme yapılamayacak durumda değil. aklımdaki değişimler yapıldığında
+			umarım daha güzel olacak
+	* mevcut branchler hakkında:
+		- mevcut brancler features/ develop ve master olmak üzere 3 tane:
+			+ features: bu tag kendii içinde kod temizliği, çeviriler, belgeleme,
+			  daha önceden çıkartılan script ve testsuiti içindir. her bir branch
+				başarıya ulaşınca develop branchine merge edilip kaldırılacaktır. develop ise
+				gerekli testlerinin ardından master tagına bağlanacaktır ve her bağlamada
+				inary yeni bir sürüm numarasına sahip olacaktır
+	* bu zamana kadar yapılanlar hakkında:
+		- ufak çaplı bug avları.
+		- zamanlı zamansız karşıma çıkan hataların tespiti.
+		- 2 ileri bir geri kod saçmalaları. daha detaylı bilgi için lütfen git diff yapınız.
+	* yol haritası:
+	  - RoadMap üzerinden yazılmıştır. Bir daha uğraştırmayın.
+
+
+2019-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* fetcher pycurl kullanılarak yeniden yazıldı. Bu sayede base sistemde
 	dependency yükü azaldı, partial file download özelliği getirildi.
 	* actionsapi modulleri elden geçirildi kararlılık sağlandı
