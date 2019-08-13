@@ -764,13 +764,8 @@ def strip_file(filepath, fileinfo, outpath):
         if ret:
             ctx.ui.warning(_("\'objcopy\' (add-debuglink) command failed for file \"{}\"!").format(f))
 
-    if fileinfo is None:
-        ret, out, err = run_batch("file {}".format(filepath), ui_debug=False)
-        if ret:
-            ctx.ui.warning(_("file command failed with return code {0} for file: \"{1}\"").format(ret, filepath))
-            ctx.ui.info(_("Output:\n{}").format(out), verbose=True)
 
-    elif "current ar archive" in fileinfo:
+    if "current ar archive" in fileinfo:
         run_strip(filepath, "--strip-debug")
         return True
 
