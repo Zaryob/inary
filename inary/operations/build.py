@@ -1052,14 +1052,30 @@ class Builder:
 
     def file_actions(self):
         install_dir = self.pkg_install_dir()
+        witcher = None  # Who makes magic? ;)
         try:
-            import magic
-        except:
-            raise Error(_("\'magic\' library of python3 not found. Please check python3-filemagic package"))
+            witcher = __import__("magic").detect_from_filename
+        except ModuleNotFoundError:
+            ctx.ui.warning(_("Module \"magic\" cannot found. Falling back with \"file\" command. \
+It is dangerous. So, if you wanna create stable packages, please fix \
+this issue in your workplace. Probably installing \"python3-filemagic\" \
+package might be a good solution."))
+
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = util.join_path(root, fn)
-                fileinfo = magic.file_type(filepath)
+                if witcher:
+                    fileinfo=witcher(filepath).name
+                    ctx.ui.info(_("\'magic\' return of \"{0}\" is \"{1}\"").format(filepath, fileinfo), verbose=True)
+                else:
+                    ret, out, err = util.run_batch("file {}".format(filepath), ui_debug=False)
+                    if ret:
+                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(ret, filepath) +
+                                     _("Output:\n{}").format(out))
+
+                    fileinfo = str(out)
+                    ctx.ui.info(_("\'file\' command return is \"{}\"").format(out), verbose=True)
+
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 exclude_special_files(filepath, fileinfo, self.actionGlobals)
 
