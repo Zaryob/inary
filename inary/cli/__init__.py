@@ -113,7 +113,7 @@ class CLI(inary.ui.UI):
         # let's cheat from KDE :)
         msg = util.colorize(msg, color)
         if verbose:
-            msg = util.colorize(_('Verboses: '), 'white') + msg
+            msg = util.colorize(_('Verboses: '), 'brightwhite') + msg
         if not noln:
             msg = '{}\n'.format(msg)
 

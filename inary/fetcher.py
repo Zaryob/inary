@@ -202,7 +202,7 @@ class Fetcher:
                 ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
                 # pycurl yüzünden kaynaklanıyor
                 file_id.close()
-                ctx.ui.debug(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))))
+                ctx.ui.info(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
                 c.close()
             except pycurl.error as x:
                     raise FetchError("{}".format(x.args[1]))

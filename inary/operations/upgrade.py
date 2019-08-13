@@ -86,7 +86,7 @@ def find_upgrades(packages, replaces):
             continue
 
         if i_pkg.endswith(ctx.const.package_suffix):
-            ctx.ui.debug(_("Warning: package *name* ends with '.inary'"))
+            ctx.ui.info(_("Warning: package *name* ends with '.inary'"), verbose=True)
 
         if not installdb.has_package(i_pkg):
             ctx.ui.info(_('Package \"{}\" is not installed.').format(i_pkg), True)

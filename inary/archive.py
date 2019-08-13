@@ -335,7 +335,7 @@ class ArchiveTar(ArchiveBase):
         except OSError:
             pass
 
-        ctx.ui.debug(_("* Target DIR: \"{}\"").format(target_dir))
+        ctx.ui.info(_("Target DIR: \"{}\"").format(target_dir), verbose=True)
         os.chdir(target_dir)
 
         for tarinfo in self.tar:
@@ -487,10 +487,10 @@ class ArchiveTar(ArchiveBase):
                 gid = os.getgid()
 
                 if not os.path.islink(tarinfo.name):
-                    ctx.ui.debug(_("* Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid))
+                    ctx.ui.info(_("Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
                     os.chown(tarinfo.name, uid, gid)
                 else:
-                    ctx.ui.debug(_("* LChowning {0} ({1}:{2})").format(tarinfo.name, uid, gid))
+                    ctx.ui.info(_("LChowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
                     os.lchown(tarinfo.name, uid, gid)
 
             if callback:
@@ -516,7 +516,6 @@ class ArchiveTar(ArchiveBase):
             elif self.type == 'tarbz2':
                 wmode = 'w:bz2'
             elif self.type in ('tarlzma', 'tarxz'):
-                format = "xz" if self.type == "tarxz" else "alone"
                 compresslevel = int(ctx.config.values.build.compressionlevel)
                 self.tar = TarFile.lzmaopen(self.file_path, "w",
                                             fileobj=self.fileobj,
