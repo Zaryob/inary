@@ -25,20 +25,21 @@ import platform
 import re
 import shutil
 import struct
-try:
-    import subprocess
-except ImportError:
-    raise Exception(_("Module: \'subprocess\' can not imported."))
 
 import sys
 import termios
 import unicodedata
 
-import gettext
 from functools import reduce
 
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
+try:
+    import subprocess
+except ImportError:
+    raise Exception(_("Module: \'subprocess\' can not imported."))
 
 
 class Singleton(type):
@@ -699,7 +700,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                     if level is None and len(paths_m) - 1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
                     if not level is None:
-                        ctx.ui.debug("Detected patch level={0} for {1}".format(level, os.path.basename(patchFile)))
+                        ctx.ui.info("Detected patch level={0} for {1}".format(level, os.path.basename(patchFile)), verbose=True)
                         break
 
     if level is None:
@@ -1047,7 +1048,7 @@ def config_changed(config_file):
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
     if os.path.isdir(dirpath) and not os.listdir(dirpath):
-        ctx.ui.debug("Removing empty dir: \"{}\"".format(dirpath))
+        ctx.ui.info(_("Removing empty dir: \"{}\"").format(dirpath),verbose=True)
         os.rmdir(dirpath)
         rmdirs(os.path.dirname(dirpath))
 

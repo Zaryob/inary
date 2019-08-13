@@ -8,11 +8,11 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
 
 
 1. Pre-Alpha
-  - Daha temiz logging stratejisi:
-    - Her çıktının log dosyasına yazılması işleri biraz karıştırıyor. log dosyası şişiyor.
+  / Daha temiz logging stratejisi:
+    / Her çıktının log dosyasına yazılması işleri biraz karıştırıyor. log dosyası şişiyor.
     bu iş için bir çare bulmak lazım. Adım adım neler yapacağım:
-      - ctx.ui.debug fonksiyonu gerekli olmadıkça kullanılmamalı.
-      - ctx.ui.info önemli mesajlar ve detaylar için (verbose parametresi ile kullanılmalı)
+      + ctx.ui.debug fonksiyonu gerekli olmadıkça kullanılmamalı.
+      + ctx.ui.info önemli mesajlar ve detaylar için (verbose parametresi ile kullanılmalı)
       - Bilgilendirme için kullanılan mesajlar ayıklanıp logdan ayrılmalı.
   - Paket kurulması öncesi tam bilgilendirme.
     - İndirilecek boyutu yazdır.

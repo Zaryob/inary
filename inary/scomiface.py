@@ -66,10 +66,6 @@ def get_link():
     """Connect to the SCOM daemon and return the link."""
 
     sockname = "/var/run/dbus/system_bus_socket"
-    # YALI starts scom chrooted in the install target, but uses INARY
-    # outside of the chroot environment, so Inary needs to use a different
-    # socket path to be able to connect true dbus (and scom).
-    # (usually /var/run/dbus/system_bus_socket)
     if ctx.dbus_sockname:
         sockname = ctx.dbus_sockname
 
@@ -110,7 +106,7 @@ def post_install(package_name, provided_scripts,
                  fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
 
-    ctx.ui.info(_("Configuring \"{}\" package".).format(package_name))
+    ctx.ui.info(_("Configuring \"{}\" package.").format(package_name))
     self_post = False
 
     package_name = safe_script_name(package_name)
@@ -123,7 +119,7 @@ def post_install(package_name, provided_scripts,
     link = get_link()
 
     for script in provided_scripts:
-        ctx.ui.debug(_("Registering \"{}\" named scom script.").format(script.om))
+        ctx.ui.debug(_("Registering \"{0}\" named scom script for \"{1}\".").format(script.om, package_name))
         script_name = safe_script_name(script.name) \
             if script.name else package_name
         if script.om == "System.Package":
@@ -139,7 +135,7 @@ def post_install(package_name, provided_scripts,
             except dbus.exceptions.DBusException as exception:
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling post install handlers."))
+    ctx.ui.debug(_("Calling post install handlers for \"{}\" package.").format(package_name))
     for handler in link.System.PackageHandler:
         try:
             link.System.PackageHandler[handler].setupPackage(
@@ -150,7 +146,7 @@ def post_install(package_name, provided_scripts,
             # Do nothing if setupPackage method is not defined
             # in package script
             if not is_method_missing(exception):
-                raise Error(_("Script error: {}").format(exception))
+                raise Error(_("Script error for \"{0}\" package: {1}").format(package_name, exception))
 
     if self_post:
         if not fromVersion:
@@ -158,7 +154,7 @@ def post_install(package_name, provided_scripts,
         if not fromRelease:
             fromRelease = ""
 
-        ctx.ui.debug(_("Running package's post install script."))
+        ctx.ui.debug(_("Running package's post install script for \"{0}\" package.").format(package_name))
         try:
             link.System.Package[package_name].postInstall(
                 fromVersion, fromRelease, toVersion, toRelease,
@@ -166,19 +162,19 @@ def post_install(package_name, provided_scripts,
         except dbus.exceptions.DBusException as exception:
             # Do nothing if postInstall method is not defined in package script
             if not is_method_missing(exception):
-                raise Error(_("Script error: {}").format(exception))
+                raise Error(_("Script error for \"{0}\" package: {1}").format(package_name, exception))
 
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's pre removal operations"""
 
-    ctx.ui.info(_("Running pre removal operations for \"{}\".").format(package_name))
+    ctx.ui.info(_("Running pre removal operations for \"{}\" package.").format(package_name))
     link = get_link()
 
     package_name = safe_script_name(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's pre remove script."))
+        ctx.ui.debug(_("Running package's pre remove script for \"{}\" package.").format(package_name))
         try:
             link.System.Package[package_name].preRemove(
                 timeout=ctx.dbus_timeout)
@@ -187,7 +183,7 @@ def pre_remove(package_name, metapath, filepath):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling pre remove handlers."))
+    ctx.ui.debug(_("Calling pre remove handlers for \"{}\" package.").format(package_name))
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].cleanupPackage(
@@ -213,7 +209,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
     scripts.add(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's postremove script."))
+        ctx.ui.debug(_("Running package's postremove script for \"{}\" package.").format(package_name))
         try:
             link.System.Package[package_name].postRemove(
                 timeout=ctx.dbus_timeout)
@@ -222,7 +218,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Calling post remove handlers."))
+    ctx.ui.debug(_("Calling post remove handlers for \"{}\" package.").format(package_name))
     for handler in list(link.System.PackageHandler):
         try:
             link.System.PackageHandler[handler].postCleanupPackage(
@@ -233,9 +229,10 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
             if not is_method_missing(exception):
                 raise Error(_("Script error: {}").format(exception))
 
-    ctx.ui.debug(_("Unregistering scom scripts."))
+    ctx.ui.debug(_("Unregistering scom scripts of \"{}\" package.").format(package_name))
     for scr in scripts:
         try:
+            ctx.ui.debug(_("Unregistering {} script.").format(scr))
             link.remove(scr, timeout=ctx.dbus_timeout)
         except dbus.exceptions.DBusException as exception:
             raise Error(_("Script error: {}").format(exception))

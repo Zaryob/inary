@@ -190,7 +190,7 @@ class Install(AtomicOperation):
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
             raise Error(_("Is there enought free space in your disk."))
-        ctx.ui.debug(_("Free Space: %.2f %s " % (total_size, symbol)))
+        ctx.ui.info(_("Free Space: %.2f %s " % (total_size, symbol)), verboe=True)
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
@@ -311,10 +311,9 @@ class Install(AtomicOperation):
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
             if os.path.islink(fpath):
-                ctx.ui.debug(_("* Added symlink '{}' ").format(fpath))
-                # Kontrol et
+                ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
             else:
-                ctx.ui.debug(_("* Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid))
+                ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
                 os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ctx.scom:

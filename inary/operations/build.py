@@ -150,7 +150,7 @@ def exclude_special_files(filepath, fileinfo, ag):
             ctx.ui.warning(_("Removing special file skipped for: \"{}\"").format(filepath))
             return
         elif re.match(pattern, fileinfo):
-            ctx.ui.debug("Removing special \"{0}\" file: \"{1}\"".format(name, filepath))
+            ctx.ui.warning(_("Removing special \"{0}\" file: \"{1}\"").format(name, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
             util.rmdirs(os.path.dirname(filepath))
@@ -171,7 +171,7 @@ def strip_debug_action(filepath, fileinfo, install_dir, ag):
                                 path)
 
     if util.strip_file(filepath, fileinfo, outputpath):
-        ctx.ui.debug("{0} [{1}]".format(path, "stripped"))
+        ctx.ui.info("{0} [{1}]".format(path, "stripped"), verbose=True)
 
 
 class Builder:
@@ -199,7 +199,7 @@ class Builder:
                     os.path.dirname(repo.indexuri.get_uri()),
                     str(src_uri.path()))
 
-            ctx.ui.debug(_("Source URI: {}").format(src_path))
+            ctx.ui.info(_("Source URI: {}").format(src_path), verbose=True)
 
             return Builder(src_path)
         else:
@@ -719,7 +719,7 @@ class Builder:
             if not os.path.exists(src_dir):
                 src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).__next__()[1] if
                                                                not d.startswith(".")][0])
-                if self.get_state() == "unpack": ctx.ui.debug("Using {} as  WorkDir".format(src_dir))
+                if self.get_state() == "unpack": ctx.ui.info("Using {} as  WorkDir".format(src_dir), verbose=True)
 
         return src_dir
 
