@@ -120,10 +120,14 @@ def __update_repo(repo, force=False):
         try:
             index.check_signature(repouri, repo)
         except inary.file.NoSignatureFound as e:
+            ctx.ui.info(_("Repository \"{}\" is deactivated because of GPG Signature fail.").format(repo),
+                          color='brightyellow')
+            set_repo_activity(repo, False)
             ctx.ui.warning(e)
 
         ctx.ui.info(_('Package database updated.'))
     else:
         raise inary.errors.Error(_('No repository named \"{}\" found.').format(repo))
+
 
     return True

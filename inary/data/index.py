@@ -27,6 +27,7 @@ _ = __trans.gettext
 import inary.context as ctx
 import inary.data.specfile as specfile
 import inary.data.metadata as metadata
+import inary.errors
 import inary.util as util
 import inary.package
 import inary.sxml.xmlfile as xmlfile
@@ -69,7 +70,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         urlfile.write(uri)  # uri
         urlfile.close()
 
-        doc = self.read_uri(uri, tmpdir, force)  # Fixme: Fuck
+        self.read_uri(uri, tmpdir, force)
 
         if not repo:
             repo = self.distribution.name()
