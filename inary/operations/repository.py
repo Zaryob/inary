@@ -97,7 +97,7 @@ def update_repo(repo, force=False):
 
 
 def __update_repo(repo, force=False):
-    ctx.ui.action(_('Updating repository: \"{}\"').format(repo))
+    ctx.ui.status(_('Updating package repository: \"{}\"').format(repo), push_screen=False)
     ctx.ui.notify(inary.ui.updatingrepo, name=repo)
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()

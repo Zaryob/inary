@@ -232,7 +232,7 @@ class Package:
             else:
                 # Added for package-manager
                 if tarinfo.name.endswith(".desktop"):
-                    ctx.ui.notify(inary.ui.desktopfile, desktopfile=tarinfo.name)
+                    ctx.ui.notify(inary.ui.desktopfile, logging=False, desktopfile=tarinfo.name)
 
         tar = self.get_install_archive()
 

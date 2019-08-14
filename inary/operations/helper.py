@@ -119,7 +119,7 @@ def calculate_download_sizes(order):
 
         total_size += pkg_size
 
-    ctx.ui.notify(ui.cached, total=total_size, cached=cached_size)
+    ctx.ui.notify(ui.cached, logging=False, total=total_size, cached=cached_size)
     return total_size, cached_size
 
 
