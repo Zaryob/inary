@@ -265,7 +265,7 @@ class File:
             if ret:
                 ctx.ui.info("Checking GPG Signature failed ('gpg --verify {}')".format(sigfilename), color='cyan')
                 ctx.ui.info(err.decode("utf-8"), color='faintcyan')
-                if not ctx.ui.confirm("Would you like skip checking gpg signature?"):
+                if not ctx.ui.confirm("Would you like to skip checking gpg signature?"):
                     raise InvalidSignature(uri)  # everything is all right here
 
     def flush(self):

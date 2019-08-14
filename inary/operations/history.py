@@ -204,7 +204,7 @@ def takeback(operation):
     if beremoved:
         ctx.ui.info(_("Following packages will be removed:\n") + util.strlist(beremoved))
 
-    if (beremoved or beinstalled) and not ctx.ui.confirm(_('Do you want to continue?')):
+    if (beremoved or beinstalled) and not ctx.ui.confirm(_('Would you like to continue?')):
         return
 
     errors = []
@@ -218,7 +218,7 @@ def takeback(operation):
     if errors:
         ctx.ui.info(_("\nFollowing packages could not be found in repositories and are not cached:\n") +
                     util.strlist(errors))
-        if not ctx.ui.confirm(_('Do you want to continue?')):
+        if not ctx.ui.confirm(_('Would you like to continue?')):
             return
 
     if beremoved:

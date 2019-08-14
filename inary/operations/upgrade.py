@@ -206,7 +206,7 @@ def upgrade(A=None, repo=None):
         return
 
     if needs_confirm and \
-            not ctx.ui.confirm(_("Do you want to continue?")):
+            not ctx.ui.confirm(_("Would you like to continue?")):
         return False
 
     ctx.ui.notify(ui.packagestogo, order=order)

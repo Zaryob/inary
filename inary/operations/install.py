@@ -81,7 +81,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     extra_packages = set(order) - A_0
     if extra_packages:
-        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Would you like to continue?')):
             return False
 
     ctx.ui.notify(ui.packagestogo, order=order)
@@ -212,7 +212,7 @@ def install_pkg_files(package_URIs, reinstall=False):
         ctx.ui.warning(_("The following packages will be installed "
                          "in order to satisfy dependencies:"))
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
-        if not ctx.ui.confirm(_('Do you want to continue?')):
+        if not ctx.ui.confirm(_('Would you like to continue?')):
             raise Exception(_('External dependencies not satisfied'))
         install_pkg_names(extra_packages, reinstall=True, extra=True)
 
