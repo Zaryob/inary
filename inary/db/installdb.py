@@ -306,7 +306,38 @@ class InstallDB(lazydb.LazyDB):
         get list of packages installed as extra dependency,
         but without reverse dependencies now.
         """
-        return [x for x in self.installed_extra if not self.get_rev_deps(x)]
+        orphaned_packages=[]
+        for x in self.installed_extra:
+            if not self.get_rev_deps(x):
+
+                if x.endswith(ctx.const.doc_package_end) and ctx.config.values.general.allow_docs:
+                    if inary.util.remove_suffix(ctx.const.doc_package_end, x) not in self.list_installed():
+                        orphaned_packages.append(x)
+                    else:
+                        pass
+
+                elif x.endswith(ctx.const.info_package_end) and ctx.config.values.general.allow_pages:
+                    if inary.util.remove_suffix(ctx.const.info_package_end, x) not in self.list_installed():
+                        orphaned_packages.append(x)
+                    else:
+                        pass
+
+                elif x.endswith(ctx.const.debug_name_suffix) and ctx.config.values.general.allow_dbginfo:
+                    if inary.util.remove_suffix(ctx.const.debug_name_suffix, x) not in self.list_installed():
+                        orphaned_packages.append(x)
+                    else:
+                        pass
+
+                elif x.endswith(ctx.const.static_name_suffix) and ctx.config.values.general.allow_static:
+                    if inary.util.remove_suffix(ctx.const.static_name_suffix, x) not in self.list_installed():
+                        orphaned_packages.append(x)
+                    else:
+                        pass
+
+                else:
+                    orphaned_packages.append(x)
+                    
+        return orphaned_packages
 
     def get_no_rev_deps(self):
         """
