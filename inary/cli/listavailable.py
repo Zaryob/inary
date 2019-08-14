@@ -58,7 +58,7 @@ all repositories.
         self.init(database=True, write=False)
 
         if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
-            ctx.ui.info(_('Installed packages are shown in this color'), color='green')
+            ctx.ui.info(_('Installed packages are shown in this color.'), color='green')
 
         if self.args:
             for arg in self.args:

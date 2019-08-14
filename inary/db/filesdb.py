@@ -46,7 +46,7 @@ class FilesDB(lazydb.LazyDB):
         for pkg in installdb.list_installed():
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
-            ctx.ui.info("%-80.80s\r" % _('-> Adding \'{}\' to db...').format(pkg), noln=True, color='purple')
+            ctx.ui.info("%-80.80s\r" % _(' -> Adding files of \"{}\" package to db...').format(pkg), noln=True, color='brightpurple')
         ctx.ui.info(_('\nAdded files database...'), color='green')
 
     def get_file(self, path):
@@ -82,7 +82,6 @@ class FilesDB(lazydb.LazyDB):
             self.filesdb[key] = pkg
 
     def remove_files(self, files):
-        ctx.ui.info(_('Removing files from database'), color='green')
         for f in files:
             key = hashlib.md5(f.path.encode('utf-8')).hexdigest()
             if key in self.filesdb:

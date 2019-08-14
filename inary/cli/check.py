@@ -124,7 +124,7 @@ class Check(command.Command, metaclass=command.autocommand):
 
             else:
                 # Package is not installed
-                ctx.ui.info(_('Package \"{}\" not installed').format(pkg))
+                ctx.ui.info(_('Package \"{}\" not installed.').format(pkg))
 
         if not necessary_permissions:
             ctx.ui.info("")

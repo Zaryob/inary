@@ -43,4 +43,4 @@ Lists packages waiting to be configured.
             for p in inary.data.pgraph.generate_pending_order(A):
                 ctx.ui.info(p)
         else:
-            ctx.ui.info(_('There are no packages waiting to be configured'))
+            ctx.ui.info(_('There are no packages waiting to be configured.'))

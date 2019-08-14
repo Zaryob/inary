@@ -50,5 +50,5 @@ dirs under /var/lib/inary
 
     def run(self):
         self.init(database=True)
-        if ctx.ui.confirm(str(_('Rebuild INARY databases?'))):
+        if ctx.ui.confirm(_('Rebuild INARY databases?')):
             inary.db.filesdb.rebuild_db()

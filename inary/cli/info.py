@@ -177,7 +177,7 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
             self.print_metadata(metadata, self.packagedb)
         else:
-            ctx.ui.info(_("\"{}\" package is not found in binary repositories").format(package))
+            ctx.ui.info(_("\"{}\" package is not found in binary repositories.").format(package))
 
     def sourcedb_info(self, package):
         if self.sourcedb.has_spec(package):
@@ -189,4 +189,4 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
             self.print_specdata(spec, self.sourcedb)
         else:
-            ctx.ui.info(_("\"{}\" package is not found in source repositories").format(package))
+            ctx.ui.info(_("\"{}\" package is not found in source repositories.").format(package))

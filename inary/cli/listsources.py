@@ -60,7 +60,7 @@ Gives a brief list of sources published in the repositories.
         for p in l:
             sf, repo = self.sourcedb.get_spec_repo(p)
             if self.options.long:
-                ctx.ui.info('[Repository: ' + repo + ']')
+                ctx.ui.info(_('[Repository: ') + repo + ']')
                 ctx.ui.info(str(sf.source))
             else:
                 if p in installed_list:

@@ -80,8 +80,10 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                     try:
                         repository.update_repos([name])
                     except (inary.errors.Error, IOError) as e:
-                        warning = _("{0} repository could not be reached. \nError Message: {1} \n\nRemoving {0} from system.").format(name,e)
-                        self.warn_and_remove(warning, name)
+                        ctx.ui.warning(_("{0} repository could not be reached: {1}").format(name, e))
+                        self.warn_and_remove(_("Removing {0} from system.").format(name), name)
+                else:
+                    repository.set_repo_activity(name, False)
 
             else:
                 raise Exception(_("Extension of repository URI must be \".xml.xz\" or \".xml\" "))
