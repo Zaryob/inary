@@ -68,7 +68,7 @@ installed in the respective order to satisfy dependencies:
         return
 
     if len(order_inst) + len(order_build) > len(A_0):
-        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
+        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Would you like to continue?')):
             return False
 
     ctx.ui.notify(ui.packagestogo, order=order_inst)

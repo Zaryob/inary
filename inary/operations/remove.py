@@ -80,7 +80,7 @@ def remove(A, ignore_dep=False, ignore_safety=False):
 in the respective order to satisfy dependencies:"""), color='green')
     ctx.ui.info(util.strlist(order))
     if len(order) > len(A_0):
-        if not ctx.ui.confirm(_('Would you like to continue??')):
+        if not ctx.ui.confirm(_('Would you like to continue?')):
             ctx.ui.warning(_('Package removal declined'))
             return False
 

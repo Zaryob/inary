@@ -554,7 +554,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('Adding files of \"{}\" package to db...').format(self.metadata.package.name), color='brightpurple')
+        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='brightpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -716,11 +716,12 @@ class Remove(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
 
     def remove_inary_files(self):
+        ctx.ui.info(_('Removing files of \"{}\" package from system').format(self.package_name), color='faintpurple')
         util.clean_dir(self.package.pkg_dir())
 
     def remove_db(self):
-        self.installdb.remove_package(self.package_name)
         ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
+        self.installdb.remove_package(self.package_name)
         ctx.filesdb.remove_files(self.files.list)
 
 

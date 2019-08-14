@@ -71,7 +71,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                 if ctx.ui.confirm(_('Add \"{}\" repository without updating the database?\nBy confirming '
                                         'this you are also adding the repository to your system without '
                                         'checking the distribution of the repository.\n'
-                                        'Do you want to continue?').format(name)):
+                                        'Would you like to continue?').format(name)):
                     self.just_add=True
 
             if indexuri.endswith(".xml.xz") or indexuri.endswith(".xml"):

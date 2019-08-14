@@ -212,7 +212,7 @@ class CLI(inary.ui.UI):
             color = 'brightgreen'
         elif event == inary.ui.removing:
             msg = _('Removing \"{}\"').format(keywords['package'].name)
-            color = 'faintpurple'
+            color = 'brightpurple'
         elif event == inary.ui.upgraded:
             msg = _('Upgraded \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
