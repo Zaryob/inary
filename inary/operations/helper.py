@@ -76,6 +76,39 @@ def expand_src_components(A):
             Ap.add(x)
     return Ap
 
+def calculate_free_space_needed(order):
+    total_needed = 0
+    installdb = inary.db.installdb.InstallDB()
+    packagedb = inary.db.packagedb.PackageDB()
+
+    for pkg in [packagedb.get_package(name) for name in order]:
+        if installdb.has_package(pkg.name):
+            (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
+            # inary distro upgrade should not use delta support
+            if distro == pkg.distribution and distro_release == pkg.distributionRelease:
+                delta = pkg.get_delta(release)
+
+            ignore_delta = ctx.config.values.general.ignore_delta
+
+            installed_release_size = installdb.get_package(pkg.name).installedSize
+
+            if delta and not ignore_delta:
+                pkg_size = delta.installedSize
+            else:
+                pkg_size = pkg.installedSize - installed_release_size
+
+            total_needed += pkg_size
+
+        else:
+            total_needed += int(packagedb.get_package(pkg.name).installedSize)
+        needed, symbol = util.human_readable_size(total_needed)
+        if total_needed < 0:
+            ctx.ui.info(_("{:.2f} {} space will be freed.").format(needed, symbol), color='cyan')
+        else:
+            ctx.ui.info(_("{:.2f} {} space will be used.").format(needed, symbol), color='cyan')
+
+    return total_needed
+
 
 def calculate_download_sizes(order):
     total_size = cached_size = 0

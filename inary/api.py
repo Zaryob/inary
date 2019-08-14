@@ -158,7 +158,7 @@ from inary.fetcher import fetch
 from inary.operations.build import build, build_until
 from inary.operations.check import check
 from inary.operations.emerge import emerge
-from inary.operations.helper import calculate_download_sizes, get_package_requirements
+from inary.operations.helper import calculate_download_sizes, calculate_free_space_needed, get_package_requirements
 from inary.operations.history import takeback, get_takeback_plan, snapshot
 from inary.operations.info import info
 from inary.operations.install import install, get_install_order

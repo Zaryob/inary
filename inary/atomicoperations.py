@@ -189,7 +189,7 @@ class Install(AtomicOperation):
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
             raise Error(_("Is there enought free space in your disk."))
-        ctx.ui.info(_("Free Space: {:.2f} {} ".format(total_size, symbol)), verbose=True)
+        ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(total_size, symbol)), verbose=True)
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
