@@ -17,12 +17,12 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
     / Fix ctx.ui functions:
       / ctx.ui içindeki fonksiyonlar düzenlenmeli. Bazıları çok canavarca kullanılmış.
         + ctx.ui.notify düzenlemesi
-  - Paket kurulması öncesi tam bilgilendirme.
+  + Paket kurulması öncesi tam bilgilendirme.
     + İndirilecek boyutu yazdır.
     + İndirilmiş boyutu yazdır.
-    - Eğer paket kurulacak ise toplam install.tar.xz boyutunu yazdır.
-    - Eğer update yapılacak ise değişecek boyutu yazdır.
-    - Silecek paketin ne kadar yer açacağını yazdır.
+    + Eğer paket kurulacak ise toplam install.tar.xz boyutunu yazdır.
+    + Eğer update yapılacak ise değişecek boyutu yazdır.
+    + Silecek paketin ne kadar yer açacağını yazdır.
   - Biraz daha anlaşılır paket yapılandırmaları.
     - Mevcut Comar forku olan SCOM kodunda uygun düzenlemeler yaparak hangi script nerede hata
       oluşturdu ise geri çevir.

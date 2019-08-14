@@ -169,7 +169,7 @@ class CLI(inary.ui.UI):
 
         while True:
             tty.tcflush(sys.stdin.fileno(), 0)
-            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red')
+            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
             s = input(prompt)
 
             if yes_expr.search(s):

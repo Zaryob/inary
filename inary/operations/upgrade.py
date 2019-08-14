@@ -192,6 +192,8 @@ def upgrade(A=None, repo=None):
     ctx.ui.info(util.format_by_columns(sorted(order)))
 
     operations.helper.calculate_download_sizes(order)
+    operations.helper.calculate_free_space_needed(order)
+    
 
     needs_confirm = check_update_actions(order)
 

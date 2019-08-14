@@ -74,6 +74,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(util.format_by_columns(sorted(order)))
 
     operations.helper.calculate_download_sizes(order)
+    operations.helper.calculate_free_space_needed(order)
 
     if ctx.get_option('dry_run'):
         return True
