@@ -290,7 +290,7 @@ def plan_install_pkg_names(A):
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                ctx.ui.info(' -> checking {}'.format(str(dep)), verbose=True)
+                ctx.ui.info(_(' -> checking {}').format(str(dep)), verbose=True)
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo(packagedb=packagedb):

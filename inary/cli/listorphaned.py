@@ -60,4 +60,4 @@ Lists packages installed as dependency, but no longer needed by any other instal
             ctx.ui.info(_("Orphaned packages:"))
             ctx.ui.info(util.format_by_columns(sorted(orphaned)))
         else:
-            ctx.ui.info(_("No orphaned packages"))
+            ctx.ui.info(_("No orphaned packages."))

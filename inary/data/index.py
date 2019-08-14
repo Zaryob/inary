@@ -189,7 +189,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     ctx.ui.info("")
                     raise
                 ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory \"{}\"... done.".format(key))),
-                            noln=False if ctx.config.get_option("verbose") else True)
+                            noln=False)
 
         ctx.ui.info("")
         pool.close()

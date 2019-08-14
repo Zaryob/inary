@@ -533,12 +533,12 @@ class Builder:
         self.spec.source.partOf = comp.name
 
     def fetch_source_archives(self):
-        ctx.ui.status(_("Building source package: {} [ Fetching Step ]").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ Fetching Step ]").format(self.spec.source.name),
                       push_screen=False)
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
-        ctx.ui.status(_("Building source package: {} [ Unpacking Step ]").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ Unpacking Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
@@ -553,27 +553,27 @@ class Builder:
 
     def run_setup_action(self):
         #  Run configure, build and install phase
-        ctx.ui.status(_("Building source package: {} [ SetupAction Step ]").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ SetupAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
     def run_build_action(self):
-        ctx.ui.status(_("Building source package: {} [ BuildAction Step ]").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ BuildAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Building source..."))
         if self.run_action_function(ctx.const.build_func):
             self.set_state("buildaction")
 
     def run_check_action(self):
-        ctx.ui.status(_("Building source package: [ CheckAction Step ] {}").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ CheckAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
-        ctx.ui.status(_("Building source package: [ InstallAction Step ] {}").format(self.spec.source.name),
+        ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'green') + _("Installing..."))
 
@@ -1340,8 +1340,8 @@ def build(pspec):
         ctx.ui.error(_("Action script error caught. {}").format(e))
     finally:
         if ctx.ui.errors or ctx.ui.warnings:
-            ctx.ui.warning(_("*** %d error(s), %d warning(s)") \
-                           % (ctx.ui.errors, ctx.ui.warnings))
+            ctx.ui.warning(_("*** {} error(s), {} warning(s)").format(
+                             ctx.ui.errors, ctx.ui.warnings))
     return pb
 
 

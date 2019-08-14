@@ -26,24 +26,23 @@ import inary.ui
 import inary.uri
 import inary.util as util
 
-
 @util.locked
 def add_repo(name, indexuri, at=None):
     import re
     if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
-        raise inary.errors.Error(_('Not a valid repo name.'))
+        raise inary.errors.Error(_('Not a valid repository name.'))
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
-        raise inary.errors.Error(_('Repo \"{}\" already present.').format(name))
+        raise inary.errors.Error(_('Repository \"{}\" already present.').format(name))
     elif repodb.has_repo_url(indexuri, only_active=False):
         repo = repodb.get_repo_by_url(indexuri)
-        raise inary.errors.Error(_('Repo \"{}\" already present with name \"{}\".').format(name, repo))
+        raise inary.errors.Error(_('Repository \"{}\" already present with name \"{}\".').format(name, repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at=at)
         ctx.ui.info(_('Flushing database caches...'), verbose=True)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo \"{}\" added to system.').format(name))
+        ctx.ui.info(_('Repository \"{}\" added to system.').format(name))
 
 
 @util.locked
@@ -53,7 +52,7 @@ def remove_repo(name):
         repodb.remove_repo(name)
         ctx.ui.info(_('Flushing database caches...'), verbose=True)
         inary.db.flush_caches()
-        ctx.ui.info(_('Repo \"{}\" removed from system.').format(name))
+        ctx.ui.info(_('Repository \"{}\" removed from system.').format(name))
     else:
         raise inary.errors.Error(_('Repository \"{}\" does not exist. Cannot remove.').format(name))
 

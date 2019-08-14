@@ -74,7 +74,7 @@ the package in graphviz format to 'pgraph.dot'.
                 ctx.ui.info(_('Plotting packages in repository \"{}\"').format(repo))
             else:
                 repo = None
-                ctx.ui.info(_('Plotting a graph of relations among all repository packages'))
+                ctx.ui.info(_('Plotting a graph of relations among all repository packages.'))
 
             if self.args:
                 a = self.args
@@ -89,7 +89,7 @@ the package in graphviz format to 'pgraph.dot'.
                 a = self.args
             else:
                 # if A is empty, then graph all packages
-                ctx.ui.info(_('Plotting a graph of relations among all installed packages'))
+                ctx.ui.info(_('Plotting a graph of relations among all installed packages.'))
                 a = inary.db.installdb.InstallDB().list_installed()
 
         g = pgraph.package_graph(a, packagedb,

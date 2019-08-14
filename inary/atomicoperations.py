@@ -157,9 +157,7 @@ class Install(AtomicOperation):
 
         # Any package should remove the package it replaces before
         self.check_replaces()
-
-        ctx.ui.status(_('Installing {0.name}, version {0.version}, release {0.release}').format(self.pkginfo))
-
+        ctx.ui.status(_("Installing \"{0.name}\", version {0.version}, release {0.release}").format(self.pkginfo), push_screen=False)
         ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
@@ -265,7 +263,7 @@ class Install(AtomicOperation):
                 iversion = inary.version.make_version(iversion_s)
                 if ctx.get_option('store_lib_info') and pkg_version > iversion:
                     self.store_old_paths = os.path.join(ctx.config.old_paths_cache_dir(), pkg.name)
-                    ctx.ui.info(_('Storing old paths info'))
+                    ctx.ui.info(_('Storing old paths info.'))
                     open(self.store_old_paths, "w").write("Version: {}\n".format(iversion_s))
 
                 pkg_release = int(pkg.release)
@@ -274,10 +272,10 @@ class Install(AtomicOperation):
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release
                 if pkg_version > iversion:
-                    ctx.ui.info(_('Upgrading to new upstream version'))
+                    ctx.ui.info(_('Upgrading to new upstream version.'))
                     self.operation = UPGRADE
                 elif pkg_release > irelease:
-                    ctx.ui.info(_('Upgrading to new distribution release'))
+                    ctx.ui.info(_('Upgrading to new distribution release.'))
                     self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
@@ -339,7 +337,7 @@ class Install(AtomicOperation):
                 )
                 ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
             except inary.scomiface.Error:
-                ctx.ui.warning(_('Configuration of \"{}\" named package failed.').format(self.pkginfo.name))
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 self.config_later = True
         else:
             self.config_later = True
@@ -530,7 +528,7 @@ class Install(AtomicOperation):
             fpath = os.path.join(ctx.const.scom_dir, pscom.script)
             # comar prefix is added to the pkg_dir while extracting comar
             # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing files of \"{}\" named package.').format(fpath), verbose=True)
+            ctx.ui.info(_('Storing files of \"{}\" package.').format(fpath), verbose=True)
             self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
@@ -555,7 +553,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('-> Adding files of \"{}\" named package to db...').format(self.metadata.package.name), color='purple')
+        ctx.ui.info(_('Adding files of \"{}\" package to db...').format(self.metadata.package.name), color='brightpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -604,14 +602,14 @@ class Remove(AtomicOperation):
         except inary.errors.Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
-            ctx.ui.warning(_('File list could not be read for \"{}\" named package, continuing removal.').format(package_name))
+            ctx.ui.warning(_('File list could not be read for \"{}\" package, continuing removal.').format(package_name))
             self.files = inary.data.files.Files()
 
     def run(self):
         """Remove a single package"""
-
-        ctx.ui.status(_('Removing package \"{}\"').format(self.package_name))
         ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
+        ctx.ui.status(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package), push_screen=False)
+
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
@@ -720,6 +718,7 @@ class Remove(AtomicOperation):
 
     def remove_db(self):
         self.installdb.remove_package(self.package_name)
+        ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
         ctx.filesdb.remove_files(self.files.list)
 
 
