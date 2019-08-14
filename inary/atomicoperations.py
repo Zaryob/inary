@@ -181,6 +181,7 @@ class Install(AtomicOperation):
         else:
             event = inary.ui.installed
         ctx.ui.notify(event, package=self.pkginfo, files=self.files)
+        util.xterm_title_reset()
 
     def check_requirements(self):
         """check system requirements"""
@@ -627,6 +628,7 @@ class Remove(AtomicOperation):
         self.remove_inary_files()
         ctx.ui.close()
         ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
+        util.xterm_title_reset()
 
     def check_dependencies(self):
         # FIXME: why is this not implemented? -- exa

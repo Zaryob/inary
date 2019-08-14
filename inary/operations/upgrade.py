@@ -120,7 +120,7 @@ def find_upgrades(packages, replaces):
                     pkg), True)
 
     if debug and ds:
-        ctx.ui.status(_('The following packages have different sha1sum:'))
+        ctx.ui.info(_('The following packages have different sha1sum:'))
         ctx.ui.info(util.format_by_columns(sorted(ds)))
 
     return Ap
@@ -188,7 +188,7 @@ def upgrade(A=None, repo=None):
     if componentdb.has_component('system.base'):
         order = operations.helper.reorder_base_packages(order)
 
-    ctx.ui.status(_('The following packages will be upgraded:'))
+    ctx.ui.info(_('The following packages will be upgraded:'), color="green")
     ctx.ui.info(util.format_by_columns(sorted(order)))
 
     total_size, cached_size = operations.helper.calculate_download_sizes(order)

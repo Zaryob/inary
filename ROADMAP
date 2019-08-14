@@ -14,6 +14,9 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
       + ctx.ui.debug fonksiyonu gerekli olmadıkça kullanılmamalı.
       + ctx.ui.info önemli mesajlar ve detaylar için (verbose parametresi ile kullanılmalı)
       - Bilgilendirme için kullanılan mesajlar ayıklanıp logdan ayrılmalı.
+    / Fix ctx.ui functions:
+      / ctx.ui içindeki fonksiyonlar düzenlenmeli. Bazıları çok canavarca kullanılmış.
+        + ctx.ui.notify düzenlemesi
   - Paket kurulması öncesi tam bilgilendirme.
     - İndirilecek boyutu yazdır.
     - Eğer paket kurulacak ise toplam install.tar.xz boyutunu yazdır.
