@@ -191,9 +191,7 @@ def upgrade(A=None, repo=None):
     ctx.ui.info(_('The following packages will be upgraded:'), color="green")
     ctx.ui.info(util.format_by_columns(sorted(order)))
 
-    total_size, cached_size = operations.helper.calculate_download_sizes(order)
-    total_size, symbol = util.human_readable_size(total_size)
-    ctx.ui.info(_('Total size of package(s): %.2f %s') % (total_size, symbol), color="yellow")
+    operations.helper.calculate_download_sizes(order)
 
     needs_confirm = check_update_actions(order)
 
