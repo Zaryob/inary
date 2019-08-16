@@ -942,7 +942,7 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            raise SourceArchiveError(_("unpack: check_file_hash failed"))
+            raise SourceArchiveError(_("unpack: check_file_hash failed."))
 
         try:
             archive = Archive(self.archiveFile, self.archive.type)

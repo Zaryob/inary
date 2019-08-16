@@ -243,7 +243,7 @@ def getBinutilsInfo(util):
     cross_build_name = '{0}-{1}'.format(HOST(), util)
     if not existBinary(cross_build_name):
         if not existBinary(util):
-            raise BinutilsError(_('Util \'{}\' cannot be found').format(util))
+            raise BinutilsError(_('Util \'{}\' cannot be found.').format(util))
         else:
             ctx.ui.warning(_('\'{0}\' does not exist, using plain name \'{1}\'').format(cross_build_name, util))
             return util

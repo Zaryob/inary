@@ -52,10 +52,10 @@ packages from all repositories.
         group = optparse.OptionGroup(self.parser, _("list-newest options"))
         group.add_option("-s", "--since", action="store",
                          default=None,
-                         help=_("List new packages added to repository after this given date formatted as yyyy-mm-dd"))
+                         help=_("List new packages added to repository after this given date formatted as yyyy-mm-dd."))
         group.add_option("-l", "--last", action="store",
                          default=None,
-                         help=_("List new packages added to repository after last nth previous repository update"))
+                         help=_("List new packages added to repository after last nth previous repository update."))
         self.parser.add_option_group(group)
 
     def run(self):
@@ -85,7 +85,7 @@ packages from all repositories.
         if since:
             ctx.ui.info(_("Packages added to \'{0}\' since \"{1}\":\n").format(repo, since))
         else:
-            ctx.ui.info(_("Packages added to \'{}\:").format(repo))
+            ctx.ui.info(_("Packages added to \'{}\':").format(repo))
 
         # maxlen is defined dynamically from the longest package name (#9021)
         maxlen = max([len(_p) for _p in l])

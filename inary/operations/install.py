@@ -99,7 +99,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     paths = []
     extra_paths = {}
     for x in order:
-        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading {} / {}").format(order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
@@ -117,7 +117,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         operations.remove.remove_conflicting_packages(conflicts)
 
     for path in paths:
-        ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
+        ctx.ui.info(_("Installing {} / {}") .format(paths.index(path) + 1, len(paths)), color="yellow")
         install_op = atomicoperations.Install(path)
         install_op.install(False)
         try:
@@ -219,7 +219,7 @@ def install_pkg_files(package_URIs, reinstall=False):
                          "in order to satisfy dependencies:"))
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Would you like to continue?')):
-            raise Exception(_('External dependencies not satisfied'))
+            raise Exception(_('External dependencies not satisfied.'))
         install_pkg_names(extra_packages, reinstall=True, extra=True)
 
     class PackageDB:
@@ -299,7 +299,7 @@ def plan_install_pkg_names(A):
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo(packagedb=packagedb):
-                        raise Exception(_('\"{0}\" dependency of package \"{1}\" is not satisfied').format(dep, pkg.name))
+                        raise Exception(_('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)

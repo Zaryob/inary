@@ -52,9 +52,9 @@ expanded to package names.
         group = optparse.OptionGroup(self.parser, _("remove options"))
         super(Remove, self).options(group)
         group.add_option("--purge", action="store_true",
-                         default=False, help=_("Removes everything including changed config files of the package"))
+                         default=False, help=_("Removes everything including changed config files of the package."))
         group.add_option("-c", "--component", action="append",
-                         default=None, help=_("Remove component's and recursive components' packages"))
+                         default=None, help=_("Remove component's and recursive components' packages."))
         self.parser.add_option_group(group)
 
     def run(self):

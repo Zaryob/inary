@@ -722,7 +722,7 @@ class Remove(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
 
     def remove_inary_files(self):
-        ctx.ui.info(_('Removing files of \"{}\" package from system').format(self.package_name), color='faintpurple')
+        ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
         util.clean_dir(self.package.pkg_dir())
 
     def remove_db(self):

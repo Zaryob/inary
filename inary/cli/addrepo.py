@@ -92,7 +92,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                     repository.set_repo_activity(name, False)
 
             else:
-                raise Exception(_("Extension of repository URI must be \".xml.xz\" or \".xml\" "))
+                raise Exception(_("Extension of repository URI must be \".xml.xz\" or \".xml\"."))
 
 
         else:

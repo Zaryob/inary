@@ -72,7 +72,7 @@ class XmlFile(object):
             self.doc = minidom.parseString(file)
             return self.doc.documentElement
         except Exception as e:
-            raise Error(_("File \"{}\" has invalid XML: {}").format(file, e))
+            raise Error(_("File \"{}\" has invalid XML: {}\n").format(file, e))
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
                 compress=None, sign=None, copylocal=False):
