@@ -41,7 +41,7 @@ try:
     import dbus
 
 except ImportError:
-    raise Error(_("scom-api package is not fully installed"))
+    raise Error(_("scom package is not fully installed."))
 
 
 def is_char_valid(char):
@@ -152,7 +152,7 @@ def post_install(package_name, provided_scripts,
             # Do nothing if setupPackage method is not defined
             # in package script
             if not is_method_missing(exception):
-                raise Error(_("Script error for \"{0}\" package: {1}").format(package_name, exception))
+                raise Error(_("Script error for \"{0}\" package: {1}.").format(package_name, exception))
 
     if self_post:
         if not fromVersion:

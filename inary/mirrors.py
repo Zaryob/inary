@@ -53,4 +53,4 @@ class Mirrors:
                         (name, url) = mirror
                         self._add_mirror(name, url)
         else:
-            raise inary.errors.Error(_('Mirrors file \"{}\" does not exist. Could not resolve mirrors://').format(config))
+            raise inary.errors.Error(_('Mirrors file \"{}\" does not exist. Could not resolve \"mirrors://\"').format(config))

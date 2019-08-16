@@ -200,7 +200,7 @@ def upgrade(A=None, repo=None):
 
     operations.helper.calculate_download_sizes(order)
     operations.helper.calculate_free_space_needed(order)
-    
+
 
     needs_confirm = check_update_actions(order)
 
@@ -224,7 +224,7 @@ def upgrade(A=None, repo=None):
 
     paths = []
     for x in order:
-        ctx.ui.info(_("Downloading %d / %d") % (order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading {} / {}").format(order.index(x) + 1, len(order)), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
@@ -239,7 +239,7 @@ def upgrade(A=None, repo=None):
 
     try:
         for path in paths:
-            ctx.ui.info(_("Installing %d / %d") % (paths.index(path) + 1, len(paths)), color="yellow")
+            ctx.ui.info(_("Installing {} / {}").format(paths.index(path) + 1, len(paths)), color="yellow")
             install_op = atomicoperations.Install(path, ignore_file_conflicts=True)
             install_op.install(not ctx.get_option('compare_sha1sum'))
     except Exception as e:
@@ -290,7 +290,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 # previous ones.
                 G_f.add_dep(pkg.name, dep)
             else:
-                ctx.ui.error(_('Dependency \"{0}\" of \"{1}\" cannot be satisfied').format(dep, pkg.name))
+                ctx.ui.error(_('Dependency \"{0}\" of \"{1}\" cannot be satisfied.').format(dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):

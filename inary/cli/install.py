@@ -59,9 +59,9 @@ expanded to package names.
         group.add_option("--ignore-check", action="store_true",
                          default=False, help=_("Skip distribution release and architecture check."))
         group.add_option("--ignore-file-conflicts", action="store_true",
-                         default=False, help=_("Ignore file conflicts"))
+                         default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
-                         default=False, help=_("Ignore package conflicts"))
+                         default=False, help=_("Ignore package conflicts."))
         group.add_option("-c", "--component", action="append",
                          default=None, help=_("Install component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",

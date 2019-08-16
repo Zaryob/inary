@@ -433,7 +433,7 @@ def join_path(a, *p):
 def check_file(_file, mode=os.F_OK):
     """Shorthand to check if a file exists."""
     if not os.access(_file, mode):
-        raise FileError("File " + _file + " not found")
+        raise FileError(_("File {} not found.").format(_file))
     return True
 
 
@@ -734,7 +734,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if ret:
         if out is None and err is None:
             # Which means stderr and stdout directed so they are None
-            raise Error(_("ERROR: patch (\"{}\") failed").format(patchFile))
+            raise Error(_("ERROR: patch (\"{}\") failed.").format(patchFile))
         else:
             raise Error(_("ERROR: patch (\"{0}\") failed: {1}").format(patchFile, out))
 

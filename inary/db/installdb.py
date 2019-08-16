@@ -436,4 +436,4 @@ class InstallDB(lazydb.LazyDB):
         if package in self.installed_db:
             return os.path.join(ctx.config.packages_dir(), "{0}-{1}".format(package, self.installed_db[package]))
 
-        raise Exception(_('Package \"{}\" is not installed').format(package))
+        raise Exception(_('Package \"{}\" is not installed.').format(package))

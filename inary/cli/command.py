@@ -38,7 +38,7 @@ class autocommand(type):
         Command.cmd.append(cls)
         name = getattr(cls, 'name', None)
         if name is None:
-            raise inary.cli.Error(_('Command lacks name'))
+            raise inary.cli.Error(_('Command lacks name.'))
         longname, shortname = name
 
         def add_cmd(cmd):
@@ -110,20 +110,20 @@ class Command(object):
         group = optparse.OptionGroup(self.parser, _("general options"))
 
         group.add_option("-D", "--destdir", action="store", default=None,
-                         help=_("Change the system root for INARY commands"))
+                         help=_("Change the system root for INARY commands."))
         group.add_option("-y", "--yes-all", action="store_true",
-                         default=False, help=_("Assume yes in all yes/no queries"))
+                         default=False, help=_("Assume yes in all yes/no queries."))
         group.add_option("-u", "--username", action="store")
         group.add_option("-p", "--password", action="store")
         group.add_option("-L", "--bandwidth-limit", action="store", default=0,
-                         help=_("Keep bandwidth usage under specified KB's"))
+                         help=_("Keep bandwidth usage under specified KB's."))
         group.add_option("-v", "--verbose", action="store_true",
                          dest="verbose", default=False,
                          help=_("Detailed output"))
         group.add_option("-d", "--debug", action="store_true",
-                         default=False, help=_("Show debugging information"))
+                         default=False, help=_("Show debugging information."))
         group.add_option("-N", "--no-color", action="store_true", default=False,
-                         help=_("Suppresses all coloring of INARY's output"))
+                         help=_("Suppresses all coloring of INARY's output."))
 
         p.add_option_group(group)
 
@@ -218,13 +218,13 @@ class PackageOp(Command):
     def options(self, group):
         group.add_option("--ignore-dependency", action="store_true",
                          default=False,
-                         help=_("Do not take dependency information into account"))
+                         help=_("Do not take dependency information into account."))
         group.add_option("--ignore-safety", action="store_true",
-                         default=False, help=_("Bypass safety switch"))
+                         default=False, help=_("Bypass safety switch."))
         group.add_option("--ignore-scom", action="store_true",
-                         default=False, help=_("Bypass scom configuration agent"))
+                         default=False, help=_("Bypass scom configuration agent."))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
-                         help=_("Do not perform any action, just show what would be done"))
+                         help=_("Do not perform any action, just show what would be done."))
 
     def init(self, database=True, write=True):
         super(PackageOp, self).init(database, write)

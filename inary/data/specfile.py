@@ -280,7 +280,7 @@ class Package(metaclass=autoxml.autoxml):
     def satisfies_runtime_dependencies(self):
         for dep in self.runtimeDependencies():
             if not dep.satisfied_by_installed():
-                ctx.ui.error(_('\"{0}\" dependency of package \"{1}\" is not satisfied').format(dep, self.name))
+                ctx.ui.error(_('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(dep, self.name))
                 return False
         return True
 

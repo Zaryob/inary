@@ -123,7 +123,7 @@ def check_path_collision(package, pkgList):
 
                 if util.subpath(pinfo.path, path.path):
                     collisions.append(path.path.rstrip("/"))
-                    ctx.ui.debug(_('Path \"{}\" belongs in multiple packages').format(path.path))
+                    ctx.ui.debug(_('Path \"{}\" belongs in multiple packages.').format(path.path))
     return collisions
 
 
@@ -522,7 +522,7 @@ class Builder:
             except inary.fetcher.FetchError:
                 ctx.ui.warning(_("Cannot find component.xml in remote "
                                  "directory, Source is now part of "
-                                 "unknown component"))
+                                 "unknown component."))
                 self.spec.source.partOf = 'unknown'
                 return
             path = util.join_path(self.pkg_work_dir(), 'component.xml')
@@ -530,7 +530,7 @@ class Builder:
             if not os.path.exists(url):
                 ctx.ui.warning(_("Cannot find component.xml in upper "
                                  "directory, Source is now part of "
-                                 "unknown component"))
+                                 "unknown component."))
                 self.spec.source.partOf = 'unknown'
                 return
             path = url
@@ -843,7 +843,7 @@ class Builder:
                     extra_deps = [dependency.Dependency(package=x) for x in extra_names]
                     build_deps.extend(extra_deps)
             else:
-                ctx.ui.warning(_('Safety switch: the component system.devel cannot be found'))
+                ctx.ui.warning(_('Safety switch: the component system.devel cannot be found.'))
 
         # find out the build dependencies that are not satisfied...
         dep_unsatis = []
@@ -856,14 +856,14 @@ class Builder:
                         + util.strlist([str(x) for x in dep_unsatis]))
 
             def fail():
-                raise Error(_('Cannot build package due to unsatisfied build dependencies'))
+                raise Error(_('Cannot build package due to unsatisfied build dependencies.'))
 
             if not ctx.config.get_option('ignore_dependency'):
                 for dep in dep_unsatis:
                     if not dep.satisfied_by_repo():
-                        raise Error(_('Build dependency \"{}\" cannot be satisfied').format(str(dep)))
+                        raise Error(_('Build dependency \"{}\" cannot be satisfied.').format(str(dep)))
                 if ctx.ui.confirm(
-                        _('Do you want to install the unsatisfied build dependencies')):
+                        _('Would you like to install the unsatisfied build dependencies?')):
                     ctx.ui.info(_('Installing build dependencies.'))
                     if not inary.api.install([dep.package for dep in dep_unsatis], reinstall=True):
                         fail()
