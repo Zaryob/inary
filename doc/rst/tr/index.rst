@@ -15,10 +15,13 @@ Bu belgelendirme Inary paket yöneticisi hakkında tüm bilgileri içermektedir.
 
    hakkinda.rst
    kurulum.rst
-   sozluk.rst
+
+   komutlar/index.rst
    gelistirme/index.rst
    gelistirme/paket_yapimi/index.rst
    gelistirme/yerellestirme/index.rst
+
    cok_sorulanlar.rst
+   sozluk.rst
 
 Bu belgeleme AGPL-3 ile lisanslanmıştır.
