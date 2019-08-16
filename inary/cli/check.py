@@ -61,13 +61,13 @@ class Check(command.Command, metaclass=command.autocommand):
                          action="store",
                          default=None,
                          help=_("Check installed packages under "
-                                "given component"))
+                                "given component."))
 
         group.add_option("--config",
                          action="store_true",
                          default=False,
                          help=_("Checks only changed config files of "
-                                "the packages"))
+                                "the packages."))
 
         self.parser.add_option_group(group)
 
@@ -83,7 +83,7 @@ class Check(command.Command, metaclass=command.autocommand):
         elif self.args:
             pkgs = self.args
         else:
-            ctx.ui.info(_('Checking all installed packages') + '\n')
+            ctx.ui.info(_('Checking all installed packages.') + '\n')
             pkgs = inary.db.installdb.InstallDB().list_installed()
 
         necessary_permissions = True
@@ -92,7 +92,7 @@ class Check(command.Command, metaclass=command.autocommand):
         check_config = ctx.get_option('config')
 
         # Line prefix
-        prefix = _('Checking integrity of \"{}\"')
+        prefix = _('Checking integrity of \"{}\".')
 
         # Determine maximum length of messages for proper formatting
         maxpkglen = max([len(_p) for _p in pkgs])

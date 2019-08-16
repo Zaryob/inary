@@ -46,9 +46,9 @@ Finds the installed package which contains the specified file.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("search-file options"))
         group.add_option("-l", "--long", action="store_true",
-                         default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format."))
         group.add_option("-q", "--quiet", action="store_true",
-                         default=False, help=_("Show only package name"))
+                         default=False, help=_("Show only package name."))
         self.parser.add_option_group(group)
 
     @staticmethod
@@ -56,7 +56,7 @@ Finds the installed package which contains the specified file.
         found = search.search_file(path)
 
         if not found:
-            ctx.ui.error(_("Path \"{}\" does not belong to an installed package").format(path))
+            ctx.ui.error(_("Path \"{}\" does not belong to an installed package.").format(path))
 
         for pkg, files in found:
             for pkg_file in files:

@@ -151,7 +151,7 @@ def dohtml(*sourceFiles, **kw):
     for sourceFile in sourceFiles:
         sourceFileGlob = glob.glob(sourceFile)
         if len(sourceFileGlob) == 0:
-            raise FileError(_("No file matched pattern \"{}\"").format(sourceFile))
+            raise FileError(_("No file matched pattern \"{}\".").format(sourceFile))
 
         for source in sourceFileGlob:
             if os.path.isfile(source) and os.path.splitext(source)[1] in allowed_extensions:

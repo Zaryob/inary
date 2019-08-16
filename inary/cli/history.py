@@ -56,11 +56,11 @@ Lists previous operations.""")
         group = optparse.OptionGroup(self.parser, _("history options"))
 
         group.add_option("-l", "--last", action="store", type="int", default=0,
-                         help=_("Output only the last n operations"))
+                         help=_("Output only the last \'n\' operations."))
         group.add_option("-s", "--snapshot", action="store_true", default=False,
-                         help=_("Take snapshot of the current system"))
+                         help=_("Take snapshot of the current system."))
         group.add_option("-t", "--takeback", action="store", type="int", default=-1,
-                         help=_("Takeback to the state after the given operation finished"))
+                         help=_("Takeback to the state after the given operation finished."))
 
         self.parser.add_option_group(group)
 

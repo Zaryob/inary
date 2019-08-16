@@ -71,7 +71,7 @@ def configure_pending(packages=None):
                 ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
     except ImportError:
-        raise inary.errors.Error(_("scom package is not fully installed"))
+        raise inary.errors.Error(_("scom package is not fully installed."))
 
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):

@@ -81,7 +81,7 @@ expanded to package names.
                                 "and components whose basenames match "
                                 "any pattern contained in file."))
         group.add_option("-s", "--compare-sha1sum", action="store_true",
-                         default=False, help=_("compare sha1sum repo and installed packages."))
+                         default=False, help=_("Compare sha1sum repo and installed packages."))
 
         self.parser.add_option_group(group)
 
@@ -93,11 +93,11 @@ expanded to package names.
             self.init()
 
         if not ctx.get_option('bypass_update_repo'):
-            ctx.ui.info(_('Updating repositories'))
+            ctx.ui.info(_('Updating repositories.'), color='green')
             repos = inary.db.repodb.RepoDB().list_repos(only_active=True)
             repository.update_repos(repos)
         else:
-            ctx.ui.info(_('Will not update repositories'))
+            ctx.ui.info(_('Will not update repositories.'))
 
         reposit = ctx.get_option('repository')
         components = ctx.get_option('component')

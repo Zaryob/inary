@@ -112,7 +112,7 @@ class ComponentDB(lazydb.LazyDB):
     def get_component(self, component_name, repo=None):
 
         if not self.has_component(component_name, repo):
-            raise Exception(_('Component {} not found').format(component_name))
+            raise Exception(_('Component {} not found.').format(component_name))
 
         component = Component.Component()
         component.parse(self.cdb.get_item(component_name, repo))

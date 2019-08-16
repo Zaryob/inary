@@ -130,7 +130,7 @@ class Build(command.Command, metaclass=command.autocommand):
                          dest="until",
                          action="store_const",
                          const="setup",
-                         help=_("Break build after running configure step"))
+                         help=_("Break build after running configure step."))
 
         group.add_option("--build",
                          dest="until",

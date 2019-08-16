@@ -82,7 +82,7 @@ class File:
         if isinstance(uri, str):
             uri = inary.uri.URI(uri)
         elif not isinstance(uri, inary.uri.URI):
-            raise Error(_("uri must have type either URI or string"))
+            raise Error(_("uri must have type either URI or string."))
         return uri
 
     @staticmethod
@@ -203,7 +203,7 @@ class File:
             if self.mode == File.read:
                 localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
             else:
-                raise Error(_("Remote write not implemented"))
+                raise Error(_("Remote write not implemented."))
         else:
             localfile = uri.get_uri()
             if self.mode == File.read:
@@ -252,10 +252,10 @@ class File:
 
             if self.sign == File.detached:
                 if inary.util.run_batch('gpg --detach-sig ' + self.localfile)[0]:
-                    raise Error(_("ERROR: \'gpg --detach-sig {}\' failed").format(self.localfile))
+                    raise Error(_("ERROR: \'gpg --detach-sig {}\' failed.").format(self.localfile))
                 for compressed_file in compressed_files:
                     if inary.util.run_batch('gpg --detach-sig ' + compressed_file)[0]:
-                        raise Error(_("ERROR: \'gpg --detach-sig {}\' failed").format(compressed_file))
+                        raise Error(_("ERROR: \'gpg --detach-sig {}\' failed.").format(compressed_file))
 
     @staticmethod
     def check_signature(uri, transfer_dir, sign=detached):

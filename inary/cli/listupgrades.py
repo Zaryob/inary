@@ -51,11 +51,11 @@ Lists the packages that will be upgraded.
     def options(self):
         group = optparse.OptionGroup(self.parser, _("list-upgrades options"))
         group.add_option("-l", "--long", action="store_true",
-                         default=False, help=_("Show in long format"))
+                         default=False, help=_("Show in long format."))
         group.add_option("-c", "--component", action="store",
-                         default=None, help=_("List upgradable packages under given component"))
+                         default=None, help=_("List upgradable packages under given component."))
         group.add_option("-i", "--install-info", action="store_true",
-                         default=False, help=_("Show detailed install info"))
+                         default=False, help=_("Show detailed install info."))
         self.parser.add_option_group(group)
 
     def run(self):
