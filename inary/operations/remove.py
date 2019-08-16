@@ -88,7 +88,7 @@ in the respective order to satisfy dependencies:"""), color='green')
     ctx.ui.info(util.strlist(order))
     if len(order) > len(A_0):
         if not ctx.ui.confirm(_('Would you like to continue?')):
-            ctx.ui.warning(_('Package removal declined'))
+            ctx.ui.warning(_('Package removal declined.'))
             return False
 
     removal_size = 0
@@ -100,7 +100,7 @@ in the respective order to satisfy dependencies:"""), color='green')
     del removal_size, symbol
 
     if not ctx.ui.confirm(_("Would you like to continue?")):
-        ctx.ui.warning(_('Package removal declined'))
+        ctx.ui.warning(_('Package removal declined.'))
         return False
 
 
@@ -180,7 +180,7 @@ def plan_remove(A):
 
 def remove_conflicting_packages(conflicts):
     if remove(conflicts, ignore_dep=True, ignore_safety=True):
-        raise Exception(_("Conflicts remain"))
+        raise Exception(_("Conflicts remain."))
 
 
 def remove_obsoleted_packages():
@@ -189,12 +189,12 @@ def remove_obsoleted_packages():
     obsoletes = list(filter(installdb.has_package, packagedb.get_obsoletes()))
     if obsoletes:
         if remove(obsoletes, ignore_dep=True, ignore_safety=True):
-            raise Exception(_("Obsoleted packages remaining"))
+            raise Exception(_("Obsoleted packages remaining."))
 
 
 def remove_replaced_packages(replaced):
     if remove(replaced, ignore_dep=True, ignore_safety=True):
-        raise Exception(_("Replaced package remains"))
+        raise Exception(_("Replaced package remains."))
 
 
 def get_remove_order(packages):

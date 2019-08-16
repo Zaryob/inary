@@ -63,7 +63,7 @@ def gnuconfig_update():
                     ctx.ui.info(_('GNU Config Update Failed.'))
                     if not pass_gnuconfig:
                         if not ctx.ui.confirm(_('Would you like to continue? (it may be dangerous!!!):')):
-                            raise RunTimeError(_('GNU Config Update Failed. Please check your gnuconfig scripts.s (/usr/share/gnuconfig)'))
+                            raise RunTimeError(_('GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)'))
                         else:
                             pass_gnuconfig=True
                 else:

@@ -115,7 +115,7 @@ def __update_repo(repo, force=False):
         except inary.file.AlreadyHaveException:
             ctx.ui.info(_('\"{}\" repository information is up-to-date.').format(repo))
             if force:
-                ctx.ui.info(_('Updating database at any rate as requested'))
+                ctx.ui.info(_('Updating database at any rate as requested.'))
                 index.read_uri_of_repo(repouri, repo, force=force)
             else:
                 return False

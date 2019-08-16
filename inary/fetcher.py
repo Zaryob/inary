@@ -165,10 +165,10 @@ class Fetcher:
             raise FetchError(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            raise FetchError(_('Access denied to write to destination directory: "%s"') % self.destdir)
+            raise FetchError(_('Access denied to write to destination directory: "{}"').format(self.destdir))
 
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
-            raise FetchError(_('Access denied to destination file: "%s"') % self.archive_file)
+            raise FetchError(_('Access denied to destination file: "{}"').format(self.archive_file))
 
         else:
             c = pycurl.Curl()
@@ -250,7 +250,7 @@ class Fetcher:
             proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme()] = ctx.config.values.general.ftp_proxy
 
         if self.url.scheme() in proxies:
-            ctx.ui.info(_("Proxy configuration has been found for '{}' protocol").format(self.url.scheme()))
+            ctx.ui.info(_("Proxy configuration has been found for '{}' protocol.").format(self.url.scheme()))
 
         return proxies
 
@@ -258,7 +258,7 @@ class Fetcher:
     def _get_bandwith_limit():
         bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
         if bandwidth_limit and bandwidth_limit != "0":
-            ctx.ui.warning(_("Bandwidth usage is limited to {} KB/s").format(bandwidth_limit))
+            ctx.ui.warning(_("Bandwidth usage is limited to {} KB/s.").format(bandwidth_limit))
             return 1024 * int(bandwidth_limit)
         else:
             return 0
@@ -285,11 +285,11 @@ def fetch(packages=None, path=os.path.curdir):
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
         package, repo = packagedb.get_package_repo(name)
-        ctx.ui.info(_("\"{0}\" package found in \"{1}\" repository").format(package.name, repo))
+        ctx.ui.info(_("\"{0}\" package found in \"{1}\" repository.").format(package.name, repo))
         uri = inary.uri.URI(package.packageURI)
         output = os.path.join(path, uri.path())
         if os.path.exists(output) and package.packageHash == inary.util.sha1_file(output):
-            ctx.ui.warning(_("\"{}\" package already fetched").format(uri.path()))
+            ctx.ui.warning(_("\"{}\" package already fetched.").format(uri.path()))
             continue
         if uri.is_absolute_path():
             url = str(uri.path())

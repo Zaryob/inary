@@ -100,7 +100,7 @@ class PreParser(optparse.OptionParser):
 
             def option():
                 if not self.allow_interspersed_args and first_arg:
-                    self.error(_('Options must precede non-option arguments'))
+                    self.error(_('Options must precede non-option arguments.'))
                 arg = rargs[0]
                 if arg.startswith('--'):
                     self.opts.append(arg[2:])
@@ -143,10 +143,10 @@ class InaryCLI(object):
                     sys.exit(0)
                 elif 'help' in opts or 'h' in opts:
                     self.die()
-                raise inary.cli.Error(_('No command given'))
+                raise inary.cli.Error(_('No command given.'))
             cmd_name = args[0]
         except ParserError:
-            raise inary.cli.Error(_('Command line parsing error'))
+            raise inary.cli.Error(_('Command line parsing error.'))
 
         self.command = command.Command.get_command(cmd_name, args=orig_args)
         if not self.command:

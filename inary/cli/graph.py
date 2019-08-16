@@ -51,16 +51,16 @@ the package in graphviz format to 'pgraph.dot'.
 
         group.add_option("-r", "--repository", action="store",
                          default=None,
-                         help=_("Specify a particular repository"))
+                         help=_("Specify a particular repository."))
         group.add_option("-i", "--installed", action="store_true",
                          default=False,
                          help=_("Graph of installed packages"))
         group.add_option("--ignore-installed", action="store_true",
                          default=False,
-                         help=_("Do not show installed packages"))
+                         help=_("Do not show installed packages."))
         group.add_option("-R", "--reverse", action="store_true",
                          default=False,
-                         help=_("Draw reverse dependency graph"))
+                         help=_("Draw reverse dependency graph."))
         group.add_option("-o", "--output", action="store",
                          default='pgraph.dot',
                          help=_("Dot output file"))
