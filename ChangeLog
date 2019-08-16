@@ -1,3 +1,33 @@
+2019-08-16 Suleyman Poyraz <zaryob.dev@gmail.com>
+    * Lisans Güncellendi:
+      Eski çatalın lisans olan GPLv2 yerine mevcut çalıştığım inary çatalında GPLv3 kullanıyordum
+      ancak AGPLv3 ile yayıma devam etme kararı aldım.
+
+2019-08-14 Suleyman Poyraz <zaryob.dev@gmail.com>
+    * Paket kurulumu öncesi tam bilgilendirme:
+     Şu değerler artık paket işlemleri sırasında listelenecek: indirilecek toplam
+     paket boyutu, indirilecek paketlerden önceden indirilmiş olanı; kurulum/güncelleme
+     sonrası gereken boş disk alanı; silme işleminden sonra diskte açılacak yer.
+     - Paket indirmeden önce toplam indirme boyutu ve önceden indirilmiş paket miktarını
+       göstecek şekilde ctx.ui.notify içindeki event ayarlanı ve ona göre kod düzenlendi.
+
+    * Orphaned paketler için düzenleme:
+     oprhaned yani kopuk olan paketler arasında her zaman doc pages static ve dbginfo
+     paketlerini de alıyordu ve anında siliyordu bu hata düzeltildi.
+    * GPG Signature/GPG İmzalama problemi:
+     GPG imzası bulunamadı ya da doğrulanamadığı durumda hata veren kod değiştirildi.
+     kontrol mekanizması eklendi
+    * ctx.ui.notify fonksiyonuna eklemeler ve düzenlemeler ve yeni renkler
+     - ui içerisindeki her bir işlem adımı için ekleme yapıldı. İnstalling removing gibi
+       adımları hem ekrana hem log dosyasında hem ekrana hem de log dökümüne yazdırmak,
+       kurulum sırasını ve bazı önemli şeyleri de sadece log dökümüne yazdırmayı denetlemem
+       lazımdı. Notify kullanacak yerler belirlendi. Buna göre kodlar düzenlendi.
+     - italic yazı stili ve üzeri çizgili yazı stilleri eklendi.
+
+2019-08-13 Suleyman Poyraz <zaryob.dev@gmail.com>
+    * magic için fallback yazıldı:
+        magic modülü yoksa file komutu ile dosya bilgileri alınacak
+
 2019-08-12 Suleyman Poyraz <zaryob.dev@gmail.com>
 	* Uzun zamandır ağız tadı ile bir ChangeLog yazamadım.
 	* gericekme branchi hakkında:
