@@ -1,7 +1,8 @@
 .. -*- coding: utf-8 -*-
------
+
+==================
 inary delete-cache
------
+==================
 
 `inary delete-cache` inary'ye ait geçici dosyaları paket ve kaynak kod arşivlerini
 işe yaramadığı zaman temizlememizi sağlayan komuttur.
