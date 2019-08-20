@@ -107,11 +107,11 @@ def calculate_free_space_needed(order):
 
         else:
             total_needed += int(packagedb.get_package(pkg.name).installedSize)
-        needed, symbol = util.human_readable_size(total_needed)
-        if total_needed < 0:
-            ctx.ui.info(_("{:.2f} {} space will be freed.").format(needed, symbol), color='cyan')
-        else:
-            ctx.ui.info(_("{:.2f} {} space will be used.").format(needed, symbol), color='cyan')
+    needed, symbol = util.human_readable_size(total_needed)
+    if total_needed < 0:
+          ctx.ui.info(_("{:.2f} {} space will be freed.").format(needed, symbol), color='cyan')
+    else:
+          ctx.ui.info(_("{:.2f} {} space will be used.").format(needed, symbol), color='cyan')
 
     return total_needed
 
