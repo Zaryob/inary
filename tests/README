@@ -1,0 +1,13 @@
+
+Inary UnitTests
+##############
+
+Before running unittests you need to first go to repos directory and 
+create test repositories.
+
+>>> test@sulin tests/repos# python3 createrepos.py
+
+Now you can return to tests folder and run tests.
+
+>>> test@sulin tests # python3 runtests.py
+
