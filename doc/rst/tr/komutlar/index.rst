@@ -82,3 +82,10 @@ Tüm Komutlar Hakkında
     clean.rst
     configure-pending.rst
     delete-cache.rst
+    delta.rst
+    emerge.rst
+    emergeup.rst
+    graph.rst
+    history.rst
+    rebuild-db.rst
+    
