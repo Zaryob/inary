@@ -199,7 +199,7 @@ def removeChild(node, doc):
     node.hide()
 
 
-def removeChildText(node, text):
+def removeChildText(node):
     node.firstChild().hide()
 
 
