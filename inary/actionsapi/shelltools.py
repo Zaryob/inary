@@ -39,7 +39,7 @@ import inary.context as ctx
 from inary.actionsapi import error
 from inary.util import run_logged
 from inary.util import join_path
-
+from inary.util import colorize
 
 def can_access_file(filePath):
     """test the existence of file"""
@@ -281,7 +281,7 @@ def dirName(filePath):
 
 def system(command):
     # command an list but should be an str
-    sys.stdout.write(command + "\n")
+    sys.stdout.write(colorize(_("[Running Command]: "),'brightwhite') + command + "\n")
     #    command = str.join(str.split(command))
     retValue = run_logged(command)
 
