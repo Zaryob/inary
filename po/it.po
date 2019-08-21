@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-17 01:25+0300\n"
+"POT-Creation-Date: 2019-08-21 21:07+0000\n"
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
@@ -19,72 +19,72 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: /usr/lib64/python3.7/optparse.py:146
+#: /usr/lib/python3.7/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "Opzione non valida: %s"
 
-#: /usr/lib64/python3.7/optparse.py:157
+#: /usr/lib/python3.7/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "opzione ambigua: %s (%s?)"
 
-#: /usr/lib64/python3.7/optparse.py:381
+#: /usr/lib/python3.7/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "uso: %s\n"
 
-#: /usr/lib64/python3.7/optparse.py:400
+#: /usr/lib/python3.7/optparse.py:400
 msgid "Usage"
 msgstr "Uso"
 
-#: /usr/lib64/python3.7/optparse.py:422 /usr/lib64/python3.7/optparse.py:423
+#: /usr/lib/python3.7/optparse.py:422 /usr/lib/python3.7/optparse.py:423
 msgid "integer"
 msgstr "intero"
 
-#: /usr/lib64/python3.7/optparse.py:424
+#: /usr/lib/python3.7/optparse.py:424
 msgid "floating-point"
 msgstr "float"
 
-#: /usr/lib64/python3.7/optparse.py:425
+#: /usr/lib/python3.7/optparse.py:425
 msgid "complex"
 msgstr "complesso"
 
-#: /usr/lib64/python3.7/optparse.py:433
+#: /usr/lib/python3.7/optparse.py:433
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "opzione %s: valore %s invalido: %r"
 
-#: /usr/lib64/python3.7/optparse.py:441
+#: /usr/lib/python3.7/optparse.py:441
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "opzione %s: scelta non valida: %r (scegli tra %s)"
 
-#: /usr/lib64/python3.7/optparse.py:1238
+#: /usr/lib/python3.7/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "mostra questo messaggio di aiuto e esce"
 
-#: /usr/lib64/python3.7/optparse.py:1243
+#: /usr/lib/python3.7/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "mostra il numero di versione del programma e esce"
 
-#: /usr/lib64/python3.7/optparse.py:1266
+#: /usr/lib/python3.7/optparse.py:1266
 msgid "%prog [options]"
 msgstr "%prog [opzioni]"
 
-#: /usr/lib64/python3.7/optparse.py:1486 /usr/lib64/python3.7/optparse.py:1524
+#: /usr/lib/python3.7/optparse.py:1486 /usr/lib/python3.7/optparse.py:1524
 #, fuzzy, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "l'opzione %s richiede %d argomenti"
 msgstr[1] "l'opzione %s richiede %d argomenti"
 
-#: /usr/lib64/python3.7/optparse.py:1496
+#: /usr/lib/python3.7/optparse.py:1496
 #, fuzzy, python-format
 msgid "%s option does not take a value"
 msgstr "l'opzione %s non richiede un parametro"
 
-#: /usr/lib64/python3.7/optparse.py:1612
+#: /usr/lib/python3.7/optparse.py:1612
 msgid "Options"
 msgstr "Opzioni"
 
@@ -535,6 +535,10 @@ msgstr "ActionsAPI [touch]: Nessun file con il pattern \"{}\"."
 msgid "ActionsAPI [touch]: Permission denied: \"{}\""
 msgstr "ActionsAPI [touch]: Permesso negato: {}"
 
+#: inary/actionsapi/shelltools.py:284
+msgid "[Running Command]: "
+msgstr ""
+
 #: inary/actionsapi/shelltools.py:290
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [system]: Command '{0}' failed, return value was {1}."
@@ -786,7 +790,7 @@ msgstr "Errore di download: Pacchetto non corrisponde al pacchetto di repository
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Il pacchetto {} non è stato trovato in alcun repository attivo."
 
-#: inary/atomicoperations.py:166 inary/cli/__init__.py:214
+#: inary/atomicoperations.py:166 inary/cli/__init__.py:216
 #, fuzzy, python-brace-format
 msgid "Installing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installazione di {0.name}, versione {0.version}, release {0.release}"
@@ -924,66 +928,72 @@ msgstr "Avviso: "
 msgid "Error: "
 msgstr "Errore: "
 
-#: inary/cli/__init__.py:178
+#: inary/cli/__init__.py:157
+msgid ""
+"\n"
+" Select one:"
+msgstr ""
+
+#: inary/cli/__init__.py:180
 #, fuzzy
 msgid "(yes"
 msgstr " (si/no)"
 
-#: inary/cli/__init__.py:178
+#: inary/cli/__init__.py:180
 msgid "no)"
 msgstr ""
 
-#: inary/cli/__init__.py:211
+#: inary/cli/__init__.py:213
 #, fuzzy
 msgid "Installed \"{}\""
 msgstr "Installato {}"
 
-#: inary/cli/__init__.py:217
+#: inary/cli/__init__.py:219
 #, fuzzy
 msgid "Removed \"{}\""
 msgstr "Rimosso {}"
 
-#: inary/cli/__init__.py:220
+#: inary/cli/__init__.py:222
 #, fuzzy
 msgid "Removing \"{}\""
 msgstr "Rimosso {}"
 
-#: inary/cli/__init__.py:223
+#: inary/cli/__init__.py:225
 #, fuzzy
 msgid "Upgraded \"{}\""
 msgstr "Aggiornato {}"
 
-#: inary/cli/__init__.py:226
+#: inary/cli/__init__.py:228
 #, fuzzy
 msgid "Configured \"{}\""
 msgstr "Configurato {}"
 
-#: inary/cli/__init__.py:229
+#: inary/cli/__init__.py:231
 #, fuzzy
 msgid "Configuring \"{}\""
 msgstr "Configurato {}"
 
-#: inary/cli/__init__.py:232
+#: inary/cli/__init__.py:234
 #, fuzzy
 msgid "Extracting the files of \"{}\""
 msgstr "Estrazione dei file di {}"
 
-#: inary/cli/__init__.py:235 inary/operations/repository.py:107
+#: inary/cli/__init__.py:237 inary/operations/repository.py:107
 #, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "Aggiornamento in corso del repositorio: {}"
 
-#: inary/cli/__init__.py:240
+#: inary/cli/__init__.py:242
 #, fuzzy
 msgid "Total size of package(s): {:.2f} {} / {:.2f} {}"
 msgstr "Dimensione totale dei pacchetti: %.2f %s"
 
-#: inary/cli/__init__.py:247
+#: inary/cli/__init__.py:249
 #, fuzzy
 msgid "Following packages ordered for process: {}"
 msgstr "I seguenti pacchetti verranno rimossi:\n"
 
-#: inary/cli/__init__.py:252
+#: inary/cli/__init__.py:254
 #, fuzzy
 msgid "Extracted desktop file \"{}\""
 msgstr "Estrazione dei file di {}"
@@ -1388,6 +1398,32 @@ msgstr "Non eseguire alcuna azione, mostra solo cosa verrebbe fatto"
 msgid "usage: {}\n"
 msgstr "uso: {}\n"
 
+#: inary/cli/configmanager.py:32
+#, fuzzy
+msgid "Inary Config file manager."
+msgstr "Installazione file di configurazione fallita."
+
+#: inary/cli/configmanager.py:41
+#, fuzzy
+msgid "config-manager options"
+msgstr "opzioni configure-pending"
+
+#: inary/cli/configmanager.py:44
+msgid "Rewrite all config files with new ones without keeping old config files."
+msgstr ""
+
+#: inary/cli/configmanager.py:46
+msgid "Rewrite all config files with new ones, keeping old config files."
+msgstr ""
+
+#: inary/cli/configmanager.py:70 inary/cli/install.py:121
+msgid "[!] Some config files have been changed. Would you like to see and apply them?"
+msgstr ""
+
+#: inary/cli/configmanager.py:74
+msgid "There isn't any new config :)"
+msgstr ""
+
 #: inary/cli/configurepending.py:74 inary/scomiface.py:44
 #, fuzzy
 msgid "scom package is not fully installed."
@@ -1781,22 +1817,22 @@ msgstr "Data: {} {}"
 msgid "    * There are {} packages in this snapshot."
 msgstr ""
 
-#: inary/cli/inarycli.py:103
+#: inary/cli/inarycli.py:104
 #, fuzzy
 msgid "Options must precede non-option arguments."
 msgstr "Le opzioni devono precedere gli argomenti non opzioni"
 
-#: inary/cli/inarycli.py:146
+#: inary/cli/inarycli.py:147
 #, fuzzy
 msgid "No command given."
 msgstr "Nessun comando fornito"
 
-#: inary/cli/inarycli.py:149
+#: inary/cli/inarycli.py:150
 #, fuzzy
 msgid "Command line parsing error."
 msgstr "Errore nell'analisi della linea di comando"
 
-#: inary/cli/inarycli.py:153
+#: inary/cli/inarycli.py:154
 #, fuzzy
 msgid "Unrecognized command: {}"
 msgstr "Comando non riconosciuto {}"
@@ -3133,7 +3169,7 @@ msgstr "Errore di sintassi nel file SCOM {0}: {1}"
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Violazione ambiente protetto: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:750 inary/util.py:680
+#: inary/operations/build.py:750 inary/util.py:684
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "Errore: La directory di lavoro {} non esiste\n"
@@ -3383,6 +3419,45 @@ msgstr ""
 
 #: inary/operations/helper.py:114
 msgid "{:.2f} {} space will be used."
+msgstr ""
+
+#: inary/operations/helper.py:221
+#, python-brace-format
+msgid "Keeping old config file {0} as {0}.old-byinary"
+msgstr ""
+
+#: inary/operations/helper.py:230
+#, fuzzy, python-brace-format
+msgid "[?] Would you like to see changes in config files of \"{0}\" package"
+msgstr "Verifica solo i file di configurazione dei pacchetti modificati"
+
+#: inary/operations/helper.py:232
+msgid "[*] Changes in config file: {}"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:236
+msgid "1. Store new config file, not apply [*]"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:238
+msgid "2. Apply new config file (keep old config)"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:240
+msgid "3. Apply new config file (don't keep old config)"
+msgstr ""
+
+#: inary/operations/helper.py:234
+msgid "3. Delete new config file"
+msgstr ""
+
+#: inary/operations/helper.py:234
+msgid "[?] Select the process which will be happened:"
+msgstr ""
+
+#: inary/operations/helper.py:244
+#, python-brace-format
+msgid "Deleting new config file {0}"
 msgstr ""
 
 #: inary/operations/history.py:89 inary/operations/history.py:113
@@ -3937,81 +4012,81 @@ msgstr "il valore di ritorno per \"{0}\" è {1}"
 msgid "File {} not found."
 msgstr "File {} non trovato"
 
-#: inary/util.py:540
+#: inary/util.py:544
 #, fuzzy
 msgid "Including external link \"{}\""
 msgstr "Includendo il collegamento esterno {}"
 
-#: inary/util.py:542
+#: inary/util.py:546
 #, fuzzy
 msgid "Including directory \"{}\""
 msgstr "Includendo la cartella {}"
 
-#: inary/util.py:632
+#: inary/util.py:636
 msgid "You don't have necessary read permissions"
 msgstr "Non avete i permessi necessari per la lettura"
 
-#: inary/util.py:634
+#: inary/util.py:638
 #, fuzzy
 msgid "Cannot calculate SHA1 hash of \"{}\""
 msgstr "Impossibile calcolare l'hash SHA1 di {}"
 
-#: inary/util.py:648
+#: inary/util.py:652
 #, fuzzy
 msgid "Compression type is not valid: '{}'"
 msgstr "Tipo di compressione non è valido: {}"
 
-#: inary/util.py:654
+#: inary/util.py:658
 #, fuzzy, python-brace-format
 msgid "Error while decompressing \"{0}\": {1}"
 msgstr "Errore durante la decompressione {0}: {1}"
 
-#: inary/util.py:709
+#: inary/util.py:713
 #, python-brace-format
 msgid "Detected patch level={0} for {1}"
 msgstr ""
 
-#: inary/util.py:737
+#: inary/util.py:741
 #, fuzzy
 msgid "ERROR: patch (\"{}\") failed."
 msgstr "ERRORE: patch {} fallita"
 
-#: inary/util.py:739
+#: inary/util.py:743
 #, fuzzy, python-brace-format
 msgid "ERROR: patch (\"{0}\") failed: {1}"
 msgstr "ERRORE: patch ({0}) fallita: {1}"
 
-#: inary/util.py:751
+#: inary/util.py:755
 #, fuzzy
 msgid "'strip' command failed for file \"{}\"!"
 msgstr "Il commando strip è fallito per il file {}!"
 
-#: inary/util.py:758
+#: inary/util.py:762
 #, fuzzy
 msgid "'chrpath' command failed for file \"{}\"!"
 msgstr "Il Comando chrpath è fallito per il file {}!"
 
-#: inary/util.py:765
+#: inary/util.py:769
 #, fuzzy
 msgid "'objcopy' (keep-debug) command failed for file \"{}\"!"
 msgstr "comando objcopy (keep-debug) fallito per il file {}!"
 
-#: inary/util.py:771
+#: inary/util.py:775
 #, fuzzy
 msgid "'objcopy' (add-debuglink) command failed for file \"{}\"!"
 msgstr "comando objcopy (add-debuglink) fallito per il file {}!"
 
-#: inary/util.py:865
+#: inary/util.py:869
 #, fuzzy
 msgid "Invalid package name: \"{}\""
 msgstr "Nome del pacchetto non valido: {}"
 
-#: inary/util.py:915
+#: inary/util.py:919
 #, fuzzy
 msgid "Invalid delta package name: \"{}\""
 msgstr "Nome del pacchetto delta non valido: {}."
 
-#: inary/util.py:1052
+#: inary/util.py:1056
 #, fuzzy
 msgid "Removing empty dir: \"{}\""
 msgstr "Rimozione del pacchetto {} in corso"
