@@ -27,7 +27,7 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-from inary.operations import install
+from inary.operations import install, helper
 import inary.db
 
 
@@ -115,3 +115,8 @@ expanded to package names.
 
         reinstall = bool(packages) and packages[0].endswith(ctx.const.package_suffix)
         install.install(packages, ctx.get_option('reinstall') or reinstall)
+
+        config_changes = helper.check_config_changes(order=packages)
+        if config_changes:
+            if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
+                helper.show_changed_configs(config_changes)
