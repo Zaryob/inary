@@ -2,7 +2,11 @@
     * İki yeni araç eklendi:
       inary-sign.py: Depoları GPG imzası ile imzalamak için kullanılacak araç.
       sync-licence: Portage paket yönetimine eklenen lisanslarla elimizdekileri güncelleyecek araç.
-
+    * Üç yeni araç daha eklendi:
+      pspec2po: kaynak depodan adları güncellemek için.
+      revdep-rebuild
+      version-bump: spec dosyasının versiyonunu güncellemek için.
+      
 2019-08-21 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:develop:
     * Yeni komut "configure-manager":
       Değişen config dosyalarının düzenlemesi bu şekilde basitçe yapılabiliyor.
