@@ -361,23 +361,23 @@ class Install(AtomicOperation):
             if util.config_changed(config):
                 config_changed.append(fpath)
                 self.historydb.save_config(self.pkginfo.name, fpath)
-                if os.path.exists(fpath + '.old'):
-                    os.unlink(fpath + '.old')
-                os.rename(fpath, fpath + '.old')
+                if os.path.exists(fpath + '.old-byinary'):
+                    os.unlink(fpath + '.old-byinary')
+                os.rename(fpath, fpath + '.old-byinary')
 
         # old config files are kept as they are. New config files from the installed
         # packages are saved with ".newconfig" string appended to their names.
         def rename_configs():
             for path in config_changed:
-                newconfig = path + '.newconfig'
-                oldconfig = path + '.old'
+                newconfig = path + '.newconfig-byinary'
+                oldconfig = path + '.old-byinary'
                 if os.path.exists(newconfig):
                     os.unlink(newconfig)
 
                 # In the case of delta packages: the old package and the new package
                 # may contain same config typed files with same hashes, so the delta
                 # package will not have that config file. In order to protect user
-                # changed config files, they are renamed with ".old" prefix in case
+                # changed config files, they are renamed with ".old-byinary" prefix in case
                 # of the hashes of these files on the filesystem and the new config
                 # file that is coming from the new package. But in delta package case
                 # with the given scenario there wont be any, so we can pass this one.
