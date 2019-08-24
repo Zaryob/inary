@@ -448,6 +448,10 @@ def clean_dir(path):
     if os.path.exists(path):
         shutil.rmtree(path)
 
+def delete_file(path):
+    if os.path.isfile(path):
+        if os.path.exists(path):
+            os.remove(path)
 
 def creation_time(_file):
     """Return the creation time of the given file."""

@@ -13,10 +13,11 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
     bu iş için bir çare bulmak lazım. Adım adım neler yapacağım:
       + ctx.ui.debug fonksiyonu gerekli olmadıkça kullanılmamalı.
       + ctx.ui.info önemli mesajlar ve detaylar için (verbose parametresi ile kullanılmalı)
-      - Bilgilendirme için kullanılan mesajlar ayıklanıp logdan ayrılmalı.
+      / Bilgilendirme için kullanılan mesajlar ayıklanıp logdan ayrılmalı.
     / Fix ctx.ui functions:
       / ctx.ui içindeki fonksiyonlar düzenlenmeli. Bazıları çok canavarca kullanılmış.
         + ctx.ui.notify düzenlemesi
+        + ctx.ui.choose düzenlemesi
   + Paket kurulması öncesi tam bilgilendirme.
     + İndirilecek boyutu yazdır.
     + İndirilmiş boyutu yazdır.
@@ -78,6 +79,7 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
       - downgrade: Paket sürümünü güncellemeden önceki haline getirmek.
       - shell: inary paket yöneticisi için kabuk ortamı
       - reconfigure: seçilen paketi yeniden yapılandırma. (ncurses arayüzü ile)
+      + configure-manager: değişen config dosyalarının takibi için
 
 
 3. Beta
@@ -87,12 +89,12 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
 
   - Index iyileştirmeleri.
 
-  - Inary config manager. [ inary config ] komutu:
+  / Inary config manager. [ inary config ] komutu:
       - değişmiş config dosyları kırılmış dosya olarak görülmemeli.
-      - yeni paket kurulumunda mevcut config kurulup yeni config *.config.new
+      + yeni paket kurulumunda mevcut config kurulup yeni config *.config.new
       şeklinde yeniden adlandırılmalı
-      - değişen config dosyalarının dökümü
-      - mevcut config dosyalarından yeni ile eskiyi emergedeki gibi değiştirebilme
+      + değişen config dosyalarının dökümü
+      + mevcut config dosyalarından yeni ile eskiyi emergedeki gibi değiştirebilme
       imkanı.
 
   - Inary licence manager:
