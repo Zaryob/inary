@@ -202,7 +202,7 @@ def check_config_changes(order):
     config_changes=dict()
 
     for package in order:
-        all_files = installdb.get_files(package)
+        all_files = inary.db.installdb.InstallDB().get_files(package)
         config_files = [x for x in all_files.list if x.type == 'config']
         config_paths = ["/" + str(x.path) for x in config_files]
 
@@ -211,8 +211,8 @@ def check_config_changes(order):
         for path in config_paths:
             if os.path.exists(path) and os.path.exists(path + ".newconfig"):
                 newconfig.append(path)
-
-        config_changes[package] = newconfig
+        if newconfig:
+            config_changes[package] = newconfig
 
     return config_changes
 
