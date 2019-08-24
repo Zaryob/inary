@@ -99,10 +99,10 @@ class UI(object):
         """display progress"""
         pass
 
-    def status(self, msg=None):
+    def status(self, msg=None, push_screen=True):
         """set status, if not given clear it"""
         pass
 
-    def notify(self, event, **keywords):
+    def notify(self, event, logging=True, **keywords):
         """notify UI of a significant event"""
         pass

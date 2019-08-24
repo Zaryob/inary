@@ -212,7 +212,7 @@ class ComponentDB(lazydb.LazyDB):
 
     # Returns the component with combined packages and sources from all repos that contain this component
     # If walk is True than also the sub components' sources from all repos are returned
-    def get_union_sources(self, component_name, walk=False):
+    def get_union_sources(self, component_name, repo=None, walk=False):
 
         component = self.get_union_component(component_name)
         if not walk:
@@ -221,7 +221,7 @@ class ComponentDB(lazydb.LazyDB):
         sources = []
         sources.extend(component.sources)
 
-        sub_components = [x for x in self.list_components() if x.startswith(component_name + ".")]
+        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 sources.extend(self.get_union_component(sub).sources)

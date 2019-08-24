@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-17 01:25+0300\n"
+"POT-Creation-Date: 2019-08-25 00:42+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -18,73 +18,73 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: /usr/lib64/python3.7/optparse.py:146
+#: /usr/lib/python3.6/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "alternativ saknas: %s"
 
-#: /usr/lib64/python3.7/optparse.py:157
+#: /usr/lib/python3.6/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "Tvetydigt argument: %s (%s?)"
 
-#: /usr/lib64/python3.7/optparse.py:381
+#: /usr/lib/python3.6/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Användning: %s\n"
 
-#: /usr/lib64/python3.7/optparse.py:400
+#: /usr/lib/python3.6/optparse.py:400
 msgid "Usage"
 msgstr "Använd"
 
-#: /usr/lib64/python3.7/optparse.py:422 /usr/lib64/python3.7/optparse.py:423
+#: /usr/lib/python3.6/optparse.py:422 /usr/lib/python3.6/optparse.py:423
 msgid "integer"
 msgstr "heltal"
 
-#: /usr/lib64/python3.7/optparse.py:424
+#: /usr/lib/python3.6/optparse.py:424
 msgid "floating-point"
 msgstr "flyttal"
 
-#: /usr/lib64/python3.7/optparse.py:425
+#: /usr/lib/python3.6/optparse.py:425
 msgid "complex"
 msgstr "komplex"
 
-#: /usr/lib64/python3.7/optparse.py:433
-#, python-format
+#: /usr/lib/python3.6/optparse.py:433
+#, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
-msgstr ""
+msgstr "alternativ% s: ogiltigt% s värde:% r"
 
-#: /usr/lib64/python3.7/optparse.py:441
-#, python-format
+#: /usr/lib/python3.6/optparse.py:441
+#, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
-msgstr ""
+msgstr "alternativ% s: ogiltigt val:% r (välj från% s)"
 
-#: /usr/lib64/python3.7/optparse.py:1238
+#: /usr/lib/python3.6/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "visa detta hjälpmeddelande och avsluta"
 
-#: /usr/lib64/python3.7/optparse.py:1243
+#: /usr/lib/python3.6/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "visa programmets version och avsluta"
 
-#: /usr/lib64/python3.7/optparse.py:1266
+#: /usr/lib/python3.6/optparse.py:1266
 #, fuzzy
 msgid "%prog [options]"
 msgstr "emerge-alternativ"
 
-#: /usr/lib64/python3.7/optparse.py:1486 /usr/lib64/python3.7/optparse.py:1524
-#, fuzzy, python-format
+#: /usr/lib/python3.6/optparse.py:1486 /usr/lib/python3.6/optparse.py:1524
+#, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
-msgstr[0] "%s-alternativet kräver %d argument"
-msgstr[1] "%s-alternativet kräver %d argument"
+msgstr[0] ""
+msgstr[1] ""
 
-#: /usr/lib64/python3.7/optparse.py:1496
-#, fuzzy, python-format
+#: /usr/lib/python3.6/optparse.py:1496
+#, python-format
 msgid "%s option does not take a value"
-msgstr "%s-alternativet tar inte ett värde"
+msgstr ""
 
-#: /usr/lib64/python3.7/optparse.py:1612
+#: /usr/lib/python3.6/optparse.py:1612
 msgid "Options"
 msgstr "Alternativ"
 
@@ -115,7 +115,7 @@ msgid ""
 "Please file a bug report to <http://bugs.sulin.org>."
 msgstr ""
 "Ohanterat internt undantag.\n"
-"Vänligen fyll i en felrapport på <http://bugs.sulin.org>."
+"Vänligen fyll i en felrapport på <http://bugs.sulin.org>.\n"
 
 #: inary-cli:69
 #, fuzzy
@@ -127,12 +127,13 @@ msgid "Please use 'inary help' for general help."
 msgstr "Vänligen använd 'inary help' för allmän hjälp."
 
 #: inary-cli:81
+#, fuzzy
 msgid ""
 "\n"
 "Traceback:"
 msgstr ""
 "\n"
-"Bakåtspårning:"
+"Bakåtspårning:\n"
 
 #: inary-cli:84
 msgid "Use --debug to see a traceback."
@@ -150,7 +151,7 @@ msgid ""
 "{}/config.log"
 msgstr ""
 "Vänligen bifoga config.log med din felrapport:\n"
-"{}/config.log"
+"{}/config.log\n"
 
 #: inary/actionsapi/autotools.py:103 inary/actionsapi/autotools.py:114
 #: inary/actionsapi/cmaketools.py:87 inary/actionsapi/mesontools.py:71
@@ -214,8 +215,9 @@ msgid "No Makefile found."
 msgstr "Ingen Make-fil funnen."
 
 #: inary/actionsapi/get.py:171
+#, fuzzy
 msgid "Unable to retrieve CPU count: {}"
-msgstr ""
+msgstr "Det går inte att hämta CPU-räkning: {}"
 
 #: inary/actionsapi/get.py:246
 #, fuzzy
@@ -223,9 +225,9 @@ msgid "Util '{}' cannot be found."
 msgstr "Verktyget {} kunde inte hittas"
 
 #: inary/actionsapi/get.py:248
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "'{0}' does not exist, using plain name '{1}'"
-msgstr ""
+msgstr "'{0}' finns inte med vanlig namn '{1}'"
 
 #: inary/actionsapi/inarytools.py:66 inary/actionsapi/inarytools.py:85
 #: inary/actionsapi/inarytools.py:103
@@ -254,8 +256,9 @@ msgid "ActionsAPI [doman]: Wrong man page file: \"{}\""
 msgstr "ActionsAPI [doman]: Fel man-sidefil: {}"
 
 #: inary/actionsapi/inarytools.py:238
+#, fuzzy
 msgid "No file matched pattern \"{}\". 'domove' operation failed."
-msgstr ""
+msgstr "Ingen fil matchade mönster \"{}\". \"domove\" -funktionen misslyckades."
 
 #: inary/actionsapi/inarytools.py:258
 #, fuzzy, python-brace-format
@@ -263,16 +266,19 @@ msgid "ActionsAPI [rename]: \"{0}\": \"{1}\""
 msgstr "ActionsAPI [rename]: {0}: {1}"
 
 #: inary/actionsapi/inarytools.py:296
+#, fuzzy
 msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
-msgstr ""
+msgstr "Inget sådant filmönster: \"{}\". \"doserad\" operation misslyckades."
 
 #: inary/actionsapi/inarytools.py:311
+#, fuzzy
 msgid "dosed method has not changed file \"{}\"."
-msgstr ""
+msgstr "den doserade metoden har inte ändrat filen \"{}\"."
 
 #: inary/actionsapi/inarytools.py:313
+#, fuzzy
 msgid "\"{}\" has been changed by dosed method."
-msgstr ""
+msgstr "\"{}\" har ändrats med doserad metod."
 
 #: inary/actionsapi/inarytools.py:316
 #, fuzzy
@@ -285,12 +291,14 @@ msgid "ActionsAPI [dosym]: File already exists: \"{}\""
 msgstr "ActionsAPI [dosym]: Filen finns redan: {}"
 
 #: inary/actionsapi/inarytools.py:375
+#, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
-msgstr ""
+msgstr "Ingen fil matchade mönster \"{}\". Ta bort åtgärden misslyckades."
 
 #: inary/actionsapi/inarytools.py:386
+#, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
-msgstr ""
+msgstr "Inget katalogmatchat mönster \"{}\". Ta bort katalogoperationen misslyckades."
 
 #: inary/actionsapi/javamodules.py:93 inary/actionsapi/javamodules.py:202
 #, fuzzy
@@ -328,8 +336,9 @@ msgid "Run failed."
 msgstr "Körning av {} misslyckades."
 
 #: inary/actionsapi/kerneltools.py:133
+#, fuzzy
 msgid "Can't find kernel version information file \"{}\"."
-msgstr ""
+msgstr "Kan inte hitta kärnversionsinformationsfilen \"{}\"."
 
 #: inary/actionsapi/libtools.py:47
 #, fuzzy
@@ -342,16 +351,19 @@ msgid "GNU Config Update Failed."
 msgstr "Konfigureringen misslyckades."
 
 #: inary/actionsapi/libtools.py:65
+#, fuzzy
 msgid "Would you like to continue? (it may be dangerous!!!):"
-msgstr ""
+msgstr "Vill du fortsätta? (det kan vara farligt !!!):"
 
 #: inary/actionsapi/libtools.py:66
+#, fuzzy
 msgid "GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)"
-msgstr ""
+msgstr "GNU-konfigurationsuppdatering misslyckades. Kontrollera dina gnuconfig-skript. (/ Usr / share / gnuconfig)"
 
 #: inary/actionsapi/libtools.py:70
+#, fuzzy
 msgid "GNU Config Update Finished."
-msgstr ""
+msgstr "GNU Config Update avslutad."
 
 #: inary/actionsapi/libtools.py:75
 #, fuzzy
@@ -400,8 +412,9 @@ msgid "Project file \"{}\" not found."
 msgstr "Projektfilen {} finns inte."
 
 #: inary/actionsapi/qt.py:76
+#, fuzzy
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")"
-msgstr ""
+msgstr "Det verkar som det finns fler än en .pro-fil, du måste ange en. (Möjliga .pro-filer: \"{}\")"
 
 #: inary/actionsapi/rubymodules.py:132
 #, fuzzy
@@ -459,8 +472,9 @@ msgid "ActionsAPI [unlink]: Permission denied: \"{}\""
 msgstr "ActionsAPI [unlink]: Tillstånd nekas: {}."
 
 #: inary/actionsapi/shelltools.py:123
+#, fuzzy
 msgid "ActionsAPI [unlink]: \"{}\" is not a file, use 'unlinkDir' or 'removeDir' to remove directories."
-msgstr ""
+msgstr "ÅtgärderAPI [unlink]: \"{}\" är inte en fil, använd 'unlinkDir' eller 'removeDir' för att ta bort kataloger."
 
 #: inary/actionsapi/shelltools.py:127
 #, fuzzy
@@ -527,6 +541,11 @@ msgstr "ActionsAPI [touch]: Ingen fil matchade mönstret \"{}\"."
 msgid "ActionsAPI [touch]: Permission denied: \"{}\""
 msgstr "ActionsAPI [touch]: Tillstånd nekas: {}"
 
+#: inary/actionsapi/shelltools.py:284
+#, fuzzy
+msgid "[Running Command]: "
+msgstr "[Kör kommando]:"
+
 #: inary/actionsapi/shelltools.py:290
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [system]: Command '{0}' failed, return value was {1}."
@@ -548,8 +567,9 @@ msgid "Building format files failed."
 msgstr "Söker efter {}"
 
 #: inary/actionsapi/texlivemodules.py:81
+#, fuzzy
 msgid "Creating symlinks from format to engines failed."
-msgstr ""
+msgstr "Skapa symlänkar från format till motorer misslyckades."
 
 #: inary/actionsapi/texlivemodules.py:85
 #, fuzzy
@@ -572,27 +592,29 @@ msgid "Handle config files failed."
 msgstr "Konfigureringen misslyckades."
 
 #: inary/actionsapi/texlivemodules.py:108
+#, fuzzy
 msgid "Symlink \"{}\" skipped (special case)"
-msgstr ""
+msgstr "Symlink \"{}\" hoppade över (specialfall)"
 
 #: inary/actionsapi/texlivemodules.py:110
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Symlink \"{0[0]}\" -> \"{0[1]}\" skipped (texlive-core takes care of it."
-msgstr ""
+msgstr "Symlink \"{0 [0]}\" -> \"{0 [1]}\" hoppade över (texlive-core tar hand om det."
 
 #: inary/actionsapi/texlivemodules.py:113
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Symlink \"{0[0]}\" -> \"{0[1]}\" skipped."
-msgstr ""
+msgstr "Symlink \"{0 [0]}\" -> \"{0 [1]}\" hoppade över."
 
 #: inary/actionsapi/texlivemodules.py:115
+#, fuzzy
 msgid "Symlink \"{}\" skipped (file exists.)"
-msgstr ""
+msgstr "Symlink \"{}\" hoppade över (fil finns.)"
 
 #: inary/actionsapi/texlivemodules.py:117
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Making symlink from {0[0]} to {0[1]}"
-msgstr ""
+msgstr "Gör symlink från {0 [0]} till {0 [1]}"
 
 #: inary/actionsapi/texlivemodules.py:170
 #, fuzzy
@@ -600,9 +622,9 @@ msgid "Creating \"/etc/texmf/{}.d\""
 msgstr "Skapar {}... "
 
 #: inary/actionsapi/texlivemodules.py:172
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Moving (and symlinking) \"/usr/share/texmf/{0}\" to \"/etc/texmf/{1}.d\""
-msgstr ""
+msgstr "Flytta (och symlinking) \"/ usr / share / texmf / {0}\" till \"/etc/texmf/{1}.d\""
 
 #: inary/actionsapi/texlivemodules.py:228
 #, fuzzy
@@ -610,32 +632,34 @@ msgid "Building format file {}"
 msgstr "Söker efter {}"
 
 #: inary/actionsapi/texlivemodules.py:290
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Map {0} is added to {1}/{2}.cfg"
-msgstr ""
+msgstr "Karta {0} läggs till i {1} / {2} .cfg"
 
 #: inary/actionsapi/texlivemodules.py:294
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "MixedMap {0} is added to {1}/{2}.cfg"
-msgstr ""
+msgstr "MixedMap {0} läggs till i {1} / {2} .cfg"
 
 #: inary/actionsapi/texlivemodules.py:298
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "p +{0} is added to {1}/{2}-config.ps"
-msgstr ""
+msgstr "p + {0} läggs till i {1} / {2} -config.ps"
 
 #: inary/actionsapi/texlivemodules.py:301
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "f {0} is added to {1}/{2}-config"
-msgstr ""
+msgstr "f {0} läggs till i {1} / {2} -config"
 
 #: inary/actionsapi/texlivemodules.py:308
+#, fuzzy
 msgid "Language file  {}  already generated."
-msgstr ""
+msgstr "Språkfil {} har redan genererats."
 
 #: inary/actionsapi/texlivemodules.py:310
+#, fuzzy
 msgid "No rule to proccess {}. Please file a bug."
-msgstr ""
+msgstr "Ingen regel att bearbeta {}. Vänligen arkivera ett fel."
 
 #: inary/analyzer/conflict.py:37 inary/analyzer/dependency.py:39
 #: inary/data/replace.py:35
@@ -678,18 +702,19 @@ msgid "Target DIR: \"{}\""
 msgstr "Paket-URI: {}"
 
 #: inary/archive.py:496
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Chowning {0} ({1}:{2})"
-msgstr ""
+msgstr "Chowning {0} ({1}: {2})"
 
 #: inary/archive.py:499
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "LChowning {0} ({1}:{2})"
-msgstr ""
+msgstr "LChowning {0} ({1}: {2})"
 
 #: inary/archive.py:566
+#, fuzzy
 msgid "Problem occured while uncompressing \"{}.Z\" file"
-msgstr ""
+msgstr "Problem uppstod när \"{} .Z\" -filen komprimeras"
 
 #: inary/archive.py:645
 #, fuzzy
@@ -702,23 +727,26 @@ msgid "Fetching source from: \"{}\""
 msgstr "Bygger paketet: {}"
 
 #: inary/archive.py:893
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid ""
 "\n"
 "Source archive is stored: \"{0}/{1}\""
-msgstr ""
+msgstr "Källarkivet lagras: \"{0} / {1}\""
 
 #: inary/archive.py:898
+#, fuzzy
 msgid "Trying fallback address: \"{}\""
-msgstr ""
+msgstr "Försöker fallback-adressen: \"{}\""
 
 #: inary/archive.py:905
+#, fuzzy
 msgid "No such file or no permission to read."
-msgstr ""
+msgstr "Ingen sådan fil eller ingen tillåtelse att läsa."
 
 #: inary/archive.py:916
+#, fuzzy
 msgid "\"{}\" mirrors are not defined."
-msgstr ""
+msgstr "\"{}\" speglar definieras inte."
 
 #: inary/archive.py:921
 #, fuzzy
@@ -726,8 +754,9 @@ msgid "Fetching source from mirror: \"{}\""
 msgstr "Bygger paketet: {}"
 
 #: inary/archive.py:927
+#, fuzzy
 msgid "Could not fetch source from \"{}\" mirrors."
-msgstr ""
+msgstr "Det gick inte att hämta källan från \"{}\" speglar."
 
 #: inary/archive.py:936 inary/operations/history.py:149
 #, fuzzy
@@ -735,17 +764,19 @@ msgid "\"{}\" [cached]"
 msgstr "{} [cachad]"
 
 #: inary/archive.py:945
+#, fuzzy
 msgid "unpack: check_file_hash failed."
-msgstr ""
+msgstr "packa upp: check_file_hash misslyckades."
 
 #: inary/archive.py:951
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
-msgstr ""
+msgstr "Okänd arkivtyp '{0}' ges för '{1}'."
 
 #: inary/archive.py:954
+#, fuzzy
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
-msgstr ""
+msgstr "Binary behöver '{}' för att packa upp detta arkiv, men det är inte installerat."
 
 #: inary/atomicoperations.py:90
 #, fuzzy, python-brace-format
@@ -766,23 +797,25 @@ msgstr "Hämtningsfel: Paketet matchar inte förrådspaketet."
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Paketet {} finns inte i något aktivt förråd."
 
-#: inary/atomicoperations.py:166 inary/cli/__init__.py:214
+#: inary/atomicoperations.py:166 inary/cli/__init__.py:216
 #, fuzzy, python-brace-format
 msgid "Installing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installerar {0.name}, version {0.version}, utgåva {0.release}"
 
 #: inary/atomicoperations.py:197
+#, fuzzy
 msgid "Is there enought free space in your disk."
-msgstr ""
+msgstr "Finns det tillräckligt med ledigt utrymme på din disk."
 
 #: inary/atomicoperations.py:198
+#, fuzzy
 msgid "Free space in 'destinationdirectory': {:.2f} {} "
-msgstr ""
+msgstr "Ledigt utrymme i 'destinationsdirectory': {: .2f} {}"
 
 #: inary/atomicoperations.py:217 inary/operations/build.py:823
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
-msgstr ""
+msgstr "{0} - {1} är inte ett giltigt INARY-version"
 
 #: inary/atomicoperations.py:247
 #, fuzzy, python-brace-format
@@ -796,19 +829,21 @@ msgid ""
 "\"{}\""
 msgstr ""
 "Filkonflikt:\n"
-"{}"
+"{}\n"
 
 #: inary/atomicoperations.py:265
 msgid "Re-install same version package?"
 msgstr "Återinstallera samma paketversion?"
 
 #: inary/atomicoperations.py:266
+#, fuzzy
 msgid "Package re-install declined"
-msgstr ""
+msgstr "Paketet installerades igen"
 
 #: inary/atomicoperations.py:273
+#, fuzzy
 msgid "Storing old paths info."
-msgstr ""
+msgstr "Lagra information om gamla vägar."
 
 #: inary/atomicoperations.py:282
 #, fuzzy
@@ -821,21 +856,24 @@ msgid "Upgrading to new distribution release."
 msgstr "Uppdaterar till ny uppströmsversion"
 
 #: inary/atomicoperations.py:294
+#, fuzzy
 msgid "Downgrade to old distribution release?"
-msgstr ""
+msgstr "Nedgradera till gammal distribution?"
 
 #: inary/atomicoperations.py:298
+#, fuzzy
 msgid "Package downgrade declined"
-msgstr ""
+msgstr "Nedgradering av paketet avvisades"
 
 #: inary/atomicoperations.py:319
+#, fuzzy
 msgid "Added symlink '{}' "
-msgstr ""
+msgstr "Tillagd symlink '{}'"
 
 #: inary/atomicoperations.py:321
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Chowning in postinstall {0} ({1}:{2})"
-msgstr ""
+msgstr "Chowning i postinstallation {0} ({1}: {2})"
 
 #: inary/atomicoperations.py:347
 #, fuzzy
@@ -843,8 +881,9 @@ msgid "Configuration of \"{}\" package failed."
 msgstr "Konfigureringen misslyckades."
 
 #: inary/atomicoperations.py:440
+#, fuzzy
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
-msgstr ""
+msgstr "Det går inte att flytta följande filer. Återinstallation av detta paket rekommenderas starkt."
 
 #: inary/atomicoperations.py:538
 #, fuzzy
@@ -867,8 +906,9 @@ msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installerar {0.name}, version {0.version}, utgåva {0.release}"
 
 #: inary/atomicoperations.py:621
+#, fuzzy
 msgid "Trying to remove nonexistent package "
-msgstr ""
+msgstr "Försöker ta bort inget existerande paket"
 
 #: inary/atomicoperations.py:661
 #, fuzzy
@@ -876,15 +916,16 @@ msgid "Not removing conflicted file : \"{}\""
 msgstr "Tar inte bort fil i konflikt: {}"
 
 #: inary/atomicoperations.py:692
+#, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
-msgstr ""
+msgstr "Den installerade filen \"{}\" finns inte i systemet [Du har antagligen raderat manuellt]"
 
-#: inary/atomicoperations.py:725
+#: inary/atomicoperations.py:727
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "* Lägger till {} till db... "
 
-#: inary/atomicoperations.py:729
+#: inary/atomicoperations.py:731
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Skapar {}... "
@@ -902,71 +943,80 @@ msgstr "Varning: "
 msgid "Error: "
 msgstr "Fel: "
 
-#: inary/cli/__init__.py:178
+#: inary/cli/__init__.py:157
+#, fuzzy
+msgid ""
+"\n"
+" Select one:"
+msgstr "Välj en:"
+
+#: inary/cli/__init__.py:180
 #, fuzzy
 msgid "(yes"
 msgstr " (ja/nej)"
 
-#: inary/cli/__init__.py:178
+#: inary/cli/__init__.py:180
+#, fuzzy
 msgid "no)"
-msgstr ""
+msgstr "Nej)"
 
-#: inary/cli/__init__.py:211
+#: inary/cli/__init__.py:213
 #, fuzzy
 msgid "Installed \"{}\""
 msgstr "Installerat {}"
 
-#: inary/cli/__init__.py:217
+#: inary/cli/__init__.py:219
 #, fuzzy
 msgid "Removed \"{}\""
 msgstr "Tog bort {}"
 
-#: inary/cli/__init__.py:220
+#: inary/cli/__init__.py:222
 #, fuzzy
 msgid "Removing \"{}\""
 msgstr "Tog bort {}"
 
-#: inary/cli/__init__.py:223
+#: inary/cli/__init__.py:225
 #, fuzzy
 msgid "Upgraded \"{}\""
 msgstr "Uppdaterade {}"
 
-#: inary/cli/__init__.py:226
+#: inary/cli/__init__.py:228
 #, fuzzy
 msgid "Configured \"{}\""
 msgstr "Anpassat paketet {}"
 
-#: inary/cli/__init__.py:229
+#: inary/cli/__init__.py:231
 #, fuzzy
 msgid "Configuring \"{}\""
 msgstr "Anpassat paketet {}"
 
-#: inary/cli/__init__.py:232
+#: inary/cli/__init__.py:234
 #, fuzzy
 msgid "Extracting the files of \"{}\""
 msgstr "Packar upp filer för {}"
 
-#: inary/cli/__init__.py:235 inary/operations/repository.py:107
+#: inary/cli/__init__.py:237 inary/operations/repository.py:107
 #, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "Uppdaterar förråd: {}"
 
-#: inary/cli/__init__.py:240
+#: inary/cli/__init__.py:242
 #, fuzzy
 msgid "Total size of package(s): {:.2f} {} / {:.2f} {}"
 msgstr "Sammanlagd paketstorlek: %.2f %s"
 
-#: inary/cli/__init__.py:247
+#: inary/cli/__init__.py:249
 #, fuzzy
 msgid "Following packages ordered for process: {}"
 msgstr "Följande paket kommer att tas bort:\n"
 
-#: inary/cli/__init__.py:252
+#: inary/cli/__init__.py:254
 #, fuzzy
 msgid "Extracted desktop file \"{}\""
 msgstr "Packar upp filer för {}"
 
 #: inary/cli/addrepo.py:36
+#, fuzzy
 msgid ""
 "Add a repository\n"
 "\n"
@@ -977,29 +1027,45 @@ msgid ""
 "\n"
 "NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
 msgstr ""
+"Lägg till ett arkiv\n"
+"\n"
+"Användning: add-repo <repo> <indexuri>\n"
+"\n"
+"<repo>: namn på förvaret som ska läggas till\n"
+"<indexuri>: URI för indexfilen\n"
+"\n"
+"OBS: Vi stöder endast lokala filer (t.ex. / a / b / c) och http: // URI för tillfället\n"
 
 #: inary/cli/addrepo.py:54
+#, fuzzy
 msgid "add-repo options"
-msgstr ""
+msgstr "add-repo-alternativ"
 
 #: inary/cli/addrepo.py:56
+#, fuzzy
 msgid "Ignore repository distribution check"
-msgstr ""
+msgstr "Ignorera distributionscheck för förvar"
 
 #: inary/cli/addrepo.py:58
+#, fuzzy
 msgid "Does not fetch repository index and does not check distribution match"
-msgstr ""
+msgstr "Hämtar inte arkivindex och kontrollerar inte distributionsmatchning"
 
 #: inary/cli/addrepo.py:61
+#, fuzzy
 msgid "Add repository at given position (0 is first)"
-msgstr ""
+msgstr "Lägg till förvar vid en viss position (0 är först)"
 
 #: inary/cli/addrepo.py:77
+#, fuzzy
 msgid ""
 "Add \"{}\" repository without updating the database?\n"
 "By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
 "Would you like to continue?"
 msgstr ""
+"Lägg till \"{}\" -förvaret utan att uppdatera databasen?\n"
+"Genom att bekräfta detta lägger du också till arkivet i ditt system utan att kontrollera distributionssystemet.\n"
+"Vill du fortsätta?\n"
 
 #: inary/cli/addrepo.py:89
 #, fuzzy, python-brace-format
@@ -1012,28 +1078,36 @@ msgid "Removing {0} from system."
 msgstr "Förrådet {} lades till:"
 
 #: inary/cli/addrepo.py:95
+#, fuzzy
 msgid "Extension of repository URI must be \".xml.xz\" or \".xml\"."
-msgstr ""
+msgstr "Förlängning av URI för förvar måste vara \".xml.xz\" eller \".xml\"."
 
 #: inary/cli/blame.py:34
+#, fuzzy
 msgid ""
 "Information about the package owner and release\n"
 "\n"
 "Usage: blame <package> ... <package>\n"
 "\n"
 msgstr ""
+"Information om paketägaren och släpp\n"
+"\n"
+"Användning: skylla <paket> ... <paket>\n"
 
 #: inary/cli/blame.py:47
+#, fuzzy
 msgid "blame options"
-msgstr ""
+msgstr "skylla alternativ"
 
 #: inary/cli/blame.py:48
+#, fuzzy
 msgid "Blame for the given release"
-msgstr ""
+msgstr "Skyll för den givna utgåvan"
 
 #: inary/cli/blame.py:50
+#, fuzzy
 msgid "Blame for all of the releases"
-msgstr ""
+msgstr "Skyll för alla utsläpp"
 
 #: inary/cli/blame.py:77 inary/data/specfile.py:379 inary/data/specfile.py:460
 #, fuzzy, python-brace-format
@@ -1041,20 +1115,22 @@ msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Namm: {0}, version: {1}, utgåva: {2}\n"
 
 #: inary/cli/blame.py:79
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Package Maintainer: {0} <{1}>\n"
-msgstr ""
+msgstr "Pakethållare: {0} <{1}>"
 
 #: inary/cli/blame.py:81
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Release Updater: {0.name} <{0.email}>\n"
-msgstr ""
+msgstr "Release Updater: {0.name} <{0.email}>"
 
 #: inary/cli/blame.py:82
+#, fuzzy
 msgid "Update Date: {}\n"
-msgstr ""
+msgstr "Uppdatera datum: {}"
 
 #: inary/cli/build.py:33
+#, fuzzy
 msgid ""
 "Build INARY packages\n"
 "\n"
@@ -1066,26 +1142,40 @@ msgid ""
 "Alternatively, you can give the name of a source package\n"
 "to be downloaded from a repository containing sources.\n"
 msgstr ""
+"Bygg INARY-paket\n"
+"\n"
+"Användning: bygg [<pspec.xml> | <namn>] ...\n"
+"\n"
+"Du kan ge en URI för filen pspec.xml. INARY kommer\n"
+"hämta alla nödvändiga filer och bygg paketet åt dig.\n"
+"\n"
+"Alternativt kan du ange namnet på ett källpaket\n"
+"att laddas ner från ett arkiv som innehåller källor.\n"
 
 #: inary/cli/build.py:55
+#, fuzzy
 msgid "build options"
-msgstr ""
+msgstr "bygga alternativ"
 
 #: inary/cli/build.py:60
+#, fuzzy
 msgid "Run inary build operation without printing extra debug information."
-msgstr ""
+msgstr "Kör inary build-operation utan att skriva ut extra felsökningsinformation."
 
 #: inary/cli/build.py:66 inary/cli/command.py:221
+#, fuzzy
 msgid "Do not take dependency information into account."
-msgstr ""
+msgstr "Ta inte hänsyn till beroendeinformation."
 
 #: inary/cli/build.py:72 inary/cli/delta.py:64
+#, fuzzy
 msgid "Output directory for produced packages."
-msgstr ""
+msgstr "Utdatakatalog för producerade paket."
 
 #: inary/cli/build.py:76
+#, fuzzy
 msgid "Bypass errors from ActionsAPI."
-msgstr ""
+msgstr "Omkoppla fel från ActionsAPI."
 
 #: inary/cli/build.py:81 inary/cli/command.py:223
 #, fuzzy
@@ -1098,48 +1188,59 @@ msgid "Bypass testing step."
 msgstr "Åsidosätt säkerhetslås"
 
 #: inary/cli/build.py:91
+#, fuzzy
 msgid "Create a static package with ar files."
-msgstr ""
+msgstr "Skapa ett statiskt paket med ar-filer."
 
 #: inary/cli/build.py:95 inary/cli/delta.py:68
+#, fuzzy
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
-msgstr ""
+msgstr "Skapa det binära paketet med det angivna formatet. Använd '-F-hjälp' för att se en lista med format som stöds."
 
 #: inary/cli/build.py:102
+#, fuzzy
 msgid "Use quilt patch management system instead of GNU patch."
-msgstr ""
+msgstr "Använd quilt patch management system istället för GNU patch."
 
 #: inary/cli/build.py:108
+#, fuzzy
 msgid "Do not constrain build process inside the build folder."
-msgstr ""
+msgstr "Begränsa inte byggprocessen i build-mappen."
 
 #: inary/cli/build.py:112
+#, fuzzy
 msgid "build steps"
-msgstr ""
+msgstr "bygga steg"
 
 #: inary/cli/build.py:118
+#, fuzzy
 msgid "Break build after fetching the source archive."
-msgstr ""
+msgstr "Break build efter att ha hämtat källarkivet."
 
 #: inary/cli/build.py:125
+#, fuzzy
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches."
-msgstr ""
+msgstr "Bryt byggandet efter att ha packat upp källarkivet, kontrollerat sha1sum och applicerat korrigeringar."
 
 #: inary/cli/build.py:133
+#, fuzzy
 msgid "Break build after running configure step."
-msgstr ""
+msgstr "Break build efter körning av konfigurationssteg."
 
 #: inary/cli/build.py:139
+#, fuzzy
 msgid "Break build after running compile step."
-msgstr ""
+msgstr "Break build efter att ha kört kompileringssteg."
 
 #: inary/cli/build.py:145
+#, fuzzy
 msgid "Break build after running check step."
-msgstr ""
+msgstr "Break build efter körning av kontrollsteg."
 
 #: inary/cli/build.py:151
+#, fuzzy
 msgid "Break build after running install step."
-msgstr ""
+msgstr "Break build efter att ha installerat installationssteg"
 
 #: inary/cli/build.py:157
 #, fuzzy
@@ -1151,10 +1252,12 @@ msgid "Supported package formats:"
 msgstr "Hanterade paketformat:"
 
 #: inary/cli/build.py:169 inary/cli/delta.py:80
+#, fuzzy
 msgid "  {} (default)"
-msgstr ""
+msgstr "{} (standard)"
 
 #: inary/cli/check.py:36
+#, fuzzy
 msgid ""
 "Verify installation\n"
 "\n"
@@ -1170,18 +1273,33 @@ msgid ""
 "    If no packages are given, checks all installed packages.\n"
 "    "
 msgstr ""
+"Verifiera installationen\n"
+"\n"
+"    Användning: kolla [<package1> <package2> ... <packagen>]\n"
+"           kontrollera -c <komponent>\n"
+"\n"
+"    <packagei>: paketnamn\n"
+"\n"
+"    En kryptografisk kontrollsum lagras för varje installerad\n"
+"    fil. Kontrollkommandot använder kontrollsumman för att verifiera ett paket.\n"
+"    Ge bara paketens namn.\n"
+"\n"
+"    Om inga paket ges, kontrollerar du alla installerade paket.\n"
 
 #: inary/cli/check.py:58
+#, fuzzy
 msgid "check options"
-msgstr ""
+msgstr "kontrollera alternativ"
 
 #: inary/cli/check.py:63
+#, fuzzy
 msgid "Check installed packages under given component."
-msgstr ""
+msgstr "Kontrollera installerade paket under given komponent."
 
 #: inary/cli/check.py:69
+#, fuzzy
 msgid "Checks only changed config files of the packages."
-msgstr ""
+msgstr "Kontrollerar endast ändrade konfigurationsfiler för paketen."
 
 #: inary/cli/check.py:86
 #, fuzzy
@@ -1189,16 +1307,19 @@ msgid "Checking all installed packages."
 msgstr "Paketet är installerat:"
 
 #: inary/cli/check.py:95
+#, fuzzy
 msgid "Checking integrity of \"{}\"."
-msgstr ""
+msgstr "Kontrollerar integriteten för \"{}\"."
 
 #: inary/cli/check.py:107
+#, fuzzy
 msgid "Broken"
-msgstr ""
+msgstr "Bruten"
 
 #: inary/cli/check.py:112
+#, fuzzy
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 #: inary/cli/check.py:114
 msgid "OK"
@@ -1210,12 +1331,14 @@ msgid "Missing file: \"/{}\""
 msgstr "Paketfil: {}"
 
 #: inary/cli/check.py:122
+#, fuzzy
 msgid "Access denied: \"/{}\""
-msgstr ""
+msgstr "Tillträde beviljas ej: \"/{}\""
 
 #: inary/cli/check.py:125
+#, fuzzy
 msgid "Corrupted file: \"/{}\""
-msgstr ""
+msgstr "Skadad fil: \"/ {}\""
 
 #: inary/cli/check.py:128
 #, fuzzy
@@ -1228,30 +1351,38 @@ msgid "Package \"{}\" not installed."
 msgstr "Paketet {} är inte installerat."
 
 #: inary/cli/check.py:137
+#, fuzzy
 msgid ""
 "Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
+"Binary kunde inte kontrollera integriteten för paket som innehåller filer som du inte har läsåtkomst.\n"
+"Att köra kontrollen under en privilegierad användare kan hjälpa till att lösa problemet.\n"
 
 #: inary/cli/command.py:41
+#, fuzzy
 msgid "Command lacks name."
-msgstr ""
+msgstr "Kommandot saknar namn."
 
 #: inary/cli/command.py:46
+#, fuzzy
 msgid "Duplicate command '{}'"
-msgstr ""
+msgstr "Duplicera kommandot '{}'"
 
 #: inary/cli/command.py:85
+#, fuzzy
 msgid "Unrecognized command: '{}'"
-msgstr ""
+msgstr "Okänt kommando: '{}'"
 
 #: inary/cli/command.py:110
+#, fuzzy
 msgid "general options"
-msgstr ""
+msgstr "generella val"
 
 #: inary/cli/command.py:113
+#, fuzzy
 msgid "Change the system root for INARY commands."
-msgstr ""
+msgstr "Ändra systemroten för INARY-kommandon."
 
 #: inary/cli/command.py:115
 #, fuzzy
@@ -1259,8 +1390,9 @@ msgid "Assume yes in all yes/no queries."
 msgstr "Anta ja på alla ja/nej -frågor"
 
 #: inary/cli/command.py:119
+#, fuzzy
 msgid "Keep bandwidth usage under specified KB's."
-msgstr ""
+msgstr "Håll bandbreddanvändning under specificerade KB: er."
 
 #: inary/cli/command.py:122
 msgid "Detailed output"
@@ -1272,8 +1404,9 @@ msgid "Show debugging information."
 msgstr "Visa debug-information"
 
 #: inary/cli/command.py:126
+#, fuzzy
 msgid "Suppresses all coloring of INARY's output."
-msgstr ""
+msgstr "Undertrycker all färgning av INARYs utdata."
 
 #: inary/cli/command.py:144
 #, fuzzy
@@ -1289,8 +1422,9 @@ msgid "You have to be root for this operation."
 msgstr "Du måste vara root för den här åtgärden."
 
 #: inary/cli/command.py:207
+#, fuzzy
 msgid "Command terminated abnormally."
-msgstr ""
+msgstr "Kommandot avslutades onormalt."
 
 #: inary/cli/command.py:225 inary/cli/emerge.py:62 inary/cli/emergeup.py:63
 #, fuzzy
@@ -1298,13 +1432,44 @@ msgid "Bypass scom configuration agent."
 msgstr "Konfigureringen misslyckades."
 
 #: inary/cli/command.py:227
+#, fuzzy
 msgid "Do not perform any action, just show what would be done."
-msgstr ""
+msgstr "Utför inga åtgärder, bara visa vad som skulle göras."
 
 #: inary/cli/command.py:246
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "användning: {}\n"
+
+#: inary/cli/configmanager.py:32
+#, fuzzy
+msgid "Inary Config file manager."
+msgstr "Installation misslyckades."
+
+#: inary/cli/configmanager.py:41
+#, fuzzy
+msgid "config-manager options"
+msgstr "index-alternativ"
+
+#: inary/cli/configmanager.py:44
+#, fuzzy
+msgid "Rewrite all config files with new ones without keeping old config files."
+msgstr "Omskriva alla konfigurationsfiler med nya utan att behålla gamla konfigurationsfiler."
+
+#: inary/cli/configmanager.py:46
+#, fuzzy
+msgid "Rewrite all config files with new ones, keeping old config files."
+msgstr "Omskriva alla konfigurationsfiler med nya, behåll gamla konfigurationsfiler."
+
+#: inary/cli/configmanager.py:70 inary/cli/install.py:122
+#, fuzzy
+msgid "[!] Some config files have been changed. Would you like to see and apply them?"
+msgstr "[!] Vissa konfigurationsfiler har ändrats. Vill du se och tillämpa dem?"
+
+#: inary/cli/configmanager.py:74
+#, fuzzy
+msgid "There isn't any new config :)"
+msgstr "Det finns ingen ny konfigurering :)"
 
 #: inary/cli/configurepending.py:74 inary/scomiface.py:44
 #, fuzzy
@@ -1312,6 +1477,7 @@ msgid "scom package is not fully installed."
 msgstr "{} är inte installerad."
 
 #: inary/cli/configurepending.py:78
+#, fuzzy
 msgid ""
 "Configure pending packages\n"
 "\n"
@@ -1320,12 +1486,20 @@ msgid ""
 "of packages waiting to be configured. This command\n"
 "configures those packages.\n"
 msgstr ""
+"Konfigurera väntande paket\n"
+"\n"
+"Om SCOM-konfigurationen för vissa paket inte var det\n"
+"görs vid installationstiden läggs de till i en lista\n"
+"av paket som väntar på att konfigureras. Detta kommando\n"
+"konfigurerar dessa paket.\n"
 
 #: inary/cli/configurepending.py:92
+#, fuzzy
 msgid "configure-pending options"
-msgstr ""
+msgstr "konfigurera-väntande alternativ"
 
 #: inary/cli/deletecache.py:33
+#, fuzzy
 msgid ""
 "Delete cache files\n"
 "\n"
@@ -1335,6 +1509,13 @@ msgid ""
 "under /var directory. Since these accumulate they can\n"
 "consume a lot of disk space."
 msgstr ""
+"Radera cache-filer\n"
+"\n"
+"Användning: delete-cache\n"
+"\n"
+"Källor, paket och tillfälliga filer lagras\n"
+"under / var-katalogen. Eftersom dessa samlas kan de\n"
+"konsumerar mycket diskutrymme.\n"
 
 #: inary/cli/deletecache.py:55
 #, fuzzy
@@ -1357,6 +1538,7 @@ msgid "Removing cache file \"{}\"..."
 msgstr "Tar bort paketet {}"
 
 #: inary/cli/delta.py:33
+#, fuzzy
 msgid ""
 "Creates delta packages\n"
 "\n"
@@ -1367,16 +1549,26 @@ msgid ""
 "packages by comparing the sha1sum of files and creates\n"
 "a delta package with the changed files.\n"
 msgstr ""
+"Skapar delta-paket\n"
+"\n"
+"Användningar: delta oldpackage1 oldpackage2 ... newpackage\n"
+"        delta -t newpackage oldpackage1 oldpackage2 ...\n"
+"\n"
+"Delta-kommandot hittar de ändrade filerna mellan det givna\n"
+"paket genom att jämföra sha1sum för filer och skapar\n"
+"ett delta-paket med de ändrade filerna.\n"
 
 #: inary/cli/delta.py:53
 msgid "delta options"
 msgstr "delta-alternativ"
 
 #: inary/cli/delta.py:58
+#, fuzzy
 msgid "Use arg as the new package and treat other arguments as old packages."
-msgstr ""
+msgstr "Använd arg som det nya paketet och behandla andra argument som gamla paket."
 
 #: inary/cli/disablerepo.py:32
+#, fuzzy
 msgid ""
 "Disable repository\n"
 "\n"
@@ -1386,8 +1578,16 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
+"Inaktivera förvaret\n"
+"\n"
+"Användning: disable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: lagringsnamn\n"
+"\n"
+"Inaktiverade förvar tas inte med i verksamheten\n"
 
 #: inary/cli/emerge.py:36
+#, fuzzy
 msgid ""
 "Build and install INARY source packages from repository\n"
 "\n"
@@ -1398,14 +1598,23 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Bygg och installera INARY källkodspaket från förvaret\n"
+"\n"
+"Användning: dyka upp <namn> ...\n"
+"\n"
+"Du ska ange namnet på ett källkodspaket som ska vara\n"
+"laddas ner från ett arkiv som innehåller källor.\n"
+"\n"
+"Du kan också ange namnet på en komponent.\n"
 
 #: inary/cli/emerge.py:54
 msgid "emerge options"
 msgstr "emerge-alternativ"
 
 #: inary/cli/emerge.py:56 inary/cli/emergeup.py:57
+#, fuzzy
 msgid "Emerge available packages under given component"
-msgstr ""
+msgstr "Skaffa tillgängliga paket under given komponent"
 
 #: inary/cli/emerge.py:58 inary/cli/emergeup.py:59 inary/cli/install.py:62
 #: inary/cli/upgrade.py:66
@@ -1420,14 +1629,17 @@ msgid "Ignore package conflicts."
 msgstr "Ignorera paketkonflikter"
 
 #: inary/cli/emerge.py:80 inary/cli/emergeup.py:84
+#, fuzzy
 msgid "Output directory: {}"
-msgstr ""
+msgstr "Utmatningskatalog: {}"
 
 #: inary/cli/emerge.py:82 inary/cli/emergeup.py:86
+#, fuzzy
 msgid "Outputting binary packages in the package cache."
-msgstr ""
+msgstr "Skickar ut binära paket i paketets cache."
 
 #: inary/cli/emergeup.py:36
+#, fuzzy
 msgid ""
 "Build and upgrade INARY source packages from repository\n"
 "\n"
@@ -1438,6 +1650,14 @@ msgid ""
 "\n"
 "You can also give the name of a component.\n"
 msgstr ""
+"Bygg och uppgradera INARY källkodspaket från förvaret\n"
+"\n"
+"Användning: emergeup ...\n"
+"\n"
+"Du ska ange namnet på ett källkodspaket som ska vara\n"
+"laddas ner från ett arkiv som innehåller källor.\n"
+"\n"
+"Du kan också ange namnet på en komponent.\n"
 
 #: inary/cli/emergeup.py:54
 #, fuzzy
@@ -1445,6 +1665,7 @@ msgid "emergeup options"
 msgstr "emerge-alternativ"
 
 #: inary/cli/enablerepo.py:32
+#, fuzzy
 msgid ""
 "Enable repository\n"
 "\n"
@@ -1454,8 +1675,16 @@ msgid ""
 "\n"
 "Disabled repositories are not taken into account in operations\n"
 msgstr ""
+"Aktivera förvaret\n"
+"\n"
+"Användning: enable-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: lagringsnamn\n"
+"\n"
+"Inaktiverade förvar tas inte med i verksamheten\n"
 
 #: inary/cli/fetch.py:33
+#, fuzzy
 msgid ""
 "Fetch a package\n"
 "\n"
@@ -1465,14 +1694,19 @@ msgid ""
 "\n"
 "Downloads the given inary packages to working directory\n"
 msgstr ""
+"Hämta ett paket\n"
+"Användning: hämta [<paket1> <paket2> ... <paket>]\n"
+"<paket>: paketnamn\n"
+"Hämtar de givna inarypaketen till arbetskatalogen\n"
 
 #: inary/cli/fetch.py:48
 msgid "fetch options"
 msgstr "fetch-alternativ"
 
 #: inary/cli/fetch.py:51
+#, fuzzy
 msgid "Output directory for the fetched packages"
-msgstr ""
+msgstr "Utmatningskatalog för de hämtade paketen"
 
 #: inary/cli/fetch.py:53
 #, fuzzy
@@ -1480,6 +1714,7 @@ msgid "Download with runtime dependencies."
 msgstr "Det finns extra paket på grund av beroenden."
 
 #: inary/cli/graph.py:35
+#, fuzzy
 msgid ""
 "Graph package relations\n"
 "\n"
@@ -1490,18 +1725,28 @@ msgid ""
 "shows the package relations among repository packages, and writes\n"
 "the package in graphviz format to 'pgraph.dot'.\n"
 msgstr ""
+"Grafpaketrelationer\n"
+"\n"
+"Användning: graf [<package1> <package2> ...]\n"
+"\n"
+"Skriv en graf över paketrelationer, spårningsberoende och\n"
+"konflikter relationer från givna paket. Som standard\n"
+"visar paketrelationerna mellan arkivpaket och skriver\n"
+"paketet i grafviz-format till 'pgraph.dot'.\n"
 
 #: inary/cli/graph.py:50
 msgid "graph options"
 msgstr "graph-alternativ"
 
 #: inary/cli/graph.py:54
+#, fuzzy
 msgid "Specify a particular repository."
-msgstr ""
+msgstr "Ange ett visst arkiv."
 
 #: inary/cli/graph.py:57
+#, fuzzy
 msgid "Graph of installed packages"
-msgstr ""
+msgstr "Graf över installerade paket"
 
 #: inary/cli/graph.py:60
 #, fuzzy
@@ -1514,8 +1759,9 @@ msgid "Draw reverse dependency graph."
 msgstr "Omvända beroenden:"
 
 #: inary/cli/graph.py:66
+#, fuzzy
 msgid "Dot output file"
-msgstr ""
+msgstr "Dot output-fil"
 
 #: inary/cli/graph.py:80
 #, fuzzy
@@ -1523,8 +1769,9 @@ msgid "Plotting packages in repository \"{}\""
 msgstr "Paket {} hittades i förrådet {}"
 
 #: inary/cli/graph.py:83
+#, fuzzy
 msgid "Plotting a graph of relations among all repository packages."
-msgstr ""
+msgstr "Plottar en graf över relationer mellan alla lagringspaket."
 
 #: inary/cli/graph.py:98
 #, fuzzy
@@ -1532,6 +1779,7 @@ msgid "Plotting a graph of relations among all installed packages."
 msgstr "Paketet är installerat:"
 
 #: inary/cli/help.py:32
+#, fuzzy
 msgid ""
 "Prints help for given commands\n"
 "\n"
@@ -1539,14 +1787,23 @@ msgid ""
 "\n"
 "If run without parameters, it prints the general help."
 msgstr ""
+"Skriver ut hjälp för givna kommandon\n"
+"\n"
+"Användning: hjälp [<command1> <command2> ... <commandn>]\n"
+"\n"
+"Om den körs utan parametrar skriver den ut den allmänna hjälpen.\n"
 
 #: inary/cli/help.py:58
+#, fuzzy
 msgid ""
 "%prog [options] <command> [arguments]\n"
 "\n"
 "where <command> is one of:\n"
 "\n"
 msgstr ""
+"% prog [alternativ] <kommando> [argument]\n"
+"\n"
+"där <kommandon> är en av:\n"
 
 #: inary/cli/help.py:64
 msgid ""
@@ -1585,6 +1842,7 @@ msgid "takeback"
 msgstr "takeback"
 
 #: inary/cli/history.py:42
+#, fuzzy
 msgid ""
 "History of inary operations\n"
 "\n"
@@ -1592,22 +1850,28 @@ msgid ""
 "\n"
 "Lists previous operations."
 msgstr ""
+"Historik om binära operationer\n"
+"Användning: historia\n"
+"Listar tidigare operationer.\n"
 
 #: inary/cli/history.py:56
 msgid "history options"
 msgstr "history-alternativ"
 
 #: inary/cli/history.py:59
+#, fuzzy
 msgid "Output only the last 'n' operations."
-msgstr ""
+msgstr "Mata endast ut de sista 'n' operationerna."
 
 #: inary/cli/history.py:61
+#, fuzzy
 msgid "Take snapshot of the current system."
-msgstr ""
+msgstr "Ta ögonblicksbild av det nuvarande systemet."
 
 #: inary/cli/history.py:63
+#, fuzzy
 msgid "Takeback to the state after the given operation finished."
-msgstr ""
+msgstr "Återupptagning till staten efter att den givna operationen avslutats."
 
 #: inary/cli/history.py:78
 #, fuzzy
@@ -1620,27 +1884,32 @@ msgid "Date: "
 msgstr "Datum: {} {}"
 
 #: inary/cli/history.py:88
+#, fuzzy
 msgid "    * There are {} packages in this snapshot."
-msgstr ""
+msgstr "* Det finns {} paket i denna ögonblicksbild."
 
-#: inary/cli/inarycli.py:103
+#: inary/cli/inarycli.py:104
+#, fuzzy
 msgid "Options must precede non-option arguments."
-msgstr ""
+msgstr "Alternativ måste gå före argument som inte är alternativ."
 
-#: inary/cli/inarycli.py:146
+#: inary/cli/inarycli.py:147
 #, fuzzy
 msgid "No command given."
 msgstr "Inget kommando angivet"
 
-#: inary/cli/inarycli.py:149
+#: inary/cli/inarycli.py:150
+#, fuzzy
 msgid "Command line parsing error."
-msgstr ""
+msgstr "Tolkningsfel för kommandorad."
 
-#: inary/cli/inarycli.py:153
+#: inary/cli/inarycli.py:154
+#, fuzzy
 msgid "Unrecognized command: {}"
-msgstr ""
+msgstr "Okänt kommando: {}"
 
 #: inary/cli/index.py:32
+#, fuzzy
 msgid ""
 "Index INARY files in a given directory\n"
 "\n"
@@ -1654,32 +1923,49 @@ msgid ""
 "If you give multiple directories, the command still works, but puts\n"
 "everything in a single index file.\n"
 msgstr ""
+"Indexera INARY-filer i en given katalog\n"
+"\n"
+"Användning: index <katalog>\n"
+"\n"
+"Detta kommando söker efter alla INARY-filer i en katalog, samlar INARY\n"
+"taggar från dem och ackumuleras informationen i en XML-fil i utgången,\n"
+"som standard heter 'inary-index.xml'. I synnerhet indexerar det båda\n"
+"källa och binära paket.\n"
+"\n"
+"Om du ger flera kataloger fungerar kommandot fortfarande men sätter\n"
+"allt i en enda indexfil.\n"
 
 #: inary/cli/index.py:55
 msgid "index options"
 msgstr "index-alternativ"
 
 #: inary/cli/index.py:60
+#, fuzzy
 msgid "Store absolute links for indexed files."
-msgstr ""
+msgstr "Lagra absoluta länkar för indexerade filer."
 
 #: inary/cli/index.py:65
+#, fuzzy
 msgid "Index output file"
-msgstr ""
+msgstr "Indexutmatningsfil"
 
 #: inary/cli/index.py:70
+#, fuzzy
 msgid "Comma-separated compression types for index file"
-msgstr ""
+msgstr "Kommaseparerade komprimeringstyper för indexfilen"
 
 #: inary/cli/index.py:76
+#, fuzzy
 msgid "Do not index INARY spec files."
-msgstr ""
+msgstr "Indexera inte INARY spec-filer."
 
 #: inary/cli/index.py:81
+#, fuzzy
 msgid "Do not sign index."
-msgstr ""
+msgstr "Underteckna inte index."
 
 #: inary/cli/info.py:36
+#, fuzzy
 msgid ""
 "Display package information\n"
 "\n"
@@ -1687,38 +1973,47 @@ msgid ""
 "\n"
 "<packagei> is either a package name or a .inary file,\n"
 msgstr ""
+"Visa paketinformation\n"
+"Användning: info <paket1> <paket2> ... <paket>\n"
+"<package> är antingen ett paketnamn eller en .fil,\n"
 
 #: inary/cli/info.py:54
 msgid "info options"
 msgstr "info-alternativ"
 
 #: inary/cli/info.py:58
+#, fuzzy
 msgid "Show a list of package files."
-msgstr ""
+msgstr "Visa en lista med paketfiler."
 
 #: inary/cli/info.py:60
+#, fuzzy
 msgid "Info about the given component."
-msgstr ""
+msgstr "Info om den givna komponenten."
 
 #: inary/cli/info.py:63
+#, fuzzy
 msgid "Show only paths."
-msgstr ""
+msgstr "Visa bara banor."
 
 #: inary/cli/info.py:65
+#, fuzzy
 msgid "Do not show details."
-msgstr ""
+msgstr "Visa inte detaljer."
 
 #: inary/cli/info.py:67
+#, fuzzy
 msgid "Output in xml format."
-msgstr ""
+msgstr "Utdata i xml-format."
 
 #: inary/cli/info.py:137
 msgid "Reverse Dependencies:"
 msgstr "Omvända beroenden:"
 
 #: inary/cli/info.py:149
+#, fuzzy
 msgid "Reverse Build Dependencies:"
-msgstr ""
+msgstr "Omvända beroenden:"
 
 #: inary/cli/info.py:154
 #, fuzzy
@@ -1762,6 +2057,7 @@ msgid "\"{}\" package is not found in source repositories."
 msgstr "{} finns inte i källkodsförråden."
 
 #: inary/cli/install.py:35
+#, fuzzy
 msgid ""
 "Install INARY packages\n"
 "\n"
@@ -1773,6 +2069,15 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Installera INARY-paket\n"
+"\n"
+"Användning: installera <package1> <package2> ... <packagen>\n"
+"\n"
+"Du kan använda filnamn, URI eller paketnamn för paket. Om du har\n"
+"angav ett paketnamn, ska det finnas i ett specifikt arkiv.\n"
+"\n"
+"Du kan också ange komponenter i stället för paketnamn, vilket kommer att vara\n"
+"utvidgats till paketnamn.\n"
 
 #: inary/cli/install.py:53
 msgid "install options"
@@ -1784,38 +2089,47 @@ msgid "Reinstall already installed packages."
 msgstr "Paketet är installerat:"
 
 #: inary/cli/install.py:60
+#, fuzzy
 msgid "Skip distribution release and architecture check."
-msgstr ""
+msgstr "Hoppa över distribution och distributionskontroll."
 
 #: inary/cli/install.py:66
+#, fuzzy
 msgid "Install component's and recursive components' packages."
-msgstr ""
+msgstr "Installera komponentens och rekursiva komponentpaket."
 
 #: inary/cli/install.py:68
+#, fuzzy
 msgid "Name of the component's repository."
-msgstr ""
+msgstr "Namnet på komponentens förvar."
 
 #: inary/cli/install.py:70 inary/cli/upgrade.py:74
+#, fuzzy
 msgid "Fetch upgrades but do not install."
-msgstr ""
+msgstr "Hämta uppgraderingar men installera inte."
 
 #: inary/cli/install.py:73
+#, fuzzy
 msgid "When installing packages, ignore packages and components whose basenames match pattern."
-msgstr ""
+msgstr "När du installerar paket ska du ignorera paket och komponenter vars basnamn matchar mönster."
 
 #: inary/cli/install.py:76
+#, fuzzy
 msgid "When installing packages, ignore packages and components whose basenames match any pattern contained in file."
-msgstr ""
+msgstr "När du installerar paket ska du ignorera paket och komponenter vars basnamn matchar alla mönster i filen."
 
 #: inary/cli/install.py:81
+#, fuzzy
 msgid "Store previous libraries info when package is updating to newer version."
-msgstr ""
+msgstr "Lagra information om tidigare bibliotek när paketet uppdateras till en nyare version."
 
 #: inary/cli/install.py:106
+#, fuzzy
 msgid "There is no component named  as \"{}\""
-msgstr ""
+msgstr "Det finns ingen komponent som heter \"{}\""
 
 #: inary/cli/listavailable.py:35
+#, fuzzy
 msgid ""
 "List available packages in the repositories\n"
 "\n"
@@ -1825,6 +2139,13 @@ msgid ""
 "repositories. If no repository is specified, we list packages in\n"
 "all repositories.\n"
 msgstr ""
+"Lista tillgängliga paket i förvaren\n"
+"\n"
+"Användning: lista-tillgänglig [<repo1> <repo2> ... repon]\n"
+"\n"
+"Ger en kort lista över INARY-paket publicerade i det angivna\n"
+"förråden. Om inget arkiv anges listar vi paket i\n"
+"alla förvar.\n"
 
 #: inary/cli/listavailable.py:53
 msgid "list-available options"
@@ -1832,20 +2153,24 @@ msgstr "list-available-alternativ"
 
 #: inary/cli/listavailable.py:55 inary/cli/listcomponents.py:51
 #: inary/cli/listinstalled.py:57 inary/cli/listsources.py:51
+#, fuzzy
 msgid "Show in long format"
-msgstr ""
+msgstr "Visa i långt format"
 
 #: inary/cli/listavailable.py:57
+#, fuzzy
 msgid "List available packages under given component"
-msgstr ""
+msgstr "Lista tillgängliga paket under given komponent"
 
 #: inary/cli/listavailable.py:59
+#, fuzzy
 msgid "Show uninstalled packages only"
-msgstr ""
+msgstr "Visa endast avinstallerade paket"
 
 #: inary/cli/listavailable.py:67
+#, fuzzy
 msgid "Installed packages are shown in this color."
-msgstr ""
+msgstr "Installerade paket visas i den här färgen."
 
 #: inary/cli/listavailable.py:75
 #, fuzzy
@@ -1855,6 +2180,7 @@ msgid ""
 msgstr "Förråd: {}\n"
 
 #: inary/cli/listcomponents.py:34
+#, fuzzy
 msgid ""
 "List available components\n"
 "\n"
@@ -1863,33 +2189,46 @@ msgid ""
 "Gives a brief list of INARY components published in the\n"
 "repositories.\n"
 msgstr ""
+"Lista tillgängliga komponenter\n"
+"\n"
+"Användning: listkomponenter\n"
+"\n"
+"Ger en kort lista över INARY-komponenter som publiceras i\n"
+"förråden.\n"
 
 #: inary/cli/listcomponents.py:49
 msgid "list-components options"
 msgstr "list-components-alternativ"
 
 #: inary/cli/listcomponents.py:53
+#, fuzzy
 msgid "Name of the source or package repository"
-msgstr ""
+msgstr "Namnet på källan eller paketförvaret"
 
 #: inary/cli/listinstalled.py:35
+#, fuzzy
 msgid ""
 "Print the list of all installed packages\n"
 "\n"
 "Usage: list-installed\n"
 msgstr ""
+"Skriv ut listan över alla installerade paket\n"
+"\n"
+"Användning: list-installerad\n"
 
 #: inary/cli/listinstalled.py:49
 msgid "list-installed options"
 msgstr "list-installed-alternativ"
 
 #: inary/cli/listinstalled.py:54
+#, fuzzy
 msgid "Only list the installed packages built by the given host."
-msgstr ""
+msgstr "Lista bara de installerade paketen som byggts av den givna värden."
 
 #: inary/cli/listinstalled.py:59
+#, fuzzy
 msgid "List installed packages under given component."
-msgstr ""
+msgstr "Lista installerade paket under given komponent."
 
 #: inary/cli/listinstalled.py:61 inary/cli/listupgrades.py:58
 #, fuzzy
@@ -1901,6 +2240,7 @@ msgid "Package Name          |St|        Version|  Rel.|  Distro|             Da
 msgstr "Paketnamn |St|Version|Utg.|Distro| Datum"
 
 #: inary/cli/listnewest.py:34
+#, fuzzy
 msgid ""
 "List newest packages in the repositories\n"
 "\n"
@@ -1910,18 +2250,27 @@ msgid ""
 "repositories. If no repository is specified, we list the new\n"
 "packages from all repositories.\n"
 msgstr ""
+"Lista de senaste paketen i förvaren\n"
+"\n"
+"Användning: list-newest [<repo1> <repo2> ... repon]\n"
+"\n"
+"Ger en lista över INARY nyligen publicerade paket i det angivna\n"
+"förråden. Om inget arkiv anges listar vi det nya\n"
+"paket från alla förvar.\n"
 
 #: inary/cli/listnewest.py:52
 msgid "list-newest options"
 msgstr "list-newest-alternativ"
 
 #: inary/cli/listnewest.py:55
+#, fuzzy
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd."
-msgstr ""
+msgstr "Lista nya paket som har lagts till i förvaret efter detta givna datum formaterat som åååå-mm-dd."
 
 #: inary/cli/listnewest.py:58
+#, fuzzy
 msgid "List new packages added to repository after last nth previous repository update."
-msgstr ""
+msgstr "Lista nya paket som har lagts till i förvaret efter den senaste uppdateringen av förra lagret."
 
 #: inary/cli/listnewest.py:86
 #, fuzzy, python-brace-format
@@ -1934,6 +2283,7 @@ msgid "Packages added to '{}':"
 msgstr "Paketfil: {}"
 
 #: inary/cli/listorphaned.py:35
+#, fuzzy
 msgid ""
 "List orphaned packages\n"
 "\n"
@@ -1941,6 +2291,11 @@ msgid ""
 "\n"
 "Lists packages installed as dependency, but no longer needed by any other installed package.\n"
 msgstr ""
+"Lista föräldralösa paket\n"
+"\n"
+"Användning: list-föräldralös\n"
+"\n"
+"Listar paket som är installerade som beroende, men behövs inte längre av något annat installerat paket.\n"
 
 #: inary/cli/listorphaned.py:50
 #, fuzzy
@@ -1953,8 +2308,9 @@ msgid "Show all packages without reverse dependencies."
 msgstr "Det finns extra paket på grund av beroenden."
 
 #: inary/cli/listorphaned.py:54
+#, fuzzy
 msgid "Ignore packages and components whose basenames match pattern."
-msgstr ""
+msgstr "Ignorera paket och komponenter vars basnamn matchar mönster."
 
 #: inary/cli/listorphaned.py:66
 #, fuzzy
@@ -1967,15 +2323,20 @@ msgid "No orphaned packages."
 msgstr "Paketet är installerat:"
 
 #: inary/cli/listpending.py:33
+#, fuzzy
 msgid ""
 "List pending packages\n"
 "\n"
 "Lists packages waiting to be configured.\n"
 msgstr ""
+"Lista väntande paket\n"
+"\n"
+"Listar paket som väntar på att konfigureras.\n"
 
 #: inary/cli/listpending.py:48
+#, fuzzy
 msgid "Listing pending orders:"
-msgstr ""
+msgstr "Visar väntande order:"
 
 #: inary/cli/listpending.py:52
 #, fuzzy
@@ -1983,6 +2344,7 @@ msgid "There are no packages waiting to be configured."
 msgstr "Det finns extra paket på grund av beroenden."
 
 #: inary/cli/listrepo.py:32
+#, fuzzy
 msgid ""
 "List repositories\n"
 "\n"
@@ -1990,6 +2352,11 @@ msgid ""
 "\n"
 "Lists currently tracked repositories.\n"
 msgstr ""
+"Lista förvar\n"
+"\n"
+"Användning: list-repo\n"
+"\n"
+"Listar för närvarande spårade förvar.\n"
 
 #: inary/cli/listrepo.py:49 inary/cli/listrepo.py:50
 msgid "active"
@@ -2005,6 +2372,7 @@ msgid "{0} [{1}]"
 msgstr "{0} [{1}]"
 
 #: inary/cli/listsources.py:35
+#, fuzzy
 msgid ""
 "List available sources\n"
 "\n"
@@ -2012,6 +2380,11 @@ msgid ""
 "\n"
 "Gives a brief list of sources published in the repositories.\n"
 msgstr ""
+"Lista tillgängliga källor\n"
+"\n"
+"Användning: listkällor\n"
+"\n"
+"Ger en kort lista över källor publicerade i förvaren.\n"
 
 #: inary/cli/listsources.py:49
 msgid "list-sources options"
@@ -2023,6 +2396,7 @@ msgid "[Repository: "
 msgstr "Förråd: {}\n"
 
 #: inary/cli/listupgrades.py:37
+#, fuzzy
 msgid ""
 "List packages to be upgraded\n"
 "\n"
@@ -2030,6 +2404,11 @@ msgid ""
 "\n"
 "Lists the packages that will be upgraded.\n"
 msgstr ""
+"Lista paket som ska uppgraderas\n"
+"\n"
+"Användning: lista-uppgraderingar\n"
+"\n"
+"Listar paketen som kommer att uppgraderas.\n"
 
 #: inary/cli/listupgrades.py:52
 msgid "list-upgrades options"
@@ -2041,14 +2420,16 @@ msgid "Show in long format."
 msgstr "Visa debug-information"
 
 #: inary/cli/listupgrades.py:56
+#, fuzzy
 msgid "List upgradable packages under given component."
-msgstr ""
+msgstr "Lista uppgraderbara paket under given komponent."
 
 #: inary/cli/listupgrades.py:81 inary/operations/upgrade.py:181
 msgid "No packages to upgrade."
 msgstr "Inga paket att uppdatera."
 
 #: inary/cli/rebuilddb.py:34
+#, fuzzy
 msgid ""
 "Rebuild Databases\n"
 "\n"
@@ -2059,20 +2440,28 @@ msgid ""
 "If package specs are given, they should be the names of package\n"
 "dirs under /var/lib/inary\n"
 msgstr ""
+"Ombygga databaser\n"
+"Användning: Rebilddb [<package1> <Package2> ... <Package>]\n"
+"Återuppbyggar BINARY-databaserna\n"
+"Om paketspecifikationer anges bör de vara paketets namn\n"
+"dirs under / var / lib / inary\n"
 
 #: inary/cli/rebuilddb.py:50
 msgid "rebuild-db options"
 msgstr "rebuild-db-alternativ"
 
 #: inary/cli/rebuilddb.py:53
+#, fuzzy
 msgid "Rebuild files database"
-msgstr ""
+msgstr "Ombygga fildatabasen"
 
 #: inary/cli/rebuilddb.py:59
+#, fuzzy
 msgid "Rebuild INARY databases?"
-msgstr ""
+msgstr "Ombygga INARY-databaser?"
 
 #: inary/cli/remove.py:35
+#, fuzzy
 msgid ""
 "Remove INARY packages\n"
 "\n"
@@ -2083,20 +2472,31 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Ta bort INARY-paketen\n"
+"\n"
+"Användning: ta bort <package1> <package2> ... <packagen>\n"
+"\n"
+"Ta bort paket (er) från ditt system. Ge bara paketnamnen att ta bort.\n"
+"\n"
+"Du kan också ange komponenter i stället för paketnamn, vilket kommer att vara\n"
+"utvidgats till paketnamn.\n"
 
 #: inary/cli/remove.py:52
 msgid "remove options"
 msgstr "remove-alternativ"
 
 #: inary/cli/remove.py:55
+#, fuzzy
 msgid "Removes everything including changed config files of the package."
-msgstr ""
+msgstr "Tar bort allt inklusive ändrade konfigurationsfiler i paketet."
 
 #: inary/cli/remove.py:57
+#, fuzzy
 msgid "Remove component's and recursive components' packages."
-msgstr ""
+msgstr "Ta bort komponentens och rekursiva komponentpaket."
 
 #: inary/cli/removeorphaned.py:36
+#, fuzzy
 msgid ""
 "Remove orphaned packages\n"
 "\n"
@@ -2104,6 +2504,11 @@ msgid ""
 "\n"
 "Remove all orphaned packages from the system.\n"
 msgstr ""
+"Ta bort föräldralösa paket\n"
+"\n"
+"Användning: ta bort-föräldralös\n"
+"\n"
+"Ta bort alla föräldralösa paket från systemet.\n"
 
 #: inary/cli/removeorphaned.py:50
 #, fuzzy
@@ -2111,10 +2516,12 @@ msgid "remove-orphaned options"
 msgstr "remove-alternativ"
 
 #: inary/cli/removeorphaned.py:55
+#, fuzzy
 msgid "When removing orphaned, ignore packages and components whose basenames match pattern."
-msgstr ""
+msgstr "När du tar bort föräldralösa barn ska du ignorera paket och komponenter vars basnamn matchar mönster."
 
 #: inary/cli/removerepo.py:31
+#, fuzzy
 msgid ""
 "Remove repositories\n"
 "\n"
@@ -2122,8 +2529,14 @@ msgid ""
 "\n"
 "Remove all repository information from the system.\n"
 msgstr ""
+"Ta bort förvar\n"
+"\n"
+"Användning: remove-repo <repo1> <repo2> ... <repon>\n"
+"\n"
+"Ta bort all lagringsinformation från systemet.\n"
 
 #: inary/cli/search.py:35
+#, fuzzy
 msgid ""
 "Search packages\n"
 "\n"
@@ -2135,18 +2548,29 @@ msgid ""
 "options to search in install database or source\n"
 "database.\n"
 msgstr ""
+"Sök paket\n"
+"\n"
+"Användning: sök <term1> <term2> ... <termn>\n"
+"\n"
+"Hitta ett paket som innehåller specifika söktermer\n"
+"i sammanfattnings-, beskrivnings- och paketnamnsfält.\n"
+"Standard sökning görs i paketdatabasen. Använda sig av\n"
+"alternativ för att söka i installera databas eller källa\n"
+"databas.\n"
 
 #: inary/cli/search.py:52
 msgid "search options"
 msgstr "search-alternativ"
 
 #: inary/cli/search.py:54
+#, fuzzy
 msgid "Summary and description language."
-msgstr ""
+msgstr "Sammanfattning och beskrivningsspråk."
 
 #: inary/cli/search.py:56
+#, fuzzy
 msgid "Name of the source or package repository."
-msgstr ""
+msgstr "Namnet på källan eller paketförvaret."
 
 #: inary/cli/search.py:58
 #, fuzzy
@@ -2154,26 +2578,32 @@ msgid "Search in installdb."
 msgstr "Paketet {} är inte installerat."
 
 #: inary/cli/search.py:60
+#, fuzzy
 msgid "Search in sourcedb."
-msgstr ""
+msgstr "Sök i sourcedb."
 
 #: inary/cli/search.py:62
+#, fuzzy
 msgid "Case sensitive search."
-msgstr ""
+msgstr "Skiftlägeskänslig sökning."
 
 #: inary/cli/search.py:64
+#, fuzzy
 msgid "Search in the package name."
-msgstr ""
+msgstr "Sök i paketnamnet."
 
 #: inary/cli/search.py:66
+#, fuzzy
 msgid "Search in the package summary."
-msgstr ""
+msgstr "Sök i paketets sammanfattning."
 
 #: inary/cli/search.py:68
+#, fuzzy
 msgid "Search in the package description."
-msgstr ""
+msgstr "Sök i paketbeskrivningen."
 
 #: inary/cli/searchfile.py:34
+#, fuzzy
 msgid ""
 "Search for a file\n"
 "\n"
@@ -2181,6 +2611,11 @@ msgid ""
 "\n"
 "Finds the installed package which contains the specified file.\n"
 msgstr ""
+"Sök efter en fil\n"
+"\n"
+"Användning: sökfil <path1> <path2> ... <pathn>\n"
+"\n"
+"Hitta det installerade paketet som innehåller den angivna filen.\n"
 
 #: inary/cli/searchfile.py:47
 msgid "search-file options"
@@ -2207,6 +2642,7 @@ msgid "Searching for \"{}\""
 msgstr "Söker efter {}"
 
 #: inary/cli/updaterepo.py:36
+#, fuzzy
 msgid ""
 "Update repository databases\n"
 "\n"
@@ -2217,16 +2653,26 @@ msgid ""
 "Synchronizes the INARY databases with the current repository.\n"
 "If no repository is given, all repositories are updated.\n"
 msgstr ""
+"Uppdatera arkivdatabaser\n"
+"\n"
+"Användning: update-repo [<repo1> <repo2> ... <repon>]\n"
+"\n"
+"<repoi>: lagringsnamn\n"
+"\n"
+"Synkroniserar INARY-databaserna med det aktuella lagret.\n"
+"Om inget förvar anges uppdateras alla förvar.\n"
 
 #: inary/cli/updaterepo.py:53
 msgid "update-repo options"
 msgstr "update-repo-alternativ"
 
 #: inary/cli/updaterepo.py:57
+#, fuzzy
 msgid "Update database in any case"
-msgstr ""
+msgstr "Uppdatera databasen i alla fall"
 
 #: inary/cli/upgrade.py:34
+#, fuzzy
 msgid ""
 "Upgrade INARY packages\n"
 "\n"
@@ -2245,14 +2691,31 @@ msgid ""
 "You can also specify components instead of package names, which will be\n"
 "expanded to package names.\n"
 msgstr ""
+"Uppgradera INARY-paket\n"
+"\n"
+"Användning: Uppgradera [<package1> <package2> ... <packagen>]\n"
+"\n"
+"<packagei>: paketnamn\n"
+"\n"
+"Uppgraderar hela systemet om inga paketnamn anges\n"
+"\n"
+"Du kan bara använda paketnamn för att ange paket eftersom\n"
+"paketuppgraderingsoperationen definieras endast med respekt\n"
+"till förvar. Om du har angett ett paketnamn, det\n"
+"borde finnas i paketförvaret. Om du bara vill\n"
+"installera om ett paket från en INARY-fil, använd installationskommandot.\n"
+"\n"
+"Du kan också ange komponenter i stället för paketnamn, vilket kommer att vara\n"
+"utvidgats till paketnamn.\n"
 
 #: inary/cli/upgrade.py:58
 msgid "upgrade options"
 msgstr "upgrade-alternativ"
 
 #: inary/cli/upgrade.py:62
+#, fuzzy
 msgid "Security related package upgrades only."
-msgstr ""
+msgstr "Endast säkerhetsrelaterade paketuppgraderingar."
 
 #: inary/cli/upgrade.py:64
 #, fuzzy
@@ -2260,20 +2723,24 @@ msgid "Do not update repositories."
 msgstr "Uppdaterar förråd"
 
 #: inary/cli/upgrade.py:70
+#, fuzzy
 msgid "Upgrade component's and recursive components' packages."
-msgstr ""
+msgstr "Uppgradera komponentens och rekursiva komponentpaket."
 
 #: inary/cli/upgrade.py:72
+#, fuzzy
 msgid "Name of the to be upgraded packages' repository."
-msgstr ""
+msgstr "Namn på förpackningens lagringsutrymme."
 
 #: inary/cli/upgrade.py:77
+#, fuzzy
 msgid "When upgrading system, ignore packages and components whose basenames match pattern."
-msgstr ""
+msgstr "När du uppgraderar systemet ska du ignorera paket och komponenter vars basnamn matchar mönster."
 
 #: inary/cli/upgrade.py:80
+#, fuzzy
 msgid "When upgrading system, ignore packages and components whose basenames match any pattern contained in file."
-msgstr ""
+msgstr "När du uppgraderar systemet ska du ignorera paket och komponenter vars basnamn matchar alla mönster i filen."
 
 #: inary/cli/upgrade.py:84
 #, fuzzy
@@ -2296,16 +2763,19 @@ msgid "Destination directory \"{}\" does not exist. Creating it."
 msgstr "Förrådet % finns inte och kan därmed inte tas bort."
 
 #: inary/configfile.py:153
+#, fuzzy
 msgid "No section by name '{}'"
-msgstr ""
+msgstr "Inget avsnitt med namnet '{}'"
 
 #: inary/constants.py:51
+#, fuzzy
 msgid "Can't rebind constant: '{}'"
-msgstr ""
+msgstr "Kan inte återställa konstant: '{}'"
 
 #: inary/constants.py:57
+#, fuzzy
 msgid "Can't unbind constant: '{}'"
-msgstr ""
+msgstr "Kan inte lossa konstant: '{}'"
 
 #: inary/data/history.py:54
 #, fuzzy, python-brace-format
@@ -2313,19 +2783,19 @@ msgid "{0} repository is updated."
 msgstr "{0}-förrådet uppdaterat."
 
 #: inary/data/history.py:73
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0} is upgraded from {1} to {2} with delta."
-msgstr ""
+msgstr "{0} uppgraderas från {1} till {2} med delta."
 
 #: inary/data/history.py:75
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0} is upgraded from {1} to {2}."
-msgstr ""
+msgstr "{0} uppgraderas från {1} till {2}."
 
 #: inary/data/history.py:77
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0} {1} is removed."
-msgstr ""
+msgstr "{0} {1} tas bort."
 
 #: inary/data/history.py:79
 #, fuzzy, python-brace-format
@@ -2333,18 +2803,19 @@ msgid "{0} {1} is installed."
 msgstr "Paketet {} är inte installerat."
 
 #: inary/data/history.py:81
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0} {1} is reinstalled."
-msgstr ""
+msgstr "{0} {1} installeras om."
 
 #: inary/data/history.py:83
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "{0} is downgraded from {1} to {2}."
-msgstr ""
+msgstr "{0} nedgraderas från {1} till {2}."
 
 #: inary/data/history.py:109 inary/data/history.py:131
+#, fuzzy
 msgid "Unknown package operation"
-msgstr ""
+msgstr "Okänd paketdrift"
 
 #: inary/data/index.py:106
 #, fuzzy
@@ -2371,7 +2842,7 @@ msgstr "Bygger paketet: {}"
 msgid "Package \"{}\": metadata corrupt, skipping..."
 msgstr ""
 "\n"
-"Paketet {} är trasigt."
+"Paketet {} är trasigt.\n"
 
 #: inary/data/index.py:271
 #, fuzzy
@@ -2423,13 +2894,14 @@ msgid ", install.tar.xz sha1sum: {}"
 msgstr ", install.tar.xz sha1sum: {}"
 
 #: inary/data/pgraph.py:39
+#, fuzzy
 msgid "Encountered cycle {}"
-msgstr ""
+msgstr "Mötet cykel {}"
 
 #: inary/data/specfile.py:172
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
-msgstr ""
+msgstr "URI: {0}, typ: {1}, sha1sum: {2}"
 
 #: inary/data/specfile.py:203 inary/data/specfile.py:206
 msgid " or "
@@ -2469,12 +2941,14 @@ msgid "Dependencies: "
 msgstr "Beroenden: "
 
 #: inary/data/specfile.py:441
+#, fuzzy
 msgid "translations.xml file is badly formed.: {}"
-msgstr ""
+msgstr "Translations.xml-filen är dåligt utformad .: {}"
 
 #: inary/data/specfile.py:466
+#, fuzzy
 msgid "Build Dependencies: "
-msgstr ""
+msgstr "Bygg beroenden:"
 
 #: inary/db/componentdb.py:115
 #, fuzzy
@@ -2508,8 +2982,9 @@ msgid "installed"
 msgstr "installerad"
 
 #: inary/db/installdb.py:46
+#, fuzzy
 msgid "installed-pending"
-msgstr ""
+msgstr "installerat under behandling varande"
 
 #: inary/db/installdb.py:63
 #, fuzzy, python-brace-format
@@ -2526,8 +3001,9 @@ msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Distribution: {0}, Installationstid: {1}\n"
 
 #: inary/db/installdb.py:119
+#, fuzzy
 msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this problem."
-msgstr ""
+msgstr "Installationsinformation för paketet \"{}\" är trasigt. Installera om det för att åtgärda problemet."
 
 #: inary/db/installdb.py:439 inary/operations/upgrade.py:99
 #, fuzzy
@@ -2561,47 +3037,57 @@ msgid "{} repository needs to be updated"
 msgstr "{}-förrådet behöver uppdateras"
 
 #: inary/db/repodb.py:185
+#, fuzzy
 msgid ""
 "Error parsing repository index information: {} \n"
 " Index file does not exist or is malformed."
 msgstr ""
+"Fel vid analys av information om lagringsindex: {}\n"
+" Indexfilen finns inte eller är felaktig.\n"
 
 #: inary/db/repodb.py:293
+#, fuzzy
 msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-msgstr ""
+msgstr "Förvaret \"{}\" är inte kompatibelt med din distribution. Förvaret är inaktiverat."
 
 #: inary/fetcher.py:165
 msgid "Filename error"
 msgstr "Filnamnsfel"
 
 #: inary/fetcher.py:168
+#, fuzzy
 msgid "Access denied to write to destination directory: \"{}\""
-msgstr ""
+msgstr "Åtkomst nekas att skriva till destinationskatalogen: \"{}\""
 
 #: inary/fetcher.py:171
 #, fuzzy
 msgid "Access denied to destination file: \"{}\""
 msgstr "Konfigureringen misslyckades."
 
-#: inary/fetcher.py:194
+#: inary/fetcher.py:195
+#, fuzzy
 msgid "Download resuming..."
-msgstr ""
+msgstr "Ladda ner återupptas ..."
 
-#: inary/fetcher.py:211
+#: inary/fetcher.py:212
+#, fuzzy
 msgid "Downloaded from:"
-msgstr ""
+msgstr "Hämtat från:"
 
-#: inary/fetcher.py:219
+#: inary/fetcher.py:220
+#, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
-msgstr ""
+msgstr "Ett problem uppstod. Kontrollera arkivadressen och / eller behörigheterna igen."
 
 #: inary/fetcher.py:253
+#, fuzzy
 msgid "Proxy configuration has been found for '{}' protocol."
-msgstr ""
+msgstr "Proxy-konfiguration har hittats för protokollet {{}"
 
 #: inary/fetcher.py:261
+#, fuzzy
 msgid "Bandwidth usage is limited to {} KB/s."
-msgstr ""
+msgstr "Bandbreddanvändning är begränsad till {} KB / s."
 
 #: inary/fetcher.py:288
 #, fuzzy, python-brace-format
@@ -2614,21 +3100,24 @@ msgid "\"{}\" package already fetched."
 msgstr "Paketborttagning nekades"
 
 #: inary/file.py:46
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "URL \"{0}\" already downloaded as \"{1}\""
-msgstr ""
+msgstr "URL \"{0}\" har redan laddats ned som \"{1}\""
 
 #: inary/file.py:53
+#, fuzzy
 msgid "No signature found for \"{}\""
-msgstr ""
+msgstr "Ingen signatur hittades för \"{}\""
 
 #: inary/file.py:63
+#, fuzzy
 msgid "GPG Signature is invalid for \"{}\""
-msgstr ""
+msgstr "GPG-signatur är ogiltig för \"{}\""
 
 #: inary/file.py:85
+#, fuzzy
 msgid "uri must have type either URI or string."
-msgstr ""
+msgstr "uri måste ha antingen URI eller sträng."
 
 #: inary/file.py:148
 #, fuzzy
@@ -2636,8 +3125,9 @@ msgid "Fetching {}"
 msgstr "Hämtar {}"
 
 #: inary/file.py:152
+#, fuzzy
 msgid "Copying \"{}\" to transfer dir"
-msgstr ""
+msgstr "Kopierar \"{}\" för att överföra dir"
 
 #: inary/file.py:157 inary/operations/info.py:41
 #, fuzzy
@@ -2645,16 +3135,19 @@ msgid "File \"{}\" not found."
 msgstr "Filen {} hittades inte"
 
 #: inary/file.py:178
+#, fuzzy
 msgid "File integrity of \"{}\" compromised."
-msgstr ""
+msgstr "Filintegriteten för \"{}\" komprometteras."
 
 #: inary/file.py:201
+#, fuzzy
 msgid "File mode must be either File.read or File.write"
-msgstr ""
+msgstr "Filläget måste vara antingen File.read eller File.write"
 
 #: inary/file.py:206
+#, fuzzy
 msgid "Remote write not implemented."
-msgstr ""
+msgstr "Fjärrskrivning inte implementerad."
 
 #: inary/file.py:255 inary/file.py:258
 #, fuzzy
@@ -2682,8 +3175,9 @@ msgid "Removing special \"{0}\" file: \"{1}\""
 msgstr "Tar bort paketet {}"
 
 #: inary/operations/build.py:208
+#, fuzzy
 msgid "Source URI: {}"
-msgstr ""
+msgstr "Källa URI: {}"
 
 #: inary/operations/build.py:212
 #, fuzzy
@@ -2691,8 +3185,9 @@ msgid "Source \"{}\" not found in any active repository."
 msgstr "Paketet {} finns inte i något aktivt förråd."
 
 #: inary/operations/build.py:337
+#, fuzzy
 msgid "pspec.xml avoids this package from building for \"{}\""
-msgstr ""
+msgstr "pspec.xml undviker att detta paket bygger för \"{}\""
 
 #: inary/operations/build.py:340
 #, fuzzy
@@ -2700,12 +3195,14 @@ msgid "Building source package: \"{}\""
 msgstr "Bygger källpaketet: {}"
 
 #: inary/operations/build.py:355
+#, fuzzy
 msgid "ccache detected..."
-msgstr ""
+msgstr "ccache upptäckt ..."
 
 #: inary/operations/build.py:357
+#, fuzzy
 msgid "IceCream detected. Make sure your daemon is up and running..."
-msgstr ""
+msgstr "IceCream upptäcktes. Se till att din demon är igång ..."
 
 #: inary/operations/build.py:391
 #, fuzzy
@@ -2713,12 +3210,14 @@ msgid "Rebuilding source for build type: {}"
 msgstr "Bygger paketet: {}"
 
 #: inary/operations/build.py:523
+#, fuzzy
 msgid "Cannot find component.xml in remote directory, Source is now part of unknown component."
-msgstr ""
+msgstr "Kan inte hitta component.xml i fjärrkatalogen, källan är nu en del av okänd komponent."
 
 #: inary/operations/build.py:531
+#, fuzzy
 msgid "Cannot find component.xml in upper directory, Source is now part of unknown component."
-msgstr ""
+msgstr "Kan inte hitta component.xml i den övre katalogen, källan är nu en del av okänd komponent."
 
 #: inary/operations/build.py:542
 #, fuzzy
@@ -2745,8 +3244,9 @@ msgid "Building source package: \"{}\" [ SetupAction Step ]"
 msgstr "Bygger källpaketet: {}"
 
 #: inary/operations/build.py:564
+#, fuzzy
 msgid "Setting up source..."
-msgstr ""
+msgstr "Ställer in källa ..."
 
 #: inary/operations/build.py:569
 #, fuzzy
@@ -2754,8 +3254,9 @@ msgid "Building source package: \"{}\" [ BuildAction Step ]"
 msgstr "Bygger källpaketet: {}"
 
 #: inary/operations/build.py:571
+#, fuzzy
 msgid "Building source..."
-msgstr ""
+msgstr "Byggkälla ..."
 
 #: inary/operations/build.py:576
 #, fuzzy
@@ -2776,59 +3277,64 @@ msgid "Installing..."
 msgstr "Installerar..."
 
 #: inary/operations/build.py:663
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
-msgstr ""
+msgstr "Det gick inte att läsa Action Script ({0}): {1}"
 
 #: inary/operations/build.py:666
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
-msgstr ""
+msgstr "SyntaxError in Actions-skript ({0}): {1}"
 
 #: inary/operations/build.py:694
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Unable to read SCOM script ({0}): {1}"
-msgstr ""
+msgstr "Det gick inte att läsa SCOM-skript ({0}): {1}"
 
 #: inary/operations/build.py:697
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "SyntaxError in SCOM file ({0}): {1}"
-msgstr ""
+msgstr "SyntaxError i SCOM-fil ({0}): {1}"
 
 #: inary/operations/build.py:734
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
-msgstr ""
+msgstr "Överträdelse av sandlådan: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:750 inary/util.py:680
+#: inary/operations/build.py:750 inary/util.py:684
+#, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
-msgstr ""
+msgstr "FEL: WorkDir ({}) finns inte"
 
 #: inary/operations/build.py:760
+#, fuzzy
 msgid "Sandbox enabled build..."
-msgstr ""
+msgstr "Sandbox aktiverad byggnad ..."
 
 #: inary/operations/build.py:784
+#, fuzzy
 msgid "Sandbox violation result:"
-msgstr ""
+msgstr "Resultat av överträdelse av sandlåda:"
 
 #: inary/operations/build.py:789
+#, fuzzy
 msgid "Sandbox violations!"
-msgstr ""
+msgstr "Överträdelser av sandlådan!"
 
 #: inary/operations/build.py:795
+#, fuzzy
 msgid "unable to call function from actions: '{}'"
-msgstr ""
+msgstr "kan inte ringa funktion från handlingar: '{}'"
 
 #: inary/operations/build.py:808
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
-msgstr ""
+msgstr "Källkodspaketet '{0}' definierar ett relativt 'Path'-element: {1}"
 
 #: inary/operations/build.py:812
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
-msgstr ""
+msgstr "Källkodspaketet {0} 'definierar flera' sökvägar '-taggar för {1}"
 
 #: inary/operations/build.py:841
 msgid "Safety switch: following extra packages in system.devel will be installed: "
@@ -2840,8 +3346,9 @@ msgid "Safety switch: the component system.devel cannot be found."
 msgstr "Säkerhetslås: kan inte hitta komponenten system.devel"
 
 #: inary/operations/build.py:855
+#, fuzzy
 msgid "Unsatisfied Build Dependencies:"
-msgstr ""
+msgstr "Otillfredsställda byggberoende:"
 
 #: inary/operations/build.py:859
 #, fuzzy
@@ -2849,20 +3356,24 @@ msgid "Cannot build package due to unsatisfied build dependencies."
 msgstr "Det finns extra paket på grund av beroenden."
 
 #: inary/operations/build.py:864
+#, fuzzy
 msgid "Build dependency \"{}\" cannot be satisfied."
-msgstr ""
+msgstr "Bygg beroende \"{}\" kan inte vara nöjd."
 
 #: inary/operations/build.py:866
+#, fuzzy
 msgid "Would you like to install the unsatisfied build dependencies?"
-msgstr ""
+msgstr "Vill du installera de otillfredsställda byggberoenden?"
 
 #: inary/operations/build.py:867
+#, fuzzy
 msgid "Installing build dependencies."
-msgstr ""
+msgstr "Installera byggberoenden."
 
 #: inary/operations/build.py:873
+#, fuzzy
 msgid "Ignoring build dependencies."
-msgstr ""
+msgstr "Att ignorera byggberoenden."
 
 #: inary/operations/build.py:883
 #, fuzzy
@@ -2880,20 +3391,24 @@ msgid "Applying patch: {}"
 msgstr "* tillämpar patch: {}"
 
 #: inary/operations/build.py:1031
+#, fuzzy
 msgid "No user named '{}' found on the system"
-msgstr ""
+msgstr "Ingen användare med namnet '{}' hittades i systemet"
 
 #: inary/operations/build.py:1036
+#, fuzzy
 msgid "No group named '{}' found on the system"
-msgstr ""
+msgstr "Ingen grupp med namnet '{}' hittades i systemet"
 
 #: inary/operations/build.py:1044
+#, fuzzy
 msgid "/{} has suid bit set"
-msgstr ""
+msgstr "/ {} har ställt in södra biten"
 
 #: inary/operations/build.py:1065
+#, fuzzy
 msgid "Module \"magic\" cannot found. Falling back with \"file\" command. It is dangerous. So, if you wanna create stable packages, please fix this issue in your workplace. Probably installing \"python3-filemagic\" package might be a good solution."
-msgstr ""
+msgstr "Modul \"magi\" kan inte hittas. Faller tillbaka med \"fil\" -kommandot. Det är farligt. Så om du vill skapa stabila paket, vänligen fixa det här problemet på din arbetsplats. Förmodligen kan det vara en bra lösning att installera \"python3-filemagic\" -paket."
 
 #: inary/operations/build.py:1075
 #, fuzzy, python-brace-format
@@ -2901,23 +3416,28 @@ msgid "'magic' return of \"{0}\" is \"{1}\""
 msgstr "returvärde för \"{0}\" är {1}"
 
 #: inary/operations/build.py:1079
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "'file' command failed with return code {0} for file: \"{1}\""
-msgstr ""
+msgstr "\"fil\" -kommandot misslyckades med returkoden {0} för filen: \"{1}\""
 
 #: inary/operations/build.py:1080
+#, fuzzy
 msgid ""
 "Output:\n"
 "{}"
 msgstr ""
+"Produktion:\n"
+"{}\n"
 
 #: inary/operations/build.py:1083
+#, fuzzy
 msgid "'file' command return is \"{}\""
-msgstr ""
+msgstr "kommandot return \"file\" är \"{}\""
 
 #: inary/operations/build.py:1140
+#, fuzzy
 msgid "There are abandoned files under the install dir ({}):"
-msgstr ""
+msgstr "Det finns övergivna filer under installationsdir ({}):"
 
 #: inary/operations/build.py:1176
 #, fuzzy
@@ -2953,17 +3473,19 @@ msgid "*** {} error(s), {} warning(s)"
 msgstr "*** %d fel, %d varning(ar)"
 
 #: inary/operations/build.py:1437
+#, fuzzy
 msgid "Last state was '{}'"
-msgstr ""
+msgstr "Senaste tillståndet var '{}'"
 
 #: inary/operations/delta.py:53
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "The file \"{0}\" belongs to a different package other than '{1}'. Skipping it..."
-msgstr ""
+msgstr "Filen \"{0}\" tillhör ett annat paket än '{1}'. Hoppar över det ..."
 
 #: inary/operations/delta.py:59
+#, fuzzy
 msgid "Package \"{}\" has the same release number with the new package. Skipping it..."
-msgstr ""
+msgstr "Paketet \"{}\" har samma utgivningsnummer med det nya paketet. Hoppar över det ..."
 
 #: inary/operations/delta.py:68
 #, fuzzy
@@ -2971,16 +3493,19 @@ msgid "Creating delta package: \"{}\"..."
 msgstr "Skapar delta-INARY-paket mellan {} och {}"
 
 #: inary/operations/delta.py:79
+#, fuzzy
 msgid "All files in the package \"{}\" are different from the files in the new package. Skipping it..."
-msgstr ""
+msgstr "Alla filer i paketet \"{}\" skiljer sig från filerna i det nya paketet. Hoppar över det ..."
 
 #: inary/operations/delta.py:123
+#, fuzzy
 msgid "New package \"{}\" exists in the list of old packages. Skipping it..."
-msgstr ""
+msgstr "Nytt paket \"{}\" finns i listan över gamla paket. Hoppar över det ..."
 
 #: inary/operations/emerge.py:51
+#, fuzzy
 msgid "No packages to emerge."
-msgstr ""
+msgstr "Inga paket att dyka upp."
 
 #: inary/operations/emerge.py:66
 msgid ""
@@ -3005,8 +3530,9 @@ msgid "Cannot find source package: \"{}\""
 msgstr "Bygger källpaketet: {}"
 
 #: inary/operations/helper.py:60
+#, fuzzy
 msgid "Selected packages \"[{}]\" are in conflict with each other."
-msgstr ""
+msgstr "Valda paket \"[{}]\" står i konflikt med varandra."
 
 #: inary/operations/helper.py:65
 #, fuzzy, python-brace-format
@@ -3020,11 +3546,12 @@ msgid ""
 "{}"
 msgstr ""
 "Följande paket har konflikter:\n"
-"{}"
+"{}\n"
 
 #: inary/operations/helper.py:69
+#, fuzzy
 msgid "Remove the following conflicting packages?"
-msgstr ""
+msgstr "Ta bort följande motstridiga paket?"
 
 #: inary/operations/helper.py:70
 #, fuzzy
@@ -3032,12 +3559,59 @@ msgid "Conflicting packages should be removed to continue."
 msgstr "Följande paket kommer att tas bort:\n"
 
 #: inary/operations/helper.py:112 inary/operations/remove.py:99
+#, fuzzy
 msgid "{:.2f} {} space will be freed."
-msgstr ""
+msgstr "{: .2f} {} utrymme kommer att frigöras."
 
 #: inary/operations/helper.py:114
+#, fuzzy
 msgid "{:.2f} {} space will be used."
-msgstr ""
+msgstr "{: .2f} {} utrymme kommer att användas."
+
+#: inary/operations/helper.py:221
+#, fuzzy, python-brace-format
+msgid "Keeping old config file {0} as {0}.old-byinary"
+msgstr "Håller den gamla konfigurationsfilen {0} som {0} .old-byinary"
+
+#: inary/operations/helper.py:230
+#, fuzzy, python-brace-format
+msgid "[?] Would you like to see changes in config files of \"{0}\" package"
+msgstr "[?] Vill du se ändringar i konfigurationsfiler i paketet \"{0}\""
+
+#: inary/operations/helper.py:232
+#, fuzzy
+msgid "[*] Changes in config file: {}"
+msgstr "[*] Ändringar i konfigurationsfilen: {}"
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:236
+#, fuzzy
+msgid "1. Store new config file, not apply [*]"
+msgstr "1. Lagra ny konfigurationsfil, använd inte [*]"
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:238
+#, fuzzy
+msgid "2. Apply new config file (keep old config)"
+msgstr "2. Använd ny konfigurationsfil (behåll den gamla konfigurationen)"
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:240
+#, fuzzy
+msgid "3. Apply new config file (don't keep old config)"
+msgstr "3. Använd ny konfigurationsfil (behåll inte den gamla konfigurationen)"
+
+#: inary/operations/helper.py:234
+#, fuzzy
+msgid "3. Delete new config file"
+msgstr "3. Radera ny konfigurationsfil"
+
+#: inary/operations/helper.py:234
+#, fuzzy
+msgid "[?] Select the process which will be happened:"
+msgstr "[?] Välj processen som kommer att hända:"
+
+#: inary/operations/helper.py:244
+#, fuzzy, python-brace-format
+msgid "Deleting new config file {0}"
+msgstr "Radera ny konfigurationsfil {0}"
 
 #: inary/operations/history.py:89 inary/operations/history.py:113
 #, fuzzy, python-brace-format
@@ -3072,18 +3646,21 @@ msgid "Downloading {} / {}"
 msgstr "Hämtar %d / %d"
 
 #: inary/operations/history.py:225
+#, fuzzy
 msgid ""
 "\n"
 "Following packages could not be found in repositories and are not cached:\n"
-msgstr ""
+msgstr "Följande paket kunde inte hittas i förvar och lagras inte i cache:"
 
 #: inary/operations/history.py:279
+#, fuzzy
 msgid "Taking snapshot of the system."
-msgstr ""
+msgstr "Ta en stillbildsbild av systemet."
 
 #: inary/operations/install.py:55 inary/operations/install.py:154
+#, fuzzy
 msgid "The following package(s) are already installed and are not going to be installed again:"
-msgstr ""
+msgstr "Följande paket (er) är redan installerade och kommer inte att installeras igen:"
 
 #: inary/operations/install.py:61 inary/operations/install.py:235
 msgid "No packages to install."
@@ -3099,8 +3676,9 @@ msgid "Installing {} / {}"
 msgstr "Installerar %d / %d"
 
 #: inary/operations/install.py:141
+#, fuzzy
 msgid "Mixing file names and package names not supported yet."
-msgstr ""
+msgstr "Blanda filnamn och paketnamn stöds ännu inte."
 
 #: inary/operations/install.py:185
 #, fuzzy, python-brace-format
@@ -3108,21 +3686,23 @@ msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{
 msgstr "{} finns inte i källkodsförråden."
 
 #: inary/operations/install.py:190
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
-msgstr ""
+msgstr "Paketet \"{0}\" ('{1}') är inte kompatibelt med din '{2}' -arkitektur."
 
 #: inary/operations/install.py:213
+#, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
-msgstr ""
+msgstr "Externa beroenden är inte nöjda: \"{}\""
 
 #: inary/operations/install.py:218
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "Följande paket kommer att installeras för att uppfylla beroenden:"
 
 #: inary/operations/install.py:222
+#, fuzzy
 msgid "External dependencies not satisfied."
-msgstr ""
+msgstr "Externa beroenden är inte nöjda."
 
 #: inary/operations/install.py:266
 msgid "Installation order: "
@@ -3239,8 +3819,9 @@ msgid "Updating database at any rate as requested."
 msgstr "Skapar {}... "
 
 #: inary/operations/repository.py:130
+#, fuzzy
 msgid "Repository \"{}\" is deactivated because of GPG Signature fail."
-msgstr ""
+msgstr "Förvaret \"{}\" inaktiveras på grund av GPG-signaturfel."
 
 #: inary/operations/repository.py:135
 #, fuzzy
@@ -3261,8 +3842,9 @@ msgid "You must restart your system for the updates in the following package(s) 
 msgstr "Du måste starta om ditt system för att uppdateringen av följande paket skall träda i kraft:"
 
 #: inary/operations/upgrade.py:96
+#, fuzzy
 msgid "Warning: package *name* ends with '.inary'"
-msgstr ""
+msgstr "Varning: paket * namn * slutar med '.binary'"
 
 #: inary/operations/upgrade.py:103
 #, fuzzy
@@ -3270,16 +3852,16 @@ msgid "Package \"{}\" is not available in repositories."
 msgstr "{} finns inte i källkodsförråden."
 
 #: inary/operations/upgrade.py:126
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Package \"{0.name}\" is already at the latest release {0.release}."
-msgstr ""
+msgstr "Paketet \"{0.name}\" finns redan vid den senaste utgåvan {0.release}."
 
 #: inary/operations/upgrade.py:130
 #, fuzzy
 msgid "The following packages have different sha1sum:"
 msgstr ""
 "Följande paket har konflikter:\n"
-"{}"
+"{}\n"
 
 #: inary/operations/upgrade.py:198
 msgid "The following packages will be upgraded:"
@@ -3290,9 +3872,9 @@ msgid "There are extra packages due to dependencies."
 msgstr "Det finns extra paket på grund av beroenden."
 
 #: inary/operations/upgrade.py:293
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Dependency \"{0}\" of \"{1}\" cannot be satisfied."
-msgstr ""
+msgstr "Beroendet \"{0}\" av \"{1}\" kan inte uppfyllas."
 
 #: inary/operations/upgrade.py:294
 msgid "Upgrade is not possible."
@@ -3317,10 +3899,13 @@ msgid "Unsupported package format: {}"
 msgstr "Hanterade paketformat:"
 
 #: inary/package.py:115
+#, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
+"Det uppstod ett problem när jag hämtade \"{}\".\n"
+"Paketet kan ha uppgraderats. Försök att uppgradera paketet.\n"
 
 #: inary/package.py:119
 #, fuzzy
@@ -3342,13 +3927,14 @@ msgid "Configuring \"{}\" package."
 msgstr "Anpassar paketet {}..."
 
 #: inary/scomiface.py:121
+#, fuzzy
 msgid "SCOM package updated. From now on, using new SCOM daemon."
-msgstr ""
+msgstr "SCOM-paketet uppdaterat. Från och med nu med ny SCOM-demon."
 
 #: inary/scomiface.py:128
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Registering \"{0}\" named scom script for \"{1}\"."
-msgstr ""
+msgstr "Registrerar \"{0}\" namngivna scom-skript för \"{1}\"."
 
 #: inary/scomiface.py:137 inary/scomiface.py:142 inary/scomiface.py:190
 #: inary/scomiface.py:201 inary/scomiface.py:225 inary/scomiface.py:236
@@ -3408,29 +3994,34 @@ msgid "Calling post remove handlers for \"{}\" package."
 msgstr "Kör avslutande åtgärder efter borttagning av {}"
 
 #: inary/scomiface.py:238
+#, fuzzy
 msgid "Unregistering scom scripts of \"{}\" package."
-msgstr ""
+msgstr "Avregistrerar scom-skript av paketet \"{}\"."
 
 #: inary/scomiface.py:241
+#, fuzzy
 msgid "Unregistering {} script."
-msgstr ""
+msgstr "Avregistrerar {} skript."
 
 #: inary/sxml/autoxml.py:90
+#, fuzzy
 msgid "At least one '{}' tag should have local text."
-msgstr ""
+msgstr "Åtminstone en \"{}\" -tagg ska ha lokal text."
 
 #: inary/sxml/autoxml.py:96
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "'{0}' language of tag '{1}' is empty."
-msgstr ""
+msgstr "'{0}' taggspråket '{1}' är tomt."
 
 #: inary/sxml/autoxml.py:123
+#, fuzzy
 msgid "LocalText: unable to get either current or default locale."
-msgstr ""
+msgstr "LocalText: kan inte få varken aktuell eller standardinställning."
 
 #: inary/sxml/autoxml.py:130 inary/sxml/autoxml.py:145
+#, fuzzy
 msgid "Tag should have at least the current locale, or failing that an English or Turkish version."
-msgstr ""
+msgstr "Taggen ska ha åtminstone den aktuella språkinställningen, eller om det inte finns en engelsk eller turkisk version."
 
 #: inary/sxml/autoxml.py:389
 #, fuzzy
@@ -3448,8 +4039,9 @@ msgid "autoxml.read: File '{}' has errors."
 msgstr "autoxml.read: Filen {} innehåller fel"
 
 #: inary/sxml/autoxml.py:494
+#, fuzzy
 msgid "autoxml.write: object validation has failed."
-msgstr ""
+msgstr "autoxml.write: validering av objekt misslyckades."
 
 #: inary/sxml/autoxml.py:502
 #, fuzzy
@@ -3457,35 +4049,41 @@ msgid "autoxml.write: File encoding '{}' has errors."
 msgstr "autoxml.read: Filen {} innehåller fel"
 
 #: inary/sxml/autoxml.py:557
+#, fuzzy
 msgid "gen_tag: unrecognized tag type {} in spec."
-msgstr ""
+msgstr "gen_tag: okänd tagg typ {} i spec."
 
 #: inary/sxml/autoxml.py:610 inary/sxml/autoxml.py:621
+#, fuzzy
 msgid "Mandatory variable {} not available."
-msgstr ""
+msgstr "Obligatorisk variabel {} inte tillgänglig."
 
 #: inary/sxml/autoxml.py:693
+#, fuzzy
 msgid "Type mismatch: read text cannot be decoded."
-msgstr ""
+msgstr "Typmatchning: läst text kan inte avkodas."
 
 #: inary/sxml/autoxml.py:697 inary/sxml/autoxml.py:706
+#, fuzzy
 msgid "Mandatory token {} not available."
-msgstr ""
+msgstr "Obligatorisk token {} inte tillgänglig."
 
 #: inary/sxml/autoxml.py:711
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Type mismatch. Expected {0}, got {1}"
-msgstr ""
+msgstr "Typmatchningsfel. Förväntade {0}, fick {1}"
 
 #: inary/sxml/autoxml.py:740 inary/sxml/autoxml.py:861
+#, fuzzy
 msgid "Type mismatch: DOM cannot be decoded."
-msgstr ""
+msgstr "Typmatchning: DOM kan inte avkodas."
 
 #: inary/sxml/autoxml.py:743 inary/sxml/autoxml.py:759
 #: inary/sxml/autoxml.py:773 inary/sxml/autoxml.py:864
 #: inary/sxml/autoxml.py:878 inary/sxml/autoxml.py:892
+#, fuzzy
 msgid "Mandatory argument not available."
-msgstr ""
+msgstr "Obligatoriskt argument inte tillgängligt."
 
 #: inary/sxml/autoxml.py:756 inary/sxml/autoxml.py:875
 #, fuzzy
@@ -3498,34 +4096,41 @@ msgid "Object cannot be formatted."
 msgstr "Objektet kan inte formateras"
 
 #: inary/sxml/autoxml.py:786
+#, fuzzy
 msgid "List type must contain only one element."
-msgstr ""
+msgstr "Listtyp får endast innehålla ett element."
 
 #: inary/sxml/autoxml.py:800 inary/sxml/autoxml.py:820
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Mandatory list \"{0}\" under \"{1}\" node is empty."
-msgstr ""
+msgstr "Obligatorisk lista \"{0}\" under noden \"{1}\" är tom."
 
 #: inary/sxml/xmlext_iks.py:106 inary/sxml/xmlext_minidom.py:129
+#, fuzzy
 msgid "getNodeText: Expected text node, got something else!"
-msgstr ""
+msgstr "getNodeText: Förväntad textnod, fick något annat!"
 
 #: inary/sxml/xmlext_minidom.py:59 inary/sxml/xmlfile_iks.py:75
 #: inary/sxml/xmlfile_minidom.py:75 inary/sxml/xmlfile_minidom.py:99
+#, fuzzy
 msgid "File \"{}\" has invalid XML: {}\n"
-msgstr ""
+msgstr "Filen \"{}\" har ogiltig XML: {}"
 
 #: inary/sxml/xmlext_minidom.py:68
+#, fuzzy
 msgid ""
 "FileString is an invalid XML: {}\n"
 "\n"
 "FileString: {}\n"
 msgstr ""
+"FileString är en ogiltig XML: {}\n"
+"\n"
+"FileString: {}\n"
 
 #: inary/sxml/xmlfile_iks.py:84 inary/sxml/xmlfile_minidom.py:84
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Cannot read URI {0}: {1}"
-msgstr ""
+msgstr "Kan inte läsa URI {0}: {1}"
 
 #: inary/sxml/xmlfile_iks.py:99
 #, fuzzy
@@ -3533,16 +4138,19 @@ msgid "File \"{}\" has invalid XML."
 msgstr "Paketet {} är inte installerat"
 
 #: inary/uri.py:88
+#, fuzzy
 msgid "setAuthInfo needs a tuple (user, pass)"
-msgstr ""
+msgstr "setAuthInfo behöver en tupel (användare, pass)"
 
 #: inary/util.py:48
+#, fuzzy
 msgid "Module: 'subprocess' can not imported."
-msgstr ""
+msgstr "Modul: \"delprocess\" kan inte importeras."
 
 #: inary/util.py:98
+#, fuzzy
 msgid "Another instance of Inary is running. Only one instance is allowed."
-msgstr ""
+msgstr "En annan instans av Inary körs. Endast en instans är tillåten."
 
 #: inary/util.py:102
 #, fuzzy
@@ -3568,79 +4176,90 @@ msgstr "returvärde för \"{0}\" är {1}"
 msgid "File {} not found."
 msgstr "Filen {} hittades inte"
 
-#: inary/util.py:540
+#: inary/util.py:544
+#, fuzzy
 msgid "Including external link \"{}\""
-msgstr ""
+msgstr "Inklusive extern länk \"{}\""
 
-#: inary/util.py:542
+#: inary/util.py:546
 #, fuzzy
 msgid "Including directory \"{}\""
 msgstr "Installation misslyckades."
 
-#: inary/util.py:632
+#: inary/util.py:636
+#, fuzzy
 msgid "You don't have necessary read permissions"
-msgstr ""
+msgstr "Du har inte nödvändiga läsbehörigheter"
 
-#: inary/util.py:634
+#: inary/util.py:638
+#, fuzzy
 msgid "Cannot calculate SHA1 hash of \"{}\""
-msgstr ""
+msgstr "Det går inte att beräkna SHA1-hash av \"{}\""
 
-#: inary/util.py:648
+#: inary/util.py:652
+#, fuzzy
 msgid "Compression type is not valid: '{}'"
-msgstr ""
+msgstr "Komprimeringstypen är inte giltig: '{}'"
 
-#: inary/util.py:654
-#, python-brace-format
+#: inary/util.py:658
+#, fuzzy, python-brace-format
 msgid "Error while decompressing \"{0}\": {1}"
-msgstr ""
+msgstr "Fel vid dekomprimering av \"{0}\": {1}"
 
-#: inary/util.py:709
-#, python-brace-format
+#: inary/util.py:713
+#, fuzzy, python-brace-format
 msgid "Detected patch level={0} for {1}"
-msgstr ""
+msgstr "Detekterad korrigeringsnivå = {0} för {1}"
 
-#: inary/util.py:737
+#: inary/util.py:741
 #, fuzzy
 msgid "ERROR: patch (\"{}\") failed."
 msgstr "FEL: patch {} misslyckades"
 
-#: inary/util.py:739
+#: inary/util.py:743
 #, fuzzy, python-brace-format
 msgid "ERROR: patch (\"{0}\") failed: {1}"
 msgstr "FEL: patch ({0}) misslyckades: {1}"
 
-#: inary/util.py:751
+#: inary/util.py:755
+#, fuzzy
 msgid "'strip' command failed for file \"{}\"!"
-msgstr ""
+msgstr "\"strip\" -kommandot misslyckades för filen \"{}\"!"
 
-#: inary/util.py:758
+#: inary/util.py:762
+#, fuzzy
 msgid "'chrpath' command failed for file \"{}\"!"
-msgstr ""
+msgstr "\"chrpath\" -kommandot misslyckades för filen \"{}\"!"
 
-#: inary/util.py:765
+#: inary/util.py:769
+#, fuzzy
 msgid "'objcopy' (keep-debug) command failed for file \"{}\"!"
-msgstr ""
+msgstr "\"objcopy\" (keep-debug) -kommandot misslyckades för filen \"{}\"!"
 
-#: inary/util.py:771
+#: inary/util.py:775
+#, fuzzy
 msgid "'objcopy' (add-debuglink) command failed for file \"{}\"!"
-msgstr ""
+msgstr "'objcopy' (add-debuglink) -kommandot misslyckades för filen \"{}\"!"
 
-#: inary/util.py:865
+#: inary/util.py:869
 #, fuzzy
 msgid "Invalid package name: \"{}\""
 msgstr "Ogiltigt paketnamn: {}"
 
-#: inary/util.py:915
+#: inary/util.py:919
 #, fuzzy
 msgid "Invalid delta package name: \"{}\""
 msgstr "Ogiltigt paketnamn: {}"
 
-#: inary/util.py:1052
+#: inary/util.py:1056
 #, fuzzy
 msgid "Removing empty dir: \"{}\""
 msgstr "Tar bort paketet {}"
 
 #: inary/version.py:76
-#, fuzzy
 msgid "Invalid version string: '{}'"
-msgstr "Ogiltig versionssträng: {}"
+msgstr ""
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s-alternativet kräver %d argument%s-alternativet kräver %d argument#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "%s-alternativet tar inte ett värde"

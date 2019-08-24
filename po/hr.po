@@ -7,75 +7,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-17 01:25+0300\n"
-"PO-Revision-Date: 2011-06-11 23:13+0100\n"
+"POT-Creation-Date: 2019-08-25 00:42+0300\n"
+"PO-Revision-Date: 2019-08-25 00:59+0300\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
-"Language: \n"
+"Language: hr_HR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Poedit-Language: Croatian\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Country: CROATIA\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: /usr/lib64/python3.7/optparse.py:146
+#: /usr/lib/python3.6/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "nema takve opcije: %s"
 
-#: /usr/lib64/python3.7/optparse.py:157
+#: /usr/lib/python3.6/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "dvosmislena opcija: %s (%s?)"
 
-#: /usr/lib64/python3.7/optparse.py:381
+#: /usr/lib/python3.6/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Upotreba: %s\n"
 
-#: /usr/lib64/python3.7/optparse.py:400
+#: /usr/lib/python3.6/optparse.py:400
 msgid "Usage"
 msgstr "Upotreba"
 
-#: /usr/lib64/python3.7/optparse.py:422 /usr/lib64/python3.7/optparse.py:423
+#: /usr/lib/python3.6/optparse.py:422 /usr/lib/python3.6/optparse.py:423
 msgid "integer"
 msgstr ""
 
-#: /usr/lib64/python3.7/optparse.py:424
+#: /usr/lib/python3.6/optparse.py:424
 msgid "floating-point"
 msgstr ""
 
-#: /usr/lib64/python3.7/optparse.py:425
+#: /usr/lib/python3.6/optparse.py:425
 #, fuzzy
 msgid "complex"
 msgstr " [dovršeno]\n"
 
-#: /usr/lib64/python3.7/optparse.py:433
+#: /usr/lib/python3.6/optparse.py:433
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "opcija %s: neispravna %s vrijednost: %r"
 
-#: /usr/lib64/python3.7/optparse.py:441
+#: /usr/lib/python3.6/optparse.py:441
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "opcija %s: inspravan izbor: %r (izaberite iz %s)"
 
-#: /usr/lib64/python3.7/optparse.py:1238
+#: /usr/lib/python3.6/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "polaži poruku pomoći i izađi"
 
-#: /usr/lib64/python3.7/optparse.py:1243
+#: /usr/lib/python3.6/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "pokaži broj verzije programa i izađi"
 
-#: /usr/lib64/python3.7/optparse.py:1266
+#: /usr/lib/python3.6/optparse.py:1266
 #, fuzzy
 msgid "%prog [options]"
 msgstr "opcije uklanjanja"
 
-#: /usr/lib64/python3.7/optparse.py:1486 /usr/lib64/python3.7/optparse.py:1524
+#: /usr/lib/python3.6/optparse.py:1486 /usr/lib/python3.6/optparse.py:1524
 #, fuzzy, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
@@ -83,12 +82,12 @@ msgstr[0] "%s opcija zahtijeva %d argumente"
 msgstr[1] "%s opcija zahtijeva %d argumente"
 msgstr[2] "%s opcija zahtijeva %d argumente"
 
-#: /usr/lib64/python3.7/optparse.py:1496
+#: /usr/lib/python3.6/optparse.py:1496
 #, fuzzy, python-format
 msgid "%s option does not take a value"
 msgstr "%s opcija ne uzima vrijednost"
 
-#: /usr/lib64/python3.7/optparse.py:1612
+#: /usr/lib/python3.6/optparse.py:1612
 msgid "Options"
 msgstr "Opcije"
 
@@ -527,6 +526,10 @@ msgstr "ActionsAPI [touch]:  Nijedna datoteka se ne podudara sa uzorakom \"{}\".
 msgid "ActionsAPI [touch]: Permission denied: \"{}\""
 msgstr "ActionsAPI [touch]: Dozvola odbijena: {}"
 
+#: inary/actionsapi/shelltools.py:284
+msgid "[Running Command]: "
+msgstr ""
+
 #: inary/actionsapi/shelltools.py:290
 #, fuzzy, python-brace-format
 msgid "ActionsAPI [system]: Command '{0}' failed, return value was {1}."
@@ -768,7 +771,7 @@ msgstr "Greška preuzimanja: Paket se ne podudara sa paketom repozitorija."
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Paket {} nije nađen u nijednom aktivnom repozitoriju."
 
-#: inary/atomicoperations.py:166 inary/cli/__init__.py:214
+#: inary/atomicoperations.py:166 inary/cli/__init__.py:216
 #, fuzzy, python-brace-format
 msgid "Installing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Instaliram {0.name},verzija {0.version},izdanje {0.release}"
@@ -883,12 +886,12 @@ msgstr "Ne uklanjanje sporne datoteke: {}"
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Instalirana datoteka {} ne postoji u sustavu [Vejrovatno ste je ručno obrisali]"
 
-#: inary/atomicoperations.py:725
+#: inary/atomicoperations.py:727
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Dodajem {} u db... "
 
-#: inary/atomicoperations.py:729
+#: inary/atomicoperations.py:731
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Obnovi bazu podataka datoteka"
@@ -905,66 +908,70 @@ msgstr "Upozorenje:"
 msgid "Error: "
 msgstr "Greška:"
 
-#: inary/cli/__init__.py:178
-#, fuzzy
-msgid "(yes"
-msgstr " (da/ne)"
-
-#: inary/cli/__init__.py:178
-msgid "no)"
+#: inary/cli/__init__.py:157
+msgid ""
+"\n"
+" Select one:"
 msgstr ""
 
-#: inary/cli/__init__.py:211
+#: inary/cli/__init__.py:180
+msgid "(yes"
+msgstr " (da"
+
+#: inary/cli/__init__.py:180
+msgid "no)"
+msgstr "ne)"
+
+#: inary/cli/__init__.py:213
 #, fuzzy
 msgid "Installed \"{}\""
 msgstr "Instaliran {}"
 
-#: inary/cli/__init__.py:217
+#: inary/cli/__init__.py:219
 #, fuzzy
 msgid "Removed \"{}\""
 msgstr "Uklonjen {}"
 
-#: inary/cli/__init__.py:220
+#: inary/cli/__init__.py:222
 #, fuzzy
 msgid "Removing \"{}\""
 msgstr "Uklonjen {}"
 
-#: inary/cli/__init__.py:223
+#: inary/cli/__init__.py:225
 #, fuzzy
 msgid "Upgraded \"{}\""
 msgstr "Nadograđen {}"
 
-#: inary/cli/__init__.py:226
+#: inary/cli/__init__.py:228
 #, fuzzy
 msgid "Configured \"{}\""
 msgstr "Konfiguriran {}"
 
-#: inary/cli/__init__.py:229
+#: inary/cli/__init__.py:231
 #, fuzzy
 msgid "Configuring \"{}\""
 msgstr "Konfiguriran {}"
 
-#: inary/cli/__init__.py:232
+#: inary/cli/__init__.py:234
 #, fuzzy
 msgid "Extracting the files of \"{}\""
 msgstr "Raspakiran datoteke od {}"
 
-#: inary/cli/__init__.py:235 inary/operations/repository.py:107
+#: inary/cli/__init__.py:237 inary/operations/repository.py:107
 #, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "Dopunjujem repozitorij: {}"
 
-#: inary/cli/__init__.py:240
-#, fuzzy
+#: inary/cli/__init__.py:242
 msgid "Total size of package(s): {:.2f} {} / {:.2f} {}"
-msgstr "Ukupna veličina paketa:  %.2f %s"
+msgstr "Ukupna veličina paketa:  {:.2f} {} / {:.2f} {}"
 
-#: inary/cli/__init__.py:247
+#: inary/cli/__init__.py:249
 #, fuzzy
 msgid "Following packages ordered for process: {}"
 msgstr "Slijedeći paketi će biti uklonjeni:\n"
 
-#: inary/cli/__init__.py:252
+#: inary/cli/__init__.py:254
 #, fuzzy
 msgid "Extracted desktop file \"{}\""
 msgstr "Raspakiran datoteke od {}"
@@ -1344,6 +1351,32 @@ msgstr "Nemoj izvoditi nikakvee akcije, samo pokaži što će biti učinjeno"
 msgid "usage: {}\n"
 msgstr "uporaba: {}\n"
 
+#: inary/cli/configmanager.py:32
+#, fuzzy
+msgid "Inary Config file manager."
+msgstr "Instaliranje konfiguracijskih datoteka nije uspjelo"
+
+#: inary/cli/configmanager.py:41
+#, fuzzy
+msgid "config-manager options"
+msgstr "osnovne opcije"
+
+#: inary/cli/configmanager.py:44
+msgid "Rewrite all config files with new ones without keeping old config files."
+msgstr ""
+
+#: inary/cli/configmanager.py:46
+msgid "Rewrite all config files with new ones, keeping old config files."
+msgstr ""
+
+#: inary/cli/configmanager.py:70 inary/cli/install.py:122
+msgid "[!] Some config files have been changed. Would you like to see and apply them?"
+msgstr ""
+
+#: inary/cli/configmanager.py:74
+msgid "There isn't any new config :)"
+msgstr ""
+
 #: inary/cli/configurepending.py:74 inary/scomiface.py:44
 #, fuzzy
 msgid "scom package is not fully installed."
@@ -1690,21 +1723,21 @@ msgstr "Datum: {} {}"
 msgid "    * There are {} packages in this snapshot."
 msgstr ""
 
-#: inary/cli/inarycli.py:103
+#: inary/cli/inarycli.py:104
 msgid "Options must precede non-option arguments."
 msgstr ""
 
-#: inary/cli/inarycli.py:146
+#: inary/cli/inarycli.py:147
 #, fuzzy
 msgid "No command given."
 msgstr "NIje dana nijedna naredba"
 
-#: inary/cli/inarycli.py:149
+#: inary/cli/inarycli.py:150
 #, fuzzy
 msgid "Command line parsing error."
 msgstr "Naredba nema ime"
 
-#: inary/cli/inarycli.py:153
+#: inary/cli/inarycli.py:154
 #, fuzzy
 msgid "Unrecognized command: {}"
 msgstr "Neprepoznata naredba: {}"
@@ -2690,15 +2723,15 @@ msgstr "Odbijen pristup za pisanje u odredišnom direktoriju: \"{}\""
 msgid "Access denied to destination file: \"{}\""
 msgstr "Odbijen pristup odedišnoj datoteci: \"{}\" "
 
-#: inary/fetcher.py:194
+#: inary/fetcher.py:195
 msgid "Download resuming..."
 msgstr ""
 
-#: inary/fetcher.py:211
+#: inary/fetcher.py:212
 msgid "Downloaded from:"
 msgstr ""
 
-#: inary/fetcher.py:219
+#: inary/fetcher.py:220
 #, fuzzy
 msgid "A problem occurred. Please check the archive address and/or permissions again."
 msgstr "Došlo je do greške.Provjerite adresu arhiva i/ili dozvole ponovno."
@@ -2913,7 +2946,7 @@ msgstr ""
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:750 inary/util.py:680
+#: inary/operations/build.py:750 inary/util.py:684
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "repozitorij {} ne postoji."
@@ -3152,6 +3185,45 @@ msgstr ""
 msgid "{:.2f} {} space will be used."
 msgstr ""
 
+#: inary/operations/helper.py:221
+#, python-brace-format
+msgid "Keeping old config file {0} as {0}.old-byinary"
+msgstr ""
+
+#: inary/operations/helper.py:230
+#, fuzzy, python-brace-format
+msgid "[?] Would you like to see changes in config files of \"{0}\" package"
+msgstr "Provjerava samo promijenjene konfiguracijske datoteke paketa"
+
+#: inary/operations/helper.py:232
+msgid "[*] Changes in config file: {}"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:236
+msgid "1. Store new config file, not apply [*]"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:238
+msgid "2. Apply new config file (keep old config)"
+msgstr ""
+
+#: inary/operations/helper.py:234 inary/operations/helper.py:240
+msgid "3. Apply new config file (don't keep old config)"
+msgstr ""
+
+#: inary/operations/helper.py:234
+msgid "3. Delete new config file"
+msgstr ""
+
+#: inary/operations/helper.py:234
+msgid "[?] Select the process which will be happened:"
+msgstr ""
+
+#: inary/operations/helper.py:244
+#, python-brace-format
+msgid "Deleting new config file {0}"
+msgstr ""
+
 #: inary/operations/history.py:89 inary/operations/history.py:113
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" found in repository \"{1}\"."
@@ -3180,9 +3252,8 @@ msgstr "Želite li nastaviti?"
 
 #: inary/operations/history.py:219 inary/operations/install.py:102
 #: inary/operations/upgrade.py:227
-#, fuzzy
 msgid "Downloading {} / {}"
-msgstr "Preuzimam %d / %d"
+msgstr "Preuzimam  {} / {}"
 
 #: inary/operations/history.py:225
 msgid ""
@@ -3208,9 +3279,8 @@ msgid "Following packages will be installed:"
 msgstr "Slijedeći paketi će biti instalirani:"
 
 #: inary/operations/install.py:120 inary/operations/upgrade.py:242
-#, fuzzy
 msgid "Installing {} / {}"
-msgstr "Instaliram  %d / %d"
+msgstr "Instaliram   {} / {}"
 
 #: inary/operations/install.py:141
 msgid "Mixing file names and package names not supported yet."
@@ -3678,75 +3748,75 @@ msgstr ""
 msgid "File {} not found."
 msgstr "Datoteka {} nije nađena"
 
-#: inary/util.py:540
+#: inary/util.py:544
 #, fuzzy
 msgid "Including external link \"{}\""
 msgstr "Uključujući vanjsku poveznicu {}"
 
-#: inary/util.py:542
+#: inary/util.py:546
 #, fuzzy
 msgid "Including directory \"{}\""
 msgstr "Uključujući direktorij {}"
 
-#: inary/util.py:632
+#: inary/util.py:636
 msgid "You don't have necessary read permissions"
 msgstr "Nemate potrebne dozvole za čitanje"
 
-#: inary/util.py:634
+#: inary/util.py:638
 msgid "Cannot calculate SHA1 hash of \"{}\""
 msgstr ""
 
-#: inary/util.py:648
+#: inary/util.py:652
 msgid "Compression type is not valid: '{}'"
 msgstr ""
 
-#: inary/util.py:654
+#: inary/util.py:658
 #, python-brace-format
 msgid "Error while decompressing \"{0}\": {1}"
 msgstr ""
 
-#: inary/util.py:709
+#: inary/util.py:713
 #, python-brace-format
 msgid "Detected patch level={0} for {1}"
 msgstr ""
 
-#: inary/util.py:737
+#: inary/util.py:741
 #, fuzzy
 msgid "ERROR: patch (\"{}\") failed."
 msgstr "GREŠKA: gpg --detach-sig {} nije uspjelo"
 
-#: inary/util.py:739
+#: inary/util.py:743
 #, fuzzy, python-brace-format
 msgid "ERROR: patch (\"{0}\") failed: {1}"
 msgstr "GREŠKA: gpg --detach-sig {} nije uspjelo"
 
-#: inary/util.py:751
+#: inary/util.py:755
 msgid "'strip' command failed for file \"{}\"!"
 msgstr ""
 
-#: inary/util.py:758
+#: inary/util.py:762
 msgid "'chrpath' command failed for file \"{}\"!"
 msgstr ""
 
-#: inary/util.py:765
+#: inary/util.py:769
 msgid "'objcopy' (keep-debug) command failed for file \"{}\"!"
 msgstr ""
 
-#: inary/util.py:771
+#: inary/util.py:775
 msgid "'objcopy' (add-debuglink) command failed for file \"{}\"!"
 msgstr ""
 
-#: inary/util.py:865
+#: inary/util.py:869
 #, fuzzy
 msgid "Invalid package name: \"{}\""
 msgstr "Neispravno ime paketa: {}"
 
-#: inary/util.py:915
+#: inary/util.py:919
 #, fuzzy
 msgid "Invalid delta package name: \"{}\""
 msgstr "Neispravano ime delta paketa: {}"
 
-#: inary/util.py:1052
+#: inary/util.py:1056
 #, fuzzy
 msgid "Removing empty dir: \"{}\""
 msgstr "Uklanjam paket {}"

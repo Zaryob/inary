@@ -1,3 +1,25 @@
+2019-08-22 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/translations:
+    * Translations Updated
+	* metadata içerisinde Scom gereksinimi olmayan paketler:
+		Gereksiz yere içerisinde scom betiği bulunmasa bile paketlerin scomiface bağlantısı yapmaya 
+		çalışması bir problemdi ve kısa süreli olarak fixlenmiş idi. Şimdi ise bu hata düzeltildi. Geriye tek
+		yapmam gereken scom dbus servisi çalışmıyor ise yapılan çağrıyı error içerisine çekmeyip pendings
+		listesine atmak olacak bu da çocuk oyuncağı sayılır. 
+
+2019-08-21 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/scripts:
+    * İki yeni araç eklendi:
+      inary-sign.py: Depoları GPG imzası ile imzalamak için kullanılacak araç.
+      sync-licence: Portage paket yönetimine eklenen lisanslarla elimizdekileri güncelleyecek araç.
+    * Üç yeni araç daha eklendi:
+      pspec2po: kaynak depodan adları güncellemek için.
+      revdep-rebuild
+      version-bump: spec dosyasının versiyonunu güncellemek için.
+
+2019-08-21 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:develop:
+    * Yeni komut "configure-manager":
+      Değişen config dosyalarının düzenlemesi bu şekilde basitçe yapılabiliyor.
+    * inary indexleri GPG imzasıyla imzalanmadı ise paket sisteminin çakışması sorunu düzenlendi.
+
 2019-08-20 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/testSuit
     * Bazı testler eklendi:
       Eski testler arasından çalışan ve yeniden yazılmaya ihtiyaç duyulmayanlar eklendi.
