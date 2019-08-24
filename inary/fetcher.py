@@ -180,6 +180,7 @@ class Fetcher:
             c.setopt(pycurl.AUTOREFERER, 1)
             c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
             # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+            c.setopt(pycurl.FOLLOWLOCATION, True)
             c.setopt(pycurl.MAXREDIRS, 10)
             c.setopt(pycurl.NOSIGNAL, True)
             # Header
@@ -219,7 +220,6 @@ class Fetcher:
                 FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
 
         shutil.move(self.partial_file, self.archive_file)
-
         return self.archive_file
 
     def _get_http_headers(self):
