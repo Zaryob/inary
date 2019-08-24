@@ -269,7 +269,7 @@ class File:
                 return True
 
             ret, out, err = inary.util.run_batch('gpg --verify ' + sigfilename)
-            if ret:
+            if ctx.config.values.general.ssl_verify and ret:
                 ctx.ui.info("Checking GPG Signature failed ('gpg --verify {}')".format(sigfilename), color='cyan')
                 ctx.ui.info(err.decode("utf-8"), color='faintcyan')
                 if not ctx.ui.confirm("Would you like to skip checking gpg signature?"):
