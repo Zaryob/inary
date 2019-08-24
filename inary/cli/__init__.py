@@ -154,8 +154,10 @@ class CLI(inary.ui.UI):
 
     def choose(self, msg, opts):
         msg = str(msg)
-        endmsg = '\n Select one:'
-        prompt = msg + util.colorize('[  %s  ]' % ("  /   ".join(opts)), 'brightblue') + endmsg
+        endmsg = _('\n Select one:')
+        prompt = ""
+        for opt in opts:
+            prompt += util.colorize('[  {}  ]\n'.format(opt), 'faintblue')
 
         while True:
             s = input(prompt)

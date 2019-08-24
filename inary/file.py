@@ -264,15 +264,18 @@ class File:
                 sigfilename = File.download(inary.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
-            except Exception as e:  # FIXME: what exception could we catch here, replace with that.
-                raise NoSignatureFound(uri)
+            except IOError:  # FIXME: what exception could we catch here, replace with that.
+                ctx.ui.error(NoSignatureFound(uri))
+                return True
 
             ret, out, err = inary.util.run_batch('gpg --verify ' + sigfilename)
-            if ret:
+            if ctx.config.values.general.ssl_verify and ret:
                 ctx.ui.info("Checking GPG Signature failed ('gpg --verify {}')".format(sigfilename), color='cyan')
                 ctx.ui.info(err.decode("utf-8"), color='faintcyan')
                 if not ctx.ui.confirm("Would you like to skip checking gpg signature?"):
                     raise InvalidSignature(uri)  # everything is all right here
+        else:
+            return True
 
     def flush(self):
         self.__file__.flush()

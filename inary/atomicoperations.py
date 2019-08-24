@@ -199,7 +199,7 @@ class Install(AtomicOperation):
 
         # what to do if / is split into /usr, /var, etc.
         # check scom
-        if self.metadata.package.providesScom and ctx.scom:
+        if self.metadata.package.providesScom and ctx.scom and not ctx.get_option("ignore_scom"):
             import inary.scomiface as scomiface
             scomiface.get_link()
 
@@ -320,34 +320,34 @@ class Install(AtomicOperation):
             else:
                 ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
                 os.chown(fpath, int(_file.uid), int(_file.gid))
-
-        if ctx.scom:
-            import inary.scomiface
-            try:
-                if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                    fromVersion = self.old_pkginfo.version
-                    fromRelease = self.old_pkginfo.release
-                else:
-                    fromVersion = None
-                    fromRelease = None
-                ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
-                inary.scomiface.post_install(
-                    self.pkginfo.name,
-                    self.metadata.package.providesScom,
-                    self.package.scom_dir(),
-                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                    fromVersion,
-                    fromRelease,
-                    self.metadata.package.version,
-                    self.metadata.package.release
-                )
-                ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-            except inary.scomiface.Error:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+        if self.metadata.package.providesScom:
+            if ctx.scom and not ctx.get_option("ignore_scom"):
+                import inary.scomiface
+                try:
+                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
+                        fromVersion = self.old_pkginfo.version
+                        fromRelease = self.old_pkginfo.release
+                    else:
+                        fromVersion = None
+                        fromRelease = None
+                    ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
+                    inary.scomiface.post_install(
+                        self.pkginfo.name,
+                        self.metadata.package.providesScom,
+                        self.package.scom_dir(),
+                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                        fromVersion,
+                        fromRelease,
+                        self.metadata.package.version,
+                        self.metadata.package.release
+                    )
+                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
+                except inary.scomiface.Error:
+                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                    self.config_later = True
+            else:
                 self.config_later = True
-        else:
-            self.config_later = True
 
     def extract_install(self):
         """unzip package in place"""
@@ -361,23 +361,23 @@ class Install(AtomicOperation):
             if util.config_changed(config):
                 config_changed.append(fpath)
                 self.historydb.save_config(self.pkginfo.name, fpath)
-                if os.path.exists(fpath + '.old'):
-                    os.unlink(fpath + '.old')
-                os.rename(fpath, fpath + '.old')
+                if os.path.exists(fpath + '.old-byinary'):
+                    os.unlink(fpath + '.old-byinary')
+                os.rename(fpath, fpath + '.old-byinary')
 
         # old config files are kept as they are. New config files from the installed
         # packages are saved with ".newconfig" string appended to their names.
         def rename_configs():
             for path in config_changed:
-                newconfig = path + '.newconfig'
-                oldconfig = path + '.old'
+                newconfig = path + '.newconfig-byinary'
+                oldconfig = path + '.old-byinary'
                 if os.path.exists(newconfig):
                     os.unlink(newconfig)
 
                 # In the case of delta packages: the old package and the new package
                 # may contain same config typed files with same hashes, so the delta
                 # package will not have that config file. In order to protect user
-                # changed config files, they are renamed with ".old" prefix in case
+                # changed config files, they are renamed with ".old-byinary" prefix in case
                 # of the hashes of these files on the filesystem and the new config
                 # file that is coming from the new package. But in delta package case
                 # with the given scenario there wont be any, so we can pass this one.
@@ -560,7 +560,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='brightpurple')
+        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -699,23 +699,25 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if ctx.scom:
-            import inary.scomiface
-            inary.scomiface.pre_remove(
-                self.package_name,
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-            )
+        if self.package.providesScom:
+            if ctx.scom and not ctx.get_option("ignore_scom"):
+                import inary.scomiface
+                inary.scomiface.pre_remove(
+                         self.package_name,
+                         os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                         os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                         )
 
     def run_postremove(self):
-        if ctx.scom:
-            import inary.scomiface
-            inary.scomiface.post_remove(
-                self.package_name,
-                os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                provided_scripts=self.package.providesScom,
-            )
+        if self.package.providesScom:
+            if ctx.scom and not ctx.get_option("ignore_scom"):
+                import inary.scomiface
+                inary.scomiface.post_remove(
+                    self.package_name,
+                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                    provided_scripts=self.package.providesScom,
+                )
 
     def update_databases(self):
         self.remove_db()
