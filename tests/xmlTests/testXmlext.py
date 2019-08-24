@@ -1,7 +1,13 @@
 import unittest
-from inary.sxml import xmlext_iks as xmliks
+
+try:
+    from inary.sxml import xmlext_iks as xmliks
+    import ciksemel
+
+except:
+    pass
+
 from inary.sxml import xmlext_minidom as xmlmdom
-import ciksemel
 import xml.dom.minidom
 import shutil
 
