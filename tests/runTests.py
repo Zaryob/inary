@@ -139,7 +139,7 @@ def main():
 
 def setup():
     options = inary.config.Options()
-    options.destdir = 'repos/tmp'
+    options.destdir = 'tests/tmp_root'
     inary.api.set_options(options)
     inary.api.set_scom(False)
 
@@ -147,7 +147,7 @@ def setup():
     ctx.config.values.general.distribution_release = "2018"
 
 if __name__ == '__main__':
-    if os.path.exists("repos/tmp"):
-        shutil.rmtree("repos/tmp")
+    if os.path.exists("tests/tmp_root"):
+        shutil.rmtree("tests/tmp_root")
     setup()
     main()
