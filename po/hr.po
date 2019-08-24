@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-21 21:07+0000\n"
+"POT-Creation-Date: 2019-08-24 05:42+0300\n"
 "PO-Revision-Date: 2011-06-11 23:13+0100\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -20,62 +20,62 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Country: CROATIA\n"
 
-#: /usr/lib/python3.7/optparse.py:146
+#: /usr/lib/python3.6/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "nema takve opcije: %s"
 
-#: /usr/lib/python3.7/optparse.py:157
+#: /usr/lib/python3.6/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "dvosmislena opcija: %s (%s?)"
 
-#: /usr/lib/python3.7/optparse.py:381
+#: /usr/lib/python3.6/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Upotreba: %s\n"
 
-#: /usr/lib/python3.7/optparse.py:400
+#: /usr/lib/python3.6/optparse.py:400
 msgid "Usage"
 msgstr "Upotreba"
 
-#: /usr/lib/python3.7/optparse.py:422 /usr/lib/python3.7/optparse.py:423
+#: /usr/lib/python3.6/optparse.py:422 /usr/lib/python3.6/optparse.py:423
 msgid "integer"
 msgstr ""
 
-#: /usr/lib/python3.7/optparse.py:424
+#: /usr/lib/python3.6/optparse.py:424
 msgid "floating-point"
 msgstr ""
 
-#: /usr/lib/python3.7/optparse.py:425
+#: /usr/lib/python3.6/optparse.py:425
 #, fuzzy
 msgid "complex"
 msgstr " [dovršeno]\n"
 
-#: /usr/lib/python3.7/optparse.py:433
+#: /usr/lib/python3.6/optparse.py:433
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "opcija %s: neispravna %s vrijednost: %r"
 
-#: /usr/lib/python3.7/optparse.py:441
+#: /usr/lib/python3.6/optparse.py:441
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "opcija %s: inspravan izbor: %r (izaberite iz %s)"
 
-#: /usr/lib/python3.7/optparse.py:1238
+#: /usr/lib/python3.6/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "polaži poruku pomoći i izađi"
 
-#: /usr/lib/python3.7/optparse.py:1243
+#: /usr/lib/python3.6/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "pokaži broj verzije programa i izađi"
 
-#: /usr/lib/python3.7/optparse.py:1266
+#: /usr/lib/python3.6/optparse.py:1266
 #, fuzzy
 msgid "%prog [options]"
 msgstr "opcije uklanjanja"
 
-#: /usr/lib/python3.7/optparse.py:1486 /usr/lib/python3.7/optparse.py:1524
+#: /usr/lib/python3.6/optparse.py:1486 /usr/lib/python3.6/optparse.py:1524
 #, fuzzy, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
@@ -83,12 +83,12 @@ msgstr[0] "%s opcija zahtijeva %d argumente"
 msgstr[1] "%s opcija zahtijeva %d argumente"
 msgstr[2] "%s opcija zahtijeva %d argumente"
 
-#: /usr/lib/python3.7/optparse.py:1496
+#: /usr/lib/python3.6/optparse.py:1496
 #, fuzzy, python-format
 msgid "%s option does not take a value"
 msgstr "%s opcija ne uzima vrijednost"
 
-#: /usr/lib/python3.7/optparse.py:1612
+#: /usr/lib/python3.6/optparse.py:1612
 msgid "Options"
 msgstr "Opcije"
 
@@ -887,12 +887,12 @@ msgstr "Ne uklanjanje sporne datoteke: {}"
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Instalirana datoteka {} ne postoji u sustavu [Vejrovatno ste je ručno obrisali]"
 
-#: inary/atomicoperations.py:725
+#: inary/atomicoperations.py:727
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Dodajem {} u db... "
 
-#: inary/atomicoperations.py:729
+#: inary/atomicoperations.py:731
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Obnovi bazu podataka datoteka"
@@ -1372,7 +1372,7 @@ msgstr ""
 msgid "Rewrite all config files with new ones, keeping old config files."
 msgstr ""
 
-#: inary/cli/configmanager.py:70 inary/cli/install.py:121
+#: inary/cli/configmanager.py:70 inary/cli/install.py:122
 msgid "[!] Some config files have been changed. Would you like to see and apply them?"
 msgstr ""
 
