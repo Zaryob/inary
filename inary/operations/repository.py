@@ -104,7 +104,7 @@ def update_repo(repo, force=False):
 
 
 def __update_repo(repo, force=False):
-    ctx.ui.status(_('Updating package repository: \"{}\"').format(repo))
+    ctx.ui.status(_('Updating package repository: \"{}\"').format(repo), push_screen=True)
     ctx.ui.notify(inary.ui.updatingrepo, name=repo)
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()
@@ -126,7 +126,7 @@ def __update_repo(repo, force=False):
 
         try:
             index.check_signature(repouri, repo)
-        except inary.file.NoSignatureFound as e:
+        except inary.file.InvalidSignature as e:
             ctx.ui.info(_("Repository \"{}\" is deactivated because of GPG Signature fail.").format(repo),
                           color='brightyellow')
             set_repo_activity(repo, False)
