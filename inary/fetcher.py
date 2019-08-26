@@ -31,6 +31,7 @@ _ = __trans.gettext
 import inary
 import inary.db
 import inary.errors
+import inary.mirrors
 import inary.util as util
 import inary.context as ctx
 import inary.uri
@@ -257,13 +258,51 @@ class Fetcher:
         else:
             return 0
 
-
 # helper function
-def fetch_url(url, destdir, progress=None, destfile=None):
+def fetch_url(url, destdir=None, progress=None, destfile=None):
+
+    if not destdir:
+        destdir=ctx.config.archives_dir()
+    if not progress:
+        progress=ctx.ui.Progress
     fetch = Fetcher(url, destdir, destfile)
     fetch.progress = progress
     fetch.fetch()
 
+def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
+    archive = os.path.basename(url)
+    src = os.path.join(ctx.config.values.build.fallback, archive)
+    ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
+    fetch_url(src, destdir=destdir, progress=progress, destfile=destfile)
+
+def fetch_from_locale(url, destdir=None, progress=None, destfile=None):
+    if not destdir:
+        destdir=ctx.config.archives_dir()
+    if url.startswith("file://"):
+        url = url[7:]
+    if not os.access(url, os.F_OK):
+        raise FetchError(_('No such file or no permission to read for {}.').format(url))
+    shutil.copy(url, os.path.join(destdir, destfile or url.split("/")[-1]))
+
+def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
+    sep = url[len("mirrors://"):].split("/")
+    name = sep.pop(0)
+    archive = "/".join(sep)
+
+    mirrors = inary.mirrors.Mirrors().get_mirrors(name)
+    if not mirrors:
+        raise inary.mirrors.MirrorError(_("\"{}\" mirrors are not defined.").format(name))
+
+    for mirror in mirrors:
+        try:
+            mirror_url = os.path.join(mirror, archive)
+            ctx.ui.warning(_('Fetching source from mirror: \"{}\"').format(mirror))
+            fetch_url(mirror_url, destdir=destdir, progress=progress, destfile=destfile)
+            return
+        except FetchError:
+            pass
+
+    raise FetchError(_('Could not fetch source from \"{}\" mirrors.').format(name))
 
 # Operation function
 def fetch(packages=None, path=os.path.curdir):
