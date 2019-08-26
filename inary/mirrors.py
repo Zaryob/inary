@@ -20,6 +20,8 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+class MirrorError(inary.errors.Error):
+    pass
 
 class Mirrors:
     def __init__(self, config=ctx.const.mirrors_conf):
