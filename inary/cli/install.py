@@ -23,7 +23,7 @@ import inary.cli.command as command
 import inary.context as ctx
 from inary.operations import install, helper
 import inary.db
-
+import inary.util as util
 
 class Install(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Install INARY packages
@@ -110,7 +110,8 @@ expanded to package names.
         reinstall = bool(packages) and packages[0].endswith(ctx.const.package_suffix)
         install.install(packages, ctx.get_option('reinstall') or reinstall)
 
-        config_changes = helper.check_config_changes(order=packages)
+
+        config_changes = helper.check_config_changes([util.parse_package_name_legacy(i)[0] for i in packages])
 
         if config_changes:
             if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
