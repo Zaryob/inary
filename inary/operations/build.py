@@ -1065,7 +1065,12 @@ package might be a good solution."))
             for fn in files:
                 filepath = util.join_path(root, fn)
                 if witcher:
-                    fileinfo=witcher(filepath).name
+                    try:
+                        fileinfo=witcher(filepath).name
+                    except ValueError:
+                        ctx.ui.warning(_("File \"{}\" might be a broken symlink. Check it before publishing package.".format(filepath)))
+                        fileinfo="broken symlink"
+
                     ctx.ui.info(_("\'magic\' return of \"{0}\" is \"{1}\"").format(filepath, fileinfo), verbose=True)
                 else:
                     ret, out, err = util.run_batch("file {}".format(filepath), ui_debug=False)
