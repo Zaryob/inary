@@ -50,9 +50,9 @@ def meson_configure(parameters=""):
               --prefix=/{0} \
               --buildtype=plain \
               --libdir=/{0}/lib{1} \
-              --libexecdir={2} \
-              --sysconfdir={3} \
-              --localstatedir={4} \
+              --libexecdir=/{2} \
+              --sysconfdir=/{3} \
+              --localstatedir=/{4} \
               {5} inaryPackageBuild".format(
             prefix,
             "32 " if get.buildTYPE() == "emul32" else "",
