@@ -1175,7 +1175,7 @@ package might be a good solution."))
                     ctx.ui.warning(_("Ignoring empty package: \"{}\"").format(package.name))
                 continue
 
-            ctx.ui.status(_("Building package: \"{}\"").format(package.name), push_screen=False)
+            ctx.ui.status(_("Building package: \"{}\"").format(package.name), push_screen=True)
             self.gen_metadata_xml(package)
 
             name = self.package_filename(self.metadata.package)
