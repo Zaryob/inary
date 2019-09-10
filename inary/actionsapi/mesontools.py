@@ -92,9 +92,9 @@ def ninja_install(parameters=""):
         raise NinjaBuildError(_("Install failed."))
     if isDirectory("{}/emul32".format(get.installDIR())):
         if isDirectory("{}/emul32/lib32".format(get.installDIR())):
-            copy("{}/emul32/lib32".format(get.installDIR()), "{}/lib32".format(get.installDIR()))
-        if isDirectory("{}/emul32/lib32".format(get.installDIR())):
-            copy("{}/emul32/usr/lib32".format(get.installDIR()), "{}/usr/lib32".format(get.installDIR()))
+            copy("{}/emul32/lib32".format(get.installDIR()), "{}/".format(get.installDIR()))
+        if isDirectory("{}/emul32/usr/lib32".format(get.installDIR())):
+            copy("{}/emul32/usr/lib32".format(get.installDIR()), "{}/usr/".format(get.installDIR()))
         removeDir("/emul32")
 
 
