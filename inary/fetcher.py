@@ -178,8 +178,8 @@ class Fetcher:
                 c.setopt(pycurl.SSL_VERIFYPEER, 0)
                 c.setopt(pycurl.SSL_VERIFYHOST, 0)
             else:
-                curl.setopt(pycurl.SSL_VERIFYPEER, 1)
-                curl.setopt(pycurl.SSL_VERIFYHOST, 1)
+                c.setopt(pycurl.SSL_VERIFYPEER, 1)
+                c.setopt(pycurl.SSL_VERIFYHOST, True)
                 # To block man-in-middle attack
                 # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
                 # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
