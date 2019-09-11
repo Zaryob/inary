@@ -1065,7 +1065,12 @@ package might be a good solution."))
             for fn in files:
                 filepath = util.join_path(root, fn)
                 if witcher:
-                    fileinfo=witcher(filepath).name
+                    try:
+                        fileinfo=witcher(filepath).name
+                    except ValueError:
+                        ctx.ui.warning(_("File \"{}\" might be a broken symlink. Check it before publishing package.".format(filepath)))
+                        fileinfo="broken symlink"
+
                     ctx.ui.info(_("\'magic\' return of \"{0}\" is \"{1}\"").format(filepath, fileinfo), verbose=True)
                 else:
                     ret, out, err = util.run_batch("file {}".format(filepath), ui_debug=False)
@@ -1170,8 +1175,7 @@ package might be a good solution."))
                     ctx.ui.warning(_("Ignoring empty package: \"{}\"").format(package.name))
                 continue
 
-            ctx.ui.action(_("Building package: \"{}\"").format(package.name))
-
+            ctx.ui.status(_("Building package: \"{}\"").format(package.name), push_screen=True)
             self.gen_metadata_xml(package)
 
             name = self.package_filename(self.metadata.package)
