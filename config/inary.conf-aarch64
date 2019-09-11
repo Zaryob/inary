@@ -1,0 +1,55 @@
+[build]
+build_host = localhost
+# buildhelper = None
+commonflags = -U_FORTIFY_SOURCE -march=armv8-a+crc -mtune=cortex-a53 -O3 -s -pipe
+cflags = %(commonflags)s
+cxxflags = %(commonflags)s
+host = aarch64-unknown-linux-gnueabi
+cc = %(host)s-gcc
+cxx = %(host)s-g++
+compressionlevel = 9
+enableSandbox = False
+fallback = http://source.sulinlinux.com/1.0
+generateDebug = False
+jobs = -j9
+ldflags = -Wl,-O1,--sort-common,--as-needed,-z,relro
+ignored_build_types = emul32
+
+[directories]
+cache_root_dir = /var/cache/epic
+archives_dir = %(cache_root_dir)s/archives
+cached_packages_dir = %(cache_root_dir)s/packages
+compiled_packages_dir = %(cache_root_dir)s/packages
+debug_packages_dir = %(cache_root_dir)s/packages-debug
+lib_dir = /var/lib/inary
+history_dir = %(lib_dir)s/history
+index_dir = %(lib_dir)s/index
+info_dir = %(lib_dir)s/info
+kde_dir = /usr
+lock_dir = /run/lock/subsys
+log_dir = /var/log
+packages_dir = %(lib_dir)s/package
+qt_dir = /usr
+tmp_dir = /var/inary
+
+[general]
+architecture = aarch64
+autoclean = False
+bandwidth_limit = 0
+destinationdirectory = /
+distribution = Sulin ARM64
+distribution_release = 0.1
+distribution_id = s19
+# ftp_proxy = None
+# http_proxy = None
+# https_proxy = None
+allow_docs=True
+allow_pages=True
+allow_dbginfo=True
+allow_static=False
+ignore_delta = False
+ignore_safety = False
+ssl_verify = True
+gpg_verify = False
+package_cache = False
+package_cache_limit = 0
