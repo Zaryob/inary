@@ -222,7 +222,7 @@ class CLI(inary.ui.UI):
             msg = _('Configured \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
         elif event == inary.ui.configuring:
-            msg = _('Configuring \"{}\"').format(keywords['package'].name)
+            msg = _('Configuring \"{}\" package.').format(keywords['package'].name)
             color = 'faintyellow'
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)

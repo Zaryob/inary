@@ -31,6 +31,7 @@ _ = __trans.gettext
 import inary
 import inary.db
 import inary.errors
+import inary.mirrors
 import inary.util as util
 import inary.context as ctx
 import inary.uri
@@ -151,10 +152,6 @@ class Fetcher:
     def fetch(self, timeout=10):
         """Return value: Fetched file's full path.."""
 
-        if not ctx.config.values.general.ssl_verify:
-            import ssl
-            ssl._create_default_https_context = ssl._create_unverified_context
-
         if not self.url.filename():
             raise FetchError(_('Filename error'))
 
@@ -177,6 +174,16 @@ class Fetcher:
             c.setopt(pycurl.FOLLOWLOCATION, True)
             c.setopt(pycurl.MAXREDIRS, 10)
             c.setopt(pycurl.NOSIGNAL, True)
+            if not ctx.config.values.general.ssl_verify:
+                c.setopt(pycurl.SSL_VERIFYPEER, 0)
+                c.setopt(pycurl.SSL_VERIFYHOST, 0)
+            else:
+                c.setopt(pycurl.SSL_VERIFYPEER, 1)
+                c.setopt(pycurl.SSL_VERIFYHOST, True)
+                # To block man-in-middle attack
+                # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
+                # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
+
             # Header
             # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
@@ -257,13 +264,51 @@ class Fetcher:
         else:
             return 0
 
-
 # helper function
-def fetch_url(url, destdir, progress=None, destfile=None):
+def fetch_url(url, destdir=None, progress=None, destfile=None):
+
+    if not destdir:
+        destdir=ctx.config.archives_dir()
+    if not progress:
+        progress=ctx.ui.Progress
     fetch = Fetcher(url, destdir, destfile)
     fetch.progress = progress
     fetch.fetch()
 
+def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
+    archive = os.path.basename(url)
+    src = os.path.join(ctx.config.values.build.fallback, archive)
+    ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
+    fetch_url(src, destdir=destdir, progress=progress, destfile=destfile)
+
+def fetch_from_locale(url, destdir=None, progress=None, destfile=None):
+    if not destdir:
+        destdir=ctx.config.archives_dir()
+    if url.startswith("file://"):
+        url = url[7:]
+    if not os.access(url, os.F_OK):
+        raise FetchError(_('No such file or no permission to read for {}.').format(url))
+    shutil.copy(url, os.path.join(destdir, destfile or url.split("/")[-1]))
+
+def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
+    sep = url[len("mirrors://"):].split("/")
+    name = sep.pop(0)
+    archive = "/".join(sep)
+
+    mirrors = inary.mirrors.Mirrors().get_mirrors(name)
+    if not mirrors:
+        raise inary.mirrors.MirrorError(_("\"{}\" mirrors are not defined.").format(name))
+
+    for mirror in mirrors:
+        try:
+            mirror_url = os.path.join(mirror, archive)
+            ctx.ui.warning(_('Fetching source from mirror: \"{}\"').format(mirror))
+            fetch_url(mirror_url, destdir=destdir, progress=progress, destfile=destfile)
+            return
+        except FetchError:
+            pass
+
+    raise FetchError(_('Could not fetch source from \"{}\" mirrors.').format(name))
 
 # Operation function
 def fetch(packages=None, path=os.path.curdir):

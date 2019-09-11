@@ -17,6 +17,11 @@ import inary.context as ctx
 from inary.actionsapi import get
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
+from inary.actionsapi.shelltools import ls
+from inary.actionsapi.shelltools import copy
+from inary.actionsapi.inarytools import dosed
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.inarytools import removeDir
 
 import gettext
 
@@ -42,6 +47,12 @@ class NinjaBuildError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[MesonTools]: " + value)
 
+def fixpc():
+    """ fix .pc files in installDIR()/usr/lib32/pkgconfig"""
+    path = "{}/usr/lib32/pkgconfig".format(get.installDIR())
+    if isDirectory(path):
+        for f in ls("{}/*.pc".format(path)):
+            dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
 
 def meson_configure(parameters=""):
     if can_access_file('meson.build'):
@@ -50,9 +61,9 @@ def meson_configure(parameters=""):
               --prefix=/{0} \
               --buildtype=plain \
               --libdir=/{0}/lib{1} \
-              --libexecdir={2} \
-              --sysconfdir={3} \
-              --localstatedir={4} \
+              --libexecdir=/{2} \
+              --sysconfdir=/{3} \
+              --localstatedir=/{4} \
               {5} inaryPackageBuild".format(
             prefix,
             "32 " if get.buildTYPE() == "emul32" else "",
@@ -70,12 +81,22 @@ def meson_configure(parameters=""):
 def ninja_build(parameters=""):
     if system("ninja {} {} -C inaryPackageBuild".format(get.makeJOBS(), parameters)):
         raise NinjaBuildError(_("Build failed."))
+    if get.buildTYPE() == "emul32":
+        fixpc()
+        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
 
 
 def ninja_install(parameters=""):
     insdir = util.join_path(get.installDIR(), "emul32") if get.buildTYPE() == "emul32" else get.installDIR()
     if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir, get.makeJOBS())):
         raise NinjaBuildError(_("Install failed."))
+    if isDirectory("{}/emul32".format(get.installDIR())):
+        if isDirectory("{}/emul32/lib32".format(get.installDIR())):
+            copy("{}/emul32/lib32".format(get.installDIR()), "{}/".format(get.installDIR()))
+        if isDirectory("{}/emul32/usr/lib32".format(get.installDIR())):
+            copy("{}/emul32/usr/lib32".format(get.installDIR()), "{}/usr/".format(get.installDIR()))
+        removeDir("/emul32")
+
 
 
 def ninja_check():
