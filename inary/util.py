@@ -1168,3 +1168,18 @@ def get_vm_info():
                     line = line.split(":", 1)
                     if len(line) != 2:
                         continue
+
+#Powered by SulinOS
+def colorize_percent(message,percent=0,message2=' ',color='backgroundgreen',color2='backgroundyellow',color3='brightblue'):
+    term_rows, term_columns = get_terminal_size()
+    spacenum=(term_columns-(len(message)+len(message2)))
+    if spacenum < 1:
+       spacenum=0
+    msg=message+spacenum*' '+message2
+    if len(msg)<1:
+        return str(msg)
+    lmsg=int((len(msg)*percent)/100)+1
+    if lmsg>=len(msg):
+        return str(ctx.const.colors[color3] + msg + ctx.const.colors['default'])
+    return str(ctx.const.colors[color]+ msg[:lmsg]+ctx.const.colors[color2]+msg[lmsg:]+ctx.const.colors['default'])
+
