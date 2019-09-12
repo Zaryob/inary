@@ -4,6 +4,8 @@
 inary rebuild-db
 ================
 
+
+
 `inary rebuild-db` komutu inary paket sistemine ait veritabanı \
 dosyalarının düzenlenip yeniden oluşturulmasını sağlar
 
@@ -49,7 +51,8 @@ dosyalarının düzenlenip yeniden oluşturulmasını sağlar
 -----------------------------
 
 .. code-block:: shell
-            inary rebuild-db
+
+            $ inary rebuild-db
             INARY veritabanı yeniden inşa edilsin mi? (evet/hayır):  yes
             Dosya veritabanını yeniden inşa ediliyor...
              -> "libobjc" veritabanına ekleniyor...

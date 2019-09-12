@@ -13,8 +13,7 @@ ve kurulmasına uygun olarak yazılmıştır.
 
 .. seealso: Dillere uygun `ActionsAPI`_ fonksiyonları için bknz. #Fixme:
 
- Inary paket yöneticisinde kaynak paketten ikili paket üretimi yapılırken \
-bu dosya import edilir ve fonksiyonları çalıştırılır.
+ Inary paket yöneticisinde kaynak paketten ikili paket üretimi yapılırken bu dosya import edilir ve fonksiyonları çalıştırılır.
 
 
 .. _inary: https://gitlab.com/Zaryob/inary/
@@ -54,9 +53,9 @@ bu dosya import edilir ve fonksiyonları çalıştırılır.
         inarytools.dohtml("doc/*.html")
         inarytools.dodoc("ChangeLog*", "README", "doc/sample.nanorc", "AUTHORS", "NEWS", "TODO", "COPYING*", "THANKS")
 
--------------------------------------------
+-----------------------------------------------
 **actions.py** :term:`betik`'inin fonksiyonları
--------------------------------------------
+-----------------------------------------------
 
 **actions.py** :term:`betik`'i paket talimatnamesi olarak kullanılır çünkü bu \
 kaynak paket derleme işini adım adım yapabilmemize olanak verir. Her bir \

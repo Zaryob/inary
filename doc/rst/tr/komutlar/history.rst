@@ -4,6 +4,8 @@
 inary history
 =============
 
+
+
 `inary history` komutu geçmişteki yapılan komutları listelememizi, belirli bir \
 zamandan sonra yapılan değişimleri geri almamızı, sistem geri yükleme noktası \
 oluşturmamızı sağlar.

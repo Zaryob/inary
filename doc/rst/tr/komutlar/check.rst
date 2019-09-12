@@ -4,9 +4,17 @@
 inary check
 ===========
 
+
+
 `inary check` komutu sisteme kurulu olan paketlerin detaylı analizini yapar. \
 Kırılmış veya silinmiş bir içerik varsa veya değiştirilmiş bir config dosyası \
 var ise bunu görmemizi sağlar.
+
+
+      -c, [--component]           Verilen bileşen altındaki kurulu paketleri denetle.
+
+      --config                    Paketlerin sadece değişen yapılandırma  dosyalarını denetler.
+
 
 **Yardım Çıktısı**
 ------------------

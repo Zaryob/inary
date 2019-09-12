@@ -4,6 +4,9 @@
 inary configure-pending
 =======================
 
+
+
+
 `inary configure-pending` sisteme kurulmuş ama kurulum sonrası betikleri işlememiş
 paketlerin kurulum sonrası betiklerini tamamlamak için kullanılır.
 
@@ -11,6 +14,7 @@ paketlerin kurulum sonrası betiklerini tamamlamak için kullanılır.
 **Yardım Çıktısı**
 ------------------
 .. code-block:: shell
+
         $ inary configure-pending --help
         Kullanım: Kalan paketleri yapılandır
 
@@ -47,6 +51,7 @@ paketlerin kurulum sonrası betiklerini tamamlamak için kullanılır.
 -----------------------------
 
 .. code-block:: shell
+
         $ sudo inary configure-pending acl bash unzip gcc binutils tar
         "acl" yapılandırılıyor.
         "acl" paketi yapılandırılıyor.
