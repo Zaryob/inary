@@ -7,10 +7,28 @@ inary build
 `inary build` komutu kaynak paketten ikili paket derlemesi için kullanılır. \
 pspec.xml veya kaynak depo içerisindeki paket ismi verilerek derleme yapılır.
 
+
+**Seçenekler**
+--------------
+
+build seçenekleri:
+
+      -q, --quiet                     Ekstra hata ayıklama bilgilerini basmadan inşa operasyonunu çalıştır.
+      --ignore-dependency             Bağımlılık bilgilerini dikkate alma.
+      -O, --output-dir                Üretilen paketler için çıktı dizini.
+      --ignore-action-errors          ActionsAPI kaynaklı hataları yoksay.
+      --ignore-safety                 Emniyet mandalını yoksay.
+      --ignore-check                  Test adımını yoksay.
+      --create-static                 Statik bir paketi ar dosyalarıyla yarat.
+      -F, --package-format            İkili paketi verilen biçimde oluştur. Desteklenen biçimlerin listesini görmek için '-F help' kullanın.
+      --use-quilt                     GNU patch yerine quilt yama yönetim sistemini kullan.
+      --ignore-sandbox                İnşa işlemini inşa klasörüyle sınırlama.
+
+
 **Yardım Çıktısı**
 ------------------
 
-.. code-block:: shell
+.. code-block::shell
 
             $ inary build --help
             kullanım: Verilen INARY paket(ler)ini inşa et
@@ -104,4 +122,3 @@ pspec.xml veya kaynak depo içerisindeki paket ismi verilerek derleme yapılır.
         "expat-pages-2.2.6-1-s19-x86_64.inary" oluşturuluyor...
         İnşa dizini bırakılıyor
         *** 0 hata, 1 uyarı
-

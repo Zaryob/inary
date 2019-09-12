@@ -16,7 +16,7 @@ Sözlük
         tagları belirtmek için kullanılan bazı keywords.
 
     betik
-        blah blah
+        çalıştırılabilir dosyalar
 
     etiket
         Xml dosyası tag
@@ -25,3 +25,7 @@ Sözlük
         derlenmiş
 
     kütüphane dosyaları
+        .h .hxx gibi C ve diğer derlemeli dillere ait başlık dosyalarını içerir.
+
+    script based diller
+        Bu programlama dilleri kodları derlemeye gerek kalmadan çalıştırmaya imkan sağlar. 

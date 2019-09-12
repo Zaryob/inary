@@ -4,10 +4,14 @@
 inary graph
 ===========
 
+
+
 `inary graph` komutu sisteme ekli depolar arasındaki bağımlılık haritasını çizer.
 
 **Yardım Çıktısı**
 ------------------
+
+.. code-block:: shell
 
             $ inary graph --help
             kullanım: Paket ilişkilerinin grafiğini çıkar
@@ -47,5 +51,8 @@ inary graph
 
 **Örnek bir çalışma çıktısı**
 -----------------------------
+
+.. code-block:: shell
+
             $ inary graph
             Depolardaki bütün paketlerin arasındaki ilişkiler çiziliyor.

@@ -7,6 +7,16 @@ inary blame
 `inary blame` komutu bir pakete air paket bakıcısı, paket sürüm bilgisini \
 ve güncelleme mesajını getirmek için kullanılır.
 
+
+**Seçenekler**
+--------------
+
+blame seçenekleri:
+
+    -r, --release      Verilen sürüm için paket bakıcısı
+
+    -a, --all             Tüm sürümler için paket bakıcısı
+
 **Yardım Çıktısı**
 ------------------
 
@@ -53,4 +63,3 @@ ve güncelleme mesajını getirmek için kullanılır.
             Güncelleme Tarihi: 2018-12-23
 
             First release
-

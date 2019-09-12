@@ -41,8 +41,10 @@ Eğer mevcut bulunan en kararlı sürümü kullanmak istiyorsanız
     $ inary-rebuild-system
     $ inary rdb
 
-.. note:: setup.py :term:`betik`i ile kurulum yaparken otomatik olarak
-   tüm bağımlılıklar internet üzerinden indirilir.
+
+
+.. note:: setup.py :term:`betik`i ile kurulum yaparken otomatik olarak  tüm bağımlılıklar internet üzerinden indirilir.
+
 
 Sınırlandırılmış kurulum
 ````````````````````````
@@ -75,6 +77,7 @@ Inary'i Güncelleştirmek
 Inary kullandığınız inary'i kullanarak güncelleştirmeye olanak verir.
 
 .. code-block:: shell
+
     $ inary ur
     $ inary up inary
 

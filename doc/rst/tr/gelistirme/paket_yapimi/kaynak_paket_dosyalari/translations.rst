@@ -23,6 +23,7 @@ Aşağıda örnek bir **translations.xml** dosyası verilmiştir.
 :file:`translations.xml`
 
 .. sourcecode:: xml
+
     <INARY>
         <Source>
             <Name>nano</Name>

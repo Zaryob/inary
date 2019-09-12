@@ -13,7 +13,7 @@ kullanmamızı sağlar.
 **Yardım Çıktısı**
 ------------------
 
-.. code-block:: shell
+.. code-block::shell
 
             $ inary delta --help
             kullanım: Delta paketleri yarat
@@ -55,6 +55,7 @@ kullanmamızı sağlar.
 **Örnek bir çalışma çıktısı**
 -----------------------------
 
-.. code-block:: shell
+.. code-block::shell
+
             $ inary delta expat-2.2.6-1-s19-x86_64.inary expat-2.2.6-2-s19-x86_64.inary
             Delta paketi oluşturuluyor: "expat-1-2-s19-x86_64.delta.inary"...

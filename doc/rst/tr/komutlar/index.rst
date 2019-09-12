@@ -63,29 +63,29 @@ içerdiği gibi kendine özel komutlara da sahiptir.
       -D [--destdir] arg          : INARY komutları için sistem kökünü değiştir.
       -y [--yes-all]              : Bütün evet/hayır sorularında cevabı evet kabul
                                     et.
-      -u [--username] arg         
-      -p [--password] arg         
+      -u [--username] arg
+      -p [--password] arg
       -L [--bandwidth-limit] arg  : Bant genişliği kullanımını belirtilen kilobaytın
                                     altında tut.
       -v [--verbose]              : Detaylı çıktı
       -d [--debug]                : Hata ayıklama bilgisini göster.
       -N [--no-color]             : INARY çıktılarında renk kullanılmasını engeller.
-      
+
 
 Tüm Komutlar Hakkında
 `````````````````````
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 0
 
-
-    check.rst
-    clean.rst
-    configure-pending.rst
-    delete-cache.rst
-    delta.rst
-    emerge.rst
-    emergeup.rst
-    graph.rst
-    history.rst
-    rebuild-db.rst
-    
+   ./blame.rst
+   ./build.rst
+   ./check.rst
+   ./configure-pending.rst
+   ./delete-cache.rst
+   ./delta.rst
+   ./emerge.rst
+   ./emergeup.rst
+   ./graph.rst
+   ./history.rst
+   ./index_cmd.rst
+   ./rebuild-db.rst

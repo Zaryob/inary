@@ -209,5 +209,5 @@ latex_documents = [
 
 autoclass_content = 'both'
 
-intersphinx_mapping = {'python3': ('https://docs.python.org/3/', (None, '../python3-3.7.4.inv'))}
-                       #'jinja2': ('http://jinja.pocoo.org/docs/', (None, '../jinja2-2.9.7.inv'))}
+intersphinx_mapping = {'python3': ('https://docs.python.org/3/', (None, '../python3-3.6.8.inv')),
+                       'jinja2': ('http://jinja.pocoo.org/docs/', (None, '../jinja2-2.9.7.inv'))}

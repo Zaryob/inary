@@ -4,6 +4,8 @@
 inary emergeup
 ==============
 
+
+
 `inary emergeup` komutu kaynak depoda yükseltilmiş paketleri inşa edip ikili paket olarak \
 sisteme kurmak için kullanılır.kaynak depo içerisindeki paket ismi verilerek kurulum yapılır.
 
@@ -12,7 +14,7 @@ sisteme kurmak için kullanılır.kaynak depo içerisindeki paket ismi verilerek
 
 .. code-block:: shell
 
-            $inary emergeup --help
+            $ inary emergeup --help
             emerge (em): INARY kaynak paketlerini depodan inşa et ve güncelle
 
             Kullanım: emergeup <kaynakismi> ...
@@ -84,5 +86,3 @@ sisteme kurmak için kullanılır.kaynak depo içerisindeki paket ismi verilerek
         "expat" dosyaları arşivden çıkartılıyor.
         "expat" paketinin dosya/dizin bilgileri veritabanına ekleniyor...
         "expat" kuruldu.
-
-
