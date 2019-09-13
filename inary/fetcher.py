@@ -15,7 +15,6 @@
 # Gettext translation library
 # python standard library modules
 import os
-import pycurl
 import shutil
 import time
 
@@ -26,6 +25,10 @@ _ = __trans.gettext
 
 # Network libraries
 # import ftplib
+try:
+    import pycurl
+except ImportError:
+    raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
 
 # inary modules
 import inary
@@ -146,10 +149,9 @@ class Fetcher:
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
-
         util.ensure_dirs(self.destdir)
 
-    def fetch(self, timeout=10):
+    def fetch(self, timeout=30):
         """Return value: Fetched file's full path.."""
 
         if not self.url.filename():
@@ -161,59 +163,73 @@ class Fetcher:
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
             raise FetchError(_('Access denied to destination file: "{}"').format(self.archive_file))
 
-        else:
-            c = pycurl.Curl()
-            c.protocol = self.url.scheme()
-            c.setopt(c.URL, self.url.get_uri())
-            # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
-            c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
-            c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+        c = pycurl.Curl()
+        c.protocol = self.url.scheme()
+        c.setopt(c.URL, self.url.get_uri())
+        # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
+        c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
+        c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+        c.setopt(pycurl.AUTOREFERER, 1)
+        c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
+        # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+        c.setopt(pycurl.MAXREDIRS, 50)
+        c.setopt(pycurl.NOSIGNAL, True)
+
+        if hasattr(pycurl, "AUTOREFERER"):
             c.setopt(pycurl.AUTOREFERER, 1)
-            c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
-            # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
-            c.setopt(pycurl.FOLLOWLOCATION, True)
-            c.setopt(pycurl.MAXREDIRS, 10)
-            c.setopt(pycurl.NOSIGNAL, True)
-            if not ctx.config.values.general.ssl_verify:
-                c.setopt(pycurl.SSL_VERIFYPEER, 0)
-                c.setopt(pycurl.SSL_VERIFYHOST, 0)
-            else:
-                c.setopt(pycurl.SSL_VERIFYPEER, 1)
-                c.setopt(pycurl.SSL_VERIFYHOST, True)
-                # To block man-in-middle attack
-                # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
-                # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
 
-            # Header
-            # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+        c.setopt(pycurl.LOW_SPEED_TIME, 30)
+        c.setopt(pycurl.LOW_SPEED_LIMIT, 5)
 
-            handler = UIHandler()
-            handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
+        if not ctx.config.values.general.ssl_verify:
+            c.setopt(pycurl.SSL_VERIFYPEER, 0)
+            c.setopt(pycurl.SSL_VERIFYHOST, 0)
+        #else:
+        #    c.setopt(pycurl.SSL_VERIFYPEER, 1)
+        #    c.setopt(pycurl.SSL_VERIFYHOST, True)
+            # To block man-in-middle attack
+            # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
+            # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
 
-            if os.path.exists(self.partial_file):
+        # Header
+        # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+
+        handler = UIHandler()
+        handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
+
+        if os.path.exists(self.partial_file):
+            if self._test_range_support():
                 file_id = open(self.partial_file, "ab")
                 c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
-                ctx.ui.info(_("Download resuming..."))
+                ctx.ui.info(_("Partial file detected. Download resuming..."), verbose=True)
             else:
                 file_id = open(self.partial_file, "wb")
 
-            # Function sets
-            c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
-            c.setopt(c.NOPROGRESS, False)
-            c.setopt(c.XFERINFOFUNCTION, handler.update)
+        else:
+            file_id = open(self.partial_file, "wb")
 
-            c.setopt(pycurl.FOLLOWLOCATION, 1)
-            c.setopt(c.WRITEDATA, file_id)
+        # Function sets
+        c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
+        c.setopt(c.NOPROGRESS, False)
+        c.setopt(c.XFERINFOFUNCTION, handler.update)
 
-            try:
-                c.perform()
-                ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
-                # pycurl yüzünden kaynaklanıyor
-                file_id.close()
-                ctx.ui.info(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
-                c.close()
-            except pycurl.error as x:
-                    raise FetchError("{}".format(x.args[1]))
+        c.setopt(pycurl.FOLLOWLOCATION, 1)
+        c.setopt(c.WRITEDATA, file_id)
+
+
+        try:
+            c.perform()
+            ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+            # pycurl yüzünden kaynaklanıyor
+            file_id.close()
+            ctx.ui.info(_("RESPONSE: ") + str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
+            ctx.ui.info(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+            c.close()
+
+        except pycurl.error as x:
+            if x.args[0]==33:
+                os.remove(self.partial_file)
+            raise FetchError("{}".format(x.args[1]))
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
@@ -263,6 +279,28 @@ class Fetcher:
             return 1024 * int(bandwidth_limit)
         else:
             return 0
+
+    def _test_range_support(self):
+        if not os.path.exists(self.partial_file):
+            return False
+
+        import urllib.request
+        try:
+            file_obj = urllib.request.urlopen(self.url.get_uri())
+        except urllib.request.URLError:
+            ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
+            os.remove(self.partial_file)
+            return False
+
+        headers = file_obj.info()
+        file_obj.close()
+        if headers.get("Content-Length"):
+            return True
+        else:
+            ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
+            os.remove(self.partial_file)
+            return False
+
 
 # helper function
 def fetch_url(url, destdir=None, progress=None, destfile=None):
