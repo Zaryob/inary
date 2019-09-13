@@ -152,10 +152,6 @@ class Fetcher:
     def fetch(self, timeout=10):
         """Return value: Fetched file's full path.."""
 
-        if not ctx.config.values.general.ssl_verify:
-            import ssl
-            ssl._create_default_https_context = ssl._create_unverified_context
-
         if not self.url.filename():
             raise FetchError(_('Filename error'))
 
@@ -178,6 +174,16 @@ class Fetcher:
             c.setopt(pycurl.FOLLOWLOCATION, True)
             c.setopt(pycurl.MAXREDIRS, 10)
             c.setopt(pycurl.NOSIGNAL, True)
+            if not ctx.config.values.general.ssl_verify:
+                c.setopt(pycurl.SSL_VERIFYPEER, 0)
+                c.setopt(pycurl.SSL_VERIFYHOST, 0)
+            else:
+                c.setopt(pycurl.SSL_VERIFYPEER, 1)
+                c.setopt(pycurl.SSL_VERIFYHOST, True)
+                # To block man-in-middle attack
+                # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
+                # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
+
             # Header
             # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
