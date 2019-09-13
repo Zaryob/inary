@@ -74,7 +74,7 @@ def __getModuleFlavour():
 
 def __getKernelARCH():
     """i386 is relevant for our i686 architecture."""
-    return get.ARCH().replace("i686", "i386")
+    return get.ARCH()
 
 
 def __getSuffix():
@@ -91,7 +91,7 @@ def __getExtraVersion():
         # if successful, this is something like:
         # .1 for 2.6.30.1
         # _rc8 for 2.6.30_rc8
-        extraversion = re.split("4.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
+        extraversion = re.split("5.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
     except IndexError:
         # e.g. if version == 2.6.30
         pass
@@ -129,7 +129,6 @@ def getKernelVersion(flavour=None):
 
 def configure():
     # Copy the relevant configuration file
-    shutil.copy("configs/kernel-{}-config".format(get.ARCH()), ".config")
 
     # Set EXTRAVERSION
     inarytools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = {}".format(__getExtraVersion()))
@@ -184,22 +183,22 @@ def install():
                          "DEPMOD=/bin/true modules_install mod-fw=")
 
     # Remove symlinks first
-    inarytools.remove("/lib/modules/{}/source".format(suffix))
-    inarytools.remove("/lib/modules/{}/build".format(suffix))
+    inarytools.remove("/lib/modules/{}-sulinos/source".format(suffix))
+    inarytools.remove("/lib/modules/{}-sulinos/build".format(suffix))
 
     # Install Module.symvers and System.map here too
-    shutil.copy("Module.symvers", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
-    shutil.copy("System.map", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+    shutil.copy("Module.symvers", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+    shutil.copy("System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}/{1}".format(suffix, _dir))
+        inarytools.dodir("/lib/modules/{0}-sulinos/{1}".format(suffix, _dir))
 
 
 def installHeaders(extraHeaders=None):
     """ Install the files needed to build out-of-tree kernel modules. """
 
-    extras = ["drivers/media/dvb-core",
+    extras = [
               "drivers/media/dvb-frontends",
               "drivers/media/tuners",
               "drivers/media/platform"]
@@ -211,7 +210,7 @@ def installHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/linux-headers-{}".format(suffix)
+    headersDirectoryName = "usr/src/linux-headers-{}-sulinos".format(suffix)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
@@ -228,7 +227,7 @@ def installHeaders(extraHeaders=None):
     # Install additional headers
     for headers in extras:
         if not os.path.exists("{0}/{1}".format(destination, headers)):
-            shelltools.system("mkdir {0}/{1}".format(destination, headers))
+            shelltools.system("mkdir -p {0}/{1}".format(destination, headers))
         shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
 
     # Install remaining headers
@@ -252,8 +251,8 @@ def installHeaders(extraHeaders=None):
     shutil.copy(".config", "{}/".format(destination))
 
     # Settle the correct build symlink to this headers
-    inarytools.dosym("/{}".format(headersDirectoryName), "/lib/modules/{}/build".format(suffix))
-    inarytools.dosym("build", "/lib/modules/{}/source".format(suffix))
+    inarytools.dosym("/{}".format(headersDirectoryName), "/lib/modules/{}-sulinos/build".format(suffix))
+    inarytools.dosym("build", "/lib/modules/{}-sulinos/source".format(suffix))
 
 
 def installLibcHeaders(excludes=None):
