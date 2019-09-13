@@ -72,7 +72,7 @@ packages from all repositories.
         else:
             since = None
 
-        l = inary.db.packagedb.PackageDB().list_newest(repo, since)
+        l = self.packagedb.list_newest(repo, since)
         if not l:
             return
 
