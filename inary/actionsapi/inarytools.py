@@ -179,7 +179,7 @@ def dolib(sourceFile, destinationDirectory='/usr/lib', mode=755):
     lib_insinto(sourceFile, destinationDirectory, mode)
 
 
-def doman(*sourceFiles):
+def doman(*sourceFiles, pageDirectory=None):
     """inserts the man pages in the list of files into /usr/share/man/"""
 
     '''example call: inarytools.doman("man.1", "sulin.*")'''
@@ -197,8 +197,9 @@ def doman(*sourceFiles):
             if compressed:
                 source = source[:-3]
             try:
-                pageName, pageDirectory = source[:source.rindex('.')], \
-                                          source[source.rindex('.') + 1:]
+                if not pageDirectory:
+                    pageName, pageDirectory = source[:source.rindex('.')], \
+                                              source[source.rindex('.') + 1:]
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: \"{}\"').format(source))
 
