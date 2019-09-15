@@ -224,6 +224,16 @@ class Builder:
 
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
+        self.package_rfp=None
+        if self.spec.source.rfp:
+            ctx.ui.info(util.colorize(_("[ !!! ] Building RFP for {}").format(self.spec.source.rfp),
+                        color="purple"))
+            if ctx.ui.confirm(_("Would you like to compile this RFP package?")):
+                self.package_rfp=self.spec.source.rfp
+            else:
+                raise Error(_("Didn't permit build RFP package."))
+
+
         self.check_versioning(self.spec.getSourceVersion(),
                               self.spec.getSourceRelease())
 
@@ -256,6 +266,7 @@ class Builder:
         self.has_ccache = False
         self.has_icecream = False
 
+
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
             # FIXME: doesn't work for file://
@@ -284,8 +295,12 @@ class Builder:
                        distro_id,
                        package_info.architecture))
 
+        if self.package_rfp:
+            package_extension = ".rfp" + ctx.const.package_suffix
+        else:
+            package_extension = ctx.const.package_suffix
         if with_extension:
-            fn += ctx.const.package_suffix
+            fn += package_extension
 
         return fn
 
@@ -324,7 +339,6 @@ class Builder:
 
     def build(self):
         """Build the package in one shot."""
-
         architecture = ctx.config.values.general.architecture
         if architecture in self.spec.source.excludeArch:
             raise ExcludedArchitectureException(
