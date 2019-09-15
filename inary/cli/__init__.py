@@ -186,16 +186,28 @@ class CLI(inary.ui.UI):
             return
 
         elif ka['operation'] == "fetching":
-            totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
+            hr_size, hr_symbol = util.human_readable_size(ka['total_size'])
+            totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
 
-            out = '%-30.50s(%s)' % (ka['filename'], totalsize)
-            out2= '%3d%% %9.2f%s [%s]' % (ka['percent'], ka['rate'],ka['symbol'], ka['eta'])
+            file_and_totalsize = '{:30.50} ({})'.format(ka['filename'], totalsize)
+            percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
+                                                                       ka['rate'],
+                                                                       ka['symbol'],
+                                                                       ka['eta'])
 
-            self.output('\r\033[2K'+util.colorize_percent(out,ka['percent'],out2))
-            util.xterm_title("%s (%d%%)" % (ka['filename'], ka['percent']))
+            self.output(util.colorize_percent(messages=[file_and_totalsize, percentage_and_time],
+                                              percentage=ka['percent']))
+            util.xterm_title("{} ( {} % )".format(ka['filename'], ka['percent']))
+
+
         else:
-            self.output("\r\033[2K"+colorize_percent(("%s" % ka['info']),ka['percent'],("(%d%%)" % ka['percent'])))
-            util.xterm_title("%s (%d%%)" % (ka['info'], ka['percent']))
+            information = "{}".format(ka['info'])
+            percent_text = "( {:.2f}% )".format(ka['percent'])
+            self.output(util.colorize_percent(messages=[information, percent_text],
+                                              percentage=ka['percent']))
+
+            util.xterm_title("{} ( {}% )".format(ka['info'], ka['percent']))
+
     def status(self, msg=None, push_screen=True):
         if msg:
             msg = str(msg)

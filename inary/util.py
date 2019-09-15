@@ -1170,16 +1170,31 @@ def get_vm_info():
                         continue
 
 #Powered by SulinOS
-def colorize_percent(message,percent=0,message2=' ',color='backgroundgreen',color2='backgroundyellow',color3='brightblue'):
-    term_rows, term_columns = get_terminal_size()
-    spacenum=(term_columns-(len(message)+len(message2)))
-    if spacenum < 1:
-       spacenum=0
-    msg=message+spacenum*' '+message2
-    if len(msg)<1:
-        return str(msg)
-    lmsg=int((len(msg)*percent)/100)+1
-    if lmsg>=len(msg):
-        return str(ctx.const.colors[color3] + msg + ctx.const.colors['default'])
-    return str(ctx.const.colors[color]+ msg[:lmsg]+ctx.const.colors[color2]+msg[lmsg:]+ctx.const.colors['default'])
+def colorize_percent(messages=[], percentage = 0):
+    if not ctx.get_option("no_color"):
+        complated_background = 'backgroundgreen'
+        queried_background = 'backgroundyellow'
+        complated='brightblue'
+    else:
+        complated_background = queried_background = complated = "default"
 
+    noln_text="\r\033[2K"
+
+    term_rows, term_columns = get_terminal_size()
+    spacenum = ( term_columns - ( len(messages[0]) + len(messages[1]) ) )
+    if spacenum < 1:
+       spacenum = 0
+
+    msg = noln_text + messages[0] + ' ' * spacenum + messages[1]
+
+    if len(msg) < 1:
+        return str(msg)
+
+    lmsg = int( ( len(msg) * percentage ) / 100 ) + 1
+
+    if lmsg >= len(msg):
+        return str(ctx.const.colors[complated] + msg + ctx.const.colors['default'])
+
+    return str(ctx.const.colors[complated_background] + \
+               msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
+               ctx.const.colors['default'])
