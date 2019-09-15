@@ -184,12 +184,10 @@ class Fetcher:
         if not ctx.config.values.general.ssl_verify:
             c.setopt(pycurl.SSL_VERIFYPEER, 0)
             c.setopt(pycurl.SSL_VERIFYHOST, 0)
-        #else:
-        #    c.setopt(pycurl.SSL_VERIFYPEER, 1)
-        #    c.setopt(pycurl.SSL_VERIFYHOST, True)
+        else:
             # To block man-in-middle attack
-            # curl.setopt(pycurl.SSL_VERIFYHOST, 2)
-            # curl.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
+             c.setopt(pycurl.SSL_VERIFYHOST, 2)
+            # c.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
 
         # Header
         # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
