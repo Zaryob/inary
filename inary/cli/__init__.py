@@ -220,12 +220,12 @@ class CLI(inary.ui.UI):
                 self.output("\r" + ctx.const.colors[complated_background] + \
                             msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
                             ctx.const.colors['default'])
-            util.xterm_title("{} ( {} % )".format(ka['filename'], ka['percent']))
+            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
         else:
-            self.output("\r{} ( {}% )" % (ka['info'], ka['percent']))
+            self.output("\r{} ( {:.2f}% )" % (ka['info'], ka['percent']))
 
-            util.xterm_title("{} ( {:2.f} % )".format(ka['filename'], ka['percent']))
+            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):
         if msg:
