@@ -28,7 +28,7 @@ def get_and_save_user_info():
 
     return name, email
 
-def bump_spec(spec, ver, packager_name, packager_email,
+def bump_spec(spec, version, packager_name, packager_email,
           critical, security, bumptype, comment):
     lines = open(spec).readlines()
     name_line = -1
@@ -67,25 +67,30 @@ def bump_spec(spec, ver, packager_name, packager_email,
     m = re.match(r" *<Version>(.+)</Version>", lines[update_line + 2])
     old_version = m.groups()[0]
 
+    if not version:
+        version = old_version
+        new_sha1sum = sha1sum
+        new_archive_name = archive_name
+
     if old_version == version:
-        print("{} is already at version {}".format(name, version))
-        return
+        comment = "Package is rebuilded and released up."
 
-    lines[archive_line] = lines[archive_line].replace(old_version, version)
-    new_archive_name = archive_name.replace(old_version, version)
-
-    if not os.path.exists("/var/cache/inary/archives/{}".format(new_archive_name)):
-        print("Archive not found downloading via inary...")
-
-        tmp_spec_file = spec_file.replace("pspec", "tmp_pspec")
-        open(tmp_spec_file, "w").writelines(lines)
-        os.system("sudo inary build {} --fetch".format(tmp_spec_file))
-        os.unlink(tmp_spec_file)
     else:
-        print("Using existing archive from cache...")
+        lines[archive_line] = lines[archive_line].replace(old_version, version)
+        new_archive_name = archive_name.replace(old_version, version)
 
-    new_sha1sum = hashlib.sha1(open("/var/cache/inary/archives/{}".format(new_archive_name), 'rb').read()).hexdigest()
-    lines[archive_line] = lines[archive_line].replace(sha1sum, new_sha1sum)
+        if not os.path.exists("/var/cache/inary/archives/{}".format(new_archive_name)):
+            print("Archive not found downloading via inary...")
+
+            tmp_spec_file = spec_file.replace("pspec", "tmp_pspec")
+            open(tmp_spec_file, "w").writelines(lines)
+            os.system("sudo inary build {} --fetch".format(tmp_spec_file))
+            os.unlink(tmp_spec_file)
+        else:
+            print("Using existing archive from cache...")
+
+        new_sha1sum = hashlib.sha1(open("/var/cache/inary/archives/{}".format(new_archive_name), 'rb').read()).hexdigest()
+        lines[archive_line] = lines[archive_line].replace(sha1sum, new_sha1sum)
 
 
     for dep_line in dep_lines:
@@ -115,7 +120,7 @@ def bump_spec(spec, ver, packager_name, packager_email,
             crit_or_sec += "\n            <Type package=\"{}\">critical</Type>".format(pkg)
 
 
-    update_lines = ['        <Update release="{}">{}\n'.format(release + 1, bumptype),
+    update_lines = ['        <Update release="{}">{}\n'.format(release + 1, bumptype or ""),
                     '            <Date>{}</Date>\n'.format(datetime.date.isoformat(datetime.date.today())),
                     '            <Version>{}</Version>\n'.format(version),
                     '            <Comment>{}</Comment>{}\n'.format(comment, crit_or_sec),
