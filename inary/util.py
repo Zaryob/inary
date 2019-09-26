@@ -167,6 +167,11 @@ def flatten_list(l):
     # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
     return [item for sublist in l for item in sublist]
 
+def unique_list(l):
+    """Creates a unique list by deleting duplicate items"""
+    list_set = set(l)
+    unique_list = (list(list_set))
+    return [x for x in unique_list]
 
 def strlist(l):
     """Concatenate string reps of l's elements."""
