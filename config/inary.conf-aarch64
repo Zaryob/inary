@@ -4,7 +4,7 @@ build_host = localhost
 commonflags = -U_FORTIFY_SOURCE -march=armv8-a+crc -mtune=cortex-a53 -O3 -s -pipe
 cflags = %(commonflags)s
 cxxflags = %(commonflags)s
-host = aarch64-unknown-linux-gnueabi
+host = aarch64-pc-linux-gnueabi
 cc = %(host)s-gcc
 cxx = %(host)s-g++
 compressionlevel = 9

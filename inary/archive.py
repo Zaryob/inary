@@ -883,7 +883,7 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("\nSource archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
+            ctx.ui.info(_("Source archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
         inary.fetcher.fetch_url(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
