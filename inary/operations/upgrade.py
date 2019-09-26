@@ -207,7 +207,7 @@ def upgrade(A=None, repo=None):
 
     if needs_confirm and \
             not ctx.ui.confirm(_("Would you like to continue?")):
-        return False
+        raise Exception(_('External dependencies not satisfied.'))
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
