@@ -57,6 +57,7 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
     t_PackageURI = [autoxml.String, autoxml.optional]
     t_DeltaPackages = [[Delta], autoxml.optional]
     t_PackageFormat = [autoxml.String, autoxml.optional]
+    t_Rfp = [autoxml.String, autoxml.optional]
 
     t_Source = [Source, autoxml.optional]
 
@@ -108,6 +109,7 @@ class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         self.source.homepage = src.homepage
         self.source.packager = src.packager
         self.package.source = self.source  # FIXME: I know that replication sucks here, but this is the easiest for now
+        self.package.rfp = src.rfp
         self.package.name = pkg.name
         self.package.summary = pkg.summary
         self.package.description = pkg.description

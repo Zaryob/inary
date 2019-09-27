@@ -74,28 +74,23 @@ def remove(A, ignore_dep=False, ignore_safety=False):
         G_f, order = plan_remove(A)
     else:
         G_f = None
-        order = A
+        order = util.unique_list(A)
 
-    ctx.ui.info(_("""The following list of packages will be removed
-in the respective order to satisfy dependencies:"""), color='green')
+    ctx.ui.info(_("""The following list of packages will be removed in the respective order to satisfy dependencies:"""), color='green')
     ctx.ui.info(util.strlist(order))
-    if len(order) > len(A_0):
-        if not ctx.ui.confirm(_('Would you like to continue?')):
-            ctx.ui.warning(_('Package removal declined.'))
-            return False
 
     removal_size = 0
     for pkg in [installdb.get_package(name) for name in order]:
         removal_size += pkg.installedSize
 
     removal_size, symbol  = util.human_readable_size(removal_size)
-    ctx.ui.info(_('{:.2f} {} space will be freed.').format(removal_size, symbol), color='cyan')
+    ctx.ui.info(_('After this operation, {:.2f} {} space will be freed.').format(removal_size, symbol), color='cyan')
     del removal_size, symbol
 
-    if not ctx.ui.confirm(_("Would you like to continue?")):
-        ctx.ui.warning(_('Package removal declined.'))
-        return False
-
+    if len(order) > len(A_0):
+        if not ctx.ui.confirm(_('Would you like to continue?')):
+            ctx.ui.warning(_('Package removal declined.'))
+            return False
 
     if ctx.get_option('dry_run'):
         return

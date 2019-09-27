@@ -106,7 +106,6 @@ def post_install(package_name, provided_scripts,
                  fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
 
-    ctx.ui.info(_("Configuring \"{}\" package.").format(package_name))
     self_post = False
 
     package_name = safe_script_name(package_name)
