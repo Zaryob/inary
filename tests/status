@@ -1,0 +1,264 @@
+testGetComponent (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testGetPackages (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testGetSources (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testGetUnionComponent (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testGetUnionPackages (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testHasComponent (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testListComponents (databaseTests.testComponentDB.ComponentDBTestCase) ... ok
+testSearchComponent (databaseTests.testComponentDB.ComponentDBTestCase) ... FAIL
+testAddRemoveFiles (databaseTests.testFilesDB.FilesDBTestCase) ... ok
+testGetFile (databaseTests.testFilesDB.FilesDBTestCase) ... ok
+testHasFile (databaseTests.testFilesDB.FilesDBTestCase) ... ok
+testSearchFile (databaseTests.testFilesDB.FilesDBTestCase) ... ok
+testAddRemovePackage (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testClearPending (databaseTests.testInstallDB.InstallDBTestCase) ... skipped ''
+testGetFiles (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testGetInfo (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testGetPackage (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testGetReverseDependencies (databaseTests.testInstallDB.InstallDBTestCase) ... FAIL
+testGetVersion (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testHasPackage (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testListInstalled (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testMarkListPending (databaseTests.testInstallDB.InstallDBTestCase) ... skipped ''
+testSearchPackage (databaseTests.testInstallDB.InstallDBTestCase) ... ok
+testGetItem (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testGetItemAndRepository (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testGetItemKeys (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testGetItemOfRepository (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testGetListItem (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testHasItem (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testHasRepository (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testItemRepos (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ok
+testWhichRepo (databaseTests.testItembyRepo.ItemByRepoTestCase) ... ERROR
+testDatabaseMethodForcingInit (databaseTests.testLazyDB.LazyDBTestCase) ... ok
+testDatabaseWithoutInit (databaseTests.testLazyDB.LazyDBTestCase) ... ok
+testSingletonBehaviour (databaseTests.testLazyDB.LazyDBTestCase) ... ok
+testGetObsoletes (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testGetPackage (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testGetPackageAndRepository (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testGetReplaces (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testGetReverseDependencies (databaseTests.testPackageDB.PackageDBTestCase) ... FAIL
+testGetVersion (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testHasPackage (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testListPackages (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testSearchPackage (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testWhichRepo (databaseTests.testPackageDB.PackageDBTestCase) ... ok
+testAddRemoveCycle (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testAddRemoveRepo (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testGetBinaryRepos (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testGetRepo (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testGetSourceRepos (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testListRepos (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testRepoOrder (databaseTests.testRepoDB.RepoDBTestCase) ... ok
+testSearch (databaseTests.testSearch.SearchTestCase) ... ERROR
+testGetSourceFromPackage (databaseTests.testSourceDB.SourceDBTestCase) ... ERROR
+testGetSpec (databaseTests.testSourceDB.SourceDBTestCase) ... ok
+testGetSpecAndRepository (databaseTests.testSourceDB.SourceDBTestCase) ... ok
+testGetSpecOfRepository (databaseTests.testSourceDB.SourceDBTestCase) ... ok
+testHasSpec (databaseTests.testSourceDB.SourceDBTestCase) ... ok
+testListSources (databaseTests.testSourceDB.SourceDBTestCase) ... skipped ''
+testSearchPackage (databaseTests.testSourceDB.SourceDBTestCase) ... ok
+testBuildDefaults (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testConfigurationSection (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testDirectoriesDefaults (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testGeneralDefaults (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testInaryConfValues (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testValuesExists (inaryTests.testConfigFile.ConfigFileTestCase) ... ok
+testConstants (inaryTests.testConstants.ConstantTestCase) ... ok
+testGetMirrors (inaryTests.testMirrors.MirrorsTestCase) ... ok
+testBaseName (inaryTests.testShell.ShellTestCase) ... ok
+testCanAccessDirectory (inaryTests.testShell.ShellTestCase) ... ok
+testCanAccessFile (inaryTests.testShell.ShellTestCase) ... ok
+testCopy (inaryTests.testShell.ShellTestCase) ... ok
+testEcho (inaryTests.testShell.ShellTestCase) ... ok
+testIsDirectory (inaryTests.testShell.ShellTestCase) ... ok
+testIsFile (inaryTests.testShell.ShellTestCase) ... ok
+testIsLink (inaryTests.testShell.ShellTestCase) ... ok
+testMakedirs (inaryTests.testShell.ShellTestCase) ... ok
+testRealPath (inaryTests.testShell.ShellTestCase) ... ok
+testSym (inaryTests.testShell.ShellTestCase) ... ok
+testSystem (inaryTests.testShell.ShellTestCase) ... ok
+testUnlinkDir (inaryTests.testShell.ShellTestCase) ... ok
+testFileName (inaryTests.testUri.UriTestCase) ... ok
+testIsLocalFile (inaryTests.testUri.UriTestCase) ... ok
+testIsRemoteFile (inaryTests.testUri.UriTestCase) ... ok
+testSchemePath (inaryTests.testUri.UriTestCase) ... ok
+testSetUri (inaryTests.testUri.UriTestCase) ... ok
+testCheckFile (inaryTests.testUtil.UtilTestCase) ... ERROR
+testCleanDir (inaryTests.testUtil.UtilTestCase) ... ok
+testCopyFile (inaryTests.testUtil.UtilTestCase) ... ok
+testDirSize (inaryTests.testUtil.UtilTestCase) ... ok
+testJoinPath (inaryTests.testUtil.UtilTestCase) ... ok
+testRemovePathPrefix (inaryTests.testUtil.UtilTestCase) ... ok
+testRunBatch (inaryTests.testUtil.UtilTestCase) ... FAIL
+testRunLogged (inaryTests.testUtil.UtilTestCase) ... ok
+testSplitPath (inaryTests.testUtil.UtilTestCase) ... ok
+testSubPath (inaryTests.testUtil.UtilTestCase) ... ok
+testXtermTitle (inaryTests.testUtil.UtilTestCase) ... ok
+testGeBug (inaryTests.testVersion.VersionTestCase) ... ok
+testOpsCharacters (inaryTests.testVersion.VersionTestCase) ... ok
+testOpsKeywords (inaryTests.testVersion.VersionTestCase) ... ok
+testOpsNumerical (inaryTests.testVersion.VersionTestCase) ... ok
+testSingle (inaryTests.testVersion.VersionTestCase) ... ok
+testAutosuper (typeTests.testOO.OOTestCase) ... ok
+testConstant (typeTests.testOO.OOTestCase) ... ok
+testSingleton (typeTests.testOO.OOTestCase) ... ok
+testCycle (typeTests.testPgraph.GraphTestCase) ... ok
+testHasEdge (typeTests.testPgraph.GraphTestCase) ... ok
+testHasVertex (typeTests.testPgraph.GraphTestCase) ... ok
+testTopologicalSort (typeTests.testPgraph.GraphTestCase) ... ok
+testDeclaration (xmlTests.testAutoxml.AutoXmlTestCase) ... FAIL
+testReadWrite (xmlTests.testAutoxml.AutoXmlTestCase) ... FAIL
+testWriteRead (xmlTests.testAutoxml.AutoXmlTestCase) ... FAIL
+testStr (xmlTests.testAutoxml.LocalTextTestCase) ... ok
+testAddNode (xmlTests.testXmlext.XmlextTestCase) ... ok
+testAddText (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetAllNodes (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetChildElts (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetChildText (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetNode (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetNodeAttribute (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetNodeText (xmlTests.testXmlext.XmlextTestCase) ... ok
+testGetTagByName (xmlTests.testXmlext.XmlextTestCase) ... ok
+testNewDocument (xmlTests.testXmlext.XmlextTestCase) ... ok
+testNewNode (xmlTests.testXmlext.XmlextTestCase) ... ok
+testParse (xmlTests.testXmlext.XmlextTestCase) ... ok
+testRemoveChild (xmlTests.testXmlext.XmlextTestCase) ... ok
+testRemoveChildText (xmlTests.testXmlext.XmlextTestCase) ... ok
+testSetNodeAttribute (xmlTests.testXmlext.XmlextTestCase) ... ok
+testToPretty (xmlTests.testXmlext.XmlextTestCase) ... ok
+testToString (xmlTests.testXmlext.XmlextTestCase) ... ok
+
+======================================================================
+[31mERROR[0m: testWhichRepo (databaseTests.testItembyRepo.ItemByRepoTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testItembyRepo.py", line 60, in testWhichRepo
+    self.assertEqual(self.testdb.tdb.which_repo("aggdraw"), "repo1")
+  File "/usr/local/lib/python3.6/dist-packages/inary/db/itembyrepo.py", line 50, in which_repo
+    raise Exception(_("\"{}\" not found in any repository.").format(str(item)))
+Exception: "aggdraw" not found in any repository.
+
+======================================================================
+[31mERROR[0m: testSearch (databaseTests.testSearch.SearchTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testSearch.py", line 28, in testSearch
+    inary.search.init(['test'], ['en'])
+AttributeError: module 'inary' has no attribute 'search'
+
+======================================================================
+[31mERROR[0m: testGetSourceFromPackage (databaseTests.testSourceDB.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testSourceDB.py", line 50, in testGetSourceFromPackage
+    pkg = self.sourcedb.pkgtosrc("xz")
+  File "/usr/local/lib/python3.6/dist-packages/inary/db/sourcedb.py", line 141, in pkgtosrc
+    return self.psdb.get_item(name, repo)
+  File "/usr/local/lib/python3.6/dist-packages/inary/db/itembyrepo.py", line 63, in get_item
+    item, repo = self.get_item_repo(item, repo)
+  File "/usr/local/lib/python3.6/dist-packages/inary/db/itembyrepo.py", line 60, in get_item_repo
+    raise Exception(_("Repo item \"{}\" not found.").format(str(item)))
+Exception: Repo item "xz" not found.
+
+======================================================================
+[31mERROR[0m: testCheckFile (inaryTests.testUtil.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/inaryTests/testUtil.py", line 48, in testCheckFile
+    assert check_file('/usr/bin/bash')
+  File "/usr/local/lib/python3.6/dist-packages/inary/util.py", line 436, in check_file
+    raise FileError(_("File {} not found.").format(_file))
+inary.util.FileError: File /usr/bin/bash not found.
+
+======================================================================
+[34mFAIL[0m: testSearchComponent (databaseTests.testComponentDB.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testComponentDB.py", line 113, in testSearchComponent
+    self.assertIn("util.misc", packages)
+AssertionError: 'util.misc' not found in []
+
+======================================================================
+[34mFAIL[0m: testGetReverseDependencies (databaseTests.testInstallDB.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testInstallDB.py", line 74, in testGetReverseDependencies
+    self.assertIn(set(["attr"]), set(map(lambda x:x[0], revdeps)))
+AssertionError: {'attr'} not found in set()
+
+======================================================================
+[34mFAIL[0m: testGetReverseDependencies (databaseTests.testPackageDB.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/databaseTests/testPackageDB.py", line 58, in testGetReverseDependencies
+    assert pkg == "bash-dbginfo"
+AssertionError
+
+======================================================================
+[34mFAIL[0m: testRunBatch (inaryTests.testUtil.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/inaryTests/testUtil.py", line 14, in testRunBatch
+    self.assertEqual((127, '', b'/bin/sh: add: command not found\n'), run_batch('add'))
+AssertionError: Tuples differ: (127, '', b'/bin/sh: add: command not found\n') != (127, '', b'/bin/sh: 1: add: not found\n')
+
+First differing element 2:
+b'/bin/sh: add: command not found\n'
+b'/bin/sh: 1: add: not found\n'
+
+- (127, '', b'/bin/sh: add: command not found\n')
+?                           --------
+
++ (127, '', b'/bin/sh: 1: add: not found\n')
+?                      +++
+
+
+======================================================================
+[34mFAIL[0m: testDeclaration (xmlTests.testAutoxml.AutoXmlTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/xmlTests/testAutoxml.py", line 19, in setUp
+    class Rat(xmlfile.XmlFile, metaclass = autoxml.autoxml):
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 311, in __init__
+    x = autoxml.gen_attr_member(cls, name)
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 517, in gen_attr_member
+    assert type(tag_type) == type(type)
+AssertionError
+
+======================================================================
+[34mFAIL[0m: testReadWrite (xmlTests.testAutoxml.AutoXmlTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/xmlTests/testAutoxml.py", line 19, in setUp
+    class Rat(xmlfile.XmlFile, metaclass = autoxml.autoxml):
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 311, in __init__
+    x = autoxml.gen_attr_member(cls, name)
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 517, in gen_attr_member
+    assert type(tag_type) == type(type)
+AssertionError
+
+======================================================================
+[34mFAIL[0m: testWriteRead (xmlTests.testAutoxml.AutoXmlTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/suleyman/Development/SulinOS/inary/tests/xmlTests/testAutoxml.py", line 19, in setUp
+    class Rat(xmlfile.XmlFile, metaclass = autoxml.autoxml):
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 311, in __init__
+    x = autoxml.gen_attr_member(cls, name)
+  File "/usr/local/lib/python3.6/dist-packages/inary/sxml/autoxml.py", line 517, in gen_attr_member
+    assert type(tag_type) == type(type)
+AssertionError
+
+----------------------------------------------------------------------
+[33m
+
+====== COMPLATE TESTS =======
+[0m[34m  * Runned 130 tests in 31.047s[0m
+
+[32m    => 119 Successed
+[0m[31m
+    => 7 Failures
+[0m[31m
+    => 4 Errored
+[0m[01;37m[Running Command]: [0mtouch tests/systemtest
