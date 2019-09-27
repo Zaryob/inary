@@ -106,6 +106,13 @@ class Install(install):
         self.installi18n()
         # self.installdoc()
         self.generateConfigFile()
+        
+    def finalize_options(self):
+        # NOTE: for Sulin distribution
+        if os.path.exists("/etc/sulin-release"):
+            self.install_platlib = '$base/lib/sulin'
+            self.install_purelib = '$base/lib/sulin'
+        install.finalize_options(self)
 
     def installi18n(self):
         for name in os.listdir('po'):
