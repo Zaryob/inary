@@ -78,7 +78,7 @@ all repositories.
             except:
                 return
         else:
-            l = inary.db.packagedb.PackageDB().list_packages(repo)
+            l = self.packagedb.list_packages(repo)
 
         installed_list = inary.db.installdb.InstallDB().list_installed()
 

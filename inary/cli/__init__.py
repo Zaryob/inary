@@ -182,18 +182,50 @@ class CLI(inary.ui.UI):
 
     def display_progress(self, **ka):
         """ display progress of any operation """
+
         if ka['operation'] in ["removing", "rebuilding-db"]:
             return
 
         elif ka['operation'] == "fetching":
-            totalsize = '%.1f %s' % util.human_readable_size(ka['total_size'])
+            if not ctx.get_option("no_color"):
+                complated_background = 'backgroundgreen'
+                queried_background = 'backgroundyellow'
+                complated='brightblue'
+            else:
+                complated_background = queried_background = complated = "default"
 
-            out = '\r%-30.50s  (%s) %3d%% %9.2f %s [%s]' % \
-                  (ka['filename'], totalsize, ka['percent'],
-                   ka['rate'], ka['symbol'], ka['eta'])
-            self.output(out)
+            hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
+            totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
+
+            file_and_totalsize = '{:30.50} ({})'.format(ka['filename'], totalsize)
+            percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
+                                                                       ka['rate'],
+                                                                       ka['symbol'],
+                                                                       ka['eta'])
+
+            term_rows, term_columns = util.get_terminal_size()
+            spacenum = ( term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
+            if spacenum < 1:
+                spacenum = 0
+
+            msg = file_and_totalsize + ' ' * spacenum + percentage_and_time
+
+            if len(msg) < 1:
+                self.output(out)
+
+            lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
+            if ka["percent"] == 100:
+                self.output("\r" + ctx.const.colors[complated] + msg + ctx.const.colors['default'])
+            else:
+                self.output("\r" + ctx.const.colors[complated_background] + \
+                            msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
+                            ctx.const.colors['default'])
+            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
+
         else:
-            self.output("\r%s (%d%%)" % (ka['info'], ka['percent']))
+            self.output("\r{} ( {:.2f}% )" % (ka['info'], ka['percent']))
+
+            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):
         if msg:
