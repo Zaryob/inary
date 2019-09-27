@@ -59,7 +59,7 @@ def configure(parameters=''):
     if can_access_file('Build.PL'):
         if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(get.curPERL(), get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
-    elif can_access_file('Build.PL'):
+    elif can_access_file('Makefile.PL'):
         if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters,
                                                                                               get.installDIR())):
             raise ConfigureError(_('Configure failed.'))

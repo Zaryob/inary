@@ -35,7 +35,6 @@ import inary.util as util
 import inary.context as ctx
 import inary.uri
 import inary.fetcher
-import inary.mirrors
 
 
 class SourceArchiveError(inary.errors.Error):
@@ -884,41 +883,16 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("\nSource archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
+            ctx.ui.info(_("Source archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
-        archive = os.path.basename(self.url.get_uri())
-        src = os.path.join(ctx.config.values.build.fallback, archive)
-        ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
-        inary.fetcher.fetch_url(src, ctx.config.archives_dir(), self.progress)
+        inary.fetcher.fetch_url(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
 
     def fetch_from_locale(self):
-        url = self.url.uri
-
-        if not os.access(url[7:], os.F_OK):
-            raise SourceArchiveError(_('No such file or no permission to read.'))
-        shutil.copy(url[7:], self.archiveFile)
+        inary.fetcher.fetch_from_locale(self.url.get_uri(), ctx.config.archives_dir(), destfile=self.uri.filename())
 
     def fetch_from_mirror(self):
-        uri = self.url.get_uri()
-        sep = uri[len("mirrors://"):].split("/")
-        name = sep.pop(0)
-        archive = "/".join(sep)
-
-        mirrors = inary.mirrors.Mirrors().get_mirrors(name)
-        if not mirrors:
-            raise SourceArchiveError(_("\"{}\" mirrors are not defined.").format(name))
-
-        for mirror in mirrors:
-            try:
-                url = os.path.join(mirror, archive)
-                ctx.ui.warning(_('Fetching source from mirror: \"{}\"').format(url))
-                inary.fetcher.fetch_url(url, ctx.config.archives_dir(), self.progress)
-                return
-            except inary.fetcher.FetchError:
-                pass
-
-        raise inary.fetcher.FetchError(_('Could not fetch source from \"{}\" mirrors.').format(name))
+        inary.fetcher.fetch_from_mirror(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
 
     def is_cached(self, interactive=True):
         if not os.access(self.archiveFile, os.R_OK):
