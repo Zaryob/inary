@@ -336,7 +336,7 @@ class InstallDB(lazydb.LazyDB):
 
                 else:
                     orphaned_packages.append(x)
-                    
+
         return orphaned_packages
 
     def get_no_rev_deps(self):

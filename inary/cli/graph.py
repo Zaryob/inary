@@ -79,7 +79,7 @@ the package in graphviz format to 'pgraph.dot'.
             if self.args:
                 a = self.args
             else:
-                a = inary.db.packagedb.PackageDB().list_packages(repo)
+                a = packagedb.list_packages(repo)
 
         else:
             # Graph from installed packages database
