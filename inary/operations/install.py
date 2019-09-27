@@ -82,7 +82,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
     extra_packages = set(order) - A_0
     if extra_packages:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Would you like to continue?')):
-            return False
+            raise Exception(_('External dependencies not satisfied.'))
+
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
@@ -333,8 +334,7 @@ def get_install_order(packages):
     dependencies -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    install_order = plan_install_pkg_names
-    i_graph, order = install_order(packages)
+    i_graph, order = plan_install_pkg_names(packages)
     return order
 
 

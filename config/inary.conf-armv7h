@@ -4,7 +4,7 @@ build_host = localhost
 commonflags = -U_FORTIFY_SOURCE -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -O3 -s -pipe
 cflags = %(commonflags)s
 cxxflags = %(commonflags)s
-host = armv7l-unknown-linux-gnueabihf
+host = armv7l-pc-linux-gnueabihf
 cc = %(host)s-gcc
 cxx = %(host)s-g++
 compressionlevel = 9
@@ -36,6 +36,7 @@ tmp_dir = /var/inary
 architecture = armv7h
 autoclean = False
 bandwidth_limit = 0
+allowrfp=False
 destinationdirectory = /
 distribution = Sulin ARM
 distribution_release = 0.1
