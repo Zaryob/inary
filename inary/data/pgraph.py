@@ -142,7 +142,7 @@ class Digraph(object):
         list = []
         self.dfs(lambda u: list.append(u))
         list.reverse()
-        return list
+        return inary.util.unique_list(list)
 
     @staticmethod
     def id_str(u):
