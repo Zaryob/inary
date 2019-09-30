@@ -872,7 +872,7 @@ def parse_package_name(package_name):
 
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
-    if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo",
+    if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo", "32bit-dbginfo",
                                  "userspace"]: name = name[:-1 - len(name.split("-").pop())]
     return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0],
                             name.lower())
