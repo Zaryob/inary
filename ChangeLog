@@ -1,587 +1,4097 @@
-2019-08-22 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/translations:
-    * Translations Updated
-	* metadata içerisinde Scom gereksinimi olmayan paketler:
-		Gereksiz yere içerisinde scom betiği bulunmasa bile paketlerin scomiface bağlantısı yapmaya 
-		çalışması bir problemdi ve kısa süreli olarak fixlenmiş idi. Şimdi ise bu hata düzeltildi. Geriye tek
-		yapmam gereken scom dbus servisi çalışmıyor ise yapılan çağrıyı error içerisine çekmeyip pendings
-		listesine atmak olacak bu da çocuk oyuncağı sayılır. 
+commit 2b52159bf370a8eb6e3d2e9223e82c86dc23b4b9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
 
-2019-08-21 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/scripts:
-    * İki yeni araç eklendi:
-      inary-sign.py: Depoları GPG imzası ile imzalamak için kullanılacak araç.
-      sync-licence: Portage paket yönetimine eklenen lisanslarla elimizdekileri güncelleyecek araç.
-    * Üç yeni araç daha eklendi:
-      pspec2po: kaynak depodan adları güncellemek için.
-      revdep-rebuild
-      version-bump: spec dosyasının versiyonunu güncellemek için.
+    Appearance arrangements.
 
-2019-08-21 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:develop:
-    * Yeni komut "configure-manager":
-      Değişen config dosyalarının düzenlemesi bu şekilde basitçe yapılabiliyor.
-    * inary indexleri GPG imzasıyla imzalanmadı ise paket sisteminin çakışması sorunu düzenlendi.
+commit 63384015de78c0b1af218007cdeec026c9f4a61a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
 
-2019-08-20 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/testSuit
-    * Bazı testler eklendi:
-      Eski testler arasından çalışan ve yeniden yazılmaya ihtiyaç duyulmayanlar eklendi.
+    Where is that forgetten component?
 
-2019-08-20 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/documentation
-    * Yeni dökümanlar eklendi:
+     * When indexing which source packages were not included with the PartOf information and the component.xml file in the parent folder did not been known. (We were aware that there were such packages, but didn't know which.) This module has been fixed in order to determine.
+
+commit de97340fd661c04ac5ae79f441a8098e455735d5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Transactional history manager of inary have been fixed.
+
+    * There was something that tried to create by changing the print function's stdout and stdin piping. this block that directs outputs to "less" was inaccurate. When the process is over, the pipe does not close, so tty crashes. to prevent this, instead of printing data with print in the function, I chose to list and print the data with pipe.
+    * If there is no package in the takeback process, the program was closing. whether this happened because there was no error or did not understand the problem. This error has been fixed as of the moment.
+
+commit 0fdb747f14ebb7903be0a7545ac3894c6a38cea6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed output function.
+
+commit ca112f5ee23ee53d58aeedc1e77fa0317f3c83e3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Gözümden kaçmış.
+
+commit 8c5effd75f590aae898b67567ac5593545563a4b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added 32bit-dbginfo to same place with other packages
+
+commit f7a9fbc5b8af2a3da8698868bcbf1519ae71188a
+Merge: 9b38ed08 14725103
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'feature/testSuit' into develop
+
+commit 9b38ed0878abb2181a9d33ff382d284c98b787ff
+Merge: a06a1a25 c1d28350
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'feature/scripts' into develop
+
+commit a06a1a259cba870c29e73983943d2aad32a564f9
+Merge: abfecc49 505d0a78
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'feature/documentation' into develop
+
+commit abfecc496c2c858357b6d3c42ed9cf8391912567
+Merge: e6057567 6bf4fc00
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'feature/cleanupCodes' into develop
+
+commit 14725103f75ec80a3cfac332c5bd743ef8857181
+Merge: 25786468 e6057567
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/testSuit
+
+commit 6bf4fc005fd9328cd3625d80673ee8cc019008fa
+Merge: 6300ba20 e6057567
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/cleanupCodes
+
+commit e605756733653cb2d3d26d9e658d4aa48a9d0707
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Çeşitli hata mesajlarında düzeltmeler ve hızda iyileştirmeler.
+
+    * Optimizasyon amacı ile paket listelerini optimize ettim.
+    * arm config dosyalarına ufak dokunuşlar.
+    * Anlamsız bir hata mesajı ve eksik uyarılar için bakıldı.
+
+commit 0e80e0c159c9c4b31cb141c21eb89dd544f6541d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    xterm_title fixed.
+
+commit a5c7003d9609e298e33671680278191e0683d8b5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    stdout üzerine ham veri yazmanın tehlikesi elle test edildi onaylandı.
+
+    Yavaşlamaya sebep olan kısım fonksiyon içerisinde telafi edildi. ayrıca lmsg ile mesajın uzunluğunun alınıp ona göre mavi renki mesaj basılması terminale üst üste ham veri girişine sebep veriyordu. şimdi %100 olmadan mavi basmayacak.
+    * JuiceSSH ile denendi uzak sunucudan veri çekerken sıkıntı yaşanmıyor.
+    * 85 X 56 terminalde denendi. Taşma yapmadan yazılar kayabiliyor. Zaten daha küçük ekran kullanan varsa helal olsun.
+
+commit 26a41bec15636b0e54d8f08ba01efad5c48b4b4f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Birkaç adet düzenleme yapıldı.
+
+    inarytools için eksik olan bir detay eklendi. cmaketools emul paketleme sırasında oluşan hata giderildi. Sadece sulin için /usr/lib/sulin default prefix yapıldı.
+
+commit e93a3130a17352dac6a709210df8f792fb59e9a3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fetcher biraz daha okunaklı ve anlaşılır hale getirildi.
+
+    --no-color için çıktıda düzenleme yapıldı. kodda deprecated % ile yapılan kullanımlar değiştirildi.
+
+commit 5f39c7575e3e18e0b01d41fbb9018ee632d85fc9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Building method for RFP packages have been added.
+
+    RFP safety switch have been added. RFP packages will just be installed with inary em.
+
+commit 31a69e2cba4ca233b2b038adac4d832bcde8344e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Runtime yavaşlığı giderildi.
+
+commit 17b731d52a57beb334f19b0ad5ff869a569220d0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fetcher bugu düzeltildi.
+
+commit 2d11018e1f14a59d976873d8dbc07b11d6c95a78
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    kerneltools modified as well.
+
+commit aee2685a771785aee8a2ca88f54975bbe70f6360
+Author: ali <hebelehübele>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Lanetolası bugların amına koydum
+
+commit 939c212d8026fcdffaf8d94a56d3b64ccb2d955f
+Author: ali <hebelehübele>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    renklendirilmiş indirme çubuğu eklendi
+
+commit fc71d5c3aa80c2f97312c468a2811dd37c875275
+Author: Ali Rıza KESKİN <55052890+sulincix@users.noreply.github.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Create inary.conf-aarch64
+
+commit 505d0a7809532885ea5c3d4e37fad30a2a660d66
+Merge: eb78fa1b 8aa63018
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit c1d2835068b0b5e6421b8577361027340a429c17
+Merge: 095df997 8aa63018
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/scripts
+
+commit 8aa63018a4741ad128a28a22f31e76bc5599bc72
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Çeşitli hata mesajlarında düzeltmeler ve hızda iyileştirmeler.
+
+    * Optimizasyon amacı ile paket listelerini optimize ettim.
+    * arm config dosyalarına ufak dokunuşlar.
+    * Anlamsız bir hata mesajı ve eksik uyarılar için bakıldı.
+
+commit 095df9979414152c5d070c1406b626af8cd54726
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    UPdated version bump script
+
+commit d8ab3722e0d7f7acdead5a7b5561901a09079f8f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    xterm_title fixed.
+
+commit 9d13f174aa367c02c6725affc8424bb31c413607
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    stdout üzerine ham veri yazmanın tehlikesi elle test edildi onaylandı.
+
+    Yavaşlamaya sebep olan kısım fonksiyon içerisinde telafi edildi. ayrıca lmsg ile mesajın uzunluğunun alınıp ona göre mavi renki mesaj basılması terminale üst üste ham veri girişine sebep veriyordu. şimdi %100 olmadan mavi basmayacak.
+    * JuiceSSH ile denendi uzak sunucudan veri çekerken sıkıntı yaşanmıyor.
+    * 85 X 56 terminalde denendi. Taşma yapmadan yazılar kayabiliyor. Zaten daha küçük ekran kullanan varsa helal olsun.
+
+commit a2fa4ecabb4c85136d6c7ceffa97379030269993
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Birkaç adet düzenleme yapıldı.
+
+    inarytools için eksik olan bir detay eklendi. cmaketools emul paketleme sırasında oluşan hata giderildi. Sadece sulin için /usr/lib/sulin default prefix yapıldı.
+
+commit 26966441eb021a6c997aae07136b6063c845a07c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fetcher biraz daha okunaklı ve anlaşılır hale getirildi.
+
+    --no-color için çıktıda düzenleme yapıldı. kodda deprecated % ile yapılan kullanımlar değiştirildi.
+
+commit 7c5ea57611ded790d40bab25208d8bd34f414a0e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Building method for RFP packages have been added.
+
+    RFP safety switch have been added. RFP packages will just be installed with inary em.
+
+commit 491a8c4878764222a2c621915cde28daa328ef99
+Merge: 1de7beaf d867ced2
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #4 from Zaryob/master
+
+    Yavaşlama sorunu  giderildi.
+
+commit d867ced2f3876e8244fac41c29fb9b2754509083
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Runtime yavaşlığı giderildi.
+
+commit 1de7beafaf0a423a4087e8d0a82e793d16eb6fe8
+Merge: 89ca000f 4e19b08e
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #3 from Zaryob/master
+
+    Fetcher bugu düzeltildi
+
+commit 4e19b08e52e4354619acf14b4324e16073ecd513
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fetcher bugu düzeltildi.
+
+commit 89ca000fb6f6dba4c8a6a1dd633ec2f42c1c20c9
+Merge: b293c1e2 49fbe0c7
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #2 from SulinOS/develop
+
+    develop içerisindeki  değişimleri depoya basma talebi
+
+commit b293c1e2548dd2a533756cbd44e68c26c369b5eb
+Merge: 9e85369a 81312885
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #1 from paledega/master
+
+    Ali Rıza Keskin: Renkli indirme çubuğu eklendi. (Sülo kusura bakma knk o fonksiyon başka türlü yazılmıyo)
+
+    Zaryob: mevcut değişimler localde incelenmek üzere merge edilecektir.
+
+commit 49fbe0c78993605c30026eea8e308318024ef2f2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    kerneltools modified as well.
+
+commit ed2e5057f6e8cbdc777332930f7ea60aa746e179
+Merge: e6f0d7e1 9e85369a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge remote-tracking branch 'github_mirror/master' into develop
+
+    aarch64 config file by ali rıza keskin
+
+commit 813128854855ba0ccaeb85a517a2df76c93ea43c
+Author: ali <hebelehübele>
+Commit: ali <hebelehübele>
+
+    Lanetolası bugların amına koydum
+
+commit ab319fcdca27a4eab4d04b24cf2c34bf3e5fc870
+Author: ali <hebelehübele>
+Commit: ali <hebelehübele>
+
+    renklendirilmiş indirme çubuğu eklendi
+
+commit eb78fa1baf269e3212135878d5e6f8c9bc61be13
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Benden bu kadar.
+
+    Daha iyisini yapmayı bilen varsa buyursun.
+
+commit 9e85369a3a399108368a0b75a9e1a8f39f22da85
+Author: Ali Rıza KESKİN <55052890+sulincix@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Create inary.conf-aarch64
+
+commit 43af94d675cc9ec5fb203dada44dd47ebc370cbe
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    A problem was happened so I have added documentation again
+
+    Documentations added again. (When them have been removed???)
+
+commit 54419b198b5389d87d1a5a194c4aa4693f06be6d
+Merge: ecb21166 e6f0d7e1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit e6f0d7e1e1cc018dffa31a46b0ea4e81176078a7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed mesontools installing error and fetcher
+
+commit 5d822a6f2f58f09d61f862786ac027340ea58b75
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Full automatized emul32 packages with mesontools.
+
+    Mesontools ile yapılan her paketin emul32 hali tam otomatize oluşturulabiliyor. ek olarak actions.py betiğinde emul32 için düzenlemelere artık gerek yoktur.
+
+commit 4ec4f6934b4050f747e5c38c62a396795e528324
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ssl stabilization(there are one more step)
+
+    To block m-i-m attack we need to add somthing which is necessary for inary.
+
+commit 9ea59daaa7696f217c0363e2d32ba4e061ef4156
+Merge: 0e6af12d 3fdc719c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' into develop
+
+commit 0e6af12da2106d7c2f04e2a79a8d9ae501cb7c56
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Meson derlemesi sırasında oluşan hata düzeltildi.
+
+commit 3fdc719cc59cdfba0f3963511b672bd80644b7fe
+Merge: ec54c2dd 4ad47e52
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop'
+
+commit 4ad47e52bc0f82740478aff5d848b3d85cd50d6f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed broken symlink error of magic
+
+    Broken symlinks will be informed to developer. It wont cause an interrupt.
+
+commit ec54c2dd680f4792864b96351c604d1ec80dd5fd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed error when installing inary from file
+
+    If an inary  have being installed form file, the directory names should be cleaned to get "just" name of package.
+
+commit c1a4b3dd224c4363848f2b55c7ab096315ccce0c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Makefile.PL not fond error.
+
+    Recursive Build.PL expression is changed as Makefile.PL to compile some perl sources which have named its build script as Makefile.PL
+
+commit f6b5ee66173d6bffe6669ad38d6960575e1edc35
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed "Package "x" not installed." Error
+
+    When trying to install an package from .inary file it may couse problem. it is a quick fixed error ;)
+
+commit a8d2191232e5d93f893c5e8611e90c474f28b7d3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Removed recursive messages
+
+    recursive messages in scomiface and build.
+
+commit 714299b6b77bd71ecfc37b7ae106a48e87c81110
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added header IsA
+
+     If a devel package contains header files, it will be specified as "header"
+
+commit 033af5510b504e235cc5e7eefba425aa9678adf0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufak bir fix.
+
+commit 8b284fff46b57a795c9a567c4637cb9cc836f1b8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fallbaking, mirroring ve local dosya çekme fetchere aktarıldı.
+
+commit 25786468a9af7bc8c536f12a7519a2464873df1b
+Merge: 15a807fe 6300ba20
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/testSuit
+
+commit 6d95edc4e2b8d5b3ff3a741385801b791e11a913
+Merge: 8f5baa7e 6300ba20
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/scripts
+
+commit ecb21166943b7fc5fb133ca8e781d4cdc448a4d4
+Merge: 6d2ac27c 6300ba20
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit 6300ba202da2a7d19e9f40963a8a7b6cf57f9ec0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+     Auto stash before revert of "Lisans Güncellendi:"
+
+commit 6d2ac27cac9e11817e8c5b458d91c2e61aa4c19d
+Merge: f26b0dad f2c0e301
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit 8f5baa7ec4ce602eca3eb7de8799369b094fa435
+Merge: 8d6fb8d3 f2c0e301
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/scripts
+
+commit 15a807fe23edf1a8c6247fe939a69b4ffd65dd90
+Merge: 07b1dd1f f2c0e301
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/testSuit
+
+commit f2c0e30196c774a03778bcab75d4c1996504d1c8
+Merge: ce268ef9 a0deafd9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'feature/translations' into develop
+
+commit ce268ef91a25b6db447d3ee25c87428cf2957b28
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufak tefek işler
+
+    GPG key kontrolü için config dosyasına parametre eklendi. pycurl ile sourceforge üzerinden veri çekerken yaşanan sıkıntı giderildi. önceden değiştirilen ui fonksiyonlarının süper sınıfına eklenmemiş parametreler eklendi.
+
+commit 07b1dd1fef4e632e852f835212e0cf71e5aeb678
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeni testler eklendi
+
+    Bu testler database için geliştrilmiş önceki testlerin revizesidir.
+
+commit f9f21eaf1e976145062cf83b4349399783a00eef
+Merge: fda8c28d 1e879d61
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/testSuit
+
+commit a0deafd924178787c25af626508d96fe3c4c8638
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    [po2goo-trans] some of languages have been proceed
+
+    de, es, fr, it, nl, ru, sv, uk have been filled, az translations added.
+
+commit fbf76bb0d8cc83e0ce2efda33a1ad85ab82d7f6f
+Merge: 5e9e6c6e 1e879d61
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/translations
+
+commit 1e879d61ef7010aaa57d7c39e2ae90701d53f681
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    metadata içerisinde Scom gereksinimi olmayan paketler:
+
+    Gereksiz yere içerisinde scom betiği bulunmasa bile paketlerin scomiface bağlantısı yapmaya çalışması bir problemdi ve kısa süreli olarak fixlenmiş idi. Şimdi ise bu hata düzeltildi. Geriye tek yapmam gereken scom dbus servisi çalışmıyor ise yapılan çağrıyı error içerisine çekmeyip pendings listesine atmak olacak bu da çocuk oyuncağı sayılır.
+
+commit 5e9e6c6e650b844344fdfeb70846bca9139deb16
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Translations Updated
+
+commit 82871bf4c2dfe7a1665fe2e8c057828d5fe2f1ad
+Merge: 774099cc 83dbb2e8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/translations
+
+commit 8d6fb8d31c158da45f620f54274b12d52e1dead7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Üç yeni araç daha eklendi
+
+    pspec2po: kaynak depodan adları güncellemek için.
+    revdep-rebuild
+    version-bump: spec dosyasının versiyonunu güncellemek için.
+
+commit 12d9f96db99cf4350a6e00a5693d8f1fd5ecba57
+Merge: 4a8f121d 946695ef
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'HEAD' into feature/scripts
+
+commit 946695ef25e06c81a44a624c263bf9b6ba8a3c1f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    İki yeni araç eklendi.
+
+    inary-sign.py: Depoları GPG imzası ile imzalamak için kullanılacak araç.
+    sync-licence: Portage paket yönetimine eklenen lisanslarla elimizdekileri güncelleyecek araç.
+
+commit 4a8f121d789c344a614120472c80b480d512582d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    İki yeni araç eklendi.
+
+          inary-sign.py: Depoları GPG imzası ile imzalamak için kullanılacak araç.
+          sync-licence: Portage paket yönetimine eklenen lisanslarla elimizdekileri güncelleyecek araç.
+
+commit 83dbb2e88d23fe9a8ca375c3275d6b0efda9a5e0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Yeni komut "configure-manager"
+
+    Değişen config dosyalarının düzenlemesi bu şekilde basitçe yapılabiliyor.
+
+commit c54ab6e2801ee7f475be7091cc2f8f2ba6b78133
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    inary indexleri GPG imzasıyla imzalanmadı ise paket sisteminin çakışması sorunu düzenlendi.
+
+commit dbec3375a3ad4559df4351532cec8b1ede584aca
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ctx.ui.choose fonksiyonunun hataları giderildi
+
+    Saçma sapan bir çıktı yapılanmasına sahipti. Düzeltildi.
+
+commit f26b0dad04d3a80e9eade7ab83a7a81369f48530
+Merge: 1ee66bba 3bfb8215
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+    Conflicts of "ChangeLog" file fixed.
+
+commit fda8c28d51f2e6a3ba30389eaf17ae8b17dd7824
+Merge: 26d1667c 3bfb8215
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/testSuit
+
+    Conflicts of "ChangeLog" file fixed.
+
+commit 774099cca133d4a6af1ebf5ba0172d06edc8ff68
+Merge: 1ee66bba 3bfb8215
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/translations
+
+    Conflicts of "ChangeLog" file fixed.
+
+commit 3bfb8215d94f1bb7e48dd898b6523bf530bc25ef
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ChangeLog Updated
+
+commit 26d1667c313deabce963e2b4e6ba3a363a6819ad
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated Changelog
+
+commit f7c62773c8df832e08fb13c735fe2facddd14ad5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Görünümsel değişiklikler
+
+commit 1ee66bba766f37636deea544372f21a6c61d0089
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated ChangeLog
+
+commit dfd83ae7f5428875d43588361f510aaabd3e7939
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Yeni dökümanlar eklendi
+
     Eklenen komut dökümanları: bi bl dt em emup graph hs rdb
 
-2019-08-17 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:feature/translations
-    * Translations Updated:
-     tr ve en dosyaları tamamen elden geçirildi. de yerelleştirmesi için biraz çalıştım ama yetersiz.
-     diğer çeviriler hak getire
-
-2019-08-16 Suleyman Poyraz <zaryob.dev@gmail.com> :onbranch:"feature/documentation"
-    * inary için Türkçe dökümantasyon eklendi.
-
-2019-08-16 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Lisans Güncellendi:
-      Eski çatalın lisans olan GPLv2 yerine mevcut çalıştığım inary çatalında GPLv3 kullanıyordum
-      ancak AGPLv3 ile yayıma devam etme kararı aldım.
-
-2019-08-14 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Paket kurulumu öncesi tam bilgilendirme:
-     Şu değerler artık paket işlemleri sırasında listelenecek: indirilecek toplam
-     paket boyutu, indirilecek paketlerden önceden indirilmiş olanı; kurulum/güncelleme
-     sonrası gereken boş disk alanı; silme işleminden sonra diskte açılacak yer.
-     - Paket indirmeden önce toplam indirme boyutu ve önceden indirilmiş paket miktarını
-       göstecek şekilde ctx.ui.notify içindeki event ayarlanı ve ona göre kod düzenlendi.
-
-    * Orphaned paketler için düzenleme:
-     oprhaned yani kopuk olan paketler arasında her zaman doc pages static ve dbginfo
-     paketlerini de alıyordu ve anında siliyordu bu hata düzeltildi.
-    * GPG Signature/GPG İmzalama problemi:
-     GPG imzası bulunamadı ya da doğrulanamadığı durumda hata veren kod değiştirildi.
-     kontrol mekanizması eklendi
-    * ctx.ui.notify fonksiyonuna eklemeler ve düzenlemeler ve yeni renkler
-     - ui içerisindeki her bir işlem adımı için ekleme yapıldı. İnstalling removing gibi
-       adımları hem ekrana hem log dosyasında hem ekrana hem de log dökümüne yazdırmak,
-       kurulum sırasını ve bazı önemli şeyleri de sadece log dökümüne yazdırmayı denetlemem
-       lazımdı. Notify kullanacak yerler belirlendi. Buna göre kodlar düzenlendi.
-     - italic yazı stili ve üzeri çizgili yazı stilleri eklendi.
-
-2019-08-13 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * magic için fallback yazıldı:
-        magic modülü yoksa file komutu ile dosya bilgileri alınacak
-
-2019-08-12 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Uzun zamandır ağız tadı ile bir ChangeLog yazamadım.
-	* gericekme branchi hakkında:
-		- kod üzerinde bazı deneysel işler ali rıza keskin tarafından yapıldı.
-			ancak yapılan değişiklikler beni rahatsız etti. asıl kodun mantığı ve
-			inary algoritmasının taa pisi dönemlerine uzanan avantajlarına gölge
-			düşüren bu kodlar arasından işe yarar nitelikte olanları alındı. Ancak
-			şunu açıkca ifade etmeliyim ki tüm değişiklikler herkesin gözle
-			görebileceği şekilde ortaya kondu.
-		- işe yarayabilecek 1-2 yama harici atıldı.
-		- bu branch üzerinde öğrendiğim şu topological sort algoritması yavaş Ancak
-		  iyileştirme yapılamayacak durumda değil. aklımdaki değişimler yapıldığında
-			umarım daha güzel olacak
-	* mevcut branchler hakkında:
-		- mevcut brancler features/ develop ve master olmak üzere 3 tane:
-			+ features: bu tag kendii içinde kod temizliği, çeviriler, belgeleme,
-			  daha önceden çıkartılan script ve testsuiti içindir. her bir branch
-				başarıya ulaşınca develop branchine merge edilip kaldırılacaktır. develop ise
-				gerekli testlerinin ardından master tagına bağlanacaktır ve her bağlamada
-				inary yeni bir sürüm numarasına sahip olacaktır
-	* bu zamana kadar yapılanlar hakkında:
-		- ufak çaplı bug avları.
-		- zamanlı zamansız karşıma çıkan hataların tespiti.
-		- 2 ileri bir geri kod saçmalaları. daha detaylı bilgi için lütfen git diff yapınız.
-	* yol haritası:
-	  - RoadMap üzerinden yazılmıştır. Bir daha uğraştırmayın.
-
-
-2019-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* fetcher pycurl kullanılarak yeniden yazıldı. Bu sayede base sistemde
-	dependency yükü azaldı, partial file download özelliği getirildi.
-	* actionsapi modulleri elden geçirildi kararlılık sağlandı
-	* delete-cache komutu elden geçti.
-	* util içindeki retrieve yüzünden erişilemeyen fonksiyon yaşanması
-	hatası giderildi.
-	* graphing hatası ve bağımlılık analizi kopmaları giderildi.
-
-2018-12-07 Suleyman Poyraz <zaryob.dev@gmail.com>
-        * inary.operations.operations isimli modül hem saçma hem gereksizdi. Silindi.
-        * clean command was a useless command. And it was deleted.
-        * Fixed archiving problem. Added file compression level.
-        * Fixed util module errors.
-
-2018-12-03 Suleyman Poyraz <zaryob.dev@gmail.com>
-        * Preprocess module added into inary/libraries until when I rewrite xmlfile
-
-2018-12-01 Suleyman Poyraz <zaryob.dev@gmail.com>
-        * PEP-8 style edits:
-	        - spaces and
-        * Unreachable return colums are deleted.
-        * Deprecated modules are deleted:
-	        - inary/__init__.py: imp -> importlib
-	        - inary/fetcher.py: encodestring -> encodebytes
-        * Mutable default arguments are rewrited.
-        * None equalities are inspected.
-        * inary/configfile.py: changed backspace tabs to space.
-        * Some functions are changed static methodes.
-
-2018-05-12 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Paket tipi hatası:
-		Belirtilen paket tipine uygun install dosyası pakete eklenmeli ve
-		sha değeri alınmalıdır. Bu yüzden bu konuda sıkıntı yaratan satırlar
-		düzenlendi.
-		* Gereksiz fonksiyonlar silindi:
-		  -> inary.atomicoperations.reorder_base_packages()
-		* atomicoperations.py eski haline getirildi:
-		  -> Kısa süreli bir çözüm için api içerisi atomicoperations'a verilmişti.
-			Tamamen baştaan ele alınarak her fonksiyon bulunması gereken yere taşındı.
-			inary ortalama 32 milisaniye hız artışı yaşadı.
-
-
-
-2018-05-09 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* util.py parçalandı:
-			-> ileride kod birikmesi olmasın diye (cross compiling özelliği ekleyince)
-				util.py dosyası parçalandı.
-			-> util parçalanması sonrası değişimler yapıldı.
-		* One test passed:
-			-> fetcher testindeki errora sebeb olan yer bulundu fetcher fixe edildi.
-		* Komutlara küçük dokunuşlar:
-		  -> innary.cli.listpendings.py dosyası düzenlendi. list-pendings komutu
-			biraz anlaşılır ve renkli yapıldı.
-
-2018-05-08 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Atomicoperations rahatlatılmalı:
-			-> atomicoperations içerisine taşınan fonksiyonlar yeniden ele alınıp gerekli
-					olanları cli içerisindeki kullanıldığı komuta taşınacak
-
-		* ctx.ui.info fonksiyonuna özellik eklendi:
-			-> inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
-					sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi.
-
-		* Cosmetics.
-			-> History renklendirildi: Paket yöneticisi pavyona döndü. Renkli filan.
-			-> Verbose ile çıktı verilirken artık o satırın detaylı çıktı olduğu belli edilecek.
-			-> inary.db içindeki database fonksiyonları çalışırken beklemek bir işkenceydi.
-					Hele minidom yüklü ise sistemde. Bu yüzden verbosed mesajlar eklendi.
-
-2018-05-06 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Küçük bir hack:
-		  -> Immm. Artık home-build şansımız var yani geliştirici root yetkisi
-			   almaksızın evde paket yapabilecek. Tabi ufak testler yapıldıktan sonra
-
-2018-05-05 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Test sonuçlarına uygun düzenlemeler:
-		  -> inary/db/sourcedb.py dosyasında farkettiğim hata düzeltildi.
-			-> testlerden bazılarındaki ufak hatalar temizlendi.
-		  -> yeni bir hata fixme dosyasına geçirildi.
-
-2018-05-01 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* xmlext ile düzenlemeler:
-			-> inary.data.specfile:
-			   - translations.xml dosyasını okurken xmlext kullanıyor.
-		  -> inary.db.installdb, inary.db.sourcedb:
-			   - Geçirilmesi unutulan satırlar yeniden ele alındı
-			-> inary.db.repodb:
-			   - Yarı yarıya xmlext ile çalışıyor.
-
-		* Eklenenler:
-			-> inary.db.filesdb:
-			   - has_file fonksiyonu eklendi. Databasede dosya var mı yok mu
-				   kontrol etmek için birebir.
-			-> inary.sxml.xmlext:
-			   - removeChild fonksiyonu eklendi. removeChildText ve removeAttribute
-				   fonkdiyonları üzerinde çalışılıyor.
-			-> checkelf scripti:
-			   - pardus döneminde kullannılan ve paketin dependency'lerini ldd ve pc
-				  dosyalarına bakarak döndüren bir tool.
-
-		* Silinenler:
-		  -> inary.analyzer:
-			  - gereksiz olan ctypes_analyzer ile pkgconfig silindi. Pkgconfig yerine
-				  checkelf script olarak alındı.
-
-		* Hata düzeltmeleri:
-		  -> dbus exception için python3'de farklı bir class açılmış. Ona oygun olarak
-			   except satırları değiştirildi.
-			-> op_wrapper:
-			   inary.operations.operations olarak yeniden adlandırıldı.
-
-2018-04-29 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * Darara (new tag= inary-1.0_rc3):
-		* historydb:
-			-> Hataya sebeb olan satırlar düzeltildi.
-		* Hata düzeltmeleri:
-			-> xmlext'ye geçirilmeyen bazı kısımlar düzeltildi.
-				 ve bu dönüşüme bağlı hatalar yamandı.
-			-> atomicoperations içindeki hatalar düzeltildi.
-		* Testler:
-			-> Portage'ın runTests betiği incelenip inary için daha
-				 uygun yeni bir betik yazıldı
-			-> setup.py içerisinde test sınıfı eklendi. Kararlılığı sağlandı.
-
-
-2018-04-28 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Hata düzeltmeleri:
-			-> Kodlama hataları ele alındı, arada anlamsız gelen çıktılar düzeltildi
-		* Lisans:
-			-> GPLv3 yapıldı, eski developerlerin kullandığı Copyright da eklendi.
-
-2018-04-15 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* fetcher.py:
-			-> Her zaman sinirimi bozan bu fetcher requests ile yeniden yazıldı.
-				 urllib kullanmak indirme yöneticisini yavaşlatıyordu.
-				 Bir tane yeni bağımlılık eklerim de yine de o yavaşlığı çekemem arkadaş
-		* İç aksam düzenlemeleri:
-			-> inary.__init__()
-			   inary main modulu içindeki error sınıfı ait olduğunu hissettiğim
-				 yer inary.errors içine taşındı. Böylece bir error için bütün inary
-				 modulunu yeniden import etmeye gerek kalmayacak.
-				 Bknz: 'Bit için yorgan yakılmaz.'
-			-> inary.db.filesdb:
-				 filesdb zaten dinamik bir database. O yüzden her installing ardından
-				 koskocaman files databasesi yapılandırmayı saçma buldum. Onu
-				 düzelttim. Ayrıca database testleri ile sağlıklı çalıştığına emin
-				 oldum.
-			-> Çıktılar biraz ellendi, renklendirmeler eklendi
-
-
-		* Atom düzenlemeleri:
-			-> Gereksiz boşluklar temizlendi.
-			-> Simetri hastası bir insan olarak bazı modul importlarını elle
-			düzelttim.
-
-
-2018-04-14 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Özellik eklemesi:
-			-> Paket kurulumundan önce yeterli alan olup olmadığı artık denetleniyor.
-
-		* Hata düzeltmeleri:
-			-> Görünümsel hatalar fixe edildi.
-			-> runtime hatalarından bazıları giderildi
-			-> dosym methodundaki hata düzeltildi.
-
-
-2018-03-29 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* Hata düzeltmeleri:
-		Kararlı öncesi.
-			-> Magic modülü kararlı hale getirildi, pkgconfig librarisi düzenlenecek.
-			-> Arşiv çıkartılırken oluşan hata düzeltildi.
-			-> inary-cli betiğini hangi kafa ile düzeltmişim? Saçmalamasına
-			sebeb olan hata düzeltildi
-
-		* Genel iyileştirmeler
-			-> Actionsapi betiklerinden gereksiz fonksiyon var mı diye kontrol edilip
-			betikler düzenlendi.
-			-> Yeni bir renk skalası eklendi. ("faint")
-			-> Renklendirme yapıldı
-
-
-2018-03-18 Suleyman Poyraz <zaryob.dev@gmail.com>
-		* minidom vs ciksemel:
-		minidom ile tüm inary sistemi yeniden yazıldı. Ancak ciddi manada
-		inar yavaşlıyor. Db initializing süresi 8 sn. Yuh yani. Ama minidom
-		uğraşımı öylece silmek istemediğim için minidom ve ciksemeli beraber
-		kullanma kararı aldım.
-
-
-2018-03-11 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * colorized help output:
-		Colorized command names and now help screen look well.
-		* Minimum dependency, Maximum stabilization:
-		patchfile:
-		patches/applied-patches/minimum-dependency-maximum-stabilization-001.patch
-		If we had one or two dependency we can control inary
-		but there are a lot of runtime dependency. And this is
-		look up bad. I clean runtime dependencies and I write
-		alternative libraries into inary. I clean runtimes:
-		    * magic: it soo easy if when use ctypes.I import libmagic
-				with ctypes and I use it in inary
-				* plyvel: for basic files database, we musn't a big
-				database library. Shelve is pretty than "Google's"
-				plyvel database library.
-				* ciksemel: I work about this.
-
-
-2018-03-10 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Cleaned ınary/api.py:
-		Clean unuseful commands, Moved functions true palaces and
-		writed 2 new module.
-		* Not worked patch delete-runtime-dependency-ciksemel:
-		Not work well minidom. So I returned codes to ciksemel.
-		Should work with minidom detailed.
-
-2018-03-09 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Patched delete-runtime-dependency-ciksemel:
-		For compability we shoul use minidom in xml file parsing,
-		we shouldn't use a new runtime dependency. (Please Read CODING)
-
-2018-03-04 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * Updated RoadMap
-		* Cleaned FIXME tags:
-		Cleaned not understandable Fixme tags
-
-
-2018-03-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-    * deleted distupdate command:
-		Sulin will be a roolling release distro. So we don't have a
-		distupdater.
-
-2018-02-11 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * distupdate komutu:
-	Stabilize edildi ve renklendirildi
-	* string -> strutils:
-	Strutils fonksiyonu kullanılır hale getirildi. String
-	modulunun icindekiler strutils içine taşındı
-	* Bug Fixes:
-	Sorunlu olan search-file komutu düzeltildi.
-	Xml dosyasındaki Utf-8 decode etmeden string oluşturmasına
-	çözüm bulunamadı :(
-
-
-2018-02-07 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * System modulleri silindi:
-	Inary içinde onlara ihtiyaç olmadığını farkettim. Scom içine alarak yer
-	kazandım.
-	* inary/strutils.py:
-	Str veri tipi için basit tipte fonksiyonları ve multisplit gibi şeyleri
-	içeren bir modul.
-
-2018-02-04 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Kozmetik fixler ve düzenlemeler yapıldı(developing branch)
-	* Dokumantasyon taslakları yazıldı.(developing branch)
-	* Merge Developing branch into master on 2018-01-07
-
-
-2018-01-29 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Gereksiz toolar temizlendi:
-	Bazıları ismail abiye yüklenecek, İsmail abi kim mi?
-	ÇOK YAKINDAAAA....
-
-
-2018-01-28 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * distupdate komutu eklendi:
-	Upgrade komutu buyuk capta guncellemeler için biraz
-	tehlikeli kaçıyordu ve yetersiz sayılırdı. Bu yüzden bu
-	modul eklendi.
-
-  * Downgrade silindi:
-	Downgrade çok vasat duruyor. Upgradeden çarptım ama bence yetersiz
-	o yüzden yeniden yazılana kadar rafa kaldırdım. çok yakında
-	yeniden yazıp koyacam. öteki türlü hep aklımdan cıkıyor :)
-
-2018-01-27 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * Darara (new tag= inary-1.0_rc1):
-	-> work build, fetch, update, install functions.
-	  |_ Fixed itembyrepodb.
-		|     Not used true tag. I use "Packages" but real tag was "Package".
-		|_ Fixed fetcher
-		|     now work very well.
-		|_ Fixed all po files
-		|     Usable Languages are: German, English, Franchis, Turkish and Russian
-		|_ Clean non useful imports
-		|_ Fixed filesdb
-		\     we use leveldb based filesdb (marcin)
-
-
-
-2018-01-26 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Python3 kullanımı ile ilgili çok vasat bir kodlama
-	anlayışımız var:
-	a) Bu sorun ile ilgili olarak
-	   "%s" ile taglanma yerine "{}" kullaniliyor.
-	b) Ceşitli düzenlemeler yapıldı. Buna uygun olarak
-	   po dosyaları ve actions.py betikleri (repodan)
-		 düzenlendi.
-	c) yanlış kullanımlar gereksiz importlar silindi
-
-
-2018-01-20 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Testler elden geçirilmeli:
-	-> Testler düzenlendi (2018-01-20)
-	-> Testler gruplandirildi (2018-01-22)
-	-> oo ve autoxml testleri eklendi (2018-01-22)
-	-> testlerin islevselliginden emin olunuldu (2018-01-23)
-
-2018-01-17 Suleyman Poyraz <zaryob.dev@gmail.com>
-  * Added system_literals and now work crossplatorm
-	inary packaging:
-	Look more about inary/system_literals/Modules.md
-
-2018-01-13 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Scom dosyalari pakette yok!!:
-	Bu hata Fixe edilmiştir
-
-
-2017-12-24 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Python3 kutuphane uyumlulugu:
-	lzma hataları düzenlendi, urllib.request ile fetcher
-	yeniden yazıldı
-	magic kutuphanesi düzenlendi.
-
-2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Yeniden adlandırıldı:
-	Yeni adı inary oldu
-
-2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* fetcher düzenlendi:
-
-2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Son dakika golu:
-	Rasbianin saati birkac gun geriden gelse de 3 eylulun
-	son saatinde api modulunun icerisi temizlendi
-
-2017-09-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* spam.operations.build:
-	There are an error in using ```Build(path)``` and I will fix it tomorrow
-
-	* unuseful importing libraries:
-	example in xmlfile. A developer imported an old library preprocess
-	and I try fix it
-	Türkçesi ile benim neler çektiğimi nerden bileceksiniz
-
-2017-09-01 Suleyman Poyraz <zaryob.dev@gmail.com>
-	-> spam 1.0 beta 2
-	* build:
-	Add new configure function in actions.py and we can make
-	configuring with only a function easly. And adding actions.py
-	in packages and it moving to package dirs actions.py file
-
-	* install:
-	FIXME: If we want install a new release for any package it
-	report file conflicts error, it should fix it.
-
-	* removing:
-	FIXME: In removing a package it report file conflicts error
-	and can not remove package
-
-	* delta:
-	FIXME: I can not add actions.py file in delta package.
-
-	* index:
-	FIXME: in source repo indexing there are type errors in
-	adding xml files...
-
-	* blame:
-	TODO: add blaming from packages support
-
-	* rebuild-db:
-	It working.
-
-2017-08-31 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Remove Comar/scom libraries:
-	Now we can install packages without comar scripts
-	I add a function in actions.py file.  I we want
-	configure package after installing we can make it quickly
-
-2017-08-20 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Cleaning unuseful outputs
-
-2017-06-24 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* not use now iksemel:
-	I rewrite iksemel module and renamed to ciksemel
-	now we use in package manager ciksemel.
-
-2017-06-23 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* spam 1.0 beta:
-	Fixed byte type output problem, archive compressing
-	problem and xml problem. Ï will rewrite tests and
-	sha1 based key control problem.
-
-2017-06-19 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* spam 1.0 alpha:
-	Ported PiSi and make PiSi based Special Package
-	Manager. I thing it's name will be SPaM ;)
-	Now work it very well.
-
-2017-05-20 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Make tests:
-	There are a problem on ComarIface.
-
-2017-04-18 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* files hashs problem in filesldb:
-	FIXED: hash encode problem
-
-	* Should looked up install module!!!
-
-2017-04-14 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* filesldb and plyvel:
-	Should fix pisi-plyvel library hash encode type error
-
-	* install:
-	Fixed compressed metadata and files xml file reading problem
-	(FileNotFound ERROR when reading)
-
-2017-04-12 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* build:
-	now we can build packages. Build options work very well and
-	build time little than pisi-pardus or pisi-pisilinux releases
-
-	* Error handling:
-	There are type problem in error handling.
-
-	* indexing:
-	Fixed index library. Now we an indexing. And basic type package
-	handling
-
-	* installing:
-	Now there are a problem in install library so we can't install
-	packages from package files. Should fix autoxml.py write module
-	and xmlfilepiks module
-
-	* fetching and progress:
-	I rewrite fetcher without UIHandler. I write an progress handler
-	with use python
-
-
-2017-04-11 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* lzma archive options:
-	There are a problem when defining options in lzma.LZMAFile
-	I can't fixe there. Now defined compress level 9 and defined
-	compress type (.lzma).
-
-2017-04-08 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* fetcher:
-	Urlgrabber not work with python3. So I rewrite fetcher.py
-	Now work very well but it can't get archive or package
-	from ftp servers.
-
-2017-03-20 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* autoxml.py:
-	Fixed autoxml file problems. now work well.
-
-2017-01-03 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* pisi-cli work now:
-	There are a lot of problem in "pisi/cli/__init__.py". I rewrite somewheres and
-	pisi-cli work now. There are problem in build and install commands.
-
-	* FIX: There are String-Bytes bug in Error raising. Fix Here!!!!
-
-2017-01-02 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* lazydb.py:
-	It ported with fuatboluk. lower_map fixed. Now pisi module can importable
-	in scripts. I should make test now.
-
-	* rewrite tests:
-	pisi modul tests rewrite and make tests. Now I can work easyly because
-	there are a bug list now :)
-
-
-2016-12-21 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* repodb.py:
-	It port with ilkermanap. Changes return object in a function list_repos.
-
-2016-12-13 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* pisi and scripts are ported.:
-	Now I start bugspacing. There are a lot of Byte-to-String Porting
-	problem. So there are a lot of works. I return porting it.
-
-2016-12-12 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* Porting Status:
-	I ported iksemel and now I start port pisi and COMAR applications.
-
-
-2016-10-28 Suleyman Poyraz <zaryob.dev@gmail.com>
-	* pisi 2.6:
-	Old versions written by Python2. This will be a problem in future. So
-	I start it porting Python2 to Python3. This is an hard job but It doesn't
-	impossible.
+commit ca0fce8d3f856995f569d9ad6f15773de5783724
+Merge: 777ed07a 3cd989ea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit 3cd989ea694692fcdfbec2eec4b77b4946f81372
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Test Sonuçlarında bulunan hatalar düzeltildi
+
+commit fc4b83a23fd0ee5ad1c42a5fb94ce8943eb83dea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bazı testler eklendi.
+
+    Eski testler arasından çalışan ve yeniden yazılmaya ihtiyaç duyulmayanlar eklendi
+
+commit 777ed07a965ea258118d122727a7f785c0fc9827
+Merge: b6897bda 58fe82d1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merged translations and messages
+
+commit 58fe82d1a7fbe0c39610c55ddc821276b1ac6ff7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated Languages
+
+commit 9bd5ca7a1e12273e65f15a2cced114cbd2e7cad3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Türkçe dile desteği tamamen eklendi. Almanca için uğraşıldı.
+
+    İşte bildiğim kadar aklım aldığı kadar.
+
+commit e85508a4ad839f3c4fab1ddd3acb1bd226417991
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Mesajlar düzenlendi.
+
+    Bazı çıktılar düzenlendi.
+
+commit b6897bda3507a5c5795d18d99c7fd81b9f57d8a7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Yeni Belgelendirmeler eklendi.
+
+commit 57665a7c518e433f5845f00a37d08f5c5008ef22
+Merge: 509e8c20 9a8b637a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'develop' into feature/documentation
+
+commit 9a8b637accedea6d02320c7359667dcf28478cef
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Lisans Güncellendi:
+
+    Eski çatalın lisans olan GPLv2 yerine mevcut çalıştığım inary çatalında GPLv3 kullanıyordum  ancak AGPLv3 ile yayıma devam etme kararı aldım.
+
+    Sonuçta açık kaynak her zaman açık kaynaktır.
+
+commit 509e8c2070b5e6615c8430c1e8521eec968956c5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Documentation Project have been just started.
+
+    Belgeleme projesi başlatıldı. Öncelikle Türkçe bir belgeleme oluşturmalıyım.
+
+commit 41dd702775bba9b2374d051d1547088291979cbd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Daha nazik ve şık çıktılar
+
+    Nazik ve birazcık daha okunabilir çıktılar.
+
+commit 74ce25018565dfa31d0d0fd9fff98457b34d25d0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Paket kurulumu öncesi tam bilgilendirme.
+
+    Şu değerler artık paket işlemleri sırasında listelenecek: indirilecek toplam paket boyutu, indirilecek paketlerden önceden indirilmiş olanı; kurulum/güncelleme sonrası gereken boş disk alanı; silme işleminden sonra diskte açılacak yer.
+
+commit 37b2535a503863c8bdf53029bbe3de63226125ab
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Orphaned paketler için düzenleme
+
+    oprhaned yani kopuk olan paketler arasında her zaman doc pages static ve dbginfo paketlerini de alıyordu ve anında siliyordu bu hata düzeltildi.
+
+commit cf957831a6e37a314224c2d7e27e08e31d9dbaf0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    GPG Signature/GPG İmzalama problemi
+
+    GPG imzası bulunamadı ya da doğrulanamadığı durumda hata veren kod değiştirildi.
+
+commit 2787e6f6d1567de156621bf004b5cde1a46d1fc9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Görünüm iyileştirmesi.(Paket indirmesi boyutlar)
+
+    Paket indirmeden önce toplam indirme boyutu ve önceden indirilmiş paket miktarını göstecek şekilde ctx.ui.notify içindeki event ayarlanı ve ona göre kod düzenlendi.
+
+commit 09066b197263769347e9fddb74d0b6a1895b279b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ctx.ui.notify fonksiyonuna eklemeler ve düzenlemeler ve yeni renkler
+
+    * ui içerisindeki her bir işlem adımı için ekleme yapıldı. İnstalling removing gibi adımları hem ekrana hem log dosyasında hem ekrana hem de log dökümüne yazdırmak, kurulum sırasını ve bazı önemli şeyleri de sadece log dökümüne yazdırmayı denetlemem lazımdı. Notify kullanacak yerler belirlendi. BUna göre kodlar düzenlendi.
+    * italic yazı stili ve üzeri çizgili yazı stilleri eklendi.
+
+commit d4b73a6e7be7ea005a52fe165a150a693256f0fe
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Hata mesajları düzenlemesi
+
+    Hata mesajları düzenlendi. Bazı yeni mesajlar eklendi. [TODO: Paket yöneticisi birazcık daha interaktif olmalı.]
+
+commit 8d87a941391622fe6a4b512b264cbb11ffff230a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bazı import kısımları düzenlendi
+
+    magic yerine file ile de fallback yapılabilir.
+
+commit 102dbba4e743a0c25f5d78563b316c089b8ee4fd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Debug ve Info mesajları düzenlendi
+
+commit f1313abd05626265f87821fe38d0b445c2575056
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    New roadmap for inary-2.0
+
+    Son bir senedir devam eden canavarca geliştirmeleri artık bir düzene sokma vakti geldi.
+
+commit 1bbb185ff82c7efb773114c3fc0dc22c6d1704c4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Gereksiz Patchler Temizlendi
+
+commit bc57532b7f0fee740bb0cff0aebe56fe53c4e3e0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Translations updated.
+
+    Çeviriler yüklendi. Bazı çıktılar da uygun olarak renklendirildi.
+
+commit fc49134904bbd5b875730a5b7d2163c5fedaaa30
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    biraz düzenleme
+
+    Detaylandırmalar yapıldı. Ayrıca geri dönütlerdeki tırnak işareti eksiklikleri giderildi. daha iyi okur daha iyi anlarsınız.
+
+commit d1a5664b550a586c46e6b32b55defa803254b16f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    subprocess modulünün iki kez import edilmesi.
+
+    Zaten import ediliyor kardeşim bir daha girmek ne gerekli.
+
+commit 8e2a08241f3df9fecb1e277664a89cc7ce74cdbe
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Readded automatic update feature to add-repo
+
+    add-repo komutuna repo eklenmesi ardından otomatik update özelliği geri getirildi. Beğenmeyen --no-fetch desin.
+
+commit 6d1d7e61a26344eff3583efc5ad843b503c48562
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    magic module deleted from source code
+
+    It is already comes with python3-filemagic package.
+
+commit 21191fb6660e0fcbb558a609ab4e652e086c995e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    More details.
+
+    Actionsapi içerinde biraz detaylı çıktılandırmaya gidildi.
+
+commit a958c59277096bd22ae048df804eb4fe5eaf16a1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed merge problems
+
+    Depolar arasındaki bu karmaşa ciddi sorunlara neden olabiliyor
+
+commit ae3d29174b3c7c10bffa927ee82166b9f545222e
+Merge: 882a61ab 72df25b4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 882a61ab2f315260c7e5d7c4fcdef77b397395a8
+Merge: 154ca87d 8f16b9d7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'gericekme'
+
+commit 8f16b9d7604e24c180ff414bfa9554a516ffffa1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Renkler geri alındı.
+
+commit 01f418c1b62b93d805a5da6cad7bf8fd1283ab6a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    "master"  Çalışma Koluna bakıldı
+
+    master branch üzerindeki kodlar analiz edildi.
+    - SCOM değiştirilmeyeceği için reactor ve diğer değişimler geri çekildi.
+    - database'lerin (installdb, packagedb, etc.) bir değişkene atanarak o değişkenle fonksiyonların çağırılması totalde ram üzerine yapılan veri işgalini azaltacak gibi görünse bile, script based bir dil olan python'da bu durum sorun oluşturabilir. En mantıklı yöntem her birisini adı ile çağırmak. lazydb superclass'ı içinde zaten databaseler içinde değişim yapılacaksa en baştan init ediyor. Bir daha aynı adımları işletmenin mantığı yok.
+    - Added new colors by Ali Rıza Keskin
+    - fetcher. Fetcher() sınıfı içerisinde indirme işlemi pycurl.PyCurl() ile yapılmakta. bunun atandığı "c" ismindeki değişkenin bu sınıfın nesnesi yapılması mantıksız bir hata gibime geldi.
+    - Fetcher renklendirilmesi için kullanılan kod oldukça karmaşıktı. yeniden yapılandırılmak üzere geri çekildi
+
+commit 6f388ebfab2d89ab8e9192139fa59d8fb4ed6ac1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Rebuild-DB  için api çağırılmayacak
+
+    Fonksiyon api içinden filesdb içine taşındı.
+
+commit 32b22a75f360086f3edf7c6cea1d7af9bf685cd7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    XML parser uyumsuzluk problemi
+
+    sourcedb ve installdb içinde bir bug tespit edildi. bu bug yüzünden bağımlılık kırılmaları yaşanıyordu. Fixlendi.
+
+commit fb0ecbcb6df536f942684acaa4cbbadf66d8e569
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    [PyCharm]: Some Inspections
+
+commit 4ec897e6e12faf2df69ef5495f7050f0d60f39e0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    [PyCharm]: Some Inspections
+
+commit bb8372da41394c888b5e8ca81ef99a1a32bb13de
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    [PyCharm]: Pep8 Coding Style Violation
+
+    This inspection runs the pep8.py tool to check for violations of the PEP 8 coding style guide.
+
+commit a2b277d90fc6e3ced07aeb2899e6e48f132512d9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Kritik script düzenlemeleri
+
+    İmport edilmesi unutulan moduller temizlendi ve gereklilikler kontrol edildi.
+    cmp fonksiyonu yerine basit bir karşılaştırma ifadesi kullanıldı.
+    class parametresi yapılan repolist silindi.
+
+commit 189c1fa061bb27ed69aa98ffdc71603439a53b7c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Some inspections
+
+    *Cleaned:
+    - deleted useless backslash
+    - deleted useless import statements
+    - deleted recursive and default parameter input
+    - deleted useless variables
+    - deleted useless returns
+
+commit 3e6d81a0221ecb3c6ab7aeea7480bba06b0135ea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    tüm dokümantasyon yeniden yazılmak üzere terkedildi
+
+commit d3ff6cb6f8273aad86a40785c87f34c2770eafae
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gereksiz kodlar tahliye edildi
+
+commit 003bde72d81444d786cc1353a95f4132defa0eca
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Kodlar detaylı analiz edildi. Sıkıntılar giderildi detaya yazıldı.
+
+    * fetcher:
+            pycurl bir handikapa sahip. process bar tamamlandıktan sonra aşağı satıra indirmiyor. (C syntax stdin mantığı).
+    * repodb:
+            repodb içerisindeki xml parserlere uyumsuzluk hatası giderildi. her bir parser için farklı bir if else yapısına giriyordu.
+    * pgrapg:
+            add_vertex eski ve kadim bir assert geleneği ile yazılmış. Python3 bu geleneği es geçtiği için program çakılma yaşıyordu.
+    * Eksik moduller:
+            eksik modullerin koda eklenmesi yapıldı. runtime çakılmalar giderildi.
+    * Gereksiz değişkenler ve moduller:
+            bazı ara değişkenler ve eklenip zamanla kaldırılmayan moduller silindi.
+
+commit 07f93ec992eb63349b0cbb4188dfc00b7ec5f55b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Main branch was returned this side.
+
+    tüm geliştirmelerin parça parça koda yedirilmesi için kod yeri çekildi.
+
+commit 154ca87ded9613cb62a79d5a78871078f7972af1
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Base kontrolü tamamen kaldırıldı.
+
+commit 07ecff834d9f99a876c6e5ba68ab85d6878a5b2e
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Güncelleme yaparken System.base kontrolü kaldırıldı.
+
+commit 2eaacc10ac572cf38b155f6398db6bd375ec3bcb
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    uniq hızlandırıldı
+
+commit e3ce35249cd7d71fa095d6772cb939499beb9834
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    reconfigure eklendi. Boş args olursa hiçbişey yapmıyo
+
+commit 08c93e8d13c54853e442d8363c96353fb79a8264
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    pisi paketlerine uyumluluk eklendi
+
+commit 99ed2432be09b89d654af924c254496a1cdd7d28
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    install ve configure-pending ayrıldı.
+
+commit 6f2a8f21cd9eeb811f5489ac2de35d8690a03de5
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Ufak hata giderme
+
+commit bd38fd6646421522d8a79b1b4b99bb8fab5970c4
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    scom yerine reactor koyuldu. Artık dbus gerektirmiyor.
+
+commit ae52db30acf272adbe57ff842afc7a3cb5662837
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    timeout 100 yapıldı
+
+commit ef6c78207369919ec87c373912b7d4be1680b148
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    epoch2string silinmiş onu geri ekledim.
+
+commit 5304328a3b94193f0d611e6c2d0157284d198fb8
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Lanet olası sslden kurtulduk.
+
+commit 8e5de1fafa14533e252b938c518cbb9e078e54d6
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    min_max sort algoritması eklendi
+
+commit 995f603fc95fb7235527e8f4aaa20de14ce03378
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Topological sort yerine Bubble sort ve Merge sort koyuldu. 1000 elemandan küçükse bubble büyükse merge kullanılıyor.
+
+commit 85a19bf20e20bd85faa138d64f3ba96a7ff2fce6
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    İndirme çubuğu terminal ekranına uyum sağlayacak hale getirildi.
+
+commit 609e2fe6f0611163854167c43469745fb95bc418
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Göz kanatma sorunu giderildi.
+
+commit b8c844de93a0054c27bdd2e8b370b227c023a7ba
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Göz kanatma sorunu giderildi.
+
+commit 53d0fce0e3280250b62721e8d9a732bd90e8c590
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Burdan Süloya selam olsun: Progressbar renklendirmesi ekledim.
+
+commit b6c0bc7f8b3b9da670a0c61a8bd033866f6756c9
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Bağımlılık çözme işlemi öncesi yavaşlama giderildi.
+
+commit 774a9fdbd6e3e71011145f36648832c37c25aa18
+Merge: 0930f2e2 8437b98b
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Merge branch 'master' of https://gitlab.com/sulinos/sulinproject/inary
+
+commit 0930f2e2922468ecbfad89c8073dfbdf9a867805
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    atomicoperations içindeki repodb classı değişkene atanmak yerine import edilerek hızlı çalışması sağlandı.
+
+commit 8437b98bff6e44c08749eb161928f3d05b6856af
+Merge: e3f6e351 f5f9a393
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' into developing
+
+commit f5f9a393eeb2e341e6355de812e8297fd444cd8c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bu iki boktan hatayı düzelten ellerim sağ olsun.
+
+commit ca3a1b576cf02e5f6fbd517697abd14f9c0c91f3
+Merge: 4745c104 804a44b8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://gitlab.com/sulinos/sulinproject/inary
+
+commit 4745c104e88334e0d60b2854b8949b8684766a47
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    (no branch): Auto stash before rebase of "master"
+
+    sıçtık sıvıyoruz
+
+commit 804a44b8dfd9330376c67dae6b42ebde6ee270c9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    (no branch): Auto stash before rebase of "master"
+
+commit d6465b57a3006e65b77e80c1576288c6b99ee2fb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Sonradan push etmenin zararları:Eksikler geri push edildi
+
+commit 73b92ffc80ec942564a17d0998cbb50dabb1839d
+Merge: ec8fb422 e3f6e351
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://gitlab.com/sulinos/sulinproject/inary
+
+commit e3f6e3518e1eed96e81be0edd636349bf5bf70eb
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Bağımlılık çözme algoritması 100 kat hızlandırıldı.
+
+commit 4677976eaaf6388db2a4a7e344e47e3c18babe4e
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Paket verisi çekme algoritmasına el atıldı
+
+commit c8d6772c590e23b8fa862f0cc641a0c8fdb22b8e
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    changed repository add method
+
+commit ddb2454be6274e38a40e0b1a4cce3940580670d2
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Makefile eklendi
+
+commit ec8fb42262db3ed73c0ce7626c3b8e3e916835b4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    An import problem fixed
+
+commit 28b2a0cb2afdcf1dbf896775d199912a43b82114
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Last twilight fixes
+
+commit 1c0091b3295a9a92f81fe5cf1f4ce5f83c65814f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Look and Feel
+
+commit bbc48e306a2d4e83729f76178df3c5348e4d7a05
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Kodlarda görünüşsel hatalar düzeltildi
+
+    gereksiz "import" veya boşluklar varsa temizlendi.
+
+commit 7526292c780a0ce7382fe568ae46227e1606d127
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Kısa süreliğine yamandı. İlerde fixlenecekç
+
+commit b68db1c69031cd76e6325068e7928a0ee13c428f
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Fetcher bugu giderildi.
+
+commit 77259592b8e9debfa4f408f7b46d9e80fce8c413
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    Fetcher bugu giderildi.
+
+commit 4178e3aa22f6af55d791789c6887faa6be0c8db0
+Author: Your Name <you@example.com>
+Commit: Your Name <you@example.com>
+
+    ehuehue
+
+commit 19c56d9a893c9297e8e052ce1b96da9d37308f1b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Update fetcher.py
+
+commit 85fb1fa94aa7db8fe5fcbec221c9aaa9bc8b8135
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Dont use vim. Another stupit bug
+
+commit 6cd51daaedf6001640f79c895ca1dd70b938c89a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ufak hatalar.
+
+commit 2673776ea67287c4eadcce86b48bdbff6f349e30
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    meson ve kernel build fonksiyon hataları giderildi
+
+commit c2f17cf0099bd78a9caeada5431c6f10bbc9c573
+Author: Suleyman Poyraz <suleymanpoyraz58@gmail.com>
+Commit: Suleyman Poyraz <suleymanpoyraz58@gmail.com>
+
+    Added mesontools for build something else with meson tool
+
+commit 537c07ac8e2671347ec017070b44d012aa8b0289
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    SSL verify control added.
+
+commit 0a6620f137228f445534439fdfc066fa2ac96309
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Çeşitli hatalar fixlendi.
+
+commit 506e8e1129e5a0a8f9362f536753265abcc429ff
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Update fetcher.py
+
+commit e3630bbc45bd91984af7f02f63d018b11fcd4dc4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fetcher fixed
+
+commit c7418a62f2bcd6796d31a51fb94e1cac09ebda15
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    translations files updated
+
+commit cf19d21c51f4d31b379332548ba3ec7b8370ad3b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Update setup.py, inary/actionsapi/variables.py, config/inary.conf-x86_64, inary/configfile.py files
+
+commit 53b4068bec05edb3791eb6e34f08b17c17117698
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bir iki klavye darbesi de buraya.
+
+commit 0dbbbf7010c9bf1423251106bc607ce5aa773cc5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bir iki klavye darbesi ile şurada bir düzeltme çiziyoruz.
+
+commit 36daca3ba6955adf1969edcaceef9a163be4d381
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    static, dbginfo, doc ve pages paketlerinin ayarlaması yapıldı.
+
+commit e0614d3991265d92189675bc303c261938042955
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeni bazı parametreler. bunlar paket yönetimini süsleyecek.
+
+commit bd879bbf67db1dfd1f1b17f13fa15e43f3db986e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Çeviriler güncellendi. tr harici yeniden çevrilmeli.
+
+commit d7a7ab7dcce841137f252ee0a50ea779ec46e8cf
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    util'in parçalı hali başıma çok iş açınca birleştirmek zorunda kaldım.
+
+commit 8769eeb77f176610b12dc7bbbb73254d6b0d21e3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    pgraph-runtime-error-fix.patch applied.
+
+commit 8205dca51a3f2a0e2c388a932c4afefd42187696
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed sha1_data not found error.
+
+commit fa9456e533d3ef2c01e32d1b5f35dd3302730357
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    delete-cache command: deleted unused variables and function.
+
+commit 9ae6578816cea7d2aaaef508e7b20278bf9ed136
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    actionsapi-runtime-fixes.patch
+
+commit 951eec3ffec9e61926968e11a941cdbb98c71d0d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fetcher-Pycurl patch
+
+commit caaea7a27c196c01af0528fb82bd2d518ba395fb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Önemli bazı yamalar
+
+commit 3e3f83fbc8acefef638099db8798694292d4330a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gid ve uid tanımlama hataları düzeltildi.
+
+commit 2aaec28759777155ca14acec960c9f943ce8ab89
+Merge: daa91d73 da595826
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'developing'
+
+commit da59582665c8919c399a40201c72d6349c899123
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Geçici olarak kullanılan değişimler deaktif edildi.
+
+commit 0291c53a20b05de7d52a034aa95f67098971f455
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Some important fixes get from branch b1ce7
+
+    I tried to patch my package manager with eopkg pkgconfig patch but it causes a platform complexity, so I returned branch to 6b83af and i take some fixes from old developing fork.
+
+commit af1472aa0f77a6676374f725d504f0306e073a4d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    New Fixes.
+
+            * Fixed archiving problem. Added file compression level.
+            * Fixed util module errors.
+
+commit 26c8c68a4573a88d1eacc79074c16e2f83c4e04d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    useless command deleted
+
+    clean command was a useless command. And it was deleted
+
+commit fd94204794698d24813a861b7feda73beba5f191
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    operations.py anlamsızlığı giderildi
+
+    inary.operations.operations çok gereksizdi silindi.
+
+commit 18d8529cedc8bf24d88b0b0bb8251abd92b22be9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Big general bug fix.
+
+    Bu açıklamayı tekrar hatırlamak için Türkçe yazacağım.
+    * inary/sourcearchive.py adındaki module inary/archive.py içine taşındı.
+    * çirkin duran inary/operations/__init__.py düzenlendi.
+    * çıktı hataları ve gereksiz kullanımlar düzenlenerek PEP-8 kurallarına uyumlu bir hale getirildi
+
+commit e463c1ee2fb8ac70aa8bb79aed93c89d65a48428
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Runtime module broken
+
+    Preprocess module added into inary/libraries until when I rewrite xmlfile
+
+commit 72df25b4f6a6b5a6d0a0339e5eddeb1057be00c7
+Author: Suleyman Poyraz <zaryob.dev@agu.edu.tr>
+Commit: Suleyman Poyraz <zaryob.dev@agu.edu.tr>
+
+    CLION inspections
+
+    * PEP-8 style edits:
+            * spaces and
+    * Unreachable return colums are deleted.
+    * Deprecated modules are deleted:
+            - inary/__init__.py: imp -> importlib
+            - inary/fetcher.py: encodestring -> encodebytes
+    * Mutable default arguments are rewrited.
+    * None equalities are inspected.
+    * inary/configfile.py: changed backspace tabs to space.
+    * Some functions are changed static methodes.
+
+commit daa91d7385c1e15446f397513164479b9683f223
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    CLION inspections
+
+    * PEP-8 style edits:
+            * spaces and
+    * Unreachable return colums are deleted.
+    * Deprecated modules are deleted:
+            - inary/__init__.py: imp -> importlib
+            - inary/fetcher.py: encodestring -> encodebytes
+    * Mutable default arguments are rewrited.
+    * None equalities are inspected.
+    * inary/configfile.py: changed backspace tabs to space.
+    * Some functions are changed static methodes.
+
+commit 5cbe39e63d5e99a3b2ecea2cf383a04884643f4e
+Merge: 5feadf1d aefe5dc2
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #8 from Zaryob/developing
+
+    Developing brach merged to master.
+
+commit 2314ede66e2af0e75c0fd38b7c7db226e7797c28
+Merge: 5feadf1d aefe5dc2
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #8 from Zaryob/developing
+
+    Developing brach merged to master.
+
+commit aefe5dc22d757db4603a2c588c053dce0f36d5ad
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    A typical error fixed
+
+    I amn't worried about a decoding error. It is a standart for my life.
+
+commit 744184851b0ec7beaea328acc1ddbf3a1639a335
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Colorization
+
+    İnstalled packages are colorized. It add new colors to our life :smile:
+
+commit e228b62a1a22574a7b30813921f08861504fb09f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed symlink copying error
+
+    when symlinks are copying, chown operation brake. so i tried to fix it but i gonna control this part of  function.
+
+commit 3622f98eefac5bd6f0d1d42f98fe5e9669284cb1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated Translations
+
+    I have just reviewed all of translations. It is a pre-updating. I gonna write translations again
+
+commit 9045a364cce3df6cca5797b0adb8a0a68dbc4b58
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed importing error
+
+    When inary is imported it gives error since metada module is imported in packagedb module. So we take error from python shell. I have fixed it.
+
+commit 4fc16251d7304bfe0fb15b78638934508b484b49
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Deleted unuseful functions
+
+    Modules deleted in analyzer method dir because of unuseful.
+
+commit 6e3d50729bad38bf1a135be3bb1c376b5400777d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Refreshed actions functions
+
+    Unuseful actionsapi functions and modules such as qt4 modules.
+
+commit a40c6cccec4a2d21afe78774ea121712ac95dbd7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Deleted tests
+
+    Testler başıma bela oldu
+
+commit 0ad272e3e29ce140e99c5ae9ad860996c75c5bf4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Before stable commit
+
+    I have fixed a lot of error and runtime brokes. Whether it can run well I will push stable tag
+
+commit 4c8378502cbd4bc77686f520a159b9f1ea7966f1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed errors.
+
+commit 41742abe09eb887b8fea5bf986c0766d225eb9f9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    inary shell rewriting
+
+commit fbbf37680937d7f724066f179993212afe387b82
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bugs fixed.
+
+commit e560691e9c7c63749c07a935f3991e671a2fd250
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Atomicoperations dosyası parçalandı
+
+commit 528261f79d8a02d6b970330f8cca77639d38392b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    son durumlar
+
+commit 42828ee8b812d2555029775ff4a7a6c9431b764e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Paket tipi hatası düzeltildi.
+
+commit 18f50ea549a448931c67255d64540d12338c3529
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated translations
+
+commit 791d648e625b700aac72f060eac06a50ac509881
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Gecenin son güzelliği
+
+commit 5b364139958ad53004f1d41a0567b4591f64597d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    util parçalanması sonrası değişimler yapıldı
+
+commit 561c26292df0eae44f9df728dbc29f842b3eed97
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Komutlara küçük dokunuşlar
+
+commit 35be50a7bf195e641c004032a673a513e03340d8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    One test passed (testFetcher)
+
+commit 89ffd0c87ba385230cfe5db8168bf2f5df1567f2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    util.py parçalandı
+
+commit 93fd11ccea894f05ed34063219ebe07057cc2c9c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Verbose ile çıktı verilirken artık o satırın detaylı çıktı olduğu belli edilecek.
+    inary.db içindeki database fonksiyonları çalışırken beklemek bir işkenceydi.
+    Hele minidom yüklü ise sistemde. Bu yüzden verbosed mesajlar eklendi.
+    ""
+
+commit f94f59b28ff2758367c11c3f367690b7cd393f0a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    History renklendirildi.
+
+commit 42b8c22340e2c5ef9e36fe2e7825e36049fffe5f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ctx.ui.info fonksiyonuna özellik eklendi:
+    inary.util.colorize ile çok işimiz oluyordu o da kodda okunmazlığa ve kodun uzamasına
+    sebeb oluyordu. Tertemiz olsun diye info fonksiyonuna renk için bir parametre eklendi
+
+commit 948b7b6cbb6db6868f41a146a768a573ce90f747
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Atomicoperations rahatlatılmalı:
+    Atomicoperations içerisine taşınan fonksiyonlar yeniden ele alınıp gerekli
+    olanları cli içerisindeki kullanıldığı komuta taşınacak.
+
+commit 5808cc96d95b4d23b3339870cd3276fee301046b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufak tefek hackler
+
+commit 823f8947864169924ae30416215507ce55c96175
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufak yamalar
+
+commit 31d7ee00f7297b100dea0b29c8ecf6c87b06a746
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Test sonuçlarına uygun düzenlemeler
+
+commit 1be9b96df997f03289a240adf673cd33d57fde56
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Email de??i??imi
+
+commit 963b9053898f7d26f90f5e31a4440ace01751ecf
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Filemode controlling enabled
+
+commit 55d437bdf1e9f5b5ac7549747779016365333569
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son de-işiklikler. Detaylar ChangeLog dosyas-±nda
+
+commit 7de851748e3d0eda89caa2ef274f595d22605812
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed history error, add test in setup file
+
+commit 24ea419d4890a6d5f04cabf9ea0140fcb6dbf885
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Test dosyaları düzenlendi, runTests.py portage testlerinden örnek alınarak düzenlendi.
+
+commit 30ac20efc8040765665fc3e712bf21e1ccaaa127
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Nedeni bilinmeyen (en az-±ndan anlamak  için yeterli bilgim yoktu) historydb hatas-± fixe edildi
+
+commit 1929b7cfcbf8d3bac5e260a829a87b248bcd0387
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Testler biraz elden gecirildi. Su an daha saglam bir halde. Birkac ufak isten sonra testlerimiz cok daha anlasilir olacak
+
+commit 5a984fd4706ead9bf9462499bfba894b98695290
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    iTestler yeniden yazilirken fark edilen hatalar fixe edildi
+
+commit 95de46e5d5bcbae2818adabdd925e3574e3a4a93
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added helloworld test
+
+commit bf924c60139b007569401e7b283be2c7c5c319e7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Last Changes before inary-1.0_rc3
+
+commit caf29623d0696c260c4e64537ded6974f4008f7f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Remastered License and Copyright lines.
+
+commit 05da4d187000c17f882694f9ac0ba8be5eea67ec
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Basic errors fixed
+
+commit ad562f25fa5becf8f204f47e968f25e6210c0581
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Rewrited ugly looking db library with xmlext
+
+commit c9fb188327d8f8c9e267479fc70b3be9ce7a61c8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Yatmadan önce son bug fixasyonu ;)
+
+commit f957d40ca2cddd54e7af951d9dc8448d65a9fa5d
+Merge: 36ecf7ef 227e0a26
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'developing' of 127.0.0.1:Suleyman Poyraz/inary into developing
+
+    * 'developing' of 127.0.0.1:Suleyman Poyraz/inary:
+      General changes, please look ChangeLog for details
+      Added new feature: Now control free space before installing package
+      Bugs are fixed
+      Updated Translations
+
+commit 227e0a26e929c0a6292c2a6f46c4266ec2b005f0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    General changes, please look ChangeLog for details
+
+commit 7303df784a2a0c994bdb3413e79b9c184d5cd1f9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added new feature: Now control free space before installing package
+
+commit 5915e696b6d375507a43928899a563baec5376f6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bugs are fixed
+
+commit ea5fdcc5249a96f0fdeaf0c88b861328c65d8adf
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated Translations
+
+commit 36ecf7ef34b45e3d27150a1c6617184b3314fb73
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated translations
+
+commit 0fec8ac4faccc9bb3a97d08a92de21e7c1e191c4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed compressed index file reading error
+
+commit aa9d613cb4d32d6c84673407690602e71dd87055
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Cleaned unuseful str function using
+
+commit 956276cd06f47ba90da53cbd21bafcae0dafd07a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed filesdb based error: When removing package now not remove conflict files
+
+commit 69cc8cf76963493703f244da752a93f896253c8d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Biraz temiz olsun
+
+commit 32105254f2b83ba02f818e65383ed1f09e70f274
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated Translations
+
+commit d34a590a2be82955ea6d142bbc0e9d9e71e4c5c0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son değişimler
+
+commit 7c5f9342bbf44890768c9c3dfcd8b69226bd0981
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated translation messages
+
+commit 4a2f713b8caa0d46b63bab32c447458d1152295b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Last changes before stable
+
+commit 9ed6a21c58d90e6419cfc177efd3c7cee58a95ca
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Changes
+
+commit 0c3fe2a7bb99f9ddca4718d3608c7058611cc61b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Search-File komutu fixe edildi. Biraz renk verirsek inary'nin tamamına bütün işimiz bitmiş olacak
+
+commit e6179182079a7f08d53d6b4b9ffd2529f5dfa20d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Inary system running with two different xml parser
+
+commit 9556b46ac2daf7f0905341d4383aecdc1f9f3adb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed errors and problems
+
+commit 668d22512251081e83282b10959e801a9a49a9a7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Hazırlayın kararlı tagını. Son birkaç hata kaldı.
+
+commit 1d5725d21c7cfc97725bd7e172d85176b3f6734a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed upgrade command errors
+
+commit c1642c650b1238e6db88b00758beb161e3a81bdd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Changes
+
+commit 462d5ae14501ef3a754ac94102865b9094343fd4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    RepoDB hariç hepsi çalışıyor.
+
+commit 9f03266f2aa2e1d932da4916eef998e29e26aa8b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    çalışması için elimden geleni yaptım
+
+commit acd8840750a9c12eb7794d8fc2a869615ff2e4b1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated License: Inary now licensed with GPLv3
+
+commit 63aeb6765cf471c221123560e50df835e4f6dd2d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Revert "Lisans ve author olayları"
+
+    This reverts commit a99e4a48c9c5c82e32b63ee27e571b54c2bd5f01.
+
+commit 2bf439e45e62ef138d28c318be0043d5d0e9e478
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Lisans ve author olayları
+
+    Bu yazılımın ilk sahibi olan Tubitak/UEKAE ibaresi dosyalara "uygun
+    şekilde" eklendi. Mevcut lisansı gplv3 olarak değiştirildi
+
+commit 8166c9c7f3b8f437655e6ceb0ea721177149d69a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Kararlılıkları sağlandı, Gereksiz kısımlar temizlendi
+
+commit cf596270b45aa5e6fa2bb91b140a174e9899977b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Her ihtimale karşı
+
+commit ac7710a2a44bc255101622e96cfbc64efb624cc3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add new toolin uludag archive
+
+    Uludag arşivinden yeni bir tool daha sizlerle:
+    pspec2po toolu repository içindeki tüm pspecleri ve translations.xml
+    dosyalarını analiz eder ve çeviri  için po dosyası halinde tüm summary
+    ve description bilgilerini alır. Daha sonra çeviri bitince po
+    dosyalarından translations'a aktarır.
+
+commit d56801c84756c9aa1fb4e2ecd13a6b81c5c10a47
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Çok canavarca bir geliştirme stilim var.
+
+    Çok acaip şekilde license taglarını hep silmişim. Falan filan... Şu ana
+    kadar offline olarak çalıştım ancak yakında kodlarımı gitlaba global
+    olarak çekeceğim. ve bundan önce de özgür yazılım için yapmam gerek
+    çeşitli işler var.
+
+commit a4fea6f61e5051b24cbc9407de382d61940fa043
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed database libraries are work weel. But repodb not work now. Should looking up.
+
+commit 10558bc0e9455d96d67fc90f9507fa8ddae4de30
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufak Fixasyonlar ve hata var şu an minidomdan ötürü. Görmek istersen rdb yap --debug ile görülüyor.
+
+commit ce745f7008decf982625c5427e645ce9aaf83778
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son bir şans daha versen sevgilim...
+
+    Bu sefer olacak öyle hissediyorum
+
+commit 46e7409f76a5166646b5fbe2de958026d15c8900
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Will rewrite tests. Now maked little changes.
+
+commit c8dc779ac9f406cac8d4b12a173bb6e59d29cf9e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Minimum dependency maximum stabilization
+
+commit 0f43451c70a22a1b7b7a6f2279829276a895989a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Maximum useful, minimum dependency
+
+commit 0942c2cac2374abfecfd7f83ba02215870831c8b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Colorizing help outputs and hanged emergeup command's summary
+
+commit 4101f5d06637691e3e0280d624cfbff9fac33086
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed Little Errors
+
+commit 35de16fabd63ae0899556a1fabfdd7b6d34a5f6e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    İnary apisi rahatlatıldı
+
+    Inary apisi içerisinde bulunmaması gereken fonksiyonlar olmaları gereken yerlere taşındı
+
+commit b6ab36165bf64256aab79995c047b32fabe728c1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Yeniden denenecek
+
+commit 75afe3e5ea98254948219ef8b46098cfcdd4e300
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bu sefer patch başarısız oldu. Tekrar denenecek.
+
+commit b649d9f82d7fbb412dfdd285925b4d7cfaee172f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed minidom errors
+
+commit 88b08dab13a7a0536ebbcf76cc34eea4e6fc03e8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Deleted distupdate in inarycli file and fixed encode erros
+
+commit d17193991ee14c7361d63d73ab7e36ad9367ebed
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Patched "delete-runtime-dependency-ciksemel"
+
+    Ciksemel bağımlılığından inary'i kurtarmak için basit tipte bir
+    patchleme yapıldı. Çalışırlık durumu testlerin ardından belirnelenecek.
+    Şimdilik tüm sorun çıkartabilecek alanlar tek tek işaretlendi. sxml
+    içindeki modullerin sorun çıkartması beklenmiyor.
+
+commit 1740ae6534f0ce18bc4c943ea904e44d833670c8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Updated year tags
+
+commit c569a546af762f34e048c91b84d2595c1a4c4d42
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Güncel yol haritası
+
+    Şu xml dosyaları için minidom kullanıp tüm gereksiz bağımlılıkları da
+    atınca içim rahat edecek
+    * Bir fikir: Scom kullanmak yerine bu betikleri düzenli bir şekilde
+    tutan bir python kodu yazarak işleri daha da kolaylaştırsak???
+
+commit 5e380e89a404eba0c3794749430b80abb6ad8fa7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ota B*ka Fıxme atmayın Allahınızı severseniz LUTFEN
+
+    FIXME staırlarını biraz temiz tutalım ki nerde hata var görelim değil mi
+
+commit f2ddc3500503c7a37259ca100b5118592527636d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Nasıl Nasıl Olur
+
+commit 9a729d6376caef996f395bbd4c8dcbc350154fda
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Temizlik
+
+commit 7d64d792861d3f790c0f9969f47cc6ea40dd8e7f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    göz bozukluğuna yol açan inary import hatasını düzenlemeye çalışıyorum.
+
+    Şimdi inary import edildikten sonra dir ile yüklü modullere bakınca
+    inary'nin birebir aynısı da import edilmiş oluyor ki bu benim gibi
+    simetri hastası bir  insan için göz bozukluğuna yol açan bir durum. Bunu
+    fixe etmek için import edilen modullerdeki import şeylerini düzenli bir
+    hale getireeğim bakalım
+
+commit 7ba0d8a5d591f0e347678d74f0525d128241c214
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    deleted unuseful command distupdate
+
+commit 3fb4b6ce395fa7ce404d794714af4045a0a0824c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Temiz kalsın buralar
+
+commit b5344ce4b249903568333b08bea6028d31aa9113
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bug fixed
+
+commit 9d916e7632336eca0128fddef8e61febfdb6a1c3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    string fonksiyonu yerine strutils kullanilacak
+
+commit ba94a323e37a70c1c5c1d8cd920d979812538171
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    stabilization and colorizing ;)
+
+commit e315270d2d826d340464a212244aac67ea017494
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Mmm. Inary ismini bir daha degistiren olursa!!!
+
+commit 2850776b86e0156da8abe2363c675182207a0398
+Merge: 8d0cd1dc 6c4b2772
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'developing' of 192.168.1.3:Suleyman Poyraz/inary into developing
+
+    * 'developing' of 192.168.1.3:Suleyman Poyraz/inary:
+      Written basic type distupdate module and bug fixes
+
+commit 8d0cd1dc10fd43e0ba98031876fe2eb526aa93ea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Düzenlemeler falan filan
+
+commit 6c4b27726ac4b39d065e29d9f8b2de22449be9c9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Written basic type distupdate module and bug fixes
+
+commit e71388e80d354d3aac94cf65ef99ad83dd9d8ac4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Şimdi bu niye burya geldi diye soracaksınız. olay şu ki, geçmiş uludag kayıtlarında eski releaselerde pisi içinden licenses klasorunun silindiğini gördüm. Bu klasöre bakınca dedim ki neden biz bu lisansları hedefimiz olan türkçeleşme için kullanmayalım. O yuzden ekledim.
+
+commit f867ad9295ba764757e97686ec663b8d76f91f80
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    cidden kıracam. şakam yok
+
+commit 3033d0ee34b4f82228495b2ca76806ad9b38de53
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Last Changes: firmware analyzer added, strutils added, fixed name problem(bir daha paket yöneticisinin isimini degistirenin elini kıracam), cosmetical fixes
+
+commit 8e7cee37b88e84393d68b703d50b43c4ad57b6b2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Deleted system_mods
+
+commit c8958afe3509bdfeee1bc5e15a5761745fd96063
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    düzgün bir dokümentasyon için
+
+commit dc21f5576dcd08e05463a96944f8d0420e0ae23f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son degisimler.
+
+commit 26799dff71f153432b8ccf94ec27b1074e7c8923
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Sistemde sorun cıktı yedek alıyoruz
+
+commit 79dfef892a9d3c0a8f481863fe0d6e5f43fa3f22
+Merge: ddf86f49 112e2624
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of 192.168.1.3:Suleyman Poyraz/inary
+
+    * 'master' of 192.168.1.3:Suleyman Poyraz/inary:
+      Literal kelimesi daha kulagima hos geliyordu ama yanlis kullanmisim. :D
+
+commit ddf86f49710bfa58da0e1a692bfeee988618af7c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Catbox hatasina baktim bir de şu literal kelimesine hasta oldum. Yanlis kullanilmiş. Yakinda o modullerin tamami silinecek
+
+commit 112e2624116e874da374db7726787078af71250e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Literal kelimesi daha kulagima hos geliyordu ama yanlis kullanmisim. :D
+
+commit 3fde3b5bfa14df8ceb2ee184dfc4d7ad00512c1a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    İsmail abiiiiiiiii
+
+commit 4576c62be434a4351a335d93e1ce88f265d59d9a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Gereksizler silindi, bazilari ismail abiye atildi
+
+commit ea65b849bbfdd6f0c5706148d780dc00144ccfa0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son duzenlemeler detayli olarak changelogda anlatimistir
+
+commit 4ef7ce7059561d7c8df25650afc1f0c13210853e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Format yuzunden meydana gelen ve gelebilecek butun buglar fixe edildi
+
+commit 4805bfff50c185a08b129ddc60e775e31055d620
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Filesdb son kez degistirildi. marcin hayran oldum leveldb based filesdb modulune
+
+commit 938851a770e04c670c2342ade3bf7f2252d25b57
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Package yerine Packages kullanılmış. Bir harf nelere kâdir ya Rabbim?
+
+commit 31ab0b21384fa0600f4e7fc6a998194d3c5a0fad
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Patched: FilesDB patch maked
+
+commit d102c6574d748ede775da707efd2e6ac7f9b0982
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bu translations olayı yordu. Bu sefer python alt çıktılarï da eklendi
+
+commit 2513150c31d469fd7c46f2fe9fd7abc672fc03fc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Biraz düzenledim ama iki sorun var. Birinci xmlext duzenlenmeli ki komut ciktilari duzgun ola. ikincisi ise itembyrepo sikintisi. Daha bu kadar çok dependencyden nasil kurtulacam onu soylemiyorum
+
+commit 1852179ac412d5305f2d0956f2b49ac1c0d77338
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Mmmh. Translations tested. German English Franche Russian and Turkish work well. Others not finished translations
+
+commit 18b199ad79b0ac59ca132c126c1b7b6326674501
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Python3 ile ilgili çok dağinik bir kullanım var. bir standartımız olmalı
+
+commit 61bb24e4ed360411434ae2def912d282c7cc9237
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bug Fixes
+
+commit 938d884de24c6c5243b00b62d5be801942ef8b5a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    İtem by repo catladi
+
+commit 1703bef4e1d5fa24e042b130b2b08ede83a2713c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Translations fixed and rewrite for format function
+
+commit 75f9f8f9bec90836daf9768e6681d70b996bc4a9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bug finded in tests. Fixed string literals and format function based problems
+
+commit d302958b5a2adfc16936c7550663362f6a5dc3f9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Rewrite tests. It run not well now...
+
+commit 25533215d373c4ef26613e65b04d13f0ff343bfe
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Testler için son hazırlıklar
+
+commit 6bb80d32a8d92f050f7ce12bcf27f5960d9b5842
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added repos before rewriting tests
+
+commit ffe9ccd6856abd987e77f82230ad2c404178afea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add new translations
+
+commit 7f855e8f3444d32a33afe21aa9bdd9d674b742fc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Testler elden geçirilmeli. Geçirilmeli ki yeni taga çıktıktan sonra tag açarken testleri verene kadar ellemeyelim
+
+commit bcef38ee989b1db92ce9d50ef304b29fbfc28f59
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Artistical Patch!!! Patched more-python3.patch
+
+commit 5691cbcd1444c5f2e936a151885026d7ed85388e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    more python3
+
+commit e4d191e585579dc3dd4c131e859faf8cd48cb8f5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    write a urgent package analyzer(but not finished should fix errors) and firmwares system literal
+
+commit 499f8463bcd739e85d62b64bfa05829f0fa8be35
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    A little fix
+
+commit 82c094556599d270d1f4406d322b6b3cb877ce73
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    When packaging we need a dependency controller for brocken runtime dependencies.
+    So Iwrite this library for controlling dependencies
+
+commit 38b918ac02dbcd4600c9af55fa4b3a89574fa481
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added a script (for checking packages and sources) and added vim module for packagers
+
+commit b5730a5874f131a4fd0f2fb45061562121cbb270
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    "#!/usr/bin/python" -> "#!/usr/bin/env python3"
+
+commit fba5503f17b68b6d2496ce53a0b8f103da184690
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Import etmeyi çözdüm. Modules kısmına yazdım. Kullanmam gerekirse bakarım. Ayrıca Modullerin bazılarını silip bazılarını da düzelteceğim. Ve Modulese kullanımlarını ekleyeceğim
+
+commit b865f4c765e1620b7ddfdd98b406c03c5c451cab
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added Uninstall function in setup.py, but not work. And in inary.system_literals package empty looking in python3! Why, why, why??
+
+commit 2ea0e7244ab41edda7745dc89ac3f488c01d3f3f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    critical bug!! I forget we dont use "-" in library name!!
+
+commit 8c2bf0aaa82ce82a3b2f8079863639bcf1048a2f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    I was changes my github name :D I forget it...
+
+commit 69eb52fe8a56d9c0df43dd4988d53e13b6b5b3e5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add system literals for cross-platform package managing
+
+commit 75b4291d8b73dcda372a811c3ac483ff4322b7ce
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bugs are fixed
+
+commit b6cb12e3c833d4d33db32b576251fa8e400aa5cc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Commitler taşïndı:
+
+    Kendi gelistirme repomdki commitlerimi kaybetmeden Pardus 2011 main developing forkundaki repoya
+    commitlerin tamamini aktarmaya calistim. Commit tasimadaki basarim tartisilabilir nitelikte bile olsa
+    şu anki pisinin ya da yeni adı ile inary paket sisteminin hızı ve esnekliği tartışılamaz nitelikte
+
+commit f28272fca01b40837c66222fcda078a7dc3c1422
+Merge: dbf793e4 bb73384d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of ../inary
+
+    * 'master' of ../inary: (246 commits)
+      Dosya izinleri duzenlendi
+      dosya dizinleri ile oynama zamani geldii.
+      Duzenlenmeler yapildi
+      Fixed Errors
+      Scom dosyaları duzenlendi
+      Hele dursun biraz su devel
+      Added devel scripts
+      Uzun süredir ugrasmamiştim yine de devam edelim
+      bi bunlar kaldi
+      bitsin bu dunya
+      batsin bu dunya
+      Ufff cidden iş cıktı başıma
+      po dosyalari aylardır hiç mi düzenlenmez abi ya. sinirim bozuldu
+      başıma iş cıkardılar
+      Ekip ismi beğenmedi değistiriyoruz
+      bunun ne isi var burda?
+      Rewrite for making understandable
+      Should rewrite fetcher
+      calismasa da eklendi
+      Deneyip yamulacaz. downgrade uzerinde calisiyorum
+      ...
+
+commit bb73384d41d96056a45842c5eb460155db1da70c
+Merge: 754610e2 fe25dc56
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of 192.168.1.3:Suleyman Poyraz/inary
+
+    * 'master' of 192.168.1.3:Suleyman Poyraz/inary:
+      Dosya izinleri duzenlendi
+
+commit fe25dc56e2569b5ca7deb81918eeb0a0637f9480
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Dosya izinleri duzenlendi
+
+commit 754610e2b52755b5b8a76fe7eacfd3f3d54cfeb4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    dosya dizinleri ile oynama zamani geldii.
+
+commit acfff16e612f568af4b78ad561a2ec47f3e4e3ca
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Duzenlenmeler yapildi
+
+commit 6272352fd1af377c218436717d023d2138eb8d94
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed Errors
+
+commit 2e0152b103a1c0c83be62eddafcc5c9d3e2f9d7d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Scom dosyaları duzenlendi
+
+commit 4f38186612ac504dd24ec2e78f221ba6c0fbf5b0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Süleyman POYRAZ <zayrob@localhost.localdomain>
+
+    Hele dursun biraz su devel
+
+commit f496a855421e532cdab9c726fd4635c1c90dd72d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added devel scripts
+
+commit 37caf6457188acfa4cdf4efda065ef8d1d390a67
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Uzun süredir ugrasmamiştim yine de devam edelim
+
+commit dbf793e4b154db0bf5e42bbb35d9926df28c9857
+Author: Suleyman Poyraz <22801690+Zaryob@users.noreply.github.com>
+Commit: GitHub <noreply@github.com>
+
+    Update README
+
+commit 31531d015599f72b53a172dad851d2e47a390a06
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bi bunlar kaldi
+
+commit 458dfe79affd9e624e88ee743d2740f2d394ba09
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bitsin bu dunya
+
+commit 7699bbae7e06033484428d70b99a5474adefaabb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    batsin bu dunya
+
+commit 070ccb95ee227aa69206b1f63c85601f057e80ff
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ufff cidden iş cıktı başıma
+
+commit 7306d5981ed4270dd426e7073eed7bc7ae3f2e27
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    po dosyalari aylardır hiç mi düzenlenmez abi ya. sinirim bozuldu
+
+commit de052dfdc4e748dd2a9fa1ec705f43886de34cd1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    başıma iş cıkardılar
+
+commit d311b7c0f043574da556bdc828d139e03f9943f5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Ekip ismi beğenmedi değistiriyoruz
+
+commit 7dc55bdb4ee053a0499c3975a9102d4209a768db
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bunun ne isi var burda?
+
+commit 8c7c84aa11e87d39f54f6e3d1557f85bfcba5539
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Rewrite for making understandable
+
+commit db114763663ae70ca67d57596e92a23291cb386d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Should rewrite fetcher
+
+commit 99db4edbe78b5dc26c9dfe3aa34fadcc80d1240c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    calismasa da eklendi
+
+commit 5de7c8eb6d4c5322d804d5ecefbc673166be9402
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Deneyip yamulacaz. downgrade uzerinde calisiyorum
+
+commit de8863d0f77cb7669a4ca58a4096caa198b66703
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ugrasiom akilci ve okunabilir kodlarim olmasi icin
+
+commit 1c7c9c1b8591bd39fd50d8982d15ee3fa40470eb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Hata debuggingde sonuna kadar devam
+
+commit 7d62156efe64e8ab2c7dfecfc84d164e613ae09f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gece gece beni bana birakmazsan seni sana birakmam
+
+commit ffd48cd4be1da03c69082dbf8465b0e4972a3d1d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Pisi nasil calisiyordu ya bi suru eksik import var
+
+commit 7c96ac0642a232e9f7941bf6bedd30fc8a71ded1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    şurada bir hata var ki beni benden almakta...
+
+commit 6a5706d795301f4a0124807ee4bd62e41cbb9fd0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Downgrade cok geç kaldi. bir de reinstall yazlacak
+
+commit f4e5bc68b783144f54d7f6f6dc3ec86607a832de
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bir dizi class gereksizligi kaldirildi
+
+    onu hangi kafayla koymusum o sira ne icmisim ya
+
+commit 08bfc2bdbf672f06b61e49e233ad5a3e3f0d18f1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Died old config types. Hurraaaaa :D I return Scom
+
+commit 684f48d8444cb18eb9f1ff4dccf25794674b52c0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    sconf yok hyasasin scom
+
+commit 3593862efd67429b83a68254011eb4592f082abb
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Starting writung spam config library ...sconf...
+
+commit 0dc9e3824be67400ec884795c2e364eac26e35e7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Start writing spamconf
+
+commit 03626e91f5302fb2c7428f0ef71e6289c72dbb5d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    remove fixed old errors
+
+commit 72dc8f23b4e5a12dac27202f39dcc55e3edb0b8c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    write fixed to fixed bugs
+
+commit f176cdda0eecbefad0ef81a570e0c9026af5647c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    index hatasi cozuldu
+
+commit fbc43511024aed0473af9f152f75fcee41701ab6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    spamconf icin ugrasiyoruz
+
+commit ba4c5a330e269c7913c2ca7f4b40215d0c38c4d1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    duzenlendi
+
+commit fca8671f5f99b47fa3324fd6e24c715b29b186f6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ilerde analyzer olarak ayirmam cok ise yarayacak
+
+commit 83b178311c751629d60e91251c2703f5caff2169
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bir bosluk hatasi deli etti, kisa sureligine translations dosyalari iptal edildi
+
+commit 673a19ebbbc2d0a87513a2ca3300f55e59d947a6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son degisimler
+
+commit 1121d098cf3695a7cd7e1ee3d845af5d26bd5be0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ve beklenen geldiii. spam interactive shelll. ama ben bunu cli icine tasiyacam artikin yarina kaldi bu da'
+
+commit 9ef38130332b1dbf1a989f08e2f94ac574fbd386
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    data setupa eklendi ve diger kisimlar degisen isimlere uygun olarak duzenlendi
+
+commit 00da0b2eb14c7918dcc08c322f12469abc1220bd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    data klasorune tasinan kisimlara uygun olarak duzenlendi
+
+commit 79e42711edbd706d9fdaa621b454240716a66e94
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    reactor ile duzenledi(reactor de afilli isim haaa)
+
+commit aa272bdbc031131bab86cdc5a360068c1ad7768b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    icerisindeki fonksiyonlar pgraph icine tasindi. yahu iki uc satir kodu ikiye boluyorsunuz eyyyy eski developerler neden apiyi bolemediniz
+
+commit 5dee2e0f9644ebc62d6c44eb62799a44d2066ea0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    api icindeki fonksiyonlar tasindiktan sonra cli modulundeki api kullanimlari duzenlendi
+
+commit d867e32e59c69566fa239852b99a50270a4b7391
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    paketlere iliskin xml dosyalarinin kaliplarini barindiran moduller dataya atildi. Karisiklik kafami allak bullak ediyor
+
+commit 209848e58a6dbde0d319ec9761ba3be75d5e955e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    api icerisindeki fonksiyonlar spam calisirken yavaslamaya sebeb oluyordu hepsi reactore yollandi
+
+commit 1901fa6d669c299037bfbc9dc7146261ab7b06b0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Düzenlendi silindi vesaire
+
+commit 9b35a8f4ab473a89af4f25b8519ab5d0f9835e0e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gece gece eski developerlerin agzina sicacam
+
+commit 33b01e09801530c4c687da22346397484483e754
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added filesdb in api.py
+
+commit 8c57242247125d57c77b2adac7b5af58018bc281
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fix problems report error clean unuseful functios
+
+commit 46bc088364cbbdf9f9a1f8bea330fd591a32ba97
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Test sonuclarına bağlı olarak alınan hatalar yazıldı
+
+commit 59ad2e50929e5cc4702444603a794f273c933176
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    spam.xml dosyasi nerde diyodum buldum :joy:
+
+commit 804c9baf04ae3ed5d8b00142c8a3a8c6c5bf51de
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    downgrade için ilk hazırlıklar
+
+commit a72d177e64d9e524fffe9abbca82e2579402337f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed index problem
+
+commit 132cf950499336ac70aaa1915634932ba5b3b4e6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Şu sinir bozucu "** /" dizgecigini kaldirdim
+
+commit 095e574cdc65722009e8224d0d68443b32996b44
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Cıkti renkleri ile oynandı bir iki degisim yapildi
+
+commit b01d96b511087662b1b0321e5a8f62dd67878b4a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    boyle daha iyi :smile:
+
+commit 26c9de8d095e01292f4464c9468f7b7af5cddef5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gozumun onunde durup beni deli ediyordu
+
+commit 7e2f45e016621ea22e53f75ba06320af54bae9d4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son degisiklikler yazildi, gereksiz dosyalar silindi ve after install fonksiyonu kullanilir hale getirildi
+
+commit a7b9bd0706ae55f7c675a1a85d653f7991d9dcf0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    actions.py betigine afterinstall fonksiyoinu eklendi
+
+commit fa69bbbb4eebf4dccd35d2fab5ee1be705d5073f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    comarsiz kurulum saglandi actions.py dosyasi sondurumda saklaniyor
+
+commit 89f371fefb6e1fa6e183198e2fe6c02631c4998f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    setup.py betigi duzenlendi adam akilli kurulum saglandi.
+
+commit c37bb627722028e9d41f50eaae25bbfb1d1ace87
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added non comar using build delta
+
+commit b7bb30674041d8d83f107823bd0de59baebacaec
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Added no using comar in building packages
+
+commit dd7c05ef1d35f6485cc16bb7146c44cdcd0c9d37
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    first after install testing
+
+commit 0bffa308e037ec9a5eec97c8fa0c7115a21583d6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    remove comar
+
+commit 39f0d0eea64f6d7515390df9931864496e0949c5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    deleted comar files
+
+commit 830124111b0ecdc4b0faad3f7b855704651ca7d1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gereksizleri kokten temizledim
+
+commit ceb49188ee93e969a2240749e4dfcbcf768e4ae3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Remove comarinface
+
+commit 86ccf392382bbb5ca470803c8745e85b2a1929a4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed proxy error
+
+commit f04fdf50bb4321b3e9c6b6a6aa80efc6d3015606
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    sys.stdout.write bos yere kullanilmamali!
+
+commit bfc7a71eec960f7b8a3a849cc93f7d9c310ad836
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed history problem
+
+commit 5a4fbe3cdd8ef34572550fc38e0b51902b54f714
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    rewrite old tests
+
+commit aab5e0ee2d9068b41c5d46ebe17e358e5c1ffcf1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    rewrite
+
+commit d553371a8b87d75de994fc71f0dc44e738ad0869
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added old tests
+
+commit 60a62ef433cd8ad259d198467cc9c16c6f89d9ae
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    little changes
+
+commit e78aafe9e0101337e7d5361237bd22f03f2776d9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    translations revized
+
+commit be970ab1578af9d74e9c21d49e4da68d008f5bb6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    comar to scom
+
+commit 9e0626cde5a1560af2eef3cdf046291fcd67ddc7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Last changes
+
+commit 765d93b5adc62b3adfcb85f9080c87728d4c287b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit 4b53c1167b195fdcb4b426b7e16382cbcda9e7d2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    little changes
+
+commit af403464d6fd2e2bdbc12e7a821c9ded75b20ba1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    modified setup
+
+commit 88bd1f348d206685cde2f2d30fbd00d70ec8cef6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add config files
+
+commit 933179b73b25b8d0046f5a9e19b3a7390a079dd5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    history of the spam
+
+commit 7a5a37ed966582b4e86f98a4a9c3e724ebd69529
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    history the main fork
+
+commit d59bb2b4abe3a57e9967235e0660c0e268cf1f0c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    news
+
+commit 53cacd49e579696e8e47e0effd1aeea38f9301c3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    New developers
+
+commit 63da70bf1e7f6723c3f0522a0fd8b6dfa6e8bf0a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    ı dont forget old developers
+
+commit 3c5b0206303b0c256e121216b2ceeb71871fb699
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added spec and actions when packaging spam
+
+commit 436637a3d46cdb0eb393ef023d63b7df71f5f041
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    modified tools
+
+commit f457c09c7344b144bf746c4e1ae9c76dae63da9e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make patches
+
+commit b4e962e242157959107ffcaf474f711a3c12f8b2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    modified and tested scripts
+
+commit a60576d496701ce19cd0ba658d34680887c3c232
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    renamed others
+
+commit 6ebf0cb393427a82ad43784b114846ea81328f36
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    modified translations
+
+commit f5d7ca45e9b7dc529292e3426f2a2741de30375c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    modified scenarios
+
+commit e428db64b3f88cc0d01471848c93380bd74d0014
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    move scenarioapi into spam
+
+commit 8ee6cb539a048ed9a69c817ba6069f5dcb8de4e6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    renamed package manager
+
+commit 15ca34ca375d70952f38284a6209216168b6ebf5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    remove old tests
+
+commit 6991aab244a7e94692d4fbabc756ba95e6fc3326
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed problems
+
+    before from stable
+
+commit b6a1f78a0003ee09cd31bc2e848ca92d5cdb26e4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed string encode problem
+
+commit b75cd4e79a17c7320183c5c0c0879e594b03fc9e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    should fix progress
+
+commit 6dc1a5525d2fd3a1199792e65537573bfdb75bba
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    delete progress library
+
+commit 90458be88896e57e1b9fa37ae79c350275860622
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed plyvel problem
+
+commit 3219454daf53be1b6e76c3a5707f3db26a3c1ecf
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    duzenlendi
+
+commit 98b78a6cc8ebe2b884759bdb8b662befbaa79f6e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    degisiklikler kaydedildi
+
+commit 70100558136b37b897717fc22fc0f95365fc975e
+Merge: 8a179f23 15fee9ff
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://github.com/AquilaNipalensis/package-manager
+
+commit 8a179f23a867f842af97bbb1cf2565f97856b8ae
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed archive read problem
+
+commit e52f54f472b7dd7632325d1c208840a9c3dd8fd8
+Merge: 3fa1922a 3c4ff6f0
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://github.com/AquilaNipalensis/package-manager
+
+commit 3fa1922a46fc4dc6361af675c89ad9b811bccd90
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    FIX ME:There are problem in LZMAProxy
+
+commit d9abf8ee2ebe259911cb7fdd8a80a4cf5b6e249b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed encode problem
+
+commit 15fee9ffde3adb3133c12077aa09e509d714bf34
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete README
+
+commit 5bbd27a68eaea7d86c57f8f2ffaa59e16a600603
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Changes
+
+commit 261003f24a212b31e3b777940f66c3629eb224df
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Fixed zipped metaclass and files xml file parsıng problem
+
+commit 3c4ff6f06dfe3da2415d370f33d921e4c5974281
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update ChangeLog
+
+commit 3abffa6a9c55ce84062a880bc28c8a4b6eb7e6b8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    clean
+
+commit 1347bc50807b26b17a3bd6ae79a454a04f2e51dc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make debian packages from pisi packages
+
+commit 5716dc51e8131a1cc9eedb760076badd398caa71
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added swo
+
+commit aaba53c1d71fa42cde731d828102792d7e9a4673
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added procress bar
+
+commit 2d44921a258e89fdb3f66fe0f4331143179abca6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed
+
+commit 2bc85677140596343827c90443b046323baf56e5
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add artistical libraries
+
+commit b41a293dd312267386c06c599c9050b808afb6b9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    News
+
+commit f716c2e4f362bace399a9e9ce61ebb2cb027a453
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    hist
+
+commit bbf0df550c2ab3eaa248875f4324629ac80ab035
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Changes
+
+commit c39773f1783a35a856130c80c9715a10761c91ea
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit cc34250b8b294118562e8da507d1334c496bab45
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed typo
+
+commit 08a2a2a99af2891866be1f940015c2bdccca3631
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit 9b8922ab1503f5de8903a39f6d068d69d2597dd7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    changed
+
+commit 38104cc7628e47935f0df9ea208c9feb89025061
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add new tools
+
+commit 49d01ef99b15773e2974aa416f6f2185b5d5bd06
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add replace and non-root build
+
+commit 768c59ad758e5b36982f04371f65da116ef309c2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    changes
+
+commit ea2d5ef7603d943e0f8e383f82757b3762bc48b6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    and others
+
+commit 24042e769e84499f204730c21f71094754f578f3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    new tests push from old svn
+
+commit 262c0ca2592ad236e9da125cdf614832ccd14947
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    new xml file types
+
+commit 83c09a27288913ac5e5dcf5965efe05b989b57f6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    fixed syntax errors xml metaclass
+
+commit 46e50f36a9820e23bae69d97219c8103cf33f853
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add new ignored file
+
+commit 3b11aee9c32ac76fded3473c534fdedee724aab8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update requirements.txt
+
+commit 5c508860900e7b7bb8046bfa1a66546d33c49134
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update requirements.txt
+
+commit 84943cbe39f214ce50e74fcde529e4f5309e8318
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update requirements.txt
+
+commit f9c9b22f48bb1b7debd695754bdead8dbcf2201d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update requirements.txt
+
+commit 83d9aec4698a3ef655fd58e699dea5d8bb0bd295
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update requirements.txt
+
+commit d948f8a925160db210df6691d7eb2ed64aa9dec2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update .travis.yml
+
+commit 081a8bec765d43797aee7b88c3f99774de373069
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit 7642a19f76aa409713ba642fa565b2ee4acde0d8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Allah belanizi versin
+
+commit f737f0ed0df0e09a4fa3a0cdf05a64842c85f25f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added  plans, scripts, and other....
+
+commit 59c8b27766ab72bd34fd6db7b3febab4a0ff5e5a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son durum budur
+
+commit c2af06d2b39110e5cd2d93421497c152c744c4ff
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son değişiklikler
+
+commit 2e2357b12e9c9cf125c5b7441eff84fd3c038151
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Sürüm yükseltmesi
+
+commit a0bd09f127979f6e4f52a0df56ef67974b4e77a1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Piksemel to iksemel
+
+commit 079449a6d8ffafb7079faefdf3def3c269e3b2f8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    updated requirements and travis ci testing type file
+
+commit 70541505b375fe251b498e0b3e98cb32918f0f56
+Merge: 4585ed05 8f92f24c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of github.com:AquilaNipalensis/package-manager
+
+commit 4585ed051a16f67c1ef8d4a570023280a028bf16
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gettext ve piksemel şeyleri giderildi
+
+commit 8f92f24ccc50a5dc7c1e1c4a38306718148890d6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Create requirements.txt
+
+commit 4560fa63fd64d768ecc2dbf5cee7e9e1449510d8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Create .travis.yml
+
+commit 0df00bbdb8db74c5885cef381727c3e547bd877b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    2to3 ile revize edildi
+
+commit 9b3b6881f41edc1823638ecd3a35cc912053e38e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    added
+
+commit 0739a621d97fe4e4e80eb569ecd7f3a59850a8f9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    neyse
+
+commit eb215adc7b6ba542cba6ff86ebb7940a8bd9f1e9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    update Readme
+
+commit d1123898d0ca0d24777c347177ef6217b6df868b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    son hali
+
+commit 3e967a76e7e452d23fe6338276571f470d76925b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit b19402e903111d1c7fca3357e93fce6137bcbe64
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    add patch outputs and 2to3 files
+
+commit b5800788e5a3d385f1734aef74c24cba2b77a575
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bakalim gorelim
+
+commit 25e1090f3cd39f677740e882ce72d8f4d79bf6f2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    son hatalar. sonuca az kaldi
+
+commit 3f37fce779b0952ff2484909cb830c690655b3f1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    calisiyor
+
+commit 75fea9c3f4b4c13b4b66ed091dd920d0a89e1e25
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Tag ve req denklarasyon
+
+commit 11bb5981836b61f76c784dc3fbb0fd171d21d432
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    scriptler ele alındı
+
+commit a5279aa8322aff094326e2cc85e58a49670e7e23
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Runtime errorlarla dansa devam
+
+commit 2d469114dde14e59cbd9bb46e9808ed2dfaf76bc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Sil bastan baslamak gerek bazen...
+
+commit 7e98f22eca81044201231b30e3f6fce89ea7e7c6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeniden baslamak icin
+
+commit 59d28141dc6db0aa914209cfd746868ee8bf8d9a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    uffff uf
+
+commit fedaf56e4052bbe7cc54f4da6ebbd9ba7626c276
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    sinir oldum ya HU :angry:
+
+commit aec4ebd657ff3e6ea4d109b81ff03c410e016d9c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update __init__.py
+
+commit 21466064ccd2bec298b66c4ddf3368cbbf6b666a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update __init__.py
+
+commit 9483ce17f9060e2202020d9590ab031a4ae9c6b7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    sil baştan başlamak gerek bazen
+
+commit 652f24ea6b30047be20f6efeb832db32e7caf1d1
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    uffffff :angry:
+
+commit 11df1f4f3e0f5198e05405dc1b00d78da5006197
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bastan ele alindi
+
+commit eddd02e1c845bef3421dede259c37f14d448e57a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update
+
+commit 24b9f8629a27078557f17428e9f66d2eb79255d6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Rename requirements.py to requirements.txt
+
+commit d98dda534bb34e7424ba12590adec5224e4ef175
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Create requirements.py
+
+commit 8b550838d7f6a5aec55f5b824eb3b8aae0660503
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Make changes
+
+commit c50ceb296d9d173618a9650c3a1f97cd0b066683
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit 844faf7d4538d1f7c0ba3d44bc4c39ae7223823c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Ok
+
+commit 61b858ca533404013a4df15dd51cdc8c0570be20
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update autoxml.py
+
+commit 0b7041f8fd39c92b373231c0cd5eaa8759397f52
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Rename dosya to hatalar
+
+commit 00f10364cb2517a701a9c15cdb9dcfae1c5db90b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete hatalar
+
+commit 39e75f24dfb9fd24ee27362c96cb69402c770859
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    son durum
+
+commit 6a933fe19e41b4c498e03dfb576249a2daa0d8bc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    hata katalogu :D afiyet olsun :joy:
+
+commit 7a6415b82e62f7746bedab52fb23cf3243370281
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update shelltools.py
+
+commit bbed2b703cc6a40efa6d1635648b3da492cfa4d9
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete deneme.py
+
+commit 9aab9ba0632c2d9289a23bfe4af152750286c7ae
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete requirements.txt
+
+commit 19b34d70ed9e788e8b53a1f1e3e5941b10d2568d
+Merge: aadbf0c2 ebf51a6c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Merge pull request #2 from Sulin-OS/master
+
+    Delete README.md
+
+commit aadbf0c2e56acf87236ea73aa622599a7c29eb5a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update .travis.yml
+
+commit 964945b7c6908f7d8f2de44dd5a06550fc11dff7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Create requirements.txt
+
+commit 19d43d29ffb455437fd4a02337b0225a6ad08cf2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update .travis.yml
+
+commit c1998c5fab6804155d98c611b31a49cfaa63910a
+Merge: ea4a7dd4 bee78186
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://github.com/AquilaNipalensis/package-manager
+
+commit ea4a7dd4c2e84b3d06f4594bc7c740a2dc919766
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    travis-ci
+
+commit bee78186f4e37a33b7276bb60a541f87827defa3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update lazydb.py
+
+commit b54df5a9e7b228c7304dfac6b5958b8ed117fa73
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update setup.py
+
+commit 3758a7fb70ca291db6b814a32279ca4877beeb37
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make little changes
+
+commit 06d3c37bcefc82ca2c3fc2e6598cdd0cd4d2aef3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update README
+
+commit 317d31519df24407a2e7b49a416540d4cd04448f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete README.md
+
+commit f9cc802d799ad459e6b04ee6bfc6a27813d3ad5f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update ChangeLog
+
+commit 7dff780f782a6268db3cd0eff55692f6f0fac821
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    versionlar düzenlendi
+
+commit 5c806d4a41c94c3ba086f8c557e790af530bb66a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    tests kısmı düzenlendi(runtests ile çalıştırın)
+
+commit 8f83df439da07f4c57da8ec416553325bcb059d8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    pisicli çalışıyor
+
+commit ebf51a6c6ebefa48f37243022e54f2d79ecdf89c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete README.md
+
+commit 51ce66349ce5bb030873e8c2fa157f03b0f38eae
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update ChangeLog
+
+commit 5b8768779c774c8d9cbfddde5923134f582ce7bd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Son değişimler
+
+commit e280856eda8ae2beb0066af824feca32fe686336
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    actions api modulerı yapılandırıldı
+
+commit c7784bd490ad2f82746bc943e2d7da662d8cdd6f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes on scripts
+
+commit 6d6cf29011df1151c5ca24179b8eee7b65162723
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit 67cde24fd536c8f274c343e4db8f31cbe886b9ec
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    python3 uyumlulugu yapıldı
+
+commit 831c79198f97409a1801c298eb3d00168a40cc4c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    gereksiz dosyalar silindi
+
+commit 27eded715573288bbdc4022d418c631a4b1d9d5e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update ChangeLog
+
+commit 286e8f60d3db32357ab0347e4c2670a4cb4f997b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    deleted
+
+commit 40cd10fd7062f426bf931aba9aa1919f70eb633a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update lazydb.py
+
+commit de652509dc9be98c5719529aa04fd1ab06de42b8
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit fbde1caf55a435dd34dfd227f7dcb83a919065db
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    string.maketrans düzeltildi
+
+commit 8857ae615370fabf1fd5097c2a63b683f52eac9e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update lazydb.py
+
+commit 40ae1758696707d703849a206af143184848870f
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeni script eklendi
+
+commit 172bb42b6d88452df7c9036452919ee68a50a58e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update ChangeLog
+
+commit c3df4f3b5a52838fd7691fc96b06c052f429be22
+Merge: 9b9ed1f6 227fdeac
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://github.com/AquilaNipalensis/package-manager
+
+commit 9b9ed1f6456381a97addeb31ee6e77093c3f5524
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    .swp dosyaları artık dahil değil
+
+commit 227fdeac709ae40587db4dc8d044951978191373
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Set theme jekyll-theme-merlot
+
+commit 96d8b2cfb462285c5dbadd3664b54ef4ddb916f6
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete changes
+
+commit ee0e63cb0d44d6fda6841895697eb7ac36f2a487
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete db
+
+commit 92973d7e35b3cbd00debfd8bf13d7f50de38325d
+Merge: 824ced3e 8578ea15
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'master' of https://github.com/AquilaNipalensis/package-manager
+
+commit 824ced3ea7c06e34afc6fcc4ba99ef04ea7ee67e
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeni yazilima bakildi ve karsilastirildi
+
+commit e973ee33bfb05e969a3a601a565cae37c65d0354
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    yeni yazilima bakildi ve karsilastirildi
+
+commit 8578ea15c02f589cfa7b6dfdcaf69b47d2ac5347
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Delete .groupdb.py.un~
+
+commit 4af39e8d8eff6eeeac055e6d34c82f834ea4ba05
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    problem duzeltildi
+
+commit 90dd9110a549951c0de0a0635190d8ace52706c8
+Merge: fd27ecee 4324f717
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'littlebranch'
+
+    Conflicts:
+            ChangeLog
+            pisi/db/groupdb.py
+            pisi/db/packagedb.py
+            pisi/db/repodb.py
+            pisi/pxml/__init__.py
+            pisi/pxml/autoxml.py
+            pisi/pxml/xmlext.py
+            pisi/pxml/xmlfile.py
+            tests/constanttest.py
+            tests/filetest.py
+            tests/replacetest.py
+            tests/srcarchivetest.py
+            tests/utiltest.py
+            tests/versiontest.py
+
+commit 4324f7173b285a4f482d8f06bc8a50f61a09a35a
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    xml.dom.minidom'a uygun hale getirildi
+
+commit a424a1e0556d6aa626b14aa53d44eb0af405a077
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    duzenelendi
+
+commit ecd3a392e8a05c7235ad07bfd0f4ed4c54c9eccd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    düzenlendi
+
+commit e31a7bd3d2ee7f73221ec6613981275e0b73958b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    hicbirsey yapamadim :(
+
+commit fd27eceee8c3a1ad81a8fa2a915649eda45ca2d7
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Bugunkuler
+
+commit bdba30f9d022e3888cd7e736efc30e3685e266dd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make changes
+
+commit f2a54f07c7bea4d97531247745400f825c5762ef
+Merge: 38380165 7179759b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge remote-tracking branch 'refs/remotes/origin/littlebranch'
+
+commit 3838016589aeeec01fa9d458bc454b44b22bbcd3
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Gunun degerlendirmesi
+
+commit 7179759b3a5fdc4080df7beabee951ab8c97dda2
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    biraz daha biseyler yapilmali haci sabah bi daha bakayim
+
+commit 644afb2dd723bec0801c99a267f9cf0f3893b59d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    duzenlendi ama emin degilim (Allah askina bir yardim ya)
+
+commit 9f612cd4e7f23f011bf8c19bedf10dd75c028ecf
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    bir kismi duzenlendi ama yetersiz :( yarin bastan ele alinmali
+
+commit d8d780a6f412840d7c225cb92469ef4182aadb27
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    degisiklikler geri alindi
+
+commit 18c4929507d292c45f098143a34ca71697720228
+Merge: 2b75c8b4 b08c16af
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Merge branch 'littlebranch'
+
+commit b08c16afd66fa89b6a191a7136e5e31f55a02044
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Buyuk degisiklikler yapildi. İksemel bagimliligi iptal edildi
+
+commit ecd29cc64b220d82e53e6c7e7c9295d4f5f970fc
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    duzeltilmeye alindi
+
+commit 2b75c8b49b30289ee17c6a079d5a9874172efe87
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    make differences
+
+commit 855e6c2b18e1bdb1756978dcefa035c662b1ae90
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    lxml uyarlamasi yapildi
+
+commit 77aff1d3f0536e6dddc4b644aeaba2568b1a6c3b
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Make changes
+
+commit 42f2fa21afccf943ce0a89800c5ac9f38bf37fb4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Modifiye etmeye basladim ama gece vakti olmaz diye yarida biraktim :)
+
+commit 45fcb001dac95f5d9333f7f8f6126a35fedec52c
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: GitHub <noreply@github.com>
+
+    Update setup.py
+
+commit c66a97ea931310ebedb5a0d80e607510800dea2d
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Make changes
+
+commit 920ac16d0ca5bad9bbb3e84dc46acf36b6ce3491
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    Initial commit
+
+commit 8e919eafb5fddada4bbbe2865dabd9c0a33cd4bd
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    delete
+
+commit 299397cbba48e996cab17937bfd5bdbd1335bcd4
+Author: Suleyman Poyraz <zaryob.dev@gmail.com>
+Commit: Suleyman Poyraz <zaryob.dev@gmail.com>
+
+    pisi3 yolda
