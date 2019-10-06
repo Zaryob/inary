@@ -22,6 +22,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.data.index as index
+import inary.util as util
 
 usage = _("""Index INARY files in a given directory
 
@@ -87,7 +88,9 @@ class Index(command.Command, metaclass=command.autocommand):
         for type_str in ctx.get_option("compression_types").split(","):
             compression |= ctypes.get(type_str, 0)
 
+        util.xterm_title(_("Taking inary repo index."))
         index.index(self.args or ["."], ctx.get_option('output'),
                     skip_sources=ctx.get_option('skip_sources'),
                     skip_signing=ctx.get_option('skip_signing'),
                     compression=compression)
+        util.xterm_title_reset()
