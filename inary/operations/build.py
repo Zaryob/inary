@@ -528,17 +528,17 @@ class Builder:
             try:
                 inary.fetcher.fetch_url(url, self.pkg_work_dir(), progress)
             except inary.fetcher.FetchError:
-                ctx.ui.warning(_("Cannot find component.xml in remote "
+                ctx.ui.warning(_("Cannot find component.xml for \"{}\" in remote "
                                  "directory, Source is now part of "
-                                 "unknown component."))
+                                 "unknown component.").format(self.spec.source.name))
                 self.spec.source.partOf = 'unknown'
                 return
             path = util.join_path(self.pkg_work_dir(), 'component.xml')
         else:
             if not os.path.exists(url):
-                ctx.ui.warning(_("Cannot find component.xml in upper "
+                ctx.ui.warning(_("Cannot find component.xml for \"{}\" in upper "
                                  "directory, Source is now part of "
-                                 "unknown component."))
+                                 "unknown component.").format(self.spec.source.name))
                 self.spec.source.partOf = 'unknown'
                 return
             path = url
