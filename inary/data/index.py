@@ -91,19 +91,21 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         specs = []
         deltas = {}
 
+        ctx.ui.info(_("* Generating index tree...\n"), color="cyan")
+
         pkgs_sorted = False
         for fn in os.walk(repo_uri).__next__()[2]:
             if fn.endswith(ctx.const.delta_package_suffix) or fn.endswith(ctx.const.package_suffix):
                 pkgpath = os.path.join(repo_uri,
                                        util.parse_package_dir_path(fn))
                 if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
-                ctx.ui.info("%-80.80s\r" % (_('Sorting:  \"{}\"').format(fn)),
+                ctx.ui.info("{:80.80}\r".format(_(' -> Sorting:  \"{}\"').format(fn)),
                             noln=False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))
                 pkgs_sorted = True
         if pkgs_sorted:
-            ctx.ui.info("%-80.80s\r" % '')
+            ctx.ui.info("{:80.80}\r".format(util.colorize(_(' * Sorted:  \"{}\"').format(fn), color="green")))
 
         for root, dirs, files in os.walk(repo_uri):
             # Filter hidden directories
@@ -132,13 +134,22 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         # Create a process pool, as many processes as the number of CPUs we
         # have
+        try:
+            obsoletes_list = list(map(str, self.distribution.obsoletes))
+        except AttributeError:
+            obsoletes_list = []
+        if obsoletes_list:
+            ctx.ui.info(_(" * Added obsoleted packages: [ {} ]".format(obsoletes_list)), color="blue", noln=False)
+
         pool = multiprocessing.Pool()
 
         # Before calling pool.map check if list is empty or not: python#12157
         if specs:
+            ctx.ui.info(_(" * Adding source packages: "), color="blue", noln=False)
             try:
                 # Add source packages to index using a process pool
                 self.specs = pool.map(add_spec, specs)
+                ctx.ui.info("\n")
             except:
                 # If an exception occurs (like a keyboard interrupt),
                 # immediately terminate worker processes and propagate
@@ -148,11 +159,6 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 pool.join()
                 ctx.ui.info("")
                 raise
-
-        try:
-            obsoletes_list = list(map(str, self.distribution.obsoletes))
-        except AttributeError:
-            obsoletes_list = []
 
         latest_packages = []
 
@@ -179,8 +185,9 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 except KeyError:
                     sorted_pkgs[key] = [pkg]
             self.packages = []
+            ctx.ui.info(_(" * Adding binary packages: "), color="blue", noln=False)
             for key, pkgs in sorted(sorted_pkgs.items()):
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory \"{}\"... ".format(key))), noln=True)
+                ctx.ui.info("{:80.80}\r".format(_("   -> Adding packages from directory \"{}\"... ".format(key))), noln=True)
                 try:
                     # Add binary packages to index using a process pool
                     self.packages.extend(pool.map(add_package, pkgs))
@@ -189,10 +196,9 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     pool.join()
                     ctx.ui.info("")
                     raise
-                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory \"{}\"... done.".format(key))),
-                            noln=False)
+                ctx.ui.info("{:80.80}\r".format(_("   * Adding packages from directory \"{}\"... done.".format(key))), color="green", noln=False)
+            ctx.ui.info(_("* Writing index file."), color="blue")
 
-        ctx.ui.info("")
         pool.close()
         pool.join()
 
@@ -201,7 +207,7 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding package to index: \"{}\"').format(os.path.basename(path))), noln=True)
+        ctx.ui.info("{:80.80}\r".format(_('   -> Adding package to index: \"{}\"').format( os.path.basename(path))), noln=True)
 
         package = inary.package.Package(path)
         md = package.get_metadata()
@@ -216,7 +222,7 @@ def add_package(params):
         errs = md.errors()
         if md.errors():
             ctx.ui.info("")
-            ctx.ui.error(_('Package \"{}\": metadata corrupt, skipping...').format(md.package.name))
+            ctx.ui.error(_(' * Package \"{}\": metadata corrupt, skipping...').format(md.package.name))
             ctx.ui.error(str(*errs))
         else:
             # No need to carry these with index (#3965)
@@ -262,32 +268,32 @@ def add_package(params):
 
 
 def add_groups(path):
-    ctx.ui.info(_('Adding groups.xml to index'))
+    ctx.ui.info(_(' * Adding \"groups.xml\" to index'))
     groups_xml = group.Groups()
     groups_xml.read(path)
     return groups_xml.groups
 
 
 def add_components(path):
-    ctx.ui.info(_('Adding \"components.xml\" to index'))
+    ctx.ui.info(_(' * Adding \"components.xml\" to index'))
     components_xml = component.Components()
     components_xml.read(path)
-    # try:
-    return components_xml.components
-    # except:
-    #    raise Error(_('Component in {} is corrupt').format(path))
-    # ctx.ui.error(str(Error(*errs)))
+    try:
+        return components_xml.components
+    except:
+        ctx.ui.error(_(' * Component in {} is corrupt').format(path))
+    ctx.ui.error(str(*errs))
 
 
 def add_distro(path):
-    ctx.ui.info(_('Adding \"distribution.xml\" to index'))
+    ctx.ui.info(_(' * Adding \"distribution.xml\" to index'))
     distro = component.Distribution()
-    # try:
-    distro.read(path)
-    return distro
-    # except:
-    #    raise Error(_('Distribution in {} is corrupt').format(path))
-    # ctx.ui.error(str(Error(*errs)))
+    try:
+        distro.read(path)
+        return distro
+    except:
+        ctx.ui.error(_(' * Distribution in {} is corrupt').format(path))
+    ctx.ui.error(str(*errs))
 
 
 def add_spec(params):
@@ -302,7 +308,7 @@ def add_spec(params):
         else:
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
-        ctx.ui.info("%-80.80s\r" % (_('Adding source to index: \"{}\"').format(path)),
+        ctx.ui.info("{:80.80}\r".format(_('   -> Adding source to index: \"{}\"').format(path)),
                     noln=False if ctx.config.get_option("verbose") else True)
         return sf
 
@@ -322,9 +328,9 @@ def index(dirs=None, output='inary-index.xml',
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('Building index of Inary files under \"{}\"').format(repo_dir))
+        ctx.ui.info(_('Building index of Inary files under \"{}\" \n').format(repo_dir))
         index.index(repo_dir, skip_sources)
 
     sign = None if skip_signing else inary.file.File.detached
     index.write(output, sha1sum=True, compress=compression, sign=sign)
-    ctx.ui.info(_('Index file written.'))
+    ctx.ui.info(_('* Index file written.'),color="green")
