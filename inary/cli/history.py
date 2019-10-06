@@ -67,6 +67,8 @@ Lists previous operations.""")
         history.takeback(operation)
 
     def print_history(self):
+        ordered_history = []
+        ordered_history.append(_("Inary Transaction History: "))
         for operation in self.historydb.get_last(ctx.get_option('last')):
 
             msg_oprt = util.colorize(_("Operation "), 'yellow') \
@@ -74,58 +76,57 @@ Lists previous operations.""")
                        + util.colorize("{}:".format(opttrans[operation.type]), "white")
 
             date_and_time = util.colorize(_("Date: "), "cyan") + "{0.date} {0.time}".format(operation)
-            print(msg_oprt)
-            print(date_and_time)
+            ordered_history.append(msg_oprt)
+            ordered_history.append(date_and_time)
 
             if operation.type == "snapshot":
                 msg_snap = util.colorize(
                     _("    * There are {} packages in this snapshot.").format(len(operation.packages)),
                     "purple")
 
-                print(msg_snap)
+                ordered_history.append(msg_snap)
             elif operation.type == "repoupdate":
                 for repo in operation.repos:
-                    print("    *", repo)
+                    ordered_history.append("    * " + repo.name)
             else:
                 for pkg in operation.packages:
-                    print("    *", pkg)
-            print()
+                    ordered_history.append("    * " + pkg.name)
+        return ordered_history
 
-    def redirect_output(self, func):
-        if os.isatty(sys.stdout.fileno()):
-            class LessException(Exception):
-                pass
+    def redirect_output(self, order):
+    #    if os.isatty(sys.stdout.fileno()):
+        class LessException(Exception):
+            pass
 
-            class LessPipe():
-                def __init__(self):
-                    import subprocess
-                    self.less = subprocess.Popen(["less", "-K -R", "-"],
-                                                 stdin=subprocess.PIPE)
+        class LessPipe():
+            def __init__(self):
+                import subprocess
+                self.less = subprocess.Popen(["less", "-K", "-R", "-"],
+                                             stdin=subprocess.PIPE)
 
-                def __del__(self):
-                    self.less.stdin.close()
-                    self.less.wait()
+            def close(self):
+                self.less.stdin.close()
+                self.less.wait()
+                self.less.kill()
 
-                def flush(self):
-                    self.less.stdin.flush()
+            def flush(self):
+                self.less.stdin.flush()
 
-                def write(self, s):
-                    try:
-                        self.less.stdin.write(bytes(s.encode("utf-8")))
-                    except IOError:
-                        raise LessException
+            def write(self, s):
+                try:
+                    self.less.stdin.write(bytes(s.encode("utf-8")))
+                except IOError:
+                    raise LessException
 
-            stdout, stderr = sys.stdout, sys.stderr
-            sys.stdout = sys.stderr = LessPipe()
-            try:
-                func()
-            except LessException:
-                pass
-            finally:
-                sys.stdout, sys.stderr = stdout, stderr
+        pipe=LessPipe()
 
-        else:
-            func()
+        try:
+            for i in order:
+                pipe.write(i)
+                pipe.write("\n")
+            pipe.close()
+        except LessException:
+            pass
 
     def run(self):
         self.init(database=False, write=False)
@@ -138,4 +139,4 @@ Lists previous operations.""")
                 self.takeback(opno)
                 return
 
-        self.redirect_output(self.print_history)
+        self.redirect_output(self.print_history())

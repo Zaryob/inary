@@ -197,6 +197,8 @@ def takeback(operation):
     historydb = inary.db.historydb.HistoryDB()
     historydb.create_history("takeback")
     beinstalled, beremoved, configs = plan_takeback(operation)
+    if not beinstalled and not beremoved:
+        ctx.ui.info(_("There is no packages to taking back (installing or removing)."))
 
     if beinstalled:
         ctx.ui.info(_("Following packages will be installed:\n") + util.strlist(beinstalled))
