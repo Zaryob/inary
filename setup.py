@@ -31,7 +31,9 @@ import inary
 
 IN_FILES = ("inary.xml.in",)
 PROJECT = "inary"
-MIMEFILE_DIR = "usr/share/mime/packages"
+CONFIG_DIR = "/etc/inary"
+MIMEFILE_DIR = "/usr/share/mime/packages"
+TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
 
 class Build(build):
@@ -104,9 +106,8 @@ class Install(install):
     def run(self):
         install.run(self)
         self.installi18n()
-        # self.installdoc()
         self.generateConfigFile()
-        
+
     def finalize_options(self):
         # NOTE: for Sulin distribution
         if os.path.exists("/etc/sulin-release"):
@@ -128,20 +129,9 @@ class Install(install):
                 os.makedirs(destpath)
             shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
 
-    def installdoc(self):
-        self.root = '/'
-        destpath = os.path.join(self.root, "usr/share/doc/inary")
-        if not os.path.exists(destpath):
-            os.makedirs(destpath)
-        os.chdir('doc')
-        for pdf in glob.glob('*.pdf'):
-            print('Installing', pdf)
-            shutil.copy(pdf, os.path.join(destpath, pdf))
-        os.chdir('..')
-
     def generateConfigFile(self):
         import inary.configfile
-        destpath = os.path.join(self.root, "etc/inary/")
+        destpath = os.path.join(self.root, CONFIG_DIR)
         if not os.path.exists(destpath):
             os.makedirs(destpath)
 
@@ -187,13 +177,6 @@ class Test(Command):
             os.path.join('runTests.py')
         ])
 
-
-datas = [
-    ("/etc/inary/", ["config/inary.conf", "config/mirrors.conf", "config/sandbox.conf"]),
-    ("/usr/share/mime/packages/", ["build/inary.xml"]),
-    ("/usr/lib/tmpfiles.d/", ["config/inary.conf-armv7h"])
-]
-
 setup(name="inary",
       version=inary.__version__,
       description="Inary (Special Package Manager)",
@@ -217,7 +200,42 @@ setup(name="inary",
                 'build_po': BuildPo,
                 'install': Install,
                 'test': Test},
-      data_files=datas
+      data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf", "config/sandbox.conf"]),
+                  (MIMEFILE_DIR, ["build/inary.xml"])],
+      scripts=['inary-cli',
+               'scripts/pspec2po',
+               'scripts/revdep-rebuild',
+               'scripts/version-bump'],
+      classifiers=[
+          'Development Status :: 5 - Production/Stable',
+          'Environment :: Console',
+          'Environment :: Plugins',
+          'Framework :: Sphinx',
+          'Intended Audience :: End Users/Desktop',
+          'Intended Audience :: Developers',
+          'Intended Audience :: System Administrators',
+          'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+          'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+          'Natural Language :: English',
+          'Natural Language :: Dutch',
+          'Natural Language :: French',
+          'Natural Language :: German',
+          'Natural Language :: Hungarian',
+          'Natural Language :: Italian',
+          'Natural Language :: Portuguese (Brazilian)',
+          'Natural Language :: Russian',
+          'Natural Language :: Slovak',
+          'Natural Language :: Turkish',
+          'Natural Language :: Ukrainian',
+          'Operating System :: MacOS :: MacOS X',
+          'Operating System :: POSIX',
+          'Operating System :: POSIX :: BSD',
+          'Programming Language :: Python :: 3 :: Only',
+          'Topic :: Desktop Environment',
+          'Topic :: System',
+          'Topic :: System :: Installation/Setup',
+          'Topic :: Software Development :: Bug Tracking',
+          ],
       )
 
 # the below stuff is really nice but we already have a version
@@ -225,26 +243,3 @@ setup(name="inary",
 # script, or with a parameter I don't know -- exa
 
 INARY_VERSION = inary.__version__
-
-
-def getRevision():
-    import os
-    try:
-        p = os.popen("svn info 2> /dev/null")
-        for line in p.readlines():
-            line = line.strip()
-            if line.startswith("Revision:"):
-                return line.split(":")[1].strip()
-    except:
-        pass
-
-    # doesn't working in a Subversion directory
-    return None
-
-
-def getVersion():
-    rev = getRevision()
-    if rev:
-        return "-r".join([INARY_VERSION, rev])
-    else:
-        return INARY_VERSION
