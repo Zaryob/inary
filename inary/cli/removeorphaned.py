@@ -51,7 +51,7 @@ Remove all orphaned packages from the system.
         self.parser.add_option_group(group)
 
     def run(self):
-        self.init(database=True, write=False)
+        self.init()
         orphaned = self.installdb.get_orphaned()
         if ctx.get_option('exclude'):
             orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))
