@@ -77,8 +77,11 @@ class Check(command.Command, metaclass=command.autocommand):
         elif self.args:
             pkgs = self.args
         else:
-            ctx.ui.info(_('Checking all installed packages.') + '\n')
+            ctx.ui.info(_('Checking all installed packages.'), color='blue')
             pkgs = inary.db.installdb.InstallDB().list_installed()
+        if not pkgs:
+            ctx.ui.error(_("No package has been installed yet. :("))
+            exit()
 
         necessary_permissions = True
 
