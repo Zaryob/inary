@@ -59,7 +59,7 @@ class RunTimeError(inary.actionsapi.Error):
 
 
 def get_config(config):
-    return os.popen("ruby -rrbconfig -e 'puts Config::CONFIG[\"{}\"]'".format(config)).read().strip()
+    return os.popen("ruby -rrbconfig -e 'puts RbConfig::CONFIG[\"{}\"]'".format(config)).read().strip()
 
 
 def get_ruby_version():
@@ -72,6 +72,9 @@ def get_rubylibdir():
 
 def get_sitedir():
     return get_config('sitedir')
+
+def get_gemdir():
+    return os.popen('gem env gemdir').read().strip()
 
 
 def get_ruby_install_name():
@@ -87,6 +90,8 @@ def get_gemhome():
 def get_sitelibdir():
     return get_config('sitelibdir')
 
+def generate_gemname():
+    return "-".join(get.srcNAME().split("-")[1:])
 
 def auto_dodoc():
     from inary.actionsapi.inarytools import dodoc
@@ -103,7 +108,7 @@ def auto_dodoc():
 def install(parameters=''):
     """does ruby setup.rb install"""
     if system(
-            'ruby -w setup.rb --prefix=/{0.defaultprefixDIR()} --destdir={0.installDIR()} {1}'.format(get, parameters)):
+            'ruby -w setup.rb --prefix=/{0}/{1} --destdir={1} {2}'.format(get.defaultprefixDIR(), get_gemdir(), get.installDIR(), parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
@@ -116,6 +121,17 @@ def rake_install(parameters=''):
 
     auto_dodoc()
 
+def gem_build(parameters=''):
+    if system('gem build {} {}'.format(generate_gemname(), parameters)):
+        raise InstallError(_('Build failed.'))
+
+
+def gem_install(parameters=''):
+    """Make installation from GemFile"""
+    if system('gem install --backtrace {0} -i "{1}{2}"  -n "{1}/usr/bin" {3}.gem'.format(parameters, get.installDIR(), get_gemdir() , generate_gemname() + "-" + get.srcVERSION())):
+        raise InstallError(_('Install failed.'))
+
+    auto_dodoc()
 
 def run(parameters=''):
     """executes parameters with ruby"""

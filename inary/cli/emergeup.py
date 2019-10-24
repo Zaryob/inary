@@ -46,7 +46,6 @@ You can also give the name of a component.
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("emergeup options"))
-        super(EmergeUp, self).add_options(group)
         group.add_option("-c", "--component", action="store",
                          default=None, help=_("Emerge available packages under given component"))
         group.add_option("--ignore-file-conflicts", action="store_true",
