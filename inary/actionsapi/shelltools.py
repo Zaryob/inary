@@ -274,6 +274,10 @@ def dirName(filePath):
 
 def system(command):
     # command an list but should be an str
+    if ctx.config.get_option('ignore_fakeroot'):
+        ctx.ui.warning(_('Fakeroot ignored!'))
+    else:
+        command="fakeroot "+command
     sys.stdout.write(colorize(_("[Running Command]: "),'brightwhite') + command + "\n")
     #    command = str.join(str.split(command))
     retValue = run_logged(command)
