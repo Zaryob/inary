@@ -96,7 +96,7 @@ all repositories.
             if p in installed_list:
                 package.name = util.colorize(package.name, 'green')
             else:
-                package.name = util.colorize(package.name, 'brightwhite')
+                package.name = util.colorize(package.name, 'white','bright')
 
             if self.options.long:
                 ctx.ui.info(str(package) + '\n')

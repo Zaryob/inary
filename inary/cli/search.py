@@ -106,11 +106,11 @@ database.
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
 
-            name = replace.sub(inary.util.colorize(r"\1", "brightred"), name)
+            name = replace.sub(inary.util.colorize(r"\1", "red","bright"), name)
             if lang and lang in summary:
-                summary = replace.sub(inary.util.colorize(r"\1", "brightred"), str(summary[lang]))
+                summary = replace.sub(inary.util.colorize(r"\1", "red","bright"), str(summary[lang]))
             else:
-                summary = replace.sub(inary.util.colorize(r"\1", "brightred"), str(summary))
+                summary = replace.sub(inary.util.colorize(r"\1", "red","bright"), str(summary))
 
             name += ' ' * max(0, maxlen - lenp)
 

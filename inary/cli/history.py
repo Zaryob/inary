@@ -71,18 +71,17 @@ Lists previous operations.""")
         ordered_history.append(_("Inary Transaction History: "))
         for operation in self.historydb.get_last(ctx.get_option('last')):
 
-            msg_oprt = util.colorize(_("Operation "),'none','yellow') \
-                       + util.colorize("#{}: ".format(operation.no),'none', "blue") \
-                       + util.colorize("{}:".format(opttrans[operation.type]),'none', "white")
+            msg_oprt = util.colorize(_("Operation "),'yellow') \
+                       + util.colorize("#{}: ".format(operation.no), "blue") \
+                       + util.colorize("{}:".format(opttrans[operation.type]), "white")
 
-            date_and_time = util.colorize(_("Date: "),'none', "cyan") + "{0.date} {0.time}".format(operation)
+            date_and_time = util.colorize(_("Date: "), "cyan") + "{0.date} {0.time}".format(operation)
             ordered_history.append(msg_oprt)
             ordered_history.append(date_and_time)
 
             if operation.type == "snapshot":
                 msg_snap = util.colorize(
-                    _("    * There are {} packages in this snapshot.").format(len(operation.packages)),
-                    'none',"purple")
+                    _("    * There are {} packages in this snapshot.").format(len(operation.packages)), "purple")
 
                 ordered_history.append(msg_snap)
             elif operation.type == "repoupdate":

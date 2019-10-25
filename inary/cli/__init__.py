@@ -113,7 +113,7 @@ class CLI(inary.ui.UI):
         # let's cheat from KDE :)
         msg = util.colorize(msg, color)
         if verbose:
-            msg = util.colorize(_('Verboses: '), 'bright','white') + msg
+            msg = util.colorize(_('Verboses: '),'white''bright',) + msg
         if not noln:
             msg = '{}\n'.format(msg)
 
@@ -127,7 +127,7 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(util.colorize(msg + '\n', 'bright','yellow'), err=True, verbose=verbose)
+            self.output(util.colorize(msg + '\n','yellow','bright'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = str(msg)
@@ -137,7 +137,7 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(util.colorize(msg + '\n', 'bright','red'), err=True)
+            self.output(util.colorize(msg + '\n','red', 'bright'), err=True)
 
     def action(self, msg, verbose=False):
         # TODO: this seems quite redundant?
@@ -151,7 +151,7 @@ class CLI(inary.ui.UI):
         endmsg = _('\n Select one:')
         prompt = ""
         for opt in opts:
-            prompt += util.colorize('[  {}  ]\n'.format(opt), 'faint','blue')
+            prompt += util.colorize('[  {}  ]\n'.format(opt),'blue', 'faint')
 
         while True:
             s = input(prompt)
@@ -171,7 +171,7 @@ class CLI(inary.ui.UI):
 
         while True:
             tty.tcflush(sys.stdin.fileno(), 0)
-            prompt = msg + util.colorize(" "+_('(yes'),'none','green',reset=False) + '/' + util.colorize(_('no)'),'none', 'red') + ":  "
+            prompt = msg + util.colorize(" "+_('(yes'),'green',reset=False) + '/' + util.colorize(_('no)'), 'red') + ":  "
             s = input(prompt)
 
             if yes_expr.search(s):
@@ -215,11 +215,11 @@ class CLI(inary.ui.UI):
 
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
             if ka["percent"] == 100:
-                self.output("\r" + util.colorize(msg ,"bright",complated))
+                self.output("\r" + util.colorize(msg ,complated,"bright"))
             else:
                 self.output("\r" + \
-                            util.colorize(msg[:lmsg],"bright",'purple',complated_background,False) + \
-                            util.colorize(msg[lmsg:],'bright','blue',queried_background))
+                            util.colorize(msg[:lmsg],'purple',"bright",complated_background,False) + \
+                            util.colorize(msg[lmsg:],'blue',"bright",queried_background))
             util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
         else:
@@ -231,34 +231,44 @@ class CLI(inary.ui.UI):
         if msg:
             msg = str(msg)
             if push_screen:
-                self.output(util.colorize(msg + '\n', 'bright','green'))
+                self.output(util.colorize(msg + '\n','green', 'bright'))
             util.xterm_title(msg)
 
     def notify(self, event, logging=True, **keywords):
+        color=None
+        attr=None
         if event == inary.ui.installed:
             msg = _('Installed \"{}\"').format(keywords['package'].name)
-            color = 'brightgreen'
+            attr='bright'
+            color = 'green'
         elif event == inary.ui.installing:
             msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(keywords['package'])
-            color = 'brightblue'
+            attr='bright'
+            color = 'blue'
         elif event == inary.ui.removed:
             msg = _('Removed \"{}\"').format(keywords['package'].name)
-            color = 'brightgreen'
+            attr='bright'
+            color = 'green'
         elif event == inary.ui.removing:
             msg = _('Removing \"{}\"').format(keywords['package'].name)
-            color = 'brightpurple'
+            attr='bright'
+            color = 'purple'
         elif event == inary.ui.upgraded:
             msg = _('Upgraded \"{}\"').format(keywords['package'].name)
-            color = 'brightgreen'
+            attr='bright'
+            color = 'green'
         elif event == inary.ui.configured:
             msg = _('Configured \"{}\"').format(keywords['package'].name)
-            color = 'brightgreen'
+            attr='bright'
+            color = 'green'
         elif event == inary.ui.configuring:
             msg = _('Configuring \"{}\" package.').format(keywords['package'].name)
-            color = 'faintyellow'
+            attr='faint'
+            color = 'yellow'
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
-            color = 'faintgreen'
+            attr='faint'
+            color = 'green'
         elif event == inary.ui.updatingrepo:
             msg = _('Updating package repository: \"{}\"').format(keywords['name'])
             color = 'green'
@@ -284,6 +294,6 @@ class CLI(inary.ui.UI):
             msg = None
 
         if msg:
-            self.output(util.colorize(msg + '\n', color))
+            self.output(util.colorize(msg + '\n', color,attr))
             if ctx.log and logging:
                 ctx.log.info(msg)

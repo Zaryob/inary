@@ -278,7 +278,7 @@ def system(command):
         ctx.ui.warning(_('Fakeroot ignored!'))
     else:
         command="fakeroot "+command
-    sys.stdout.write(colorize(_("[Running Command]: "),'brightwhite') + command + "\n")
+    sys.stdout.write(colorize(_("[Running Command]: "),'white','bright') + command + "\n")
     #    command = str.join(str.split(command))
     retValue = run_logged(command)
 

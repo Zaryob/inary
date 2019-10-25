@@ -121,7 +121,7 @@ class UIHandler:
     def _update_ui(self):
         ctx.ui.display_progress(operation="fetching",
                                 percent=self.percent,
-                                filename=self.filename,
+                                filename=self.filename.replace(".inary","") ,
                                 total_size=self.total_size or self.size,
                                 downloaded_size=self.size,
                                 rate=self.rate,

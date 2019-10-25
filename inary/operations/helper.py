@@ -223,7 +223,7 @@ def apply_changed_config(file, keep=True):
 def show_changed_configs(package_dict):
     for package in package_dict:
         if package_dict[package]:
-            if ctx.ui.confirm(util.colorize(_("[?] Would you like to see changes in config files of \"{0}\" package").format(package, file), color='brightyellow')):
+            if ctx.ui.confirm(util.colorize(_("[?] Would you like to see changes in config files of \"{0}\" package").format(package, file),'yellow','bright')):
                 for file in package_dict[package]:
                      ctx.ui.info(_("[*] Changes in config file: {}").format(file), color='yellow')
                      os.system("diff -u {0} {1} | less".format(file, file + ".newconfig-byinary"))

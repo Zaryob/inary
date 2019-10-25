@@ -1028,7 +1028,7 @@ def filter_latest_packages(package_paths):
     return [x[0] for x in list(latest.values())]
 
 
-def colorize(msg ,attr="none",color="none",bg="none",reset=True):
+def colorize(msg,color=None,attr=None,bg=None,reset=True):
     """Colorize the given message for console output"""
     feature="\033[" # \033[{color};{attr}m\033[{bg}m
     if not ctx.get_option('no_color'):

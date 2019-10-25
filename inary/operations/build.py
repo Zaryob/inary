@@ -226,7 +226,7 @@ class Builder:
         # scheme errors
         self.package_rfp=None
         if self.spec.source.rfp:
-            ctx.ui.info(util.colorize(_("[ !!! ] Building RFP for {}").format(self.spec.source.rfp),'none',"purple"))
+            ctx.ui.info(util.colorize(_("[ !!! ] Building RFP for {}").format(self.spec.source.rfp),"purple"))
             if ctx.ui.confirm(_("Would you like to compile this RFP package?")):
                 self.package_rfp=self.spec.source.rfp
             else:
@@ -553,7 +553,7 @@ class Builder:
     def unpack_source_archives(self):
         ctx.ui.status(_("Building source package: \"{}\" [ Unpacking Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ",'none', 'green') + _("Unpacking archive(s)..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
         # Grab AdditionalFiles
@@ -568,27 +568,27 @@ class Builder:
         #  Run configure, build and install phase
         ctx.ui.status(_("Building source package: \"{}\" [ SetupAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ",'none', 'green') + _("Setting up source..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
     def run_build_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ BuildAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'none','green') + _("Building source..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Building source..."))
         if self.run_action_function(ctx.const.build_func):
             self.set_state("buildaction")
 
     def run_check_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ CheckAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ",'none', 'green') + _("Testing package..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ",'none', 'green') + _("Installing..."))
+        ctx.ui.action(util.colorize(">>> ", 'green') + _("Installing..."))
 
         # Before the default install make sure install_dir is clean
         if not self.build_type and os.path.exists(self.pkg_install_dir()):
