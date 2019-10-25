@@ -108,12 +108,12 @@ class CLI(inary.ui.UI):
         msg = new_msg
         self.output(str(msg), verbose=verbose)
 
-    def info(self, msg, verbose=False, noln=False, color='default'):
+    def info(self, msg, verbose=False, noln=False, color='normal'):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         msg = util.colorize(msg, color)
         if verbose:
-            msg = util.colorize(_('Verboses: '), 'brightwhite') + msg
+            msg = util.colorize(_('Verboses: '), 'bright','white') + msg
         if not noln:
             msg = '{}\n'.format(msg)
 
@@ -127,7 +127,7 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
+            self.output(util.colorize(msg + '\n', 'bright','yellow'), err=True, verbose=verbose)
 
     def error(self, msg):
         msg = str(msg)
@@ -137,7 +137,7 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Error: ') + msg + '\n', err=True)
         else:
-            self.output(util.colorize(msg + '\n', 'brightred'), err=True)
+            self.output(util.colorize(msg + '\n', 'bright','red'), err=True)
 
     def action(self, msg, verbose=False):
         # TODO: this seems quite redundant?
@@ -151,7 +151,7 @@ class CLI(inary.ui.UI):
         endmsg = _('\n Select one:')
         prompt = ""
         for opt in opts:
-            prompt += util.colorize('[  {}  ]\n'.format(opt), 'faintblue')
+            prompt += util.colorize('[  {}  ]\n'.format(opt), 'faint','blue')
 
         while True:
             s = input(prompt)
@@ -171,7 +171,7 @@ class CLI(inary.ui.UI):
 
         while True:
             tty.tcflush(sys.stdin.fileno(), 0)
-            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+            prompt = msg + util.colorize(" "+_('(yes'),'none','green',reset=False) + '/' + util.colorize(_('no)'),'none', 'red') + ":  "
             s = input(prompt)
 
             if yes_expr.search(s):
@@ -188,9 +188,9 @@ class CLI(inary.ui.UI):
 
         elif ka['operation'] == "fetching":
             if not ctx.get_option("no_color"):
-                complated_background = 'backgroundgreen'
-                queried_background = 'backgroundyellow'
-                complated='brightblue'
+                complated_background = 'green'
+                queried_background = 'yellow'
+                complated='purple'
             else:
                 complated_background = queried_background = complated = "default"
 
@@ -215,11 +215,11 @@ class CLI(inary.ui.UI):
 
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
             if ka["percent"] == 100:
-                self.output("\r" + ctx.const.colors[complated] + msg + ctx.const.colors['default'])
+                self.output("\r" + util.colorize(msg ,"bright",complated))
             else:
-                self.output("\r" + ctx.const.colors[complated_background] + \
-                            msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
-                            ctx.const.colors['default'])
+                self.output("\r" + \
+                            util.colorize(msg[:lmsg],"bright",'purple',complated_background,False) + \
+                            util.colorize(msg[lmsg:],'bright','blue',queried_background))
             util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
         else:
@@ -231,7 +231,7 @@ class CLI(inary.ui.UI):
         if msg:
             msg = str(msg)
             if push_screen:
-                self.output(util.colorize(msg + '\n', 'brightgreen'))
+                self.output(util.colorize(msg + '\n', 'bright','green'))
             util.xterm_title(msg)
 
     def notify(self, event, logging=True, **keywords):

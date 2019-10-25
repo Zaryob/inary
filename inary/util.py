@@ -1028,13 +1028,38 @@ def filter_latest_packages(package_paths):
     return [x[0] for x in list(latest.values())]
 
 
-def colorize(msg, color):
+def colorize(msg ,attr="none",color="none",bg="none",reset=True):
     """Colorize the given message for console output"""
-    if color in ctx.const.colors and not ctx.get_option('no_color'):
-        return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
-    else:
-        return str(msg)
+    feature="\033[" # \033[{color};{attr}m\033[{bg}m
+    if not ctx.get_option('no_color'):
 
+        if color in ctx.const.colors:
+            feature += str(ctx.const.colors[color])
+
+        if attr in ctx.const.attrs:
+            feature += str(";" + str(ctx.const.attrs[attr]))
+
+        feature += "m"
+        if bg in ctx.const.backgrounds:
+            feature += "\033["+str(ctx.const.backgrounds[bg])+"m"
+
+        msg = (feature + str(msg))
+
+        if reset:
+            msg += str("\033[m")
+
+    return str(msg)
+
+def initscr():
+    """Clear terminal and create new ncurses like window"""
+    sys.stdout.write("\033s\033c")
+    sys.stdout.flush()
+
+def endscr():
+    """Close ncurses like window and return normal terminal"""
+    sys.stdout.write("\033c\033u")
+    sys.stdout.flush()
+    
 
 def config_changed(config_file):
     fpath = join_path(ctx.config.dest_dir(), config_file.path)

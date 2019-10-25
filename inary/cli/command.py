@@ -66,7 +66,7 @@ class Command(object):
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' ({})'.format(commandcls.name[1])
-            s += util.colorize(' %23s ' % name, 'blue') + '- %s\n' % summary
+            s += util.colorize(' %23s ' % name,'none', 'blue') + '- %s\n' % summary
         return s
 
     @staticmethod

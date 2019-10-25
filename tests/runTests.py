@@ -72,7 +72,7 @@ class InaryTestRunner(unittest.TextTestRunner):
             result.printErrors()
         self.stream.writeln(result.separator2)
         run = result.testsRun
-        self.stream.write(util.colorize("\n\n====== COMPLATE TESTS =======\n" ,'yellow'))
+        self.stream.write(util.colorize("\n\n====== COMPLATE TESTS =======\n" ,'none','yellow'))
         self.stream.writeln(util.colorize("  * Runned %d test%s in %.3fs" %
                             (run, run != 1 and "s" or "", timeTaken),'blue'))
         self.stream.writeln()
@@ -81,13 +81,13 @@ class InaryTestRunner(unittest.TextTestRunner):
             errored = len(result.errors)
             todoed = len(result.todoed)
             success = run - (failed + errored + todoed)
-            self.stream.write(util.colorize("    => %d Successed\n" % success, 'green'))
+            self.stream.write(util.colorize("    => %d Successed\n" % success, 'none','green'))
             if failed:
-                self.stream.write(util.colorize("\n    => %d Failures\n" % failed, 'red'))
+                self.stream.write(util.colorize("\n    => %d Failures\n" % failed,'none', 'red'))
             if errored:
-                self.stream.write(util.colorize("\n    => %d Errored\n" % errored, 'red'))
+                self.stream.write(util.colorize("\n    => %d Errored\n" % errored, 'none','red'))
             if todoed:
-                self.stream.write(util.colorize("\n    => %d ToDo  |" % todoed, 'yellow'))
+                self.stream.write(util.colorize("\n    => %d ToDo  |" % todoed,'none', 'yellow'))
         else:
             self.stream.writeln("Tests End Succesfull...")
         return result
