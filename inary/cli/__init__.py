@@ -113,7 +113,7 @@ class CLI(inary.ui.UI):
         # let's cheat from KDE :)
         msg = util.colorize(msg, color)
         if verbose:
-            msg = util.colorize(_('Verboses: '),'white''bright',) + msg
+            msg = util.colorize(_('Verboses: '),'white','bright') + msg
         if not noln:
             msg = '{}\n'.format(msg)
 
@@ -267,7 +267,7 @@ class CLI(inary.ui.UI):
             color = 'yellow'
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
-            attr='faint'
+           attr='faint'
             color = 'green'
         elif event == inary.ui.updatingrepo:
             msg = _('Updating package repository: \"{}\"').format(keywords['name'])
