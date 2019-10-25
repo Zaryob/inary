@@ -59,6 +59,10 @@ class Build(command.Command, metaclass=command.autocommand):
                          default=False,
                          help=_("Do not take dependency information into "
                                 "account."))
+        
+        group.add_option("--ignore-fakeroot",
+                         action="store_true", default=False,
+                         help=_("Disable fakeroot when building"))
 
         group.add_option("-O", "--output-dir",
                          action="store",
