@@ -181,6 +181,10 @@ def aclocal(parameters=''):
     if system('aclocal {}'.format(parameters)):
         raise RunTimeError(_('Running \'aclocal\' failed.'))
 
+def autogen():
+    """generates configure script from autogen"""
+    if system('bash autogen.sh'):
+        raise RunTimeError(_('Running \'autogen.sh\' script failed.'))
 
 def autoconf(parameters=''):
     """generates a configure script"""
