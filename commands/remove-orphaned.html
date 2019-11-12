@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>inary remove-orphaned &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Inary Documentation" href="../index.html"/>
+        <link rel="up" title="Inary Commands" href="index.html"/>
+        <link rel="next" title="inary search" href="search.html"/>
+        <link rel="prev" title="inary remove" href="remove.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation of Inary</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Inary Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blame.html">inary blame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">inary build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">inary check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html">inary configure-pending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html">inary delete-cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html">inary delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html">inary emerge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html">inary emergeup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">inary fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">inary graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html">inary info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">inary install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html">inary help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html">inary history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html">inary index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html">inary remove</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">inary remove-orphaned</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options"><strong>Options</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">inary search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html">inary upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html">Managing Repositories in INARY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Inary Commands</a> &raquo;</li>
+        
+      <li>inary remove-orphaned</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inary-remove-orphaned">
+<h1>inary remove-orphaned<a class="headerlink" href="#inary-remove-orphaned" title="Permalink to this headline">¶</a></h1>
+<p><cite>inary remove-orphaned</cite> allows us to delete packages whose come as a dependency of any package then reverse dependencies have been deleted. That is, it automatically removes unneeded packages.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This operation needs privileges and can be allowed by only super user.</p>
+</div>
+<div class="section" id="using">
+<h2><strong>Using</strong><a class="headerlink" href="#using" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary remove-orphaned
+sh ~$ inary ro
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2><strong>Options</strong><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>remove-orphaned options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">--ignore-dependency</span></kbd></dt>
+<dd><p>Do not take dependency information into account.</p>
+</dd>
+<dt><kbd><span class="option">--ignore-safety</span></kbd></dt>
+<dd><p>Bypass safety switch.</p>
+</dd>
+<dt><kbd><span class="option">--ignore-scom</span></kbd></dt>
+<dd><p>Bypass scom configuration agent.</p>
+</dd>
+<dt><kbd><span class="option">-n</span>, <span class="option">--dry-run</span></kbd></dt>
+<dd><p>Do not perform any action, just show what would be done.</p>
+</dd>
+<dt><kbd><span class="option">-x</span>, <span class="option">--exclude</span></kbd></dt>
+<dd><p>When removing orphaned, ignore packages and components whose basenames match pattern.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="example-runtime">
+<h2><strong>Example Runtime</strong><a class="headerlink" href="#example-runtime" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">sh ~$ inary remove-orphaned</span>
+<span class="l l-Scalar l-Scalar-Plain">The following list of packages will be removed in the respective order to satisfy dependencies</span><span class="p p-Indicator">:</span>
+<span class="l l-Scalar l-Scalar-Plain">libnut libdc1394</span>
+<span class="l l-Scalar l-Scalar-Plain">After this operation, 11.21 MB space will be freed.</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing &quot;libnut&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing files of &quot;libnut&quot; package from database...</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing files of &quot;libnut&quot; package from system...</span>
+<span class="l l-Scalar l-Scalar-Plain">Removed &quot;libnut&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing &quot;libdc1394&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing files of &quot;libdc1394&quot; package from database...</span>
+<span class="l l-Scalar l-Scalar-Plain">Removing files of &quot;libdc1394&quot; package from system...</span>
+<span class="l l-Scalar l-Scalar-Plain">Removed &quot;libdc1394&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="search.html" class="btn btn-neutral float-right" title="inary search" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="remove.html" class="btn btn-neutral" title="inary remove" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

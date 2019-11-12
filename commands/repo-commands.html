@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Managing Repositories in INARY &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Inary Documentation" href="../index.html"/>
+        <link rel="up" title="Inary Commands" href="index.html"/>
+        <link rel="next" title="Other Commands in INARY" href="list-commands.html"/>
+        <link rel="prev" title="inary upgrade" href="upgrade.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation of Inary</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Inary Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blame.html">inary blame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">inary build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">inary check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html">inary configure-pending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html">inary delete-cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html">inary delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html">inary emerge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html">inary emergeup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">inary fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">inary graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html">inary info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">inary install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html">inary help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html">inary history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html">inary index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html">inary remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html">inary remove-orphaned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">inary search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html">inary upgrade</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Managing Repositories in INARY</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-repository"><strong>Adding Repository</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#options"><strong>Options</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using"><strong>Using</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hints"><strong>Hints</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-repository"><strong>Removing Repository</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><strong>Using</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#update-repository"><strong>Update Repository</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><strong>Options</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><strong>Using</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><strong>Hints</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-activity-of-a-repository"><strong>Changing Activity of a Repository</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-repository"><strong>Enabling Repository</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-repository"><strong>Disabling Repository</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Inary Commands</a> &raquo;</li>
+        
+      <li>Managing Repositories in INARY</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="managing-repositories-in-inary">
+<h1>Managing Repositories in INARY<a class="headerlink" href="#managing-repositories-in-inary" title="Permalink to this headline">¶</a></h1>
+<p>inary package manager can download binary packages from repositories on local and remote servers. It allows adding and removing package repositories with a few commands.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Repository operations needs privileges and can be allowed by only super user.</p>
+</div>
+<div class="section" id="adding-repository">
+<h2><strong>Adding Repository</strong><a class="headerlink" href="#adding-repository" title="Permalink to this headline">¶</a></h2>
+<p>Adding a repository in system making with <cite>inary add-repo</cite> command</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Repository url can be a file path.</p>
+</div>
+<div class="section" id="options">
+<h3><strong>Options</strong><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>add-repo options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">--ignore-check</span></kbd></dt>
+<dd><p>Ignore repository distribution check</p>
+</dd>
+<dt><kbd><span class="option">--no-fetch</span></kbd></dt>
+<dd><p>Does not fetch repository index and does not check distribution match</p>
+</dd>
+<dt><kbd><span class="option">--at</span></kbd></dt>
+<dd><p>Add repository at given position (0 is first)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="using">
+<h3><strong>Using</strong><a class="headerlink" href="#using" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary add-repo &lt;repository-name&gt; &lt;repository-url&gt;
+sh ~$ inary ar &lt;repository-name&gt; &lt;repository-url&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="hints">
+<h3><strong>Hints</strong><a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>GPG key check is performed during the repository addition. This check action can be by-passed, if not bypass, the added repository will be deactivated</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="removing-repository">
+<h2><strong>Removing Repository</strong><a class="headerlink" href="#removing-repository" title="Permalink to this headline">¶</a></h2>
+<p>Removing a repository in system making with <cite>inary remove-repo</cite> command</p>
+<div class="section" id="id1">
+<h3><strong>Using</strong><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary remove-repo &lt;repository-name&gt;
+sh ~$ inary rr &lt;repository-name&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="update-repository">
+<h2><strong>Update Repository</strong><a class="headerlink" href="#update-repository" title="Permalink to this headline">¶</a></h2>
+<p>Refreshing the repository informations can be made with <cite>inary update-repo</cite> command. It synchronizes repository information whether index’s sha1sum has changed.</p>
+<div class="section" id="id2">
+<h3><strong>Options</strong><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>update-repo options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">--f</span>, <span class="option">--force</span></kbd></dt>
+<dd><p>Update database in any case</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="id3">
+<h3><strong>Using</strong><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><cite>update-repo</cite> operation refreshes given repositor(y/ies) if the argument is given…</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary update-repo &lt;repository-name&gt;
+sh ~$ inary ur &lt;repository-name&gt;
+</pre></div>
+</div>
+<p>…but refreshes all repositories if no argument is given.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary update-repo
+sh ~$ inary ur
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><strong>Hints</strong><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>GPG key checking is also making when this process is happened. So, if you won’t confirm to pass this check action your updated repository will be deactivated.</p></li>
+<li><p>Disable repositories will not updated unless otherwise specified.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="changing-activity-of-a-repository">
+<h2><strong>Changing Activity of a Repository</strong><a class="headerlink" href="#changing-activity-of-a-repository" title="Permalink to this headline">¶</a></h2>
+<p>There are two types of repository in the system:
+* Enable Repositories: added repositories are enabled by default.
+* Disable Repositories: if a GPG key error is occurred while adding/updating a repository, or, if the user requests this, the repositories are deactivated.</p>
+<div class="section" id="enabling-repository">
+<h3><strong>Enabling Repository</strong><a class="headerlink" href="#enabling-repository" title="Permalink to this headline">¶</a></h3>
+<p><cite>inary enable-repo</cite> command is used to activate a repository which has already deactivated.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary enable-repo &lt;repository-name&gt;
+sh ~$ inary er &lt;repository-name&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="disabling-repository">
+<h3><strong>Disabling Repository</strong><a class="headerlink" href="#disabling-repository" title="Permalink to this headline">¶</a></h3>
+<p><cite>inary disable-repo</cite> command is used to deactivate a repository.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary disable-repo &lt;repository-name&gt;
+sh ~$ inary dr &lt;repository-name&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="list-commands.html" class="btn btn-neutral float-right" title="Other Commands in INARY" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="upgrade.html" class="btn btn-neutral" title="inary upgrade" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

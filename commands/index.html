@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inary Commands &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Inary Documentation" href="../index.html"/>
+        <link rel="next" title="inary blame" href="blame.html"/>
+        <link rel="prev" title="Installation of Inary" href="../installation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation of Inary</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Inary Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blame.html">inary blame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">inary build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">inary check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html">inary configure-pending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html">inary delete-cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html">inary delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html">inary emerge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html">inary emergeup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">inary fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">inary graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html">inary info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">inary install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html">inary help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html">inary history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html">inary index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html">inary remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html">inary remove-orphaned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">inary search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html">inary upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html">Managing Repositories in INARY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Inary Commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inary-commands">
+<h1>Inary Commands<a class="headerlink" href="#inary-commands" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="blame.html">inary blame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blame.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="blame.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="blame.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">inary build</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="check.html">inary check</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="check.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configure-pending.html">inary configure-pending</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="delete-cache.html">inary delete-cache</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="delta.html">inary delta</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="delta.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="emerge.html">inary emerge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="emergeup.html">inary emergeup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fetch.html">inary fetch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graph.html">inary graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graph.html#output"><strong>Output</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="info.html">inary info</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="info.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">inary install</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">inary help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="help.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html#output"><strong>Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">inary history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="history.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#hints"><strong>Hints</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_cmd.html">inary index</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html#example-runtime-output"><strong>Example Runtime Output</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remove.html">inary remove</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remove.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remove-orphaned.html">inary remove-orphaned</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">inary search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="search.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="search-file.html">inary search-file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="upgrade.html">inary upgrade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="repo-commands.html">Managing Repositories in INARY</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html#adding-repository"><strong>Adding Repository</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#options"><strong>Options</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#hints"><strong>Hints</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html#removing-repository"><strong>Removing Repository</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#id1"><strong>Using</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html#update-repository"><strong>Update Repository</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#id2"><strong>Options</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#id3"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#id4"><strong>Hints</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html#changing-activity-of-a-repository"><strong>Changing Activity of a Repository</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#enabling-repository"><strong>Enabling Repository</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="repo-commands.html#disabling-repository"><strong>Disabling Repository</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-available"><strong>inary list-available</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#using"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#options"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-sources"><strong>inary list-sources</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id1"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id2"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-newest"><strong>inary list-newest</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id3"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id4"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-upgrades"><strong>inary list-upgrades</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id5"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id6"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-installed"><strong>inary list-installed</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id7"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id8"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-repo"><strong>inary list-repo</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id9"><strong>Using</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-orphaned"><strong>inary list-orphaned</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id10"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id11"><strong>Options</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html#inary-list-components"><strong>inary list-components</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id12"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="list-commands.html#id13"><strong>Options</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="blame.html" class="btn btn-neutral float-right" title="inary blame" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../installation.html" class="btn btn-neutral" title="Installation of Inary" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

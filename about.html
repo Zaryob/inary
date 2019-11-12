@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>About Inary Software &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="#"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Inary Documentation" href="index.html"/>
+        <link rel="next" title="Installation of Inary" href="installation.html"/>
+        <link rel="prev" title="Inary Handbook" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation of Inary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands/index.html">Inary Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>About Inary Software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="about-inary-software">
+<h1>About Inary Software<a class="headerlink" href="#about-inary-software" title="Permalink to this headline">¶</a></h1>
+<p><cite>PiSi</cite> fork: Copyright (C) 2005 - 2011, Tubitak / UEKAE
+          Licensed with GNU / General Public License version 2.</p>
+<p>Inary fork and enhancements: Copyright (C) 2016 - 2018 Suleyman POYRAZ (Zaryob)
+          License has been upgraded to version 3 of the GNU / General Public License.</p>
+<p>Bifurcated from <a class="reference external" href="https://github.com/Pardus-Linux/pisi">https://github.com/Pardus-Linux/pisi</a></p>
+<p>Inary package management system started to work on the pisi fork on 21-12-2016 in order to repair the deficiencies and errors of the existing pisi package manager and to port it to python3 to catch up with the latest developments in Python Programming language;
+The first pisi fork (spam) was separated from the fork in terms of coding method and additional modules used and turned into a unique one. The name of the library has been changed from pisi to inary. The reason for this is to avoid conflicts with linux distributions that use similar infrastructure, such as <a class="reference external" href="https://dev.sol.us/">Solus</a> and  <a class="reference external" href="https://www.pisilinux.org">PisiLinux</a>.</p>
+<p>The software was called inary and was made available to the public through the <a class="reference external" href="https://gitlab.com/SulinOS">gitlab</a> and <a class="reference external" href="https://github.com/SulinOS">github</a> when it provided the appropriate conditions for the end users.</p>
+<p>What distinguishes it from other package management systems:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Has dynamic file database. It is easy to follow up whether there is a change in the installed files.</p></li>
+<li><p>Compared to other package managers coded with Python, it is quite fast.</p></li>
+<li><p>Since all the installation script consists of python script. Since the other data of the package is stored in xml files, package building steps can be done without without entering tons of code.</p></li>
+<li><p>Post-package and post-package operations (postinstall) do not cause any process confusion by separate software.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Other features:</dt><dd><ul class="simple">
+<li><p>It is robust and fast because it works with a database embedded in python.</p></li>
+<li><p>Because it uses LZMA and XZ compression methods, it has smaller packages.</p></li>
+<li><p>Simple and high-level operations with the same determination</p></li>
+<li><p>It includes an API suitable for designing forend applications.</p></li>
+<li><p>Terminal interface is very understandable and user-friendly.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation of Inary" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Inary Handbook" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation of Inary &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Inary Documentation" href="index.html"/>
+        <link rel="next" title="Inary Commands" href="commands/index.html"/>
+        <link rel="prev" title="About Inary Software" href="about.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Inary Software</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation of Inary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-under-another-distro">Installation under another distro</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#use-to-switch-to-sulin-from-another-distro">Use to switch to Sulin from another distro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brew-like-using">Brew-Like using</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-on-sulinos">Installation on SulinOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrade-inary">Upgrade inary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-post-install-processes">Package Post install Processes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commands/index.html">Inary Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation of Inary</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-of-inary">
+<h1>Installation of Inary<a class="headerlink" href="#installation-of-inary" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation-under-another-distro">
+<h2>Installation under another distro<a class="headerlink" href="#installation-under-another-distro" title="Permalink to this headline">¶</a></h2>
+<p>If you’re using another distribution, inary can be used in two ways</p>
+<ul class="simple">
+<li><p>to completely switch to sulin: with inary it’s easy to switch to sulin without downloading and reinstalling iso</p></li>
+<li><p>to install programs in your userspace: Like brew package manager</p></li>
+</ul>
+<div class="section" id="use-to-switch-to-sulin-from-another-distro">
+<h3>Use to switch to Sulin from another distro<a class="headerlink" href="#use-to-switch-to-sulin-from-another-distro" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~# git clone https://github.com/SulinOS/inary.git
+sh ~# <span class="nb">cd</span> inary
+sh ~# python3 setup.py install
+sh ~# <span class="nb">cd</span> ..
+sh ~# git clone https://github.com/SulinOS/switch-sulin.git
+sh ~# <span class="nb">cd</span> switch-sulin
+sh ~# ./switch-sulin --interactive
+sh ~# inary rdb
+sh ~# inary cp
+sh ~# shutdown -r now
+</pre></div>
+</div>
+</div>
+<div class="section" id="brew-like-using">
+<h3>Brew-Like using<a class="headerlink" href="#brew-like-using" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ mkdir ~/.inary
+sh ~$ git clone https://github.com/SulinOS/inary.git
+sh ~$ python3 setup.py build
+sh ~$ python3 setup.py install --root<span class="o">=</span>~/.inary
+sh ~$ python3 scripts/inary-profile <span class="k">select</span> brew-like
+sh ~$ inary rdb
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installation-on-sulinos">
+<h2>Installation on SulinOS<a class="headerlink" href="#installation-on-sulinos" title="Permalink to this headline">¶</a></h2>
+<p>In the distribution of Sulin, Inary comes  preloaded.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>you can install inary fallowing steps to installing any other distro, but this could break the preloaded inary package.</p>
+</div>
+</div>
+<div class="section" id="upgrade-inary">
+<h2>Upgrade inary<a class="headerlink" href="#upgrade-inary" title="Permalink to this headline">¶</a></h2>
+<p>Inary allows self-updating…</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary ur
+sh ~$ inary up inary
+</pre></div>
+</div>
+<p>…or you can also upgrade it from exist cloned repository</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~# <span class="nb">cd</span> inary
+sh ~# git pull
+sh ~# python3 setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-post-install-processes">
+<h2>Package Post install Processes<a class="headerlink" href="#package-post-install-processes" title="Permalink to this headline">¶</a></h2>
+<p>For inary package management system, Comar has been forked and developed  and scom is a former inary dependency and contains pisi package configuration scripts.</p>
+<p>Unless otherwise specified (scom script running can be ignored with using <cite>–ignore-scom</cite> parameter), scom scripts will be executed after package installation.</p>
+<p>However, unlike in the past, existing inary allows packet processing without using scom. In this case, the configuration after the installation of the packages is left entirely to the users hand.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commands/index.html" class="btn btn-neutral float-right" title="Inary Commands" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="about.html" class="btn btn-neutral" title="About Inary Software" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

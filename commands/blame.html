@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>inary blame &mdash; Inary Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Inary Documentation" href="../index.html"/>
+        <link rel="up" title="Inary Commands" href="index.html"/>
+        <link rel="next" title="inary build" href="build.html"/>
+        <link rel="prev" title="Inary Commands" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation of Inary</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Inary Commands</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">inary blame</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using"><strong>Using</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options"><strong>Options</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-runtime"><strong>Example Runtime</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build.html">inary build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">inary check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-pending.html">inary configure-pending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delete-cache.html">inary delete-cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="delta.html">inary delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emerge.html">inary emerge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="emergeup.html">inary emergeup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">inary fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">inary graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info.html">inary info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">inary install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="help.html">inary help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html">inary history</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_cmd.html">inary index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove.html">inary remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html">inary remove-orphaned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">inary search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade.html">inary upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="repo-commands.html">Managing Repositories in INARY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Inary Commands</a> &raquo;</li>
+        
+      <li>inary blame</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inary-blame">
+<h1>inary blame<a class="headerlink" href="#inary-blame" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt><cite>inary blame</cite> gives information of packager name and email from <a class="reference internal" href="../glossary.html#term-installdb"><span class="xref std std-term">installdb</span></a> or package file.</dt><dd><p><cite>blame</cite> operation gives information under history tag rather than giving detailed information</p>
+</dd>
+</dl>
+<div class="section" id="using">
+<h2><strong>Using</strong><a class="headerlink" href="#using" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary blame &lt;package-name or package-file&gt;
+sh ~$ inary bl &lt;package-name or package-file&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2><strong>Options</strong><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>blame options:</p>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">-r</span>, <span class="option">--release</span></kbd></dt>
+<dd><p>Blame for the given release</p>
+</dd>
+<dt><kbd><span class="option">-a</span>, <span class="option">--all</span></kbd></dt>
+<dd><p>Blame for the given release</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="example-runtime">
+<h2><strong>Example Runtime</strong><a class="headerlink" href="#example-runtime" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ inary blame expat
+Name: expat, version: <span class="m">2</span>.2.6, release: <span class="m">1</span>
+Package Maintainer: Süleyman POYRAZ &lt;zaryob.dev@gmail.com&gt;
+Release Updater: Süleyman POYRAZ &lt;zaryob.dev@gmail.com&gt;
+Update Date: <span class="m">2018</span>-12-23
+
+First release
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build.html" class="btn btn-neutral float-right" title="inary build" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Inary Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on Nov 11, 2019.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
