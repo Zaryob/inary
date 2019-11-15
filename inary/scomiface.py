@@ -147,7 +147,7 @@ def post_install(package_name, provided_scripts,
             if not is_method_missing(exception):
                 raise Error(_("Script error for \"{0}\" package: {1}.").format(package_name, exception))
 
-    if self_post:
+    if (self_post and hasattr(link.System.Package[package_name],"postInstall")):
         if not fromVersion:
             fromVersion = ""
         if not fromRelease:
@@ -172,7 +172,7 @@ def pre_remove(package_name, metapath, filepath):
 
     package_name = safe_script_name(package_name)
 
-    if package_name in list(link.System.Package):
+    if (package_name in list(link.System.Package) and hasattr(link.System.Package[package_name],"preRemove")):
         ctx.ui.debug(_("Running package's pre remove script for \"{}\" package.").format(package_name))
         try:
             link.System.Package[package_name].preRemove(
@@ -207,7 +207,7 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
                    in provided_scripts if s.name])
     scripts.add(package_name)
 
-    if package_name in list(link.System.Package):
+    if (package_name in list(link.System.Package) and hasattr(link.System.Package[package_name],"postRemove")):
         ctx.ui.debug(_("Running package's postremove script for \"{}\" package.").format(package_name))
         try:
             link.System.Package[package_name].postRemove(
