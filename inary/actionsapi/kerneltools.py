@@ -52,7 +52,7 @@ def __getAllSupportedFlavours():
 
 def __getFlavour():
     try:
-        flavour = get.srcNAME().split("kernel-")[1]
+        flavour = get.srcNAME().split("linux-")[1]
     except IndexError:
         return ""
     else:
@@ -69,7 +69,7 @@ def __getModuleFlavour():
             # needing the kernel sources/headers for only reference.
             pass
 
-    return "kernel"
+    return "linux"
 
 
 def __getKernelARCH():
@@ -173,7 +173,7 @@ def install():
     dumpVersion()
 
     # Install kernel image
-    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "kernel-{}".format(suffix))
+    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "linux-{}".format(suffix))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
