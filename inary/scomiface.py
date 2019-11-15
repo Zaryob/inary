@@ -45,8 +45,7 @@ def is_char_valid(char):
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in SCOM script"""
-    if exception._dbus_error_name in ("tr.org.sulin.scom.python.missing",
-                                      "tr.org.sulin.scom.Missing"):
+    if "tr.org.sulin.scom.Missing" in str(exception):
         return True
     return False
 
