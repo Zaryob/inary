@@ -179,7 +179,7 @@ class Package:
         tar = archive.ArchiveTar(fileobj=archive_file,
                                  arch_type=archive_format,
                                  no_same_permissions=False,
-                                 no_same_owner=True)
+                                 no_same_owner=False)
 
         return tar
 
