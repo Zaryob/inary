@@ -585,8 +585,10 @@ class ArchiveTarZ(ArchiveBase):
 
             if self.no_same_owner:
                 if not os.path.islink(tarinfo.name):
+                    ctx.ui.info(_("Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
                     os.chown(tarinfo.name, uid, gid)
                 else:
+                    ctx.ui.info(_("LChowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
                     os.lchown(tarinfo.name, uid, gid)
 
         # Bug #10680 and addition for tarZ files
