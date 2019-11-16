@@ -80,8 +80,8 @@ def meson_configure(parameters=""):
         raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("meson.build")))
 
 def cmake_configure(parameters=""):
-    shelltools.makedirs("inaryPackageBuild")
-    shelltools.cd("inaryPackageBuild")
+    makedirs("inaryPackageBuild")
+    cd("inaryPackageBuild")
 
     if can_access_file(util.join_path("..", 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
@@ -89,7 +89,7 @@ def cmake_configure(parameters=""):
                       -DCMAKE_C_FLAGS="{6} {2}" \
                       -DCMAKE_CXX_FLAGS="{6} {3}" \
                       -DCMAKE_LD_FLAGS="{4}" \
-                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} -G Ninja'.format(get.defaultprefixDIR(),
+                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} -G Ninja ..'.format(get.defaultprefixDIR(),
                                                                         "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
                                                                         get.CFLAGS(),
                                                                         get.CXXFLAGS(),
