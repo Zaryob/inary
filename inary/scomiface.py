@@ -45,8 +45,8 @@ def is_char_valid(char):
 
 def is_method_missing(exception):
     """Tells if exception is about missing method in SCOM script"""
-    if exception._dbus_error_name in ("tr.org.sulin.scom.python.missing",
-                                      "tr.org.sulin.scom.Missing"):
+    if ("tr.org.sulin.scom.Missing" or "tr.org.sulin.scom.python.missing") in str(exception):
+        ctx.ui.debug(str(exception).split(":")[-1])
         return True
     return False
 
@@ -147,7 +147,7 @@ def post_install(package_name, provided_scripts,
             if not is_method_missing(exception):
                 raise Error(_("Script error for \"{0}\" package: {1}.").format(package_name, exception))
 
-    if self_post:
+    if (self_post and hasattr(link.System.Package[package_name], "postInstall")):
         if not fromVersion:
             fromVersion = ""
         if not fromRelease:
@@ -173,14 +173,15 @@ def pre_remove(package_name, metapath, filepath):
     package_name = safe_script_name(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's pre remove script for \"{}\" package.").format(package_name))
-        try:
-            link.System.Package[package_name].preRemove(
-                timeout=ctx.dbus_timeout)
-        except dbus.exceptions.DBusException as exception:
-            # Do nothing if preRemove method is not defined in package script
-            if not is_method_missing(exception):
-                raise Error(_("Script error: {}").format(exception))
+        if hasattr(link.System.Package[package_name], "preRemove"):
+            ctx.ui.debug(_("Running package's pre remove script for \"{}\" package.").format(package_name))
+            try:
+                link.System.Package[package_name].preRemove(
+                    timeout=ctx.dbus_timeout)
+            except dbus.exceptions.DBusException as exception:
+                # Do nothing if preRemove method is not defined in package script
+                if not is_method_missing(exception):
+                    raise Error(_("Script error: {}").format(exception))
 
     ctx.ui.debug(_("Calling pre remove handlers for \"{}\" package.").format(package_name))
     for handler in list(link.System.PackageHandler):
@@ -208,14 +209,15 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
     scripts.add(package_name)
 
     if package_name in list(link.System.Package):
-        ctx.ui.debug(_("Running package's postremove script for \"{}\" package.").format(package_name))
-        try:
-            link.System.Package[package_name].postRemove(
-                timeout=ctx.dbus_timeout)
-        except dbus.exceptions.DBusException as exception:
-            # Do nothing if postRemove method is not defined in package script
-            if not is_method_missing(exception):
-                raise Error(_("Script error: {}").format(exception))
+        if hasattr(link.System.Package[package_name], "postRemove"):
+            ctx.ui.debug(_("Running package's postremove script for \"{}\" package.").format(package_name))
+            try:
+                link.System.Package[package_name].postRemove(
+                    timeout=ctx.dbus_timeout)
+            except dbus.exceptions.DBusException as exception:
+                # Do nothing if postRemove method is not defined in package script
+                if not is_method_missing(exception):
+                    raise Error(_("Script error: {}").format(exception))
 
     ctx.ui.debug(_("Calling post remove handlers for \"{}\" package.").format(package_name))
     for handler in list(link.System.PackageHandler):
