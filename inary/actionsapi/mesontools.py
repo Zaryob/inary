@@ -84,7 +84,7 @@ def cmake_configure(parameters=""):
     cd("inaryPackageBuild")
 
     if can_access_file(util.join_path("..", 'CMakeLists.txt')):
-        args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
+        args = 'cmake -DCMAKE_INSTALL_PREFIX=/{0} \
                       -DCMAKE_INSTALL_LIBDIR={1} \
                       -DCMAKE_C_FLAGS="{6} {2}" \
                       -DCMAKE_CXX_FLAGS="{6} {3}" \
