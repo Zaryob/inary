@@ -101,10 +101,8 @@ def get_link():
     raise Error(_("Cannot connect to SCOM: \n  \"{}\"\n").format("\n  ".join(exceptions)))
 
 
-def post_install(package_name, provided_scripts,
-                 scriptpath, metapath, filepath,
-                 fromVersion, fromRelease, toVersion, toRelease):
-    """Do package's post install operations"""
+def registerScom(package_name, provided_scripts, scriptpath):
+    """Register package's scom scripts"""
 
     self_post = False
 
@@ -134,6 +132,34 @@ def post_install(package_name, provided_scripts,
             except dbus.exceptions.DBusException as exception:
                 raise Error(_("Script error: {}").format(exception))
 
+def pre_install(package_name, fromVersion, fromRelease, toVersion, toRelease):
+    """Do package's post install operations"""
+    if (self_post and hasattr(link.System.Package[package_name], "preInstall")):
+        if not fromVersion:
+            fromVersion = ""
+        if not fromRelease:
+            fromRelease = ""
+
+        ctx.ui.debug(_("Running pre install script for \"{0}\" package.").format(package_name))
+        try:
+            link.System.Package[package_name].preInstall(
+                fromVersion, fromRelease, toVersion, toRelease,
+                timeout=ctx.dbus_timeout)
+        except dbus.exceptions.DBusException as exception:
+            # Do nothing if preInstall method is not defined in package script
+            if not is_method_missing(exception):
+                raise Error(_("Script error for \"{0}\" package: {1}").format(package_name, exception))
+
+
+
+def post_install(package_name, metapath, filepath,
+                 fromVersion, fromRelease, toVersion, toRelease):
+
+    ctx.ui.info(_("Running post install operations for \"{}\" package.").format(package_name))
+    link = get_link()
+
+    package_name = safe_script_name(package_name)
+
     ctx.ui.debug(_("Calling post install handlers for \"{}\" package.").format(package_name))
     for handler in link.System.PackageHandler:
         try:
@@ -147,7 +173,7 @@ def post_install(package_name, provided_scripts,
             if not is_method_missing(exception):
                 raise Error(_("Script error for \"{0}\" package: {1}.").format(package_name, exception))
 
-    if (self_post and hasattr(link.System.Package[package_name], "postInstall")):
+    if hasattr(link.System.Package[package_name], "postInstall"):
         if not fromVersion:
             fromVersion = ""
         if not fromRelease:

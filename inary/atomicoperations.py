@@ -167,9 +167,9 @@ class Install(AtomicOperation):
         self.check_operation()
 
         ctx.disable_keyboard_interrupts()
-
-        self.extract_install()
         self.store_inary_files()
+        self.preinstall()
+        self.extract_install()
         self.postinstall()
         self.update_databases()
 
@@ -303,6 +303,35 @@ class Install(AtomicOperation):
     def reinstall(self):
         return not self.operation == INSTALL
 
+    def preinstall(self):
+        if self.metadata.package.providesScom:
+            if ctx.scom and not ctx.get_option("ignore_scom"):
+                import inary.scomiface
+                try:
+                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
+                        fromVersion = self.old_pkginfo.version
+                        fromRelease = self.old_pkginfo.release
+                    else:
+                        fromVersion = None
+                        fromRelease = None
+                    ctx.ui.action(_("Working on package preInstall operations."))
+                    inary.scomiface.pre_install(
+                        self.pkginfo.name,
+                        self.metadata.package.providesScom,
+                        self.package.scom_dir(),
+                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                        fromVersion,
+                        fromRelease,
+                        self.metadata.package.version,
+                        self.metadata.package.release
+                    )
+                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
+                except inary.scomiface.Error:
+                    pass
+            else:
+                pass
+
     def postinstall(self):
         self.config_later = False
 
@@ -325,10 +354,9 @@ class Install(AtomicOperation):
                         fromVersion = None
                         fromRelease = None
                     ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
+
                     inary.scomiface.post_install(
                         self.pkginfo.name,
-                        self.metadata.package.providesScom,
-                        self.package.scom_dir(),
                         os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                         os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
                         fromVersion,
