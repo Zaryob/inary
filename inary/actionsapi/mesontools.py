@@ -15,13 +15,15 @@ import inary.actionsapi
 import inary.util as util
 import inary.context as ctx
 from inary.actionsapi import get
-from inary.actionsapi.shelltools import can_access_file
-from inary.actionsapi.shelltools import system
+from inary.actionsapi.shelltools import cd
 from inary.actionsapi.shelltools import ls
 from inary.actionsapi.shelltools import copy
 from inary.actionsapi.inarytools import dosed
-from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.shelltools import system
+from inary.actionsapi.shelltools import makedirs
 from inary.actionsapi.inarytools import removeDir
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.shelltools import can_access_file
 
 import gettext
 
@@ -77,6 +79,28 @@ def meson_configure(parameters=""):
     else:
         raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("meson.build")))
 
+def cmake_configure(parameters=""):
+    shelltools.makedirs("inaryPackageBuild")
+    shelltools.cd("inaryPackageBuild")
+
+    if can_access_file(util.join_path("..", 'CMakeLists.txt')):
+        args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
+                      -DCMAKE_INSTALL_LIBDIR={1} \
+                      -DCMAKE_C_FLAGS="{6} {2}" \
+                      -DCMAKE_CXX_FLAGS="{6} {3}" \
+                      -DCMAKE_LD_FLAGS="{4}" \
+                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} -G Ninja'.format(get.defaultprefixDIR(),
+                                                                        "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
+                                                                        get.CFLAGS(),
+                                                                        get.CXXFLAGS(),
+                                                                        get.LDFLAGS(),
+                                                                        parameters,
+                                                                        "-m32"  if get.buildTYPE() == "emul32" else "-m64")
+
+        if system(args):
+            raise ConfigureError(_('CMake configure failed.'))
+    else:
+        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
 
 def ninja_build(parameters=""):
     if system("ninja {} {} -C inaryPackageBuild".format(get.makeJOBS(), parameters)):
