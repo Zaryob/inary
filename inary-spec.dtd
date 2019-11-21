@@ -10,6 +10,7 @@
 	Name |
 	Homepage |
 	Icon |
+	Rfp |
 	Packager |
 	ExcludeArch |
 	License |
@@ -28,6 +29,8 @@
 <!ELEMENT Homepage (#PCDATA)>
 
 <!ELEMENT Icon (#PCDATA)>
+
+<!ELEMENT Rfp (#PCDATA)>
 
 <!ELEMENT Packager (Name, Email)>
 <!ELEMENT Email (#PCDATA)>
@@ -85,6 +88,7 @@
 	Name |
 	License |
 	Icon |
+	Rfp |
 	IsA |
 	PartOf |
 	Summary |
