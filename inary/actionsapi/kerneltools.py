@@ -197,12 +197,10 @@ def install():
 
 def installHeaders(extraHeaders=None):
     """ Install the files needed to build out-of-tree kernel modules. """
-
-    extras = ["arch/x86/include",
-              "drivers/md/",
+    extras = ["drivers/md/",
               "net/mac80211",
               "drivers/media/i2c/",
-              "drivers/media/dvb-usb",
+              "drivers/media/usb/dvb-usb",
               "drivers/media/dvb-frontends",
               "drivers/media/tuners",
               "drivers/media/platform"]
@@ -228,12 +226,13 @@ def installHeaders(extraHeaders=None):
 
     shelltools.system(find_cmd)
 
+    shelltools.system("pwd")
     # Install additional headers
     for headers in extras:
         if not os.path.exists("{0}/{1}".format(destination, headers)):
             shelltools.system("mkdir -p {0}/{1}".format(destination, headers))
+        shelltools.system("pwd")
         shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
-
     # Install remaining headers
     shelltools.system("cp -a {0} {1}".format(" ".join(pruned), destination))
 
@@ -253,7 +252,6 @@ def installHeaders(extraHeaders=None):
     shutil.copy("Kbuild", "{}/".format(destination))
     shutil.copy("Kconfig", "{}/".format(destination))
     shutil.copy("Makefile", "{}/".format(destination))
-    shutil.copytree("scripts/", "{}/".format(destination))
 
     # Copy .config file which will be needed by some external modules
     shutil.copy(".config", "{}/".format(destination))
@@ -261,7 +259,6 @@ def installHeaders(extraHeaders=None):
     # Settle the correct build symlink to this headers
     inarytools.dosym("/{}".format(headersDirectoryName), "/lib/modules/{}-sulinos/build".format(suffix))
     inarytools.dosym("build", "/lib/modules/{}-sulinos/source".format(suffix))
-    shutil.copy("arch/x86/kernel/asm-offsets.s", "{}/lib/modules/{}-sulinos/source/arch/x86/kernel".format(get.installDIR(), suffix))
 
 def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
