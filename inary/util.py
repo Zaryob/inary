@@ -1110,12 +1110,6 @@ def get_kernel_option(option):
 
     return args
 
-def wsl_block():
-   """"Fuck the WSL"""
-   f=open("/proc/version","r").readline()
-   if (("Microsoft" in f) or ("WSL" in f)):
-     exit(1)
-
 def get_cpu_count():
     """
     This function part of portage
