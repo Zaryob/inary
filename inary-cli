@@ -31,7 +31,7 @@ gettext.bindtextdomain('inary', "/usr/share/locale")
 gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
+util.wsl_block()
 
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
