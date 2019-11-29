@@ -71,7 +71,6 @@ class FileError(Error):
 class FilePermissionDeniedError(Error):
     pass
 
-
 def locked(func):
     """
     Decorator for synchronizing privileged functions
@@ -1104,7 +1103,6 @@ def get_kernel_option(option):
                     args[arg] = ""
 
     return args
-
 
 def get_cpu_count():
     """
