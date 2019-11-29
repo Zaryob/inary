@@ -32,7 +32,6 @@ gettext.textdomain('inary')
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
         exit()
@@ -40,7 +39,6 @@ def sig_handler(sig, frame):
 
 def exit():
     sys.exit(1)
-
 
 def handle_exception(exception, value, tb):
     signal.signal(signal.SIGINT, signal.SIG_IGN)  # disable further interrupts
@@ -85,8 +83,17 @@ def handle_exception(exception, value, tb):
 
     exit()
 
+# This is blocking WSL bash to supply stability of packages
+# created by packagers.
+def blc_wsl():
+    """Dont allow fucking WSL"""
+    f=open("/proc/version","r").readline()
+    if (("Microsoft" in f) or ("WSL" in f)):
+        print(_("Using inary in WSL environment is not allowed."))
+        exit()
 
 if __name__ == "__main__":
+    blc_wsl()
     sys.excepthook = handle_exception
 
     signal.signal(signal.SIGTERM, sig_handler)
