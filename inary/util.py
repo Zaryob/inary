@@ -71,12 +71,6 @@ class FileError(Error):
 class FilePermissionDeniedError(Error):
     pass
 
-def wsl_block():
-    """Fuck the WSL"""
-   f=open("/proc/version","r").readline()
-   if (("Microsoft" in f) or ("WSL" in f)):
-     exit(1)
-
 def locked(func):
     """
     Decorator for synchronizing privileged functions
