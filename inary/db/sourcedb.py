@@ -60,7 +60,7 @@ class SourceDB(lazydb.LazyDB):
             compressed_data = gzip.zlib.compress(xmlext.toString(spec).encode('utf-8'))
             sources[src_name] = compressed_data
 
-            for package in xmlext.getTagByName(doc, "Package"):
+            for package in xmlext.getTagByName(spec, "Package"):
                 pkgstosrc[xmlext.getNodeText(package, "Name")] = src_name
 
         return sources, pkgstosrc
