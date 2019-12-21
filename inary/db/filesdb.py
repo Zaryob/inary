@@ -125,7 +125,6 @@ def rebuild_db():
     # save parameters and shutdown inary
     options = ctx.config.options
     ui = ctx.ui
-    scom = ctx.scom
     from inary import _cleanup
     _cleanup()
 
@@ -137,4 +136,3 @@ def rebuild_db():
     # reinitialize everything
     ctx.ui = ui
     ctx.config.set_options(options)
-    ctx.scom = scom

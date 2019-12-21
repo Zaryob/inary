@@ -459,7 +459,6 @@ class Builder:
         self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_additionalFiles()
-        self.fetch_scomfiles()
 
         return self.destdir
 
@@ -500,15 +499,6 @@ class Builder:
                 self.download(afileuri, util.join_path(self.destdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
-
-    def fetch_scomfiles(self):
-        for package in self.spec.packages:
-            for pscom in package.providesScom:
-                scomuri = util.join_path(self.specdiruri,
-                                         ctx.const.scom_dir, pscom.script)
-                self.download(scomuri, util.join_path(self.specdir,
-                                                      ctx.const.scom_dir))
-                ctx.ui.info("Scom Script Fetched {}".format(pscom.script))
 
     @staticmethod
     def download(uri, transferdir):
@@ -687,23 +677,6 @@ class Builder:
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
-
-    def compile_scom_script(self):
-        """Compiles scom scripts to check syntax errors"""
-        for package in self.spec.packages:
-            for pscom in package.providesScom:
-                fname = util.join_path(self.specdir, ctx.const.scom_dir,
-                                       pscom.script)
-
-                try:
-                    buf = open(fname).read()
-                    compile(buf, "error", "exec")
-                except IOError as e:
-                    raise Error(_("Unable to read SCOM script ({0}): {1}").format(
-                        fname, e))
-                except SyntaxError as e:
-                    raise Error(_("SyntaxError in SCOM file ({0}): {1}").format(
-                        fname, e))
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -1211,13 +1184,6 @@ package might be a good solution."))
                                         format=self.target_package_format,
                                         tmp_dir=self.pkg_dir())
 
-            # add config files to package
-            os.chdir(self.specdir)
-            for pscom in package.providesScom:
-                fname = util.join_path(ctx.const.scom_dir,
-                                       pscom.script)
-                pkg.add_to_package(fname)
-
             # add xmls and files
             os.chdir(self.pkg_dir())
             pkg.add_files_xml(ctx.const.files_xml)
@@ -1424,8 +1390,6 @@ def build_until(pspec, state):
         pb = Builder(pspec)
     else:
         pb = Builder.from_name(pspec)
-
-    pb.compile_scom_script()
 
     if state == "fetch":
         __buildState_fetch(pb)

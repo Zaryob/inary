@@ -76,12 +76,6 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         delta_pkg = inary.package.Package(delta_name, "w", format=target_format)
 
-        # add conf scripts
-        os.chdir(specdir)
-        for pscom in new_pkg_info.providesScom:
-            fname = util.join_path(ctx.const.scom_dir, pscom.script)
-            delta_pkg.add_to_package(fname)
-
         # add xmls and files
         os.chdir(new_pkg_path)
 
@@ -126,7 +120,6 @@ def create_delta_packages(old_packages, new_package):
 
     # Unpack new package to temp
     new_pkg.extract_inary_files(new_pkg_path)
-    new_pkg.extract_dir("scom", new_pkg_path)
 
     install_dir = util.join_path(new_pkg_path, "install")
     util.clean_dir(install_dir)
