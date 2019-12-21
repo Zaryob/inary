@@ -300,10 +300,13 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def preinstall(self):
-        if self.metadata.package.realtorPreInstall:
-            command=self.metadata.package.realtorPreInstall[0]
-            if os.system(command) != 0:
-                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+        try:
+            if self.metadata.package.realtorPreInstall:
+                command=self.metadata.package.realtorPreInstall[0]
+                if os.system(command) != 0:
+                    ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+        except AttributeError:
+            pass
 
 
     def postinstall(self):
@@ -317,11 +320,14 @@ class Install(AtomicOperation):
         #    else:
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
-        if self.metadata.package.realtorPostInstall:
-            command=self.metadata.package.realtorPostInstall[0]
-            if os.system(command) != 0:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                self.config_later = True
+        try:
+            if self.metadata.package.realtorPostInstall:
+                command=self.metadata.package.realtorPostInstall[0]
+                if os.system(command) != 0:
+                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                    self.config_later = True
+        except AttributeError:
+            pass
 
     def extract_install(self):
         """unzip package in place"""
@@ -665,18 +671,22 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if self.metadata.package.realtorPreRemove:
-            command=self.metadata.package.realtorPreRemove[0]
-            if os.system(command) != 0:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-
+        try:
+            if self.package.realtorPreRemove:
+                command=self.package.realtorPreRemove[0]
+                if os.system(command) != 0:
+                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+        except AttributeError:
+            pass
 
     def run_postremove(self):
-        if self.metadata.package.realtorPostRemove:
-            command=self.metadata.package.realtorPostRemove[0]
-            if os.system(command) != 0:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-
+        try:
+            if self.package.realtorPostRemove:
+                command=self.package.realtorPostRemove[0]
+                if os.system(command) != 0:
+                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+        except AttributeError:
+            pass
 
     def update_databases(self):
         self.remove_db()
