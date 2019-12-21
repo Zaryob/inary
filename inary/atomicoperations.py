@@ -42,6 +42,8 @@ import inary.version
 class Error(inary.errors.Error):
     pass
 
+class PostScriptsError(inary.errors.Error):
+    pass
 
 class NotfoundError(inary.errors.Error):
     pass
@@ -299,12 +301,9 @@ class Install(AtomicOperation):
 
     def preinstall(self):
         if self.metadata.package.realtorPreInstall:
-            try:
-                command=self.metadata.package.realtorPreInstall[0]
-                os.system(command)
-
-            except inary.scomiface.Error:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+            command=self.metadata.package.realtorPreInstall[0]
+            if os.system(command) != 0:
+                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
 
     def postinstall(self):
@@ -319,11 +318,8 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
         if self.metadata.package.realtorPostInstall:
-            try:
-                command=self.metadata.package.realtorPostInstall[0]
-                os.system(command)
-
-            except inary.scomiface.Error:
+            command=self.metadata.package.realtorPostInstall[0]
+            if os.system(command) != 0:
                 ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 self.config_later = True
 
@@ -500,21 +496,13 @@ class Install(AtomicOperation):
             clean_leftovers()
 
     def store_inary_files(self):
-        """put files.xml, metadata.xml, scom scripts
-        somewhere in the file system. We'll need these in future..."""
+        """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
         if self.reinstall():
             util.clean_dir(self.old_path)
 
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
-
-        for pscom in self.metadata.package.providesScom:
-            fpath = os.path.join(ctx.const.scom_dir, pscom.script)
-            # comar prefix is added to the pkg_dir while extracting comar
-            # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing files of \"{}\" package.').format(fpath), verbose=True)
-            self.package.extract_file_synced(fpath, self.package.pkg_dir())
 
     def update_databases(self):
         """update databases"""
@@ -678,21 +666,15 @@ class Remove(AtomicOperation):
 
     def run_preremove(self):
         if self.metadata.package.realtorPreRemove:
-            try:
-                command=self.metadata.package.realtorPreRemove[0]
-                os.system(command)
-
-            except inary.scomiface.Error:
+            command=self.metadata.package.realtorPreRemove[0]
+            if os.system(command) != 0:
                 ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
 
     def run_postremove(self):
         if self.metadata.package.realtorPostRemove:
-            try:
-                command=self.metadata.package.realtorPostRemove[0]
-                os.system(command)
-
-            except inary.scomiface.Error:
+            command=self.metadata.package.realtorPostRemove[0]
+            if os.system(command) != 0:
                 ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
 

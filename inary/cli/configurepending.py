@@ -28,9 +28,6 @@ import inary.context as ctx
 
 
 def configure_pending(packages=None):
-    # Import SCOM
-    import inary.scomiface
-
     # start with pending packages
     # configure them in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
