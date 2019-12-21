@@ -285,6 +285,7 @@ def installLibcHeaders(excludes=None):
     #######################Workaround ends here ...
 
     # make defconfig and install the headers
+    autotools.make("mrproper")
     autotools.make("{} defconfig".format(make_cmd))
     autotools.rawInstall(make_cmd, "headers_install")
 
