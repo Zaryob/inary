@@ -85,7 +85,6 @@ class Command(object):
     def __init__(self, args=None):
         # now for the real parser
         import inary
-        self.scom = False
         self.parser = optparse.OptionParser(usage=getattr(self, "__doc__"),
                                             version="%prog " + inary.__version__,
                                             formatter=InaryHelpFormatter())
@@ -175,7 +174,6 @@ class Command(object):
                     os.path.join(ctx.config.info_dir(), ctx.const.files_db), os.W_OK))):
             raise inary.cli.Error(_("You have to be root for this operation."))
 
-        inary.api.set_scom(self.scom and not ctx.get_option('ignore_scom'))
         inary.api.set_userinterface(ui)
         inary.api.set_options(self.options)
 
@@ -207,7 +205,6 @@ class PackageOp(Command):
 
     def __init__(self, args):
         super(PackageOp, self).__init__(args)
-        self.scom = True
 
     def options(self, group):
         group.add_option("--ignore-dependency", action="store_true",
@@ -215,8 +212,6 @@ class PackageOp(Command):
                          help=_("Do not take dependency information into account."))
         group.add_option("--ignore-safety", action="store_true",
                          default=False, help=_("Bypass safety switch."))
-        group.add_option("--ignore-scom", action="store_true",
-                         default=False, help=_("Bypass scom configuration agent."))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
                          help=_("Do not perform any action, just show what would be done."))
 
