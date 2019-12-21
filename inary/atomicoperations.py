@@ -170,8 +170,9 @@ class Install(AtomicOperation):
 
         ctx.disable_keyboard_interrupts()
 
-        self.extract_install()
         self.store_inary_files()
+        self.preinstall()
+        self.extract_install()
         self.postinstall()
         self.update_databases()
 
