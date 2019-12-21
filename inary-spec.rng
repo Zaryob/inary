@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" ?>
 <!-- RELAX NG schema file for INARY pspec.xml files -->
-<!-- http://www.pardus.org.tr/projeler/inary/ -->
-
+<!-- https://gitlab.com/sulinos/devel/inary -->
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
 
     <!-- Start Document -->
@@ -132,7 +131,7 @@
     <!-- Name -->
     <define name="Name">
         <element name="Name">
-            <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <data datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" type="string">
                 <param name="pattern">[0-9a-zA-Z\-_+]*</param>
                 <param name="maxLength">255</param>
             </data>
@@ -171,7 +170,7 @@
     <!-- Packager.Name -->
     <define name="Packager.Name">
         <element name="Name">
-            <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <data datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" type="string">
                 <param name="maxLength">255</param>
             </data>
         </element>
@@ -1305,7 +1304,7 @@
         </element>
     </define>
     <!-- attlist.Summary -->
-    <define name="attlist.Summary" combine="interleave">
+    <define combine="interleave" name="attlist.Summary">
         <optional>
             <attribute name="xml:lang"/>
         </optional>
@@ -1319,7 +1318,7 @@
         </element>
     </define>
     <!-- attlist.Description -->
-    <define name="attlist.Description" combine="interleave">
+    <define combine="interleave" name="attlist.Description">
         <optional>
             <attribute name="xml:lang"/>
         </optional>
@@ -1333,7 +1332,7 @@
         </element>
     </define>
     <!-- attlist.Archive -->
-    <define name="attlist.Archive" combine="interleave">
+    <define combine="interleave" name="attlist.Archive">
         <group>
             <attribute name="sha1sum"/>
             <optional>
@@ -1459,7 +1458,7 @@
         </element>
     </define>
     <!-- attlist.Patch -->
-    <define name="attlist.Patch" combine="interleave">
+    <define combine="interleave" name="attlist.Patch">
         <group>
             <optional>
                 <attribute name="compressionType"/>
@@ -1480,26 +1479,87 @@
     <define name="Provides">
         <element name="Provides">
             <oneOrMore>
-                <ref name="SCOM"/>
+                <ref name="Command"/>
+                <ref name="SharedObject"/>
+                <ref name="CMAKE"/>
+                <ref name="PkgConfig"/>
+                <ref name="Service"/>
+            </oneOrMore>
+        </element>
+    </define>
+    <!-- Command -->
+    <define name="Command">
+        <element name="Command">
+            <text/>
+        </element>
+    </define>
+    <!-- SharedObject -->
+    <define name="SharedObject">
+        <element name="SharedObject">
+            <text/>
+        </element>
+    </define>
+    <!-- CMAKE -->
+    <define name="CMAKE">
+        <element name="CMAKE">
+            <text/>
+        </element>
+    </define>
+    <!-- PkgConfig -->
+    <define name="PkgConfig">
+        <element name="PkgConfig">
+            <text/>
+        </element>
+    </define>
+    <!-- Service -->
+    <define name="Service">
+        <element name="Service">
+            <ref name="attlist.Service"/>
+            <text/>
+        </element>
+    </define>
+    <!-- attlist.Service -->
+    <define name="attlist.Service">
+        <optional>
+            <attribute name="runlevel"/>
+        </optional>
+    </define>
+
+    <!-- Realtor -->
+    <define name="Realtor">
+        <element name="Realtor">
+            <oneOrMore>
+                <ref name="PreRemove"/>
+                <ref name="PreInstall"/>
+                <ref name="PostRemove"/>
+                <ref name="PostInstall"/>
             </oneOrMore>
         </element>
     </define>
 
-    <!-- SCOM -->
-    <define name="SCOM">
-        <element name="SCOM">
-            <ref name="attlist.SCOM"/>
+    <!-- PreRemove -->
+    <define name="PreRemove">
+        <element name="PreRemove">
             <text/>
         </element>
     </define>
-    <!-- attlist.SCOM -->
-    <define name="attlist.SCOM">
-        <optional>
-            <attribute name="script"/>
-        </optional>
-        <optional>
-            <attribute name="name"/>
-        </optional>
+    <!-- PreInstall -->
+    <define name="PreInstall">
+        <element name="PreInstall">
+            <text/>
+        </element>
+    </define>
+    <!-- PostRemove -->
+    <define name="PostRemove">
+        <element name="PostRemove">
+            <text/>
+        </element>
+    </define>
+    <!-- PostInstall -->
+    <define name="PostInstall">
+        <element name="PostInstall">
+            <text/>
+        </element>
     </define>
 
     <!-- Conflicts -->
@@ -1514,7 +1574,7 @@
     <define name="Conflicts.Package">
         <element name="Package">
             <ref name="attlist.VersionReleaseToFrom"/>
-            <text />
+            <text/>
         </element>
     </define>
 
@@ -1529,7 +1589,7 @@
 
     <define name="Replaces.Package">
         <element name="Package">
-            <text />
+            <text/>
         </element>
     </define>
 
@@ -1602,7 +1662,7 @@
         </element>
     </define>
     <!-- attlist.Path -->
-    <define name="attlist.Path" combine="interleave">
+    <define combine="interleave" name="attlist.Path">
         <group>
             <attribute name="fileType">
                 <choice>
@@ -1657,7 +1717,7 @@
     </define>
 
     <!-- attlist.Update -->
-    <define name="attlist.Update" combine="interleave">
+    <define combine="interleave" name="attlist.Update">
         <attribute name="release"/>
         <optional>
             <attribute name="type">
@@ -1672,7 +1732,7 @@
     <!-- Date -->
     <define name="Date">
         <element name="Date">
-            <data type="date" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+            <data datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" type="date"/>
         </element>
     </define>
 
@@ -1702,7 +1762,7 @@
     </define>
 
     <!-- attlist.Type -->
-    <define name="attlist.Type" combine="interleave">
+    <define combine="interleave" name="attlist.Type">
         <optional>
             <attribute name="package"/>
         </optional>
@@ -1730,7 +1790,7 @@
     </define>
 
     <!-- attlist.Action -->
-    <define name="attlist.Action" combine="interleave">
+    <define combine="interleave" name="attlist.Action">
         <optional>
             <attribute name="package"/>
         </optional>

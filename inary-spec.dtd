@@ -1,5 +1,5 @@
 <!-- Document Type Declaration file for INARY pspec.xml files -->
-<!-- http://www.sulin.org.tr/projeler/inary/ -->
+<!-- https://gitlab.com/sulinos/devel/inary -->
 
 <!ELEMENT INARY (Source,Package+,History)>
 
@@ -102,12 +102,31 @@
 	Replaces |
 	AdditionalFiles |
 	Provides
+	Realtor
 )*>
 
-<!ELEMENT Provides (SCOM)+>
-<!ELEMENT SCOM (#PCDATA)>
-<!ATTLIST SCOM script CDATA #IMPLIED>
-<!ATTLIST SCOM name CDATA #IMPLIED>
+
+<!ELEMENT Provides (CMAKE)>
+<!ELEMENT CMAKE (#PCDATA)>
+<!ELEMENT Provides (PkgConfig)>
+<!ELEMENT PkgConfig (#PCDATA)>
+<!ELEMENT Provides (Command)>
+<!ELEMENT Command (#PCDATA)>
+<!ELEMENT Provides (SharedObject)>
+<!ELEMENT SharedObject (#PCDATA)>
+<!ELEMENT Provides (Service)>
+<!ELEMENT Service (#PCDATA)>
+<!ATTLIST Service runlevel CDATA #IMPLIED>
+
+<!ELEMENT Realtor (PreInstall)>
+<!ELEMENT PreInstall (#PCDATA)>
+<!ELEMENT Realtor (PostInstall)>
+<!ELEMENT PostInstall (#PCDATA)>
+<!ELEMENT Realtor (PreRemove)>
+<!ELEMENT PreRemove (#PCDATA)>
+<!ELEMENT Realtor (PostRemove)>
+<!ELEMENT PostRemove (#PCDATA)>
+
 
 <!ELEMENT Conflicts (Package)+>
 <!-- we have a problem here, this Package tag only contains a package name
