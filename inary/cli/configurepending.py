@@ -19,6 +19,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+import os
 import inary.util as util
 import inary.cli.command as command
 import inary.ui
@@ -37,33 +38,24 @@ def configure_pending(packages=None):
         packages = set(packages).intersection(installdb.list_pending())
 
     order = inary.data.pgraph.generate_pending_order(packages)
-    try:
-        for x in order:
-            if installdb.has_package(x):
-                pkginfo = installdb.get_package(x)
-                pkg_path = installdb.package_path(x)
-                m = inary.data.metadata.MetaData()
-                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-                m.read(metadata_path)
-                # FIXME: we need a full package info here!
-                pkginfo.name = x
-                ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-                inary.scomiface.post_install(
-                    pkginfo.name,
-                    m.package.providesScom,
-                    util.join_path(pkg_path, ctx.const.scom_dir),
-                    util.join_path(pkg_path, ctx.const.metadata_xml),
-                    util.join_path(pkg_path, ctx.const.files_xml),
-                    None,
-                    None,
-                    m.package.version,
-                    m.package.release
-                )
-                ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
-            installdb.clear_pending(x)
-    except ImportError:
-        raise inary.errors.Error(_("scom package is not fully installed."))
+    for x in order:
+        if installdb.has_package(x):
+            pkginfo = installdb.get_package(x)
+            pkg_path = installdb.package_path(x)
+            m = inary.data.metadata.MetaData()
+            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+            m.read(metadata_path)
+            # FIXME: we need a full package info here!
+            pkginfo.name = x
+            ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
 
+            command=m.package.realtorPostInstall[0]
+
+            if os.system(command) != 0:
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(pkginfo.name))
+            else:
+                installdb.clear_pending(x)
+                ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Configure pending packages
