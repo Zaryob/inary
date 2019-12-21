@@ -141,15 +141,14 @@ class Path(metaclass=autoxml.autoxml):
         return s
 
 
-class ScomProvide(metaclass=autoxml.autoxml):
+class ServiceProvide(metaclass=autoxml.autoxml):
     s_om = [autoxml.String, autoxml.mandatory]
-    a_script = [autoxml.String, autoxml.mandatory]
-    a_name = [autoxml.String, autoxml.optional]
+    a_runlevel = [autoxml.String, autoxml.optional]
 
     def __str__(self):
         # FIXME: descriptive enough?
-        s = self.script
-        s += ' (' + self.om + '{}'.format(' for {}'.format(self.name) if self.name else '') + ')'
+        s = self.om
+        s += ' ( ' + self.runlevel + ' )'
         return s
 
 
@@ -245,7 +244,15 @@ class Package(metaclass=autoxml.autoxml):
     t_Files = [[Path], autoxml.optional]
     t_Conflicts = [[inary.analyzer.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
     t_Replaces = [[inary.data.replace.Replace], autoxml.optional, "Replaces/Package"]
-    t_ProvidesScom = [[ScomProvide], autoxml.optional, "Provides/SCOM"]
+    t_ProvidesCommand = [[autoxml.String], autoxml.optional, "Provides/Command"]
+    t_ProvidesCMAKE = [[autoxml.String], autoxml.optional, "Provides/CMAKE"]
+    t_ProvidesPkgConfig = [[autoxml.String], autoxml.optional, "Provides/PkgConfig"]
+    t_ProvidesSharedObject = [[autoxml.String], autoxml.optional, "Provides/SharedObject"]
+    t_ProvidesService = [[ServiceProvide], autoxml.optional, "Provides/Service"]
+    t_RealtorPreInstall = [[autoxml.String], autoxml.optional, "Realtor/PreInstall"]
+    t_RealtorPostInstall = [[autoxml.String], autoxml.optional, "Realtor/PostInstall"]
+    t_RealtorPreRemove = [[autoxml.String], autoxml.optional, "Realtor/PreRemove"]
+    t_RealtorPostRemove = [[autoxml.String], autoxml.optional, "Realtor/PostRemove"]
     t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
     t_History = [[Update], autoxml.optional]
 
@@ -377,9 +384,28 @@ class Package(metaclass=autoxml.autoxml):
         s += _('Description: {}\n').format(str(self.description))
         s += _('Licenses: {}\n').format(", ".join(self.license))
         s += _('Component: {}\n').format(str(self.partOf))
-        s += _('Provides: ')
-        for x in self.providesScom:
-            s += x.om + ' '
+        s += _('Provides: \n')
+
+        if(self.providesCommand):
+            s += _('   - Commands: \n')
+            for x in self.providesCommand:
+                s+= '       * {}\n'.format(x)
+
+        if(self.providesCMAKE):
+            s += _('   - CMAKE Needs: \n')
+            for x in self.providesCMAKE:
+                s+= '       * {}\n'.format(x)
+
+        if(self.providesPkgConfig):
+            s += _('   - PkgConfig Needs: \n')
+            for x in self.providesPkgConfig:
+                s+= '       * {}\n'.format(x)
+
+        if(self.providesService):
+            s += _('   - Services: \n')
+            for x in self.providesService:
+                s+= '       * {}\n'.format(x)
+
         s += '\n'
         s += _('Dependencies: ')
         for x in self.componentDependencies:
