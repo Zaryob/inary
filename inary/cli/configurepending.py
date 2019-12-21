@@ -49,7 +49,7 @@ def configure_pending(packages=None):
             pkginfo.name = x
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
 
-            command=m.package.realtorPostInstall[0]
+            command=m.package.postopsPostInstall[0]
 
             if os.system(command) != 0:
                 ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(pkginfo.name))

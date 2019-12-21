@@ -302,8 +302,8 @@ class Install(AtomicOperation):
 
     def preinstall(self):
         try:
-            if self.metadata.package.realtorPreInstall:
-                command=self.metadata.package.realtorPreInstall[0]
+            if self.metadata.package.postopsPreInstall:
+                command=self.metadata.package.postopsPreInstall[0]
                 if os.system(command) != 0:
                     ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
         except AttributeError:
@@ -322,8 +322,8 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
         try:
-            if self.metadata.package.realtorPostInstall:
-                command=self.metadata.package.realtorPostInstall[0]
+            if self.metadata.package.postopsPostInstall:
+                command=self.metadata.package.postopsPostInstall[0]
                 if os.system(command) != 0:
                     ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                     self.config_later = True
@@ -507,7 +507,6 @@ class Install(AtomicOperation):
 
         if self.reinstall():
             util.clean_dir(self.old_path)
-
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
 
@@ -673,8 +672,8 @@ class Remove(AtomicOperation):
 
     def run_preremove(self):
         try:
-            if self.package.realtorPreRemove:
-                command=self.package.realtorPreRemove[0]
+            if self.package.postopsPreRemove:
+                command=self.package.postopsPreRemove[0]
                 if os.system(command) != 0:
                     ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
         except AttributeError:
@@ -682,8 +681,8 @@ class Remove(AtomicOperation):
 
     def run_postremove(self):
         try:
-            if self.package.realtorPostRemove:
-                command=self.package.realtorPostRemove[0]
+            if self.package.postopsPostRemove:
+                command=self.package.postopsPostRemove[0]
                 if os.system(command) != 0:
                     ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
         except AttributeError:

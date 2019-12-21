@@ -102,7 +102,6 @@
 	Replaces |
 	AdditionalFiles |
 	Provides
-	Realtor
 )*>
 
 
@@ -117,16 +116,6 @@
 <!ELEMENT Provides (Service)>
 <!ELEMENT Service (#PCDATA)>
 <!ATTLIST Service runlevel CDATA #IMPLIED>
-
-<!ELEMENT Realtor (PreInstall)>
-<!ELEMENT PreInstall (#PCDATA)>
-<!ELEMENT Realtor (PostInstall)>
-<!ELEMENT PostInstall (#PCDATA)>
-<!ELEMENT Realtor (PreRemove)>
-<!ELEMENT PreRemove (#PCDATA)>
-<!ELEMENT Realtor (PostRemove)>
-<!ELEMENT PostRemove (#PCDATA)>
-
 
 <!ELEMENT Conflicts (Package)+>
 <!-- we have a problem here, this Package tag only contains a package name

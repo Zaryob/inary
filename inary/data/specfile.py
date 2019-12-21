@@ -249,10 +249,6 @@ class Package(metaclass=autoxml.autoxml):
     t_ProvidesPkgConfig = [[autoxml.String], autoxml.optional, "Provides/PkgConfig"]
     t_ProvidesSharedObject = [[autoxml.String], autoxml.optional, "Provides/SharedObject"]
     t_ProvidesService = [[ServiceProvide], autoxml.optional, "Provides/Service"]
-    t_RealtorPreInstall = [[autoxml.String], autoxml.optional, "Realtor/PreInstall"]
-    t_RealtorPostInstall = [[autoxml.String], autoxml.optional, "Realtor/PostInstall"]
-    t_RealtorPreRemove = [[autoxml.String], autoxml.optional, "Realtor/PreRemove"]
-    t_RealtorPostRemove = [[autoxml.String], autoxml.optional, "Realtor/PostRemove"]
     t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
     t_History = [[Update], autoxml.optional]
 

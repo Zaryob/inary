@@ -58,6 +58,7 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
     t_DeltaPackages = [[Delta], autoxml.optional]
     t_PackageFormat = [autoxml.String, autoxml.optional]
     t_Rfp = [autoxml.String, autoxml.optional]
+    t_PostOps = [autoxml.String, autoxml.optional]
 
     t_Source = [Source, autoxml.optional]
 
@@ -128,11 +129,6 @@ class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         self.package.providesCMAKE = pkg.providesCMAKE
         self.package.providesPkgConfig = pkg.providesPkgConfig
         self.package.providesService = pkg.providesService
-        # Realtors
-        self.package.realtorPreInstall = pkg.realtorPreInstall
-        self.package.realtorPostInstall = pkg.realtorPostInstall
-        self.package.realtorPreRemove = pkg.realtorPreRemove
-        self.package.realtorPostRemove = pkg.realtorPostRemove
         # FIXME: no need to copy full history with comments
         self.package.history = history
         self.package.conflicts = pkg.conflicts

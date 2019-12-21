@@ -1525,43 +1525,6 @@
         </optional>
     </define>
 
-    <!-- Realtor -->
-    <define name="Realtor">
-        <element name="Realtor">
-            <oneOrMore>
-                <ref name="PreRemove"/>
-                <ref name="PreInstall"/>
-                <ref name="PostRemove"/>
-                <ref name="PostInstall"/>
-            </oneOrMore>
-        </element>
-    </define>
-
-    <!-- PreRemove -->
-    <define name="PreRemove">
-        <element name="PreRemove">
-            <text/>
-        </element>
-    </define>
-    <!-- PreInstall -->
-    <define name="PreInstall">
-        <element name="PreInstall">
-            <text/>
-        </element>
-    </define>
-    <!-- PostRemove -->
-    <define name="PostRemove">
-        <element name="PostRemove">
-            <text/>
-        </element>
-    </define>
-    <!-- PostInstall -->
-    <define name="PostInstall">
-        <element name="PostInstall">
-            <text/>
-        </element>
-    </define>
-
     <!-- Conflicts -->
     <define name="Conflicts">
         <element name="Conflicts">
