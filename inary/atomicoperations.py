@@ -188,14 +188,8 @@ class Install(AtomicOperation):
         # Check free space
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
-            raise Error(_("Is there enought free space in your disk."))
+            raise Error(_("Is there enought free space in your disk?"))
         ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(total_size, symbol)), verbose=True)
-
-        # what to do if / is split into /usr, /var, etc.
-        # check scom
-        if self.metadata.package.providesScom and ctx.scom and not ctx.get_option("ignore_scom"):
-            import inary.scomiface as scomiface
-            scomiface.get_link()
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -303,6 +297,16 @@ class Install(AtomicOperation):
     def reinstall(self):
         return not self.operation == INSTALL
 
+    def preinstall(self):
+        if self.metadata.package.realtorPreInstall:
+            try:
+                command=self.metadata.package.realtorPreInstall[0]
+                os.system(command)
+
+            except inary.scomiface.Error:
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+
+
     def postinstall(self):
         self.config_later = False
 
@@ -314,33 +318,13 @@ class Install(AtomicOperation):
         #    else:
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
-        if self.metadata.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                try:
-                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                        fromVersion = self.old_pkginfo.version
-                        fromRelease = self.old_pkginfo.release
-                    else:
-                        fromVersion = None
-                        fromRelease = None
-                    ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
-                    inary.scomiface.post_install(
-                        self.pkginfo.name,
-                        self.metadata.package.providesScom,
-                        self.package.scom_dir(),
-                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                        fromVersion,
-                        fromRelease,
-                        self.metadata.package.version,
-                        self.metadata.package.release
-                    )
-                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-                except inary.scomiface.Error:
-                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                    self.config_later = True
-            else:
+        if self.metadata.package.realtorPostInstall:
+            try:
+                command=self.metadata.package.realtorPostInstall[0]
+                os.system(command)
+
+            except inary.scomiface.Error:
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 self.config_later = True
 
     def extract_install(self):
@@ -693,25 +677,24 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if self.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.pre_remove(
-                         self.package_name,
-                         os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                         os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                         )
+        if self.metadata.package.realtorPreRemove:
+            try:
+                command=self.metadata.package.realtorPreRemove[0]
+                os.system(command)
+
+            except inary.scomiface.Error:
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+
 
     def run_postremove(self):
-        if self.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.post_remove(
-                    self.package_name,
-                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                    provided_scripts=self.package.providesScom,
-                )
+        if self.metadata.package.realtorPostRemove:
+            try:
+                command=self.metadata.package.realtorPostRemove[0]
+                os.system(command)
+
+            except inary.scomiface.Error:
+                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+
 
     def update_databases(self):
         self.remove_db()
