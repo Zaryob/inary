@@ -35,6 +35,9 @@
             <optional>
                 <ref name="Icon"/>
             </optional>
+            <optional>
+                <ref name="Rfp"/>
+            </optional>
             <zeroOrMore>
                 <ref name="IsA"/>
             </zeroOrMore>
@@ -72,6 +75,9 @@
             </optional>
             <optional>
                 <ref name="Icon"/>
+            </optional>
+            <optional>
+                <ref name="Rfp"/>
             </optional>
             <zeroOrMore>
                 <ref name="IsA"/>
@@ -141,6 +147,13 @@
     </define>
 
     <!-- Icon -->
+    <define name="Icon">
+        <element name="Icon">
+            <text/>
+        </element>
+    </define>
+
+    <!-- Rfp -->
     <define name="Icon">
         <element name="Icon">
             <text/>
@@ -1346,6 +1359,9 @@
             </optional>
             <optional>
                 <attribute name="target"/>
+            </optional>
+            <optional>
+                <attribute name="save_as"/>
             </optional>
         </group>
     </define>
