@@ -901,7 +901,7 @@ class SourceArchive:
             return False
 
         # check hash
-        if util.check_file_hash(self.archiveFile, self.archive.sha1sum):
+        if util.check_file_hash(self.archiveFile, self.archive.sha1sum) or ctx.get_option('ignore_verify'):
             if interactive:
                 ctx.ui.info(_('\"{}\" [cached]').format(self.archive.name))
             return True
@@ -912,8 +912,11 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            raise SourceArchiveError(_("unpack: check_file_hash failed."))
-
+            ctx.ui.warning(_("* Expected sha1 value: {} \n* Received sha1 value: {} \n".format(self.archive.sha1sum,util.sha1_file(self.archiveFile))))
+            if not ctx.get_option('ignore_verify'):
+                raise SourceArchiveError(_("unpack: check_file_hash failed."))
+            else:
+                ctx.ui.warning(_("* Archive verification passed. Such problems may occur during the build process."))
         try:
             archive = Archive(self.archiveFile, self.archive.type)
         except UnknownArchiveType:

@@ -65,6 +65,11 @@ class Build(command.Command, metaclass=command.autocommand):
                          default=None,
                          help=_("Output directory for produced packages."))
 
+        group.add_option("--ignore-verify",
+                         action="store_true",
+                         default=False,
+                         help=_("Bypass sha1sum verify step of source archive."))
+
         group.add_option("--ignore-action-errors",
                          action="store_true", default=False,
                          help=_("Bypass errors from ActionsAPI."))
