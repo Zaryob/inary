@@ -76,6 +76,10 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         delta_pkg = inary.package.Package(delta_name, "w", format=target_format)
 
+        # add postops files to package
+        os.chdir(self.specdir)
+        pkg.add_to_package(ctx.const.postops)
+
         # add xmls and files
         os.chdir(new_pkg_path)
 
@@ -120,6 +124,10 @@ def create_delta_packages(old_packages, new_package):
 
     # Unpack new package to temp
     new_pkg.extract_inary_files(new_pkg_path)
+    try:
+        new_pkg.extract_file(ctx.const.postops, new_pkg_path)
+    except:
+        pass
 
     install_dir = util.join_path(new_pkg_path, "install")
     util.clean_dir(install_dir)

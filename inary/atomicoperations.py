@@ -37,12 +37,12 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
-
+import inary.trigger
 
 class Error(inary.errors.Error):
     pass
 
-class PostScriptsError(inary.errors.Error):
+class PostOpsError(inary.errors.Error):
     pass
 
 class NotfoundError(inary.errors.Error):
@@ -154,6 +154,7 @@ class Install(AtomicOperation):
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
+        self.trigger=inary.trigger.Trigger()
 
     def install(self, ask_reinstall=True):
 
@@ -302,12 +303,11 @@ class Install(AtomicOperation):
 
     def preinstall(self):
         try:
-            if self.metadata.package.postopsPreInstall:
-                command=self.metadata.package.postopsPreInstall[0]
-                if os.system(command) != 0:
-                    ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-        except AttributeError:
-            pass
+            if self.metadata.package.postOps == "PositivE":
+                self.trigger.preinstall(self.package.pkg_dir())
+
+        except PostOpsError:
+            ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
 
     def postinstall(self):
@@ -321,14 +321,13 @@ class Install(AtomicOperation):
         #    else:
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
+
         try:
-            if self.metadata.package.postopsPostInstall:
-                command=self.metadata.package.postopsPostInstall[0]
-                if os.system(command) != 0:
-                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                    self.config_later = True
-        except AttributeError:
-            pass
+            if self.metadata.package.postOps == "PositivE":
+                self.trigger.postinstall(self.package.pkg_dir())
+        except:
+            self.config_later = True
+
 
     def extract_install(self):
         """unzip package in place"""
@@ -503,12 +502,14 @@ class Install(AtomicOperation):
             clean_leftovers()
 
     def store_inary_files(self):
-        """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
+        """put files.xml, metadata.xml, postoperations.py, somewhere in the file system. We'll need these in future..."""
 
         if self.reinstall():
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
+        if self.metadata.package.postOps:
+            self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
 
     def update_databases(self):
         """update databases"""
@@ -576,6 +577,7 @@ class Remove(AtomicOperation):
         self.package_name = package_name
         self.package = self.installdb.get_package(self.package_name)
         self.store_old_paths = store_old_paths
+        self.trigger=inary.trigger.Trigger()
         try:
             self.files = self.installdb.get_files(self.package_name)
         except inary.errors.Error as e:
@@ -671,22 +673,13 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        try:
-            if self.package.postopsPreRemove:
-                command=self.package.postopsPreRemove[0]
-                if os.system(command) != 0:
-                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-        except AttributeError:
-            pass
+        if self.package.postOps == "PositivE":
+            self.trigger.preremove(self.package.pkg_dir())
+
 
     def run_postremove(self):
-        try:
-            if self.package.postopsPostRemove:
-                command=self.package.postopsPostRemove[0]
-                if os.system(command) != 0:
-                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-        except AttributeError:
-            pass
+        if self.package.postOps == "PositivE":
+            self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):
         self.remove_db()

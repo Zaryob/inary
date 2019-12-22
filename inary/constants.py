@@ -102,6 +102,7 @@ class Constants(metaclass=Singleton):
         self.__c.translations_file = "translations.xml"
         self.__c.files_xml = "files.xml"
         self.__c.metadata_xml = "metadata.xml"
+        self.__c.postops = "postoperations.py"
         self.__c.install_tar = "install.tar"
         self.__c.mirrors_conf = "/etc/inary/mirrors.conf"
         self.__c.sandbox_conf = "/etc/inary/sandbox.conf"

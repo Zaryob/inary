@@ -459,6 +459,7 @@ class Builder:
         self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_additionalFiles()
+        self.fetch_postops()
 
         return self.destdir
 
@@ -499,6 +500,11 @@ class Builder:
                 self.download(afileuri, util.join_path(self.destdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
+    def fetch_scomfiles(self):
+        postops_script=util.join_path(self.specdiruri, ctx.const.postops)
+        if util.check_file(postops_script):
+                self.download(postops_script, util.join_path(self.specdir))
+                ctx.ui.info("PostOps Script Fetched {}".format(pscom.script))
 
     @staticmethod
     def download(uri, transferdir):
@@ -677,6 +683,21 @@ class Builder:
 
         self.actionLocals = localSymbols
         self.actionGlobals = globalSymbols
+
+    def compile_postops_script(self):
+        """Compiles scom scripts to check syntax errors"""
+        fname = util.join_path(self.specdir, ctx.const.postops)
+
+        try:
+            buf = open(fname).read()
+            compile(buf, "error", "exec")
+        except IOError as e:
+            raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
+                fname, e))
+        except SyntaxError as e:
+            raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
+                fname, e))
+
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -948,6 +969,9 @@ class Builder:
         metadata.package.architecture = ctx.config.values.general.architecture
         metadata.package.packageFormat = self.target_package_format
 
+        if util.check_file(util.join_path(self.specdir, ctx.const.postops)):
+            metadata.package.postOps = "PositivE"
+
         size = 0
         for fileinfo in self.files.list:
             size += fileinfo.size
@@ -1184,6 +1208,10 @@ package might be a good solution."))
                                         format=self.target_package_format,
                                         tmp_dir=self.pkg_dir())
 
+            # add postops files to package
+            os.chdir(self.specdir)
+            pkg.add_to_package(ctx.const.postops)
+
             # add xmls and files
             os.chdir(self.pkg_dir())
             pkg.add_files_xml(ctx.const.files_xml)
@@ -1390,6 +1418,8 @@ def build_until(pspec, state):
         pb = Builder(pspec)
     else:
         pb = Builder.from_name(pspec)
+
+    pb.compile_postops_script()
 
     if state == "fetch":
         __buildState_fetch(pb)
