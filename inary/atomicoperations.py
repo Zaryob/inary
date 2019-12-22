@@ -170,12 +170,9 @@ class Install(AtomicOperation):
         self.check_operation()
 
         ctx.disable_keyboard_interrupts()
-        self.store_inary_files()
 
-        try:
-            self.preinstall()
-        except:
-            util.clean_dir(self.package.pkg_dir())
+        self.store_inary_files()
+        self.preinstall()
 
         self.extract_install()
         self.postinstall()
@@ -311,6 +308,8 @@ class Install(AtomicOperation):
                 self.trigger.preinstall(self.package.pkg_dir())
 
         except PostOpsError:
+            util.clean_dir(self.package.pkg_dir())
+
             ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
 
