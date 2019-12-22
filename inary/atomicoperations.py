@@ -170,9 +170,13 @@ class Install(AtomicOperation):
         self.check_operation()
 
         ctx.disable_keyboard_interrupts()
-
         self.store_inary_files()
-        self.preinstall()
+
+        try:
+            self.preinstall()
+        except:
+            util.clean_dir(self.package.pkg_dir())
+
         self.extract_install()
         self.postinstall()
         self.update_databases()
