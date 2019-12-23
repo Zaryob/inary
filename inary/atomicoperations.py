@@ -37,11 +37,13 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
-
+import inary.trigger
 
 class Error(inary.errors.Error):
     pass
 
+class PostOpsError(inary.errors.Error):
+    pass
 
 class NotfoundError(inary.errors.Error):
     pass
@@ -152,6 +154,7 @@ class Install(AtomicOperation):
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
+        self.trigger=inary.trigger.Trigger()
 
     def install(self, ask_reinstall=True):
 
@@ -167,8 +170,10 @@ class Install(AtomicOperation):
         self.check_operation()
 
         ctx.disable_keyboard_interrupts()
+
         self.store_inary_files()
         self.preinstall()
+
         self.extract_install()
         self.postinstall()
         self.update_databases()
@@ -188,14 +193,8 @@ class Install(AtomicOperation):
         # Check free space
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
-            raise Error(_("Is there enought free space in your disk."))
+            raise Error(_("Is there enought free space in your disk?"))
         ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(total_size, symbol)), verbose=True)
-
-        # what to do if / is split into /usr, /var, etc.
-        # check scom
-        if self.metadata.package.providesScom and ctx.scom and not ctx.get_option("ignore_scom"):
-            import inary.scomiface as scomiface
-            scomiface.get_link()
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -304,33 +303,15 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def preinstall(self):
-        if self.metadata.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                try:
-                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                        fromVersion = self.old_pkginfo.version
-                        fromRelease = self.old_pkginfo.release
-                    else:
-                        fromVersion = None
-                        fromRelease = None
-                    ctx.ui.action(_("Working on package preInstall operations."))
-                    inary.scomiface.pre_install(
-                        self.pkginfo.name,
-                        self.metadata.package.providesScom,
-                        self.package.scom_dir(),
-                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                        fromVersion,
-                        fromRelease,
-                        self.metadata.package.version,
-                        self.metadata.package.release
-                    )
-                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-                except inary.scomiface.Error:
-                    pass
-            else:
-                pass
+        try:
+            if self.metadata.package.postOps == "PositivE":
+                self.trigger.preinstall(self.package.pkg_dir())
+
+        except PostOpsError:
+            util.clean_dir(self.package.pkg_dir())
+
+            ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+
 
     def postinstall(self):
         self.config_later = False
@@ -343,33 +324,13 @@ class Install(AtomicOperation):
         #    else:
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
-        if self.metadata.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                try:
-                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
-                        fromVersion = self.old_pkginfo.version
-                        fromRelease = self.old_pkginfo.release
-                    else:
-                        fromVersion = None
-                        fromRelease = None
-                    ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
 
-                    inary.scomiface.post_install(
-                        self.pkginfo.name,
-                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                        fromVersion,
-                        fromRelease,
-                        self.metadata.package.version,
-                        self.metadata.package.release
-                    )
-                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-                except inary.scomiface.Error:
-                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                    self.config_later = True
-            else:
-                self.config_later = True
+        try:
+            if self.metadata.package.postOps == "PositivE":
+                self.trigger.postinstall(self.package.pkg_dir())
+        except:
+            self.config_later = True
+
 
     def extract_install(self):
         """unzip package in place"""
@@ -544,21 +505,14 @@ class Install(AtomicOperation):
             clean_leftovers()
 
     def store_inary_files(self):
-        """put files.xml, metadata.xml, scom scripts
-        somewhere in the file system. We'll need these in future..."""
+        """put files.xml, metadata.xml, postoperations.py, somewhere in the file system. We'll need these in future..."""
 
         if self.reinstall():
             util.clean_dir(self.old_path)
-
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
-
-        for pscom in self.metadata.package.providesScom:
-            fpath = os.path.join(ctx.const.scom_dir, pscom.script)
-            # comar prefix is added to the pkg_dir while extracting comar
-            # script file. so we'll use pkg_dir as destination.
-            ctx.ui.info(_('Storing files of \"{}\" package.').format(fpath), verbose=True)
-            self.package.extract_file_synced(fpath, self.package.pkg_dir())
+        if self.metadata.package.postOps:
+            self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
 
     def update_databases(self):
         """update databases"""
@@ -626,6 +580,7 @@ class Remove(AtomicOperation):
         self.package_name = package_name
         self.package = self.installdb.get_package(self.package_name)
         self.store_old_paths = store_old_paths
+        self.trigger=inary.trigger.Trigger()
         try:
             self.files = self.installdb.get_files(self.package_name)
         except inary.errors.Error as e:
@@ -721,25 +676,13 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if self.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.pre_remove(
-                         self.package_name,
-                         os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                         os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                         )
+        if self.package.postOps == "PositivE":
+            self.trigger.preremove(self.package.pkg_dir())
+
 
     def run_postremove(self):
-        if self.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.post_remove(
-                    self.package_name,
-                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                    provided_scripts=self.package.providesScom,
-                )
+        if self.package.postOps == "PositivE":
+            self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):
         self.remove_db()

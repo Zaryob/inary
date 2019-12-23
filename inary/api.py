@@ -61,24 +61,6 @@ import inary.operations.upgrade
 import inary.uri
 import inary.util
 
-
-def set_scom(enable):
-    """
-    Set scom usage
-    False means no preremove and postinstall scripts will be run
-    @param enable: Flag indicating scom usage
-    """
-    ctx.scom = enable
-
-
-def set_scom_updated(updated):
-    """
-    Set scom package update status
-    @param updated: True if SCOM package is updated, else False
-    """
-    ctx.scom_updated = updated
-
-
 def set_userinterface(ui):
     """
     Set the user interface where the status information will be send
