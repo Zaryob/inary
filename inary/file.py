@@ -148,7 +148,6 @@ class File:
             localfile = uri.get_uri()  # TODO: use a special function here?
             if localfile.startswith("file:///"):
                 localfile=localfile[7:]
-            ctx.ui.info(_("Using local file \"{}\".").format(localfile))
 
             if not os.path.exists(localfile):
                 raise IOError(_("File \"{}\" not found.").format(localfile))
