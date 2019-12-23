@@ -143,10 +143,11 @@ class File:
                 inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile)
             else:
                 # copy to transfer dir
-                ctx.ui.info(_("Copying \"{}\" to transfer dir").format(uri.get_uri()), verbose=True)
-                shutil.copy(uri.get_uri(), localfile)
+                inary.fetcher.fetch_from_locale(uri.get_uri(), transfer_dir, destfile=localfile)
         else:
             localfile = uri.get_uri()  # TODO: use a special function here?
+            ctx.ui.info(_("Using local file \"{}\".").format(localfile))
+
             if not os.path.exists(localfile):
                 raise IOError(_("File \"{}\" not found.").format(localfile))
             if not os.access(localfile, os.W_OK):
