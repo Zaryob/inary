@@ -146,6 +146,8 @@ class File:
                 inary.fetcher.fetch_from_locale(uri.get_uri(), transfer_dir, destfile=localfile)
         else:
             localfile = uri.get_uri()  # TODO: use a special function here?
+            if localfile.startswith("file:///"):
+                localfile=localfile[7:]
             ctx.ui.info(_("Using local file \"{}\".").format(localfile))
 
             if not os.path.exists(localfile):
@@ -260,7 +262,7 @@ class File:
             except KeyboardInterrupt:
                 raise
             except IOError:  # FIXME: what exception could we catch here, replace with that.
-                ctx.ui.error(NoSignatureFound(uri))
+                ctx.ui.warning(NoSignatureFound(uri))
                 return True
 
             ret, out, err = inary.util.run_batch('gpg --verify ' + sigfilename)

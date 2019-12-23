@@ -80,7 +80,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                     try:
                         repository.update_repos([name])
                     except (inary.errors.Error, IOError) as e:
-                        ctx.ui.warning(_("{0} repository could not be reached: {1}").format(name, e))
+                        ctx.ui.info(_("Error: {0} repository could not be reached: \n{1}").format(name, e), color="red")
                         self.warn_and_remove(_("Removing {0} from system.").format(name), name)
                 else:
                     ctx.ui.warning(_("Couldn't trust \"{0}\" repository. It is deactivated.").format(name))
