@@ -502,9 +502,9 @@ class Builder:
                                                        dir_name))
     def fetch_scomfiles(self):
         postops_script=util.join_path(self.specdiruri, ctx.const.postops)
-        if util.check_file(postops_script):
-                self.download(postops_script, util.join_path(self.specdir))
-                ctx.ui.info("PostOps Script Fetched {}".format(pscom.script))
+        if util.check_file(postops_script, noerr=True):
+            self.download(postops_script, util.join_path(self.specdir))
+            ctx.ui.info("PostOps Script Fetched {}".format(pscom.script))
 
     @staticmethod
     def download(uri, transferdir):
@@ -687,16 +687,18 @@ class Builder:
     def compile_postops_script(self):
         """Compiles scom scripts to check syntax errors"""
         fname = util.join_path(self.specdir, ctx.const.postops)
-
-        try:
-            buf = open(fname).read()
-            compile(buf, "error", "exec")
-        except IOError as e:
-            raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
-                fname, e))
-        except SyntaxError as e:
-            raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
-                fname, e))
+        if(util.check_file(fname, noerr=True)):
+            try:
+                buf = open(fname).read()
+                compile(buf, "error", "exec")
+            except IOError as e:
+                raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
+                    fname, e))
+            except SyntaxError as e:
+                raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
+                    fname, e))
+        else:
+            pass
 
 
     def pkg_src_dir(self):
@@ -969,7 +971,7 @@ class Builder:
         metadata.package.architecture = ctx.config.values.general.architecture
         metadata.package.packageFormat = self.target_package_format
 
-        if util.check_file(util.join_path(self.specdir, ctx.const.postops)):
+        if util.check_file(util.join_path(self.specdir, ctx.const.postops),noerr=True):
             metadata.package.postOps = "PositivE"
 
         size = 0
@@ -1210,7 +1212,8 @@ package might be a good solution."))
 
             # add postops files to package
             os.chdir(self.specdir)
-            pkg.add_to_package(ctx.const.postops)
+            if util.check_file(ctx.const.postops,noerr=True):
+                pkg.add_to_package(ctx.const.postops)
 
             # add xmls and files
             os.chdir(self.pkg_dir())

@@ -428,10 +428,13 @@ def join_path(a, *p):
 # File/Directory Related Functions #
 ####################################
 
-def check_file(_file, mode=os.F_OK):
+def check_file(_file, mode=os.F_OK, noerr=False):
     """Shorthand to check if a file exists."""
     if not os.access(_file, mode):
-        raise FileError(_("File {} not found.").format(_file))
+        if noerr:
+            return False
+        else:
+            raise FileError(_("File {} not found.").format(_file))
     return True
 
 
