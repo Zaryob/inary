@@ -54,7 +54,6 @@ class CLI(inary.ui.UI):
 
     def __init__(self, show_debug=False, show_verbose=False):
         super(CLI, self).__init__(show_debug, show_verbose)
-        self.term_rows, self.term_columns = util.get_terminal_size()
         self.warnings = 0
         self.errors = 0
         self.clean_line="\x1b[K"
@@ -198,18 +197,14 @@ class CLI(inary.ui.UI):
 
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
             totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
-            term_rows, term_columns = util.get_terminal_size()
-            size1=term_columns-60
-            size2=term_columns-50
-            if term_columns<=50:
-                size1=1
-                size2=1
-            file_and_totalsize = ('{:'+str(size1)+'.'+str(size2)+'} ({})').format(ka['filename'], totalsize)
+
+            file_and_totalsize = '{:30.20} ({})'.format(ka['filename'], totalsize)
             percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
                                                                        ka['rate'],
                                                                        ka['symbol'],
                                                                        ka['eta'])
 
+            term_rows, term_columns = util.get_terminal_size()
             spacenum = ( term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
             if spacenum < 1:
                 spacenum = 0
