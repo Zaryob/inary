@@ -56,6 +56,7 @@ class CLI(inary.ui.UI):
         super(CLI, self).__init__(show_debug, show_verbose)
         self.warnings = 0
         self.errors = 0
+        self.clean_line="\x1b[K"
 
     def close(self):
         util.xterm_title_reset()
@@ -67,6 +68,7 @@ class CLI(inary.ui.UI):
             if err:
                 sys.stderr.write(str(msg))
             else:
+                msg=self.clean_line+msg+self.clean_line
                 sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
@@ -180,9 +182,9 @@ class CLI(inary.ui.UI):
             if no_expr.search(s):
                 return False
 
+
     def display_progress(self, **ka):
         """ display progress of any operation """
-
         if ka['operation'] in ["removing", "rebuilding-db"]:
             return
 
@@ -190,14 +192,13 @@ class CLI(inary.ui.UI):
             if not ctx.get_option("no_color"):
                 complated_background = 'backgroundgreen'
                 queried_background = 'backgroundyellow'
-                complated='brightblue'
             else:
                 complated_background = queried_background = complated = "default"
 
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
             totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
 
-            file_and_totalsize = '{:30.50} ({})'.format(ka['filename'], totalsize)
+            file_and_totalsize = '{:30.20} ({})'.format(ka['filename'], totalsize)
             percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
                                                                        ka['rate'],
                                                                        ka['symbol'],
@@ -214,12 +215,9 @@ class CLI(inary.ui.UI):
                 self.output(out)
 
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
-            if ka["percent"] == 100:
-                self.output("\r" + ctx.const.colors[complated] + msg + ctx.const.colors['default'])
-            else:
-                self.output("\r" + ctx.const.colors[complated_background] + \
-                            msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
-                            ctx.const.colors['default'])
+            self.output("\r".format(lmsg)+ctx.const.colors[complated_background] + \
+                        msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
+                        ctx.const.colors['default'])
             util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
         else:
@@ -279,6 +277,22 @@ class CLI(inary.ui.UI):
             if ctx.log:
                 ctx.log.info(_("Extracted desktop file \"{}\"").format(keywords['desktopfile']))
             msg = None
+
+        elif event == inary.ui.fetching:
+            if self.show_verbose:
+                msg=""
+            else:
+                msg="\x1b[K"
+            msg+=_("Downloading <{} / {}>".format(keywords['which'],keywords['total']))
+            color="yellow"
+
+        elif event == inary.ui.fetched:
+            if self.show_verbose:
+                msg=""
+            else:
+                msg="\x1b[3A"
+            msg+=_("Downloaded \"{}\"".format(keywords['name']))
+            color="green"
 
         else:
             msg = None

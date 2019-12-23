@@ -66,6 +66,8 @@ class Package:
 
         if url.is_remote_file():
             self.fetch_remote_file(url)
+        else:
+            ctx.ui.info(_("Getting package file \"{}\" from locale.").format(url.filename()))
 
         try:
             self.impl = archive.ArchiveZip(self.filepath, 'zip', mode)

@@ -171,7 +171,7 @@ class RepoDB(lazydb.LazyDB):
                 index_path = os.path.splitext(index_path)[0]
 
         if not os.path.exists(index_path):
-            ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
+            #ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
 
         try:

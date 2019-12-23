@@ -15,7 +15,7 @@
 #
 
 (installed, upgraded, removed, installing, removing, configuring, configured, extracting,
- downloading, packagestogo, updatingrepo, cached, desktopfile) = list(range(13))
+ downloading, packagestogo, updatingrepo, cached, desktopfile, fetching, fetched) = list(range(15))
 
 
 class UI(object):
