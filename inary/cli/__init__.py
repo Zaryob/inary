@@ -56,6 +56,7 @@ class CLI(inary.ui.UI):
         super(CLI, self).__init__(show_debug, show_verbose)
         self.warnings = 0
         self.errors = 0
+        self.clean_line="\x1b[K"
 
     def close(self):
         util.xterm_title_reset()
@@ -67,6 +68,7 @@ class CLI(inary.ui.UI):
             if err:
                 sys.stderr.write(str(msg))
             else:
+                msg=self.clean_line+msg+self.clean_line
                 sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
@@ -187,15 +189,41 @@ class CLI(inary.ui.UI):
             return
 
         elif ka['operation'] == "fetching":
+            if not ctx.get_option("no_color"):
+                complated_background = 'backgroundgreen'
+                queried_background = 'backgroundyellow'
+            else:
+                complated_background = queried_background = complated = "default"
+
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
             totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
 
-            out = '\r{:30.40}  ({}) {:3.1f}% {:9.2f} {} [{}]'.format(
-                   ka['filename'], totalsize, ka['percent'],
-                   ka['rate'], ka['symbol'], ka['eta'])
-            self.output(out)
+            file_and_totalsize = '{:30.20} ({})'.format(ka['filename'], totalsize)
+            percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
+                                                                       ka['rate'],
+                                                                       ka['symbol'],
+                                                                       ka['eta'])
+
+            term_rows, term_columns = util.get_terminal_size()
+            spacenum = ( term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
+            if spacenum < 1:
+                spacenum = 0
+
+            msg = file_and_totalsize + ' ' * spacenum + percentage_and_time
+
+            if len(msg) < 1:
+                self.output(out)
+
+            lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
+            self.output("\r".format(lmsg)+ctx.const.colors[complated_background] + \
+                        msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
+                        ctx.const.colors['default'])
+            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
+
         else:
-            self.output("\r{} ({}%)" % (ka['info'], ka['percent']))
+            self.output("\r{} ( {:.2f} % )".format(ka['info'], ka['percent']))
+
+            util.xterm_title("{} ( {:.2f} % )".format(ka['info'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):
         if msg:
@@ -262,8 +290,8 @@ class CLI(inary.ui.UI):
             if self.show_verbose:
                 msg=""
             else:
-                msg="\x1b[3A\x1b[K"
-            msg+=_("Downloaded <{}>".format(keywords['name']))
+                msg="\x1b[3A"
+            msg+=_("Downloaded \"{}\"".format(keywords['name']))
             color="green"
 
         else:
