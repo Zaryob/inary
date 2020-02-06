@@ -697,8 +697,9 @@ class Builder:
                                        pscom.script)
 
                 try:
-                    buf = open(fname).read()
-                    compile(buf, "error", "exec")
+                    if(os.path.splitext(filename)[1]=="py"):
+                        buf = open(fname).read()
+                        compile(buf, "error", "exec")
                 except IOError as e:
                     raise Error(_("Unable to read SCOM script ({0}): {1}").format(
                         fname, e))
