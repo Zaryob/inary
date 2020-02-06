@@ -174,7 +174,9 @@ class CLI(inary.ui.UI):
             prompt = msg + util.colorize(" "+_('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
         else:
             prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+        util.noecho(False)
         s = input(prompt)
+        util.noecho(True)
 
         if yes_expr.search(s):
             return True

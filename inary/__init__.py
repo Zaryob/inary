@@ -18,7 +18,6 @@ import atexit
 import importlib
 import logging
 import logging.handlers
-import util
 import os
 import sys
 
@@ -69,4 +68,3 @@ atexit.register(_cleanup)
 
 ctx.config = inary.config.Config()
 init_logging()
-util.noecho()

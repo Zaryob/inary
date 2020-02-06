@@ -199,6 +199,7 @@ class Command(object):
     def die():
         """exit program"""
         ctx.ui.error(_('Command terminated abnormally.'))
+        util.noecho(False)
         sys.exit(-1)
 
 

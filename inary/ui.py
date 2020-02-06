@@ -84,10 +84,29 @@ class UI(object):
         """ask the user to choose from a list of alternatives"""
         pass
 
-    def confirm(self, msg):
-        """ask a yes/no question"""
-        # default ui confirms everything
-        return True
+    def confirm(self, msg,invert=False):
+        msg = str(msg)
+        if ctx.config.options and ctx.config.options.yes_all:
+            return True
+
+        locale.setlocale(locale.LC_ALL, "")
+        yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
+        no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
+        locale.setlocale(locale.LC_ALL, "C")
+
+        tty.tcflush(sys.stdin.fileno(), 0)
+        if invert:
+            prompt = msg + util.colorize(" "+_('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
+        else:
+            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+        util.noecho(False)
+        s = input(prompt)
+        util.noecho(True)
+
+        if yes_expr.search(s):
+            return True
+        else:
+            return False
 
     def display_progress(self, **ka):
         """display progress"""

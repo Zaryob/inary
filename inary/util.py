@@ -396,7 +396,7 @@ def noecho(enabled=True):
     if(enabled):
         printw("\x1b[?25l")
     else:
-        printw("\x1b[?250")
+        printw("\x1b[?25h")
 
 def attron(attribute):
     """Attribute enable"""
