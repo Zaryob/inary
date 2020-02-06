@@ -194,8 +194,7 @@ class Install(AtomicOperation):
         # what to do if / is split into /usr, /var, etc.
         # check scom
         if self.metadata.package.providesScom and ctx.scom and not ctx.get_option("ignore_scom"):
-            import inary.scomiface as scomiface
-            scomiface.get_link()
+            import inary.reactor as reactor
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -316,7 +315,7 @@ class Install(AtomicOperation):
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
         if self.metadata.package.providesScom:
             if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
+                import inary.reactor
                 try:
                     if self.operation == UPGRADE or self.operation == DOWNGRADE:
                         fromVersion = self.old_pkginfo.version
@@ -325,7 +324,7 @@ class Install(AtomicOperation):
                         fromVersion = None
                         fromRelease = None
                     ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
-                    inary.scomiface.post_install(
+                    inary.reactor.post_install(
                         self.pkginfo.name,
                         self.metadata.package.providesScom,
                         self.package.scom_dir(),
@@ -337,7 +336,7 @@ class Install(AtomicOperation):
                         self.metadata.package.release
                     )
                     ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
-                except inary.scomiface.Error:
+                except :
                     ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                     self.config_later = True
             else:
@@ -695,8 +694,8 @@ class Remove(AtomicOperation):
     def run_preremove(self):
         if self.package.providesScom:
             if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.pre_remove(
+                import inary.reactor
+                inary.reactor.pre_remove(
                          self.package_name,
                          os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                          os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
@@ -705,8 +704,8 @@ class Remove(AtomicOperation):
     def run_postremove(self):
         if self.package.providesScom:
             if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.scomiface
-                inary.scomiface.post_remove(
+                import inary.reactor
+                inary.reactor.post_remove(
                     self.package_name,
                     os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                     os.path.join(self.package.pkg_dir(), ctx.const.files_xml),

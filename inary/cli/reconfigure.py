@@ -15,7 +15,6 @@
 import optparse
 
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -27,19 +26,14 @@ import inary.errors
 import inary.context as ctx
 import inary.reactor
 
+
 def configure_pending(packages=None):
-    # Import SCOM
 
     # start with pending packages
     # configure them in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
-    if not packages:
-        packages = installdb.list_pending()
-    else:
-        packages = set(packages).intersection(installdb.list_pending())
-
-    order = inary.data.pgraph.generate_pending_order(packages)
-    try:
+    order=packages
+    if True:
         for x in order:
             if installdb.has_package(x):
                 pkginfo = installdb.get_package(x)
@@ -63,12 +57,9 @@ def configure_pending(packages=None):
                 )
                 ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
-    except ImportError:
-        raise inary.errors.Error(_("scom package is not fully installed."))
-
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
-    __doc__ = _("""Configure pending packages
+    __doc__ = _("""Reconfigure pending packages
 
 If SCOM configuration of some packages were not
 done at installation time, they are added to a list
@@ -79,7 +70,7 @@ configures those packages.
     def __init__(self, args):
         super(ConfigurePending, self).__init__(args)
 
-    name = ("configure-pending", "cp")
+    name = (_("reconfigure"), "rp")
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("configure-pending options"))
