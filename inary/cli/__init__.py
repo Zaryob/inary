@@ -190,21 +190,21 @@ class CLI(inary.ui.UI):
             if not ctx.get_option("no_color"):
                 complated_background = 'backgroundgreen'
                 queried_background = 'backgroundyellow'
-                complated='brightblue'
+                complated='brightgreen'
             else:
                 complated_background = queried_background = complated = "default"
 
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
+            phr_size, phr_symbol = util.human_readable_size(ka["downloaded_size"])
             totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
+            nowsize = '{:.1f} {}'.format(phr_size, phr_symbol)
 
-            file_and_totalsize = '{:30.50} ({})'.format(ka['filename'], totalsize)
-            percentage_and_time = '{:9.2f} % {:9.2f} {} [ {} ]'.format(ka['percent'],
-                                                                       ka['rate'],
-                                                                       ka['symbol'],
-                                                                       ka['eta'])
+            file_and_totalsize = '[{:.40} {}/{}]'.format(ka['basename'],nowsize,totalsize)
+            percentage_and_time = '{:.2f} {}'.format(ka['rate'],ka['symbol'])
 
             term_rows, term_columns = util.get_terminal_size()
-            spacenum = ( term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
+            spacenum = (term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
+            spacenum = spacenum - 10
             if spacenum < 1:
                 spacenum = 0
 
@@ -214,10 +214,11 @@ class CLI(inary.ui.UI):
                 self.output(out)
 
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
+            # \r\x1b[2K erase current line
             if ka["percent"] == 100:
-                self.output("\r" + ctx.const.colors[complated] + msg + ctx.const.colors['default'])
+                self.output("\r\x1b[2K" + ctx.const.colors[complated] + ka['basename'] +" [" + _("downloaded")+"]"+ctx.const.colors['default'])
             else:
-                self.output("\r" + ctx.const.colors[complated_background] + \
+                self.output("\r\x1b[2K" + ctx.const.colors[complated_background] + "{:6.2f}% ".format(ka['percent']) + \
                             msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
                             ctx.const.colors['default'])
             util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))

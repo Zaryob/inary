@@ -17,6 +17,7 @@
 import os
 import shutil
 import time
+import random
 
 import gettext
 
@@ -69,6 +70,7 @@ class UIHandler:
         self.basename = None
         self.downloaded_size = 0
         self.percent = None
+        self.pkgname = None
         self.rate = 0.0
         self.size = 0
         self.eta = '--:--:--'
@@ -126,7 +128,8 @@ class UIHandler:
                                 downloaded_size=self.size,
                                 rate=self.rate,
                                 eta=self.eta,
-                                symbol=self.symbol)
+                                symbol=self.symbol,
+                                basename=self.basename)
 
         self.last_updated = self.now()
 
@@ -307,9 +310,12 @@ def fetch_url(url, destdir=None, progress=None, destfile=None):
         destdir=ctx.config.archives_dir()
     if not progress:
         progress=ctx.ui.Progress
-    fetch = Fetcher(url, destdir, destfile)
-    fetch.progress = progress
-    fetch.fetch()
+    if "mirrors://" in str(url):
+        fetch_from_mirror(str(url),destdir,progress,destfile)
+    else:
+        fetch = Fetcher(url, destdir, destfile)
+        fetch.progress = progress
+        fetch.fetch()
 
 def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
     archive = os.path.basename(url)
@@ -332,13 +338,14 @@ def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
     archive = "/".join(sep)
 
     mirrors = inary.mirrors.Mirrors().get_mirrors(name)
+    random.shuffle(mirrors) # randomize mirror list
     if not mirrors:
         raise inary.mirrors.MirrorError(_("\"{}\" mirrors are not defined.").format(name))
 
     for mirror in mirrors:
         try:
             mirror_url = os.path.join(mirror, archive)
-            ctx.ui.warning(_('Fetching source from mirror: \"{}\"').format(mirror))
+            ctx.ui.debug(_('Fetching source from: \"{}\"').format(mirror_url))
             fetch_url(mirror_url, destdir=destdir, progress=progress, destfile=destfile)
             return
         except FetchError:
