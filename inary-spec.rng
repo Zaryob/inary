@@ -36,7 +36,7 @@
                 <ref name="Icon"/>
             </optional>
             <optional>
-                <ref name="Rfp"/>
+                <ref name="RFP"/>
             </optional>
             <zeroOrMore>
                 <ref name="IsA"/>
@@ -51,9 +51,9 @@
                 <!-- FIXME: should be oneOrMore -->
                 <ref name="Description"/>
             </zeroOrMore>
-            <oneOrMore>
+            <optional>
                 <ref name="Archive"/>
-            </oneOrMore>
+            </optional>
             <optional>
                 <ref name="AdditionalFiles"/>
             </optional>
@@ -154,8 +154,8 @@
     </define>
 
     <!-- Rfp -->
-    <define name="Icon">
-        <element name="Icon">
+    <define name="RFP">
+        <element name="RFP">
             <text/>
         </element>
     </define>

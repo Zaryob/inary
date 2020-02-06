@@ -377,7 +377,7 @@ class Builder:
     def get_build_types(self):
         ignored_build_types = \
             ctx.config.values.build.ignored_build_types.split(",")
-        build_types = [""]
+        build_types = []
         packages = []
 
         for package in self.spec.packages:
@@ -391,7 +391,7 @@ class Builder:
             packages.append(package)
 
         self.spec.packages = packages
-
+        build_types.append("")
         return build_types
 
     def set_build_type(self, build_type):
@@ -407,6 +407,7 @@ class Builder:
 
         # Each time a builder is created we must reset
         # environment. See bug #2575
+        os.environ.clear()
         inary.actionsapi.variables.initVariables()
 
         env = {"PKG_DIR": self.pkg_dir(),
