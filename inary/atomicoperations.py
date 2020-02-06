@@ -81,7 +81,7 @@ class Install(AtomicOperation):
         repo = packagedb.which_repo(name)
         if repo:
             repodb = inary.db.repodb.RepoDB()
-            ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\"").format(name, repo))
+            ctx.ui.debug(_("Package \"{0}\" found in repository \"{1}\"").format(name, repo))
 
             repo = repodb.get_repo(repo)
             pkg = packagedb.get_package(name)

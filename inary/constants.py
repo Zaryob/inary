@@ -130,6 +130,7 @@ class Constants(metaclass=Singleton):
         self.__c.check_func = "check"
         self.__c.install_func = "install"
 
+
         # file types
         # FIXME: these seem redundant
         self.__c.doc = "doc"

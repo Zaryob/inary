@@ -302,14 +302,8 @@ def run_batch(cmd, ui_debug=True):
     out, err = p.communicate()
     if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
     return p.returncode, out.decode('utf-8'), err
-
-
-# TODO: it might be worthwhile to try to remove the
-# use of ctx.stdout, and use run_batch()'s return
-# values instead. but this is good enough :)
-def run_logged(cmd):
-    """Run command and get the return value."""
-    ctx.ui.info(_('Running ') + cmd, verbose=True)
+p=None
+def logger_init():
     if ctx.stdout:
         stdout = ctx.stdout
     else:
@@ -327,6 +321,16 @@ def run_logged(cmd):
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
     out, err = p.communicate()
+
+# TODO: it might be worthwhile to try to remove the
+# use of ctx.stdout, and use run_batch()'s return
+# values instead. but this is good enough :)
+def run_logged(cmd):
+    """Run command and get the return value."""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
+    if(p==None):
+        logger_init()
+    p.write(cmd+"\n")
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
@@ -363,6 +367,99 @@ def xterm_title_reset():
     if "TERM" in os.environ:
         xterm_title("")
 
+#############################
+#   ncurses like functions  #
+#############################
+def initscr():
+    """Clear and create a window"""
+    printw("\x1b[s\x1bc")
+
+def endsrc():
+    """Clear and restore screen"""
+    printw("\x1bc\x1b[u")
+
+def move(x,y):
+    """Move"""
+    printw("\x1b[{};{}f".format(y,x))
+
+def printw(msg=''):
+    """Print clone"""
+    sys.stdout.write(msg)
+    sys.stdout.flush()
+
+def mvprintw(x,y,msg=''):
+    """Move and print"""
+    move(x,y)
+    printw(msg)
+
+def noecho(enabled=True):
+    if(enabled):
+        printw("\x1b[?25l")
+    else:
+        printw("\x1b[?250")
+
+def attron(attribute):
+    """Attribute enable"""
+    if(attribute=="A_NORMAL"):
+        sys.stdout.write("\x1b[;0m")
+    elif(attribute=="A_UNDERLINE"):
+        sys.stdout.write("\x1b[4m")
+    elif(attribute=="A_REVERSE"):
+        sys.stdout.write("\x1b[7m")
+    elif(attribute=="A_BLINK"):
+        sys.stdout.write("\x1b[5m")
+    elif(attribute=="A_DIM"):
+        sys.stdout.write("\x1b[2m")
+    elif(attribute=="A_BOLD"):
+        sys.stdout.write("\x1b[1m")
+    elif(attribute=="A_INVIS"):
+        sys.stdout.write("\x1b[8m")
+    elif(attribute=="C_BLACK"):
+        sys.stdout.write("\x1b[30m")
+    elif(attribute=="C_RED"):
+        sys.stdout.write("\x1b[31m")
+    elif(attribute=="C_GREEN"):
+        sys.stdout.write("\x1b[32m")
+    elif(attribute=="C_YELLOW"):
+        sys.stdout.write("\x1b[33m")
+    elif(attribute=="C_BLUE"):
+        sys.stdout.write("\x1b[34m")
+    elif(attribute=="C_MAGENTA"):
+        sys.stdout.write("\x1b[35m")
+    elif(attribute=="C_CYAN"):
+        sys.stdout.write("\x1b[36m")
+    elif(attribute=="C_WHITE"):
+        sys.stdout.write("\x1b374m")
+    elif(attribute=="B_BLACK"):
+        sys.stdout.write("\x1b[40m")
+    elif(attribute=="B_RED"):
+        sys.stdout.write("\x1b[41m")
+    elif(attribute=="B_GREEN"):
+        sys.stdout.write("\x1b[42m")
+    elif(attribute=="B_YELLOW"):
+        sys.stdout.write("\x1b[43m")
+    elif(attribute=="B_BLUE"):
+        sys.stdout.write("\x1b[44m")
+    elif(attribute=="B_MAGENTA"):
+        sys.stdout.write("\x1b[45m")
+    elif(attribute=="B_CYAN"):
+        sys.stdout.write("\x1b[46m")
+    elif(attribute=="B_WHITE"):
+        sys.stdout.write("\x1b[47m")
+    sys.stdout.flush()
+
+def drawbox(x1,y1,x2,y2):
+    """Draw box"""
+    mvprintw(x1,y1,"╔")
+    mvprintw(x1,y2,"╚")
+    mvprintw(x2,y1,"╗")
+    mvprintw(x2,y2,"╝")
+    for i in range((x1+1),(x2-1)):
+        mvprintw(i,y1,"═")
+        mvprintw(i,y2,"═")
+    for i in range((y1+1),(y2-1)):
+        mvprintw(x1,i,"║")
+        mvprintw(x2,i,"║")
 
 #############################
 # Path Processing Functions #

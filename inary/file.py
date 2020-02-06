@@ -169,7 +169,7 @@ class File:
         if sha1sum:
             if inary.util.sha1_file(localfile) != newsha1:
                 clean_temporary()
-                raise Error(_("File integrity of \"{}\" compromised.").format(uri))
+                raise Error(_("File integrity of \"{}\" compromised.\n localfile:{}\n newsha1: {}").format(uri,inary.util.sha1_file(localfile),newsha1))
 
         if check_integrity:
             shutil.move(localfile, origfile)

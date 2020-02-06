@@ -7,5 +7,5 @@ clean:
 build:
 	python3 setup.py build
 install:
-	python3 setup.py install --prefix=$(PREFIX)
-	install inary-cli $(PREFIX)usr/bin/inary
+	python3 setup.py install 
+	install inary-cli /usr/bin/inary

@@ -64,7 +64,7 @@ class Package:
         self.filepath = packagefn
         url = inary.uri.URI(packagefn)
 
-        if url.is_remote_file():
+        if "://" in self.filepath:
             self.fetch_remote_file(url)
 
         try:
