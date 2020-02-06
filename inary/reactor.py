@@ -17,13 +17,12 @@ import inary.db
 import inary.util as util
 import os
 import sys
-installdb = inary.db.installdb.InstallDB()
 
 def post_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
              fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
-    pkg_path = installdb.package_path(package_name)
+    pkg_path = metapath.replace("metadata.xml","")
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
         import package as package_py
@@ -32,7 +31,9 @@ def post_install(package_name, provided_scripts,
         del package_py
         sys.path.pop(0)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        os.system("cd {}; source package.sh ; postInstall {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('source {}/package.sh ; postInstall "{}" "{}" "{}" "{}"'.format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+        if(i!=0):
+            raise SystemExit
     else:
         return 0
 
@@ -40,7 +41,7 @@ def pre_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
              fromVersion, fromRelease, toVersion, toRelease):
     """Do package's pre install operations"""
-    pkg_path = installdb.package_path(package_name)
+    pkg_path = metapath.replace("metadata.xml","")
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
         import package as package_py
@@ -49,38 +50,44 @@ def pre_install(package_name, provided_scripts,
         del package_py
         sys.path.pop(0)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        os.system("cd {}; source package.sh ; preInstall {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('source {}/package.sh ; preInstall "{}" "{}" "{}" "{}"'.format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+        if(i!=0):
+            raise SystemExit
     else:
         return 0
     
 
 def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
-    pkg_path = installdb.package_path(package_name)
+    pkg_path = metapath.replace("metadata.xml","")
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
         import package as package_py
         if "postRemove" in dir(package_py):
-            package_py.postRemove(timeout=ctx.dbus_timeout)
+            package_py.postRemove()
         del package_py
         sys.path.pop(0)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        os.system("cd {}; source package.sh ; postRemove {}".format((pkg_path+"/"+ctx.const.scom_dir),timeout=ctx.dbus_timeout))
+        i=os.system('source {}/package.sh ; postRemove '.format((pkg_path+"/"+ctx.const.scom_dir)))
+        if(i!=0):
+            raise SystemExit
     else:
         return 0
    
 
-def pre_remove(package_name, metapath, filepath):
+def pre_remove(package_name, metapath, filepath,provided_scripts=None):
     """Do package's post removal operations"""
-    pkg_path = installdb.package_path(package_name)
+    pkg_path = metapath.replace("metadata.xml","")
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
         import package as package_py
         if "preRemove" in dir(package_py):
-            package_py.preRemove(timeout=ctx.dbus_timeout)
+            package_py.preRemove()
         del package_py
         sys.path.pop(0)
     elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        os.system("cd {}; source package.sh ; preRemove {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),timeout=ctx.dbus_timeout))
+        i=os.system('source {}/package.sh ; preRemove'.format((pkg_path+"/"+ctx.const.scom_dir)))
+        if(i!=0):
+            raise SystemExit
     else:
         return 0
