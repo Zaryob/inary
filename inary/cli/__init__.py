@@ -159,7 +159,7 @@ class CLI(inary.ui.UI):
                 if opt.startswith(str(s)):
                     return opt
 
-    def confirm(self, msg):
+    def confirm(self, msg,invert=False):
         msg = str(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True
@@ -169,16 +169,17 @@ class CLI(inary.ui.UI):
         no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
         locale.setlocale(locale.LC_ALL, "C")
 
-        while True:
-            tty.tcflush(sys.stdin.fileno(), 0)
+        tty.tcflush(sys.stdin.fileno(), 0)
+        if invert:
+            prompt = msg + util.colorize(" "+_('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
+        else:
             prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
-            s = input(prompt)
+        s = input(prompt)
 
-            if yes_expr.search(s):
-                return True
-
-            if no_expr.search(s):
-                return False
+        if yes_expr.search(s):
+            return True
+        else:
+            return False
 
     def display_progress(self, **ka):
         """ display progress of any operation """
