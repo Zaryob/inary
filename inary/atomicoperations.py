@@ -699,6 +699,7 @@ class Remove(AtomicOperation):
                          self.package_name,
                          os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                          os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                         provided_scripts=self.package.providesScom,
                          )
 
     def run_postremove(self):
