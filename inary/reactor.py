@@ -26,12 +26,15 @@ def post_install(package_name, provided_scripts,
     pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
+        import package as package_py
+        if "postInstall" in dir(package_py):
+            package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
+        del package_py
+        sys.path.pop(0)
+    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
+        os.system("cd {}; source package.sh ; postInstall {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
     else:
         return 0
-    import package as package_py
-    package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
-    del package_py
-    sys.path.pop(0)
 
 def pre_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
@@ -40,36 +43,44 @@ def pre_install(package_name, provided_scripts,
     pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
+        import package as package_py
+        if "preInstall" in dir(package_py):
+            package_py.preInstall(fromVersion, fromRelease, toVersion, toRelease)
+        del package_py
+        sys.path.pop(0)
+    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
+        os.system("cd {}; source package.sh ; preInstall {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
     else:
         return 0
-    import package as package_py
-    if "preInstall" in dir(package_py):
-        package_py.preInstall(fromVersion, fromRelease, toVersion, toRelease)
-    del package_py
-    sys.path.pop(0)
+    
 
 def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
     pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
+        import package as package_py
+        if "postRemove" in dir(package_py):
+            package_py.postRemove(timeout=ctx.dbus_timeout)
+        del package_py
+        sys.path.pop(0)
+    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
+        os.system("cd {}; source package.sh ; postRemove {}".format((pkg_path+"/"+ctx.const.scom_dir),timeout=ctx.dbus_timeout))
     else:
         return 0
-    import package as package_py
-    if "postInstall" in dir(package_py):
-        package_py.postRemove(timeout=ctx.dbus_timeout)
-    del package_py
-    sys.path.pop(0)
+   
 
 def pre_remove(package_name, metapath, filepath):
     """Do package's post removal operations"""
     pkg_path = installdb.package_path(package_name)
     if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
         sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
+        import package as package_py
+        if "preRemove" in dir(package_py):
+            package_py.preRemove(timeout=ctx.dbus_timeout)
+        del package_py
+        sys.path.pop(0)
+    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
+        os.system("cd {}; source package.sh ; preRemove {},{},{}{}".format((pkg_path+"/"+ctx.const.scom_dir),timeout=ctx.dbus_timeout))
     else:
         return 0
-    import package as package_py
-    if "postInstall" in dir(package_py):
-        package_py.preRemove(timeout=ctx.dbus_timeout)
-    del package_py
-    sys.path.pop(0)
