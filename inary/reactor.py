@@ -22,16 +22,12 @@ def post_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
              fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
-    pkg_path = metapath.replace("metadata.xml","")
-    if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
-        sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
-        import package as package_py
-        if "postInstall" in dir(package_py):
-            package_py.postInstall(fromVersion, fromRelease, toVersion, toRelease)
-        del package_py
-        sys.path.pop(0)
-    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        i=os.system('source {}/package.sh ; postInstall "{}" "{}" "{}" "{}"'.format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+    pkg_path = metapath.replace("metadata.xml","scom")
+    print(pkg_path)
+    if(os.path.isfile(pkg_path+"/package.py")):
+        os.system('cd {} ; python3 -c \'import package; package.postInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+    elif(os.path.isfile(pkg_path+"/package.sh")):
+        i=os.system('source {}/package.sh ; postInstall "{}" "{}" "{}" "{}"'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
             raise SystemExit
     else:
@@ -41,16 +37,11 @@ def pre_install(package_name, provided_scripts,
              scriptpath, metapath, filepath,
              fromVersion, fromRelease, toVersion, toRelease):
     """Do package's pre install operations"""
-    pkg_path = metapath.replace("metadata.xml","")
-    if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
-        sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
-        import package as package_py
-        if "preInstall" in dir(package_py):
-            package_py.preInstall(fromVersion, fromRelease, toVersion, toRelease)
-        del package_py
-        sys.path.pop(0)
-    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        i=os.system('source {}/package.sh ; preInstall "{}" "{}" "{}" "{}"'.format((pkg_path+"/"+ctx.const.scom_dir),fromVersion, fromRelease, toVersion, toRelease))
+    pkg_path = metapath.replace("metadata.xml","scom")
+    if(os.path.isfile(pkg_path+"/package.py")):
+        os.system('cd {} ; python3 -c \'import package; package.preInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+    elif(os.path.isfile(pkg_path+"/package.sh")):
+        i=os.system('source {}/package.sh ; preInstall "{}" "{}" "{}" "{}"'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
             raise SystemExit
     else:
@@ -59,16 +50,11 @@ def pre_install(package_name, provided_scripts,
 
 def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
-    pkg_path = metapath.replace("metadata.xml","")
-    if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
-        sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
-        import package as package_py
-        if "postRemove" in dir(package_py):
-            package_py.postRemove()
-        del package_py
-        sys.path.pop(0)
-    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        i=os.system('source {}/package.sh ; postRemove '.format((pkg_path+"/"+ctx.const.scom_dir)))
+    pkg_path = metapath.replace("metadata.xml","scom")
+    if(os.path.isfile(pkg_path+"/package.py")):
+        os.system('cd {} ; python3 -c \'import package; package.postRemove()\''.format(pkg_path))
+    elif(os.path.isfile(pkg_path+"/package.sh")):
+        i=os.system('source {}/package.sh ; postRemove '.format((pkg_path)))
         if(i!=0):
             raise SystemExit
     else:
@@ -77,16 +63,11 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
 
 def pre_remove(package_name, metapath, filepath,provided_scripts=None):
     """Do package's post removal operations"""
-    pkg_path = metapath.replace("metadata.xml","")
-    if(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.py")):
-        sys.path.insert(0,pkg_path+"/"+ctx.const.scom_dir)
-        import package as package_py
-        if "preRemove" in dir(package_py):
-            package_py.preRemove()
-        del package_py
-        sys.path.pop(0)
-    elif(os.path.isfile(pkg_path+"/"+ctx.const.scom_dir+"/package.sh")):
-        i=os.system('source {}/package.sh ; preRemove'.format((pkg_path+"/"+ctx.const.scom_dir)))
+    pkg_path = metapath.replace("metadata.xml","scom")
+    if(os.path.isfile(pkg_path+"/package.py")):
+        os.system('cd {} ; python3 -c \'import package; package.preRemove()\''.format(pkg_path))
+    elif(os.path.isfile(pkg_path+"/package.sh")):
+        i=os.system('source {}/package.sh ; preRemove'.format((pkg_path)))
         if(i!=0):
             raise SystemExit
     else:
