@@ -302,8 +302,13 @@ def run_batch(cmd, ui_debug=True):
     out, err = p.communicate()
     if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
     return p.returncode, out.decode('utf-8'), err
-p=None
-def logger_init():
+
+# TODO: it might be worthwhile to try to remove the
+# use of ctx.stdout, and use run_batch()'s return
+# values instead. but this is good enough :)
+def run_logged(cmd):
+    """Run command and get the return value."""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
     if ctx.stdout:
         stdout = ctx.stdout
     else:
@@ -321,16 +326,6 @@ def logger_init():
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
     out, err = p.communicate()
-
-# TODO: it might be worthwhile to try to remove the
-# use of ctx.stdout, and use run_batch()'s return
-# values instead. but this is good enough :)
-def run_logged(cmd):
-    """Run command and get the return value."""
-    ctx.ui.info(_('Running ') + cmd, verbose=True)
-    if(p==None):
-        logger_init()
-    p.write(cmd+"\n")
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
