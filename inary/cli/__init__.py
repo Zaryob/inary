@@ -219,7 +219,10 @@ class CLI(inary.ui.UI):
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
             # \r\x1b[2K erase current line
             if ka["percent"] == 100:
-                self.output("\r\x1b[2K" + ctx.const.colors[complated] + ka['basename'] +" [" + _("downloaded")+"]"+ctx.const.colors['default'])
+                if ctx.get_option('debug'):
+                    self.output("\r\x1b[2K" + ctx.const.colors[complated] + ka['basename'] +" [" + _("downloaded")+"]"+ctx.const.colors['default'])
+                else:
+                    self.output("\r\x1b[2K\x1b[1A") # clear line and move up
             else:
                 self.output("\r\x1b[2K" + ctx.const.colors[complated_background] + "{:6.2f}% ".format(ka['percent']) + \
                             msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
@@ -239,18 +242,21 @@ class CLI(inary.ui.UI):
             util.xterm_title(msg)
 
     def notify(self, event, logging=True, **keywords):
+        is_debug=False
         if event == inary.ui.installed:
             msg = _('Installed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
         elif event == inary.ui.installing:
             msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(keywords['package'])
-            color = 'brightblue'
+            color = 'faintblue'
+            is_debug=True
         elif event == inary.ui.removed:
             msg = _('Removed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
         elif event == inary.ui.removing:
             msg = _('Removing \"{}\"').format(keywords['package'].name)
             color = 'brightpurple'
+            is_debug=True
         elif event == inary.ui.upgraded:
             msg = _('Upgraded \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
@@ -260,12 +266,15 @@ class CLI(inary.ui.UI):
         elif event == inary.ui.configuring:
             msg = _('Configuring \"{}\" package.').format(keywords['package'].name)
             color = 'faintyellow'
+            is_debug=True
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
             color = 'faintgreen'
+            is_debug=True
         elif event == inary.ui.updatingrepo:
             msg = _('Updating package repository: \"{}\"').format(keywords['name'])
             color = 'green'
+            is_debug=True
         elif event == inary.ui.cached:
             total_size, total_symbol = util.human_readable_size(keywords['total'])
             cached_size, cached_symbol = util.human_readable_size(keywords['cached'])
@@ -288,6 +297,7 @@ class CLI(inary.ui.UI):
             msg = None
 
         if msg:
-            self.output(util.colorize(msg + '\n', color))
-            if ctx.log and logging:
-                ctx.log.info(msg)
+            if ((not is_debug) or ctx.get_option('debug')):
+                self.output(util.colorize(msg + '\n', color))
+                if ctx.log and logging:
+                    ctx.log.info(msg)

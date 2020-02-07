@@ -62,10 +62,10 @@ class UI(object):
         """inform the user of an important event and wait for acknowledgement"""
         pass
 
-    def debug(self, msg):
+    def debug(self, msg, color='normal'):
         """show debugging info"""
         if self.show_debug:
-            self.info(str('DEBUG: ' + msg))
+            self.info(str('DEBUG: ' + msg),color)
 
     def warning(self, msg):
         """warn the user"""

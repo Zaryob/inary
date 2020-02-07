@@ -110,7 +110,8 @@ class Package:
                         url))
                 raise
         else:
-            ctx.ui.info(_('{} [cached]').format(url.filename()))
+            if ctx.config.get_option('debug'):
+                ctx.ui.info(_('{} [cached]').format(url.filename()))
 
     def add_to_package(self, fn, an=None):
         """Add a file or directory to package"""
