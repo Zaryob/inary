@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ $UID -ne 0 ] ; then
+    echo "You must be root!"
+     exit 1
+fi
+inary dc
+inary ur
+echo
+echo "Listing avaiable..."
+inary la --no-color | awk -F ' ' '{print $1}' > /var/cache/inary/avaiable
+echo "Listing installed..."
+inary li --no-color | awk -F ' ' '{print $1}' > /var/cache/inary/installed
+echo "Listing repos..."
+ls /var/lib/inary/index/ > /var/cache/inary/repos
+echo
+echo "Done"

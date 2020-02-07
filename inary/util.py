@@ -393,10 +393,11 @@ def mvprintw(x,y,msg=''):
     printw(msg)
 
 def noecho(enabled=True):
-    if(enabled):
-        printw("\x1b[?25l")
-    else:
-        printw("\x1b[?25h")
+    if(ctx.get_option('no_color')==False):
+        if(enabled):
+            printw("\x1b[?25l")
+        else:
+            printw("\x1b[?25h")
 
 def attron(attribute):
     """Attribute enable"""

@@ -205,6 +205,8 @@ setup(name="inary",
       scripts=['inary-cli',
                'scripts/pspec2po',
                'scripts/revdep-rebuild',
+               'scripts/sulinstrapt',
+               'scripts/update-inary-cache',
                'scripts/version-bump'],
       classifiers=[
           'Development Status :: 5 - Production/Stable',

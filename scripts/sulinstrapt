@@ -1,0 +1,26 @@
+#!/bin/sh
+#sulinstrapt betiği ile sulinos chroot oluşturabilirsiniz veya diskinize kurulum yapabilirsiniz
+
+if [ "$1" == "" ] || [ "$1" == "-*" ]
+then
+    echo "Usage: sulinstrapt [directory]"
+    exit 0
+fi
+sulin="$1"
+if [ $UID -ne 0 ]
+then
+    echo "You must be root!"
+    exit 1
+fi
+if [ -d "$sulin" ]
+then
+  echo "$sulin already exist"
+fi
+if [ -f "$sulin" ]
+then
+  echo "$sulin is a file. You must delete or move."
+  exit 1
+fi
+inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml -D$sulin
+inary it -c system.base -y --ignore-scom -D$sulin
+cp -prf $sulin/usr/share/baselayout/* $sulin/etc/
