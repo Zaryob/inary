@@ -24,11 +24,11 @@ def post_install(package_name, provided_scripts,
     """Do package's post install operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
     if(os.path.isfile(pkg_path+"/package.py")):
-        i=os.system('cd {} ; python3 -c \'import package; package.postInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('cd {} ; python3 -c \'import package; package.postInstall("{}",{},"{}",{})\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
             raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):
-        i=os.system('source {}/package.sh ; postInstall "{}" "{}" "{}" "{}"'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('source {}/package.sh ; postInstall "{}" {} "{}" {}'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
             raise SystemExit
     else:
@@ -40,7 +40,7 @@ def pre_install(package_name, provided_scripts,
     """Do package's pre install operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
     if(os.path.isfile(pkg_path+"/package.py")):
-        i=os.system('cd {} ; python3 -c \'import package; package.preInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('cd {} ; python3 -c \'import package; package.preInstall("{}",{},"{}",{})\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
             raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):

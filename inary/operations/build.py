@@ -697,7 +697,7 @@ class Builder:
                                        pscom.script)
 
                 try:
-                    if(os.path.splitext(filename)[1]=="py"):
+                    if(os.path.splitext(fname)[1]=="py"):
                         buf = open(fname).read()
                         compile(buf, "error", "exec")
                 except IOError as e:
