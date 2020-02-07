@@ -217,7 +217,7 @@ def upgrade(A=None, repo=None):
 
     paths = []
     for x in order:
-        ctx.ui.info(_("Downloading {} / {}").format(order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading {} / {} => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
 
@@ -232,7 +232,7 @@ def upgrade(A=None, repo=None):
 
     try:
         for path in paths:
-            ctx.ui.info(_("Installing {} / {}").format(paths.index(path) + 1, len(paths)), color="yellow")
+            ctx.ui.info(_("Installing {} / {} => [{}]").format(paths.index(path) + 1, len(paths),path.split("/")[len(path.split("/"))-1]), color="yellow")
             install_op = atomicoperations.Install(path, ignore_file_conflicts=True)
             install_op.install(not ctx.get_option('compare_sha1sum'))
     except Exception as e:

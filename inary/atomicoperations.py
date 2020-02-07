@@ -553,7 +553,8 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
+        if ctx.get_option('debug'):
+            ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -608,7 +609,7 @@ class Remove(AtomicOperation):
     def run(self):
         """Remove a single package"""
         ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
-        ctx.ui.status(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package), push_screen=False)
+        ctx.ui.debug(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package))
 
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
@@ -718,11 +719,13 @@ class Remove(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
 
     def remove_inary_files(self):
-        ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
+        if ctx.get_option('debug'):
+            ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
         util.clean_dir(self.package.pkg_dir())
 
     def remove_db(self):
-        ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
+        if ctx.get_option('debug'):
+            ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
         self.installdb.remove_package(self.package_name)
         ctx.filesdb.remove_files(self.files.list)
 

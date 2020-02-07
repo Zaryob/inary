@@ -58,6 +58,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     A |= operations.upgrade.upgrade_base(A)
 
     if not ctx.config.get_option('ignore_dependency'):
+        ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
         G_f, order = plan_install_pkg_names(A)
     else:
         G_f = None
@@ -94,7 +95,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     paths = []
     extra_paths = {}
     for x in order:
-        ctx.ui.info(_("Downloading {} / {}").format(order.index(x) + 1, len(order)), color="yellow")
+        ctx.ui.info(_("Downloading {} / {} => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
         if x in extra_packages or (extra and x in A):
@@ -112,7 +113,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         operations.remove.remove_conflicting_packages(conflicts)
 
     for path in paths:
-        ctx.ui.info(_("Installing {} / {}") .format(paths.index(path) + 1, len(paths)), color="yellow")
+        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),path.split("/")[len(path.split("/"))-1]), color="yellow")
         install_op = atomicoperations.Install(path)
         install_op.install(False)
         try:
@@ -274,7 +275,6 @@ def install_pkg_files(package_URIs, reinstall=False):
 def plan_install_pkg_names(A):
     # try to construct a inary graph of packages to
     # install / reinstall
-    ctx.ui.info(_('Checking dependencies for install...'))
     packagedb = inary.db.packagedb.PackageDB()
 
     G_f = pgraph.PGraph(packagedb)  # construct G_f
