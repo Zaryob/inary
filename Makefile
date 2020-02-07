@@ -9,4 +9,3 @@ build:
 install:
 	python3 setup.py install 
 	ln -s /usr/bin/inary-cli /usr/bin/inary || true
-	install shell-complete/bash-complete.sh /usr/share/bash-completion/completions/inary
