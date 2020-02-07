@@ -108,7 +108,7 @@ class File:
 
     @staticmethod
     def download(uri, transfer_dir="/tmp", sha1sum=False,
-                 compress=None, sign=None, copylocal=False):
+                 compress=None, sign=None, copylocal=False,pkgname=''):
 
         assert isinstance(uri, inary.uri.URI)
 
@@ -140,7 +140,7 @@ class File:
 
             if uri.is_remote_file():
                 ctx.ui.info(_("Fetching {}").format(uri.get_uri()), verbose=True)
-                inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile)
+                inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile,pkgname)
             else:
                 # copy to transfer dir
                 ctx.ui.info(_("Copying \"{}\" to transfer dir").format(uri.get_uri()), verbose=True)

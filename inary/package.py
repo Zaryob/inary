@@ -60,11 +60,11 @@ class Package:
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
 
-    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None):
+    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None,pkgname='',no_fetch=False):
         self.filepath = packagefn
         url = inary.uri.URI(packagefn)
 
-        if "://" in self.filepath:
+        if ("://" in self.filepath) and not no_fetch:
             self.fetch_remote_file(url)
 
         try:
@@ -95,13 +95,12 @@ class Package:
 
         self.tmp_dir = tmp_dir or ctx.config.tmp_dir()
 
-    def fetch_remote_file(self, url):
+    def fetch_remote_file(self, url,pkgname=''):
         dest = ctx.config.cached_packages_dir()
         self.filepath = os.path.join(dest, url.filename())
-
         if not os.path.exists(self.filepath):
             try:
-                inary.file.File.download(url, dest)
+                inary.file.File.download(url, dest,pkgname)
             except fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
