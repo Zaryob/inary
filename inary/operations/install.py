@@ -29,6 +29,7 @@ import inary.operations as operations
 import inary.data.pgraph as pgraph
 import inary.ui as ui
 import inary.db
+import inary.libraries.sort as sort
 
 
 def install_pkg_names(A, reinstall=False, extra=False):
@@ -94,10 +95,12 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     paths = []
     extra_paths = {}
-    for x in order:
-        ctx.ui.info(_("Downloading {} / {} => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
+    sorted_order=sort.sort_auto(order)
+    for x in sorted_order:
+        ctx.ui.info(_("Downloading {} / {} => [{}]").format(sorted_order.index(x) + 1, len(sorted_order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
+        
         if x in extra_packages or (extra and x in A):
             extra_paths[install_op.package_fname] = x
         elif reinstall and x in installdb.installed_extra:
@@ -112,9 +115,17 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
+
+    for path in order:
+        if installdb.has_package(path):
+            remove_op = atomicoperations.Remove(path)
+            remove_op.run_preremove()
+        install_op = atomicoperations.Install.from_name(path)
+        install_op.preInstall()
+
     for path in paths:
-        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),path.split("/")[len(path.split("/"))-1]), color="yellow")
         install_op = atomicoperations.Install(path)
+        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),install_op.package_fname), color="yellow")
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
@@ -122,6 +133,11 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
+
+    for path in order:
+        install_op = atomicoperations.Install.from_name(path)
+        install_op.postInstall()
+
 
     return True
 

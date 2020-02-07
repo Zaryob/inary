@@ -194,21 +194,22 @@ def get_package_requirements(packages):
     return requirements
 
 def check_config_changes(order):
-
+    installdb = inary.db.installdb.InstallDB()
     config_changes=dict()
 
     for package in order:
-        all_files = inary.db.installdb.InstallDB().get_files(package)
-        config_files = [x for x in all_files.list if x.type == 'config']
-        config_paths = ["/" + str(x.path) for x in config_files]
+        if installdb.has_package(package):
+            all_files = inary.db.installdb.InstallDB().get_files(package)
+            config_files = [x for x in all_files.list if x.type == 'config']
+            config_paths = ["/" + str(x.path) for x in config_files]
 
-        newconfig = []
+            newconfig = []
 
-        for path in config_paths:
-            if os.path.exists(path) and os.path.exists(path + ".newconfig"):
-                newconfig.append(path)
-        if newconfig:
-            config_changes[package] = newconfig
+            for path in config_paths:
+                if os.path.exists(path) and os.path.exists(path + ".newconfig"):
+                    newconfig.append(path)
+            if newconfig:
+                config_changes[package] = newconfig
 
     return config_changes
 

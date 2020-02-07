@@ -37,6 +37,7 @@ import inary.uri
 import inary.ui
 import inary.util as util
 import inary.version
+import inary.reactor
 
 
 class Error(inary.errors.Error):
@@ -161,19 +162,13 @@ class Install(AtomicOperation):
         ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
-        self.check_requirements()
         self.check_versioning(self.pkginfo.version, self.pkginfo.release)
         self.check_relations()
         self.check_operation()
 
-        ctx.disable_keyboard_interrupts()
-
         self.extract_install()
         self.store_inary_files()
-        self.postinstall()
         self.update_databases()
-
-        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
@@ -191,10 +186,6 @@ class Install(AtomicOperation):
             raise Error(_("Is there enought free space in your disk."))
         ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(total_size, symbol)), verbose=True)
 
-        # what to do if / is split into /usr, /var, etc.
-        # check scom
-        if self.metadata.package.providesScom and ctx.scom and not ctx.get_option("ignore_scom"):
-            import inary.reactor as reactor
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
@@ -296,33 +287,48 @@ class Install(AtomicOperation):
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
             self.remove_old = Remove(pkg.name, store_old_paths=self.store_old_paths)
-            self.remove_old.run_preremove()
-            self.remove_old.run_postremove()
 
     def reinstall(self):
         return not self.operation == INSTALL
 
-    def postinstall(self):
-        self.config_later = False
-
-        # Chowning for additional files
-        #for _file in self.package.get_files().list:
-        #    fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-        #    if os.path.islink(fpath):
-        #        ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
-        #    else:
-        #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
-        #        os.chown(fpath, int(_file.uid), int(_file.gid))
+    def preInstall(self):
+        self.config_later = ctx.scom and not ctx.get_option("ignore_scom")
         if self.metadata.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.reactor
+            if self.config_later:
                 try:
                     if self.operation == UPGRADE or self.operation == DOWNGRADE:
                         fromVersion = self.old_pkginfo.version
                         fromRelease = self.old_pkginfo.release
                     else:
-                        fromVersion = None
-                        fromRelease = None
+                        fromVersion = 0
+                        fromRelease = 1
+                    ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
+                    inary.reactor.pre_install(
+                        self.pkginfo.name,
+                        self.metadata.package.providesScom,
+                        self.package.scom_dir(),
+                        os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
+                        os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
+                        fromVersion,
+                        fromRelease,
+                        self.metadata.package.version,
+                        self.metadata.package.release
+                    )
+                    ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
+                except :
+                    ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+
+    def postInstall(self):
+        self.config_later = ctx.scom and not ctx.get_option("ignore_scom")
+        if self.metadata.package.providesScom:
+            if self.config_later:
+                try:
+                    if self.operation == UPGRADE or self.operation == DOWNGRADE:
+                        fromVersion = self.old_pkginfo.version
+                        fromRelease = self.old_pkginfo.release
+                    else:
+                        fromVersion = 0
+                        fromRelease = 1
                     ctx.ui.notify(inary.ui.configuring, package=self.pkginfo, files=self.files)
                     inary.reactor.post_install(
                         self.pkginfo.name,
@@ -338,51 +344,11 @@ class Install(AtomicOperation):
                     ctx.ui.notify(inary.ui.configured, package=self.pkginfo, files=self.files)
                 except :
                     ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                    self.config_later = True
-            else:
-                self.config_later = True
 
     def extract_install(self):
         """unzip package in place"""
 
         ctx.ui.notify(inary.ui.extracting, package=self.pkginfo, files=self.files)
-
-        config_changed = []
-
-        def check_config_changed(config):
-            fpath = util.join_path(ctx.config.dest_dir(), config.path)
-            if util.config_changed(config):
-                config_changed.append(fpath)
-                self.historydb.save_config(self.pkginfo.name, fpath)
-                if os.path.exists(fpath + '.old-byinary'):
-                    os.unlink(fpath + '.old-byinary')
-                os.rename(fpath, fpath + '.old-byinary')
-
-        # old config files are kept as they are. New config files from the installed
-        # packages are saved with ".newconfig" string appended to their names.
-        def rename_configs():
-            for path in config_changed:
-                newconfig = path + '.newconfig-byinary'
-                oldconfig = path + '.old-byinary'
-                if os.path.exists(newconfig):
-                    os.unlink(newconfig)
-
-                # In the case of delta packages: the old package and the new package
-                # may contain same config typed files with same hashes, so the delta
-                # package will not have that config file. In order to protect user
-                # changed config files, they are renamed with ".old-byinary" prefix in case
-                # of the hashes of these files on the filesystem and the new config
-                # file that is coming from the new package. But in delta package case
-                # with the given scenario there wont be any, so we can pass this one.
-                # If the config files were not be the same between these packages the
-                # delta package would have it and extract it and the path would point
-                # to that new config file. If they are same and the user had changed
-                # that file and using the changed config file, there is no problem
-                # here.
-                if os.path.exists(path):
-                    os.rename(path, newconfig)
-
-                os.rename(oldconfig, path)
 
         # Package file's path may not be relocated or content may not be changed but
         # permission may be changed
@@ -481,38 +447,15 @@ class Install(AtomicOperation):
                 else:
                     Remove.remove_file(old_file, self.pkginfo.name, store_old_paths=self.store_old_paths)
 
-        if self.reinstall():
-            # get 'config' typed file objects replace is not set
-            # new = [x for x in self.files.list if x.type == 'config' and not x.replace, self.files.list]
-            new = [x for x in self.files.list if x.type == 'config']
-            old = [x for x in self.old_files.list if x.type == 'config']
-
-            # get config path lists
-            newconfig = set(str(x.path) for x in new)
-            oldconfig = set(str(x.path) for x in old)
-
-            config_overlaps = newconfig & oldconfig
-            if config_overlaps:
-                files = [x for x in old if x.path in config_overlaps]
-                for f in files:
-                    check_config_changed(f)
-        else:
-            for f in self.files.list:
-                if f.type == 'config':
-                    # there may be left over config files
-                    check_config_changed(f)
-
         if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
             update_permissions()
 
-        self.package.extract_install(ctx.config.dest_dir())
-
-        if config_changed:
-            rename_configs()
-
         if self.reinstall():
             clean_leftovers()
+
+        self.package.extract_install(ctx.config.dest_dir())
+
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, scom scripts
@@ -536,8 +479,9 @@ class Install(AtomicOperation):
         if self.reinstall():
             self.remove_old.remove_db()
 
-        if self.config_later:
-            self.installdb.mark_pending(self.pkginfo.name)
+        if (ctx.scom and not ctx.get_option("ignore_scom"))==False:
+            if self.pkginfo.providesScom:
+                self.installdb.mark_pending(self.pkginfo.name)
 
         # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
@@ -585,8 +529,7 @@ def install_single_file(pkg_location, upgrade=False):
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
-    install = Install.from_name(name)
-    install.install(not upgrade)
+    Install.from_name(name).install(not upgrade)
 
 
 class Remove(AtomicOperation):
@@ -617,11 +560,8 @@ class Remove(AtomicOperation):
 
         self.check_dependencies()
 
-        self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
-
-        self.run_postremove()
 
         self.update_databases()
 
@@ -695,24 +635,12 @@ class Remove(AtomicOperation):
     def run_preremove(self):
         if self.package.providesScom:
             if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.reactor
                 inary.reactor.pre_remove(
                          self.package_name,
                          os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
                          os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
                          provided_scripts=self.package.providesScom,
                          )
-
-    def run_postremove(self):
-        if self.package.providesScom:
-            if ctx.scom and not ctx.get_option("ignore_scom"):
-                import inary.reactor
-                inary.reactor.post_remove(
-                    self.package_name,
-                    os.path.join(self.package.pkg_dir(), ctx.const.metadata_xml),
-                    os.path.join(self.package.pkg_dir(), ctx.const.files_xml),
-                    provided_scripts=self.package.providesScom,
-                )
 
     def update_databases(self):
         self.remove_db()
@@ -736,4 +664,5 @@ class Remove(AtomicOperation):
 
 
 def remove_single(package_name):
+    Remove(package_name).run_preremove()
     Remove(package_name).run()
