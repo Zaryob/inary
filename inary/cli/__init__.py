@@ -246,6 +246,7 @@ class CLI(inary.ui.UI):
         if event == inary.ui.installed:
             msg = _('Installed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
+            is_debug=True
         elif event == inary.ui.installing:
             msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(keywords['package'])
             color = 'faintblue'
