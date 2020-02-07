@@ -230,13 +230,29 @@ def upgrade(A=None, repo=None):
 
     operations.remove.remove_obsoleted_packages()
 
-    try:
-        for path in paths:
-            ctx.ui.info(_("Installing {} / {} => [{}]").format(paths.index(path) + 1, len(paths),path.split("/")[len(path.split("/"))-1]), color="yellow")
-            install_op = atomicoperations.Install(path, ignore_file_conflicts=True)
-            install_op.install(not ctx.get_option('compare_sha1sum'))
-    except Exception as e:
-        raise (e)
+    for path in order:
+        if installdb.has_package(path):
+            remove_op = atomicoperations.Remove(path)
+            remove_op.run_preremove()
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        install_op.preInstall()
+
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        basename=path.split("/")[-1]
+        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),basename), color="yellow")
+        install_op.install(False)
+        try:
+            with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
+                ie_file.write("{}\n".format(extra_paths[path]))
+            installdb.installed_extra.append(extra_paths[path])
+        except KeyError:
+            pass
+
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        install_op.postInstall()
 
 
 def plan_upgrade(A, force_replaced=True, replaces=None):

@@ -81,9 +81,9 @@ database.
         if name or summary or desc:
             fields = {'name': name, 'summary': summary, 'desc': desc}
 
+        installdb = inary.db.installdb.InstallDB()
         if ctx.get_option('installdb'):
-            db = inary.db.installdb.InstallDB()
-            pkgs = db.search_package(self.args, lang, fields, cs)
+            pkgs = installdb.search_package(self.args, lang, fields, cs)
             get_info = db.get_package
             get_name_sum = lambda pkg: (pkg.name, pkg.summary)
         elif ctx.get_option('sourcedb'):
@@ -105,13 +105,13 @@ database.
 
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
-
-            name = replace.sub(inary.util.colorize(r"\1", "brightred"), name)
-            if lang and lang in summary:
-                summary = replace.sub(inary.util.colorize(r"\1", "brightred"), str(summary[lang]))
+            if installdb.has_package(pkg):
+                  color="brightgreen"
             else:
-                summary = replace.sub(inary.util.colorize(r"\1", "brightred"), str(summary))
+                  color="brightred"
+            name = replace.sub(inary.util.colorize(r"\1", color), str(name))
+            summary = replace.sub(inary.util.colorize(r"\1", color), str(summary))
 
             name += ' ' * max(0, maxlen - lenp)
 
-            ctx.ui.info('{0} - {1}'.format(name, summary))
+            ctx.ui.info('{} {} {}'.format(name,inary.util.colorize("=",color), summary))

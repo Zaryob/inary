@@ -120,12 +120,14 @@ def install_pkg_names(A, reinstall=False, extra=False):
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
             remove_op.run_preremove()
-        install_op = atomicoperations.Install.from_name(path)
+    for path in paths:
+        install_op = atomicoperations.Install(path)
         install_op.preInstall()
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),install_op.package_fname), color="yellow")
+        basename=path.split("/")[-1]
+        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),basename), color="yellow")
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
@@ -134,10 +136,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
         except KeyError:
             pass
 
-    for path in order:
-        install_op = atomicoperations.Install.from_name(path)
+    for path in paths:
+        install_op = atomicoperations.Install(path)
         install_op.postInstall()
-
 
     return True
 
