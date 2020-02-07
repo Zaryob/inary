@@ -23,9 +23,10 @@ def post_install(package_name, provided_scripts,
              fromVersion, fromRelease, toVersion, toRelease):
     """Do package's post install operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
-    print(pkg_path)
     if(os.path.isfile(pkg_path+"/package.py")):
-        os.system('cd {} ; python3 -c \'import package; package.postInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('cd {} ; python3 -c \'import package; package.postInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        if(i!=0):
+            raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):
         i=os.system('source {}/package.sh ; postInstall "{}" "{}" "{}" "{}"'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
@@ -39,7 +40,9 @@ def pre_install(package_name, provided_scripts,
     """Do package's pre install operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
     if(os.path.isfile(pkg_path+"/package.py")):
-        os.system('cd {} ; python3 -c \'import package; package.preInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        i=os.system('cd {} ; python3 -c \'import package; package.preInstall("{}","{}","{}","{}")\''.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
+        if(i!=0):
+            raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):
         i=os.system('source {}/package.sh ; preInstall "{}" "{}" "{}" "{}"'.format((pkg_path),fromVersion, fromRelease, toVersion, toRelease))
         if(i!=0):
@@ -52,7 +55,9 @@ def post_remove(package_name, metapath, filepath, provided_scripts=None):
     """Do package's post removal operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
     if(os.path.isfile(pkg_path+"/package.py")):
-        os.system('cd {} ; python3 -c \'import package; package.postRemove()\''.format(pkg_path))
+        i=os.system('cd {} ; python3 -c \'import package; package.postRemove()\''.format(pkg_path))
+        if(i!=0):
+            raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):
         i=os.system('source {}/package.sh ; postRemove '.format((pkg_path)))
         if(i!=0):
@@ -65,7 +70,9 @@ def pre_remove(package_name, metapath, filepath,provided_scripts=None):
     """Do package's post removal operations"""
     pkg_path = metapath.replace("metadata.xml","scom")
     if(os.path.isfile(pkg_path+"/package.py")):
-        os.system('cd {} ; python3 -c \'import package; package.preRemove()\''.format(pkg_path))
+        i=os.system('cd {} ; python3 -c \'import package; package.preRemove()\''.format(pkg_path))
+        if(i!=0):
+            raise SystemExit
     elif(os.path.isfile(pkg_path+"/package.sh")):
         i=os.system('source {}/package.sh ; preRemove'.format((pkg_path)))
         if(i!=0):
