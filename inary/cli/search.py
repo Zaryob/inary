@@ -98,20 +98,20 @@ database.
             get_name_sum = lambda pkg: (pkg.name, pkg.summary)
 
         if pkgs:
-            maxlen = max([len(_pkg) for _pkg in pkgs])
+            maxlen = max([len(_pkg) for _pkg in pkgs])+2
 
         for pkg in pkgs:
             pkg_info = get_info(pkg)
 
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
+            version=""
             if installdb.has_package(pkg):
                   color="brightgreen"
             else:
                   color="brightred"
             name = replace.sub(inary.util.colorize(r"\1", color), str(name))
             summary = replace.sub(inary.util.colorize(r"\1", color), str(summary))
-
             name += ' ' * max(0, maxlen - lenp)
 
             ctx.ui.info('{} {} {}'.format(name,inary.util.colorize("=",color), summary))
