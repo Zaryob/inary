@@ -236,7 +236,7 @@ def upgrade(A=None, repo=None):
             remove_op.run_preremove()
     for path in paths:
         install_op = atomicoperations.Install(path)
-        install_op.preInstall()
+        install_op.preinstall()
 
     for path in paths:
         install_op = atomicoperations.Install(path)
@@ -252,7 +252,7 @@ def upgrade(A=None, repo=None):
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        install_op.postInstall()
+        install_op.postinstall()
 
 
 def plan_upgrade(A, force_replaced=True, replaces=None):
