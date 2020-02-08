@@ -111,3 +111,8 @@ expanded to package names.
         install.install(packages, ctx.get_option('reinstall') or reinstall)
 
 
+        config_changes = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+
+        if config_changes:
+            if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
+                helper.show_changed_configs(config_changes)

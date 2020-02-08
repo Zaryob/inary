@@ -30,6 +30,7 @@ import inary.cli.addrepo
 import inary.cli.blame
 import inary.cli.build
 import inary.cli.check
+import inary.cli.configmanager
 import inary.cli.configurepending
 import inary.cli.deletecache
 import inary.cli.delta

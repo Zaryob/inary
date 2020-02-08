@@ -164,6 +164,7 @@ class Install(AtomicOperation):
         ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
+        self.check_requirements()
         self.check_versioning(self.pkginfo.version, self.pkginfo.release)
         self.check_relations()
         self.check_operation()
@@ -176,6 +177,8 @@ class Install(AtomicOperation):
         self.extract_install()
         self.postinstall()
         self.update_databases()
+
+        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
@@ -293,6 +296,8 @@ class Install(AtomicOperation):
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
             self.remove_old = Remove(pkg.name, store_old_paths=self.store_old_paths)
+            self.remove_old.run_preremove()
+            self.remove_old.run_postremove()
 
     def reinstall(self):
         return not self.operation == INSTALL
@@ -330,6 +335,43 @@ class Install(AtomicOperation):
         """unzip package in place"""
 
         ctx.ui.notify(inary.ui.extracting, package=self.pkginfo, files=self.files)
+
+        config_changed = []
+
+        def check_config_changed(config):
+            fpath = util.join_path(ctx.config.dest_dir(), config.path)
+            if util.config_changed(config):
+                config_changed.append(fpath)
+                self.historydb.save_config(self.pkginfo.name, fpath)
+                if os.path.exists(fpath + '.old-byinary'):
+                    os.unlink(fpath + '.old-byinary')
+                os.rename(fpath, fpath + '.old-byinary')
+
+        # old config files are kept as they are. New config files from the installed
+        # packages are saved with ".newconfig" string appended to their names.
+        def rename_configs():
+            for path in config_changed:
+                newconfig = path + '.newconfig-byinary'
+                oldconfig = path + '.old-byinary'
+                if os.path.exists(newconfig):
+                    os.unlink(newconfig)
+
+                # In the case of delta packages: the old package and the new package
+                # may contain same config typed files with same hashes, so the delta
+                # package will not have that config file. In order to protect user
+                # changed config files, they are renamed with ".old-byinary" prefix in case
+                # of the hashes of these files on the filesystem and the new config
+                # file that is coming from the new package. But in delta package case
+                # with the given scenario there wont be any, so we can pass this one.
+                # If the config files were not be the same between these packages the
+                # delta package would have it and extract it and the path would point
+                # to that new config file. If they are same and the user had changed
+                # that file and using the changed config file, there is no problem
+                # here.
+                if os.path.exists(path):
+                    os.rename(path, newconfig)
+
+                os.rename(oldconfig, path)
 
         # Package file's path may not be relocated or content may not be changed but
         # permission may be changed
@@ -428,15 +470,38 @@ class Install(AtomicOperation):
                 else:
                     Remove.remove_file(old_file, self.pkginfo.name, store_old_paths=self.store_old_paths)
 
+        if self.reinstall():
+            # get 'config' typed file objects replace is not set
+            # new = [x for x in self.files.list if x.type == 'config' and not x.replace, self.files.list]
+            new = [x for x in self.files.list if x.type == 'config']
+            old = [x for x in self.old_files.list if x.type == 'config']
+
+            # get config path lists
+            newconfig = set(str(x.path) for x in new)
+            oldconfig = set(str(x.path) for x in old)
+
+            config_overlaps = newconfig & oldconfig
+            if config_overlaps:
+                files = [x for x in old if x.path in config_overlaps]
+                for f in files:
+                    check_config_changed(f)
+        else:
+            for f in self.files.list:
+                if f.type == 'config':
+                    # there may be left over config files
+                    check_config_changed(f)
+
         if self.package_fname.endswith(ctx.const.delta_package_suffix):
             relocate_files()
             update_permissions()
 
-        if self.reinstall():
-            clean_leftovers()
-
         self.package.extract_install(ctx.config.dest_dir())
 
+        if config_changed:
+            rename_configs()
+
+        if self.reinstall():
+            clean_leftovers()
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, postoperations.py, somewhere in the file system. We'll need these in future..."""
@@ -453,9 +518,8 @@ class Install(AtomicOperation):
         if self.reinstall():
             self.remove_old.remove_db()
 
-        if (ctx.scom and not ctx.get_option("ignore_scom"))==False:
-            if self.pkginfo.providesScom:
-                self.installdb.mark_pending(self.pkginfo.name)
+        if self.config_later:
+            self.installdb.mark_pending(self.pkginfo.name)
 
         # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
@@ -471,8 +535,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        if ctx.get_option('debug'):
-            ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
+        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -503,7 +566,8 @@ def install_single_file(pkg_location, upgrade=False):
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
-    Install.from_name(name).install(not upgrade)
+    install = Install.from_name(name)
+    install.install(not upgrade)
 
 
 class Remove(AtomicOperation):
@@ -527,7 +591,7 @@ class Remove(AtomicOperation):
     def run(self):
         """Remove a single package"""
         ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
-        ctx.ui.debug(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package))
+        ctx.ui.status(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package), push_screen=False)
 
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
@@ -535,8 +599,11 @@ class Remove(AtomicOperation):
 
         self.check_dependencies()
 
+        self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
+
+        self.run_postremove()
 
         self.update_databases()
 
@@ -621,13 +688,11 @@ class Remove(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
 
     def remove_inary_files(self):
-        if ctx.get_option('debug'):
-            ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
+        ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
         util.clean_dir(self.package.pkg_dir())
 
     def remove_db(self):
-        if ctx.get_option('debug'):
-            ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
+        ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
         self.installdb.remove_package(self.package_name)
         ctx.filesdb.remove_files(self.files.list)
 
@@ -638,5 +703,4 @@ class Remove(AtomicOperation):
 
 
 def remove_single(package_name):
-    Remove(package_name).run_preremove()
     Remove(package_name).run()

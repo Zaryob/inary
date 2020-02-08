@@ -26,7 +26,7 @@ import inary.ui
 import inary.data
 import inary.errors
 import inary.context as ctx
-import inary.reactor
+
 
 def configure_pending(packages=None):
     # start with pending packages
