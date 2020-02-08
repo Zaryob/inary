@@ -298,14 +298,13 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def preinstall(self):
-        try:
-            if self.metadata.package.postOps == "PositivE":
-                self.trigger.preinstall(self.package.pkg_dir())
+        if self.metadata.package.postOps == "PositivE":
 
-        except PostOpsError:
-            util.clean_dir(self.package.pkg_dir())
-
-            ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+            if not self.trigger.preinstall(self.package.pkg_dir()):
+                util.clean_dir(self.package.pkg_dir())
+ 
+                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                raise SystemExit
 
 
     def postinstall(self):
