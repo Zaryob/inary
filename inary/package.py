@@ -281,9 +281,6 @@ class Package:
 
         return os.path.join(ctx.config.packages_dir(), packageDir)
 
-    def scom_dir(self):
-        return os.path.join(self.pkg_dir(), ctx.const.scom_dir)
-
     @staticmethod
     def is_cached(packagefn):
         url = inary.uri.URI(packagefn)

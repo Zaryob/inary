@@ -391,6 +391,7 @@ class ArchiveTar(ArchiveBase):
                                 if path.endswith("dbus") and "pid" in files:
                                     startservices.append("dbus")
                                     for service in ("NetworkManager", "connman", "wicd"):
+                                        #FIXME: It needs a quick fix for openrc
                                         if os.path.isfile("/etc/scom/services/enabled/{}".format(service)):
                                             startservices.append(service)
                                             os.system("service {} stop".format(service))

@@ -41,7 +41,6 @@ class Build(command.Command, metaclass=command.autocommand):
 
     def __init__(self, args):
         super(Build, self).__init__(args)
-        self.scom = True
 
     name = ("build", "bi")
 
