@@ -24,7 +24,7 @@ import inary.ui
 import inary.data
 import inary.errors
 import inary.context as ctx
-import inary.reactor
+import inary.trigger
 
 
 def configure_pending(packages=None):
@@ -44,17 +44,7 @@ def configure_pending(packages=None):
                 # FIXME: we need a full package info here!
                 pkginfo.name = x
                 ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-                inary.reactor.post_install(
-                    pkginfo.name,
-                    m.package.providesScom,
-                    util.join_path(pkg_path, ctx.const.scom_dir),
-                    util.join_path(pkg_path, ctx.const.metadata_xml),
-                    util.join_path(pkg_path, ctx.const.files_xml),
-                    None,
-                    None,
-                    m.package.version,
-                    m.package.release
-                )
+                inary.trigger.post_install(pkg_path)
                 ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
             installdb.clear_pending(x)
 
