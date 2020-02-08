@@ -366,13 +366,17 @@ class Builder:
                 ctx.ui.info(_("IceCream detected. Make sure your daemon "
                               "is up and running..."))
         for build_type in self.build_types:
+            self.set_build_type(build_type)
             self.run_setup_action()
         for build_type in self.build_types:
+            self.set_build_type(build_type)
             self.run_build_action()
         for build_type in self.build_types:
+            self.set_build_type(build_type)
             if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
                 self.run_check_action()
         for build_type in self.build_types:
+            self.set_build_type(build_type)
             self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
