@@ -42,7 +42,7 @@ class Trigger:
         curDir = os.getcwd()
         os.chdir(ctx.config.dest_dir())
 
-        ret_val=os.system('python3 -c \'import package\nif(hasattr(package,"{0}")):\n package.{0}()\''.format(func))
+        ret_val=os.system('python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func))
         if ret_val != 0:
             os.chdir(curDir)
             return False
