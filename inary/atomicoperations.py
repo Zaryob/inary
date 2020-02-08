@@ -303,7 +303,7 @@ class Install(AtomicOperation):
         return not self.operation == INSTALL
 
     def preinstall(self):
-        if self.metadata.package.postOps == "PositivE":
+        if ('postOps' in self.metadata.package.isA):
 
             if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
@@ -325,7 +325,7 @@ class Install(AtomicOperation):
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
         try:
-            if self.metadata.package.postOps == "PositivE":
+            if ('postOps' in self.metadata.package.isA):
                 self.trigger.postinstall(self.package.pkg_dir())
         except:
             self.config_later = True
@@ -510,7 +510,7 @@ class Install(AtomicOperation):
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
-        if self.metadata.package.postOps:
+        if ('postOps' in self.metadata.package.isA):
             self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
 
     def update_databases(self):
@@ -675,12 +675,12 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if self.package.postOps == "PositivE":
+        if ('postOps' in self.metadata.package.isA):
             self.trigger.preremove(self.package.pkg_dir())
 
 
     def run_postremove(self):
-        if self.package.postOps == "PositivE":
+        if ('postOps' in self.metadata.package.isA):
             self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):

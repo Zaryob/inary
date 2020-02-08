@@ -973,9 +973,6 @@ class Builder:
         metadata.package.architecture = ctx.config.values.general.architecture
         metadata.package.packageFormat = self.target_package_format
 
-        if util.check_file(util.join_path(self.specdir, ctx.const.postops),noerr=True):
-            metadata.package.postOps = "PositivE"
-
         size = 0
         for fileinfo in self.files.list:
             size += fileinfo.size
@@ -1214,7 +1211,7 @@ package might be a good solution."))
 
             # add postops files to package
             os.chdir(self.specdir)
-            if util.check_file(ctx.const.postops,noerr=True):
+            if util.check_file(ctx.const.postops,noerr=True) and ('postOps' in self.metadata.package.isA):
                 pkg.add_to_package(ctx.const.postops)
 
             # add xmls and files
