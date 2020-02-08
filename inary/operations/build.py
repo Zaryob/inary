@@ -505,11 +505,11 @@ class Builder:
                 self.download(afileuri, util.join_path(self.destdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
-    def fetch_scomfiles(self):
+    def fetch_postops(self):
         postops_script=util.join_path(self.specdiruri, ctx.const.postops)
         if util.check_file(postops_script):
                 self.download(postops_script, util.join_path(self.specdir))
-                ctx.ui.info("PostOps Script Fetched {}".format(pscom.script))
+                ctx.ui.info(_("PostOps Script Fetched."))
 
     @staticmethod
     def download(uri, transferdir):
@@ -687,7 +687,7 @@ class Builder:
         self.actionGlobals = globalSymbols
 
     def compile_postops_script(self):
-        """Compiles scom scripts to check syntax errors"""
+        """Compiles postops scripts to check syntax errors"""
         fname = util.join_path(self.specdir, ctx.const.postops)
 
                 try:
