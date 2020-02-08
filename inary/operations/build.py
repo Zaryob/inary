@@ -355,6 +355,7 @@ class Builder:
         self.fetch_component()
         self.fetch_source_archives()
 
+        util.clean_dir(self.pkg_install_dir())
         for build_type in self.build_types:
             self.set_build_type(build_type)
             self.unpack_source_archives()
@@ -364,11 +365,14 @@ class Builder:
             if self.has_icecream:
                 ctx.ui.info(_("IceCream detected. Make sure your daemon "
                               "is up and running..."))
-
+        for build_type in self.build_types:
             self.run_setup_action()
+        for build_type in self.build_types:
             self.run_build_action()
+        for build_type in self.build_types:
             if ctx.get_option('debug') and not ctx.get_option('ignore_check'):
                 self.run_check_action()
+        for build_type in self.build_types:
             self.run_install_action()
 
         # after all, we are ready to build/prepare the packages
@@ -555,7 +559,7 @@ class Builder:
     def unpack_source_archives(self):
         ctx.ui.status(_("Building source package: \"{}\" [ Unpacking Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'green') + _("Unpacking archive(s)..."))
+        ctx.ui.action(util.colorize(">>> ", 'purple') + _("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
         # Grab AdditionalFiles
@@ -570,7 +574,7 @@ class Builder:
         #  Run configure, build and install phase
         ctx.ui.status(_("Building source package: \"{}\" [ SetupAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'green') + _("Setting up source..."))
+        ctx.ui.action(util.colorize(">>> ", 'yellow') + _("Setting up source..."))
         if self.run_action_function(ctx.const.setup_func):
             self.set_state("setupaction")
 
@@ -584,17 +588,14 @@ class Builder:
     def run_check_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ CheckAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'green') + _("Testing package..."))
+        ctx.ui.action(util.colorize(">>> ", 'blue') + _("Testing package..."))
         self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'green') + _("Installing..."))
+        ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
 
-        # Before the default install make sure install_dir is clean
-        if not self.build_type and os.path.exists(self.pkg_install_dir()):
-            util.clean_dir(self.pkg_install_dir())
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
