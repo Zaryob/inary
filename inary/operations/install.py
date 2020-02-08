@@ -123,7 +123,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             remove_op.run_preremove()
     for path in paths:
         install_op = atomicoperations.Install(path)
-        install_op.preInstall()
+        install_op.preinstall()
 
     for path in paths:
         install_op = atomicoperations.Install(path)
