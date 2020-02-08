@@ -41,15 +41,14 @@ class Trigger:
         """"""
         curDir = os.getcwd()
         os.chdir(ctx.config.dest_dir())
-
-        ret_val=os.system('python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func))
-        if ret_val != 0:
-            os.chdir(curDir)
-            return False
+        if func in self.Locals:
+            self.Locals[func]()
 
         else:
-            os.chdir(curDir)
-            return True
+            pass
+
+        os.chdir(curDir)
+        return True
 
     def preinstall(self, specdir):
         self.specdir=specdir
