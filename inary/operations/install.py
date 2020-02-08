@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -107,6 +107,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.remove(x)
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "w") as ie_file:
                 ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
+        ctx.ui.notify(ui.fetched, name=x)
 
     # fetch to be installed packages but do not install them.
     if ctx.get_option('fetch_only'):

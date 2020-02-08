@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -507,7 +507,7 @@ class Builder:
                                                        dir_name))
     def fetch_postops(self):
         postops_script=util.join_path(self.specdiruri, ctx.const.postops)
-        if util.check_file(postops_script):
+        if util.check_file(postops_script, noerr=True):
                 self.download(postops_script, util.join_path(self.specdir))
                 ctx.ui.info(_("PostOps Script Fetched."))
 
@@ -689,17 +689,18 @@ class Builder:
     def compile_postops_script(self):
         """Compiles postops scripts to check syntax errors"""
         fname = util.join_path(self.specdir, ctx.const.postops)
-
-                try:
-                    if(os.path.splitext(fname)[1]=="py"):
-                        buf = open(fname).read()
-                        compile(buf, "error", "exec")
-                except IOError as e:
-            raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
-                fname, e))
-        except SyntaxError as e:
-                fname, e))
-            raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
+        if(util.check_file(fname, noerr=True)):
+            try:
+                buf = open(fname).read()
+                compile(buf, "error", "exec")
+            except IOError as e:
+                raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
+                    fname, e))
+            except SyntaxError as e:
+                raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
+                    fname, e))
+        else:
+            pass
 
 
     def pkg_src_dir(self):
@@ -972,7 +973,7 @@ class Builder:
         metadata.package.architecture = ctx.config.values.general.architecture
         metadata.package.packageFormat = self.target_package_format
 
-        if util.check_file(util.join_path(self.specdir, ctx.const.postops)):
+        if util.check_file(util.join_path(self.specdir, ctx.const.postops),noerr=True):
             metadata.package.postOps = "PositivE"
 
         size = 0
@@ -1213,7 +1214,8 @@ package might be a good solution."))
 
             # add postops files to package
             os.chdir(self.specdir)
-            pkg.add_to_package(ctx.const.postops)
+            if util.check_file(ctx.const.postops,noerr=True):
+                pkg.add_to_package(ctx.const.postops)
 
             # add xmls and files
             os.chdir(self.pkg_dir())

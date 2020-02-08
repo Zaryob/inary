@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -34,7 +34,7 @@ def init_logging():
     log_dir = os.path.join(ctx.config.dest_dir(), ctx.config.log_dir())
     if os.access(log_dir, os.W_OK) and "distutils.core" not in sys.modules:
         handler = logging.handlers.RotatingFileHandler('{}/inary.log'.format(log_dir))
-        formatter = logging.Formatter('%(asctime)s  %(name)s(%(module)12s:%(lineno)4d)  %(levelname).1s  %(message)s')
+        formatter = logging.Formatter('%(asctime)-12s: %(levelname)-8s %(message)s')
         handler.setFormatter(formatter)
         ctx.log = logging.getLogger('inary')
         ctx.log.addHandler(handler)

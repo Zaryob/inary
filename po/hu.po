@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 01:36+0300\n"
+"POT-Creation-Date: 2019-12-23 22:47+0000\n"
 "PO-Revision-Date: 2019-08-25 01:00+0300\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -22,72 +22,72 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /usr/lib64/python3.7/optparse.py:146
+#: /usr/lib/python3.7/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "nincs ilyen opció: %s"
 
-#: /usr/lib64/python3.7/optparse.py:157
+#: /usr/lib/python3.7/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "nem egyértelmű opció: %s (%s?)"
 
-#: /usr/lib64/python3.7/optparse.py:381
+#: /usr/lib/python3.7/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Használat: %s\n"
 
-#: /usr/lib64/python3.7/optparse.py:400
+#: /usr/lib/python3.7/optparse.py:400
 msgid "Usage"
 msgstr "Használat"
 
-#: /usr/lib64/python3.7/optparse.py:422 /usr/lib64/python3.7/optparse.py:423
+#: /usr/lib/python3.7/optparse.py:422 /usr/lib/python3.7/optparse.py:423
 msgid "integer"
 msgstr "egész szám"
 
-#: /usr/lib64/python3.7/optparse.py:424
+#: /usr/lib/python3.7/optparse.py:424
 msgid "floating-point"
 msgstr "lebegőpontos"
 
-#: /usr/lib64/python3.7/optparse.py:425
+#: /usr/lib/python3.7/optparse.py:425
 msgid "complex"
 msgstr "összetett"
 
-#: /usr/lib64/python3.7/optparse.py:433
+#: /usr/lib/python3.7/optparse.py:433
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "%s opció: %s érvénytelen érték: %r"
 
-#: /usr/lib64/python3.7/optparse.py:441
+#: /usr/lib/python3.7/optparse.py:441
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "%s opció: érvénytelen választás: %r (válasszon innen: %s)"
 
-#: /usr/lib64/python3.7/optparse.py:1238
+#: /usr/lib/python3.7/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "megjeleníti ezt a súgót, majd kilép"
 
-#: /usr/lib64/python3.7/optparse.py:1243
+#: /usr/lib/python3.7/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "megjeleníti a program verziószámát, majd kilép"
 
-#: /usr/lib64/python3.7/optparse.py:1266
+#: /usr/lib/python3.7/optparse.py:1266
 msgid "%prog [options]"
 msgstr "%prog [opciók]"
 
-#: /usr/lib64/python3.7/optparse.py:1486 /usr/lib64/python3.7/optparse.py:1524
+#: /usr/lib/python3.7/optparse.py:1486 /usr/lib/python3.7/optparse.py:1524
 #, fuzzy, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "a(z) %s opció megköveteli %d argumentumot"
 msgstr[1] "a(z) %s opció megköveteli %d argumentumot"
 
-#: /usr/lib64/python3.7/optparse.py:1496
+#: /usr/lib/python3.7/optparse.py:1496
 #, fuzzy, python-format
 msgid "%s option does not take a value"
 msgstr "a(z) %s opció nem kér értéket"
 
-#: /usr/lib64/python3.7/optparse.py:1612
+#: /usr/lib/python3.7/optparse.py:1612
 msgid "Options"
 msgstr "Opciók"
 
@@ -712,98 +712,108 @@ msgstr "A(z) {} csomag nincs telepítve"
 msgid "Target DIR: \"{}\""
 msgstr "Csomag URI: {}"
 
-#: inary/archive.py:489 inary/archive.py:588
+#: inary/archive.py:490 inary/archive.py:589
 #, python-brace-format
 msgid "Chowning {0} ({1}:{2})"
 msgstr ""
 
-#: inary/archive.py:492 inary/archive.py:591
+#: inary/archive.py:493 inary/archive.py:592
 #, python-brace-format
 msgid "LChowning {0} ({1}:{2})"
 msgstr ""
 
-#: inary/archive.py:559
+#: inary/archive.py:560
 #, fuzzy
 msgid "Problem occured while uncompressing \"{}.Z\" file"
 msgstr "Hiba lépett fel a {}.Z kicsomagolása közben."
 
-#: inary/archive.py:640
+#: inary/archive.py:641
 #, fuzzy
 msgid "File \"{}\" is not a zip file."
 msgstr "A(z) {} csomag nincs telepítve"
 
-#: inary/archive.py:875
+#: inary/archive.py:876
 #, fuzzy
 msgid "Fetching source from: \"{}\""
 msgstr "A forrás letöltése innen: {}"
 
-#: inary/archive.py:888
+#: inary/archive.py:889
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr "A forrás csomag eltárolva: {0}/{1}"
 
-#: inary/archive.py:906 inary/operations/history.py:143
+#: inary/archive.py:907 inary/operations/history.py:143
 #, fuzzy
 msgid "\"{}\" [cached]"
 msgstr "{} [a gyorsítótárban]"
 
-#: inary/archive.py:915
+#: inary/archive.py:916
+msgid ""
+"* Expected sha1 value: {} \n"
+"* Received sha1 value: {} \n"
+msgstr ""
+
+#: inary/archive.py:918
 #, fuzzy
 msgid "unpack: check_file_hash failed."
 msgstr "kicsomagolás: check_file_hash művelet sikertelen"
 
-#: inary/archive.py:921
+#: inary/archive.py:920
+msgid "* Archive verification passed. Such problems may occur during the build process."
+msgstr ""
+
+#: inary/archive.py:925
 #, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "{0} ismeretlen arhívumtípus lett megadva ehhez: '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:928
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr ""
 
-#: inary/atomicoperations.py:84
+#: inary/atomicoperations.py:86
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" found in repository \"{1}\""
 msgstr "A(z) {0} csomag nem található a(z) {1} tárolóban"
 
-#: inary/atomicoperations.py:115
+#: inary/atomicoperations.py:117
 #, fuzzy
 msgid "Package URI: \"{}\""
 msgstr "Csomag URI: {}"
 
-#: inary/atomicoperations.py:129
+#: inary/atomicoperations.py:131
 msgid "Download Error: Package does not match the repository package."
 msgstr "Letöltési hiba: A letöltött fájl nem egyezik meg a tárolóban lévő példánnyal."
 
-#: inary/atomicoperations.py:133
+#: inary/atomicoperations.py:135
 #, fuzzy
 msgid "Package \"{}\" not found in any active repository."
 msgstr "A(z) {} csomag nem található meg az aktív tárolókban."
 
-#: inary/atomicoperations.py:160 inary/cli/__init__.py:242
+#: inary/atomicoperations.py:163 inary/cli/__init__.py:240
 #, fuzzy, python-brace-format
 msgid "Installing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "{0.name} telepítése, verzió {0.version}, kiadás {0.release}"
 
-#: inary/atomicoperations.py:191
-msgid "Is there enought free space in your disk."
+#: inary/atomicoperations.py:196
+msgid "Is there enought free space in your disk?"
 msgstr ""
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:197
 msgid "Free space in 'destinationdirectory': {:.2f} {} "
 msgstr ""
 
-#: inary/atomicoperations.py:211 inary/operations/build.py:831
+#: inary/atomicoperations.py:210 inary/operations/build.py:825
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} nem érvényes INARY verzió formátum"
 
-#: inary/atomicoperations.py:241
+#: inary/atomicoperations.py:240
 #, fuzzy, python-brace-format
 msgid "\"/{0}\" from \"{1}\" package\n"
 msgstr "/{0} a(z) {1} csomagból\n"
 
-#: inary/atomicoperations.py:242
+#: inary/atomicoperations.py:241
 #, fuzzy
 msgid ""
 "File conflicts:\n"
@@ -812,172 +822,177 @@ msgstr ""
 "Fájl ütközés:\n"
 "{}"
 
-#: inary/atomicoperations.py:259
+#: inary/atomicoperations.py:258
 msgid "Re-install same version package?"
 msgstr "Ugyanazon verziójú csomag újratelepítése?"
 
-#: inary/atomicoperations.py:260
+#: inary/atomicoperations.py:259
 msgid "Package re-install declined"
 msgstr "Csomag újratelepítés visszavonva."
 
-#: inary/atomicoperations.py:267
+#: inary/atomicoperations.py:266
 #, fuzzy
 msgid "Storing old paths info."
 msgstr "Csak az elérési út mutatása."
 
-#: inary/atomicoperations.py:276
+#: inary/atomicoperations.py:275
 #, fuzzy
 msgid "Upgrading to new upstream version."
 msgstr "Frissítés a legújabb verzióra"
 
-#: inary/atomicoperations.py:279
+#: inary/atomicoperations.py:278
 #, fuzzy
 msgid "Upgrading to new distribution release."
 msgstr "Frissítés a disztribúció új kiadására"
 
-#: inary/atomicoperations.py:288
+#: inary/atomicoperations.py:287
 msgid "Downgrade to old distribution release?"
 msgstr "Visszatér a disztribúció korábbi kiadására?"
 
-#: inary/atomicoperations.py:292
+#: inary/atomicoperations.py:291
 msgid "Package downgrade declined"
 msgstr "Csomagfrissítés eltávolítása visszavonva"
 
-#: inary/atomicoperations.py:341
+#: inary/atomicoperations.py:313 inary/cli/configurepending.py:55
 #, fuzzy
 msgid "Configuration of \"{}\" package failed."
 msgstr "A konfigurálás nem sikerült."
 
-#: inary/atomicoperations.py:434
+#: inary/atomicoperations.py:423
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Nem sikerült áthelyezni a következő fájlokat. A csomag újratelepítése erősen ajánlott."
 
-#: inary/atomicoperations.py:532
-#, fuzzy
-msgid "Storing files of \"{}\" package."
-msgstr "* {} hozzáadása az adatbázishoz..."
-
-#: inary/atomicoperations.py:557
+#: inary/atomicoperations.py:539
 #, fuzzy
 msgid "Adding files of \"{}\" package to database..."
 msgstr "* {} hozzáadása az adatbázishoz..."
 
-#: inary/atomicoperations.py:606
+#: inary/atomicoperations.py:589
 #, fuzzy
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "A {} csomag fájllistáját nem lehet olvasni, eltávolítás folytatása."
 
-#: inary/atomicoperations.py:612
+#: inary/atomicoperations.py:595
 #, fuzzy, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "{0.name} telepítése, verzió {0.version}, kiadás {0.release}"
 
-#: inary/atomicoperations.py:615
+#: inary/atomicoperations.py:598
 msgid "Trying to remove nonexistent package "
 msgstr "Nem létező csomag eltávolításának kísérlete"
 
-#: inary/atomicoperations.py:655
+#: inary/atomicoperations.py:638
 #, fuzzy
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Ütköző fájl nincs eltávolítva: {} "
 
-#: inary/atomicoperations.py:686
+#: inary/atomicoperations.py:669
 #, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "A telepített {} fájl nem létezik a rendszerben [Valószínűleg a felhasználó törölte]"
 
-#: inary/atomicoperations.py:721
+#: inary/atomicoperations.py:692
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "* {} hozzáadása az adatbázishoz..."
 
-#: inary/atomicoperations.py:725
+#: inary/atomicoperations.py:696
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Fájl adatbázis újraépítése"
 
-#: inary/cli/__init__.py:116
+#: inary/cli/__init__.py:118
 #, fuzzy
 msgid "Verboses: "
 msgstr "Szolgáltat:"
 
-#: inary/cli/__init__.py:128
+#: inary/cli/__init__.py:130
 msgid "Warning: "
 msgstr "Figyelmeztetés:"
 
-#: inary/cli/__init__.py:138
+#: inary/cli/__init__.py:140
 msgid "Error: "
 msgstr "Hiba:"
 
-#: inary/cli/__init__.py:151
+#: inary/cli/__init__.py:153
 msgid ""
 "\n"
 " Select one:"
 msgstr ""
 
-#: inary/cli/__init__.py:174
+#: inary/cli/__init__.py:176
 #, fuzzy
 msgid "(yes"
 msgstr "(igen/nem)"
 
-#: inary/cli/__init__.py:174
+#: inary/cli/__init__.py:176
 msgid "no)"
 msgstr ""
 
-#: inary/cli/__init__.py:239
+#: inary/cli/__init__.py:237
 #, fuzzy
 msgid "Installed \"{}\""
 msgstr "{} telepítve"
 
-#: inary/cli/__init__.py:245
+#: inary/cli/__init__.py:243
 #, fuzzy
 msgid "Removed \"{}\""
 msgstr "{} eltávolítva"
 
-#: inary/cli/__init__.py:248
+#: inary/cli/__init__.py:246
 #, fuzzy
 msgid "Removing \"{}\""
 msgstr "{} eltávolítva"
 
-#: inary/cli/__init__.py:251
+#: inary/cli/__init__.py:249
 #, fuzzy
 msgid "Upgraded \"{}\""
 msgstr "{} frissítve"
 
-#: inary/cli/__init__.py:254
+#: inary/cli/__init__.py:252
 #, fuzzy
 msgid "Configured \"{}\""
 msgstr "{} beállítva"
 
-#: inary/cli/__init__.py:257
+#: inary/cli/__init__.py:255
 #, fuzzy
 msgid "Configuring \"{}\" package."
 msgstr "A(z) {} csomag beállítása"
 
-#: inary/cli/__init__.py:260
+#: inary/cli/__init__.py:258
 #, fuzzy
 msgid "Extracting the files of \"{}\""
 msgstr "Fájlok kibontása {} csomagból"
 
-#: inary/cli/__init__.py:263 inary/operations/repository.py:100
+#: inary/cli/__init__.py:261 inary/operations/repository.py:100
 #, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "{} tároló frissítése"
 
-#: inary/cli/__init__.py:268
+#: inary/cli/__init__.py:266
 #, fuzzy
 msgid "Total size of package(s): {:.2f} {} / {:.2f} {}"
 msgstr "A csomagok teljes mérete: %.2f %s"
 
-#: inary/cli/__init__.py:275
+#: inary/cli/__init__.py:273
 #, fuzzy
 msgid "Following packages ordered for process: {}"
 msgstr "A következő csomagok eltávolításra kerülnek:\n"
 
-#: inary/cli/__init__.py:280
+#: inary/cli/__init__.py:278
 #, fuzzy
 msgid "Extracted desktop file \"{}\""
 msgstr "Fájlok kibontása {} csomagból"
+
+#: inary/cli/__init__.py:286
+#, fuzzy
+msgid "Downloading <{} / {}>"
+msgstr "Letöltés  {} / {}"
+
+#: inary/cli/__init__.py:294
+#, fuzzy
+msgid "Downloaded \"{}\""
+msgstr "Letöltés  {} / {}"
 
 #: inary/cli/addrepo.py:30
 #, fuzzy
@@ -1030,7 +1045,9 @@ msgstr ""
 
 #: inary/cli/addrepo.py:83
 #, fuzzy, python-brace-format
-msgid "{0} repository could not be reached: {1}"
+msgid ""
+"Error: {0} repository could not be reached: \n"
+"{1}"
 msgstr "A(z) {} tároló frissítésre szorul."
 
 #: inary/cli/addrepo.py:84
@@ -1071,7 +1088,7 @@ msgstr "az adott verzió információi"
 msgid "Blame for all of the releases"
 msgstr "az összes verzó információi"
 
-#: inary/cli/blame.py:71 inary/data/specfile.py:374 inary/data/specfile.py:455
+#: inary/cli/blame.py:71 inary/data/specfile.py:377 inary/data/specfile.py:477
 #, fuzzy, python-brace-format
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Név: {0}, verzió: {1}, kiadás: {2}\n"
@@ -1113,102 +1130,106 @@ msgstr ""
 "Más lehetőségként megadhatod egy forráscsomag nevét,\n"
 "melyet egy forrásokat kínáló tárolóból lehet letölteni.\n"
 
-#: inary/cli/build.py:49
+#: inary/cli/build.py:48
 msgid "build options"
 msgstr "build opciók"
 
-#: inary/cli/build.py:54
+#: inary/cli/build.py:53
 #, fuzzy
 msgid "Run inary build operation without printing extra debug information."
 msgstr "A inary build futtatása extra debug információk megjelenítése nélkül"
 
-#: inary/cli/build.py:60 inary/cli/command.py:215
+#: inary/cli/build.py:59 inary/cli/command.py:212
 #, fuzzy
 msgid "Do not take dependency information into account."
 msgstr "Nem veszi figyelembe a függőségi információkat"
 
-#: inary/cli/build.py:66 inary/cli/delta.py:58
+#: inary/cli/build.py:65 inary/cli/delta.py:58
 msgid "Output directory for produced packages."
 msgstr "Könyvtár az elkészített csomagok számára"
 
 #: inary/cli/build.py:70
+msgid "Bypass sha1sum verify step of source archive."
+msgstr ""
+
+#: inary/cli/build.py:74
 #, fuzzy
 msgid "Bypass errors from ActionsAPI."
 msgstr "Az ActionsAPI hibák átlépése"
 
-#: inary/cli/build.py:75 inary/cli/command.py:217
+#: inary/cli/build.py:79 inary/cli/command.py:214
 #, fuzzy
 msgid "Bypass safety switch."
 msgstr "A biztonsági kapcsoló átlépése"
 
-#: inary/cli/build.py:80
+#: inary/cli/build.py:84
 #, fuzzy
 msgid "Bypass testing step."
 msgstr "A tesztelés kihagyása"
 
-#: inary/cli/build.py:85
+#: inary/cli/build.py:89
 #, fuzzy
 msgid "Create a static package with ar files."
 msgstr "Statikus csomag létrehozása, ar fájllal"
 
-#: inary/cli/build.py:89 inary/cli/delta.py:62
+#: inary/cli/build.py:93 inary/cli/delta.py:62
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
 msgstr "Bináris csomag létrehozása a megadott formátummal. Használja a '-F help' kapcsolót a támogatott formátumok listájának kiírásához."
 
-#: inary/cli/build.py:96
+#: inary/cli/build.py:100
 #, fuzzy
 msgid "Use quilt patch management system instead of GNU patch."
 msgstr "A quilt patch kezelő használata GNU patch helyett "
 
-#: inary/cli/build.py:102
+#: inary/cli/build.py:106
 #, fuzzy
 msgid "Do not constrain build process inside the build folder."
 msgstr "Ne korlátozza a build folyamatot a build könyvtáron belülre"
 
-#: inary/cli/build.py:106
+#: inary/cli/build.py:110
 msgid "build steps"
 msgstr "build lépések"
 
-#: inary/cli/build.py:112
+#: inary/cli/build.py:116
 #, fuzzy
 msgid "Break build after fetching the source archive."
 msgstr "A build megszakítása a forrás csomag letöltése után"
 
-#: inary/cli/build.py:119
+#: inary/cli/build.py:123
 #, fuzzy
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches."
 msgstr "A build megszakítása a forrás csomag letöltése, az sh1sum ellenőrzése és a patchek alkalmazása után"
 
-#: inary/cli/build.py:127
+#: inary/cli/build.py:131
 #, fuzzy
 msgid "Break build after running configure step."
 msgstr "A build megszakítása a configure lépés után"
 
-#: inary/cli/build.py:133
+#: inary/cli/build.py:137
 #, fuzzy
 msgid "Break build after running compile step."
 msgstr "A build megszakítása a a compile lépés után"
 
-#: inary/cli/build.py:139
+#: inary/cli/build.py:143
 #, fuzzy
 msgid "Break build after running check step."
 msgstr "A build megszakítása a az ellenörzés után"
 
-#: inary/cli/build.py:145
+#: inary/cli/build.py:149
 #, fuzzy
 msgid "Break build after running install step."
 msgstr "A build megszakítása az install lépés után"
 
-#: inary/cli/build.py:151
+#: inary/cli/build.py:155
 #, fuzzy
 msgid "Create INARY package."
 msgstr "INARY csomag létrehozása"
 
-#: inary/cli/build.py:160 inary/cli/delta.py:71
+#: inary/cli/build.py:164 inary/cli/delta.py:71
 msgid "Supported package formats:"
 msgstr "Támogatott csomagformátumok:"
 
-#: inary/cli/build.py:163 inary/cli/delta.py:74
+#: inary/cli/build.py:167 inary/cli/delta.py:74
 #, fuzzy
 msgid "  {} (default)"
 msgstr "  {} (alapértelmezett)"
@@ -1332,67 +1353,62 @@ msgstr "Duplikált parancs: {}"
 msgid "Unrecognized command: '{}'"
 msgstr "Ismeretlen parancs: {}"
 
-#: inary/cli/command.py:104
+#: inary/cli/command.py:103
 msgid "general options"
 msgstr "általános beállítások"
 
-#: inary/cli/command.py:107
+#: inary/cli/command.py:106
 #, fuzzy
 msgid "Change the system root for INARY commands."
 msgstr "Gyökér könyvtár megváltoztatása a INARY parancsok számára"
 
-#: inary/cli/command.py:109
+#: inary/cli/command.py:108
 #, fuzzy
 msgid "Assume yes in all yes/no queries."
 msgstr "Automatikus 'igen' válasz minden igen/nem kérdésre"
 
-#: inary/cli/command.py:113
+#: inary/cli/command.py:112
 #, fuzzy
 msgid "Keep bandwidth usage under specified KB's."
 msgstr "Ne engedje a sávszélesség használatot a megadott KB fölé"
 
-#: inary/cli/command.py:116
+#: inary/cli/command.py:115
 msgid "Detailed output"
 msgstr "Részletes kimenet"
 
-#: inary/cli/command.py:118
+#: inary/cli/command.py:117
 #, fuzzy
 msgid "Show debugging information."
 msgstr "Hibakeresési információk megjelenítése"
 
-#: inary/cli/command.py:120
+#: inary/cli/command.py:119
 #, fuzzy
 msgid "Suppresses all coloring of INARY's output."
 msgstr "Színes kimenet letiltása"
 
-#: inary/cli/command.py:138
+#: inary/cli/command.py:137
 #, fuzzy
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "A(z) {} célkönyvtár nem létezik. Létrehozom.\n"
 
-#: inary/cli/command.py:160
+#: inary/cli/command.py:159
 msgid "Password: "
 msgstr "Jelszó:"
 
-#: inary/cli/command.py:176 inary/util.py:83
+#: inary/cli/command.py:175 inary/util.py:83
 msgid "You have to be root for this operation."
 msgstr "Rendszergazda jogosultsággal kell rendelkeznie ehhez a művelethez."
 
-#: inary/cli/command.py:201
+#: inary/cli/command.py:199
 msgid "Command terminated abnormally."
 msgstr "A parancs váratlanul megszakadt."
 
-#: inary/cli/command.py:219 inary/cli/emerge.py:56 inary/cli/emergeup.py:56
-#, fuzzy
-msgid "Bypass scom configuration agent."
-msgstr "A scom konfigurációs automatizmus átlépése."
-
-#: inary/cli/command.py:221
+#: inary/cli/command.py:216
 #, fuzzy
 msgid "Do not perform any action, just show what would be done."
 msgstr "Nem hajtja végre a műveleteket, csak megmutatja mi történne"
 
-#: inary/cli/command.py:240
+#: inary/cli/command.py:235
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "használata: {}\n"
@@ -1423,12 +1439,7 @@ msgstr ""
 msgid "There isn't any new config :)"
 msgstr ""
 
-#: inary/cli/configurepending.py:68 inary/scomiface.py:38
-#, fuzzy
-msgid "scom package is not fully installed."
-msgstr "A scom csomag nincs teljesen telepítve"
-
-#: inary/cli/configurepending.py:72
+#: inary/cli/configurepending.py:61
 #, fuzzy
 msgid ""
 "Configure pending packages\n"
@@ -1444,7 +1455,7 @@ msgstr ""
 "listájába kerülnek. Ez a parancs elvégzi ezen csomagok\n"
 "beállítását.\n"
 
-#: inary/cli/configurepending.py:86
+#: inary/cli/configurepending.py:75
 msgid "configure-pending options"
 msgstr "configure-pending opciók"
 
@@ -1551,32 +1562,32 @@ msgstr ""
 "\n"
 "Megadható egy komponens neve is.\n"
 
-#: inary/cli/emerge.py:48
+#: inary/cli/emerge.py:47
 msgid "emerge options"
 msgstr "emerge opciók"
 
-#: inary/cli/emerge.py:50 inary/cli/emergeup.py:50
+#: inary/cli/emerge.py:49 inary/cli/emergeup.py:49
 msgid "Emerge available packages under given component"
 msgstr "Az adott komponens elérhető csomagjainak beépítése."
 
-#: inary/cli/emerge.py:52 inary/cli/emergeup.py:52 inary/cli/install.py:56
+#: inary/cli/emerge.py:51 inary/cli/emergeup.py:51 inary/cli/install.py:56
 #: inary/cli/upgrade.py:60
 #, fuzzy
 msgid "Ignore file conflicts."
 msgstr "Fájl-ütközések figyelmen kívül hagyása"
 
-#: inary/cli/emerge.py:54 inary/cli/emergeup.py:54 inary/cli/install.py:58
+#: inary/cli/emerge.py:53 inary/cli/emergeup.py:53 inary/cli/install.py:58
 #: inary/cli/upgrade.py:62
 #, fuzzy
 msgid "Ignore package conflicts."
 msgstr "Csomag-ütközések figyelmen kívül hagyása"
 
-#: inary/cli/emerge.py:74 inary/cli/emergeup.py:77
+#: inary/cli/emerge.py:71 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Kimeneti könyvtár: {}"
 
-#: inary/cli/emerge.py:76 inary/cli/emergeup.py:79
+#: inary/cli/emerge.py:73 inary/cli/emergeup.py:76
 msgid "Outputting binary packages in the package cache."
 msgstr "A bináris csomagok elhelyezése a csomag-gyorsítótárban."
 
@@ -1601,7 +1612,7 @@ msgstr ""
 "\n"
 "Megadható egy komponens neve is.\n"
 
-#: inary/cli/emergeup.py:48
+#: inary/cli/emergeup.py:47
 #, fuzzy
 msgid "emergeup options"
 msgstr "emerge opciók"
@@ -2810,22 +2821,22 @@ msgstr "* INARY fájl-index építése folyamatban: {}"
 msgid "* Index file written."
 msgstr "* Index fájl létrehozva"
 
-#: inary/data/metadata.py:80
+#: inary/data/metadata.py:81
 #, fuzzy, python-brace-format
 msgid "Distribution: {0}, Dist. Release: {1}\n"
 msgstr "Disztribúció: {0}, kiadás: {1}\n"
 
-#: inary/data/metadata.py:82
+#: inary/data/metadata.py:83
 #, fuzzy, python-brace-format
 msgid "Architecture: {0}, Installed Size: {1}"
 msgstr "Architektúra: {0}, telepített méret: {1}"
 
-#: inary/data/metadata.py:88
+#: inary/data/metadata.py:89
 #, fuzzy
 msgid ", Package Size: {}"
 msgstr ", csomag mérete: {}"
 
-#: inary/data/metadata.py:90
+#: inary/data/metadata.py:91
 msgid ", install.tar.xz sha1sum: {}"
 msgstr ", install.tar.xz sha1sum: {}"
 
@@ -2834,54 +2845,71 @@ msgstr ", install.tar.xz sha1sum: {}"
 msgid "Encountered cycle {}"
 msgstr "{} ciklusba futottam."
 
-#: inary/data/specfile.py:166
+#: inary/data/specfile.py:165
 #, fuzzy, python-brace-format
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "URI: {0}, típus: {1}, sha1sum: {2}"
 
-#: inary/data/specfile.py:198 inary/data/specfile.py:201
+#: inary/data/specfile.py:197 inary/data/specfile.py:200
 msgid " or "
 msgstr "vagy"
 
-#: inary/data/specfile.py:278 inary/operations/install.py:297
+#: inary/data/specfile.py:281 inary/operations/install.py:298
 #, fuzzy, python-brace-format
 msgid "\"{0}\" dependency of package \"{1}\" is not satisfied."
 msgstr "A(z) {0} csomag függősége a(z) {1} csomagnak, de nem teljesíthető."
 
-#: inary/data/specfile.py:376 inary/data/specfile.py:457
+#: inary/data/specfile.py:379 inary/data/specfile.py:479
 #, fuzzy
 msgid "Summary: {}\n"
 msgstr "Összefoglalás: {}\n"
 
-#: inary/data/specfile.py:377 inary/data/specfile.py:458
+#: inary/data/specfile.py:380 inary/data/specfile.py:480
 #, fuzzy
 msgid "Description: {}\n"
 msgstr "Leírás: {}\n"
 
-#: inary/data/specfile.py:378 inary/data/specfile.py:459
+#: inary/data/specfile.py:381 inary/data/specfile.py:481
 #, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Használat: {}\n"
 
-#: inary/data/specfile.py:379 inary/data/specfile.py:460
+#: inary/data/specfile.py:382 inary/data/specfile.py:482
 #, fuzzy
 msgid "Component: {}\n"
 msgstr "Komponens: {}\n"
 
-#: inary/data/specfile.py:380
-msgid "Provides: "
+#: inary/data/specfile.py:383
+#, fuzzy
+msgid "Provides: \n"
 msgstr "Szolgáltat:"
 
-#: inary/data/specfile.py:384
+#: inary/data/specfile.py:386
+msgid "   - Commands: \n"
+msgstr ""
+
+#: inary/data/specfile.py:391
+msgid "   - CMAKE Needs: \n"
+msgstr ""
+
+#: inary/data/specfile.py:396
+msgid "   - PkgConfig Needs: \n"
+msgstr ""
+
+#: inary/data/specfile.py:401
+msgid "   - Services: \n"
+msgstr ""
+
+#: inary/data/specfile.py:406
 msgid "Dependencies: "
 msgstr "Függőségek:"
 
-#: inary/data/specfile.py:436
+#: inary/data/specfile.py:458
 #, fuzzy
 msgid "translations.xml file is badly formed.: {}"
 msgstr "a translation.xml fájl hibás formátumú"
 
-#: inary/data/specfile.py:461
+#: inary/data/specfile.py:483
 msgid "Build Dependencies: "
 msgstr "Build függőségek:"
 
@@ -2964,11 +2992,6 @@ msgstr "A(z) {} tároló nem létezik."
 #, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "A(z) {} csomag nem található."
-
-#: inary/db/repodb.py:174
-#, fuzzy
-msgid "{} repository needs to be updated"
-msgstr "A(z) {} tároló frissítésre szorul."
 
 #: inary/db/repodb.py:181
 #, fuzzy
@@ -3094,31 +3117,26 @@ msgstr "Az URI típusa URI vagy sztring kell legyen."
 msgid "Fetching {}"
 msgstr "{} letöltése"
 
-#: inary/file.py:146
-#, fuzzy
-msgid "Copying \"{}\" to transfer dir"
-msgstr "{} másolása a transzfer könyvtárba"
-
-#: inary/file.py:151 inary/operations/info.py:36
+#: inary/file.py:153 inary/operations/info.py:36
 #, fuzzy
 msgid "File \"{}\" not found."
 msgstr "A(z) {} fájl nem található"
 
-#: inary/file.py:172
+#: inary/file.py:174
 #, fuzzy
 msgid "File integrity of \"{}\" compromised."
 msgstr "A(z) {} fájl sérült."
 
-#: inary/file.py:195
+#: inary/file.py:197
 msgid "File mode must be either File.read or File.write"
 msgstr "A fájl mód File.read vagy File.write lehet."
 
-#: inary/file.py:200
+#: inary/file.py:202
 #, fuzzy
 msgid "Remote write not implemented."
 msgstr "A távoli írás nem lehetséges."
 
-#: inary/file.py:249 inary/file.py:252
+#: inary/file.py:251 inary/file.py:254
 #, fuzzy
 msgid "ERROR: 'gpg --detach-sig {}' failed."
 msgstr "HIBA: gpg --detach-sig {} nem sikerült"
@@ -3190,261 +3208,261 @@ msgstr "IceCream észlelve. Győződjön meg róla, hogy a démon működik."
 msgid "Rebuilding source for build type: {}"
 msgstr "{} hozzáadása a csomaglistához"
 
-#: inary/operations/build.py:531
+#: inary/operations/build.py:527
 #, fuzzy
 msgid "Cannot find component.xml for \"{}\" in remote directory, Source is now part of unknown component."
 msgstr "Nem található component.xml a távoli könyvtárban. A forrás mostantól ismeretlen komponens része."
 
-#: inary/operations/build.py:539
+#: inary/operations/build.py:535
 #, fuzzy
 msgid "Cannot find component.xml for \"{}\" in upper directory, Source is now part of unknown component."
 msgstr "Nem található component.xml a szülő könyvtárban. A forrás mostantól imseretlne komponens része."
 
-#: inary/operations/build.py:550
+#: inary/operations/build.py:546
 #, fuzzy
 msgid "Building source package: \"{}\" [ Fetching Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:555
+#: inary/operations/build.py:551
 #, fuzzy
 msgid "Building source package: \"{}\" [ Unpacking Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:557
+#: inary/operations/build.py:553
 msgid "Unpacking archive(s)..."
 msgstr "Archívumok kicsomagolása..."
 
-#: inary/operations/build.py:565
+#: inary/operations/build.py:561
 #, fuzzy
 msgid " -> unpacked ({})"
 msgstr " kicsomagolva {}"
 
-#: inary/operations/build.py:570
+#: inary/operations/build.py:566
 #, fuzzy
 msgid "Building source package: \"{}\" [ SetupAction Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:572
+#: inary/operations/build.py:568
 msgid "Setting up source..."
 msgstr "Forrás beállítása..."
 
-#: inary/operations/build.py:577
+#: inary/operations/build.py:573
 #, fuzzy
 msgid "Building source package: \"{}\" [ BuildAction Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:579
+#: inary/operations/build.py:575
 msgid "Building source..."
 msgstr "Forrás építése..."
 
-#: inary/operations/build.py:584
+#: inary/operations/build.py:580
 #, fuzzy
 msgid "Building source package: \"{}\" [ CheckAction Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:586
+#: inary/operations/build.py:582
 msgid "Testing package..."
 msgstr "Csomag tesztelése..."
 
-#: inary/operations/build.py:590
+#: inary/operations/build.py:586
 #, fuzzy
 msgid "Building source package: \"{}\" [ InstallAction Step ]"
 msgstr "INARY forráscsomag készítése: {}"
 
-#: inary/operations/build.py:592
+#: inary/operations/build.py:588
 msgid "Installing..."
 msgstr "Telepítés..."
 
-#: inary/operations/build.py:671
+#: inary/operations/build.py:667
 #, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
 msgstr "Az Action Script {0} nem olvasható: {1}"
 
-#: inary/operations/build.py:674
+#: inary/operations/build.py:670
 #, fuzzy, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
 
-#: inary/operations/build.py:702
+#: inary/operations/build.py:695
 #, fuzzy, python-brace-format
-msgid "Unable to read SCOM script ({0}): {1}"
-msgstr "A SCOM script nem olvasható {0}: {1}"
+msgid "Unable to read Post Operations script ({0}): {1}"
+msgstr "Az Action Script {0} nem olvasható: {1}"
 
-#: inary/operations/build.py:705
+#: inary/operations/build.py:698
 #, fuzzy, python-brace-format
-msgid "SyntaxError in SCOM file ({0}): {1}"
-msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
+msgid "SyntaxError in Post Operations script ({0}): {1}"
+msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
 
-#: inary/operations/build.py:742
+#: inary/operations/build.py:736
 #, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Sandbox violation: {0} ({1} -> {2})"
 
-#: inary/operations/build.py:758 inary/util.py:682
+#: inary/operations/build.py:752 inary/util.py:682
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "HIBA: A(z) {} munkakönyvtár nem létezik.\n"
 
-#: inary/operations/build.py:768
+#: inary/operations/build.py:762
 msgid "Sandbox enabled build..."
 msgstr "Sandbox enabled build..."
 
-#: inary/operations/build.py:792
+#: inary/operations/build.py:786
 msgid "Sandbox violation result:"
 msgstr "Sandbox violation result:"
 
-#: inary/operations/build.py:797
+#: inary/operations/build.py:791
 msgid "Sandbox violations!"
 msgstr "Sandbox violations!"
 
-#: inary/operations/build.py:803
+#: inary/operations/build.py:797
 #, fuzzy
 msgid "unable to call function from actions: '{}'"
 msgstr "unable to call function from actions: {}"
 
-#: inary/operations/build.py:816
+#: inary/operations/build.py:810
 #, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr ""
 
-#: inary/operations/build.py:820
+#: inary/operations/build.py:814
 #, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr ""
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:843
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Biztonsági kapcsoló: a következő extra csomagok telepítésre kerülnek a system.devel-ből: "
 
-#: inary/operations/build.py:854
+#: inary/operations/build.py:848
 #, fuzzy
 msgid "Safety switch: the component system.devel cannot be found."
 msgstr "Biztonsági kapcsoló: a system.devel komponens nem található"
 
-#: inary/operations/build.py:863
+#: inary/operations/build.py:857
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Teljesíthetetlen függőségek:"
 
-#: inary/operations/build.py:867
+#: inary/operations/build.py:861
 #, fuzzy
 msgid "Cannot build package due to unsatisfied build dependencies."
 msgstr "A csomag nem készíthető el teljesítetlen függőségek miatt"
 
-#: inary/operations/build.py:872
+#: inary/operations/build.py:866
 #, fuzzy
 msgid "Build dependency \"{}\" cannot be satisfied."
 msgstr "A(z) {} build függőséget nem lehet teljesíteni"
 
-#: inary/operations/build.py:874
+#: inary/operations/build.py:868
 #, fuzzy
 msgid "Would you like to install the unsatisfied build dependencies?"
 msgstr "Akarja telepíteni a hiányzó függőségeket?"
 
-#: inary/operations/build.py:875
+#: inary/operations/build.py:869
 msgid "Installing build dependencies."
 msgstr "Build függőségek telepítése."
 
-#: inary/operations/build.py:881
+#: inary/operations/build.py:875
 msgid "Ignoring build dependencies."
 msgstr "Build függőségek kihagyása."
 
-#: inary/operations/build.py:891
+#: inary/operations/build.py:885
 #, fuzzy
 msgid "Patch file is missing: \"{}\"\n"
 msgstr "Patch fájl nincs meg: {}\n"
 
-#: inary/operations/build.py:893
+#: inary/operations/build.py:887
 #, fuzzy
 msgid "Patch file is empty: \"{}\""
 msgstr "Patch fájl nincs meg: {}\n"
 
-#: inary/operations/build.py:909
+#: inary/operations/build.py:903
 #, fuzzy
 msgid "Applying patch: {}"
 msgstr "* Patch alkalmazása: {}"
 
-#: inary/operations/build.py:1039
+#: inary/operations/build.py:1036
 #, fuzzy
 msgid "No user named '{}' found on the system"
 msgstr "Nincs {} nevű felhasználó a rendszerben"
 
-#: inary/operations/build.py:1044
+#: inary/operations/build.py:1041
 #, fuzzy
 msgid "No group named '{}' found on the system"
 msgstr "Nincs {} nevű csoport a rendszerben"
 
-#: inary/operations/build.py:1052
+#: inary/operations/build.py:1049
 #, fuzzy
 msgid "/{} has suid bit set"
 msgstr "/{} suid bit beállítva"
 
-#: inary/operations/build.py:1073
+#: inary/operations/build.py:1070
 msgid "Module \"magic\" cannot found. Falling back with \"file\" command. It is dangerous. So, if you wanna create stable packages, please fix this issue in your workplace. Probably installing \"python3-filemagic\" package might be a good solution."
 msgstr ""
 
-#: inary/operations/build.py:1085
+#: inary/operations/build.py:1082
 msgid "File \"{}\" might be a broken symlink. Check it before publishing package."
 msgstr ""
 
-#: inary/operations/build.py:1088
+#: inary/operations/build.py:1085
 #, fuzzy, python-brace-format
 msgid "'magic' return of \"{0}\" is \"{1}\""
 msgstr "\"{0}\" visszatéréis értéke {1}"
 
-#: inary/operations/build.py:1092
+#: inary/operations/build.py:1089
 #, fuzzy, python-brace-format
 msgid "'file' command failed with return code {0} for file: \"{1}\""
 msgstr "A strip parancsot nem tudtam végrehajtani a(z) {} fájlon!"
 
-#: inary/operations/build.py:1093
+#: inary/operations/build.py:1090
 msgid ""
 "Output:\n"
 "{}"
 msgstr ""
 
-#: inary/operations/build.py:1096
+#: inary/operations/build.py:1093
 #, fuzzy
 msgid "'file' command return is \"{}\""
 msgstr "A strip parancsot nem tudtam végrehajtani a(z) {} fájlon!"
 
-#: inary/operations/build.py:1153
+#: inary/operations/build.py:1150
 #, fuzzy
 msgid "There are abandoned files under the install dir ({}):"
 msgstr "Gazdátlan fájlok vannak a telepítési könyvtár {}:"
 
-#: inary/operations/build.py:1189
+#: inary/operations/build.py:1186
 #, fuzzy
 msgid "Ignoring empty package: \"{}\""
 msgstr "% üres csomag figyelmen kívül hagyása"
 
-#: inary/operations/build.py:1192
+#: inary/operations/build.py:1189
 #, fuzzy
 msgid "Building package: \"{}\""
 msgstr "{} csomag elkészítése"
 
-#: inary/operations/build.py:1208
+#: inary/operations/build.py:1205
 #, fuzzy
 msgid "Creating \"{}\"..."
 msgstr "{} létrehozása..."
 
-#: inary/operations/build.py:1266
+#: inary/operations/build.py:1260
 msgid "Cleaning build directory..."
 msgstr "Átmeneti könyvtár tisztítása..."
 
-#: inary/operations/build.py:1269
+#: inary/operations/build.py:1263
 msgid "Keeping build directory"
 msgstr "Átmeneti könyvtár megőrzése"
 
-#: inary/operations/build.py:1358
+#: inary/operations/build.py:1352
 #, fuzzy
 msgid "Action script error caught. {}"
 msgstr "Parancsfájl hiba: {}"
 
-#: inary/operations/build.py:1361
+#: inary/operations/build.py:1355
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** hibák száma {}, figyelmeztetések száma {}"
 
-#: inary/operations/build.py:1449
+#: inary/operations/build.py:1443
 msgid "Last state was '{}'"
 msgstr ""
 
@@ -3468,7 +3486,7 @@ msgstr "INARY különbözeti csomag létrehozása {} és {} között."
 msgid "All files in the package \"{}\" are different from the files in the new package. Skipping it..."
 msgstr "{} csomag kiadási száma az újjal megegyezik. Kihagyjuk..."
 
-#: inary/operations/delta.py:117
+#: inary/operations/delta.py:115
 #, fuzzy
 msgid "New package \"{}\" exists in the list of old packages. Skipping it..."
 msgstr "{} új csomag található a régi csomagok listáján. Kihagyjuk..."
@@ -3603,14 +3621,13 @@ msgid "Following packages will be removed:\n"
 msgstr "A következő csomagok eltávolításra kerülnek:\n"
 
 #: inary/operations/history.py:209 inary/operations/history.py:223
-#: inary/operations/install.py:216 inary/operations/remove.py:91
+#: inary/operations/install.py:217 inary/operations/remove.py:91
 #: inary/operations/upgrade.py:209
 #, fuzzy
 msgid "Would you like to continue?"
 msgstr "Kívánja folytatni?"
 
-#: inary/operations/history.py:215 inary/operations/install.py:97
-#: inary/operations/upgrade.py:220
+#: inary/operations/history.py:215 inary/operations/upgrade.py:220
 msgid "Downloading {} / {}"
 msgstr "Letöltés  {} / {}"
 
@@ -3627,11 +3644,11 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Pillanatfelvétel készítése a rendszerről"
 
-#: inary/operations/install.py:49 inary/operations/install.py:149
+#: inary/operations/install.py:49 inary/operations/install.py:150
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "A következő csomag(ok) már telepítve vannak, nem lesznek újratelepítve:"
 
-#: inary/operations/install.py:55 inary/operations/install.py:230
+#: inary/operations/install.py:55 inary/operations/install.py:231
 msgid "No packages to install."
 msgstr "Nincs telepítendő csomag."
 
@@ -3639,49 +3656,49 @@ msgstr "Nincs telepítendő csomag."
 msgid "Following packages will be installed:"
 msgstr "A következő csomagok lesznek telepítve:"
 
-#: inary/operations/install.py:85 inary/operations/install.py:217
+#: inary/operations/install.py:85 inary/operations/install.py:218
 #: inary/operations/upgrade.py:210
 #, fuzzy
 msgid "External dependencies not satisfied."
 msgstr "A külső föggőségek nem teljesülnek"
 
-#: inary/operations/install.py:115 inary/operations/upgrade.py:235
+#: inary/operations/install.py:116 inary/operations/upgrade.py:235
 msgid "Installing {} / {}"
 msgstr "Telepítés  {} / {}"
 
-#: inary/operations/install.py:136
+#: inary/operations/install.py:137
 msgid "Mixing file names and package names not supported yet."
 msgstr "Csomagok és fájlnevek vegyes használata még nem támogatott."
 
-#: inary/operations/install.py:180
+#: inary/operations/install.py:181
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "A(z) {0} csomag nem kompatíbilis az ön disztribúciójának kiadásával: {1} {2}."
 
-#: inary/operations/install.py:185
+#: inary/operations/install.py:186
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "A(z) {0} {1} csomag nem kompatíbilis az ön számítógépének kiépítésével {2}."
 
-#: inary/operations/install.py:208
+#: inary/operations/install.py:209
 #, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Egy külső függőség nincs teljesítve: {}"
 
-#: inary/operations/install.py:213
+#: inary/operations/install.py:214
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "A következő csomagok kerülnek telepítésre, a függőségeknek megfelelő sorrendben:"
 
-#: inary/operations/install.py:261
+#: inary/operations/install.py:262
 msgid "Installation order: "
 msgstr "Telepítési sorrend: "
 
-#: inary/operations/install.py:277
+#: inary/operations/install.py:278
 #, fuzzy
 msgid "Checking dependencies for install..."
 msgstr "A következő csomagok lesznek telepítve:"
 
-#: inary/operations/install.py:293
+#: inary/operations/install.py:294
 #, fuzzy
 msgid " -> checking {}"
 msgstr "/{} ellenőrzése "
@@ -3854,17 +3871,22 @@ msgstr "A következő csomagok biztonsági kapcsolóval kényszerített telepít
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "A biztonsági kapcsoló kényszeríti a következő csomagok frissítését:"
 
-#: inary/package.py:73
+#: inary/package.py:70
+#, fuzzy
+msgid "Getting package file \"{}\" from locale."
+msgstr "A texmf fájlok telepítése nem sikerült"
+
+#: inary/package.py:75
 #, fuzzy
 msgid "Cannot open package file: \"{}\""
 msgstr "A csomagfájl nem található: {}"
 
-#: inary/package.py:94
+#: inary/package.py:96
 #, fuzzy
 msgid "Unsupported package format: {}"
 msgstr "Nem támogatott csomagformátum: {}"
 
-#: inary/package.py:109
+#: inary/package.py:111
 #, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
@@ -3873,96 +3895,10 @@ msgstr ""
 "Hiba történt a(z) {} letöltése során.\n"
 "Lehet, hogy a csomagot frissíteni kéne. Kérem, próbálja meg frissíteni a csomagot."
 
-#: inary/package.py:113
+#: inary/package.py:115
 #, fuzzy
 msgid "{} [cached]"
 msgstr "{} [a gyorsítótárban]"
-
-#: inary/scomiface.py:101
-#, fuzzy
-msgid ""
-"Cannot connect to SCOM: \n"
-"  \"{}\"\n"
-msgstr ""
-"Nem tudokkapcsolódni a SCOM-hoz:\n"
-"  {}\n"
-
-#: inary/scomiface.py:114
-#, fuzzy
-msgid "SCOM package updated. From now on, using new SCOM daemon."
-msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
-
-#: inary/scomiface.py:121
-#, fuzzy, python-brace-format
-msgid "Registering \"{0}\" named scom script for \"{1}\"."
-msgstr "A(z) {} scom parancsfájl regisztrálása"
-
-#: inary/scomiface.py:130 inary/scomiface.py:135 inary/scomiface.py:184
-#: inary/scomiface.py:195 inary/scomiface.py:220 inary/scomiface.py:231
-#: inary/scomiface.py:239
-#, fuzzy
-msgid "Script error: {}"
-msgstr "Parancsfájl hiba: {}"
-
-#: inary/scomiface.py:137
-#, fuzzy
-msgid "Calling post install handlers for \"{}\" package."
-msgstr "Telepítés utáni műveletek indítása"
-
-#: inary/scomiface.py:148
-#, fuzzy, python-brace-format
-msgid "Script error for \"{0}\" package: {1}."
-msgstr "Parancsfájl hiba: {}"
-
-#: inary/scomiface.py:156
-#, fuzzy, python-brace-format
-msgid "Running package's post install script for \"{0}\" package."
-msgstr "A csomag telepítés utáni parancsainak futtatása"
-
-#: inary/scomiface.py:164
-#, fuzzy, python-brace-format
-msgid "Script error for \"{0}\" package: {1}"
-msgstr "Parancsfájl hiba: {}"
-
-#: inary/scomiface.py:170
-#, fuzzy
-msgid "Running pre removal operations for \"{}\" package."
-msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#: inary/scomiface.py:177
-#, fuzzy
-msgid "Running package's pre remove script for \"{}\" package."
-msgstr "A csomag eltávolítás előtti parancsainak futtatása"
-
-#: inary/scomiface.py:186
-#, fuzzy
-msgid "Calling pre remove handlers for \"{}\" package."
-msgstr "Az eltávolítást előkészítő parancsok indítása"
-
-#: inary/scomiface.py:203
-#, fuzzy
-msgid "Running post removal operations for \"{}\" package."
-msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#: inary/scomiface.py:213
-#, fuzzy
-msgid "Running package's postremove script for \"{}\" package."
-msgstr "A csomag eltávolítás utáni parancsainak futtatása"
-
-#: inary/scomiface.py:222
-#, fuzzy
-msgid "Calling post remove handlers for \"{}\" package."
-msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#: inary/scomiface.py:233
-#, fuzzy
-msgid "Unregistering scom scripts of \"{}\" package."
-msgstr "Scom parancsfájl bejegyzésének eltávolítása"
-
-#: inary/scomiface.py:236
-#, fuzzy
-msgid "Unregistering {} script."
-msgstr "Scom parancsfájl bejegyzésének eltávolítása"
 
 #: inary/sxml/autoxml.py:84
 #, fuzzy
@@ -4094,6 +4030,16 @@ msgstr ""
 msgid "File \"{}\" has invalid XML."
 msgstr "A(z) {} fájl hibás XML adatot tartalmaz"
 
+#: inary/trigger.py:34
+#, fuzzy, python-brace-format
+msgid "Unable to read Post Operations Script ({0}): {1}"
+msgstr "Az Action Script {0} nem olvasható: {1}"
+
+#: inary/trigger.py:37
+#, fuzzy, python-brace-format
+msgid "SyntaxError in Post Operations Script ({0}): {1}"
+msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
+
 #: inary/uri.py:82
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "a setAuthInfo bemenete egy tuple (user, pass)"
@@ -4216,5 +4162,101 @@ msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
 #, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás utáni parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Az eltávolítást előkészítő parancsok indítása"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás előtti parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy, python-brace-format
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "A csomag telepítés utáni parancsainak futtatása"
+
+#, fuzzy, python-brace-format
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Telepítés utáni műveletek indítása"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "A(z) {} scom parancsfájl regisztrálása"
+
+#, fuzzy
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
+
+#, fuzzy
+#~ msgid ""
+#~ "Cannot connect to SCOM: \n"
+#~ "  \"{}\"\n"
+#~ msgstr ""
+#~ "Nem tudokkapcsolódni a SCOM-hoz:\n"
+#~ "  {}\n"
+
+#, fuzzy, python-brace-format
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "A SCOM script nem olvasható {0}: {1}"
+
+#, fuzzy
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "{} másolása a transzfer könyvtárba"
+
+#, fuzzy
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "A(z) {} tároló frissítésre szorul."
+
+#, fuzzy
+#~ msgid "scom package is not fully installed."
+#~ msgstr "A scom csomag nincs teljesen telepítve"
+
+#, fuzzy
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "A scom konfigurációs automatizmus átlépése."
+
+#, fuzzy
 #~ msgid "Configuring \"{}\""
 #~ msgstr "{} beállítva"
+
+#, fuzzy
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "* {} hozzáadása az adatbázishoz..."

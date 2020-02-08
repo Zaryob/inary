@@ -5,7 +5,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -171,7 +171,7 @@ class RepoDB(lazydb.LazyDB):
                 index_path = os.path.splitext(index_path)[0]
 
         if not os.path.exists(index_path):
-            ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
+            #ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
 
         try:

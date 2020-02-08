@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -56,6 +56,7 @@ class CLI(inary.ui.UI):
         super(CLI, self).__init__(show_debug, show_verbose)
         self.warnings = 0
         self.errors = 0
+        self.clean_line="\x1b[K"
 
     def close(self):
         util.xterm_title_reset()
@@ -67,6 +68,7 @@ class CLI(inary.ui.UI):
             if err:
                 sys.stderr.write(str(msg))
             else:
+                msg=self.clean_line+msg+self.clean_line
                 sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
@@ -185,7 +187,6 @@ class CLI(inary.ui.UI):
 
     def display_progress(self, **ka):
         """ display progress of any operation """
-
         if ka['operation'] in ["removing", "rebuilding-db"]:
             return
 
@@ -293,6 +294,22 @@ class CLI(inary.ui.UI):
             if ctx.log:
                 ctx.log.info(_("Extracted desktop file \"{}\"").format(keywords['desktopfile']))
             msg = None
+
+        elif event == inary.ui.fetching:
+            if self.show_verbose:
+                msg=""
+            else:
+                msg="\x1b[K"
+            msg+=_("Downloading <{} / {}>".format(keywords['which'],keywords['total']))
+            color="yellow"
+
+        elif event == inary.ui.fetched:
+            if self.show_verbose:
+                msg=""
+            else:
+                msg="\x1b[3A"
+            msg+=_("Downloaded \"{}\"".format(keywords['name']))
+            color="green"
 
         else:
             msg = None

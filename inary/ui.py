@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -15,7 +15,7 @@
 #
 
 (installed, upgraded, removed, installing, removing, configuring, configured, extracting,
- downloading, packagestogo, updatingrepo, cached, desktopfile) = list(range(13))
+ downloading, packagestogo, updatingrepo, cached, desktopfile, fetching, fetched) = list(range(15))
 
 
 class UI(object):

@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -521,10 +521,13 @@ def join_path(a, *p):
 # File/Directory Related Functions #
 ####################################
 
-def check_file(_file, mode=os.F_OK):
+def check_file(_file, mode=os.F_OK, noerr=False):
     """Shorthand to check if a file exists."""
     if not os.access(_file, mode):
-        raise FileError(_("File {} not found.").format(_file))
+        if noerr:
+            return False
+        else:
+            raise FileError(_("File {} not found.").format(_file))
     return True
 
 

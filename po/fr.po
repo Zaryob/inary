@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-13 01:36+0300\n"
+"POT-Creation-Date: 2019-12-23 22:47+0000\n"
 "PO-Revision-Date: 2019-08-25 00:57+0300\n"
 "Last-Translator: Philippe Svetoslavsky <philsvet@gmail.com>\n"
 "Language-Team: French <pardus-translators@pardus.org.tr>\n"
@@ -19,72 +19,72 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: /usr/lib64/python3.7/optparse.py:146
+#: /usr/lib/python3.7/optparse.py:146
 #, fuzzy, python-format
 msgid "no such option: %s"
 msgstr "pas d'option :%s"
 
-#: /usr/lib64/python3.7/optparse.py:157
+#: /usr/lib/python3.7/optparse.py:157
 #, fuzzy, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "option ambiguë : %s (%s?)"
 
-#: /usr/lib64/python3.7/optparse.py:381
+#: /usr/lib/python3.7/optparse.py:381
 #, fuzzy, python-format
 msgid "Usage: %s\n"
 msgstr "Mode d'emploi : %s\n"
 
-#: /usr/lib64/python3.7/optparse.py:400
+#: /usr/lib/python3.7/optparse.py:400
 msgid "Usage"
 msgstr "Mode d'emploi"
 
-#: /usr/lib64/python3.7/optparse.py:422 /usr/lib64/python3.7/optparse.py:423
+#: /usr/lib/python3.7/optparse.py:422 /usr/lib/python3.7/optparse.py:423
 msgid "integer"
 msgstr "entier"
 
-#: /usr/lib64/python3.7/optparse.py:424
+#: /usr/lib/python3.7/optparse.py:424
 msgid "floating-point"
 msgstr "virgule flottante"
 
-#: /usr/lib64/python3.7/optparse.py:425
+#: /usr/lib/python3.7/optparse.py:425
 msgid "complex"
 msgstr "complexe"
 
-#: /usr/lib64/python3.7/optparse.py:433
+#: /usr/lib/python3.7/optparse.py:433
 #, fuzzy, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "Option %s : valeur %s invalide : %r"
 
-#: /usr/lib64/python3.7/optparse.py:441
+#: /usr/lib/python3.7/optparse.py:441
 #, fuzzy, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "Option %s : choix invalides : %r (à choisir dans %s)"
 
-#: /usr/lib64/python3.7/optparse.py:1238
+#: /usr/lib/python3.7/optparse.py:1238
 msgid "show this help message and exit"
 msgstr "Afficher ce message d'aide et sortir"
 
-#: /usr/lib64/python3.7/optparse.py:1243
+#: /usr/lib/python3.7/optparse.py:1243
 msgid "show program's version number and exit"
 msgstr "Afficher le numéro de version du programme et sortir"
 
-#: /usr/lib64/python3.7/optparse.py:1266
+#: /usr/lib/python3.7/optparse.py:1266
 msgid "%prog [options]"
 msgstr "%prog [options]"
 
-#: /usr/lib64/python3.7/optparse.py:1486 /usr/lib64/python3.7/optparse.py:1524
+#: /usr/lib/python3.7/optparse.py:1486 /usr/lib/python3.7/optparse.py:1524
 #, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /usr/lib64/python3.7/optparse.py:1496
+#: /usr/lib/python3.7/optparse.py:1496
 #, python-format
 msgid "%s option does not take a value"
 msgstr ""
 
-#: /usr/lib64/python3.7/optparse.py:1612
+#: /usr/lib/python3.7/optparse.py:1612
 msgid "Options"
 msgstr "Options"
 
@@ -715,101 +715,111 @@ msgstr "Le paquet {} n'est pas installé."
 msgid "Target DIR: \"{}\""
 msgstr "URI du paquet : {}"
 
-#: inary/archive.py:489 inary/archive.py:588
+#: inary/archive.py:490 inary/archive.py:589
 #, fuzzy, python-brace-format
 msgid "Chowning {0} ({1}:{2})"
 msgstr "Chowning {0} ({1}: {2})"
 
-#: inary/archive.py:492 inary/archive.py:591
+#: inary/archive.py:493 inary/archive.py:592
 #, fuzzy, python-brace-format
 msgid "LChowning {0} ({1}:{2})"
 msgstr "LChowning {0} ({1}: {2})"
 
-#: inary/archive.py:559
+#: inary/archive.py:560
 #, fuzzy
 msgid "Problem occured while uncompressing \"{}.Z\" file"
 msgstr "Un problème est survenu durant la décompression du fichiers {}.Z"
 
-#: inary/archive.py:640
+#: inary/archive.py:641
 #, fuzzy
 msgid "File \"{}\" is not a zip file."
 msgstr "Le paquet {} n'est pas installé."
 
-#: inary/archive.py:875
+#: inary/archive.py:876
 #, fuzzy
 msgid "Fetching source from: \"{}\""
 msgstr "Récupération de la source depuis : {}"
 
-#: inary/archive.py:888
+#: inary/archive.py:889
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr "L'archive du source est stockée dans : {0}/{1}"
 
-#: inary/archive.py:906 inary/operations/history.py:143
+#: inary/archive.py:907 inary/operations/history.py:143
 #, fuzzy
 msgid "\"{}\" [cached]"
 msgstr "{} [en cache]"
 
-#: inary/archive.py:915
+#: inary/archive.py:916
+msgid ""
+"* Expected sha1 value: {} \n"
+"* Received sha1 value: {} \n"
+msgstr ""
+
+#: inary/archive.py:918
 #, fuzzy
 msgid "unpack: check_file_hash failed."
 msgstr "unpack : check_file_hash a échoué"
 
-#: inary/archive.py:921
+#: inary/archive.py:920
+msgid "* Archive verification passed. Such problems may occur during the build process."
+msgstr ""
+
+#: inary/archive.py:925
 #, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "Type d'archive inconnu {0} est donné pour '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:928
 #, fuzzy
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr "Inary a besoins de {} pour décompresser cette archive, mais ce dernier n'est pas installé."
 
-#: inary/atomicoperations.py:84
+#: inary/atomicoperations.py:86
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" found in repository \"{1}\""
 msgstr "Paquet {0} trouvé dans le dépôt {1}"
 
-#: inary/atomicoperations.py:115
+#: inary/atomicoperations.py:117
 #, fuzzy
 msgid "Package URI: \"{}\""
 msgstr "URI du paquet : {}"
 
-#: inary/atomicoperations.py:129
+#: inary/atomicoperations.py:131
 msgid "Download Error: Package does not match the repository package."
 msgstr "Erreur de téléchargement : le paquet ne correspond pas au paquet du dépôt."
 
-#: inary/atomicoperations.py:133
+#: inary/atomicoperations.py:135
 #, fuzzy
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Le paquet {} introuvable dans les dépôts actifs."
 
-#: inary/atomicoperations.py:160 inary/cli/__init__.py:242
+#: inary/atomicoperations.py:163 inary/cli/__init__.py:240
 #, fuzzy, python-brace-format
 msgid "Installing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installation de {0.name}, version {0.version}, millésime {0.release}"
 
-#: inary/atomicoperations.py:191
+#: inary/atomicoperations.py:196
 #, fuzzy
-msgid "Is there enought free space in your disk."
+msgid "Is there enought free space in your disk?"
 msgstr "Y a-t-il suffisamment d'espace libre sur votre disque?"
 
-#: inary/atomicoperations.py:192
+#: inary/atomicoperations.py:197
 #, fuzzy
 msgid "Free space in 'destinationdirectory': {:.2f} {} "
 msgstr "Espace libre dans 'destinationdirectory': {: .2f} {}"
 
-#: inary/atomicoperations.py:211 inary/operations/build.py:831
+#: inary/atomicoperations.py:210 inary/operations/build.py:825
 #, fuzzy, python-brace-format
 msgid "{0}-{1} is not a valid INARY version format"
 msgstr "{0}-{1} n'est pas un format de version valide de INARY."
 
-#: inary/atomicoperations.py:241
+#: inary/atomicoperations.py:240
 #, fuzzy, python-brace-format
 msgid "\"/{0}\" from \"{1}\" package\n"
 msgstr "/{0} pour le paquet {1}\n"
 
-#: inary/atomicoperations.py:242
+#: inary/atomicoperations.py:241
 #, fuzzy
 msgid ""
 "File conflicts:\n"
@@ -818,173 +828,178 @@ msgstr ""
 "Conflit de fichiers :\n"
 "{}\n"
 
-#: inary/atomicoperations.py:259
+#: inary/atomicoperations.py:258
 msgid "Re-install same version package?"
 msgstr "Ré-installer la même version du paquet ?"
 
-#: inary/atomicoperations.py:260
+#: inary/atomicoperations.py:259
 msgid "Package re-install declined"
 msgstr "Ré-installation du paquet déclinée"
 
-#: inary/atomicoperations.py:267
+#: inary/atomicoperations.py:266
 #, fuzzy
 msgid "Storing old paths info."
 msgstr "Affiche seulement les chemins."
 
-#: inary/atomicoperations.py:276
+#: inary/atomicoperations.py:275
 #, fuzzy
 msgid "Upgrading to new upstream version."
 msgstr "Mise à jour vers une version ultérieure"
 
-#: inary/atomicoperations.py:279
+#: inary/atomicoperations.py:278
 #, fuzzy
 msgid "Upgrading to new distribution release."
 msgstr "Mise à jour vers une nouvelle version de distribution"
 
-#: inary/atomicoperations.py:288
+#: inary/atomicoperations.py:287
 msgid "Downgrade to old distribution release?"
 msgstr "Régresser vers une version de distribution plus récente ?"
 
-#: inary/atomicoperations.py:292
+#: inary/atomicoperations.py:291
 msgid "Package downgrade declined"
 msgstr "Régression de paquet déclinée"
 
-#: inary/atomicoperations.py:341
+#: inary/atomicoperations.py:313 inary/cli/configurepending.py:55
 #, fuzzy
 msgid "Configuration of \"{}\" package failed."
 msgstr "La configuration a échoué."
 
-#: inary/atomicoperations.py:434
+#: inary/atomicoperations.py:423
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Impossible de déplacer les fichiers suivants. La réinstallation de ce paquet est fortement recommandée."
 
-#: inary/atomicoperations.py:532
-#, fuzzy
-msgid "Storing files of \"{}\" package."
-msgstr "Ajout de {} à la base de données... "
-
-#: inary/atomicoperations.py:557
+#: inary/atomicoperations.py:539
 #, fuzzy
 msgid "Adding files of \"{}\" package to database..."
 msgstr "Ajout de {} à la base de données... "
 
-#: inary/atomicoperations.py:606
+#: inary/atomicoperations.py:589
 #, fuzzy
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "La liste des fichier pour le paquet {} n'a pu être lue, poursuite de la suppression."
 
-#: inary/atomicoperations.py:612
+#: inary/atomicoperations.py:595
 #, fuzzy, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installation de {0.name}, version {0.version}, millésime {0.release}"
 
-#: inary/atomicoperations.py:615
+#: inary/atomicoperations.py:598
 msgid "Trying to remove nonexistent package "
 msgstr " Tentative de suppression d'un paquet inexistant"
 
-#: inary/atomicoperations.py:655
+#: inary/atomicoperations.py:638
 #, fuzzy
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Le fichier {} causant un conflit ne sera pas supprimé"
 
-#: inary/atomicoperations.py:686
+#: inary/atomicoperations.py:669
 #, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Le fichier {} précédemment installé n'existe plus sur le système [Probablement supprimé manuellement]"
 
-#: inary/atomicoperations.py:721
+#: inary/atomicoperations.py:692
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Ajout de {} à la base de données... "
 
-#: inary/atomicoperations.py:725
+#: inary/atomicoperations.py:696
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Reconstruction de la base de données fichiers"
 
-#: inary/cli/__init__.py:116
+#: inary/cli/__init__.py:118
 #, fuzzy
 msgid "Verboses: "
 msgstr "Fournit : "
 
-#: inary/cli/__init__.py:128
+#: inary/cli/__init__.py:130
 msgid "Warning: "
 msgstr "Alerte :"
 
-#: inary/cli/__init__.py:138
+#: inary/cli/__init__.py:140
 msgid "Error: "
 msgstr "Erreur :"
 
-#: inary/cli/__init__.py:151
+#: inary/cli/__init__.py:153
 #, fuzzy
 msgid ""
 "\n"
 " Select one:"
 msgstr "Choisissez un:"
 
-#: inary/cli/__init__.py:174
+#: inary/cli/__init__.py:176
 #, fuzzy
 msgid "(yes"
 msgstr " (oui/non)"
 
-#: inary/cli/__init__.py:174
+#: inary/cli/__init__.py:176
 #, fuzzy
 msgid "no)"
 msgstr "non)"
 
-#: inary/cli/__init__.py:239
+#: inary/cli/__init__.py:237
 #, fuzzy
 msgid "Installed \"{}\""
 msgstr "{} installé"
 
-#: inary/cli/__init__.py:245
+#: inary/cli/__init__.py:243
 #, fuzzy
 msgid "Removed \"{}\""
 msgstr "{} supprimé"
 
-#: inary/cli/__init__.py:248
+#: inary/cli/__init__.py:246
 #, fuzzy
 msgid "Removing \"{}\""
 msgstr "{} supprimé"
 
-#: inary/cli/__init__.py:251
+#: inary/cli/__init__.py:249
 #, fuzzy
 msgid "Upgraded \"{}\""
 msgstr "{} mis à jour"
 
-#: inary/cli/__init__.py:254
+#: inary/cli/__init__.py:252
 #, fuzzy
 msgid "Configured \"{}\""
 msgstr "{} configuré"
 
-#: inary/cli/__init__.py:257
+#: inary/cli/__init__.py:255
 #, fuzzy
 msgid "Configuring \"{}\" package."
 msgstr "Configuration du paquet {}"
 
-#: inary/cli/__init__.py:260
+#: inary/cli/__init__.py:258
 #, fuzzy
 msgid "Extracting the files of \"{}\""
 msgstr "Extraction des fichiers de {}"
 
-#: inary/cli/__init__.py:263 inary/operations/repository.py:100
+#: inary/cli/__init__.py:261 inary/operations/repository.py:100
 #, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "Mise à jour du dépôt : {}"
 
-#: inary/cli/__init__.py:268
+#: inary/cli/__init__.py:266
 msgid "Total size of package(s): {:.2f} {} / {:.2f} {}"
 msgstr "Taille totale du/des paquets(s) :{:.2f} {} / {:.2f} {}"
 
-#: inary/cli/__init__.py:275
+#: inary/cli/__init__.py:273
 #, fuzzy
 msgid "Following packages ordered for process: {}"
 msgstr "Les paquets suivants vont être supprimés :\n"
 
-#: inary/cli/__init__.py:280
+#: inary/cli/__init__.py:278
 #, fuzzy
 msgid "Extracted desktop file \"{}\""
 msgstr "Extraction des fichiers de {}"
+
+#: inary/cli/__init__.py:286
+#, fuzzy
+msgid "Downloading <{} / {}>"
+msgstr "Téléchargement %d / %d"
+
+#: inary/cli/__init__.py:294
+#, fuzzy
+msgid "Downloaded \"{}\""
+msgstr "Téléchargé de:"
 
 #: inary/cli/addrepo.py:30
 msgid ""
@@ -1035,7 +1050,9 @@ msgstr ""
 
 #: inary/cli/addrepo.py:83
 #, fuzzy, python-brace-format
-msgid "{0} repository could not be reached: {1}"
+msgid ""
+"Error: {0} repository could not be reached: \n"
+"{1}"
 msgstr "Le dépôt {} a besoin d'être mis à jour."
 
 #: inary/cli/addrepo.py:84
@@ -1077,7 +1094,7 @@ msgstr "Accuse pour la version donnée"
 msgid "Blame for all of the releases"
 msgstr "Responsable de toutes les versions"
 
-#: inary/cli/blame.py:71 inary/data/specfile.py:374 inary/data/specfile.py:455
+#: inary/cli/blame.py:71 inary/data/specfile.py:377 inary/data/specfile.py:477
 #, fuzzy, python-brace-format
 msgid "Name: {0}, version: {1}, release: {2}\n"
 msgstr "Nom : {0}, version : {1}, release : {2}\n"
@@ -1119,102 +1136,106 @@ msgstr ""
 "Vous pouvez également donner le nom d'un paquet source\n"
 "à télécharger à partir d'un dépôt contenant des sources.\n"
 
-#: inary/cli/build.py:49
+#: inary/cli/build.py:48
 msgid "build options"
 msgstr "options de compilation"
 
-#: inary/cli/build.py:54
+#: inary/cli/build.py:53
 #, fuzzy
 msgid "Run inary build operation without printing extra debug information."
 msgstr "Ne pas afficher d'informations de déboguage supplémentaires lors de la construction de paquet inary."
 
-#: inary/cli/build.py:60 inary/cli/command.py:215
+#: inary/cli/build.py:59 inary/cli/command.py:212
 #, fuzzy
 msgid "Do not take dependency information into account."
 msgstr "Ne pas prendre les informations de dépendance en compte"
 
-#: inary/cli/build.py:66 inary/cli/delta.py:58
+#: inary/cli/build.py:65 inary/cli/delta.py:58
 msgid "Output directory for produced packages."
 msgstr "Répertoire accueillant les paquets produits"
 
 #: inary/cli/build.py:70
+msgid "Bypass sha1sum verify step of source archive."
+msgstr ""
+
+#: inary/cli/build.py:74
 #, fuzzy
 msgid "Bypass errors from ActionsAPI."
 msgstr "Passe outre les erreurs d'ActionsAPI"
 
-#: inary/cli/build.py:75 inary/cli/command.py:217
+#: inary/cli/build.py:79 inary/cli/command.py:214
 #, fuzzy
 msgid "Bypass safety switch."
 msgstr "Passe outre les précautions de sécurité"
 
-#: inary/cli/build.py:80
+#: inary/cli/build.py:84
 #, fuzzy
 msgid "Bypass testing step."
 msgstr "Passer outre l'étape de test"
 
-#: inary/cli/build.py:85
+#: inary/cli/build.py:89
 #, fuzzy
 msgid "Create a static package with ar files."
 msgstr "Création d'un paquet statique avec des fichier ar"
 
-#: inary/cli/build.py:89 inary/cli/delta.py:62
+#: inary/cli/build.py:93 inary/cli/delta.py:62
 msgid "Create the binary package using the given format. Use '-F help' to see a list of supported formats."
 msgstr "Créez le paquet binaire en utilisant le format donné. Utilisez '-F Help' pour voir la liste des formats pris en charge."
 
-#: inary/cli/build.py:96
+#: inary/cli/build.py:100
 #, fuzzy
 msgid "Use quilt patch management system instead of GNU patch."
 msgstr "Utiliser le système de patch quilt au lieu de GNU patch."
 
-#: inary/cli/build.py:102
+#: inary/cli/build.py:106
 #, fuzzy
 msgid "Do not constrain build process inside the build folder."
 msgstr "Ne cantonne pas le processus de compilation au sein du répertoire de compilation"
 
-#: inary/cli/build.py:106
+#: inary/cli/build.py:110
 msgid "build steps"
 msgstr "étapes de compilation"
 
-#: inary/cli/build.py:112
+#: inary/cli/build.py:116
 #, fuzzy
 msgid "Break build after fetching the source archive."
 msgstr "Se contente de télécharger le code source"
 
-#: inary/cli/build.py:119
+#: inary/cli/build.py:123
 #, fuzzy
 msgid "Break build after unpacking the source archive, checking sha1sum and applying patches."
 msgstr "Se contente de télécharger le code source, vérifier son intégrité avec sha1sum et appliquer les patchs"
 
-#: inary/cli/build.py:127
+#: inary/cli/build.py:131
 #, fuzzy
 msgid "Break build after running configure step."
 msgstr "Arrête le processus de construction du paquet après le lancement de configure"
 
-#: inary/cli/build.py:133
+#: inary/cli/build.py:137
 #, fuzzy
 msgid "Break build after running compile step."
 msgstr "Arrête le processus de construction du paquet après la compilation du source"
 
-#: inary/cli/build.py:139
+#: inary/cli/build.py:143
 #, fuzzy
 msgid "Break build after running check step."
 msgstr "Arrête le processus de compilation du paquet après la fin de l'étape de test"
 
-#: inary/cli/build.py:145
+#: inary/cli/build.py:149
 #, fuzzy
 msgid "Break build after running install step."
 msgstr "Arrête le process de construction du paquet après l'exécution de l'install"
 
-#: inary/cli/build.py:151
+#: inary/cli/build.py:155
 #, fuzzy
 msgid "Create INARY package."
 msgstr "Crée le paquet INARY"
 
-#: inary/cli/build.py:160 inary/cli/delta.py:71
+#: inary/cli/build.py:164 inary/cli/delta.py:71
 msgid "Supported package formats:"
 msgstr "Formats de paquets pris en charge :"
 
-#: inary/cli/build.py:163 inary/cli/delta.py:74
+#: inary/cli/build.py:167 inary/cli/delta.py:74
 #, fuzzy
 msgid "  {} (default)"
 msgstr "{} (par défaut)"
@@ -1339,67 +1360,62 @@ msgstr "Commande {} dupliquée"
 msgid "Unrecognized command: '{}'"
 msgstr "Commande non reconnue : {}"
 
-#: inary/cli/command.py:104
+#: inary/cli/command.py:103
 msgid "general options"
 msgstr "options générales"
 
-#: inary/cli/command.py:107
+#: inary/cli/command.py:106
 #, fuzzy
 msgid "Change the system root for INARY commands."
 msgstr "Change la racine système pour les commandes INARY"
 
-#: inary/cli/command.py:109
+#: inary/cli/command.py:108
 #, fuzzy
 msgid "Assume yes in all yes/no queries."
 msgstr "Assume oui pour toutes les questions oui/non"
 
-#: inary/cli/command.py:113
+#: inary/cli/command.py:112
 #, fuzzy
 msgid "Keep bandwidth usage under specified KB's."
 msgstr "Maintient l'utilisation de la bande passante en dessus du seuil spécifié en Ko."
 
-#: inary/cli/command.py:116
+#: inary/cli/command.py:115
 msgid "Detailed output"
 msgstr "Affichage détaillé du retour"
 
-#: inary/cli/command.py:118
+#: inary/cli/command.py:117
 #, fuzzy
 msgid "Show debugging information."
 msgstr "Montrer les informations de déverminage"
 
-#: inary/cli/command.py:120
+#: inary/cli/command.py:119
 #, fuzzy
 msgid "Suppresses all coloring of INARY's output."
 msgstr "Supprime toute coloration dans les retours de INARY."
 
-#: inary/cli/command.py:138
+#: inary/cli/command.py:137
 #, fuzzy
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "Répertoire de destination {} n'existe pas. Création du répertoire.\n"
 
-#: inary/cli/command.py:160
+#: inary/cli/command.py:159
 msgid "Password: "
 msgstr "Mot de passe : "
 
-#: inary/cli/command.py:176 inary/util.py:83
+#: inary/cli/command.py:175 inary/util.py:83
 msgid "You have to be root for this operation."
 msgstr "Vous devez être administrateur (root) pour réaliser cette opération."
 
-#: inary/cli/command.py:201
+#: inary/cli/command.py:199
 msgid "Command terminated abnormally."
 msgstr "La commande s'est achevée anormalement."
 
-#: inary/cli/command.py:219 inary/cli/emerge.py:56 inary/cli/emergeup.py:56
-#, fuzzy
-msgid "Bypass scom configuration agent."
-msgstr "Passer outre l'agent de configuration scom"
-
-#: inary/cli/command.py:221
+#: inary/cli/command.py:216
 #, fuzzy
 msgid "Do not perform any action, just show what would be done."
 msgstr "Ne rien faire, juste montrer ce qui serait fait"
 
-#: inary/cli/command.py:240
+#: inary/cli/command.py:235
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "Mode d'emploi : {}\n"
@@ -1434,12 +1450,7 @@ msgstr "[!] Certains fichiers de configuration ont été modifiés. Voulez-vous 
 msgid "There isn't any new config :)"
 msgstr "Il n'y a pas de nouvelle configuration :)"
 
-#: inary/cli/configurepending.py:68 inary/scomiface.py:38
-#, fuzzy
-msgid "scom package is not fully installed."
-msgstr "Le paquet scom n'est pas entièrement installé"
-
-#: inary/cli/configurepending.py:72
+#: inary/cli/configurepending.py:61
 #, fuzzy
 msgid ""
 "Configure pending packages\n"
@@ -1456,7 +1467,7 @@ msgstr ""
 "paquets en attente de configuration. Cette commande\n"
 "configure ces paquets.\n"
 
-#: inary/cli/configurepending.py:86
+#: inary/cli/configurepending.py:75
 msgid "configure-pending options"
 msgstr "Options de configure-pending"
 
@@ -1565,32 +1576,32 @@ msgstr ""
 "\n"
 "Vous pouvez aussi indiquer le nom d'un composant.\n"
 
-#: inary/cli/emerge.py:48
+#: inary/cli/emerge.py:47
 msgid "emerge options"
 msgstr "Options d'emerge"
 
-#: inary/cli/emerge.py:50 inary/cli/emergeup.py:50
+#: inary/cli/emerge.py:49 inary/cli/emergeup.py:49
 msgid "Emerge available packages under given component"
 msgstr "'Emerge' les paquets disponibles pour un composant donné"
 
-#: inary/cli/emerge.py:52 inary/cli/emergeup.py:52 inary/cli/install.py:56
+#: inary/cli/emerge.py:51 inary/cli/emergeup.py:51 inary/cli/install.py:56
 #: inary/cli/upgrade.py:60
 #, fuzzy
 msgid "Ignore file conflicts."
 msgstr "Ignorer les conflits de fichiers"
 
-#: inary/cli/emerge.py:54 inary/cli/emergeup.py:54 inary/cli/install.py:58
+#: inary/cli/emerge.py:53 inary/cli/emergeup.py:53 inary/cli/install.py:58
 #: inary/cli/upgrade.py:62
 #, fuzzy
 msgid "Ignore package conflicts."
 msgstr "Ignorer les conflits de paquets"
 
-#: inary/cli/emerge.py:74 inary/cli/emergeup.py:77
+#: inary/cli/emerge.py:71 inary/cli/emergeup.py:74
 #, fuzzy
 msgid "Output directory: {}"
 msgstr "Répertoire de sortie : {}"
 
-#: inary/cli/emerge.py:76 inary/cli/emergeup.py:79
+#: inary/cli/emerge.py:73 inary/cli/emergeup.py:76
 msgid "Outputting binary packages in the package cache."
 msgstr "Génération de paquets binaires dans le cache de paquets."
 
@@ -1615,7 +1626,7 @@ msgstr ""
 "\n"
 "Vous pouvez aussi indiquer le nom d'un composant.\n"
 
-#: inary/cli/emergeup.py:48
+#: inary/cli/emergeup.py:47
 #, fuzzy
 msgid "emergeup options"
 msgstr "Options d'emerge"
@@ -2825,22 +2836,22 @@ msgstr "Construction de l'index des fichiers INARY sous {}"
 msgid "* Index file written."
 msgstr "Fichier d'index écrit"
 
-#: inary/data/metadata.py:80
+#: inary/data/metadata.py:81
 #, fuzzy, python-brace-format
 msgid "Distribution: {0}, Dist. Release: {1}\n"
 msgstr "Distribution: {0}, Dist. Release: {1}\n"
 
-#: inary/data/metadata.py:82
+#: inary/data/metadata.py:83
 #, fuzzy, python-brace-format
 msgid "Architecture: {0}, Installed Size: {1}"
 msgstr "Architecture : {0}, Taille des fichiers installés : {1}"
 
-#: inary/data/metadata.py:88
+#: inary/data/metadata.py:89
 #, fuzzy
 msgid ", Package Size: {}"
 msgstr ", taille du paquet : {}"
 
-#: inary/data/metadata.py:90
+#: inary/data/metadata.py:91
 msgid ", install.tar.xz sha1sum: {}"
 msgstr ", install.tar.xz sha1sum: {}"
 
@@ -2849,54 +2860,71 @@ msgstr ", install.tar.xz sha1sum: {}"
 msgid "Encountered cycle {}"
 msgstr "Dépendance circulaire {} rencontrée"
 
-#: inary/data/specfile.py:166
+#: inary/data/specfile.py:165
 #, fuzzy, python-brace-format
 msgid "URI: {0}, type: {1}, sha1sum: {2}"
 msgstr "URI : {0}, type : {1}, sha1sum : {2}"
 
-#: inary/data/specfile.py:198 inary/data/specfile.py:201
+#: inary/data/specfile.py:197 inary/data/specfile.py:200
 msgid " or "
 msgstr " ou "
 
-#: inary/data/specfile.py:278 inary/operations/install.py:297
+#: inary/data/specfile.py:281 inary/operations/install.py:298
 #, fuzzy, python-brace-format
 msgid "\"{0}\" dependency of package \"{1}\" is not satisfied."
 msgstr "La dépendance {0} du paquet {1} n'est pas satisfaite"
 
-#: inary/data/specfile.py:376 inary/data/specfile.py:457
+#: inary/data/specfile.py:379 inary/data/specfile.py:479
 #, fuzzy
 msgid "Summary: {}\n"
 msgstr "Résumé : {}\n"
 
-#: inary/data/specfile.py:377 inary/data/specfile.py:458
+#: inary/data/specfile.py:380 inary/data/specfile.py:480
 #, fuzzy
 msgid "Description: {}\n"
 msgstr "Description : {}\n"
 
-#: inary/data/specfile.py:378 inary/data/specfile.py:459
+#: inary/data/specfile.py:381 inary/data/specfile.py:481
 #, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Licences : {}\n"
 
-#: inary/data/specfile.py:379 inary/data/specfile.py:460
+#: inary/data/specfile.py:382 inary/data/specfile.py:482
 #, fuzzy
 msgid "Component: {}\n"
 msgstr "Composant : {}\n"
 
-#: inary/data/specfile.py:380
-msgid "Provides: "
+#: inary/data/specfile.py:383
+#, fuzzy
+msgid "Provides: \n"
 msgstr "Fournit : "
 
-#: inary/data/specfile.py:384
+#: inary/data/specfile.py:386
+msgid "   - Commands: \n"
+msgstr ""
+
+#: inary/data/specfile.py:391
+msgid "   - CMAKE Needs: \n"
+msgstr ""
+
+#: inary/data/specfile.py:396
+msgid "   - PkgConfig Needs: \n"
+msgstr ""
+
+#: inary/data/specfile.py:401
+msgid "   - Services: \n"
+msgstr ""
+
+#: inary/data/specfile.py:406
 msgid "Dependencies: "
 msgstr "Dépendances : "
 
-#: inary/data/specfile.py:436
+#: inary/data/specfile.py:458
 #, fuzzy
 msgid "translations.xml file is badly formed.: {}"
 msgstr "Le fichier translation.xml est mal formé."
 
-#: inary/data/specfile.py:461
+#: inary/data/specfile.py:483
 msgid "Build Dependencies: "
 msgstr "Dépendances : "
 
@@ -2979,11 +3007,6 @@ msgstr "Le dépôt {} n'existe pas."
 #, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "Le paquet {} est introuvable."
-
-#: inary/db/repodb.py:174
-#, fuzzy
-msgid "{} repository needs to be updated"
-msgstr "Le dépôt {} a besoin d'être mis à jour."
 
 #: inary/db/repodb.py:181
 #, fuzzy
@@ -3112,31 +3135,26 @@ msgstr "uri doit être de type URI ou string"
 msgid "Fetching {}"
 msgstr "Téléchargement de {}"
 
-#: inary/file.py:146
-#, fuzzy
-msgid "Copying \"{}\" to transfer dir"
-msgstr "Copie de {} vers le répertoire de transfert"
-
-#: inary/file.py:151 inary/operations/info.py:36
+#: inary/file.py:153 inary/operations/info.py:36
 #, fuzzy
 msgid "File \"{}\" not found."
 msgstr "Le fichier {} est introuvable"
 
-#: inary/file.py:172
+#: inary/file.py:174
 #, fuzzy
 msgid "File integrity of \"{}\" compromised."
 msgstr "L'intégrité du fichier {} est compromise."
 
-#: inary/file.py:195
+#: inary/file.py:197
 msgid "File mode must be either File.read or File.write"
 msgstr "Le mode d'accès au fichier doit être soit File.read soit File.write"
 
-#: inary/file.py:200
+#: inary/file.py:202
 #, fuzzy
 msgid "Remote write not implemented."
 msgstr "Écriture distante non implémentée"
 
-#: inary/file.py:249 inary/file.py:252
+#: inary/file.py:251 inary/file.py:254
 #, fuzzy
 msgid "ERROR: 'gpg --detach-sig {}' failed."
 msgstr "ERREUR : gpg --detach-sig {} a échoué"
@@ -3208,214 +3226,214 @@ msgstr "IceCream détecté. Vérifiez bien que votre daemon est en cours d'exéc
 msgid "Rebuilding source for build type: {}"
 msgstr "Ajout du paquet à l'index : {}"
 
-#: inary/operations/build.py:531
+#: inary/operations/build.py:527
 #, fuzzy
 msgid "Cannot find component.xml for \"{}\" in remote directory, Source is now part of unknown component."
 msgstr "Impossible de trouver component.xml dans le répertoire distant."
 
-#: inary/operations/build.py:539
+#: inary/operations/build.py:535
 #, fuzzy
 msgid "Cannot find component.xml for \"{}\" in upper directory, Source is now part of unknown component."
 msgstr "Impossible de trouver component.xml dans le répertoire parent."
 
-#: inary/operations/build.py:550
+#: inary/operations/build.py:546
 #, fuzzy
 msgid "Building source package: \"{}\" [ Fetching Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:555
+#: inary/operations/build.py:551
 #, fuzzy
 msgid "Building source package: \"{}\" [ Unpacking Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:557
+#: inary/operations/build.py:553
 msgid "Unpacking archive(s)..."
 msgstr "Déballage des archives..."
 
-#: inary/operations/build.py:565
+#: inary/operations/build.py:561
 #, fuzzy
 msgid " -> unpacked ({})"
 msgstr " décompressée {}"
 
-#: inary/operations/build.py:570
+#: inary/operations/build.py:566
 #, fuzzy
 msgid "Building source package: \"{}\" [ SetupAction Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:572
+#: inary/operations/build.py:568
 msgid "Setting up source..."
 msgstr "Préparation du code source..."
 
-#: inary/operations/build.py:577
+#: inary/operations/build.py:573
 #, fuzzy
 msgid "Building source package: \"{}\" [ BuildAction Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:579
+#: inary/operations/build.py:575
 msgid "Building source..."
 msgstr "Compilation du code source..."
 
-#: inary/operations/build.py:584
+#: inary/operations/build.py:580
 #, fuzzy
 msgid "Building source package: \"{}\" [ CheckAction Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:586
+#: inary/operations/build.py:582
 msgid "Testing package..."
 msgstr "Test du paquet..."
 
-#: inary/operations/build.py:590
+#: inary/operations/build.py:586
 #, fuzzy
 msgid "Building source package: \"{}\" [ InstallAction Step ]"
 msgstr "Construction du paquet source INARY : {}"
 
-#: inary/operations/build.py:592
+#: inary/operations/build.py:588
 msgid "Installing..."
 msgstr "Installation..."
 
-#: inary/operations/build.py:671
+#: inary/operations/build.py:667
 #, fuzzy, python-brace-format
 msgid "Unable to read Actions Script ({0}): {1}"
 msgstr "Impossible de lire le Script d'Actions ({0}) : {1}"
 
-#: inary/operations/build.py:674
+#: inary/operations/build.py:670
 #, fuzzy, python-brace-format
 msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "Erreur de syntaxe dans le Script d'Actions ({0}) : {1}"
 
-#: inary/operations/build.py:702
+#: inary/operations/build.py:695
 #, fuzzy, python-brace-format
-msgid "Unable to read SCOM script ({0}): {1}"
-msgstr "Impossible de lire le script SCOM ({0}) : {1}"
+msgid "Unable to read Post Operations script ({0}): {1}"
+msgstr "Impossible de lire le Script d'Actions ({0}) : {1}"
 
-#: inary/operations/build.py:705
+#: inary/operations/build.py:698
 #, fuzzy, python-brace-format
-msgid "SyntaxError in SCOM file ({0}): {1}"
-msgstr "Erreur de syntaxe dans le fichier SCOM ({0}) : {1}"
+msgid "SyntaxError in Post Operations script ({0}): {1}"
+msgstr "Erreur de syntaxe dans le Script d'Actions ({0}) : {1}"
 
-#: inary/operations/build.py:742
+#: inary/operations/build.py:736
 #, fuzzy, python-brace-format
 msgid "Sandbox violation: {0} ({1} -> {2})"
 msgstr "Violation du bac à sable (sandbox) : {0} ({1} -> {2})"
 
-#: inary/operations/build.py:758 inary/util.py:682
+#: inary/operations/build.py:752 inary/util.py:682
 #, fuzzy
 msgid "ERROR: WorkDir ({}) does not exist\n"
 msgstr "ERREUR : Le répertoire de travail ({}) n'existe pas.\n"
 
-#: inary/operations/build.py:768
+#: inary/operations/build.py:762
 msgid "Sandbox enabled build..."
 msgstr "Build avec bac à sable (sandbox) autorisé..."
 
-#: inary/operations/build.py:792
+#: inary/operations/build.py:786
 msgid "Sandbox violation result:"
 msgstr "Violation du bac à sable (sandbox) : "
 
-#: inary/operations/build.py:797
+#: inary/operations/build.py:791
 msgid "Sandbox violations!"
 msgstr "Violations du bac à sable (sandbox) !"
 
-#: inary/operations/build.py:803
+#: inary/operations/build.py:797
 #, fuzzy
 msgid "unable to call function from actions: '{}'"
 msgstr "impossible d'appeler une fonction depuis une action : {}"
 
-#: inary/operations/build.py:816
+#: inary/operations/build.py:810
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines a relative 'Path' element: {1}"
 msgstr "Le paquet source {0} définit un chemin relatif de l'élément : {1}"
 
-#: inary/operations/build.py:820
+#: inary/operations/build.py:814
 #, fuzzy, python-brace-format
 msgid "Source package '{0}' defines multiple 'Path' tags for {1}"
 msgstr "Le paquet source {0} définit plusieurs balises de chemin pour {1}"
 
-#: inary/operations/build.py:849
+#: inary/operations/build.py:843
 msgid "Safety switch: following extra packages in system.devel will be installed: "
 msgstr "Précautions de sécurité : les paquets supplémentaire dans system.devel vont être installés :"
 
-#: inary/operations/build.py:854
+#: inary/operations/build.py:848
 #, fuzzy
 msgid "Safety switch: the component system.devel cannot be found."
 msgstr "Précautions de sécurité : Le composant system.devel est introuvable"
 
-#: inary/operations/build.py:863
+#: inary/operations/build.py:857
 msgid "Unsatisfied Build Dependencies:"
 msgstr "Dépendance de Compilation Insatisfaites : "
 
-#: inary/operations/build.py:867
+#: inary/operations/build.py:861
 #, fuzzy
 msgid "Cannot build package due to unsatisfied build dependencies."
 msgstr "Impossible de construire le paquet à cause de dépendance de compilation insatisfaites"
 
-#: inary/operations/build.py:872
+#: inary/operations/build.py:866
 #, fuzzy
 msgid "Build dependency \"{}\" cannot be satisfied."
 msgstr "La dépendance de compilation {} ne peut être satisfaite"
 
-#: inary/operations/build.py:874
+#: inary/operations/build.py:868
 #, fuzzy
 msgid "Would you like to install the unsatisfied build dependencies?"
 msgstr "Voulez vous installer les dépendances de compilations manquantes ?"
 
-#: inary/operations/build.py:875
+#: inary/operations/build.py:869
 msgid "Installing build dependencies."
 msgstr "Installation des dépendances de compilation."
 
-#: inary/operations/build.py:881
+#: inary/operations/build.py:875
 msgid "Ignoring build dependencies."
 msgstr "Ignore les dépendances de compilations."
 
-#: inary/operations/build.py:891
+#: inary/operations/build.py:885
 #, fuzzy
 msgid "Patch file is missing: \"{}\"\n"
 msgstr "Le fichier de patch {} est manquant\n"
 
-#: inary/operations/build.py:893
+#: inary/operations/build.py:887
 #, fuzzy
 msgid "Patch file is empty: \"{}\""
 msgstr "Fichier de patch vide : {}"
 
-#: inary/operations/build.py:909
+#: inary/operations/build.py:903
 #, fuzzy
 msgid "Applying patch: {}"
 msgstr "Application du patch : {}"
 
-#: inary/operations/build.py:1039
+#: inary/operations/build.py:1036
 #, fuzzy
 msgid "No user named '{}' found on the system"
 msgstr "Aucun utilisateur {} trouvé sur le système"
 
-#: inary/operations/build.py:1044
+#: inary/operations/build.py:1041
 #, fuzzy
 msgid "No group named '{}' found on the system"
 msgstr "Pas de groupe {} trouvé sur le système"
 
-#: inary/operations/build.py:1052
+#: inary/operations/build.py:1049
 #, fuzzy
 msgid "/{} has suid bit set"
 msgstr "/{} a le bit suid"
 
-#: inary/operations/build.py:1073
+#: inary/operations/build.py:1070
 #, fuzzy
 msgid "Module \"magic\" cannot found. Falling back with \"file\" command. It is dangerous. So, if you wanna create stable packages, please fix this issue in your workplace. Probably installing \"python3-filemagic\" package might be a good solution."
 msgstr "Le module \"magique\" ne peut pas être trouvé. Reculer avec la commande \"file\". C'est dangereux. Par conséquent, si vous souhaitez créer des packages stables, corrigez ce problème sur votre lieu de travail. L'installation du paquetage \"python3-filemagic\" pourrait être une bonne solution."
 
-#: inary/operations/build.py:1085
+#: inary/operations/build.py:1082
 msgid "File \"{}\" might be a broken symlink. Check it before publishing package."
 msgstr ""
 
-#: inary/operations/build.py:1088
+#: inary/operations/build.py:1085
 #, fuzzy, python-brace-format
 msgid "'magic' return of \"{0}\" is \"{1}\""
 msgstr "la valeur retournée pour \"{0}\" est {1}"
 
-#: inary/operations/build.py:1092
+#: inary/operations/build.py:1089
 #, fuzzy, python-brace-format
 msgid "'file' command failed with return code {0} for file: \"{1}\""
 msgstr "La commande strip a échoué pour le fichier {} !"
 
-#: inary/operations/build.py:1093
+#: inary/operations/build.py:1090
 #, fuzzy
 msgid ""
 "Output:\n"
@@ -3424,49 +3442,49 @@ msgstr ""
 "Sortie:\n"
 "{}\n"
 
-#: inary/operations/build.py:1096
+#: inary/operations/build.py:1093
 #, fuzzy
 msgid "'file' command return is \"{}\""
 msgstr "La commande strip a échoué pour le fichier {} !"
 
-#: inary/operations/build.py:1153
+#: inary/operations/build.py:1150
 #, fuzzy
 msgid "There are abandoned files under the install dir ({}):"
 msgstr "Fichiers abandonnés sous le répertoire d'installation {} :"
 
-#: inary/operations/build.py:1189
+#: inary/operations/build.py:1186
 #, fuzzy
 msgid "Ignoring empty package: \"{}\""
 msgstr "Ignorons le paquet vide {}"
 
-#: inary/operations/build.py:1192
+#: inary/operations/build.py:1189
 #, fuzzy
 msgid "Building package: \"{}\""
 msgstr "Construction du paquet : {}"
 
-#: inary/operations/build.py:1208
+#: inary/operations/build.py:1205
 #, fuzzy
 msgid "Creating \"{}\"..."
 msgstr "Création de {}..."
 
-#: inary/operations/build.py:1266
+#: inary/operations/build.py:1260
 msgid "Cleaning build directory..."
 msgstr "Nettoyage du dossier de construction..."
 
-#: inary/operations/build.py:1269
+#: inary/operations/build.py:1263
 msgid "Keeping build directory"
 msgstr "Dossier de construction conservé"
 
-#: inary/operations/build.py:1358
+#: inary/operations/build.py:1352
 #, fuzzy
 msgid "Action script error caught. {}"
 msgstr "Erreur de script d'action rencontrée"
 
-#: inary/operations/build.py:1361
+#: inary/operations/build.py:1355
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** {} erreur(s),  {} alerte(s)"
 
-#: inary/operations/build.py:1449
+#: inary/operations/build.py:1443
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Le dernier état était {}"
@@ -3491,7 +3509,7 @@ msgstr "Création du paquet INARY delta entre {} {}."
 msgid "All files in the package \"{}\" are different from the files in the new package. Skipping it..."
 msgstr "Tous les fichiers du paquet {} diffèrent des fichiers du nouveau paquet. On le saute..."
 
-#: inary/operations/delta.py:117
+#: inary/operations/delta.py:115
 #, fuzzy
 msgid "New package \"{}\" exists in the list of old packages. Skipping it..."
 msgstr "Le nouveau paquet {} existe dans la liste des anciens paquets. On le saute..."
@@ -3634,14 +3652,13 @@ msgid "Following packages will be removed:\n"
 msgstr "Les paquets suivants vont être supprimés :\n"
 
 #: inary/operations/history.py:209 inary/operations/history.py:223
-#: inary/operations/install.py:216 inary/operations/remove.py:91
+#: inary/operations/install.py:217 inary/operations/remove.py:91
 #: inary/operations/upgrade.py:209
 #, fuzzy
 msgid "Would you like to continue?"
 msgstr "Voulez vous continuer ?"
 
-#: inary/operations/history.py:215 inary/operations/install.py:97
-#: inary/operations/upgrade.py:220
+#: inary/operations/history.py:215 inary/operations/upgrade.py:220
 #, fuzzy
 msgid "Downloading {} / {}"
 msgstr "Téléchargement %d / %d"
@@ -3659,11 +3676,11 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Prise d'un instantané du système"
 
-#: inary/operations/install.py:49 inary/operations/install.py:149
+#: inary/operations/install.py:49 inary/operations/install.py:150
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "Les paquets suivants sont déjà installés et ne seront pas installés à nouveau :"
 
-#: inary/operations/install.py:55 inary/operations/install.py:230
+#: inary/operations/install.py:55 inary/operations/install.py:231
 msgid "No packages to install."
 msgstr "Aucun paquet à installer."
 
@@ -3671,50 +3688,50 @@ msgstr "Aucun paquet à installer."
 msgid "Following packages will be installed:"
 msgstr "Les paquets suivants vont être installés :"
 
-#: inary/operations/install.py:85 inary/operations/install.py:217
+#: inary/operations/install.py:85 inary/operations/install.py:218
 #: inary/operations/upgrade.py:210
 #, fuzzy
 msgid "External dependencies not satisfied."
 msgstr "Dépendances externes non satisfaites"
 
-#: inary/operations/install.py:115 inary/operations/upgrade.py:235
+#: inary/operations/install.py:116 inary/operations/upgrade.py:235
 #, fuzzy
 msgid "Installing {} / {}"
 msgstr "Installation %d / %d"
 
-#: inary/operations/install.py:136
+#: inary/operations/install.py:137
 msgid "Mixing file names and package names not supported yet."
 msgstr "Mélanger des noms de fichiers et des noms de paquets n'est pas encore supporté."
 
-#: inary/operations/install.py:180
+#: inary/operations/install.py:181
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "Le paquet {0} n'est pas compatible avec votre version de distribution {1} {2}."
 
-#: inary/operations/install.py:185
+#: inary/operations/install.py:186
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "Le paquet {0} ({1}) n'est pas compatible avec votre architecture {2}."
 
-#: inary/operations/install.py:208
+#: inary/operations/install.py:209
 #, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Dépendances externes non satisfaites : {}"
 
-#: inary/operations/install.py:213
+#: inary/operations/install.py:214
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "Les paquets suivants vont être installés dans cet ordre afin de satisfaire les dépendances."
 
-#: inary/operations/install.py:261
+#: inary/operations/install.py:262
 msgid "Installation order: "
 msgstr "Ordre d'installation : "
 
-#: inary/operations/install.py:277
+#: inary/operations/install.py:278
 #, fuzzy
 msgid "Checking dependencies for install..."
 msgstr "Les paquets suivants vont être installés :"
 
-#: inary/operations/install.py:293
+#: inary/operations/install.py:294
 #, fuzzy
 msgid " -> checking {}"
 msgstr "Vérification de /{} "
@@ -3885,17 +3902,22 @@ msgstr "Le loquet de sécurité oblige à l'installation des paquets suivants : 
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Le loquet de sécurité oblige à la mise à jour des paquets suivants :"
 
-#: inary/package.py:73
+#: inary/package.py:70
+#, fuzzy
+msgid "Getting package file \"{}\" from locale."
+msgstr "Échec de l'installation des fichiers texmf."
+
+#: inary/package.py:75
 #, fuzzy
 msgid "Cannot open package file: \"{}\""
 msgstr "Impossible d'ouvrir le fichier de paquet : {}"
 
-#: inary/package.py:94
+#: inary/package.py:96
 #, fuzzy
 msgid "Unsupported package format: {}"
 msgstr "Format de paquets non géré : {}"
 
-#: inary/package.py:109
+#: inary/package.py:111
 #, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
@@ -3904,96 +3926,10 @@ msgstr ""
 "Un problème est survenu lors de le récupération de {}.\n"
 "Le paquet a peut être été mis à jour. Veuillez essayer de mettre à jour le paquet.\n"
 
-#: inary/package.py:113
+#: inary/package.py:115
 #, fuzzy
 msgid "{} [cached]"
 msgstr "{} [en cache]"
-
-#: inary/scomiface.py:101
-#, fuzzy
-msgid ""
-"Cannot connect to SCOM: \n"
-"  \"{}\"\n"
-msgstr ""
-"Impossible de se connecter à SCOM : \n"
-"  {}\n"
-
-#: inary/scomiface.py:114
-#, fuzzy
-msgid "SCOM package updated. From now on, using new SCOM daemon."
-msgstr "Paquet SCOM mis à jour. Utilisation du nouveau démon SCOM à partir de maintenant."
-
-#: inary/scomiface.py:121
-#, fuzzy, python-brace-format
-msgid "Registering \"{0}\" named scom script for \"{1}\"."
-msgstr "Enregistrement du script scom {}"
-
-#: inary/scomiface.py:130 inary/scomiface.py:135 inary/scomiface.py:184
-#: inary/scomiface.py:195 inary/scomiface.py:220 inary/scomiface.py:231
-#: inary/scomiface.py:239
-#, fuzzy
-msgid "Script error: {}"
-msgstr "Erreur de script : {}"
-
-#: inary/scomiface.py:137
-#, fuzzy
-msgid "Calling post install handlers for \"{}\" package."
-msgstr "Appel aux officiants de post-installation"
-
-#: inary/scomiface.py:148
-#, fuzzy, python-brace-format
-msgid "Script error for \"{0}\" package: {1}."
-msgstr "Erreur de script : {}"
-
-#: inary/scomiface.py:156
-#, fuzzy, python-brace-format
-msgid "Running package's post install script for \"{0}\" package."
-msgstr "Lancement du script de post-installation du paquet"
-
-#: inary/scomiface.py:164
-#, fuzzy, python-brace-format
-msgid "Script error for \"{0}\" package: {1}"
-msgstr "Erreur de script : {}"
-
-#: inary/scomiface.py:170
-#, fuzzy
-msgid "Running pre removal operations for \"{}\" package."
-msgstr "Opérations de post-suppression en cours pour {}"
-
-#: inary/scomiface.py:177
-#, fuzzy
-msgid "Running package's pre remove script for \"{}\" package."
-msgstr "Lancement du script de pré-suppression du paquet"
-
-#: inary/scomiface.py:186
-#, fuzzy
-msgid "Calling pre remove handlers for \"{}\" package."
-msgstr "Appel aux officiants de pré-suppression"
-
-#: inary/scomiface.py:203
-#, fuzzy
-msgid "Running post removal operations for \"{}\" package."
-msgstr "Opérations de post-suppression en cours pour {}"
-
-#: inary/scomiface.py:213
-#, fuzzy
-msgid "Running package's postremove script for \"{}\" package."
-msgstr "Lancement du script de pré-suppression du paquet"
-
-#: inary/scomiface.py:222
-#, fuzzy
-msgid "Calling post remove handlers for \"{}\" package."
-msgstr "Opérations de post-suppression en cours pour {}"
-
-#: inary/scomiface.py:233
-#, fuzzy
-msgid "Unregistering scom scripts of \"{}\" package."
-msgstr "Désenregistrement des scripts scom"
-
-#: inary/scomiface.py:236
-#, fuzzy
-msgid "Unregistering {} script."
-msgstr "Désenregistrement des scripts scom"
 
 #: inary/sxml/autoxml.py:84
 #, fuzzy
@@ -4125,6 +4061,16 @@ msgstr "Impossible de lire l'URI {0}: {1}"
 msgid "File \"{}\" has invalid XML."
 msgstr "Le fichier {} contient un texte XML invalide"
 
+#: inary/trigger.py:34
+#, fuzzy, python-brace-format
+msgid "Unable to read Post Operations Script ({0}): {1}"
+msgstr "Impossible de lire le Script d'Actions ({0}) : {1}"
+
+#: inary/trigger.py:37
+#, fuzzy, python-brace-format
+msgid "SyntaxError in Post Operations Script ({0}): {1}"
+msgstr "Erreur de syntaxe dans le Script d'Actions ({0}) : {1}"
+
 #: inary/uri.py:82
 msgid "setAuthInfo needs a tuple (user, pass)"
 msgstr "setAuthInfo a besoin d'un tuple (utilisateur, mot de passe)"
@@ -4251,10 +4197,106 @@ msgstr ""
 #~ msgstr "L'option %s ne prend pas de valeur"
 
 #, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Désenregistrement des scripts scom"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Désenregistrement des scripts scom"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Opérations de post-suppression en cours pour {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Lancement du script de pré-suppression du paquet"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Opérations de post-suppression en cours pour {}"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Appel aux officiants de pré-suppression"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Lancement du script de pré-suppression du paquet"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Opérations de post-suppression en cours pour {}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Erreur de script : {}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Lancement du script de post-installation du paquet"
+
+#, fuzzy, python-brace-format
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Erreur de script : {}"
+
+#, fuzzy
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Appel aux officiants de post-installation"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Erreur de script : {}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Enregistrement du script scom {}"
+
+#, fuzzy
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "Paquet SCOM mis à jour. Utilisation du nouveau démon SCOM à partir de maintenant."
+
+#, fuzzy
+#~ msgid ""
+#~ "Cannot connect to SCOM: \n"
+#~ "  \"{}\"\n"
+#~ msgstr ""
+#~ "Impossible de se connecter à SCOM : \n"
+#~ "  {}\n"
+
+#, fuzzy, python-brace-format
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Erreur de syntaxe dans le fichier SCOM ({0}) : {1}"
+
+#, fuzzy, python-brace-format
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Impossible de lire le script SCOM ({0}) : {1}"
+
+#, fuzzy
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Copie de {} vers le répertoire de transfert"
+
+#, fuzzy
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "Le dépôt {} a besoin d'être mis à jour."
+
+#, fuzzy
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Le paquet scom n'est pas entièrement installé"
+
+#, fuzzy
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Passer outre l'agent de configuration scom"
+
+#, fuzzy
 #~ msgid "Configuring \"{}\""
 #~ msgstr "{} configuré"
 
 #, fuzzy
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Ajout de {} à la base de données... "
+
+#, fuzzy, python-brace-format
 #~ msgid "Chowning in postinstall {0} ({1}:{2})"
 #~ msgstr "Refuser dans postinstall {0} ({1}: {2})"
 

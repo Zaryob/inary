@@ -2,7 +2,7 @@
 #
 # Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
 #
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -143,10 +143,12 @@ class File:
                 inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile,pkgname)
             else:
                 # copy to transfer dir
-                ctx.ui.info(_("Copying \"{}\" to transfer dir").format(uri.get_uri()), verbose=True)
-                shutil.copy(uri.get_uri(), localfile)
+                inary.fetcher.fetch_from_locale(uri.get_uri(), transfer_dir, destfile=localfile)
         else:
             localfile = uri.get_uri()  # TODO: use a special function here?
+            if localfile.startswith("file:///"):
+                localfile=localfile[7:]
+
             if not os.path.exists(localfile):
                 raise IOError(_("File \"{}\" not found.").format(localfile))
             if not os.access(localfile, os.W_OK):
@@ -259,7 +261,7 @@ class File:
             except KeyboardInterrupt:
                 raise
             except IOError:  # FIXME: what exception could we catch here, replace with that.
-                ctx.ui.error(NoSignatureFound(uri))
+                ctx.ui.warning(NoSignatureFound(uri))
                 return True
 
             ret, out, err = inary.util.run_batch('gpg --verify ' + sigfilename)
