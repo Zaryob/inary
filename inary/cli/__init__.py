@@ -68,7 +68,7 @@ class CLI(inary.ui.UI):
             if err:
                 sys.stderr.write(str(msg))
             else:
-                msg=self.clean_line+msg+self.clean_line
+                #msg=self.clean_line+msg+self.clean_line
                 sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
@@ -219,15 +219,12 @@ class CLI(inary.ui.UI):
 
             lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
             # \r\x1b[2K erase current line
-            if ka["percent"] == 100:
-                if ctx.get_option('debug'):
-                    self.output("\r\x1b[2K" + ctx.const.colors[complated] + ka['basename'] +" [" + _("downloaded")+"]"+ctx.const.colors['default'])
-                else:
-                    self.output("\r\x1b[2K\x1b[1A") # clear line and move up
-            else:
+            if ka["percent"] < 100:
                 self.output("\r\x1b[2K" + ctx.const.colors[complated_background] + "{:6.2f}% ".format(ka['percent']) + \
                             msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
                             ctx.const.colors['default'])
+            else:
+                self.output("\r\x1b[2K\x1b[A") #@@@
             util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
 
         else:
@@ -295,21 +292,14 @@ class CLI(inary.ui.UI):
                 ctx.log.info(_("Extracted desktop file \"{}\"").format(keywords['desktopfile']))
             msg = None
 
-        elif event == inary.ui.fetching:
-            if self.show_verbose:
-                msg=""
-            else:
-                msg="\x1b[K"
-            msg+=_("Downloading <{} / {}>".format(keywords['which'],keywords['total']))
-            color="yellow"
-
         elif event == inary.ui.fetched:
             if self.show_verbose:
                 msg=""
             else:
-                msg="\x1b[3A"
+                msg="\x1b[K"
             msg+=_("Downloaded \"{}\"".format(keywords['name']))
             color="green"
+            is_debug=True
 
         else:
             msg = None
