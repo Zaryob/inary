@@ -292,15 +292,13 @@ class Install(AtomicOperation):
                     self.operation = DOWNGRADE
 
             # schedule for reinstall
+
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
-            self.remove_old = Remove(pkg.name, store_old_paths=self.store_old_paths)
-            self.remove_old.run_preremove()
-            self.remove_old.run_postremove()
 
     def reinstall(self):
-        return not self.operation == INSTALL
+        return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
         if ('postOps' in self.metadata.package.isA):
@@ -516,7 +514,7 @@ class Install(AtomicOperation):
     def update_databases(self):
         """update databases"""
         if self.reinstall():
-            self.remove_old.remove_db()
+            self.installdb.remove_package(self.pkginfo)
 
         if self.config_later:
             self.installdb.mark_pending(self.pkginfo.name)
@@ -577,7 +575,8 @@ class Remove(AtomicOperation):
         super(Remove, self).__init__(ignore_dep)
         self.installdb = inary.db.installdb.InstallDB()
         self.package_name = package_name
-        self.package = self.installdb.get_package(self.package_name)
+        self.package = inary.package.Package(package_name)
+        self.metadata = self.package.metadata
         self.store_old_paths = store_old_paths
         self.trigger=inary.trigger.Trigger()
         try:
