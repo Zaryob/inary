@@ -33,20 +33,19 @@ def configure_pending(packages=None):
     # configure them in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
     order=packages
-    if True:
-        for x in order:
-            if installdb.has_package(x):
-                pkginfo = installdb.get_package(x)
-                pkg_path = installdb.package_path(x)
-                m = inary.data.metadata.MetaData()
-                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-                m.read(metadata_path)
-                # FIXME: we need a full package info here!
-                pkginfo.name = x
-                ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-                inary.trigger.post_install(pkg_path)
-                ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
-            installdb.clear_pending(x)
+    for x in order:
+        if installdb.has_package(x):
+            pkginfo = installdb.get_package(x)
+            pkg_path = installdb.package_path(x)
+            m = inary.data.metadata.MetaData()
+            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+            m.read(metadata_path)
+            # FIXME: we need a full package info here!
+            pkginfo.name = x
+            ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
+            inary.trigger.Trigger().postinstall(pkg_path)
+            ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
+        installdb.clear_pending(x)
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Reconfigure pending packages

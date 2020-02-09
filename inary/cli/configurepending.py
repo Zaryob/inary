@@ -39,23 +39,19 @@ def configure_pending(packages=None):
 
     order = inary.data.pgraph.generate_pending_order(packages)
     for x in order:
-        if installdb.has_package(x):
-            pkginfo = installdb.get_package(x)
-            pkg_path = installdb.package_path(x)
-            m = inary.data.metadata.MetaData()
-            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-            m.read(metadata_path)
-            # FIXME: we need a full package info here!
-            pkginfo.name = x
-            ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-
-            command=m.package.postopsPostInstall[0]
-
-            if os.system(command) != 0:
-                ctx.ui.warning(_('Configuration of \"{}\" package failed.').format(pkginfo.name))
-            else:
-                installdb.clear_pending(x)
+        for x in order:
+            if installdb.has_package(x):
+                pkginfo = installdb.get_package(x)
+                pkg_path = installdb.package_path(x)
+                m = inary.data.metadata.MetaData()
+                metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
+                m.read(metadata_path)
+                # FIXME: we need a full package info here!
+                pkginfo.name = x
+                ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
+                inary.trigger.Trigger().postinstall(pkg_path)
                 ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
+            installdb.clear_pending(x)
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Configure pending packages

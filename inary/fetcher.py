@@ -166,6 +166,9 @@ class Fetcher:
         if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
             raise FetchError(_('Access denied to destination file: "{}"').format(self.archive_file))
 
+        if os.path.exists(self.archive_file):
+            ctx.ui.info(_("File already exsist. Download skiped..."), verbose=True)
+            return 0
         c = pycurl.Curl()
         c.protocol = self.url.scheme()
         c.setopt(c.URL, self.url.get_uri())
