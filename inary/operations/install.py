@@ -117,7 +117,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         operations.remove.remove_conflicting_packages(conflicts)
 
 
-    for path in order:
+    for path in paths:
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
             remove_op.run_preremove()

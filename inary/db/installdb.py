@@ -355,6 +355,13 @@ class InstallDB(lazydb.LazyDB):
         metadata.read(metadata_xml)
         return metadata.package
 
+    def get_metadata(self, package):
+        metadata = inary.data.metadata.MetaData()
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata.read(metadata_xml)
+        return metadata
+    
+
     def __mark_package(self, _type, package):
         packages = self.__get_marked_packages(_type)
         if package not in packages:

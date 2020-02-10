@@ -575,8 +575,8 @@ class Remove(AtomicOperation):
         super(Remove, self).__init__(ignore_dep)
         self.installdb = inary.db.installdb.InstallDB()
         self.package_name = package_name
-        self.package = inary.package.Package(package_name)
-        self.metadata = self.package.metadata
+        self.package = self.installdb.get_package(self.package_name)
+        self.metadata = self.installdb.get_metadata(self.package_name)
         self.store_old_paths = store_old_paths
         self.trigger=inary.trigger.Trigger()
         try:
