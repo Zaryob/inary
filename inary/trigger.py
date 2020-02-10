@@ -27,15 +27,8 @@ class Trigger:
         """Compiles the script and returns a code object"""
 
         fname = util.join_path(self.postscript)
-        try:
-            buf = open(fname).read()
-            return compile(buf, fname, "exec")
-        except IOError as e:
-            raise Error(_("Unable to read Post Operations Script ({0}): {1}").format(
-                fname, e))
-        except SyntaxError as e:
-            raise Error(_("SyntaxError in Post Operations Script ({0}): {1}").format(
-                fname, e))
+        buf = open(fname).read()
+        return compile(buf, fname, "exec")
 
     def run_command(self, func):
         """"""

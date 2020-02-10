@@ -13,6 +13,7 @@
 #
 
 import sys
+import os
 
 import gettext
 
@@ -216,9 +217,11 @@ def upgrade(A=None, repo=None):
         conflicts = operations.helper.check_conflicts(order, packagedb)
 
     paths = []
+    extra_paths = {}
     for x in order:
         ctx.ui.info(_("Downloading {} / {} => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
+        install_op.store_inary_files()
         paths.append(install_op.package_fname)
 
     # fetch to be upgraded packages but do not install them.

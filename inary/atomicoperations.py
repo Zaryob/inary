@@ -301,6 +301,8 @@ class Install(AtomicOperation):
         return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
+        print(self.metadata.package.name)
+        print(self.metadata.package.isA)
         if ('postOps' in self.metadata.package.isA):
 
             if not self.trigger.preinstall(self.package.pkg_dir()):

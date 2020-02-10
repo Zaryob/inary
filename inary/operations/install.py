@@ -99,6 +99,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     for x in sorted_order:
         ctx.ui.info(_("Downloading {} / {} => [{}]").format(sorted_order.index(x) + 1, len(sorted_order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
+        install_op.store_inary_files()
         paths.append(install_op.package_fname)
         
         if x in extra_packages or (extra and x in A):
@@ -115,7 +116,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
-
 
     for path in paths:
         if installdb.has_package(path):
