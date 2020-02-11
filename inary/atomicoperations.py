@@ -301,11 +301,10 @@ class Install(AtomicOperation):
         return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
-        if ctx.config.get_option('ignore_configure'):
-            self.installdb.mark_pending(self.pkginfo.name)
-            return 0
-
         if ('postOps' in self.metadata.package.isA):
+            if ctx.config.get_option('ignore_configure'):
+               self.installdb.mark_pending(self.pkginfo.name)
+               return 0
             ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
@@ -324,10 +323,10 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
-        if ctx.config.get_option('ignore_configure'):
-            self.installdb.mark_pending(self.pkginfo.name)
-            return 0
         if ('postOps' in self.metadata.package.isA):
+            if ctx.config.get_option('ignore_configure'):
+                self.installdb.mark_pending(self.pkginfo.name)
+                return 0
             ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.postinstall(self.package.pkg_dir()):
                 ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
