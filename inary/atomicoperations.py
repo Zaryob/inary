@@ -307,11 +307,11 @@ class Install(AtomicOperation):
         if ctx.config.get_option('ignore_configure'):
             self.installdb.mark_pending(self.pkginfo.name)
             return 0
-            
+
         if ('postOps' in self.metadata.package.isA):
+            ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
- 
                 ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
 
@@ -331,6 +331,7 @@ class Install(AtomicOperation):
             self.installdb.mark_pending(self.pkginfo.name)
             return 0
         if ('postOps' in self.metadata.package.isA):
+            ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.postinstall(self.package.pkg_dir()):
                 ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
@@ -540,7 +541,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
+        ctx.ui.debug(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
@@ -689,11 +690,13 @@ class Remove(AtomicOperation):
 
     def run_preremove(self):
         if ('postOps' in self.metadata.package.isA):
+            ctx.ui.info(_('Configuring \"{}\"'.format(package_name)),color='brightyellow')
             self.trigger.preremove(self.package.pkg_dir())
 
 
     def run_postremove(self):
         if ('postOps' in self.metadata.package.isA):
+            ctx.ui.info(_('Configuring \"{}\"'.format(package_name)),color='brightyellow')
             self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):

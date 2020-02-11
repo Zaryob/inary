@@ -39,6 +39,7 @@ import inary.cli.emergeup
 import inary.cli.fetch
 import inary.cli.graph
 import inary.cli.index
+import inary.cli.init
 import inary.cli.info
 import inary.cli.install
 import inary.cli.history
@@ -137,8 +138,6 @@ class InaryCLI(object):
                 if 'version' in opts:
                     self.parser.print_version()
                     sys.exit(0)
-                elif 'help' in opts or 'h' in opts:
-                    self.die()
                 raise inary.cli.Error(_('No command given.'))
             cmd_name = args[0]
         except ParserError:

@@ -166,10 +166,7 @@ class CLI(inary.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
 
-        locale.setlocale(locale.LC_ALL, "")
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
-        no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
-        locale.setlocale(locale.LC_ALL, "C")
 
         tty.tcflush(sys.stdin.fileno(), 0)
         if invert:
@@ -252,20 +249,21 @@ class CLI(inary.ui.UI):
         elif event == inary.ui.removed:
             msg = _('Removed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
+            is_debug=True
         elif event == inary.ui.removing:
             msg = _('Removing \"{}\"').format(keywords['package'].name)
             color = 'brightpurple'
-            is_debug=True
         elif event == inary.ui.upgraded:
             msg = _('Upgraded \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
+            is_debug=True
         elif event == inary.ui.configured:
             msg = _('Configured \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
-        elif event == inary.ui.configuring:
-            msg = _('Configuring \"{}\" package.').format(keywords['package'].name)
-            color = 'faintyellow'
             is_debug=True
+        elif event == inary.ui.configuring:
+            msg = _('Configuring \"{}\"').format(keywords['package'].name)
+            color = 'faintyellow'
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
             color = 'faintgreen'
