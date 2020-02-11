@@ -574,12 +574,12 @@ def install_single_file(pkg_location, upgrade=False):
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
-    install = Install.from_name(name)
+    install=Install.from_name(name)
     install.store_inary_files()
     install.preinstall()
     install.install(not upgrade)
     install.postinstall()
-    Install(pkg_location).write_status_file()
+    install.write_status_file()
 
 
 class Remove(AtomicOperation):
