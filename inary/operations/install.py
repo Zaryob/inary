@@ -140,6 +140,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        install_op.write_status_file()
 
     return True
 

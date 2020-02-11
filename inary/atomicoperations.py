@@ -164,18 +164,21 @@ class Install(AtomicOperation):
         ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
 
         self.ask_reinstall = ask_reinstall
+        ctx.ui.status(_("Checking requirements"), push_screen=False)
         self.check_requirements()
+        ctx.ui.status(_("Checking versioning"), push_screen=False)
         self.check_versioning(self.pkginfo.version, self.pkginfo.release)
+        ctx.ui.status(_("Checking relations"), push_screen=False)
         self.check_relations()
+        ctx.ui.status(_("Checking operations"), push_screen=False)
         self.check_operation()
 
         ctx.disable_keyboard_interrupts()
-
-        self.store_inary_files()
-        self.preinstall()
-
+        # postOps from inary.operations.install and inary.operations.upgrade
+        ctx.ui.status(_("Unpacking package"), push_screen=False)
         self.extract_install()
-        self.postinstall()
+        
+        ctx.ui.status(_("Updating database"), push_screen=False)
         self.update_databases()
 
         ctx.enable_keyboard_interrupts()
@@ -301,10 +304,11 @@ class Install(AtomicOperation):
         return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
-        print(self.metadata.package.name)
-        print(self.metadata.package.isA)
+        if ctx.config.get_option('ignore_configure'):
+            self.installdb.mark_pending(self.pkginfo.name)
+            return 0
+            
         if ('postOps' in self.metadata.package.isA):
-
             if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
  
@@ -313,7 +317,6 @@ class Install(AtomicOperation):
 
 
     def postinstall(self):
-        self.config_later = False
 
         # Chowning for additional files
         #for _file in self.package.get_files().list:
@@ -324,11 +327,13 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
-        try:
-            if ('postOps' in self.metadata.package.isA):
-                self.trigger.postinstall(self.package.pkg_dir())
-        except:
-            self.config_later = True
+        if ctx.config.get_option('ignore_configure'):
+            self.installdb.mark_pending(self.pkginfo.name)
+            return 0
+        if ('postOps' in self.metadata.package.isA):
+            if not self.trigger.postinstall(self.package.pkg_dir()):
+                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                raise SystemExit
 
 
     def extract_install(self):
@@ -512,14 +517,14 @@ class Install(AtomicOperation):
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
         if ('postOps' in self.metadata.package.isA):
             self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
+            
+    def write_status_file(self):
+        open(self.package.pkg_dir()+"/status","w").write("installed")
 
     def update_databases(self):
         """update databases"""
         if self.reinstall():
             self.installdb.remove_package(self.pkginfo)
-
-        if self.config_later:
-            self.installdb.mark_pending(self.pkginfo.name)
 
         # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
@@ -561,13 +566,19 @@ def install_single(pkg, upgrade=False):
 # FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
+    Install(pkg_location).preinstall()
     Install(pkg_location).install(not upgrade)
+    Install(pkg_location).postinstall()
+    Install(pkg_location).write_status_file()
 
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
     install = Install.from_name(name)
+    install.preinstall()
     install.install(not upgrade)
+    install.postinstall()
+    Install(pkg_location).write_status_file()
 
 
 class Remove(AtomicOperation):
@@ -599,12 +610,13 @@ class Remove(AtomicOperation):
                             + self.package_name)
 
         self.check_dependencies()
-
-        self.run_preremove()
+        if not self.config_later:
+            self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
-
-        self.run_postremove()
+            
+        if not self.config_later:
+            self.run_postremove()
 
         self.update_databases()
 

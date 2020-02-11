@@ -256,6 +256,9 @@ def upgrade(A=None, repo=None):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
+    for path in paths:
+        install_op = atomicoperations.Install(path)
+        install_op.write_status_file()
 
 
 def plan_upgrade(A, force_replaced=True, replaces=None):

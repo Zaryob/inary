@@ -52,6 +52,9 @@ expanded to package names.
                          default=False, help=_("Reinstall already installed packages."))
         group.add_option("--ignore-check", action="store_true",
                          default=False, help=_("Skip distribution release and architecture check."))
+                         
+        group.add_option("--ignore-configure", action="store_true",
+                         default=False, help=_("Skip configure and mark configure pending."))
         group.add_option("--ignore-file-conflicts", action="store_true",
                          default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
