@@ -22,5 +22,7 @@ then
   exit 1
 fi
 inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml -D$sulin
-inary it -c system.base -y --ignore-scom -D$sulin
+inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
+inary it -c system.base -y --ignore-configure -D$sulin
 cp -prf $sulin/usr/share/baselayout/* $sulin/etc/
+chroot $sulin inary cp

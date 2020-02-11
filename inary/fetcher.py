@@ -77,6 +77,9 @@ class UIHandler:
         self.symbol = '--/-'
         self.last_updated = 0
         self.exist_size = 0
+        self.useragent='Inary Fetcher/' + inary.__version__
+        if os.environ['USER_AGENT']:
+            self.useragent=os.environ['USER_AGENT']
 
     def start(self, archive, url, basename, size=0):
         if os.path.exists(archive):
@@ -149,6 +152,7 @@ class Fetcher:
         self.destdir = destdir
         self.destfile = destfile
         self.progress = None
+        self.try_number=0
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
@@ -174,7 +178,7 @@ class Fetcher:
         c.setopt(c.URL, self.url.get_uri())
         # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
         c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
-        c.setopt(pycurl.USERAGENT, ('Inary Fetcher/' + inary.__version__).encode("utf-8"))
+        c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
         c.setopt(pycurl.AUTOREFERER, 1)
         c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
         # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
@@ -233,6 +237,10 @@ class Fetcher:
         except pycurl.error as x:
             if x.args[0]==33:
                 os.remove(self.partial_file)
+            if self.try_number != 3:
+                self.try_number=self.try_number+1
+                ctx.ui.info(_("Download error: {}".format(x)), verbose=True)
+                fetch()
             raise FetchError("{}".format(x.args[1]))
 
         if os.stat(self.partial_file).st_size == 0:

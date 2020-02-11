@@ -1,4 +1,4 @@
-PREFIX=/
+DESTDIR=/
 all: build install
 
 clean:
@@ -7,5 +7,5 @@ clean:
 build:
 	python3 setup.py build
 install:
-	python3 setup.py install 
-	ln -s /usr/bin/inary-cli /usr/bin/inary || true
+	python3 setup.py install --install-lib=${DESTDIR}/usr/lib/sulin
+	ln -s inary-cli ${DESTDIR}/usr/bin/inary || true
