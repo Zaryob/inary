@@ -77,9 +77,6 @@ class UIHandler:
         self.symbol = '--/-'
         self.last_updated = 0
         self.exist_size = 0
-        self.useragent='Inary Fetcher/' + inary.__version__
-        if os.environ['USER_AGENT']:
-            self.useragent=os.environ['USER_AGENT']
 
     def start(self, archive, url, basename, size=0):
         if os.path.exists(archive):
@@ -153,6 +150,9 @@ class Fetcher:
         self.destfile = destfile
         self.progress = None
         self.try_number=0
+        self.useragent='Inary Fetcher/' + inary.__version__
+        if os.environ['USER_AGENT']:
+            self.useragent=os.environ['USER_AGENT']
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
