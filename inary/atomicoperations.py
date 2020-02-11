@@ -274,10 +274,7 @@ class Install(AtomicOperation):
 
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release
-                if pkg_version > iversion:
-                    ctx.ui.info(_('Upgrading to new upstream version.'))
-                    self.operation = UPGRADE
-                elif pkg_release > irelease:
+                if pkg_release > irelease:
                     ctx.ui.info(_('Upgrading to new distribution release.'))
                     self.operation = UPGRADE
 
@@ -567,15 +564,18 @@ def install_single(pkg, upgrade=False):
 # FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
-    Install(pkg_location).preinstall()
-    Install(pkg_location).install(not upgrade)
-    Install(pkg_location).postinstall()
+    install=Install(pkg_location)
+    install.store_inary_files()
+    install.preinstall()
+    install.install(not upgrade)
+    install.postinstall()
     Install(pkg_location).write_status_file()
 
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
     install = Install.from_name(name)
+    install.store_inary_files()
     install.preinstall()
     install.install(not upgrade)
     install.postinstall()
@@ -611,12 +611,12 @@ class Remove(AtomicOperation):
                             + self.package_name)
 
         self.check_dependencies()
-        if not self.config_later:
+        if not ctx.config.get_option('ignore_configure'):
             self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
             
-        if not self.config_later:
+        if not ctx.config.get_option('ignore_configure'):
             self.run_postremove()
 
         self.update_databases()
