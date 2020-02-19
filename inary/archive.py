@@ -705,7 +705,6 @@ class ArchiveZip(ArchiveBase):
         pred: filename -> bool
         unpacks stuff into target_dir and only extracts files
         from archive_root, treating it as the archive root"""
-        zip_obj = self.zip_obj
         for info in zip_obj.infolist():
             if pred(info.filename):  # check if condition holds
 
@@ -728,11 +727,6 @@ class ArchiveZip(ArchiveBase):
                 if is_dir:  # this is a directory
                     if not os.path.isdir(ofile):
                         os.makedirs(ofile)
-                        perm = info.external_attr
-                        perm &= 0xFFFF0000
-                        perm >>= 16
-                        perm |= 0x00000100
-                        os.chmod(ofile, perm)
                     continue
 
                 # check that output dir is present
@@ -751,14 +745,8 @@ class ArchiveZip(ArchiveBase):
                     target = zip_obj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
-                    perm = info.external_attr
-                    perm &= 0x08FF0000
-                    perm >>= 16
-                    perm |= 0x00000100
-
                     info.filename = outpath
                     zip_obj.extract(info, target_dir)
-                    os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
         self.unpack_file_cond(lambda f: f in paths, target_dir)
