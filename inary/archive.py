@@ -14,17 +14,17 @@
 
 """Archive module provides access to regular archive file types."""
 
+import errno
+import lzma
 # standard library modules
 import os
-import lzma
-import stat
-import errno
 import shutil
+import stat
 import tarfile
 import zipfile
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

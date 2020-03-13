@@ -11,11 +11,11 @@
 #
 # Please read the COPYING file.
 
-# standard python modules
+# Standard python modules
 import os
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

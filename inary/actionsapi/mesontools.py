@@ -12,24 +12,23 @@
 # Please read the COPYING file.
 
 import inary.actionsapi
-import inary.util as util
 import inary.context as ctx
+import inary.util as util
 from inary.actionsapi import get
-from inary.actionsapi.shelltools import cd
-from inary.actionsapi.shelltools import ls
-from inary.actionsapi.shelltools import copy
 from inary.actionsapi.inarytools import dosed
-from inary.actionsapi.shelltools import system
-from inary.actionsapi.shelltools import makedirs
 from inary.actionsapi.inarytools import removeDir
-from inary.actionsapi.shelltools import isDirectory
 from inary.actionsapi.shelltools import can_access_file
+from inary.actionsapi.shelltools import cd
+from inary.actionsapi.shelltools import copy
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.shelltools import ls
+from inary.actionsapi.shelltools import makedirs
+from inary.actionsapi.shelltools import system
 
+#Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
 
 class MesonError(inary.actionsapi.Error):
     def __init__(self, value=''):

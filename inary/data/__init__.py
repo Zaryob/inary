@@ -13,7 +13,6 @@
 #
 import inary.errors
 
-
 class Error(inary.errors.Error):
     pass
 

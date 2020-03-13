@@ -11,13 +11,13 @@
 #
 # Please read the COPYING file.
 
+import multiprocessing
 # Standart Python Modules
 import os
 import sys
-import multiprocessing
 
+#Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

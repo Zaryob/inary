@@ -16,6 +16,7 @@ import os.path
 import inary.context as ctx
 import inary.errors
 
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

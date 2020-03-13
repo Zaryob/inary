@@ -24,8 +24,8 @@ import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
 from inary.sxml import xmlext
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

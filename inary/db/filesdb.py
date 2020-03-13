@@ -20,6 +20,7 @@ import inary.db
 import inary.db.lazydb as lazydb
 import inary.util
 
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

@@ -12,11 +12,11 @@
 # Please read the COPYING file.
 #
 
-import sys
 import os
+import sys
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

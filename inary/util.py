@@ -25,13 +25,12 @@ import platform
 import re
 import shutil
 import struct
-
 import sys
 import termios
 import unicodedata
-
 from functools import reduce
 
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

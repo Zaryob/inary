@@ -12,15 +12,14 @@
 # Please read the COPYING file.
 #
 
-# Gettext translation library
 # python standard library modules
 import os
+import random
 import shutil
 import time
-import random
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

@@ -14,10 +14,8 @@
 
 """package abstraction methods to add/remove files, extract control files"""
 
-import os.path
-
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -32,6 +30,7 @@ import inary.data.files
 import inary.util as util
 from . import fetcher
 
+import os.path
 
 class Error(inary.errors.Error):
     pass

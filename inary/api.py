@@ -11,10 +11,11 @@
 #
 # Please read the COPYING file.
 
+
 from . import fetcher
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

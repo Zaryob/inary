@@ -13,8 +13,9 @@
 #
 
 import re
-import gettext
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

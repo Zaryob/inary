@@ -18,8 +18,8 @@ parsing and processing"""
 import os.path
 import urllib.parse
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

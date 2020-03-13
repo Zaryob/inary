@@ -17,11 +17,11 @@ INARY Configuration module is used for gathering and providing
 regular INARY configurations.
 """
 
-import os
 import copy
+import os
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

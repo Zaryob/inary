@@ -19,12 +19,12 @@ we are just encapsulating a common pattern in our program, nothing big.
 like all inary classes, it has been programmed in a non-restrictive way
 """
 
-import os
 import lzma
+import os
 import shutil
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

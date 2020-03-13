@@ -22,8 +22,8 @@ import pwd
 import re
 import stat
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

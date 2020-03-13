@@ -12,19 +12,18 @@
 # Please read the COPYING file.
 #
 
+import locale
 import re
 import sys
 import tty
-import locale
 
-
-import inary.ui
-import inary.errors
 import inary.context as ctx
+import inary.errors
+import inary.ui
 import inary.util as util
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -68,7 +67,7 @@ class CLI(inary.ui.UI):
             if err:
                 sys.stderr.write(str(msg))
             else:
-                #msg=self.clean_line+msg+self.clean_line
+                # msg=self.clean_line+msg+self.clean_line
                 sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
@@ -161,7 +160,7 @@ class CLI(inary.ui.UI):
                 if opt.startswith(str(s)):
                     return opt
 
-    def confirm(self, msg,invert=False):
+    def confirm(self, msg, invert=False):
         msg = str(msg)
         if ctx.config.options and ctx.config.options.yes_all:
             return True

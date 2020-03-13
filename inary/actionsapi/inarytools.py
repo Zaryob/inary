@@ -13,16 +13,16 @@
 
 """supports globs in sourceFile arguments"""
 
+# Standart Python Modules
 import filecmp
 import fileinput
 import glob
-# Standart Python Modules
 import os
 import re
 import sys
 
+#Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

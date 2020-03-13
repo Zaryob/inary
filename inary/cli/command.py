@@ -12,12 +12,12 @@
 # Please read the COPYING file.
 #
 
+import optparse
 import os
 import sys
-import optparse
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

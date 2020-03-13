@@ -1,7 +1,9 @@
 
 import os
+
 import inary.context as ctx
 import inary.util as util
+
 
 class Trigger:
     def __init__(self):

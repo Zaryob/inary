@@ -19,8 +19,8 @@ import inary.db
 import inary.errors
 import inary.operations.helper as op_helper
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

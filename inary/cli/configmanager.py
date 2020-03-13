@@ -15,9 +15,8 @@
 # Please read the COPYING file.
 #
 
-import optparse
-
 import gettext
+import optparse
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

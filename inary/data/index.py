@@ -14,16 +14,17 @@
 
 """INARY source/package index"""
 
+import multiprocessing
 import os
 import re
 import shutil
-import multiprocessing
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+# Inary Libraries
 import inary.context as ctx
 import inary.data.specfile as specfile
 import inary.data.metadata as metadata
