@@ -165,13 +165,17 @@ class CLI(inary.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
 
+        locale.setlocale(locale.LC_ALL, "")
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
+        locale.setlocale(locale.LC_ALL, "C")
 
         tty.tcflush(sys.stdin.fileno(), 0)
+
         if invert:
-            prompt = msg + util.colorize(" "+_('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
+            prompt = msg + util.colorize(" " + _('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
         else:
-            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+            prompt = msg + util.colorize(" " + _('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+
         util.noecho(False)
         s = input(prompt)
         util.noecho(True)

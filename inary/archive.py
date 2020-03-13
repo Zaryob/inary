@@ -84,7 +84,8 @@ class _LZMAProxy(object):
             if not raw:
                 break
             try:
-                data = self.lzmaobj.decompress(raw)
+                if self.lzmaobj.__class__== lzma.LZMADecompressor:
+                    data = self.lzmaobj.decompress(raw)
             except EOFError:
                 break
             b.append(data)
@@ -705,7 +706,7 @@ class ArchiveZip(ArchiveBase):
         pred: filename -> bool
         unpacks stuff into target_dir and only extracts files
         from archive_root, treating it as the archive root"""
-        for info in zip_obj.infolist():
+        for info in self.zip_obj.infolist():
             if pred(info.filename):  # check if condition holds
 
                 # below code removes that, so we find it here
@@ -742,11 +743,11 @@ class ArchiveZip(ArchiveBase):
                         # A rare case, the file used to be a dir,
                         # now it is a symlink!
                         shutil.rmtree(ofile)
-                    target = zip_obj.read(info.filename)
+                    target = self.zip_obj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
                     info.filename = outpath
-                    zip_obj.extract(info, target_dir)
+                    self.zip_obj.extract(info, target_dir)
 
     def unpack_files(self, paths, target_dir):
         self.unpack_file_cond(lambda f: f in paths, target_dir)
@@ -880,7 +881,7 @@ class SourceArchive:
         inary.fetcher.fetch_url(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
 
     def fetch_from_locale(self):
-        inary.fetcher.fetch_from_locale(self.url.get_uri(), ctx.config.archives_dir(), destfile=self.uri.filename())
+        inary.fetcher.fetch_from_locale(self.url.get_uri(), ctx.config.archives_dir(), destfile=self.url.filename())
 
     def fetch_from_mirror(self):
         inary.fetcher.fetch_from_mirror(self.url.get_uri(), ctx.config.archives_dir(), self.progress)

@@ -689,13 +689,13 @@ class Remove(AtomicOperation):
 
     def run_preremove(self):
         if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Configuring \"{}\"'.format(package_name)),color='brightyellow')
+            ctx.ui.info(_('Configuring \"{}\"'.format(self.package_name)),color='brightyellow')
             self.trigger.preremove(self.package.pkg_dir())
 
 
     def run_postremove(self):
         if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Configuring \"{}\"'.format(package_name)),color='brightyellow')
+            ctx.ui.info(_('Configuring \"{}\"'.format(self.package_name)),color='brightyellow')
             self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):

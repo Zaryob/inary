@@ -65,7 +65,7 @@ class UI(object):
     def debug(self, msg, color='normal'):
         """show debugging info"""
         if self.show_debug:
-            self.info(str('DEBUG: ' + msg),color)
+            self.info(str('DEBUG: ' + msg), color)
 
     def warning(self, msg):
         """warn the user"""
@@ -85,28 +85,8 @@ class UI(object):
         pass
 
     def confirm(self, msg,invert=False):
-        msg = str(msg)
-        if ctx.config.options and ctx.config.options.yes_all:
-            return True
-
-        locale.setlocale(locale.LC_ALL, "")
-        yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
-        no_expr = re.compile(locale.nl_langinfo(locale.NOEXPR))
-        locale.setlocale(locale.LC_ALL, "C")
-
-        tty.tcflush(sys.stdin.fileno(), 0)
-        if invert:
-            prompt = msg + util.colorize(" "+_('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
-        else:
-            prompt = msg + util.colorize(" "+_('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
-        util.noecho(False)
-        s = input(prompt)
-        util.noecho(True)
-
-        if yes_expr.search(s):
-            return True
-        else:
-            return False
+        """ask the user to confirm question"""
+        pass
 
     def display_progress(self, **ka):
         """display progress"""
