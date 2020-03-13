@@ -18,7 +18,7 @@ class Trigger:
         compiled_script = self.compile_script()
 
         try:
-            if self.missing_postOps == False:
+            if not self.missing_postOps:
                 localSymbols = globalSymbols = {}
                 exec(compiled_script, localSymbols, globalSymbols)
             else:
@@ -42,7 +42,7 @@ class Trigger:
 
     def run_command(self, func):
         """"""
-        if self.missing_postOps==False:
+        if not self.missing_postOps:
             curDir = os.getcwd()
             os.chdir(self.specdir)
             cmd_extra=""

@@ -59,7 +59,7 @@ class Package:
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
 
-    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None,pkgname='',no_fetch=False):
+    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None, pkgname='', no_fetch=False):
         self.filepath = packagefn
         url = inary.uri.URI(packagefn)
 

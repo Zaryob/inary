@@ -216,7 +216,7 @@ class File:
         """returns the underlying file object"""
         return self.__file__
 
-    def close(self, delete_transfer=False):  # FIXME: look this parameter
+    def close(self,  delete_transfer=False):  # TODO: look this parameter
         """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:

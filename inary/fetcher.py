@@ -312,7 +312,7 @@ class Fetcher:
 
 
 # helper function
-def fetch_url(url, destdir=None, progress=None, destfile=None,pkgname=''):
+def fetch_url(url, destdir=None, progress=None, destfile=None, pkgname=''):
 
     if not destdir:
         destdir=ctx.config.archives_dir()

@@ -137,6 +137,8 @@ class InaryCLI(object):
                 if 'version' in opts:
                     self.parser.print_version()
                     sys.exit(0)
+                if 'help' in opts:
+                    self.parser.print_usage()
                 raise inary.cli.Error(_('No command given.'))
             cmd_name = args[0]
         except ParserError:
