@@ -9,6 +9,7 @@ cc = %(host)s-gcc
 cxx = %(host)s-g++
 compressionlevel = 9
 enableSandbox = False
+enableForeign = False
 fallback = http://source.sulinlinux.com/1.0
 generateDebug = False
 jobs = -j9

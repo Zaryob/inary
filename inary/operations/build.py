@@ -408,7 +408,8 @@ class Builder:
 
         self.build_type = build_type
         self.set_environment_vars()
-        self.load_action_script()
+        if os.path.isfile("actions.py"):
+            self.load_action_script()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -709,8 +710,9 @@ class Builder:
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
-
-        dirname = self.actionGlobals.get("WorkDir")
+        dirname=None
+        if self.actionGlobals != None:
+            dirname = self.actionGlobals.get("WorkDir")
         if dirname:
             return util.join_path(self.pkg_work_dir(), dirname)
 
@@ -758,6 +760,18 @@ class Builder:
             os.chdir(src_dir)
         else:
             raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
+
+        #bash like actions script call
+        if not os.path.isfile("{0}/actions.py".format(curDir)):
+            if not ctx.config.values.build.enableforeign:
+                raise Error(_("ERROR: Foreign actions support not enabled. Use actions.py or enable foreign actions support."))
+            if os.path.isfile("{0}/actions.sh".format(curDir)):
+                if os.system('bash -c \'. {0}/actions.sh && _{1}\''.format(curDir,func)):
+                    raise Error(_("unable to call function from actions: \'{}\'").format(func))
+                os.chdir(curDir)
+                return True
+            else:
+                raise Error(_("unable to call function from actions: \'{}\'").format(func))
 
         if func in self.actionLocals:
             if ctx.get_option('ignore_sandbox') or \

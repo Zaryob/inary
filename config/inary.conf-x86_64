@@ -9,6 +9,7 @@ cc = %(host)s-gcc
 cxx = %(host)s-g++
 compressionlevel = 9
 enableSandbox = False
+enableForeign = False
 fallback = https://master.dl.sourceforge.net/project/sulinos/archives
 generateDebug = True
 jobs = -j5
