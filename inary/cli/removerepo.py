@@ -18,7 +18,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import inary.cli.command as command
-from inary.operations import repository
 
 
 class RemoveRepo(command.Command, metaclass=command.autocommand):
@@ -35,7 +34,7 @@ Remove all repository information from the system.
     name = ("remove-repo", "rr")
 
     def run(self):
-
+        from inary.operations import repository
         if len(self.args) >= 1:
             self.init()
             for repo in self.args:

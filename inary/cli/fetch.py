@@ -21,7 +21,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-import inary.fetcher as fetcher
 
 
 class Fetch(command.Command, metaclass=command.autocommand):
@@ -50,6 +49,7 @@ Downloads the given inary packages to working directory
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.fetcher as fetcher
         packages = inary.db.packagedb.PackageDB()
         self.init(database=False, write=False)
 

@@ -21,7 +21,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-from inary.operations import repository, upgrade
 
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
@@ -80,7 +79,7 @@ expanded to package names.
         self.parser.add_option_group(group)
 
     def run(self):
-
+        from inary.operations import repository, upgrade
         if self.options.fetch_only:
             self.init(database=True, write=False)
         else:

@@ -23,7 +23,6 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-from inary.operations import helper
 import inary.db
 
 
@@ -46,6 +45,7 @@ class ConfigManager(command.Command, metaclass=command.autocommand):
         self.parser.add_option_group(group)
 
     def run(self):
+        from inary.operations import helper
         self.init(database=True, write=True)
 
         config_changes = helper.check_config_changes(order=self.installdb.list_installed())

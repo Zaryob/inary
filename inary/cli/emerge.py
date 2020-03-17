@@ -23,7 +23,6 @@ import inary.db
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
-import inary.operations.emerge as emerge
 
 
 class Emerge(build.Build, metaclass=command.autocommand):
@@ -54,6 +53,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.operations.emerge as emerge
         self.init(database=True)
 
         component = ctx.get_option('component')

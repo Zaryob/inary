@@ -21,7 +21,6 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-from inary.operations import remove
 import inary.db
 import inary.blacklist
 
@@ -51,6 +50,7 @@ Remove all orphaned packages from the system.
         self.parser.add_option_group(group)
 
     def run(self):
+        from inary.operations import remove
         self.init()
         orphaned = self.installdb.get_orphaned()
         if ctx.get_option('exclude'):

@@ -21,7 +21,6 @@ _ = __trans.gettext
 
 import inary.cli.command as command
 import inary.context as ctx
-from inary.operations import remove
 import inary.db
 
 
@@ -52,6 +51,7 @@ expanded to package names.
         self.parser.add_option_group(group)
 
     def run(self):
+        from inary.operations import remove
         self.init()
 
         components = ctx.get_option('component')

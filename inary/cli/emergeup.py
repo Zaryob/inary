@@ -23,7 +23,6 @@ import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
 import inary.db
-from inary.operations import repository, emerge
 
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
@@ -54,6 +53,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
+        from inary.operations import repository, emerge
         self.init(database=True)
 
         source = inary.db.sourcedb.SourceDB()

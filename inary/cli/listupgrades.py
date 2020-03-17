@@ -24,7 +24,7 @@ import inary.cli.command as command
 import inary.blacklist
 import inary.context as ctx
 import inary.db
-import inary.operations as operations
+
 
 
 class ListUpgrades(command.Command, metaclass=command.autocommand):
@@ -53,6 +53,7 @@ Lists the packages that will be upgraded.
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.operations as operations
         self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
         is_upgradable = operations.upgrade.is_upgradable

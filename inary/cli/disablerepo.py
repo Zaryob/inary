@@ -19,7 +19,6 @@ _ = __trans.gettext
 
 import inary.db
 import inary.cli.command as command
-import inary.operations.repository as repository
 
 
 class DisableRepo(command.Command, metaclass=command.autocommand):
@@ -39,6 +38,7 @@ Disabled repositories are not taken into account in operations
     name = ("disable-repo", "dr")
 
     def run(self):
+        import inary.operations.repository as repository
         self.init(database=True)
 
         if not self.args:

@@ -19,7 +19,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.operations.check as check
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
@@ -66,6 +65,7 @@ class Check(command.Command, metaclass=command.autocommand):
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.operations.check as check
         self.init(database=True, write=False)
 
         component = ctx.get_option('component')

@@ -19,7 +19,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.operations.repository as repository
+
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
@@ -61,7 +61,7 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         repository.remove_repo(repo)
 
     def run(self):
-
+        import inary.operations.repository as repository
         if len(self.args) == 2:
             self.init()
             name, indexuri = self.args

@@ -22,7 +22,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.package
-import inary.operations
 
 usage = _("""Creates delta packages
 
@@ -65,6 +64,7 @@ class Delta(command.Command, metaclass=command.autocommand):
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.operations
         self.init(database=False, write=False)
 
         if self.options.package_format == "help":

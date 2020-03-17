@@ -22,7 +22,6 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.package
-import inary.operations
 
 usage = _("""Build INARY packages
 
@@ -157,6 +156,7 @@ class Build(command.Command, metaclass=command.autocommand):
         self.parser.add_option_group(group)
 
     def run(self):
+        import inary.operations
         if not self.options.quiet:
             self.options.debug = True
 
