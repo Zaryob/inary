@@ -761,15 +761,26 @@ class Builder:
         else:
             raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
 
-        #bash like actions script call
+        #foreign actions script call
         if not os.path.isfile("{0}/actions.py".format(curDir)):
             if not ctx.config.values.build.enableforeign:
                 raise Error(_("ERROR: Foreign actions support not enabled. Use actions.py or enable foreign actions support."))
-            if os.path.isfile("{0}/actions.sh".format(curDir)):
+            if os.path.isfile("{0}/actions.sh".format(curDir)): #bash
                 if os.system('bash -c \'. {0}/actions.sh && _{1}\''.format(curDir,func)):
                     raise Error(_("unable to call function from actions: \'{}\'").format(func))
                 os.chdir(curDir)
                 return True
+            elif os.path.isfile("{0}/actions.mk".format(curDir)): #GNU/Makefile
+                if os.system('make -f \'{0}/actions.mk\' {1}'.format(curDir,func)):
+                    raise Error(_("unable to call function from actions: \'{}\'").format(func))
+                os.chdir(curDir)
+                return True
+            elif os.path.isfile("{0}/actions.pm".format(curDir)): #Perl Module
+                if os.system('perl -I{0} -e \'use actions; actions::{1}()\''.format(curDir,func)):
+                    raise Error(_("unable to call function from actions: \'{}\'").format(func))
+                os.chdir(curDir)
+                return True
+            
             else:
                 raise Error(_("unable to call function from actions: \'{}\'").format(func))
 
