@@ -563,23 +563,22 @@ def install_single(pkg, upgrade=False):
 # FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
+    ctx.ui.info(_('Installing => [{}]'.format(pkg_location)),color='yellow')
     install=Install(pkg_location)
-    install.store_inary_files()
-    install.preinstall()
-    install.install(not upgrade)
-    install.postinstall()
-    Install(pkg_location).write_status_file()
-
+    install_standard(install,upgrade)
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
     install=Install.from_name(name)
+    install_standard(install,upgrade)
+
+def install_standard(install,upgrade=False):
+    '''Standard installation function'''
     install.store_inary_files()
     install.preinstall()
     install.install(not upgrade)
     install.postinstall()
-    install.write_status_file()
-
+    install.write_status_file()    
 
 class Remove(AtomicOperation):
 
