@@ -780,7 +780,11 @@ class Builder:
                     raise Error(_("unable to call function from actions: \'{}\'").format(func))
                 os.chdir(curDir)
                 return True
-            
+            elif os.path.isfile("{0}/actions.c".format(curDir)) and os.path.isfile("/usr/lib/sulin/actions-main.c"): #C source 
+                if os.system('gcc -o /tmp/action /usr/lib/sulin/actions-main.c {0}/actions.c ; /tmp/action {1} ; rm -f /tmp/action'.format(curDir,func)):
+                    raise Error(_("unable to call function from actions: \'{}\'").format(func))
+                os.chdir(curDir)
+                return True
             else:
                 raise Error(_("unable to call function from actions: \'{}\'").format(func))
 
