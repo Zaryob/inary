@@ -30,7 +30,6 @@ import inary.context as ctx
 # ActionsAPI Modules
 
 from inary.actionsapi import error
-from inary.util import run_logged
 from inary.util import join_path
 from inary.util import colorize
 
@@ -276,7 +275,7 @@ def system(command):
     # command an list but should be an str
     sys.stdout.write(colorize(_("[Running Command]: "),'brightwhite') + command + "\n")
     #    command = str.join(str.split(command))
-    retValue = run_logged(command)
+    retValue = os.system(command)
 
     # if return value is different than 0, it means error, raise exception
     if retValue != 0:
