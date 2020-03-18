@@ -588,16 +588,16 @@ class Builder:
             self.set_state("buildaction")
 
     def run_check_action(self):
-        ctx.ui.status(_("Building source package: \"{}\" [ CheckAction Step ]").format(self.spec.source.name),
+        if ctx.config.get_option('debug'):
+            ctx.ui.status(_("Building source package: \"{}\" [ CheckAction Step ]").format(self.spec.source.name),
                       push_screen=False)
-        ctx.ui.action(util.colorize(">>> ", 'blue') + _("Testing package..."))
-        self.run_action_function(ctx.const.check_func)
+            ctx.ui.action(util.colorize(">>> ", 'blue') + _("Testing package..."))
+            self.run_action_function(ctx.const.check_func)
 
     def run_install_action(self):
         ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
-
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
@@ -788,7 +788,7 @@ class Builder:
                 return True
             else:
                 raise Error(_("unable to call function from actions: \'{}\'").format(func))
-        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nactions.{0}()\''.format(func,curDir)):
+        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func,curDir)):
              raise Error(_("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
         return True
