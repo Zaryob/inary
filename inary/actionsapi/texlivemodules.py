@@ -206,7 +206,6 @@ def moveSources():
             if "RELOC" in line:
                 path = line.split("/", 1)[-1]
                 path = path.strip()
-                path.split("/", -1)
                 dirname = os.path.dirname(path)
                 if not os.path.isdir("{0}/{1}".format(reloc, dirname)):
                     os.system("mkdir -p {0}/{1}".format(reloc, dirname))

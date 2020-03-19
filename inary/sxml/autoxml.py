@@ -573,7 +573,6 @@ class autoxml(oo.autosuper, oo.autoprop):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
-        spec[0]
         req = spec[1]
         (init_a, decode_a, encode_a, errors_a, format_a) = anonfuns
 
