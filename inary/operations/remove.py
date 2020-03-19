@@ -73,7 +73,6 @@ def remove(A, ignore_dep=False, ignore_safety=False):
     if not ctx.config.get_option('ignore_dependency') and not ignore_dep:
         G_f, order = plan_remove(A)
     else:
-        G_f = None
         order = util.unique_list(A)
 
     ctx.ui.info(_("""The following list of packages will be removed in the respective order to satisfy dependencies:"""), color='green')

@@ -18,7 +18,6 @@ import glob
 import grp
 # python standard library
 import os
-import sys
 import pwd
 import re
 import stat

@@ -13,8 +13,6 @@
 #
 
 import optparse
-import os
-import sys
 
 # Gettext Library
 import gettext

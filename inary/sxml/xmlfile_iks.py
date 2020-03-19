@@ -89,7 +89,7 @@ class XmlFile(object):
         try:
             self.doc = iks.parse(localpath)
             return self.doc
-        except Exception as e:
+        except Exception:
             raise Error(_("File \"{}\" has invalid XML.").format(localpath))
 
     def writexml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None, sign=None):

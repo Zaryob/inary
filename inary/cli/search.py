@@ -105,7 +105,6 @@ database.
 
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
-            version=""
             if installdb.has_package(pkg):
                   color="brightgreen"
             else:

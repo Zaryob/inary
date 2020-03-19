@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-import optparse
 
 # Gettext Library
 import gettext

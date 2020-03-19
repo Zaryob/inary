@@ -573,7 +573,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
-        token_type = spec[0]
+        spec[0]
         req = spec[1]
         (init_a, decode_a, encode_a, errors_a, format_a) = anonfuns
 
@@ -633,7 +633,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         """returns split of the tag path into last tag and the rest"""
         try:
             lastsep = tagpath.rindex('/')
-        except ValueError as e:
+        except ValueError:
             return '', tagpath
         return tagpath[:lastsep], tagpath[lastsep + 1:]
 

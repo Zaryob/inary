@@ -125,7 +125,6 @@ class Command(object):
     def options(self):
         """This is a fall back function. If the implementer module provides an
         options function it will be called"""
-        pass
 
     def process_opts(self):
         self.check_auth_info()

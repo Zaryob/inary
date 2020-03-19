@@ -180,7 +180,6 @@ def upgrade(A=None, repo=None):
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order = plan_upgrade(A, replaces=replaces)
     else:
-        G_f = None
         order = list(A)
 
     componentdb = inary.db.componentdb.ComponentDB()

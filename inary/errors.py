@@ -26,7 +26,6 @@ class Exception(Exception):
 
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
-    pass
 
 
 class AnotherInstanceError(Exception):

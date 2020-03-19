@@ -64,7 +64,6 @@ class AtomicOperation(object):
 
     def run(self, package):
         """perform an atomic package operation"""
-        pass
 
 
 # possible paths of install operation

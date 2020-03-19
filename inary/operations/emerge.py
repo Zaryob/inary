@@ -52,7 +52,6 @@ def emerge(A):
     if not ctx.config.get_option('ignore_dependency'):
         G_f, order_inst, order_build = plan_emerge(A)
     else:
-        G_f = None
         order_inst = []
         order_build = A
 

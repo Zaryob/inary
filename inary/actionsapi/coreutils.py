@@ -90,7 +90,6 @@ class uniq:
                     continue
             except NameError:
                 pass
-            prev = i
             yield i
 
 

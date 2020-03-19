@@ -62,7 +62,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
         G_f, order = plan_install_pkg_names(A)
     else:
-        G_f = None
         order = list(A)
 
     componentdb = inary.db.componentdb.ComponentDB()

@@ -19,7 +19,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import os
 import inary.util as util
 import inary.cli.command as command
 import inary.ui
