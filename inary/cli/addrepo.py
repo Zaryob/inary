@@ -65,27 +65,9 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         if len(self.args) == 2:
             self.init()
             name, indexuri = self.args
-            self.just_add = False
-
-            if ctx.get_option('no_fetch'):
-                if ctx.ui.confirm(_('Add \"{}\" repository without updating the database?\nBy confirming '
-                                        'this you are also adding the repository to your system without '
-                                        'checking the distribution of the repository.\n'
-                                        'Would you like to continue?').format(name)):
-                    self.just_add=True
 
             if indexuri.endswith(".xml.xz") or indexuri.endswith(".xml"):
-                repository.add_repo(name, indexuri, ctx.get_option('at'))
-                if not self.just_add:
-                    try:
-                        repository.update_repos([name])
-                    except (inary.errors.Error, IOError) as e:
-                        ctx.ui.info(_("Error: {0} repository could not be reached: \n{1}").format(name, e), color="red")
-                        self.warn_and_remove(_("Removing {0} from system.").format(name), name)
-                else:
-                    ctx.ui.warning(_("Couldn't trust \"{0}\" repository. It is deactivated.").format(name))
-                    repository.set_repo_activity(name, False)
-
+                repository.add_repo(name, indexuri)
             else:
                 raise Exception(_("Extension of repository URI must be \".xml.xz\" or \".xml\"."))
 

@@ -189,7 +189,7 @@ class RepoDB(lazydb.LazyDB):
         uri = open(urifile_path).read()
         return uri.rstrip()
 
-    def add_repo(self, name, repo_info, at=None):
+    def add_repo(self, name, repo_info):
         repo_path = util.join_path(ctx.config.index_dir(), name)
         ###########
         try:

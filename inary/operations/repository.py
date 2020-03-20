@@ -13,6 +13,7 @@
 #
 
 import gettext
+import os
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -27,7 +28,7 @@ import inary.uri
 import inary.util as util
 
 @util.locked
-def add_repo(name, indexuri, at=None):
+def add_repo(name, indexuri):
     import re
     if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
         raise inary.errors.Error(_('Not a valid repository name.'))
@@ -39,7 +40,7 @@ def add_repo(name, indexuri, at=None):
         raise inary.errors.Error(_('Repository \"{}\" already present with name \"{}\".').format(name, repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
-        repodb.add_repo(name, repo, at=at)
+        repodb.add_repo(name, repo)
         ctx.ui.info(_('Flushing database caches...'), verbose=True)
         inary.db.flush_caches()
         ctx.ui.info(_('Repository \"{}\" added to system.').format(name))
@@ -102,16 +103,14 @@ def __update_repo(repo, force=False):
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()
     if repodb.has_repo(repo):
+        ctx.ui.info(_('Update => [{}]').format(repo),color="yellow")
         repouri = repodb.get_repo(repo).indexuri.get_uri()
-        try:
-            index.read_uri_of_repo(repouri, repo)
-        except inary.file.AlreadyHaveException:
-            ctx.ui.info(_('\"{}\" repository information is up-to-date.').format(repo))
-            if force:
-                ctx.ui.info(_('Updating database at any rate as requested.'))
-                index.read_uri_of_repo(repouri, repo, force=force)
-            else:
-                return False
+        util.clean_dir(os.path.join(ctx.config.index_dir(), repo))
+        index.read_uri_of_repo(repouri, repo)
+        if force:
+            ctx.ui.info(_('Updating database at any rate as requested.'))
+        else:
+            return False
 
         inary.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
 

@@ -31,7 +31,7 @@ class SignalHandler:
     def __init__(self):
         self.signals = {}
 
-    def signal_handler(self, sig, frame):
+    def signal_handler(self, sig):
         signal.signal(sig, signal.SIG_IGN)
         self.signals[sig].pending = True
 

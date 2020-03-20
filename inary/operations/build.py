@@ -598,8 +598,7 @@ class Builder:
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
 
-        # install function is mandatory!
-        if self.run_action_function(ctx.const.install_func, True):
+        if self.run_action_function(ctx.const.install_func):
             self.set_state("installaction")
 
     def get_abandoned_files(self):
@@ -747,7 +746,7 @@ class Builder:
                                                                      path,
                                                                      canonical_path))
 
-    def run_action_function(self, func, mandatory=False):
+    def run_action_function(self, func):
         """Calls the corresponding function in actions.py.
 
         If mandatory parameter is True, and function is not present in
