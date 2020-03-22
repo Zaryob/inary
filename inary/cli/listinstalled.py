@@ -79,16 +79,23 @@ Usage: list-installed
         if self.options.install_info:
             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
             sys.stdout.write('===========================================================================\n')
-        for pkg in installed:
-            package = self.installdb.get_package(pkg)
-            inst_info = self.installdb.get_info(pkg)
-            if self.options.long:
+
+        if self.options.long:
+            for pkg in installed:
+                package = self.installdb.get_package(pkg)
+                inst_info = self.installdb.get_info(pkg)
                 ctx.ui.info(str(package))
                 ctx.ui.info(str(inst_info))
-            elif self.options.install_info:
+        elif self.options.install_info:
+            for pkg in installed:
+                package = self.installdb.get_package(pkg)
+                inst_info = self.installdb.get_info(pkg)
                 ctx.ui.info('%-20s  ' % package.name, color='white', noln=True)
                 ctx.ui.info('|%s' % inst_info.one_liner())
-            else:
+        else:
+            for pkg in installed:
+                package = self.installdb.get_package(pkg)
+                inst_info = self.installdb.get_info(pkg)
                 package.name += ' ' * (maxlen - len(package.name))
                 ctx.ui.info('{} '.format(package.name), color='white', noln=True)
                 ctx.ui.info('- {}'.format(str(package.summary)))

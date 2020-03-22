@@ -76,8 +76,6 @@ class FilesDB(lazydb.LazyDB):
         return found
 
     def add_files(self, pkg, files):
-        self.__check_filesdb()
-
         for f in files.list:
             key = hashlib.md5(f.path.encode('utf-8')).hexdigest()
             self.filesdb[key] = pkg

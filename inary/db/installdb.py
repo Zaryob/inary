@@ -89,9 +89,8 @@ class InstallDB(lazydb.LazyDB):
         installed_list=[]
         def split_name(dirname):
             if os.path.isfile(ctx.config.packages_dir()+"/"+dirname+"/status"):
-                if "installed" in open(ctx.config.packages_dir()+"/"+dirname+"/status","r").readline():
-                    name, version, release = dirname.rsplit("-", 2)
-                    installed_list.append((name, version + "-" + release))
+                name, version, release = dirname.rsplit("-", 2)
+                installed_list.append((name, version + "-" + release))
                     
         for i in os.listdir(ctx.config.packages_dir()):
             split_name(i)
