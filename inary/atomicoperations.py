@@ -565,14 +565,14 @@ def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
     ctx.ui.info(_('Installing => [{}]'.format(pkg_location)),color='yellow')
     install=Install(pkg_location)
-    install_standard(install,upgrade)
+    __install(install, upgrade)
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
     install=Install.from_name(name)
-    install_standard(install,upgrade)
+    __install(install, upgrade)
 
-def install_standard(install,upgrade=False):
+def __install(install, upgrade=False):
     '''Standard installation function'''
     install.store_inary_files()
     install.preinstall()
