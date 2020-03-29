@@ -331,6 +331,10 @@ def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
     ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
     fetch_url(src, destdir=destdir, progress=progress, destfile=destfile)
 
+def fetch_from_git(url, destdir=None, progress=None, destfile=None):
+    #TODO: remove os.system then add more control
+    os.system("git clone --depth=1 {0}".format(url)) 
+
 def fetch_from_locale(url, destdir=None, progress=None, destfile=None):
     if not destdir:
         destdir=ctx.config.archives_dir()

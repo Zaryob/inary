@@ -234,7 +234,7 @@ def ls(source):
 
 def export(key, value):
     """export environ variable"""
-    os.environ[key] = value
+    os.environ[str(key)] = str(value)
 
 
 def isLink(filePath):

@@ -867,6 +867,8 @@ class SourceArchive:
                     self.fetch_from_mirror()
                 elif self.url.get_uri().startswith("file://") or self.url.get_uri().startswith("/"):
                     self.fetch_from_locale()
+                elif self.url.get_uri().startswith("git://"):
+                    self.fetch_from_git()
                 else:
                     inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
             except inary.fetcher.FetchError:
@@ -885,6 +887,9 @@ class SourceArchive:
 
     def fetch_from_mirror(self):
         inary.fetcher.fetch_from_mirror(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
+
+    def fetch_from_git(self):
+        inary.fetcher.fetch_from_git(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
 
     def is_cached(self, interactive=True):
         if not os.access(self.archiveFile, os.R_OK):
