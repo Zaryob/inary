@@ -908,7 +908,7 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            ctx.ui.warning(_("Archive File: {}\n * Expected sha1 value: {} \n* Received sha1 value: {} \n".format(
+            ctx.ui.warning(_("Archive File: {}\n * Expected sha1 value: {} \n * Received sha1 value: {} \n".format(
                 self.url.filename(), self.archive.sha1sum, util.sha1_file(self.archiveFile))))
             if not ctx.get_option('ignore_verify'):
                 raise SourceArchiveError(_("unpack: check_file_hash failed."))
