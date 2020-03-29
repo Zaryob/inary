@@ -40,7 +40,6 @@ def exportFlags():
 
     os.environ['LD_AS_NEEDED'] = "1"
 
-    # http://liste.pardus.org.tr/gelistirici/2009-January/016442.html
     os.environ['CC'] = "{}-gcc".format(values.build.host)
     os.environ['CXX'] = "{}-g++".format(values.build.host)
     os.environ['LD'] = "ld"

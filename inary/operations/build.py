@@ -24,6 +24,8 @@ import stat
 
 # Gettext Library
 import gettext
+import sys
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -43,19 +45,16 @@ import inary.package
 import inary.data.component as Component
 import inary.actionsapi.variables
 import inary.db
-
+import inary.process as process
 
 class Error(inary.errors.Error):
     pass
 
-
 class ActionScriptException(Error):
     pass
 
-
 class AbandonedFilesException(inary.errors.Error):
     pass
-
 
 class ExcludedArchitectureException(Error):
     pass
@@ -254,6 +253,7 @@ class Builder:
 
         self.actionLocals = None
         self.actionGlobals = None
+        self.actionScript = ""
 
         self.delta_history_search_paths = []
         self.delta_search_paths = {}
@@ -415,7 +415,9 @@ class Builder:
 
         # Each time a builder is created we must reset
         # environment. See bug #2575
+
         os.environ.clear()
+
         inary.actionsapi.variables.initVariables()
 
         env = {"PKG_DIR": self.pkg_dir(),
@@ -695,17 +697,14 @@ class Builder:
         fname = util.join_path(self.specdir, ctx.const.postops)
         if(util.check_file(fname, noerr=True)):
             try:
-                buf = open(fname).read()
-                compile(buf, "error", "exec")
+                self.actionScript = open(fname).read()
+                compile(self.actionScript, "error", "exec")
             except IOError as e:
                 raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
                     fname, e))
             except SyntaxError as e:
                 raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
                     fname, e))
-        else:
-            pass
-
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -755,7 +754,25 @@ class Builder:
 
         if func in self.actionLocals:
             # Fixme: It needs a more effective fix than commit 17d7d45 on branch origin/foreign-actions
-            self.actionLocals[func]()
+
+            prcss=process.Process(name="INARY_BUILD", target=self.actionLocals[func],)
+            prcss.start()
+            ctx.ui.info(_("[ Child Process PID ] : "), color="brightwhite",noln=True)
+            print(prcss.pid)
+
+            prcss.join()
+            if prcss.exception:
+                error, traceback = prcss.exception
+                for i in traceback.splitlines():
+                    if 'actions.py' in i:
+                        errmsg=i
+
+                raise Error(_("Running commands in \"{}\" function failed:\nError Message: \n{}\n\t{} ").format(
+                                                                                                  func,
+                                                                                                  errmsg,
+                                                                                                  error
+                                                                                                  )
+                )
 
         else:
             if mandatory:

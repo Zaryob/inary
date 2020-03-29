@@ -35,7 +35,6 @@ class BinutilsError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[Binutils]: "+ value)
 
-
 # Globals
 env = inary.actionsapi.variables.glb.env
 dirs = inary.actionsapi.variables.glb.dirs

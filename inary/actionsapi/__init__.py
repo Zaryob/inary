@@ -23,7 +23,6 @@ class Error(inary.errors.Error):
 class Exception(inary.errors.Exception):
     pass
 
-
 def error(msg):
     if ctx.config.get_option('ignore_action_errors'):
         ctx.ui.error(msg)

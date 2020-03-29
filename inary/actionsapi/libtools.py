@@ -43,7 +43,6 @@ def preplib(sourceDirectory='/usr/lib'):
 
 def gnuconfig_update():
     """ copy newest config.* onto source\'s """
-    pass_gnuconfig=False
     for root, dirs, files in os.walk(os.getcwd()):
         for fileName in files:
             if fileName in ['config.sub', 'config.guess']:
@@ -54,12 +53,7 @@ def gnuconfig_update():
                 try:
                     copy('/usr/share/gnuconfig/{}'.format(fileName), join_path(root, fileName))
                 except:
-                    ctx.ui.info(_('GNU Config Update Failed.'))
-                    if not pass_gnuconfig:
-                        if not ctx.ui.confirm(_('Would you like to continue? (it may be dangerous!!!):')):
-                            raise RunTimeError(_('GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)'))
-                        else:
-                            pass_gnuconfig=True
+                    ctx.ui.warning(_('GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)'))
                 else:
                     ctx.ui.info(_('GNU Config Update Finished.'))
 
