@@ -62,5 +62,5 @@ class UtilTestCase(unittest.TestCase):
 
     def testCopyFile(self):
         copy_file('/etc/inary/inary.conf', '/tmp/inary-test1')
-        copy_file('/etc/inary/sandbox.conf', '/tmp/inary-test2')
+        copy_file('/etc/inary/mirrors.conf', '/tmp/inary-test2')
         copy_file_stat('/etc/inary/inary.conf', '/tmp/inary-test1')

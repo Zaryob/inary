@@ -105,7 +105,6 @@ class Constants(metaclass=Singleton):
         self.__c.postops = "postoperations.py"
         self.__c.install_tar = "install.tar"
         self.__c.mirrors_conf = "/etc/inary/mirrors.conf"
-        self.__c.sandbox_conf = "/etc/inary/sandbox.conf"
         self.__c.blacklist = "/etc/inary/blacklist"
         self.__c.config_pending = "configpending"
         self.__c.needs_restart = "needsrestart"

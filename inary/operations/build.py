@@ -739,12 +739,6 @@ class Builder:
 
         return src_dir
 
-    @staticmethod
-    def log_sandbox_violation(operation, path, canonical_path):
-        ctx.ui.error(_("Sandbox violation: {0} ({1} -> {2})").format(operation,
-                                                                     path,
-                                                                     canonical_path))
-
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
 
@@ -760,46 +754,9 @@ class Builder:
             raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
 
         if func in self.actionLocals:
-            if ctx.get_option('ignore_sandbox') or \
-                    not ctx.config.values.build.enablesandbox or \
-                    "emul32" in self.build_type:
-                self.actionLocals[func]()
-            else:
-                import catbox
+            # Fixme: It needs a more effective fix than commit 17d7d45 on branch origin/foreign-actions
+            self.actionLocals[func]()
 
-                ctx.ui.info(_("Sandbox enabled build..."))
-
-                # Configure allowed paths from sandbox.conf
-                valid_paths = [bytes(self.pkg_dir().encode('utf-8'))]
-                conf_file = ctx.const.sandbox_conf
-                if os.path.exists(conf_file):
-                    for line in open(conf_file):
-                        line = line.strip()
-                        if len(line) > 0 and not line.startswith("#"):
-                            if line.startswith("~"):
-                                line = os.environ["HOME"] + line[1:]
-                            valid_paths.append(line.encode('utf-8'))
-
-                # Extra path for ccache when needed
-                if ctx.config.values.build.buildhelper == "ccache":
-                    valid_paths.append(os.environ.get("CCACHE_DIR",
-                                                      "/root/.ccache"))
-
-                ret = catbox.run(self.actionLocals[func],
-                                 valid_paths,
-                                 logger=self.log_sandbox_violation)
-                # Retcode can be 0 while there is a sanbox violation, so only
-                # look for violations to correctly handle it
-                if ret.violations:
-                    ctx.ui.error(_("Sandbox violation result:"))
-                    for result in ret.violations:
-                        ctx.ui.error("{0} ({1} -> {2})".format(result[0],
-                                                               result[1],
-                                                               result[2]))
-                    raise Error(_("Sandbox violations!"))
-
-                if ret.code == 1:
-                    raise ActionScriptException
         else:
             if mandatory:
                 raise Error(_("unable to call function from actions: \'{}\'").format(func))

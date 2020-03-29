@@ -99,12 +99,6 @@ class Build(command.Command, metaclass=command.autocommand):
                          help=_("Use quilt patch management system "
                                 "instead of GNU patch."))
 
-        group.add_option("--ignore-sandbox",
-                         action="store_true",
-                         default=False,
-                         help=_("Do not constrain build process inside "
-                                "the build folder."))
-
         self.parser.add_option_group(group)
         group = optparse.OptionGroup(self.parser, _("build steps"))
 
