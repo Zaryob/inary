@@ -25,6 +25,7 @@ import zipfile
 
 # Gettext Library
 import gettext
+
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
@@ -84,7 +85,7 @@ class _LZMAProxy(object):
             if not raw:
                 break
             try:
-                if self.lzmaobj.__class__== lzma.LZMADecompressor:
+                if self.lzmaobj.__class__ == lzma.LZMADecompressor:
                     data = self.lzmaobj.decompress(raw)
             except EOFError:
                 break
@@ -275,6 +276,14 @@ class ArchiveLzma(ArchiveBase):
         lzma_file.close()
 
 
+def __chown(name, uid, gid):
+    if not os.path.islink(name):
+        ctx.ui.info(_("Chowning {0} ({1}:{2})").format(name, uid, gid), verbose=True)
+        os.chown(name, uid, gid)
+    else:
+        ctx.ui.info(_("LChowning {0} ({1}:{2})").format(name, uid, gid), verbose=True)
+        os.lchown(name, uid, gid)
+
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
     type. Provides access to tar, tar.gz and tar.bz2 files.
@@ -392,7 +401,7 @@ class ArchiveTar(ArchiveBase):
                                 if path.endswith("dbus") and "pid" in files:
                                     startservices.append("dbus")
                                     for service in ("NetworkManager", "connman", "wicd"):
-                                        #FIXME: It needs a quick fix for openrc
+                                        # FIXME: It needs a quick fix for openrc
                                         if os.path.isfile("/etc/scom/services/enabled/{}".format(service)):
                                             startservices.append(service)
                                             os.system("service {} stop".format(service))
@@ -486,6 +495,7 @@ class ArchiveTar(ArchiveBase):
             if self.no_same_owner:
                 uid = os.getuid()
                 gid = os.getgid()
+                __chown(tarinfo.name, uid, gid)
 
                 if not os.path.islink(tarinfo.name):
                     ctx.ui.info(_("Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
@@ -586,12 +596,7 @@ class ArchiveTarZ(ArchiveBase):
                 os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
 
             if self.no_same_owner:
-                if not os.path.islink(tarinfo.name):
-                    ctx.ui.info(_("Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
-                    os.chown(tarinfo.name, uid, gid)
-                else:
-                    ctx.ui.info(_("LChowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
-                    os.lchown(tarinfo.name, uid, gid)
+                __chown(tarinfo.name, uid, gid)
 
         # Bug #10680 and addition for tarZ files
         os.unlink(self.file_path)
@@ -875,7 +880,8 @@ class SourceArchive:
                 else:
                     raise
 
-            ctx.ui.info(_("Source archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
+            ctx.ui.info(
+                _("Source archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
 
     def fetch_from_fallback(self):
         inary.fetcher.fetch_url(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
@@ -902,7 +908,8 @@ class SourceArchive:
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):
-            ctx.ui.warning(_("Archive File: {}\n * Expected sha1 value: {} \n* Received sha1 value: {} \n".format(self.url.filename(),self.archive.sha1sum,util.sha1_file(self.archiveFile))))
+            ctx.ui.warning(_("Archive File: {}\n * Expected sha1 value: {} \n* Received sha1 value: {} \n".format(
+                self.url.filename(), self.archive.sha1sum, util.sha1_file(self.archiveFile))))
             if not ctx.get_option('ignore_verify'):
                 raise SourceArchiveError(_("unpack: check_file_hash failed."))
             else:

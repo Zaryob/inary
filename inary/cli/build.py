@@ -157,6 +157,7 @@ class Build(command.Command, metaclass=command.autocommand):
 
     def run(self):
         import inary.operations
+
         if not self.options.quiet:
             self.options.debug = True
 
