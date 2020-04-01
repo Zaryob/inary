@@ -274,7 +274,10 @@ class Install(AtomicOperation):
 
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release
-                if pkg_release > irelease:
+                if pkg_version > iversion:
+                    ctx.ui.info(_('Upgrading to new upstream version.'))
+                    self.operation = UPGRADE
+                elif pkg_release > irelease:
                     ctx.ui.info(_('Upgrading to new distribution release.'))
                     self.operation = UPGRADE
 
@@ -537,7 +540,7 @@ class Install(AtomicOperation):
             inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.debug(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
+        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages

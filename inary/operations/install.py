@@ -14,6 +14,7 @@
 
 import os
 import sys
+import math
 import zipfile
 
 # Gettext Library
@@ -95,9 +96,12 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     paths = []
     extra_paths = {}
-    sorted_order=sort.sort_auto(order)
+    sorted_order = sort.sort_auto(order)
+    lndig = math.floor(math.log(len(sorted_order), 10)) + 1
     for x in sorted_order:
-        ctx.ui.info(_("Downloading {} / {} => [{}]").format(sorted_order.index(x) + 1, len(sorted_order),x), color="yellow")
+        ctx.ui.info(
+            _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(sorted_order.index(x) + 1, len(sorted_order),
+                                                                                      x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         install_op.store_inary_files()
         paths.append(install_op.package_fname)
@@ -128,7 +132,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     for path in paths:
         install_op = atomicoperations.Install(path)
         basename=path.split("/")[-1]
-        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),basename), color="yellow")
+        ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:

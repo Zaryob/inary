@@ -14,6 +14,7 @@
 
 import os
 import sys
+import math
 
 # Gettext Library
 import gettext
@@ -218,8 +219,9 @@ def upgrade(A=None, repo=None):
 
     paths = []
     extra_paths = {}
+    lndig = math.floor(math.log(len(order), 10)) + 1
     for x in order:
-        ctx.ui.info(_("Downloading {} / {} => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
+        ctx.ui.info(_("Downloading") + str(" [ {:>"+str(lndig)+ "} / {} ] => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         install_op.store_inary_files()
         paths.append(install_op.package_fname)
@@ -244,7 +246,7 @@ def upgrade(A=None, repo=None):
     for path in paths:
         install_op = atomicoperations.Install(path)
         basename=path.split("/")[-1]
-        ctx.ui.info(_("Installing {} / {} => [{}]") .format(paths.index(path) + 1, len(paths),basename), color="yellow")
+        ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:

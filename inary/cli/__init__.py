@@ -241,40 +241,34 @@ class CLI(inary.ui.UI):
 
     def notify(self, event, logging=True, **keywords):
         is_debug=False
+        notify=True
         if event == inary.ui.installed:
             msg = _('Installed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
-            is_debug=True
         elif event == inary.ui.installing:
             msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(keywords['package'])
             color = 'faintblue'
-            is_debug=True
         elif event == inary.ui.removed:
             msg = _('Removed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
-            is_debug=True
         elif event == inary.ui.removing:
             msg = _('Removing \"{}\"').format(keywords['package'].name)
             color = 'brightpurple'
         elif event == inary.ui.upgraded:
             msg = _('Upgraded \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
-            is_debug=True
         elif event == inary.ui.configured:
             msg = _('Configured \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
-            is_debug=True
         elif event == inary.ui.configuring:
             msg = _('Configuring \"{}\"').format(keywords['package'].name)
             color = 'faintyellow'
         elif event == inary.ui.extracting:
             msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
             color = 'faintgreen'
-            is_debug=True
         elif event == inary.ui.updatingrepo:
             msg = _('Updating package repository: \"{}\"').format(keywords['name'])
             color = 'green'
-            is_debug=True
         elif event == inary.ui.cached:
             total_size, total_symbol = util.human_readable_size(keywords['total'])
             cached_size, cached_symbol = util.human_readable_size(keywords['cached'])
@@ -283,11 +277,12 @@ class CLI(inary.ui.UI):
                                                                               total_size,
                                                                               total_symbol)
             color = 'cyan'
+            notify=False
         elif event == inary.ui.packagestogo:
             if ctx.log:
                 ctx.log.info(_("Following packages ordered for process: {}").format(keywords['order']))
             msg = None
-
+            notify=False
         elif event == inary.ui.desktopfile:
             if ctx.log:
                 ctx.log.info(_("Extracted desktop file \"{}\"").format(keywords['desktopfile']))
@@ -310,3 +305,5 @@ class CLI(inary.ui.UI):
                 self.output(util.colorize(msg + '\n', color))
                 if ctx.log and logging:
                     ctx.log.info(msg)
+                if notify:
+                    self.notify(msg, push_screen=False)

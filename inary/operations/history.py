@@ -12,6 +12,7 @@
 # Please read the COPYING file.
 
 import os
+import math
 
 # Gettext Library
 import gettext
@@ -212,8 +213,9 @@ def takeback(operation):
 
     errors = []
     paths = []
+    lndig = math.floor(math.log(len(beinstalled), 10)) + 1
     for pkg in beinstalled:
-        ctx.ui.info(_("Downloading {} / {} => [{}]").format(beinstalled.index(pkg) + 1, len(beinstalled),pkg), color="yellow")
+        ctx.ui.info(_("Downloading") + str(" [ {:>"+str(lndig)+ "} / {} ] => [{}]").format(beinstalled.index(pkg) + 1, len(beinstalled),pkg), color="yellow")
         pkg += ctx.const.package_suffix
         if fetch_remote_file(pkg, errors):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))
