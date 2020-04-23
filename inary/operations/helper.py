@@ -24,7 +24,7 @@ import inary.util as util
 import inary.ui as ui
 import inary.analyzer.conflict
 import inary.db
-
+import time
 
 def reorder_base_packages(order):
     componentdb = inary.db.componentdb.ComponentDB()
@@ -205,7 +205,7 @@ def check_config_changes(order):
         newconfig = []
 
         for path in config_paths:
-            if os.path.exists(path) and os.path.exists(path + ".newconfig"):
+            if os.path.exists(path) and os.path.exists(path + ".newconfig-byinary"):
                 newconfig.append(path)
         if newconfig:
             config_changes[package] = newconfig

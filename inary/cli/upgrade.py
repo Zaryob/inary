@@ -22,6 +22,7 @@ import inary.cli.command as command
 import inary.context as ctx
 import inary.db
 import inary.sysconf as sysconf
+import inary.util as util
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
@@ -83,7 +84,7 @@ expanded to package names.
         self.parser.add_option_group(group)
 
     def run(self):
-        from inary.operations import repository, upgrade
+        from inary.operations import repository, upgrade, helper
         if self.options.fetch_only:
             self.init(database=True, write=False)
         else:
@@ -111,5 +112,12 @@ expanded to package names.
 
         upgrade.upgrade(packages, reposit)
 
+        config_changes = helper.check_config_changes(
+            [util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+
         if self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
+
+        if config_changes:
+            if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
+                helper.show_changed_configs(config_changes)
