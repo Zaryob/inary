@@ -23,7 +23,7 @@ import inary.cli.command as command
 import inary.context as ctx
 import inary.db
 import inary.blacklist
-
+import inary.sysconf as sysconf
 
 class RemoveOrphaned(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Remove orphaned packages
@@ -46,6 +46,10 @@ Remove all orphaned packages from the system.
         group.add_option("-x", "--exclude", action="append",
                          default=None, help=_(
                 "When removing orphaned, ignore packages and components whose basenames match pattern."))
+        group.add_option("--ignore-sysconf", action="store_true",
+                         default=False, help=_("Skip sysconf operations after installation."))
+        group.add_option("--force-sysconf", action="store_true",
+                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
 
         self.parser.add_option_group(group)
 
@@ -57,3 +61,6 @@ Remove all orphaned packages from the system.
             orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))
 
         remove.remove(orphaned)
+
+        if self.options.ignore_sysconf:
+            sysconf.proceed(self.options.force_sysconf)

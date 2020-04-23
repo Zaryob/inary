@@ -21,7 +21,7 @@ _ = __trans.gettext
 import inary.cli.command as command
 import inary.context as ctx
 import inary.db
-
+import inary.sysconf as sysconf
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
@@ -59,6 +59,10 @@ expanded to package names.
                          default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
                          default=False, help=_("Ignore package conflicts."))
+        group.add_option("--ignore-sysconf", action="store_true",
+                         default=False, help=_("Skip sysconf operations after installation."))
+        group.add_option("--force-sysconf", action="store_true",
+                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
         group.add_option("-c", "--component", action="append",
                          default=None, help=_("Upgrade component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",
@@ -106,3 +110,6 @@ expanded to package names.
         packages.extend(self.args)
 
         upgrade.upgrade(packages, reposit)
+
+        if self.options.ignore_sysconf:
+            sysconf.proceed(self.options.force_sysconf)

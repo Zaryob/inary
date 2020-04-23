@@ -23,6 +23,7 @@ import inary.cli.command as command
 import inary.context as ctx
 import inary.db
 import inary.util as util
+import inary.sysconf as sysconf
 
 class Install(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Install INARY packages
@@ -51,13 +52,16 @@ expanded to package names.
                          default=False, help=_("Reinstall already installed packages."))
         group.add_option("--ignore-check", action="store_true",
                          default=False, help=_("Skip distribution release and architecture check."))
-                         
         group.add_option("--ignore-configure", action="store_true",
                          default=False, help=_("Skip configure and mark configure pending."))
         group.add_option("--ignore-file-conflicts", action="store_true",
                          default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
                          default=False, help=_("Ignore package conflicts."))
+        group.add_option("--ignore-sysconf", action="store_true",
+                         default=False, help=_("Skip sysconf operations after installation."))
+        group.add_option("--force-sysconf", action="store_true",
+                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
         group.add_option("-c", "--component", action="append",
                          default=None, help=_("Install component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",
@@ -114,6 +118,9 @@ expanded to package names.
 
 
         config_changes = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+
+        if self.options.ignore_sysconf:
+            sysconf.proceed(self.options.force_sysconf)
 
         if config_changes:
             if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):

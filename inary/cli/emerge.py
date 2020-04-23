@@ -23,7 +23,7 @@ import inary.db
 import inary.cli.command as command
 import inary.cli.build as build
 import inary.context as ctx
-
+import inary.sysconf as sysconf
 
 class Emerge(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and install INARY source packages from repository
@@ -50,6 +50,11 @@ You can also give the name of a component.
                          default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
                          default=False, help=_("Ignore package conflicts."))
+        group.add_option("--ignore-sysconf", action="store_true",
+                         default=False, help=_("Skip sysconf operations after installation."))
+        group.add_option("--force-sysconf", action="store_true",
+                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
+
         self.parser.add_option_group(group)
 
     def run(self):
@@ -74,3 +79,5 @@ You can also give the name of a component.
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
         emerge.emerge(sources)
+        if self.options.ignore_sysconf:
+            sysconf.proceed(self.options.force_sysconf)
