@@ -1199,6 +1199,7 @@ package might be a good solution."))
             # Sort the files in-place according to their path for an ordered
             # tarfile layout which dramatically improves the compression
             # performance of lzma.
+
             pkg.files.list.sort(key=lambda x: x.path)
 
             for finfo in pkg.files.list:

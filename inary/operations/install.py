@@ -96,11 +96,10 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     paths = []
     extra_paths = {}
-    sorted_order = sort.sort_auto(order)
-    lndig = math.floor(math.log(len(sorted_order), 10)) + 1
-    for x in sorted_order:
+    lndig = math.floor(math.log(len(order), 10)) + 1
+    for x in order:
         ctx.ui.info(
-            _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(sorted_order.index(x) + 1, len(sorted_order),
+            _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(order.index(x) + 1, len(order),
                                                                                       x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         install_op.store_inary_files()

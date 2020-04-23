@@ -308,10 +308,10 @@ class Install(AtomicOperation):
             if ctx.config.get_option('ignore_configure'):
                self.installdb.mark_pending(self.pkginfo.name)
                return 0
-            ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
+            ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
-                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                ctx.ui.error(_('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
 
 
@@ -330,9 +330,9 @@ class Install(AtomicOperation):
             if ctx.config.get_option('ignore_configure'):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
-            ctx.ui.info(_('Configuring \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
+            ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.postinstall(self.package.pkg_dir()):
-                ctx.ui.error(_('Configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                ctx.ui.error(_('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
 
 
@@ -691,13 +691,13 @@ class Remove(AtomicOperation):
 
     def run_preremove(self):
         if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Configuring \"{}\"'.format(self.package_name)),color='brightyellow')
+            ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(self.package_name)),color='brightyellow')
             self.trigger.preremove(self.package.pkg_dir())
 
 
     def run_postremove(self):
         if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Configuring \"{}\"'.format(self.package_name)),color='brightyellow')
+            ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(self.package_name)),color='brightyellow')
             self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):
