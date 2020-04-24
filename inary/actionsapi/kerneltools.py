@@ -212,17 +212,18 @@ def installHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/linux-headers-{}-sulinos".format(suffix)
+    headersDirectoryName = "usr/src/{}-headers-{}-sulinos".format(get.srcNAME(),suffix)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
     shelltools.makedirs(destination)
 
     # First create the skel
-    find_cmd = "find . -path {0} -prune -o -type f \( -name {1} \) -print".format(
-        " -prune -o -path ".join(["'./{}/*'".format(l for l in pruned)]),
-        " -o -name ".join(["'{}'".format(k for k in wanted)])
-    ) + " | cpio -pVd --preserve-modification-time {}".format(destination)
+    find_cmd = "find . -path %s -prune -o -type f \( -name %s \) -print" % \
+                (
+                    " -prune -o -path ".join(["'./%s/*'" % l for l in pruned]),
+                    " -o -name ".join(["'%s'" % k for k in wanted])
+                ) + " | cpio -pVd --preserve-modification-time %s" % destination
 
     shelltools.system(find_cmd)
 
