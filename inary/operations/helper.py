@@ -84,18 +84,10 @@ def calculate_free_space_needed(order):
     for pkg in [packagedb.get_package(name) for name in order]:
         if installdb.has_package(pkg.name):
             (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
-            # inary distro upgrade should not use delta support
-            if distro == pkg.distribution and distro_release == pkg.distributionRelease:
-                delta = pkg.get_delta(release)
-
-            ignore_delta = ctx.config.values.general.ignore_delta
 
             installed_release_size = installdb.get_package(pkg.name).installedSize
 
-            if delta and not ignore_delta:
-                pkg_size = delta.installedSize
-            else:
-                pkg_size = pkg.installedSize - installed_release_size
+            pkg_size = pkg.installedSize - installed_release_size
 
             total_needed += pkg_size
 
@@ -126,23 +118,12 @@ def calculate_download_sizes(order):
 
     for pkg in [packagedb.get_package(name) for name in order]:
 
-        delta = None
         if installdb.has_package(pkg.name):
             (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
-            # inary distro upgrade should not use delta support
-            if distro == pkg.distribution and distro_release == pkg.distributionRelease:
-                delta = pkg.get_delta(release)
-
-        ignore_delta = ctx.config.values.general.ignore_delta
-
-        if delta and not ignore_delta:
-            fn = os.path.basename(delta.packageURI)
-            pkg_hash = delta.packageHash
-            pkg_size = delta.packageSize
-        else:
-            fn = os.path.basename(pkg.packageURI)
-            pkg_hash = pkg.packageHash
-            pkg_size = pkg.packageSize
+       
+        fn = os.path.basename(pkg.packageURI)
+        pkg_hash = pkg.packageHash
+        pkg_size = pkg.packageSize
 
         if cached_packages_dir:
             path = util.join_path(cached_packages_dir, fn)

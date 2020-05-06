@@ -22,10 +22,12 @@ then
   exit 1
 fi
 inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml -D$sulin
+inary ur -D$sulin
 inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
 inary it -c system.base -y --ignore-configure -D$sulin
 for i in /dev /sys /proc
 do
+    mkdir -p $sulin/$i &>/dev/null
     mount --bind $i $sulin/$i
 done
 chroot $sulin inary cp
