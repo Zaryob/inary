@@ -1,0 +1,147 @@
+#!/bin/bash
+# İnary paketi üreten clone makepkg (SulinOS topluluğu tarafından geliştirildi)
+# Çok önemli uyarı: bu betik deneysel çalışmadır. sisteme zarar verebilir.
+#
+# Bu betik ile tüm archlinux/aur paketleri derlenememektedir.
+set -e
+arch-meson(){
+	exec meson setup \
+	  --prefix        /usr \
+	  --libexecdir    lib \
+	  --sbindir       bin \
+	  --buildtype     plain \
+	  --auto-features enabled \
+	  --wrap-mode     nodownload \
+	  -D              b_lto=true \
+	  -D              b_pie=true \
+	  "$@"
+
+}
+pwd=$(pwd)
+export pkgdir=$pwd/install
+export srcdir=.
+export distrel=s19
+. PKGBUILD
+fetch_sources(){
+	for src in $source ; do
+		if echo "$src" | grep "git://" &>/dev/null ; then
+			srcloc=$(echo $src | sed "s|^.*git://|git://|g")
+			srcdir=$(echo $src | sed "s|::git://.*$||g")
+			echo $srcloc $srcdir
+			[ -d "$srcdir" ] || git clone  --depth=1 $srcloc $srcdir
+		elif echo "$src" | grep "^git+" &>/dev/null ; then
+			srcloc=$(echo $src | sed "s|^git+||g")
+			git clone --depth=1 $srcloc || true
+		else
+			wget -q --show-progress -c $src || true
+			tar -xf *.tar.*
+		fi
+done
+}
+check_make_dep(){
+	missdep=""
+	for dep in ${makedepends[@]} ${depends[@]}
+	do
+		echo "checking $dep"
+		LANG=C inary info $dep -s -N | grep "\[inst\]" >/dev/null
+		if [ ! $? -eq 0 ] ; then
+			exit 1
+		fi
+	done
+}
+function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
+}
+run(){
+	cd $pwd
+	if function_exists $1 ; then
+		echo -e "\033[32;1m$2\033[;0m" > /dev/stderr
+		$1
+	fi
+}
+create_tar(){
+cd install
+[ -f ../install.tar.xz ] && rm -f ../install.tar.xz
+tar --xz -cf ../install.tar.xz *
+echo -e "<Files>" > ../files.xml
+find | sed "s|^\./||g" | while read line
+do
+	if [ -f $line ] ; then
+		echo -e "   <File>" >> ../files.xml
+	        echo -e "      <Path>$line</Path>" >> ../files.xml
+        	echo -e "      <Type>data</Type>" >> ../files.xml
+        	echo -e "      <Size>$(du -b $line | awk '{print $1}')</Size>" >> ../files.xml
+        	echo -e "      <Uid>0</Uid>" >> ../files.xml
+        	echo -e "      <Gid>0</Gid>" >> ../files.xml
+        	echo -e "      <Mode>0o755</Mode>" >> ../files.xml
+        	echo -e "      <Hash>$(sha1sum $line | awk '{print $1}')</Hash>" >> ../files.xml
+        	echo -e "   </File>" >> ../files.xml
+	fi
+done
+echo -e "</Files>" >> ../files.xml
+}
+write_metadata(){
+	export installtarhash="$(sha1sum install.tar.xz | awk '{print $1}')"
+	echo -e "<INARY>"
+	echo -e "    <Source>"
+	echo -e "        <Name>$pkgname</Name>"
+	echo -e "        <Homepage>$url</Homepage>"
+	echo -e "        <Packager>"
+	echo -e "            <Name>Auto generated</Name>"
+	echo -e "            <Email>auto@generat.et</Email>"
+	echo -e "        </Packager>"
+	echo -e "    </Source>"
+	echo -e "    <Package>"
+	echo -e "    <RFP></RFP>"
+	echo -e "    <PartOf>aur</PartOf>"	
+	echo -e "        <Name>$pkgname</Name>"
+	echo -e "        <Summary xml:lang=\"en\">$pkgdesc</Summary>"
+	echo -e "        <Description xml:lang=\"en\">$pkgdesc</Description>"
+	echo -e "        <IsA>app</IsA>"
+	echo -e "        <License>$license</License>"
+	echo -e "    <RuntimeDependencies>"
+	for dep in ${depends[@]}
+	do
+		echo -e "        <Dependency>$dep</Dependency>"
+	done
+	echo -e "    </RuntimeDependencies>"
+	echo -e "        <Files>"
+	echo -e "            <Path fileType=\"data\">/usr</Path>"
+	echo -e "            <Path fileType=\"data\">/etc</Path>"
+	echo -e "            <Path fileType=\"data\">/bin</Path>"
+	echo -e "            <Path fileType=\"data\">/var</Path>"
+	echo -e "            <Path fileType=\"data\">/lib</Path>"
+	echo -e "            <Path fileType=\"data\">/boot</Path>"
+	echo -e "        </Files>"
+	echo -e "        <History>"
+	echo -e "            <Update release=\"1\">"
+	echo -e "                <Date>2020-04-24</Date>"
+	echo -e "                <Version>$pkgver</Version>"
+	echo -e "                <Comment>Auto generated.</Comment>"
+	echo -e "                <Name>Auto generated</Name>"
+	echo -e "                <Email>auto@generat.et</Email>"
+	echo -e "            </Update>"
+	echo -e "        </History>"
+	echo -e "        <BuildHost>uludag</BuildHost>"
+	echo -e "        <Distribution>Sulin</Distribution>"
+	echo -e "        <DistributionRelease>2019</DistributionRelease>"
+	echo -e "        <Architecture>x86_64</Architecture>"
+	echo -e "        <InstalledSize>1</InstalledSize>"
+	echo -e "        <InstallTarHash>$installtarhash</InstallTarHash>"
+	echo -e "        <PackageFormat>1.2</PackageFormat>"
+	echo -e "    </Package>"
+	echo -e "</INARY>"
+}
+create_inary(){
+	zip $pkgname-$pkgver-$pkgrel-$distrel-$(uname -m).inary install.tar.xz metadata.xml files.xml
+}
+run fetch_sources "Downloading"
+run check_make_dep "Checking dependency"
+run pkgver "Runninn pkgver"
+run prepare "Running prepare"
+run build "Building"
+run package "Installing"
+run create_tar "Creating install.tar.xz"
+run write_metadata "Generating metadata.xml" > $pwd/metadata.xml
+run create_inary "Building inary file"
