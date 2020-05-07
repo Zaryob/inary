@@ -21,21 +21,26 @@ pwd=$(pwd)
 export pkgdir=$pwd/install
 export srcdir=.
 export distrel=s19
-export distver=2019
 . PKGBUILD
 fetch_sources(){
-	for src in $source ; do
+	for src in $source $source_x86_64 ; do
 		if echo "$src" | grep "git://" &>/dev/null ; then
 			srcloc=$(echo $src | sed "s|^.*git://|git://|g")
-			srcdir=$(echo $src | sed "s|::git://.*$||g")
-			echo $srcloc $srcdir
-			[ -d "$srcdir" ] || git clone  --depth=1 $srcloc $srcdir
-		elif echo "$src" | grep "git+" &>/dev/null ; then
+			srcname=$(echo $src | sed "s|::git://.*$||g")
+			echo $srcloc $srcname
+			[ -d "$srcname" ] || git clone  --depth=1 $srcloc $srcname
+		elif echo "$src" | grep "^git+" &>/dev/null ; then
 			srcloc=$(echo $src | sed "s|^git+||g")
 			git clone --depth=1 $srcloc || true
+		elif echo "$src" | grep "::http" &>/dev/null ; then
+                        srcloc=$(echo $src | sed "s|^.*::||g")
+                        srcname=$(echo $src | sed "s|::http.*$||g")
+			echo $srcloc
+			wget -c $srcloc -O $srcname
+			echo $srcname | grep ".tar.*" && tar -xf $srcname
 		else
-			wget -q --show-progress -c $src || true
-			tar -xf *.tar.*
+			wget -c $src > $(basename $src) || true
+			basename $src | grep ".tar.*" && tar -xf $(basename $src)
 		fi
 done
 }
@@ -126,7 +131,7 @@ write_metadata(){
 	echo -e "        </History>"
 	echo -e "        <BuildHost>uludag</BuildHost>"
 	echo -e "        <Distribution>Sulin</Distribution>"
-	echo -e "        <DistributionRelease>$distver</DistributionRelease>"
+	echo -e "        <DistributionRelease>2019</DistributionRelease>"
 	echo -e "        <Architecture>x86_64</Architecture>"
 	echo -e "        <InstalledSize>1</InstalledSize>"
 	echo -e "        <InstallTarHash>$installtarhash</InstallTarHash>"
