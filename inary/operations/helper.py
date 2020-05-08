@@ -82,6 +82,7 @@ def calculate_free_space_needed(order):
     packagedb = inary.db.packagedb.PackageDB()
 
     for pkg in [packagedb.get_package(name) for name in order]:
+        delta = None 
         if installdb.has_package(pkg.name):
             (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
 
