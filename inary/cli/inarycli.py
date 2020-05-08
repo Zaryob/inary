@@ -62,6 +62,7 @@ import inary.cli.searchfile
 import inary.cli.search
 import inary.cli.updaterepo
 import inary.cli.upgrade
+import inary.cli.sysconf
 
 # FIXME: why does this has to be imported last
 import inary.cli.help

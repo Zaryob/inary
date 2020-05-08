@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # -*- coding:utf-8 -*-
 #
 # Copyright (C) 2020, Sulin Community
@@ -17,6 +16,10 @@
 
 import os
 import sys
+# Gettext Library
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
 def getmtime(path):
     """Get file or directory modify time"""
     if not os.path.exists(path):
@@ -45,21 +48,20 @@ def t(name, path, command):
     status = 0
     if os.path.isdir(path) == True:
         if getltime(name) != getmtime(path):
-            sys.stdout.write(_("\0x1b[1K\0x1b[33m    [-] Process triggering for {}\0x1b[;0m".format(name)))
+            sys.stdout.write(_("\n\x1b[33m    [-] Process triggering for \x1b[;0m{}".format(name)))
             status = os.system(command + " &>/dev/null")
         setltime(name, getmtime(path))
     if status != 0:
-        sys.stdout.write("\0x1b[1K\0x1b[31;1m    [!] Triggering end with {}\0x1b[;0m".format(status))
+        sys.stdout.write("\r\x1b[K\x1b[31;1m    [!] Triggering end with \x1b[;0m{}".format(status))
     else:
-        sys.stdout.write(_("\0x1b[1K\0x1b[32;1m    [+] Process triggered for {}\0x1b[;0m".format(name)))
-
-    sys.stdout.write("\n")
-
+        sys.stdout.write(_("\r\x1b[K\x1b[32;1m    [+] Process triggered for  \x1b[;0m{}".format(name)))
+        
 
 def t_r(name, path, command):
     """main trigger handler with recursive"""
     for i in os.listdir(path):
-        t("{}-{}".format(name, i), "{}/{}".format(path, i), "{}{}".format(command, i))
+    	if os.path.isdir("{}/{}".format(path, i)):
+             t("{}-{}".format(name, i), "{}/{}".format(path, i), "{}{}".format(command, i))
 
 
 def proceed(force=False):
@@ -81,3 +83,4 @@ def proceed(force=False):
     t("appstream", "/var/cache/app-info", "appstreamcli refresh-cache --force")
     t("ca-certficates", "/etc/ssl/certs", "update-ca-certificates --fresh")
     t("cracklib", "/usr/share/cracklib/", "create-cracklib-dict /usr/share/cracklib/*")
+    sys.stdout.write("\n")
