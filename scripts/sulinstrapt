@@ -3,14 +3,14 @@
 
 if [ "$1" == "" ] || [ "$1" == "-*" ]
 then
-    echo "Usage: sulinstrapt [directory]"
-    exit 0
+	echo "Usage: sulinstrapt [directory]"
+	exit 0
 fi
 sulin="$1"
 if [ $UID -ne 0 ]
 then
-    echo "You must be root!"
-    exit 1
+	echo "You must be root!"
+	exit 1
 fi
 if [ -d "$sulin" ]
 then
@@ -25,9 +25,17 @@ inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository
 inary ur -D$sulin
 inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
 inary it -c system.base -y --ignore-configure -D$sulin
+if echo $2 | grep "^-" &>/dev/null ; then
+	echo $2 | grep "b" && inary it -c system.boot toybox btrfs-progs linux -y --ignore-configure -D$sulin
+	echo $2 | grep "x" && inary it -c x11 -y --ignore-configure -D$sulin
+	echo $2 | grep "d" && inary it -c system.devel -y --ignore-configure -D$sulin
+	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
+	echo $2 | grep "a" && inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
+fi
 for i in /dev /sys /proc
 do
-    mkdir -p $sulin/$i &>/dev/null
-    mount --bind $i $sulin/$i
+	mkdir -p $sulin/$i &>/dev/null
+	mount --bind $i $sulin/$i
 done
+chroot $sulin inary cp baselayout
 chroot $sulin inary cp
