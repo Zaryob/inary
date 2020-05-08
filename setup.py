@@ -206,6 +206,7 @@ setup(name="inary",
                'scripts/pspec2po',
                'scripts/revdep-rebuild',
                'scripts/sulinstrapt',
+               'scripts/makepkg',
                'scripts/update-inary-cache',
                'scripts/version-bump'],
       classifiers=[

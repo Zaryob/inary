@@ -6,7 +6,6 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
 / Üzerinde Çalışıyorum
 + Yaptım
 
-
 1. Pre-Alpha
   / Daha temiz logging stratejisi:
     / Her çıktının log dosyasına yazılması işleri biraz karıştırıyor. log dosyası şişiyor.
@@ -24,11 +23,10 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
     + Eğer paket kurulacak ise toplam install.tar.xz boyutunu yazdır.
     + Eğer update yapılacak ise değişecek boyutu yazdır.
     + Silecek paketin ne kadar yer açacağını yazdır.
-  - Biraz daha anlaşılır paket yapılandırmaları.
-    - Mevcut Comar forku olan SCOM kodunda uygun düzenlemeler yaparak hangi script nerede hata
-      oluşturdu ise geri çevir.
-    - Script hata oluşturunca inary paket yönetiminin donmasını engelle.
-    - debconf benzeri yapılandırma arayüzü oluştur.
+  \ Biraz daha anlaşılır paket yapılandırmaları.
+    + SCOM alternatifi bir yapılandırma yöneticisi oluştur
+    + triggerler ekle (ca-certificates glib-shemes update-icon-themes)
+    ? tui yapılandırma desteği
   - TestSuit:
     - Hangi testler eklenecek ise ona göre doldurulacak.
 
@@ -49,36 +47,42 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
     / uk
     - az
 
+  - Inary Fetcher:
+      - Uzak depodan paket kaynak dosyası çekme
+           - git
+           - subversion
+      - ftp sunucusundan kaynak indirme.
+
   - Inary-Devtools:
       - Depo paketlerinin geçmişini resetleyecek bir araç.
       - Depo elemanlarının çevirilerini kolaylaştıracak bir araç.
-      - pkgconfig ldd ve .so uzantılı linkleri kullanarak bir paketin
+      + pkgconfig ldd ve .so uzantılı linkleri kullanarak bir paketin
         kırık bağımlılığını raporlayacak bir araç.
 
   - Inary-SIGN:
-      - GPG bazlı index ve paket imzası kontrol mekanizması.
-        - GPG signed repository.
-        - GPG signing script.
+      + GPG bazlı index ve paket imzası kontrol mekanizması.
+        + GPG signed repository.
+        \ GPG signing script.
 
-  - Full System Emerge:
-      - Kaynak repolarından bağımlılık getirirek paket build etmek.
-      - Derlemeli upgrade mekanizması.
-      - Kaynak repolarından devam ederse derlenmiş paketlerin sisteme alınmasında
+  + Full System Emerge:
+      + Kaynak repolarından bağımlılık getirirek paket build etmek.
+      + Derlemeli upgrade mekanizması.
+      + Kaynak repolarından devam ederse derlenmiş paketlerin sisteme alınmasında
         katı sınırlama yapmak.
 
-  - History için düzenlemeler:
-      - hs komutu sonrası kırılmaların önlenmesi.
-      - hs komutunun tüm terminaller için uygun hale getirilmesi.
+  + History için düzenlemeler:
+      + hs komutu sonrası kırılmaların önlenmesi.
+      + hs komutunun tüm terminaller için uygun hale getirilmesi.
 
   - Database methodları:
-      - lazydb içindeki biraz ilkel ve yavaş olan db yönetim mantığı düzenlenmeli.
+      \ lazydb içindeki biraz ilkel ve yavaş olan db yönetim mantığı düzenlenmeli.
       database pickle ile oluşturulmak yerine adam akıllı bir database yönetimi ile
       (sqlite) veya bir yığın depolama ile (shelve) sağlanması hız katabilir.
 
-  - Yeni Komutlar.
-      - downgrade: Paket sürümünü güncellemeden önceki haline getirmek.
-      - shell: inary paket yöneticisi için kabuk ortamı
-      - reconfigure: seçilen paketi yeniden yapılandırma. (ncurses arayüzü ile)
+  \ Yeni Komutlar.
+      - downgrade: Paket sürümünü güncellemeden önceki haline getirmek. (nasıl yapılabilir üzerinde uğraşıyorum)
+      + shell: inary paket yöneticisi için kabuk ortamı
+      + reconfigure: seçilen paketi yeniden yapılandırma. (ncurses arayüzü ile)
       + configure-manager: değişen config dosyalarının takibi için
 
 
@@ -90,7 +94,7 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
   - Index iyileştirmeleri.
 
   / Inary config manager. [ inary config ] komutu:
-      - değişmiş config dosyları kırılmış dosya olarak görülmemeli.
+      \ değişmiş config dosyları kırılmış dosya olarak görülmemeli.
       + yeni paket kurulumunda mevcut config kurulup yeni config *.config.new
       şeklinde yeniden adlandırılmalı
       + değişen config dosyalarının dökümü
@@ -108,14 +112,18 @@ INARY 2.0 Yol Haritası ve Yapılacaklar
 4. Release
   - Removing deprecated modules:
       - autoxml için formatter kütüphanesi.
-  - Code optimizations:
-      - Optimize imports.
-      - Optimize definitions.
-      - Optimize runtime variables.
-      - Optimize class and superclasses.
+  + Code optimizations:
+      + Optimize imports.
+      + Optimize definitions.
+      + Optimize runtime variables.
+      + Optimize class and superclasses.
 
 5. Post Release
-    ... Zamanla eklenecek ...
+  - Inary Archives
+      - çoklu doğrulama imkani
+           + sha1sum
+           - sha256sum
+           - md5sum
 
 6. Long Term
     ... Zamanla eklenecek ...
