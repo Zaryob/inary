@@ -24,7 +24,7 @@ import inary.util as util
 import inary.ui as ui
 import inary.analyzer.conflict
 import inary.db
-
+import time
 
 def reorder_base_packages(order):
     componentdb = inary.db.componentdb.ComponentDB()
@@ -82,6 +82,7 @@ def calculate_free_space_needed(order):
     packagedb = inary.db.packagedb.PackageDB()
 
     for pkg in [packagedb.get_package(name) for name in order]:
+        delta = None 
         if installdb.has_package(pkg.name):
             (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
 
@@ -186,7 +187,7 @@ def check_config_changes(order):
         newconfig = []
 
         for path in config_paths:
-            if os.path.exists(path) and os.path.exists(path + ".newconfig"):
+            if os.path.exists(path) and os.path.exists(path + ".newconfig-byinary"):
                 newconfig.append(path)
         if newconfig:
             config_changes[package] = newconfig
