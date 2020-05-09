@@ -38,7 +38,9 @@ class runsysconf(command.PackageOp, metaclass=command.autocommand):
     name = (_("sysconf"), "sc")
 
     def options(self):
-        pass
+        group = optparse.OptionGroup(self.parser, _("search options"))
+        group.add_option("--force-sysconf", action="store_true",
+                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
 
     def run(self):
-        sc.proceed(True)
+        sc.proceed(self.options.force_sysconf)

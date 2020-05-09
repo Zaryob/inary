@@ -79,5 +79,5 @@ You can also give the name of a component.
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
         emerge.emerge(sources)
-        if self.options.ignore_sysconf:
+        if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)

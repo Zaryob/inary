@@ -119,7 +119,7 @@ expanded to package names.
 
         config_changes = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
 
-        if self.options.ignore_sysconf:
+        if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
 
         if config_changes:

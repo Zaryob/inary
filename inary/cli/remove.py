@@ -72,5 +72,5 @@ expanded to package names.
 
         remove.remove(packages)
 
-        if self.options.ignore_sysconf:
+        if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)

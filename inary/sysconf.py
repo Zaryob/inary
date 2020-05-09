@@ -50,11 +50,11 @@ def t(name, path, command):
         if getltime(name) != getmtime(path):
             sys.stdout.write(_("\n\x1b[33m    [-] Process triggering for \x1b[;0m{}".format(name)))
             status = os.system(command + " &>/dev/null")
-        setltime(name, getmtime(path))
-    if status != 0:
-        sys.stdout.write("\r\x1b[K\x1b[31;1m    [!] Triggering end with \x1b[;0m{}".format(status))
-    else:
-        sys.stdout.write(_("\r\x1b[K\x1b[32;1m    [+] Process triggered for  \x1b[;0m{}".format(name)))
+            setltime(name, getmtime(path))
+            if status != 0:
+                sys.stdout.write("\r\x1b[K\x1b[31;1m    [!] Triggering end with \x1b[;0m{}".format(status))
+            else:
+                sys.stdout.write(_("\r\x1b[K\x1b[32;1m    [+] Process triggered for  \x1b[;0m{}".format(name)))
         
 
 def t_r(name, path, command):
