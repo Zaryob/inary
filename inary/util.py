@@ -284,6 +284,10 @@ def format_by_columns(strings, sep_width=2):
 # Process Releated Functions #
 ##############################
 
+def makedirs(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
 def search_executable(executable):
     """Search for the executable in user's paths and return it."""
     for _path in os.environ["PATH"].split(":"):
