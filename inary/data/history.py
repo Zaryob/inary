@@ -100,7 +100,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def create(self, operation):
 
         if operation not in ["downgrade", "upgrade", "remove", "emerge", "install", "snapshot", "takeback",
-                             "repoupdate"]:
+                             "repoupdate", "reset"]:
             raise Exception(_("Unknown package operation"))
 
         opno = self._get_latest()
@@ -122,7 +122,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     # @param otype is currently only used to hold if an upgrade is from "delta"
     def add(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
 
-        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot", "reset"]:
+        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot"]:
             raise Exception(_("Unknown package operation"))
 
         package = Package()
@@ -151,7 +151,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         files = [h for h in os.listdir(ctx.config.history_dir()) if h.endswith(".xml")]
         if not files:
-            return "0o01"
+            return "001"
 
         # files.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         files.sort(key=lambda x: int(x.split("_")[0].replace("0o", "0")))
