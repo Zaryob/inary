@@ -195,8 +195,13 @@ def get_package_requirements(packages):
 
     return requirements
 
-def check_config_changes(order):
 
+def check_config_changes(opt=None, order):
+    if not opt:
+        import inary.data.history as History
+        history = History.History()
+        opt=history._get_latest()
+        print(opt)
     config_changes=dict()
 
     for package in order:
@@ -207,7 +212,7 @@ def check_config_changes(order):
         newconfig = []
 
         for path in config_paths:
-            if os.path.exists(path) and os.path.exists(path + ".newconfig-byinary"):
+            if os.path.exists(path) and os.path.exists(path):
                 newconfig.append(path)
         if newconfig:
             config_changes[package] = newconfig
