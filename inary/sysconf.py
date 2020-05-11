@@ -20,6 +20,7 @@ import sys
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+sysconfdir="/var/lib/inary/sysconf"
 def getmtime(path):
     """Get file or directory modify time"""
     if not os.path.exists(path):
@@ -29,9 +30,9 @@ def getmtime(path):
 
 def getltime(name):
     """Get last modify time from database"""
-    location = "/var/lib/triggers/{}".format(name)
-    if not os.path.exists("/var/lib/triggers"):
-        os.mkdir("/var/lib/triggers")
+    location = sysconfdir+"/{}".format(name)
+    if not os.path.exists(sysconfdir):
+        os.mkdir(sysconfdir)
     if not os.path.exists(location):
         setltime(name, 0)
     return int(open(location, "r").readline().replace("\n", ""))
@@ -39,7 +40,7 @@ def getltime(name):
 
 def setltime(name, value):
     """Set last modify time to database"""
-    location = "/var/lib/triggers/{}".format(name)
+    location = sysconfdir+"/{}".format(name)
     open(location, "w").write(str(value))
 
 
@@ -67,7 +68,7 @@ def t_r(name, path, command):
 def proceed(force=False):
     sys.stdout.write(_("Process triggering for sysconf.\n"))
     if force:
-        os.system("rm -rf {}".format("/var/lib/triggers"))
+        os.system("rm -rf {}".format(sysconfdir))
     t("fonts", "/usr/share/fonts", "fc-cache -f")
     t("glib-schema", "/usr/share/glib-2.0/schemas/", "glib-compile-schemas /usr/share/glib-2.0/schemas/")
     t_r("icon", "/usr/share/icons", "gtk-update-icon-cache -t -f /usr/share/icons/")
