@@ -306,6 +306,34 @@ def run_batch(cmd, ui_debug=True):
     if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
     return p.returncode, out.decode('utf-8'), err
 
+
+def run_batch_no_out(cmd, ui_debug=True):
+    """Run command and report return value and output."""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
+    p = subprocess.Popen(cmd, shell=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    err = p.communicate()[1]
+    if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
+    return p.returncode, err
+
+def run_batch_no_err(cmd, ui_debug=True):
+    """Run command and report return value and output."""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
+    p = subprocess.Popen(cmd, shell=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = p.communicate()[0]
+    if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
+    return p.returncode, out
+
+def run_batch_no_stdio(cmd, ui_debug=True):
+    """Run command and report return value."""
+    ctx.ui.info(_('Running ') + cmd, verbose=True)
+    p = subprocess.Popen(cmd, shell=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
+    return p.returncode
+
+
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
 # values instead. but this is good enough :)
@@ -328,7 +356,7 @@ def run_logged(cmd):
             stderr = subprocess.STDOUT
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
-    out, err = p.communicate()
+    p.communicate()
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
@@ -966,6 +994,18 @@ def parse_package_name(package_name):
             raise Error(_("Invalid package name: \"{}\"").format(package_name))
 
     return name, "{0}-{1}".format(version, release)
+
+def parse_package_name_get_name(package_name):
+    """Separate package name and version string.
+
+    example: tasma-1.0.3-5-p11-x86_64 -> (tasma, 1.0.3-5)
+    """
+
+    # Strip extension if exists
+    if package_name.endswith(ctx.const.package_suffix):
+        package_name = remove_suffix(ctx.const.package_suffix, package_name)
+    name = package_name.rsplit("-", 4)[0]
+    return name
 
 
 def parse_package_dir_path(package_name):

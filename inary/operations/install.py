@@ -61,9 +61,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     if not ctx.config.get_option('ignore_dependency'):
         ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
-        G_f, order = plan_install_pkg_names(A)
+        order = plan_install_pkg_names(A)
     else:
-        G_f = None
         order = list(A)
 
     componentdb = inary.db.componentdb.ComponentDB()
@@ -130,7 +129,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        basename=path.split("/")[-1]
         ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
         install_op.install(False)
         try:
@@ -165,7 +163,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     if not reinstall:
         for x in package_URIs:
             if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(ctx.const.package_suffix):
-                pkg_name, pkg_version = util.parse_package_name(os.path.basename(x))
+                pkg_name = util.parse_package_name_get_name(os.path.basename(x))
                 if installdb.has_package(pkg_name):
                     already_installed.add(pkg_name)
                 else:
@@ -348,7 +346,7 @@ def plan_install_pkg_names(A):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
-    return G_f, order
+    return order
 
 
 def get_install_order(packages):
@@ -358,8 +356,7 @@ def get_install_order(packages):
     dependencies -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    i_graph, order = plan_install_pkg_names(packages)
-    return order
+    return plan_install_pkg_names(packages)
 
 
 @util.locked

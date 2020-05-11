@@ -50,9 +50,8 @@ def emerge(A):
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order_inst, order_build = plan_emerge(A)
+        order_inst, order_build = plan_emerge(A)
     else:
-        G_f = None
         order_inst = []
         order_build = A
 
@@ -155,6 +154,6 @@ def plan_emerge(A):
     order_build = G_f.topological_sort()
     order_build.reverse()
 
-    G_f2, order_inst = inary.operations.install.plan_install_pkg_names(install_list)
+    order_inst = inary.operations.install.plan_install_pkg_names(install_list)
 
-    return G_f, order_inst, order_build
+    return order_inst, order_build

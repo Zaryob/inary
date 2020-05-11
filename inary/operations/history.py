@@ -59,11 +59,28 @@ def __listactions(actions):
 
     return beinstalled, beremoved, configs
 
+def __listactions_without_config(actions):
+    beinstalled = []
+    beremoved = []
+
+    installdb = inary.db.installdb.InstallDB()
+    for pkg in actions:
+        action, pkginfo = actions[pkg][:2]
+        if action == "install":
+            if __pkg_already_installed(pkg, pkginfo):
+                continue
+            beinstalled.append("{0}-{1}".format(pkg, pkginfo))
+        else:
+            if installdb.has_package(pkg):
+                beremoved.append("{}".format(pkg))
+
+    return beinstalled, beremoved
+
 
 def __getpackageurl_binman(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
-    pkg, ver = inary.util.parse_package_name(package)
+    pkg = inary.util.parse_package_name_get_name(package)
 
     reponame = None
     try:
@@ -91,7 +108,7 @@ def __getpackageurl_binman(package):
 def __getpackageurl(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
-    pkg, ver = util.parse_package_name(package)
+    pkg = util.parse_package_name_get_ver(package)
 
     reponame = None
     try:
@@ -188,6 +205,16 @@ def plan_takeback(operation):
 
     return __listactions(actions)
 
+def plan_takeback_without_config(operation):
+    historydb = inary.db.historydb.HistoryDB()
+    op = historydb.get_operation(operation)
+    if op.type == "snapshot":
+        actions = get_snapshot_actions(op)
+    else:
+        actions = get_takeback_actions(operation)
+
+    return __listactions_without_config(actions)
+
 
 @util.locked
 def takeback(operation):
@@ -198,7 +225,7 @@ def takeback(operation):
     """
     historydb = inary.db.historydb.HistoryDB()
     historydb.create_history("takeback")
-    beinstalled, beremoved, configs = plan_takeback(operation)
+    beinstalled, beremoved = plan_takeback_without_config(operation)
     if not beinstalled and not beremoved:
         ctx.ui.info(_("There is no packages to taking back (installing or removing)."))
 
@@ -243,7 +270,7 @@ def get_takeback_plan(operation):
     @param operation: number of the operation that the system will be taken back -> integer
     """
 
-    beinstalled, beremoved, configs = plan_takeback(operation)
+    beinstalled, beremoved = plan_takeback_without_config(operation)
     return beinstalled, beremoved
 
 

@@ -43,7 +43,7 @@ def check_update_actions(packages):
             continue
 
         pkg = packagedb.get_package(package)
-        version, release, build = installdb.get_version(package)
+        release = installdb.get_release(package)
         pkg_actions = pkg.get_update_actions(release)
 
         for action_name, action_targets in list(pkg_actions.items()):
@@ -100,7 +100,8 @@ def find_upgrades(packages, replaces):
 
         pkg = packagedb.get_package(i_pkg)
         hash = installdb.get_install_tar_hash(i_pkg)
-        (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(i_pkg)
+        release = installdb.get_release(i_pkg)
+        (distro, distro_release) = installdb.get_distro_release(i_pkg)
 
         if security_only and not pkg.has_update_type("security", release):
             continue
@@ -179,9 +180,8 @@ def upgrade(A=None, repo=None):
     ctx.ui.debug('A = {}'.format(str(A)))
 
     if not ctx.config.get_option('ignore_dependency'):
-        G_f, order = plan_upgrade(A, replaces=replaces)
+        order = plan_upgrade(A, replaces=replaces)
     else:
-        G_f = None
         order = list(A)
 
     componentdb = inary.db.componentdb.ComponentDB()
@@ -247,7 +247,6 @@ def upgrade(A=None, repo=None):
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        basename=path.split("/")[-1]
         ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
         install_op.install(False)
         try:
@@ -362,13 +361,13 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     def add_needed_revdeps(pkg, Bp):
         # Search for reverse dependency update needs of to be upgraded packages
         # check only the installed ones.
-        version, release, build = installdb.get_version(pkg.name)
+        release = installdb.get_release(pkg.name)
         actions = pkg.get_update_actions(release)
 
         packages = actions.get("reverseDependencyUpdate")
         if packages:
             for target_package in packages:
-                for name, dep in installdb.get_rev_deps(target_package):
+                for name in installdb.get_rev_dep_names(target_package):
                     if name in G_f.vertices() or not is_upgradable(name):
                         continue
 
@@ -395,7 +394,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 
     order = G_f.topological_sort()
     order.reverse()
-    return G_f, order
+    return order
 
 
 def upgrade_base(A=None):
@@ -414,7 +413,7 @@ def upgrade_base(A=None):
                 ctx.ui.info(util.format_by_columns(sorted(extra_installs)))
 
             # Will delete G_F and extra_upgrades
-            G_f, install_order = operations.install.plan_install_pkg_names(extra_installs)
+            install_order = operations.install.plan_install_pkg_names(extra_installs)
             extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x)]
             upgrade_order = []
 
@@ -430,7 +429,7 @@ def upgrade_base(A=None):
                 ctx.ui.warning(_("Safety switch forces the upgrade of "
                                  "following packages:"))
                 ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
-                G_f, upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
+                upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
 
             # no-need-for-upgrade-order patch
             # extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
@@ -449,14 +448,14 @@ def is_upgradable(name):
     if not installdb.has_package(name):
         return False
 
-    (i_version, i_release, i_build, i_distro, i_distro_release) = installdb.get_version_and_distro_release(name)
+    i_release = installdb.get_release(name)
+    (i_distro, i_distro_release) = installdb.get_distro_release(name)
 
     packagedb = inary.db.packagedb.PackageDB()
 
     try:
-        version, release, build, distro, distro_release = packagedb.get_version_and_distro_release(name,
-                                                                                                   packagedb.which_repo(
-                                                                                                       name))
+        release = packagedb.get_release(name,packagedb.which_repo(name))
+        distro, distro_release = packagedb.get_distro_release(name,packagedb.which_repo(name))
     except KeyboardInterrupt:
         raise
     except Exception:  # FIXME: what exception could we catch here, replace with that.
@@ -476,7 +475,7 @@ def get_upgrade_order(packages):
     @param packages: list of package names -> list_of_strings
     """
     upgrade_order = inary.operations.upgrade.plan_upgrade
-    i_graph, order = upgrade_order(packages)
+    order = upgrade_order(packages)
     return order
 
 

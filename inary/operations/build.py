@@ -1063,7 +1063,7 @@ package might be a good solution."))
 
                     ctx.ui.info(_("\'magic\' return of \"{0}\" is \"{1}\"").format(filepath, fileinfo), verbose=True)
                 else:
-                    ret, out, err = util.run_batch("file {}".format(filepath), ui_debug=False)
+                    ret, out = util.run_batch_no_err("file {}".format(filepath), ui_debug=False)
                     if ret:
                         ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(ret, filepath) +
                                      _("Output:\n{}").format(out))
