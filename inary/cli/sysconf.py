@@ -37,6 +37,8 @@ class runsysconf(command.PackageOp, metaclass=command.autocommand):
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("sysconf options"))
+        group.add_option("-f","--force", action="store_true",
+                         default=False, help=_("Run force sysconf"))
 
     def run(self):
-        sc.proceed(self.options.force_sysconf)
+        sc.proceed(self.options.force)
