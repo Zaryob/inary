@@ -1,8 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
-#
-# Copyright (C) 2016 - 2018, Suleyman POYRAZ (Zaryob)
+# Copyright (C) 2016 - 2020, Suleyman POYRAZ (Zaryob)
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -38,9 +36,7 @@ class runsysconf(command.PackageOp, metaclass=command.autocommand):
     name = (_("sysconf"), "sc")
 
     def options(self):
-        group = optparse.OptionGroup(self.parser, _("search options"))
-        group.add_option("--force-sysconf", action="store_true",
-                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
+        group = optparse.OptionGroup(self.parser, _("sysconf options"))
 
     def run(self):
         sc.proceed(self.options.force_sysconf)

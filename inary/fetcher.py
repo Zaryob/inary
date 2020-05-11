@@ -228,7 +228,7 @@ class Fetcher:
             # pycurl yüzünden kaynaklanıyor
             file_id.close()
             ctx.ui.info(_("RESPONSE: ") + str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
-            ctx.ui.info(_("Downloaded from:" + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+            ctx.ui.info(_("Downloaded from: " + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
             c.close()
 
         except pycurl.error as x:
