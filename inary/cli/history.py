@@ -54,7 +54,7 @@ Lists previous operations.""")
         group.add_option("-s", "--snapshot", action="store_true", default=False,
                          help=_("Take snapshot of the current system."))
         group.add_option("-r", "--reset", action="store_true", default=False,
-                         help=_("Take snapshot of the current system."))
+                         help=_("Clear history."))
         group.add_option("-t", "--takeback", action="store", type="int", default=-1,
                          help=_("Takeback to the state after the given operation finished."))
 
@@ -137,9 +137,8 @@ Lists previous operations.""")
             return
         elif ctx.get_option('takeback') != -1:
             opno = ctx.get_option('takeback')
-            if opno != -1:
-                self.takeback(opno)
-                return
+            self.takeback(opno)
+            return
         elif ctx.get_option('reset'):
             util.clean_dir(ctx.config.history_dir())
             util.makedirs(ctx.config.history_dir())
@@ -148,4 +147,5 @@ Lists previous operations.""")
             #history = History.History()
             #history.add("reset")
             return
-        self.redirect_output(self.print_history())
+        else:
+            self.redirect_output(self.print_history())
