@@ -62,8 +62,8 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             tmpdir = os.path.join(ctx.config.index_dir(), repo)
         else:
             tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
-            util.clean_dir(tmpdir)
-
+        
+        util.clean_dir(tmpdir)
         util.ensure_dirs(tmpdir)
 
         # write uri
