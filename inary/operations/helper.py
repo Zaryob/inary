@@ -229,32 +229,29 @@ def apply_changed_config(old_file, new_file, keep=True):
      util.copy_file(new_file, old_file)
      util.delete_file(new_file)
 
-#def store_new_config(file):
-#     util.copy_file(file, file+".new-byinary")
-
-
 def show_changed_configs(package_dict, opt):
     for package in package_dict:
         if package_dict[package]:
             if ctx.ui.confirm(util.colorize(_("[?] Would you like to see changes in config files of \"{0}\" package").format(package), color='brightyellow')):
                 for file in package_dict[package]:
                     new_file = util.join_path(ctx.config.history_dir(), opt, package, ctx.config.dest_dir(), file)
-                    ctx.ui.info(_("[*] Changes in config file: {}").format(file), color='yellow')
-                    os.system("diff -u {0} {1} | less".format(new_file, file))
-                    prompt=ctx.ui.choose(_("[?] Select the process which will be happened:"), 
-                            [ _("1. Store new config file, not apply [*]"),
-                              _("2. Apply new config file (keep old config)"),
-                              _("3. Apply new config file (don't keep old config)"),
-                              _("4. Delete new config file") ])
+                   
+                    if os.path.exist(new_file):
+                        ctx.ui.info(_("[*] Changes in config file: {}").format(file), color='yellow')
+                        os.system("diff -u {0} {1} | less".format(new_file, file))
+                        prompt=ctx.ui.choose(_("[?] Select the process which will be happened:"), 
+                                [ _("1. Store new config file, not apply [*]"),
+                                  _("2. Apply new config file (keep old config)"),
+                                  _("3. Apply new config file (don't keep old config)"),
+                                  _("4. Delete new config file") ])
 
-                    if prompt == _("1. Store new config file, not apply [*]"):
-                        pass
-                      #  store_new_config(new_file)
-                    elif prompt == _("2. Apply new config file (keep old config)"):
-                        apply_changed_config(util.join_path(ctx.config.dest_dir(),file), new_file, keep=True)
-                    elif prompt == _("3. Apply new config file (don't keep old config)"):
-                        apply_changed_config(util.join_path(ctx.config.dest_dir(),file), new_file, keep=False)
+                        if prompt == _("1. Store new config file, not apply [*]"):
+                            pass
+                        elif prompt == _("2. Apply new config file (keep old config)"):
+                            apply_changed_config(util.join_path(ctx.config.dest_dir(),file), new_file, keep=True)
+                        elif prompt == _("3. Apply new config file (don't keep old config)"):
+                            apply_changed_config(util.join_path(ctx.config.dest_dir(),file), new_file, keep=False)
 
-                    else:
-                        ctx.ui.info(_("Deleting new config file {0}").format(file), verbose=True)
-                        util.delete_file(new_file)
+                        else:
+                            ctx.ui.info(_("Deleting new config file {0}").format(file), verbose=True)
+                            util.delete_file(new_file)

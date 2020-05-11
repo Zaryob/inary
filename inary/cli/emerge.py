@@ -58,7 +58,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
-        import inary.operations.emerge as emerge
+        from inary.operations import emerge, helper
         self.init(database=True)
 
         component = ctx.get_option('component')
@@ -79,5 +79,15 @@ You can also give the name of a component.
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
         emerge.emerge(sources)
+
+        try:
+            config_changes,opt = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+            if config_changes:
+                if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
+                    helper.show_changed_configs(config_changes,opt)
+        except ValueError:
+            pass
+        
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
+        
