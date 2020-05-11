@@ -92,7 +92,8 @@ class Install(AtomicOperation):
             installdb = inary.db.installdb.InstallDB()
             # Package is installed. This is an upgrade. Check delta.
             if installdb.has_package(pkg.name):
-                (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
+                release = installdb.get_release(pkg.name)
+                (distro, distro_release) = installdb.get_distro_release(pkg.name)
                 # inary distro upgrade should not use delta support
                 if distro == pkg.distribution and distro_release == pkg.distributionRelease:
                     delta = pkg.get_delta(release)
@@ -253,7 +254,7 @@ class Install(AtomicOperation):
         pkg = self.pkginfo
 
         if self.installdb.has_package(pkg.name):  # is this a reinstallation?
-            (iversion_s, irelease_s, ibuild) = self.installdb.get_version(pkg.name)
+            (iversion_s, irelease_s) = self.installdb.get_version(pkg.name)[:2]
 
             # determine if same version
             if pkg.release == irelease_s:
@@ -528,7 +529,7 @@ class Install(AtomicOperation):
 
         # need service or system restart?
         if self.installdb.has_package(self.pkginfo.name):
-            (version, release, build) = self.installdb.get_version(self.pkginfo.name)
+            release = self.installdb.get_release(self.pkginfo.name)
             actions = self.pkginfo.get_update_actions(release)
         else:
             actions = self.pkginfo.get_update_actions("1")
@@ -647,7 +648,7 @@ class Remove(AtomicOperation):
         # package (this can legitimately occur while upgrading
         # two packages such that a file has moved from one package to
         # another as in #2911)
-        pkg, existing_file = ctx.filesdb.get_file(fileinfo.path)
+        pkg = ctx.filesdb.get_file_name(fileinfo.path)
         if pkg and pkg != package_name:
             ctx.ui.warning(_('Not removing conflicted file : \"{}\"').format(fpath))
             return

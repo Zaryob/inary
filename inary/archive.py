@@ -565,7 +565,7 @@ class ArchiveTarZ(ArchiveBase):
     def unpack_dir(self, target_dir):
         self.file_path = util.remove_suffix(".Z", self.file_path)
 
-        ret, out, err = util.run_batch(
+        ret = util.run_batch_no_stdio(
             "uncompress -cf {0}.Z > {0}".format(self.file_path))
         if ret != 0:
             raise RuntimeError(_("Problem occured while uncompressing \"{}.Z\" file").format(self.file_path))
