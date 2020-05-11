@@ -1,0 +1,147 @@
+diff --git a/inary/cli/listavailable.py b/inary/cli/listavailable.py
+index b502dba2..d7b5a81c 100644
+--- a/inary/cli/listavailable.py
++++ b/inary/cli/listavailable.py
+@@ -45,8 +45,8 @@ all repositories.
+     def options(self):
+ 
+         group = optparse.OptionGroup(self.parser, _("list-available options"))
+-        group.add_option("-l", "--long", action="store_true",
+-                         default=False, help=_("Show in long format"))
++        group.add_option("-n", "--name-only", action="store_true",
++                         default=False, help=_("Write only names."))
+         group.add_option("-c", "--component", action="store",
+                          default=None, help=_("List available packages under given component"))
+         group.add_option("-U", "--uninstalled", action="store_true",
+@@ -91,15 +91,16 @@ all repositories.
+             if ctx.config.get_option('uninstalled') and p in installed_list:
+                 continue
+ 
+-            package = self.packagedb.get_package(p, repo)
++            pkgname=""
+ 
+             if p in installed_list:
+-                package.name = util.colorize(package.name, 'green')
++                pkgname = util.colorize(p, 'green')
+             else:
+-                package.name = util.colorize(package.name, 'brightwhite')
++                pkgname = util.colorize(p, 'brightwhite')
+ 
+-            if self.options.long:
+-                ctx.ui.info(str(package) + '\n')
++            if self.options.name_only:
++                ctx.ui.info(str(pkgname))
+             else:
+-                package.name += ' ' * max(0, maxlen - len(p))
+-                ctx.ui.info('{0} - {1} '.format(package.name, str(package.summary)))
++                package = self.packagedb.get_package(p, repo)
++                pkgname += ' ' * max(0, maxlen - len(p))
++                ctx.ui.info('{0} - {1} '.format(pkgname, str(package.summary)))
+diff --git a/inary/cli/listinstalled.py b/inary/cli/listinstalled.py
+index aaec6317..04a697e8 100644
+--- a/inary/cli/listinstalled.py
++++ b/inary/cli/listinstalled.py
+@@ -49,6 +49,8 @@ Usage: list-installed
+                                 "by the given host."))
+         group.add_option("-l", "--long", action="store_true",
+                          default=False, help=_("Show in long format"))
++        group.add_option("-n", "--name-only", action="store_true",
++                         default=False, help=_("Write only names."))
+         group.add_option("-c", "--component", action="store",
+                          default=None, help=_("List installed packages under given component."))
+         group.add_option("-i", "--install-info", action="store_true",
+@@ -79,16 +81,28 @@ Usage: list-installed
+         if self.options.install_info:
+             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
+             sys.stdout.write('===========================================================================\n')
+-        for pkg in installed:
+-            package = self.installdb.get_package(pkg)
+-            inst_info = self.installdb.get_info(pkg)
+-            if self.options.long:
++
++        if self.options.long:
++            for pkg in installed:
++                package = self.installdb.get_package(pkg)
++                inst_info = self.installdb.get_info(pkg)
+                 ctx.ui.info(str(package))
+                 ctx.ui.info(str(inst_info))
+-            elif self.options.install_info:
+-                ctx.ui.info('%-20s  ' % package.name, color='white', noln=True)
++    
++        elif self.options.install_info:
++            for pkg in installed:
++                inst_info = self.installdb.get_info(pkg)
++                ctx.ui.info('%-20s  ' % pkg, color='white', noln=True)
+                 ctx.ui.info('|%s' % inst_info.one_liner())
+-            else:
+-                package.name += ' ' * (maxlen - len(package.name))
+-                ctx.ui.info('{} '.format(package.name), color='white', noln=True)
++
++        elif self.options.name_only:
++            for pkg in installed:
++                ctx.ui.info(pkg, color='white')
++
++        else:
++            for pkg in installed:
++                pkgname=pkg
++                package = self.installdb.get_package(pkg)
++                pkgname += ' ' * (maxlen - len(package.name))
++                ctx.ui.info('{} '.format(pkgname), color='white', noln=True)
+                 ctx.ui.info('- {}'.format(str(package.summary)))
+diff --git a/inary/cli/sysconf.py b/inary/cli/sysconf.py
+index 524f207b..18a6ad35 100644
+--- a/inary/cli/sysconf.py
++++ b/inary/cli/sysconf.py
+@@ -37,6 +37,8 @@ class runsysconf(command.PackageOp, metaclass=command.autocommand):
+ 
+     def options(self):
+         group = optparse.OptionGroup(self.parser, _("sysconf options"))
++        group.add_option("-f","--force", action="store_true",
++                         default=False, help=_("Run force sysconf"))
+ 
+     def run(self):
+-        sc.proceed(self.options.force_sysconf)
++        sc.proceed(self.options.force)
+diff --git a/inary/sysconf.py b/inary/sysconf.py
+index ab7a8ea2..c54b5fd4 100644
+--- a/inary/sysconf.py
++++ b/inary/sysconf.py
+@@ -20,6 +20,7 @@ import sys
+ import gettext
+ __trans = gettext.translation('inary', fallback=True)
+ _ = __trans.gettext
++sysconfdir="/var/lib/inary/sysconf"
+ def getmtime(path):
+     """Get file or directory modify time"""
+     if not os.path.exists(path):
+@@ -29,9 +30,9 @@ def getmtime(path):
+ 
+ def getltime(name):
+     """Get last modify time from database"""
+-    location = "/var/lib/triggers/{}".format(name)
+-    if not os.path.exists("/var/lib/triggers"):
+-        os.mkdir("/var/lib/triggers")
++    location = sysconfdir+"/{}".format(name)
++    if not os.path.exists(sysconfdir):
++        os.mkdir(sysconfdir)
+     if not os.path.exists(location):
+         setltime(name, 0)
+     return int(open(location, "r").readline().replace("\n", ""))
+@@ -39,7 +40,7 @@ def getltime(name):
+ 
+ def setltime(name, value):
+     """Set last modify time to database"""
+-    location = "/var/lib/triggers/{}".format(name)
++    location = sysconfdir+"/{}".format(name)
+     open(location, "w").write(str(value))
+ 
+ 
+@@ -67,7 +68,7 @@ def t_r(name, path, command):
+ def proceed(force=False):
+     sys.stdout.write(_("Process triggering for sysconf.\n"))
+     if force:
+-        os.system("rm -rf {}".format("/var/lib/triggers"))
++        os.system("rm -rf {}".format(sysconfdir))
+     t("fonts", "/usr/share/fonts", "fc-cache -f")
+     t("glib-schema", "/usr/share/glib-2.0/schemas/", "glib-compile-schemas /usr/share/glib-2.0/schemas/")
+     t_r("icon", "/usr/share/icons", "gtk-update-icon-cache -t -f /usr/share/icons/")
