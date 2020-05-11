@@ -49,8 +49,6 @@ Usage: list-installed
                                 "by the given host."))
         group.add_option("-l", "--long", action="store_true",
                          default=False, help=_("Show in long format"))
-        group.add_option("-n", "--name-only", action="store_true",
-                         default=False, help=_("Write only names."))
         group.add_option("-c", "--component", action="store",
                          default=None, help=_("List installed packages under given component."))
         group.add_option("-i", "--install-info", action="store_true",
@@ -81,28 +79,16 @@ Usage: list-installed
         if self.options.install_info:
             ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
             sys.stdout.write('===========================================================================\n')
-
-        if self.options.long:
-            for pkg in installed:
-                package = self.installdb.get_package(pkg)
-                inst_info = self.installdb.get_info(pkg)
+        for pkg in installed:
+            package = self.installdb.get_package(pkg)
+            inst_info = self.installdb.get_info(pkg)
+            if self.options.long:
                 ctx.ui.info(str(package))
                 ctx.ui.info(str(inst_info))
-    
-        elif self.options.install_info:
-            for pkg in installed:
-                inst_info = self.installdb.get_info(pkg)
-                ctx.ui.info('%-20s  ' % pkg, color='white', noln=True)
+            elif self.options.install_info:
+                ctx.ui.info('%-20s  ' % package.name, color='white', noln=True)
                 ctx.ui.info('|%s' % inst_info.one_liner())
-
-        elif self.options.name_only:
-            for pkg in installed:
-                ctx.ui.info(pkg, color='white')
-
-        else:
-            for pkg in installed:
-                pkgname=pkg
-                package = self.installdb.get_package(pkg)
-                pkgname += ' ' * (maxlen - len(package.name))
-                ctx.ui.info('{} '.format(pkgname), color='white', noln=True)
+            else:
+                package.name += ' ' * (maxlen - len(package.name))
+                ctx.ui.info('{} '.format(package.name), color='white', noln=True)
                 ctx.ui.info('- {}'.format(str(package.summary)))

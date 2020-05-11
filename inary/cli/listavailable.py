@@ -45,8 +45,8 @@ all repositories.
     def options(self):
 
         group = optparse.OptionGroup(self.parser, _("list-available options"))
-        group.add_option("-n", "--name-only", action="store_true",
-                         default=False, help=_("Write only names."))
+        group.add_option("-l", "--long", action="store_true",
+                         default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
                          default=None, help=_("List available packages under given component"))
         group.add_option("-U", "--uninstalled", action="store_true",
@@ -91,16 +91,15 @@ all repositories.
             if ctx.config.get_option('uninstalled') and p in installed_list:
                 continue
 
-            pkgname=""
+            package = self.packagedb.get_package(p, repo)
 
             if p in installed_list:
-                pkgname = util.colorize(p, 'green')
+                package.name = util.colorize(package.name, 'green')
             else:
-                pkgname = util.colorize(p, 'brightwhite')
+                package.name = util.colorize(package.name, 'brightwhite')
 
-            if self.options.name_only:
-                ctx.ui.info(str(pkgname))
+            if self.options.long:
+                ctx.ui.info(str(package) + '\n')
             else:
-                package = self.packagedb.get_package(p, repo)
-                pkgname += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('{0} - {1} '.format(pkgname, str(package.summary)))
+                package.name += ' ' * max(0, maxlen - len(p))
+                ctx.ui.info('{0} - {1} '.format(package.name, str(package.summary)))
