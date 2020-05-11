@@ -29,7 +29,8 @@ import inary.cli.command as command
 
 # Operation names for translation
 opttrans = {"upgrade": _("upgrade"), "remove": _("remove"), "emerge": _("emerge"), "install": _("install"),
-            "snapshot": _("snapshot"), "takeback": _("takeback"), "repoupdate": _("repository update")}
+            "snapshot": _("snapshot"), "takeback": _("takeback"), "repoupdate": _("repository update"),
+            "reset": _("reset history")}
 
 
 class History(command.PackageOp, metaclass=command.autocommand):
@@ -140,12 +141,13 @@ Lists previous operations.""")
             self.takeback(opno)
             return
         elif ctx.get_option('reset'):
+            ctx.ui.info(_("Resetting history casts"), verbose=True)
             util.clean_dir(ctx.config.history_dir())
             util.makedirs(ctx.config.history_dir())
-            # FIXME: we must add reset info in history
-            #import inary.data.history as History
-            #history = History.History()
-            #history.add("reset")
+            import inary.data.history as History
+            history = History.History()
+            history.create("reset")
+            history.update()
             return
         else:
             self.redirect_output(self.print_history())
