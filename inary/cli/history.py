@@ -138,5 +138,12 @@ Lists previous operations.""")
             if opno != -1:
                 self.takeback(opno)
                 return
+        elif ctx.get_option('reset'):
+            util.clean_dir(ctx.config.history_dir())
+            util.makedirs(ctx.config.history_dir())
+            import inary.data.history as History
+            history = History.History()
+            history.add("reset")
+            return
 
         self.redirect_output(self.print_history())

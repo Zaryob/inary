@@ -122,7 +122,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     # @param otype is currently only used to hold if an upgrade is from "delta"
     def add(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
 
-        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot"]:
+        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot", "reset"]:
             raise Exception(_("Unknown package operation"))
 
         package = Package()
