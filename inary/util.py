@@ -225,7 +225,7 @@ def human_readable_rate(size=0):
 
 def format_by_columns(strings, sep_width=2):
     longest_str_len = len(max(strings, key=len))
-    term_rows, term_columns = get_terminal_size()
+    term_columns = get_terminal_size()[1]
 
     def get_columns(max_count):
         if longest_str_len > term_columns:
@@ -1078,7 +1078,7 @@ def split_package_filename(filename):
 
     except ValueError:
         name, version = parse_package_name_legacy(filename)
-        version, release, build = split_version(version)
+        version, release = split_version(version)[:2]
         distro_id = arch = None
 
     return name, version, release, distro_id, arch
@@ -1116,8 +1116,7 @@ def split_version(package_version):
 
     example: 1.0.3-5-2 -> (1.0.3, 5, 2)
     """
-    version, sep, release_and_build = package_version.partition("-")
-    release, sep, build = release_and_build.partition("-")
+    version, release,build = package_version.split('-')
     return version, release, build
 
 
@@ -1257,7 +1256,8 @@ def get_cpu_count():
         import multiprocessing
         return multiprocessing.cpu_count()
     except (ImportError, NotImplementedError):
-        return None
+        # If we cannot count cpu, we shoult return 1
+        return 1
 
 
 def get_vm_info():

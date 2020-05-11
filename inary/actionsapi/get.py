@@ -54,7 +54,7 @@ def curKERNEL():
 
 def curPYTHON():
     """ returns currently used python's version"""
-    (a, b, c, x, y) = sys.version_info
+    (a, b) = sys.version_info[:2]
     return 'python{0}.{1}'.format(a, b)
 
 
