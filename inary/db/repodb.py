@@ -276,3 +276,19 @@ class RepoDB(lazydb.LazyDB):
         if dist_name is None:
             return
 
+        compatible = dist_name == ctx.config.values.general.distribution
+
+        dist_release = self.get_distribution_release(name)
+        if dist_release is not None:
+            compatible &= \
+                dist_release == ctx.config.values.general.distribution_release
+
+        if not compatible:
+            self.deactivate_repo(name)
+            raise IncompatibleRepoError(
+                _("Repository \"{}\" is not compatible with your distribution. Repository is disabled.\nYour distribution is {} release {}\nRepository distribution is {} release {}\n\nIf you want add this repository please use \"--ignore-check\" parameter with this command.").format(name,
+                    ctx.config.values.general.distribution, 
+                    ctx.config.values.general.distribution_release,
+                    dist_name,
+                    dist_release))
+
