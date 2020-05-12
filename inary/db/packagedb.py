@@ -169,6 +169,12 @@ class PackageDB(lazydb.LazyDB):
         return release
 
     @staticmethod
+    def __get_summary(meta_doc):
+        summary = xmlext.getNodeText(meta_doc, 'Summary')
+
+        return summary
+
+    @staticmethod
     def __get_distro_release(meta_doc):
         distro = xmlext.getNodeText(meta_doc, 'Distribution')
         release = xmlext.getNodeText(meta_doc, 'DistributionRelease')
@@ -190,6 +196,14 @@ class PackageDB(lazydb.LazyDB):
         pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
 
         return self.__get_version(pkg_doc)
+
+    def get_summary(self, name, repo=None):
+        if not self.has_package(name, repo):
+            raise Exception(_('Package \"{}\" not found.').format(name))
+
+        pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
+
+        return self.__get_summary(pkg_doc)
 
     def get_release(self, name, repo):
         if not self.has_package(name, repo):

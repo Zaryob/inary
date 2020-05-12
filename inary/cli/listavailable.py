@@ -91,15 +91,15 @@ all repositories.
             if ctx.config.get_option('uninstalled') and p in installed_list:
                 continue
 
-            package = self.packagedb.get_package(p, repo)
+            psum = self.packagedb.get_summary(p,repo)
 
             if p in installed_list:
-                package.name = util.colorize(package.name, 'green')
+                pkgname = util.colorize(p, 'green')
             else:
-                package.name = util.colorize(package.name, 'brightwhite')
+                pkgname = util.colorize(p, 'brightwhite')
 
             if self.options.long:
-                ctx.ui.info(str(package) + '\n')
+                ctx.ui.info(str(p) + '\n')
             else:
-                package.name += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('{0} - {1} '.format(package.name, str(package.summary)))
+                pkgname += ' ' * max(0, maxlen - len(p))
+                ctx.ui.info('{0} - {1} '.format(p, str(psum)))
