@@ -391,7 +391,7 @@ def mvprintw(x,y,msg=''):
     printw(msg)
 
 def noecho(enabled=True):
-    if(ctx.get_option('no_color')==False):
+    if not ctx.get_option('no_color'):
         if(enabled):
             printw("\x1b[?25l")
         else:
@@ -1139,7 +1139,7 @@ def filter_latest_packages(package_paths):
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
-    if color in ctx.const.colors and not ctx.get_option('no_color'):
+    if color in ctx.const.colors and not (ctx.get_option('no_color') or ctx.config.values.general.no_color):
         return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
     else:
         return str(msg)

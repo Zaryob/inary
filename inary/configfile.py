@@ -83,6 +83,7 @@ class GeneralDefaults:
     package_cache_limit = 0
     ssl_verify = True
     bandwidth_limit = 0
+    no_color = False
     ignore_safety = False
     ignore_delta = False
 
