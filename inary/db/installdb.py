@@ -160,6 +160,14 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     @staticmethod
+    def __get_summary(meta_doc):
+        package = xmlext.getNode(meta_doc, 'Package')
+        summary = xmlext.getNodeText(package, 'Summary')
+
+        return summary
+
+
+    @staticmethod
     def __get_version(meta_doc):
         package = xmlext.getNode(meta_doc, 'Package')
         history = xmlext.getNode(package, 'History')
@@ -226,6 +234,12 @@ class InstallDB(lazydb.LazyDB):
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_release(meta_doc)
+
+    def get_summary(self, package):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        meta_doc = xmlext.parse(metadata_xml)
+
+        return self.__get_summary(meta_doc)
 
 
     def get_files(self, package):

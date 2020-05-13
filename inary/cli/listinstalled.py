@@ -84,9 +84,8 @@ Usage: list-installed
 
         if self.options.long:
             for pkg in installed:
-                package = self.installdb.get_package(pkg)
                 inst_info = self.installdb.get_info(pkg)
-                ctx.ui.info(str(package))
+                ctx.ui.info(str(pkg))
                 ctx.ui.info(str(inst_info))
     
         elif self.options.install_info:
@@ -102,7 +101,7 @@ Usage: list-installed
         else:
             for pkg in installed:
                 pkgname=pkg
-                package = self.installdb.get_package(pkg)
-                pkgname += ' ' * (maxlen - len(package.name))
+                psum = self.installdb.get_summary(pkg)
+                pkgname += ' ' * (maxlen - len(pkg))
                 ctx.ui.info('{} '.format(pkgname), color='white', noln=True)
-                ctx.ui.info('- {}'.format(str(package.summary)))
+                ctx.ui.info('- {}'.format(str(psum)))
