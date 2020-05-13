@@ -16,11 +16,14 @@
 
 import os
 import sys
+
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 sysconfdir="/var/lib/inary/sysconf"
+
 def getmtime(path):
     """Get file or directory modify time"""
     if not os.path.exists(path):

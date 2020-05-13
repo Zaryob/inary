@@ -47,6 +47,8 @@ all repositories.
         group = optparse.OptionGroup(self.parser, _("list-available options"))
         group.add_option("-n", "--name-only", action="store_true",
                          default=False, help=_("Write only names."))
+        #group.add_option("-l", "--long", action="store_true",
+        #                 default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
                          default=None, help=_("List available packages under given component"))
         group.add_option("-U", "--uninstalled", action="store_true",
@@ -98,7 +100,13 @@ all repositories.
             else:
                 pkgname = util.colorize(p, 'brightwhite')
 
-            if self.options.name_only:
+            #if self.options.long:
+            #    package = self.packagedb.get_package(p)
+            #    inst_info = self.packagedb.get_info(p)
+            #    ctx.ui.info(str(package))
+            #    ctx.ui.info(str(inst_info))
+    
+            elif self.options.name_only:
                 ctx.ui.info(str(pkgname))
             else:
                 package = self.packagedb.get_package(p, repo)
