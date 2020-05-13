@@ -342,42 +342,11 @@ class Install(AtomicOperation):
 
         ctx.ui.notify(inary.ui.extracting, package=self.pkginfo, files=self.files)
 
-        config_changed = []
 
         def check_config_changed(config):
             fpath = util.join_path(ctx.config.dest_dir(), config.path)
             if util.config_changed(config):
-                config_changed.append(fpath)
                 self.historydb.save_config(self.pkginfo.name, fpath)
-                if os.path.exists(fpath + '.old-byinary'):
-                    os.unlink(fpath + '.old-byinary')
-                os.rename(fpath, fpath + '.old-byinary')
-
-        # old config files are kept as they are. New config files from the installed
-        # packages are saved with ".newconfig" string appended to their names.
-        def rename_configs():
-            for path in config_changed:
-                newconfig = path + '.newconfig-byinary'
-                oldconfig = path + '.old-byinary'
-                if os.path.exists(newconfig):
-                    os.unlink(newconfig)
-
-                # In the case of delta packages: the old package and the new package
-                # may contain same config typed files with same hashes, so the delta
-                # package will not have that config file. In order to protect user
-                # changed config files, they are renamed with ".old-byinary" prefix in case
-                # of the hashes of these files on the filesystem and the new config
-                # file that is coming from the new package. But in delta package case
-                # with the given scenario there wont be any, so we can pass this one.
-                # If the config files were not be the same between these packages the
-                # delta package would have it and extract it and the path would point
-                # to that new config file. If they are same and the user had changed
-                # that file and using the changed config file, there is no problem
-                # here.
-                if os.path.exists(path):
-                    os.rename(path, newconfig)
-
-                os.rename(oldconfig, path)
 
         # Package file's path may not be relocated or content may not be changed but
         # permission may be changed
@@ -502,9 +471,6 @@ class Install(AtomicOperation):
             update_permissions()
 
         self.package.extract_install(ctx.config.dest_dir())
-
-        if config_changed:
-            rename_configs()
 
         if self.reinstall():
             clean_leftovers()

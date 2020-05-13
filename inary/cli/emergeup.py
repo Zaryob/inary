@@ -58,7 +58,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
-        from inary.operations import repository, emerge
+        from inary.operations import repository, emerge, helper
         self.init(database=True)
 
         source = inary.db.sourcedb.SourceDB()
@@ -85,5 +85,7 @@ You can also give the name of a component.
         repository.update_repos(repos, ctx.get_option('force'))
 
         emerge.emerge(emerge_up_list)
+        
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
+        
