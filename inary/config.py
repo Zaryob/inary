@@ -19,6 +19,7 @@ regular INARY configurations.
 
 import copy
 import os
+from pathlib import Path
 
 # Gettext Library
 import gettext
@@ -51,8 +52,15 @@ class Config(object, metaclass=util.Singleton):
 
     def __init__(self, options=Options()):
         self.set_options(options)
-        self.values = inary.configfile.ConfigurationFile("/etc/inary/inary.conf")
 
+        if Path("/etc/inary/inary.conf").is_file():
+                self.values = inary.configfile.ConfigurationFile("/etc/inary/inary.conf")
+        elif Path("inary.conf").is_file():
+                self.values = inary.configfile.ConfigurationFile("inary.conf")
+        else:
+                # config not found but class needed
+                self.values = inary.configfile.ConfigurationFile("")
+		
         # get the initial environment variables. this is needed for
         # build process.
         self.environ = copy.deepcopy(os.environ)
