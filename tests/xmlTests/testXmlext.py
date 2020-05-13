@@ -5,7 +5,7 @@ try:
     import ciksemel
 
 except:
-    pass
+    raise("Ciksemel not found")
 
 from inary.sxml import xmlext_minidom as xmlmdom
 import xml.dom.minidom
