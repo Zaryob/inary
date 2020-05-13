@@ -16,6 +16,7 @@
 
 import os
 import sys
+import inary.context as ctx
 
 # Gettext Library
 import gettext
@@ -69,6 +70,8 @@ def t_r(name, path, command):
 
 
 def proceed(force=False):
+    if ctx.get_option('destdir'):
+        return
     sys.stdout.write(_("Process triggering for sysconf.\n"))
     if force:
         os.system("rm -rf {}".format(sysconfdir))

@@ -238,7 +238,7 @@ def show_changed_configs(package_dict, opt):
                 for file in package_dict[package]:
                     new_file = util.join_path(ctx.config.history_dir(), opt, package, ctx.config.dest_dir(), file)
                    
-                    if os.path.exist(new_file):
+                    if os.path.exists(new_file):
                         ctx.ui.info(_("[*] Changes in config file: {}").format(file), color='yellow')
                         os.system("diff -u {0} {1} | less".format(new_file, file))
                         prompt=ctx.ui.choose(_("[?] Select the process which will be happened:"), 

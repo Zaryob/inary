@@ -306,7 +306,7 @@ class Install(AtomicOperation):
 
     def preinstall(self):
         if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure'):
+            if ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
                self.installdb.mark_pending(self.pkginfo.name)
                return 0
             ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
@@ -328,7 +328,7 @@ class Install(AtomicOperation):
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure'):
+            if ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
             ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
@@ -579,12 +579,12 @@ class Remove(AtomicOperation):
                             + self.package_name)
 
         self.check_dependencies()
-        if not ctx.config.get_option('ignore_configure'):
+        if not ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
             self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
             
-        if not ctx.config.get_option('ignore_configure'):
+        if not ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
             self.run_postremove()
 
         self.update_databases()
