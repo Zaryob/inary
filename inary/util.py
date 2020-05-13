@@ -225,7 +225,7 @@ def human_readable_rate(size=0):
 
 def format_by_columns(strings, sep_width=2):
     longest_str_len = len(max(strings, key=len))
-    term_rows, term_columns = get_terminal_size()
+    term_columns = get_terminal_size()[1]
 
     def get_columns(max_count):
         if longest_str_len > term_columns:
@@ -328,7 +328,7 @@ def run_logged(cmd):
             stderr = subprocess.STDOUT
 
     p = subprocess.Popen(cmd, shell=True, stdout=stdout, stderr=stderr)
-    out, err = p.communicate()
+    p.communicate()
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
@@ -967,6 +967,18 @@ def parse_package_name(package_name):
 
     return name, "{0}-{1}".format(version, release)
 
+def parse_package_name_get_name(package_name):
+    """Separate package name and version string.
+
+    example: tasma-1.0.3-5-p11-x86_64 -> (tasma, 1.0.3-5)
+    """
+
+    # Strip extension if exists
+    if package_name.endswith(ctx.const.package_suffix):
+        package_name = remove_suffix(ctx.const.package_suffix, package_name)
+    name = package_name.rsplit("-", 4)[0]
+    return name
+
 
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
@@ -1038,7 +1050,7 @@ def split_package_filename(filename):
 
     except ValueError:
         name, version = parse_package_name_legacy(filename)
-        version, release, build = split_version(version)
+        version, release = split_version(version)[:2]
         distro_id = arch = None
 
     return name, version, release, distro_id, arch
@@ -1076,8 +1088,7 @@ def split_version(package_version):
 
     example: 1.0.3-5-2 -> (1.0.3, 5, 2)
     """
-    version, sep, release_and_build = package_version.partition("-")
-    release, sep, build = release_and_build.partition("-")
+    version, release,build = package_version.split('-')
     return version, release, build
 
 
@@ -1217,7 +1228,8 @@ def get_cpu_count():
         import multiprocessing
         return multiprocessing.cpu_count()
     except (ImportError, NotImplementedError):
-        return None
+        # If we cannot count cpu, we shoult return 1
+        return 1
 
 
 def get_vm_info():

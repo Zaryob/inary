@@ -71,9 +71,8 @@ def remove(A, ignore_dep=False, ignore_safety=False):
         return False
 
     if not ctx.config.get_option('ignore_dependency') and not ignore_dep:
-        G_f, order = plan_remove(A)
+        order = plan_remove(A)
     else:
-        G_f = None
         order = util.unique_list(A)
 
     ctx.ui.info(_("""The following list of packages will be removed in the respective order to satisfy dependencies:"""), color='green')
@@ -163,7 +162,7 @@ def plan_remove(A):
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
-    return G_f, order
+    return order
 
 
 def remove_conflicting_packages(conflicts):
@@ -190,5 +189,5 @@ def get_remove_order(packages):
     Return a list of packages in the remove order -> list_of_strings
     @param packages: list of package names -> list_of_strings
     """
-    i_graph, order = plan_remove(packages)
+    order = plan_remove(packages)
     return order

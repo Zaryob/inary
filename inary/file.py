@@ -264,10 +264,10 @@ class File:
                 ctx.ui.warning(NoSignatureFound(uri))
                 return True
 
-            ret, out, err = inary.util.run_batch('gpg --verify ' + sigfilename)
-            if ctx.config.values.general.ssl_verify and ret:
+            result = inary.util.run_batch('gpg --verify ' + sigfilename)
+            if ctx.config.values.general.ssl_verify and result[0]:
                 ctx.ui.info("Checking GPG Signature failed ('gpg --verify {}')".format(sigfilename), color='cyan')
-                ctx.ui.info(err.decode("utf-8"), color='faintcyan')
+                ctx.ui.info(result[2].decode("utf-8"), color='faintcyan')
                 if not ctx.ui.confirm("Would you like to skip checking gpg signature?"):
                     raise InvalidSignature(uri)  # everything is all right here
         else:

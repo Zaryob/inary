@@ -52,7 +52,7 @@ def __listactions(actions):
             if __pkg_already_installed(pkg, pkginfo):
                 continue
             beinstalled.append("{0}-{1}".format(pkg, pkginfo))
-            configs.append((pkg, operation))
+            configs.append(pkg, operation)
         else:
             if installdb.has_package(pkg):
                 beremoved.append("{}".format(pkg))
@@ -63,7 +63,7 @@ def __listactions(actions):
 def __getpackageurl_binman(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
-    pkg, ver = inary.util.parse_package_name(package)
+    pkg = inary.util.parse_package_name_get_name(package)
 
     reponame = None
     try:
@@ -91,7 +91,7 @@ def __getpackageurl_binman(package):
 def __getpackageurl(package):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
-    pkg, ver = util.parse_package_name(package)
+    pkg = util.parse_package_name_get_name(package)
 
     reponame = None
     try:

@@ -94,6 +94,7 @@ all repositories.
                 continue
 
             pkgname=""
+            pkgsum = self.packagedb.get_summary(p,repo)
 
             if p in installed_list:
                 pkgname = util.colorize(p, 'green')
@@ -109,6 +110,5 @@ all repositories.
             elif self.options.name_only:
                 ctx.ui.info(str(pkgname))
             else:
-                package = self.packagedb.get_package(p, repo)
                 pkgname += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('{0} - {1} '.format(pkgname, str(package.summary)))
+                ctx.ui.info('{0} - {1} '.format(pkgname, str(pkgsum)))

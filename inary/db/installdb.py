@@ -171,6 +171,13 @@ class InstallDB(lazydb.LazyDB):
         return version, release, None
 
     @staticmethod
+    def __get_release(meta_doc):
+        package = xmlext.getNode(meta_doc, 'Package')
+        history = xmlext.getNode(package, 'History')
+        update = xmlext.getNode(history, 'Update')
+        return xmlext.getNodeAttribute(update, 'release')
+    
+    @staticmethod
     def __get_distro_release(meta_doc):
         package = xmlext.getNode(meta_doc, 'Package')
         distro = xmlext.getNodeText(package, 'Distribution')
@@ -198,12 +205,28 @@ class InstallDB(lazydb.LazyDB):
 
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
+    def get_distro_release(self, package):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+
+        meta_doc = xmlext.parse(metadata_xml)
+
+        return self.__get_distro_release(meta_doc)
+
+
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_version(meta_doc)
+
+    def get_release(self, package):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+
+        meta_doc = xmlext.parse(metadata_xml)
+
+        return self.__get_release(meta_doc)
+
 
     def get_files(self, package):
         files = Files.Files()
@@ -303,6 +326,16 @@ class InstallDB(lazydb.LazyDB):
             for pkg, dep in list(package_revdeps.items()):
                 dependency = self.__create_dependency(dep)
                 rev_deps.append((pkg, dependency))
+
+        return rev_deps
+
+    def get_rev_dep_names(self, name):
+        rev_deps = []
+
+        package_revdeps = self.rev_deps_db.get(name)
+        if package_revdeps:
+            for pkg in list(package_revdeps.items()):
+                rev_deps.append(pkg)
 
         return rev_deps
 

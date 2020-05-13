@@ -198,8 +198,7 @@ def doman(*sourceFiles, pageDirectory=None):
                 source = source[:-3]
             try:
                 if not pageDirectory:
-                    pageName, pageDirectory = source[:source.rindex('.')], \
-                                              source[source.rindex('.') + 1:]
+                    pageDirectory = source[source.rindex('.') + 1:]
             except ValueError:
                 error(_('ActionsAPI [doman]: Wrong man page file: \"{}\"').format(source))
 

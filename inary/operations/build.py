@@ -1063,13 +1063,13 @@ package might be a good solution."))
 
                     ctx.ui.info(_("\'magic\' return of \"{0}\" is \"{1}\"").format(filepath, fileinfo), verbose=True)
                 else:
-                    ret, out, err = util.run_batch("file {}".format(filepath), ui_debug=False)
-                    if ret:
-                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(ret, filepath) +
-                                     _("Output:\n{}").format(out))
+                    result = util.run_batch("file {}".format(filepath), ui_debug=False)
+                    if result[0]:
+                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(result[0], filepath) +
+                                     _("Output:\n{}").format(result[1]))
 
-                    fileinfo = str(out)
-                    ctx.ui.info(_("\'file\' command return is \"{}\"").format(out), verbose=True)
+                    fileinfo = str(result[1])
+                    ctx.ui.info(_("\'file\' command return is \"{}\"").format(result[1]), verbose=True)
 
                 strip_debug_action(filepath, fileinfo, install_dir, self.actionGlobals)
                 exclude_special_files(filepath, fileinfo, self.actionGlobals)

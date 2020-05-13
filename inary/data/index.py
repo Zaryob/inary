@@ -117,7 +117,7 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
             for fn in files:
 
                 if fn.endswith(ctx.const.delta_package_suffix):
-                    name, version = util.parse_package_name(fn)
+                    name = util.parse_package_name_get_name(fn)
                     deltas.setdefault(name, []).append(os.path.join(root, fn))
                 elif fn.endswith(ctx.const.package_suffix):
                     packages.append(os.path.join(root, fn))

@@ -84,7 +84,8 @@ def calculate_free_space_needed(order):
     for pkg in [packagedb.get_package(name) for name in order]:
         delta = None
         if installdb.has_package(pkg.name):
-            (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
+            release= installdb.get_release(pkg.name)
+            (distro, distro_release) = installdb.get_distro_release(pkg.name)
 
             # inary distro upgrade should not use delta support
             if distro == pkg.distribution and distro_release == pkg.distributionRelease:
@@ -129,7 +130,8 @@ def calculate_download_sizes(order):
     for pkg in [packagedb.get_package(name) for name in order]:
         delta = None
         if installdb.has_package(pkg.name):
-            (version, release, build, distro, distro_release) = installdb.get_version_and_distro_release(pkg.name)
+            release = installdb.get_release(pkg.name)
+            (distro, distro_release) = installdb.get_distro_release(pkg.name)
        
             # inary distro upgrade should not use delta support
             if distro == pkg.distribution and distro_release == pkg.distributionRelease:
@@ -186,7 +188,7 @@ def get_package_requirements(packages):
         except Exception:  # FIXME: Should catch RepoItemNotFound exception
             pass
 
-        version, release, build = installdb.get_version(i_pkg)
+        release = installdb.get_release(i_pkg)
         pkg_actions = pkg.get_update_actions(release)
 
         for action_name in pkg_actions:

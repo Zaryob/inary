@@ -155,5 +155,5 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         # files.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         files.sort(key=lambda x: int(x.split("_")[0].replace("0o", "0")))
-        no, osxml = files[-1].replace("0o", "0").split("_")
+        no = files[-1].replace("0o", "0").split("_")[0]
         return "%03d" % (int(no) + 1)
