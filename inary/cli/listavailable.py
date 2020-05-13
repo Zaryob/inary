@@ -107,7 +107,7 @@ all repositories.
             #    ctx.ui.info(str(package))
             #    ctx.ui.info(str(inst_info))
     
-            elif self.options.name_only:
+            if self.options.name_only:
                 ctx.ui.info(str(pkgname))
             else:
                 pkgname += ' ' * max(0, maxlen - len(p))
