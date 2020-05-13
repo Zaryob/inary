@@ -144,7 +144,7 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         self.operation.packages.append(package)
 
     def update(self):
-        self.write(os.path.join("%s/%s", ctx.config.history_dir(), self.histfile))
+        self.write(os.path.join(ctx.config.history_dir(), self.histfile))
 
     @staticmethod
     def _get_latest():
