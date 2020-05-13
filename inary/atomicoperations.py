@@ -140,7 +140,7 @@ class Install(AtomicOperation):
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
         if not ignore_file_conflicts:
-            ignore_file_conflicts = ctx.get_option('ignore_file_conflicts')
+            ignore_file_conflicts = ctx.config.get_option('ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
         self.package_fname = package_fname
         try:
@@ -265,7 +265,7 @@ class Install(AtomicOperation):
             else:
                 pkg_version = inary.version.make_version(pkg.version)
                 iversion = inary.version.make_version(iversion_s)
-                if ctx.get_option('store_lib_info') and pkg_version > iversion:
+                if ctx.config.get_option('store_lib_info') and pkg_version > iversion:
                     self.store_old_paths = os.path.join(ctx.config.old_paths_cache_dir(), pkg.name)
                     ctx.ui.info(_('Storing old paths info.'))
                     open(self.store_old_paths, "w").write("Version: {}\n".format(iversion_s))
@@ -306,7 +306,7 @@ class Install(AtomicOperation):
 
     def preinstall(self):
         if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
+            if ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
                self.installdb.mark_pending(self.pkginfo.name)
                return 0
             ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
@@ -328,7 +328,7 @@ class Install(AtomicOperation):
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
         if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
+            if ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
             ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
@@ -579,12 +579,12 @@ class Remove(AtomicOperation):
                             + self.package_name)
 
         self.check_dependencies()
-        if not ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
+        if not ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
             self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
             
-        if not ctx.config.get_option('ignore_configure') or ctx.get_option('destdir'):
+        if not ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
             self.run_postremove()
 
         self.update_databases()
@@ -634,7 +634,7 @@ class Remove(AtomicOperation):
                     historydb.save_config(package_name, fpath)
 
                     # after saving to history db, remove the config file any way
-                    if ctx.get_option("purge"):
+                    if ctx.config.get_option("purge"):
                         os.unlink(fpath)
             except util.FileError:
                 pass

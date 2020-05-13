@@ -70,7 +70,7 @@ def t_r(name, path, command):
 
 
 def proceed(force=False):
-    if ctx.get_option('destdir'):
+    if ctx.config.get_option('destdir'):
         return
     sys.stdout.write(_("Process triggering for sysconf.\n"))
     if force:
