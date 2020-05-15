@@ -225,7 +225,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
-        if not dep.satisfied_by_repo():
+        if not dep.satisfied_by_repo() and not ctx.config.get_option('ignore_satisfy'):
             raise Exception(_('External dependencies not satisfied: \"{}\"').format(dep))
 
     # if so, then invoke install_pkg_names
@@ -313,7 +313,7 @@ def plan_install_pkg_names(A):
                 ctx.ui.info(_(' -> checking {}').format(str(dep)), verbose=True)
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo(packagedb=packagedb):
+                    if not dep.satisfied_by_repo(packagedb=packagedb) and not ctx.config.get_option('ignore_satisfy'):
                         raise Exception(_('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))

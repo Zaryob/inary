@@ -212,6 +212,10 @@ class PackageOp(Command):
         group.add_option("--ignore-dependency", action="store_true",
                          default=False,
                          help=_("Do not take dependency information into account."))
+        group.add_option("--ignore-satisfy", action="store_true",
+                         default=False,
+                         help=_("Ignore unsatisfied dependency."))
+
         group.add_option("--ignore-safety", action="store_true",
                          default=False, help=_("Bypass safety switch."))
         group.add_option("-n", "--dry-run", action="store_true", default=False,
