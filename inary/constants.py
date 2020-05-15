@@ -107,6 +107,7 @@ class Constants(metaclass=Singleton):
         self.__c.mirrors_conf = "/etc/inary/mirrors.conf"
         self.__c.blacklist = "/etc/inary/blacklist"
         self.__c.config_pending = "configpending"
+        self.__c.config_installed = "installed"
         self.__c.needs_restart = "needsrestart"
         self.__c.needs_reboot = "needsreboot"
         self.__c.files_db = "files"

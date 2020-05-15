@@ -486,7 +486,7 @@ class Install(AtomicOperation):
             self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
             
     def write_status_file(self):
-        open(self.package.pkg_dir()+"/status","w").write("installed")
+        self.installdb.mark_installed(self.pkginfo.name)
 
     def update_databases(self):
         """update databases"""
@@ -593,6 +593,7 @@ class Remove(AtomicOperation):
         ctx.ui.close()
         ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
         util.xterm_title_reset()
+        self.installdb.clear_installed(self.package_name)
 
     def check_dependencies(self):
         # FIXME: why is this not implemented? -- exa
