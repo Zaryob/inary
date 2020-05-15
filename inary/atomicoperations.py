@@ -78,6 +78,7 @@ class Install(AtomicOperation):
     @staticmethod
     def from_name(name, ignore_dep=None):
         packagedb = inary.db.packagedb.PackageDB()
+        installdb = inary.db.installdb.InstallDB()
         # download package and return an installer object
         # find package in repository
         repo = packagedb.which_repo(name)
@@ -89,7 +90,6 @@ class Install(AtomicOperation):
             pkg = packagedb.get_package(name)
             delta = None
 
-            installdb = inary.db.installdb.InstallDB()
             # Package is installed. This is an upgrade. Check delta.
             if installdb.has_package(pkg.name):
                 release = installdb.get_release(pkg.name)
@@ -486,7 +486,7 @@ class Install(AtomicOperation):
             self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
             
     def write_status_file(self):
-        self.installdb.mark_installed(self.pkginfo.name)
+        self.installdb.mark_installed("{0}-{1}-{2}".format(self.pkginfo.name,self.pkginfo.version,self.pkginfo.release))
 
     def update_databases(self):
         """update databases"""
@@ -501,10 +501,10 @@ class Install(AtomicOperation):
             actions = self.pkginfo.get_update_actions("1")
 
         for package_name in actions.get("serviceRestart", []):
-            inary.db.installdb.InstallDB().mark_needs_restart(package_name)
+            self.installdb.mark_needs_restart(package_name)
 
         for package_name in actions.get("systemRestart", []):
-            inary.db.installdb.InstallDB().mark_needs_reboot(package_name)
+            self.installdb.mark_needs_reboot(package_name)
 
         # filesdb
         ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
@@ -593,7 +593,10 @@ class Remove(AtomicOperation):
         ctx.ui.close()
         ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
         util.xterm_title_reset()
-        self.installdb.clear_installed(self.package_name)
+        self.remove_status_file()
+        
+    def remove_status_file(self):
+        self.installdb.clear_installed("{0.name}-{0.version}-{0.release}".format(self.package))
 
     def check_dependencies(self):
         # FIXME: why is this not implemented? -- exa

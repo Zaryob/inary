@@ -354,7 +354,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
             if rev_dep in G_f.vertices() or depinfo.satisfied_by_repo():
                 continue
 
-            if is_upgradable(rev_dep):
+            if is_upgradable(rev_dep,installdb,packagedb):
                 Bp.add(rev_dep)
                 G_f.add_plain_dep(rev_dep, pkg.name)
 
@@ -368,7 +368,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         if packages:
             for target_package in packages:
                 for name in installdb.get_rev_dep_names(target_package):
-                    if name in G_f.vertices() or not is_upgradable(name):
+                    if name in G_f.vertices() or not is_upgradable(name,installdb,packagedb):
                         continue
 
                     Bp.add(name)
@@ -401,6 +401,7 @@ def upgrade_base(A=None):
     if A is None:
         A = set()
     installdb = inary.db.installdb.InstallDB()
+    packagedb = inary.db.packagedb.PackageDB()
     componentdb = inary.db.componentdb.ComponentDB()
     if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
         if componentdb.has_component('system.base'):
@@ -414,7 +415,7 @@ def upgrade_base(A=None):
 
             # Will delete G_F and extra_upgrades
             install_order = operations.install.plan_install_pkg_names(extra_installs)
-            extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x)]
+            extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x,installdb,packagedb)]
             upgrade_order = []
 
             extra_upgrades = inary.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
@@ -441,17 +442,13 @@ def upgrade_base(A=None):
             ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
     return set()
 
-
-def is_upgradable(name):
-    installdb = inary.db.installdb.InstallDB()
+def is_upgradable(name,installdb,packagedb):
 
     if not installdb.has_package(name):
         return False
 
     i_release = installdb.get_release(name)
     (i_distro, i_distro_release) = installdb.get_distro_release(name)
-
-    packagedb = inary.db.packagedb.PackageDB()
 
     try:
         release = packagedb.get_release(name,packagedb.which_repo(name))

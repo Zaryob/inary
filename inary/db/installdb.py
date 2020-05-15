@@ -68,7 +68,7 @@ class InstallDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True, cachedir=ctx.config.packages_dir())
-        self.init()
+        #self.init()
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
@@ -87,19 +87,15 @@ class InstallDB(lazydb.LazyDB):
     @staticmethod
     def __generate_installed_pkgs():
         installed_list=[]
-        not_installed=[]
         info_path = os.path.join(ctx.config.info_dir(), ctx.const.config_installed)
-        #config = open(info_path, "w")
-        installed_pkgs=open(info_path).read().split()
-            
         def split_name(dirname):
             name, version, release = dirname.rsplit("-", 2)
-            #config.write("{}\n".format(name))
-            if name in installed_pkgs:
-                    installed_list.append((name, version + "-" + release))
+            installed_list.append((name, version + "-" + release))
+        
+        installed_pkgs=open(info_path).read().split() 
             
-        for i in os.listdir(ctx.config.packages_dir()):
-            split_name(i)
+        for name in installed_pkgs:
+            split_name(name)
         return dict(installed_list)
 
     @staticmethod
@@ -423,7 +419,6 @@ class InstallDB(lazydb.LazyDB):
         packages = self.__get_marked_packages(_type)
         if package not in packages:
             packages.append(package)
-            packages.sort()
             self.__write_marked_packages(_type, packages)
 
     def mark_pending(self, package):
@@ -477,6 +472,7 @@ class InstallDB(lazydb.LazyDB):
         for pkg in set(packages):
             config.write("{}\n".format(pkg))
         config.close()
+
 
     def __clear_marked_packages(self, _type, package):
         if package == "*":

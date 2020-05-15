@@ -34,8 +34,8 @@ class PackageDB(lazydb.LazyDB):
 
     def __init__(self):
         lazydb.LazyDB.__init__(self, cacheable=True)
-        # self.init()
-
+        #self.init()
+                
     def init(self):
         self.__package_nodes = {}  # Packages
         self.__revdeps = {}  # Reverse dependencies
@@ -43,14 +43,12 @@ class PackageDB(lazydb.LazyDB):
         self.__replaces = {}  # Replaces
 
         repodb = inary.db.repodb.RepoDB()
-
         for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
             self.__package_nodes[repo] = self.__generate_packages(doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
             self.__obsoletes[repo] = self.__generate_obsoletes(doc)
             self.__replaces[repo] = self.__generate_replaces(doc)
-
         self.pdb = inary.db.itembyrepo.ItemByRepo(self.__package_nodes, compressed=True)
         self.rvdb = inary.db.itembyrepo.ItemByRepo(self.__revdeps)
         self.odb = inary.db.itembyrepo.ItemByRepo(self.__obsoletes)

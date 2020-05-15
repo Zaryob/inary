@@ -22,7 +22,6 @@ _ = __trans.gettext
 
 import inary
 import inary.errors
-
 import inary.cli
 import inary.cli.command as command
 import inary.cli.addrepo

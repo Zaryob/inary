@@ -56,15 +56,13 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if len(A) == 0:
         ctx.ui.info(_('No packages to install.'))
         return True
-
+    
     A |= operations.upgrade.upgrade_base(A)
-
     if not ctx.config.get_option('ignore_dependency'):
         ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
         order = plan_install_pkg_names(A)
     else:
         order = list(A)
-
     componentdb = inary.db.componentdb.ComponentDB()
 
     # Bug 4211

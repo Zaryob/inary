@@ -117,7 +117,6 @@ def calculate_free_space_needed(order):
 
 def calculate_download_sizes(order):
     total_size = cached_size = 0
-
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
 
@@ -205,12 +204,12 @@ def check_config_changes(order, opt=None):
         opt="%03d" % (int(history._get_latest())-1)
 
     config_changes=dict()
-    
+    installdb=inary.db.installdb.InstallDB()
     if not os.path.exists(os.path.join(ctx.config.history_dir(), opt)):
         return []
 
     for package in order:
-        all_files = inary.db.installdb.InstallDB().get_files(package)
+        all_files = installdb.get_files(package)
         config_files = [x for x in all_files.list if x.type == 'config']
         config_paths = ["/" + str(x.path) for x in config_files]
 
