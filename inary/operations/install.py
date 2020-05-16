@@ -306,7 +306,7 @@ def plan_install_pkg_names(A):
     for x in A:
         G_f.add_package(x)
     B = A
-
+    not_satisfied=dict()
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -316,7 +316,11 @@ def plan_install_pkg_names(A):
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo(packagedb=packagedb):
-                        raise Exception(_('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(dep, pkg.name))
+                        if dep in not_satisfied:
+                            not_satisfied[dep]+=[pkg.name]
+                        else:
+                            not_satisfied[dep]=[pkg.name]
+                        pass
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
@@ -340,8 +344,12 @@ def plan_install_pkg_names(A):
                 if packagedb.has_package(dep):
                     Bp.add(dep)
                     G_f.add_package(dep)
-
         B = Bp
+    if not_satisfied:
+        msg=_("Following packages are not satisfied:\n")
+        for ns in not_satisfied:
+            msg+=(_(' -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n').format(not_satisfied[ns], ns))
+        raise Exception(msg)
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
