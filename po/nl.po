@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2011-06-17 15:13+0200\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -125,7 +125,7 @@ msgstr "Toetsenbord-interrupt: Wordt verlaten..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Onhandelbare interne uitzondering.\n"
 "Rapporteer deze fout op <http://bugs.sulin.org>.\n"
@@ -4563,124 +4563,40 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config bijwerken voltooid."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Symlink '{}' toegevoegd"
 
 #, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "wil je verder gaan? (het kan gevaarlijk zijn !!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Configureren {} pakket"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Toevoegen {} aan db... "
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Downloaden %d / %d"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Omzeil Scom-configuratieagent"
 
 #, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Perk bouw proces niet in tot binnen de bouw folder"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom-pakket is niet volledig geïnstalleerd"
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Softwarebron {} is niet compatibel met de distributie. Bron is uitgeschakeld."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} softwarebron dient opgewaardeerd te worden."
 
 #, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Bron ophalen van mirror: {} "
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Kopiëren {} naar overdrachtmap"
 
 #, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox-overtreding: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Kan SCOM script niet lezen ({0}): {1}"
 
 #, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sanbox geactiveerde build..."
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox overtreding resultaat:"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox overtredingen!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installeren texmf bestanden mislukt"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Kan Actions Script niet lezen ({0}): {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Syntaxfout in Actions Script ({0}): {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsoptie %s vereist %d argumentenoptie %s vereist %d argumenten#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "optie %s neemt geen waarde"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Deregistreren scom-scripts"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Deregistreren scom-scripts"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderscript van pakket"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Aanroepen pre-verwijder afhandelingen"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Uitvoeren pre-verwijderscript van pakket"
-
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Scriptfout: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "UItvoeren post-installatiescript van pakket"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Scriptfout: {}"
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Aanroepen post-installatie afhandelingen"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Scriptfout: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registreren {} scom-script"
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Syntaxfout in SCOM bestand ({0}): {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4691,37 +4607,121 @@ msgstr ""
 #~ "  {}\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Syntaxfout in SCOM bestand ({0}): {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Kan SCOM script niet lezen ({0}): {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registreren {} scom-script"
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Kopiëren {} naar overdrachtmap"
+#~ msgid "Script error: {}"
+#~ msgstr "Scriptfout: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} softwarebron dient opgewaardeerd te worden."
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Aanroepen post-installatie afhandelingen"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom-pakket is niet volledig geïnstalleerd"
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Scriptfout: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Omzeil Scom-configuratieagent"
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "UItvoeren post-installatiescript van pakket"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Toevoegen {} aan db... "
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Scriptfout: {}"
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Symlink '{}' toegevoegd"
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Uitvoeren pre-verwijderscript van pakket"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Aanroepen pre-verwijder afhandelingen"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderscript van pakket"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Deregistreren scom-scripts"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Deregistreren scom-scripts"
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsoptie %s vereist %d argumentenoptie %s vereist %d argumenten#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "optie %s neemt geen waarde"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Syntaxfout in Actions Script ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Kan Actions Script niet lezen ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installeren texmf bestanden mislukt"
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox overtredingen!"
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox overtreding resultaat:"
+
+#, fuzzy
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sanbox geactiveerde build..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox-overtreding: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Bron ophalen van mirror: {} "
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Softwarebron {} is niet compatibel met de distributie. Bron is uitgeschakeld."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Perk bouw proces niet in tot binnen de bouw folder"
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Downloaden %d / %d"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Configureren {} pakket"
+
+#, fuzzy
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "wil je verder gaan? (het kan gevaarlijk zijn !!!):"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config bijwerken voltooid."

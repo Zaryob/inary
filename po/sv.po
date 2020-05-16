@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2010-12-27 10:06+0100\n"
 "Last-Translator: Patrik Karlsson <patrik@trixon.se>\n"
 "Language-Team: Swedish <pardus-translators@pardus.org.tr>\n"
@@ -112,7 +112,7 @@ msgstr "Tangentbordsavbrott: Avslutar..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Ohanterat internt undantag.\n"
 "Vänligen fyll i en felrapport på <http://bugs.sulin.org>.\n"
@@ -4448,124 +4448,40 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Tillagd symlink '{}'"
+
+#, fuzzy
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning i postinstallation {0} ({1}: {2})"
+
+#, fuzzy
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "* Lägger till {} till db... "
+
+#, fuzzy
+#~ msgid "Bypass scom configuration agent."
 #~ msgstr "Konfigureringen misslyckades."
 
 #, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Vill du fortsätta? (det kan vara farligt !!!):"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "{} är inte installerad."
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Anpassar paketet {}..."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{}-förrådet behöver uppdateras"
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Hämtar %d / %d"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Kopierar \"{}\" för att överföra dir"
 
 #, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Begränsa inte byggprocessen i build-mappen."
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Det gick inte att läsa SCOM-skript ({0}): {1}"
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Förvaret \"{}\" är inte kompatibelt med din distribution. Förvaret är inaktiverat."
-
-#, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Bygger paketet: {}"
-
-#, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Överträdelse av sandlådan: {0} ({1} -> {2})"
-
-#, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox aktiverad byggnad ..."
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Resultat av överträdelse av sandlåda:"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Överträdelser av sandlådan!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installation misslyckades."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Det gick inte att läsa Action Script ({0}): {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "SyntaxError in Actions-skript ({0}): {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s-alternativet kräver %d argument%s-alternativet kräver %d argument#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "%s-alternativet tar inte ett värde"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Avregistrerar {} skript."
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Avregistrerar scom-skript av paketet \"{}\"."
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Inga paket att ta bort."
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Inga paket att ta bort."
-
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Skriptfel: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Inga paket att ta bort."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Skriptfel: {}"
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Skriptfel: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registrerar \"{0}\" namngivna scom-skript för \"{1}\"."
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM-paketet uppdaterat. Från och med nu med ny SCOM-demon."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "SyntaxError i SCOM-fil ({0}): {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4576,37 +4492,121 @@ msgstr ""
 #~ "  {}\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "SyntaxError i SCOM-fil ({0}): {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM-paketet uppdaterat. Från och med nu med ny SCOM-demon."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Det gick inte att läsa SCOM-skript ({0}): {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registrerar \"{0}\" namngivna scom-skript för \"{1}\"."
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Kopierar \"{}\" för att överföra dir"
+#~ msgid "Script error: {}"
+#~ msgstr "Skriptfel: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{}-förrådet behöver uppdateras"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "{} är inte installerad."
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Skriptfel: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Inga paket att ta bort."
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Skriptfel: {}"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Inga paket att ta bort."
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Inga paket att ta bort."
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Kör avslutande åtgärder efter borttagning av {}"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Avregistrerar scom-skript av paketet \"{}\"."
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Avregistrerar {} skript."
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s-alternativet kräver %d argument%s-alternativet kräver %d argument#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "%s-alternativet tar inte ett värde"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "SyntaxError in Actions-skript ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Det gick inte att läsa Action Script ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installation misslyckades."
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Överträdelser av sandlådan!"
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Resultat av överträdelse av sandlåda:"
+
+#, fuzzy
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox aktiverad byggnad ..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Överträdelse av sandlådan: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Bygger paketet: {}"
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Förvaret \"{}\" är inte kompatibelt med din distribution. Förvaret är inaktiverat."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Begränsa inte byggprocessen i build-mappen."
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Hämtar %d / %d"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Anpassar paketet {}..."
+
+#, fuzzy
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Vill du fortsätta? (det kan vara farligt !!!):"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
 #~ msgstr "Konfigureringen misslyckades."
-
-#, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "* Lägger till {} till db... "
-
-#, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning i postinstallation {0} ({1}: {2})"
-
-#, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Tillagd symlink '{}'"

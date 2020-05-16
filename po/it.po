@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2010-07-01 16:01+0200\n"
 "Last-Translator: Davide Siciliano <edivad95@gmail.com>\n"
 "Language-Team: Italian <pardus-translators@pardus.org.tr>\n"
@@ -112,7 +112,7 @@ msgstr "Interruzione da tastiera: uscita..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Eccezione interna non gestita.\n"
 "Invia per piacere una segnalazione di un bug  su <http://bugs.sulin.org>\n"
@@ -4366,122 +4366,40 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "Aggiornamento GNU Config concluso."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Aggiunto link simbolico \"{}\""
 
 #, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Vuoi continuare? (Potrebbe essere pericoloso!!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Configurazione {} pacchetto in corso"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Aggiunta di {} al database... "
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Scaricamento di %d/%d"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Ignora l'agente di configurazione di SCOM"
 
 #, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Non vincolare il processo di compilazione all'interno della cartella della build"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "il pacchetto SCOM non è completamente installato"
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Il pacchetto {} non è disponibile nei repositorio. Repositorio è disattivato."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "Repositorio di nome {} dev'essere aggiornato."
 
 #, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Prelevamento dei sorgenti dal mirror: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Copia di {} alla cartella di trasferimento"
 
 #, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Violazione ambiente protetto: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Impossibile leggere script SCOM {0}: {1}"
 
 #, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Build abilitato per sandbox ..."
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Violazione dell'ambiente protetto (sandbox)!"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Violazioni dell'ambiente protetto (sandbox)!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installazione file twxmf fallita."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Impossibile leggere Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Errore di sintassi in Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsl'opzione %s richiede %d argomentil'opzione %s richiede %d argomenti#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "l'opzione %s non richiede un parametro"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Deregistrazionescript SCOM"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Deregistrazionescript SCOM"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Chiamata dei gestori di post rimozione"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Esecuzione dello script post rimozione del pacchetto"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Esecuzione di operazioni di post-rimozione per il pacchetto \"{}\"."
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Chiamata dei gestori di pre rimozione"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Esecuzione dello script pre rimozione del pacchetto"
-
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Esecuzione di operazioni di pre-rimozione per il pacchetto \"{}\"."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Errore nello script: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Esecuzione dello script post installazione del pacchetto"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Errore nello script: {}"
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Chiamata dei gestori di post installazione"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Errore nello script: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registrazione script SCOM {}"
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "Pacchetto SCOM aggiornato. Da ora in poi, usando il nuovo demone SCOM."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Errore di sintassi nel file SCOM {0}: {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4492,37 +4410,119 @@ msgstr ""
 #~ " {}\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Errore di sintassi nel file SCOM {0}: {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "Pacchetto SCOM aggiornato. Da ora in poi, usando il nuovo demone SCOM."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Impossibile leggere script SCOM {0}: {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registrazione script SCOM {}"
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Copia di {} alla cartella di trasferimento"
+#~ msgid "Script error: {}"
+#~ msgstr "Errore nello script: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "Repositorio di nome {} dev'essere aggiornato."
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Chiamata dei gestori di post installazione"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "il pacchetto SCOM non è completamente installato"
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Errore nello script: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Ignora l'agente di configurazione di SCOM"
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Esecuzione dello script post installazione del pacchetto"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Aggiunta di {} al database... "
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Errore nello script: {}"
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Esecuzione di operazioni di pre-rimozione per il pacchetto \"{}\"."
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Aggiunto link simbolico \"{}\""
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Esecuzione dello script pre rimozione del pacchetto"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Chiamata dei gestori di pre rimozione"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Esecuzione di operazioni di post-rimozione per il pacchetto \"{}\"."
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Esecuzione dello script post rimozione del pacchetto"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Chiamata dei gestori di post rimozione"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Deregistrazionescript SCOM"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Deregistrazionescript SCOM"
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsl'opzione %s richiede %d argomentil'opzione %s richiede %d argomenti#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "l'opzione %s non richiede un parametro"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Errore di sintassi in Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Impossibile leggere Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installazione file twxmf fallita."
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Violazioni dell'ambiente protetto (sandbox)!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Violazione dell'ambiente protetto (sandbox)!"
+
+#, fuzzy
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Build abilitato per sandbox ..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Violazione ambiente protetto: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Prelevamento dei sorgenti dal mirror: {}"
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Il pacchetto {} non è disponibile nei repositorio. Repositorio è disattivato."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Non vincolare il processo di compilazione all'interno della cartella della build"
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Scaricamento di %d/%d"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Configurazione {} pacchetto in corso"
+
+#, fuzzy
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Vuoi continuare? (Potrebbe essere pericoloso!!!):"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "Aggiornamento GNU Config concluso."

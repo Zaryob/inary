@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: inary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-25 00:59+0300\n"
 "Last-Translator: Ivica Kolić <ikoli@yahoo.com>\n"
 "Language-Team: Croatian <ikoli@yahoo.com>\n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 
 #: inary-cli:68
@@ -4015,75 +4015,28 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config završena dopuna."
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Dodajem {} u db... "
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Konfiguriram{} paket"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Zaobiđi Scom konfiguracijski agent"
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Preuzimam  {} / {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom paket nije u potpunosti instaliran"
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Repozitorij {} nije kompatibilan sa vašom distribucijom.Repozitorij je onemogućen. "
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} repozitorij treba nadopuniti"
 
 #, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Dodajem paket u indeks: {}"
-
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Kopiranje {} u direktorij prijenosa "
 
 #, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Instaliranje texmf datoteke nije uspjelo"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
 #~ msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Registriranje {} Scom skripte"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Registriranje {} Scom skripte"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Nema paketa za uklanajnje."
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Nema paketa za uklanajnje."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Greška skripte: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Nema paketa za uklanajnje."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Greška skripte: {}"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Greška skripte: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registriranje {} Scom skripte"
 
 #, fuzzy
 #~ msgid ""
@@ -4094,25 +4047,72 @@ msgstr ""
 #~ " {}\n"
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registriranje {} Scom skripte"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Greška skripte: {}"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Greška skripte: {}"
+
+#, fuzzy
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Nema paketa za uklanajnje."
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Greška skripte: {}"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Nema paketa za uklanajnje."
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Nema paketa za uklanajnje."
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Registriranje {} Scom skripte"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Registriranje {} Scom skripte"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
 #~ msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Kopiranje {} u direktorij prijenosa "
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Nije moguće pročitati SCOM skriptu {0}: {1}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} repozitorij treba nadopuniti"
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Instaliranje texmf datoteke nije uspjelo"
+
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom paket nije u potpunosti instaliran"
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Dodajem paket u indeks: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Zaobiđi Scom konfiguracijski agent"
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Repozitorij {} nije kompatibilan sa vašom distribucijom.Repozitorij je onemogućen. "
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Dodajem {} u db... "
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Preuzimam  {} / {}"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Konfiguriram{} paket"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config završena dopuna."

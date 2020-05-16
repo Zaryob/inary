@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-25 00:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -117,10 +117,11 @@ msgstr ""
 "Tastatur-Interrupt [Ctrl-D]: Wird beendet..."
 
 #: inary-cli:59
+#, fuzzy
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "\n"
 "Unbehandelte interne Ausnahme.\n"
@@ -3980,100 +3981,32 @@ msgstr "Paket \"{}\" wird entfernt"
 msgid "Invalid version string: '{}'"
 msgstr "Ungültige Versionszeichenfolge: '{}'"
 
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config Aktualisierung fertig gestellt."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Symlink '{}' hinzugefügt"
 
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Willst du weiter machen? (Das kann gefährlich sein!!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning nach der Installation {0} ({1}: {2})"
 
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Konfiguriere Paket \"{}\"."
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "\"{}\" wird zur db hinzugefügt..."
 
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Wird heruntergeladen {} / {}"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Scom Konfigurations-Agent umgehen."
 
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Scom-Paket wurde nicht vollständig installiert."
 
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Depot \"{}\" ist nicht kompatibel zu Ihrer Distribution. Depot ist desaktiviert."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{}-Depot muss aktualisiert werden"
 
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Quelle wird vom Mirror abgerufen: \"{}\""
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "\"{}\" wird zum Übertragungs-Verzeichnis kopiert"
 
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox-Verletzung: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Nicht in der Lage, das SCOM Skript zu lesen {0}:{1}"
 
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox ermöglicht Build..."
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Ergebniss der Sandbox-Verletzung:"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox-Verletzungen!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installation der \"{}\"-Dateien ist fehlgeschlagen."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Nicht in der Lage, Action Skript zu lesen {0}: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Syntax-Fehler im Action Skript {0}: {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
-#~ msgstr "Die Option% (Option) erfordert% (Nummer) d Argument. Die Option% (Option) erfordert% (Nummer) d Argumente. #: /usr/lib/python3.6/optparse.py:149#, python-forma% s Option nimmt keinen Wert an"
-
-#~ msgid "Unregistering {} script."
-#~ msgstr "Scom-Skripte werden entfernt."
-
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Scom-Skripte werden entfernt für \"{}\"."
-
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Skript wird ausgeführt, um die Deinstallation abzuschließen für \"{}\"."
-
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Prozess zur Vorbereitung des Entfernens wird aufgerufen für \"{}\"."
-
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Vorbereitung zur Entfernen des Paketes wird ausgeführt für \"{}\"."
-
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\""
-
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Nach installieren des Skriptes, werden Pakete ausgeführt für \"{0}\"."
-
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\"."
-
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Post install handlers werden aufgerufen für \"{}\"."
-
-#~ msgid "Script error: {}"
-#~ msgstr "Skript-Fehler: {}"
-
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registriere \"{0}\" Scom-Skript für \"{1}\"."
-
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM Paket aktualisiert. Von jetzt an wird der neue SCOM daemon verwendet."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Syntax-Fehler in der SCOM-Datei {0}: {1}"
 
 #~ msgid ""
 #~ "Cannot connect to SCOM: \n"
@@ -4082,29 +4015,97 @@ msgstr "Ungültige Versionszeichenfolge: '{}'"
 #~ "Verbindung mit SCOM nicht möglich: \n"
 #~ "  \"{}\"\n"
 
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Syntax-Fehler in der SCOM-Datei {0}: {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM Paket aktualisiert. Von jetzt an wird der neue SCOM daemon verwendet."
 
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Nicht in der Lage, das SCOM Skript zu lesen {0}:{1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registriere \"{0}\" Scom-Skript für \"{1}\"."
 
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "\"{}\" wird zum Übertragungs-Verzeichnis kopiert"
+#~ msgid "Script error: {}"
+#~ msgstr "Skript-Fehler: {}"
 
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{}-Depot muss aktualisiert werden"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Post install handlers werden aufgerufen für \"{}\"."
 
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Scom-Paket wurde nicht vollständig installiert."
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\"."
 
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Scom Konfigurations-Agent umgehen."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Nach installieren des Skriptes, werden Pakete ausgeführt für \"{0}\"."
 
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "\"{}\" wird zur db hinzugefügt..."
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\""
 
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning nach der Installation {0} ({1}: {2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
 
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Symlink '{}' hinzugefügt"
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Vorbereitung zur Entfernen des Paketes wird ausgeführt für \"{}\"."
+
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Prozess zur Vorbereitung des Entfernens wird aufgerufen für \"{}\"."
+
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
+
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Skript wird ausgeführt, um die Deinstallation abzuschließen für \"{}\"."
+
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
+
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Scom-Skripte werden entfernt für \"{}\"."
+
+#~ msgid "Unregistering {} script."
+#~ msgstr "Scom-Skripte werden entfernt."
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
+#~ msgstr "Die Option% (Option) erfordert% (Nummer) d Argument. Die Option% (Option) erfordert% (Nummer) d Argumente. #: /usr/lib/python3.6/optparse.py:149#, python-forma% s Option nimmt keinen Wert an"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Syntax-Fehler im Action Skript {0}: {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Nicht in der Lage, Action Skript zu lesen {0}: {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installation der \"{}\"-Dateien ist fehlgeschlagen."
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox-Verletzungen!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Ergebniss der Sandbox-Verletzung:"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox ermöglicht Build..."
+
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox-Verletzung: {0} ({1} -> {2})"
+
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Quelle wird vom Mirror abgerufen: \"{}\""
+
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Depot \"{}\" ist nicht kompatibel zu Ihrer Distribution. Depot ist desaktiviert."
+
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken."
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Wird heruntergeladen {} / {}"
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Konfiguriere Paket \"{}\"."
+
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Willst du weiter machen? (Das kann gefährlich sein!!!):"
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config Aktualisierung fertig gestellt."

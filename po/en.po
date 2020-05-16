@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-24 06:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -108,10 +108,11 @@ msgstr ""
 "Keyboard Interrupt [Ctrl-D]: Exiting..."
 
 #: inary-cli:59
+#, fuzzy
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "\n"
 "Unhandled internal exception.\n"
@@ -3971,96 +3972,32 @@ msgstr "Removing empty dir: \"{}\""
 msgid "Invalid version string: '{}'"
 msgstr "Invalid version string: '{}'"
 
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config Update Failed."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Added symlink '{}' "
 
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Would you like to continue? (it may be dangerous!!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning in postinstall {0} ({1}:{2})"
 
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Configuring \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Storing files of \"{}\" package."
 
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Downloading {} / {}"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Bypass scom configuration agent."
 
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Do not constrain build process inside the build folder."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom package is not fully installed."
 
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} repository needs to be updated"
 
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Fetching source from mirror: \"{}\""
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Copying \"{}\" to transfer dir"
 
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Unable to read SCOM script ({0}): {1}"
 
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox enabled build..."
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox violation result:"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox violations!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installing file \"{}\" failed."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Unable to read Actions Script ({0}): {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "SyntaxError in Actions Script ({0}): {1}"
-
-#~ msgid "Unregistering {} script."
-#~ msgstr "Unregistering {} script."
-
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Unregistering scom scripts of \"{}\" package."
-
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Calling post remove handlers for \"{}\" package."
-
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Running package's postremove script for \"{}\" package."
-
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Running post removal operations for \"{}\" package."
-
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Calling pre remove handlers for \"{}\" package."
-
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Running package's pre remove script for \"{}\" package."
-
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Running pre removal operations for \"{}\" package."
-
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Script error for \"{0}\" package: {1}"
-
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Running package's post install script for \"{0}\" package."
-
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Script error for \"{0}\" package: {1}."
-
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Calling post install handlers for \"{}\" package."
-
-#~ msgid "Script error: {}"
-#~ msgstr "Script error: {}"
-
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registering \"{0}\" named scom script for \"{1}\"."
-
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "SyntaxError in SCOM file ({0}): {1}"
 
 #~ msgid ""
 #~ "Cannot connect to SCOM: \n"
@@ -4069,29 +4006,93 @@ msgstr "Invalid version string: '{}'"
 #~ "Cannot connect to SCOM: \n"
 #~ "  \"{}\"\n"
 
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "SyntaxError in SCOM file ({0}): {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM package updated. From now on, using new SCOM daemon."
 
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Unable to read SCOM script ({0}): {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registering \"{0}\" named scom script for \"{1}\"."
 
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Copying \"{}\" to transfer dir"
+#~ msgid "Script error: {}"
+#~ msgstr "Script error: {}"
 
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} repository needs to be updated"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Calling post install handlers for \"{}\" package."
 
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom package is not fully installed."
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Script error for \"{0}\" package: {1}."
 
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Bypass scom configuration agent."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Running package's post install script for \"{0}\" package."
 
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Storing files of \"{}\" package."
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Script error for \"{0}\" package: {1}"
 
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning in postinstall {0} ({1}:{2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Running pre removal operations for \"{}\" package."
 
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Added symlink '{}' "
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Running package's pre remove script for \"{}\" package."
+
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Calling pre remove handlers for \"{}\" package."
+
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Running post removal operations for \"{}\" package."
+
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Running package's postremove script for \"{}\" package."
+
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Calling post remove handlers for \"{}\" package."
+
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Unregistering scom scripts of \"{}\" package."
+
+#~ msgid "Unregistering {} script."
+#~ msgstr "Unregistering {} script."
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "SyntaxError in Actions Script ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Unable to read Actions Script ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installing file \"{}\" failed."
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox violations!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox violation result:"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox enabled build..."
+
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
+
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Fetching source from mirror: \"{}\""
+
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Do not constrain build process inside the build folder."
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Downloading {} / {}"
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Configuring \"{}\" package."
+
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Would you like to continue? (it may be dangerous!!!):"
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config Update Failed."

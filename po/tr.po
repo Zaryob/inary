@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-17 01:25+0300\n"
 "Last-Translator: Suleyman Poyraz <nipalensiaquila@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -82,6 +82,7 @@ msgstr "%prog [seçenekler]"
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "%(option)s seçeneği %(number)d adet argüman almalıdır"
+msgstr[1] "%(option)s seçeneği %(number)d adet argüman almalıdır"
 
 #: /usr/lib64/python3.6/optparse.py:1496
 #, python-format
@@ -113,10 +114,11 @@ msgstr ""
 "Klavye Kesmesi [Ctrl-C]: Program Sonlandırılıyor..."
 
 #: inary-cli:59
+#, fuzzy
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "\n"
 "Denetlenmeyen iç hata.\n"
@@ -4007,97 +4009,32 @@ msgstr "Boş klasör \"{}\" kaldırılıyor."
 msgid "Invalid version string: '{}'"
 msgstr "Hatalı sürüm dizgisi: '{}'"
 
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Yapılandırma Güncellemesi Tamamlanamadı."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Sembolik link '{}' eklendi "
 
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Devam etmek ister misiniz? (Tehlikeli olabilir!!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Kurulum sonrası dosya sahiplikleri değiştiriliyor {0} ({1}:{2})"
 
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "\"{}\" paketi yapılandırılıyor."
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "\"{}\" paketinin dosyaları depolanıyor."
 
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "İndiriliyor  {} / {}"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Scom yapılandırma yöneticisini es geç."
 
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "İnşa işlemini inşa klasörüyle sınırlama."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom paketi tam olarak kurulmamış."
 
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "\"{}\" adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} deposunun güncellenmesi gerekiyor"
 
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Kaynak, \"{}\" yansısından indiriliyor."
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "\"{}\" aktarım dizinine kopyalanıyor"
 
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox ihlali: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "SCOM betiği okunamıyor ({0}): {1}"
 
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox açık inşa..."
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox ihlal sonucu:"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox ihlali!"
-
-# inary/actionsapi/autotools.py:119 :127
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "\"{}\" dosyalarının yüklenmesi işlemi başarısız oldu."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Actions betiği okunamıyor ({0}): {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Actions betiğinde sözdizimi hatası ({0}): {1}"
-
-#~ msgid "Unregistering {} script."
-#~ msgstr "{} scom betiği kayıtlardan siliniyor."
-
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "\"{}\" paketi için tüm scom betikleri kayıtlardan siliniyor."
-
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" için kaldırma sonrası işlemler çalıştırılıyor."
-
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "\"{}\" paketinin kaldırma sonrası betiği çağrılıyor."
-
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma sonrası işlemler çalıştırılıyor."
-
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma öncesi işleyicileri çağrılıyor."
-
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Paketin kaldırma öncesi betiği çağrılıyor."
-
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma öncesi işlemler çalıştırılıyor."
-
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "{1} Paketi için Betik hatası: \"{0}\""
-
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "\"{0}\" paketinin kurulum sonrası betiği çağrılıyor."
-
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "{1} Paketi için Betik hatası: \"{0}\"."
-
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kurulum sonrası betikleri çağrılıyor."
-
-#~ msgid "Script error: {}"
-#~ msgstr "Betik hatası: {}"
-
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "\"{0}\" adlandırılmış scom betiği \"{1}\" kayıt ediliyor."
-
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM paketi güncellendi, artık yeni SCOM kullanılıyor."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "SCOM dosyasında sözdizimi hatası ({0}): {1}"
 
 #~ msgid ""
 #~ "Cannot connect to SCOM: \n"
@@ -4106,29 +4043,94 @@ msgstr "Hatalı sürüm dizgisi: '{}'"
 #~ "SCOM'a bağlanılamıyor: \n"
 #~ "  \"{}\"\n"
 
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "SCOM dosyasında sözdizimi hatası ({0}): {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM paketi güncellendi, artık yeni SCOM kullanılıyor."
 
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "SCOM betiği okunamıyor ({0}): {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "\"{0}\" adlandırılmış scom betiği \"{1}\" kayıt ediliyor."
 
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "\"{}\" aktarım dizinine kopyalanıyor"
+#~ msgid "Script error: {}"
+#~ msgstr "Betik hatası: {}"
 
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} deposunun güncellenmesi gerekiyor"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kurulum sonrası betikleri çağrılıyor."
 
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom paketi tam olarak kurulmamış."
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "{1} Paketi için Betik hatası: \"{0}\"."
 
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Scom yapılandırma yöneticisini es geç."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "\"{0}\" paketinin kurulum sonrası betiği çağrılıyor."
 
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "\"{}\" paketinin dosyaları depolanıyor."
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "{1} Paketi için Betik hatası: \"{0}\""
 
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Kurulum sonrası dosya sahiplikleri değiştiriliyor {0} ({1}:{2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma öncesi işlemler çalıştırılıyor."
 
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Sembolik link '{}' eklendi "
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Paketin kaldırma öncesi betiği çağrılıyor."
+
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma öncesi işleyicileri çağrılıyor."
+
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma sonrası işlemler çalıştırılıyor."
+
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "\"{}\" paketinin kaldırma sonrası betiği çağrılıyor."
+
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" için kaldırma sonrası işlemler çalıştırılıyor."
+
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "\"{}\" paketi için tüm scom betikleri kayıtlardan siliniyor."
+
+#~ msgid "Unregistering {} script."
+#~ msgstr "{} scom betiği kayıtlardan siliniyor."
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Actions betiğinde sözdizimi hatası ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Actions betiği okunamıyor ({0}): {1}"
+
+# inary/actionsapi/autotools.py:119 :127
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "\"{}\" dosyalarının yüklenmesi işlemi başarısız oldu."
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox ihlali!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox ihlal sonucu:"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox açık inşa..."
+
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox ihlali: {0} ({1} -> {2})"
+
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Kaynak, \"{}\" yansısından indiriliyor."
+
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "\"{}\" adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
+
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "İnşa işlemini inşa klasörüyle sınırlama."
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "İndiriliyor  {} / {}"
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "\"{}\" paketi yapılandırılıyor."
+
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Devam etmek ister misiniz? (Tehlikeli olabilir!!!):"
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Yapılandırma Güncellemesi Tamamlanamadı."

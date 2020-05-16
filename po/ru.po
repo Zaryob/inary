@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -119,7 +119,7 @@ msgstr "Прерывание от клавиатуры: Выход ..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Необработанное внутреннее исключение. \n"
 "Пожалуйста отправьте отчет об ошибке в <http://bugs.sulin.org> .\n"
@@ -4557,124 +4557,40 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config Update завершено."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Добавлена ​​символическая ссылка \"{}\""
 
 #, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Желаете ли вы продолжить? (Это может быть опасно!!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Чоунинг в постинсталляции {0} ({1}: {2})"
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Настройка {} пакета"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Добавление {} в базу данных... "
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Загрузка %d / %d"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Пропустить утилиту конфигурирования scom"
 
 #, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Целевая директория: {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Пакет сomar  не полностью установлен"
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Репозиторий {} не совместим с Вашим дистрибутивом. Репозиторий отключен."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "репозиторий {} нуждается в обновлении"
 
 #, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Загрузка архива исходного кода из зеркала: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Копирование {} в каталог для передачи"
 
 #, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Нарушение среды сборки: {0} ({1} -> {2})"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Невозможно прочитать SCOM script {0}: {1}"
 
 #, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Построение песочницы включено..."
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Результат нарушения песочницы:"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Нарушения песочницы!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Установка файлов texmf не удалась"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Невозможно прочитать Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Ошибка синтаксиса в Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s опция требует %d аргумент%s опция требует %d аргумент%s опция требует %d аргумент#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "%s опция не требует аргумент"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Отмена регистрации сценариев scom"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Отмена регистрации сценариев scom"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Запустить сценарий, используемый после удаления, пакета"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Вызов предустановочных обработчиков"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Запустить сценарий, используемый перед удалением, пакета"
-
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Ошибка скрипта: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Запуск послеустановочного скрипта"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Ошибка скрипта: {}"
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Вызов послеустановочных обработчиков"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Ошибка скрипта: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Регистрация scom-скрипта {} "
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "Пакет SCOM обнавлен. С текущего момента используется новый демон SCOM."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Ошибка синтаксиса в SCOM script {0}: {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4685,37 +4601,121 @@ msgstr ""
 #~ " {}\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Ошибка синтаксиса в SCOM script {0}: {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "Пакет SCOM обнавлен. С текущего момента используется новый демон SCOM."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Невозможно прочитать SCOM script {0}: {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Регистрация scom-скрипта {} "
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Копирование {} в каталог для передачи"
+#~ msgid "Script error: {}"
+#~ msgstr "Ошибка скрипта: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "репозиторий {} нуждается в обновлении"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Вызов послеустановочных обработчиков"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Пакет сomar  не полностью установлен"
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Ошибка скрипта: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Пропустить утилиту конфигурирования scom"
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Запуск послеустановочного скрипта"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Добавление {} в базу данных... "
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Ошибка скрипта: {}"
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Чоунинг в постинсталляции {0} ({1}: {2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Добавлена ​​символическая ссылка \"{}\""
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Запустить сценарий, используемый перед удалением, пакета"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Вызов предустановочных обработчиков"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Запустить сценарий, используемый после удаления, пакета"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Отмена регистрации сценариев scom"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Отмена регистрации сценариев scom"
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s опция требует %d аргумент%s опция требует %d аргумент%s опция требует %d аргумент#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "%s опция не требует аргумент"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Ошибка синтаксиса в Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Невозможно прочитать Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Установка файлов texmf не удалась"
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Нарушения песочницы!"
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Результат нарушения песочницы:"
+
+#, fuzzy
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Построение песочницы включено..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Нарушение среды сборки: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Загрузка архива исходного кода из зеркала: {}"
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Репозиторий {} не совместим с Вашим дистрибутивом. Репозиторий отключен."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Целевая директория: {}"
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Загрузка %d / %d"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Настройка {} пакета"
+
+#, fuzzy
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Желаете ли вы продолжить? (Это может быть опасно!!!):"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config Update завершено."

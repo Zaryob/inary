@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2014-02-26 16:34+0000\n"
 "Last-Translator: obsoleteman <tulliana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/INARYLinux/language/pt_BR/)\n"
@@ -111,7 +111,7 @@ msgstr "Interrupção do teclado: Saindo ..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 
 #: inary-cli:68
@@ -3749,19 +3749,11 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU configuração de atualização acabado."
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
 #~ msgstr "Configurar falhou."
 
 #, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Instale falhou."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgid "Bypass scom configuration agent."
 #~ msgstr "Configurar falhou."
 
 #, fuzzy
@@ -3769,9 +3761,17 @@ msgstr ""
 #~ msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
+#~ msgid "Script error for \"{0}\" package: {1}."
 #~ msgstr "Configurar falhou."
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Instale falhou."
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
 #~ msgstr "Configurar falhou."
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU configuração de atualização acabado."

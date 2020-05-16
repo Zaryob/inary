@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-25 00:49+0300\n"
 "Last-Translator: Suleyman Poyraz\n"
 "Language-Team: Sulin Translation Team\n"
@@ -118,7 +118,7 @@ msgstr "Klaviaturann ksilmsi [Ctrl-D]: xr ..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Sklmmi daxili istisna.\n"
 "Zhmt olmasa shv hesabatn <http://bugs.sulin.org> gndrin.\n"
@@ -4543,124 +4543,40 @@ msgid "Invalid version string: '{}'"
 msgstr "Yanl versiya stri: '{}'"
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Konfiqurasiya Yenilmsi alnmad."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "lav olunmu symlink '{}'"
 
 #, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Davam etmk istrdinizmi? (thlkli ola bilr !!!):"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Postinstall {0} ({1}: {2}) il eynm"
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "\"{}\" Nizamlanr"
-
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "{} / {} Yklnir"
-
-#, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Qurma qovluun irisind qurulma prosesini mhdudladrmayn."
-
-#, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "\"{}\" Depoziti paylama il uyun deyildir. Depozitari lil."
-
-#, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Gzgdn mnbyi aln: \"{}\""
-
-#, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Qum qutusunun pozulmas: {0} ({1} -> {2})"
-
-#, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox qurmaa imkan verdi ..."
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox pozuntusunun nticsi:"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox pozuntular!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "\"{}\" Fayl quradrlmad."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Actions Script ({0}) oxuya bilmdi: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Sintaksiya Shvlr Skriptindki shv ({0}): {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
-#~ msgstr "% (seim) s seimi% (say) d dlil tlb edir bir dyr almr"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "{} Skriptini qeydiyyata almr."
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
 #~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
 
 #, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Konfiqurasiya uursuz oldu."
 
 #, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "\"{}\" Paketi n paketin postremove skriptini i salmaq."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom paketi tam qurulmamdr."
 
 #, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "\"{}\" Paketi n post xarlmas mliyyatlar aparlr."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} depo yenilnmlidir"
 
 #, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Dir krmk n \"{}\" kopyalanr"
 
 #, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "\"{}\" Paketi n vvlcdn silinn skript ilyir."
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "CPU sayn ld etmk olmur: {}"
 
 #, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "\"{}\" Paketi n vvlcdn xarlmas mliyyatlar aparlr."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "\"{0}\" paketi n potun quradrma skriptini i salmaq."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Ssenari xtas: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "\"{0}\" adl scom skriptini \"{1}\" n qeyd etmk."
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM paketi yenilndi. Bu gndn etibarn yeni SCOM demonundan istifad etmkl."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "SCOM sndindki sintaksiya xtas ({0}): {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4671,37 +4587,121 @@ msgstr "Yanl versiya stri: '{}'"
 #~ "\"{}\"\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "SCOM sndindki sintaksiya xtas ({0}): {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM paketi yenilndi. Bu gndn etibarn yeni SCOM demonundan istifad etmkl."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "CPU sayn ld etmk olmur: {}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "\"{0}\" adl scom skriptini \"{1}\" n qeyd etmk."
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Dir krmk n \"{}\" kopyalanr"
+#~ msgid "Script error: {}"
+#~ msgstr "Ssenari xtas: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} depo yenilnmlidir"
-
-#, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom paketi tam qurulmamdr."
-
-#, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Konfiqurasiya uursuz oldu."
-
-#, fuzzy
-#~ msgid "Storing files of \"{}\" package."
+#~ msgid "Calling post install handlers for \"{}\" package."
 #~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Postinstall {0} ({1}: {2}) il eynm"
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "lav olunmu symlink '{}'"
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "\"{0}\" paketi n potun quradrma skriptini i salmaq."
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "\"{}\" Paketi n vvlcdn xarlmas mliyyatlar aparlr."
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "\"{}\" Paketi n vvlcdn silinn skript ilyir."
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "\"{}\" Paketi n post xarlmas mliyyatlar aparlr."
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "\"{}\" Paketi n paketin postremove skriptini i salmaq."
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "\"{}\" Paketinin fayllar saxlanlr."
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "{} Skriptini qeydiyyata almr."
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
+#~ msgstr "% (seim) s seimi% (say) d dlil tlb edir bir dyr almr"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Sintaksiya Shvlr Skriptindki shv ({0}): {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Actions Script ({0}) oxuya bilmdi: {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "\"{}\" Fayl quradrlmad."
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox pozuntular!"
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox pozuntusunun nticsi:"
+
+#, fuzzy
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox qurmaa imkan verdi ..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Qum qutusunun pozulmas: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Gzgdn mnbyi aln: \"{}\""
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "\"{}\" Depoziti paylama il uyun deyildir. Depozitari lil."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Qurma qovluun irisind qurulma prosesini mhdudladrmayn."
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "{} / {} Yklnir"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "\"{}\" Nizamlanr"
+
+#, fuzzy
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Davam etmk istrdinizmi? (thlkli ola bilr !!!):"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Konfiqurasiya Yenilmsi alnmad."

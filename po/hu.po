@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2019-08-25 01:00+0300\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -115,7 +115,7 @@ msgstr "Megszakítás a billentyűzetről: Kilépés ..."
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Nem kezelt belső hiba.\n"
 "Küldjön hibabejelentést a <http://bugs.sulin.org> címen."
@@ -4319,113 +4319,32 @@ msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "A GNU Config Update művelet befejezve."
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "* {} hozzáadása az adatbázishoz..."
 
 #, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "A(z) {} csomag beállítása"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "A scom konfigurációs automatizmus átlépése."
 
 #, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Letöltés  {} / {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "A scom csomag nincs teljesen telepítve"
 
 #, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Ne korlátozza a build folyamatot a build könyvtáron belülre"
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "A(z) {} tároló frissítésre szorul."
 
 #, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "A(z) tároló nem kompatíbilis az ön által használt disztribúcióval. A tárolót kikapcsoltam."
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "{} másolása a transzfer könyvtárba"
 
 #, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Forrás letöltése egy tükörszerverről: {}"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "A SCOM script nem olvasható {0}: {1}"
 
 #, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
-
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox enabled build..."
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox violation result:"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox violations!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "A texmf fájlok telepítése nem sikerült"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Az Action Script {0} nem olvasható: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "A csomag eltávolítás utáni parancsainak futtatása"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Az eltávolítást előkészítő parancsok indítása"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "A csomag eltávolítás előtti parancsainak futtatása"
-
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Parancsfájl hiba: {}"
-
-#, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "A csomag telepítés utáni parancsainak futtatása"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Parancsfájl hiba: {}"
-
-#, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Telepítés utáni műveletek indítása"
-
-#, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Parancsfájl hiba: {}"
-
-#, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "A(z) {} scom parancsfájl regisztrálása"
-
-#, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
 
 #, fuzzy
 #~ msgid ""
@@ -4436,29 +4355,110 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #~ "  {}\n"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "A SCOM script nem olvasható {0}: {1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "A(z) {} scom parancsfájl regisztrálása"
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "{} másolása a transzfer könyvtárba"
+#~ msgid "Script error: {}"
+#~ msgstr "Parancsfájl hiba: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "A(z) {} tároló frissítésre szorul."
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Telepítés utáni műveletek indítása"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "A scom csomag nincs teljesen telepítve"
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Parancsfájl hiba: {}"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "A scom konfigurációs automatizmus átlépése."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "A csomag telepítés utáni parancsainak futtatása"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "* {} hozzáadása az adatbázishoz..."
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás előtti parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Az eltávolítást előkészítő parancsok indítása"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás utáni parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Az Action Script {0} nem olvasható: {1}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "A texmf fájlok telepítése nem sikerült"
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox violations!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox violation result:"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox enabled build..."
+
+#, fuzzy
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
+
+#, fuzzy
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Forrás letöltése egy tükörszerverről: {}"
+
+#, fuzzy
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "A(z) tároló nem kompatíbilis az ön által használt disztribúcióval. A tárolót kikapcsoltam."
+
+#, fuzzy
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Ne korlátozza a build folyamatot a build könyvtáron belülre"
+
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Letöltés  {} / {}"
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "A(z) {} csomag beállítása"
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "A GNU Config Update művelet befejezve."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 19:06+0300\n"
+"POT-Creation-Date: 2020-05-16 20:18+0300\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -113,7 +113,7 @@ msgstr "Перереривання клавіатури: вихід…"
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.sulin.org>."
+"Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 "Ноброблено внутрішні винятки.\n"
 "Будь ласка, повідомте про ваду в <http://bugs.sulin.org>."
@@ -3774,23 +3774,11 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "Налаштування GNU оновлено."
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
 #~ msgstr "Не вдалось налаштувати."
 
 #, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Не вдалось установити."
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Неможливо створити каталог {}"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgid "Bypass scom configuration agent."
 #~ msgstr "Не вдалось налаштувати."
 
 #, fuzzy
@@ -3798,9 +3786,21 @@ msgstr ""
 #~ msgstr "Не знайдено файла проекту «{}»."
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
+#~ msgid "Script error for \"{0}\" package: {1}."
 #~ msgstr "Не вдалось налаштувати."
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Неможливо створити каталог {}"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Не вдалось установити."
+
+#, fuzzy
+#~ msgid "Configuring \"{}\" package."
 #~ msgstr "Не вдалось налаштувати."
+
+#, fuzzy
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "Налаштування GNU оновлено."
