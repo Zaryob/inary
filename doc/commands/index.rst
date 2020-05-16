@@ -27,6 +27,7 @@ Inary Commands
    ./remove-orphaned.rst
    ./search.rst
    ./search-file.rst
+   ./sysconf.rst
    ./upgrade.rst
    ./repo-commands.rst
    ./list-commands.rst

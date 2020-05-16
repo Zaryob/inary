@@ -18,6 +18,7 @@ from end users to developers, even though you won't read it.
    about.rst
    installation.rst
    commands/index.rst
+   basicsofinary/index.rst
    faqs.rst
    glossary.rst
 
