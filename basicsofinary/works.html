@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How inary transactions works? &mdash; Inary Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Inary Documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Inary Documentation" href="../index.html"/>
+        <link rel="up" title="Basics of INARY" href="index.html"/>
+        <link rel="next" title="How to install a new package?" href="install.html"/>
+        <link rel="prev" title="Basics of INARY" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Inary
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2_alpha
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About Inary Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation of Inary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands/index.html">Inary Commands</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Basics of INARY</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How inary transactions works?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xml-and-why-i-used"><strong>XML and Why I used?</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#well-what-about-xml-files-slowly-read"><strong>Well, What about XML files slowly read?</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-ensure-stability"><strong>How to ensure stability?</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auxiliary-operations"><strong>Auxiliary Operations</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#okay-other-punches"><strong>Okay, other punches?</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">How to install a new package?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faqs.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Inary</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Basics of INARY</a> &raquo;</li>
+        
+      <li>How inary transactions works?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-inary-transactions-works">
+<h1>How inary transactions works?<a class="headerlink" href="#how-inary-transactions-works" title="Permalink to this headline">¶</a></h1>
+<p>Inary generates own database for package installation, uninstall and all other package operations. The database of inary is generated with using <cite>index.xml</cite> file, metadata’s of installed packages and package content list of the installed packages. Inary database is based on 3 main foundations.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>installdb: Consists of all installed packages and their datas.</p></li>
+<li><p>packagedb: Consists of all packages in remote or local repositories.</p></li>
+<li><p>repodb: Consists of repository uri and details.</p></li>
+</ul>
+</div></blockquote>
+<p>These database files are created and edited by inary. These database files are created automatically when a break or corruption is detected. Database files only contain some ways to secure installation. So you can sit back and sip your coffee without fear of databases.</p>
+<p>When any install operation is triggered, inary first checks the installdb to see if the package is installed, if it is not installed, it finds the repository containing the most package from the repodb. When all the process is done, the package is added to the installdb.</p>
+<p>Removal is simpler. The reverse dependencies of the package are added to the deletion queue, the list of files is removed, the packages are removed from the system and the packages are removed from the installdb.</p>
+<p>Summing up these procedures may seem intimidating to you, but the purpose of summarizing this is to brag about making these processes very fast and 100% lossless :smile:</p>
+<p>Package managers usually consist of two parts. such as dpkg and apt coexistence or yum and rpm. However, inary supports all users from the end user to the developer through the same library and the same cli. We also force any user into some cases to prevent unnecessary errors and problems. For example, even the freedom to blow up your system is gived by inary (only with “–ignore-safety” parameter)</p>
+<p>However, we will go into a little more details, if you are afraid of the details, you can continue with how to set up the program for the shiftlesses.</p>
+<div class="section" id="xml-and-why-i-used">
+<h2><strong>XML and Why I used?</strong><a class="headerlink" href="#xml-and-why-i-used" title="Permalink to this headline">¶</a></h2>
+<p>It has a metadata management style that uses XML files. Extensible Markup Language (XML) is a markup language. Isn’t it pretty descriptive? That is, a structural-language created for you to easily create the tree directory structure using markups.
+Although it seems difficult to read and write by hand (which we can do), it has a structure that can be manipulated quickly and at 100% stability using appropriate libraries. Indeed, the similarity to the HTML language (even the use of the same syntax) facilitates our work on the web side.
+It also works as well as a plain text file when compressed. And it saves us the trouble of
+analyzing packet data with complex commands like sed grep awk and other regexes.</p>
+<p>Package building process is the festivity of the houses. it consists of two package files, <cite>pspec.xml</cite> and <cite>actions.py</cite>. I will explain them in more detail is just preliminary information. Using them, the packages are compiled independently from the outside world by providing python shell isolation. In this way, the packages can sleep in their packs without being affected by the absurd environment variables.</p>
+<p>We said that everything is created by inary except pspec.xml for packages. It certainly is. Metadata and files data of the packages are derived from this.
+Analyzing all the packages and writing the warehouse index is also done with a command of inary. Opensuse must have been suffering to do this :smile:.</p>
+<p>Another point is that while doing this, no hand intervention actually permits. So this is good news when there are tons of packages that are wasted as a result of each packer’s own style. At the very least, the new packager does not have to examine the codes that are broken from someone else’s fantasy world.</p>
+</div>
+<div class="section" id="well-what-about-xml-files-slowly-read">
+<h2><strong>Well, What about XML files slowly read?</strong><a class="headerlink" href="#well-what-about-xml-files-slowly-read" title="Permalink to this headline">¶</a></h2>
+<p>This is actually caused by armament xml parsers that are printed to developers. we have created a C-based parser to overcome this. After all, I stated that we are about 950% faster to the git repository.</p>
+</div>
+<div class="section" id="how-to-ensure-stability">
+<h2><strong>How to ensure stability?</strong><a class="headerlink" href="#how-to-ensure-stability" title="Permalink to this headline">¶</a></h2>
+<p>The rest comes when it meets certain standards for the steps to be taken outside the package specifications.</p>
+</div>
+<div class="section" id="auxiliary-operations">
+<h2><strong>Auxiliary Operations</strong><a class="headerlink" href="#auxiliary-operations" title="Permalink to this headline">¶</a></h2>
+<p>If you are just a standard user who installs and updates packages, install remove and upgrade is sufficient for you. But not everyone’s needs are the same. Some of them have fetishes on package management. Since we know this, there are many commands that can be used to clean the packages (including runtime deps) from your files, to clean up the stray packages. It might be nice to tamper with the <cite>inary help</cite> command.</p>
+</div>
+<div class="section" id="okay-other-punches">
+<h2><strong>Okay, other punches?</strong><a class="headerlink" href="#okay-other-punches" title="Permalink to this headline">¶</a></h2>
+<p>There are many features to use the git repository as a repository (but pushing the packages is a bit annoying), from encrypting repositories, even packages with the gpg key. I will continue to call these as the place for each command.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="How to install a new package?" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Basics of INARY" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019 Zaryob.
+      Last updated on May 17, 2020.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> and ❤️  using a custom <a href="https://github.com/LinxiFan/Sphinx-theme">theme</a> based on <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2_alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

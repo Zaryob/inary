@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>inary search &mdash; Inary Documentation</title>
+  <title>inary sysconf &mdash; Inary Documentation</title>
   
 
   
@@ -41,8 +41,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Inary Documentation" href="../index.html"/>
         <link rel="up" title="Inary Commands" href="index.html"/>
-        <link rel="next" title="inary search-file" href="search-file.html"/>
-        <link rel="prev" title="inary remove-orphaned" href="remove-orphaned.html"/> 
+        <link rel="next" title="inary upgrade" href="upgrade.html"/>
+        <link rel="prev" title="inary search-file" href="search-file.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -114,14 +114,13 @@
 <li class="toctree-l2"><a class="reference internal" href="rebuild-db.html">inary rebuild-db</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove.html">inary remove</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove-orphaned.html">inary remove-orphaned</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">inary search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="search.html">inary search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">inary sysconf</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using"><strong>Using</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#options"><strong>Options</strong></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example-runtime"><strong>Example Runtime</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="search-file.html">inary search-file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sysconf.html">inary sysconf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="upgrade.html">inary upgrade</a></li>
 <li class="toctree-l2"><a class="reference internal" href="repo-commands.html">Managing Repositories in INARY</a></li>
 <li class="toctree-l2"><a class="reference internal" href="list-commands.html">Other Commands in INARY</a></li>
@@ -176,7 +175,7 @@
         
           <li><a href="index.html">Inary Commands</a> &raquo;</li>
         
-      <li>inary search</li>
+      <li>inary sysconf</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -193,57 +192,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="inary-search">
-<h1>inary search<a class="headerlink" href="#inary-search" title="Permalink to this headline">¶</a></h1>
-<p><cite>inary search</cite> command allows to search from package names and summary.</p>
+  <div class="section" id="inary-sysconf">
+<h1>inary sysconf<a class="headerlink" href="#inary-sysconf" title="Permalink to this headline">¶</a></h1>
+<p><cite>inary sysconf</cite> command triggers automatically after package operations.</p>
 <div class="section" id="using">
 <h2><strong>Using</strong><a class="headerlink" href="#using" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary search &lt;package-name&gt;
-sh ~$ inary sr &lt;package-name&gt;
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sh ~$ inary sysconf
+sh ~$ inary sc
 </pre></div>
 </div>
 </div>
-<div class="section" id="options">
-<h2><strong>Options</strong><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt>search options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-l</span>, <span class="option">--language</span></kbd></dt>
-<dd><p>Summary and description language.</p>
-</dd>
-<dt><kbd><span class="option">-r</span>, <span class="option">--repository</span></kbd></dt>
-<dd><p>Name of the source or package repository.</p>
-</dd>
-<dt><kbd><span class="option">-i</span>, <span class="option">--installdb</span></kbd></dt>
-<dd><p>Search in installdb.</p>
-</dd>
-<dt><kbd><span class="option">-s</span>, <span class="option">--sourcedb</span></kbd></dt>
-<dd><p>Search in sourcedb.</p>
-</dd>
-<dt><kbd><span class="option">-c</span>, <span class="option">--case-sensitive</span></kbd></dt>
-<dd><p>Case sensitive search.</p>
-</dd>
-<dt><kbd><span class="option">--name</span></kbd></dt>
-<dd><p>Search in the package name.</p>
-</dd>
-<dt><kbd><span class="option">--summary</span></kbd></dt>
-<dd><p>Search in the package summary.</p>
-</dd>
-<dt><kbd><span class="option">--description</span></kbd></dt>
-<dd><p>Search in the package description.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div>
 <div class="section" id="example-runtime">
 <h2><strong>Example Runtime</strong><a class="headerlink" href="#example-runtime" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">sh ~$ inary search expa</span>
-<span class="l l-Scalar l-Scalar-Plain">expat           - XML parsing libraries</span>
-<span class="l l-Scalar l-Scalar-Plain">expat-32bit     - 32-bit shared libraries for expat</span>
-<span class="l l-Scalar l-Scalar-Plain">expat-devel     - Development files for expat</span>
-<span class="l l-Scalar l-Scalar-Plain">expat-docs      - Documentation for expat package.</span>
-<span class="l l-Scalar l-Scalar-Plain">expat-pages     - ManPages for expat package.</span>
-<span class="l l-Scalar l-Scalar-Plain">perl-XML-Parser - A Perl extension interface to James Clark&#39;s XML parser, expat</span>
+<div class="highlight-YAML+Jinja notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">sh ~# inary sc</span>
+  <span class="l l-Scalar l-Scalar-Plain">Process triggering for sysconf.</span>
+
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  fonts</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  glib-schema</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-Adwaita</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-HighContrast</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-hicolor</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-locolor</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-default</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  icon-gnome</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  desktop-database</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  mandb</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  linux-4.18.0-sulinos.x86_64</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  mime</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  dbus</span>
+      <span class="l l-Scalar l-Scalar-Plain">[+] Process triggered for  eudev</span>
 </pre></div>
 </div>
 </div>
@@ -256,10 +233,10 @@ sh ~$ inary sr &lt;package-name&gt;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="search-file.html" class="btn btn-neutral float-right" title="inary search-file" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="upgrade.html" class="btn btn-neutral float-right" title="inary upgrade" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="remove-orphaned.html" class="btn btn-neutral" title="inary remove-orphaned" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="search-file.html" class="btn btn-neutral" title="inary search-file" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
