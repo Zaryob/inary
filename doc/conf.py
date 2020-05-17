@@ -24,7 +24,7 @@ copyright = "2016-2020 Zaryob"
 # The short X.Y version.
 version =  '1.3'
 # The full version, including alpha/beta/rc tags.
-release = 'rc'
+release = '1.3_rc'
 
 
 # General configuration
