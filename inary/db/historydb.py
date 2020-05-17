@@ -123,8 +123,6 @@ class HistoryDB(lazydb.LazyDB):
     def get_last_repo_update(self, last=1):
         repoupdates = [l for l in self.__logs if l.endswith("repoupdate.xml")]
         repoupdates.reverse()
-        if not len(repoupdates) >= 2:
-            return None
 
         if last != 1 and len(repoupdates) <= last:
             return None

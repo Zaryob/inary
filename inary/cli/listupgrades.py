@@ -56,9 +56,9 @@ Lists the packages that will be upgraded.
         import inary.operations as operations
         self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
-        is_upgradable = operations.upgrade.is_upgradable
+        packagedb = inary.db.packagedb.PackageDB()
 
-        upgradable_pkgs = list(filter(is_upgradable, installdb.list_installed()))
+        upgradable_pkgs = operations.upgrade.list_upgradeable(installdb,packagedb)
         # replaced packages can not pass is_upgradable test, so we add them manually
         # upgradable_pkgs.extend(list_replaces())
 
@@ -86,13 +86,12 @@ Lists the packages that will be upgraded.
             sys.stdout.write('===========================================================================')
 
         for pkg in upgradable_pkgs:
-            package = self.installdb.get_package(pkg)
             inst_info = self.installdb.get_info(pkg)
             if self.options.long:
-                ctx.ui.info(package)
+                ctx.ui.info(pkg)
                 sys.stdout.write(inst_info)
             elif self.options.install_info:
-                ctx.ui.info('%-20s |%s ' % (package.name, inst_info.one_liner()))
+                ctx.ui.info('%-20s |%s ' % (pkg, inst_info.one_liner()))
             else:
-                package.name += ' ' * max(0, maxlen - len(package.name))
-                ctx.ui.info('{0} - {1}'.format(package.name, str(package.summary)))
+                package.name += ' ' * max(0, maxlen - len(pkg))
+                ctx.ui.info('{0} - {1}'.format(pkg, str(packagedb.get_summary(pkg))))

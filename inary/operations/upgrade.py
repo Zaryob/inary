@@ -464,6 +464,12 @@ def is_upgradable(name,installdb,packagedb):
 
     return int(i_release) < int(release)
 
+def list_upgradeable(installdb,packagedb):
+    listup=[]
+    for pkg in installdb.list_installed():
+        if is_upgradable(pkg,installdb,packagedb):
+            listup.append(pkg)
+    return listup
 
 def get_upgrade_order(packages):
     """

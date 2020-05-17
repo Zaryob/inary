@@ -165,6 +165,15 @@ class PackageDB(lazydb.LazyDB):
         release = xmlext.getNodeAttribute(update, 'release')
 
         return release
+        
+    @staticmethod
+    def __get_last_date(meta_doc):
+        history = xmlext.getNode(meta_doc, 'History')
+        update = xmlext.getNode(history, 'Update')
+
+        date = xmlext.getNodeText(update, 'Date')
+
+        return date
 
     @staticmethod
     def __get_summary(meta_doc):
@@ -210,6 +219,14 @@ class PackageDB(lazydb.LazyDB):
         pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
 
         return self.__get_release(pkg_doc)
+        
+    def get_last_date(self, name, repo):
+        if not self.has_package(name, repo):
+            raise Exception(_('Package \"{}\" not found.').format(name))
+
+        pkg_doc = xmlext.parseString(self.pdb.get_item(name, repo))
+
+        return self.__get_last_date(pkg_doc)
 
     def get_package_repo(self, name, repo=None):
         pkg, repo = self.pdb.get_item_repo(name, repo)
@@ -283,9 +300,10 @@ class PackageDB(lazydb.LazyDB):
     def list_packages(self, repo):
         return self.pdb.get_item_keys(repo)
 
-    def list_newest(self, repo, since=None):
+    def list_newest(self, repo, since=None,historydb=None):
         packages = []
-        historydb = inary.db.historydb.HistoryDB()
+        if not historydb:
+            historydb = inary.db.historydb.HistoryDB()
         if since:
             since_date = datetime.datetime(*time.strptime(since, "%Y-%m-%d")[0:6])
         else:
@@ -294,16 +312,16 @@ class PackageDB(lazydb.LazyDB):
         for pkg in self.list_packages(repo):
             failed = False
             try:
-                enter_date = datetime.datetime(*time.strptime(self.get_package(pkg).history[-1].date, "%m-%d-%Y")[0:6])
+                enter_date = datetime.datetime(*time.strptime(self.get_last_date(pkg,repo), "%m-%d-%Y")[0:6])
             except:
                 failed = True
             if failed:
                 try:
                     enter_date = datetime.datetime(
-                        *time.strptime(self.get_package(pkg).history[-1].date, "%Y-%m-%d")[0:6])
+                        *time.strptime(self.get_last_date(pkg,repo), "%Y-%m-%d")[0:6])
                 except:
                     enter_date = datetime.datetime(
-                        *time.strptime(self.get_package(pkg).history[-1].date, "%Y-%d-%m")[0:6])
+                        *time.strptime(self.get_last_date(pkg,repo), "%Y-%d-%m")[0:6])
 
             if enter_date >= since_date:
                 packages.append(pkg)
