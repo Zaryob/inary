@@ -54,45 +54,8 @@ class Trigger:
             self.missing_postOps=True
             return None
 
-
     def run_command(self, func):
-        """Calls the corresponding function in actions.py.
-
-        If mandatory parameter is True, and function is not present in
-        actionLocals inary.build.Error will be raised."""
-        # we'll need our working directory after actionscript
-        # finished its work in the archive source directory.
-        curDir = os.getcwd()
-        os.chdir(self.specdir)
-        self.compile_script()
-        self.load_script()
-
-        if func in self.actionLocals:
-            # Fixme: It needs a more effective fix than commit 17d7d45 on branch origin/foreign-actions
-
-            prcss=process.Process(name="INARY_POSTOPS", target=self.actionLocals[func],)
-            prcss.start()
-            ctx.ui.info(_("[ Child Process PID ] : "), color="brightwhite",noln=True)
-            print(prcss.pid)
-
-            prcss.join()
-            if prcss.exception:
-                error, traceback = prcss.exception
-
-                raise Error(_("Running commands in \"{}\" function failed:\nError Message: \n{}\n\t{} ").format(
-                                                                                                  func,
-                                                                                                  traceback,
-                                                                                                  error
-                                                                                                  )
-                )
-
-        else:
-            if mandatory:
-                raise Error(_("unable to call function from actions: \'{}\'").format(func))
-
-        os.chdir(curDir)
-        return True
-
+        """"""
         if not self.missing_postOps:
             curDir = os.getcwd()
             os.chdir(self.specdir)
@@ -108,26 +71,28 @@ class Trigger:
         else:
             return 0
 
-    def preinstall(self, specdir, package):
+    def preinstall(self, specdir):
         self.specdir=specdir
-        self.postscript = util.join_path(self.specdir, package)
+        self.postscript = util.join_path(self.specdir, ctx.const.postops)
         self.load_script()
-        return self.run_command("preInstall")
+        retval = self.run_command("preInstall")
+        util.delete_file(self.postscript)
+        return retval
 
-    def postinstall(self, specdir, package):
+    def postinstall(self, specdir):
         self.specdir=specdir
-        self.postscript = util.join_path(self.specdir, package)
+        self.postscript = util.join_path(self.specdir, ctx.const.postops)
         self.load_script()
         return self.run_command("postInstall")
 
-    def postremove(self, specdir, package):
+    def postremove(self, specdir):
         self.specdir=specdir
-        self.postscript = util.join_path(self.specdir, package)
+        self.postscript = util.join_path(self.specdir, ctx.const.postops)
         self.load_script()
         return self.run_command("postRemove")
 
-    def preremove(self, specdir, package):
+    def preremove(self, specdir):
         self.specdir=specdir
-        self.postscript = util.join_path(self.specdir, package)
+        self.postscript = util.join_path(self.specdir, ctx.const.postops)
         self.load_script()
         return self.run_command("preRemove")

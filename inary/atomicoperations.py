@@ -156,8 +156,6 @@ class Install(AtomicOperation):
         self.operation = INSTALL
         self.store_old_paths = None
         self.trigger=inary.trigger.Trigger()
-        self.ops_dir = os.path.join(ctx.config.packages_dir(), "postoperations")
-        self.ops_script = os.path.join(self.ops_dir, self.pkginfo.name)
 
     def install(self, ask_reinstall=True):
 
@@ -312,11 +310,10 @@ class Install(AtomicOperation):
                self.installdb.mark_pending(self.pkginfo.name)
                return 0
             ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
-            if not self.trigger.preinstall(self.ops_dir, self.pkginfo.name):
+            if not self.trigger.preinstall(ctx.config.tmp_dir()):
                 util.clean_dir(self.package.pkg_dir())
                 ctx.ui.error(_('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
-
 
     def postinstall(self):
 
@@ -334,7 +331,7 @@ class Install(AtomicOperation):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
             ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
-            if not self.trigger.postinstall(self.ops_dir, self.pkginfo.name):
+            if not self.trigger.postinstall(self.package.pkg_dir()):
                 ctx.ui.error(_('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
 
@@ -478,11 +475,9 @@ class Install(AtomicOperation):
             clean_leftovers()
 
     def store_postops(self):
-        """stores postops script"""
+        """stores postops script temporarly"""
         if ('postOps' in self.metadata.package.isA):
-            self.package.extract_file_synced(ctx.const.postops, self.ops_dir)
-
-        shutil.move(os.path.join(self.ops_dir, ctx.const.postops), self.ops_script)
+            self.package.extract_file_synced(ctx.const.postops, ctx.config.tmp_dir())
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
@@ -491,6 +486,8 @@ class Install(AtomicOperation):
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
+        if ('postOps' in self.metadata.package.isA):
+            self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
 
 
     def update_databases(self):
@@ -665,7 +662,7 @@ class Remove(AtomicOperation):
     def run_preremove(self):
         if ('postOps' in self.metadata.package.isA):
             ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(self.package_name)),color='brightyellow')
-            self.trigger.preremove(self.ops_dir, self.pkginfo.name)
+            self.trigger.preremove(self.package.pkg_dir())
 
 
     def run_postremove(self):
