@@ -40,21 +40,24 @@ class Package:
     """INARY Package Class provides access to a inary package (.inary
     file)."""
 
-    formats = ("1.0", "1.1", "1.2")
+    formats = ("1.0", "1.1", "1.2", "1.3")
     default_format = "1.2"
     timestamp = None
 
     @staticmethod
     def archive_name_and_format(package_format):
-        if package_format == "1.2":
+        if package_format == "1.3":
+            archive_format = "targz"
+            archive_suffix = ctx.const.gz_suffix
+        elif package_format == "1.2":
             archive_format = "tarxz"
             archive_suffix = ctx.const.xz_suffix
         elif package_format == "1.1":
             archive_format = "tarlzma"
             archive_suffix = ctx.const.lzma_suffix
         else:
-            # "1.0" format does not have an archive
-            return None, None
+            archive_format = "tar"
+            archive_suffix = ""
 
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
@@ -120,11 +123,6 @@ class Package:
 
         if arcname is None:
             arcname = name
-
-        if self.format == "1.0":
-            arcname = util.join_path("install", arcname)
-            self.add_to_package(name, arcname)
-            return
 
         if self.install_archive is None:
             archive_name, archive_format = \

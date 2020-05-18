@@ -69,6 +69,8 @@ class Constants(metaclass=Singleton):
         self.__c.lzma_suffix = ".lzma"
         # suffix for xz
         self.__c.xz_suffix = ".xz"
+        # suffix for gz
+        self.__c.gz_suffix = ".gz"
 
         self.__c.partial_suffix = ".part"
         self.__c.temporary_suffix = ".tmp"

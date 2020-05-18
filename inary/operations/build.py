@@ -1208,13 +1208,15 @@ package might be a good solution."))
                     orgname = util.join_path("debug", finfo.path)
                 pkg.add_to_install(orgname, finfo.path)
 
-            if self.target_package_format == "1.2":
+            if self.target_package_format == "1.3":
+                archive_format = ".tar.gz"
+            elif self.target_package_format == "1.2":
                 archive_format = ".tar.xz"
             elif self.target_package_format == "1.1":
                 archive_format = ".tar.lzma"
             else:
                 # "1.0" format does not have an archive
-                archive_format = ""
+                archive_format = ".tar"
 
             self.metadata.package.installTarHash = util.sha1_file(
                 "{0}/install{1}".format(self.pkg_dir(), archive_format))
