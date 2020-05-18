@@ -733,6 +733,11 @@ class ArchiveZip(ArchiveBase):
                 if is_dir:  # this is a directory
                     if not os.path.isdir(ofile):
                         os.makedirs(ofile)
+                        perm = info.external_attr
+                        perm &= 0xFFFF0000
+                        perm >>= 16
+                        perm |= 0x00000100
+                        os.chmod(ofile, perm)
                     continue
 
                 # check that output dir is present
@@ -751,8 +756,14 @@ class ArchiveZip(ArchiveBase):
                     target = self.zip_obj.read(info.filename)
                     os.symlink(target, ofile)
                 else:
+                    perm = info.external_attr
+                    perm &= 0x08FF0000
+                    perm >>= 16
+                    perm |= 0x00000100
+
                     info.filename = outpath
                     self.zip_obj.extract(info, target_dir)
+                    os.chmod(ofile, perm)
 
     def unpack_files(self, paths, target_dir):
         self.unpack_file_cond(lambda f: f in paths, target_dir)
