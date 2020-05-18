@@ -128,8 +128,6 @@ class Command(object):
         pass
 
     def process_opts(self):
-        self.check_auth_info()
-
         # make destdir absolute
         if self.options.destdir:
             d = str(self.options.destdir)
@@ -138,32 +136,8 @@ class Command(object):
                 os.makedirs(d)
             self.options.destdir = os.path.realpath(d)
 
-    def check_auth_info(self):
-        username = self.options.username
-        password = self.options.password
-
-        # TODO: We'll get the username, password pair from a configuration
-        # file from users home directory. Currently we need user to
-        # give it from the user interface.
-        #         if not username and not password:
-        #             if someauthconfig.username and someauthconfig.password:
-        #                 self.authInfo = (someauthconfig.username,
-        #                                  someauthconfig.password)
-        #                 return
-        if username and password:
-            self.options.authinfo = (username, password)
-            return
-
-        if username and not password:
-            from getpass import getpass
-            password = getpass(_("Password: "))
-            self.options.authinfo = (username, password)
-        else:
-            self.options.authinfo = None
-
     def init(self, database=True, write=True, locked=False):
         """initialize INARY components"""
-
         if self.options:
             ui = inary.cli.CLI(self.options.debug, self.options.verbose)
         else:
