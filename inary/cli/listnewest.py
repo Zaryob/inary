@@ -38,6 +38,7 @@ packages from all repositories.
         super(ListNewest, self).__init__(args)
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.packagedb = inary.db.packagedb.PackageDB()
+        self.historydb=inary.db.historydb.HistoryDB()
 
     name = ("list-newest", "ln")
 
@@ -55,7 +56,6 @@ packages from all repositories.
     def run(self):
 
         self.init(database=True, write=False)
-
         if self.args:
             for arg in self.args:
                 self.print_packages(arg)
@@ -68,14 +68,12 @@ packages from all repositories.
         if ctx.config.get_option('since'):
             since = ctx.config.get_option('since')
         elif ctx.config.get_option('last'):
-            since = inary.db.historydb.HistoryDB().get_last_repo_update(int(ctx.config.get_option('last')))
+            since = self.historydb.get_last_repo_update(int(ctx.config.get_option('last')))
         else:
             since = None
-
-        l = self.packagedb.list_newest(repo, since)
+        l = self.packagedb.list_newest(repo, since,self.historydb)
         if not l:
             return
-
         if since:
             ctx.ui.info(_("Packages added to \'{0}\' since \"{1}\":\n").format(repo, since))
         else:
@@ -86,9 +84,9 @@ packages from all repositories.
 
         l.sort()
         for p in l:
-            package = self.packagedb.get_package(p, repo)
+            pkgsum = self.packagedb.get_summary(p)
             lenp = len(p)
             p += ' ' * max(0, maxlen - lenp)
-            ctx.ui.info('{0} - {1} '.format(p, str(package.summary)))
+            ctx.ui.info('{0} - {1} '.format(p, str(pkgsum)))
 
         print()
