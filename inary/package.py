@@ -56,8 +56,8 @@ class Package:
             archive_format = "tarlzma"
             archive_suffix = ctx.const.lzma_suffix
         else:
-            # "1.0" format does not have an archive
-            return None, None
+            archive_format = "tar"
+            archive_suffix = ""
 
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
@@ -123,11 +123,6 @@ class Package:
 
         if arcname is None:
             arcname = name
-
-        if self.format == "1.0":
-            arcname = util.join_path("install", arcname)
-            self.add_to_package(name, arcname)
-            return
 
         if self.install_archive is None:
             archive_name, archive_format = \
