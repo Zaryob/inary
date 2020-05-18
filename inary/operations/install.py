@@ -56,7 +56,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if len(A) == 0:
         ctx.ui.info(_('No packages to install.'))
         return True
-    
+
     A |= operations.upgrade.upgrade_base(A)
     if not ctx.config.get_option('ignore_dependency'):
         ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
@@ -101,7 +101,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         install_op = atomicoperations.Install.from_name(x)
         install_op.store_inary_files()
         paths.append(install_op.package_fname)
-        
+
         if x in extra_packages or (extra and x in A):
             extra_paths[install_op.package_fname] = x
         elif reinstall and x in installdb.installed_extra:
@@ -139,9 +139,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
-    for path in paths:
-        install_op = atomicoperations.Install(path)
-        install_op.write_status_file()
 
     return True
 

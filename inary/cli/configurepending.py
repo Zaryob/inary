@@ -41,14 +41,10 @@ def configure_pending(packages=None):
     for x in order:
         if installdb.has_package(x):
             pkginfo = installdb.get_package(x)
-            pkg_path = installdb.package_path(x)
-            m = inary.data.metadata.MetaData()
-            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-            m.read(metadata_path)
-            # FIXME: we need a full package info here!
-            pkginfo.name = x
+            ops_Dir=os.path.join(ctx.config.packages_dir(), "postoperations")
+            
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-            inary.trigger.Trigger().postinstall(pkg_path)
+            inary.trigger.Trigger().postinstall(ops_Dir, x)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)
 

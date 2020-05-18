@@ -156,6 +156,8 @@ class Install(AtomicOperation):
         self.operation = INSTALL
         self.store_old_paths = None
         self.trigger=inary.trigger.Trigger()
+        self.ops_dir = os.path.join(ctx.config.packages_dir(), "postoperations")
+        self.ops_script = os.path.join(self.ops_dir, self.pkginfo.name)
 
     def install(self, ask_reinstall=True):
 
@@ -178,7 +180,7 @@ class Install(AtomicOperation):
         # postOps from inary.operations.install and inary.operations.upgrade
         ctx.ui.status(_("Unpacking package"), push_screen=False)
         self.extract_install()
-        
+
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.update_databases()
 
@@ -310,7 +312,7 @@ class Install(AtomicOperation):
                self.installdb.mark_pending(self.pkginfo.name)
                return 0
             ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
-            if not self.trigger.preinstall(self.package.pkg_dir()):
+            if not self.trigger.preinstall(self.ops_dir, self.pkginfo.name):
                 util.clean_dir(self.package.pkg_dir())
                 ctx.ui.error(_('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
@@ -332,7 +334,7 @@ class Install(AtomicOperation):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
             ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
-            if not self.trigger.postinstall(self.package.pkg_dir()):
+            if not self.trigger.postinstall(self.ops_dir, self.pkginfo.name):
                 ctx.ui.error(_('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 raise SystemExit
 
@@ -475,18 +477,21 @@ class Install(AtomicOperation):
         if self.reinstall():
             clean_leftovers()
 
+    def store_postops(self):
+        """stores postops script"""
+        if ('postOps' in self.metadata.package.isA):
+            self.package.extract_file_synced(ctx.const.postops, self.ops_dir)
+
+        shutil.move(os.path.join(self.ops_dir, ctx.const.postops), self.ops_script)
+
     def store_inary_files(self):
-        """put files.xml, metadata.xml, postoperations.py, somewhere in the file system. We'll need these in future..."""
+        """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
         if self.reinstall():
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
-        if ('postOps' in self.metadata.package.isA):
-            self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
-            
-    def write_status_file(self):
-        self.installdb.mark_installed("{0}-{1}-{2}".format(self.pkginfo.name,self.pkginfo.version,self.pkginfo.release))
+
 
     def update_databases(self):
         """update databases"""
@@ -544,11 +549,11 @@ def install_single_name(name, upgrade=False):
 
 def __install(install, upgrade=False):
     '''Standard installation function'''
-    install.store_inary_files()
+    install.store_postops()
     install.preinstall()
     install.install(not upgrade)
+    install.store_inary_files()
     install.postinstall()
-    install.write_status_file()    
 
 class Remove(AtomicOperation):
 
@@ -583,7 +588,7 @@ class Remove(AtomicOperation):
             self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
-            
+
         if not ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
             self.run_postremove()
 
@@ -593,10 +598,7 @@ class Remove(AtomicOperation):
         ctx.ui.close()
         ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
         util.xterm_title_reset()
-        self.remove_status_file()
-        
-    def remove_status_file(self):
-        self.installdb.clear_installed("{0.name}-{0.version}-{0.release}".format(self.package))
+
 
     def check_dependencies(self):
         # FIXME: why is this not implemented? -- exa
@@ -663,13 +665,13 @@ class Remove(AtomicOperation):
     def run_preremove(self):
         if ('postOps' in self.metadata.package.isA):
             ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(self.package_name)),color='brightyellow')
-            self.trigger.preremove(self.package.pkg_dir())
+            self.trigger.preremove(self.ops_dir, self.pkginfo.name)
 
 
     def run_postremove(self):
         if ('postOps' in self.metadata.package.isA):
             ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(self.package_name)),color='brightyellow')
-            self.trigger.postremove(self.package.pkg_dir())
+            self.trigger.postremove(self.ops_script)
 
     def update_databases(self):
         self.remove_db()
