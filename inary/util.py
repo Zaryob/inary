@@ -1088,9 +1088,9 @@ def split_version(package_version):
 
     example: 1.0.3-5-2 -> (1.0.3, 5, 2)
     """
-    version, release,build = package_version.split('-')
+    version, sep, release_and_build = package_version.partition("-")
+    release, sep, build = release_and_build.partition("-")
     return version, release, build
-
 
 def filter_latest_packages(package_paths):
     """ For a given inary package paths list where there may also be multiple versions
