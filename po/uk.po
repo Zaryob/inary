@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 17:53+0300\n"
+"POT-Creation-Date: 2020-05-19 17:58+0300\n"
 "PO-Revision-Date: 2011-02-04 12:21+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
@@ -19,17 +19,17 @@ msgstr ""
 "X-Generator: Virtaal 0.6.1\n"
 
 #: /usr/lib64/python3.6/optparse.py:146
-#, fuzzy, python-format
+#, python-format
 msgid "no such option: %s"
 msgstr "нема такого параметра: %s"
 
 #: /usr/lib64/python3.6/optparse.py:157
-#, fuzzy, python-format
+#, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "неоднозначний параметр: %s (%s?)"
 
 #: /usr/lib64/python3.6/optparse.py:381
-#, fuzzy, python-format
+#, python-format
 msgid "Usage: %s\n"
 msgstr "Використання: %s\n"
 
@@ -50,12 +50,12 @@ msgid "complex"
 msgstr "складний"
 
 #: /usr/lib64/python3.6/optparse.py:433
-#, fuzzy, python-format
+#, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "Параметр %s: неправильне %s значення: %r"
 
 #: /usr/lib64/python3.6/optparse.py:441
-#, fuzzy, python-format
+#, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "параметр %s: неправильний вибір:  %r (вибрано з %s)"
 
@@ -68,12 +68,11 @@ msgid "show program's version number and exit"
 msgstr "показати версію програми і вийти"
 
 #: /usr/lib64/python3.6/optparse.py:1266
-#, fuzzy
 msgid "%prog [options]"
 msgstr "%prog [параметри]"
 
 #: /usr/lib64/python3.6/optparse.py:1486 /usr/lib64/python3.6/optparse.py:1524
-#, fuzzy, python-format
+#, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "параметр %s потребує аргумент %d"
@@ -81,7 +80,7 @@ msgstr[1] "параметр %s потребує аргумент %d"
 msgstr[2] "параметр %s потребує аргумент %d"
 
 #: /usr/lib64/python3.6/optparse.py:1496
-#, fuzzy, python-format
+#, python-format
 msgid "%s option does not take a value"
 msgstr "параметр %s не має значення"
 
@@ -90,26 +89,22 @@ msgid "Options"
 msgstr "Параметри"
 
 #: inary-cli:50
-#, fuzzy
 msgid "Program terminated."
 msgstr "Програму перервано."
 
 #: inary-cli:52
-#, fuzzy
 msgid ""
 "\n"
 "Keyboard Interrupt [Ctrl-C]: Exiting..."
 msgstr "Перереривання клавіатури: вихід…"
 
 #: inary-cli:55
-#, fuzzy
 msgid ""
 "\n"
 "Keyboard Interrupt [Ctrl-D]: Exiting..."
 msgstr "Перереривання клавіатури: вихід…"
 
 #: inary-cli:59
-#, fuzzy
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
@@ -119,7 +114,6 @@ msgstr ""
 "Будь ласка, повідомте про ваду в <http://bugs.sulin.org>."
 
 #: inary-cli:68
-#, fuzzy
 msgid "System error. Program terminated."
 msgstr "Системна помилка. Програму перервано."
 
@@ -144,12 +138,10 @@ msgid "Using inary in WSL environment is not allowed."
 msgstr ""
 
 #: inary.xml.in.h:1
-#, fuzzy
 msgid "Inary package"
 msgstr "Пакунок INARY"
 
 #: inary/actionsapi/autotools.py:44 inary/actionsapi/cmaketools.py:40
-#, fuzzy
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "{}/config.log"
@@ -166,12 +158,10 @@ msgstr "Не вдалось налаштувати."
 #: inary/actionsapi/autotools.py:99 inary/actionsapi/autotools.py:110
 #: inary/actionsapi/cmaketools.py:84 inary/actionsapi/mesontools.py:79
 #: inary/actionsapi/mesontools.py:102 inary/actionsapi/perlmodules.py:67
-#, fuzzy
 msgid "No configure script found. (\"{}\" file not found.)"
 msgstr "Не знайдено скрипта налаштування для cmake."
 
 #: inary/actionsapi/autotools.py:115
-#, fuzzy
 msgid "Compiling failed."
 msgstr "Не вдалось налаштувати."
 
@@ -191,32 +181,26 @@ msgid "Install failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/autotools.py:182
-#, fuzzy
 msgid "Running 'aclocal' failed."
 msgstr "Не вдалось запустити aclocal."
 
 #: inary/actionsapi/autotools.py:187
-#, fuzzy
 msgid "Running 'autogen.sh' script failed."
 msgstr "Не вдалось запустити autoreconf."
 
 #: inary/actionsapi/autotools.py:192
-#, fuzzy
 msgid "Running 'autoconf' failed."
 msgstr "Не вдалось запустити autoconf."
 
 #: inary/actionsapi/autotools.py:198
-#, fuzzy
 msgid "Running 'autoreconf' failed."
 msgstr "Не вдалось запустити autoreconf."
 
 #: inary/actionsapi/autotools.py:204
-#, fuzzy
 msgid "Running 'automake' failed."
 msgstr "Не вдалось запустити automake."
 
 #: inary/actionsapi/autotools.py:210
-#, fuzzy
 msgid "Running 'autoheader' failed."
 msgstr "Не вдалось запустити autoheader."
 
@@ -229,12 +213,11 @@ msgid "Unable to retrieve CPU count: {}"
 msgstr ""
 
 #: inary/actionsapi/get.py:239
-#, fuzzy
 msgid "Util '{}' cannot be found."
 msgstr "{} не знайдено."
 
 #: inary/actionsapi/get.py:241
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "'{0}' does not exist, using plain name '{1}'"
 msgstr "Попередження: {0} не існує, використовуйте просту назву {1}"
 
@@ -244,43 +227,36 @@ msgid "Insufficient arguments."
 msgstr "Неповні аргументи."
 
 #: inary/actionsapi/inarytools.py:68
-#, fuzzy
 msgid "No executable file matched pattern \"{}\"."
 msgstr "Жодного виконавчого файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/inarytools.py:87 inary/actionsapi/inarytools.py:148
 #: inary/actionsapi/inarytools.py:339
-#, fuzzy
 msgid "No file matched pattern \"{}\"."
 msgstr "Жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/inarytools.py:193
-#, fuzzy
 msgid "No file matched pattern \"{}\""
 msgstr "Немає файла з відповідних шаблоном «{}»"
 
 #: inary/actionsapi/inarytools.py:203
-#, fuzzy
 msgid "ActionsAPI [doman]: Wrong man page file: \"{}\""
 msgstr "ActionsAPI [doman]: неправильний файл посібника: {}"
 
 #: inary/actionsapi/inarytools.py:232
-#, fuzzy
 msgid "No file matched pattern \"{}\". 'domove' operation failed."
 msgstr "Немає файла з відповідних шаблоном «{}». Не вдалось виконати «domove»."
 
 #: inary/actionsapi/inarytools.py:252
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [rename]: \"{0}\": \"{1}\""
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/inarytools.py:290
-#, fuzzy
 msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
 msgstr "Немає файла з відповідних шаблоном «{}». Не вдалось виконати «dosed»."
 
 #: inary/actionsapi/inarytools.py:305
-#, fuzzy
 msgid "dosed method has not changed file \"{}\"."
 msgstr "Частковий спосіб не має вибраного файла «{}»."
 
@@ -289,67 +265,54 @@ msgid "\"{}\" has been changed by dosed method."
 msgstr ""
 
 #: inary/actionsapi/inarytools.py:310
-#, fuzzy
 msgid "File does not exist or permission denied: \"{}\""
 msgstr "Файл не існує або немає доступу: {}"
 
 #: inary/actionsapi/inarytools.py:329
-#, fuzzy
 msgid "ActionsAPI [dosym]: File already exists: \"{}\""
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/inarytools.py:369
-#, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Жодного файла відповідного до шаблону «{}». Не вдалось вилучити."
 
 #: inary/actionsapi/inarytools.py:380
-#, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
 msgstr "Жодного каталогу відповідного до шаблону «{}». Не вдалось вилучити."
 
 #: inary/actionsapi/javamodules.py:87 inary/actionsapi/javamodules.py:196
-#, fuzzy
 msgid "No any file/directory matched to regex expression \"{}\"."
 msgstr "Жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/javamodules.py:94 inary/actionsapi/javamodules.py:100
-#, fuzzy
 msgid "DoJavadoc failed."
 msgstr "Не вдалось зібрати."
 
 #: inary/actionsapi/javamodules.py:150
-#, fuzzy
 msgid "Compile failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/actionsapi/javamodules.py:178 inary/actionsapi/javamodules.py:207
-#, fuzzy
 msgid "Installing file \"{}\" failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/javamodules.py:217
-#, fuzzy
 msgid "Installing directory \"{}\" failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/javamodules.py:246
-#, fuzzy
 msgid "Javadoc generation failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/actionsapi/javamodules.py:262
-#, fuzzy
 msgid "Run failed."
 msgstr "Не вдалось запустити {}."
 
 #: inary/actionsapi/kerneltools.py:127
-#, fuzzy
 msgid "Can't find kernel version information file \"{}\"."
 msgstr "Неможливо знайти файл про інформацію версії ядра {}."
 
 #: inary/actionsapi/libtools.py:41
-#, fuzzy
 msgid "Running 'ldconfig' failed."
 msgstr "Не вдалось запустити ldconfig."
 
@@ -362,32 +325,26 @@ msgid "GNU Config Update Finished."
 msgstr "Налаштування GNU оновлено."
 
 #: inary/actionsapi/libtools.py:63
-#, fuzzy
 msgid "Running \"libtoolize\" failed."
 msgstr "Не вдалось запустити libtoolize."
 
 #: inary/actionsapi/mesontools.py:100
-#, fuzzy
 msgid "CMake configure failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/actionsapi/mesontools.py:106 inary/actionsapi/rubymodules.py:126
-#, fuzzy
 msgid "Build failed."
 msgstr "не вдалось зібрати через perl."
 
 #: inary/actionsapi/mesontools.py:127
-#, fuzzy
 msgid "Check failed."
 msgstr "Не вдалось зібрати."
 
 #: inary/actionsapi/perlmodules.py:78
-#, fuzzy
 msgid "'perl build' failed."
 msgstr "не вдалось зібрати через perl."
 
 #: inary/actionsapi/perlmodules.py:88
-#, fuzzy
 msgid "'perl install' failed."
 msgstr "Не вдалось установити через perl."
 
@@ -402,12 +359,10 @@ msgid "Configuration failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/actionsapi/pythonmodules.py:91
-#, fuzzy
 msgid "Running \"{}\" failed."
 msgstr "Не вдалось запустити {}."
 
 #: inary/actionsapi/qt.py:67
-#, fuzzy
 msgid "Project file \"{}\" not found."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -416,57 +371,49 @@ msgid "It seems there are more than one .pro file, you must specify one. (Possib
 msgstr ""
 
 #: inary/actionsapi/rubymodules.py:141
-#, fuzzy
 msgid "Running 'ruby {}' failed."
 msgstr "Не вдалось запустити «ruby {}»."
 
 #: inary/actionsapi/shelltools.py:53
-#, fuzzy
 msgid "ActionsAPI [makedirs]: Cannot create directory \"{}\""
 msgstr "Неможливо створити каталог {}"
 
 #: inary/actionsapi/shelltools.py:62
-#, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file \"{}\""
 msgstr "ActionsAPI [echo]: Неможливо додати до файла {}."
 
 #: inary/actionsapi/shelltools.py:69
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\""
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/shelltools.py:76
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\n"
 
 #: inary/actionsapi/shelltools.py:78
-#, fuzzy
 msgid "ActionsAPI [chmod]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:88
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [chown]: Permission denied: {0} (uid: {1}, gid: {2})"
 msgstr "ActionsAPI [chown]: немає прав на виконання: {0} (uid: {1}, gid: {2})"
 
 #: inary/actionsapi/shelltools.py:90
-#, fuzzy
 msgid "ActionsAPI [chown]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:98
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\n"
 
 #: inary/actionsapi/shelltools.py:105
-#, fuzzy
 msgid "ActionsAPI [unlink]: No file matched pattern \"{}\". Remove operation failed."
 msgstr "Жодного файла відповідного до шаблону «{}». Не вдалось вилучити."
 
 #: inary/actionsapi/shelltools.py:113
-#, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: \"{}\""
 msgstr "ActionsAPI [chmod]: немає прав на виконання: {}\t"
 
@@ -475,67 +422,57 @@ msgid "ActionsAPI [unlink]: \"{}\" is not a file, use 'unlinkDir' or 'removeDir'
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:120
-#, fuzzy
 msgid "ActionsAPI [unlink]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:129
-#, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: \"{}\""
 msgstr "ActionsAPI [chmod]: немає прав на виконання: {}\t"
 
 #: inary/actionsapi/shelltools.py:133
-#, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:140
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/shelltools.py:147
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\n"
 
 #: inary/actionsapi/shelltools.py:149
-#, fuzzy
 msgid "ActionsAPI [move]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:157
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/shelltools.py:164
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "ActionsAPI [chmod]: немає прав на виконання: %s (режим: 0%o)\n"
 
 #: inary/actionsapi/shelltools.py:180
-#, fuzzy
 msgid "ActionsAPI [copy]: File \"{}\" does not exist."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:196
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [copytree] \"{0}\" to \"{1}\": {2}"
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/shelltools.py:198
-#, fuzzy
 msgid "ActionsAPI [copytree]: Directory \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/actionsapi/shelltools.py:207
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «{}»."
 
 #: inary/actionsapi/shelltools.py:216
-#, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: \"{}\""
 msgstr "ActionsAPI [chmod]: жодного файла відповідного до шаблону «{}»."
 
@@ -544,22 +481,19 @@ msgid "[Running Command]: "
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:283
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [system]: Command '{0}' failed, return value was {1}."
 msgstr "ActionsAPI [echo]: Неможливо додати до файла {}."
 
 #: inary/actionsapi/texlivemodules.py:60
-#, fuzzy
 msgid "Moving source files failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/texlivemodules.py:63
-#, fuzzy
 msgid "Generate config files failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/actionsapi/texlivemodules.py:66
-#, fuzzy
 msgid "Building format files failed."
 msgstr "Не вдалось установити."
 
@@ -568,22 +502,18 @@ msgid "Creating symlinks from format to engines failed."
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:78
-#, fuzzy
 msgid "Installing docs failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/texlivemodules.py:82
-#, fuzzy
 msgid "Installing texmf files failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/texlivemodules.py:86
-#, fuzzy
 msgid "Installing config files failed."
 msgstr "Не вдалось установити."
 
 #: inary/actionsapi/texlivemodules.py:90
-#, fuzzy
 msgid "Handle config files failed."
 msgstr "Не вдалось налаштувати."
 
@@ -682,7 +612,6 @@ msgid " release "
 msgstr ""
 
 #: inary/archive.py:162
-#, fuzzy
 msgid " \"{}\" is not a lzma file."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -761,7 +690,6 @@ msgid "Download Error: Package does not match the repository package."
 msgstr ""
 
 #: inary/atomicoperations.py:136
-#, fuzzy
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -787,7 +715,6 @@ msgid "Checking operations"
 msgstr ""
 
 #: inary/atomicoperations.py:179
-#, fuzzy
 msgid "Unpacking package"
 msgstr "Пакунок INARY"
 
@@ -809,7 +736,7 @@ msgid "{0}-{1} is not a valid INARY version format"
 msgstr ""
 
 #: inary/atomicoperations.py:244
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"/{0}\" from \"{1}\" package\n"
 msgstr "Не вдалось налаштувати."
 
@@ -852,17 +779,14 @@ msgid "Pre-install configuration have been run for \"{}\""
 msgstr ""
 
 #: inary/atomicoperations.py:315
-#, fuzzy
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "Не вдалось налаштувати."
 
 #: inary/atomicoperations.py:333
-#, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "Не вдалось налаштувати."
 
 #: inary/atomicoperations.py:335
-#, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "Не вдалось налаштувати."
 
@@ -875,7 +799,6 @@ msgid "Adding files of \"{}\" package to database..."
 msgstr ""
 
 #: inary/atomicoperations.py:538
-#, fuzzy
 msgid "Installing => [{}]"
 msgstr "Не вдалось установити."
 
@@ -909,7 +832,6 @@ msgid "Post-remove configuration have been run for  \"{}\""
 msgstr ""
 
 #: inary/atomicoperations.py:678
-#, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Не вдалось налаштувати."
 
@@ -944,7 +866,6 @@ msgid "no)"
 msgstr ""
 
 #: inary/cli/__init__.py:246
-#, fuzzy
 msgid "Installed \"{}\""
 msgstr "Не вдалось установити."
 
@@ -953,7 +874,6 @@ msgid "Removed \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:255
-#, fuzzy
 msgid "Removing \"{}\""
 msgstr "Не вдалось запустити aclocal."
 
@@ -962,12 +882,10 @@ msgid "Upgraded \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:261
-#, fuzzy
 msgid "Configured \"{}\""
 msgstr "Не вдалось налаштувати."
 
 #: inary/cli/__init__.py:264
-#, fuzzy
 msgid "Configuring \"{}\""
 msgstr "Не вдалось налаштувати."
 
@@ -976,7 +894,6 @@ msgid "Extracting the files of \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:270 inary/operations/repository.py:100
-#, fuzzy
 msgid "Updating package repository: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -993,7 +910,6 @@ msgid "Extracted desktop file \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:296
-#, fuzzy
 msgid "Downloaded \"{}\""
 msgstr "Не вдалось установити."
 
@@ -1223,7 +1139,6 @@ msgid "Checking all installed packages."
 msgstr ""
 
 #: inary/cli/check.py:83
-#, fuzzy
 msgid "No package has been installed yet. :("
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -1256,12 +1171,10 @@ msgid "Corrupted file: \"/{}\""
 msgstr ""
 
 #: inary/cli/check.py:125
-#, fuzzy
 msgid "Modified configuration file: \"/{}\""
 msgstr "Не вдалось налаштувати."
 
 #: inary/cli/check.py:130
-#, fuzzy
 msgid "Package \"{}\" not installed."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -1332,12 +1245,10 @@ msgid "Do not perform any action, just show what would be done."
 msgstr ""
 
 #: inary/cli/command.py:215
-#, fuzzy
 msgid "usage: {}\n"
 msgstr "Використання: {}\n"
 
 #: inary/cli/configmanager.py:30
-#, fuzzy
 msgid "Inary Config file manager."
 msgstr "Не вдалось установити."
 
@@ -1392,17 +1303,14 @@ msgid "Cleaning package cache \"{}\"..."
 msgstr ""
 
 #: inary/cli/deletecache.py:51
-#, fuzzy
 msgid "Cleaning source archive cache \"{}\"..."
 msgstr "Неможливо створити каталог {}"
 
 #: inary/cli/deletecache.py:53
-#, fuzzy
 msgid "Cleaning temporary directory \"{}\"..."
 msgstr "Неможливо створити каталог {}"
 
 #: inary/cli/deletecache.py:57
-#, fuzzy
 msgid "Removing cache file \"{}\"..."
 msgstr "Не вдалось запустити aclocal."
 
@@ -1500,7 +1408,6 @@ msgid ""
 msgstr ""
 
 #: inary/cli/emergeup.py:46
-#, fuzzy
 msgid "emergeup options"
 msgstr "%prog [параметри]"
 
@@ -1563,7 +1470,6 @@ msgid "Graph of installed packages"
 msgstr ""
 
 #: inary/cli/graph.py:54
-#, fuzzy
 msgid "Do not show installed packages."
 msgstr "Не вдалось налаштувати."
 
@@ -1576,7 +1482,6 @@ msgid "Dot output file"
 msgstr ""
 
 #: inary/cli/graph.py:74
-#, fuzzy
 msgid "Plotting packages in repository \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -1677,7 +1582,6 @@ msgid "Inary Transaction History: "
 msgstr ""
 
 #: inary/cli/history.py:77
-#, fuzzy
 msgid "Operation "
 msgstr "Параметри"
 
@@ -1806,7 +1710,6 @@ msgid "Installed package:"
 msgstr ""
 
 #: inary/cli/info.py:169
-#, fuzzy
 msgid "\"{}\" package is not installed."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -1819,7 +1722,6 @@ msgid "Package found in \"{}\" repository:"
 msgstr ""
 
 #: inary/cli/info.py:180
-#, fuzzy
 msgid "\"{}\" package is not found in binary repositories."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -1828,7 +1730,6 @@ msgid "[source] "
 msgstr ""
 
 #: inary/cli/info.py:192
-#, fuzzy
 msgid "\"{}\" package is not found in source repositories."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2042,7 +1943,6 @@ msgid "Orphaned packages:"
 msgstr ""
 
 #: inary/cli/listorphaned.py:63
-#, fuzzy
 msgid "No orphaned packages."
 msgstr "Не вдалось налаштувати."
 
@@ -2160,7 +2060,6 @@ msgid ""
 msgstr ""
 
 #: inary/cli/reconfigure.py:57
-#, fuzzy
 msgid "reconfigure"
 msgstr "Не вдалось налаштувати."
 
@@ -2240,7 +2139,6 @@ msgid "Name of the source or package repository."
 msgstr ""
 
 #: inary/cli/search.py:52
-#, fuzzy
 msgid "Search in installdb."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2282,7 +2180,6 @@ msgid "Show only package name."
 msgstr ""
 
 #: inary/cli/searchfile.py:53
-#, fuzzy
 msgid "Path \"{}\" does not belong to an installed package."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2304,7 +2201,6 @@ msgid "sysconf"
 msgstr ""
 
 #: inary/cli/sysconf.py:39
-#, fuzzy
 msgid "sysconf options"
 msgstr "нема такого параметра: %s"
 
@@ -2385,7 +2281,6 @@ msgid "Compare sha1sum repo and installed packages."
 msgstr ""
 
 #: inary/cli/upgrade.py:94
-#, fuzzy
 msgid "Updating repositories."
 msgstr "Неможливо створити каталог {}"
 
@@ -2465,22 +2360,18 @@ msgid " * Added obsoleted packages: [ {} ]"
 msgstr ""
 
 #: inary/data/index.py:149
-#, fuzzy
 msgid " * Adding source packages: "
 msgstr "Неможливо створити каталог {}"
 
 #: inary/data/index.py:189
-#, fuzzy
 msgid " * Adding binary packages: "
 msgstr "Пакунок INARY"
 
 #: inary/data/index.py:191
-#, fuzzy
 msgid "   -> Adding packages from directory \"{}\"... "
 msgstr "Неможливо створити каталог {}"
 
 #: inary/data/index.py:200
-#, fuzzy
 msgid "   * Adding packages from directory \"{}\"... done."
 msgstr "Неможливо створити каталог {}"
 
@@ -2489,7 +2380,6 @@ msgid "* Writing index file."
 msgstr ""
 
 #: inary/data/index.py:211
-#, fuzzy
 msgid "   -> Adding package to index: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -2506,7 +2396,6 @@ msgid " * Adding \"components.xml\" to index"
 msgstr ""
 
 #: inary/data/index.py:285
-#, fuzzy
 msgid " * Component in {} is corrupt"
 msgstr "{} не знайдено."
 
@@ -2519,7 +2408,6 @@ msgid " * Distribution in {} is corrupt"
 msgstr ""
 
 #: inary/data/index.py:312
-#, fuzzy
 msgid "   -> Adding source to index: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -2563,7 +2451,7 @@ msgid " or "
 msgstr ""
 
 #: inary/data/specfile.py:280
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"{0}\" dependency of package \"{1}\" is not satisfied."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2576,7 +2464,6 @@ msgid "Description: {}\n"
 msgstr ""
 
 #: inary/data/specfile.py:380 inary/data/specfile.py:480
-#, fuzzy
 msgid "Licenses: {}\n"
 msgstr "Використання: {}\n"
 
@@ -2617,7 +2504,6 @@ msgid "Build Dependencies: "
 msgstr ""
 
 #: inary/db/componentdb.py:110
-#, fuzzy
 msgid "Component {} not found."
 msgstr "{} не знайдено."
 
@@ -2636,7 +2522,6 @@ msgid ""
 msgstr ""
 
 #: inary/db/groupdb.py:80 inary/db/groupdb.py:89
-#, fuzzy
 msgid "Group \"{}\" not found."
 msgstr "{} не знайдено."
 
@@ -2665,7 +2550,6 @@ msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this 
 msgstr ""
 
 #: inary/db/installdb.py:502 inary/operations/upgrade.py:94
-#, fuzzy
 msgid "Package \"{}\" is not installed."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2674,20 +2558,17 @@ msgid "\"{}\" not found in any repository."
 msgstr ""
 
 #: inary/db/itembyrepo.py:55
-#, fuzzy
 msgid "Repo item \"{}\" not found."
 msgstr "Не знайдено файла проекту «{}»."
 
 #: inary/db/itembyrepo.py:65 inary/db/itembyrepo.py:76
 #: inary/db/itembyrepo.py:86
-#, fuzzy
 msgid "Repository \"{}\" does not exist."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/db/packagedb.py:193 inary/db/packagedb.py:201
 #: inary/db/packagedb.py:209 inary/db/packagedb.py:217
 #: inary/db/packagedb.py:225
-#, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2719,7 +2600,6 @@ msgid "Access denied to write to destination directory: \"{}\""
 msgstr ""
 
 #: inary/fetcher.py:168
-#, fuzzy
 msgid "Access denied to destination file: \"{}\""
 msgstr "Не вдалось налаштувати."
 
@@ -2736,12 +2616,10 @@ msgid "RESPONSE: "
 msgstr ""
 
 #: inary/fetcher.py:231
-#, fuzzy
 msgid "Downloaded from: "
 msgstr "Не вдалось установити."
 
 #: inary/fetcher.py:239
-#, fuzzy
 msgid "Download error: {}"
 msgstr "Не вдалось установити."
 
@@ -2782,12 +2660,11 @@ msgid "Could not fetch source from \"{}\" mirrors."
 msgstr ""
 
 #: inary/fetcher.py:378
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"{0}\" package found in \"{1}\" repository."
 msgstr "Не знайдено файла проекту «{}»."
 
 #: inary/fetcher.py:382
-#, fuzzy
 msgid "\"{}\" package already fetched."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2797,12 +2674,10 @@ msgid "URL \"{0}\" already downloaded as \"{1}\""
 msgstr ""
 
 #: inary/file.py:47
-#, fuzzy
 msgid "No signature found for \"{}\""
 msgstr "Не знайдено скрипта налаштування для cmake."
 
 #: inary/file.py:57
-#, fuzzy
 msgid "GPG Signature is invalid for \"{}\""
 msgstr "Не знайдено скрипта налаштування для cmake."
 
@@ -2815,7 +2690,6 @@ msgid "Fetching {}"
 msgstr ""
 
 #: inary/file.py:153 inary/operations/info.py:37
-#, fuzzy
 msgid "File \"{}\" not found."
 msgstr "{} не знайдено."
 
@@ -2843,17 +2717,15 @@ msgid "Mirrors file \"{}\" does not exist. Could not resolve \"mirrors://\""
 msgstr ""
 
 #: inary/operations/build.py:119
-#, fuzzy
 msgid "Path \"{}\" belongs in multiple packages."
 msgstr "Не знайдено файла проекту «{}»."
 
 #: inary/operations/build.py:149
-#, fuzzy
 msgid "Removing special file skipped for: \"{}\""
 msgstr "Не вдалось запустити aclocal."
 
 #: inary/operations/build.py:152
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Removing special \"{0}\" file: \"{1}\""
 msgstr "Не вдалось запустити aclocal."
 
@@ -2862,7 +2734,6 @@ msgid "Source URI: {}"
 msgstr ""
 
 #: inary/operations/build.py:205
-#, fuzzy
 msgid "Source \"{}\" not found in any active repository."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -2883,7 +2754,6 @@ msgid "pspec.xml avoids this package from building for \"{}\""
 msgstr ""
 
 #: inary/operations/build.py:348
-#, fuzzy
 msgid "Building source package: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -2912,12 +2782,10 @@ msgid "Cannot find component.xml for \"{}\" in upper directory, Source is now pa
 msgstr ""
 
 #: inary/operations/build.py:557
-#, fuzzy
 msgid "Building source package: \"{}\" [ Fetching Step ]"
 msgstr "Неможливо створити каталог {}"
 
 #: inary/operations/build.py:562
-#, fuzzy
 msgid "Building source package: \"{}\" [ Unpacking Step ]"
 msgstr "Неможливо створити каталог {}"
 
@@ -2930,7 +2798,6 @@ msgid " -> unpacked ({})"
 msgstr ""
 
 #: inary/operations/build.py:577
-#, fuzzy
 msgid "Building source package: \"{}\" [ SetupAction Step ]"
 msgstr "Неможливо створити каталог {}"
 
@@ -2939,7 +2806,6 @@ msgid "Setting up source..."
 msgstr ""
 
 #: inary/operations/build.py:584
-#, fuzzy
 msgid "Building source package: \"{}\" [ BuildAction Step ]"
 msgstr "Неможливо створити каталог {}"
 
@@ -2948,7 +2814,6 @@ msgid "Building source..."
 msgstr ""
 
 #: inary/operations/build.py:591
-#, fuzzy
 msgid "Building source package: \"{}\" [ CheckAction Step ]"
 msgstr "Неможливо створити каталог {}"
 
@@ -2957,7 +2822,6 @@ msgid "Testing package..."
 msgstr ""
 
 #: inary/operations/build.py:597
-#, fuzzy
 msgid "Building source package: \"{}\" [ InstallAction Step ]"
 msgstr "Неможливо створити каталог {}"
 
@@ -3104,12 +2968,10 @@ msgid "There are abandoned files under the install dir ({}):"
 msgstr ""
 
 #: inary/operations/build.py:1165
-#, fuzzy
 msgid "Ignoring empty package: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
 #: inary/operations/build.py:1168
-#, fuzzy
 msgid "Building package: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
@@ -3253,13 +3115,12 @@ msgid "Deleting new config file {0}"
 msgstr ""
 
 #: inary/operations/history.py:85 inary/operations/history.py:109
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Package \"{0}\" found in repository \"{1}\"."
 msgstr "Не знайдено файла проекту «{}»."
 
 #: inary/operations/history.py:122 inary/operations/history.py:133
 #: inary/operations/history.py:141
-#, fuzzy
 msgid "\"{}\" could not be found."
 msgstr "{} не знайдено."
 
@@ -3283,7 +3144,6 @@ msgstr ""
 
 #: inary/operations/history.py:218 inary/operations/install.py:99
 #: inary/operations/upgrade.py:225
-#, fuzzy
 msgid "Downloading"
 msgstr "Не вдалось установити."
 
@@ -3319,7 +3179,6 @@ msgid "External dependencies not satisfied."
 msgstr ""
 
 #: inary/operations/install.py:130 inary/operations/upgrade.py:250
-#, fuzzy
 msgid "Installing"
 msgstr "Не вдалось установити."
 
@@ -3358,7 +3217,7 @@ msgid "Following packages are not satisfied:\n"
 msgstr ""
 
 #: inary/operations/install.py:347
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -3387,7 +3246,6 @@ msgid "Package removal declined."
 msgstr ""
 
 #: inary/operations/remove.py:108
-#, fuzzy
 msgid "Package \"{}\" is not installed. Cannot remove."
 msgstr "Не знайдено файла проекту «{}»."
 
@@ -3396,12 +3254,10 @@ msgid "Conflicts remain."
 msgstr ""
 
 #: inary/operations/remove.py:179
-#, fuzzy
 msgid "Obsoleted packages remaining."
 msgstr "Не вдалось налаштувати."
 
 #: inary/operations/remove.py:184
-#, fuzzy
 msgid "Replaced package remains."
 msgstr "Не вдалось налаштувати."
 
@@ -3410,12 +3266,10 @@ msgid "Not a valid repository name."
 msgstr ""
 
 #: inary/operations/repository.py:36
-#, fuzzy
 msgid "Repository \"{}\" already present."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/operations/repository.py:39
-#, fuzzy
 msgid "Repository \"{}\" already present with name \"{}\"."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
@@ -3424,12 +3278,10 @@ msgid "Flushing database caches..."
 msgstr ""
 
 #: inary/operations/repository.py:45
-#, fuzzy
 msgid "Repository \"{}\" added to system."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
 #: inary/operations/repository.py:55
-#, fuzzy
 msgid "Repository \"{}\" removed from system."
 msgstr "ActionsAPI [dosym]:  файл уже існує: {}"
 
@@ -3607,7 +3459,6 @@ msgid "Object cannot be encoded."
 msgstr ""
 
 #: inary/sxml/autoxml.py:764 inary/sxml/autoxml.py:883
-#, fuzzy
 msgid "Object cannot be formatted."
 msgstr "{} не знайдено."
 
@@ -3642,7 +3493,6 @@ msgid "Cannot read URI {0}: {1}"
 msgstr ""
 
 #: inary/sxml/xmlfile_iks.py:93
-#, fuzzy
 msgid "File \"{}\" has invalid XML."
 msgstr "{} не знайдено."
 
@@ -3692,7 +3542,6 @@ msgid "return value for \"{0}\" is {1}"
 msgstr ""
 
 #: inary/util.py:533
-#, fuzzy
 msgid "File {} not found."
 msgstr "{} не знайдено."
 
@@ -3701,7 +3550,6 @@ msgid "Including external link \"{}\""
 msgstr ""
 
 #: inary/util.py:643
-#, fuzzy
 msgid "Including directory \"{}\""
 msgstr "Не вдалось установити."
 
@@ -3757,12 +3605,10 @@ msgid "Invalid package name: \"{}\""
 msgstr ""
 
 #: inary/util.py:1028
-#, fuzzy
 msgid "Invalid delta package name: \"{}\""
 msgstr "Неможливо створити каталог {}"
 
 #: inary/util.py:1164
-#, fuzzy
 msgid "Removing empty dir: \"{}\""
 msgstr "Не вдалось запустити aclocal."
 
@@ -3770,34 +3616,26 @@ msgstr "Не вдалось запустити aclocal."
 msgid "Invalid version string: '{}'"
 msgstr ""
 
-#, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "Налаштування GNU оновлено."
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
 #~ msgstr "Не вдалось налаштувати."
 
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Не вдалось установити."
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Неможливо створити каталог {}"
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Не вдалось налаштувати."
-
-#, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Не знайдено файла проекту «{}»."
-
-#, fuzzy
 #~ msgid "Bypass scom configuration agent."
 #~ msgstr "Не вдалось налаштувати."
 
-#, fuzzy
-#~ msgid "Storing files of \"{}\" package."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Не знайдено файла проекту «{}»."
+
+#~ msgid "Script error for \"{0}\" package: {1}."
 #~ msgstr "Не вдалось налаштувати."
+
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Неможливо створити каталог {}"
+
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Не вдалось установити."
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Не вдалось налаштувати."
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "Налаштування GNU оновлено."

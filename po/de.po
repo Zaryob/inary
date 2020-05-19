@@ -1,7 +1,6 @@
 # translation of de.po to German
 # translation of de.po to
 # Copyright (C) 2018 Sulin
-#
 # Mustafa Ölcerman <oelcerman@fussballkreis.org>, 2006.
 # Mustafa Ölcerman <mustafa.oelcerman@fk-koeln.de>, 2007.
 # Mustafa Ölcerman <m.oelcerman@pardus-linux.de>, 2008, 2009.
@@ -15,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 17:53+0300\n"
+"POT-Creation-Date: 2020-05-19 17:58+0300\n"
 "PO-Revision-Date: 2019-08-25 00:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
@@ -117,7 +116,6 @@ msgstr ""
 "Tastatur-Interrupt [Ctrl-D]: Wird beendet..."
 
 #: inary-cli:59
-#, fuzzy
 msgid ""
 "\n"
 "Unhandled internal exception.\n"
@@ -199,7 +197,6 @@ msgid "Running 'aclocal' failed."
 msgstr "Ausführen von 'aclocal' fehlgeschlagen."
 
 #: inary/actionsapi/autotools.py:187
-#, fuzzy
 msgid "Running 'autogen.sh' script failed."
 msgstr "Ausführen von 'autoreconf' fehlgeschlagen."
 
@@ -344,7 +341,6 @@ msgid "Running \"libtoolize\" failed."
 msgstr "Ausführen von 'libtoolize' fehlgeschlagen."
 
 #: inary/actionsapi/mesontools.py:100
-#, fuzzy
 msgid "CMake configure failed."
 msgstr "Configure fehlgeschlagen."
 
@@ -646,7 +642,6 @@ msgid "Target DIR: \"{}\""
 msgstr "Paket URI: \"{}\""
 
 #: inary/archive.py:570
-#, fuzzy
 msgid ""
 "Problem occured while uncompressing \"{}.Z\" file.\n"
 "Error:{}"
@@ -661,7 +656,7 @@ msgid "Fetching source from: \"{}\""
 msgstr "Quelle wird abgerufen von: \"{}\""
 
 #: inary/archive.py:892
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr ""
 "\n"
@@ -726,27 +721,22 @@ msgid "Checking versioning"
 msgstr ""
 
 #: inary/atomicoperations.py:172
-#, fuzzy
 msgid "Checking relations"
 msgstr "Optionen von check"
 
 #: inary/atomicoperations.py:174
-#, fuzzy
 msgid "Checking operations"
 msgstr "Optionen von check"
 
 #: inary/atomicoperations.py:179
-#, fuzzy
 msgid "Unpacking package"
 msgstr "Inary Paket"
 
 #: inary/atomicoperations.py:182
-#, fuzzy
 msgid "Updating database"
 msgstr "Datenbankcaches werden aktualisiert ..."
 
 #: inary/atomicoperations.py:200
-#, fuzzy
 msgid "Is there enought free space in your disk?"
 msgstr "Befindet sich genügend freier Speicherplatz auf Ihrer Festplatte?"
 
@@ -801,22 +791,18 @@ msgid "Package downgrade declined"
 msgstr "Paket-Downgrade abgelehnt"
 
 #: inary/atomicoperations.py:312
-#, fuzzy
 msgid "Pre-install configuration have been run for \"{}\""
 msgstr "Für das '{} Protokoll wurde eine Proxy-Konfiguration entdeckt."
 
 #: inary/atomicoperations.py:315
-#, fuzzy
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "Konfiguration für \"{}\" fehlgeschlagen."
 
 #: inary/atomicoperations.py:333
-#, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "\"{}\" konfiguriert."
 
 #: inary/atomicoperations.py:335
-#, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "Konfiguration für \"{}\" fehlgeschlagen."
 
@@ -829,7 +815,6 @@ msgid "Adding files of \"{}\" package to database..."
 msgstr "\"{}\" wird zur db hinzugefügt..."
 
 #: inary/atomicoperations.py:538
-#, fuzzy
 msgid "Installing => [{}]"
 msgstr "Wird installiert {} / {}"
 
@@ -855,12 +840,10 @@ msgid "Installed file \"{}\" does not exist on system [Probably you manually del
 msgstr "Installierte Datei \"{}\" existiert nicht mehr im System [vermutlich haben Sie sie manuell gelöscht]"
 
 #: inary/atomicoperations.py:664
-#, fuzzy
 msgid "Pre-remove configuration have been run for \"{}\""
 msgstr "Für das '{} Protokoll wurde eine Proxy-Konfiguration entdeckt."
 
 #: inary/atomicoperations.py:670
-#, fuzzy
 msgid "Post-remove configuration have been run for  \"{}\""
 msgstr "Für das '{} Protokoll wurde eine Proxy-Konfiguration entdeckt."
 
@@ -945,7 +928,6 @@ msgid "Extracted desktop file \"{}\""
 msgstr "Entpacke die Dateien aus \"{}\""
 
 #: inary/cli/__init__.py:296
-#, fuzzy
 msgid "Downloaded \"{}\""
 msgstr "Heruntergeladen von:"
 
@@ -996,7 +978,7 @@ msgstr ""
 "Wollen Sie forfahren?"
 
 #: inary/cli/addrepo.py:83
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "Error: {0} repository could not be reached: \n"
 "{1}"
@@ -1008,7 +990,7 @@ msgid "Removing {0} from system."
 msgstr "Depot \"{0}\" vom System entfernt."
 
 #: inary/cli/addrepo.py:86
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Couldn't trust \"{0}\" repository. It is deactivated."
 msgstr "{0}-Depot ist aktualisiert."
 
@@ -1211,7 +1193,6 @@ msgid "Checking all installed packages."
 msgstr "Prüfe alle installierten Pakete."
 
 #: inary/cli/check.py:83
-#, fuzzy
 msgid "No package has been installed yet. :("
 msgstr "Keine zu installierenden Pakete."
 
@@ -1312,7 +1293,6 @@ msgid "Command terminated abnormally."
 msgstr "Unerwarteter Befehlsabbruch."
 
 #: inary/cli/command.py:191
-#, fuzzy
 msgid "Ignore unsatisfied dependency."
 msgstr "Build-Abhängigkeiten werden ignoriert."
 
@@ -1908,7 +1888,6 @@ msgid "\"{}\" package is not found in source repositories."
 msgstr "Paket \"{}\" nicht gefunden in Quell-Depots."
 
 #: inary/cli/init.py:32
-#, fuzzy
 msgid "Do not anything."
 msgstr "Index nicht signieren."
 
@@ -2290,7 +2269,6 @@ msgid "Rebuild INARY databases?"
 msgstr "INARY-Datenbanken rekonstruieren?"
 
 #: inary/cli/reconfigure.py:46
-#, fuzzy
 msgid ""
 "Reconfigure pending packages\n"
 "\n"
@@ -2307,7 +2285,6 @@ msgstr ""
 "Das Kommando konfiguriert diese Pakete.\n"
 
 #: inary/cli/reconfigure.py:57
-#, fuzzy
 msgid "reconfigure"
 msgstr "\"{}\" konfiguriert."
 
@@ -2481,7 +2458,6 @@ msgid "sysconf"
 msgstr ""
 
 #: inary/cli/sysconf.py:39
-#, fuzzy
 msgid "sysconf options"
 msgstr "Optionen von info"
 
@@ -2652,12 +2628,10 @@ msgid "* Generating index tree...\n"
 msgstr ""
 
 #: inary/data/index.py:103
-#, fuzzy
 msgid " -> Sorting:  \"{}\""
 msgstr "Erstelle \"{}\""
 
 #: inary/data/index.py:109
-#, fuzzy
 msgid " * Sorted:  \"{}\""
 msgstr "Erstelle \"{}\""
 
@@ -2666,22 +2640,18 @@ msgid " * Added obsoleted packages: [ {} ]"
 msgstr ""
 
 #: inary/data/index.py:149
-#, fuzzy
 msgid " * Adding source packages: "
 msgstr "Quell-Paket wird erstelltt: \"{}\""
 
 #: inary/data/index.py:189
-#, fuzzy
 msgid " * Adding binary packages: "
 msgstr "Inary Paket"
 
 #: inary/data/index.py:191
-#, fuzzy
 msgid "   -> Adding packages from directory \"{}\"... "
 msgstr "Füge Paket zum Index hinzu: \"{}\"... "
 
 #: inary/data/index.py:200
-#, fuzzy
 msgid "   * Adding packages from directory \"{}\"... done."
 msgstr "Füge Paket zum Index hinzu: \"{}\"... erledigt."
 
@@ -2690,32 +2660,26 @@ msgid "* Writing index file."
 msgstr ""
 
 #: inary/data/index.py:211
-#, fuzzy
 msgid "   -> Adding package to index: \"{}\""
 msgstr "Füge Paket zum Index hinzu: \"{}\""
 
 #: inary/data/index.py:226
-#, fuzzy
 msgid " * Package \"{}\": metadata corrupt, skipping..."
 msgstr "Paket \"{}\": Metadata korrupt, wird übersprungen..."
 
 #: inary/data/index.py:272
-#, fuzzy
 msgid " * Adding \"groups.xml\" to index"
 msgstr "Wird zum Indexgroups.xml hinzugefügt"
 
 #: inary/data/index.py:279
-#, fuzzy
 msgid " * Adding \"components.xml\" to index"
 msgstr "\"components.xml\" wird zum Index hinzugefügt"
 
 #: inary/data/index.py:285
-#, fuzzy
 msgid " * Component in {} is corrupt"
 msgstr "Komponente {} nicht gefunden."
 
 #: inary/data/index.py:290
-#, fuzzy
 msgid " * Adding \"distribution.xml\" to index"
 msgstr "\"distribution.xml\" wird zum Index hinzugefügt"
 
@@ -2724,17 +2688,14 @@ msgid " * Distribution in {} is corrupt"
 msgstr ""
 
 #: inary/data/index.py:312
-#, fuzzy
 msgid "   -> Adding source to index: \"{}\""
 msgstr "Füge Paket zum Index hinzu: \"{}\""
 
 #: inary/data/index.py:332
-#, fuzzy
 msgid "Building index of Inary files under \"{}\" \n"
 msgstr "Indexiere INARY-Dateien unter \"{}\""
 
 #: inary/data/index.py:337
-#, fuzzy
 msgid "* Index file written."
 msgstr "Index-Datei geschrieben."
 
@@ -2791,7 +2752,6 @@ msgid "Component: {}\n"
 msgstr "Komponente: {}\n"
 
 #: inary/data/specfile.py:382
-#, fuzzy
 msgid "Provides: \n"
 msgstr "Bietet: "
 
@@ -2934,7 +2894,6 @@ msgid "File already exsist. Download skiped..."
 msgstr ""
 
 #: inary/fetcher.py:209
-#, fuzzy
 msgid "Partial file detected. Download resuming..."
 msgstr "Download wird fortgesetzt ..."
 
@@ -2943,12 +2902,10 @@ msgid "RESPONSE: "
 msgstr ""
 
 #: inary/fetcher.py:231
-#, fuzzy
 msgid "Downloaded from: "
 msgstr "Heruntergeladen von:"
 
 #: inary/fetcher.py:239
-#, fuzzy
 msgid "Download error: {}"
 msgstr "Heruntergeladen von:"
 
@@ -2977,7 +2934,6 @@ msgid "Trying fallback address: \"{}\""
 msgstr "Versuche Ersatz-Adresse: \"{}\""
 
 #: inary/fetcher.py:340
-#, fuzzy
 msgid "No such file or no permission to read for {}."
 msgstr "Keine solche Datei oder keine Erlaubnis zum Lesen."
 
@@ -3024,7 +2980,6 @@ msgid "File \"{}\" not found."
 msgstr "Datei \"{}\" nicht gefunden."
 
 #: inary/file.py:174
-#, fuzzy
 msgid ""
 "File integrity of \"{}\" compromised.\n"
 " localfile:{}\n"
@@ -3069,12 +3024,10 @@ msgid "Source \"{}\" not found in any active repository."
 msgstr "Quell-Paket \"{}\" wurde in keinem der aktuellen Depot's gefunden."
 
 #: inary/operations/build.py:228
-#, fuzzy
 msgid "[ !!! ] Building RFP for {}"
 msgstr "Format-Datei {} wird konstruiert"
 
 #: inary/operations/build.py:230
-#, fuzzy
 msgid "Would you like to compile this RFP package?"
 msgstr "Wollen Sie fortfahren?"
 
@@ -3107,12 +3060,10 @@ msgid "PostOps Script Fetched."
 msgstr ""
 
 #: inary/operations/build.py:538
-#, fuzzy
 msgid "Cannot find component.xml for \"{}\" in remote directory, Source is now part of unknown component."
 msgstr "Component.xml konnte im Verzeichnis nicht gefunden werden. Der Quellcode ist jetzt Teil von unbekannter Komponente."
 
 #: inary/operations/build.py:546
-#, fuzzy
 msgid "Cannot find component.xml for \"{}\" in upper directory, Source is now part of unknown component."
 msgstr "Component.xml konnte im oberen Verzeichnis nicht gefunden werden.  Der Quellcode ist jetzt Teil von unbekannter Komponente."
 
@@ -3175,12 +3126,12 @@ msgid "SyntaxError in Actions Script ({0}): {1}"
 msgstr "Syntax-Fehler im Action Skript {0}: {1}"
 
 #: inary/operations/build.py:703
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Unable to read Post Operations script ({0}): {1}"
 msgstr "Nicht in der Lage, Action Skript zu lesen {0}: {1}"
 
 #: inary/operations/build.py:706
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "SyntaxError in Post Operations script ({0}): {1}"
 msgstr "Syntax-Fehler im Action Skript {0}: {1}"
 
@@ -3411,12 +3362,10 @@ msgid "Conflicting packages should be removed to continue."
 msgstr "Pakete mit Konflikten sollten zuerst entfernt werden."
 
 #: inary/operations/helper.py:111 inary/operations/remove.py:86
-#, fuzzy
 msgid "After this operation, {:.2f} {} space will be freed."
 msgstr "{: .2f} {} Speicherplatz wird freigegeben."
 
 #: inary/operations/helper.py:113
-#, fuzzy
 msgid "After this operation, {:.2f} {} space will be used."
 msgstr "{: .2f} {} Leerzeichen werden verwendet."
 
@@ -3451,7 +3400,6 @@ msgid "3. Apply new config file (don't keep old config)"
 msgstr "3. Neue Konfigurationsdatei anwenden (alte Konfiguration nicht behalten)"
 
 #: inary/operations/helper.py:247
-#, fuzzy
 msgid "4. Delete new config file"
 msgstr "3. Löschen Sie die neue Konfigurationsdatei"
 
@@ -3471,7 +3419,6 @@ msgid "\"{}\" could not be found."
 msgstr "{} konnte nicht gefunden werden."
 
 #: inary/operations/history.py:203
-#, fuzzy
 msgid "There is no packages to taking back (installing or removing)."
 msgstr "Es sind keine Pakete vorhanden, die auf die Konfiguration warten."
 
@@ -3491,7 +3438,6 @@ msgstr "Wollen Sie fortfahren?"
 
 #: inary/operations/history.py:218 inary/operations/install.py:99
 #: inary/operations/upgrade.py:225
-#, fuzzy
 msgid "Downloading"
 msgstr "Wird heruntergeladen {} / {}"
 
@@ -3529,7 +3475,6 @@ msgid "External dependencies not satisfied."
 msgstr "Externe Abhängigkeiten werden nicht erfüllt."
 
 #: inary/operations/install.py:130 inary/operations/upgrade.py:250
-#, fuzzy
 msgid "Installing"
 msgstr "Wird installiert..."
 
@@ -3564,12 +3509,11 @@ msgid " -> checking {}"
 msgstr " -> {} wird überprüft."
 
 #: inary/operations/install.py:345
-#, fuzzy
 msgid "Following packages are not satisfied:\n"
 msgstr "Folgende Pakete werden installiert:\n"
 
 #: inary/operations/install.py:347
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "Abhängigkeit \"{0}\" von \"{1}\" ist nicht zufriedenstellend."
 
@@ -3590,7 +3534,6 @@ msgid "No packages to remove."
 msgstr "Es gibt keine Pakete zum entfernen."
 
 #: inary/operations/remove.py:78
-#, fuzzy
 msgid "The following list of packages will be removed in the respective order to satisfy dependencies:"
 msgstr ""
 "Die folgende Paketliste wird in der entsprechenden Reihenfolge entfernt, \n"
@@ -3978,100 +3921,35 @@ msgstr "Paket \"{}\" wird entfernt"
 msgid "Invalid version string: '{}'"
 msgstr "Ungültige Versionszeichenfolge: '{}'"
 
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config Aktualisierung fertig gestellt."
+#~ msgid "Password: "
+#~ msgstr "Passwort: "
 
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Willst du weiter machen? (Das kann gefährlich sein!!!):"
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Symlink '{}' hinzugefügt"
 
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Konfiguriere Paket \"{}\"."
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning nach der Installation {0} ({1}: {2})"
 
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Wird heruntergeladen {} / {}"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "\"{}\" wird zur db hinzugefügt..."
 
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken."
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Scom Konfigurations-Agent umgehen."
 
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Depot \"{}\" ist nicht kompatibel zu Ihrer Distribution. Depot ist desaktiviert."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Scom-Paket wurde nicht vollständig installiert."
 
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Quelle wird vom Mirror abgerufen: \"{}\""
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{}-Depot muss aktualisiert werden"
 
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox-Verletzung: {0} ({1} -> {2})"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "\"{}\" wird zum Übertragungs-Verzeichnis kopiert"
 
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox ermöglicht Build..."
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Nicht in der Lage, das SCOM Skript zu lesen {0}:{1}"
 
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Ergebniss der Sandbox-Verletzung:"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox-Verletzungen!"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installation der \"{}\"-Dateien ist fehlgeschlagen."
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Nicht in der Lage, Action Skript zu lesen {0}: {1}"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Syntax-Fehler im Action Skript {0}: {1}"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
-#~ msgstr "Die Option% (Option) erfordert% (Nummer) d Argument. Die Option% (Option) erfordert% (Nummer) d Argumente. #: /usr/lib/python3.6/optparse.py:149#, python-forma% s Option nimmt keinen Wert an"
-
-#~ msgid "Unregistering {} script."
-#~ msgstr "Scom-Skripte werden entfernt."
-
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Scom-Skripte werden entfernt für \"{}\"."
-
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Skript wird ausgeführt, um die Deinstallation abzuschließen für \"{}\"."
-
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Prozess zur Vorbereitung des Entfernens wird aufgerufen für \"{}\"."
-
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Vorbereitung zur Entfernen des Paketes wird ausgeführt für \"{}\"."
-
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
-
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\""
-
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Nach installieren des Skriptes, werden Pakete ausgeführt für \"{0}\"."
-
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\"."
-
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Post install handlers werden aufgerufen für \"{}\"."
-
-#~ msgid "Script error: {}"
-#~ msgstr "Skript-Fehler: {}"
-
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registriere \"{0}\" Scom-Skript für \"{1}\"."
-
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM Paket aktualisiert. Von jetzt an wird der neue SCOM daemon verwendet."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Syntax-Fehler in der SCOM-Datei {0}: {1}"
 
 #~ msgid ""
 #~ "Cannot connect to SCOM: \n"
@@ -4080,32 +3958,92 @@ msgstr "Ungültige Versionszeichenfolge: '{}'"
 #~ "Verbindung mit SCOM nicht möglich: \n"
 #~ "  \"{}\"\n"
 
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Syntax-Fehler in der SCOM-Datei {0}: {1}"
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM Paket aktualisiert. Von jetzt an wird der neue SCOM daemon verwendet."
 
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Nicht in der Lage, das SCOM Skript zu lesen {0}:{1}"
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registriere \"{0}\" Scom-Skript für \"{1}\"."
 
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "\"{}\" wird zum Übertragungs-Verzeichnis kopiert"
+#~ msgid "Script error: {}"
+#~ msgstr "Skript-Fehler: {}"
 
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{}-Depot muss aktualisiert werden"
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Post install handlers werden aufgerufen für \"{}\"."
 
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Scom-Paket wurde nicht vollständig installiert."
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\"."
 
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Scom Konfigurations-Agent umgehen."
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Nach installieren des Skriptes, werden Pakete ausgeführt für \"{0}\"."
 
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "\"{}\" wird zur db hinzugefügt..."
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Skript-Fehler für \"{0}\": \"{1}\""
 
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning nach der Installation {0} ({1}: {2})"
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
 
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Symlink '{}' hinzugefügt"
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Vorbereitung zur Entfernen des Paketes wird ausgeführt für \"{}\"."
 
-#~ msgid "Password: "
-#~ msgstr "Passwort: "
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Prozess zur Vorbereitung des Entfernens wird aufgerufen für \"{}\"."
+
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
+
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Skript wird ausgeführt, um die Deinstallation abzuschließen für \"{}\"."
+
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Operationen nach dem Entfernen von \"{}\" werden durchgeführt."
+
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Scom-Skripte werden entfernt für \"{}\"."
+
+#~ msgid "Unregistering {} script."
+#~ msgstr "Scom-Skripte werden entfernt."
+
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments#: /usr/lib/python3.6/optparse.py:149#, python-forma%s option does not take a value"
+#~ msgstr "Die Option% (Option) erfordert% (Nummer) d Argument. Die Option% (Option) erfordert% (Nummer) d Argumente. #: /usr/lib/python3.6/optparse.py:149#, python-forma% s Option nimmt keinen Wert an"
+
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Syntax-Fehler im Action Skript {0}: {1}"
+
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Nicht in der Lage, Action Skript zu lesen {0}: {1}"
+
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installation der \"{}\"-Dateien ist fehlgeschlagen."
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox-Verletzungen!"
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Ergebniss der Sandbox-Verletzung:"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox ermöglicht Build..."
+
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox-Verletzung: {0} ({1} -> {2})"
+
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Quelle wird vom Mirror abgerufen: \"{}\""
+
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Depot \"{}\" ist nicht kompatibel zu Ihrer Distribution. Depot ist desaktiviert."
+
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Den Build-Prozess nicht auf den Build-Ordner beschränken."
+
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Wird heruntergeladen {} / {}"
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Konfiguriere Paket \"{}\"."
+
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Willst du weiter machen? (Das kann gefährlich sein!!!):"
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config Aktualisierung fertig gestellt."

@@ -1,14 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Translators:
 # k4d1r <ufogorenmasumkoyluuu@hotmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: INARYLinux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-19 17:53+0300\n"
+"POT-Creation-Date: 2020-05-19 17:58+0300\n"
 "PO-Revision-Date: 2014-02-26 16:34+0000\n"
 "Last-Translator: obsoleteman <tulliana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/INARYLinux/language/pt_BR/)\n"
@@ -19,17 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: /usr/lib64/python3.6/optparse.py:146
-#, fuzzy, python-format
+#, python-format
 msgid "no such option: %s"
 msgstr "Ha não como opção: %s"
 
 #: /usr/lib64/python3.6/optparse.py:157
-#, fuzzy, python-format
+#, python-format
 msgid "ambiguous option: %s (%s?)"
 msgstr "opção ambíguo: %s (%s?)"
 
 #: /usr/lib64/python3.6/optparse.py:381
-#, fuzzy, python-format
+#, python-format
 msgid "Usage: %s\n"
 msgstr "maneira de usar: %s\n"
 
@@ -50,12 +49,12 @@ msgid "complex"
 msgstr "complexo"
 
 #: /usr/lib64/python3.6/optparse.py:433
-#, fuzzy, python-format
+#, python-format
 msgid "option %s: invalid %s value: %r"
 msgstr "opçao %s: invalido %s valor: %r"
 
 #: /usr/lib64/python3.6/optparse.py:441
-#, fuzzy, python-format
+#, python-format
 msgid "option %s: invalid choice: %r (choose from %s)"
 msgstr "opçao %s: seleçao invalido: %r (selecionar de %s)"
 
@@ -68,19 +67,18 @@ msgid "show program's version number and exit"
 msgstr "mostrar o número versão da programa e saí"
 
 #: /usr/lib64/python3.6/optparse.py:1266
-#, fuzzy
 msgid "%prog [options]"
 msgstr "%prog [optçaos]"
 
 #: /usr/lib64/python3.6/optparse.py:1486 /usr/lib64/python3.6/optparse.py:1524
-#, fuzzy, python-format
+#, python-format
 msgid "%(option)s option requires %(number)d argument"
 msgid_plural "%(option)s option requires %(number)d arguments"
 msgstr[0] "%s opçoes requer %d argumentos"
 msgstr[1] "%s opçoes requer %d argumentos"
 
 #: /usr/lib64/python3.6/optparse.py:1496
-#, fuzzy, python-format
+#, python-format
 msgid "%s option does not take a value"
 msgstr "%s opção não toma um valor"
 
@@ -89,19 +87,16 @@ msgid "Options"
 msgstr "Opções"
 
 #: inary-cli:50
-#, fuzzy
 msgid "Program terminated."
 msgstr "Program terminei."
 
 #: inary-cli:52
-#, fuzzy
 msgid ""
 "\n"
 "Keyboard Interrupt [Ctrl-C]: Exiting..."
 msgstr "Interrupção do teclado: Saindo ..."
 
 #: inary-cli:55
-#, fuzzy
 msgid ""
 "\n"
 "Keyboard Interrupt [Ctrl-D]: Exiting..."
@@ -115,7 +110,6 @@ msgid ""
 msgstr ""
 
 #: inary-cli:68
-#, fuzzy
 msgid "System error. Program terminated."
 msgstr "Erro do sistema. Programa terminei."
 
@@ -140,12 +134,10 @@ msgid "Using inary in WSL environment is not allowed."
 msgstr ""
 
 #: inary.xml.in.h:1
-#, fuzzy
 msgid "Inary package"
 msgstr "INARY pacote"
 
 #: inary/actionsapi/autotools.py:44 inary/actionsapi/cmaketools.py:40
-#, fuzzy
 msgid ""
 "Please attach the config.log to your bug report:\n"
 "{}/config.log"
@@ -162,12 +154,10 @@ msgstr "Configurar falhou."
 #: inary/actionsapi/autotools.py:99 inary/actionsapi/autotools.py:110
 #: inary/actionsapi/cmaketools.py:84 inary/actionsapi/mesontools.py:79
 #: inary/actionsapi/mesontools.py:102 inary/actionsapi/perlmodules.py:67
-#, fuzzy
 msgid "No configure script found. (\"{}\" file not found.)"
 msgstr "Nenhum script configure foi encontrado para cmake."
 
 #: inary/actionsapi/autotools.py:115
-#, fuzzy
 msgid "Compiling failed."
 msgstr "Configurar falhou."
 
@@ -187,32 +177,26 @@ msgid "Install failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/autotools.py:182
-#, fuzzy
 msgid "Running 'aclocal' failed."
 msgstr "Execução de aclocal falhou."
 
 #: inary/actionsapi/autotools.py:187
-#, fuzzy
 msgid "Running 'autogen.sh' script failed."
 msgstr "Execução de autoreconf falhou."
 
 #: inary/actionsapi/autotools.py:192
-#, fuzzy
 msgid "Running 'autoconf' failed."
 msgstr "Execução de autoconf falhou."
 
 #: inary/actionsapi/autotools.py:198
-#, fuzzy
 msgid "Running 'autoreconf' failed."
 msgstr "Execução de autoreconf falhou."
 
 #: inary/actionsapi/autotools.py:204
-#, fuzzy
 msgid "Running 'automake' failed."
 msgstr "Execução de automake falhou."
 
 #: inary/actionsapi/autotools.py:210
-#, fuzzy
 msgid "Running 'autoheader' failed."
 msgstr "Execução de autoheader falhou."
 
@@ -225,12 +209,11 @@ msgid "Unable to retrieve CPU count: {}"
 msgstr ""
 
 #: inary/actionsapi/get.py:239
-#, fuzzy
 msgid "Util '{}' cannot be found."
 msgstr "util {} não pode ser encontrado"
 
 #: inary/actionsapi/get.py:241
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "'{0}' does not exist, using plain name '{1}'"
 msgstr "Aviso: {0} não existe, usando o nome de planície {1}"
 
@@ -240,43 +223,36 @@ msgid "Insufficient arguments."
 msgstr ""
 
 #: inary/actionsapi/inarytools.py:68
-#, fuzzy
 msgid "No executable file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/inarytools.py:87 inary/actionsapi/inarytools.py:148
 #: inary/actionsapi/inarytools.py:339
-#, fuzzy
 msgid "No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/inarytools.py:193
-#, fuzzy
 msgid "No file matched pattern \"{}\""
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/inarytools.py:203
-#, fuzzy
 msgid "ActionsAPI [doman]: Wrong man page file: \"{}\""
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
 #: inary/actionsapi/inarytools.py:232
-#, fuzzy
 msgid "No file matched pattern \"{}\". 'domove' operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'domove \"operação falhou."
 
 #: inary/actionsapi/inarytools.py:252
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [rename]: \"{0}\": \"{1}\""
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/inarytools.py:290
-#, fuzzy
 msgid "No such file matching pattern: \"{}\". 'dosed' operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". 'dosed \"operação falhou."
 
 #: inary/actionsapi/inarytools.py:305
-#, fuzzy
 msgid "dosed method has not changed file \"{}\"."
 msgstr "método de dosed não alterou o ficheiro {}."
 
@@ -285,67 +261,54 @@ msgid "\"{}\" has been changed by dosed method."
 msgstr ""
 
 #: inary/actionsapi/inarytools.py:310
-#, fuzzy
 msgid "File does not exist or permission denied: \"{}\""
 msgstr "O ficheiro não existe ou permissão negada: {}"
 
 #: inary/actionsapi/inarytools.py:329
-#, fuzzy
 msgid "ActionsAPI [dosym]: File already exists: \"{}\""
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/inarytools.py:369
-#, fuzzy
 msgid "No file matched pattern \"{}\". Remove operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". Remover operaçao falhou."
 
 #: inary/actionsapi/inarytools.py:380
-#, fuzzy
 msgid "No directory matched pattern \"{}\". Remove directory operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". Remover operação falhou."
 
 #: inary/actionsapi/javamodules.py:87 inary/actionsapi/javamodules.py:196
-#, fuzzy
 msgid "No any file/directory matched to regex expression \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/javamodules.py:94 inary/actionsapi/javamodules.py:100
-#, fuzzy
 msgid "DoJavadoc failed."
 msgstr "Make falhou."
 
 #: inary/actionsapi/javamodules.py:150
-#, fuzzy
 msgid "Compile failed."
 msgstr "Configurar falhou."
 
 #: inary/actionsapi/javamodules.py:178 inary/actionsapi/javamodules.py:207
-#, fuzzy
 msgid "Installing file \"{}\" failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/javamodules.py:217
-#, fuzzy
 msgid "Installing directory \"{}\" failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/javamodules.py:246
-#, fuzzy
 msgid "Javadoc generation failed."
 msgstr "Configurar falhou."
 
 #: inary/actionsapi/javamodules.py:262
-#, fuzzy
 msgid "Run failed."
 msgstr "Execução {} falhou."
 
 #: inary/actionsapi/kerneltools.py:127
-#, fuzzy
 msgid "Can't find kernel version information file \"{}\"."
 msgstr "Não pode encontrar a versão do kernel informações do ficheiro {}."
 
 #: inary/actionsapi/libtools.py:41
-#, fuzzy
 msgid "Running 'ldconfig' failed."
 msgstr "Execução de ldconfig falhou."
 
@@ -358,32 +321,26 @@ msgid "GNU Config Update Finished."
 msgstr "GNU configuração de atualização acabado."
 
 #: inary/actionsapi/libtools.py:63
-#, fuzzy
 msgid "Running \"libtoolize\" failed."
 msgstr "Execuçao de libtoolize falhou."
 
 #: inary/actionsapi/mesontools.py:100
-#, fuzzy
 msgid "CMake configure failed."
 msgstr "Configurar falhou."
 
 #: inary/actionsapi/mesontools.py:106 inary/actionsapi/rubymodules.py:126
-#, fuzzy
 msgid "Build failed."
 msgstr "perl construção falhou."
 
 #: inary/actionsapi/mesontools.py:127
-#, fuzzy
 msgid "Check failed."
 msgstr "Make falhou."
 
 #: inary/actionsapi/perlmodules.py:78
-#, fuzzy
 msgid "'perl build' failed."
 msgstr "perl construção falhou."
 
 #: inary/actionsapi/perlmodules.py:88
-#, fuzzy
 msgid "'perl install' failed."
 msgstr "perl Instalaçao falhou."
 
@@ -398,12 +355,10 @@ msgid "Configuration failed."
 msgstr "Configurar falhou."
 
 #: inary/actionsapi/pythonmodules.py:91
-#, fuzzy
 msgid "Running \"{}\" failed."
 msgstr "Execução {} falhou."
 
 #: inary/actionsapi/qt.py:67
-#, fuzzy
 msgid "Project file \"{}\" not found."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -412,22 +367,18 @@ msgid "It seems there are more than one .pro file, you must specify one. (Possib
 msgstr ""
 
 #: inary/actionsapi/rubymodules.py:141
-#, fuzzy
 msgid "Running 'ruby {}' failed."
 msgstr "Execução {} falhou."
 
 #: inary/actionsapi/shelltools.py:53
-#, fuzzy
 msgid "ActionsAPI [makedirs]: Cannot create directory \"{}\""
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
 #: inary/actionsapi/shelltools.py:62
-#, fuzzy
 msgid "ActionsAPI [echo]: Can't append to file \"{}\""
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
 #: inary/actionsapi/shelltools.py:69
-#, fuzzy
 msgid "ActionsAPI [chmod]: No file matched pattern \"{}\""
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
@@ -437,7 +388,6 @@ msgid "ActionsAPI [chmod]: Operation not permitted: {0} (mode: 0{1})"
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:78
-#, fuzzy
 msgid "ActionsAPI [chmod]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
@@ -447,22 +397,19 @@ msgid "ActionsAPI [chown]: Permission denied: {0} (uid: {1}, gid: {2})"
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:90
-#, fuzzy
 msgid "ActionsAPI [chown]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:98
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [sym]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/shelltools.py:105
-#, fuzzy
 msgid "ActionsAPI [unlink]: No file matched pattern \"{}\". Remove operation failed."
 msgstr "Nenhum de ficheiros corresponde padrão \"{}\". Remover operaçao falhou."
 
 #: inary/actionsapi/shelltools.py:113
-#, fuzzy
 msgid "ActionsAPI [unlink]: Permission denied: \"{}\""
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
@@ -471,67 +418,57 @@ msgid "ActionsAPI [unlink]: \"{}\" is not a file, use 'unlinkDir' or 'removeDir'
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:120
-#, fuzzy
 msgid "ActionsAPI [unlink]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:129
-#, fuzzy
 msgid "ActionsAPI [unlinkDir]: Operation not permitted: \"{}\""
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
 #: inary/actionsapi/shelltools.py:133
-#, fuzzy
 msgid "ActionsAPI [unlinkDir]: Directory \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:140
-#, fuzzy
 msgid "ActionsAPI [move]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/shelltools.py:147
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [move]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/shelltools.py:149
-#, fuzzy
 msgid "ActionsAPI [move]: File \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:157
-#, fuzzy
 msgid "ActionsAPI [copy]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/shelltools.py:164
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [copy]: Permission denied: \"{0}\" to \"{1}\""
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/shelltools.py:180
-#, fuzzy
 msgid "ActionsAPI [copy]: File \"{}\" does not exist."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:196
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [copytree] \"{0}\" to \"{1}\": {2}"
 msgstr "ActionsAPI [rename]: {}: {}"
 
 #: inary/actionsapi/shelltools.py:198
-#, fuzzy
 msgid "ActionsAPI [copytree]: Directory \"{}\" doesn't exists."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/actionsapi/shelltools.py:207
-#, fuzzy
 msgid "ActionsAPI [touch]: No file matched pattern \"{}\"."
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
 #: inary/actionsapi/shelltools.py:216
-#, fuzzy
 msgid "ActionsAPI [touch]: Permission denied: \"{}\""
 msgstr "Nenhum ficheiro corresponde padrão \"{}\""
 
@@ -540,22 +477,19 @@ msgid "[Running Command]: "
 msgstr ""
 
 #: inary/actionsapi/shelltools.py:283
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "ActionsAPI [system]: Command '{0}' failed, return value was {1}."
 msgstr "ActionsAPI [Doman]: Errado página de manual: {}"
 
 #: inary/actionsapi/texlivemodules.py:60
-#, fuzzy
 msgid "Moving source files failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/texlivemodules.py:63
-#, fuzzy
 msgid "Generate config files failed."
 msgstr "Configurar falhou."
 
 #: inary/actionsapi/texlivemodules.py:66
-#, fuzzy
 msgid "Building format files failed."
 msgstr "Instale falhou."
 
@@ -564,22 +498,18 @@ msgid "Creating symlinks from format to engines failed."
 msgstr ""
 
 #: inary/actionsapi/texlivemodules.py:78
-#, fuzzy
 msgid "Installing docs failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/texlivemodules.py:82
-#, fuzzy
 msgid "Installing texmf files failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/texlivemodules.py:86
-#, fuzzy
 msgid "Installing config files failed."
 msgstr "Instale falhou."
 
 #: inary/actionsapi/texlivemodules.py:90
-#, fuzzy
 msgid "Handle config files failed."
 msgstr "Configurar falhou."
 
@@ -678,7 +608,6 @@ msgid " release "
 msgstr ""
 
 #: inary/archive.py:162
-#, fuzzy
 msgid " \"{}\" is not a lzma file."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -757,7 +686,6 @@ msgid "Download Error: Package does not match the repository package."
 msgstr ""
 
 #: inary/atomicoperations.py:136
-#, fuzzy
 msgid "Package \"{}\" not found in any active repository."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -783,7 +711,6 @@ msgid "Checking operations"
 msgstr ""
 
 #: inary/atomicoperations.py:179
-#, fuzzy
 msgid "Unpacking package"
 msgstr "INARY pacote"
 
@@ -805,7 +732,7 @@ msgid "{0}-{1} is not a valid INARY version format"
 msgstr ""
 
 #: inary/atomicoperations.py:244
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"/{0}\" from \"{1}\" package\n"
 msgstr "Configurar falhou."
 
@@ -848,17 +775,14 @@ msgid "Pre-install configuration have been run for \"{}\""
 msgstr ""
 
 #: inary/atomicoperations.py:315
-#, fuzzy
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "Configurar falhou."
 
 #: inary/atomicoperations.py:333
-#, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "Configurar falhou."
 
 #: inary/atomicoperations.py:335
-#, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "Configurar falhou."
 
@@ -871,7 +795,6 @@ msgid "Adding files of \"{}\" package to database..."
 msgstr ""
 
 #: inary/atomicoperations.py:538
-#, fuzzy
 msgid "Installing => [{}]"
 msgstr "Instale falhou."
 
@@ -905,7 +828,6 @@ msgid "Post-remove configuration have been run for  \"{}\""
 msgstr ""
 
 #: inary/atomicoperations.py:678
-#, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Configurar falhou."
 
@@ -940,7 +862,6 @@ msgid "no)"
 msgstr ""
 
 #: inary/cli/__init__.py:246
-#, fuzzy
 msgid "Installed \"{}\""
 msgstr "Instale falhou."
 
@@ -949,7 +870,6 @@ msgid "Removed \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:255
-#, fuzzy
 msgid "Removing \"{}\""
 msgstr "Execução de aclocal falhou."
 
@@ -958,12 +878,10 @@ msgid "Upgraded \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:261
-#, fuzzy
 msgid "Configured \"{}\""
 msgstr "Configurar falhou."
 
 #: inary/cli/__init__.py:264
-#, fuzzy
 msgid "Configuring \"{}\""
 msgstr "Configurar falhou."
 
@@ -988,7 +906,6 @@ msgid "Extracted desktop file \"{}\""
 msgstr ""
 
 #: inary/cli/__init__.py:296
-#, fuzzy
 msgid "Downloaded \"{}\""
 msgstr "Instale falhou."
 
@@ -1218,7 +1135,6 @@ msgid "Checking all installed packages."
 msgstr ""
 
 #: inary/cli/check.py:83
-#, fuzzy
 msgid "No package has been installed yet. :("
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -1251,12 +1167,10 @@ msgid "Corrupted file: \"/{}\""
 msgstr ""
 
 #: inary/cli/check.py:125
-#, fuzzy
 msgid "Modified configuration file: \"/{}\""
 msgstr "Configurar falhou."
 
 #: inary/cli/check.py:130
-#, fuzzy
 msgid "Package \"{}\" not installed."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -1327,12 +1241,10 @@ msgid "Do not perform any action, just show what would be done."
 msgstr ""
 
 #: inary/cli/command.py:215
-#, fuzzy
 msgid "usage: {}\n"
 msgstr "maneira de usar: {}\n"
 
 #: inary/cli/configmanager.py:30
-#, fuzzy
 msgid "Inary Config file manager."
 msgstr "Instale falhou."
 
@@ -1395,7 +1307,6 @@ msgid "Cleaning temporary directory \"{}\"..."
 msgstr ""
 
 #: inary/cli/deletecache.py:57
-#, fuzzy
 msgid "Removing cache file \"{}\"..."
 msgstr "Execução de aclocal falhou."
 
@@ -1493,7 +1404,6 @@ msgid ""
 msgstr ""
 
 #: inary/cli/emergeup.py:46
-#, fuzzy
 msgid "emergeup options"
 msgstr "%prog [optçaos]"
 
@@ -1556,7 +1466,6 @@ msgid "Graph of installed packages"
 msgstr ""
 
 #: inary/cli/graph.py:54
-#, fuzzy
 msgid "Do not show installed packages."
 msgstr "Configurar falhou."
 
@@ -1669,7 +1578,6 @@ msgid "Inary Transaction History: "
 msgstr ""
 
 #: inary/cli/history.py:77
-#, fuzzy
 msgid "Operation "
 msgstr "Opções"
 
@@ -1798,7 +1706,6 @@ msgid "Installed package:"
 msgstr ""
 
 #: inary/cli/info.py:169
-#, fuzzy
 msgid "\"{}\" package is not installed."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -1811,7 +1718,6 @@ msgid "Package found in \"{}\" repository:"
 msgstr ""
 
 #: inary/cli/info.py:180
-#, fuzzy
 msgid "\"{}\" package is not found in binary repositories."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -1820,7 +1726,6 @@ msgid "[source] "
 msgstr ""
 
 #: inary/cli/info.py:192
-#, fuzzy
 msgid "\"{}\" package is not found in source repositories."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2034,7 +1939,6 @@ msgid "Orphaned packages:"
 msgstr ""
 
 #: inary/cli/listorphaned.py:63
-#, fuzzy
 msgid "No orphaned packages."
 msgstr "Configurar falhou."
 
@@ -2152,7 +2056,6 @@ msgid ""
 msgstr ""
 
 #: inary/cli/reconfigure.py:57
-#, fuzzy
 msgid "reconfigure"
 msgstr "Configurar falhou."
 
@@ -2232,7 +2135,6 @@ msgid "Name of the source or package repository."
 msgstr ""
 
 #: inary/cli/search.py:52
-#, fuzzy
 msgid "Search in installdb."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2274,7 +2176,6 @@ msgid "Show only package name."
 msgstr ""
 
 #: inary/cli/searchfile.py:53
-#, fuzzy
 msgid "Path \"{}\" does not belong to an installed package."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2296,7 +2197,6 @@ msgid "sysconf"
 msgstr ""
 
 #: inary/cli/sysconf.py:39
-#, fuzzy
 msgid "sysconf options"
 msgstr "Ha não como opção: %s"
 
@@ -2460,7 +2360,6 @@ msgid " * Adding source packages: "
 msgstr ""
 
 #: inary/data/index.py:189
-#, fuzzy
 msgid " * Adding binary packages: "
 msgstr "INARY pacote"
 
@@ -2493,7 +2392,6 @@ msgid " * Adding \"components.xml\" to index"
 msgstr ""
 
 #: inary/data/index.py:285
-#, fuzzy
 msgid " * Component in {} is corrupt"
 msgstr "util {} não pode ser encontrado"
 
@@ -2549,7 +2447,7 @@ msgid " or "
 msgstr ""
 
 #: inary/data/specfile.py:280
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"{0}\" dependency of package \"{1}\" is not satisfied."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2602,7 +2500,6 @@ msgid "Build Dependencies: "
 msgstr ""
 
 #: inary/db/componentdb.py:110
-#, fuzzy
 msgid "Component {} not found."
 msgstr "util {} não pode ser encontrado"
 
@@ -2621,7 +2518,6 @@ msgid ""
 msgstr ""
 
 #: inary/db/groupdb.py:80 inary/db/groupdb.py:89
-#, fuzzy
 msgid "Group \"{}\" not found."
 msgstr "util {} não pode ser encontrado"
 
@@ -2650,7 +2546,6 @@ msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this 
 msgstr ""
 
 #: inary/db/installdb.py:502 inary/operations/upgrade.py:94
-#, fuzzy
 msgid "Package \"{}\" is not installed."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2659,20 +2554,17 @@ msgid "\"{}\" not found in any repository."
 msgstr ""
 
 #: inary/db/itembyrepo.py:55
-#, fuzzy
 msgid "Repo item \"{}\" not found."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/db/itembyrepo.py:65 inary/db/itembyrepo.py:76
 #: inary/db/itembyrepo.py:86
-#, fuzzy
 msgid "Repository \"{}\" does not exist."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/db/packagedb.py:193 inary/db/packagedb.py:201
 #: inary/db/packagedb.py:209 inary/db/packagedb.py:217
 #: inary/db/packagedb.py:225
-#, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2704,7 +2596,6 @@ msgid "Access denied to write to destination directory: \"{}\""
 msgstr ""
 
 #: inary/fetcher.py:168
-#, fuzzy
 msgid "Access denied to destination file: \"{}\""
 msgstr "Configurar falhou."
 
@@ -2721,12 +2612,10 @@ msgid "RESPONSE: "
 msgstr ""
 
 #: inary/fetcher.py:231
-#, fuzzy
 msgid "Downloaded from: "
 msgstr "Instale falhou."
 
 #: inary/fetcher.py:239
-#, fuzzy
 msgid "Download error: {}"
 msgstr "Instale falhou."
 
@@ -2767,12 +2656,11 @@ msgid "Could not fetch source from \"{}\" mirrors."
 msgstr ""
 
 #: inary/fetcher.py:378
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "\"{0}\" package found in \"{1}\" repository."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/fetcher.py:382
-#, fuzzy
 msgid "\"{}\" package already fetched."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -2782,12 +2670,10 @@ msgid "URL \"{0}\" already downloaded as \"{1}\""
 msgstr ""
 
 #: inary/file.py:47
-#, fuzzy
 msgid "No signature found for \"{}\""
 msgstr "Nenhum script configure foi encontrado para cmake."
 
 #: inary/file.py:57
-#, fuzzy
 msgid "GPG Signature is invalid for \"{}\""
 msgstr "Nenhum script configure foi encontrado para cmake."
 
@@ -2800,7 +2686,6 @@ msgid "Fetching {}"
 msgstr ""
 
 #: inary/file.py:153 inary/operations/info.py:37
-#, fuzzy
 msgid "File \"{}\" not found."
 msgstr "util {} não pode ser encontrado"
 
@@ -2828,17 +2713,15 @@ msgid "Mirrors file \"{}\" does not exist. Could not resolve \"mirrors://\""
 msgstr ""
 
 #: inary/operations/build.py:119
-#, fuzzy
 msgid "Path \"{}\" belongs in multiple packages."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/operations/build.py:149
-#, fuzzy
 msgid "Removing special file skipped for: \"{}\""
 msgstr "Execução de aclocal falhou."
 
 #: inary/operations/build.py:152
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Removing special \"{0}\" file: \"{1}\""
 msgstr "Execução de aclocal falhou."
 
@@ -2847,7 +2730,6 @@ msgid "Source URI: {}"
 msgstr ""
 
 #: inary/operations/build.py:205
-#, fuzzy
 msgid "Source \"{}\" not found in any active repository."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -3229,13 +3111,12 @@ msgid "Deleting new config file {0}"
 msgstr ""
 
 #: inary/operations/history.py:85 inary/operations/history.py:109
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Package \"{0}\" found in repository \"{1}\"."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/operations/history.py:122 inary/operations/history.py:133
 #: inary/operations/history.py:141
-#, fuzzy
 msgid "\"{}\" could not be found."
 msgstr "util {} não pode ser encontrado"
 
@@ -3259,7 +3140,6 @@ msgstr ""
 
 #: inary/operations/history.py:218 inary/operations/install.py:99
 #: inary/operations/upgrade.py:225
-#, fuzzy
 msgid "Downloading"
 msgstr "Instale falhou."
 
@@ -3295,7 +3175,6 @@ msgid "External dependencies not satisfied."
 msgstr ""
 
 #: inary/operations/install.py:130 inary/operations/upgrade.py:250
-#, fuzzy
 msgid "Installing"
 msgstr "Instale falhou."
 
@@ -3334,7 +3213,7 @@ msgid "Following packages are not satisfied:\n"
 msgstr ""
 
 #: inary/operations/install.py:347
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -3363,7 +3242,6 @@ msgid "Package removal declined."
 msgstr ""
 
 #: inary/operations/remove.py:108
-#, fuzzy
 msgid "Package \"{}\" is not installed. Cannot remove."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
@@ -3372,12 +3250,10 @@ msgid "Conflicts remain."
 msgstr ""
 
 #: inary/operations/remove.py:179
-#, fuzzy
 msgid "Obsoleted packages remaining."
 msgstr "Configurar falhou."
 
 #: inary/operations/remove.py:184
-#, fuzzy
 msgid "Replaced package remains."
 msgstr "Configurar falhou."
 
@@ -3386,12 +3262,10 @@ msgid "Not a valid repository name."
 msgstr ""
 
 #: inary/operations/repository.py:36
-#, fuzzy
 msgid "Repository \"{}\" already present."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/operations/repository.py:39
-#, fuzzy
 msgid "Repository \"{}\" already present with name \"{}\"."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
@@ -3400,12 +3274,10 @@ msgid "Flushing database caches..."
 msgstr ""
 
 #: inary/operations/repository.py:45
-#, fuzzy
 msgid "Repository \"{}\" added to system."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
 #: inary/operations/repository.py:55
-#, fuzzy
 msgid "Repository \"{}\" removed from system."
 msgstr "ActionsAPI [dosym]: O ficheiro existe já: {} "
 
@@ -3583,7 +3455,6 @@ msgid "Object cannot be encoded."
 msgstr ""
 
 #: inary/sxml/autoxml.py:764 inary/sxml/autoxml.py:883
-#, fuzzy
 msgid "Object cannot be formatted."
 msgstr "util {} não pode ser encontrado"
 
@@ -3618,7 +3489,6 @@ msgid "Cannot read URI {0}: {1}"
 msgstr ""
 
 #: inary/sxml/xmlfile_iks.py:93
-#, fuzzy
 msgid "File \"{}\" has invalid XML."
 msgstr "util {} não pode ser encontrado"
 
@@ -3668,7 +3538,6 @@ msgid "return value for \"{0}\" is {1}"
 msgstr ""
 
 #: inary/util.py:533
-#, fuzzy
 msgid "File {} not found."
 msgstr "util {} não pode ser encontrado"
 
@@ -3677,7 +3546,6 @@ msgid "Including external link \"{}\""
 msgstr ""
 
 #: inary/util.py:643
-#, fuzzy
 msgid "Including directory \"{}\""
 msgstr "Instale falhou."
 
@@ -3737,7 +3605,6 @@ msgid "Invalid delta package name: \"{}\""
 msgstr ""
 
 #: inary/util.py:1164
-#, fuzzy
 msgid "Removing empty dir: \"{}\""
 msgstr "Execução de aclocal falhou."
 
@@ -3745,30 +3612,23 @@ msgstr "Execução de aclocal falhou."
 msgid "Invalid version string: '{}'"
 msgstr ""
 
-#, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU configuração de atualização acabado."
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
+#~ msgid "Storing files of \"{}\" package."
 #~ msgstr "Configurar falhou."
 
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Instale falhou."
-
-#, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Configurar falhou."
-
-#, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Ficheiro de projeto {} nao foi encontrado. "
-
-#, fuzzy
 #~ msgid "Bypass scom configuration agent."
 #~ msgstr "Configurar falhou."
 
-#, fuzzy
-#~ msgid "Storing files of \"{}\" package."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Ficheiro de projeto {} nao foi encontrado. "
+
+#~ msgid "Script error for \"{0}\" package: {1}."
 #~ msgstr "Configurar falhou."
+
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Instale falhou."
+
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Configurar falhou."
+
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU configuração de atualização acabado."
