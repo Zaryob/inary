@@ -259,7 +259,6 @@ def upgrade(A=None, repo=None):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
-        install_op.write_status_file()
 
     for old_path in old_releases_paths:
         ctx.ui.info(_("Cleaning old inary files: {}".format(old_path.split("/")[-1])),verbose=True)

@@ -87,15 +87,14 @@ class InstallDB(lazydb.LazyDB):
     @staticmethod
     def __generate_installed_pkgs():
         installed_list=[]
-        info_path = os.path.join(ctx.config.info_dir(), ctx.const.config_installed)
+        
         def split_name(dirname):
             name, version, release = dirname.rsplit("-", 2)
             installed_list.append((name, version + "-" + release))
-        
-        installed_pkgs=open(info_path).read().split() 
-            
-        for name in installed_pkgs:
-            split_name(name)
+
+        for i in os.listdir(ctx.config.packages_dir()):
+            split_name(i)
+
         return dict(installed_list)
 
     @staticmethod
@@ -185,7 +184,7 @@ class InstallDB(lazydb.LazyDB):
         history = xmlext.getNode(package, 'History')
         update = xmlext.getNode(history, 'Update')
         return xmlext.getNodeAttribute(update, 'release')
-    
+
     @staticmethod
     def __get_distro_release(meta_doc):
         package = xmlext.getNode(meta_doc, 'Package')
@@ -413,7 +412,7 @@ class InstallDB(lazydb.LazyDB):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         metadata.read(metadata_xml)
         return metadata
-    
+
 
     def __mark_package(self, _type, package):
         packages = self.__get_marked_packages(_type)
@@ -423,7 +422,7 @@ class InstallDB(lazydb.LazyDB):
 
     def mark_pending(self, package):
         self.__mark_package(ctx.const.config_pending, package)
-        
+
     def mark_installed(self, package):
         self.__mark_package(ctx.const.config_installed, package)
 
@@ -485,7 +484,7 @@ class InstallDB(lazydb.LazyDB):
 
     def clear_pending(self, package):
         self.__clear_marked_packages(ctx.const.config_pending, package)
-        
+
     def clear_installed(self, package):
         self.__clear_marked_packages(ctx.const.config_installed, package)
 

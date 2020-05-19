@@ -63,7 +63,7 @@ class Trigger:
             #FIXME: translate support needed
             if ctx.config.get_option('debug'):
                  ctx.ui.info(util.colorize("Running => {}",'brightgreen').format(util.colorize(func,"brightyellow")))
-            else:    
+            else:
                 cmd_extra=" > /dev/null"
             ret_val=os.system('python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func)+cmd_extra)
             os.chdir(curDir)
@@ -75,7 +75,9 @@ class Trigger:
         self.specdir=specdir
         self.postscript = util.join_path(self.specdir, ctx.const.postops)
         self.load_script()
-        return self.run_command("preInstall")
+        retval = self.run_command("preInstall")
+        util.delete_file(self.postscript)
+        return retval
 
     def postinstall(self, specdir):
         self.specdir=specdir

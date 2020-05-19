@@ -28,8 +28,7 @@ import inary.context as ctx
 import inary.trigger
 
 
-def configure_pending(packages=None):
-
+def reconfigure(packages=None):
     # start with pending packages
     # configure them in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
@@ -37,14 +36,9 @@ def configure_pending(packages=None):
     for x in order:
         if installdb.has_package(x):
             pkginfo = installdb.get_package(x)
-            pkg_path = installdb.package_path(x)
-            m = inary.data.metadata.MetaData()
-            metadata_path = util.join_path(pkg_path, ctx.const.metadata_xml)
-            m.read(metadata_path)
-            # FIXME: we need a full package info here!
-            pkginfo.name = x
+            ops_Dir=os.path.join(ctx.config.packages_dir(), "postoperations")
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-            inary.trigger.Trigger().postinstall(pkg_path)
+            inary.trigger.Trigger().postinstall(ops_Dir, x)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)
 
@@ -69,4 +63,4 @@ configures those packages.
 
     def run(self):
         self.init(database=True, write=False)
-        configure_pending(self.args)
+        reconfigure(self.args)
