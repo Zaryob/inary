@@ -16,15 +16,15 @@ import os
 
 # General substitutions.
 project = 'Inary'
-copyright = "2016-2019 Zaryob"
+copyright = "2016-2020 Zaryob"
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
 # The short X.Y version.
-version =  '1.2_alpha'
+version =  '1.3'
 # The full version, including alpha/beta/rc tags.
-release = '1.2_alpha'
+release = '1.3_rc'
 
 
 # General configuration
