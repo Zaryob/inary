@@ -18,17 +18,33 @@ from inary.actionsapi import shelltools
 
 basename = "kde5"
 
+# general terms
 prefix = "/{}".format(get.defaultprefixDIR())
 libdir = "{}/lib".format(prefix)
+libexecdir = "{}/libexec".format(prefix)
+sysconfdir = "/etc"
 bindir = "{}/bin".format(prefix)
-libexecdir = "{}/lib".format(prefix)
+includedir = "{}/include".format(prefix)
+
+# qt5 spesific variables
+
+headerdir = "{0}/include/{1}".format(prefix, basename)
+datadir = "{0}/share/{1}".format(prefix, basename)
+docdir = "/{0}/{1}".format(get.docDIR(), basename)
+archdatadir = "{0}/{1}".format(libdir, basename)
+examplesdir = "{0}/{1}/examples".format(libdir, basename)
+importdir = "{0}/{1}/imports".format(libdir, basename)
+plugindir = "{0}/{1}/plugins".format(libdir, basename)
+qmldir = "{0}/{1}/qmldir".format(libdir, basename)
+testdir = "{0}/share/{1}".format(prefix, basename)
+translationdir = "{0}/translations".format(datadir)
+
+# KDE 5 specific variables
 iconsdir = "{}/share/icons".format(prefix)
 applicationsdir = "{0}/share/applications/{1}".format(prefix, basename)
 mandir = "/{}".format(get.manDIR())
 sharedir = "{}/share".format(prefix)
 localedir = "{}/share/locale".format(prefix)
-qmldir = "{}/lib/qt5/qml".format(prefix)
-plugindir = "{}/lib/qt5/plugins".format(prefix)
 moduledir = "{}/lib/qt5/mkspecs/modules".format(prefix)
 pythondir = "{}/bin/python".format(prefix)
 appsdir = "{}".format(sharedir)
@@ -36,8 +52,6 @@ sysconfdir = "/etc"
 configdir = "{}/xdg".format(sysconfdir)
 servicesdir = "{}/services".format(sharedir)
 servicetypesdir = "{}/servicetypes".format(sharedir)
-includedir = "{}/include".format(prefix)
-docdir = "/{0}/{1}".format(get.docDIR(), basename)
 htmldir = "{}/html".format(docdir)
 wallpapersdir = "{}/share/wallpapers".format(prefix)
 
