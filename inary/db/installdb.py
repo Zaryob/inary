@@ -87,14 +87,12 @@ class InstallDB(lazydb.LazyDB):
     @staticmethod
     def __generate_installed_pkgs():
         installed_list=[]
-        
         def split_name(dirname):
-            name, version, release = dirname.rsplit("-", 2)
-            installed_list.append((name, version + "-" + release))
-
+                    name, version, release = dirname.rsplit("-", 2)
+                    installed_list.append((name, version + "-" + release))
+                    
         for i in os.listdir(ctx.config.packages_dir()):
             split_name(i)
-
         return dict(installed_list)
 
     @staticmethod
