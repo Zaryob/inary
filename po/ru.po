@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 20:18+0300\n"
+"POT-Creation-Date: 2020-05-19 17:53+0300\n"
 "PO-Revision-Date: 2011-07-04 23:03+0400\n"
 "Last-Translator: Alexey Ivanov <alexey.ivanes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -426,12 +426,12 @@ msgstr "Конфигурация не удалась."
 msgid "Running \"{}\" failed."
 msgstr "Запуск {} не удался."
 
-#: inary/actionsapi/qt.py:65
+#: inary/actionsapi/qt.py:67
 #, fuzzy
 msgid "Project file \"{}\" not found."
 msgstr "Файл проекта {} не найден."
 
-#: inary/actionsapi/qt.py:70
+#: inary/actionsapi/qt.py:72
 #, fuzzy
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")"
 msgstr "Похоже, что .pro файлов несколько, Вы должны выбрать один. (Возможные .pro файлы: {})"
@@ -749,43 +749,43 @@ msgstr "Обнаружена ошибка во время распаковки {
 msgid "File \"{}\" is not a zip file."
 msgstr "Пакет {} не установлен"
 
-#: inary/archive.py:870 inary/fetcher.py:356
+#: inary/archive.py:878 inary/fetcher.py:356
 #, fuzzy
 msgid "Fetching source from: \"{}\""
 msgstr "Получение исходного кода из: {}"
 
-#: inary/archive.py:884
+#: inary/archive.py:892
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr "Архив исходных файлов хранится: {0}/{1}"
 
-#: inary/archive.py:902 inary/operations/history.py:145
+#: inary/archive.py:910 inary/operations/history.py:145
 #, fuzzy
 msgid "\"{}\" [cached]"
 msgstr "{} [кэшировано]"
 
-#: inary/archive.py:911
+#: inary/archive.py:919
 msgid ""
 "Archive File: {}\n"
 " * Expected sha1 value: {} \n"
 " * Received sha1 value: {} \n"
 msgstr ""
 
-#: inary/archive.py:914
+#: inary/archive.py:922
 #, fuzzy
 msgid "unpack: check_file_hash failed."
 msgstr "распаковка: не верный хэш файла"
 
-#: inary/archive.py:916
+#: inary/archive.py:924
 msgid "* Archive verification passed. Such problems may occur during the build process."
 msgstr ""
 
-#: inary/archive.py:921
+#: inary/archive.py:929
 #, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "Неизвестный тип архива {0} задан для '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:932
 #, fuzzy
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr "Inary необходим {} для распаковки архива, но он не установлен."
@@ -917,72 +917,72 @@ msgstr "Обнаружена конфигурация прокси-сервер�
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "Конфигурация не удалась."
 
-#: inary/atomicoperations.py:334
+#: inary/atomicoperations.py:333
 #, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "{} настроен"
 
-#: inary/atomicoperations.py:336
+#: inary/atomicoperations.py:335
 #, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "Конфигурация не удалась."
 
-#: inary/atomicoperations.py:397
+#: inary/atomicoperations.py:396
 #, fuzzy
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Невозможно разрешить попытку перемещения данных файлов. Настоятельно рекомендуется повторная установка ."
 
-#: inary/atomicoperations.py:510
+#: inary/atomicoperations.py:512
 #, fuzzy
 msgid "Adding files of \"{}\" package to database..."
 msgstr "Добавление {} в базу данных... "
 
-#: inary/atomicoperations.py:536
+#: inary/atomicoperations.py:538
 #, fuzzy
 msgid "Installing => [{}]"
 msgstr "Установка %d / %d"
 
-#: inary/atomicoperations.py:569
+#: inary/atomicoperations.py:571
 #, fuzzy
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "Список файлов не может быть прочитан для пакета {}, продолжение удаления."
 
-#: inary/atomicoperations.py:575
+#: inary/atomicoperations.py:577
 #, fuzzy, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Установка {0.name}, версия {0.version}, релиз {0.release}"
 
-#: inary/atomicoperations.py:578
+#: inary/atomicoperations.py:580
 #, fuzzy
 msgid "Trying to remove nonexistent package "
 msgstr "Попытка удаления несуществующего пакета"
 
-#: inary/atomicoperations.py:623
+#: inary/atomicoperations.py:622
 #, fuzzy
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Не удаляется конфликтующий файл: {}"
 
-#: inary/atomicoperations.py:654
+#: inary/atomicoperations.py:653
 #, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Установленный файл {} не существует в системе. [Возможно, он был удален вручную]"
 
-#: inary/atomicoperations.py:665
+#: inary/atomicoperations.py:664
 #, fuzzy
 msgid "Pre-remove configuration have been run for \"{}\""
 msgstr "Обнаружена конфигурация прокси-сервера для протокола {} "
 
-#: inary/atomicoperations.py:671
+#: inary/atomicoperations.py:670
 #, fuzzy
 msgid "Post-remove configuration have been run for  \"{}\""
 msgstr "Обнаружена конфигурация прокси-сервера для протокола {} "
 
-#: inary/atomicoperations.py:679
+#: inary/atomicoperations.py:678
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Добавление {} в базу данных... "
 
-#: inary/atomicoperations.py:683
+#: inary/atomicoperations.py:682
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Обновление базы данных файлов"
@@ -1236,7 +1236,7 @@ msgstr "build опции"
 msgid "Run inary build operation without printing extra debug information."
 msgstr "Запустить inary build без вывода дополнительной отладочной информации"
 
-#: inary/cli/build.py:58 inary/cli/command.py:214
+#: inary/cli/build.py:58 inary/cli/command.py:188
 #, fuzzy
 msgid "Do not take dependency information into account."
 msgstr "Не вкладывать информацию о зависимостях в аккаунт"
@@ -1255,7 +1255,7 @@ msgstr ""
 msgid "Bypass errors from ActionsAPI."
 msgstr "Bypass ошибка ActionsAPI"
 
-#: inary/cli/build.py:78 inary/cli/command.py:220
+#: inary/cli/build.py:78 inary/cli/command.py:194
 #, fuzzy
 msgid "Bypass safety switch."
 msgstr "Пропустить проверку безопасности"
@@ -1488,37 +1488,32 @@ msgstr "Показать информацию об отладке"
 msgid "Suppresses all coloring of INARY's output."
 msgstr "Убирает цветной вывод INARY"
 
-#: inary/cli/command.py:137
+#: inary/cli/command.py:135
 #, fuzzy
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "Целевая директория {} не найдена. Создание директории.\n"
 
-#: inary/cli/command.py:159
-#, fuzzy
-msgid "Password: "
-msgstr "Пароль:"
-
-#: inary/cli/command.py:175 inary/util.py:82
+#: inary/cli/command.py:149 inary/util.py:82
 #, fuzzy
 msgid "You have to be root for this operation."
 msgstr "Вы должны иметь привилегии суперпользователя для этой операции."
 
-#: inary/cli/command.py:199
+#: inary/cli/command.py:173
 #, fuzzy
 msgid "Command terminated abnormally."
 msgstr "Аварийное завершение команды."
 
-#: inary/cli/command.py:217
+#: inary/cli/command.py:191
 #, fuzzy
 msgid "Ignore unsatisfied dependency."
 msgstr "Игнорирование зависимостей для сборки."
 
-#: inary/cli/command.py:222
+#: inary/cli/command.py:196
 #, fuzzy
 msgid "Do not perform any action, just show what would be done."
 msgstr "Не выполнять никаких действи, просто смотреть, что могло бы произойти"
 
-#: inary/cli/command.py:241
+#: inary/cli/command.py:215
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "использование: {}\n"
@@ -1554,7 +1549,7 @@ msgstr "[!] Некоторые конфигурационные файлы бы�
 msgid "There isn't any new config :)"
 msgstr "Там нет никакого нового конфига :)"
 
-#: inary/cli/configurepending.py:56
+#: inary/cli/configurepending.py:52
 #, fuzzy
 msgid ""
 "Configure pending packages\n"
@@ -1570,7 +1565,7 @@ msgstr ""
 "во время установки, они будут добавлены в список пакетов, ожидающих конфигурирования. Эта команда\n"
 "сконфигурирует такие пакеты.\n"
 
-#: inary/cli/configurepending.py:70 inary/cli/reconfigure.py:66
+#: inary/cli/configurepending.py:66 inary/cli/reconfigure.py:60
 #, fuzzy
 msgid "configure-pending options"
 msgstr "Опции задержки конфигурирования"
@@ -2417,27 +2412,27 @@ msgstr ""
 "репозиториях. Если репозиторий не задан, мы получим список новых\n"
 "пакетов из всех репозиториев.\n"
 
-#: inary/cli/listnewest.py:46
+#: inary/cli/listnewest.py:47
 #, fuzzy
 msgid "list-newest options"
 msgstr "опции list-newes"
 
-#: inary/cli/listnewest.py:49
+#: inary/cli/listnewest.py:50
 #, fuzzy
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd."
 msgstr "Показать новые пакеты, добавленные в репозиторий после указанной даты в формате yyyy-mm-dd"
 
-#: inary/cli/listnewest.py:52
+#: inary/cli/listnewest.py:53
 #, fuzzy
 msgid "List new packages added to repository after last nth previous repository update."
 msgstr "Показать список новых пакетов, добавленных к репозиторию после последнего обновления репозитория."
 
-#: inary/cli/listnewest.py:80
+#: inary/cli/listnewest.py:78
 #, fuzzy, python-brace-format
 msgid "Packages added to '{0}' since \"{1}\":\n"
 msgstr "Пакеты добавлены в {0} с {1}:\n"
 
-#: inary/cli/listnewest.py:82
+#: inary/cli/listnewest.py:80
 #, fuzzy
 msgid "Packages added to '{}':"
 msgstr "Пакеты добавлены в {}:"
@@ -2629,7 +2624,7 @@ msgstr "Обновление базы данных файлов"
 msgid "Rebuild INARY databases?"
 msgstr "Обновить базу данных INARY?"
 
-#: inary/cli/reconfigure.py:52
+#: inary/cli/reconfigure.py:46
 #, fuzzy
 msgid ""
 "Reconfigure pending packages\n"
@@ -2645,7 +2640,7 @@ msgstr ""
 "во время установки, они будут добавлены в список пакетов, ожидающих конфигурирования. Эта команда\n"
 "сконфигурирует такие пакеты.\n"
 
-#: inary/cli/reconfigure.py:63
+#: inary/cli/reconfigure.py:57
 #, fuzzy
 msgid "reconfigure"
 msgstr "{} настроен"
@@ -3267,12 +3262,12 @@ msgstr ""
 msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Дистрибутив: {0}, Время установки: {1}\n"
 
-#: inary/db/installdb.py:119
+#: inary/db/installdb.py:118
 #, fuzzy
 msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this problem."
 msgstr "Информация для установки пакета {} повреждена. Переустановите для исправления этой ошибки."
 
-#: inary/db/installdb.py:503 inary/operations/upgrade.py:94
+#: inary/db/installdb.py:502 inary/operations/upgrade.py:94
 #, fuzzy
 msgid "Package \"{}\" is not installed."
 msgstr "Пакет {} не установлен."
@@ -3293,8 +3288,9 @@ msgstr "Элемент {} репозитория не обнаружен"
 msgid "Repository \"{}\" does not exist."
 msgstr "Репозиторий {} не существует."
 
-#: inary/db/packagedb.py:184 inary/db/packagedb.py:192
-#: inary/db/packagedb.py:200 inary/db/packagedb.py:208
+#: inary/db/packagedb.py:193 inary/db/packagedb.py:201
+#: inary/db/packagedb.py:209 inary/db/packagedb.py:217
+#: inary/db/packagedb.py:225
 #, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "Пакет {} не найден."
@@ -3781,27 +3777,27 @@ msgstr "Сборка пакета: {}"
 msgid "Creating \"{}\"..."
 msgstr "Создание {}..."
 
-#: inary/operations/build.py:1241
+#: inary/operations/build.py:1243
 #, fuzzy
 msgid "Cleaning build directory..."
 msgstr "Очистка директории сборки..."
 
-#: inary/operations/build.py:1244
+#: inary/operations/build.py:1246
 #, fuzzy
 msgid "Keeping build directory"
 msgstr "Сохранение каталога сборки"
 
-#: inary/operations/build.py:1333
+#: inary/operations/build.py:1335
 #, fuzzy
 msgid "Action script error caught. {}"
 msgstr "Обнаружена ошибка в Action Script"
 
-#: inary/operations/build.py:1336
+#: inary/operations/build.py:1338
 #, fuzzy
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** %d ошибка(ок), %d предупреждение(ий)."
 
-#: inary/operations/build.py:1424
+#: inary/operations/build.py:1426
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Последнее состояние было {}"
@@ -3975,7 +3971,7 @@ msgid "Following packages will be removed:\n"
 msgstr "Следующие пакеты будут удалены:\n"
 
 #: inary/operations/history.py:211 inary/operations/history.py:226
-#: inary/operations/install.py:237 inary/operations/remove.py:90
+#: inary/operations/install.py:234 inary/operations/remove.py:90
 #: inary/operations/upgrade.py:211
 #, fuzzy
 msgid "Would you like to continue?"
@@ -4001,12 +3997,12 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Снятие снимка с системы"
 
-#: inary/operations/install.py:51 inary/operations/install.py:170
+#: inary/operations/install.py:51 inary/operations/install.py:167
 #, fuzzy
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "Следующий пакет (ы) уже установлены и не будет установлен еще раз:"
 
-#: inary/operations/install.py:57 inary/operations/install.py:251
+#: inary/operations/install.py:57 inary/operations/install.py:248
 #, fuzzy
 msgid "No packages to install."
 msgstr "Нет пакетов для установки."
@@ -4021,7 +4017,7 @@ msgstr "Следующие пакеты будут установлены:"
 msgid "Following packages will be installed:"
 msgstr "Следующие пакеты будут установлены:"
 
-#: inary/operations/install.py:85 inary/operations/install.py:238
+#: inary/operations/install.py:85 inary/operations/install.py:235
 #: inary/operations/upgrade.py:212
 #, fuzzy
 msgid "External dependencies not satisfied."
@@ -4032,47 +4028,47 @@ msgstr "Внешние зависимости не соблюдены"
 msgid "Installing"
 msgstr "Установка..."
 
-#: inary/operations/install.py:157
+#: inary/operations/install.py:154
 #, fuzzy
 msgid "Mixing file names and package names not supported yet."
 msgstr "Сочетание имен файлов и имен пакетов пока не поддерживается."
 
-#: inary/operations/install.py:201
+#: inary/operations/install.py:198
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "Пакет {0} не совместим с вашей версией дистрибутива {1} {2}."
 
-#: inary/operations/install.py:206
+#: inary/operations/install.py:203
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "Пакет {0} {1} не совместим с вашей {2} архитектурой."
 
-#: inary/operations/install.py:229
+#: inary/operations/install.py:226
 #, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Внешние зависимости не могут быть удовлетворены: {}"
 
-#: inary/operations/install.py:234
+#: inary/operations/install.py:231
 #, fuzzy
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "Следующие пакеты будут установлены в соответствии с зависимостями:"
 
-#: inary/operations/install.py:282
+#: inary/operations/install.py:279
 #, fuzzy
 msgid "Installation order: "
 msgstr "Порядок установки: "
 
-#: inary/operations/install.py:313
+#: inary/operations/install.py:310
 #, fuzzy
 msgid " -> checking {}"
 msgstr "Проверка /{}"
 
-#: inary/operations/install.py:348
+#: inary/operations/install.py:345
 #, fuzzy
 msgid "Following packages are not satisfied:\n"
 msgstr "Следующие пакеты будут установлены:\n"
 
-#: inary/operations/install.py:350
+#: inary/operations/install.py:347
 #, fuzzy, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "Зависимость {0} пакета {1} не соблюдена"
@@ -4082,7 +4078,7 @@ msgstr "Зависимость {0} пакета {1} не соблюдена"
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Переключатель безопасности предотвратил удаление следующих пакетов:\n"
 
-#: inary/operations/remove.py:59 inary/operations/upgrade.py:442
+#: inary/operations/remove.py:59 inary/operations/upgrade.py:441
 #, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Изменение безопасности: компонент system.base не найден."
@@ -4237,41 +4233,41 @@ msgstr "Следующие пакеты будут обновлены:"
 msgid "There are extra packages due to dependencies."
 msgstr "Есть дополнительные пакеты из-за зависимостей."
 
-#: inary/operations/upgrade.py:265
+#: inary/operations/upgrade.py:264
 msgid "Cleaning old inary files: {}"
 msgstr ""
 
-#: inary/operations/upgrade.py:313
+#: inary/operations/upgrade.py:312
 #, fuzzy, python-brace-format
 msgid "Dependency \"{0}\" of \"{1}\" cannot be satisfied."
 msgstr "Зависимость {0} из {1} не соблюдена"
 
-#: inary/operations/upgrade.py:314
+#: inary/operations/upgrade.py:313
 #, fuzzy
 msgid "Upgrade is not possible."
 msgstr "Обновление не возможно."
 
-#: inary/operations/upgrade.py:412
+#: inary/operations/upgrade.py:411
 #, fuzzy
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Изменение безопасности требует установки следующих пакетов:"
 
-#: inary/operations/upgrade.py:430
+#: inary/operations/upgrade.py:429
 #, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Изменение безопасности требует обновления следующих пакетов:"
 
-#: inary/package.py:72
+#: inary/package.py:75
 #, fuzzy
 msgid "Cannot open package file: \"{}\""
 msgstr "Файл пакета не может быть открыт: {}"
 
-#: inary/package.py:93
+#: inary/package.py:96
 #, fuzzy
 msgid "Unsupported package format: {}"
 msgstr "Не поддерживаемый формат пакета: {}"
 
-#: inary/package.py:107
+#: inary/package.py:110
 #, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
@@ -4280,7 +4276,7 @@ msgstr ""
 "There was a problem while fetching {}.\n"
 "The package may have been upgraded. Please try to upgrade the package.\n"
 
-#: inary/package.py:112
+#: inary/package.py:115
 #, fuzzy
 msgid "{} [cached]"
 msgstr "{} [кэшировано]"
@@ -4557,40 +4553,124 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Добавлена ​​символическая ссылка \"{}\""
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config Update завершено."
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Чоунинг в постинсталляции {0} ({1}: {2})"
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Желаете ли вы продолжить? (Это может быть опасно!!!):"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Добавление {} в базу данных... "
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Настройка {} пакета"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Пропустить утилиту конфигурирования scom"
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Загрузка %d / %d"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "Пакет сomar  не полностью установлен"
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Целевая директория: {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "репозиторий {} нуждается в обновлении"
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Репозиторий {} не совместим с Вашим дистрибутивом. Репозиторий отключен."
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Копирование {} в каталог для передачи"
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Загрузка архива исходного кода из зеркала: {}"
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Невозможно прочитать SCOM script {0}: {1}"
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Нарушение среды сборки: {0} ({1} -> {2})"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Ошибка синтаксиса в SCOM script {0}: {1}"
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Построение песочницы включено..."
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Результат нарушения песочницы:"
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Нарушения песочницы!"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Установка файлов texmf не удалась"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Невозможно прочитать Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Ошибка синтаксиса в Actions Script {0}: {1}"
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s опция требует %d аргумент%s опция требует %d аргумент%s опция требует %d аргумент#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "%s опция не требует аргумент"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Отмена регистрации сценариев scom"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Отмена регистрации сценариев scom"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Запустить сценарий, используемый после удаления, пакета"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Вызов предустановочных обработчиков"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Запустить сценарий, используемый перед удалением, пакета"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Запуск операций после удаления для {}"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Ошибка скрипта: {}"
+
+#, fuzzy
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "Запуск послеустановочного скрипта"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Ошибка скрипта: {}"
+
+#, fuzzy
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Вызов послеустановочных обработчиков"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Ошибка скрипта: {}"
+
+#, fuzzy
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Регистрация scom-скрипта {} "
+
+#, fuzzy
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "Пакет SCOM обнавлен. С текущего момента используется новый демон SCOM."
 
 #, fuzzy
 #~ msgid ""
@@ -4601,121 +4681,41 @@ msgstr ""
 #~ " {}\n"
 
 #, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "Пакет SCOM обнавлен. С текущего момента используется новый демон SCOM."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Ошибка синтаксиса в SCOM script {0}: {1}"
 
 #, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Регистрация scom-скрипта {} "
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Невозможно прочитать SCOM script {0}: {1}"
 
 #, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Ошибка скрипта: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Копирование {} в каталог для передачи"
 
 #, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Вызов послеустановочных обработчиков"
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "репозиторий {} нуждается в обновлении"
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Ошибка скрипта: {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "Пакет сomar  не полностью установлен"
 
 #, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "Запуск послеустановочного скрипта"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Пропустить утилиту конфигурирования scom"
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Ошибка скрипта: {}"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Добавление {} в базу данных... "
 
 #, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Чоунинг в постинсталляции {0} ({1}: {2})"
 
 #, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Запустить сценарий, используемый перед удалением, пакета"
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Добавлена ​​символическая ссылка \"{}\""
 
 #, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Вызов предустановочных обработчиков"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Запустить сценарий, используемый после удаления, пакета"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Запуск операций после удаления для {}"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Отмена регистрации сценариев scom"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Отмена регистрации сценариев scom"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d arguments%s опция требует %d аргумент%s опция требует %d аргумент%s опция требует %d аргумент#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "%s опция не требует аргумент"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Ошибка синтаксиса в Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Невозможно прочитать Actions Script {0}: {1}"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Установка файлов texmf не удалась"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Нарушения песочницы!"
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Результат нарушения песочницы:"
-
-#, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Построение песочницы включено..."
-
-#, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Нарушение среды сборки: {0} ({1} -> {2})"
-
-#, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Загрузка архива исходного кода из зеркала: {}"
-
-#, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Репозиторий {} не совместим с Вашим дистрибутивом. Репозиторий отключен."
-
-#, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Целевая директория: {}"
-
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Загрузка %d / %d"
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Настройка {} пакета"
-
-#, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Желаете ли вы продолжить? (Это может быть опасно!!!):"
-
-#, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config Update завершено."
+#~ msgid "Password: "
+#~ msgstr "Пароль:"

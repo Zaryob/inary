@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 20:18+0300\n"
+"POT-Creation-Date: 2020-05-19 17:53+0300\n"
 "PO-Revision-Date: 2011-06-17 15:13+0200\n"
 "Last-Translator: Antoon Tolboom <atolboo@gmail.com>\n"
 "Language-Team: Dutch <kde-i18n-doc@kde.org>\n"
@@ -432,12 +432,12 @@ msgstr "Configuratie mislukt."
 msgid "Running \"{}\" failed."
 msgstr "Uitvoeren {} mislukt."
 
-#: inary/actionsapi/qt.py:65
+#: inary/actionsapi/qt.py:67
 #, fuzzy
 msgid "Project file \"{}\" not found."
 msgstr "Projectbestand {} niet gevonden."
 
-#: inary/actionsapi/qt.py:70
+#: inary/actionsapi/qt.py:72
 #, fuzzy
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")"
 msgstr "Er is meer dan een .pro-bestand, geef er een op. (Mogelijke .pro-bestand: {})"
@@ -755,43 +755,43 @@ msgstr "Probleem tijdens uitpakken bestand {}.Z"
 msgid "File \"{}\" is not a zip file."
 msgstr "Pakket {} is niet geïnstalleerd"
 
-#: inary/archive.py:870 inary/fetcher.py:356
+#: inary/archive.py:878 inary/fetcher.py:356
 #, fuzzy
 msgid "Fetching source from: \"{}\""
 msgstr "Ophalen bron van: {} "
 
-#: inary/archive.py:884
+#: inary/archive.py:892
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr "Bronarchief is opgeslagen: {0}/{1}"
 
-#: inary/archive.py:902 inary/operations/history.py:145
+#: inary/archive.py:910 inary/operations/history.py:145
 #, fuzzy
 msgid "\"{}\" [cached]"
 msgstr "{} [gebufferd]"
 
-#: inary/archive.py:911
+#: inary/archive.py:919
 msgid ""
 "Archive File: {}\n"
 " * Expected sha1 value: {} \n"
 " * Received sha1 value: {} \n"
 msgstr ""
 
-#: inary/archive.py:914
+#: inary/archive.py:922
 #, fuzzy
 msgid "unpack: check_file_hash failed."
 msgstr "uitpakken: check_file_hash mislukt"
 
-#: inary/archive.py:916
+#: inary/archive.py:924
 msgid "* Archive verification passed. Such problems may occur during the build process."
 msgstr ""
 
-#: inary/archive.py:921
+#: inary/archive.py:929
 #, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "Onbekend archieftype {0} is opgegeven voor '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:932
 #, fuzzy
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr "Inary heeft {} nodig voor het uitpakken van dit archief maar het is niet geïnstalleerd."
@@ -923,72 +923,72 @@ msgstr "Proxy-configuratie gevonden voor {} protocol"
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "Configuratie mislukt."
 
-#: inary/atomicoperations.py:334
+#: inary/atomicoperations.py:333
 #, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "Geconfigureerd {}"
 
-#: inary/atomicoperations.py:336
+#: inary/atomicoperations.py:335
 #, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "Configuratie mislukt."
 
-#: inary/atomicoperations.py:397
+#: inary/atomicoperations.py:396
 #, fuzzy
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Kan volgende bestanden niet terugvinden. Herinstallatie van dit pakket wordt sterk aangeraden."
 
-#: inary/atomicoperations.py:510
+#: inary/atomicoperations.py:512
 #, fuzzy
 msgid "Adding files of \"{}\" package to database..."
 msgstr "Toevoegen {} aan db... "
 
-#: inary/atomicoperations.py:536
+#: inary/atomicoperations.py:538
 #, fuzzy
 msgid "Installing => [{}]"
 msgstr "Installeren %d / %d"
 
-#: inary/atomicoperations.py:569
+#: inary/atomicoperations.py:571
 #, fuzzy
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "Bestandslijst kon niet gelezen worden voor pakket {}, voortzetten verwijderen."
 
-#: inary/atomicoperations.py:575
+#: inary/atomicoperations.py:577
 #, fuzzy, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "Installatie {0.name}, versie {0.version}, uitgave {0.release}"
 
-#: inary/atomicoperations.py:578
+#: inary/atomicoperations.py:580
 #, fuzzy
 msgid "Trying to remove nonexistent package "
 msgstr "Proberen niet-bestaand pakket te verwijderen "
 
-#: inary/atomicoperations.py:623
+#: inary/atomicoperations.py:622
 #, fuzzy
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Niet verwijderen conflicterend bestand: {}"
 
-#: inary/atomicoperations.py:654
+#: inary/atomicoperations.py:653
 #, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Geïnstalleerd bestand {} bestaat niet op systeem [waarschijnlijk handmatig verwijderd]"
 
-#: inary/atomicoperations.py:665
+#: inary/atomicoperations.py:664
 #, fuzzy
 msgid "Pre-remove configuration have been run for \"{}\""
 msgstr "Proxy-configuratie gevonden voor {} protocol"
 
-#: inary/atomicoperations.py:671
+#: inary/atomicoperations.py:670
 #, fuzzy
 msgid "Post-remove configuration have been run for  \"{}\""
 msgstr "Proxy-configuratie gevonden voor {} protocol"
 
-#: inary/atomicoperations.py:679
+#: inary/atomicoperations.py:678
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "Toevoegen {} aan db... "
 
-#: inary/atomicoperations.py:683
+#: inary/atomicoperations.py:682
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Herbouw bestanden database"
@@ -1240,7 +1240,7 @@ msgstr "bouw opties"
 msgid "Run inary build operation without printing extra debug information."
 msgstr "Inary bouwoperatie uitvoeren en geen debuginformatie weergeven"
 
-#: inary/cli/build.py:58 inary/cli/command.py:214
+#: inary/cli/build.py:58 inary/cli/command.py:188
 #, fuzzy
 msgid "Do not take dependency information into account."
 msgstr "Geen rekening houden met afhankelijkheidsinformatie"
@@ -1259,7 +1259,7 @@ msgstr ""
 msgid "Bypass errors from ActionsAPI."
 msgstr "Omzeilen fouten van ActionsAPI"
 
-#: inary/cli/build.py:78 inary/cli/command.py:220
+#: inary/cli/build.py:78 inary/cli/command.py:194
 #, fuzzy
 msgid "Bypass safety switch."
 msgstr "Omzeilen veiligheidsprocedure"
@@ -1494,37 +1494,32 @@ msgstr "Toon debuginformatie"
 msgid "Suppresses all coloring of INARY's output."
 msgstr "Onderdrukt kleuren van INARY-uitvoer"
 
-#: inary/cli/command.py:137
+#: inary/cli/command.py:135
 #, fuzzy
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "Doelmap {} bestaat niet. Aanmaken map.\n"
 
-#: inary/cli/command.py:159
-#, fuzzy
-msgid "Password: "
-msgstr "Wachtwoord: "
-
-#: inary/cli/command.py:175 inary/util.py:82
+#: inary/cli/command.py:149 inary/util.py:82
 #, fuzzy
 msgid "You have to be root for this operation."
 msgstr "U dient root te zijn voor deze handeling."
 
-#: inary/cli/command.py:199
+#: inary/cli/command.py:173
 #, fuzzy
 msgid "Command terminated abnormally."
 msgstr "Commando abnormaal gestopt."
 
-#: inary/cli/command.py:217
+#: inary/cli/command.py:191
 #, fuzzy
 msgid "Ignore unsatisfied dependency."
 msgstr "Negeren bouwafhankelijkheden."
 
-#: inary/cli/command.py:222
+#: inary/cli/command.py:196
 #, fuzzy
 msgid "Do not perform any action, just show what would be done."
 msgstr "Geen acties uitvoeren, geef alleen weer wat er zou gebeuren"
 
-#: inary/cli/command.py:241
+#: inary/cli/command.py:215
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "gebruik: {}\n"
@@ -1560,7 +1555,7 @@ msgstr "[!] Sommige configuratiebestanden zijn gewijzigd. Wil je ze zien en toep
 msgid "There isn't any new config :)"
 msgstr "Er is geen nieuwe configuratie :)"
 
-#: inary/cli/configurepending.py:56
+#: inary/cli/configurepending.py:52
 #, fuzzy
 msgid ""
 "Configure pending packages\n"
@@ -1577,7 +1572,7 @@ msgstr ""
 "een wachtlijst van pakketten toegevoegd om ze later te\n"
 "configuren. Dit commando configureert deze pakketten.\n"
 
-#: inary/cli/configurepending.py:70 inary/cli/reconfigure.py:66
+#: inary/cli/configurepending.py:66 inary/cli/reconfigure.py:60
 #, fuzzy
 msgid "configure-pending options"
 msgstr "wachtende configuratie opties"
@@ -2423,27 +2418,27 @@ msgstr ""
 "de opgegeven softwarebron. Indien geen softwarebron opgegeven is,\n"
 "worden de nieuwste pakketten uit alle softwarebronnen getoond.\n"
 
-#: inary/cli/listnewest.py:46
+#: inary/cli/listnewest.py:47
 #, fuzzy
 msgid "list-newest options"
 msgstr "list-newest opties"
 
-#: inary/cli/listnewest.py:49
+#: inary/cli/listnewest.py:50
 #, fuzzy
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd."
 msgstr "Toon nieuwe pakketten die aan de softwarebron toegevoegd zijn na de opgegeven datum in het formaat jjjj-mm-dd"
 
-#: inary/cli/listnewest.py:52
+#: inary/cli/listnewest.py:53
 #, fuzzy
 msgid "List new packages added to repository after last nth previous repository update."
 msgstr "Toon nieuwe pakketten die aan de softwarebron toegevoegd zijn na de laatste n-de opwaardering van softwarebron"
 
-#: inary/cli/listnewest.py:80
+#: inary/cli/listnewest.py:78
 #, fuzzy, python-brace-format
 msgid "Packages added to '{0}' since \"{1}\":\n"
 msgstr "Pakketten toegevoegd aan {0} sinds {1}:\n"
 
-#: inary/cli/listnewest.py:82
+#: inary/cli/listnewest.py:80
 #, fuzzy
 msgid "Packages added to '{}':"
 msgstr "Pakketten toegevoegd aan {}:"
@@ -2634,7 +2629,7 @@ msgstr "Herbouw bestanden database"
 msgid "Rebuild INARY databases?"
 msgstr "INARY databases herbouwen?"
 
-#: inary/cli/reconfigure.py:52
+#: inary/cli/reconfigure.py:46
 #, fuzzy
 msgid ""
 "Reconfigure pending packages\n"
@@ -2651,7 +2646,7 @@ msgstr ""
 "een wachtlijst van pakketten toegevoegd om ze later te\n"
 "configuren. Dit commando configureert deze pakketten.\n"
 
-#: inary/cli/reconfigure.py:63
+#: inary/cli/reconfigure.py:57
 #, fuzzy
 msgid "reconfigure"
 msgstr "Geconfigureerd {}"
@@ -3273,12 +3268,12 @@ msgstr ""
 msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Distributie: {0}, installatietijd: {1}\n"
 
-#: inary/db/installdb.py:119
+#: inary/db/installdb.py:118
 #, fuzzy
 msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this problem."
 msgstr "Installatie-informatie voor pakket {} is niet goed. Installeer opnieuw voor het oplossen van het probleem."
 
-#: inary/db/installdb.py:503 inary/operations/upgrade.py:94
+#: inary/db/installdb.py:502 inary/operations/upgrade.py:94
 #, fuzzy
 msgid "Package \"{}\" is not installed."
 msgstr "Pakket {} is niet geïnstalleerd."
@@ -3299,8 +3294,9 @@ msgstr "Bronitem {} niet gevonden"
 msgid "Repository \"{}\" does not exist."
 msgstr "Softwarebron {} bestaat niet."
 
-#: inary/db/packagedb.py:184 inary/db/packagedb.py:192
-#: inary/db/packagedb.py:200 inary/db/packagedb.py:208
+#: inary/db/packagedb.py:193 inary/db/packagedb.py:201
+#: inary/db/packagedb.py:209 inary/db/packagedb.py:217
+#: inary/db/packagedb.py:225
 #, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "Pakket {} niet gevonden."
@@ -3787,27 +3783,27 @@ msgstr "Bouwen pakket: {}"
 msgid "Creating \"{}\"..."
 msgstr "Aanmaken {}... "
 
-#: inary/operations/build.py:1241
+#: inary/operations/build.py:1243
 #, fuzzy
 msgid "Cleaning build directory..."
 msgstr "Opschonen bouwmap..."
 
-#: inary/operations/build.py:1244
+#: inary/operations/build.py:1246
 #, fuzzy
 msgid "Keeping build directory"
 msgstr "Behouden bouwmap"
 
-#: inary/operations/build.py:1333
+#: inary/operations/build.py:1335
 #, fuzzy
 msgid "Action script error caught. {}"
 msgstr "Fout in actiescript opgetreden."
 
-#: inary/operations/build.py:1336
+#: inary/operations/build.py:1338
 #, fuzzy
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** %d fout(en), %d waarschuwing(en)"
 
-#: inary/operations/build.py:1424
+#: inary/operations/build.py:1426
 #, fuzzy
 msgid "Last state was '{}'"
 msgstr "Laatste status was {}"
@@ -3981,7 +3977,7 @@ msgid "Following packages will be removed:\n"
 msgstr "Volgende pakketen zullen worden verwijderd:\n"
 
 #: inary/operations/history.py:211 inary/operations/history.py:226
-#: inary/operations/install.py:237 inary/operations/remove.py:90
+#: inary/operations/install.py:234 inary/operations/remove.py:90
 #: inary/operations/upgrade.py:211
 #, fuzzy
 msgid "Would you like to continue?"
@@ -4007,12 +4003,12 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Snapshot van het systeem nemen"
 
-#: inary/operations/install.py:51 inary/operations/install.py:170
+#: inary/operations/install.py:51 inary/operations/install.py:167
 #, fuzzy
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "De volgende pakket(ten) zijn al geïnstalleerd en zullen niet opnieuw worden geïnstalleerd:"
 
-#: inary/operations/install.py:57 inary/operations/install.py:251
+#: inary/operations/install.py:57 inary/operations/install.py:248
 #, fuzzy
 msgid "No packages to install."
 msgstr "Geen te installeren pakketten."
@@ -4027,7 +4023,7 @@ msgstr "Volgende pakketten zullen worden geïnstalleerd:"
 msgid "Following packages will be installed:"
 msgstr "Volgende pakketten zullen worden geïnstalleerd:"
 
-#: inary/operations/install.py:85 inary/operations/install.py:238
+#: inary/operations/install.py:85 inary/operations/install.py:235
 #: inary/operations/upgrade.py:212
 #, fuzzy
 msgid "External dependencies not satisfied."
@@ -4038,47 +4034,47 @@ msgstr "Externe afhankelijkheden zijn niet voldaan"
 msgid "Installing"
 msgstr "Installeren..."
 
-#: inary/operations/install.py:157
+#: inary/operations/install.py:154
 #, fuzzy
 msgid "Mixing file names and package names not supported yet."
 msgstr "Combineren van bestands- en pakketnamen nog niet ondersteund."
 
-#: inary/operations/install.py:201
+#: inary/operations/install.py:198
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "Pakket {0} is niet compatibel met de distributieversie {1} {2}."
 
-#: inary/operations/install.py:206
+#: inary/operations/install.py:203
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "Pakket {0} ({1}) is niet compatibel met de {} architectuur."
 
-#: inary/operations/install.py:229
+#: inary/operations/install.py:226
 #, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Externe afhankelijkheden zijn niet voldaan: {}"
 
-#: inary/operations/install.py:234
+#: inary/operations/install.py:231
 #, fuzzy
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "De volgende pakketten zullen in de respectievelijke volgorde geïnstalleerd worden om aan de afhankelijkheden te voldoen:"
 
-#: inary/operations/install.py:282
+#: inary/operations/install.py:279
 #, fuzzy
 msgid "Installation order: "
 msgstr "Volgorde van installatie: "
 
-#: inary/operations/install.py:313
+#: inary/operations/install.py:310
 #, fuzzy
 msgid " -> checking {}"
 msgstr "Controle /{} "
 
-#: inary/operations/install.py:348
+#: inary/operations/install.py:345
 #, fuzzy
 msgid "Following packages are not satisfied:\n"
 msgstr "Volgende pakketen zullen worden geïnstalleerd:\n"
 
-#: inary/operations/install.py:350
+#: inary/operations/install.py:347
 #, fuzzy, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "{0} afhankelijkheid van pakket {1} is niet bevredigend"
@@ -4088,7 +4084,7 @@ msgstr "{0} afhankelijkheid van pakket {1} is niet bevredigend"
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Veiligheidsprocedure voorkomt het verwijderen van de volgende pakketten:\n"
 
-#: inary/operations/remove.py:59 inary/operations/upgrade.py:442
+#: inary/operations/remove.py:59 inary/operations/upgrade.py:441
 #, fuzzy
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Veiligheidsprocedure: De component system.base is niet gevonden."
@@ -4243,41 +4239,41 @@ msgstr "De volgende pakketten worden opgewaardeerd:"
 msgid "There are extra packages due to dependencies."
 msgstr "Wegens afhankelijkheden zijn er extra pakketten."
 
-#: inary/operations/upgrade.py:265
+#: inary/operations/upgrade.py:264
 msgid "Cleaning old inary files: {}"
 msgstr ""
 
-#: inary/operations/upgrade.py:313
+#: inary/operations/upgrade.py:312
 #, fuzzy, python-brace-format
 msgid "Dependency \"{0}\" of \"{1}\" cannot be satisfied."
 msgstr "Afhankelijkheid {0} van {1} kan niet worden voldaan"
 
-#: inary/operations/upgrade.py:314
+#: inary/operations/upgrade.py:313
 #, fuzzy
 msgid "Upgrade is not possible."
 msgstr "Opwaarderen niet mogelijk."
 
-#: inary/operations/upgrade.py:412
+#: inary/operations/upgrade.py:411
 #, fuzzy
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Veiligheidsprocedure vereist het installeren van de volgende pakketten:"
 
-#: inary/operations/upgrade.py:430
+#: inary/operations/upgrade.py:429
 #, fuzzy
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Veiligheidsprocedure vereist het opwaarderen van de volgende pakketten:"
 
-#: inary/package.py:72
+#: inary/package.py:75
 #, fuzzy
 msgid "Cannot open package file: \"{}\""
 msgstr "Kan pakketbestand niet openen: {}"
 
-#: inary/package.py:93
+#: inary/package.py:96
 #, fuzzy
 msgid "Unsupported package format: {}"
 msgstr "Niet-ondersteunde pakketformaat: {}"
 
-#: inary/package.py:107
+#: inary/package.py:110
 #, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
@@ -4286,7 +4282,7 @@ msgstr ""
 "Er was een probleem het bij ophalen van {}.\n"
 "Het pakket kan opgewaardeerd zijn. Probeer het pakket op te waarderen.\n"
 
-#: inary/package.py:112
+#: inary/package.py:115
 #, fuzzy
 msgid "{} [cached]"
 msgstr "{} [gebufferd]"
@@ -4563,40 +4559,124 @@ msgid "Invalid version string: '{}'"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Symlink '{}' toegevoegd"
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Config bijwerken voltooid."
 
 #, fuzzy
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "wil je verder gaan? (het kan gevaarlijk zijn !!!):"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "Toevoegen {} aan db... "
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "Configureren {} pakket"
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Omzeil Scom-configuratieagent"
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Downloaden %d / %d"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom-pakket is niet volledig geïnstalleerd"
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Perk bouw proces niet in tot binnen de bouw folder"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} softwarebron dient opgewaardeerd te worden."
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "Softwarebron {} is niet compatibel met de distributie. Bron is uitgeschakeld."
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "Kopiëren {} naar overdrachtmap"
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Bron ophalen van mirror: {} "
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "Kan SCOM script niet lezen ({0}): {1}"
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox-overtreding: {0} ({1} -> {2})"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Syntaxfout in SCOM bestand ({0}): {1}"
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sanbox geactiveerde build..."
+
+#, fuzzy
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox overtreding resultaat:"
+
+#, fuzzy
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox overtredingen!"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "Installeren texmf bestanden mislukt"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Kan Actions Script niet lezen ({0}): {1}"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Syntaxfout in Actions Script ({0}): {1}"
+
+#, fuzzy
+#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsoptie %s vereist %d argumentenoptie %s vereist %d argumenten#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
+#~ msgstr "optie %s neemt geen waarde"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Deregistreren scom-scripts"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Deregistreren scom-scripts"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderscript van pakket"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Aanroepen pre-verwijder afhandelingen"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Uitvoeren pre-verwijderscript van pakket"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Scriptfout: {}"
+
+#, fuzzy
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "UItvoeren post-installatiescript van pakket"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Scriptfout: {}"
+
+#, fuzzy
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Aanroepen post-installatie afhandelingen"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Scriptfout: {}"
+
+#, fuzzy
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "Registreren {} scom-script"
+
+#, fuzzy
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
 
 #, fuzzy
 #~ msgid ""
@@ -4607,121 +4687,41 @@ msgstr ""
 #~ "  {}\n"
 
 #, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM-pakket opgewaardeerd. Van nu af aan, niewe SCOM-daemon gebruiken."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Syntaxfout in SCOM bestand ({0}): {1}"
 
 #, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "Registreren {} scom-script"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "Kan SCOM script niet lezen ({0}): {1}"
 
 #, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Scriptfout: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "Kopiëren {} naar overdrachtmap"
 
 #, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Aanroepen post-installatie afhandelingen"
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} softwarebron dient opgewaardeerd te worden."
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Scriptfout: {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom-pakket is niet volledig geïnstalleerd"
 
 #, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "UItvoeren post-installatiescript van pakket"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Omzeil Scom-configuratieagent"
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Scriptfout: {}"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "Toevoegen {} aan db... "
 
 #, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Chowning in postinstall {0} ({1}: {2})"
 
 #, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Uitvoeren pre-verwijderscript van pakket"
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Symlink '{}' toegevoegd"
 
 #, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Aanroepen pre-verwijder afhandelingen"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderscript van pakket"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "Uitvoeren post-verwijderingoperatie voor {}"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Deregistreren scom-scripts"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Deregistreren scom-scripts"
-
-#, fuzzy
-#~ msgid "%(option)s option requires %(number)d argument%(option)s option requires %(number)d argumentsoptie %s vereist %d argumentenoptie %s vereist %d argumenten#: /usr/lib/python3.6/optparse.py:149#, fuzzy, python-forma%s option does not take a value"
-#~ msgstr "optie %s neemt geen waarde"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Syntaxfout in Actions Script ({0}): {1}"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Kan Actions Script niet lezen ({0}): {1}"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "Installeren texmf bestanden mislukt"
-
-#, fuzzy
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox overtredingen!"
-
-#, fuzzy
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox overtreding resultaat:"
-
-#, fuzzy
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sanbox geactiveerde build..."
-
-#, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox-overtreding: {0} ({1} -> {2})"
-
-#, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Bron ophalen van mirror: {} "
-
-#, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "Softwarebron {} is niet compatibel met de distributie. Bron is uitgeschakeld."
-
-#, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Perk bouw proces niet in tot binnen de bouw folder"
-
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Downloaden %d / %d"
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "Configureren {} pakket"
-
-#, fuzzy
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "wil je verder gaan? (het kan gevaarlijk zijn !!!):"
-
-#, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Config bijwerken voltooid."
+#~ msgid "Password: "
+#~ msgstr "Wachtwoord: "

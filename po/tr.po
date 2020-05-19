@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 20:18+0300\n"
+"POT-Creation-Date: 2020-05-19 17:53+0300\n"
 "PO-Revision-Date: 2019-08-17 01:25+0300\n"
 "Last-Translator: Suleyman Poyraz <nipalensiaquila@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -393,11 +393,11 @@ msgstr "Yapılandırma sırasında hata oluştu."
 msgid "Running \"{}\" failed."
 msgstr "\"{}\" komutunu çalıştırma işlemi başarısız oldu."
 
-#: inary/actionsapi/qt.py:65
+#: inary/actionsapi/qt.py:67
 msgid "Project file \"{}\" not found."
 msgstr "\"{}\" proje dosyası bulunamadı."
 
-#: inary/actionsapi/qt.py:70
+#: inary/actionsapi/qt.py:72
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")"
 msgstr "Birden fazla .pro dosyası mevcut görünüyor. Bir tane belirtmelisiniz (Olası .pro dosyaları: \"{}\")."
 
@@ -673,42 +673,42 @@ msgstr "\"{}.Z\" dosyası çıkartılırken hata oluştu"
 msgid "File \"{}\" is not a zip file."
 msgstr "\"{}\" dosyası zip formatında sıkıştırılmış dosya değil."
 
-#: inary/archive.py:870 inary/fetcher.py:356
+#: inary/archive.py:878 inary/fetcher.py:356
 msgid "Fetching source from: \"{}\""
 msgstr "Kaynak \"{}\" adresinden indiriliyor"
 
-#: inary/archive.py:884
+#: inary/archive.py:892
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr ""
 "\n"
 "Kaynak arşivi depolandı:  \"{0}/{1}\""
 
-#: inary/archive.py:902 inary/operations/history.py:145
+#: inary/archive.py:910 inary/operations/history.py:145
 msgid "\"{}\" [cached]"
 msgstr "{} [önbellekte]"
 
-#: inary/archive.py:911
+#: inary/archive.py:919
 msgid ""
 "Archive File: {}\n"
 " * Expected sha1 value: {} \n"
 " * Received sha1 value: {} \n"
 msgstr ""
 
-#: inary/archive.py:914
+#: inary/archive.py:922
 msgid "unpack: check_file_hash failed."
 msgstr "unpack: check_file_hash (kaynak arşivin doğruluk) değerinde sorun var."
 
-#: inary/archive.py:916
+#: inary/archive.py:924
 msgid "* Archive verification passed. Such problems may occur during the build process."
 msgstr ""
 
-#: inary/archive.py:921
+#: inary/archive.py:929
 #, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "Arşiv için bilinmeyen bir tip \"{0}\" verilmiş: '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:932
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr "Inary bu arşivi açabilmek için '{}' aracına ihtiyaç duyuyor ancak araç yüklü değil."
 
@@ -829,66 +829,66 @@ msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "\"{}\" paketinin yapılandırması sırasında hata oluştu."
 
 # inary/actionsapi/autotools.py:75 :85
-#: inary/atomicoperations.py:334
+#: inary/atomicoperations.py:333
 #, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "\"{}\" yapılandırılıyor."
 
 # inary/actionsapi/autotools.py:75 :85
-#: inary/atomicoperations.py:336
+#: inary/atomicoperations.py:335
 #, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "\"{}\" paketinin yapılandırması sırasında hata oluştu."
 
-#: inary/atomicoperations.py:397
+#: inary/atomicoperations.py:396
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Aşağıdaki dosyalar taşınamadı. Bu paketin yeniden kurulumu şiddetle önerilir."
 
-#: inary/atomicoperations.py:510
+#: inary/atomicoperations.py:512
 msgid "Adding files of \"{}\" package to database..."
 msgstr "\"{}\" paketinin dosya/dizin bilgileri veritabanına ekleniyor..."
 
-#: inary/atomicoperations.py:536
+#: inary/atomicoperations.py:538
 #, fuzzy
 msgid "Installing => [{}]"
 msgstr "Kuruluyor {} / {}"
 
-#: inary/atomicoperations.py:569
+#: inary/atomicoperations.py:571
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "\"{}\" paketi için dosya listesi okunamadı, kaldırma işlemine devam ediliyor."
 
-#: inary/atomicoperations.py:575
+#: inary/atomicoperations.py:577
 #, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "\"{0.name}\" paketi {0.version} sürümü {0.release} yayımı kuruluyor"
 
-#: inary/atomicoperations.py:578
+#: inary/atomicoperations.py:580
 msgid "Trying to remove nonexistent package "
 msgstr "Varolmayan paket kaldırılmaya çalışıldı "
 
-#: inary/atomicoperations.py:623
+#: inary/atomicoperations.py:622
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Çakışan dosya \"{}\" silinemiyor."
 
-#: inary/atomicoperations.py:654
+#: inary/atomicoperations.py:653
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "Kurulmuş dosya \"{}\" sistemde bulunamadı (Muhtemelen elle sildiniz)."
 
-#: inary/atomicoperations.py:665
+#: inary/atomicoperations.py:664
 #, fuzzy
 msgid "Pre-remove configuration have been run for \"{}\""
 msgstr "'{}' protokolü için vekil yapılandırması bulundu."
 
-#: inary/atomicoperations.py:671
+#: inary/atomicoperations.py:670
 #, fuzzy
 msgid "Post-remove configuration have been run for  \"{}\""
 msgstr "'{}' protokolü için vekil yapılandırması bulundu."
 
-#: inary/atomicoperations.py:679
+#: inary/atomicoperations.py:678
 msgid "Removing files of \"{}\" package from system..."
 msgstr "\"{}\" paketinin dosya/dizinleri sistemden kaldırılıyor..."
 
-#: inary/atomicoperations.py:683
+#: inary/atomicoperations.py:682
 msgid "Removing files of \"{}\" package from database..."
 msgstr "\"{}\" paketinin dosya/dizin bilgileri veritabanından kaldırılıyor..."
 
@@ -1108,7 +1108,7 @@ msgstr "inşa seçenekleri"
 msgid "Run inary build operation without printing extra debug information."
 msgstr "Ekstra hata ayıklama bilgilerini basmadan inşa operasyonunu çalıştır."
 
-#: inary/cli/build.py:58 inary/cli/command.py:214
+#: inary/cli/build.py:58 inary/cli/command.py:188
 msgid "Do not take dependency information into account."
 msgstr "Bağımlılık bilgilerini dikkate alma."
 
@@ -1124,7 +1124,7 @@ msgstr ""
 msgid "Bypass errors from ActionsAPI."
 msgstr "ActionsAPI kaynaklı hataları yoksay."
 
-#: inary/cli/build.py:78 inary/cli/command.py:220
+#: inary/cli/build.py:78 inary/cli/command.py:194
 msgid "Bypass safety switch."
 msgstr "Emniyet mandalını yoksay."
 
@@ -1323,32 +1323,28 @@ msgstr "Hata ayıklama bilgisini göster."
 msgid "Suppresses all coloring of INARY's output."
 msgstr "INARY çıktılarında renk kullanılmasını engeller."
 
-#: inary/cli/command.py:137
+#: inary/cli/command.py:135
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "\"{}\" hedef dizini bulunamadı. Dizin yaratılıyor.\n"
 
-#: inary/cli/command.py:159
-msgid "Password: "
-msgstr "Parola: "
-
-#: inary/cli/command.py:175 inary/util.py:82
+#: inary/cli/command.py:149 inary/util.py:82
 msgid "You have to be root for this operation."
 msgstr "Bu işlemi yapabilmek için root kullanıcısı olmalısınız."
 
-#: inary/cli/command.py:199
+#: inary/cli/command.py:173
 msgid "Command terminated abnormally."
 msgstr "Komut beklenmeyen bir biçimde sonlandı."
 
-#: inary/cli/command.py:217
+#: inary/cli/command.py:191
 #, fuzzy
 msgid "Ignore unsatisfied dependency."
 msgstr "İnşa bağımlılıkları yoksayılıyor."
 
-#: inary/cli/command.py:222
+#: inary/cli/command.py:196
 msgid "Do not perform any action, just show what would be done."
 msgstr "Hiçbir eylem gerçekleştirme, sadece neler yapılacağını göster."
 
-#: inary/cli/command.py:241
+#: inary/cli/command.py:215
 msgid "usage: {}\n"
 msgstr "kullanım: {}\n"
 
@@ -1379,7 +1375,7 @@ msgstr ""
 msgid "There isn't any new config :)"
 msgstr ""
 
-#: inary/cli/configurepending.py:56
+#: inary/cli/configurepending.py:52
 msgid ""
 "Configure pending packages\n"
 "\n"
@@ -1394,7 +1390,7 @@ msgstr ""
 "atlandıysa, o paketler yapılandırılmayı bekleyen paketler\n"
 "listesine eklenir. Bu komut o paketleri yapılandırır.\n"
 
-#: inary/cli/configurepending.py:70 inary/cli/reconfigure.py:66
+#: inary/cli/configurepending.py:66 inary/cli/reconfigure.py:60
 msgid "configure-pending options"
 msgstr "configure-pending seçenekleri"
 
@@ -2133,24 +2129,24 @@ msgstr ""
 "Eğer herhangi bir depo belirtilmezse, tüm depolardaki yeni\n"
 "paketler listelenir.\n"
 
-#: inary/cli/listnewest.py:46
+#: inary/cli/listnewest.py:47
 msgid "list-newest options"
 msgstr "list-newest seçenekleri"
 
-#: inary/cli/listnewest.py:49
+#: inary/cli/listnewest.py:50
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd."
 msgstr "Paketleri yyyy-aa-gg biçiminde verdiğiniz tarihten sonra depoya eklenen paketleri listeler."
 
-#: inary/cli/listnewest.py:52
+#: inary/cli/listnewest.py:53
 msgid "List new packages added to repository after last nth previous repository update."
 msgstr "Depoya eklenen yeni paketleri n önceki depo güncellemesinden itibaren listeler."
 
-#: inary/cli/listnewest.py:80
+#: inary/cli/listnewest.py:78
 #, python-brace-format
 msgid "Packages added to '{0}' since \"{1}\":\n"
 msgstr "'{0}' deposuna \"{1}\" tarihinden bu yana giren paketler:\n"
 
-#: inary/cli/listnewest.py:82
+#: inary/cli/listnewest.py:80
 msgid "Packages added to '{}':"
 msgstr "Paketler eklendi '{}':"
 
@@ -2317,7 +2313,7 @@ msgstr "Dosya veritabanını yeniden inşa et"
 msgid "Rebuild INARY databases?"
 msgstr "INARY veritabanı yeniden inşa edilsin mi?"
 
-#: inary/cli/reconfigure.py:52
+#: inary/cli/reconfigure.py:46
 #, fuzzy
 msgid ""
 "Reconfigure pending packages\n"
@@ -2334,7 +2330,7 @@ msgstr ""
 "listesine eklenir. Bu komut o paketleri yapılandırır.\n"
 
 # inary/actionsapi/autotools.py:75 :85
-#: inary/cli/reconfigure.py:63
+#: inary/cli/reconfigure.py:57
 #, fuzzy
 msgid "reconfigure"
 msgstr "\"{}\" yapılandırıldı."
@@ -2899,11 +2895,11 @@ msgstr ""
 msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Dağıtım: {0}, Kurulma Zamanı: {1}\n"
 
-#: inary/db/installdb.py:119
+#: inary/db/installdb.py:118
 msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this problem."
 msgstr "\"{}\" paketine ait kurulum bilgisi bozulmuş. Sorunu düzeltmek için paketi yeniden kurun."
 
-#: inary/db/installdb.py:503 inary/operations/upgrade.py:94
+#: inary/db/installdb.py:502 inary/operations/upgrade.py:94
 msgid "Package \"{}\" is not installed."
 msgstr "\"{}\" paketi kurulu değil."
 
@@ -2920,8 +2916,9 @@ msgstr "Depo elemanı \"{}\" bulunamadı."
 msgid "Repository \"{}\" does not exist."
 msgstr "\"{}\" deposu yok."
 
-#: inary/db/packagedb.py:184 inary/db/packagedb.py:192
-#: inary/db/packagedb.py:200 inary/db/packagedb.py:208
+#: inary/db/packagedb.py:193 inary/db/packagedb.py:201
+#: inary/db/packagedb.py:209 inary/db/packagedb.py:217
+#: inary/db/packagedb.py:225
 msgid "Package \"{}\" not found."
 msgstr "Paket \"{}\" bulunamadı."
 
@@ -3347,23 +3344,23 @@ msgstr "Paket inşa ediliyor: \"{}\""
 msgid "Creating \"{}\"..."
 msgstr "\"{}\" oluşturuluyor..."
 
-#: inary/operations/build.py:1241
+#: inary/operations/build.py:1243
 msgid "Cleaning build directory..."
 msgstr "İnşa dizini temizleniyor..."
 
-#: inary/operations/build.py:1244
+#: inary/operations/build.py:1246
 msgid "Keeping build directory"
 msgstr "İnşa dizini bırakılıyor"
 
-#: inary/operations/build.py:1333
+#: inary/operations/build.py:1335
 msgid "Action script error caught. {}"
 msgstr "Eylem betiği hatası oluştu. {}"
 
-#: inary/operations/build.py:1336
+#: inary/operations/build.py:1338
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** {} hata, {} uyarı"
 
-#: inary/operations/build.py:1424
+#: inary/operations/build.py:1426
 msgid "Last state was '{}'"
 msgstr "Son inşa adımı: '{}'"
 
@@ -3512,7 +3509,7 @@ msgid "Following packages will be removed:\n"
 msgstr "Bu paketler kaldırılacak:\n"
 
 #: inary/operations/history.py:211 inary/operations/history.py:226
-#: inary/operations/install.py:237 inary/operations/remove.py:90
+#: inary/operations/install.py:234 inary/operations/remove.py:90
 #: inary/operations/upgrade.py:211
 msgid "Would you like to continue?"
 msgstr "Devam etmek istiyor musunuz?"
@@ -3535,12 +3532,12 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Sistemin görüntüsü alınıyor."
 
-#: inary/operations/install.py:51 inary/operations/install.py:170
+#: inary/operations/install.py:51 inary/operations/install.py:167
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "Aşağıdaki paket(ler) zaten kurulu ve yeniden kurulmayacak:"
 
 # inary/api.py:168 :215
-#: inary/operations/install.py:57 inary/operations/install.py:251
+#: inary/operations/install.py:57 inary/operations/install.py:248
 msgid "No packages to install."
 msgstr "Kurulacak paket yok."
 
@@ -3552,7 +3549,7 @@ msgstr "Kurulum için bağımlılıklar kontrol ediliyor..."
 msgid "Following packages will be installed:"
 msgstr "Aşağıdaki paketler kurulacak:"
 
-#: inary/operations/install.py:85 inary/operations/install.py:238
+#: inary/operations/install.py:85 inary/operations/install.py:235
 #: inary/operations/upgrade.py:212
 msgid "External dependencies not satisfied."
 msgstr "Dış bağımlılıklar sağlanamadı."
@@ -3562,42 +3559,42 @@ msgstr "Dış bağımlılıklar sağlanamadı."
 msgid "Installing"
 msgstr "Kuruluyor..."
 
-#: inary/operations/install.py:157
+#: inary/operations/install.py:154
 msgid "Mixing file names and package names not supported yet."
 msgstr "Henüz dosya ve paket adlarını birlikte kullanılamıyor."
 
-#: inary/operations/install.py:201
+#: inary/operations/install.py:198
 #, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "\"{0}\" paketi, sizin  dağıtım sürümüz '{1}' '{2}' ile uyumlu değil."
 
-#: inary/operations/install.py:206
+#: inary/operations/install.py:203
 #, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "\"{0}\" ('{1}') paketi sizin mimariniz ('{2}' mimarisi) ile uyumlu değil."
 
-#: inary/operations/install.py:229
+#: inary/operations/install.py:226
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Dış bağımlılıklar sağlanamadı: \"{}\""
 
-#: inary/operations/install.py:234
+#: inary/operations/install.py:231
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "Bağımlılıkları sağlamak için aşağıdaki paketler kurulacaktır:"
 
-#: inary/operations/install.py:282
+#: inary/operations/install.py:279
 msgid "Installation order: "
 msgstr "Kurulum sırası: "
 
-#: inary/operations/install.py:313
+#: inary/operations/install.py:310
 msgid " -> checking {}"
 msgstr " -> kontrol ediliyor {}"
 
-#: inary/operations/install.py:348
+#: inary/operations/install.py:345
 #, fuzzy
 msgid "Following packages are not satisfied:\n"
 msgstr "Bu paketler kurulacak:\n"
 
-#: inary/operations/install.py:350
+#: inary/operations/install.py:347
 #, fuzzy, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "\"{0}\" bağımlılığı \"{1}\" paketi için sağlanamadı."
@@ -3606,7 +3603,7 @@ msgstr "\"{0}\" bağımlılığı \"{1}\" paketi için sağlanamadı."
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "Emniyet mandalı, aşağıdaki paketlerin kaldırılmasını engelliyor:\n"
 
-#: inary/operations/remove.py:59 inary/operations/upgrade.py:442
+#: inary/operations/remove.py:59 inary/operations/upgrade.py:441
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Emniyet mandalı: Taban sistem bileşeni system.base bulunamadı."
 
@@ -3729,37 +3726,37 @@ msgstr "Aşağıdaki paketler yükseltilecektir:"
 msgid "There are extra packages due to dependencies."
 msgstr "Bağımlılıklar yüzünden ek paketler var."
 
-#: inary/operations/upgrade.py:265
+#: inary/operations/upgrade.py:264
 msgid "Cleaning old inary files: {}"
 msgstr ""
 
-#: inary/operations/upgrade.py:313
+#: inary/operations/upgrade.py:312
 #, python-brace-format
 msgid "Dependency \"{0}\" of \"{1}\" cannot be satisfied."
 msgstr "{0} bağımlılığı, {1} paketi için sağlanamadı."
 
-#: inary/operations/upgrade.py:314
+#: inary/operations/upgrade.py:313
 msgid "Upgrade is not possible."
 msgstr "Yükseltme mümkün değil."
 
-#: inary/operations/upgrade.py:412
+#: inary/operations/upgrade.py:411
 msgid "Safety switch forces the installation of following packages:"
 msgstr "Emniyet mandalı aşağıdaki paketlerin kurulmasını zorunlu kılıyor:"
 
-#: inary/operations/upgrade.py:430
+#: inary/operations/upgrade.py:429
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "Emniyet mandalı aşağıdaki paketlerin yükseltilmesini zorunlu kılıyor:"
 
-#: inary/package.py:72
+#: inary/package.py:75
 msgid "Cannot open package file: \"{}\""
 msgstr "Paket dosyası açılamadı: \"{}\""
 
-#: inary/package.py:93
+#: inary/package.py:96
 msgid "Unsupported package format: {}"
 msgstr "Desteklenmeyen paket biçimi: {}"
 
 # There was a problem while fetching \"{}\".\nThe repository index may have been upgraded. Please try to upgrade the package.
-#: inary/package.py:107
+#: inary/package.py:110
 msgid ""
 "There was a problem while fetching \"{}\".\n"
 "The package may have been upgraded. Please try to upgrade the package."
@@ -3767,7 +3764,7 @@ msgstr ""
 "\"{}\" indirilirken bir hata oluştu.\n"
 "Paket yükseltilmiş olabilir. Lütfen paketi yükseltmeyi deneyin."
 
-#: inary/package.py:112
+#: inary/package.py:115
 msgid "{} [cached]"
 msgstr "{} [önbellekte]"
 
@@ -4009,32 +4006,97 @@ msgstr "Boş klasör \"{}\" kaldırılıyor."
 msgid "Invalid version string: '{}'"
 msgstr "Hatalı sürüm dizgisi: '{}'"
 
-#~ msgid "Added symlink '{}' "
-#~ msgstr "Sembolik link '{}' eklendi "
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "GNU Yapılandırma Güncellemesi Tamamlanamadı."
 
-#~ msgid "Chowning in postinstall {0} ({1}:{2})"
-#~ msgstr "Kurulum sonrası dosya sahiplikleri değiştiriliyor {0} ({1}:{2})"
+#~ msgid "Would you like to continue? (it may be dangerous!!!):"
+#~ msgstr "Devam etmek ister misiniz? (Tehlikeli olabilir!!!):"
 
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "\"{}\" paketinin dosyaları depolanıyor."
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "\"{}\" paketi yapılandırılıyor."
 
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "Scom yapılandırma yöneticisini es geç."
+#, fuzzy
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "İndiriliyor  {} / {}"
 
-#~ msgid "scom package is not fully installed."
-#~ msgstr "scom paketi tam olarak kurulmamış."
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "İnşa işlemini inşa klasörüyle sınırlama."
 
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "{} deposunun güncellenmesi gerekiyor"
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "\"{}\" adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
 
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "\"{}\" aktarım dizinine kopyalanıyor"
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Kaynak, \"{}\" yansısından indiriliyor."
 
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "SCOM betiği okunamıyor ({0}): {1}"
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox ihlali: {0} ({1} -> {2})"
 
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "SCOM dosyasında sözdizimi hatası ({0}): {1}"
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox açık inşa..."
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox ihlal sonucu:"
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox ihlali!"
+
+# inary/actionsapi/autotools.py:119 :127
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "\"{}\" dosyalarının yüklenmesi işlemi başarısız oldu."
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Actions betiği okunamıyor ({0}): {1}"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Actions betiğinde sözdizimi hatası ({0}): {1}"
+
+#~ msgid "Unregistering {} script."
+#~ msgstr "{} scom betiği kayıtlardan siliniyor."
+
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "\"{}\" paketi için tüm scom betikleri kayıtlardan siliniyor."
+
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" için kaldırma sonrası işlemler çalıştırılıyor."
+
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "\"{}\" paketinin kaldırma sonrası betiği çağrılıyor."
+
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma sonrası işlemler çalıştırılıyor."
+
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma öncesi işleyicileri çağrılıyor."
+
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "Paketin kaldırma öncesi betiği çağrılıyor."
+
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kaldırma öncesi işlemler çalıştırılıyor."
+
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "{1} Paketi için Betik hatası: \"{0}\""
+
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "\"{0}\" paketinin kurulum sonrası betiği çağrılıyor."
+
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "{1} Paketi için Betik hatası: \"{0}\"."
+
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "\"{}\" paketi için kurulum sonrası betikleri çağrılıyor."
+
+#~ msgid "Script error: {}"
+#~ msgstr "Betik hatası: {}"
+
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "\"{0}\" adlandırılmış scom betiği \"{1}\" kayıt ediliyor."
+
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "SCOM paketi güncellendi, artık yeni SCOM kullanılıyor."
 
 #~ msgid ""
 #~ "Cannot connect to SCOM: \n"
@@ -4043,94 +4105,32 @@ msgstr "Hatalı sürüm dizgisi: '{}'"
 #~ "SCOM'a bağlanılamıyor: \n"
 #~ "  \"{}\"\n"
 
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "SCOM paketi güncellendi, artık yeni SCOM kullanılıyor."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "SCOM dosyasında sözdizimi hatası ({0}): {1}"
 
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "\"{0}\" adlandırılmış scom betiği \"{1}\" kayıt ediliyor."
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "SCOM betiği okunamıyor ({0}): {1}"
 
-#~ msgid "Script error: {}"
-#~ msgstr "Betik hatası: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "\"{}\" aktarım dizinine kopyalanıyor"
 
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kurulum sonrası betikleri çağrılıyor."
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "{} deposunun güncellenmesi gerekiyor"
 
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "{1} Paketi için Betik hatası: \"{0}\"."
+#~ msgid "scom package is not fully installed."
+#~ msgstr "scom paketi tam olarak kurulmamış."
 
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "\"{0}\" paketinin kurulum sonrası betiği çağrılıyor."
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "Scom yapılandırma yöneticisini es geç."
 
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "{1} Paketi için Betik hatası: \"{0}\""
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "\"{}\" paketinin dosyaları depolanıyor."
 
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma öncesi işlemler çalıştırılıyor."
+#~ msgid "Chowning in postinstall {0} ({1}:{2})"
+#~ msgstr "Kurulum sonrası dosya sahiplikleri değiştiriliyor {0} ({1}:{2})"
 
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "Paketin kaldırma öncesi betiği çağrılıyor."
+#~ msgid "Added symlink '{}' "
+#~ msgstr "Sembolik link '{}' eklendi "
 
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma öncesi işleyicileri çağrılıyor."
-
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "\"{}\" paketi için kaldırma sonrası işlemler çalıştırılıyor."
-
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "\"{}\" paketinin kaldırma sonrası betiği çağrılıyor."
-
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "\"{}\" için kaldırma sonrası işlemler çalıştırılıyor."
-
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "\"{}\" paketi için tüm scom betikleri kayıtlardan siliniyor."
-
-#~ msgid "Unregistering {} script."
-#~ msgstr "{} scom betiği kayıtlardan siliniyor."
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Actions betiğinde sözdizimi hatası ({0}): {1}"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Actions betiği okunamıyor ({0}): {1}"
-
-# inary/actionsapi/autotools.py:119 :127
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "\"{}\" dosyalarının yüklenmesi işlemi başarısız oldu."
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox ihlali!"
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox ihlal sonucu:"
-
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox açık inşa..."
-
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox ihlali: {0} ({1} -> {2})"
-
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Kaynak, \"{}\" yansısından indiriliyor."
-
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "\"{}\" adlı depo dağıtımınız ile uyumlu değil. Depo etkisiz hale getirildi."
-
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "İnşa işlemini inşa klasörüyle sınırlama."
-
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "İndiriliyor  {} / {}"
-
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "\"{}\" paketi yapılandırılıyor."
-
-#~ msgid "Would you like to continue? (it may be dangerous!!!):"
-#~ msgstr "Devam etmek ister misiniz? (Tehlikeli olabilir!!!):"
-
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "GNU Yapılandırma Güncellemesi Tamamlanamadı."
+#~ msgid "Password: "
+#~ msgstr "Parola: "

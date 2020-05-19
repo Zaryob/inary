@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: INARY\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-16 20:18+0300\n"
+"POT-Creation-Date: 2020-05-19 17:53+0300\n"
 "PO-Revision-Date: 2019-08-25 01:00+0300\n"
 "Last-Translator: Attila Siposs <sipiatti@gmail.com>\n"
 "Language-Team: Hungarian <pardus-translators@pardus.org.tr>\n"
@@ -410,12 +410,12 @@ msgstr "A konfigurálás nem sikerült."
 msgid "Running \"{}\" failed."
 msgstr "A(z) {} futtatása nem sikerült."
 
-#: inary/actionsapi/qt.py:65
+#: inary/actionsapi/qt.py:67
 #, fuzzy
 msgid "Project file \"{}\" not found."
 msgstr "A(z) {} projektfájl nem található."
 
-#: inary/actionsapi/qt.py:70
+#: inary/actionsapi/qt.py:72
 #, fuzzy
 msgid "It seems there are more than one .pro file, you must specify one. (Possible .pro files: \"{}\")"
 msgstr "Úgy tűnik több mint egy .pro fájl van. Válasszon ki egyet. (Lehetséges .pro fájlok: {})"
@@ -725,43 +725,43 @@ msgstr "Hiba lépett fel a {}.Z kicsomagolása közben."
 msgid "File \"{}\" is not a zip file."
 msgstr "A(z) {} csomag nincs telepítve"
 
-#: inary/archive.py:870 inary/fetcher.py:356
+#: inary/archive.py:878 inary/fetcher.py:356
 #, fuzzy
 msgid "Fetching source from: \"{}\""
 msgstr "A forrás letöltése innen: {}"
 
-#: inary/archive.py:884
+#: inary/archive.py:892
 #, fuzzy, python-brace-format
 msgid "Source archive is stored: \"{0}/{1}\""
 msgstr "A forrás csomag eltárolva: {0}/{1}"
 
-#: inary/archive.py:902 inary/operations/history.py:145
+#: inary/archive.py:910 inary/operations/history.py:145
 #, fuzzy
 msgid "\"{}\" [cached]"
 msgstr "{} [a gyorsítótárban]"
 
-#: inary/archive.py:911
+#: inary/archive.py:919
 msgid ""
 "Archive File: {}\n"
 " * Expected sha1 value: {} \n"
 " * Received sha1 value: {} \n"
 msgstr ""
 
-#: inary/archive.py:914
+#: inary/archive.py:922
 #, fuzzy
 msgid "unpack: check_file_hash failed."
 msgstr "kicsomagolás: check_file_hash művelet sikertelen"
 
-#: inary/archive.py:916
+#: inary/archive.py:924
 msgid "* Archive verification passed. Such problems may occur during the build process."
 msgstr ""
 
-#: inary/archive.py:921
+#: inary/archive.py:929
 #, fuzzy, python-brace-format
 msgid "Unknown archive type '{0}' is given for '{1}'."
 msgstr "{0} ismeretlen arhívumtípus lett megadva ehhez: '{1}'."
 
-#: inary/archive.py:924
+#: inary/archive.py:932
 msgid "Inary needs '{}' to unpack this archive but it is not installed."
 msgstr ""
 
@@ -885,70 +885,70 @@ msgstr "Proxy beállításokat találtam a(z) \"{}\" protokoll használatához."
 msgid "Pre-install configuration of \"{}\" package failed."
 msgstr "A konfigurálás nem sikerült."
 
-#: inary/atomicoperations.py:334
+#: inary/atomicoperations.py:333
 #, fuzzy
 msgid "Configuring post-install \"{}\""
 msgstr "{} beállítva"
 
-#: inary/atomicoperations.py:336
+#: inary/atomicoperations.py:335
 #, fuzzy
 msgid "Post-install configuration of \"{}\" package failed."
 msgstr "A konfigurálás nem sikerült."
 
-#: inary/atomicoperations.py:397
+#: inary/atomicoperations.py:396
 msgid "Unable to relocate following files. Reinstallation of this package is strongly recommended."
 msgstr "Nem sikerült áthelyezni a következő fájlokat. A csomag újratelepítése erősen ajánlott."
 
-#: inary/atomicoperations.py:510
+#: inary/atomicoperations.py:512
 #, fuzzy
 msgid "Adding files of \"{}\" package to database..."
 msgstr "* {} hozzáadása az adatbázishoz..."
 
-#: inary/atomicoperations.py:536
+#: inary/atomicoperations.py:538
 #, fuzzy
 msgid "Installing => [{}]"
 msgstr "Telepítés  {} / {}"
 
-#: inary/atomicoperations.py:569
+#: inary/atomicoperations.py:571
 #, fuzzy
 msgid "File list could not be read for \"{}\" package, continuing removal."
 msgstr "A {} csomag fájllistáját nem lehet olvasni, eltávolítás folytatása."
 
-#: inary/atomicoperations.py:575
+#: inary/atomicoperations.py:577
 #, fuzzy, python-brace-format
 msgid "Removing \"{0.name}\", version {0.version}, release {0.release}"
 msgstr "{0.name} telepítése, verzió {0.version}, kiadás {0.release}"
 
-#: inary/atomicoperations.py:578
+#: inary/atomicoperations.py:580
 msgid "Trying to remove nonexistent package "
 msgstr "Nem létező csomag eltávolításának kísérlete"
 
-#: inary/atomicoperations.py:623
+#: inary/atomicoperations.py:622
 #, fuzzy
 msgid "Not removing conflicted file : \"{}\""
 msgstr "Ütköző fájl nincs eltávolítva: {} "
 
-#: inary/atomicoperations.py:654
+#: inary/atomicoperations.py:653
 #, fuzzy
 msgid "Installed file \"{}\" does not exist on system [Probably you manually deleted]"
 msgstr "A telepített {} fájl nem létezik a rendszerben [Valószínűleg a felhasználó törölte]"
 
-#: inary/atomicoperations.py:665
+#: inary/atomicoperations.py:664
 #, fuzzy
 msgid "Pre-remove configuration have been run for \"{}\""
 msgstr "Proxy beállításokat találtam a(z) \"{}\" protokoll használatához."
 
-#: inary/atomicoperations.py:671
+#: inary/atomicoperations.py:670
 #, fuzzy
 msgid "Post-remove configuration have been run for  \"{}\""
 msgstr "Proxy beállításokat találtam a(z) \"{}\" protokoll használatához."
 
-#: inary/atomicoperations.py:679
+#: inary/atomicoperations.py:678
 #, fuzzy
 msgid "Removing files of \"{}\" package from system..."
 msgstr "* {} hozzáadása az adatbázishoz..."
 
-#: inary/atomicoperations.py:683
+#: inary/atomicoperations.py:682
 #, fuzzy
 msgid "Removing files of \"{}\" package from database..."
 msgstr "Fájl adatbázis újraépítése"
@@ -1186,7 +1186,7 @@ msgstr "build opciók"
 msgid "Run inary build operation without printing extra debug information."
 msgstr "A inary build futtatása extra debug információk megjelenítése nélkül"
 
-#: inary/cli/build.py:58 inary/cli/command.py:214
+#: inary/cli/build.py:58 inary/cli/command.py:188
 #, fuzzy
 msgid "Do not take dependency information into account."
 msgstr "Nem veszi figyelembe a függőségi információkat"
@@ -1204,7 +1204,7 @@ msgstr ""
 msgid "Bypass errors from ActionsAPI."
 msgstr "Az ActionsAPI hibák átlépése"
 
-#: inary/cli/build.py:78 inary/cli/command.py:220
+#: inary/cli/build.py:78 inary/cli/command.py:194
 #, fuzzy
 msgid "Bypass safety switch."
 msgstr "A biztonsági kapcsoló átlépése"
@@ -1428,34 +1428,30 @@ msgstr "Hibakeresési információk megjelenítése"
 msgid "Suppresses all coloring of INARY's output."
 msgstr "Színes kimenet letiltása"
 
-#: inary/cli/command.py:137
+#: inary/cli/command.py:135
 #, fuzzy
 msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
 msgstr "A(z) {} célkönyvtár nem létezik. Létrehozom.\n"
 
-#: inary/cli/command.py:159
-msgid "Password: "
-msgstr "Jelszó:"
-
-#: inary/cli/command.py:175 inary/util.py:82
+#: inary/cli/command.py:149 inary/util.py:82
 msgid "You have to be root for this operation."
 msgstr "Rendszergazda jogosultsággal kell rendelkeznie ehhez a művelethez."
 
-#: inary/cli/command.py:199
+#: inary/cli/command.py:173
 msgid "Command terminated abnormally."
 msgstr "A parancs váratlanul megszakadt."
 
-#: inary/cli/command.py:217
+#: inary/cli/command.py:191
 #, fuzzy
 msgid "Ignore unsatisfied dependency."
 msgstr "Build függőségek kihagyása."
 
-#: inary/cli/command.py:222
+#: inary/cli/command.py:196
 #, fuzzy
 msgid "Do not perform any action, just show what would be done."
 msgstr "Nem hajtja végre a műveleteket, csak megmutatja mi történne"
 
-#: inary/cli/command.py:241
+#: inary/cli/command.py:215
 #, fuzzy
 msgid "usage: {}\n"
 msgstr "használata: {}\n"
@@ -1487,7 +1483,7 @@ msgstr ""
 msgid "There isn't any new config :)"
 msgstr ""
 
-#: inary/cli/configurepending.py:56
+#: inary/cli/configurepending.py:52
 #, fuzzy
 msgid ""
 "Configure pending packages\n"
@@ -1503,7 +1499,7 @@ msgstr ""
 "listájába kerülnek. Ez a parancs elvégzi ezen csomagok\n"
 "beállítását.\n"
 
-#: inary/cli/configurepending.py:70 inary/cli/reconfigure.py:66
+#: inary/cli/configurepending.py:66 inary/cli/reconfigure.py:60
 msgid "configure-pending options"
 msgstr "configure-pending opciók"
 
@@ -2283,26 +2279,26 @@ msgstr ""
 "jeleníti meg. Ha nincs tároló megadva, akkor valamennyi tároló\n"
 "új csomagjai kilistázásra kerülnek.\n"
 
-#: inary/cli/listnewest.py:46
+#: inary/cli/listnewest.py:47
 msgid "list-newest options"
 msgstr "list-newest opciói"
 
-#: inary/cli/listnewest.py:49
+#: inary/cli/listnewest.py:50
 #, fuzzy
 msgid "List new packages added to repository after this given date formatted as yyyy-mm-dd."
 msgstr "A megadott dátum után a tárolóba került csomagok listája. A dátum ééé-hh-nn formátumú legyen."
 
-#: inary/cli/listnewest.py:52
+#: inary/cli/listnewest.py:53
 #, fuzzy
 msgid "List new packages added to repository after last nth previous repository update."
 msgstr "A legutóbbi tároló frissítés óta a tárolóhoz adott új csomagok listája"
 
-#: inary/cli/listnewest.py:80
+#: inary/cli/listnewest.py:78
 #, fuzzy, python-brace-format
 msgid "Packages added to '{0}' since \"{1}\":\n"
 msgstr "A(z) {0} tárolóhoz {1} óta hozzáadott csomagok:\n"
 
-#: inary/cli/listnewest.py:82
+#: inary/cli/listnewest.py:80
 #, fuzzy
 msgid "Packages added to '{}':"
 msgstr "A(z) {} tárolóhoz hozzáadott csomagok:"
@@ -2474,7 +2470,7 @@ msgstr "Fájl adatbázis újraépítése"
 msgid "Rebuild INARY databases?"
 msgstr "Újraépítsem a INARY adatbázist?"
 
-#: inary/cli/reconfigure.py:52
+#: inary/cli/reconfigure.py:46
 #, fuzzy
 msgid ""
 "Reconfigure pending packages\n"
@@ -2490,7 +2486,7 @@ msgstr ""
 "listájába kerülnek. Ez a parancs elvégzi ezen csomagok\n"
 "beállítását.\n"
 
-#: inary/cli/reconfigure.py:63
+#: inary/cli/reconfigure.py:57
 #, fuzzy
 msgid "reconfigure"
 msgstr "{} beállítva"
@@ -3089,12 +3085,12 @@ msgstr ""
 msgid "Distribution: {0}, Install Time: {1}\n"
 msgstr "Disztribúció: {0}, Telepítés ideje: {1}\n"
 
-#: inary/db/installdb.py:119
+#: inary/db/installdb.py:118
 #, fuzzy
 msgid "Installation info for package \"{}\" is broken. Reinstall it to fix this problem."
 msgstr "A(z) {} csomag telepítési információi megsérültek. A hiba kijavításához telepítse újra a csomagot."
 
-#: inary/db/installdb.py:503 inary/operations/upgrade.py:94
+#: inary/db/installdb.py:502 inary/operations/upgrade.py:94
 #, fuzzy
 msgid "Package \"{}\" is not installed."
 msgstr "A(z) {} csomag nincs telepítve."
@@ -3115,8 +3111,9 @@ msgstr "A(z) {} tárolóbejegyzés nem található"
 msgid "Repository \"{}\" does not exist."
 msgstr "A(z) {} tároló nem létezik."
 
-#: inary/db/packagedb.py:184 inary/db/packagedb.py:192
-#: inary/db/packagedb.py:200 inary/db/packagedb.py:208
+#: inary/db/packagedb.py:193 inary/db/packagedb.py:201
+#: inary/db/packagedb.py:209 inary/db/packagedb.py:217
+#: inary/db/packagedb.py:225
 #, fuzzy
 msgid "Package \"{}\" not found."
 msgstr "A(z) {} csomag nem található."
@@ -3584,24 +3581,24 @@ msgstr "{} csomag elkészítése"
 msgid "Creating \"{}\"..."
 msgstr "{} létrehozása..."
 
-#: inary/operations/build.py:1241
+#: inary/operations/build.py:1243
 msgid "Cleaning build directory..."
 msgstr "Átmeneti könyvtár tisztítása..."
 
-#: inary/operations/build.py:1244
+#: inary/operations/build.py:1246
 msgid "Keeping build directory"
 msgstr "Átmeneti könyvtár megőrzése"
 
-#: inary/operations/build.py:1333
+#: inary/operations/build.py:1335
 #, fuzzy
 msgid "Action script error caught. {}"
 msgstr "Parancsfájl hiba: {}"
 
-#: inary/operations/build.py:1336
+#: inary/operations/build.py:1338
 msgid "*** {} error(s), {} warning(s)"
 msgstr "*** hibák száma {}, figyelmeztetések száma {}"
 
-#: inary/operations/build.py:1424
+#: inary/operations/build.py:1426
 msgid "Last state was '{}'"
 msgstr ""
 
@@ -3760,7 +3757,7 @@ msgid "Following packages will be removed:\n"
 msgstr "A következő csomagok eltávolításra kerülnek:\n"
 
 #: inary/operations/history.py:211 inary/operations/history.py:226
-#: inary/operations/install.py:237 inary/operations/remove.py:90
+#: inary/operations/install.py:234 inary/operations/remove.py:90
 #: inary/operations/upgrade.py:211
 #, fuzzy
 msgid "Would you like to continue?"
@@ -3785,11 +3782,11 @@ msgstr ""
 msgid "Taking snapshot of the system."
 msgstr "Pillanatfelvétel készítése a rendszerről"
 
-#: inary/operations/install.py:51 inary/operations/install.py:170
+#: inary/operations/install.py:51 inary/operations/install.py:167
 msgid "The following package(s) are already installed and are not going to be installed again:"
 msgstr "A következő csomag(ok) már telepítve vannak, nem lesznek újratelepítve:"
 
-#: inary/operations/install.py:57 inary/operations/install.py:251
+#: inary/operations/install.py:57 inary/operations/install.py:248
 msgid "No packages to install."
 msgstr "Nincs telepítendő csomag."
 
@@ -3802,7 +3799,7 @@ msgstr "A következő csomagok lesznek telepítve:"
 msgid "Following packages will be installed:"
 msgstr "A következő csomagok lesznek telepítve:"
 
-#: inary/operations/install.py:85 inary/operations/install.py:238
+#: inary/operations/install.py:85 inary/operations/install.py:235
 #: inary/operations/upgrade.py:212
 #, fuzzy
 msgid "External dependencies not satisfied."
@@ -3813,44 +3810,44 @@ msgstr "A külső föggőségek nem teljesülnek"
 msgid "Installing"
 msgstr "Telepítés..."
 
-#: inary/operations/install.py:157
+#: inary/operations/install.py:154
 msgid "Mixing file names and package names not supported yet."
 msgstr "Csomagok és fájlnevek vegyes használata még nem támogatott."
 
-#: inary/operations/install.py:201
+#: inary/operations/install.py:198
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" is not compatible with your distribution release '{1}' '{2}'."
 msgstr "A(z) {0} csomag nem kompatíbilis az ön disztribúciójának kiadásával: {1} {2}."
 
-#: inary/operations/install.py:206
+#: inary/operations/install.py:203
 #, fuzzy, python-brace-format
 msgid "Package \"{0}\" ('{1}') is not compatible with your '{2}' architecture."
 msgstr "A(z) {0} {1} csomag nem kompatíbilis az ön számítógépének kiépítésével {2}."
 
-#: inary/operations/install.py:229
+#: inary/operations/install.py:226
 #, fuzzy
 msgid "External dependencies not satisfied: \"{}\""
 msgstr "Egy külső függőség nincs teljesítve: {}"
 
-#: inary/operations/install.py:234
+#: inary/operations/install.py:231
 msgid "The following packages will be installed in order to satisfy dependencies:"
 msgstr "A következő csomagok kerülnek telepítésre, a függőségeknek megfelelő sorrendben:"
 
-#: inary/operations/install.py:282
+#: inary/operations/install.py:279
 msgid "Installation order: "
 msgstr "Telepítési sorrend: "
 
-#: inary/operations/install.py:313
+#: inary/operations/install.py:310
 #, fuzzy
 msgid " -> checking {}"
 msgstr "/{} ellenőrzése "
 
-#: inary/operations/install.py:348
+#: inary/operations/install.py:345
 #, fuzzy
 msgid "Following packages are not satisfied:\n"
 msgstr "A következő csomagok telepítve lesznek:\n"
 
-#: inary/operations/install.py:350
+#: inary/operations/install.py:347
 #, fuzzy, python-brace-format
 msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
 msgstr "A(z) {0} csomag függősége a(z) {1} csomagnak, de nem teljesíthető."
@@ -3859,7 +3856,7 @@ msgstr "A(z) {0} csomag függősége a(z) {1} csomagnak, de nem teljesíthető."
 msgid "Safety switch prevents the removal of following packages:\n"
 msgstr "A biztonsági kapcsoló nem teszi lehetővé a következő csomagok eltávolítását:\n"
 
-#: inary/operations/remove.py:59 inary/operations/upgrade.py:442
+#: inary/operations/remove.py:59 inary/operations/upgrade.py:441
 msgid "Safety switch: The component system.base cannot be found."
 msgstr "Biztonsági kapcsoló: A system.base komponens nem található."
 
@@ -4006,38 +4003,38 @@ msgstr "A következő csomagok lesznek frissítve:"
 msgid "There are extra packages due to dependencies."
 msgstr "A függőségek miatt további csomagok csomagok telepítése szükséges."
 
-#: inary/operations/upgrade.py:265
+#: inary/operations/upgrade.py:264
 msgid "Cleaning old inary files: {}"
 msgstr ""
 
-#: inary/operations/upgrade.py:313
+#: inary/operations/upgrade.py:312
 #, fuzzy, python-brace-format
 msgid "Dependency \"{0}\" of \"{1}\" cannot be satisfied."
 msgstr "A(z) {0}, mint a(z) {1} csomag függősége, nem teljesíthető"
 
-#: inary/operations/upgrade.py:314
+#: inary/operations/upgrade.py:313
 msgid "Upgrade is not possible."
 msgstr "A frissítés nem lehetséges."
 
-#: inary/operations/upgrade.py:412
+#: inary/operations/upgrade.py:411
 msgid "Safety switch forces the installation of following packages:"
 msgstr "A következő csomagok biztonsági kapcsolóval kényszerített telepítése:"
 
-#: inary/operations/upgrade.py:430
+#: inary/operations/upgrade.py:429
 msgid "Safety switch forces the upgrade of following packages:"
 msgstr "A biztonsági kapcsoló kényszeríti a következő csomagok frissítését:"
 
-#: inary/package.py:72
+#: inary/package.py:75
 #, fuzzy
 msgid "Cannot open package file: \"{}\""
 msgstr "A csomagfájl nem található: {}"
 
-#: inary/package.py:93
+#: inary/package.py:96
 #, fuzzy
 msgid "Unsupported package format: {}"
 msgstr "Nem támogatott csomagformátum: {}"
 
-#: inary/package.py:107
+#: inary/package.py:110
 #, fuzzy
 msgid ""
 "There was a problem while fetching \"{}\".\n"
@@ -4046,7 +4043,7 @@ msgstr ""
 "Hiba történt a(z) {} letöltése során.\n"
 "Lehet, hogy a csomagot frissíteni kéne. Kérem, próbálja meg frissíteni a csomagot."
 
-#: inary/package.py:112
+#: inary/package.py:115
 #, fuzzy
 msgid "{} [cached]"
 msgstr "{} [a gyorsítótárban]"
@@ -4319,32 +4316,113 @@ msgid "Invalid version string: '{}'"
 msgstr "Érvénytelen verzió-sztring: {}"
 
 #, fuzzy
-#~ msgid "Storing files of \"{}\" package."
-#~ msgstr "* {} hozzáadása az adatbázishoz..."
+#~ msgid "GNU Config Update Failed."
+#~ msgstr "A GNU Config Update művelet befejezve."
 
 #, fuzzy
-#~ msgid "Bypass scom configuration agent."
-#~ msgstr "A scom konfigurációs automatizmus átlépése."
+#~ msgid "Configuring \"{}\" package."
+#~ msgstr "A(z) {} csomag beállítása"
 
 #, fuzzy
-#~ msgid "scom package is not fully installed."
-#~ msgstr "A scom csomag nincs teljesen telepítve"
+#~ msgid "Downloading <{} / {}>"
+#~ msgstr "Letöltés  {} / {}"
 
 #, fuzzy
-#~ msgid "{} repository needs to be updated"
-#~ msgstr "A(z) {} tároló frissítésre szorul."
+#~ msgid "Do not constrain build process inside the build folder."
+#~ msgstr "Ne korlátozza a build folyamatot a build könyvtáron belülre"
 
 #, fuzzy
-#~ msgid "Copying \"{}\" to transfer dir"
-#~ msgstr "{} másolása a transzfer könyvtárba"
+#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+#~ msgstr "A(z) tároló nem kompatíbilis az ön által használt disztribúcióval. A tárolót kikapcsoltam."
 
 #, fuzzy
-#~ msgid "Unable to read SCOM script ({0}): {1}"
-#~ msgstr "A SCOM script nem olvasható {0}: {1}"
+#~ msgid "Fetching source from mirror: \"{}\""
+#~ msgstr "Forrás letöltése egy tükörszerverről: {}"
 
 #, fuzzy
-#~ msgid "SyntaxError in SCOM file ({0}): {1}"
-#~ msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
+#~ msgid "Sandbox violation: {0} ({1} -> {2})"
+#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
+
+#~ msgid "Sandbox enabled build..."
+#~ msgstr "Sandbox enabled build..."
+
+#~ msgid "Sandbox violation result:"
+#~ msgstr "Sandbox violation result:"
+
+#~ msgid "Sandbox violations!"
+#~ msgstr "Sandbox violations!"
+
+#, fuzzy
+#~ msgid "Getting package file \"{}\" from locale."
+#~ msgstr "A texmf fájlok telepítése nem sikerült"
+
+#, fuzzy
+#~ msgid "Unable to read Post Operations Script ({0}): {1}"
+#~ msgstr "Az Action Script {0} nem olvasható: {1}"
+
+#, fuzzy
+#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
+#~ msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
+
+#, fuzzy
+#~ msgid "Unregistering {} script."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "Unregistering scom scripts of \"{}\" package."
+#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
+
+#, fuzzy
+#~ msgid "Calling post remove handlers for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Running package's postremove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás utáni parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Running post removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Calling pre remove handlers for \"{}\" package."
+#~ msgstr "Az eltávolítást előkészítő parancsok indítása"
+
+#, fuzzy
+#~ msgid "Running package's pre remove script for \"{}\" package."
+#~ msgstr "A csomag eltávolítás előtti parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Running pre removal operations for \"{}\" package."
+#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}"
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy
+#~ msgid "Running package's post install script for \"{0}\" package."
+#~ msgstr "A csomag telepítés utáni parancsainak futtatása"
+
+#, fuzzy
+#~ msgid "Script error for \"{0}\" package: {1}."
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy
+#~ msgid "Calling post install handlers for \"{}\" package."
+#~ msgstr "Telepítés utáni műveletek indítása"
+
+#, fuzzy
+#~ msgid "Script error: {}"
+#~ msgstr "Parancsfájl hiba: {}"
+
+#, fuzzy
+#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
+#~ msgstr "A(z) {} scom parancsfájl regisztrálása"
+
+#, fuzzy
+#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
+#~ msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
 
 #, fuzzy
 #~ msgid ""
@@ -4355,110 +4433,32 @@ msgstr "Érvénytelen verzió-sztring: {}"
 #~ "  {}\n"
 
 #, fuzzy
-#~ msgid "SCOM package updated. From now on, using new SCOM daemon."
-#~ msgstr "A SCOM csomag frissítésre került. Mostantól az új SCOM démont használjuk."
+#~ msgid "SyntaxError in SCOM file ({0}): {1}"
+#~ msgstr "Szintaktikai hiba a SCOM fájlban {0}: {1}"
 
 #, fuzzy
-#~ msgid "Registering \"{0}\" named scom script for \"{1}\"."
-#~ msgstr "A(z) {} scom parancsfájl regisztrálása"
+#~ msgid "Unable to read SCOM script ({0}): {1}"
+#~ msgstr "A SCOM script nem olvasható {0}: {1}"
 
 #, fuzzy
-#~ msgid "Script error: {}"
-#~ msgstr "Parancsfájl hiba: {}"
+#~ msgid "Copying \"{}\" to transfer dir"
+#~ msgstr "{} másolása a transzfer könyvtárba"
 
 #, fuzzy
-#~ msgid "Calling post install handlers for \"{}\" package."
-#~ msgstr "Telepítés utáni műveletek indítása"
+#~ msgid "{} repository needs to be updated"
+#~ msgstr "A(z) {} tároló frissítésre szorul."
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}."
-#~ msgstr "Parancsfájl hiba: {}"
+#~ msgid "scom package is not fully installed."
+#~ msgstr "A scom csomag nincs teljesen telepítve"
 
 #, fuzzy
-#~ msgid "Running package's post install script for \"{0}\" package."
-#~ msgstr "A csomag telepítés utáni parancsainak futtatása"
+#~ msgid "Bypass scom configuration agent."
+#~ msgstr "A scom konfigurációs automatizmus átlépése."
 
 #, fuzzy
-#~ msgid "Script error for \"{0}\" package: {1}"
-#~ msgstr "Parancsfájl hiba: {}"
+#~ msgid "Storing files of \"{}\" package."
+#~ msgstr "* {} hozzáadása az adatbázishoz..."
 
-#, fuzzy
-#~ msgid "Running pre removal operations for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Running package's pre remove script for \"{}\" package."
-#~ msgstr "A csomag eltávolítás előtti parancsainak futtatása"
-
-#, fuzzy
-#~ msgid "Calling pre remove handlers for \"{}\" package."
-#~ msgstr "Az eltávolítást előkészítő parancsok indítása"
-
-#, fuzzy
-#~ msgid "Running post removal operations for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Running package's postremove script for \"{}\" package."
-#~ msgstr "A csomag eltávolítás utáni parancsainak futtatása"
-
-#, fuzzy
-#~ msgid "Calling post remove handlers for \"{}\" package."
-#~ msgstr "{} eltávolítás utáni műveleteinek futtatása"
-
-#, fuzzy
-#~ msgid "Unregistering scom scripts of \"{}\" package."
-#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
-
-#, fuzzy
-#~ msgid "Unregistering {} script."
-#~ msgstr "Scom parancsfájl bejegyzésének eltávolítása"
-
-#, fuzzy
-#~ msgid "SyntaxError in Post Operations Script ({0}): {1}"
-#~ msgstr "Szintaktikai hiba az Action Script-ben {0}: {1}"
-
-#, fuzzy
-#~ msgid "Unable to read Post Operations Script ({0}): {1}"
-#~ msgstr "Az Action Script {0} nem olvasható: {1}"
-
-#, fuzzy
-#~ msgid "Getting package file \"{}\" from locale."
-#~ msgstr "A texmf fájlok telepítése nem sikerült"
-
-#~ msgid "Sandbox violations!"
-#~ msgstr "Sandbox violations!"
-
-#~ msgid "Sandbox violation result:"
-#~ msgstr "Sandbox violation result:"
-
-#~ msgid "Sandbox enabled build..."
-#~ msgstr "Sandbox enabled build..."
-
-#, fuzzy
-#~ msgid "Sandbox violation: {0} ({1} -> {2})"
-#~ msgstr "Sandbox violation: {0} ({1} -> {2})"
-
-#, fuzzy
-#~ msgid "Fetching source from mirror: \"{}\""
-#~ msgstr "Forrás letöltése egy tükörszerverről: {}"
-
-#, fuzzy
-#~ msgid "Repository \"{}\" is not compatible with your distribution. Repository is disabled."
-#~ msgstr "A(z) tároló nem kompatíbilis az ön által használt disztribúcióval. A tárolót kikapcsoltam."
-
-#, fuzzy
-#~ msgid "Do not constrain build process inside the build folder."
-#~ msgstr "Ne korlátozza a build folyamatot a build könyvtáron belülre"
-
-#, fuzzy
-#~ msgid "Downloading <{} / {}>"
-#~ msgstr "Letöltés  {} / {}"
-
-#, fuzzy
-#~ msgid "Configuring \"{}\" package."
-#~ msgstr "A(z) {} csomag beállítása"
-
-#, fuzzy
-#~ msgid "GNU Config Update Failed."
-#~ msgstr "A GNU Config Update művelet befejezve."
+#~ msgid "Password: "
+#~ msgstr "Jelszó:"
