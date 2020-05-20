@@ -180,6 +180,7 @@ class Install(AtomicOperation):
         self.extract_install()
 
         ctx.ui.status(_("Updating database"), push_screen=False)
+        self.store_inary_files()
         self.update_databases()
 
         ctx.enable_keyboard_interrupts()
@@ -313,7 +314,6 @@ class Install(AtomicOperation):
             if not self.trigger.preinstall(ctx.config.tmp_dir()):
                 util.clean_dir(self.package.pkg_dir())
                 ctx.ui.error(_('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                raise SystemExit
 
     def postinstall(self):
 
@@ -333,7 +333,8 @@ class Install(AtomicOperation):
             ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
             if not self.trigger.postinstall(self.package.pkg_dir()):
                 ctx.ui.error(_('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
-                raise SystemExit
+                self.installdb.mark_pending(self.pkginfo.name)
+                return 0
 
 
     def extract_install(self):
@@ -549,7 +550,6 @@ def __install(install, upgrade=False):
     install.store_postops()
     install.preinstall()
     install.install(not upgrade)
-    install.store_inary_files()
     install.postinstall()
 
 class Remove(AtomicOperation):
