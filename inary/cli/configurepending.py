@@ -44,7 +44,7 @@ def configure_pending(packages=None):
             ops_Dir=os.path.join(ctx.config.packages_dir(), "postoperations")
             
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-            inary.trigger.Trigger().postinstall(ops_Dir, x)
+            inary.trigger.Trigger().postinstall(ops_Dir)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)
 

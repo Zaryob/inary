@@ -57,7 +57,7 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, inary.errors.Exception):
         show_traceback = True
         ui.error(_("\nUnhandled internal exception.\n"
-                   "Please file a bug report to <http://bugs.sulin.org>."))
+                   "Please file a bug report to <https://github.com/SulinOS/inary/issues>."))
     elif isinstance(value, IOError) and value.errno == errno.EPIPE:
         # Ignore broken pipe errors
         sys.exit(0)

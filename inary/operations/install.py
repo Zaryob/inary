@@ -99,7 +99,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(order.index(x) + 1, len(order),
                                                                                       x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
-        install_op.store_inary_files()
+        install_op.store_postops()
         paths.append(install_op.package_fname)
 
         if x in extra_packages or (extra and x in A):
@@ -128,6 +128,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     for path in paths:
         install_op = atomicoperations.Install(path)
         ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
+        install_op.store_inary_files()
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
@@ -135,6 +136,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
+
 
     for path in paths:
         install_op = atomicoperations.Install(path)
