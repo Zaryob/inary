@@ -668,7 +668,7 @@ class Remove(AtomicOperation):
     def run_postremove(self):
         if ('postOps' in self.metadata.package.isA):
             ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(self.package_name)),color='brightyellow')
-            self.trigger.postremove(self.ops_script)
+            self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):
         self.remove_db()

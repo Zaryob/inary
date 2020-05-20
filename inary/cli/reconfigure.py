@@ -26,6 +26,7 @@ import inary.data
 import inary.errors
 import inary.context as ctx
 import inary.trigger
+import os
 
 
 def reconfigure(packages=None):
@@ -38,7 +39,7 @@ def reconfigure(packages=None):
             pkginfo = installdb.get_package(x)
             ops_Dir=os.path.join(ctx.config.packages_dir(), "postoperations")
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-            inary.trigger.Trigger().postinstall(ops_Dir, x)
+            inary.trigger.Trigger().postinstall(ops_Dir)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)
 
