@@ -39,7 +39,6 @@ def reconfigure(packages=None):
             pkginfo = installdb.get_package(x)
             ops_Dir=installdb.package_path(x)
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
-            print(ops_Dir)
             inary.trigger.Trigger().postinstall(ops_Dir)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)

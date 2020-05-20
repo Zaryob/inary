@@ -99,7 +99,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
             _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(order.index(x) + 1, len(order),
                                                                                       x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
-        install_op.store_postops()
         paths.append(install_op.package_fname)
 
         if x in extra_packages or (extra and x in A):
@@ -123,6 +122,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
             remove_op.run_preremove()
     for path in paths:
         install_op = atomicoperations.Install(path)
+        install_op.store_postops()
         install_op.preinstall()
 
     for path in paths:
