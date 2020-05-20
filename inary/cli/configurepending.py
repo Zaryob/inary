@@ -41,7 +41,7 @@ def configure_pending(packages=None):
     for x in order:
         if installdb.has_package(x):
             pkginfo = installdb.get_package(x)
-            ops_Dir=os.path.join(ctx.config.packages_dir(), "postoperations")
+            ops_Dir=installdb.package_path(x)
             
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
             inary.trigger.Trigger().postinstall(ops_Dir)
