@@ -33,8 +33,10 @@ import inary.context as ctx
 def init_logging():
     log_dir = os.path.join(ctx.config.dest_dir(), ctx.config.log_dir())
     if os.access(log_dir, os.W_OK) and "distutils.core" not in sys.modules:
-        handler = logging.handlers.RotatingFileHandler('{}/inary.log'.format(log_dir))
-        formatter = logging.Formatter('%(asctime)-12s:  %(name)s(%(module)s:%(lineno)4d)  %(levelname)s  %(message)s')
+        handler = logging.handlers.RotatingFileHandler(
+            '{}/inary.log'.format(log_dir))
+        formatter = logging.Formatter(
+            '%(asctime)-12s:  %(name)s(%(module)s:%(lineno)4d)  %(levelname)s  %(message)s')
         handler.setFormatter(formatter)
         ctx.log = logging.getLogger('inary')
         ctx.log.addHandler(handler)

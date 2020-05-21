@@ -17,6 +17,10 @@ INARY Configuration module is used for gathering and providing
 regular INARY configurations.
 """
 
+import inary.util as util
+import inary.errors
+import inary.configfile
+import inary.context as ctx
 import copy
 import os
 from pathlib import Path
@@ -25,11 +29,6 @@ from pathlib import Path
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.context as ctx
-import inary.configfile
-import inary.errors
-import inary.util as util
 
 
 class Error(inary.errors.Error):
@@ -54,13 +53,14 @@ class Config(object, metaclass=util.Singleton):
         self.set_options(options)
 
         if Path("/etc/inary/inary.conf").is_file():
-                self.values = inary.configfile.ConfigurationFile("/etc/inary/inary.conf")
+            self.values = inary.configfile.ConfigurationFile(
+                "/etc/inary/inary.conf")
         elif Path("inary.conf").is_file():
-                self.values = inary.configfile.ConfigurationFile("inary.conf")
+            self.values = inary.configfile.ConfigurationFile("inary.conf")
         else:
-                # config not found but class needed
-                self.values = inary.configfile.ConfigurationFile("")
-		
+            # config not found but class needed
+            self.values = inary.configfile.ConfigurationFile("")
+
         # get the initial environment variables. this is needed for
         # build process.
         self.environ = copy.deepcopy(os.environ)
@@ -94,7 +94,9 @@ class Config(object, metaclass=util.Singleton):
                 self.__dest_dir = self.values.general.destinationdirectory
 
             if not os.path.exists(self.__dest_dir):
-                ctx.ui.warning(_("Destination directory \"{}\" does not exist. Creating it.").format(self.__dest_dir))
+                ctx.ui.warning(
+                    _("Destination directory \"{}\" does not exist. Creating it.").format(
+                        self.__dest_dir))
                 os.makedirs(self.__dest_dir)
 
         return self.__dest_dir

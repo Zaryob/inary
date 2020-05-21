@@ -16,6 +16,9 @@
 
 # standard python modules
 
+import inary.context as ctx
+import inary.errors
+import inary
 import fcntl
 import fnmatch
 import hashlib
@@ -54,9 +57,6 @@ class Singleton(type):
 
 
 # inary modules
-import inary
-import inary.errors
-import inary.context as ctx
 
 
 class Error(inary.errors.Error):
@@ -70,6 +70,7 @@ class FileError(Error):
 class FilePermissionDeniedError(Error):
     pass
 
+
 def locked(func):
     """
     Decorator for synchronizing privileged functions
@@ -79,7 +80,8 @@ def locked(func):
         try:
             lock = open(join_path(ctx.config.lock_dir(), 'inary'), 'w')
         except IOError:
-            raise inary.errors.PrivilegeError(_("You have to be root for this operation."))
+            raise inary.errors.PrivilegeError(
+                _("You have to be root for this operation."))
 
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -114,7 +116,7 @@ ascii_letters = ascii_lowercase + ascii_uppercase
 digits = '0123456789'
 hexdigits = digits + 'abcdef' + 'ABCDEF'
 octdigits = '01234567'
-punctuation = """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+punctuation = r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
 printable = digits + ascii_letters + punctuation + whitespace
 
 
@@ -162,14 +164,17 @@ def any(pred, seq):
 def flatten_list(l):
     """Flatten a list of lists."""
     # Fastest solution is list comprehension
-    # See: http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
+    # See:
+    # http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
     return [item for sublist in l for item in sublist]
+
 
 def unique_list(l):
     """Creates a unique list by deleting duplicate items"""
     list_set = set(l)
     unique_list = (list(list_set))
     return [x for x in unique_list]
+
 
 def strlist(l):
     """Concatenate string reps of l's elements."""
@@ -288,6 +293,7 @@ def makedirs(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+
 def search_executable(executable):
     """Search for the executable in user's paths and return it."""
     for _path in os.environ["PATH"].split(":"):
@@ -303,12 +309,17 @@ def run_batch(cmd, ui_debug=True):
     p = subprocess.Popen(cmd, shell=True,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
-    if ui_debug: ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
+    if ui_debug:
+        ctx.ui.debug(
+            _('return value for "{0}" is {1}').format(
+                cmd, p.returncode))
     return p.returncode, out.decode('utf-8'), err
 
 # TODO: it might be worthwhile to try to remove the
 # use of ctx.stdout, and use run_batch()'s return
 # values instead. but this is good enough :)
+
+
 def run_logged(cmd):
     """Run command and get the return value."""
     ctx.ui.info(_('Running ') + cmd, verbose=True)
@@ -353,7 +364,8 @@ def xterm_title(message):
     """Set message as console window title."""
     if "TERM" in os.environ and sys.stderr.isatty():
         terminalType = os.environ["TERM"]
-        for term in ["xterm", "Eterm", "aterm", "rxvt", "screen", "kterm", "rxvt-unicode"]:
+        for term in ["xterm", "Eterm", "aterm",
+                     "rxvt", "screen", "kterm", "rxvt-unicode"]:
             if terminalType.startswith(term):
                 sys.stderr.write("\x1b]2;" + str(message) + "\x07")
                 sys.stderr.flush()
@@ -368,27 +380,34 @@ def xterm_title_reset():
 #############################
 #   ncurses like functions  #
 #############################
+
+
 def initscr():
     """Clear and create a window"""
     printw("\x1b[s\x1bc")
+
 
 def endsrc():
     """Clear and restore screen"""
     printw("\x1bc\x1b[u")
 
-def move(x,y):
+
+def move(x, y):
     """Move"""
-    printw("\x1b[{};{}f".format(y,x))
+    printw("\x1b[{};{}f".format(y, x))
+
 
 def printw(msg=''):
     """Print clone"""
     sys.stdout.write(msg)
     sys.stdout.flush()
 
-def mvprintw(x,y,msg=''):
+
+def mvprintw(x, y, msg=''):
     """Move and print"""
-    move(x,y)
+    move(x, y)
     printw(msg)
+
 
 def noecho(enabled=True):
     if not ctx.get_option('no_color'):
@@ -397,72 +416,75 @@ def noecho(enabled=True):
         else:
             printw("\x1b[?25h")
 
+
 def attron(attribute):
     """Attribute enable"""
-    if(attribute=="A_NORMAL"):
+    if(attribute == "A_NORMAL"):
         sys.stdout.write("\x1b[;0m")
-    elif(attribute=="A_UNDERLINE"):
+    elif(attribute == "A_UNDERLINE"):
         sys.stdout.write("\x1b[4m")
-    elif(attribute=="A_REVERSE"):
+    elif(attribute == "A_REVERSE"):
         sys.stdout.write("\x1b[7m")
-    elif(attribute=="A_BLINK"):
+    elif(attribute == "A_BLINK"):
         sys.stdout.write("\x1b[5m")
-    elif(attribute=="A_DIM"):
+    elif(attribute == "A_DIM"):
         sys.stdout.write("\x1b[2m")
-    elif(attribute=="A_BOLD"):
+    elif(attribute == "A_BOLD"):
         sys.stdout.write("\x1b[1m")
-    elif(attribute=="A_INVIS"):
+    elif(attribute == "A_INVIS"):
         sys.stdout.write("\x1b[8m")
-    elif(attribute=="C_BLACK"):
+    elif(attribute == "C_BLACK"):
         sys.stdout.write("\x1b[30m")
-    elif(attribute=="C_RED"):
+    elif(attribute == "C_RED"):
         sys.stdout.write("\x1b[31m")
-    elif(attribute=="C_GREEN"):
+    elif(attribute == "C_GREEN"):
         sys.stdout.write("\x1b[32m")
-    elif(attribute=="C_YELLOW"):
+    elif(attribute == "C_YELLOW"):
         sys.stdout.write("\x1b[33m")
-    elif(attribute=="C_BLUE"):
+    elif(attribute == "C_BLUE"):
         sys.stdout.write("\x1b[34m")
-    elif(attribute=="C_MAGENTA"):
+    elif(attribute == "C_MAGENTA"):
         sys.stdout.write("\x1b[35m")
-    elif(attribute=="C_CYAN"):
+    elif(attribute == "C_CYAN"):
         sys.stdout.write("\x1b[36m")
-    elif(attribute=="C_WHITE"):
+    elif(attribute == "C_WHITE"):
         sys.stdout.write("\x1b374m")
-    elif(attribute=="B_BLACK"):
+    elif(attribute == "B_BLACK"):
         sys.stdout.write("\x1b[40m")
-    elif(attribute=="B_RED"):
+    elif(attribute == "B_RED"):
         sys.stdout.write("\x1b[41m")
-    elif(attribute=="B_GREEN"):
+    elif(attribute == "B_GREEN"):
         sys.stdout.write("\x1b[42m")
-    elif(attribute=="B_YELLOW"):
+    elif(attribute == "B_YELLOW"):
         sys.stdout.write("\x1b[43m")
-    elif(attribute=="B_BLUE"):
+    elif(attribute == "B_BLUE"):
         sys.stdout.write("\x1b[44m")
-    elif(attribute=="B_MAGENTA"):
+    elif(attribute == "B_MAGENTA"):
         sys.stdout.write("\x1b[45m")
-    elif(attribute=="B_CYAN"):
+    elif(attribute == "B_CYAN"):
         sys.stdout.write("\x1b[46m")
-    elif(attribute=="B_WHITE"):
+    elif(attribute == "B_WHITE"):
         sys.stdout.write("\x1b[47m")
     sys.stdout.flush()
 
-def drawbox(x1,y1,x2,y2):
+
+def drawbox(x1, y1, x2, y2):
     """Draw box"""
-    mvprintw(x1,y1,"╔")
-    mvprintw(x1,y2,"╚")
-    mvprintw(x2,y1,"╗")
-    mvprintw(x2,y2,"╝")
-    for i in range((x1+1),(x2-1)):
-        mvprintw(i,y1,"═")
-        mvprintw(i,y2,"═")
-    for i in range((y1+1),(y2-1)):
-        mvprintw(x1,i,"║")
-        mvprintw(x2,i,"║")
+    mvprintw(x1, y1, "╔")
+    mvprintw(x1, y2, "╚")
+    mvprintw(x2, y1, "╗")
+    mvprintw(x2, y2, "╝")
+    for i in range((x1 + 1), (x2 - 1)):
+        mvprintw(i, y1, "═")
+        mvprintw(i, y2, "═")
+    for i in range((y1 + 1), (y2 - 1)):
+        mvprintw(x1, i, "║")
+        mvprintw(x2, i, "║")
 
 #############################
 # Path Processing Functions #
 #############################
+
 
 def splitpath(a):
     """split path into components and return as a list
@@ -545,10 +567,12 @@ def clean_dir(path):
     if os.path.exists(path):
         shutil.rmtree(path)
 
+
 def delete_file(path):
     if os.path.isfile(path):
         if os.path.exists(path):
             os.remove(path)
+
 
 def creation_time(_file):
     """Return the creation time of the given file."""
@@ -566,7 +590,8 @@ def dir_size(_dir):
     # better solution :(.
     # Not really, du calculates size on disk, this is much better
 
-    if os.path.exists(_dir) and (not os.path.isdir(_dir) and not os.path.islink(_dir)):
+    if os.path.exists(_dir) and (not os.path.isdir(_dir)
+                                 and not os.path.islink(_dir)):
         # so, this is not a directory but file..
         return os.path.getsize(_dir)
 
@@ -730,9 +755,11 @@ def sha1_file(filename):
     except IOError as e:
         if e.errno == 13:
             # Permission denied, the file doesn't have read permissions, skip
-            raise FilePermissionDeniedError(_("You don't have necessary read permissions"))
+            raise FilePermissionDeniedError(
+                _("You don't have necessary read permissions"))
         else:
-            raise FileError(_("Cannot calculate SHA1 hash of \"{}\"").format(filename))
+            raise FileError(
+                _("Cannot calculate SHA1 hash of \"{}\"").format(filename))
 
 
 def sha1_data(data):
@@ -746,13 +773,16 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
     """Uncompress the file and return the new path."""
     formats = ("gz", "gzip", "bz2", "bzip2", "lzma", "xz")
     if compressType not in formats:
-        raise Error(_("Compression type is not valid: '{}'").format(compressType))
+        raise Error(
+            _("Compression type is not valid: '{}'").format(compressType))
 
     archive = inary.archive.Archive(patchFile, compressType)
     try:
         archive.unpack(targetDir)
     except Exception as msg:
-        raise Error(_("Error while decompressing \"{0}\": {1}").format(patchFile, msg))
+        raise Error(
+            _("Error while decompressing \"{0}\": {1}").format(
+                patchFile, msg))
 
     # FIXME: Get file path from Archive instance
     filePath = join_path(targetDir, os.path.basename(patchFile))
@@ -766,8 +796,10 @@ def uncompress(patchFile, compressType="gz", targetDir=""):
 def check_patch_level(workdir, path):
     level = 0
     while path:
-        if os.path.isfile("{0}/{1}".format(workdir, path)): return level
-        if path.find("/") == -1: return None
+        if os.path.isfile("{0}/{1}".format(workdir, path)):
+            return level
+        if path.find("/") == -1:
+            return None
         level += 1
         path = path[path.find("/") + 1:]
 
@@ -778,7 +810,8 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
     if os.path.exists(sourceDir):
         os.chdir(sourceDir)
     else:
-        raise Error(_("ERROR: WorkDir ({}) does not exist\n").format(sourceDir))
+        raise Error(
+            _("ERROR: WorkDir ({}) does not exist\n").format(sourceDir))
 
     check_file(patchFile)
 
@@ -786,9 +819,11 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         with open(patchFile) as patchfile:
             lines = patchfile.readlines()
             try:
-                paths_m = [l.strip().split()[1] for l in lines if l.startswith("---") and "/" in l]
+                paths_m = [l.strip().split()[1]
+                           for l in lines if l.startswith("---") and "/" in l]
                 try:
-                    paths_p = [l.strip().split()[1] for l in lines if l.startswith("+++")]
+                    paths_p = [l.strip().split()[1]
+                               for l in lines if l.startswith("+++")]
                 except IndexError:
                     paths_p = []
             except IndexError:
@@ -797,17 +832,23 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                 if not paths_p:
                     paths_p = paths_m[:]
                     try:
-                        paths_m = [l.strip().split()[1] for l in lines if l.startswith("***") and "/" in l]
+                        paths_m = [l.strip().split()[1]
+                                   for l in lines if l.startswith("***") and "/" in l]
                     except IndexError:
                         pass
 
                 for path_p, path_m in zip(paths_p, paths_m):
-                    if "/dev/null" in path_m and not len(paths_p) - 1 == paths_p.index(path_p): continue
+                    if "/dev/null" in path_m and not len(
+                            paths_p) - 1 == paths_p.index(path_p):
+                        continue
                     level = check_patch_level(sourceDir, path_p)
-                    if level is None and len(paths_m) - 1 == paths_m.index(path_m):
+                    if level is None and len(
+                            paths_m) - 1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
                     if not level is None:
-                        ctx.ui.info(_("Detected patch level={0} for {1}").format(level, os.path.basename(patchFile)), verbose=True)
+                        ctx.ui.info(
+                            _("Detected patch level={0} for {1}").format(
+                                level, os.path.basename(patchFile)), verbose=True)
                         break
 
     if level is None:
@@ -837,7 +878,9 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
             # Which means stderr and stdout directed so they are None
             raise Error(_("ERROR: patch (\"{}\") failed.").format(patchFile))
         else:
-            raise Error(_("ERROR: patch (\"{0}\") failed: {1}").format(patchFile, out))
+            raise Error(
+                _("ERROR: patch (\"{0}\") failed: {1}").format(
+                    patchFile, out))
 
     os.chdir(cwd)
 
@@ -849,34 +892,39 @@ def strip_file(filepath, fileinfo, outpath):
         p = os.popen("strip {0} {1}".format(flags, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("\'strip\' command failed for file \"{}\"!").format(f))
+            ctx.ui.warning(
+                _("\'strip\' command failed for file \"{}\"!").format(f))
 
     def run_chrpath(f):
         """ remove rpath info from binary """
         p = os.popen("chrpath -d {}".format(f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("\'chrpath\' command failed for file \"{}\"!").format(f))
+            ctx.ui.warning(
+                _("\'chrpath\' command failed for file \"{}\"!").format(f))
 
     def save_elf_debug(f, o):
         """copy debug info into file.debug file"""
-        p = os.popen("objcopy --only-keep-debug {0} {1}{2}".format(f, o, ctx.const.debug_file_suffix))
+        p = os.popen(
+            "objcopy --only-keep-debug {0} {1}{2}".format(f, o, ctx.const.debug_file_suffix))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("\'objcopy\' (keep-debug) command failed for file \"{}\"!").format(f))
+            ctx.ui.warning(
+                _("\'objcopy\' (keep-debug) command failed for file \"{}\"!").format(f))
 
         """mark binary/shared objects to use file.debug"""
-        p = os.popen("objcopy --add-gnu-debuglink={0}{1} {2}".format(o, ctx.const.debug_file_suffix, f))
+        p = os.popen(
+            "objcopy --add-gnu-debuglink={0}{1} {2}".format(o, ctx.const.debug_file_suffix, f))
         ret = p.close()
         if ret:
-            ctx.ui.warning(_("\'objcopy\' (add-debuglink) command failed for file \"{}\"!").format(f))
-
+            ctx.ui.warning(
+                _("\'objcopy\' (add-debuglink) command failed for file \"{}\"!").format(f))
 
     if "current ar archive" in fileinfo:
         run_strip(filepath, "--strip-debug")
         return True
 
-    elif re.search("SB\s+executable", fileinfo):
+    elif re.search(r"SB\s+executable", fileinfo):
         if ctx.config.values.build.generatedebug:
             ensure_dirs(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
@@ -885,7 +933,7 @@ def strip_file(filepath, fileinfo, outpath):
         # run_chrpath(filepath)
         return True
 
-    elif re.search("SB\s+shared object", fileinfo):
+    elif re.search(r"SB\s+shared object", fileinfo):
         if ctx.config.values.build.generatedebug:
             ensure_dirs(os.path.dirname(outpath))
             save_elf_debug(filepath, outpath)
@@ -962,10 +1010,11 @@ def parse_package_name(package_name):
     except ValueError:
         try:
             return parse_package_name_legacy(package_name)
-        except:
+        except BaseException:
             raise Error(_("Invalid package name: \"{}\"").format(package_name))
 
     return name, "{0}-{1}".format(version, release)
+
 
 def parse_package_name_get_name(package_name):
     """Separate package name and version string.
@@ -983,7 +1032,8 @@ def parse_package_name_get_name(package_name):
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
     if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo", "32bit-dbginfo",
-                                 "userspace"]: name = name[:-1 - len(name.split("-").pop())]
+                                 "userspace"]:
+        name = name[:-1 - len(name.split("-").pop())]
     return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0],
                             name.lower())
 
@@ -1024,8 +1074,9 @@ def parse_delta_package_name(package_name):
     except ValueError:
         try:
             return parse_delta_package_name_legacy(package_name)
-        except:
-            raise Error(_("Invalid delta package name: \"{}\"").format(package_name))
+        except BaseException:
+            raise Error(
+                _("Invalid delta package name: \"{}\"").format(package_name))
 
     return name, source_release, target_release
 
@@ -1092,6 +1143,7 @@ def split_version(package_version):
     release, sep, build = release_and_build.partition("-")
     return version, release, build
 
+
 def filter_latest_packages(package_paths):
     """ For a given inary package paths list where there may also be multiple versions
         of the same package, filters only the latest versioned ones """
@@ -1101,7 +1153,8 @@ def filter_latest_packages(package_paths):
     latest = {}
     for path in package_paths:
 
-        name, version = parse_package_name(os.path.basename(path[:-len(ctx.const.package_suffix)]))
+        name, version = parse_package_name(
+            os.path.basename(path[:-len(ctx.const.package_suffix)]))
 
         if name in latest:
             l_version, l_release, l_build = split_version(latest[name][1])
@@ -1139,7 +1192,8 @@ def filter_latest_packages(package_paths):
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
-    if color in ctx.const.colors and not (ctx.get_option('no_color') or ctx.config.values.general.no_color):
+    if color in ctx.const.colors and not (ctx.get_option(
+            'no_color') or ctx.config.values.general.no_color):
         return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
     else:
         return str(msg)
@@ -1161,7 +1215,9 @@ def config_changed(config_file):
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
     if os.path.isdir(dirpath) and not os.listdir(dirpath):
-        ctx.ui.info(_("Removing empty dir: \"{}\"").format(dirpath),verbose=True)
+        ctx.ui.info(
+            _("Removing empty dir: \"{}\"").format(dirpath),
+            verbose=True)
         os.rmdir(dirpath)
         rmdirs(os.path.dirname(dirpath))
 
@@ -1213,6 +1269,7 @@ def get_kernel_option(option):
                     args[arg] = ""
 
     return args
+
 
 def get_cpu_count():
     """

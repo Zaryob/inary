@@ -15,22 +15,21 @@
 """package abstraction methods to add/remove files, extract control files"""
 
 # Gettext Library
+import os.path
+from . import fetcher
+import inary.util as util
+import inary.data.files
+import inary.file
+import inary.data.metadata
+import inary.ui
+import inary.uri
+import inary.archive as archive
+import inary.context as ctx
+import inary.errors
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.errors
-import inary.context as ctx
-import inary.archive as archive
-import inary.uri
-import inary.ui
-import inary.data.metadata
-import inary.file
-import inary.data.files
-import inary.util as util
-from . import fetcher
-
-import os.path
 
 class Error(inary.errors.Error):
     pass
@@ -62,7 +61,8 @@ class Package:
         archive_name = ctx.const.install_tar + archive_suffix
         return archive_name, archive_format
 
-    def __init__(self, packagefn, mode='r', format=None, tmp_dir=None, pkgname='', no_fetch=False):
+    def __init__(self, packagefn, mode='r', format=None,
+                 tmp_dir=None, pkgname='', no_fetch=False):
         self.filepath = packagefn
         url = inary.uri.URI(packagefn)
 
@@ -97,12 +97,12 @@ class Package:
 
         self.tmp_dir = tmp_dir or ctx.config.tmp_dir()
 
-    def fetch_remote_file(self, url,pkgname=''):
+    def fetch_remote_file(self, url, pkgname=''):
         dest = ctx.config.cached_packages_dir()
         self.filepath = os.path.join(dest, url.filename())
         if not os.path.exists(self.filepath):
             try:
-                inary.file.File.download(url, dest,pkgname)
+                inary.file.File.download(url, dest, pkgname)
             except fetcher.FetchError:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
@@ -220,7 +220,8 @@ class Package:
                 #
                 # Also, tar.extract() doesn't write on symlinks... Not any
                 # more :).
-                if os.path.isfile(tarinfo.name) or os.path.islink(tarinfo.name):
+                if os.path.isfile(
+                        tarinfo.name) or os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
                     except OSError as e:
@@ -229,7 +230,10 @@ class Package:
             else:
                 # Added for package-manager
                 if tarinfo.name.endswith(".desktop"):
-                    ctx.ui.notify(inary.ui.desktopfile, logging=False, desktopfile=tarinfo.name)
+                    ctx.ui.notify(
+                        inary.ui.desktopfile,
+                        logging=False,
+                        desktopfile=tarinfo.name)
 
         tar = self.get_install_archive()
 
@@ -252,7 +256,8 @@ class Package:
     def extract_inary_files(self, outdir):
         """Extract INARY control files: metadata.xml, files.xml,
         action scripts, etc."""
-        self.extract_files([ctx.const.metadata_xml, ctx.const.files_xml], outdir)
+        self.extract_files(
+            [ctx.const.metadata_xml, ctx.const.files_xml], outdir)
         self.extract_dir('config', outdir)
 
     def get_metadata(self):
@@ -273,8 +278,8 @@ class Package:
 
     def pkg_dir(self):
         packageDir = self.metadata.package.name + '-' \
-                     + self.metadata.package.version + '-' \
-                     + self.metadata.package.release
+            + self.metadata.package.version + '-' \
+            + self.metadata.package.release
 
         return os.path.join(ctx.config.packages_dir(), packageDir)
 
@@ -283,7 +288,9 @@ class Package:
         url = inary.uri.URI(packagefn)
         filepath = packagefn
         if url.is_remote_file():
-            filepath = os.path.join(ctx.config.cached_packages_dir(), url.filename())
+            filepath = os.path.join(
+                ctx.config.cached_packages_dir(),
+                url.filename())
             return os.path.exists(filepath) and filepath
         else:
             return filepath

@@ -14,6 +14,11 @@
 
 """Archive module provides access to regular archive file types."""
 
+import inary.fetcher
+import inary.uri
+import inary.context as ctx
+import inary.util as util
+import inary.errors
 import errno
 import lzma
 # standard library modules
@@ -30,12 +35,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY modules
-
-import inary.errors
-import inary.util as util
-import inary.context as ctx
-import inary.uri
-import inary.fetcher
 
 
 class SourceArchiveError(inary.errors.Error):
@@ -159,7 +158,8 @@ class TarFile(tarfile.TarFile):
         try:
             t = cls.taropen(name, mode, fileobj, **kwargs)
         except IOError:
-            raise tarfile.ReadError(_(" \"{}\" is not a lzma file.").format(name))
+            raise tarfile.ReadError(
+                _(" \"{}\" is not a lzma file.").format(name))
         t._extfileobj = False
         return t
 
@@ -278,11 +278,16 @@ class ArchiveLzma(ArchiveBase):
 
 def __chown(name, uid, gid):
     if not os.path.islink(name):
-        ctx.ui.info(_("Chowning {0} ({1}:{2})").format(name, uid, gid), verbose=True)
+        ctx.ui.info(
+            _("Chowning {0} ({1}:{2})").format(
+                name, uid, gid), verbose=True)
         os.chown(name, uid, gid)
     else:
-        ctx.ui.info(_("LChowning {0} ({1}:{2})").format(name, uid, gid), verbose=True)
+        ctx.ui.info(
+            _("LChowning {0} ({1}:{2})").format(
+                name, uid, gid), verbose=True)
         os.lchown(name, uid, gid)
+
 
 class ArchiveTar(ArchiveBase):
     """ArchiveTar handles tar archives depending on the compression
@@ -308,9 +313,9 @@ class ArchiveTar(ArchiveBase):
     def maybe_nuke_pip(self, info):
         if not info.name.endswith(".egg-info"):
             return
-        if not "site-packages" in info.name:
+        if "site-packages" not in info.name:
             return
-        if not "/python" in info.name:
+        if "/python" not in info.name:
             return
         if not info.isreg():
             return
@@ -381,30 +386,41 @@ class ArchiveTar(ArchiveBase):
                             if e.errno == errno.EXDEV:
                                 if tarinfo.linkname.startswith(".."):
                                     new_path = util.join_path(
-                                        os.path.normpath(os.path.join(os.path.dirname(tarinfo.name), tarinfo.linkname)),
+                                        os.path.normpath(
+                                            os.path.join(
+                                                os.path.dirname(
+                                                    tarinfo.name),
+                                                tarinfo.linkname)),
                                         filename)
                                 if not old_path.startswith("/"):
                                     old_path = "/" + old_path
                                 if not new_path.startswith("/"):
                                     new_path = "/" + new_path
                                 print("Moving:", old_path, " -> ", new_path)
-                                os.system("mv -f {0} {1}".format(old_path, new_path))
+                                os.system(
+                                    "mv -f {0} {1}".format(old_path, new_path))
                             else:
                                 raise
                     try:
                         os.rmdir(tarinfo.name)
                     except OSError as e:
-                        # hmmm, not empty dir? try rename it adding .old extension.
+                        # hmmm, not empty dir? try rename it adding .old
+                        # extension.
                         if e.errno == errno.ENOTEMPTY:
-                            # if directory with dbus/pid file was moved we have to restart dbus
+                            # if directory with dbus/pid file was moved we have
+                            # to restart dbus
                             for (path, dirs, files) in os.walk(tarinfo.name):
                                 if path.endswith("dbus") and "pid" in files:
                                     startservices.append("dbus")
-                                    for service in ("NetworkManager", "connman", "wicd"):
-                                        # FIXME: It needs a quick fix for openrc
-                                        if os.path.isfile("/etc/scom/services/enabled/{}".format(service)):
+                                    for service in (
+                                            "NetworkManager", "connman", "wicd"):
+                                        # FIXME: It needs a quick fix for
+                                        # openrc
+                                        if os.path.isfile(
+                                                "/etc/scom/services/enabled/{}".format(service)):
                                             startservices.append(service)
-                                            os.system("service {} stop".format(service))
+                                            os.system(
+                                                "service {} stop".format(service))
                                     os.system("service dbus stop")
                                     break
                             os.system("mv -f {0} {0}.old".format(tarinfo.name))
@@ -422,13 +438,14 @@ class ArchiveTar(ArchiveBase):
                     try:
                         os.rename(tarinfo.name,
                                   "{}.renamed-by-inary".format(tarinfo.name))
-                    except:
+                    except BaseException:
                         # If fails, try to remove it
                         shutil.rmtree(tarinfo.name)
 
             try:
                 self.tar.extract(tarinfo)
-                for service in startservices: os.system("service {} start".format(service))
+                for service in startservices:
+                    os.system("service {} start".format(service))
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
@@ -464,7 +481,8 @@ class ArchiveTar(ArchiveBase):
                 self.tar.extract(tarinfo)
 
                 # Handle the case where new path is file, but old path is directory
-                # due to not possible touch file c in /a/b if directory /a/b/c exists.
+                # due to not possible touch file c in /a/b if directory /a/b/c
+                # exists.
                 if not e.errno == errno.EISDIR:
                     path = tarinfo.name
                     found = False
@@ -475,7 +493,8 @@ class ArchiveTar(ArchiveBase):
                             break
                         else:
                             path = "/".join(path.split("/")[:-1])
-                    if not found: raise
+                    if not found:
+                        raise
                     # Try to extract again.
                     self.tar.extract(tarinfo)
                 else:
@@ -498,10 +517,14 @@ class ArchiveTar(ArchiveBase):
                 __chown(tarinfo.name, uid, gid)
 
                 if not os.path.islink(tarinfo.name):
-                    ctx.ui.info(_("Chowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
+                    ctx.ui.info(
+                        _("Chowning {0} ({1}:{2})").format(
+                            tarinfo.name, uid, gid), verbose=True)
                     os.chown(tarinfo.name, uid, gid)
                 else:
-                    ctx.ui.info(_("LChowning {0} ({1}:{2})").format(tarinfo.name, uid, gid), verbose=True)
+                    ctx.ui.info(
+                        _("LChowning {0} ({1}:{2})").format(
+                            tarinfo.name, uid, gid), verbose=True)
                     os.lchown(tarinfo.name, uid, gid)
 
             if callback:
@@ -565,10 +588,12 @@ class ArchiveTarZ(ArchiveBase):
     def unpack_dir(self, target_dir):
         self.file_path = util.remove_suffix(".Z", self.file_path)
 
-        result = util.run_batch("uncompress -cf {0}.Z > {0}".format(self.file_path))
+        result = util.run_batch(
+            "uncompress -cf {0}.Z > {0}".format(self.file_path))
         if result[0] != 0:
-            raise RuntimeError(_("Problem occured while uncompressing \"{}.Z\" file.\nError:{}").format(self.file_path,
-                                                                                                        result[2]))
+            raise RuntimeError(
+                _("Problem occured while uncompressing \"{}.Z\" file.\nError:{}").format(
+                    self.file_path, result[2]))
 
         self.tar = tarfile.open(self.file_path)
 
@@ -627,7 +652,8 @@ class Archive7Zip(ArchiveBase):
         """Unpack 7z archive to a given target directory(target_dir)."""
 
         # e.g. 7z x -bd -o<target_directory> <archive.7z>
-        util.run_batch("{0} x -bd -o{1} {2}".format(self.cmd, target_dir, self.file_path))
+        util.run_batch("{0} x -bd -o{1} {2}".format(self.cmd,
+                                                    target_dir, self.file_path))
 
 
 class ArchiveZip(ArchiveBase):
@@ -644,7 +670,9 @@ class ArchiveZip(ArchiveBase):
         try:
             self.zip_obj = zipfile.ZipFile(self.file_path, mode)
         except zipfile.BadZipFile:
-            raise UnknownArchiveType(_("File \"{}\" is not a zip file.").format(self.file_path))
+            raise UnknownArchiveType(
+                _("File \"{}\" is not a zip file.").format(
+                    self.file_path))
 
     def open(self, file_path, mode="r"):
         return self.zip_obj.open(file_path, mode)
@@ -735,7 +763,7 @@ class ArchiveZip(ArchiveBase):
                         os.makedirs(ofile)
                         perm = info.external_attr >> 16
                         if perm == 0:
-                            perm = 33261 # octets of -rwxr-xr-x
+                            perm = 33261  # octets of -rwxr-xr-x
                         os.chmod(ofile, perm)
                     continue
 
@@ -756,8 +784,8 @@ class ArchiveZip(ArchiveBase):
                     os.symlink(target, ofile)
                 else:
                     perm = info.external_attr >> 16
-                    if perm==0:
-                        perm=33261 # -rwxr-xr-x
+                    if perm == 0:
+                        perm = 33261  # -rwxr-xr-x
                     info.filename = outpath
                     self.zip_obj.extract(info, target_dir)
                     os.chmod(ofile, perm)
@@ -792,21 +820,21 @@ class Archive:
         if not arch_type:
             arch_type = self._guess_archive_type(file_path)
 
-        handlers = {'targz':    ArchiveTar,
-                    'tarbz2':   ArchiveTar,
-                    'tarlzma':  ArchiveTar,
-                    'tarxz':    ArchiveTar,
-                    'tarZ':     ArchiveTarZ,
-                    'tar':      ArchiveTar,
-                    'zip':      ArchiveZip,
-                    'gz':       ArchiveGzip,
-                    'gzip':     ArchiveGzip,
-                    'bz2':      ArchiveBzip2,
-                    'bzip2':    ArchiveBzip2,
-                    'lzma':     ArchiveLzma,
-                    'xz':       ArchiveLzma,
-                    '7z':       Archive7Zip,
-                    'binary':   ArchiveBinary}
+        handlers = {'targz': ArchiveTar,
+                    'tarbz2': ArchiveTar,
+                    'tarlzma': ArchiveTar,
+                    'tarxz': ArchiveTar,
+                    'tarZ': ArchiveTarZ,
+                    'tar': ArchiveTar,
+                    'zip': ArchiveZip,
+                    'gz': ArchiveGzip,
+                    'gzip': ArchiveGzip,
+                    'bz2': ArchiveBzip2,
+                    'bzip2': ArchiveBzip2,
+                    'lzma': ArchiveLzma,
+                    'xz': ArchiveLzma,
+                    '7z': Archive7Zip,
+                    'binary': ArchiveBinary}
 
         handler = handlers.get(arch_type)
         if handler is None:
@@ -816,19 +844,19 @@ class Archive:
 
     @staticmethod
     def _guess_archive_type(file_path):
-        types = (("targz",      (".tar.gz", ".tgz")),
-                 ("tarbz2",     (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
-                 ("tarlzma",    (".tar.lzma", ".tlz")),
-                 ("tarxz",      (".tar.xz", ".txz")),
-                 ("tarZ",       (".tar.Z",)),
-                 ("tar",        (".tar",)),
-                 ("zip",        (".zip", ".ZIP")),
-                 ("gz",         (".gz",)),
-                 ("bz2",        (".bz2", ".bz")),
-                 ("lzma",       (".lzma",)),
-                 ("xz",         (".xz",)),
-                 ("7z",         (".7z",)),
-                 ("binary",     (".bin", ".run", ".sh")))
+        types = (("targz", (".tar.gz", ".tgz")),
+                 ("tarbz2", (".tar.bz2", ".tar.bz", ".tbz2", ".tbz")),
+                 ("tarlzma", (".tar.lzma", ".tlz")),
+                 ("tarxz", (".tar.xz", ".txz")),
+                 ("tarZ", (".tar.Z",)),
+                 ("tar", (".tar",)),
+                 ("zip", (".zip", ".ZIP")),
+                 ("gz", (".gz",)),
+                 ("bz2", (".bz2", ".bz")),
+                 ("lzma", (".lzma",)),
+                 ("xz", (".xz",)),
+                 ("7z", (".7z",)),
+                 ("binary", (".bin", ".run", ".sh")))
 
         for _type, extensions in types:
             if file_path.endswith(extensions):
@@ -865,7 +893,8 @@ class SourceArchive:
 
     def __init__(self, archive):
         self.url = inary.uri.URI(archive.uri)
-        self.archiveFile = os.path.join(ctx.config.archives_dir(), self.url.filename())
+        self.archiveFile = os.path.join(
+            ctx.config.archives_dir(), self.url.filename())
         self.archive = archive
         self.progress = None
 
@@ -875,37 +904,54 @@ class SourceArchive:
                 self.progress = ctx.ui.Progress
 
             try:
-                ctx.ui.info(_("Fetching source from: \"{}\"").format(self.url.uri))
+                ctx.ui.info(
+                    _("Fetching source from: \"{}\"").format(
+                        self.url.uri))
                 if self.url.get_uri().startswith("mirrors://"):
                     self.fetch_from_mirror()
                 elif self.url.get_uri().startswith("file://") or self.url.get_uri().startswith("/"):
                     self.fetch_from_locale()
                 else:
-                    inary.fetcher.fetch_url(self.url, ctx.config.archives_dir(), self.progress)
+                    inary.fetcher.fetch_url(
+                        self.url, ctx.config.archives_dir(), self.progress)
             except inary.fetcher.FetchError:
-                if ctx.config.values.build.fallback and not self.is_cached(interactive=False):
+                if ctx.config.values.build.fallback and not self.is_cached(
+                        interactive=False):
                     self.fetch_from_fallback()
                 else:
                     raise
 
             ctx.ui.info(
-                _("Source archive is stored: \"{0}/{1}\"").format(ctx.config.archives_dir(), self.url.filename()))
+                _("Source archive is stored: \"{0}/{1}\"").format(
+                    ctx.config.archives_dir(),
+                    self.url.filename()))
 
     def fetch_from_fallback(self):
-        inary.fetcher.fetch_url(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
+        inary.fetcher.fetch_url(
+            self.url.get_uri(),
+            ctx.config.archives_dir(),
+            self.progress)
 
     def fetch_from_locale(self):
-        inary.fetcher.fetch_from_locale(self.url.get_uri(), ctx.config.archives_dir(), destfile=self.url.filename())
+        inary.fetcher.fetch_from_locale(
+            self.url.get_uri(),
+            ctx.config.archives_dir(),
+            destfile=self.url.filename())
 
     def fetch_from_mirror(self):
-        inary.fetcher.fetch_from_mirror(self.url.get_uri(), ctx.config.archives_dir(), self.progress)
+        inary.fetcher.fetch_from_mirror(
+            self.url.get_uri(),
+            ctx.config.archives_dir(),
+            self.progress)
 
     def is_cached(self, interactive=True):
         if not os.access(self.archiveFile, os.R_OK):
             return False
 
         # check hash
-        if util.check_file_hash(self.archiveFile, self.archive.sha1sum) or ctx.get_option('ignore_verify'):
+        if util.check_file_hash(
+                self.archiveFile,
+                self.archive.sha1sum) or ctx.get_option('ignore_verify'):
             if interactive and ctx.config.get_option('debug'):
                 ctx.ui.info(_('\"{}\" [cached]').format(self.archive.name))
             return True
@@ -921,15 +967,18 @@ class SourceArchive:
             if not ctx.get_option('ignore_verify'):
                 raise SourceArchiveError(_("unpack: check_file_hash failed."))
             else:
-                ctx.ui.warning(_("* Archive verification passed. Such problems may occur during the build process."))
+                ctx.ui.warning(
+                    _("* Archive verification passed. Such problems may occur during the build process."))
         try:
             archive = Archive(self.archiveFile, self.archive.type)
         except UnknownArchiveType:
             raise SourceArchiveError(
-                _("Unknown archive type '{0}' is given for '{1}'.").format(self.archive.type, self.url.filename()))
+                _("Unknown archive type '{0}' is given for '{1}'.").format(
+                    self.archive.type, self.url.filename()))
         except ArchiveHandlerNotInstalled:
             raise SourceArchiveError(
-                _("Inary needs \'{}\' to unpack this archive but it is not installed.").format(self.archive.type))
+                _("Inary needs \'{}\' to unpack this archive but it is not installed.").format(
+                    self.archive.type))
 
         target_dir = os.path.join(target_dir, self.archive.target or "")
         archive.unpack(target_dir, clean_dir)

@@ -21,8 +21,10 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+
 class MirrorError(inary.errors.Error):
     pass
+
 
 class Mirrors:
     def __init__(self, config=ctx.const.mirrors_conf):
@@ -50,4 +52,5 @@ class Mirrors:
                         (name, url) = mirror
                         self._add_mirror(name, url)
         else:
-            raise inary.errors.Error(_('Mirrors file \"{}\" does not exist. Could not resolve \"mirrors://\"').format(config))
+            raise inary.errors.Error(
+                _('Mirrors file \"{}\" does not exist. Could not resolve \"mirrors://\"').format(config))
