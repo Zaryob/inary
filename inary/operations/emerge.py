@@ -137,7 +137,7 @@ def plan_emerge(A):
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    if not srcdep in G_f.vertices():
+                    if srcdep not in G_f.vertices():
                         Bp.add(srcdep)
                         add_src(get_src(srcdep))
                     if not src.name == srcdep:  # firefox - firefox-devel thing

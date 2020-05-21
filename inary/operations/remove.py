@@ -144,7 +144,7 @@ def plan_remove(A):
                 if installdb.has_package(rev_dep) and \
                         depinfo.satisfied_by_installed() and not \
                         depinfo.satisfied_by_any_installed_other_than(x):
-                    if not rev_dep in G_f.vertices():
+                    if rev_dep not in G_f.vertices():
                         Bp.add(rev_dep)
                         G_f.add_plain_dep(rev_dep, x)
 

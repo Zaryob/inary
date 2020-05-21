@@ -307,7 +307,6 @@ def add_components(path):
         return components_xml.components
     except BaseException:
         ctx.ui.error(_(' * Component in {} is corrupt').format(path))
-    ctx.ui.error(str(*errs))
 
 
 def add_distro(path):
@@ -318,7 +317,6 @@ def add_distro(path):
         return distro
     except BaseException:
         ctx.ui.error(_(' * Distribution in {} is corrupt').format(path))
-    ctx.ui.error(str(*errs))
 
 
 def add_spec(params):

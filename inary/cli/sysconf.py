@@ -12,12 +12,9 @@
 
 import inary.sysconf as sc
 import inary.trigger
-import inary.context as ctx
 import inary.errors
 import inary.data
-import inary.ui
 import inary.cli.command as command
-import inary.util as util
 import optparse
 
 # Gettext Library

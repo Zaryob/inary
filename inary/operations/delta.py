@@ -77,8 +77,8 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
             delta_name, "w", format=target_format)
 
         # add postops files to package
-        os.chdir(self.specdir)
-        pkg.add_to_package(ctx.const.postops)
+        os.chdir(specdir)
+        delta_pkg.add_to_package(ctx.const.postops)
 
         # add xmls and files
         os.chdir(new_pkg_path)

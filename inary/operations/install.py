@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-import inary.libraries.sort as sort
 import inary.db
 import inary.ui as ui
 import inary.data.pgraph as pgraph
@@ -278,7 +277,7 @@ def install_pkg_files(package_URIs, reinstall=False):
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
                 if dep.satisfied_by_dict_repo(d_t):
-                    if not dep.package in G_f.vertices():
+                    if dep.package not in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp
@@ -332,7 +331,7 @@ def plan_install_pkg_names(A):
                         else:
                             not_satisfied[dep] = [pkg.name]
                         pass
-                    if not dep.package in G_f.vertices():
+                    if dep.package not in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
 

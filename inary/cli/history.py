@@ -18,8 +18,6 @@ import inary.context as ctx
 import inary.db
 from inary.operations import history
 import optparse
-import os
-import sys
 
 # Gettext Library
 import gettext

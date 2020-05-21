@@ -13,7 +13,6 @@
 #
 
 import inary.db
-import inary.util as util
 import inary.context as ctx
 import inary.cli.command as command
 import optparse

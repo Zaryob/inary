@@ -255,7 +255,7 @@ class Install(AtomicOperation):
             if not self.pkginfo.conflicts:
                 return True
 
-            return not pkg in [x.package for x in self.pkginfo.conflicts]
+            return pkg not in [x.package for x in self.pkginfo.conflicts]
 
         # check file conflicts
         file_conflicts = []

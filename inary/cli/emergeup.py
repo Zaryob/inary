@@ -58,7 +58,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
-        from inary.operations import repository, emerge, helper
+        from inary.operations import repository, emerge
         self.init(database=True)
 
         source = inary.db.sourcedb.SourceDB()

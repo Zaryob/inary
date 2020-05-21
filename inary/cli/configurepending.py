@@ -17,8 +17,6 @@ import inary.errors
 import inary.data
 import inary.ui
 import inary.cli.command as command
-import inary.util as util
-import os
 import optparse
 
 # Gettext Library

@@ -154,7 +154,6 @@ class CLI(inary.ui.UI):
 
     def choose(self, msg, opts):
         msg = str(msg)
-        endmsg = _('\n Select one:')
         prompt = ""
         for opt in opts:
             prompt += util.colorize('[  {}  ]\n'.format(opt), 'faintblue')
@@ -203,9 +202,8 @@ class CLI(inary.ui.UI):
             if not ctx.get_option("no_color"):
                 complated_background = 'backgroundgreen'
                 queried_background = 'backgroundyellow'
-                complated = 'brightgreen'
             else:
-                complated_background = queried_background = complated = "default"
+                complated_background = queried_background = "default"
 
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
             phr_size, phr_symbol = util.human_readable_size(
@@ -226,9 +224,6 @@ class CLI(inary.ui.UI):
                 spacenum = 0
 
             msg = file_and_totalsize + ' ' * spacenum + percentage_and_time
-
-            if len(msg) < 1:
-                self.output(out)
 
             lmsg = int((len(msg) * ka["percent"]) / 100) + 1
             # \r\x1b[2K erase current line

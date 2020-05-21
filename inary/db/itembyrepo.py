@@ -14,7 +14,6 @@
 
 import inary.db
 import gzip
-import inary.context as ctx
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)

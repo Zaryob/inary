@@ -41,7 +41,6 @@ import stat
 
 # Gettext Library
 import gettext
-import sys
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -140,8 +139,7 @@ def exclude_special_files(filepath, fileinfo, ag):
         if re.match(patterns["libtool"], fileinfo) and \
                 not os.path.islink(filepath):
             ladata = open(filepath).read()
-            new_ladata = re.sub(
-                r"-L{}/\S*".format(ctx.config.tmp_dir()), "", ladata)
+            new_ladata = re.sub(r"-L{}/\S*".format(ctx.config.tmp_dir()), "", ladata)
             new_ladata = re.sub("{}/\S*/install/".format(ctx.config.tmp_dir()), "/",
                                 new_ladata)
             if new_ladata != ladata:

@@ -1,4 +1,4 @@
-import inary.actionsapi.shelltools
+import inary.actionsapi.shelltools as shelltools
 
 sourcefile = "action.sh"
 

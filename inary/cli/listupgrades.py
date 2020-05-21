@@ -97,6 +97,6 @@ Lists the packages that will be upgraded.
             elif self.options.install_info:
                 ctx.ui.info('%-20s |%s ' % (pkg, inst_info.one_liner()))
             else:
-                package.name += ' ' * max(0, maxlen - len(pkg))
+                pkgname = pkg+ ' ' * max(0, maxlen - len(pkg))
                 ctx.ui.info(
-                    '{0} - {1}'.format(pkg, str(packagedb.get_summary(pkg))))
+                    '{0} - {1}'.format(pkgname, str(packagedb.get_summary(pkg))))

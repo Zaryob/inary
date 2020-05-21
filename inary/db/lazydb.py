@@ -27,7 +27,7 @@ class Singleton(object):
     _the_instances = {}
 
     def __new__(type):
-        if not type.__name__ in Singleton._the_instances:
+        if type.__name__ not in Singleton._the_instances:
             Singleton._the_instances[type.__name__] = object.__new__(type)
         return Singleton._the_instances[type.__name__]
 

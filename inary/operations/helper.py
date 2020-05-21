@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-import time
 import inary.db
 import inary.analyzer.conflict
 import inary.ui as ui

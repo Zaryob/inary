@@ -138,7 +138,6 @@ class RepoOrder:
         for r in xmlext.getTagByName(repo_doc, "Repo"):
             media = xmlext.getNodeText(r, "Media")
             name = xmlext.getNodeText(r, "Name")
-            status = xmlext.getNodeText(r, "Status")
             order.setdefault(media, []).append(name)
 
         return order

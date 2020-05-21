@@ -55,7 +55,7 @@ class Digraph(object):
 
     def add_vertex(self, u, data=None):
         """add vertex u, optionally with data"""
-        if not u in self.__v:
+        if u not in self.__v:
             self.__v.add(u)
             self.__adj[u] = set()
             if data:
@@ -64,9 +64,9 @@ class Digraph(object):
 
     def add_edge(self, u, v, edata=None, udata=None, vdata=None):
         """add edge u -> v"""
-        if not u in self.__v:
+        if u not in self.__v:
             self.add_vertex(u, udata)
-        if not v in self.__v:
+        if v not in self.__v:
             self.add_vertex(v, vdata)
         self.__adj[u].add(v)
         if edata is not None:
@@ -186,11 +186,11 @@ class PGraph(Digraph):
 
     def add_plain_dep(self, pkg1name, pkg2name):
         pkg1data = None
-        if not pkg1name in self.vertices():
+        if pkg1name not in self.vertices():
             pkg1 = self.packagedb.get_package(pkg1name)
             pkg1data = (pkg1.version, pkg1.release)
         pkg2data = None
-        if not pkg2name in self.vertices():
+        if pkg2name not in self.vertices():
             pkg2 = self.packagedb.get_package(pkg2name)
             pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(pkg1name), str(pkg2name), ('d', None),
@@ -198,11 +198,11 @@ class PGraph(Digraph):
 
     def add_dep(self, pkg, depinfo):
         pkg1data = None
-        if not pkg in self.vertices():
+        if pkg not in self.vertices():
             pkg1 = self.packagedb.get_package(pkg)
             pkg1data = (pkg1.version, pkg1.release)
         pkg2data = None
-        if not depinfo.package in self.vertices():
+        if depinfo.package not in self.vertices():
             pkg2 = self.packagedb.get_package(depinfo.package)
             pkg2data = (pkg2.version, pkg2.release)
         self.add_edge(str(pkg), str(depinfo.package), ('d', depinfo),
@@ -245,7 +245,7 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
                     if ignore_installed:
                         if dep.satisfied_by_installed():
                             continue
-                    if not name in G_f.vertices():
+                    if name not in G_f.vertices():
                         Bp.add(name)
                     G_f.add_dep(name, dep)
         else:
@@ -255,7 +255,7 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
                     if ignore_installed:
                         if dep.satisfied_by_installed():
                             continue
-                    if not dep.package in G_f.vertices():
+                    if dep.package not in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)
         B = Bp

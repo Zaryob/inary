@@ -12,7 +12,6 @@
 # Please read the COPYING file.
 #
 
-import inary.package
 import inary.context as ctx
 import inary.cli.command as command
 import optparse

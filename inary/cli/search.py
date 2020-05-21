@@ -87,7 +87,7 @@ database.
         installdb = inary.db.installdb.InstallDB()
         if ctx.get_option('installdb'):
             pkgs = installdb.search_package(self.args, lang, fields, cs)
-            get_info = db.get_package
+            get_info = installdb.get_package
             def get_name_sum(pkg): return (pkg.name, pkg.summary)
         elif ctx.get_option('sourcedb'):
             db = inary.db.sourcedb.SourceDB()
@@ -108,7 +108,6 @@ database.
 
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
-            version = ""
             if installdb.has_package(pkg):
                 color = "brightgreen"
             else:

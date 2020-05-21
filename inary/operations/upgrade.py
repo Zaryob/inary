@@ -312,7 +312,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 continue
 
             if dep.satisfied_by_repo():
-                if not dep.package in G_f.vertices():
+                if dep.package not in G_f.vertices():
                     Bp.add(str(dep.package))
 
                 # Always add the dependency info although the dependant
