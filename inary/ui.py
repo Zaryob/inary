@@ -14,8 +14,21 @@
 # generic user interface
 #
 
-(installed, upgraded, removed, installing, removing, configuring, configured, extracting,
- downloading, packagestogo, updatingrepo, cached, desktopfile, fetching, fetched) = list(range(15))
+(installed,
+    upgraded,
+    removed,
+    installing,
+    removing,
+    configuring,
+    configured,
+    extracting,
+    downloading,
+    packagestogo,
+    updatingrepo,
+    cached,
+    desktopfile,
+    fetching,
+ fetched) = list(range(15))
 
 
 class UI(object):

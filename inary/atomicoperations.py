@@ -123,8 +123,10 @@ class Install(AtomicOperation):
             if uri.is_absolute_path():
                 pkg_path = str(pkg_uri)
             else:
-                pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
-                                        str(uri.path()))
+                pkg_path = os.path.join(
+                    os.path.dirname(
+                        repo.indexuri.get_uri()), str(
+                        uri.path()))
 
             ctx.ui.info(
                 _("Package URI: \"{}\"").format(pkg_path),
@@ -575,8 +577,10 @@ class Install(AtomicOperation):
 
         otype = "delta" if self.package_fname.endswith(
             ctx.const.delta_package_suffix) else None
-        self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
-                                      operation=opttostr[self.operation], otype=otype)
+        self.historydb.add_and_update(
+            pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
+            operation=opttostr[self.operation],
+            otype=otype)
 
 
 def install_single(pkg, upgrade=False):
