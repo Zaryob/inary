@@ -832,9 +832,8 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                 if not paths_p:
                     paths_p = paths_m[:]
                     try:
-                        paths_m = [
-                            l.strip().split()[1] for l in lines
-                            if l.startswith("***") and "/" in l]
+                        paths_m = [l.strip().split()[1]
+                                   for l in lines if l.startswith("***") and "/" in l]
                     except IndexError:
                         pass
 
@@ -864,8 +863,8 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         if not os.path.exists(patchesDir):
             os.makedirs(patchesDir)
         # Import original patch into quilt tree
-        (ret, out, err) = run_batch('quilt import {0} -p {1} -P {2} \"{3}\"'.format(
-            ("-R" if reverse else ""), level, name, patchFile))
+        (ret, out, err) = run_batch(
+            'quilt import {0} -p {1} -P {2} \"{3}\"'.format(("-R" if reverse else ""), level, name, patchFile))
         # run quilt push to apply original patch into tree
         (ret, out, err) = run_batch('quilt push')
     else:
@@ -1032,12 +1031,11 @@ def parse_package_name_get_name(package_name):
 
 def parse_package_dir_path(package_name):
     name = parse_package_name(package_name)[0]
-    if name.split("-").pop() in ["devel", "32bit", "doc", "docs",
-                                 "pages", "static", "dbginfo", "32bit-dbginfo", "userspace"]:
+    if name.split("-").pop() in ["devel", "32bit", "doc", "docs", "pages", "static", "dbginfo", "32bit-dbginfo",
+                                 "userspace"]:
         name = name[:-1 - len(name.split("-").pop())]
-    return "{0}/{1}".format(name[0: 4].lower()
-                            if name.startswith("lib") and len(name) > 3 else
-                            name.lower()[0], name.lower())
+    return "{0}/{1}".format(name[0:4].lower() if name.startswith("lib") and len(name) > 3 else name.lower()[0],
+                            name.lower())
 
 
 def parse_delta_package_name_legacy(package_name):

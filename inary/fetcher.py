@@ -111,11 +111,9 @@ class UIHandler:
             except ZeroDivisionError:
                 self.rate, self.symbol = None, None
             if self.total_size:
-                self.eta = '%02d:%02d:%02d' % tuple(
-                    [i
-                     for i in time.gmtime(
-                         (self.t_diff() * (100 - self.percent)) / self.percent)
-                     [3: 6]])
+                self.eta = '%02d:%02d:%02d' % \
+                           tuple([i for i in time.gmtime(
+                               (self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
         self._update_ui()
 
@@ -263,8 +261,7 @@ class Fetcher:
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
             ctx.ui.error(
-                FetchError(
-                    _('A problem occurred. Please check the archive address and/or permissions again.')))
+                FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
 
         shutil.move(self.partial_file, self.archive_file)
         return self.archive_file
@@ -296,8 +293,8 @@ class Fetcher:
             )] = ctx.config.values.general.http_proxy
 
         if ctx.config.values.general.https_proxy and self.url.scheme() == "https":
-            proxies[inary.uri.URI(ctx.config.values.general.https_proxy).scheme(
-            )] = ctx.config.values.general.https_proxy
+            proxies[
+                inary.uri.URI(ctx.config.values.general.https_proxy).scheme()] = ctx.config.values.general.https_proxy
 
         if ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
             proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme(

@@ -307,9 +307,8 @@ class ConfigurationFile(object):
                             value = self.parser.get(sect, opt)
                             # Fix continuations.
                             value = value.replace("\n", "\n\t")
-                            current.write(
-                                "{0}{1}{2}{3}\n".format(
-                                    opt, padded_vi, value, comment))
+                            current.write("{0}{1}{2}{3}\n".format(opt, padded_vi,
+                                                                  value, comment))
                             written.append((sect, opt))
         if sect:
             sections[sect] = current
