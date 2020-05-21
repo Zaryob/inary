@@ -238,10 +238,9 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
     # state = {}
     while len(B) > 0:
         Bp = set()
-        for x in B:
-            pkg = packagedb.get_package(x)
             # print pkg
-            if reverse:
+        if reverse:
+            for x in B:
                 for name, dep in packagedb.get_rev_deps(x):
                     if ignore_installed:
                         if dep.satisfied_by_installed():
@@ -249,7 +248,9 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
                     if not name in G_f.vertices():
                         Bp.add(name)
                     G_f.add_dep(name, dep)
-            else:
+        else:
+            for x in B:
+                pkg = packagedb.get_package(x)
                 for dep in pkg.runtimeDependencies():
                     if ignore_installed:
                         if dep.satisfied_by_installed():
