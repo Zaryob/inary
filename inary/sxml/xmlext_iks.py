@@ -24,14 +24,13 @@
  this implementation uses iksemel
 """
 
+import ciksemel as iks
+import inary.errors
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.errors
-
-import ciksemel as iks
 
 parse = iks.parse
 parseString = iks.parseString
@@ -98,7 +97,8 @@ def getNodeText(node, tagpath=""):
         # print('child_data=', child_data.strip())
         return child_data.strip()  # in any case, strip whitespaces...
     else:
-        raise XMLError(_("getNodeText: Expected text node, got something else!"))
+        raise XMLError(
+            _("getNodeText: Expected text node, got something else!"))
 
 
 def getChildText(node_s, tagpath):
@@ -115,7 +115,7 @@ def getNode(node, tagpath):
     if tagpath == "":
         return node
 
-    assert type(tagpath) == str
+    assert isinstance(tagpath, str)
     tags = tagpath.split('/')
     assert len(tags) > 0
 
@@ -155,7 +155,7 @@ def addNode(node, tagpath, newnode=None, branch=True):
     """add a new node at the end of the tree and returns it
     if newnode is given adds that node, too."""
 
-    assert type(tagpath) == str
+    assert isinstance(tagpath, str)
     tags = []
     if tagpath != "":
         tags = tagpath.split('/')  # tag chain

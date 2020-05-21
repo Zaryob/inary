@@ -11,29 +11,30 @@
 #
 # Please read the COPYING file.
 
+import inary.actionsapi.variables
+import inary.context as ctx
+import inary.actionsapi
 import multiprocessing
 # Standart Python Modules
 import os
 import sys
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY Modules
-import inary.actionsapi
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi.variables
 
 
 class BinutilsError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
-        ctx.ui.error("[Binutils]: "+ value)
+        ctx.ui.error("[Binutils]: " + value)
+
 
 # Globals
 env = inary.actionsapi.variables.glb.env
@@ -96,7 +97,7 @@ def installDIR():
 
 def lsbINFO():
     """Returns a dictionary filled through /etc/lsb-release."""
-    return dict([(l.split("=")[0], l.split("=")[1].strip("'\"")) \
+    return dict([(l.split("=")[0], l.split("=")[1].strip("'\""))
                  for l in open("/etc/lsb-release").read().strip().split("\n") if "=" in l])
 
 
@@ -238,7 +239,9 @@ def getBinutilsInfo(util):
         if not existBinary(util):
             raise BinutilsError(_('Util \'{}\' cannot be found.').format(util))
         else:
-            ctx.ui.warning(_('\'{0}\' does not exist, using plain name \'{1}\'').format(cross_build_name, util))
+            ctx.ui.warning(
+                _('\'{0}\' does not exist, using plain name \'{1}\'').format(
+                    cross_build_name, util))
             return util
     else:
         return cross_build_name

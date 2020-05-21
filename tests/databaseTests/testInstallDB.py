@@ -17,6 +17,7 @@ import inary.db
 import unittest
 from . import testcase
 
+
 class InstallDBTestCase(testcase.TestCase):
 
     def setUp(self):
@@ -43,7 +44,8 @@ class InstallDBTestCase(testcase.TestCase):
     def testListInstalled(self):
         inary.api.install(["timezone", "time"])
         self.installdb = inary.db.installdb.InstallDB()
-        self.assertEqual(set(self.installdb.list_installed()), set(["timezone", "time"]))
+        self.assertEqual(set(self.installdb.list_installed()),
+                         set(["timezone", "time"]))
 
     def testGetVersion(self):
         inary.api.install(["timezone"])
@@ -57,7 +59,8 @@ class InstallDBTestCase(testcase.TestCase):
         inary.api.install(["timezone"])
         self.installdb = inary.db.installdb.InstallDB()
         files = self.installdb.get_files("timezone")
-        self.assertIn("usr/share/zoneinfo/Portugal", [x.path for x in files.list])
+        self.assertIn("usr/share/zoneinfo/Portugal",
+                      [x.path for x in files.list])
         self.assertNotIn("usr/bin", [x.path for x in files.list])
 
     def testGetInfo(self):
@@ -71,7 +74,7 @@ class InstallDBTestCase(testcase.TestCase):
         inary.api.install(["acl"])
         self.installdb = inary.db.installdb.InstallDB()
         revdeps = self.installdb.get_rev_deps("acl")
-        self.assertIn(set(["attr"]), set(map(lambda x:x[0], revdeps)))
+        self.assertIn(set(["attr"]), set(map(lambda x: x[0], revdeps)))
 
     def testAddRemovePackage(self):
         inary.api.install(["time"])
@@ -95,4 +98,5 @@ class InstallDBTestCase(testcase.TestCase):
         self.assertFalse(self.installdb.search_package(["timezone"]))
         inary.api.install(["timezone"])
         self.installdb = inary.db.installdb.InstallDB()
-        self.assertEqual(self.installdb.search_package(["t", "ime", "zone"]), ["timezone"])
+        self.assertEqual(self.installdb.search_package(
+            ["t", "ime", "zone"]), ["timezone"])

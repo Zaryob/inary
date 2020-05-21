@@ -12,15 +12,14 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.command as command
+import inary.context as ctx
+import inary.util as util
+import os
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import os
-import inary.util as util
-import inary.context as ctx
-import inary.cli.command as command
 
 
 class DeleteCache(command.Command, metaclass=command.autocommand):
@@ -46,13 +45,20 @@ consume a lot of disk space.""")
         """
         Deletes cached packages, cached archives, build dirs, db caches
         """
-        ctx.ui.info(_("Cleaning package cache \"{}\"...").format(ctx.config.cached_packages_dir()))
+        ctx.ui.info(
+            _("Cleaning package cache \"{}\"...").format(
+                ctx.config.cached_packages_dir()))
         util.clean_dir(ctx.config.cached_packages_dir())
-        ctx.ui.info(_("Cleaning source archive cache \"{}\"...").format(ctx.config.archives_dir()))
+        ctx.ui.info(
+            _("Cleaning source archive cache \"{}\"...").format(
+                ctx.config.archives_dir()))
         util.clean_dir(ctx.config.archives_dir())
-        ctx.ui.info(_("Cleaning temporary directory \"{}\"...").format(ctx.config.tmp_dir()))
+        ctx.ui.info(
+            _("Cleaning temporary directory \"{}\"...").format(
+                ctx.config.tmp_dir()))
         util.clean_dir(ctx.config.tmp_dir())
-        for cache in [x for x in os.listdir(ctx.config.cache_root_dir()) if x.endswith(".cache")]:
+        for cache in [x for x in os.listdir(
+                ctx.config.cache_root_dir()) if x.endswith(".cache")]:
             cache_file = util.join_path(ctx.config.cache_root_dir(), cache)
             ctx.ui.info(_("Removing cache file \"{}\"...").format(cache_file))
             os.unlink(cache_file)

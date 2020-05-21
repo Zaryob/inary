@@ -24,17 +24,15 @@
  this implementation uses iksemel
 """
 
+from inary.file import File
+import inary.config
+import inary.errors
+import ciksemel as iks
+import io
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import io
-import ciksemel as iks
-
-import inary.errors
-import inary.config
-from inary.file import File
 
 
 class Error(inary.errors.Error):
@@ -61,7 +59,7 @@ class XmlFile(object):
 
     def parsexml(self, file):
         try:
-            if type(file) == bytes:
+            if isinstance(file, bytes):
                 file.decode('utf-8')
             self.doc = iks.parseString(str(file))
             return self.doc
@@ -81,9 +79,12 @@ class XmlFile(object):
 
         try:
             from inary.libraries.preprocess import preprocess
-            preprocess.preprocess(infile=localpath, outfile=st, defines=inary.config.Config().values.directives)
+            preprocess.preprocess(
+                infile=localpath,
+                outfile=st,
+                defines=inary.config.Config().values.directives)
             st.seek(0)
-        except:
+        except BaseException:
             st = open(localpath)
 
         try:
@@ -92,8 +93,14 @@ class XmlFile(object):
         except Exception as e:
             raise Error(_("File \"{}\" has invalid XML.").format(localpath))
 
-    def writexml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None, sign=None):
-        f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+    def writexml(self, uri, tmpDir='/tmp', sha1sum=False,
+                 compress=None, sign=None):
+        f = File(
+            uri,
+            File.write,
+            sha1sum=sha1sum,
+            compress=compress,
+            sign=sign)
         f.write(self.doc.toPrettyString())
         f.close()
 

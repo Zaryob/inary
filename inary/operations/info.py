@@ -34,7 +34,8 @@ def info(package, installed=False):
 
 def info_file(package_fn):
     if not os.path.exists(package_fn):
-        raise inary.errors.Error(_('File \"{}\" not found.').format(package_fn))
+        raise inary.errors.Error(
+            _('File \"{}\" not found.').format(package_fn))
 
     package = inary.package.Package(package_fn)
     package.read()
@@ -56,7 +57,8 @@ def info_name(package_name, useinstalldb=False):
     metadata.package = package
     # FIXME: get it from sourcedb if available
     metadata.source = None
-    # TODO: fetch the files from server if possible (wow, you maniac -- future exa)
+    # TODO: fetch the files from server if possible (wow, you maniac -- future
+    # exa)
     if useinstalldb and installdb.has_package(package.name):
         try:
             files = installdb.get_files(package.name)

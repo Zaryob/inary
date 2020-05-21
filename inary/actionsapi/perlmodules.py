@@ -12,6 +12,14 @@
 # Please read the COPYING file.
 
 # Standard python modules
+from inary.actionsapi.shelltools import unlinkDir
+from inary.actionsapi.shelltools import unlink
+from inary.actionsapi.shelltools import export
+from inary.actionsapi.shelltools import can_access_file
+from inary.actionsapi.shelltools import system
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
 import os
 
 # Gettext Library
@@ -20,16 +28,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system
-from inary.actionsapi.shelltools import can_access_file
-from inary.actionsapi.shelltools import export
-from inary.actionsapi.shelltools import unlink
-from inary.actionsapi.shelltools import unlinkDir
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -57,15 +57,16 @@ def configure(parameters=''):
     """configure source with given parameters."""
     export('PERL_MM_USE_DEFAULT', '1')
     if can_access_file('Build.PL'):
-        if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(get.curPERL(), get.installDIR())):
+        if system('perl{0} Build.PL installdirs=vendor destdir={1}'.format(
+                get.curPERL(), get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
     elif can_access_file('Makefile.PL'):
         if system('perl{0} Makefile.PL {1} PREFIX=/usr INSTALLDIRS=vendor DESTDIR={2}'.format(get.curPERL(), parameters,
                                                                                               get.installDIR())):
             raise ConfigureError(_('Configure failed.'))
     else:
-            raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("Build.PL/Makefile.PL")))
-
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("Build.PL/Makefile.PL")))
 
 
 def make(parameters=''):

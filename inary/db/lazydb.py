@@ -36,7 +36,9 @@ class Singleton(object):
 
     def _delete(self):
         # FIXME: After invalidate, previously initialized db object becomes
-        ctx.ui.debug("LazyDB: {0} invalidated.".format(self.__class__.__name__))
+        ctx.ui.debug(
+            "LazyDB: {0} invalidated.".format(
+                self.__class__.__name__))
         del self._the_instances[type(self).__name__]
 
 
@@ -122,7 +124,10 @@ class LazyDB(Singleton):
             start = time.time()
             self.__init()
             end = time.time()
-            ctx.ui.debug("{0} initialized in {1}.".format(self.__class__.__name__, end - start))
+            ctx.ui.debug(
+                "{0} initialized in {1}.".format(
+                    self.__class__.__name__,
+                    end - start))
             self.initialized = True
 
         if attr not in self.__dict__:

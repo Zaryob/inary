@@ -12,59 +12,59 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.sysconf
+import inary.cli.upgrade
+import inary.cli.updaterepo
+import inary.cli.search
+import inary.cli.searchfile
+import inary.cli.disablerepo
+import inary.cli.enablerepo
+import inary.cli.removeorphaned
+import inary.cli.removerepo
+import inary.cli.remove
+import inary.cli.reconfigure
+import inary.cli.rebuilddb
+import inary.cli.listupgrades
+import inary.cli.listsources
+import inary.cli.listrepo
+import inary.cli.listpending
+import inary.cli.listorphaned
+import inary.cli.listinstalled
+import inary.cli.listcomponents
+import inary.cli.listavailable
+import inary.cli.listnewest
+import inary.cli.history
+import inary.cli.install
+import inary.cli.info
+import inary.cli.init
+import inary.cli.index
+import inary.cli.graph
+import inary.cli.fetch
+import inary.cli.emergeup
+import inary.cli.emerge
+import inary.cli.delta
+import inary.cli.deletecache
+import inary.cli.configurepending
+import inary.cli.configmanager
+import inary.cli.check
+import inary.cli.build
+import inary.cli.blame
+import inary.cli.addrepo
+import inary.cli.command as command
+import inary.cli
+import inary.errors
+import inary
 import optparse
 import sys
+import inary.cli.help
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
-import inary.errors
-import inary.cli
-import inary.cli.command as command
-import inary.cli.addrepo
-import inary.cli.blame
-import inary.cli.build
-import inary.cli.check
-import inary.cli.configmanager
-import inary.cli.configurepending
-import inary.cli.deletecache
-import inary.cli.delta
-import inary.cli.emerge
-import inary.cli.emergeup
-import inary.cli.fetch
-import inary.cli.graph
-import inary.cli.index
-import inary.cli.init
-import inary.cli.info
-import inary.cli.install
-import inary.cli.history
-import inary.cli.listnewest
-import inary.cli.listavailable
-import inary.cli.listcomponents
-import inary.cli.listinstalled
-import inary.cli.listorphaned
-import inary.cli.listpending
-import inary.cli.listrepo
-import inary.cli.listsources
-import inary.cli.listupgrades
-import inary.cli.rebuilddb
-import inary.cli.reconfigure
-import inary.cli.remove
-import inary.cli.removerepo
-import inary.cli.removeorphaned
-import inary.cli.enablerepo
-import inary.cli.disablerepo
-import inary.cli.searchfile
-import inary.cli.search
-import inary.cli.updaterepo
-import inary.cli.upgrade
-import inary.cli.sysconf
 
 # FIXME: why does this has to be imported last
-import inary.cli.help
 
 
 class ParserError(inary.errors.Exception):
@@ -75,7 +75,8 @@ class PreParser(optparse.OptionParser):
     """consumes any options, and finds arguments from command line"""
 
     def __init__(self, version):
-        optparse.OptionParser.__init__(self, usage=inary.cli.help.usage_text, version=version)
+        optparse.OptionParser.__init__(
+            self, usage=inary.cli.help.usage_text, version=version)
 
     def error(self, msg):
         raise ParserError(msg)
@@ -146,7 +147,8 @@ class InaryCLI(object):
 
         self.command = command.Command.get_command(cmd_name, args=orig_args)
         if not self.command:
-            raise inary.cli.Error(_("Unrecognized command: {}").format(cmd_name))
+            raise inary.cli.Error(
+                _("Unrecognized command: {}").format(cmd_name))
 
     def die(self):
         inary.cli.printu('\n' + self.parser.format_help())

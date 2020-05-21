@@ -11,6 +11,12 @@
 #
 # Please read the COPYING file.
 
+import inary.operations as operations
+import inary.fetcher
+import inary.db
+import inary.util as util
+import inary.context as ctx
+import inary.errors
 import os
 import math
 
@@ -18,13 +24,6 @@ import math
 import gettext
 __trans = gettext.translation("inary", fallback=True)
 _ = __trans.gettext
-
-import inary.errors
-import inary.context as ctx
-import inary.util as util
-import inary.db
-import inary.fetcher
-import inary.operations as operations
 
 
 class PackageNotFound(inary.errors.Error):
@@ -82,7 +81,9 @@ def __getpackageurl_binman(package):
     base_package = os.path.dirname(package_.packageURI)
     repo_base = os.path.dirname(repourl)
     possible_url = os.path.join(repo_base, base_package, package)
-    ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\".").format(pkg, reponame))
+    ctx.ui.info(
+        _("Package \"{0}\" found in repository \"{1}\".").format(
+            pkg, reponame))
 
     # return _possible_ url for this package
     return possible_url
@@ -106,7 +107,9 @@ def __getpackageurl(package):
         raise PackageNotFound
 
     repourl = repodb.get_repo_url(reponame)
-    ctx.ui.info(_("Package \"{0}\" found in repository \"{1}\".").format(pkg, reponame))
+    ctx.ui.info(
+        _("Package \"{0}\" found in repository \"{1}\".").format(
+            pkg, reponame))
 
     # return _possible_ url for this package
     return os.path.join(os.path.dirname(repourl),
@@ -119,7 +122,9 @@ def fetch_remote_file(package, errors):
         uri = inary.file.File.make_uri(__getpackageurl_binman(package))
     except PackageNotFound:
         errors.append(package)
-        ctx.ui.info(_("\"{}\" could not be found.").format(package), color="red")
+        ctx.ui.info(
+            _("\"{}\" could not be found.").format(package),
+            color="red")
         return False
 
     dest = ctx.config.cached_packages_dir()
@@ -130,15 +135,18 @@ def fetch_remote_file(package, errors):
             inary.fetcher.fetch_url(uri, dest, ctx.ui.Progress)
         except inary.fetcher.FetchError:
             errors.append(package)
-            ctx.ui.info(_("\"{}\" could not be found.").format(package), color="red")
+            ctx.ui.info(
+                _("\"{}\" could not be found.").format(package),
+                color="red")
             failed = True
         if failed:
             try:
                 new_uri = inary.file.File.make_uri(__getpackageurl(package))
                 inary.fetcher.fetch_url(new_uri, dest, ctx.ui.Progress)
-            except:
+            except BaseException:
                 errors.append(package)
-                ctx.ui.info(_("\"{}\" could not be found.").format(package), "red")
+                ctx.ui.info(
+                    _("\"{}\" could not be found.").format(package), "red")
                 return False
 
     else:
@@ -200,22 +208,32 @@ def takeback(operation):
     historydb.create_history("takeback")
     beinstalled, beremoved, configs = plan_takeback(operation)
     if not beinstalled and not beremoved:
-        ctx.ui.info(_("There is no packages to taking back (installing or removing)."))
+        ctx.ui.info(
+            _("There is no packages to taking back (installing or removing)."))
 
     if beinstalled:
-        ctx.ui.info(_("Following packages will be installed:\n") + util.strlist(beinstalled))
+        ctx.ui.info(
+            _("Following packages will be installed:\n") +
+            util.strlist(beinstalled))
 
     if beremoved:
-        ctx.ui.info(_("Following packages will be removed:\n") + util.strlist(beremoved))
+        ctx.ui.info(
+            _("Following packages will be removed:\n") +
+            util.strlist(beremoved))
 
-    if (beremoved or beinstalled) and not ctx.ui.confirm(_('Would you like to continue?')):
+    if (beremoved or beinstalled) and not ctx.ui.confirm(
+            _('Would you like to continue?')):
         return
 
     errors = []
     paths = []
     lndig = math.floor(math.log(len(beinstalled), 10)) + 1
     for pkg in beinstalled:
-        ctx.ui.info(_("Downloading") + str(" [ {:>"+str(lndig)+ "} / {} ] => [{}]").format(beinstalled.index(pkg) + 1, len(beinstalled),pkg), color="yellow")
+        ctx.ui.info(_("Downloading") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ] => [{}]").format(beinstalled.index(pkg) +
+                                                   1, len(beinstalled), pkg), color="yellow")
         pkg += ctx.const.package_suffix
         if fetch_remote_file(pkg, errors):
             paths.append(os.path.join(ctx.config.cached_packages_dir(), pkg))

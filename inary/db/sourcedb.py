@@ -42,10 +42,12 @@ class SourceDB(lazydb.LazyDB):
 
         for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
-            self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(doc)
+            self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(
+                doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
 
-        self.sdb = inary.db.itembyrepo.ItemByRepo(self.__source_nodes, compressed=True)
+        self.sdb = inary.db.itembyrepo.ItemByRepo(
+            self.__source_nodes, compressed=True)
         self.psdb = inary.db.itembyrepo.ItemByRepo(self.__pkgstosrc)
         self.rvdb = inary.db.itembyrepo.ItemByRepo(self.__revdeps)
 
@@ -57,7 +59,8 @@ class SourceDB(lazydb.LazyDB):
         for spec in xmlext.getTagByName(doc, "SpecFile"):
             src = xmlext.getNode(spec, "Source")
             src_name = xmlext.getNodeText(src, "Name")
-            compressed_data = gzip.zlib.compress(xmlext.toString(spec).encode('utf-8'))
+            compressed_data = gzip.zlib.compress(
+                xmlext.toString(spec).encode('utf-8'))
             sources[src_name] = compressed_data
 
             for package in xmlext.getTagByName(spec, "Package"):
@@ -75,7 +78,9 @@ class SourceDB(lazydb.LazyDB):
             deps = xmlext.getNode(src, "BuildDependencies")
             if deps:
                 for dep in xmlext.getTagByName(deps, "Dependency"):
-                    revdeps.setdefault(xmlext.getNodeText(dep), set()).add((name, xmlext.toString(dep)))
+                    revdeps.setdefault(
+                        xmlext.getNodeText(dep), set()).add(
+                        (name, xmlext.toString(dep)))
 
         return revdeps
 
@@ -115,10 +120,10 @@ class SourceDB(lazydb.LazyDB):
         found = []
         for name, xml in self.sdb.get_items_iter(repo):
             if terms == [term for term in terms if (fields['name'] and
-                                                    re.compile(term, re.I).search(name)) or \
+                                                    re.compile(term, re.I).search(name)) or
                                                    (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
-                                                        xml)) or \
+                                                        xml)) or
                                                    (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
@@ -149,11 +154,13 @@ class SourceDB(lazydb.LazyDB):
 
             if xmlext.getAttributeList(node):
                 if xmlext.getNodeAttribute(node, "version"):
-                    dependency.__dict__["version"] = xmlext.getNodeAttribute(node, "version")
+                    dependency.__dict__[
+                        "version"] = xmlext.getNodeAttribute(node, "version")
                 elif xmlext.getNodeAttribute(node, "release"):
-                    dependency.__dict__["release"] = xmlext.getNodeAttribute(node, "release")
+                    dependency.__dict__[
+                        "release"] = xmlext.getNodeAttribute(node, "release")
                 else:
-                    pass #FIXME: ugly
+                    pass  # FIXME: ugly
             rev_deps.append((pkg, dependency))
 
         return rev_deps

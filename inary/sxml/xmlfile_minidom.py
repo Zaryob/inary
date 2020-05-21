@@ -23,18 +23,16 @@
 
 """
 
+from inary.file import File
+import inary.config
+import inary.errors
+from xml.parsers.expat import ExpatError
+import xml.dom.minidom as minidom
+import io
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import io
-import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
-
-import inary.errors
-import inary.config
-from inary.file import File
 
 
 class Error(inary.errors.Error):
@@ -81,9 +79,12 @@ class XmlFile(object):
 
         try:
             from inary.libraries import preprocess
-            preprocess.preprocess(infile=localpath, outfile=st, defines=inary.config.Config().values.directives)
+            preprocess.preprocess(
+                infile=localpath,
+                outfile=st,
+                defines=inary.config.Config().values.directives)
             st.seek(0)
-        except:
+        except BaseException:
             st = open(localpath)
 
         try:
@@ -91,10 +92,16 @@ class XmlFile(object):
             return self.doc.documentElement
         except ExpatError as err:
             raise Error(_("File \"{}\" has invalid XML: {}\n").format(localpath,
-                                                                    str(err)))
+                                                                      str(err)))
 
-    def writexml(self, uri, tmpDir='/tmp', sha1sum=False, compress=None, sign=None):
-        f = File(uri, File.write, sha1sum=sha1sum, compress=compress, sign=sign)
+    def writexml(self, uri, tmpDir='/tmp', sha1sum=False,
+                 compress=None, sign=None):
+        f = File(
+            uri,
+            File.write,
+            sha1sum=sha1sum,
+            compress=compress,
+            sign=sign)
         f.write(self.doc.toprettyxml())
         f.close()
 

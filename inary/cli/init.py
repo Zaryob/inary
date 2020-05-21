@@ -12,20 +12,19 @@
 # Please read the COPYING file.
 #
 
+import inary.trigger
+import inary.context as ctx
+import inary.errors
+import inary.data
+import inary.ui
+import inary.cli.command as command
+import inary.util as util
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.util as util
-import inary.cli.command as command
-import inary.ui
-import inary.data
-import inary.errors
-import inary.context as ctx
-import inary.trigger
 
 
 class InitNothing(command.PackageOp, metaclass=command.autocommand):

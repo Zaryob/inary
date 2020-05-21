@@ -12,12 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.errors
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.errors
 
 
 class Error(inary.errors.Error):

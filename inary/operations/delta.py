@@ -11,16 +11,15 @@
 #
 # Please read the COPYING file.
 
+import inary.util as util
+import inary.package
+import inary.context as ctx
 import os
 
 # Gettext Library
 import gettext
 __trans = gettext.translation("inary", fallback=True)
 _ = __trans.gettext
-
-import inary.context as ctx
-import inary.package
-import inary.util as util
 
 
 def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
@@ -45,7 +44,7 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
         if old_pkg_info.name != new_pkg_info.name:
             ctx.ui.warning(
                 _("The file \"{0}\" belongs to a different package other than '{1}'. Skipping it...").format(old_package,
-                                                                                                           new_pkg_info.name))
+                                                                                                             new_pkg_info.name))
             continue
 
         if old_pkg_info.release == new_pkg_info.release:
@@ -74,7 +73,8 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
                 old_package))
             continue
 
-        delta_pkg = inary.package.Package(delta_name, "w", format=target_format)
+        delta_pkg = inary.package.Package(
+            delta_name, "w", format=target_format)
 
         # add postops files to package
         os.chdir(self.specdir)
@@ -112,7 +112,8 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
 def create_delta_packages(old_packages, new_package):
     if new_package in old_packages:
-        ctx.ui.warning(_("New package \"{}\" exists in the list of old packages. Skipping it...").format(new_package))
+        ctx.ui.warning(
+            _("New package \"{}\" exists in the list of old packages. Skipping it...").format(new_package))
         while new_package in old_packages:
             old_packages.remove(new_package)
 
@@ -126,7 +127,7 @@ def create_delta_packages(old_packages, new_package):
     new_pkg.extract_inary_files(new_pkg_path)
     try:
         new_pkg.extract_file(ctx.const.postops, new_pkg_path)
-    except:
+    except BaseException:
         pass
 
     install_dir = util.join_path(new_pkg_path, "install")
@@ -164,7 +165,8 @@ def find_delta(old_files, new_files):
     hashes_delta = list(new_hashes - old_hashes)
 
     # Add to-be-replaced config files to delta package regardless of its state
-    hashes_delta.extend([f.hash for f in new_files.list if f.type == 'config' and f.replace])
+    hashes_delta.extend(
+        [f.hash for f in new_files.list if f.type == 'config' and f.replace])
 
     deltas = []
     for h in hashes_delta:

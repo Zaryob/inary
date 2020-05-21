@@ -13,5 +13,5 @@
 try:
     from .xmlext_iks import *
 
-except:
+except BaseException:
     from .xmlext_minidom import *

@@ -238,7 +238,7 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
     # state = {}
     while len(B) > 0:
         Bp = set()
-            # print pkg
+        # print pkg
         if reverse:
             for x in B:
                 for name, dep in packagedb.get_rev_deps(x):

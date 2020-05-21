@@ -25,10 +25,11 @@ from inary.actionsapi.shelltools import ls
 from inary.actionsapi.shelltools import makedirs
 from inary.actionsapi.shelltools import system
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
 
 class MesonError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -36,11 +37,13 @@ class MesonError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[MesonTools]: " + value)
 
+
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error("[MesonTools]: " + value)
+
 
 class NinjaBuildError(inary.actionsapi.Error):
     def __init__(self, value=''):
@@ -48,12 +51,14 @@ class NinjaBuildError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[MesonTools]: " + value)
 
+
 def fixpc():
     """ fix .pc files in installDIR()/usr/lib32/pkgconfig"""
     path = "{}/usr/lib32/pkgconfig".format(get.installDIR())
     if isDirectory(path):
         for f in ls("{}/*.pc".format(path)):
             dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
+
 
 def meson_configure(parameters=""):
     if can_access_file('meson.build'):
@@ -76,7 +81,9 @@ def meson_configure(parameters=""):
         if system(args):
             raise MesonError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("meson.build")))
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("meson.build")))
+
 
 def cmake_configure(parameters=""):
     makedirs("inaryPackageBuild")
@@ -89,37 +96,44 @@ def cmake_configure(parameters=""):
                       -DCMAKE_CXX_FLAGS="{6} {3}" \
                       -DCMAKE_LD_FLAGS="{4}" \
                       -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} -G Ninja ..'.format(get.defaultprefixDIR(),
-                                                                        "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
-                                                                        get.CFLAGS(),
-                                                                        get.CXXFLAGS(),
-                                                                        get.LDFLAGS(),
-                                                                        parameters,
-                                                                        "-m32"  if get.buildTYPE() == "emul32" else "-m64")
+                                                                                "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
+                                                                                get.CFLAGS(),
+                                                                                get.CXXFLAGS(),
+                                                                                get.LDFLAGS(),
+                                                                                parameters,
+                                                                                "-m32" if get.buildTYPE() == "emul32" else "-m64")
 
         if system(args):
             raise ConfigureError(_('CMake configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
+
 
 def ninja_build(parameters=""):
     if system("ninja {} {} -C inaryPackageBuild".format(get.makeJOBS(), parameters)):
         raise NinjaBuildError(_("Build failed."))
     if get.buildTYPE() == "emul32":
         fixpc()
-        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
+        if isDirectory("{}/emul32".format(get.installDIR())):
+            removeDir("/emul32")
 
 
 def ninja_install(parameters=""):
-    insdir = util.join_path(get.installDIR(), "emul32") if get.buildTYPE() == "emul32" else get.installDIR()
-    if system('DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir, get.makeJOBS())):
+    insdir = util.join_path(
+        get.installDIR(),
+        "emul32") if get.buildTYPE() == "emul32" else get.installDIR()
+    if system(
+            'DESTDIR="{}" ninja install {} -C inaryPackageBuild'.format(insdir, get.makeJOBS())):
         raise NinjaBuildError(_("Install failed."))
     if isDirectory("{}/emul32".format(get.installDIR())):
         if isDirectory("{}/emul32/lib32".format(get.installDIR())):
-            copy("{}/emul32/lib32".format(get.installDIR()), "{}/".format(get.installDIR()))
+            copy("{}/emul32/lib32".format(get.installDIR()),
+                 "{}/".format(get.installDIR()))
         if isDirectory("{}/emul32/usr/lib32".format(get.installDIR())):
-            copy("{}/emul32/usr/lib32".format(get.installDIR()), "{}/usr/".format(get.installDIR()))
+            copy("{}/emul32/usr/lib32".format(get.installDIR()),
+                 "{}/usr/".format(get.installDIR()))
         removeDir("/emul32")
-
 
 
 def ninja_check():

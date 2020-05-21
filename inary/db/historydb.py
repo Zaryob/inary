@@ -29,7 +29,9 @@ class HistoryDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_history():
-        logs = [x for x in os.listdir(ctx.config.history_dir()) if x.endswith(".xml")]
+        logs = [
+            x for x in os.listdir(
+                ctx.config.history_dir()) if x.endswith(".xml")]
         # logs.sort(key=lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
         logs.sort(key=lambda x: int(x.split("_")[0].replace("0o", "0")))
         logs.reverse()
@@ -38,22 +40,29 @@ class HistoryDB(lazydb.LazyDB):
     def create_history(self, operation):
         self.history.create(operation)
 
-    def add_and_update(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
+    def add_and_update(self, pkgBefore=None, pkgAfter=None,
+                       operation=None, otype=None):
         self.add_package(pkgBefore, pkgAfter, operation, otype)
         self.update_history()
 
-    def add_package(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
+    def add_package(self, pkgBefore=None, pkgAfter=None,
+                    operation=None, otype=None):
         self.history.add(pkgBefore, pkgAfter, operation, otype)
 
     @staticmethod
     def load_config(operation, package):
-        config_dir = os.path.join(ctx.config.history_dir(), "%03d" % operation, package)
+        config_dir = os.path.join(
+            ctx.config.history_dir(), "%03d" %
+            operation, package)
         if os.path.exists(config_dir):
             import distutils.dir_util as dir_util
             dir_util.copy_tree(config_dir, "/")
 
     def save_config(self, package, config_file):
-        hist_dir = os.path.join(ctx.config.history_dir(), self.history.operation.no, package)
+        hist_dir = os.path.join(
+            ctx.config.history_dir(),
+            self.history.operation.no,
+            package)
         if os.path.isdir(config_file):
             os.makedirs(os.path.join(hist_dir, config_file))
             return
@@ -71,14 +80,17 @@ class HistoryDB(lazydb.LazyDB):
     def get_operation(self, operation):
         for log in self.__logs:
             if log.startswith("%03d_" % operation):
-                hist = History.History(os.path.join(ctx.config.history_dir(), log))
+                hist = History.History(os.path.join(
+                    ctx.config.history_dir(), log))
                 hist.operation.no = int(log.split("_")[0].replace("0o", "0"))
                 return hist.operation
         return None
 
     @staticmethod
     def get_package_config_files(operation, package):
-        package_path = os.path.join(ctx.config.history_dir(), "%03d/%s" % (operation, package))
+        package_path = os.path.join(
+            ctx.config.history_dir(), "%03d/%s" %
+            (operation, package))
         if not os.path.exists(package_path):
             return None
 
@@ -90,14 +102,18 @@ class HistoryDB(lazydb.LazyDB):
         return configs
 
     def get_config_files(self, operation):
-        config_path = os.path.join(ctx.config.history_dir(), "%03d" % operation)
+        config_path = os.path.join(
+            ctx.config.history_dir(),
+            "%03d" %
+            operation)
         if not os.path.exists(config_path):
             return None
 
         allconfigs = {}
         packages = os.listdir(config_path)
         for package in packages:
-            allconfigs[package] = self.get_package_config_files(operation, package)
+            allconfigs[package] = self.get_package_config_files(
+                operation, package)
 
         return allconfigs
 
@@ -127,5 +143,6 @@ class HistoryDB(lazydb.LazyDB):
         if last != 1 and len(repoupdates) <= last:
             return None
 
-        hist = History.History(os.path.join(ctx.config.history_dir(), repoupdates[-last]))
+        hist = History.History(os.path.join(
+            ctx.config.history_dir(), repoupdates[-last]))
         return hist.operation.date

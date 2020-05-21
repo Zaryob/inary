@@ -12,18 +12,17 @@
 # Please read the COPYING file.
 #
 
+from inary.sxml import autoxml, xmlext
+import inary.db.lazydb as lazydb
+import inary.data.component as Component
+import inary.db.itembyrepo
+import inary.db.repodb
 import re
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.db.repodb
-import inary.db.itembyrepo
-import inary.data.component as Component
-import inary.db.lazydb as lazydb
-from inary.sxml import autoxml, xmlext
 
 
 class ComponentDB(lazydb.LazyDB):
@@ -97,17 +96,19 @@ class ComponentDB(lazydb.LazyDB):
         found = []
         for name, xml in self.cdb.get_items_iter(repo):
             if name not in found and terms == [term for term in terms if
-                                               re.compile(rename.format(lang, term), re.I).search(xml) or \
-                                               re.compile(resum.format(lang, term), re.I).search(xml) or \
+                                               re.compile(rename.format(lang, term), re.I).search(xml) or
+                                               re.compile(resum.format(lang, term), re.I).search(xml) or
                                                re.compile(redesc.format(lang, term), re.I).search(xml)]:
                 found.append(name)
         return found
 
-    # Returns the component in given repo or first found component in repo order if repo is None
+    # Returns the component in given repo or first found component in repo
+    # order if repo is None
     def get_component(self, component_name, repo=None):
 
         if not self.has_component(component_name, repo):
-            raise Exception(_('Component {} not found.').format(component_name))
+            raise Exception(
+                _('Component {} not found.').format(component_name))
 
         component = Component.Component()
         component.parse(self.cdb.get_item(component_name, repo))
@@ -124,7 +125,8 @@ class ComponentDB(lazydb.LazyDB):
 
         return component
 
-    # Returns the component with combined packages and sources from all repos that contain this component
+    # Returns the component with combined packages and sources from all repos
+    # that contain this component
     def get_union_component(self, component_name):
 
         component = Component.Component()
@@ -132,12 +134,16 @@ class ComponentDB(lazydb.LazyDB):
 
         for repo in inary.db.repodb.RepoDB().list_repos():
             try:
-                component.packages.extend(self.cpdb.get_item(component_name, repo))
+                component.packages.extend(
+                    self.cpdb.get_item(
+                        component_name, repo))
             except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
             try:
-                component.sources.extend(self.csdb.get_item(component_name, repo))
+                component.sources.extend(
+                    self.csdb.get_item(
+                        component_name, repo))
             except Exception:  # FIXME: what exception could we catch here, replace with that.
                 pass
 
@@ -155,7 +161,8 @@ class ComponentDB(lazydb.LazyDB):
         packages = []
         packages.extend(component.packages)
 
-        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
+        sub_components = [x for x in self.list_components(
+            repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 packages.extend(self.get_component(sub, repo).packages)
@@ -165,7 +172,8 @@ class ComponentDB(lazydb.LazyDB):
         return packages
 
     # Returns the component with combined packages and sources from all repos that contain this component
-    # If walk is True than also the sub components' packages from all repos are returned
+    # If walk is True than also the sub components' packages from all repos
+    # are returned
     def get_union_packages(self, component_name, walk=False):
 
         component = self.get_union_component(component_name)
@@ -175,7 +183,9 @@ class ComponentDB(lazydb.LazyDB):
         packages = []
         packages.extend(component.packages)
 
-        sub_components = [x for x in self.list_components() if x.startswith(component_name + ".")]
+        sub_components = [
+            x for x in self.list_components() if x.startswith(
+                component_name + ".")]
         for sub in sub_components:
             try:
                 packages.extend(self.get_union_component(sub).packages)
@@ -196,7 +206,8 @@ class ComponentDB(lazydb.LazyDB):
         sources = []
         sources.extend(component.sources)
 
-        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
+        sub_components = [x for x in self.list_components(
+            repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 sources.extend(self.get_component(sub, repo).sources)
@@ -206,7 +217,8 @@ class ComponentDB(lazydb.LazyDB):
         return sources
 
     # Returns the component with combined packages and sources from all repos that contain this component
-    # If walk is True than also the sub components' sources from all repos are returned
+    # If walk is True than also the sub components' sources from all repos are
+    # returned
     def get_union_sources(self, component_name, repo=None, walk=False):
 
         component = self.get_union_component(component_name)
@@ -216,7 +228,8 @@ class ComponentDB(lazydb.LazyDB):
         sources = []
         sources.extend(component.sources)
 
-        sub_components = [x for x in self.list_components(repo) if x.startswith(component_name + ".")]
+        sub_components = [x for x in self.list_components(
+            repo) if x.startswith(component_name + ".")]
         for sub in sub_components:
             try:
                 sources.extend(self.get_union_component(sub).sources)

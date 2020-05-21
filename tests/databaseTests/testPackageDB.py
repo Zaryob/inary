@@ -15,6 +15,7 @@ import unittest
 from . import testcase
 import inary
 
+
 class PackageDBTestCase(testcase.TestCase):
 
     def setUp(self):
@@ -38,7 +39,8 @@ class PackageDBTestCase(testcase.TestCase):
         self.assertTrue(self.packagedb.has_package("zlib"))
 
     def testGetVersion(self):
-        version, release, build = self.packagedb.get_version("bash", "core-binary")
+        version, release, build = self.packagedb.get_version(
+            "bash", "core-binary")
         self.assertEqual(version, "5.0")
         self.assertEqual(release, "1")
 
@@ -65,10 +67,10 @@ class PackageDBTestCase(testcase.TestCase):
     def testListPackages(self):
         self.assertIn("expat", self.packagedb.list_packages("core-binary"))
 
-
     def testSearchPackage(self):
-        packages = self.packagedb.search_package(["osd","doc"])
+        packages = self.packagedb.search_package(["osd", "doc"])
         self.assertIn('biosdevname-docs', packages)
 
-        packages = self.packagedb.search_package(["32bit","bus"],repo="core-binary")
+        packages = self.packagedb.search_package(
+            ["32bit", "bus"], repo="core-binary")
         self.assertIn('dbus-32bit', packages)

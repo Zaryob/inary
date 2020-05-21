@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+from inary.actionsapi.shelltools import system, export
+from inary.actionsapi import get
+import inary.actionsapi
+import inary.context as ctx
+import inary.util as util
 import os
 from glob import glob
 from shutil import copy, copytree
@@ -22,13 +27,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.util as util
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-from inary.actionsapi import get
-from inary.actionsapi.shelltools import system, export
 
 # java -Xmx256M -jar x.jar --key=val
 EXEC_TEMPLATE = """\
@@ -84,7 +84,8 @@ def _dodoc(*source_files, **kw):
     for source_file in source_files:
         sources = glob(source_file)
         if not sources:
-            raise DoJavadocError(_('No any file/directory matched to regex expression "{}".'.format(source_file)))
+            raise DoJavadocError(
+                _('No any file/directory matched to regex expression "{}".'.format(source_file)))
 
         for source in sources:
             if os.path.isfile(source):
@@ -204,7 +205,8 @@ def installLib(src='*.jar', dest='/usr/share/java'):
             try:
                 copy(source, destination)
             except IOError:
-                raise InstallError(_('Installing file "{}" failed.'.format(source)))
+                raise InstallError(
+                    _('Installing file "{}" failed.'.format(source)))
             if source.endswith('.jar'):
                 classpath.append(util.join_path('/',
                                                 dest,
@@ -214,7 +216,8 @@ def installLib(src='*.jar', dest='/usr/share/java'):
             try:
                 copytree(source, target)
             except IOError:
-                raise InstallError(_('Installing directory "{}" failed.'.format(source)))
+                raise InstallError(
+                    _('Installing directory "{}" failed.'.format(source)))
             for root, dirs, files in os.walk(target):
                 for f in files:
                     if f.endswith('.jar'):

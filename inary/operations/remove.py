@@ -12,6 +12,13 @@
 # Please read the COPYING file.
 #
 
+import inary.ui as ui
+import inary.util as util
+import inary.errors
+import inary.db
+import inary.data.pgraph as pgraph
+import inary.context as ctx
+import inary.atomicoperations as atomicoperations
 import os
 import sys
 
@@ -19,14 +26,6 @@ import sys
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.atomicoperations as atomicoperations
-import inary.context as ctx
-import inary.data.pgraph as pgraph
-import inary.db
-import inary.errors
-import inary.util as util
-import inary.ui as ui
 
 
 @util.locked
@@ -46,9 +45,11 @@ def remove(A, ignore_dep=False, ignore_safety=False):
     # filter packages that are not installed
     A_0 = A = set(A)
 
-    if not ctx.get_option('ignore_safety') and not ctx.config.values.general.ignore_safety and not ignore_safety:
+    if not ctx.get_option(
+            'ignore_safety') and not ctx.config.values.general.ignore_safety and not ignore_safety:
         if componentdb.has_component('system.base'):
-            systembase = set(componentdb.get_union_component('system.base').packages)
+            systembase = set(
+                componentdb.get_union_component('system.base').packages)
             refused = A.intersection(systembase)
             if refused:
                 raise inary.errors.Error(_("Safety switch prevents the removal of "
@@ -56,14 +57,16 @@ def remove(A, ignore_dep=False, ignore_safety=False):
                                          util.format_by_columns(sorted(refused)))
                 A = A - systembase
         else:
-            ctx.ui.warning(_("Safety switch: The component system.base cannot be found."))
+            ctx.ui.warning(
+                _("Safety switch: The component system.base cannot be found."))
 
     Ap = []
     for x in A:
         if installdb.has_package(x):
             Ap.append(x)
         else:
-            ctx.ui.info(_('Package \"{}\" does not exist. Cannot remove.').format(x))
+            ctx.ui.info(
+                _('Package \"{}\" does not exist. Cannot remove.').format(x))
     A = set(Ap)
 
     if len(A) == 0:
@@ -75,15 +78,21 @@ def remove(A, ignore_dep=False, ignore_safety=False):
     else:
         order = util.unique_list(A)
 
-    ctx.ui.info(_("""The following list of packages will be removed in the respective order to satisfy dependencies:"""), color='green')
+    ctx.ui.info(
+        _("""The following list of packages will be removed in the respective order to satisfy dependencies:"""),
+        color='green')
     ctx.ui.info(util.strlist(order))
 
     removal_size = 0
     for pkg in [installdb.get_package(name) for name in order]:
         removal_size += pkg.installedSize
 
-    removal_size, symbol  = util.human_readable_size(removal_size)
-    ctx.ui.info(_('After this operation, {:.2f} {} space will be freed.').format(removal_size, symbol), color='cyan')
+    removal_size, symbol = util.human_readable_size(removal_size)
+    ctx.ui.info(
+        _('After this operation, {:.2f} {} space will be freed.').format(
+            removal_size,
+            symbol),
+        color='cyan')
     del removal_size, symbol
 
     if len(order) > len(A_0):
@@ -102,10 +111,12 @@ def remove(A, ignore_dep=False, ignore_safety=False):
             if x in installdb.installed_extra:
                 installdb.installed_extra.remove(x)
                 with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "w") as ie_file:
-                    ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
+                    ie_file.write("\n".join(installdb.installed_extra) +
+                                  ("\n" if installdb.installed_extra else ""))
 
         else:
-            ctx.ui.info(_('Package \"{}\" is not installed. Cannot remove.').format(x))
+            ctx.ui.info(
+                _('Package \"{}\" is not installed. Cannot remove.').format(x))
 
 
 def plan_remove(A):

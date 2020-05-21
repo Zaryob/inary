@@ -7,6 +7,7 @@
 
 # -- Project information -----------------------------------------------------
 
+import sphinx_theme
 import sys
 import os
 
@@ -22,7 +23,7 @@ copyright = "2016-2020 Zaryob"
 # other places throughout the built documents.
 #
 # The short X.Y version.
-version =  '1.3'
+version = '1.3'
 # The full version, including alpha/beta/rc tags.
 release = '1.3_rc'
 
@@ -37,7 +38,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.intersphinx',
               'sphinx.ext.todo',
               'sphinx.ext.githubpages',
-]
+              ]
 # Later on, add 'sphinx.ext.viewcode' to the list if you want to have
 # colorized code generated too for references.
 
@@ -106,7 +107,6 @@ rst_epilog = """
 #
 
 html_theme = 'neo_rtd_theme'
-import sphinx_theme
 html_theme_path = [sphinx_theme.get_html_theme_path()]
 
 #html_theme_path = ['../_themes']

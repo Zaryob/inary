@@ -12,6 +12,9 @@
 # Please read the COPYING file.
 #
 
+import inary.context as ctx
+import inary.util as util
+import inary.api
 import optparse
 import os
 import sys
@@ -20,10 +23,6 @@ import sys
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.api
-import inary.util as util
-import inary.context as ctx
 
 
 class autocommand(type):
@@ -37,7 +36,8 @@ class autocommand(type):
 
         def add_cmd(cmd):
             if cmd in Command.cmd_dict:
-                raise inary.cli.Error(_('Duplicate command \'{}\'').format(cmd))
+                raise inary.cli.Error(
+                    _('Duplicate command \'{}\'').format(cmd))
             else:
                 Command.cmd_dict[cmd] = cls
 
@@ -57,8 +57,7 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        l = [x.name[0] for x in Command.cmd]
-        l.sort()
+        l = sorted([x.name[0] for x in Command.cmd])
         for name in l:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('inary', fallback=True)
@@ -76,7 +75,8 @@ class Command(object):
             return Command.cmd_dict[cmd](args)
 
         if fail:
-            raise inary.cli.Error(_("Unrecognized command: \'{}\'").format(cmd))
+            raise inary.cli.Error(
+                _("Unrecognized command: \'{}\'").format(cmd))
         else:
             return None
 
@@ -132,7 +132,8 @@ class Command(object):
         if self.options.destdir:
             d = str(self.options.destdir)
             if not os.path.exists(d):
-                inary.cli.printu(_('Destination directory \"{}\" does not exist. Creating directory.\n').format(d))
+                inary.cli.printu(
+                    _('Destination directory \"{}\" does not exist. Creating directory.\n').format(d))
                 os.makedirs(d)
             self.options.destdir = os.path.realpath(d)
 
@@ -164,7 +165,11 @@ class Command(object):
     def help(self):
         """print help for the command"""
         trans = gettext.translation('inary', fallback=True)
-        print("{0}: {1}".format(self.format_name(), trans.gettext(self.__doc__)))
+        print(
+            "{0}: {1}".format(
+                self.format_name(),
+                trans.gettext(
+                    self.__doc__)))
         print(self.parser.format_option_help())
 
     @staticmethod

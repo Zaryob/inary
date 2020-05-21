@@ -12,6 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.libraries.sort as sort
+import inary.db
+import inary.ui as ui
+import inary.data.pgraph as pgraph
+import inary.operations as operations
+import inary.atomicoperations as atomicoperations
+import inary.util as util
+import inary.context as ctx
+import inary.package
 import os
 import sys
 import math
@@ -21,16 +30,6 @@ import zipfile
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.package
-import inary.context as ctx
-import inary.util as util
-import inary.atomicoperations as atomicoperations
-import inary.operations as operations
-import inary.data.pgraph as pgraph
-import inary.ui as ui
-import inary.db
-import inary.libraries.sort as sort
 
 
 def install_pkg_names(A, reinstall=False, extra=False):
@@ -59,7 +58,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     A |= operations.upgrade.upgrade_base(A)
     if not ctx.config.get_option('ignore_dependency'):
-        ctx.ui.info(_('Checking dependencies for install...'),color="brightpurple")
+        ctx.ui.info(
+            _('Checking dependencies for install...'),
+            color="brightpurple")
         order = plan_install_pkg_names(A)
     else:
         order = list(A)
@@ -70,7 +71,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
         order = operations.helper.reorder_base_packages(order)
 
     if len(order) > 1:
-        ctx.ui.info(_("Following packages will be installed:"), color="brightblue")
+        ctx.ui.info(
+            _("Following packages will be installed:"),
+            color="brightblue")
         ctx.ui.info(util.format_by_columns(sorted(order)))
 
     operations.helper.calculate_download_sizes(order)
@@ -81,9 +84,9 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     extra_packages = set(order) - A_0
     if extra_packages:
-        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Would you like to continue?')):
+        if not ctx.ui.confirm(
+                _('There are extra packages due to dependencies. Would you like to continue?')):
             raise Exception(_('External dependencies not satisfied.'))
-
 
     ctx.ui.notify(ui.packagestogo, order=order)
 
@@ -106,7 +109,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
         elif reinstall and x in installdb.installed_extra:
             installdb.installed_extra.remove(x)
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "w") as ie_file:
-                ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
+                ie_file.write("\n".join(installdb.installed_extra) +
+                              ("\n" if installdb.installed_extra else ""))
         ctx.ui.notify(ui.fetched, name=x)
 
     # fetch to be installed packages but do not install them.
@@ -127,7 +131,11 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
+        ctx.ui.info(_("Installing") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ]").format(paths.index(path) +
+                                           1, len(paths)), color="yellow")
         install_op.store_inary_files()
         install_op.install(False)
         try:
@@ -136,7 +144,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
             installdb.installed_extra.append(extra_paths[path])
         except KeyError:
             pass
-
 
     for path in paths:
         install_op = atomicoperations.Install(path)
@@ -153,14 +160,17 @@ def install_pkg_files(package_URIs, reinstall=False):
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_suffix):
-            raise Exception(_('Mixing file names and package names not supported yet.'))
+            raise Exception(
+                _('Mixing file names and package names not supported yet.'))
 
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
     if not reinstall:
         for x in package_URIs:
-            if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(ctx.const.package_suffix):
-                pkg_name = util.parse_package_name_get_name(os.path.basename(x))
+            if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(
+                    ctx.const.package_suffix):
+                pkg_name = util.parse_package_name_get_name(
+                    os.path.basename(x))
                 if installdb.has_package(pkg_name):
                     already_installed.add(pkg_name)
                 else:
@@ -203,7 +213,7 @@ def install_pkg_files(package_URIs, reinstall=False):
             if pkg.architecture != ctx.config.values.general.architecture:
                 raise Exception(
                     _('Package \"{0}\" (\'{1}\') is not compatible with your \'{2}\' architecture.').format(x, pkg.architecture,
-                                                                                                ctx.config.values.general.architecture))
+                                                                                                            ctx.config.values.general.architecture))
 
     def satisfiesDep(dep):
         # is dependency satisfied among available packages
@@ -218,14 +228,16 @@ def install_pkg_files(package_URIs, reinstall=False):
         pkg = d_t[name]
         deps = pkg.runtimeDependencies()
         for dep in deps:
-            if not satisfiesDep(dep) and dep.package not in [x.package for x in dep_unsatis]:
+            if not satisfiesDep(dep) and dep.package not in [
+                    x.package for x in dep_unsatis]:
                 dep_unsatis.append(dep)
 
     # now determine if these unsatisfied dependencies could
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo() and not ctx.config.get_option('ignore_satisfy'):
-            raise Exception(_('External dependencies not satisfied: \"{}\"').format(dep))
+            raise Exception(
+                _('External dependencies not satisfied: \"{}\"').format(dep))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -303,20 +315,22 @@ def plan_install_pkg_names(A):
     for x in A:
         G_f.add_package(x)
     B = A
-    not_satisfied=dict()
+    not_satisfied = dict()
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                ctx.ui.info(_(' -> checking {}').format(str(dep)), verbose=True)
+                ctx.ui.info(
+                    _(' -> checking {}').format(str(dep)), verbose=True)
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo(packagedb=packagedb) and not ctx.config.get_option('ignore_satisfy'):
+                    if not dep.satisfied_by_repo(
+                            packagedb=packagedb) and not ctx.config.get_option('ignore_satisfy'):
                         if dep in not_satisfied:
-                            not_satisfied[dep]+=[pkg.name]
+                            not_satisfied[dep] += [pkg.name]
                         else:
-                            not_satisfied[dep]=[pkg.name]
+                            not_satisfied[dep] = [pkg.name]
                         pass
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
@@ -344,9 +358,10 @@ def plan_install_pkg_names(A):
                     G_f.add_package(dep)
         B = Bp
     if not_satisfied:
-        msg=_("Following packages are not satisfied:\n")
+        msg = _("Following packages are not satisfied:\n")
         for ns in not_satisfied:
-            msg+=(_(' -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n').format(not_satisfied[ns], ns))
+            msg += (_(' -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n').format(
+                not_satisfied[ns], ns))
         raise Exception(msg)
     if ctx.config.get_option('debug'):
         G_f.write_graphviz(sys.stdout)
@@ -366,7 +381,8 @@ def get_install_order(packages):
 
 
 @util.locked
-def install(packages, reinstall=False, ignore_file_conflicts=False, ignore_package_conflicts=False):
+def install(packages, reinstall=False, ignore_file_conflicts=False,
+            ignore_package_conflicts=False):
     """
     Returns True if no errors occured during the operation
     @param packages: list of package names -> list_of_strings

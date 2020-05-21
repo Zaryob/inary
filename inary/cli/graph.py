@@ -12,17 +12,16 @@
 # Please read the COPYING file.
 #
 
+import inary.data.pgraph as pgraph
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.data.pgraph as pgraph
 
 
 class Graph(command.Command, metaclass=command.autocommand):
@@ -71,10 +70,12 @@ the package in graphviz format to 'pgraph.dot'.
 
             if ctx.get_option('repository'):
                 repo = ctx.get_option('repository')
-                ctx.ui.info(_('Plotting packages in repository \"{}\"').format(repo))
+                ctx.ui.info(
+                    _('Plotting packages in repository \"{}\"').format(repo))
             else:
                 repo = None
-                ctx.ui.info(_('Plotting a graph of relations among all repository packages.'))
+                ctx.ui.info(
+                    _('Plotting a graph of relations among all repository packages.'))
 
             if self.args:
                 a = self.args
@@ -89,7 +90,8 @@ the package in graphviz format to 'pgraph.dot'.
                 a = self.args
             else:
                 # if A is empty, then graph all packages
-                ctx.ui.info(_('Plotting a graph of relations among all installed packages.'))
+                ctx.ui.info(
+                    _('Plotting a graph of relations among all installed packages.'))
                 a = inary.db.installdb.InstallDB().list_installed()
 
         g = pgraph.package_graph(a, packagedb,

@@ -11,6 +11,11 @@
 #
 # Please read the COPYING file.
 
+from inary.actionsapi import shelltools
+from inary.actionsapi import cmaketools
+from inary.actionsapi import get
+import inary.actionsapi
+import inary.context as ctx
 import gettext
 import glob
 
@@ -18,15 +23,10 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
 
 # ActionsAPI Modules
-from inary.actionsapi import get
-from inary.actionsapi import cmaketools
-from inary.actionsapi import shelltools
 
 basename = "qt5"
 
@@ -64,7 +64,8 @@ class ConfigureError(inary.actionsapi.Error):
 
 def configure(projectfile='', parameters='', installPrefix=prefix):
     if projectfile != '' and not shelltools.can_access_file(projectfile):
-        raise ConfigureError(_("Project file \"{}\" not found.").format(projectfile))
+        raise ConfigureError(
+            _("Project file \"{}\" not found.").format(projectfile))
 
     profiles = glob.glob("*.pro")
     if len(profiles) > 1 and projectfile == '':
@@ -85,4 +86,8 @@ def make(parameters=''):
 
 
 def install(parameters='', argument='install'):
-    cmaketools.install('INSTALL_ROOT="{0}" {1}'.format(get.installDIR(), parameters), argument)
+    cmaketools.install(
+        'INSTALL_ROOT="{0}" {1}'.format(
+            get.installDIR(),
+            parameters),
+        argument)

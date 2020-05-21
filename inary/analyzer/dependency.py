@@ -14,14 +14,13 @@
 
 """dependency analyzer"""
 
+import inary.sxml.autoxml as autoxml
+from inary.db.packagedb import PackageDB
+import inary.data.relation as relation
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.data.relation as relation
-from inary.db.packagedb import PackageDB
-import inary.sxml.autoxml as autoxml
 
 
 class Dependency(relation.Relation, metaclass=autoxml.autoxml):

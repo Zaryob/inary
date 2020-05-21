@@ -14,12 +14,12 @@
 
 """conflict analyzer"""
 
+import inary.data.relation as relation
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.data.relation as relation
 
 """ Conflict relation """
 
@@ -50,7 +50,8 @@ given conflicting spec"""
 
 def package_conflicts(pkg, confs):
     for c in confs:
-        if pkg.name == c.package and c.satisfies_relation(pkg.version, pkg.release):
+        if pkg.name == c.package and c.satisfies_relation(
+                pkg.version, pkg.release):
             return c
 
     return None
@@ -68,7 +69,8 @@ def calculate_conflicts(order, packagedb):
         conflicts = []
 
         for conflict in pkg.conflicts:
-            if conflict.package not in order and installed_package_conflicts(conflict):
+            if conflict.package not in order and installed_package_conflicts(
+                    conflict):
                 conflicts.append(conflict)
 
         return conflicts
@@ -84,7 +86,8 @@ def calculate_conflicts(order, packagedb):
         conflicts = check_installed(pkg, order)
         if conflicts:
             conflicting_pairs[x] = [str(c) for c in conflicts]
-            conflicting_pkgs = conflicting_pkgs.union([c.package for c in conflicts])
+            conflicting_pkgs = conflicting_pkgs.union(
+                [c.package for c in conflicts])
 
         # now check if any package has conflicts with each other
         B_i = B_0.intersection(set([c.package for c in pkg.conflicts]))

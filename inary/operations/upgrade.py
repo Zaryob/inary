@@ -12,6 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.blacklist
+import inary.db
+import inary.util as util
+import inary.operations as operations
+import inary.atomicoperations as atomicoperations
+import inary.data.pgraph as pgraph
+import inary.context as ctx
+import inary.ui as ui
+import inary
 import os
 import sys
 import math
@@ -20,16 +29,6 @@ import math
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary
-import inary.ui as ui
-import inary.context as ctx
-import inary.data.pgraph as pgraph
-import inary.atomicoperations as atomicoperations
-import inary.operations as operations
-import inary.util as util
-import inary.db
-import inary.blacklist
 
 
 def check_update_actions(packages):
@@ -88,14 +87,18 @@ def find_upgrades(packages, replaces):
             continue
 
         if i_pkg.endswith(ctx.const.package_suffix):
-            ctx.ui.info(_("Warning: package *name* ends with '.inary'"), verbose=True)
+            ctx.ui.info(
+                _("Warning: package *name* ends with '.inary'"),
+                verbose=True)
 
         if not installdb.has_package(i_pkg):
-            ctx.ui.info(_('Package \"{}\" is not installed.').format(i_pkg), True)
+            ctx.ui.info(
+                _('Package \"{}\" is not installed.').format(i_pkg), True)
             continue
 
         if not packagedb.has_package(i_pkg):
-            ctx.ui.info(_('Package \"{}\" is not available in repositories.').format(i_pkg), True)
+            ctx.ui.info(
+                _('Package \"{}\" is not available in repositories.').format(i_pkg), True)
             continue
 
         pkg = packagedb.get_package(i_pkg)
@@ -196,7 +199,6 @@ def upgrade(A=None, repo=None):
     operations.helper.calculate_download_sizes(order)
     operations.helper.calculate_free_space_needed(order)
 
-
     needs_confirm = check_update_actions(order)
 
     # NOTE: replaces.values() was already flattened above, it can be reused
@@ -222,7 +224,11 @@ def upgrade(A=None, repo=None):
     old_releases_paths = []
     lndig = math.floor(math.log(len(order), 10)) + 1
     for x in order:
-        ctx.ui.info(_("Downloading") + str(" [ {:>"+str(lndig)+ "} / {} ] => [{}]").format(order.index(x) + 1, len(order),x), color="yellow")
+        ctx.ui.info(_("Downloading") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ] => [{}]").format(order.index(x) +
+                                                   1, len(order), x), color="yellow")
         install_op = atomicoperations.Install.from_name(x)
         install_op.store_inary_files()
         paths.append(install_op.package_fname)
@@ -247,7 +253,11 @@ def upgrade(A=None, repo=None):
 
     for path in paths:
         install_op = atomicoperations.Install(path)
-        ctx.ui.info(_("Installing") + str(" [ {:>"+str(lndig)+ "} / {} ]").format(paths.index(path) + 1, len(paths)), color="yellow")
+        ctx.ui.info(_("Installing") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ]").format(paths.index(path) +
+                                           1, len(paths)), color="yellow")
         install_op.install(False)
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
@@ -261,7 +271,8 @@ def upgrade(A=None, repo=None):
         install_op.postinstall()
 
     for old_path in old_releases_paths:
-        ctx.ui.info(_("Cleaning old inary files: {}".format(old_path.split("/")[-1])),verbose=True)
+        ctx.ui.info(_("Cleaning old inary files: {}".format(
+            old_path.split("/")[-1])), verbose=True)
         util.clean_dir(old_path)
 
 
@@ -296,7 +307,8 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     def add_runtime_deps(pkg, Bp):
         for dep in pkg.runtimeDependencies():
             # add packages that can be upgraded
-            if installdb.has_package(dep.package) and dep.satisfied_by_installed():
+            if installdb.has_package(
+                    dep.package) and dep.satisfied_by_installed():
                 continue
 
             if dep.satisfied_by_repo():
@@ -309,7 +321,9 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 # previous ones.
                 G_f.add_dep(pkg.name, dep)
             else:
-                ctx.ui.error(_('Dependency \"{0}\" of \"{1}\" cannot be satisfied.').format(dep, pkg.name))
+                ctx.ui.error(
+                    _('Dependency \"{0}\" of \"{1}\" cannot be satisfied.').format(
+                        dep, pkg.name))
                 raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):
@@ -323,7 +337,8 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 # Conflicting package is already in the upgrade list.
                 continue
 
-            if not inary.analyzer.conflict.installed_package_conflicts(conflict):
+            if not inary.analyzer.conflict.installed_package_conflicts(
+                    conflict):
                 # Conflicting package is not installed.
                 # No need to deal with it.
                 continue
@@ -353,7 +368,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
             if rev_dep in G_f.vertices() or depinfo.satisfied_by_repo():
                 continue
 
-            if is_upgradable(rev_dep,installdb,packagedb):
+            if is_upgradable(rev_dep, installdb, packagedb):
                 Bp.add(rev_dep)
                 G_f.add_plain_dep(rev_dep, pkg.name)
 
@@ -367,7 +382,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         if packages:
             for target_package in packages:
                 for name in installdb.get_rev_dep_names(target_package):
-                    if name in G_f.vertices() or not is_upgradable(name,installdb,packagedb):
+                    if name in G_f.vertices() or not is_upgradable(name, installdb, packagedb):
                         continue
 
                     Bp.add(name)
@@ -402,34 +417,49 @@ def upgrade_base(A=None):
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
     componentdb = inary.db.componentdb.ComponentDB()
-    if not ctx.config.values.general.ignore_safety and not ctx.get_option('ignore_safety'):
+    if not ctx.config.values.general.ignore_safety and not ctx.get_option(
+            'ignore_safety'):
         if componentdb.has_component('system.base'):
-            systembase = set(componentdb.get_union_component('system.base').packages)
-            extra_installs = [x for x in systembase - set(A) if not installdb.has_package(x)]
-            extra_installs = inary.blacklist.exclude_from(extra_installs, ctx.const.blacklist)
+            systembase = set(
+                componentdb.get_union_component('system.base').packages)
+            extra_installs = [
+                x for x in systembase -
+                set(A) if not installdb.has_package(x)]
+            extra_installs = inary.blacklist.exclude_from(
+                extra_installs, ctx.const.blacklist)
             if extra_installs:
                 ctx.ui.warning(_("Safety switch forces the installation of "
                                  "following packages:"))
                 ctx.ui.info(util.format_by_columns(sorted(extra_installs)))
 
             # Will delete G_F and extra_upgrades
-            install_order = operations.install.plan_install_pkg_names(extra_installs)
-            extra_upgrades = [x for x in systembase - set(install_order) if is_upgradable(x,installdb,packagedb)]
+            install_order = operations.install.plan_install_pkg_names(
+                extra_installs)
+            extra_upgrades = [
+                x for x in systembase -
+                set(install_order) if is_upgradable(
+                    x,
+                    installdb,
+                    packagedb)]
             upgrade_order = []
 
-            extra_upgrades = inary.blacklist.exclude_from(extra_upgrades, ctx.const.blacklist)
+            extra_upgrades = inary.blacklist.exclude_from(
+                extra_upgrades, ctx.const.blacklist)
 
             if ctx.get_option('exclude_from'):
-                extra_upgrades = inary.blacklist.exclude_from(extra_upgrades, ctx.get_option('exclude_from'))
+                extra_upgrades = inary.blacklist.exclude_from(
+                    extra_upgrades, ctx.get_option('exclude_from'))
 
             if ctx.get_option('exclude'):
-                extra_upgrades = inary.blacklist.exclude(extra_upgrades, ctx.get_option('exclude'))
+                extra_upgrades = inary.blacklist.exclude(
+                    extra_upgrades, ctx.get_option('exclude'))
 
             if extra_upgrades:
                 ctx.ui.warning(_("Safety switch forces the upgrade of "
                                  "following packages:"))
                 ctx.ui.info(util.format_by_columns(sorted(extra_upgrades)))
-                upgrade_order = plan_upgrade(extra_upgrades, force_replaced=False)
+                upgrade_order = plan_upgrade(
+                    extra_upgrades, force_replaced=False)
 
             # no-need-for-upgrade-order patch
             # extra_upgrades = filter(lambda x: is_upgradable(x, ignore_build), systembase - set(extra_installs))
@@ -438,10 +468,12 @@ def upgrade_base(A=None):
             # return packages that must be added to any installation
             return set(install_order + upgrade_order)
         else:
-            ctx.ui.warning(_('Safety switch: The component system.base cannot be found.'))
+            ctx.ui.warning(
+                _('Safety switch: The component system.base cannot be found.'))
     return set()
 
-def is_upgradable(name,installdb,packagedb):
+
+def is_upgradable(name, installdb, packagedb):
 
     if not installdb.has_package(name):
         return False
@@ -450,8 +482,9 @@ def is_upgradable(name,installdb,packagedb):
     (i_distro, i_distro_release) = installdb.get_distro_release(name)
 
     try:
-        release = packagedb.get_release(name,packagedb.which_repo(name))
-        distro, distro_release = packagedb.get_distro_release(name,packagedb.which_repo(name))
+        release = packagedb.get_release(name, packagedb.which_repo(name))
+        distro, distro_release = packagedb.get_distro_release(
+            name, packagedb.which_repo(name))
     except KeyboardInterrupt:
         raise
     except Exception:  # FIXME: what exception could we catch here, replace with that.
@@ -463,12 +496,14 @@ def is_upgradable(name,installdb,packagedb):
 
     return int(i_release) < int(release)
 
-def list_upgradeable(installdb,packagedb):
-    listup=[]
+
+def list_upgradeable(installdb, packagedb):
+    listup = []
     for pkg in installdb.list_installed():
-        if is_upgradable(pkg,installdb,packagedb):
+        if is_upgradable(pkg, installdb, packagedb):
             listup.append(pkg)
     return listup
+
 
 def get_upgrade_order(packages):
     """

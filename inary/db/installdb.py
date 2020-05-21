@@ -15,6 +15,13 @@
 # installation database
 #
 
+import inary.util
+from inary.sxml import autoxml, xmlext
+import inary.db.lazydb as lazydb
+import inary.data.files as Files
+import inary.data
+import inary.context as ctx
+import inary.analyzer.dependency
 import os
 import re
 
@@ -24,13 +31,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY
-import inary.analyzer.dependency
-import inary.context as ctx
-import inary.data
-import inary.data.files as Files
-import inary.db.lazydb as lazydb
-from inary.sxml import autoxml, xmlext
-import inary.util
 
 
 class InstallDBError(inary.errors.Error):
@@ -67,8 +67,11 @@ class InstallInfo:
 class InstallDB(lazydb.LazyDB):
 
     def __init__(self):
-        lazydb.LazyDB.__init__(self, cacheable=True, cachedir=ctx.config.packages_dir())
-        #self.init()
+        lazydb.LazyDB.__init__(
+            self,
+            cacheable=True,
+            cachedir=ctx.config.packages_dir())
+        # self.init()
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
@@ -78,7 +81,9 @@ class InstallDB(lazydb.LazyDB):
     @staticmethod
     def __generate_installed_extra():
         ie = []
-        ie_path = os.path.join(ctx.config.info_dir(), ctx.const.installed_extra)
+        ie_path = os.path.join(
+            ctx.config.info_dir(),
+            ctx.const.installed_extra)
         if os.path.isfile(ie_path):
             with open(ie_path) as ie_file:
                 ie.extend(ie_file.read().strip().split("\n"))
@@ -86,11 +91,12 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def __generate_installed_pkgs():
-        installed_list=[]
+        installed_list = []
+
         def split_name(dirname):
-                    name, version, release = dirname.rsplit("-", 2)
-                    installed_list.append((name, version + "-" + release))
-                    
+            name, version, release = dirname.rsplit("-", 2)
+            installed_list.append((name, version + "-" + release))
+
         for i in os.listdir(ctx.config.packages_dir()):
             split_name(i)
         return dict(installed_list)
@@ -103,12 +109,14 @@ class InstallDB(lazydb.LazyDB):
         return []
 
     def __add_to_revdeps(self, package, revdeps):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
         meta_doc = xmlext.parse(metadata_xml)
 
         try:
             pkg = xmlext.getNode(meta_doc, "Package")
-        except:
+        except BaseException:
             pkg = None
 
         if pkg is None:
@@ -145,7 +153,10 @@ class InstallDB(lazydb.LazyDB):
         build_host_re = re.compile("<BuildHost>(.*?)</BuildHost>")
         found = []
         for name in self.list_installed():
-            xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
+            xml = open(
+                os.path.join(
+                    self.package_path(name),
+                    ctx.const.metadata_xml)).read()
             matched = build_host_re.search(xml)
             if matched:
                 if build_host != matched.groups()[0]:
@@ -163,7 +174,6 @@ class InstallDB(lazydb.LazyDB):
         summary = xmlext.getNodeText(package, 'Summary')
 
         return summary
-
 
     @staticmethod
     def __get_version(meta_doc):
@@ -198,51 +208,64 @@ class InstallDB(lazydb.LazyDB):
         return hash
 
     def get_install_tar_hash(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_install_tar_hash(meta_doc)
 
     def get_version_and_distro_release(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
-        return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
+        return self.__get_version(meta_doc) + \
+            self.__get_distro_release(meta_doc)
 
     def get_distro_release(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_distro_release(meta_doc)
 
-
     def get_version(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_version(meta_doc)
 
     def get_release(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
 
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_release(meta_doc)
 
     def get_summary(self, package):
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
         meta_doc = xmlext.parse(metadata_xml)
 
         return self.__get_summary(meta_doc)
 
-
     def get_files(self, package):
         files = Files.Files()
-        files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
+        files_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.files_xml)
         files.read(files_xml)
         return files
 
@@ -268,12 +291,15 @@ class InstallDB(lazydb.LazyDB):
             lang = autoxml.LocalText.get_lang()
         found = []
         for name in self.list_installed():
-            xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
+            xml = open(
+                os.path.join(
+                    self.package_path(name),
+                    ctx.const.metadata_xml)).read()
             if terms == [term for term in terms if (fields['name'] and
-                                                    re.compile(term, re.I).search(name)) or \
+                                                    re.compile(term, re.I).search(name)) or
                                                    (fields['summary'] and
                                                     re.compile(resum.format(lang, term), 0 if cs else re.I).search(
-                                                        xml)) or \
+                                                        xml)) or
                                                    (fields['desc'] and
                                                     re.compile(redesc.format(lang, term), 0 if cs else re.I).search(
                                                         xml))]:
@@ -284,13 +310,18 @@ class InstallDB(lazydb.LazyDB):
         risa = '<IsA>{}</IsA>'.format(isa)
         packages = []
         for name in self.list_installed():
-            xml = open(os.path.join(self.package_path(name), ctx.const.metadata_xml)).read()
+            xml = open(
+                os.path.join(
+                    self.package_path(name),
+                    ctx.const.metadata_xml)).read()
             if re.compile(risa).search(xml):
                 packages.append(name)
         return packages
 
     def get_info(self, package):
-        files_xml = os.path.join(self.package_path(package), ctx.const.files_xml)
+        files_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.files_xml)
         ctime = inary.util.creation_time(files_xml)
         pkg = self.get_package(package)
         state = "i"
@@ -314,17 +345,20 @@ class InstallDB(lazydb.LazyDB):
 
         if xmlext.getAttributeList(node):
             if xmlext.getNodeAttribute(node, "version"):
-                dependency.__dict__["version"] = xmlext.getNodeAttribute(node, "version")
+                dependency.__dict__[
+                    "version"] = xmlext.getNodeAttribute(node, "version")
             elif xmlext.getNodeAttribute(node, "release"):
-                dependency.__dict__["release"] = xmlext.getNodeAttribute(node, "release")
+                dependency.__dict__[
+                    "release"] = xmlext.getNodeAttribute(node, "release")
             else:
-                pass #FIXME: ugly
+                pass  # FIXME: ugly
         return dependency
 
     def __create_dependency(self, depStr):
         if "<AnyDependency>" in depStr:
             anydependency = inary.data.specfile.AnyDependency()
-            for dep in re.compile('(<Dependency .*?>.*?</Dependency>)').findall(depStr):
+            for dep in re.compile(
+                    '(<Dependency .*?>.*?</Dependency>)').findall(depStr):
                 anydependency.dependencies.append(self.__make_dependency(dep))
             return anydependency
         else:
@@ -356,30 +390,35 @@ class InstallDB(lazydb.LazyDB):
         get list of packages installed as extra dependency,
         but without reverse dependencies now.
         """
-        orphaned_packages=[]
+        orphaned_packages = []
         for x in self.installed_extra:
             if not self.get_rev_deps(x):
 
-                if x.endswith(ctx.const.doc_package_end) and ctx.config.values.general.allow_docs:
-                    if inary.util.remove_suffix(ctx.const.doc_package_end, x) not in self.list_installed():
+                if x.endswith(
+                        ctx.const.doc_package_end) and ctx.config.values.general.allow_docs:
+                    if inary.util.remove_suffix(
+                            ctx.const.doc_package_end, x) not in self.list_installed():
                         orphaned_packages.append(x)
                     else:
                         pass
 
                 elif x.endswith(ctx.const.info_package_end) and ctx.config.values.general.allow_pages:
-                    if inary.util.remove_suffix(ctx.const.info_package_end, x) not in self.list_installed():
+                    if inary.util.remove_suffix(
+                            ctx.const.info_package_end, x) not in self.list_installed():
                         orphaned_packages.append(x)
                     else:
                         pass
 
                 elif x.endswith(ctx.const.debug_name_suffix) and ctx.config.values.general.allow_dbginfo:
-                    if inary.util.remove_suffix(ctx.const.debug_name_suffix, x) not in self.list_installed():
+                    if inary.util.remove_suffix(
+                            ctx.const.debug_name_suffix, x) not in self.list_installed():
                         orphaned_packages.append(x)
                     else:
                         pass
 
                 elif x.endswith(ctx.const.static_name_suffix) and ctx.config.values.general.allow_static:
-                    if inary.util.remove_suffix(ctx.const.static_name_suffix, x) not in self.list_installed():
+                    if inary.util.remove_suffix(
+                            ctx.const.static_name_suffix, x) not in self.list_installed():
                         orphaned_packages.append(x)
                     else:
                         pass
@@ -397,20 +436,24 @@ class InstallDB(lazydb.LazyDB):
 
     @staticmethod
     def pkg_dir(pkg, version, release):
-        return inary.util.join_path(ctx.config.packages_dir(), pkg + '-' + version + '-' + release)
+        return inary.util.join_path(
+            ctx.config.packages_dir(), pkg + '-' + version + '-' + release)
 
     def get_package(self, package):
         metadata = inary.data.metadata.MetaData()
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
         metadata.read(metadata_xml)
         return metadata.package
 
     def get_metadata(self, package):
         metadata = inary.data.metadata.MetaData()
-        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        metadata_xml = os.path.join(
+            self.package_path(package),
+            ctx.const.metadata_xml)
         metadata.read(metadata_xml)
         return metadata
-
 
     def __mark_package(self, _type, package):
         packages = self.__get_marked_packages(_type)
@@ -436,7 +479,8 @@ class InstallDB(lazydb.LazyDB):
             if pkginfo.name in revdep_info:
                 del revdep_info[pkginfo.name]
 
-        self.installed_db[pkginfo.name] = "{0.version}-{0.release}".format(pkginfo)
+        self.installed_db[pkginfo.name] = "{0.version}-{0.release}".format(
+            pkginfo)
         self.__add_to_revdeps(pkginfo.name, self.rev_deps_db)
 
     def remove_package(self, package_name):
@@ -470,7 +514,6 @@ class InstallDB(lazydb.LazyDB):
             config.write("{}\n".format(pkg))
         config.close()
 
-
     def __clear_marked_packages(self, _type, package):
         if package == "*":
             self.__write_marked_packages(_type, [])
@@ -495,6 +538,7 @@ class InstallDB(lazydb.LazyDB):
     def package_path(self, package):
 
         if package in self.installed_db:
-            return os.path.join(ctx.config.packages_dir(), "{0}-{1}".format(package, self.installed_db[package]))
+            return os.path.join(ctx.config.packages_dir(
+            ), "{0}-{1}".format(package, self.installed_db[package]))
 
         raise Exception(_('Package \"{}\" is not installed.').format(package))

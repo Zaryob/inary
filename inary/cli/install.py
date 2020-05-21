@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.sysconf as sysconf
+import inary.util as util
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,11 +24,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.util as util
-import inary.sysconf as sysconf
 
 class Install(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Install INARY packages
@@ -70,7 +70,7 @@ expanded to package names.
                          default=False, help=_("Fetch upgrades but do not install."))
         group.add_option("-x", "--exclude", action="append",
                          default=None, help=_(
-                "When installing packages, ignore packages and components whose basenames match pattern."))
+                             "When installing packages, ignore packages and components whose basenames match pattern."))
         group.add_option("--exclude-from", action="store",
                          default=None,
                          help=_("When installing packages, ignore packages "
@@ -99,30 +99,39 @@ expanded to package names.
                 if self.componentdb.has_component(name):
                     repository = ctx.get_option('repository')
                     if repository:
-                        packages.extend(self.componentdb.get_packages(name, walk=True, repo=repository))
+                        packages.extend(
+                            self.componentdb.get_packages(
+                                name, walk=True, repo=repository))
                     else:
-                        packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                        packages.extend(
+                            self.componentdb.get_union_packages(
+                                name, walk=True))
                 else:
-                    ctx.ui.info(_('There is no component named  as \"{}\"').format(name))
+                    ctx.ui.info(
+                        _('There is no component named  as \"{}\"').format(name))
 
         packages.extend(self.args)
 
         if ctx.get_option('exclude_from'):
-            packages = inary.blacklist.exclude_from(packages, ctx.get_option('exclude_from'))
+            packages = inary.blacklist.exclude_from(
+                packages, ctx.get_option('exclude_from'))
 
         if ctx.get_option('exclude'):
-            packages = inary.blacklist.exclude(packages, ctx.get_option('exclude'))
+            packages = inary.blacklist.exclude(
+                packages, ctx.get_option('exclude'))
 
-        reinstall = bool(packages) and packages[0].endswith(ctx.const.package_suffix)
+        reinstall = bool(packages) and packages[0].endswith(
+            ctx.const.package_suffix)
         install.install(packages, ctx.get_option('reinstall') or reinstall)
 
         try:
-            config_changes,opt = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+            config_changes, opt = helper.check_config_changes(
+                [util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
             if config_changes:
-                if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
-                    helper.show_changed_configs(config_changes,opt)
+                if ctx.ui.confirm(
+                        _("[!] Some config files have been changed. Would you like to see and apply them?")):
+                    helper.show_changed_configs(config_changes, opt)
         except ValueError:
             pass
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
-

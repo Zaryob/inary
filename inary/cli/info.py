@@ -12,18 +12,17 @@
 # Please read the COPYING file.
 #
 
+import inary.operations.info as info_operation
+import inary.db
+import inary.util as util
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.util as util
-import inary.db
-import inary.operations.info as info_operation
 
 
 class Info(command.Command, metaclass=command.autocommand):
@@ -84,7 +83,8 @@ Usage: info <package1> <package2> ... <packagen>
                         if not self.options.short:
                             ctx.ui.info(str(component))
                         else:
-                            ctx.ui.info("{0.name} - {0.summary}".format(component))
+                            ctx.ui.info(
+                                "{0.name} - {0.summary}".format(component))
 
         # info of packages
         for arg in self.args:
@@ -127,8 +127,13 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.formatted_output(str(metadata.package))
             if packagedb:
-                revdeps = [name for name, dep in packagedb.get_rev_deps(metadata.package.name)]
-                ctx.ui.formatted_output(" ".join((_("Reverse Dependencies:"), util.strlist(revdeps))))
+                revdeps = [
+                    name for name,
+                    dep in packagedb.get_rev_deps(
+                        metadata.package.name)]
+                ctx.ui.formatted_output(
+                    " ".join(
+                        (_("Reverse Dependencies:"), util.strlist(revdeps))))
                 print()
 
     @staticmethod
@@ -139,7 +144,10 @@ Usage: info <package1> <package2> ... <packagen>
         else:
             ctx.ui.formatted_output(str(spec))
             if sourcedb:
-                revdeps = [name for name, dep in sourcedb.get_rev_deps(spec.source.name)]
+                revdeps = [
+                    name for name,
+                    dep in sourcedb.get_rev_deps(
+                        spec.source.name)]
                 print(_('Reverse Build Dependencies:'), util.strlist(revdeps))
                 print()
 
@@ -174,10 +182,12 @@ Usage: info <package1> <package2> ... <packagen>
             if self.options.short:
                 ctx.ui.formatted_output(_("[binary] "), noln=True, column=" ")
             else:
-                ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
+                ctx.ui.info(
+                    _('Package found in \"{}\" repository:').format(repo))
             self.print_metadata(metadata, self.packagedb)
         else:
-            ctx.ui.info(_("\"{}\" package is not found in binary repositories.").format(package))
+            ctx.ui.info(
+                _("\"{}\" package is not found in binary repositories.").format(package))
 
     def sourcedb_info(self, package):
         if self.sourcedb.has_spec(package):
@@ -186,7 +196,9 @@ Usage: info <package1> <package2> ... <packagen>
             if self.options.short:
                 ctx.ui.formatted_output(_("[source] "), noln=True, column=" ")
             else:
-                ctx.ui.info(_('Package found in \"{}\" repository:').format(repo))
+                ctx.ui.info(
+                    _('Package found in \"{}\" repository:').format(repo))
             self.print_specdata(spec, self.sourcedb)
         else:
-            ctx.ui.info(_("\"{}\" package is not found in source repositories.").format(package))
+            ctx.ui.info(
+                _("\"{}\" package is not found in source repositories.").format(package))

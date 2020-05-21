@@ -12,31 +12,34 @@
 # Please read the COPYING file.
 #
 
+import inary.util as util
+import inary.uri
+import inary.ui
+import inary.file
+import inary.errors
+import inary.data
+import inary.db
+import inary.context as ctx
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.context as ctx
-import inary.db
-import inary.data
-import inary.errors
-import inary.file
-import inary.ui
-import inary.uri
-import inary.util as util
 
 @util.locked
 def add_repo(name, indexuri, at=None):
     import re
-    if not re.match("^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
+    if not re.match(r"^[0-9{}\-\\_\\.\s]*$".format(str(util.letters())), name):
         raise inary.errors.Error(_('Not a valid repository name.'))
     repodb = inary.db.repodb.RepoDB()
     if repodb.has_repo(name):
-        raise inary.errors.Error(_('Repository \"{}\" already present.').format(name))
+        raise inary.errors.Error(
+            _('Repository \"{}\" already present.').format(name))
     elif repodb.has_repo_url(indexuri, only_active=False):
         repo = repodb.get_repo_by_url(indexuri)
-        raise inary.errors.Error(_('Repository \"{}\" already present with name \"{}\".').format(name, repo))
+        raise inary.errors.Error(
+            _('Repository \"{}\" already present with name \"{}\".').format(
+                name, repo))
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at=at)
@@ -54,7 +57,8 @@ def remove_repo(name):
         inary.db.flush_caches()
         ctx.ui.info(_('Repository \"{}\" removed from system.').format(name))
     else:
-        raise inary.errors.Error(_('Repository \"{}\" does not exist. Cannot remove.').format(name))
+        raise inary.errors.Error(
+            _('Repository \"{}\" does not exist. Cannot remove.').format(name))
 
 
 @util.locked
@@ -97,7 +101,9 @@ def update_repo(repo, force=False):
 
 
 def __update_repo(repo, force=False):
-    ctx.ui.status(_('Updating package repository: \"{}\"').format(repo), push_screen=False)
+    ctx.ui.status(
+        _('Updating package repository: \"{}\"').format(repo),
+        push_screen=False)
     ctx.ui.notify(inary.ui.updatingrepo, name=repo)
     repodb = inary.db.repodb.RepoDB()
     index = inary.data.index.Index()
@@ -106,7 +112,8 @@ def __update_repo(repo, force=False):
         try:
             index.read_uri_of_repo(repouri, repo)
         except inary.file.AlreadyHaveException:
-            ctx.ui.info(_('\"{}\" repository information is up-to-date.').format(repo))
+            ctx.ui.info(
+                _('\"{}\" repository information is up-to-date.').format(repo))
             if force:
                 ctx.ui.info(_('Updating database at any rate as requested.'))
                 index.read_uri_of_repo(repouri, repo, force=force)
@@ -121,13 +128,13 @@ def __update_repo(repo, force=False):
             index.check_signature(repouri, repo)
         except inary.file.InvalidSignature as e:
             ctx.ui.info(_("Repository \"{}\" is deactivated because of GPG Signature fail.").format(repo),
-                          color='brightyellow')
+                        color='brightyellow')
             set_repo_activity(repo, False)
             ctx.ui.warning(e)
 
         ctx.ui.info(_('Package database updated.'))
     else:
-        raise inary.errors.Error(_('No repository named \"{}\" found.').format(repo))
-
+        raise inary.errors.Error(
+            _('No repository named \"{}\" found.').format(repo))
 
     return True

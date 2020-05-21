@@ -12,12 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.command as command
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
 
 
 class RemoveRepo(command.Command, metaclass=command.autocommand):

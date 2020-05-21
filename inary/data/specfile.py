@@ -18,26 +18,26 @@
  provides read and write routines for PSPEC files.
 """
 
+import inary.db
+import inary.errors
+import inary.util as util
+import inary.data.group as group
+import inary.data.component as component
+import inary.analyzer.conflict
+import inary.data.replace
+import inary.analyzer.dependency
+import inary.context as ctx
+import inary.sxml.autoxml as autoxml
+import inary.sxml.xmlext as xmlext
+import inary.sxml.xmlfile as xmlfile
+import os.path
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # standard python modules
-import os.path
 
 # inary modules
-import inary.sxml.xmlfile as xmlfile
-import inary.sxml.xmlext as xmlext
-import inary.sxml.autoxml as autoxml
-import inary.context as ctx
-import inary.analyzer.dependency
-import inary.data.replace
-import inary.analyzer.conflict
-import inary.data.component as component
-import inary.data.group as group
-import inary.util as util
-import inary.errors
-import inary.db
 
 
 class Error(inary.errors.Error):
@@ -161,7 +161,8 @@ class Archive(metaclass=autoxml.autoxml):
         self.name = os.path.basename(str(self.uri))
 
     def __str__(self):
-        s = _('URI: {0}, type: {1}, sha1sum: {2}').format(self.uri, self.type, self.sha1sum)
+        s = _('URI: {0}, type: {1}, sha1sum: {2}').format(
+            self.uri, self.type, self.sha1sum)
         return s
 
 
@@ -179,7 +180,8 @@ class Source(metaclass=autoxml.autoxml):
     t_Icon = [autoxml.String, autoxml.optional]
     t_Archive = [[Archive], autoxml.mandatory, "Archive"]
     t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
-    t_BuildDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional]
+    t_BuildDependencies = [
+        [inary.analyzer.dependency.Dependency], autoxml.optional]
     t_Patches = [[Patch], autoxml.optional]
     t_Version = [autoxml.String, autoxml.optional]
     t_Release = [autoxml.String, autoxml.optional]
@@ -190,13 +192,16 @@ class Source(metaclass=autoxml.autoxml):
 
 
 class AnyDependency(metaclass=autoxml.autoxml):
-    t_Dependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional, "Dependency"]
+    t_Dependencies = [[inary.analyzer.dependency.Dependency],
+                      autoxml.optional, "Dependency"]
 
     def __str__(self):
-        return "{{}}".format(_(" or ").join([str(dep) for dep in self.dependencies]))
+        return "{{}}".format(_(" or ").join(
+            [str(dep) for dep in self.dependencies]))
 
     def name(self):
-        return "{{}}".format(_(" or ").join([dep.package for dep in self.dependencies]))
+        return "{{}}".format(_(" or ").join(
+            [dep.package for dep in self.dependencies]))
 
     def decode_hook(self, node, errs, where):
         self.package = self.dependencies[0].package
@@ -236,18 +241,32 @@ class Package(metaclass=autoxml.autoxml):
     t_Icon = [autoxml.String, autoxml.optional]
     t_BuildFlags = [[autoxml.String], autoxml.optional, "BuildFlags/Flag"]
     t_BuildType = [autoxml.String, autoxml.optional]
-    t_BuildDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional]
-    t_PackageDependencies = [[inary.analyzer.dependency.Dependency], autoxml.optional, "RuntimeDependencies/Dependency"]
-    t_PackageAnyDependencies = [[AnyDependency], autoxml.optional, "RuntimeDependencies/AnyDependency"]
-    t_ComponentDependencies = [[autoxml.String], autoxml.optional, "RuntimeDependencies/Component"]
+    t_BuildDependencies = [
+        [inary.analyzer.dependency.Dependency], autoxml.optional]
+    t_PackageDependencies = [[inary.analyzer.dependency.Dependency],
+                             autoxml.optional, "RuntimeDependencies/Dependency"]
+    t_PackageAnyDependencies = [
+        [AnyDependency],
+        autoxml.optional,
+        "RuntimeDependencies/AnyDependency"]
+    t_ComponentDependencies = [[autoxml.String],
+                               autoxml.optional, "RuntimeDependencies/Component"]
     t_Files = [[Path], autoxml.optional]
-    t_Conflicts = [[inary.analyzer.conflict.Conflict], autoxml.optional, "Conflicts/Package"]
-    t_Replaces = [[inary.data.replace.Replace], autoxml.optional, "Replaces/Package"]
-    t_ProvidesCommand = [[autoxml.String], autoxml.optional, "Provides/Command"]
+    t_Conflicts = [[inary.analyzer.conflict.Conflict],
+                   autoxml.optional, "Conflicts/Package"]
+    t_Replaces = [[inary.data.replace.Replace],
+                  autoxml.optional, "Replaces/Package"]
+    t_ProvidesCommand = [[autoxml.String],
+                         autoxml.optional, "Provides/Command"]
     t_ProvidesCMAKE = [[autoxml.String], autoxml.optional, "Provides/CMAKE"]
-    t_ProvidesPkgConfig = [[autoxml.String], autoxml.optional, "Provides/PkgConfig"]
-    t_ProvidesSharedObject = [[autoxml.String], autoxml.optional, "Provides/SharedObject"]
-    t_ProvidesService = [[ServiceProvide], autoxml.optional, "Provides/Service"]
+    t_ProvidesPkgConfig = [[autoxml.String],
+                           autoxml.optional, "Provides/PkgConfig"]
+    t_ProvidesSharedObject = [[autoxml.String],
+                              autoxml.optional, "Provides/SharedObject"]
+    t_ProvidesService = [
+        [ServiceProvide],
+        autoxml.optional,
+        "Provides/Service"]
     t_AdditionalFiles = [[AdditionalFile], autoxml.optional]
     t_History = [[Update], autoxml.optional]
 
@@ -263,21 +282,25 @@ class Package(metaclass=autoxml.autoxml):
         # a component dependency.
         for component in self.componentDependencies:
             for pkgName in componentdb.get_component(component).packages:
-                deps.append(inary.analyzer.dependency.Dependency(package=pkgName))
+                deps.append(
+                    inary.analyzer.dependency.Dependency(
+                        package=pkgName))
 
         return deps
 
     def pkg_dir(self):
         packageDir = self.name + '-' \
-                     + self.version + '-' \
-                     + self.release
+            + self.version + '-' \
+            + self.release
 
         return util.join_path(ctx.config.packages_dir(), packageDir)
 
     def satisfies_runtime_dependencies(self):
         for dep in self.runtimeDependencies():
             if not dep.satisfied_by_installed():
-                ctx.ui.error(_('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(dep, self.name))
+                ctx.ui.error(
+                    _('\"{0}\" dependency of package \"{1}\" is not satisfied.').format(
+                        dep, self.name))
                 return False
         return True
 
@@ -384,22 +407,22 @@ class Package(metaclass=autoxml.autoxml):
         if(self.providesCommand):
             s += _('   - Commands: \n')
             for x in self.providesCommand:
-                s+= '       * {}\n'.format(x)
+                s += '       * {}\n'.format(x)
 
         if(self.providesCMAKE):
             s += _('   - CMAKE Needs: \n')
             for x in self.providesCMAKE:
-                s+= '       * {}\n'.format(x)
+                s += '       * {}\n'.format(x)
 
         if(self.providesPkgConfig):
             s += _('   - PkgConfig Needs: \n')
             for x in self.providesPkgConfig:
-                s+= '       * {}\n'.format(x)
+                s += '       * {}\n'.format(x)
 
         if(self.providesService):
             s += _('   - Services: \n')
             for x in self.providesService:
-                s+= '       * {}\n'.format(x)
+                s += '       * {}\n'.format(x)
 
         s += '\n'
         s += _('Dependencies: ')
@@ -450,11 +473,14 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def _set_i18n(tag, inst):
         try:
             for summary in xmlext.getTagByName(tag, "Summary"):
-                inst.summary[xmlext.getNodeAttribute(summary, "xml:lang")] = xmlext.getNodeText(summary)
+                inst.summary[xmlext.getNodeAttribute(
+                    summary, "xml:lang")] = xmlext.getNodeText(summary)
             for desc in xmlext.getTagByName(tag, "Description"):
-                inst.description[xmlext.getNodeAttribute(desc, "xml:lang")] = xmlext.getNodeText(desc)
+                inst.description[xmlext.getNodeAttribute(
+                    desc, "xml:lang")] = xmlext.getNodeText(desc)
         except AttributeError as e:
-            raise Error(_("translations.xml file is badly formed.: {}").format(e))
+            raise Error(
+                _("translations.xml file is badly formed.: {}").format(e))
 
     def read_translations(self, path):
         if not os.path.exists(path):
@@ -462,7 +488,8 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         doc = xmlext.parse(path)
 
-        if xmlext.getNodeText(xmlext.getNode(doc, "Source"), "Name") == self.source.name:
+        if xmlext.getNodeText(xmlext.getNode(doc, "Source"),
+                              "Name") == self.source.name:
             # Set source package translations
             self._set_i18n(xmlext.getNode(doc, "Source"), self.source)
 

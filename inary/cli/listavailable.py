@@ -12,17 +12,16 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.util as util
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.util as util
-import inary.db
 
 
 class ListAvailable(command.Command, metaclass=command.autocommand):
@@ -47,7 +46,7 @@ all repositories.
         group = optparse.OptionGroup(self.parser, _("list-available options"))
         group.add_option("-n", "--name-only", action="store_true",
                          default=False, help=_("Write only names."))
-        #group.add_option("-l", "--long", action="store_true",
+        # group.add_option("-l", "--long", action="store_true",
         #                 default=False, help=_("Show in long format"))
         group.add_option("-c", "--component", action="store",
                          default=None, help=_("List available packages under given component"))
@@ -59,8 +58,11 @@ all repositories.
 
         self.init(database=True, write=False)
 
-        if not (ctx.get_option('no_color') or ctx.config.get_option('uninstalled')):
-            ctx.ui.info(_('Installed packages are shown in this color.'), color='green')
+        if not (ctx.get_option('no_color')
+                or ctx.config.get_option('uninstalled')):
+            ctx.ui.info(
+                _('Installed packages are shown in this color.'),
+                color='green')
 
         if self.args:
             for arg in self.args:
@@ -68,7 +70,9 @@ all repositories.
         else:
             # print for all repos
             for repo in inary.db.repodb.RepoDB().list_repos(only_active=True):
-                ctx.ui.info(_("\n Repository : \"{}\"\n").format(str(repo)), color="blue")
+                ctx.ui.info(
+                    _("\n Repository : \"{}\"\n").format(
+                        str(repo)), color="blue")
                 self.print_packages(repo)
 
     def print_packages(self, repo):
@@ -76,8 +80,9 @@ all repositories.
         component = ctx.get_option('component')
         if component:
             try:
-                l = self.componentdb.get_packages(component, repo=repo, walk=True)
-            except:
+                l = self.componentdb.get_packages(
+                    component, repo=repo, walk=True)
+            except BaseException:
                 return
         else:
             l = self.packagedb.list_packages(repo)
@@ -93,20 +98,20 @@ all repositories.
             if ctx.config.get_option('uninstalled') and p in installed_list:
                 continue
 
-            pkgname=""
-            pkgsum = self.packagedb.get_summary(p,repo)
+            pkgname = ""
+            pkgsum = self.packagedb.get_summary(p, repo)
 
             if p in installed_list:
                 pkgname = util.colorize(p, 'green')
             else:
                 pkgname = util.colorize(p, 'brightwhite')
 
-            #if self.options.long:
+            # if self.options.long:
             #    package = self.packagedb.get_package(p)
             #    inst_info = self.packagedb.get_info(p)
             #    ctx.ui.info(str(package))
             #    ctx.ui.info(str(inst_info))
-    
+
             if self.options.name_only:
                 ctx.ui.info(str(pkgname))
             else:

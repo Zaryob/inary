@@ -12,6 +12,9 @@
 # Please read the COPYING file.
 
 # Inary Modules
+from inary.actionsapi.shelltools import system
+import inary.actionsapi.get as get
+import inary.actionsapi
 import inary.context as ctx
 
 # Gettext Library
@@ -20,9 +23,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system
 
 
 class MakeError(inary.actionsapi.Error):

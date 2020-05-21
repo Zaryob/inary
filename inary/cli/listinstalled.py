@@ -12,17 +12,16 @@
 # Please read the COPYING file.
 #
 
+import sys
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import sys
 
 
 class ListInstalled(command.Command, metaclass=command.autocommand):
@@ -65,11 +64,13 @@ Usage: list-installed
         if build_host is None:
             installed = self.installdb.list_installed()
         else:
-            installed = self.installdb.list_installed_with_build_host(build_host)
+            installed = self.installdb.list_installed_with_build_host(
+                build_host)
 
         component = ctx.get_option('component')
         if component:
-            component_pkgs = self.componentdb.get_union_packages(component, walk=True)
+            component_pkgs = self.componentdb.get_union_packages(
+                component, walk=True)
             installed = list(set(installed) & set(component_pkgs))
 
         installed.sort()
@@ -79,15 +80,17 @@ Usage: list-installed
             maxlen = max([len(_p) for _p in installed])
 
         if self.options.install_info:
-            ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
-            sys.stdout.write('===========================================================================\n')
+            ctx.ui.info(
+                _('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
+            sys.stdout.write(
+                '===========================================================================\n')
 
         if self.options.long:
             for pkg in installed:
                 inst_info = self.installdb.get_info(pkg)
                 ctx.ui.info(str(pkg))
                 ctx.ui.info(str(inst_info))
-    
+
         elif self.options.install_info:
             for pkg in installed:
                 inst_info = self.installdb.get_info(pkg)
@@ -100,7 +103,7 @@ Usage: list-installed
 
         else:
             for pkg in installed:
-                pkgname=pkg
+                pkgname = pkg
                 psum = self.installdb.get_summary(pkg)
                 pkgname += ' ' * (maxlen - len(pkg))
                 ctx.ui.info('{} '.format(pkgname), color='white', noln=True)
