@@ -11,9 +11,6 @@
 #
 
 import inary.sysconf as sc
-import inary.trigger
-import inary.errors
-import inary.data
 import inary.cli.command as command
 import optparse
 

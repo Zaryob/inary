@@ -115,7 +115,7 @@ class LocalText(dict):
                 return lang[0:2]
         except KeyboardInterrupt:
             raise
-        except Exception as e:  # FIXME: what exception could we catch here, replace with that.
+        except Exception:  # FIXME: what exception could we catch here, replace with that.
             raise Error(
                 _('LocalText: unable to get either current or default locale.'))
 
@@ -433,7 +433,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                             return False
                     except KeyboardInterrupt:
                         raise
-                    except Exception as e:  # FIXME: what exception could we catch here, replace with that.
+                    except Exception:  # FIXME: what exception could we catch here, replace with that.
                         return False
                 return True
 
@@ -593,7 +593,6 @@ class autoxml(oo.autosuper, oo.autoprop):
         """generate a named component tag/attr. a decoration of
         anonymous functions that do not bind to variable names"""
         name = cls.mixed_case(token)
-        token_type = spec[0]
         req = spec[1]
         (init_a, decode_a, encode_a, errors_a, format_a) = anonfuns
 
@@ -641,7 +640,7 @@ class autoxml(oo.autosuper, oo.autoprop):
     @staticmethod
     def mixed_case(identifier):
         """helper function to turn token name into mixed case"""
-        if identifier is "":
+        if identifier == "":
             return ""
         else:
             if identifier[0] == 'I':
@@ -655,7 +654,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         """returns split of the tag path into last tag and the rest"""
         try:
             lastsep = tagpath.rindex('/')
-        except ValueError as e:
+        except ValueError:
             return '', tagpath
         return tagpath[:lastsep], tagpath[lastsep + 1:]
 
@@ -704,7 +703,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                     value = autoxml.basic_cons_map[token_type](text)
                 except KeyboardInterrupt:
                     raise
-                except Exception as e:  # FIXME: what exception could we catch here, replace with that.
+                except Exception:  # FIXME: what exception could we catch here, replace with that.
                     value = None
                     errs.append(
                         where + ': ' + _('Type mismatch: read text cannot be decoded.'))

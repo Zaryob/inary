@@ -340,7 +340,7 @@ class Install(AtomicOperation):
         return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             if ctx.config.get_option(
                     'ignore_configure') or ctx.config.get_option('destdir'):
                 self.installdb.mark_pending(self.pkginfo.name)
@@ -363,7 +363,7 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             if ctx.config.get_option(
                     'ignore_configure') or ctx.config.get_option('destdir'):
                 self.installdb.mark_pending(self.pkginfo.name)
@@ -528,7 +528,7 @@ class Install(AtomicOperation):
 
     def store_postops(self):
         """stores postops script temporarly"""
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             self.package.extract_file_synced(
                 ctx.const.postops, ctx.config.tmp_dir())
 
@@ -541,7 +541,7 @@ class Install(AtomicOperation):
             ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(
             ctx.const.metadata_xml, self.package.pkg_dir())
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             self.package.extract_file_synced(
                 ctx.const.postops, self.package.pkg_dir())
 
@@ -732,13 +732,13 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(
                 self.package_name)), color='brightyellow')
             self.trigger.preremove(self.package.pkg_dir())
 
     def run_postremove(self):
-        if ('postOps' in self.metadata.package.isA):
+        if 'postOps' in self.metadata.package.isA:
             ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(
                 self.package_name)), color='brightyellow')
             self.trigger.postremove(self.package.pkg_dir())

@@ -1,7 +1,7 @@
 Writing commands:
 -----------------
 
-TODO: this is a *bit* out of date now.
+TODO: this is a * bit * out of date now.
 
 Subclass from Command.
 
@@ -14,10 +14,11 @@ We used to import inary.operations in inary.cli
 This prevented inary.operations from having the current global
 inary.ui.ui because it's loaded before the UI is set! So, despite
 what you might understand from the python FAQ 1.2.3
-http://www.python.org/doc/faq/programming.html#how-do-i-share-global-variables-across-modules
+# how-do-i-share-global-variables-across-modules
+http: // www.python.org / doc / faq / programming.html
 you have to be careful about the initialization order when using
 singleton modules.
 
 Another way to solve this is to ensure that the global module is
-always imported again in every function it is called (see
-ui.CLI.confirm() ) but this is more expensive.
+always imported again in every function it is called(see
+                                                     ui.CLI.confirm()) but this is more expensive.

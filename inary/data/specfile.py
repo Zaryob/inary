@@ -280,8 +280,8 @@ class Package(metaclass=autoxml.autoxml):
 
         # Create Dependency objects for each package coming from
         # a component dependency.
-        for component in self.componentDependencies:
-            for pkgName in componentdb.get_component(component).packages:
+        for componentName in self.componentDependencies:
+            for pkgName in componentdb.get_component(componentName).packages:
                 deps.append(
                     inary.analyzer.dependency.Dependency(
                         package=pkgName))

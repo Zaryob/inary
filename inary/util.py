@@ -157,10 +157,6 @@ def same(l):
         return True
 
 
-def any(pred, seq):
-    return reduce(operator.or_, list(map(pred, seq)), False)
-
-
 def flatten_list(l):
     """Flatten a list of lists."""
     # Fastest solution is list comprehension

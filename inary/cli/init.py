@@ -12,8 +12,6 @@
 # Please read the COPYING file.
 #
 
-import inary.trigger
-import inary.errors
 import inary.cli.command as command
 
 # Gettext Library
