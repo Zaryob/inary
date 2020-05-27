@@ -12,6 +12,12 @@
 # Please read the COPYING file.
 #
 
+import inary.trigger
+import inary.context as ctx
+import inary.errors
+import inary.data
+import inary.ui
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,29 +25,21 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.util as util
-import inary.cli.command as command
-import inary.ui
-import inary.data
-import inary.errors
-import inary.context as ctx
-import inary.trigger
-import os
-
 
 def reconfigure(packages=None):
     # start with pending packages
     # configure them in reverse topological order of dependency
     installdb = inary.db.installdb.InstallDB()
-    order=packages
+    order = packages
     for x in order:
         if installdb.has_package(x):
             pkginfo = installdb.get_package(x)
-            ops_Dir=installdb.package_path(x)
+            ops_Dir = installdb.package_path(x)
             ctx.ui.notify(inary.ui.configuring, package=pkginfo, files=None)
             inary.trigger.Trigger().postinstall(ops_Dir)
             ctx.ui.notify(inary.ui.configured, package=pkginfo, files=None)
         installdb.clear_pending(x)
+
 
 class ConfigurePending(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Reconfigure pending packages
@@ -58,7 +56,8 @@ configures those packages.
     name = (_("reconfigure"), "rp")
 
     def options(self):
-        group = optparse.OptionGroup(self.parser, _("configure-pending options"))
+        group = optparse.OptionGroup(
+            self.parser, _("configure-pending options"))
         super(ConfigurePending, self).options(group)
         self.parser.add_option_group(group)
 

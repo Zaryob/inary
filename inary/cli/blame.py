@@ -12,16 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class Blame(command.Command, metaclass=command.autocommand):
@@ -39,7 +38,12 @@ Usage: blame <package> ... <package>
 
     def options(self):
         group = optparse.OptionGroup(self.parser, _("blame options"))
-        group.add_option("-r", "--release", action="store", type="int", help=_("Blame for the given release"))
+        group.add_option(
+            "-r",
+            "--release",
+            action="store",
+            type="int",
+            help=_("Blame for the given release"))
         group.add_option("-a", "--all", action="store_true", default=False,
                          help=_("Blame for all of the releases"))
         self.parser.add_option_group(group)
@@ -72,7 +76,8 @@ Usage: blame <package> ... <package>
             package.name, package.history[hno].version, package.history[hno].release)
         s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name),
                                                          package.source.packager.email)
-        s += _('Release Updater: {0.name} <{0.email}>\n').format(package.history[hno])
+        s += _('Release Updater: {0.name} <{0.email}>\n').format(
+            package.history[hno])
         s += _('Update Date: {}\n').format(package.history[hno].date)
         s += '\n{}\n'.format(package.history[hno].comment)
         ctx.ui.info(s)

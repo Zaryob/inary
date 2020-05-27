@@ -1,15 +1,15 @@
-2019-01-08 Suleyman POYRAZ <zaryob.dev@gmail.com>
-   * dependency error --status: not fixed; flag: critical ---:
+2019 - 01 - 08 Suleyman POYRAZ < zaryob.dev @ gmail.com >
+   * dependency error - -status: not fixed; flag: critical - --:
    -> çalışma sırasında dependencylere göre paketler kurulum sıralamasına sokulmadığı içinde
    error veriyor sonuç olarak kurulumun ortasında hata yiyoruz. Önceden beri var olan bu hata giderilmeli.
-   
-2018-05-05 Suleyman POYRAZ <zaryob.dev@gmail.com>
-    * inary.data.pgraph.py --status: fixed; flag: critical ---:
+
+2018 - 05 - 05 Suleyman POYRAZ < zaryob.dev @ gmail.com >
+    * inary.data.pgraph.py - -status: fixed; flag: critical - --:
     ->inary kurulum için mevcut dizin olarak farklı bir yer kulllanılınca pgraph.Digraph()
     sınıfındaki dfs fonksiyonlarından KeyError yükseliyor.
 
-2018-03-17 Suleyman POYRAZ <zaryob.dev@gmail.com>
-    * inary.fetcher.py: --- status: fixed; flag: critical ---:
+2018 - 03 - 17 Suleyman POYRAZ < zaryob.dev @ gmail.com >
+    * inary.fetcher.py: --- status: fixed; flag: critical - --:
     ->Ufak bir sihirli dokunuş düzeltmeye yetti.
     Neden local dosyaları çekmiyor bu?
     """

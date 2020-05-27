@@ -12,6 +12,8 @@
 # Please read the COPYING file.
 
 # Standart Python Modules
+import inary.actionsapi
+import inary.context as ctx
 import subprocess
 
 # Gettext Library
@@ -20,8 +22,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # INARY Modules
-import inary.context as ctx
-import inary.actionsapi
 
 
 class PkgconfigError(inary.actionsapi.Error):
@@ -29,6 +29,7 @@ class PkgconfigError(inary.actionsapi.Error):
         inary.actionsapi.Error.__init__(self, value)
         self.value = value
         ctx.ui.error("[pkgconfig]: " + value)
+
 
 def getVariableForLibrary(library, variable):
     # Returns a specific variable provided in the library .pc file
@@ -41,7 +42,8 @@ def getVariableForLibrary(library, variable):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -61,7 +63,8 @@ def getLibraryVersion(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -82,7 +85,8 @@ def getLibraryCFLAGS(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -103,7 +107,8 @@ def getLibraryLIBADD(library):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -123,7 +128,8 @@ def runManualCommand(*args):
         return_code = proc.wait()
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         if return_code == 0 and proc.stdout:
             return proc.stdout.read().strip()
@@ -141,6 +147,7 @@ def libraryExists(library):
                                   "{}".format(library)])
     except OSError as exception:
         if exception.errno == 2:
-            raise PkgconfigError(_("Package pkgconfig is not installed on your system."))
+            raise PkgconfigError(
+                _("Package pkgconfig is not installed on your system."))
     else:
         return result == 0

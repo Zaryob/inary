@@ -12,17 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.util as util
-import inary.db
 
 
 class Check(command.Command, metaclass=command.autocommand):
@@ -97,7 +95,8 @@ class Check(command.Command, metaclass=command.autocommand):
         for pkg in pkgs:
             if self.installdb.has_package(pkg):
                 check_results = check.check(pkg, check_config)
-                ctx.ui.info("{0}    {1}".format(prefix.format(pkg), (' ' * (maxpkglen - len(pkg)))), noln=True)
+                ctx.ui.info("{0}    {1}".format(prefix.format(
+                    pkg), (' ' * (maxpkglen - len(pkg)))), noln=True)
 
                 if check_results['missing'] or check_results['corrupted'] \
                         or check_results['config']:
@@ -113,13 +112,19 @@ class Check(command.Command, metaclass=command.autocommand):
 
                 # Dump per file stuff
                 for fpath in check_results['missing']:
-                    ctx.ui.info(_("Missing file: \"/{}\"").format(fpath), color='brightred')
+                    ctx.ui.info(
+                        _("Missing file: \"/{}\"").format(fpath),
+                        color='brightred')
 
                 for fpath in check_results['denied']:
-                    ctx.ui.info(_("Access denied: \"/{}\"").format(fpath), color='yellow')
+                    ctx.ui.info(
+                        _("Access denied: \"/{}\"").format(fpath),
+                        color='yellow')
 
                 for fpath in check_results['corrupted']:
-                    ctx.ui.info(_("Corrupted file: \"/{}\"").format(fpath), color='brightyellow')
+                    ctx.ui.info(
+                        _("Corrupted file: \"/{}\"").format(fpath),
+                        color='brightyellow')
 
                 for fpath in check_results['config']:
                     ctx.ui.info(_("Modified configuration file: \"/{}\"").format(fpath),

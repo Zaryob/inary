@@ -15,8 +15,6 @@
 
 import gettext
 
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
 
 import os
 import shutil
@@ -39,11 +37,17 @@ import inary.util as util
 import inary.version
 import inary.trigger
 
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
+
 class Error(inary.errors.Error):
     pass
 
+
 class PostOpsError(inary.errors.Error):
     pass
+
 
 class NotfoundError(inary.errors.Error):
     pass
@@ -69,7 +73,12 @@ class AtomicOperation(object):
 
 # possible paths of install operation
 (INSTALL, REINSTALL, UPGRADE, DOWNGRADE, REMOVE) = list(range(5))
-opttostr = {INSTALL: "install", REMOVE: "remove", REINSTALL: "reinstall", UPGRADE: "upgrade", DOWNGRADE: "downgrade"}
+opttostr = {
+    INSTALL: "install",
+    REMOVE: "remove",
+    REINSTALL: "reinstall",
+    UPGRADE: "upgrade",
+    DOWNGRADE: "downgrade"}
 
 
 class Install(AtomicOperation):
@@ -84,7 +93,9 @@ class Install(AtomicOperation):
         repo = packagedb.which_repo(name)
         if repo:
             repodb = inary.db.repodb.RepoDB()
-            ctx.ui.debug(_("Package \"{0}\" found in repository \"{1}\"").format(name, repo))
+            ctx.ui.debug(
+                _("Package \"{0}\" found in repository \"{1}\"").format(
+                    name, repo))
 
             repo = repodb.get_repo(repo)
             pkg = packagedb.get_package(name)
@@ -115,7 +126,9 @@ class Install(AtomicOperation):
                 pkg_path = os.path.join(os.path.dirname(repo.indexuri.get_uri()),
                                         str(uri.path()))
 
-            ctx.ui.info(_("Package URI: \"{}\"").format(pkg_path), verbose=True)
+            ctx.ui.info(
+                _("Package URI: \"{}\"").format(pkg_path),
+                verbose=True)
 
             # Bug 4113
             cached_file = inary.package.Package.is_cached(pkg_path)
@@ -129,18 +142,23 @@ class Install(AtomicOperation):
             if not cached_file:
                 downloaded_file = install_op.package.filepath
                 if util.sha1_file(downloaded_file) != pkg_hash:
-                    raise inary.errors.Error(_("Download Error: Package does not match the repository package."))
+                    raise inary.errors.Error(
+                        _("Download Error: Package does not match the repository package."))
 
             return install_op
         else:
-            raise Error(_("Package \"{}\" not found in any active repository.").format(name))
+            raise Error(
+                _("Package \"{}\" not found in any active repository.").format(name))
 
-    def __init__(self, package_fname, ignore_dep=None, ignore_file_conflicts=None):
-        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
+    def __init__(self, package_fname, ignore_dep=None,
+                 ignore_file_conflicts=None):
+        if not ctx.filesdb:
+            ctx.filesdb = inary.db.filesdb.FilesDB()
         "initialize from a file name"
         super(Install, self).__init__(ignore_dep)
         if not ignore_file_conflicts:
-            ignore_file_conflicts = ctx.config.get_option('ignore_file_conflicts')
+            ignore_file_conflicts = ctx.config.get_option(
+                'ignore_file_conflicts')
         self.ignore_file_conflicts = ignore_file_conflicts
         self.package_fname = package_fname
         try:
@@ -155,14 +173,19 @@ class Install(AtomicOperation):
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
-        self.trigger=inary.trigger.Trigger()
+        self.trigger = inary.trigger.Trigger()
 
     def install(self, ask_reinstall=True):
 
         # Any package should remove the package it replaces before
         self.check_replaces()
-        ctx.ui.status(_("Installing \"{0.name}\", version {0.version}, release {0.release}").format(self.pkginfo), push_screen=False)
-        ctx.ui.notify(inary.ui.installing, package=self.pkginfo, files=self.files)
+        ctx.ui.status(
+            _("Installing \"{0.name}\", version {0.version}, release {0.release}").format(
+                self.pkginfo), push_screen=False)
+        ctx.ui.notify(
+            inary.ui.installing,
+            package=self.pkginfo,
+            files=self.files)
 
         self.ask_reinstall = ask_reinstall
         ctx.ui.status(_("Checking requirements"), push_screen=False)
@@ -199,12 +222,14 @@ class Install(AtomicOperation):
         total_size, symbol = util.human_readable_size(util.free_space())
         if util.free_space() < self.installedSize:
             raise Error(_("Is there enought free space in your disk?"))
-        ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(total_size, symbol)), verbose=True)
+        ctx.ui.info(_("Free space in \'destinationdirectory\': {:.2f} {} ".format(
+            total_size, symbol)), verbose=True)
 
     def check_replaces(self):
         for replaced in self.pkginfo.replaces:
             if self.installdb.has_package(replaced.package):
-                inary.operations.remove.remove_replaced_packages([replaced.package])
+                inary.operations.remove.remove_replaced_packages(
+                    [replaced.package])
 
     @staticmethod
     def check_versioning(version, release):
@@ -212,11 +237,11 @@ class Install(AtomicOperation):
             int(release)
             inary.version.make_version(version)
         except (ValueError, inary.version.InvalidVersionError):
-            raise Error(_("{0}-{1} is not a valid INARY version format").format(version, release))
+            raise Error(
+                _("{0}-{1} is not a valid INARY version format").format(version, release))
 
     def check_relations(self):
         # check dependencies
-        # Fixme: !!!
         # if not ctx.config.get_option('ignore_dependency'):
         #    if not self.pkginfo.installable():
         #        raise Error(_("{} package cannot be installed unless the dependencies are satisfied").format(self.pkginfo.name))
@@ -224,12 +249,13 @@ class Install(AtomicOperation):
         # If it is explicitly specified that package conflicts with this package and also
         # we passed check_conflicts tests in operations.py than this means a non-conflicting
         # pkg is in "order" to be installed that has no file conflict problem with this package.
-        # PS: we need this because "order" generating code does not consider conflicts.
+        # PS: we need this because "order" generating code does not consider
+        # conflicts.
         def really_conflicts(pkg):
             if not self.pkginfo.conflicts:
                 return True
 
-            return not pkg in [x.package for x in self.pkginfo.conflicts]
+            return pkg not in [x.package for x in self.pkginfo.conflicts]
 
         # check file conflicts
         file_conflicts = []
@@ -237,12 +263,14 @@ class Install(AtomicOperation):
             pkg, existing_file = ctx.filesdb.get_file(f.path)
             if pkg:
                 dst = util.join_path(ctx.config.dest_dir(), f.path)
-                if pkg != self.pkginfo.name and not os.path.isdir(dst) and really_conflicts(pkg):
+                if pkg != self.pkginfo.name and not os.path.isdir(
+                        dst) and really_conflicts(pkg):
                     file_conflicts.append((pkg, existing_file))
         if file_conflicts:
             file_conflicts_str = ""
             for (pkg, existing_file) in file_conflicts:
-                file_conflicts_str += _("\"/{0}\" from \"{1}\" package\n").format(existing_file, pkg)
+                file_conflicts_str += _(
+                    "\"/{0}\" from \"{1}\" package\n").format(existing_file, pkg)
             msg = _('File conflicts:\n\"{}\"').format(file_conflicts_str)
             if self.ignore_file_conflicts:
                 ctx.ui.warning(msg)
@@ -260,16 +288,21 @@ class Install(AtomicOperation):
             # determine if same version
             if pkg.release == irelease_s:
                 if self.ask_reinstall:
-                    if not ctx.ui.confirm(_('Re-install same version package?')):
+                    if not ctx.ui.confirm(
+                            _('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
                 self.operation = REINSTALL
             else:
                 pkg_version = inary.version.make_version(pkg.version)
                 iversion = inary.version.make_version(iversion_s)
-                if ctx.config.get_option('store_lib_info') and pkg_version > iversion:
-                    self.store_old_paths = os.path.join(ctx.config.old_paths_cache_dir(), pkg.name)
+                if ctx.config.get_option(
+                        'store_lib_info') and pkg_version > iversion:
+                    self.store_old_paths = os.path.join(
+                        ctx.config.old_paths_cache_dir(), pkg.name)
                     ctx.ui.info(_('Storing old paths info.'))
-                    open(self.store_old_paths, "w").write("Version: {}\n".format(iversion_s))
+                    open(
+                        self.store_old_paths, "w").write(
+                        "Version: {}\n".format(iversion_s))
 
                 pkg_release = int(pkg.release)
                 irelease = int(irelease_s)
@@ -300,25 +333,29 @@ class Install(AtomicOperation):
 
             self.old_files = self.installdb.get_files(pkg.name)
             self.old_pkginfo = self.installdb.get_info(pkg.name)
-            self.old_path = self.installdb.pkg_dir(pkg.name, iversion_s, irelease_s)
+            self.old_path = self.installdb.pkg_dir(
+                pkg.name, iversion_s, irelease_s)
 
     def reinstall(self):
         return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
-        if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
-               self.installdb.mark_pending(self.pkginfo.name)
-               return 0
-            ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
+        if 'postOps' in self.metadata.package.isA:
+            if ctx.config.get_option(
+                    'ignore_configure') or ctx.config.get_option('destdir'):
+                self.installdb.mark_pending(self.pkginfo.name)
+                return 0
+            ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(
+                self.pkginfo.name)), color='brightyellow')
             if not self.trigger.preinstall(ctx.config.tmp_dir()):
                 util.clean_dir(self.package.pkg_dir())
-                ctx.ui.error(_('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                ctx.ui.error(
+                    _('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
 
     def postinstall(self):
 
         # Chowning for additional files
-        #for _file in self.package.get_files().list:
+        # for _file in self.package.get_files().list:
         #    fpath = util.join_path(ctx.config.dest_dir(), _file.path)
         #    if os.path.islink(fpath):
         #        ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
@@ -326,22 +363,26 @@ class Install(AtomicOperation):
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
 
-        if ('postOps' in self.metadata.package.isA):
-            if ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
+        if 'postOps' in self.metadata.package.isA:
+            if ctx.config.get_option(
+                    'ignore_configure') or ctx.config.get_option('destdir'):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
-            ctx.ui.info(_('Configuring post-install \"{}\"'.format(self.pkginfo.name)),color='brightyellow')
+            ctx.ui.info(
+                _('Configuring post-install \"{}\"'.format(self.pkginfo.name)), color='brightyellow')
             if not self.trigger.postinstall(self.package.pkg_dir()):
-                ctx.ui.error(_('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
+                ctx.ui.error(
+                    _('Post-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
-
 
     def extract_install(self):
         """unzip package in place"""
 
-        ctx.ui.notify(inary.ui.extracting, package=self.pkginfo, files=self.files)
-
+        ctx.ui.notify(
+            inary.ui.extracting,
+            package=self.pkginfo,
+            files=self.files)
 
         def check_config_changed(config):
             fpath = util.join_path(ctx.config.dest_dir(), config.path)
@@ -351,7 +392,8 @@ class Install(AtomicOperation):
         # Package file's path may not be relocated or content may not be changed but
         # permission may be changed
         def update_permissions():
-            permissions = inary.operations.delta.find_permission_changes(self.old_files, self.files)
+            permissions = inary.operations.delta.find_permission_changes(
+                self.old_files, self.files)
             for path, mode in permissions:
                 os.chmod(path, mode)
 
@@ -362,7 +404,8 @@ class Install(AtomicOperation):
         def relocate_files():
             missing_old_files = set()
 
-            for old_file, new_file in inary.operations.delta.find_relocations(self.old_files, self.files):
+            for old_file, new_file in inary.operations.delta.find_relocations(
+                    self.old_files, self.files):
                 old_path = os.path.join(ctx.config.dest_dir(), old_file.path)
                 new_path = os.path.join(ctx.config.dest_dir(), new_file.path)
 
@@ -405,14 +448,17 @@ class Install(AtomicOperation):
             files_by_name = {}
             new_paths = []
             for f in self.files.list:
-                files_by_name.setdefault(os.path.basename(f.path), []).append(f)
+                files_by_name.setdefault(
+                    os.path.basename(
+                        f.path), []).append(f)
                 new_paths.append(f.path)
 
             for old_file in self.old_files.list:
                 if old_file.path in new_paths:
                     continue
 
-                old_file_path = os.path.join(ctx.config.dest_dir(), old_file.path)
+                old_file_path = os.path.join(
+                    ctx.config.dest_dir(), old_file.path)
 
                 try:
                     old_file_stat = os.lstat(old_file_path)
@@ -432,7 +478,8 @@ class Install(AtomicOperation):
                     new_file_stat = stat_cache.get(new_file.path)
 
                     if new_file_stat is None:
-                        path = os.path.join(ctx.config.dest_dir(), new_file.path)
+                        path = os.path.join(
+                            ctx.config.dest_dir(), new_file.path)
                         try:
                             new_file_stat = os.lstat(path)
                         except OSError:
@@ -443,11 +490,15 @@ class Install(AtomicOperation):
                     if os.path.samestat(new_file_stat, old_file_stat):
                         break
                 else:
-                    Remove.remove_file(old_file, self.pkginfo.name, store_old_paths=self.store_old_paths)
+                    Remove.remove_file(
+                        old_file,
+                        self.pkginfo.name,
+                        store_old_paths=self.store_old_paths)
 
         if self.reinstall():
             # get 'config' typed file objects replace is not set
-            # new = [x for x in self.files.list if x.type == 'config' and not x.replace, self.files.list]
+            # new = [x for x in self.files.list if x.type == 'config' and not
+            # x.replace, self.files.list]
             new = [x for x in self.files.list if x.type == 'config']
             old = [x for x in self.old_files.list if x.type == 'config']
 
@@ -477,19 +528,22 @@ class Install(AtomicOperation):
 
     def store_postops(self):
         """stores postops script temporarly"""
-        if ('postOps' in self.metadata.package.isA):
-            self.package.extract_file_synced(ctx.const.postops, ctx.config.tmp_dir())
+        if 'postOps' in self.metadata.package.isA:
+            self.package.extract_file_synced(
+                ctx.const.postops, ctx.config.tmp_dir())
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
         if self.reinstall():
             util.clean_dir(self.old_path)
-        self.package.extract_file_synced(ctx.const.files_xml, self.package.pkg_dir())
-        self.package.extract_file_synced(ctx.const.metadata_xml, self.package.pkg_dir())
-        if ('postOps' in self.metadata.package.isA):
-            self.package.extract_file_synced(ctx.const.postops, self.package.pkg_dir())
-
+        self.package.extract_file_synced(
+            ctx.const.files_xml, self.package.pkg_dir())
+        self.package.extract_file_synced(
+            ctx.const.metadata_xml, self.package.pkg_dir())
+        if 'postOps' in self.metadata.package.isA:
+            self.package.extract_file_synced(
+                ctx.const.postops, self.package.pkg_dir())
 
     def update_databases(self):
         """update databases"""
@@ -510,13 +564,17 @@ class Install(AtomicOperation):
             self.installdb.mark_needs_reboot(package_name)
 
         # filesdb
-        ctx.ui.info(_('Adding files of \"{}\" package to database...').format(self.metadata.package.name), color='faintpurple')
+        ctx.ui.info(
+            _('Adding files of \"{}\" package to database...').format(
+                self.metadata.package.name),
+            color='faintpurple')
         ctx.filesdb.add_files(self.metadata.package.name, self.files)
 
         # installed packages
         self.installdb.add_package(self.pkginfo)
 
-        otype = "delta" if self.package_fname.endswith(ctx.const.delta_package_suffix) else None
+        otype = "delta" if self.package_fname.endswith(
+            ctx.const.delta_package_suffix) else None
         self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
                                       operation=opttostr[self.operation], otype=otype)
 
@@ -533,17 +591,18 @@ def install_single(pkg, upgrade=False):
         install_single_name(pkg, upgrade)
 
 
-# FIXME: Here and elsewhere pkg_location must be a URI
 def install_single_file(pkg_location, upgrade=False):
     """install a package file"""
-    ctx.ui.info(_('Installing => [{}]'.format(pkg_location)),color='yellow')
-    install=Install(pkg_location)
+    ctx.ui.info(_('Installing => [{}]'.format(pkg_location)), color='yellow')
+    install = Install(pkg_location)
     __install(install, upgrade)
+
 
 def install_single_name(name, upgrade=False):
     """install a single package from ID"""
-    install=Install.from_name(name)
+    install = Install.from_name(name)
     __install(install, upgrade)
+
 
 def __install(install, upgrade=False):
     '''Standard installation function'''
@@ -552,41 +611,51 @@ def __install(install, upgrade=False):
     install.install(not upgrade)
     install.postinstall()
 
+
 class Remove(AtomicOperation):
 
     def __init__(self, package_name, ignore_dep=None, store_old_paths=None):
-        if not ctx.filesdb: ctx.filesdb = inary.db.filesdb.FilesDB()
+        if not ctx.filesdb:
+            ctx.filesdb = inary.db.filesdb.FilesDB()
         super(Remove, self).__init__(ignore_dep)
         self.installdb = inary.db.installdb.InstallDB()
         self.package_name = package_name
         self.package = self.installdb.get_package(self.package_name)
         self.metadata = self.installdb.get_metadata(self.package_name)
         self.store_old_paths = store_old_paths
-        self.trigger=inary.trigger.Trigger()
+        self.trigger = inary.trigger.Trigger()
         try:
             self.files = self.installdb.get_files(self.package_name)
         except inary.errors.Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
-            ctx.ui.warning(_('File list could not be read for \"{}\" package, continuing removal.').format(package_name))
+            ctx.ui.warning(
+                _('File list could not be read for \"{}\" package, continuing removal.').format(package_name))
             self.files = inary.data.files.Files()
 
     def run(self):
         """Remove a single package"""
-        ctx.ui.notify(inary.ui.removing, package=self.package, files=self.files)
-        ctx.ui.status(_("Removing \"{0.name}\", version {0.version}, release {0.release}").format(self.package), push_screen=False)
+        ctx.ui.notify(
+            inary.ui.removing,
+            package=self.package,
+            files=self.files)
+        ctx.ui.status(
+            _("Removing \"{0.name}\", version {0.version}, release {0.release}").format(
+                self.package), push_screen=False)
 
         if not self.installdb.has_package(self.package_name):
             raise Exception(_('Trying to remove nonexistent package ')
                             + self.package_name)
 
         self.check_dependencies()
-        if not ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
+        if not ctx.config.get_option(
+                'ignore_configure') or ctx.config.get_option('destdir'):
             self.run_preremove()
         for fileinfo in self.files.list:
             self.remove_file(fileinfo, self.package_name, True)
 
-        if not ctx.config.get_option('ignore_configure') or ctx.config.get_option('destdir'):
+        if not ctx.config.get_option(
+                'ignore_configure') or ctx.config.get_option('destdir'):
             self.run_postremove()
 
         self.update_databases()
@@ -596,7 +665,6 @@ class Remove(AtomicOperation):
         ctx.ui.notify(inary.ui.removed, package=self.package, files=self.files)
         util.xterm_title_reset()
 
-
     def check_dependencies(self):
         # FIXME: why is this not implemented? -- exa
         # we only have to check the dependencies to ensure the
@@ -605,7 +673,8 @@ class Remove(AtomicOperation):
         # is there any package who depends on this package?
 
     @staticmethod
-    def remove_file(fileinfo, package_name, remove_permanent=False, store_old_paths=None):
+    def remove_file(fileinfo, package_name,
+                    remove_permanent=False, store_old_paths=None):
 
         if fileinfo.permanent and not remove_permanent:
             return
@@ -619,7 +688,8 @@ class Remove(AtomicOperation):
         # another as in #2911)
         pkg = ctx.filesdb.get_filename(fileinfo.path)
         if pkg and pkg != package_name:
-            ctx.ui.warning(_('Not removing conflicted file : \"{}\"').format(fpath))
+            ctx.ui.warning(
+                _('Not removing conflicted file : \"{}\"').format(fpath))
             return
 
         if fileinfo.type == ctx.const.conf:
@@ -630,13 +700,15 @@ class Remove(AtomicOperation):
             # and when the package is reinstalled the symlink will
             # link to that changed file again.
             try:
-                if os.path.islink(fpath) or util.sha1_file(fpath) == fileinfo.hash:
+                if os.path.islink(fpath) or util.sha1_file(
+                        fpath) == fileinfo.hash:
                     os.unlink(fpath)
                 else:
                     # keep changed file in history
                     historydb.save_config(package_name, fpath)
 
-                    # after saving to history db, remove the config file any way
+                    # after saving to history db, remove the config file any
+                    # way
                     if ctx.config.get_option("purge"):
                         os.unlink(fpath)
             except util.FileError:
@@ -660,26 +732,34 @@ class Remove(AtomicOperation):
             dpath = os.path.dirname(dpath)
 
     def run_preremove(self):
-        if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(self.package_name)),color='brightyellow')
+        if 'postOps' in self.metadata.package.isA:
+            ctx.ui.info(_('Pre-remove configuration have been run for \"{}\"'.format(
+                self.package_name)), color='brightyellow')
             self.trigger.preremove(self.package.pkg_dir())
 
-
     def run_postremove(self):
-        if ('postOps' in self.metadata.package.isA):
-            ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(self.package_name)),color='brightyellow')
+        if 'postOps' in self.metadata.package.isA:
+            ctx.ui.info(_('Post-remove configuration have been run for  \"{}\"'.format(
+                self.package_name)), color='brightyellow')
             self.trigger.postremove(self.package.pkg_dir())
 
     def update_databases(self):
         self.remove_db()
-        self.historydb.add_and_update(pkgBefore=self.package, operation="remove")
+        self.historydb.add_and_update(
+            pkgBefore=self.package, operation="remove")
 
     def remove_inary_files(self):
-        ctx.ui.info(_('Removing files of \"{}\" package from system...').format(self.package_name), color='faintpurple')
+        ctx.ui.info(
+            _('Removing files of \"{}\" package from system...').format(
+                self.package_name),
+            color='faintpurple')
         util.clean_dir(self.package.pkg_dir())
 
     def remove_db(self):
-        ctx.ui.info(_('Removing files of \"{}\" package from database...').format(self.package_name), color='faintyellow')
+        ctx.ui.info(
+            _('Removing files of \"{}\" package from database...').format(
+                self.package_name),
+            color='faintyellow')
         self.installdb.remove_package(self.package_name)
         ctx.filesdb.remove_files(self.files.list)
 

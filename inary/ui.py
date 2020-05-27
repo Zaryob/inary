@@ -84,7 +84,7 @@ class UI(object):
         """ask the user to choose from a list of alternatives"""
         pass
 
-    def confirm(self, msg,invert=False):
+    def confirm(self, msg, invert=False):
         """ask the user to confirm question"""
         pass
 

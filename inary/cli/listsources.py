@@ -12,17 +12,16 @@
 # Please read the COPYING file.
 #
 
+import inary.util as util
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.util as util
 
 
 class ListSources(command.Command, metaclass=command.autocommand):
@@ -66,4 +65,5 @@ Gives a brief list of sources published in the repositories.
                 if p in installed_list:
                     sf.source.name = util.colorize(sf.source.name, 'cyan')
                 sf.source.name += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('{0} - {1}'.format(sf.source.name, str(sf.source.summary)))
+                ctx.ui.info('{0} - {1}'.format(sf.source.name,
+                                               str(sf.source.summary)))

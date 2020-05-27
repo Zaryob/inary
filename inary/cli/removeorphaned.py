@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.sysconf as sysconf
+import inary.blacklist
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,11 +24,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.blacklist
-import inary.sysconf as sysconf
 
 class RemoveOrphaned(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Remove orphaned packages
@@ -45,7 +45,7 @@ Remove all orphaned packages from the system.
         super(RemoveOrphaned, self).options(group)
         group.add_option("-x", "--exclude", action="append",
                          default=None, help=_(
-                "When removing orphaned, ignore packages and components whose basenames match pattern."))
+                             "When removing orphaned, ignore packages and components whose basenames match pattern."))
         group.add_option("--ignore-sysconf", action="store_true",
                          default=False, help=_("Skip sysconf operations after installation."))
         group.add_option("--force-sysconf", action="store_true",
@@ -58,7 +58,8 @@ Remove all orphaned packages from the system.
         self.init()
         orphaned = self.installdb.get_orphaned()
         if ctx.get_option('exclude'):
-            orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))
+            orphaned = inary.blacklist.exclude(
+                orphaned, ctx.get_option('exclude'))
 
         remove.remove(orphaned)
 

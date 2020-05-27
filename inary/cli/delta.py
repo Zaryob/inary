@@ -12,6 +12,8 @@
 # Please read the COPYING file.
 #
 
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,9 +21,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.context as ctx
-import inary.package
 
 usage = _("""Creates delta packages
 

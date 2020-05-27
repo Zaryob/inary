@@ -14,6 +14,18 @@
 
 """INARY source/package index"""
 
+import inary.operations.build
+import inary.data.group as group
+import inary.data.component as component
+import inary.sxml.autoxml as autoxml
+import inary.file
+import inary.sxml.xmlfile as xmlfile
+import inary.package
+import inary.util as util
+import inary.errors
+import inary.data.metadata as metadata
+import inary.data.specfile as specfile
+import inary.context as ctx
 import multiprocessing
 import os
 import re
@@ -25,18 +37,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Libraries
-import inary.context as ctx
-import inary.data.specfile as specfile
-import inary.data.metadata as metadata
-import inary.errors
-import inary.util as util
-import inary.package
-import inary.sxml.xmlfile as xmlfile
-import inary.file
-import inary.sxml.autoxml as autoxml
-import inary.data.component as component
-import inary.data.group as group
-import inary.operations.build
 
 
 class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
@@ -55,14 +55,15 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                          sign=inary.file.File.detached,
                          copylocal=True, nodecode=True)
 
-    # read index for a given repo, force means download even if remote not updated
+    # read index for a given repo, force means download even if remote not
+    # updated
     def read_uri_of_repo(self, uri, repo=None, force=False):
         """Read PSPEC file"""
         if repo:
             tmpdir = os.path.join(ctx.config.index_dir(), repo)
         else:
             tmpdir = os.path.join(ctx.config.tmp_dir(), 'index')
-        
+
         util.clean_dir(tmpdir)
         util.ensure_dirs(tmpdir)
 
@@ -96,17 +97,23 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         pkgs_sorted = False
         for fn in os.walk(repo_uri).__next__()[2]:
-            if fn.endswith(ctx.const.delta_package_suffix) or fn.endswith(ctx.const.package_suffix):
+            if fn.endswith(ctx.const.delta_package_suffix) or fn.endswith(
+                    ctx.const.package_suffix):
                 pkgpath = os.path.join(repo_uri,
                                        util.parse_package_dir_path(fn))
-                if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
+                if not os.path.isdir(pkgpath):
+                    os.makedirs(pkgpath)
                 ctx.ui.info("{:80.80}\r".format(_(' -> Sorting:  \"{}\"').format(fn)),
                             noln=False if ctx.config.get_option("verbose") else True)
                 shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
                 os.remove(os.path.join(repo_uri, fn))
                 pkgs_sorted = True
         if pkgs_sorted:
-            ctx.ui.info("{:80.80}\r".format(util.colorize(_(' * Sorted:  \"{}\"').format(fn), color="green")))
+            ctx.ui.info(
+                "{:80.80}\r".format(
+                    util.colorize(
+                        _(' * Sorted:  \"{}\"').format(fn),
+                        color="green")))
 
         for root, dirs, files in os.walk(repo_uri):
             # Filter hidden directories
@@ -123,7 +130,8 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                     packages.append(os.path.join(root, fn))
 
                 if fn == 'components.xml':
-                    self.components.extend(add_components(os.path.join(root, fn)))
+                    self.components.extend(
+                        add_components(os.path.join(root, fn)))
                 if fn == 'pspec.xml' and not skip_sources:
                     specs.append((os.path.join(root, fn), repo_uri))
                 if fn == 'distribution.xml':
@@ -140,18 +148,22 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         except AttributeError:
             obsoletes_list = []
         if obsoletes_list:
-            ctx.ui.info(_(" * Added obsoleted packages: [ {} ]".format(obsoletes_list)), color="blue", noln=False)
+            ctx.ui.info(
+                _(" * Added obsoleted packages: [ {} ]".format(obsoletes_list)), color="blue", noln=False)
 
         pool = multiprocessing.Pool()
 
         # Before calling pool.map check if list is empty or not: python#12157
         if specs:
-            ctx.ui.info(_(" * Adding source packages: "), color="blue", noln=False)
+            ctx.ui.info(
+                _(" * Adding source packages: "),
+                color="blue",
+                noln=False)
             try:
                 # Add source packages to index using a process pool
                 self.specs = pool.map(add_spec, specs)
                 ctx.ui.info("\n")
-            except:
+            except BaseException:
                 # If an exception occurs (like a keyboard interrupt),
                 # immediately terminate worker processes and propagate
                 # exception. (CLI honors KeyboardInterrupt exception, if you're
@@ -179,25 +191,34 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         if latest_packages:
             sorted_pkgs = {}
             for pkg in latest_packages:
-                key = re.search("\/((lib)?[\d\w])\/", pkg[0])
+                key = re.search(r"\/((lib)?[\d\w])\/", pkg[0])
                 key = key.group(1) if key else os.path.dirname(pkg[0])
                 try:
                     sorted_pkgs[key].append(pkg)
                 except KeyError:
                     sorted_pkgs[key] = [pkg]
             self.packages = []
-            ctx.ui.info(_(" * Adding binary packages: "), color="blue", noln=False)
+            ctx.ui.info(
+                _(" * Adding binary packages: "),
+                color="blue",
+                noln=False)
             for key, pkgs in sorted(sorted_pkgs.items()):
-                ctx.ui.info("{:80.80}\r".format(_("   -> Adding packages from directory \"{}\"... ".format(key))), noln=True)
+                ctx.ui.info("{:80.80}\r".format(
+                    _("   -> Adding packages from directory \"{}\"... ".format(key))), noln=True)
                 try:
                     # Add binary packages to index using a process pool
                     self.packages.extend(pool.map(add_package, pkgs))
-                except:
+                except BaseException:
                     pool.terminate()
                     pool.join()
                     ctx.ui.info("")
                     raise
-                ctx.ui.info("{:80.80}\r".format(_("   * Adding packages from directory \"{}\"... done.".format(key))), color="green", noln=False)
+                ctx.ui.info(
+                    "{:80.80}\r".format(
+                        _(
+                            "   * Adding packages from directory \"{}\"... done.".format(key))),
+                    color="green",
+                    noln=False)
             ctx.ui.info(_("* Writing index file."), color="blue")
 
         pool.close()
@@ -208,7 +229,8 @@ def add_package(params):
     try:
         path, deltas, repo_uri = params
 
-        ctx.ui.info("{:80.80}\r".format(_('   -> Adding package to index: \"{}\"').format( os.path.basename(path))), noln=True)
+        ctx.ui.info("{:80.80}\r".format(
+            _('   -> Adding package to index: \"{}\"').format(os.path.basename(path))), noln=True)
 
         package = inary.package.Package(path)
         md = package.get_metadata()
@@ -223,7 +245,8 @@ def add_package(params):
         errs = md.errors()
         if md.errors():
             ctx.ui.info("")
-            ctx.ui.error(_(' * Package \"{}\": metadata corrupt, skipping...').format(md.package.name))
+            ctx.ui.error(
+                _(' * Package \"{}\": metadata corrupt, skipping...').format(md.package.name))
             ctx.ui.error(str(*errs))
         else:
             # No need to carry these with index (#3965)
@@ -244,7 +267,8 @@ def add_package(params):
                         continue
 
                     delta = metadata.Delta()
-                    delta.packageURI = util.removepathprefix(repo_uri, delta_path)
+                    delta.packageURI = util.removepathprefix(
+                        repo_uri, delta_path)
                     delta.packageSize = int(os.path.getsize(delta_path))
                     delta.packageHash = util.sha1_file(delta_path)
                     delta.releaseFrom = src_release
@@ -281,9 +305,8 @@ def add_components(path):
     components_xml.read(path)
     try:
         return components_xml.components
-    except:
+    except BaseException:
         ctx.ui.error(_(' * Component in {} is corrupt').format(path))
-    ctx.ui.error(str(*errs))
 
 
 def add_distro(path):
@@ -292,9 +315,8 @@ def add_distro(path):
     try:
         distro.read(path)
         return distro
-    except:
+    except BaseException:
         ctx.ui.error(_(' * Distribution in {} is corrupt').format(path))
-    ctx.ui.error(str(*errs))
 
 
 def add_spec(params):
@@ -329,9 +351,10 @@ def index(dirs=None, output='inary-index.xml',
         dirs = ['.']
     for repo_dir in dirs:
         repo_dir = str(repo_dir)
-        ctx.ui.info(_('Building index of Inary files under \"{}\" \n').format(repo_dir))
+        ctx.ui.info(
+            _('Building index of Inary files under \"{}\" \n').format(repo_dir))
         index.index(repo_dir, skip_sources)
 
     sign = None if skip_signing else inary.file.File.detached
     index.write(output, sha1sum=True, compress=compression, sign=sign)
-    ctx.ui.info(_('* Index file written.'),color="green")
+    ctx.ui.info(_('* Index file written.'), color="green")

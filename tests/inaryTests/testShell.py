@@ -4,6 +4,7 @@ import inary.actionsapi
 import os
 import shutil
 
+
 class ShellTestCase(unittest.TestCase):
     def setUp(self):
         from inary.actionsapi.variables import initVariables
@@ -25,25 +26,28 @@ class ShellTestCase(unittest.TestCase):
         from inary.actionsapi.shelltools import makedirs
 
         makedirs('tests/testdirectory/aDirectory')
-        self.assertEqual(os.path.exists('tests/testdirectory/aDirectory'),True)
+        self.assertEqual(os.path.exists(
+            'tests/testdirectory/aDirectory'), True)
         shutil.rmtree('tests/testdirectory')
 
     def testEcho(self):
         from inary.actionsapi.shelltools import echo
 
-        echo('tests/echo-file','eco subject')
-        self.assertEqual(os.path.exists('tests/echo-file'),True)
-        self.assertEqual(open('tests/echo-file').readlines()[0].strip(), 'eco subject')
+        echo('tests/echo-file', 'eco subject')
+        self.assertEqual(os.path.exists('tests/echo-file'), True)
+        self.assertEqual(open('tests/echo-file').readlines()
+                         [0].strip(), 'eco subject')
         echo('tests/echo-file', 'subject eco')
-        self.assertEqual(open('tests/echo-file').readlines()[1].strip(), 'subject eco')
+        self.assertEqual(open('tests/echo-file').readlines()
+                         [1].strip(), 'subject eco')
         os.remove('tests/echo-file')
 
     def testSym(self):
         from inary.actionsapi.shelltools import sym
 
-        sym('../../scenarios/repo','tests/repos')
-        self.assertEqual(os.path.islink('tools'),False)
-        self.assertEqual(os.path.islink('tests/repos'),True)
+        sym('../../scenarios/repo', 'tests/repos')
+        self.assertEqual(os.path.islink('tools'), False)
+        self.assertEqual(os.path.islink('tests/repos'), True)
 
     def testUnlinkDir(self):
         from inary.actionsapi.shelltools import makedirs
@@ -109,7 +113,7 @@ class ShellTestCase(unittest.TestCase):
     def testSystem(self):
         from inary.actionsapi.shelltools import system
 
-        self.assertEqual(os.path.exists('tests/systemtest'),False)
+        self.assertEqual(os.path.exists('tests/systemtest'), False)
         system('touch tests/systemtest')
-        self.assertEqual(os.path.exists('tests/systemtest'),True)
+        self.assertEqual(os.path.exists('tests/systemtest'), True)
         os.remove('tests/systemtest')

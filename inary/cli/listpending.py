@@ -12,15 +12,14 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.data.pgraph
+import inary.context as ctx
+import inary.cli.command as command
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.data.pgraph
-import inary.db
 
 
 class ListPending(command.Command, metaclass=command.autocommand):

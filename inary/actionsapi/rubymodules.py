@@ -12,6 +12,12 @@
 # Please read the COPYING file.
 
 # standard python modules
+from inary.actionsapi.shelltools import system
+from inary.actionsapi.shelltools import isEmpty
+from inary.actionsapi.shelltools import export
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
 import os
 from gettext import translation
 from glob import glob
@@ -20,14 +26,8 @@ __trans = translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import export
-from inary.actionsapi.shelltools import isEmpty
-from inary.actionsapi.shelltools import system
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -59,7 +59,8 @@ class RunTimeError(inary.actionsapi.Error):
 
 
 def get_config(config):
-    return os.popen("ruby -rrbconfig -e 'puts RbConfig::CONFIG[\"{}\"]'".format(config)).read().strip()
+    return os.popen(
+        "ruby -rrbconfig -e 'puts RbConfig::CONFIG[\"{}\"]'".format(config)).read().strip()
 
 
 def get_ruby_version():
@@ -73,6 +74,7 @@ def get_rubylibdir():
 def get_sitedir():
     return get_config('sitedir')
 
+
 def get_gemdir():
     return os.popen('gem env gemdir').read().strip()
 
@@ -84,14 +86,17 @@ def get_ruby_install_name():
 def get_gemhome():
     (rubylibdir, ruby_version) = os.path.split(get_rubylibdir())
 
-    return os.path.join(get.installDIR(), rubylibdir.lstrip('/'), 'gems', ruby_version)
+    return os.path.join(get.installDIR(), rubylibdir.lstrip(
+        '/'), 'gems', ruby_version)
 
 
 def get_sitelibdir():
     return get_config('sitelibdir')
 
+
 def generate_gemname():
     return "-".join(get.srcNAME().split("-")[1:])
+
 
 def auto_dodoc():
     from inary.actionsapi.inarytools import dodoc
@@ -116,10 +121,12 @@ def install(parameters=''):
 
 def rake_install(parameters=''):
     """execute rake script for installation"""
-    if system('rake -t -l {0} {1}'.format(os.path.join('/', get.defaultprefixDIR(), 'lib'), parameters)):
+    if system('rake -t -l {0} {1}'.format(os.path.join('/',
+                                                       get.defaultprefixDIR(), 'lib'), parameters)):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
+
 
 def gem_build(parameters=''):
     if system('gem build {} {}'.format(generate_gemname(), parameters)):
@@ -128,10 +135,12 @@ def gem_build(parameters=''):
 
 def gem_install(parameters=''):
     """Make installation from GemFile"""
-    if system('gem install --backtrace {0} -i "{1}{2}"  -n "{1}/usr/bin" {3}.gem'.format(parameters, get.installDIR(), get_gemdir() , generate_gemname() + "-" + get.srcVERSION())):
+    if system('gem install --backtrace {0} -i "{1}{2}"  -n "{1}/usr/bin" {3}.gem'.format(
+            parameters, get.installDIR(), get_gemdir(), generate_gemname() + "-" + get.srcVERSION())):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()
+
 
 def run(parameters=''):
     """executes parameters with ruby"""

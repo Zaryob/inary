@@ -12,16 +12,15 @@
 # Please read the COPYING file.
 #
 
+from inary.sxml import xmlext
+import inary.db.lazydb as lazydb
+import inary.data.group as Group
+import inary.db.itembyrepo
+import inary.db.repodb
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.db.repodb
-import inary.db.itembyrepo
-import inary.data.group as Group
-import inary.db.lazydb as lazydb
-from inary.sxml import xmlext
 
 
 class GroupNotFound(Exception):

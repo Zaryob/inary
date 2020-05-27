@@ -4,6 +4,7 @@ from inary import uri
 from inary.file import File
 from inary.data.specfile import SpecFile
 
+
 class UriTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -12,7 +13,7 @@ class UriTestCase(unittest.TestCase):
     def testSetUri(self):
         self.url = uri.URI()
         self.url.set_uri('uri')
-        assert 'uri' ==  self.url.get_uri()
+        assert 'uri' == self.url.get_uri()
         self.url.set_uri('urix')
         assert 'urix' == self.url.get_uri()
 
@@ -37,4 +38,4 @@ class UriTestCase(unittest.TestCase):
     def testFileName(self):
         uri4 = uri.URI()
         uri4.set_uri('/usr/share/aclocal')
-        assert 'aclocal' ==  uri4.filename()
+        assert 'aclocal' == uri4.filename()

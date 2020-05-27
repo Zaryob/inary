@@ -12,14 +12,13 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class ListRepo(command.Command, metaclass=command.autocommand):
@@ -40,7 +39,8 @@ Lists currently tracked repositories.
 
         self.init(database=True, write=False)
         for repo in self.repodb.list_repos(only_active=False):
-            active = _("active") if self.repodb.repo_active(repo) else _("inactive")
+            active = _("active") if self.repodb.repo_active(
+                repo) else _("inactive")
             if active == _("active"):
                 ctx.ui.info(_("{0} [{1}]").format(repo, active), color='green')
             else:

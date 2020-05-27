@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.operations.repository as repository
+import inary.errors
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,13 +24,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.errors
-
-import inary.operations.repository as repository
 
 class AddRepo(command.Command, metaclass=command.autocommand):
     __doc__ = _("""Add a repository
@@ -69,10 +67,10 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
 
             if ctx.get_option('no_fetch'):
                 if ctx.ui.confirm(_('Add \"{}\" repository without updating the database?\nBy confirming '
-                                        'this you are also adding the repository to your system without '
-                                        'checking the distribution of the repository.\n'
-                                        'Would you like to continue?').format(name)):
-                    self.just_add=True
+                                    'this you are also adding the repository to your system without '
+                                    'checking the distribution of the repository.\n'
+                                    'Would you like to continue?').format(name)):
+                    self.just_add = True
 
             if indexuri.endswith(".xml.xz") or indexuri.endswith(".xml"):
                 repository.add_repo(name, indexuri, ctx.get_option('at'))
@@ -80,15 +78,19 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
                     try:
                         repository.update_repos([name])
                     except (inary.errors.Error, IOError) as e:
-                        ctx.ui.info(_("Error: {0} repository could not be reached: \n{1}").format(name, e), color="red")
-                        self.warn_and_remove(_("Removing {0} from system.").format(name), name)
+                        ctx.ui.info(
+                            _("Error: {0} repository could not be reached: \n{1}").format(
+                                name, e), color="red")
+                        self.warn_and_remove(
+                            _("Removing {0} from system.").format(name), name)
                 else:
-                    ctx.ui.warning(_("Couldn't trust \"{0}\" repository. It is deactivated.").format(name))
+                    ctx.ui.warning(
+                        _("Couldn't trust \"{0}\" repository. It is deactivated.").format(name))
                     repository.set_repo_activity(name, False)
 
             else:
-                raise Exception(_("Extension of repository URI must be \".xml.xz\" or \".xml\"."))
-
+                raise Exception(
+                    _("Extension of repository URI must be \".xml.xz\" or \".xml\"."))
 
         else:
             self.help()

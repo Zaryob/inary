@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.sysconf as sysconf
+import inary.db
+import inary.context as ctx
+import inary.cli.build as build
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,11 +24,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.cli.build as build
-import inary.context as ctx
-import inary.db
-import inary.sysconf as sysconf
 
 class EmergeUp(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and upgrade INARY source packages from repository
@@ -58,14 +58,15 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
-        from inary.operations import repository, emerge, helper
+        from inary.operations import repository, emerge
         self.init(database=True)
 
         source = inary.db.sourcedb.SourceDB()
 
         imdb = inary.db.installdb.InstallDB()
 
-        installed_emerge_packages = imdb.list_installed_with_build_host("localhost")
+        installed_emerge_packages = imdb.list_installed_with_build_host(
+            "localhost")
 
         emerge_up_list = []
 
@@ -76,7 +77,9 @@ You can also give the name of a component.
                     emerge_up_list.append(package)
 
         if ctx.get_option('output_dir'):
-            ctx.ui.info(_('Output directory: {}').format(ctx.config.options.output_dir))
+            ctx.ui.info(
+                _('Output directory: {}').format(
+                    ctx.config.options.output_dir))
         else:
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
@@ -85,7 +88,6 @@ You can also give the name of a component.
         repository.update_repos(repos, ctx.get_option('force'))
 
         emerge.emerge(emerge_up_list)
-        
+
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
-        

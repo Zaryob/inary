@@ -12,16 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.command as command
+import inary.context as ctx
+import inary.operations.search as search
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.operations.search as search
-import inary.context as ctx
-import inary.cli.command as command
 
 
 class SearchFile(command.Command, metaclass=command.autocommand):
@@ -50,11 +49,13 @@ Finds the installed package which contains the specified file.
         found = search.search_file(path)
 
         if not found:
-            ctx.ui.error(_("Path \"{}\" does not belong to an installed package.").format(path))
+            ctx.ui.error(
+                _("Path \"{}\" does not belong to an installed package.").format(path))
 
         for pkg, files in found:
             for pkg_file in files:
-                ctx.ui.info(_("Package \"{0}\" has file \"/{1}\"").format(pkg, pkg_file))
+                ctx.ui.info(
+                    _("Package \"{0}\" has file \"/{1}\"").format(pkg, pkg_file))
 
     def run(self):
 

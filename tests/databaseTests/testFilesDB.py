@@ -16,6 +16,7 @@ import inary.context as ctx
 import unittest
 from . import testcase
 
+
 class FilesDBTestCase(testcase.TestCase):
 
     filesdb = inary.db.filesdb.FilesDB()
@@ -27,7 +28,6 @@ class FilesDBTestCase(testcase.TestCase):
         self.assertTrue(self.filesdb.has_file("etc/services"))
         inary.api.remove(["iana-etc"])
         self.assertFalse(self.filesdb.has_file("etc/protocols"))
-
 
     def testGetFile(self):
         inary.api.install(["iana-etc"])
@@ -58,7 +58,8 @@ class FilesDBTestCase(testcase.TestCase):
         pkg, path = self.filesdb.get_file("etc/inary/inary.conf")
         self.assertEqual(pkg, "inary")
 
-        # FIXME: inconsistency in filesdb.py add_remove and remove_remove parameters
+        # FIXME: inconsistency in filesdb.py add_remove and remove_remove
+        # parameters
         self.filesdb.remove_files(files.list)
 
         self.assertFalse(self.filesdb.has_file("etc/inary/inary.conf"))

@@ -12,17 +12,16 @@
 # Please read the COPYING file.
 #
 
+import inary.util as util
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.util as util
 
 
 class ListOrphaned(command.Command, metaclass=command.autocommand):
@@ -51,10 +50,12 @@ Lists packages installed as dependency, but no longer needed by any other instal
     def run(self):
 
         self.init(database=True, write=False)
-        orphaned = self.installdb.get_no_rev_deps() if self.options.all else self.installdb.get_orphaned()
+        orphaned = self.installdb.get_no_rev_deps(
+        ) if self.options.all else self.installdb.get_orphaned()
 
         if self.options.exclude:
-            orphaned = inary.blacklist.exclude(orphaned, ctx.get_option('exclude'))
+            orphaned = inary.blacklist.exclude(
+                orphaned, ctx.get_option('exclude'))
 
         if orphaned:
             ctx.ui.info(_("Orphaned packages:"))

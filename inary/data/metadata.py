@@ -19,14 +19,13 @@ installation. Package repository also uses metadata.xml for building
 a package index.
 """
 
+import inary.util as util
+import inary.sxml.autoxml as autoxml
+import inary.sxml.xmlfile as xmlfile
+import inary.data.specfile as specfile
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.data.specfile as specfile
-import inary.sxml.xmlfile as xmlfile
-import inary.sxml.autoxml as autoxml
-import inary.util as util
 
 
 class Delta(metaclass=autoxml.autoxml):
@@ -108,7 +107,9 @@ class MetaData(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         self.source.name = src.name
         self.source.homepage = src.homepage
         self.source.packager = src.packager
-        self.package.source = self.source  # FIXME: I know that replication sucks here, but this is the easiest for now
+        # FIXME: I know that replication sucks here, but this is the easiest
+        # for now
+        self.package.source = self.source
         self.package.rfp = src.rfp
         self.package.name = pkg.name
         self.package.summary = pkg.summary

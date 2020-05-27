@@ -16,15 +16,16 @@ from . import testcase
 
 import inary.db.itembyrepo
 
+
 class TestDB:
     def __init__(self):
         self.packages = {}
         self.obsoletes = {}
 
-        self.packages["repo1"] = {"aggdraw":"package aggdraw",
-                                        "acpica":"package acpica"}
-        self.packages["repo2"] = {"kdiff3":"package kdiff3",
-                                         "kmess":"package kmess"}
+        self.packages["repo1"] = {"aggdraw": "package aggdraw",
+                                  "acpica": "package acpica"}
+        self.packages["repo2"] = {"kdiff3": "package kdiff3",
+                                  "kmess": "package kmess"}
 
         self.obsoletes["repo1"] = ["wengophone", "rar"]
         self.obsoletes["repo2"] = ["xara"]
@@ -41,6 +42,7 @@ class TestDB:
 
         self.tdb.item_repos = item_repos
         self.odb.item_repos = item_repos
+
 
 class ItemByRepoTestCase(testcase.TestCase):
 
@@ -80,15 +82,29 @@ class ItemByRepoTestCase(testcase.TestCase):
         self.assertEqual(self.testdb.tdb.get_item("kmess"), "package kmess")
 
     def testGetItemOfRepository(self):
-        self.assertEqual(self.testdb.tdb.get_item("acpica", "repo1"), "package acpica")
-        self.assertEqual(self.testdb.tdb.get_item("kmess", "repo2"), "package kmess")
+        self.assertEqual(
+            self.testdb.tdb.get_item(
+                "acpica",
+                "repo1"),
+            "package acpica")
+        self.assertEqual(
+            self.testdb.tdb.get_item(
+                "kmess",
+                "repo2"),
+            "package kmess")
 
     def testGetItemKeys(self):
-        self.assertEqual(set(self.testdb.tdb.get_item_keys("repo1")), set(["aggdraw", "acpica"]))
-        self.assertEqual(set(self.testdb.tdb.get_item_keys("repo2")), set(["kdiff3", "kmess"]))
-        self.assertEqual(set(self.testdb.tdb.get_item_keys()), set(["kdiff3", "kmess", "aggdraw", "acpica"]))
+        self.assertEqual(set(self.testdb.tdb.get_item_keys(
+            "repo1")), set(["aggdraw", "acpica"]))
+        self.assertEqual(set(self.testdb.tdb.get_item_keys(
+            "repo2")), set(["kdiff3", "kmess"]))
+        self.assertEqual(set(self.testdb.tdb.get_item_keys()),
+                         set(["kdiff3", "kmess", "aggdraw", "acpica"]))
 
     def testGetListItem(self):
-        self.assertEqual(set(self.testdb.odb.get_list_item("repo1")), set(['rar', 'wengophone']))
-        self.assertEqual(set(self.testdb.odb.get_list_item("repo2")), set(['xara']))
-        self.assertEqual(set(self.testdb.odb.get_list_item()), set(['rar', 'xara', 'wengophone']))
+        self.assertEqual(set(self.testdb.odb.get_list_item(
+            "repo1")), set(['rar', 'wengophone']))
+        self.assertEqual(
+            set(self.testdb.odb.get_list_item("repo2")), set(['xara']))
+        self.assertEqual(set(self.testdb.odb.get_list_item()),
+                         set(['rar', 'xara', 'wengophone']))

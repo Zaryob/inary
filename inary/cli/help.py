@@ -12,14 +12,13 @@
 # Please read the COPYING file.
 #
 
+import inary.context as ctx
+import inary.cli.command as command
+import inary.cli
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli
-import inary.cli.command as command
-import inary.context as ctx
 
 
 class Help(command.Command, metaclass=command.autocommand):

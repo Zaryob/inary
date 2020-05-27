@@ -12,14 +12,12 @@
 # Please read the COPYING file.
 #
 
+import inary.db
 import gzip
-
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.db
 
 
 class ItemByRepo:
@@ -42,13 +40,16 @@ class ItemByRepo:
             if r in self.dbobj and item in self.dbobj[r]:
                 return r
 
-        raise Exception(_("\"{}\" not found in any repository.").format(str(item)))
+        raise Exception(
+            _("\"{}\" not found in any repository.").format(
+                str(item)))
 
     def get_item_repo(self, item, repo=None):
         for r in self.item_repos(repo):
             if r in self.dbobj and item in self.dbobj[r]:
                 if self.compressed:
-                    return gzip.zlib.decompress(self.dbobj[r][item]).decode('utf-8'), r
+                    return gzip.zlib.decompress(
+                        self.dbobj[r][item]).decode('utf-8'), r
                 else:
                     return self.dbobj[r][item], r
 
@@ -62,7 +63,8 @@ class ItemByRepo:
         items = []
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository \"{}\" does not exist.').format(repo))
+                raise Exception(
+                    _('Repository \"{}\" does not exist.').format(repo))
 
             if r in self.dbobj:
                 items.extend(list(self.dbobj[r].keys()))
@@ -73,7 +75,8 @@ class ItemByRepo:
         items = []
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository \"{}\" does not exist.').format(repo))
+                raise Exception(
+                    _('Repository \"{}\" does not exist.').format(repo))
 
             if r in self.dbobj:
                 items.extend(self.dbobj[r])
@@ -83,7 +86,8 @@ class ItemByRepo:
     def get_items_iter(self, repo=None):
         for r in self.item_repos(repo):
             if not self.has_repo(r):
-                raise Exception(_('Repository \"{}\" does not exist.').format(repo))
+                raise Exception(
+                    _('Repository \"{}\" does not exist.').format(repo))
 
             if self.compressed:
                 for item in list(self.dbobj[r].keys()):

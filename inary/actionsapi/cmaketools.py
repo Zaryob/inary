@@ -12,23 +12,23 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+from inary.actionsapi.shelltools import unlink
+from inary.actionsapi.shelltools import can_access_file
+from inary.actionsapi.shelltools import system
+import inary.actionsapi.get as get
+import inary.actionsapi
+from inary.util import join_path
+import inary.context as ctx
 import os
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
-from inary.util import join_path
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system
-from inary.actionsapi.shelltools import can_access_file
-from inary.actionsapi.shelltools import unlink
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -37,7 +37,8 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[CMakeTools]: " + value)
         if can_access_file('config.log'):
-            ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
+            ctx.ui.error(
+                _('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 
 class MakeError(inary.actionsapi.Error):
@@ -61,7 +62,8 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error("[CMakeTools]: " + value)
 
 
-def configure(parameters='', installPrefix='/{}'.format(get.defaultprefixDIR()), sourceDir='.'):
+def configure(parameters='',
+              installPrefix='/{}'.format(get.defaultprefixDIR()), sourceDir='.'):
     """configure source with given cmake parameters = "-DCMAKE_BUILD_TYPE -DCMAKE_CXX_FLAGS ... " """
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
@@ -76,12 +78,13 @@ def configure(parameters='', installPrefix='/{}'.format(get.defaultprefixDIR()),
                                                                         get.LDFLAGS(),
                                                                         parameters,
                                                                         sourceDir,
-                                                                        "-m32"  if get.buildTYPE() == "emul32" else "-m64")
+                                                                        "-m32" if get.buildTYPE() == "emul32" else "-m64")
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("CMakeLists.txt")))
 
 
 def make(parameters=''):
@@ -111,15 +114,16 @@ def install(parameters='', argument='install'):
                              parameters,
                              argument)
 
-
     if system(args):
         raise InstallError(_('Install failed.'))
     else:
         fixInfoDir()
 
+
 def rawInstall(parameters='', argument='install'):
     """install source into install directory with given parameters = PREFIX=get.installDIR()"""
-    if can_access_file('makefile') or can_access_file('Makefile') or can_access_file('GNUmakefile'):
+    if can_access_file('makefile') or can_access_file(
+            'Makefile') or can_access_file('GNUmakefile'):
         if system('make {0} {1} '.format(parameters, argument)):
             raise InstallError(_('Install failed.'))
         else:

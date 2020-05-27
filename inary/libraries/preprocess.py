@@ -48,7 +48,7 @@
     of the form:
         <comment-prefix> <preprocessor-statement> <comment-suffix>
     where the <comment-prefix/suffix> are the native comment delimiters for
-    that file type. 
+    that file type.
 
 
     Examples
@@ -59,7 +59,7 @@
         <!-- #if FOO -->
         ...
         <!-- #endif -->
-    
+
     Python (*.py), Perl (*.pl), Tcl (*.tcl), Ruby (*.rb), Bash (*.sh),
     or make ([Mm]akefile*) files:
 
@@ -109,7 +109,7 @@
       error to refer to a variable that has not been defined by a -D
       option or by an in-content #define.
     - Special built-in methods for expressions:
-        defined(varName)    Return true if given variable is defined.  
+        defined(varName)    Return true if given variable is defined.
 
 
     Tips
@@ -198,7 +198,7 @@ class _Logger:
             self.level = self.WARN
         else:
             self.level = level
-        if type(streamOrFileName) == bytes:
+        if isinstance(streamOrFileName, bytes):
             self.stream = open(streamOrFileName, 'w')
             self._opennedStream = 1
         else:
@@ -346,7 +346,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
              keepLines, includePath, contentType, __preprocessedFiles)
     absInfile = os.path.normpath(os.path.abspath(infile))
     if absInfile in __preprocessedFiles:
-        raise PreprocessError("detected recursive #include of '%s'" \
+        raise PreprocessError("detected recursive #include of '%s'"
                               % infile)
     __preprocessedFiles.append(os.path.abspath(infile))
 
@@ -361,8 +361,8 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     try:
         cgs = _commentGroups[contentType]
     except KeyError:
-        raise PreprocessError("don't know comment delimiters for content " \
-                              "type '%s' (file '%s')" \
+        raise PreprocessError("don't know comment delimiters for content "
+                              "type '%s' (file '%s')"
                               % (contentType, infile))
 
     # Generate statement parsing regexes. Basic format:
@@ -378,11 +378,11 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
     #       ...
     #       # #endif
     stmts = ['#\s*(?P<op>if|elif|ifdef|ifndef)\s+(?P<expr>.*?)',
-             '#\s*(?P<op>else|endif)',
-             '#\s*(?P<op>error)\s+(?P<error>.*?)',
-             '#\s*(?P<op>define)\s+(?P<var>[^\s]*?)(\s+(?P<val>.+?))?',
-             '#\s*(?P<op>undef)\s+(?P<var>[^\s]*?)',
-             '#\s*(?P<op>include)\s+"(?P<fname>.*?)"',
+             r'#\s*(?P<op>else|endif)',
+             r'#\s*(?P<op>error)\s+(?P<error>.*?)',
+             r'#\s*(?P<op>define)\s+(?P<var>[^\s]*?)(\s+(?P<val>.+?))?',
+             r'#\s*(?P<op>undef)\s+(?P<var>[^\s]*?)',
+             r'#\s*(?P<op>include)\s+"(?P<fname>.*?)"',
              r'#\s*(?P<op>include)\s+(?P<var>[^\s]+?)',
              ]
     patterns = []
@@ -448,7 +448,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         try:
                             val = eval(val, {}, {})
-                        except:
+                        except BaseException:
                             pass
                     defines[var] = val
             elif op == "undef":
@@ -473,8 +473,8 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                         if os.path.exists(fname):
                             break
                     else:
-                        raise PreprocessError("could not find #include'd file " \
-                                              "\"%s\" on include path: %r" \
+                        raise PreprocessError("could not find #include'd file "
+                                              "\"%s\" on include path: %r"
                                               % (f, includePath))
                     defines = preprocess(fname, fout, defines, force,
                                          keepLines, includePath, substitute,
@@ -496,7 +496,7 @@ def preprocess(infile, outfile=sys.stdout, defines=None,
                     else:
                         states.append((SKIP, 0, 0))
                 except KeyError:
-                    raise PreprocessError("use of undefined variable in " \
+                    raise PreprocessError("use of undefined variable in "
                                           "#%s stmt" % op, defines['__FILE__'],
                                           defines['__LINE__'], line)
             elif op == "elif":
@@ -689,7 +689,7 @@ class ContentTypesRegistry:
 
     def _loadContentType(self, content, path=None):
         """Return the registry for the given content.types file.
-       
+
         The registry is three mappings:
             <suffix> -> <content type>
             <regex> -> <content type>
@@ -701,11 +701,13 @@ class ContentTypesRegistry:
                 if words[i][0] == '#':
                     del words[i:]
                     break
-            if not words: continue
+            if not words:
+                continue
             contentType, patterns = words[0], words[1:]
             if not patterns:
-                if line[-1] == '\n': line = line[:-1]
-                raise PreprocessError("bogus content.types line, there must " \
+                if line[-1] == '\n':
+                    line = line[:-1]
+                raise PreprocessError("bogus content.types line, there must "
                                       "be one or more patterns: '%s'" % line)
             for pattern in patterns:
                 if pattern.startswith('.'):
@@ -786,10 +788,11 @@ except NameError:
     # 'sorted' added in Python 2.4. Note that I'm only implementing enough
     # of sorted as is used in this module.
     def sorted(seq, key=None):
-        identity = lambda x: x
+        def identity(x): return x
         key_func = (key or identity)
         sseq = list(seq)
-        sseq.sort(lambda self, other: (key_func(self) > key_func(other))- (key_func(self) < key_func(other)))
+        sseq.sort(lambda self, other: (key_func(self) > key_func(
+            other)) - (key_func(self) < key_func(other)))
         for item in sseq:
             yield item
 
@@ -802,7 +805,7 @@ def main(argv):
                                       ['help', 'version', 'verbose', 'force', 'keep-lines',
                                        'substitute', 'content-types-path='])
     except getopt.GetoptError as msg:
-        sys.stderr.write("preprocess: error: %s. Your invocation was: %s\n" \
+        sys.stderr.write("preprocess: error: %s. Your invocation was: %s\n"
                          % (msg, argv))
         sys.stderr.write("See 'preprocess --help'.\n")
         return 1
@@ -846,7 +849,7 @@ def main(argv):
             contentTypesPaths.append(optarg)
 
     if len(args) != 1:
-        sys.stderr.write("preprocess: error: incorrect number of " \
+        sys.stderr.write("preprocess: error: incorrect number of "
                          "arguments: argv=%r\n" % argv)
         return 1
     else:

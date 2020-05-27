@@ -12,6 +12,9 @@
 # Please read the COPYING file.
 #
 
+import inary.context as ctx
+import inary.sxml.xmlfile as xmlfile
+import inary.sxml.autoxml as autoxml
 import os
 import time
 
@@ -19,10 +22,6 @@ import time
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.sxml.autoxml as autoxml
-import inary.sxml.xmlfile as xmlfile
-import inary.context as ctx
 
 
 class PackageInfo(metaclass=autoxml.autoxml):
@@ -65,9 +64,11 @@ class Package(metaclass=autoxml.autoxml):
         # "upgrade", "remove", "install", "reinstall", "downgrade"
         if self.operation == "upgrade":
             if self.type == "delta":
-                return _("{0} is upgraded from {1} to {2} with delta.").format(self.name, self.before, self.after)
+                return _("{0} is upgraded from {1} to {2} with delta.").format(
+                    self.name, self.before, self.after)
             else:
-                return _("{0} is upgraded from {1} to {2}.").format(self.name, self.before, self.after)
+                return _("{0} is upgraded from {1} to {2}.").format(
+                    self.name, self.before, self.after)
         elif self.operation == "remove":
             return _("{0} {1} is removed.").format(self.name, self.before)
         elif self.operation == "install":
@@ -75,7 +76,8 @@ class Package(metaclass=autoxml.autoxml):
         elif self.operation == "reinstall":
             return _("{0} {1} is reinstalled.").format(self.name, self.after)
         elif self.operation == "downgrade":
-            return _("{0} is downgraded from {1} to {2}.").format(self.name, self.before, self.after)
+            return _("{0} is downgraded from {1} to {2}.").format(
+                self.name, self.before, self.after)
         else:
             return ""
 
@@ -122,13 +124,16 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     # @param otype is currently only used to hold if an upgrade is from "delta"
     def add(self, pkgBefore=None, pkgAfter=None, operation=None, otype=None):
 
-        if operation not in ["upgrade", "remove", "install", "reinstall", "downgrade", "snapshot"]:
+        if operation not in ["upgrade", "remove",
+                             "install", "reinstall", "downgrade", "snapshot"]:
             raise Exception(_("Unknown package operation"))
 
         package = Package()
         package.operation = operation
         package.type = otype
-        package.name = (pkgAfter and pkgAfter.name) or (pkgBefore and pkgBefore.name)
+        package.name = (
+            pkgAfter and pkgAfter.name) or (
+            pkgBefore and pkgBefore.name)
 
         if not pkgBefore:
             package.before = None
@@ -136,7 +141,8 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         if not pkgAfter:
             package.after = None
 
-        for histInfo, pkgInfo in [(package.before, pkgBefore), (package.after, pkgAfter)]:
+        for histInfo, pkgInfo in [
+                (package.before, pkgBefore), (package.after, pkgAfter)]:
             if pkgInfo:
                 histInfo.version = str(pkgInfo.version)
                 histInfo.release = str(pkgInfo.release)
@@ -149,7 +155,9 @@ class History(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     @staticmethod
     def _get_latest():
 
-        files = [h for h in os.listdir(ctx.config.history_dir()) if h.endswith(".xml")]
+        files = [
+            h for h in os.listdir(
+                ctx.config.history_dir()) if h.endswith(".xml")]
         if not files:
             return "001"
 

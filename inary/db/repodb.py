@@ -15,20 +15,19 @@
 # Please read the COPYING file.
 #
 
+import inary.util as util
+import inary.uri
+import inary.sxml.xmlext as xmlext
+from inary.file import File
+import inary.errors
+import inary.db.lazydb as lazydb
+import inary.context as ctx
+import os
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import os
-
-import inary.context as ctx
-import inary.db.lazydb as lazydb
-import inary.errors
-from inary.file import File
-import inary.sxml.xmlext as xmlext
-import inary.uri
-import inary.util as util
 
 """
 xmlext içine tag için remove eklenene kadar böyle
@@ -139,7 +138,6 @@ class RepoOrder:
         for r in xmlext.getTagByName(repo_doc, "Repo"):
             media = xmlext.getNodeText(r, "Media")
             name = xmlext.getNodeText(r, "Name")
-            status = xmlext.getNodeText(r, "Status")
             order.setdefault(media, []).append(name)
 
         return order
@@ -195,10 +193,11 @@ class RepoDB(lazydb.LazyDB):
         ###########
         try:
             os.makedirs(repo_path)
-        except:
+        except BaseException:
             pass
         # FIXME: FileExistError errno: 17
-        # When addind repo there are the same as name empty dirs it should remove it
+        # When addind repo there are the same as name empty dirs it should
+        # remove it
         urifile_path = util.join_path(ctx.config.index_dir(), name, "uri")
         open(urifile_path, "w").write(repo_info.indexuri.get_uri())
         self.repoorder.add(name, repo_info.indexuri.get_uri())
@@ -287,8 +286,7 @@ class RepoDB(lazydb.LazyDB):
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
                 _("Repository \"{}\" is not compatible with your distribution. Repository is disabled.\nYour distribution is {} release {}\nRepository distribution is {} release {}\n\nIf you want add this repository please use \"--ignore-check\" parameter with this command.").format(name,
-                    ctx.config.values.general.distribution, 
-                    ctx.config.values.general.distribution_release,
-                    dist_name,
-                    dist_release))
-
+                                                                                                                                                                                                                                                                                            ctx.config.values.general.distribution,
+                                                                                                                                                                                                                                                                                            ctx.config.values.general.distribution_release,
+                                                                                                                                                                                                                                                                                            dist_name,
+                                                                                                                                                                                                                                                                                            dist_release))

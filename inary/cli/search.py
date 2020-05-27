@@ -12,6 +12,9 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 import re
 
@@ -19,10 +22,6 @@ import re
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class Search(command.Command, metaclass=command.autocommand):
@@ -71,7 +70,11 @@ database.
             return
 
         cs = ctx.get_option("case_sensitive")
-        replace = re.compile("({})".format("|".join(self.args)), 0 if cs else re.I)
+        replace = re.compile(
+            "({})".format(
+                "|".join(
+                    self.args)),
+            0 if cs else re.I)
         lang = ctx.get_option('language')
         repo = ctx.get_option('repository')
         name = ctx.get_option('name')
@@ -84,34 +87,38 @@ database.
         installdb = inary.db.installdb.InstallDB()
         if ctx.get_option('installdb'):
             pkgs = installdb.search_package(self.args, lang, fields, cs)
-            get_info = db.get_package
-            get_name_sum = lambda pkg: (pkg.name, pkg.summary)
+            get_info = installdb.get_package
+            def get_name_sum(pkg): return (pkg.name, pkg.summary)
         elif ctx.get_option('sourcedb'):
             db = inary.db.sourcedb.SourceDB()
             pkgs = db.search_spec(self.args, lang, repo, fields, cs)
             get_info = db.get_spec
-            get_name_sum = lambda pkg: (pkg.source.name, pkg.source.summary)
+            def get_name_sum(pkg): return (pkg.source.name, pkg.source.summary)
         else:
             db = inary.db.packagedb.PackageDB()
             pkgs = db.search_package(self.args, lang, repo, fields, cs)
             get_info = db.get_package
-            get_name_sum = lambda pkg: (pkg.name, pkg.summary)
+            def get_name_sum(pkg): return (pkg.name, pkg.summary)
 
         if pkgs:
-            maxlen = max([len(_pkg) for _pkg in pkgs])+2
+            maxlen = max([len(_pkg) for _pkg in pkgs]) + 2
 
         for pkg in pkgs:
             pkg_info = get_info(pkg)
 
             name, summary = get_name_sum(pkg_info)
             lenp = len(name)
-            version=""
             if installdb.has_package(pkg):
-                  color="brightgreen"
+                color = "brightgreen"
             else:
-                  color="brightred"
+                color = "brightred"
             name = replace.sub(inary.util.colorize(r"\1", color), str(name))
-            summary = replace.sub(inary.util.colorize(r"\1", color), str(summary))
+            summary = replace.sub(
+                inary.util.colorize(
+                    r"\1", color), str(summary))
             name += ' ' * max(0, maxlen - lenp)
 
-            ctx.ui.info('{} {} {}'.format(name,inary.util.colorize("=",color), summary))
+            ctx.ui.info(
+                '{} {} {}'.format(
+                    name, inary.util.colorize(
+                        "=", color), summary))

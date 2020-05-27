@@ -12,6 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.sysconf as sysconf
+import inary.context as ctx
+import inary.cli.build as build
+import inary.cli.command as command
+import inary.db
 import optparse
 
 # Gettext Library
@@ -19,11 +24,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.db
-import inary.cli.command as command
-import inary.cli.build as build
-import inary.context as ctx
-import inary.sysconf as sysconf
 
 class Emerge(build.Build, metaclass=command.autocommand):
     __doc__ = _("""Build and install INARY source packages from repository
@@ -58,7 +58,7 @@ You can also give the name of a component.
         self.parser.add_option_group(group)
 
     def run(self):
-        from inary.operations import emerge, helper
+        from inary.operations import emerge
         self.init(database=True)
 
         component = ctx.get_option('component')
@@ -73,7 +73,9 @@ You can also give the name of a component.
             sources = self.args
 
         if ctx.get_option('output_dir'):
-            ctx.ui.info(_('Output directory: {}').format(ctx.config.options.output_dir))
+            ctx.ui.info(
+                _('Output directory: {}').format(
+                    ctx.config.options.output_dir))
         else:
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
@@ -82,4 +84,3 @@ You can also give the name of a component.
 
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)
-        

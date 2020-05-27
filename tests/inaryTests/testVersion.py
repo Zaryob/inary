@@ -2,6 +2,7 @@ import unittest
 
 from inary.version import Version
 
+
 class VersionTestCase(unittest.TestCase):
     def setUp(self):
         pass
@@ -61,5 +62,5 @@ class VersionTestCase(unittest.TestCase):
         # bug 603
         v1 = Version('1.8.0')
         v2 = Version('1.9.1')
-        self.assertTrue( not v1 > v2 )
-        self.assertTrue( not v1 >= v2 )
+        self.assertTrue(not v1 > v2)
+        self.assertTrue(not v1 >= v2)

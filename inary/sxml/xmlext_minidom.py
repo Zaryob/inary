@@ -24,15 +24,13 @@
  this implementation uses minidom
 """
 
+from xml.parsers.expat import ExpatError
+import xml.dom.minidom as minidom
+import inary
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary
-
-import xml.dom.minidom as minidom
-from xml.parsers.expat import ExpatError
 
 
 class XMLError(inary.errors.Error):
@@ -51,7 +49,7 @@ def parse(fileName):
         return dom.documentElement
     except ExpatError as inst:
         raise XMLError(_("File \"{}\" has invalid XML: {}\n").format(fileName,
-                                                                   str(inst)))
+                                                                     str(inst)))
 
 
 def parseString(fileString):
@@ -120,7 +118,8 @@ def getNodeText(node, tagpath=""):
         # print('child_data=', child.data.strip())
         return child.data.strip()  # in any case, strip whitespaces...
     else:
-        raise XMLError(_("getNodeText: Expected text node, got something else!"))
+        raise XMLError(
+            _("getNodeText: Expected text node, got something else!"))
 
 
 def getChildText(node_s, tagpath):
@@ -137,7 +136,7 @@ def getNode(node, tagpath):
     if tagpath == "":
         return node
 
-    assert type(tagpath) == str
+    assert isinstance(tagpath, str)
     tags = tagpath.split('/')
     assert len(tags) > 0
 
@@ -178,7 +177,7 @@ def addNode(node, tagpath, newnode=None, branch=True):
     """add a new node at the end of the tree and returns it
     if newnode is given adds that node, too."""
 
-    assert type(tagpath) == str
+    assert isinstance(tagpath, str)
     tags = []
     if tagpath != "":
         tags = tagpath.split('/')  # tag chain

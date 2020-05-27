@@ -14,12 +14,12 @@
 
 """version structure"""
 
+import inary.errors
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.errors
 
 # Basic rule is:
 # p > (no suffix) > m > rc > pre > beta > alpha
@@ -55,19 +55,21 @@ def make_version(version):
                 for keyword, value in __keywords:
                     if suffix.startswith(keyword):
                         return list(map(__make_version_item, ver.split("."))), value, \
-                               list(map(__make_version_item, suffix[len(keyword):].split(".")))
+                            list(map(__make_version_item,
+                                     suffix[len(keyword):].split(".")))
                 else:
                     # Probably an invalid version string. Reset ver string
                     # to raise an exception in __make_version_item function.
                     ver = ""
             else:
                 return list(map(__make_version_item, ver.split("."))), 0, \
-                       list(map(__make_version_item, suffix.split(".")))
+                    list(map(__make_version_item, suffix.split(".")))
 
         return list(map(__make_version_item, ver.split("."))), 0, [(0, None)]
 
     except ValueError:
-        raise InvalidVersionError(_("Invalid version string: '{}'").format(version))
+        raise InvalidVersionError(
+            _("Invalid version string: '{}'").format(version))
 
 
 class Version(object):
@@ -91,9 +93,11 @@ class Version(object):
     def compare(self, ver):
         # In old code it was written with cmp().
         if isinstance(ver, str):
-            return (self.__version > make_version(ver)) - (self.__version < make_version(ver))
+            return (self.__version > make_version(ver)) - \
+                (self.__version < make_version(ver))
 
-        return (self.__version > ver.__version) - (self.__version < ver.__version)
+        return (self.__version > ver.__version) - \
+            (self.__version < ver.__version)
 
     def __lt__(self, rhs):
         if isinstance(rhs, str):

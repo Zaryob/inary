@@ -13,6 +13,14 @@
 #
 
 # python standard library modules
+from base64 import encodebytes
+import inary.uri
+import inary.context as ctx
+import inary.util as util
+import inary.mirrors
+import inary.errors
+import inary.db
+import inary
 import os
 import random
 import shutil
@@ -31,15 +39,6 @@ except ImportError:
     raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
 
 # inary modules
-import inary
-import inary.db
-import inary.errors
-import inary.mirrors
-import inary.util as util
-import inary.context as ctx
-import inary.uri
-
-from base64 import encodebytes
 
 
 # For raising errors when fetching
@@ -90,7 +89,8 @@ class UIHandler:
 
         self.s_time = self.now()
 
-    def update(self, total_to_download, total_downloaded, total_to_upload, total_uploaded):
+    def update(self, total_to_download, total_downloaded,
+               total_to_upload, total_uploaded):
         if self.size == total_downloaded:
             return
 
@@ -99,7 +99,7 @@ class UIHandler:
         if self.total_size:
             try:
                 self.percent = (self.size * 100.0) / self.total_size
-            except:
+            except BaseException:
                 self.percent = 0
         else:
             self.percent = 0
@@ -112,7 +112,8 @@ class UIHandler:
                 self.rate, self.symbol = None, None
             if self.total_size:
                 self.eta = '%02d:%02d:%02d' % \
-                           tuple([i for i in time.gmtime((self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
+                           tuple([i for i in time.gmtime(
+                               (self.t_diff() * (100 - self.percent)) / self.percent)[3:6]])
 
         self._update_ui()
 
@@ -148,11 +149,12 @@ class Fetcher:
         self.destdir = destdir
         self.destfile = destfile
         self.progress = None
-        self.try_number=0
-        self.useragent='Inary Fetcher/' + inary.__version__
-        
+        self.try_number = 0
+        self.useragent = 'Inary Fetcher/' + inary.__version__
+
         self.archive_file = os.path.join(destdir, destfile or url.filename())
-        self.partial_file = os.path.join(self.destdir, self.url.filename()) + ctx.const.partial_suffix
+        self.partial_file = os.path.join(
+            self.destdir, self.url.filename()) + ctx.const.partial_suffix
         util.ensure_dirs(self.destdir)
 
     def fetch(self, timeout=30):
@@ -162,22 +164,31 @@ class Fetcher:
             raise FetchError(_('Filename error'))
 
         if not os.access(self.destdir, os.W_OK):
-            raise FetchError(_('Access denied to write to destination directory: "{}"').format(self.destdir))
+            raise FetchError(
+                _('Access denied to write to destination directory: "{}"').format(
+                    self.destdir))
 
-        if os.path.exists(self.archive_file) and not os.access(self.archive_file, os.W_OK):
-            raise FetchError(_('Access denied to destination file: "{}"').format(self.archive_file))
+        if os.path.exists(self.archive_file) and not os.access(
+                self.archive_file, os.W_OK):
+            raise FetchError(
+                _('Access denied to destination file: "{}"').format(
+                    self.archive_file))
 
         if os.path.exists(self.archive_file):
-            ctx.ui.info(_("File already exsist. Download skiped..."), verbose=True)
+            ctx.ui.info(
+                _("File already exsist. Download skiped..."),
+                verbose=True)
             return 0
         c = pycurl.Curl()
         c.protocol = self.url.scheme()
         c.setopt(c.URL, self.url.get_uri())
-        # Some runtime settings (user agent, bandwidth limit, timeout, redirections etc.)
+        # Some runtime settings (user agent, bandwidth limit, timeout,
+        # redirections etc.)
         c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
         c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
         c.setopt(pycurl.AUTOREFERER, 1)
-        c.setopt(pycurl.CONNECTTIMEOUT, timeout)  # This for waiting to establish connection
+        # This for waiting to establish connection
+        c.setopt(pycurl.CONNECTTIMEOUT, timeout)
         # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
         c.setopt(pycurl.MAXREDIRS, 50)
         c.setopt(pycurl.NOSIGNAL, True)
@@ -193,20 +204,25 @@ class Fetcher:
             c.setopt(pycurl.SSL_VERIFYHOST, 0)
         else:
             # To block man-in-middle attack
-             c.setopt(pycurl.SSL_VERIFYHOST, 2)
+            c.setopt(pycurl.SSL_VERIFYHOST, 2)
             # c.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
 
         # Header
         # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
         handler = UIHandler()
-        handler.start(self.archive_file, self.url.get_uri(), self.url.filename())
+        handler.start(
+            self.archive_file,
+            self.url.get_uri(),
+            self.url.filename())
 
         if os.path.exists(self.partial_file):
             if self._test_range_support():
                 file_id = open(self.partial_file, "ab")
                 c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
-                ctx.ui.info(_("Partial file detected. Download resuming..."), verbose=True)
+                ctx.ui.info(
+                    _("Partial file detected. Download resuming..."),
+                    verbose=True)
             else:
                 file_id = open(self.partial_file, "wb")
 
@@ -221,21 +237,23 @@ class Fetcher:
         c.setopt(pycurl.FOLLOWLOCATION, 1)
         c.setopt(c.WRITEDATA, file_id)
 
-
         try:
             c.perform()
-            ctx.ui.info("\n", noln=True)  # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+            # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+            ctx.ui.info("\n", noln=True)
             # pycurl yüzünden kaynaklanıyor
             file_id.close()
-            ctx.ui.info(_("RESPONSE: ") + str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
-            ctx.ui.info(_("Downloaded from: " + str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+            ctx.ui.info(_("RESPONSE: ") +
+                        str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
+            ctx.ui.info(_("Downloaded from: " +
+                          str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
             c.close()
 
         except pycurl.error as x:
-            if x.args[0]==33:
+            if x.args[0] == 33:
                 os.remove(self.partial_file)
             if self.try_number != 3:
-                self.try_number=self.try_number+1
+                self.try_number = self.try_number + 1
                 ctx.ui.info(_("Download error: {}".format(x)), verbose=True)
                 fetch()
             raise FetchError("{}".format(x.args[1]))
@@ -250,15 +268,20 @@ class Fetcher:
 
     def _get_http_headers(self):
         headers = []
-        if self.url.auth_info() and (self.url.scheme() == "http" or self.url.scheme() == "https"):
-            enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+        if self.url.auth_info() and (self.url.scheme() ==
+                                     "http" or self.url.scheme() == "https"):
+            enc = encodebytes(
+                '{0}:{0}'.format(
+                    self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return headers
 
     def _get_ftp_headers(self):
         headers = []
         if self.url.auth_info() and self.url.scheme() == "ftp":
-            enc = encodebytes('{0}:{0}'.format(self.url.auth_info()).encode('utf-8'))
+            enc = encodebytes(
+                '{0}:{0}'.format(
+                    self.url.auth_info()).encode('utf-8'))
             headers.append(('Authorization', 'Basic {}'.format(enc)))
         return headers
 
@@ -266,17 +289,21 @@ class Fetcher:
         proxies = {}
 
         if ctx.config.values.general.http_proxy and self.url.scheme() == "http":
-            proxies[inary.uri.URI(ctx.config.values.general.http_proxy).scheme()] = ctx.config.values.general.http_proxy
+            proxies[inary.uri.URI(ctx.config.values.general.http_proxy).scheme(
+            )] = ctx.config.values.general.http_proxy
 
         if ctx.config.values.general.https_proxy and self.url.scheme() == "https":
             proxies[
                 inary.uri.URI(ctx.config.values.general.https_proxy).scheme()] = ctx.config.values.general.https_proxy
 
         if ctx.config.values.general.ftp_proxy and self.url.scheme() == "ftp":
-            proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme()] = ctx.config.values.general.ftp_proxy
+            proxies[inary.uri.URI(ctx.config.values.general.ftp_proxy).scheme(
+            )] = ctx.config.values.general.ftp_proxy
 
         if self.url.scheme() in proxies:
-            ctx.ui.info(_("Proxy configuration has been found for '{}' protocol.").format(self.url.scheme()))
+            ctx.ui.info(
+                _("Proxy configuration has been found for '{}' protocol.").format(
+                    self.url.scheme()))
 
         return proxies
 
@@ -284,7 +311,8 @@ class Fetcher:
     def _get_bandwith_limit():
         bandwidth_limit = ctx.config.options.bandwidth_limit or ctx.config.values.general.bandwidth_limit
         if bandwidth_limit and bandwidth_limit != "0":
-            ctx.ui.warning(_("Bandwidth usage is limited to {} KB/s.").format(bandwidth_limit))
+            ctx.ui.warning(
+                _("Bandwidth usage is limited to {} KB/s.").format(bandwidth_limit))
             return 1024 * int(bandwidth_limit)
         else:
             return 0
@@ -297,7 +325,8 @@ class Fetcher:
         try:
             file_obj = urllib.request.urlopen(self.url.get_uri())
         except urllib.request.URLError:
-            ctx.ui.debug(_("Remote file can not be reached. Previously downloaded part of the file will be removed."))
+            ctx.ui.debug(
+                _("Remote file can not be reached. Previously downloaded part of the file will be removed."))
             os.remove(self.partial_file)
             return False
 
@@ -306,7 +335,8 @@ class Fetcher:
         if headers.get("Content-Length"):
             return True
         else:
-            ctx.ui.debug(_("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
+            ctx.ui.debug(
+                _("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
             os.remove(self.partial_file)
             return False
 
@@ -315,15 +345,16 @@ class Fetcher:
 def fetch_url(url, destdir=None, progress=None, destfile=None, pkgname=''):
 
     if not destdir:
-        destdir=ctx.config.archives_dir()
+        destdir = ctx.config.archives_dir()
     if not progress:
-        progress=ctx.ui.Progress
+        progress = ctx.ui.Progress
     if "mirrors://" in str(url):
-        fetch_from_mirror(str(url),destdir,progress,destfile)
+        fetch_from_mirror(str(url), destdir, progress, destfile)
     else:
         fetch = Fetcher(url, destdir, destfile)
         fetch.progress = progress
         fetch.fetch()
+
 
 def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
     archive = os.path.basename(url)
@@ -331,14 +362,17 @@ def fetch_from_fallback(url, destdir=None, progress=None, destfile=None):
     ctx.ui.warning(_('Trying fallback address: \"{}\"').format(src))
     fetch_url(src, destdir=destdir, progress=progress, destfile=destfile)
 
+
 def fetch_from_locale(url, destdir=None, progress=None, destfile=None):
     if not destdir:
-        destdir=ctx.config.archives_dir()
+        destdir = ctx.config.archives_dir()
     if url.startswith("file://"):
         url = url[7:]
     if not os.access(url, os.F_OK):
-        raise FetchError(_('No such file or no permission to read for {}.').format(url))
+        raise FetchError(
+            _('No such file or no permission to read for {}.').format(url))
     shutil.copy(url, os.path.join(destdir, destfile or url.split("/")[-1]))
+
 
 def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
     sep = url[len("mirrors://"):].split("/")
@@ -346,22 +380,30 @@ def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
     archive = "/".join(sep)
 
     mirrors = inary.mirrors.Mirrors().get_mirrors(name)
-    random.shuffle(mirrors) # randomize mirror list
+    random.shuffle(mirrors)  # randomize mirror list
     if not mirrors:
-        raise inary.mirrors.MirrorError(_("\"{}\" mirrors are not defined.").format(name))
+        raise inary.mirrors.MirrorError(
+            _("\"{}\" mirrors are not defined.").format(name))
 
     for mirror in mirrors:
         try:
             mirror_url = os.path.join(mirror, archive)
             ctx.ui.debug(_('Fetching source from: \"{}\"').format(mirror_url))
-            fetch_url(mirror_url, destdir=destdir, progress=progress, destfile=destfile)
+            fetch_url(
+                mirror_url,
+                destdir=destdir,
+                progress=progress,
+                destfile=destfile)
             return
         except FetchError:
             pass
 
-    raise FetchError(_('Could not fetch source from \"{}\" mirrors.').format(name))
+    raise FetchError(
+        _('Could not fetch source from \"{}\" mirrors.').format(name))
 
 # Operation function
+
+
 def fetch(packages=None, path=os.path.curdir):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
@@ -375,15 +417,23 @@ def fetch(packages=None, path=os.path.curdir):
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
         package, repo = packagedb.get_package_repo(name)
-        ctx.ui.info(_("\"{0}\" package found in \"{1}\" repository.").format(package.name, repo))
+        ctx.ui.info(
+            _("\"{0}\" package found in \"{1}\" repository.").format(
+                package.name, repo))
         uri = inary.uri.URI(package.packageURI)
         output = os.path.join(path, uri.path())
-        if os.path.exists(output) and package.packageHash == inary.util.sha1_file(output):
-            ctx.ui.warning(_("\"{}\" package already fetched.").format(uri.path()))
+        if os.path.exists(
+                output) and package.packageHash == inary.util.sha1_file(output):
+            ctx.ui.warning(
+                _("\"{}\" package already fetched.").format(
+                    uri.path()))
             continue
         if uri.is_absolute_path():
             url = str(uri.path())
         else:
-            url = os.path.join(os.path.dirname(repodb.get_repo_url(repo)), str(uri.path()))
+            url = os.path.join(
+                os.path.dirname(
+                    repodb.get_repo_url(repo)), str(
+                    uri.path()))
 
         fetch_url(url, path, ctx.ui.Progress)

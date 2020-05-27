@@ -30,14 +30,19 @@ class Obsolete(metaclass=autoxml.autoxml):
 class Distribution(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     tag = "INARY"
 
-    t_SourceName = [autoxml.String, autoxml.mandatory]  # name of distribution (source)
+    # name of distribution (source)
+    t_SourceName = [autoxml.String, autoxml.mandatory]
     t_Description = [autoxml.LocalText, autoxml.mandatory]
     t_Version = [autoxml.String, autoxml.optional]
     t_Type = [autoxml.String, autoxml.mandatory]
-    t_Dependencies = [[autoxml.Text], autoxml.optional, "Dependencies/Distribution"]
+    t_Dependencies = [[autoxml.Text],
+                      autoxml.optional,
+                      "Dependencies/Distribution"]
 
-    t_BinaryName = [autoxml.LocalText, autoxml.optional]  # name of repository (binary distro)
-    t_Architecture = [autoxml.Text, autoxml.optional]  # architecture identifier
+    # name of repository (binary distro)
+    t_BinaryName = [autoxml.LocalText, autoxml.optional]
+    # architecture identifier
+    t_Architecture = [autoxml.Text, autoxml.optional]
 
     t_Obsoletes = [[Obsolete], autoxml.optional, "Obsoletes/Package"]
 

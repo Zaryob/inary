@@ -12,16 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class ListComponents(command.Command, metaclass=command.autocommand):
@@ -61,4 +60,5 @@ repositories.
                 ctx.ui.info(str(component))
             else:
                 component.name += ' ' * max(0, maxlen - len(p))
-                ctx.ui.info('{0} - {1} '.format(component.name, str(component.summary)))
+                ctx.ui.info('{0} - {1} '.format(component.name,
+                                                str(component.summary)))

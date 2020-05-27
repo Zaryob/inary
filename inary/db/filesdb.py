@@ -30,7 +30,8 @@ _ = __trans.gettext
 # We could traverse through files.xml files of the packages to find the path and
 # the package - a linear search - as some well known package managers do. But the current
 # file conflict mechanism of inary prevents this and needs a fast has_file function.
-# So currently filesdb is the only db and we cant still get rid of rebuild-db :/
+# So currently filesdb is the only db and we cant still get rid of
+# rebuild-db :/
 
 class FilesDB(lazydb.LazyDB):
 
@@ -47,7 +48,11 @@ class FilesDB(lazydb.LazyDB):
         for pkg in installdb.list_installed():
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
-            ctx.ui.info("%-80.80s\r" % _(' -> Adding files of \"{}\" package to db...').format(pkg), noln=True, color='brightpurple')
+            ctx.ui.info(
+                "%-80.80s\r" %
+                _(' -> Adding files of \"{}\" package to db...').format(pkg),
+                noln=True,
+                color='brightpurple')
         ctx.ui.info(_('\nAdded files database...'), color='green')
 
     def get_file(self, path):
@@ -73,8 +78,13 @@ class FilesDB(lazydb.LazyDB):
         installdb = inary.db.installdb.InstallDB()
         found = []
         for pkg in installdb.list_installed():
-            files_xml = open(os.path.join(installdb.package_path(pkg), ctx.const.files_xml)).read()
-            paths = re.compile('<Path>(.*?%s.*?)</Path>' % re.escape(term), re.I).findall(files_xml)
+            files_xml = open(
+                os.path.join(
+                    installdb.package_path(pkg),
+                    ctx.const.files_xml)).read()
+            paths = re.compile(
+                '<Path>(.*?%s.*?)</Path>' %
+                re.escape(term), re.I).findall(files_xml)
             if paths:
                 found.append((pkg, paths))
         return found
@@ -124,6 +134,7 @@ class FilesDB(lazydb.LazyDB):
         files_db = os.path.join(ctx.config.info_dir(), ctx.const.files_db)
         os.remove(files_db)
         self.__check_filesdb()
+
 
 @inary.util.locked
 def rebuild_db():

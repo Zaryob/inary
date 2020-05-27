@@ -15,15 +15,14 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import gettext
 import optparse
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class ConfigManager(command.Command, metaclass=command.autocommand):
@@ -48,7 +47,8 @@ class ConfigManager(command.Command, metaclass=command.autocommand):
         from inary.operations import helper
         self.init(database=True, write=True)
 
-        config_changes = helper.check_config_changes(order=self.installdb.list_installed())
+        config_changes = helper.check_config_changes(
+            order=self.installdb.list_installed())
 
         if config_changes:
             if ctx.get_option('purge'):
@@ -65,8 +65,8 @@ class ConfigManager(command.Command, metaclass=command.autocommand):
                             helper.apply_changed_config(file, keep=True)
                 return
 
-
-            if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
+            if ctx.ui.confirm(
+                    _("[!] Some config files have been changed. Would you like to see and apply them?")):
                 helper.show_changed_configs(config_changes)
 
         else:

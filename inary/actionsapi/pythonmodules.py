@@ -11,6 +11,11 @@
 #
 # Please read the COPYING file.
 
+from inary.actionsapi.inarytools import dodoc
+from inary.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
 import glob
 # standard python modules
 import os
@@ -21,13 +26,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
-from inary.actionsapi.inarytools import dodoc
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -72,7 +72,8 @@ def compile(parameters='', pyVer=''):
 
 def install(parameters='', pyVer=''):
     """does python setup.py install"""
-    if system('python{0} setup.py install --root={1} --no-compile -O0 {2}'.format(pyVer, get.installDIR(), parameters)):
+    if system('python{0} setup.py install --root={1} --no-compile -O0 {2}'.format(
+            pyVer, get.installDIR(), parameters)):
         raise InstallError(_('Install failed.'))
 
     docFiles = ('AUTHORS', 'CHANGELOG', 'CONTRIBUTORS', 'COPYING*', 'COPYRIGHT',
@@ -93,7 +94,8 @@ def run(parameters='', pyVer=''):
 
 def fixCompiledPy(lookInto='/usr/lib/{}/'.format(get.curPYTHON())):
     """ cleans *.py[co] from packages """
-    for root, dirs, files in os.walk('{0}/{1}'.format(get.installDIR(), lookInto)):
+    for root, dirs, files in os.walk(
+            '{0}/{1}'.format(get.installDIR(), lookInto)):
         for compiledFile in files:
             if compiledFile.endswith('.pyc') or compiledFile.endswith('.pyo'):
                 if can_access_file('{0}/{1}'.format(root, compiledFile)):

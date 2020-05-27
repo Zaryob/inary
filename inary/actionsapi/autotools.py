@@ -12,27 +12,27 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+from inary.actionsapi.inarytools import removeDir
+from inary.actionsapi.inarytools import dosed
+from inary.actionsapi.shelltools import ls
+from inary.actionsapi.shelltools import isDirectory
+from inary.actionsapi.libtools import gnuconfig_update
+from inary.actionsapi.shelltools import unlink
+from inary.actionsapi.shelltools import can_access_file
+from inary.actionsapi.shelltools import system
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
 import os
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get as get
-from inary.actionsapi.shelltools import system
-from inary.actionsapi.shelltools import can_access_file
-from inary.actionsapi.shelltools import unlink
-from inary.actionsapi.libtools import gnuconfig_update
-from inary.actionsapi.shelltools import isDirectory
-from inary.actionsapi.shelltools import ls
-from inary.actionsapi.inarytools import dosed
-from inary.actionsapi.inarytools import removeDir
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -41,7 +41,8 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[AutoTools]: " + value)
         if can_access_file('config.log'):
-            ctx.ui.error(_('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
+            ctx.ui.error(
+                _('Please attach the config.log to your bug report:\n{}/config.log').format(os.getcwd()))
 
 
 class MakeError(inary.actionsapi.Error):
@@ -78,7 +79,8 @@ def configure(parameters=''):
     if can_access_file('configure'):
         gnuconfig_update()
 
-        prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
+        prefix = get.emul32prefixDIR() if get.buildTYPE(
+        ) == "emul32" else get.defaultprefixDIR()
         args = './configure \
                 --prefix=/{0} \
                 --build={1} \
@@ -96,7 +98,8 @@ def configure(parameters=''):
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("configure")))
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("configure")))
 
 
 def rawConfigure(parameters=''):
@@ -107,7 +110,8 @@ def rawConfigure(parameters=''):
         if system('./configure {}'.format(parameters)):
             raise ConfigureError(_('Configure failed.'))
     else:
-        raise ConfigureError(_('No configure script found. (\"{}\" file not found.)'.format("configure")))
+        raise ConfigureError(
+            _('No configure script found. (\"{}\" file not found.)'.format("configure")))
 
 
 def compile(parameters=''):
@@ -161,7 +165,8 @@ def install(parameters='', argument='install'):
 
     if get.buildTYPE() == "emul32":
         fixpc()
-        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
+        if isDirectory("{}/emul32".format(get.installDIR())):
+            removeDir("/emul32")
 
 
 def rawInstall(parameters='', argument='install'):
@@ -173,7 +178,8 @@ def rawInstall(parameters='', argument='install'):
 
     if get.buildTYPE() == "emul32":
         fixpc()
-        if isDirectory("{}/emul32".format(get.installDIR())): removeDir("/emul32")
+        if isDirectory("{}/emul32".format(get.installDIR())):
+            removeDir("/emul32")
 
 
 def aclocal(parameters=''):
@@ -181,10 +187,12 @@ def aclocal(parameters=''):
     if system('aclocal {}'.format(parameters)):
         raise RunTimeError(_('Running \'aclocal\' failed.'))
 
+
 def autogen():
     """generates configure script from autogen"""
     if system('bash autogen.sh'):
         raise RunTimeError(_('Running \'autogen.sh\' script failed.'))
+
 
 def autoconf(parameters=''):
     """generates a configure script"""

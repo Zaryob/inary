@@ -27,7 +27,7 @@ class Singleton(object):
     _the_instances = {}
 
     def __new__(type):
-        if not type.__name__ in Singleton._the_instances:
+        if type.__name__ not in Singleton._the_instances:
             Singleton._the_instances[type.__name__] = object.__new__(type)
         return Singleton._the_instances[type.__name__]
 
@@ -36,7 +36,9 @@ class Singleton(object):
 
     def _delete(self):
         # FIXME: After invalidate, previously initialized db object becomes
-        ctx.ui.debug("LazyDB: {0} invalidated.".format(self.__class__.__name__))
+        ctx.ui.debug(
+            "LazyDB: {0} invalidated.".format(
+                self.__class__.__name__))
         del self._the_instances[type(self).__name__]
 
 
@@ -122,7 +124,10 @@ class LazyDB(Singleton):
             start = time.time()
             self.__init()
             end = time.time()
-            ctx.ui.debug("{0} initialized in {1}.".format(self.__class__.__name__, end - start))
+            ctx.ui.debug(
+                "{0} initialized in {1}.".format(
+                    self.__class__.__name__,
+                    end - start))
             self.initialized = True
 
         if attr not in self.__dict__:

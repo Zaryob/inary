@@ -12,20 +12,19 @@
 # Please read the COPYING file.
 #
 
+import inary.data
+import inary.db
+import inary.ui as ui
+import inary.atomicoperations as atomicoperations
+import inary.util as util
+import inary.context as ctx
+import inary.operations as operations
 import sys
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.operations as operations
-import inary.context as ctx
-import inary.util as util
-import inary.atomicoperations as atomicoperations
-import inary.ui as ui
-import inary.db
-import inary.data
 
 
 @util.locked
@@ -67,7 +66,8 @@ installed in the respective order to satisfy dependencies:
         return
 
     if len(order_inst) + len(order_build) > len(A_0):
-        if not ctx.ui.confirm(_('There are extra packages due to dependencies. Would you like to continue?')):
+        if not ctx.ui.confirm(
+                _('There are extra packages due to dependencies. Would you like to continue?')):
             return False
 
     ctx.ui.notify(ui.packagestogo, order=order_inst)
@@ -79,7 +79,8 @@ installed in the respective order to satisfy dependencies:
 
     for x in order_build:
         package_names = operations.build.build(x).new_packages
-        inary.operations.install.install_pkg_files(package_names, reinstall=True)  # handle inter-package deps here
+        inary.operations.install.install_pkg_files(
+            package_names, reinstall=True)  # handle inter-package deps here
         # reset counts between builds
         ctx.ui.errors = ctx.ui.warnings = 0
 
@@ -101,7 +102,8 @@ def plan_emerge(A):
         if sourcedb.has_spec(name):
             return sourcedb.get_spec(name)
         else:
-            raise Exception(_('Cannot find source package: \"{}\"').format(name))
+            raise Exception(
+                _('Cannot find source package: \"{}\"').format(name))
 
     def get_src(name):
         return get_spec(name).source
@@ -135,7 +137,7 @@ def plan_emerge(A):
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    if not srcdep in G_f.vertices():
+                    if srcdep not in G_f.vertices():
                         Bp.add(srcdep)
                         add_src(get_src(srcdep))
                     if not src.name == srcdep:  # firefox - firefox-devel thing

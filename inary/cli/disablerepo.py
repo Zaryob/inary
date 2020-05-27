@@ -12,13 +12,12 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.command as command
+import inary.db
 import gettext
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.db
-import inary.cli.command as command
 
 
 class DisableRepo(command.Command, metaclass=command.autocommand):

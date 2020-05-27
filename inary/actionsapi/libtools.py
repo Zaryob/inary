@@ -11,9 +11,12 @@
 #
 # Please read the COPYING file.
 
+import inary.actionsapi.get as get
+from inary.actionsapi.shelltools import *
+import inary.actionsapi
 import os
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
@@ -22,9 +25,6 @@ _ = __trans.gettext
 # Inary-Core Modules
 
 # ActionsAPI Modules
-import inary.actionsapi
-from inary.actionsapi.shelltools import *
-import inary.actionsapi.get as get
 
 
 class RunTimeError(inary.actionsapi.Error):
@@ -51,9 +51,14 @@ def gnuconfig_update():
                     unlink(targetFile)
 
                 try:
-                    copy('/usr/share/gnuconfig/{}'.format(fileName), join_path(root, fileName))
-                except:
-                    ctx.ui.warning(_('GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)'))
+                    copy(
+                        '/usr/share/gnuconfig/{}'.format(fileName),
+                        join_path(
+                            root,
+                            fileName))
+                except BaseException:
+                    ctx.ui.warning(
+                        _('GNU Config Update Failed. Please check your gnuconfig scripts. (/usr/share/gnuconfig)'))
                 else:
                     ctx.ui.info(_('GNU Config Update Finished.'))
 
@@ -66,7 +71,8 @@ def libtoolize(parameters=''):
 def gen_usr_ldscript(dynamicLib):
     makedirs('{}/usr/lib'.format(get.installDIR()))
 
-    destinationFile = open('{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib), 'w')
+    destinationFile = open(
+        '{0}/usr/lib/{1}'.format(get.installDIR(), dynamicLib), 'w')
     content = '''
 /* GNU ld script
     Since Sulin has critical dynamic libraries

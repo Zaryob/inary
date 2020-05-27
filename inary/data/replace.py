@@ -12,11 +12,11 @@
 # Please read the COPYING file.
 #
 
+import inary.data.relation as relation
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.data.relation as relation
 
 """ Replace relation """
 

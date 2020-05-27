@@ -50,6 +50,7 @@
 # kde5_dir =
 # qt5_dir =
 
+import inary.errors
 import configparser
 import io
 import os
@@ -59,8 +60,6 @@ import re
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.errors
 
 
 class Error(inary.errors.Error):
@@ -130,7 +129,7 @@ class DirectoriesDefaults:
 
 class ConfigurationSection(object):
     """ConfigurationSection class defines a section in the configuration
-	file, using defaults (above) as a fallback."""
+        file, using defaults (above) as a fallback."""
 
     def __init__(self, section, items=None):
         if items is None:
@@ -217,7 +216,8 @@ class ConfigurationFile(object):
     # get, set and write_config methods added for manipulation of inary.conf file from Scom to solve bug #5668.
     # Current ConfigParser does not keep the comments and white spaces, which we do not want for inary.conf. There
     # are patches floating in the python sourceforge to add this feature. The write_config code is from python
-    # sourceforge tracker id: #1410680, modified a little to make it turn into a function.
+    # sourceforge tracker id: #1410680, modified a little to make it turn into
+    # a function.
 
     def get(self, section, option):
         try:
@@ -338,7 +338,9 @@ class ConfigurationFile(object):
                         value = self.parser.get(sect, opt)
                         # Fix continuations.
                         value = value.replace("\n", "\n\t")
-                        output.write("{0}{1}{2}\n".format(opt, padded_vi, value))
+                        output.write(
+                            "{0}{1}{2}\n".format(
+                                opt, padded_vi, value))
                         written.append((sect, opt))
         # Copy across the new file.
         fp.seek(0)

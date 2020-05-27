@@ -12,17 +12,17 @@
 # Please read the COPYING file.
 #
 
+import inary.util as util
+import inary.sysconf as sysconf
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import gettext
 import optparse
 
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.sysconf as sysconf
-import inary.util as util
 
 class Upgrade(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Upgrade INARY packages
@@ -105,20 +105,26 @@ expanded to package names.
             for name in components:
                 if componentdb.has_component(name):
                     if repository:
-                        packages.extend(componentdb.get_packages(name, walk=True, repo=reposit))
+                        packages.extend(
+                            componentdb.get_packages(
+                                name, walk=True, repo=reposit))
                     else:
-                        packages.extend(componentdb.get_union_packages(name, walk=True))
+                        packages.extend(
+                            componentdb.get_union_packages(
+                                name, walk=True))
         packages.extend(self.args)
 
         upgrade.upgrade(packages, reposit)
 
         try:
-            config_changes,opt = helper.check_config_changes([util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
+            config_changes, opt = helper.check_config_changes(
+                [util.parse_package_name_legacy(i.split("/")[-1])[0] for i in packages])
             if config_changes:
-                if ctx.ui.confirm(_("[!] Some config files have been changed. Would you like to see and apply them?")):
-                    helper.show_changed_configs(config_changes,opt)
+                if ctx.ui.confirm(
+                        _("[!] Some config files have been changed. Would you like to see and apply them?")):
+                    helper.show_changed_configs(config_changes, opt)
         except ValueError:
             pass
-        
+
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)

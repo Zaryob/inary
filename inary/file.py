@@ -19,6 +19,11 @@ we are just encapsulating a common pattern in our program, nothing big.
 like all inary classes, it has been programmed in a non-restrictive way
 """
 
+import inary.util
+import inary.uri
+import inary.fetcher
+import inary.errors
+import inary.context as ctx
 import lzma
 import os
 import shutil
@@ -28,23 +33,20 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.context as ctx
-import inary.errors
-import inary.fetcher
-import inary.uri
-import inary.util
-
 
 class AlreadyHaveException(inary.errors.Exception):
     def __init__(self, url, localfile):
-        inary.errors.Exception.__init__(self, _("URL \"{0}\" already downloaded as \"{1}\"").format(url, localfile))
+        inary.errors.Exception.__init__(
+            self, _("URL \"{0}\" already downloaded as \"{1}\"").format(
+                url, localfile))
         self.url = url
         self.localfile = localfile
 
 
 class NoSignatureFound(inary.errors.Exception):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _("No signature found for \"{}\"").format(url))
+        inary.errors.Exception.__init__(
+            self, _("No signature found for \"{}\"").format(url))
         self.url = url
 
 
@@ -54,7 +56,8 @@ class Error(inary.errors.Error):
 
 class InvalidSignature(inary.errors.Error):
     def __init__(self, url):
-        inary.errors.Exception.__init__(self, _("GPG Signature is invalid for \"{}\"").format(url))
+        inary.errors.Exception.__init__(
+            self, _("GPG Signature is invalid for \"{}\"").format(url))
         self.url = url
 
 
@@ -98,7 +101,8 @@ class File:
     def decompress(localfile, compress):
         compress = File.choose_method(localfile, compress)
         if compress == File.COMPRESSION_TYPE_XZ:
-            open(localfile[:-3], "w").write(lzma.LZMAFile(localfile).read().decode('utf-8'))
+            open(
+                localfile[:-3], "w").write(lzma.LZMAFile(localfile).read().decode('utf-8'))
             localfile = localfile[:-3]
         elif compress == File.COMPRESSION_TYPE_BZ2:
             import bz2
@@ -108,7 +112,7 @@ class File:
 
     @staticmethod
     def download(uri, transfer_dir="/tmp", sha1sum=False,
-                 compress=None, sign=None, copylocal=False,pkgname=''):
+                 compress=None, sign=None, copylocal=False, pkgname=''):
 
         assert isinstance(uri, inary.uri.URI)
 
@@ -119,14 +123,19 @@ class File:
         origfile = inary.util.join_path(transfer_dir, uri.filename())
 
         if sha1sum:
-            sha1filename = File.download(inary.uri.URI(uri.get_uri() + '.sha1sum'), transfer_dir)
+            sha1filename = File.download(
+                inary.uri.URI(
+                    uri.get_uri() +
+                    '.sha1sum'),
+                transfer_dir)
 
             sha1f = open(sha1filename)
             newsha1 = sha1f.read().split("\n")[0]
 
         if uri.is_remote_file() or copylocal:
             tmpfile = check_integrity and uri.filename() + ctx.const.temporary_suffix
-            localfile = inary.util.join_path(transfer_dir, tmpfile or uri.filename())
+            localfile = inary.util.join_path(
+                transfer_dir, tmpfile or uri.filename())
 
             # TODO: code to use old .sha1sum file, is this a necessary optimization?
             # oldsha1fn = localfile + '.sha1sum'
@@ -139,21 +148,27 @@ class File:
                     raise AlreadyHaveException(uri, origfile)
 
             if uri.is_remote_file():
-                ctx.ui.info(_("Fetching {}").format(uri.get_uri()), verbose=True)
-                inary.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile,pkgname)
+                ctx.ui.info(
+                    _("Fetching {}").format(
+                        uri.get_uri()),
+                    verbose=True)
+                inary.fetcher.fetch_url(
+                    uri, transfer_dir, ctx.ui.Progress, tmpfile, pkgname)
             else:
                 # copy to transfer dir
-                inary.fetcher.fetch_from_locale(uri.get_uri(), transfer_dir, destfile=localfile)
+                inary.fetcher.fetch_from_locale(
+                    uri.get_uri(), transfer_dir, destfile=localfile)
         else:
             localfile = uri.get_uri()  # TODO: use a special function here?
             if localfile.startswith("file:///"):
-                localfile=localfile[7:]
+                localfile = localfile[7:]
 
             if not os.path.exists(localfile):
                 raise IOError(_("File \"{}\" not found.").format(localfile))
             if not os.access(localfile, os.W_OK):
                 oldfn = localfile
-                localfile = inary.util.join_path(transfer_dir, os.path.basename(localfile))
+                localfile = inary.util.join_path(
+                    transfer_dir, os.path.basename(localfile))
                 shutil.copy(oldfn, localfile)
 
         def clean_temporary():
@@ -171,7 +186,9 @@ class File:
         if sha1sum:
             if inary.util.sha1_file(localfile) != newsha1:
                 clean_temporary()
-                raise Error(_("File integrity of \"{}\" compromised.\n localfile:{}\n newsha1: {}").format(uri,inary.util.sha1_file(localfile),newsha1))
+                raise Error(
+                    _("File integrity of \"{}\" compromised.\n localfile:{}\n newsha1: {}").format(
+                        uri, inary.util.sha1_file(localfile), newsha1))
 
         if check_integrity:
             shutil.move(localfile, origfile)
@@ -197,7 +214,8 @@ class File:
             raise Error(_("File mode must be either File.read or File.write"))
         if uri.is_remote_file():
             if self.mode == File.read:
-                localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
+                localfile = File.download(
+                    uri, transfer_dir, sha1sum, compress, sign)
             else:
                 raise Error(_("Remote write not implemented."))
         else:
@@ -216,7 +234,7 @@ class File:
         """returns the underlying file object"""
         return self.__file__
 
-    def close(self,  delete_transfer=False):  # TODO: look this parameter
+    def close(self, delete_transfer=False):  # TODO: look this parameter
         """this method must be called at the end of operation"""
         self.__file__.close()
         if self.mode == File.write:
@@ -233,7 +251,10 @@ class File:
                 import bz2
                 compressed_file = self.localfile + ".bz2"
                 compressed_files.append(compressed_file)
-                bz2.BZ2File(compressed_file, "w").write(open(self.localfile).read())
+                bz2.BZ2File(
+                    compressed_file, "w").write(
+                    open(
+                        self.localfile).read())
 
             if self.sha1sum:
                 sha1 = inary.util.sha1_file(self.localfile)
@@ -247,17 +268,22 @@ class File:
                     cs.close()
 
             if self.sign == File.detached:
-                if inary.util.run_batch('gpg --detach-sig ' + self.localfile)[0]:
-                    raise Error(_("ERROR: \'gpg --detach-sig {}\' failed.").format(self.localfile))
+                if inary.util.run_batch(
+                        'gpg --detach-sig ' + self.localfile)[0]:
+                    raise Error(
+                        _("ERROR: \'gpg --detach-sig {}\' failed.").format(self.localfile))
                 for compressed_file in compressed_files:
-                    if inary.util.run_batch('gpg --detach-sig ' + compressed_file)[0]:
-                        raise Error(_("ERROR: \'gpg --detach-sig {}\' failed.").format(compressed_file))
+                    if inary.util.run_batch(
+                            'gpg --detach-sig ' + compressed_file)[0]:
+                        raise Error(
+                            _("ERROR: \'gpg --detach-sig {}\' failed.").format(compressed_file))
 
     @staticmethod
     def check_signature(uri, transfer_dir, sign=detached):
         if sign == File.detached:
             try:
-                sigfilename = File.download(inary.uri.URI(uri + '.sig'), transfer_dir)
+                sigfilename = File.download(
+                    inary.uri.URI(uri + '.sig'), transfer_dir)
             except KeyboardInterrupt:
                 raise
             except IOError:  # FIXME: what exception could we catch here, replace with that.
@@ -266,9 +292,13 @@ class File:
 
             result = inary.util.run_batch('gpg --verify ' + sigfilename)
             if ctx.config.values.general.ssl_verify and result[0]:
-                ctx.ui.info("Checking GPG Signature failed ('gpg --verify {}')".format(sigfilename), color='cyan')
+                ctx.ui.info(
+                    "Checking GPG Signature failed ('gpg --verify {}')".format(
+                        sigfilename),
+                    color='cyan')
                 ctx.ui.info(result[2].decode("utf-8"), color='faintcyan')
-                if not ctx.ui.confirm("Would you like to skip checking gpg signature?"):
+                if not ctx.ui.confirm(
+                        "Would you like to skip checking gpg signature?"):
                     raise InvalidSignature(uri)  # everything is all right here
         else:
             return True

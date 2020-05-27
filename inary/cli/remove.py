@@ -12,6 +12,10 @@
 # Please read the COPYING file.
 #
 
+import inary.sysconf as sysconf
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
@@ -19,10 +23,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
-import inary.sysconf as sysconf
 
 class Remove(command.PackageOp, metaclass=command.autocommand):
     __doc__ = _("""Remove INARY packages
@@ -67,7 +67,9 @@ expanded to package names.
         if components:
             for name in components:
                 if self.componentdb.has_component(name):
-                    packages.extend(self.componentdb.get_union_packages(name, walk=True))
+                    packages.extend(
+                        self.componentdb.get_union_packages(
+                            name, walk=True))
         packages.extend(self.args)
 
         remove.remove(packages)

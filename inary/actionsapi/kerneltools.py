@@ -12,24 +12,24 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+import inary.actionsapi.shelltools as shelltools
+import inary.actionsapi.inarytools as inarytools
+import inary.actionsapi.autotools as autotools
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
 import os
 import re
 import shutil
 
-#Gettext Library
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # Inary Modules
-import inary.context as ctx
 
 # ActionsAPI Modules
-import inary.actionsapi
-import inary.actionsapi.get          as get
-import inary.actionsapi.autotools    as autotools
-import inary.actionsapi.inarytools   as inarytools
-import inary.actionsapi.shelltools   as shelltools
 
 
 class ConfigureError(inary.actionsapi.Error):
@@ -91,7 +91,9 @@ def __getExtraVersion():
         # if successful, this is something like:
         # .1 for 2.6.30.1
         # _rc8 for 2.6.30_rc8
-        extraversion = re.split("5.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
+        extraversion = re.split(
+            "5.[0-9].[0-9]{2}([._].*)",
+            get.srcVERSION())[1]
     except IndexError:
         # e.g. if version == 2.6.30
         pass
@@ -124,7 +126,8 @@ def getKernelVersion(flavour=None):
         return open(kverfile).read().strip()
     else:
         # Fail
-        raise ConfigureError(_("Can't find kernel version information file \"{}\".").format(kverfile))
+        raise ConfigureError(
+            _("Can't find kernel version information file \"{}\".").format(kverfile))
 
 
 def configure():
@@ -132,7 +135,11 @@ def configure():
 
     # Set EXTRAVERSION
 
-    inarytools.dosed("Makefile", "EXTRAVERSION =.*", "EXTRAVERSION = {}".format(__getExtraVersion()))
+    inarytools.dosed(
+        "Makefile",
+        "EXTRAVERSION =.*",
+        "EXTRAVERSION = {}".format(
+            __getExtraVersion()))
     # Configure the kernel interactively if
     # configuration contains new options
     autotools.make("ARCH={} oldconfig".format(__getKernelARCH()))
@@ -140,7 +147,7 @@ def configure():
     # Check configuration with listnewconfig
     try:
         autotools.make("ARCH={} listnewconfig".format(__getKernelARCH()))
-    except:
+    except BaseException:
         pass
 
 
@@ -163,7 +170,10 @@ def build(debugSymbols=False):
         # Enable debugging symbols (-g -gdwarf2)
         extra_config.append("CONFIG_DEBUG_INFO=y")
 
-    autotools.make("ARCH={0} {1}".format(__getKernelARCH(), " ".join(extra_config)))
+    autotools.make(
+        "ARCH={0} {1}".format(
+            __getKernelARCH(),
+            " ".join(extra_config)))
 
 
 def install():
@@ -173,7 +183,10 @@ def install():
     dumpVersion()
 
     # Install kernel image
-    inarytools.insinto("/boot/", "arch/x86/boot/bzImage", "linux-{}".format(suffix))
+    inarytools.insinto(
+        "/boot/",
+        "arch/x86/boot/bzImage",
+        "linux-{}".format(suffix))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
@@ -187,8 +200,10 @@ def install():
     inarytools.remove("/lib/modules/{}-sulinos/build".format(suffix))
 
     # Install Module.symvers and System.map here too
-    shutil.copy("Module.symvers", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
-    shutil.copy("System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+    shutil.copy("Module.symvers",
+                "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+    shutil.copy(
+        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
@@ -212,7 +227,8 @@ def installHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/{}-headers-{}-sulinos".format(get.srcNAME(),suffix)
+    headersDirectoryName = "usr/src/{}-headers-{}-sulinos".format(
+        get.srcNAME(), suffix)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
@@ -220,10 +236,10 @@ def installHeaders(extraHeaders=None):
 
     # First create the skel
     find_cmd = "find . -path %s -prune -o -type f \( -name %s \) -print" % \
-                (
-                    " -prune -o -path ".join(["'./%s/*'" % l for l in pruned]),
-                    " -o -name ".join(["'%s'" % k for k in wanted])
-                ) + " | cpio -pVd --preserve-modification-time %s" % destination
+        (
+            " -prune -o -path ".join(["'./%s/*'" % l for l in pruned]),
+            " -o -name ".join(["'%s'" % k for k in wanted])
+        ) + " | cpio -pVd --preserve-modification-time %s" % destination
 
     shelltools.system(find_cmd)
 
@@ -233,7 +249,8 @@ def installHeaders(extraHeaders=None):
         if not os.path.exists("{0}/{1}".format(destination, headers)):
             shelltools.system("mkdir -p {0}/{1}".format(destination, headers))
         shelltools.system("pwd")
-        shelltools.system("cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
+        shelltools.system(
+            "cp -a {0}/*.h {1}/{2}".format(headers, destination, headers))
     # Install remaining headers
     shelltools.system("cp -a {0} {1}".format(" ".join(pruned), destination))
 
@@ -258,8 +275,10 @@ def installHeaders(extraHeaders=None):
     shutil.copy(".config", "{}/".format(destination))
 
     # Settle the correct build symlink to this headers
-    inarytools.dosym("/{}".format(headersDirectoryName), "/lib/modules/{}-sulinos/build".format(suffix))
+    inarytools.dosym("/{}".format(headersDirectoryName),
+                     "/lib/modules/{}-sulinos/build".format(suffix))
     inarytools.dosym("build", "/lib/modules/{}-sulinos/source".format(suffix))
+
 
 def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
@@ -274,7 +293,7 @@ def installLibcHeaders(excludes=None):
     shelltools.makedirs(headers_tmp)
     shelltools.makedirs(headers_dir)
 
-    ###################Workaround begins here ...
+    # Workaround begins here ...
     # Workaround information -- http://patches.openembedded.org/patch/33433/
     cpy_src = "{}/linux-*/arch/x86/include/generated".format(get.workDIR())
     cpy_tgt = "{}/arch/x86/include".format(headers_tmp)
@@ -283,7 +302,7 @@ def installLibcHeaders(excludes=None):
     copy_cmd = "cp -Rv {0} {1} ".format(cpy_src, cpy_tgt)
 
     shelltools.system(copy_cmd)
-    #######################Workaround ends here ...
+    # Workaround ends here ...
 
     # make defconfig and install the headers
     autotools.make("mrproper")

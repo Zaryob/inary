@@ -12,20 +12,18 @@
 # Please read the COPYING file.
 #
 
+import inary.cli.command as command
+import inary.util as util
+import inary.context as ctx
+import inary.db
+from inary.operations import history
 import optparse
-import os
-import sys
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from inary.operations import history
-import inary.db
-import inary.context as ctx
-import inary.util as util
-import inary.cli.command as command
 
 # Operation names for translation
 opttrans = {"upgrade": _("upgrade"), "remove": _("remove"), "emerge": _("emerge"), "install": _("install"),
@@ -75,10 +73,11 @@ Lists previous operations.""")
         for operation in self.historydb.get_last(ctx.get_option('last')):
 
             msg_oprt = util.colorize(_("Operation "), 'yellow') \
-                       + util.colorize("#{}: ".format(operation.no), "blue") \
-                       + util.colorize("{}:".format(opttrans[operation.type]), "white")
+                + util.colorize("#{}: ".format(operation.no), "blue") \
+                + util.colorize("{}:".format(opttrans[operation.type]), "white")
 
-            date_and_time = util.colorize(_("Date: "), "cyan") + "{0.date} {0.time}".format(operation)
+            date_and_time = util.colorize(
+                _("Date: "), "cyan") + "{0.date} {0.time}".format(operation)
             ordered_history.append(msg_oprt)
             ordered_history.append(date_and_time)
 
@@ -97,7 +96,7 @@ Lists previous operations.""")
         return ordered_history
 
     def redirect_output(self, order):
-    #    if os.isatty(sys.stdout.fileno()):
+        #    if os.isatty(sys.stdout.fileno()):
         class LessException(Exception):
             pass
 
@@ -121,7 +120,7 @@ Lists previous operations.""")
                 except IOError:
                     raise LessException
 
-        pipe=LessPipe()
+        pipe = LessPipe()
 
         try:
             for i in order:

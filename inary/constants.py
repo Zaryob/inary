@@ -42,13 +42,15 @@ class _constant:
 
     def __setattr__(self, name, value):
         if name in self.__dict__:
-            raise self.ConstError(_("Can't rebind constant: \'{}\'").format(name))
+            raise self.ConstError(
+                _("Can't rebind constant: \'{}\'").format(name))
         # Binding an attribute once to a const is available
         self.__dict__[name] = value
 
     def __delattr__(self, name):
         if name in self.__dict__:
-            raise self.ConstError(_("Can't unbind constant: \'{}\'").format(name))
+            raise self.ConstError(
+                _("Can't unbind constant: \'{}\'").format(name))
         # we don't have an attribute by this name
         raise NameError(name)
 
@@ -85,7 +87,8 @@ class Constants(metaclass=Singleton):
         self.__c.ar_file_suffix = ".a"
 
         # directory suffixes for build
-        self.__c.work_dir_suffix = "/work"  # these, too, because we might wanna change 'em
+        # these, too, because we might wanna change 'em
+        self.__c.work_dir_suffix = "/work"
         self.__c.install_dir_suffix = "/install"
         self.__c.debug_dir_suffix = "/debug"
         self.__c.debug_files_suffix = "/usr/lib/debug"
@@ -130,7 +133,6 @@ class Constants(metaclass=Singleton):
         self.__c.build_func = "build"
         self.__c.check_func = "check"
         self.__c.install_func = "install"
-
 
         # file types
         # FIXME: these seem redundant

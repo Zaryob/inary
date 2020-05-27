@@ -12,16 +12,15 @@
 # Please read the COPYING file.
 #
 
+import inary.db
+import inary.context as ctx
+import inary.cli.command as command
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.cli.command as command
-import inary.context as ctx
-import inary.db
 
 
 class ListNewest(command.Command, metaclass=command.autocommand):
@@ -38,7 +37,7 @@ packages from all repositories.
         super(ListNewest, self).__init__(args)
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.packagedb = inary.db.packagedb.PackageDB()
-        self.historydb=inary.db.historydb.HistoryDB()
+        self.historydb = inary.db.historydb.HistoryDB()
 
     name = ("list-newest", "ln")
 
@@ -68,14 +67,17 @@ packages from all repositories.
         if ctx.config.get_option('since'):
             since = ctx.config.get_option('since')
         elif ctx.config.get_option('last'):
-            since = self.historydb.get_last_repo_update(int(ctx.config.get_option('last')))
+            since = self.historydb.get_last_repo_update(
+                int(ctx.config.get_option('last')))
         else:
             since = None
-        l = self.packagedb.list_newest(repo, since,self.historydb)
+        l = self.packagedb.list_newest(repo, since, self.historydb)
         if not l:
             return
         if since:
-            ctx.ui.info(_("Packages added to \'{0}\' since \"{1}\":\n").format(repo, since))
+            ctx.ui.info(
+                _("Packages added to \'{0}\' since \"{1}\":\n").format(
+                    repo, since))
         else:
             ctx.ui.info(_("Packages added to \'{}\':").format(repo))
 

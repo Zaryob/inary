@@ -12,18 +12,16 @@
 # Please read the COPYING file.
 #
 
+from inary.operations import repository
+import inary.context as ctx
+import inary.cli.command as command
+import inary.db
 import optparse
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import inary.db
-import inary.cli.command as command
-import inary.context as ctx
-
-from inary.operations import repository
 
 
 class UpdateRepo(command.Command, metaclass=command.autocommand):

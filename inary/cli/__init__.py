@@ -55,7 +55,7 @@ class CLI(inary.ui.UI):
         super(CLI, self).__init__(show_debug, show_verbose)
         self.warnings = 0
         self.errors = 0
-        self.clean_line="\x1b[K"
+        self.clean_line = "\x1b[K"
 
     def close(self):
         util.xterm_title_reset()
@@ -128,7 +128,12 @@ class CLI(inary.ui.UI):
         if ctx.get_option('no_color'):
             self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
         else:
-            self.output(util.colorize(msg + '\n', 'brightyellow'), err=True, verbose=verbose)
+            self.output(
+                util.colorize(
+                    msg + '\n',
+                    'brightyellow'),
+                err=True,
+                verbose=verbose)
 
     def error(self, msg):
         msg = str(msg)
@@ -149,7 +154,6 @@ class CLI(inary.ui.UI):
 
     def choose(self, msg, opts):
         msg = str(msg)
-        endmsg = _('\n Select one:')
         prompt = ""
         for opt in opts:
             prompt += util.colorize('[  {}  ]\n'.format(opt), 'faintblue')
@@ -172,9 +176,13 @@ class CLI(inary.ui.UI):
         tty.tcflush(sys.stdin.fileno(), 0)
 
         if invert:
-            prompt = msg + util.colorize(" " + _('(yes'), 'red') + '/' + util.colorize(_('no)'), 'green') + ":  "
+            prompt = msg + util.colorize(" " + _('(yes'),
+                                         'red') + '/' + util.colorize(_('no)'),
+                                                                      'green') + ":  "
         else:
-            prompt = msg + util.colorize(" " + _('(yes'), 'green') + '/' + util.colorize(_('no)'), 'red') + ":  "
+            prompt = msg + util.colorize(" " + _('(yes'),
+                                         'green') + '/' + util.colorize(_('no)'),
+                                                                        'red') + ":  "
 
         util.noecho(False)
         s = input(prompt)
@@ -194,43 +202,48 @@ class CLI(inary.ui.UI):
             if not ctx.get_option("no_color"):
                 complated_background = 'backgroundgreen'
                 queried_background = 'backgroundyellow'
-                complated='brightgreen'
             else:
-                complated_background = queried_background = complated = "default"
+                complated_background = queried_background = "default"
 
             hr_size, hr_symbol = util.human_readable_size(ka["total_size"])
-            phr_size, phr_symbol = util.human_readable_size(ka["downloaded_size"])
+            phr_size, phr_symbol = util.human_readable_size(
+                ka["downloaded_size"])
             totalsize = '{:.1f} {}'.format(hr_size, hr_symbol)
             nowsize = '{:.1f} {}'.format(phr_size, phr_symbol)
 
-            file_and_totalsize = '[{:.40} {}/{}]'.format(ka['basename'],nowsize,totalsize)
-            percentage_and_time = '{:.2f} {}'.format(ka['rate'],ka['symbol'])
+            file_and_totalsize = '[{:.40} {}/{}]'.format(
+                ka['basename'], nowsize, totalsize)
+            percentage_and_time = '{:.2f} {}'.format(ka['rate'], ka['symbol'])
 
             term_rows, term_columns = util.get_terminal_size()
-            spacenum = (term_columns - ( len(file_and_totalsize) + len(percentage_and_time) ) )
+            spacenum = (term_columns -
+                        (len(file_and_totalsize) +
+                         len(percentage_and_time)))
             spacenum = spacenum - 10
             if spacenum < 1:
                 spacenum = 0
 
             msg = file_and_totalsize + ' ' * spacenum + percentage_and_time
 
-            if len(msg) < 1:
-                self.output(out)
-
-            lmsg = int( ( len(msg) * ka["percent"] ) / 100 ) + 1
+            lmsg = int((len(msg) * ka["percent"]) / 100) + 1
             # \r\x1b[2K erase current line
             if ka["percent"] < 100:
-                self.output("\r\x1b[2K" + ctx.const.colors[complated_background] + "{:6.2f}% ".format(ka['percent']) + \
-                            msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] + \
+                self.output("\r\x1b[2K" + ctx.const.colors[complated_background] + "{:6.2f}% ".format(ka['percent']) +
+                            msg[:lmsg] + ctx.const.colors[queried_background] + msg[lmsg:] +
                             ctx.const.colors['default'])
             else:
-                self.output("\r\x1b[2K\x1b[A") #@@@
-            util.xterm_title("{} ( {:.2f} % )".format(ka['filename'], ka['percent']))
+                self.output("\r\x1b[2K\x1b[A")  # @@@
+            util.xterm_title(
+                "{} ( {:.2f} % )".format(
+                    ka['filename'],
+                    ka['percent']))
 
         else:
             self.output("\r{} ( {:.2f} % )".format(ka['info'], ka['percent']))
 
-            util.xterm_title("{} ( {:.2f} % )".format(ka['info'], ka['percent']))
+            util.xterm_title(
+                "{} ( {:.2f} % )".format(
+                    ka['info'], ka['percent']))
 
     def status(self, msg=None, push_screen=True):
         if msg:
@@ -240,13 +253,14 @@ class CLI(inary.ui.UI):
             util.xterm_title(msg)
 
     def notify(self, event, logging=True, **keywords):
-        is_debug=False
-        notify=True
+        is_debug = False
+        notify = True
         if event == inary.ui.installed:
             msg = _('Installed \"{}\"').format(keywords['package'].name)
             color = 'brightgreen'
         elif event == inary.ui.installing:
-            msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(keywords['package'])
+            msg = _('Installing \"{0.name}\", version {0.version}, release {0.release}').format(
+                keywords['package'])
             color = 'faintblue'
         elif event == inary.ui.removed:
             msg = _('Removed \"{}\"').format(keywords['package'].name)
@@ -264,38 +278,46 @@ class CLI(inary.ui.UI):
             msg = _('Configuring \"{}\"').format(keywords['package'].name)
             color = 'faintyellow'
         elif event == inary.ui.extracting:
-            msg = _('Extracting the files of \"{}\"').format(keywords['package'].name)
+            msg = _('Extracting the files of \"{}\"').format(
+                keywords['package'].name)
             color = 'faintgreen'
         elif event == inary.ui.updatingrepo:
-            msg = _('Updating package repository: \"{}\"').format(keywords['name'])
+            msg = _('Updating package repository: \"{}\"').format(
+                keywords['name'])
             color = 'green'
         elif event == inary.ui.cached:
-            total_size, total_symbol = util.human_readable_size(keywords['total'])
-            cached_size, cached_symbol = util.human_readable_size(keywords['cached'])
+            total_size, total_symbol = util.human_readable_size(
+                keywords['total'])
+            cached_size, cached_symbol = util.human_readable_size(
+                keywords['cached'])
             msg = _('Total size of package(s): {:.2f} {} / {:.2f} {}').format(cached_size,
                                                                               cached_symbol,
                                                                               total_size,
                                                                               total_symbol)
             color = 'cyan'
-            notify=False
+            notify = False
         elif event == inary.ui.packagestogo:
             if ctx.log:
-                ctx.log.info(_("Following packages ordered for process: {}").format(keywords['order']))
+                ctx.log.info(
+                    _("Following packages ordered for process: {}").format(
+                        keywords['order']))
             msg = None
-            notify=False
+            notify = False
         elif event == inary.ui.desktopfile:
             if ctx.log:
-                ctx.log.info(_("Extracted desktop file \"{}\"").format(keywords['desktopfile']))
+                ctx.log.info(
+                    _("Extracted desktop file \"{}\"").format(
+                        keywords['desktopfile']))
             msg = None
 
         elif event == inary.ui.fetched:
             if self.show_verbose:
-                msg=""
+                msg = ""
             else:
-                msg="\x1b[K"
-            msg+=_("Downloaded \"{}\"".format(keywords['name']))
-            color="green"
-            is_debug=True
+                msg = "\x1b[K"
+            msg += _("Downloaded \"{}\"".format(keywords['name']))
+            color = "green"
+            is_debug = True
 
         else:
             msg = None

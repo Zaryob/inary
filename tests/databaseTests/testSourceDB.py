@@ -15,16 +15,15 @@ import unittest
 from . import testcase
 import inary
 
+
 class SourceDBTestCase(testcase.TestCase):
 
     def setUp(self):
         testcase.TestCase.setUp(self)
         self.sourcedb = inary.db.sourcedb.SourceDB()
 
-
     def testListSources(self):
         self.skipTest(reason="")
-
 
     def testHasSpec(self):
         assert self.sourcedb.has_spec("openssl")
