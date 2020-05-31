@@ -617,6 +617,12 @@ class Builder:
         ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
+        install_dir = self.pkg_install_dir()
+
+        if os.path.exists(install_dir):
+            util.rmdirs(install_dir)
+            util.makedirs(install_dir)
+            ctx.ui.verbose(_("[!] InstallDir {} cleant up.".format(install_dir)))
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
