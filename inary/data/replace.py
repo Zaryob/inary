@@ -12,7 +12,10 @@
 # Please read the COPYING file.
 #
 
+# Inary Modules
 import inary.data.relation as relation
+
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

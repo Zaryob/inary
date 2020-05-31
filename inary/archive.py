@@ -14,27 +14,26 @@
 
 """Archive module provides access to regular archive file types."""
 
-import inary.fetcher
+# INARY modules
 import inary.uri
-import inary.context as ctx
-import inary.util as util
 import inary.errors
-import errno
-import lzma
-# standard library modules
+import inary.fetcher
+import inary.util as util
+import inary.context as ctx
+
+# Standard Python Modules
 import os
-import shutil
+import lzma
 import stat
+import errno
+import shutil
 import tarfile
 import zipfile
 
 # Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# INARY modules
 
 
 class SourceArchiveError(inary.errors.Error):

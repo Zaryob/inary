@@ -15,10 +15,11 @@
 """dependency analyzer"""
 
 import inary.sxml.autoxml as autoxml
-from inary.db.packagedb import PackageDB
 import inary.data.relation as relation
-import gettext
+from inary.db.packagedb import PackageDB
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

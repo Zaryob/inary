@@ -15,16 +15,22 @@
 # Please read the COPYING file.
 #
 
-import inary.util as util
-import inary.uri
-import inary.sxml.xmlext as xmlext
-from inary.file import File
-import inary.errors
-import inary.db.lazydb as lazydb
-import inary.context as ctx
+# Standart Python Modules
 import os
-import gettext
 
+# Inary Modules
+import inary.uri
+import inary.errors
+import inary.util as util
+import inary.context as ctx
+from inary.file import File
+import inary.db.lazydb as lazydb
+
+# AutoXML Library
+import inary.sxml.xmlext as xmlext
+
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

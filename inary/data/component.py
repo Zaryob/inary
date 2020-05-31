@@ -12,6 +12,7 @@
 # Please read the COPYING file.
 #
 
+# AutoXML Library
 import inary.sxml.autoxml as autoxml
 import inary.sxml.xmlfile as xmlfile
 

@@ -12,24 +12,24 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+import os
+
+# Inary Modules
+from inary.util import join_path
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import unlink
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
-import inary.actionsapi.get as get
-import inary.actionsapi
-from inary.util import join_path
-import inary.context as ctx
-import os
+
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
-
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):

@@ -21,19 +21,21 @@
  an old library.
 """
 
+# Standart Python Libraries
+import io
+import re
+import sys
+import locale
+import inspect
+import formatter
+
+# Standart Python Libraries
+import inary.errors
 import inary.oo as oo
 import inary.util as util
 import inary.context as ctx
 import inary.sxml.xmlfile as xmlfile
 import inary.sxml.xmlext as xmlext
-import inary.errors
-import formatter
-import inspect
-import io
-# System
-import locale
-import re
-import sys
 
 # Gettext Library
 import gettext

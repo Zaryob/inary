@@ -13,15 +13,13 @@
 
 """Atomic package operations such as install/remove/upgrade"""
 
-import gettext
-
-
+# Standard Python Modules
 import os
 import shutil
 import zipfile
 
+# INARY modules
 import inary
-
 import inary.configfile
 import inary.context as ctx
 import inary.data
@@ -37,6 +35,8 @@ import inary.util as util
 import inary.version
 import inary.trigger
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

@@ -12,19 +12,21 @@
 # Please read the COPYING file.
 #
 
-# python standard library modules
-from base64 import encodebytes
-import inary.uri
-import inary.context as ctx
-import inary.util as util
-import inary.mirrors
-import inary.errors
-import inary.db
-import inary
+# Standard Python Modules
 import os
+import time
 import random
 import shutil
-import time
+from base64 import encodebytes
+
+# INARY Modules
+import inary
+import inary.db
+import inary.uri
+import inary.errors
+import inary.mirrors
+import inary.util as util
+import inary.context as ctx
 
 # Gettext Library
 import gettext

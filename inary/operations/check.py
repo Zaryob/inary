@@ -11,11 +11,13 @@
 #
 # Please read the COPYING file.
 
+# Standart Python Libraries
 import os
 
-import inary.context as ctx
+# Inary Modules
 import inary.db
 import inary.util
+import inary.context as ctx
 
 # Gettext Library
 import gettext

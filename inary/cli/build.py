@@ -12,9 +12,12 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
+import optparse
+
+# Inary Modules
 import inary.context as ctx
 import inary.cli.command as command
-import optparse
 
 # Gettext Library
 import gettext

@@ -23,14 +23,21 @@
 
 """
 
-from inary.file import File
-import inary.config
-import inary.errors
+# Standart System Library
+import io
+
+# MiniDOM Library 
+# in order to lack possibilty of Ciksemel
 from xml.parsers.expat import ExpatError
 import xml.dom.minidom as minidom
-import io
-import gettext
 
+# Inary Modules
+import inary.config
+import inary.errors
+from inary.file import File
+
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

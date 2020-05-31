@@ -12,16 +12,20 @@
 # Please read the COPYING file.
 #
 
-import datetime
-import gzip
+# Standart Python Modules
 import re
 import time
+import gzip
+import datetime
 
-import inary.analyzer.dependency
-import inary.data.metadata
+# Inary Modules
 import inary.db
+import inary.data.metadata
 import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
+import inary.analyzer.dependency
+
+# AutoXML Library
 from inary.sxml import xmlext
 
 # Gettext Library

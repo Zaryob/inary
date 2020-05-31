@@ -12,12 +12,15 @@
 # Please read the COPYING file.
 #
 
-from inary.sxml import autoxml, xmlext
-import inary.db.lazydb as lazydb
-import inary.data.component as Component
-import inary.db.itembyrepo
-import inary.db.repodb
+# Standart Python Modules
 import re
+
+# Inary Modules
+import inary.db.repodb
+import inary.db.itembyrepo
+import inary.db.lazydb as lazydb
+from inary.sxml import autoxml, xmlext
+import inary.data.component as Component
 
 # Gettext Library
 import gettext

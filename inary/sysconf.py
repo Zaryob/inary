@@ -14,8 +14,11 @@
 #   Suleyman Poyraz (Zaryob)
 #
 
+# Standard Python Modules
 import os
 import sys
+
+# INARY Modules
 import inary.context as ctx
 
 # Gettext Library

@@ -15,12 +15,16 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
+import optparse
+
+# Inary Modules
 import inary.db
 import inary.context as ctx
 import inary.cli.command as command
-import gettext
-import optparse
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

@@ -12,9 +12,11 @@
 # Developed by:
 #   Ali Rıza Keskin (sulincix)
 #   Suleyman Poyraz (Zaryob)
-#
+
+# Standard Python Modules
 import os
 
+# INARY Modules
 import inary.context as ctx
 import inary.util as util
 

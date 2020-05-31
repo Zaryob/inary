@@ -14,9 +14,10 @@
 
 """INARY package relation graph that represents the state of packagedb"""
 
-import inary.context as ctx
+# Inary Modules
 import inary.db
 import inary.errors
+import inary.context as ctx
 import inary.operations.helper as op_helper
 
 # Gettext Library

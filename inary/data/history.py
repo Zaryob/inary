@@ -12,11 +12,16 @@
 # Please read the COPYING file.
 #
 
-import inary.context as ctx
-import inary.sxml.xmlfile as xmlfile
-import inary.sxml.autoxml as autoxml
+# Standart Python Modules
 import os
 import time
+
+# Inary Modules
+import inary.context as ctx
+
+# AutoXML Library
+import inary.sxml.xmlfile as xmlfile
+import inary.sxml.autoxml as autoxml
 
 # Gettext Library
 import gettext

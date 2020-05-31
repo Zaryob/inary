@@ -12,6 +12,7 @@
 # Please read the COPYING file.
 #
 
+# Standard Python Modules
 import signal
 
 exception = {

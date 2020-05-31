@@ -19,10 +19,15 @@ installation. Package repository also uses metadata.xml for building
 a package index.
 """
 
+# Inary Modules
 import inary.util as util
+import inary.data.specfile as specfile
+
+# AutoXML Library
 import inary.sxml.autoxml as autoxml
 import inary.sxml.xmlfile as xmlfile
-import inary.data.specfile as specfile
+
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

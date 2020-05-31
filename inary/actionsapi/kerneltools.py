@@ -12,24 +12,25 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
-import inary.actionsapi.shelltools as shelltools
-import inary.actionsapi.inarytools as inarytools
-import inary.actionsapi.autotools as autotools
-import inary.actionsapi.get as get
-import inary.actionsapi
-import inary.context as ctx
 import os
 import re
 import shutil
+
+# Inary Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.get as get
+import inary.actionsapi.autotools as autotools
+import inary.actionsapi.shelltools as shelltools
+import inary.actionsapi.inarytools as inarytools
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Inary Modules
-
-# ActionsAPI Modules
 
 
 class ConfigureError(inary.actionsapi.Error):

@@ -11,23 +11,25 @@
 #
 # Please read the COPYING file.
 
-import inary.actionsapi.variables
-import inary.context as ctx
-import inary.actionsapi
+
+# Multiprocessing
 import multiprocessing
+
 # Standart Python Modules
 import os
 import sys
+
+# INARY Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.variables
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# INARY Modules
-
-# ActionsAPI Modules
-
 
 class BinutilsError(inary.actionsapi.Error):
     def __init__(self, value=''):

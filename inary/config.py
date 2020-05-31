@@ -17,13 +17,16 @@ INARY Configuration module is used for gathering and providing
 regular INARY configurations.
 """
 
+# Standard Python Modules
+import os
+import copy
+from pathlib import Path
+
+# INARY Modules
 import inary.util as util
 import inary.errors
 import inary.configfile
 import inary.context as ctx
-import copy
-import os
-from pathlib import Path
 
 # Gettext Library
 import gettext

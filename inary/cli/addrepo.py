@@ -12,12 +12,15 @@
 # Please read the COPYING file.
 #
 
-import inary.operations.repository as repository
-import inary.errors
+# Standard Python Modules
+import optparse
+
+# Inary Modules
 import inary.db
+import inary.errors
 import inary.context as ctx
 import inary.cli.command as command
-import optparse
+import inary.operations.repository as repository
 
 # Gettext Library
 import gettext

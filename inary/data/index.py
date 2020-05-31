@@ -14,22 +14,27 @@
 
 """INARY source/package index"""
 
-import inary.operations.build
-import inary.data.group as group
-import inary.data.component as component
-import inary.sxml.autoxml as autoxml
-import inary.file
-import inary.sxml.xmlfile as xmlfile
-import inary.package
-import inary.util as util
-import inary.errors
-import inary.data.metadata as metadata
-import inary.data.specfile as specfile
-import inary.context as ctx
-import multiprocessing
+# Standart Python Modules
 import os
 import re
 import shutil
+import multiprocessing
+
+# Inary Modules
+import inary.file
+import inary.errors
+import inary.package
+import inary.util as util
+import inary.context as ctx
+import inary.operations.build
+import inary.data.group as group
+import inary.data.metadata as metadata
+import inary.data.specfile as specfile
+import inary.data.component as component
+
+# AutoXML Library
+import inary.sxml.autoxml as autoxml
+import inary.sxml.xmlfile as xmlfile
 
 # Gettext Library
 import gettext

@@ -11,22 +11,23 @@
 #
 # Please read the COPYING file.
 
+# Standart Python Modules
+import glob
+
+# Inary Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
 from inary.actionsapi import shelltools
 from inary.actionsapi import cmaketools
 from inary.actionsapi import get
-import inary.actionsapi
-import inary.context as ctx
-import gettext
-import glob
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Inary Modules
-
-# ActionsAPI Modules
-
-# ActionsAPI Modules
 
 basename = "qt5"
 

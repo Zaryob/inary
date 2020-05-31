@@ -12,14 +12,17 @@
 # Please read the COPYING file.
 #
 
-import inary.data
+# Standart Python Libraries
+import sys
+
+# Inary Modules
 import inary.db
+import inary.data
 import inary.ui as ui
-import inary.atomicoperations as atomicoperations
 import inary.util as util
 import inary.context as ctx
 import inary.operations as operations
-import sys
+import inary.atomicoperations as atomicoperations
 
 # Gettext Library
 import gettext

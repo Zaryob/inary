@@ -16,8 +16,8 @@
 If you have a "magic" constant value this is where it should be
 defined."""
 
+# Gettext Library
 import gettext
-
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

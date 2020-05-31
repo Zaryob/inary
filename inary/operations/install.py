@@ -12,18 +12,21 @@
 # Please read the COPYING file.
 #
 
-import inary.db
-import inary.ui as ui
-import inary.data.pgraph as pgraph
-import inary.operations as operations
-import inary.atomicoperations as atomicoperations
-import inary.util as util
-import inary.context as ctx
-import inary.package
+# Standart Python Libraries
 import os
 import sys
 import math
 import zipfile
+
+# Inary Modules
+import inary.db
+import inary.package
+import inary.ui as ui
+import inary.util as util
+import inary.context as ctx
+import inary.data.pgraph as pgraph
+import inary.operations as operations
+import inary.atomicoperations as atomicoperations
 
 # Gettext Library
 import gettext

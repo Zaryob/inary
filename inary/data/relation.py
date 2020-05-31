@@ -12,10 +12,12 @@
 # Please read the COPYING file.
 #
 
+# Inary Modules
 import inary.db
-import inary.sxml.autoxml as autoxml
 import inary.version
 
+# AutoXML Library
+import inary.sxml.autoxml as autoxml
 
 class Relation(metaclass=autoxml.autoxml):
     s_Package = [autoxml.String, autoxml.mandatory]

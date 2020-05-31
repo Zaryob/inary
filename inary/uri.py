@@ -15,6 +15,7 @@
 """Simplifies working with URLs, purl module provides common URL
 parsing and processing"""
 
+# Standard Python Modules
 import os.path
 import urllib.parse
 

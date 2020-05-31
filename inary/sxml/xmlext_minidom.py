@@ -24,11 +24,16 @@
  this implementation uses minidom
 """
 
+# MiniDOM Library 
+# in order to lack possibility of Ciksemel
 from xml.parsers.expat import ExpatError
 import xml.dom.minidom as minidom
-import inary
-import gettext
 
+# Inary Modules
+import inary.errors
+
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

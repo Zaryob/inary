@@ -12,13 +12,17 @@
 # Please read the COPYING file.
 #
 
-import gzip
+# Standart Python Modules
 import re
+import gzip
 
+# Inary Modules
 import inary.analyzer
 import inary.data.specfile as Specfile
 import inary.db
 import inary.db.lazydb as lazydb
+
+# AutoXML Library
 from inary.sxml import autoxml, xmlext
 
 # Gettext Library

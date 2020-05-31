@@ -12,15 +12,17 @@
 # Please read the COPYING file.
 #
 
-import locale
+# Standard Python Modules
 import re
 import sys
 import tty
+import locale
 
-import inary.context as ctx
-import inary.errors
+# Inary Modules
 import inary.ui
+import inary.errors
 import inary.util as util
+import inary.context as ctx
 
 # Gettext Library
 import gettext

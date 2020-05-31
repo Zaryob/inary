@@ -11,23 +11,24 @@
 #
 # Please read the COPYING file.
 
+
+# Standard Python Modules
+import os
+import glob
+
+# Inary Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.get as get
 from inary.actionsapi.inarytools import dodoc
 from inary.actionsapi.shelltools import system, can_access_file, unlink, isEmpty
-import inary.actionsapi.get as get
-import inary.actionsapi
-import inary.context as ctx
-import glob
-# standard python modules
-import os
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
 
 
 class ConfigureError(inary.actionsapi.Error):

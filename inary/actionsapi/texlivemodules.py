@@ -11,22 +11,23 @@
 #
 # Please read the COPYING file.
 
+# ActionsAPI Modules
+import inary.actionsapi
 from inary.actionsapi.inarytools import dodir, domove, dosym, insinto
 from inary.actionsapi.shelltools import *
 import inary.actionsapi.get as get
-import inary.actionsapi
-import gettext
-# standard python modules
+
+# Standard Python Modules
 import os
 import shlex
 import shutil
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Inary Modules
 
-# ActionsAPI Modules
 
 WorkDir = "{0}-{1}".format(get.srcNAME(), get.srcVERSION().split('_')[-1])
 

@@ -11,24 +11,24 @@
 #
 # Please read the COPYING file.
 
-# standard python modules
+# Standard Python Modules
+import os
+from glob import glob
+
+# Inary Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import system
 from inary.actionsapi.shelltools import isEmpty
 from inary.actionsapi.shelltools import export
-import inary.actionsapi.get as get
-import inary.actionsapi
-import inary.context as ctx
-import os
-from gettext import translation
-from glob import glob
 
-__trans = translation('inary', fallback=True)
+# Gettext Library
+import gettext
+__trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
-
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):

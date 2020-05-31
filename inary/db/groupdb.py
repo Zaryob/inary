@@ -12,13 +12,17 @@
 # Please read the COPYING file.
 #
 
-from inary.sxml import xmlext
+# Inary Modules
+import inary.db.repodb
+import inary.db.itembyrepo
 import inary.db.lazydb as lazydb
 import inary.data.group as Group
-import inary.db.itembyrepo
-import inary.db.repodb
-import gettext
 
+# AutoXML Library
+from inary.sxml import xmlext
+
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

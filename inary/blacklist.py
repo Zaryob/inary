@@ -12,9 +12,11 @@
 # Please read the COPYING file.
 #
 
-import fnmatch
+# Standard Python Modules
 import os
+import fnmatch
 
+# INARY modules
 import inary.db
 
 

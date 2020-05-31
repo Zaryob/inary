@@ -11,8 +11,10 @@
 #
 # Please read the COPYING file.
 
+# Standard Python Modules
 import os.path
 
+# INARY Modules
 import inary.context as ctx
 import inary.errors
 

@@ -11,25 +11,25 @@
 #
 # Please read the COPYING file.
 
-# Standard python modules
-from inary.actionsapi.shelltools import unlinkDir
+# Standard Python Modules
+import os
+
+# Inary Modules
+import inary.context as ctx
+
+# ActionsAPI Modules
+import inary.actionsapi
+import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import unlink
 from inary.actionsapi.shelltools import export
-from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
-import inary.actionsapi.get as get
-import inary.actionsapi
-import inary.context as ctx
-import os
+from inary.actionsapi.shelltools import unlinkDir
+from inary.actionsapi.shelltools import can_access_file
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
 
 
 class ConfigureError(inary.actionsapi.Error):

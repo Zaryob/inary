@@ -50,11 +50,14 @@
 # kde5_dir =
 # qt5_dir =
 
-import inary.errors
-import configparser
+# Standard Python Modules
 import io
 import os
 import re
+import configparser
+
+# INARY Modules
+import inary.errors
 
 # Gettext Library
 import gettext

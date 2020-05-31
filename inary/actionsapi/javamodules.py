@@ -12,23 +12,24 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
-from inary.actionsapi.shelltools import system, export
-from inary.actionsapi import get
-import inary.actionsapi
-import inary.context as ctx
-import inary.util as util
 import os
 from glob import glob
 from shutil import copy, copytree
+
+# Inary Modules
+import inary.context as ctx
+import inary.util as util
+
+# ActionsAPI Modules
+import inary.actionsapi
+from inary.actionsapi.shelltools import system, export
+from inary.actionsapi import get
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Inary Modules
-
-# ActionsAPI Modules
 
 # java -Xmx256M -jar x.jar --key=val
 EXEC_TEMPLATE = """\

@@ -13,6 +13,8 @@
 
 # Standart Python Modules
 import inary.actionsapi
+
+# INARY Modules
 import inary.context as ctx
 import subprocess
 
@@ -20,8 +22,6 @@ import subprocess
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# INARY Modules
 
 
 class PkgconfigError(inary.actionsapi.Error):

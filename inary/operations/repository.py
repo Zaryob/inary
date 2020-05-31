@@ -12,16 +12,18 @@
 # Please read the COPYING file.
 #
 
-import inary.util as util
-import inary.uri
+# Inary Modules
+import inary.db
 import inary.ui
+import inary.uri
+import inary.data
 import inary.file
 import inary.errors
-import inary.data
-import inary.db
+import inary.util as util
 import inary.context as ctx
-import gettext
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

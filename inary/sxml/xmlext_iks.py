@@ -24,10 +24,13 @@
  this implementation uses iksemel
 """
 
+# Ciksemel Library 
 import ciksemel as iks
-import inary.errors
-import gettext
 
+# Inary Modules
+import inary.errors
+
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

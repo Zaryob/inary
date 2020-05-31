@@ -12,12 +12,15 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Libraries
+import os
+
+# Inary Modules
 import inary.db
-import inary.analyzer.conflict
 import inary.ui as ui
 import inary.util as util
 import inary.context as ctx
-import os
+import inary.analyzer.conflict
 
 # Gettext Library
 import gettext

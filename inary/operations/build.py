@@ -13,31 +13,33 @@
 
 """package building code"""
 
-import inary.process as process
-import inary.db
-import inary.actionsapi.variables
-import inary.data.component as Component
-import inary.package
-import inary.data.metadata as Metadata
-import inary.uri
-import inary.fetcher
-import inary.data.files as Files
-import inary.archive
-import inary.api
-import inary.analyzer.dependency as dependency
-import inary.context as ctx
-import inary.file
-import inary.util as util
-import inary.data.specfile as Specfile
-import inary.errors
-import fnmatch
-import glob
-import grp
-# python standard library
+# Standart Python Modules
 import os
-import pwd
 import re
+import grp
+import pwd
+import glob
 import stat
+import fnmatch
+
+# Inary Modules
+import inary.api
+import inary.db
+import inary.uri
+import inary.file
+import inary.errors
+import inary.archive
+import inary.fetcher
+import inary.package
+import inary.util as util
+import inary.context as ctx
+import inary.process as process
+import inary.data.files as Files
+import inary.actionsapi.variables
+import inary.data.metadata as Metadata
+import inary.data.specfile as Specfile
+import inary.data.component as Component
+import inary.analyzer.dependency as dependency
 
 # Gettext Library
 import gettext

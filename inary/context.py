@@ -16,6 +16,7 @@
 
 import signal
 
+# INARY Modules
 import inary.constants
 import inary.signalhandler
 import inary.ui

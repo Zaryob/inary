@@ -14,24 +14,25 @@
 
 """misc. utility functions, including process and file utils"""
 
-# standard python modules
-
-import inary.context as ctx
-import inary.errors
-import inary
-import fcntl
-import fnmatch
-import hashlib
-import operator
+# Standard Python Modules
 import os
-import platform
 import re
+import sys
+import fcntl
 import shutil
 import struct
-import sys
+import fnmatch
+import hashlib
 import termios
+import operator
+import platform
 import unicodedata
 from functools import reduce
+
+# Inary Modules
+import inary
+import inary.errors
+import inary.context as ctx
 
 # Gettext Library
 import gettext

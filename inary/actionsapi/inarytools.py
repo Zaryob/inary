@@ -14,11 +14,6 @@
 """supports globs in sourceFile arguments"""
 
 # Standart Python Modules
-from inary.actionsapi import error
-from inary.actionsapi.shelltools import *
-import inary.actionsapi.get as get
-import inary.actionsapi
-from inary.util import remove_prefix, uncompress
 import filecmp
 import fileinput
 import glob
@@ -26,14 +21,19 @@ import os
 import re
 import sys
 
+# Inary Modules
+from inary.util import remove_prefix, uncompress
+
+# ActionsAPI Modules
+import inary.actionsapi
+from inary.actionsapi import error
+from inary.actionsapi.shelltools import *
+import inary.actionsapi.get as get
+
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
 
 
 # Error Classes

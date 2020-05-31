@@ -12,8 +12,12 @@
 # Please read the COPYING file.
 #
 
-import inary.db
+# Standart Python Modules
 import gzip
+
+# Inary Modules
+import inary.db
+
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)

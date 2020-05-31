@@ -9,8 +9,9 @@
 #
 # Please read the COPYING file.
 
-import multiprocessing
+# Standard Python Modules
 import traceback
+import multiprocessing
 
 
 class Process(multiprocessing.Process):

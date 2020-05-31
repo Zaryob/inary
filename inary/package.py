@@ -14,18 +14,22 @@
 
 """package abstraction methods to add/remove files, extract control files"""
 
-# Gettext Library
+# Standard Python Modules
 import os.path
-from . import fetcher
-import inary.util as util
-import inary.data.files
-import inary.file
-import inary.data.metadata
+
+# INARY Modules
 import inary.ui
 import inary.uri
-import inary.archive as archive
-import inary.context as ctx
+import inary.file
 import inary.errors
+from . import fetcher
+import inary.data.files
+import inary.util as util
+import inary.data.metadata
+import inary.context as ctx
+import inary.archive as archive
+
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext

@@ -12,6 +12,14 @@
 # Please read the COPYING file.
 
 # Standard Python Modules
+import os
+
+# Inary Modules
+import inary.actionsapi.get as get
+import inary.actionsapi
+import inary.context as ctx
+
+# ActionsAPI Modules
 from inary.actionsapi.inarytools import removeDir
 from inary.actionsapi.inarytools import dosed
 from inary.actionsapi.shelltools import ls
@@ -20,20 +28,12 @@ from inary.actionsapi.libtools import gnuconfig_update
 from inary.actionsapi.shelltools import unlink
 from inary.actionsapi.shelltools import can_access_file
 from inary.actionsapi.shelltools import system
-import inary.actionsapi.get as get
-import inary.actionsapi
-import inary.context as ctx
-import os
+
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Inary Modules
-
-# ActionsAPI Modules
-
 
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):

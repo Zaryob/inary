@@ -15,15 +15,21 @@
 # installation database
 #
 
-import inary.util
-from inary.sxml import autoxml, xmlext
-import inary.db.lazydb as lazydb
-import inary.data.files as Files
-import inary.data
-import inary.context as ctx
-import inary.analyzer.dependency
+
+# Standart Python Modules
 import os
 import re
+
+# Inary Modules
+import inary.data
+import inary.util
+import inary.context as ctx
+import inary.db.lazydb as lazydb
+import inary.data.files as Files
+import inary.analyzer.dependency
+
+# AutoXML Library
+from inary.sxml import xmlext, autoxml
 
 # Gettext Library
 import gettext

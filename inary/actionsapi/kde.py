@@ -11,9 +11,9 @@
 #
 # Please read the COPYING file.
 
-from inary.actionsapi import cmaketools
 # ActionsAPI Modules
 from inary.actionsapi import get
+from inary.actionsapi import cmaketools
 from inary.actionsapi import shelltools
 
 basename = "kde5"

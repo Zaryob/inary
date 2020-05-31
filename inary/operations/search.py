@@ -12,8 +12,9 @@
 # Please read the COPYING file.
 #
 
-import inary.context as ctx
+# Inary Modules
 import inary.db
+import inary.context as ctx
 
 
 def search_package(terms, lang=None, repo=None):

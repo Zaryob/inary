@@ -11,14 +11,17 @@
 #
 # Please read the COPYING file.
 
-import inary.operations as operations
-import inary.fetcher
-import inary.db
-import inary.util as util
-import inary.context as ctx
-import inary.errors
+# Standart Python Libraries
 import os
 import math
+
+# Inary Modules
+import inary.db
+import inary.errors
+import inary.fetcher
+import inary.util as util
+import inary.context as ctx
+import inary.operations as operations
 
 # Gettext Library
 import gettext

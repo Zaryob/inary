@@ -12,10 +12,12 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
 import os
-import pickle
 import time
+import pickle
 
+# Inary Modules
 import inary.context as ctx
 import inary.util as util
 

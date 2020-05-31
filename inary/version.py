@@ -14,9 +14,11 @@
 
 """version structure"""
 
+# Inary Modules
 import inary.errors
-import gettext
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

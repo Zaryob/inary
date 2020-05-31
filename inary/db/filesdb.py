@@ -10,15 +10,17 @@
 # Please read the COPYING file.
 #
 
-import hashlib
+# Standart Python Modules
 import os
 import re
 import shelve
+import hashlib
 
-import inary.context as ctx
+# Inary Modules
 import inary.db
-import inary.db.lazydb as lazydb
 import inary.util
+import inary.context as ctx
+import inary.db.lazydb as lazydb
 
 # Gettext Library
 import gettext

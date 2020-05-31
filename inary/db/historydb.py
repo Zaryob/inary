@@ -12,12 +12,14 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
 import os
 
-import inary.context as ctx
-import inary.data.history as History
-import inary.db.lazydb as lazydb
+# Inary Modules
 import inary.util
+import inary.context as ctx
+import inary.db.lazydb as lazydb
+import inary.data.history as History
 
 
 class HistoryDB(lazydb.LazyDB):

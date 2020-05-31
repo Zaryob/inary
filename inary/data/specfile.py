@@ -18,6 +18,10 @@
  provides read and write routines for PSPEC files.
 """
 
+# Standart Python Modules
+import os.path
+
+# Inary Modules
 import inary.db
 import inary.errors
 import inary.util as util
@@ -27,17 +31,16 @@ import inary.analyzer.conflict
 import inary.data.replace
 import inary.analyzer.dependency
 import inary.context as ctx
+
+# AutoXML Library
 import inary.sxml.autoxml as autoxml
 import inary.sxml.xmlext as xmlext
 import inary.sxml.xmlfile as xmlfile
-import os.path
+
+# Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# standard python modules
-
-# inary modules
 
 
 class Error(inary.errors.Error):

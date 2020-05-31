@@ -19,14 +19,17 @@ we are just encapsulating a common pattern in our program, nothing big.
 like all inary classes, it has been programmed in a non-restrictive way
 """
 
-import inary.util
+# Standard Python Modules
+import os
+import lzma
+import shutil
+
+# INARY Modules
 import inary.uri
+import inary.util
 import inary.fetcher
 import inary.errors
 import inary.context as ctx
-import lzma
-import os
-import shutil
 
 # Gettext Library
 import gettext

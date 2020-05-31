@@ -12,12 +12,16 @@
 # Please read the COPYING file.
 #
 
+# Standart Python Modules
+import os
+
+# Inary Modules
 import inary.cli.command as command
 import inary.context as ctx
 import inary.util as util
-import os
-import gettext
 
+# Gettext Library
+import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

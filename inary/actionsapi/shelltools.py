@@ -11,27 +11,28 @@
 #
 # Please read the COPYING file.
 
+# Inary Modules
+import inary.context as ctx
 from inary.util import colorize
 from inary.util import join_path
 from inary.util import run_logged
-from inary.actionsapi import error
-import inary.context as ctx
-import glob
-import grp
+
+# ActionsAPI Modules
+inary.actionsapi import error
+
 # Standart Python Modules
 import os
+import grp
 import pwd
-import shutil
 import sys
+import glob
+import shutil
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Inary Modules
-
-# ActionsAPI Modules
 
 
 def can_access_file(filePath):

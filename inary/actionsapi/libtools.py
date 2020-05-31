@@ -11,10 +11,13 @@
 #
 # Please read the COPYING file.
 
+# Standart Python Modules
+import os
+
+# ActionsAPI Modules
 import inary.actionsapi.get as get
 from inary.actionsapi.shelltools import *
 import inary.actionsapi
-import os
 
 # Gettext Library
 import gettext
@@ -22,9 +25,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-# Inary-Core Modules
 
-# ActionsAPI Modules
+
 
 
 class RunTimeError(inary.actionsapi.Error):
