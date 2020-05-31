@@ -621,7 +621,7 @@ class Builder:
         if os.path.exists(install_dir):
             util.rmdirs(install_dir)
             util.makedirs(install_dir)
-            ctx.ui.verbose(_("[!] InstallDir {} cleant up.".format(install_dir)))
+            ctx.ui.info(_("[!] InstallDir {} cleant up.".format(install_dir)),verbose=True)
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
