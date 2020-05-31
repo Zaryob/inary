@@ -23,7 +23,6 @@ import stat
 import fnmatch
 
 # Inary Modules
-import inary.api
 import inary.db
 import inary.uri
 import inary.file
@@ -898,7 +897,7 @@ class Builder:
                 if ctx.ui.confirm(
                         _('Would you like to install the unsatisfied build dependencies?')):
                     ctx.ui.info(_('Installing build dependencies.'))
-                    if not inary.api.install(
+                    if not inary.operations.install.install(
                             [dep.package for dep in dep_unsatis], reinstall=True):
                         fail()
                 else:

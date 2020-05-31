@@ -156,3 +156,20 @@ def set_options(options):
 
 # The following are INARY operations which constitute the INARY API
 # Within functions
+from inary.analyzer.conflict import calculate_conflicts
+from inary.db.filesdb import rebuild_db
+from inary.data.index import index
+from inary.data.pgraph import package_graph
+from inary.fetcher import fetch
+from inary.operations.build import build, build_until
+from inary.operations.check import check
+from inary.operations.emerge import emerge
+from inary.operations.helper import calculate_download_sizes, calculate_free_space_needed, get_package_requirements
+from inary.operations.history import takeback, get_takeback_plan, snapshot
+from inary.operations.info import info
+from inary.operations.install import install, get_install_order
+from inary.operations.remove import remove, get_remove_order
+from inary.operations.repository import *
+from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
+from inary.operations.search import *
+
