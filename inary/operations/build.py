@@ -618,8 +618,8 @@ class Builder:
         ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
         install_dir = self.pkg_install_dir()
 
-        if os.path.exists(install_dir):
-            util.rmdirs(install_dir)
+        if os.path.isdir(install_dir):
+            util.clean_dir(install_dir)
             util.makedirs(install_dir)
             ctx.ui.info(_("[!] InstallDir {} cleant up.".format(install_dir)),verbose=True)
 
