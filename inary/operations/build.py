@@ -23,7 +23,6 @@ import stat
 import fnmatch
 
 # Inary Modules
-import inary.api
 import inary.db
 import inary.uri
 import inary.file
@@ -617,6 +616,12 @@ class Builder:
         ctx.ui.status(_("Building source package: \"{}\" [ InstallAction Step ]").format(self.spec.source.name),
                       push_screen=False)
         ctx.ui.action(util.colorize(">>> ", 'cyan') + _("Installing..."))
+        install_dir = self.pkg_install_dir()
+
+        if os.path.isdir(install_dir):
+            util.clean_dir(install_dir)
+            util.makedirs(install_dir)
+            ctx.ui.info(_("[!] InstallDir {} cleant up.".format(install_dir)),verbose=True)
 
         # install function is mandatory!
         if self.run_action_function(ctx.const.install_func, True):
@@ -892,7 +897,7 @@ class Builder:
                 if ctx.ui.confirm(
                         _('Would you like to install the unsatisfied build dependencies?')):
                     ctx.ui.info(_('Installing build dependencies.'))
-                    if not inary.api.install(
+                    if not inary.operations.install.install(
                             [dep.package for dep in dep_unsatis], reinstall=True):
                         fail()
                 else:

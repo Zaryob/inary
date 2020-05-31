@@ -18,7 +18,7 @@ from inary.util import join_path
 from inary.util import run_logged
 
 # ActionsAPI Modules
-inary.actionsapi import error
+from inary.actionsapi import error
 
 # Standart Python Modules
 import os
