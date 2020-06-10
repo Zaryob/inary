@@ -18,7 +18,7 @@ import sys
 import optparse
 
 # Inary Modules
-import inary.api
+import inary.settings
 import inary.util as util
 import inary.context as ctx
 
@@ -152,8 +152,8 @@ class Command(object):
                     os.path.join(ctx.config.info_dir(), ctx.const.files_db), os.W_OK))):
             raise inary.cli.Error(_("You have to be root for this operation."))
 
-        inary.api.set_userinterface(ui)
-        inary.api.set_options(self.options)
+        inary.settings.set_userinterface(ui)
+        inary.settings.set_options(self.options)
 
     def get_name(self):
         return self.__class__.name
