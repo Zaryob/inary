@@ -71,89 +71,6 @@ import inary.util
 # Fetcher
 from . import fetcher
 
-# Gettext Library
-import gettext
-__trans = gettext.translation('inary', fallback=True)
-_ = __trans.gettext
-
-
-# DataFile Libraries
-
-# DataBase Libraries
-
-
-# Operation Libraries
-
-
-def set_userinterface(ui):
-    """
-    Set the user interface where the status information will be send
-    @param ui: User interface
-    """
-    ctx.ui = ui
-
-
-def set_io_streams(stdout=None, stderr=None):
-    """
-    Set standart i/o streams
-    Used by Buildfarm
-    @param stdout: Standart output
-    @param stderr: Standart input
-    """
-    if stdout:
-        ctx.stdout = stdout
-    if stderr:
-        ctx.stderr = stderr
-
-
-def set_dbus_sockname(sockname):
-    """
-    Set dbus socket file
-    Used by YALI
-    @param sockname: Path to dbus socket file
-    """
-    ctx.dbus_sockname = sockname
-
-
-def set_dbus_timeout(timeout):
-    """
-    Set dbus timeout
-    Used by YALI
-    @param timeout: Timeout in seconds
-    """
-    ctx.dbus_timeout = timeout
-
-
-def set_signal_handling(enable):
-    """
-    Enable signal handling. Signal handling in inary mostly used for disabling keyboard interrupts
-    in critical paths.
-    Used by YALI
-    @param enable: Flag indicating signal handling usage
-    """
-    if enable:
-        ctx.sig = inary.signalhandler.SignalHandler()
-    else:
-        ctx.sig = None
-
-
-def set_options(options):
-    """
-    Set various options of inary
-    @param options: option set
-
-       >>> options = inary.config.Options()
-
-           options.destdir     # inary destination directory where operations will take effect
-           options.username    # username that for reaching remote repository
-           options.password    # password that for reaching remote repository
-           options.debug       # flag controlling debug output
-           options.verbose     # flag controlling verbosity of the output messages
-           options.output_dir  # build and delta operations package output directory
-    """
-    ctx.config.set_options(options)
-
-
 # The following are INARY operations which constitute the INARY API
 # Within functions
 from inary.analyzer.conflict import calculate_conflicts
@@ -172,4 +89,3 @@ from inary.operations.remove import remove, get_remove_order
 from inary.operations.repository import *
 from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
 from inary.operations.search import *
-
