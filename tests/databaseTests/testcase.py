@@ -1,5 +1,6 @@
 import unittest
 import inary
+import inary.api
 import inary.context as ctx
 
 import inary.db.repodb
@@ -11,8 +12,8 @@ class TestCase(unittest.TestCase):
     def setUp(self):
         options = inary.config.Options()
         options.destdir = 'tests/tmp_root'
-        inary.api.set_options(options)
-        inary.api.set_scom(False)
+        inary.api.settings.set_options(options)
+        inary.api.settings.set_scom(False)
         ctx.config.values.general.distribution = "Sulin"
         ctx.config.values.general.distribution_release = "2019"
         ctx.config.values.general.ignore_safety = True

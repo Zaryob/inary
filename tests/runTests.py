@@ -10,6 +10,7 @@ import unittest
 from unittest import _TextTestResult
 
 import inary
+import inary.api
 import inary.context as ctx
 import inary.util as util
 import os
@@ -164,7 +165,7 @@ def main():
 def setup():
     options = inary.config.Options()
     options.destdir = 'tests/tmp_root'
-    inary.api.set_options(options)
+    inary.api.settings.set_options(options)
 
     ctx.config.values.general.distribution = "Sulin"
     ctx.config.values.general.distribution_release = "2018"
