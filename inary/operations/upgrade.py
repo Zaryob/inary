@@ -244,7 +244,7 @@ def upgrade(A=None, repo=None):
 
     operations.remove.remove_obsoleted_packages()
 
-    for path in order:
+    for path in paths:
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
             remove_op.run_preremove()
@@ -261,6 +261,7 @@ def upgrade(A=None, repo=None):
                         "} / {} ]").format(paths.index(path) +
                                            1, len(paths)), color="yellow")
         install_op.install(False)
+
         try:
             with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
                 ie_file.write("{}\n".format(extra_paths[path]))

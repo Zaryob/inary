@@ -376,6 +376,9 @@ class Install(AtomicOperation):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
 
+        if self.operation == UPGRADE or self.operation== DOWNGRADE:
+            util.clean_dir(self.old_path)
+
     def extract_install(self):
         """unzip package in place"""
 
@@ -523,7 +526,7 @@ class Install(AtomicOperation):
 
         self.package.extract_install(ctx.config.dest_dir())
 
-        if self.reinstall():
+        if self.reinstall() or self.operation == UPGRADE:
             clean_leftovers()
 
     def store_postops(self):
