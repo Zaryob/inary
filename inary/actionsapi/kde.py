@@ -17,6 +17,7 @@ from inary.actionsapi import cmaketools
 from inary.actionsapi import shelltools
 
 basename = "kde5"
+qtbasename = "qt5"
 
 # general terms
 prefix = "/{}".format(get.defaultprefixDIR())
@@ -31,11 +32,11 @@ includedir = "{}/include".format(prefix)
 headerdir = "{0}/include/{1}".format(prefix, basename)
 datadir = "{0}/share/{1}".format(prefix, basename)
 docdir = "/{0}/{1}".format(get.docDIR(), basename)
-archdatadir = "{0}/{1}".format(libdir, basename)
-examplesdir = "{0}/{1}/examples".format(libdir, basename)
-importdir = "{0}/{1}/imports".format(libdir, basename)
-plugindir = "{0}/{1}/plugins".format(libdir, basename)
-qmldir = "{0}/{1}/qmldir".format(libdir, basename)
+archdatadir = "{0}/{1}".format(libdir, qtbasename)
+examplesdir = "{0}/{1}/examples".format(libdir, qtbasename)
+importdir = "{0}/{1}/imports".format(libdir, qtbasename)
+plugindir = "{0}/{1}/plugins".format(libdir, qtbasename)
+qmldir = "{0}/{1}/qmldir".format(libdir, qtbasename)
 testdir = "{0}/share/{1}".format(prefix, basename)
 translationdir = "{0}/translations".format(datadir)
 
