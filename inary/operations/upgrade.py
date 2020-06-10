@@ -224,7 +224,6 @@ def upgrade(A=None, repo=None):
 
     paths = []
     extra_paths = {}
-    old_releases_paths = []
     lndig = math.floor(math.log(len(order), 10)) + 1
     for x in order:
         ctx.ui.info(_("Downloading") +
@@ -249,7 +248,7 @@ def upgrade(A=None, repo=None):
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
             remove_op.run_preremove()
-            old_releases_paths.append(remove_op.package.pkg_dir())
+
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.preinstall()
@@ -272,12 +271,6 @@ def upgrade(A=None, repo=None):
     for path in paths:
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
-
-    for old_path in old_releases_paths:
-        ctx.ui.info(_("Cleaning old inary files: {}".format(
-            old_path.split("/")[-1])), verbose=True)
-        util.clean_dir(old_path)
-
 
 def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced
