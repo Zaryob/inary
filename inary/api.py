@@ -69,7 +69,7 @@ import inary.uri
 import inary.util
 
 # Settings
-import inary.settings as settings
+from inary.settings import *
 
 # Fetcher
 from . import fetcher
