@@ -68,6 +68,9 @@ import inary.uri
 # Utilities
 import inary.util
 
+# Settings
+import inary.settings as settings
+
 # Fetcher
 from . import fetcher
 
