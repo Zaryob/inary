@@ -44,7 +44,8 @@ class Po:
         self.messages = messages or []
         self.header = header or po_header_tmpl
 
-    def _escape(self, str):
+    @staticmethod
+    def _escape(str):
         if not str:
             return '""'
 
@@ -74,7 +75,8 @@ class Po:
             f.write(po_entry)
         f.close()
 
-    def _unescape(self, str):
+    @staticmethod
+    def _unescape(str):
         str = re.sub('\\\\"', '"', str)
         str = re.sub('\\\\n', '\n', str)
         return str
@@ -160,7 +162,9 @@ def getDataByTagName(elem, tag):
     except:
         pass
 
-def extract_from_translationsxmls(path, language, old_messages = []):
+def extract_from_translationsxmls(path, language, old_messages=None):
+    if old_messages is None:
+        old_messages = []
     if not path.endswith('/'):
         path += '/'
     messages = []
@@ -296,10 +300,10 @@ def update_translationsxmls(path, language, po):
         translations = os.path.join(path, current_name, "translations.xml")
         if os.path.exists(translations):
             doc = dom.parse(translations)
-            inary = doc.getElementsByTagName("INARY")[0]
+            pisi = doc.getElementsByTagName("INARY")[0]
         else:
             doc = dom.Document()
-            inary = Element("INARY")
+            pisi = Element("INARY")
 
         for msg in po.messages:
             if not msg.msgstr:
@@ -342,13 +346,13 @@ def update_translationsxmls(path, language, po):
                     entry = get_sourcepackage(item, package_name)
                     sumdesc = get_sumdesc(tag, msg.msgstr)
                     entry.appendChild(sumdesc)
-                    inary.appendChild(entry)
+                    pisi.appendChild(entry)
             else:
                 entry = get_sourcepackage(item, package_name)
                 sumdesc = get_sumdesc(tag, msg.msgstr)
                 entry.appendChild(sumdesc)
-                inary.appendChild(entry)
-                doc.appendChild(inary)
+                pisi.appendChild(entry)
+                doc.appendChild(pisi)
 
 
         # we can't use .toprettyxml() here. Because it also adds newlines and tabs
@@ -380,8 +384,7 @@ def update_translationsxmls(path, language, po):
         if xml[-1] != "\n":
             xml += "\n"
         open(translations, "w").write(xml)
-        
-    print("{} translations have been translated.".format(len(finished_packages)))
+
 
 def extract(path, language, pofile):
     if os.path.exists(pofile):
