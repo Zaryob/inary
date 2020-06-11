@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Main fork Pisi: Copyright (C) 2005 - 2011, Tubitak/UEKAE
+#
+# Copyright (C) 2018, Suleyman POYRAZ (Zaryob)
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# Please read the COPYING file.
+
+import os
+import sys
+from zipfile import BadZipfile
+
+from inary.package import Package
+
+def usage(errmsg):
+    print(("""
+    Error: %s
+
+    Usage:
+      uninary INARY_package.inary [target_dir]
+    """ % (errmsg)))
+
+    sys.exit(1)
+
+def main():
+
+    if len(sys.argv) < 2:
+        usage("INARY package required..")
+
+    elif not os.path.exists(sys.argv[1]):
+        usage("File %s not found" % sys.argv[1])
+
+    try:
+        package = Package(sys.argv[1])
+    except BadZipfile as e:
+        print(e)
+        sys.exit(1)
+
+    target = '.' if len(sys.argv) == 2 else sys.argv[2]
+
+    if not os.path.exists(os.path.join(target, 'inary_files')):
+        os.makedirs(os.path.join(target, 'inary_files'))
+
+    package.extract_inary_files(os.path.join(target, 'inary_files'))
+
+    if not os.path.exists(os.path.join(target, 'install')):
+        os.makedirs(os.path.join(target, 'install'))
+
+    package.extract_install(os.path.join(target, 'install'))
+
+    # FIXME: There is a Inary bug, it already creates an install directory even its empty.
+    if not os.listdir('install'):
+        os.rmdir('install')
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
