@@ -1,0 +1,9 @@
+export PKG_CONFIG_PATH=/usr/lib32/pkgconfig:$PKG_CONFIG_PATH
+for j in {/usr/lib/pkgconfig,/usr/lib32/pkgconfig,/usr/share/pkgconfig}
+do
+	echo -e "\033[32;1mChecking \033[;0m$j"
+	for i in $(ls $j | sed "s/.pc//g")
+	do
+		[ -f $j/$i.pc ] && pkg-config --cflags --libs $i >/dev/null | sed '/^$/d' || true
+	done
+done

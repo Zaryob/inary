@@ -31,7 +31,7 @@ def run(cmd, ignore_error=False):
 def create_sandbox(output_dir, repository):
     try:
         # Add repository of the packages
-        run('inary --yes-all --destdir="%s" add-repo pardus %s' % (output_dir, repository))
+        run('inary --yes-all --destdir="%s" add-repo sulin %s' % (output_dir, repository))
 
         # Install system.base and system.devel
         run('inary --yes-all --ignore-file-conflicts -D"%s" it -c system.base -c system.devel' % output_dir)
@@ -71,10 +71,12 @@ def mount_sandbox():
     run("mount -t tmpfs -o size=1024M,mode=0744 tmpfs tmpfs/")
     run("mkdir -p sandbox")
     run("mount -t aufs -o br=tmpfs=rw:base=ro none sandbox/")
-    run('/bin/mount --bind /proc sandbox/proc')
-    run('/bin/mount --bind /dev sandbox/dev')
+    run('/bin/mount -t proc proc sandbox/proc')
+    run('/bin/mount -t devtmpfs dev sandbox/dev')
+    run('/bin/mount -t sys sys sandbox/sys')
 
 def umount_sandbox():
+    run('/bin/umount sandbox/sys')
     run('/bin/umount sandbox/dev')
     run('/bin/umount sandbox/proc')
     run('/bin/umount sandbox')

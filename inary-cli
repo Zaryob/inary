@@ -15,6 +15,7 @@
 import errno
 import traceback
 import signal
+import os
 import sys
 import traceback
 
@@ -92,7 +93,7 @@ def handle_exception(exception, value, tb):
 
 def blc_wsl():
     """Dont allow fucking WSL"""
-    f = open("/proc/version", "r").readline()
+    f = str(os.uname())
     if (("Microsoft" in f) or ("WSL" in f)):
         print(_("Using inary in WSL environment is not allowed."))
         exit()

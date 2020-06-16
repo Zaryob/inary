@@ -179,8 +179,9 @@ else
 		if LD_LIBRARY_PATH="$COMPLETE_LD_LIBRARY_PATH" \
 		ldd "$FILE" 2>/dev/null | grep -v "$LD_MASK" |
 			$SONAME_GREP -q "$SONAME_SEARCH" ; then
-			echo "$FILE" >>$LLIST.3_rebuild
+			
 			echo_v "  broken $FILE (requires $(ldd "$FILE" | sed -n 's/	\(.*\) => not found$/\1/p' | tr '\n' ' ' | sed 's/ $//' ))"
+			echo "  broken $FILE (requires $(ldd "$FILE" | sed -n 's/	\(.*\) => not found$/\1/p' | tr '\n' ' ' | sed 's/ $//' ))" >>$LLIST.3_rebuild
 		fi
 		else
 		echo "$FILE" >>$LLIST.3_rebuild
