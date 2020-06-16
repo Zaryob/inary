@@ -536,7 +536,7 @@ class Install(AtomicOperation):
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
-        if self.old_path and os.path.exists(self.old_path):
+        if self.old_path and os.path.isfile(self.old_path+"/metadata.xml"):
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
