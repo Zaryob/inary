@@ -374,9 +374,6 @@ class Install(AtomicOperation):
                 self.installdb.mark_pending(self.pkginfo.name)
                 return 0
 
-        if self.operation == UPGRADE or self.operation== DOWNGRADE:
-            util.clean_dir(self.old_path)
-
     def extract_install(self):
         """unzip package in place"""
 
@@ -536,7 +533,7 @@ class Install(AtomicOperation):
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
-        if self.old_path and os.path.isfile(self.old_path+"/metadata.xml"):
+        if self.reinstall() or  self.operation == UPGRADE or self.operation == DOWNGRADE:
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
