@@ -549,7 +549,12 @@ class Install(AtomicOperation):
             self.installdb.remove_package(self.pkginfo)
 
         # need service or system restart?
+
         if self.installdb.has_package(self.pkginfo.name):
+            if self.operation == (UPGRADE or DOWNGRADE):
+                self.installdb.remove_package(self.pkginfo)
+                self.installdb.add_package(self.pkginfo)
+
             release = self.installdb.get_release(self.pkginfo.name)
             actions = self.pkginfo.get_update_actions(release)
         else:
