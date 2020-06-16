@@ -173,6 +173,7 @@ class Install(AtomicOperation):
         self.installdb = inary.db.installdb.InstallDB()
         self.operation = INSTALL
         self.store_old_paths = None
+        self.old_path = None
         self.trigger = inary.trigger.Trigger()
 
     def install(self, ask_reinstall=True):
@@ -197,7 +198,6 @@ class Install(AtomicOperation):
         ctx.ui.status(_("Checking operations"), push_screen=False)
         self.check_operation()
 
-        ctx.disable_keyboard_interrupts()
         # postOps from inary.operations.install and inary.operations.upgrade
         ctx.ui.status(_("Unpacking package"), push_screen=False)
         self.extract_install()
@@ -205,8 +205,6 @@ class Install(AtomicOperation):
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.store_inary_files()
         self.update_databases()
-
-        ctx.enable_keyboard_interrupts()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
@@ -538,7 +536,7 @@ class Install(AtomicOperation):
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
 
-        if self.reinstall():
+        if self.old_path and os.path.exists(self.old_path):
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
