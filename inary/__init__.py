@@ -25,6 +25,7 @@ __version__ = "1.3"
 
 __all__ = ['api', 'configfile', 'db', 'util', '_cleanup']
 
+import inary.api
 import inary.config
 import inary.settings
 import inary.context as ctx

@@ -86,7 +86,7 @@ from inary.operations.check import check
 from inary.operations.emerge import emerge
 from inary.operations.helper import calculate_download_sizes, calculate_free_space_needed, get_package_requirements
 from inary.operations.history import takeback, get_takeback_plan, snapshot
-from inary.operations.info import info
+from inary.operations.info import info, info_file
 from inary.operations.install import install, get_install_order
 from inary.operations.remove import remove, get_remove_order
 from inary.operations.repository import *
