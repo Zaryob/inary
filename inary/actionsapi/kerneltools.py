@@ -45,7 +45,8 @@ def save_headers():
     shelltools.system("cp -rv include/* {}/headers/include/".format(get.pkgDIR()))
 
 def install_headers():
-    os.makedirs(join_path(get.installDIR(), "/usr/"))
+    if not shelltools.can_access_directory(join_path(get.installDIR(), "/usr/")):
+        os.makedirs(join_path(get.installDIR(), "/usr/"))
     shelltools.system("cp -rv {}/headers/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
 
 
