@@ -47,17 +47,85 @@ def install_headers():
     shelltools.system("mv -v {}/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
 
 
-def generate_version():
-    pass
+def generateVersion():
+    autotools.make("-s kernelrelease > version")
+
+
+def dumpVersion():
+    # Writes the specific kernel version into /etc/kernel
+    destination = os.path.join(get.installDIR(), "etc/kernel/")
+    if not os.path.exists(destination):
+        os.makedirs(destination)
+    inarytools.insinto("/etc/kernel", "version", destinationFile=get.srcNAME())
+
+def __getKernelARCH():
+    return get.ARCH()
+
 
 def configure():
-    pass
 
-def build():
-    pass
+    inarytools.dosed(
+        "Makefile",
+        "EXTRAVERSION =.*",
+        "EXTRAVERSION = {}".format(
+            __getExtraVersion()))
+    # Configure the kernel interactively if
+    # configuration contains new options
+    autotools.make("ARCH={} oldconfig".format(__getKernelARCH()))
+
+    # Check configuration with listnewconfig
+    try:
+        autotools.make("ARCH={} listnewconfig".format(__getKernelARCH()))
+    except BaseException:
+        pass
+
+def build(debugSymbols=False):
+    extra_config = []
+    if debugSymbols:
+        # Enable debugging symbols (-g -gdwarf2)
+        extra_config.append("CONFIG_DEBUG_INFO=y")
+
+    autotools.make(
+        "ARCH={0} {1}".format(
+            __getKernelARCH(),
+            " ".join(extra_config)))
+
+
+def install(suffix=""):
+    if not suffix:
+        suffix=get.srcNAME()+get.srcVERSION()
+
+    generateVersion()
+    # Dump kernel version under /etc/kernel
+    dumpVersion()
+
+    # Install the modules
+    # mod-fw= avoids firmwares from installing
+    # Override DEPMOD= to not call depmod as it will be called
+    # during module-init-tools' package handler
+    autotools.rawInstall("INSTALL_MOD_PATH={}/".format(get.installDIR()),
+                         "DEPMOD=/bin/true modules_install mod-fw=")
+
+    # Install Module.symvers and System.map here too
+    shutil.copy("Module.symvers",
+                "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+    shutil.copy(
+        "System.map", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+
+    # Create extra/ and updates/ subdirectories
+    for _dir in ("extra", "updates"):
+        inarytools.dodir("/lib/modules/{0}/{1}".format(suffix, _dir))
+
 
 def modules_install():
     pass
 
-def bzimage_install(bzImage=""):
-    pass
+def bzimage_install(suffix=""):
+    # Install kernel image
+    if not suffix:
+        suffix=get.srcNAME()+get.srcVERSION()
+
+    inarytools.insinto(
+        "/boot/",
+        "arch/x86/boot/bzImage",
+        "linux-{}".format(suffix))
