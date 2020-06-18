@@ -95,7 +95,7 @@ def build(debugSymbols=False):
 
 def install(suffix=""):
     if not suffix:
-        suffix=get.srcNAME()+get.srcVERSION()
+        suffix='-byinary'
 
     generateVersion()
     # Dump kernel version under /etc/kernel
@@ -112,17 +112,56 @@ def install(suffix=""):
     shutil.copy("Module.symvers",
                 "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
 
+    # For modules headers
+    shutil.copy("Module.symvers",
+                "{0}/usr/src/linux-headers-{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
+
     shutil.copy(
         "System.map",
                 "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
+
+    # Remove symlinks
+    inarytools.remove("/lib/modules/{}{}/source".format(get.srcVERSION(), suffix))
+    inarytools.remove("/lib/modules/{}{}/build".format(get.srcVERSION(), suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
         inarytools.dodir("/lib/modules/{0}{1}/{2}".format(get.srcVERSION(), suffix, _dir))
 
 
-def modules_install():
-    pass
+def module_headers_install(suffix=""):
+    if not suffix:
+        suffix='-byinary'
+
+    # mrproper to control
+    autotools.make("O={}/usr/src/linux-headers-{}{} mrproper".format(get.installDIR(), get.srcVERSION(), suffix))
+
+    # makedirs
+    inarytools.makedirs("{}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix))
+
+    # recopy config file
+    shelltools.copy("{}/{}/.config".format(get.workDIR(), get.srcDIR()),
+                    "{}/usr/src/linux-headers-{}{}/.config".format(get.installDIR(), get.srcVERSION(), suffix))
+
+    autotools.make("mrproper")
+
+    # old config recompile
+    autotools.rawInstall("O={}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix), argument="oldconfig")
+
+    # modules_prepare
+    autotools.rawInstall("O={}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix), argument="modules_prepare")
+    shelltools.system("rm {}/usr/src/linux-headers-{}{}/source".format(get.installDIR(), get.srcVERSION(), suffix))
+
+    # remove useless config
+    inarytools.remove("/usr/src/linux-headers-{}{}/.config".format(get.srcVERSION(), suffix))
+
+    # Settle the correct build symlink to this headers
+    inarytools.dosym("/usr/src/linux-headers-{}{}".format(get.srcVERSION(), suffix),
+                     "/lib/modules/{}{}/build".format(get.srcVERSION(), suffix))
+    inarytools.dosym("/usr/src/linux-headers-{}{}".format(get.srcVERSION(), suffix),
+                     "/lib/modules/{}{}/source".format(get.srcVERSION(), suffix))
+
+
 
 def bzimage_install(suffix=""):
     # Install kernel image
@@ -133,3 +172,7 @@ def bzimage_install(suffix=""):
         "/boot/",
         "arch/x86/boot/bzImage",
         "{}".format(suffix))
+    inarytools.insinto(
+        "/boot/",
+        ".config",
+        "{}-config".format(suffix))
