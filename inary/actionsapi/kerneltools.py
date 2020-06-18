@@ -39,10 +39,13 @@ class ConfigureError(inary.actionsapi.Error):
         ctx.ui.error("[KernelTools]" + value)
 
 def save_headers():
-    pass
+    autotools.make("INSTALL_HDR_PATH={}/headers headers_install".format(get.pkgDIR()))
+    shelltools.system("find dest/include \( -name .install -o -name ..install.cmd \) -delete")
+    shelltools.system("cp -rv dest/include/* {}/usr/include".format(get.pkgDIR()))
 
 def install_headers():
-    pass
+    shelltools.system("mv -v {}/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
+
 
 def generate_version():
     pass

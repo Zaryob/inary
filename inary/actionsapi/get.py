@@ -78,7 +78,7 @@ def ENV(environ):
         return None
 
 
-# PİSİ Related Functions
+# INARY Related Functions
 
 def pkgDIR():
     """returns the path of binary packages"""
