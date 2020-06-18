@@ -18,6 +18,7 @@ import shutil
 
 # Inary Modules
 import inary.context as ctx
+from inary.util import join_path
 
 # ActionsAPI Modules
 import inary.actionsapi
@@ -40,11 +41,12 @@ class ConfigureError(inary.actionsapi.Error):
 
 def save_headers():
     autotools.make("INSTALL_HDR_PATH={}/headers headers_install".format(get.pkgDIR()))
-    shelltools.system("find dest/include \( -name .install -o -name ..install.cmd \) -delete")
-    shelltools.system("cp -rv dest/include/* {}/usr/include".format(get.pkgDIR()))
+    shelltools.system("find include \( -name .install -o -name ..install.cmd \) -delete")
+    shelltools.system("cp -rv include/* {}/headers/include/".format(get.pkgDIR()))
 
 def install_headers():
-    shelltools.system("mv -v {}/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
+    os.makedirs(join_path(get.installDIR(), "/usr/"))
+    shelltools.system("cp -rv {}/headers/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
 
 
 def generateVersion():
@@ -62,13 +64,13 @@ def __getKernelARCH():
     return get.ARCH()
 
 
-def configure():
+def configure(ExtraVersion=""):
 
     inarytools.dosed(
         "Makefile",
         "EXTRAVERSION =.*",
         "EXTRAVERSION = {}".format(
-            __getExtraVersion()))
+            ExtraVersion))
     # Configure the kernel interactively if
     # configuration contains new options
     autotools.make("ARCH={} oldconfig".format(__getKernelARCH()))
@@ -108,13 +110,15 @@ def install(suffix=""):
 
     # Install Module.symvers and System.map here too
     shutil.copy("Module.symvers",
-                "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+                "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
+
     shutil.copy(
-        "System.map", "{0}/lib/modules/{1}/".format(get.installDIR(), suffix))
+        "System.map",
+                "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}/{1}".format(suffix, _dir))
+        inarytools.dodir("/lib/modules/{0}{1}/{2}".format(get.srcVERSION(), suffix, _dir))
 
 
 def modules_install():
@@ -128,4 +132,4 @@ def bzimage_install(suffix=""):
     inarytools.insinto(
         "/boot/",
         "arch/x86/boot/bzImage",
-        "linux-{}".format(suffix))
+        "{}".format(suffix))
