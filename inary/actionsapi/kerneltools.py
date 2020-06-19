@@ -177,6 +177,8 @@ def build(debugSymbols=False):
 
 
 def install(distro=""):
+    if not distro:
+        distro="linux"
     suffix = __getSuffix()
 
     # Dump kernel version under /etc/kernel
@@ -186,13 +188,13 @@ def install(distro=""):
     inarytools.insinto(
         "/boot/",
         "arch/x86/boot/bzImage",
-        "{}-sulinos".format(suffix))
+        "{}-{}".format(suffix, distro))
 
     # Install defconfig
     inarytools.insinto(
         "/boot/",
         ".config",
-        "{}-sulinos.config".format(suffix))
+        "{}-{}.config".format(suffix, distro))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
@@ -202,21 +204,24 @@ def install(distro=""):
                          "DEPMOD=/bin/true modules_install mod-fw=")
 
     # Remove symlinks first
-    inarytools.remove("/lib/modules/{}-sulinos/source".format(suffix))
-    inarytools.remove("/lib/modules/{}-sulinos/build".format(suffix))
+    inarytools.remove("/lib/modules/{}-{}/source".format(suffix, distro))
+    inarytools.remove("/lib/modules/{}-{}/build".format(suffix, distro))
 
     # Install Module.symvers and System.map here too
     shutil.copy("Module.symvers",
-                "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+                "{0}/lib/modules/{1}-{2}/".format(get.installDIR(), suffix, distro))
     shutil.copy(
-        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+        "System.map", "{0}/lib/modules/{1}-{2}/".format(get.installDIR(), suffix, distro))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}-sulinos/{1}".format(suffix, _dir))
+        inarytools.dodir("/lib/modules/{0}-{1}/{2}".format(suffix, distro, _dir))
 
 
-def installModuleHeaders(extraHeaders=None):
+def installModuleHeaders(extraHeaders=None, distro=""):
+    if not distro:
+        distro="linux"
+        
     """ Install the files needed to build out-of-tree kernel modules. """
     extras = ["drivers/md/",
               "net/mac80211",
@@ -233,8 +238,8 @@ def installModuleHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/{}-headers-{}-sulinos".format(
-        get.srcNAME(), suffix)
+    headersDirectoryName = "usr/src/{0}-headers-{1}-{2}".format(
+        get.srcNAME(), suffix, distro)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
@@ -282,8 +287,8 @@ def installModuleHeaders(extraHeaders=None):
 
     # Settle the correct build symlink to this headers
     inarytools.dosym("/{}".format(headersDirectoryName),
-                     "/lib/modules/{}-sulinos/build".format(suffix))
-    inarytools.dosym("build", "/lib/modules/{}-sulinos/source".format(suffix))
+                     "/lib/modules/{}-{}/build".format(suffix, distro))
+    inarytools.dosym("build", "/lib/modules/{}-{}/source".format(suffix, distro))
 
 def prepareLibcHeaders():
     # make defconfig and install the
