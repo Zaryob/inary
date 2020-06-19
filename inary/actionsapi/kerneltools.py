@@ -238,8 +238,7 @@ def installModuleHeaders(extraHeaders=None, distro=""):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/{0}-headers-{1}-{2}".format(
-        get.srcNAME(), suffix, distro)
+    headersDirectoryName = "usr/src/linux-headers-{0}-{1}".format(suffix, distro)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
