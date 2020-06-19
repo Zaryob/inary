@@ -210,12 +210,6 @@ def install(distro=""):
                 "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
     shutil.copy(
         "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
-    shutil.copy(
-        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
-    shutil.copy(
-        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
-    shutil.copy(
-        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
@@ -293,6 +287,8 @@ def installModuleHeaders(extraHeaders=None):
 
 def prepareLibcHeaders():
     # make defconfig and install the
+    headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
+
     make_cmd = "O={0} INSTALL_HDR_PATH={0}/install".format(headers_tmp)
 
     autotools.make("mrproper")
@@ -335,4 +331,3 @@ def installLibcHeaders(excludes=None):
 
     # Remove tmp directory
     shelltools.system("rm -rf {}".format(headers_tmp))
-
