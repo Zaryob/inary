@@ -186,13 +186,13 @@ def install(distro=""):
     inarytools.insinto(
         "/boot/",
         "arch/x86/boot/bzImage",
-        "{}".format(suffix))
+        "{}-sulinos".format(suffix))
 
     # Install defconfig
     inarytools.insinto(
         "/boot/",
         ".config",
-        "{}.config".format(suffix))
+        "{}-sulinos.config".format(suffix))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
