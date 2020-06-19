@@ -18,7 +18,6 @@ import shutil
 
 # Inary Modules
 import inary.context as ctx
-from inary.util import join_path
 
 # ActionsAPI Modules
 import inary.actionsapi
@@ -39,20 +38,8 @@ class ConfigureError(inary.actionsapi.Error):
         self.value = value
         ctx.ui.error("[KernelTools]" + value)
 
-<<<<<<< HEAD
-def save_headers():
-    autotools.make("INSTALL_HDR_PATH={}/headers headers_install".format(get.pkgDIR()))
-    shelltools.system("find include \( -name .install -o -name ..install.cmd \) -delete")
-    shelltools.system("cp -rv include/* {}/headers/include/".format(get.pkgDIR()))
-
-def install_headers():
-    if not shelltools.can_access_directory(join_path(get.installDIR(), "/usr/")):
-        os.makedirs(join_path(get.installDIR(), "/usr/"))
-    shelltools.system("cp -rv {}/headers/* {}/usr/include".format(get.pkgDIR(), get.installDIR()))
-=======
 
 # Internal helpers
->>>>>>> 768e4e2409a061f408428bbeca392b4489c1c07a
 
 def __getAllSupportedFlavours():
     if os.path.exists("/etc/kernel"):
@@ -90,9 +77,6 @@ def __getKernelARCH():
     return get.ARCH()
 
 
-<<<<<<< HEAD
-def configure(ExtraVersion=""):
-=======
 def __getSuffix():
     """Read and return the value read from .suffix file."""
     suffix = get.srcVERSION()
@@ -150,13 +134,12 @@ def configure():
     # Copy the relevant configuration file
 
     # Set EXTRAVERSION
->>>>>>> 768e4e2409a061f408428bbeca392b4489c1c07a
 
     inarytools.dosed(
         "Makefile",
         "EXTRAVERSION =.*",
         "EXTRAVERSION = {}".format(
-            ExtraVersion))
+            __getExtraVersion()))
     # Configure the kernel interactively if
     # configuration contains new options
     autotools.make("ARCH={} oldconfig".format(__getKernelARCH()))
@@ -193,14 +176,8 @@ def build(debugSymbols=False):
             " ".join(extra_config)))
 
 
-<<<<<<< HEAD
-def install(suffix=""):
-    if not suffix:
-        suffix='-byinary'
-=======
 def install(distro=""):
     suffix = __getSuffix()
->>>>>>> 768e4e2409a061f408428bbeca392b4489c1c07a
 
     # Dump kernel version under /etc/kernel
     dumpVersion()
@@ -230,60 +207,6 @@ def install(distro=""):
 
     # Install Module.symvers and System.map here too
     shutil.copy("Module.symvers",
-<<<<<<< HEAD
-                "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
-
-    # For modules headers
-    shutil.copy("Module.symvers",
-                "{0}/usr/src/linux-headers-{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
-
-    shutil.copy(
-        "System.map",
-                "{0}/lib/modules/{1}{2}/".format(get.installDIR(),get.srcVERSION() ,suffix))
-
-    # Remove symlinks
-    inarytools.remove("/lib/modules/{}{}/source".format(get.srcVERSION(), suffix))
-    inarytools.remove("/lib/modules/{}{}/build".format(get.srcVERSION(), suffix))
-
-    # Create extra/ and updates/ subdirectories
-    for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}{1}/{2}".format(get.srcVERSION(), suffix, _dir))
-
-
-def module_headers_install(suffix=""):
-    if not suffix:
-        suffix='-byinary'
-
-    # mrproper to control
-    autotools.make("O={}/usr/src/linux-headers-{}{} mrproper".format(get.installDIR(), get.srcVERSION(), suffix))
-
-    # makedirs
-    inarytools.makedirs("{}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix))
-
-    # recopy config file
-    shelltools.copy("{}/{}/.config".format(get.workDIR(), get.srcDIR()),
-                    "{}/usr/src/linux-headers-{}{}/.config".format(get.installDIR(), get.srcVERSION(), suffix))
-
-    autotools.make("mrproper")
-
-    # old config recompile
-    autotools.rawInstall("O={}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix), argument="oldconfig")
-
-    # modules_prepare
-    autotools.rawInstall("O={}/usr/src/linux-headers-{}{}".format(get.installDIR(), get.srcVERSION(), suffix), argument="modules_prepare")
-    shelltools.system("rm {}/usr/src/linux-headers-{}{}/source".format(get.installDIR(), get.srcVERSION(), suffix))
-
-    # remove useless config
-    inarytools.remove("/usr/src/linux-headers-{}{}/.config".format(get.srcVERSION(), suffix))
-
-    # Settle the correct build symlink to this headers
-    inarytools.dosym("/usr/src/linux-headers-{}{}".format(get.srcVERSION(), suffix),
-                     "/lib/modules/{}{}/build".format(get.srcVERSION(), suffix))
-    inarytools.dosym("/usr/src/linux-headers-{}{}".format(get.srcVERSION(), suffix),
-                     "/lib/modules/{}{}/source".format(get.srcVERSION(), suffix))
-
-
-=======
                 "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
     shutil.copy(
         "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
@@ -308,21 +231,10 @@ def installModuleHeaders(extraHeaders=None):
               "drivers/media/dvb-frontends",
               "drivers/media/tuners",
               "drivers/media/platform"]
->>>>>>> 768e4e2409a061f408428bbeca392b4489c1c07a
 
     if extraHeaders:
         extras.extend(extraHeaders)
 
-<<<<<<< HEAD
-    inarytools.insinto(
-        "/boot/",
-        "arch/x86/boot/bzImage",
-        "{}".format(suffix))
-    inarytools.insinto(
-        "/boot/",
-        ".config",
-        "{}-config".format(suffix))
-=======
     pruned = ["include", "scripts", "Documentation"]
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
@@ -423,4 +335,4 @@ def installLibcHeaders(excludes=None):
 
     # Remove tmp directory
     shelltools.system("rm -rf {}".format(headers_tmp))
->>>>>>> 768e4e2409a061f408428bbeca392b4489c1c07a
+
