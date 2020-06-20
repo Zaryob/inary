@@ -188,13 +188,13 @@ def install(distro=""):
     inarytools.insinto(
         "/boot/",
         "arch/x86/boot/bzImage",
-        "{}-{}".format(suffix, distro))
+        "linux-{}-{}".format(suffix, distro))
 
     # Install defconfig
     inarytools.insinto(
         "/boot/",
         ".config",
-        "{}-{}.config".format(suffix, distro))
+        "linux-{}-{}.config".format(suffix, distro))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
@@ -322,9 +322,6 @@ def installLibcHeaders(excludes=None):
     shelltools.system("find . -name '.' -o -name '.*' -prune -o -print | \
                        cpio -pVd --preserve-modification-time {}".format(headers_dir))
 
-
-    # Remove sound/ directory which is installed by alsa-headers
-    shelltools.system("rm -rf {}/sound".format(headers_dir))
 
     # Remove possible excludes given by actions.py
     if excludes:
