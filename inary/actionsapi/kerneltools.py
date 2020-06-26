@@ -32,7 +32,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
@@ -177,7 +176,9 @@ def build(debugSymbols=False):
             " ".join(extra_config)))
 
 
-def install():
+def install(distro=""):
+    if not distro:
+        distro="linux"
     suffix = __getSuffix()
 
     # Dump kernel version under /etc/kernel
@@ -187,7 +188,13 @@ def install():
     inarytools.insinto(
         "/boot/",
         "arch/x86/boot/bzImage",
-        "linux-{}".format(suffix))
+        "linux-{}-{}".format(suffix, distro))
+
+    # Install defconfig
+    inarytools.insinto(
+        "/boot/",
+        ".config",
+        "config-{}-{}".format(suffix, distro))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
@@ -197,21 +204,24 @@ def install():
                          "DEPMOD=/bin/true modules_install mod-fw=")
 
     # Remove symlinks first
-    inarytools.remove("/lib/modules/{}-sulinos/source".format(suffix))
-    inarytools.remove("/lib/modules/{}-sulinos/build".format(suffix))
+    inarytools.remove("/lib/modules/{}-{}/source".format(suffix, distro))
+    inarytools.remove("/lib/modules/{}-{}/build".format(suffix, distro))
 
     # Install Module.symvers and System.map here too
     shutil.copy("Module.symvers",
-                "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+                "{0}/lib/modules/{1}-{2}/".format(get.installDIR(), suffix, distro))
     shutil.copy(
-        "System.map", "{0}/lib/modules/{1}-sulinos/".format(get.installDIR(), suffix))
+        "System.map", "{0}/lib/modules/{1}-{2}/".format(get.installDIR(), suffix, distro))
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}-sulinos/{1}".format(suffix, _dir))
+        inarytools.dodir("/lib/modules/{0}-{1}/{2}".format(suffix, distro, _dir))
 
 
-def installHeaders(extraHeaders=None):
+def installModuleHeaders(extraHeaders=None, distro=""):
+    if not distro:
+        distro="linux"
+        
     """ Install the files needed to build out-of-tree kernel modules. """
     extras = ["drivers/md/",
               "net/mac80211",
@@ -228,8 +238,7 @@ def installHeaders(extraHeaders=None):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/{}-headers-{}-sulinos".format(
-        get.srcNAME(), suffix)
+    headersDirectoryName = "usr/src/linux-headers-{0}-{1}".format(suffix, distro)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
@@ -277,9 +286,17 @@ def installHeaders(extraHeaders=None):
 
     # Settle the correct build symlink to this headers
     inarytools.dosym("/{}".format(headersDirectoryName),
-                     "/lib/modules/{}-sulinos/build".format(suffix))
-    inarytools.dosym("build", "/lib/modules/{}-sulinos/source".format(suffix))
+                     "/lib/modules/{}-{}/build".format(suffix, distro))
+    inarytools.dosym("build", "/lib/modules/{}-{}/source".format(suffix, distro))
 
+def prepareLibcHeaders():
+    # make defconfig and install the
+    headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
+
+    make_cmd = "O={0} INSTALL_HDR_PATH={0}/install".format(headers_tmp)
+
+    autotools.make("mrproper")
+    autotools.make("{} allnoconfig".format(make_cmd))
 
 def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
@@ -296,28 +313,15 @@ def installLibcHeaders(excludes=None):
 
     # Workaround begins here ...
     # Workaround information -- http://patches.openembedded.org/patch/33433/
-    cpy_src = "{}/linux-*/arch/x86/include/generated".format(get.workDIR())
-    cpy_tgt = "{}/arch/x86/include".format(headers_tmp)
-    shelltools.makedirs(cpy_tgt)
-
-    copy_cmd = "cp -Rv {0} {1} ".format(cpy_src, cpy_tgt)
-
-    shelltools.system(copy_cmd)
-    # Workaround ends here ...
-
-    # make defconfig and install the headers
-    autotools.make("mrproper")
-    autotools.make("{} defconfig".format(make_cmd))
     autotools.rawInstall(make_cmd, "headers_install")
-
+    # Workaround ends here ...
     oldwd = os.getcwd()
 
+    shelltools.system("find {} -name ..install.cmd -or -name .install | xargs rm -vf".format(headers_tmp))
     shelltools.cd(os.path.join(headers_tmp, "install", "include"))
     shelltools.system("find . -name '.' -o -name '.*' -prune -o -print | \
                        cpio -pVd --preserve-modification-time {}".format(headers_dir))
 
-    # Remove sound/ directory which is installed by alsa-headers
-    shelltools.system("rm -rf {}/sound".format(headers_dir))
 
     # Remove possible excludes given by actions.py
     if excludes:
