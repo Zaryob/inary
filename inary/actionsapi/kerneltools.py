@@ -194,7 +194,7 @@ def install(distro=""):
     inarytools.insinto(
         "/boot/",
         ".config",
-        "linux-{}-{}.config".format(suffix, distro))
+        "config-{}-{}".format(suffix, distro))
 
     # Install the modules
     # mod-fw= avoids firmwares from installing
