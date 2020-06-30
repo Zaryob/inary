@@ -298,5 +298,5 @@ def snapshot():
         ctx.ui.display_progress(operation="snapshot",
                                 percent=progress.update(processed),
                                 info=_("Taking snapshot of the system."))
-
+    ctx.ui.info("")
     historydb.update_history()
