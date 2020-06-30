@@ -1147,6 +1147,10 @@ package might be a good solution."))
         """Build each package defined in PSPEC file. After this process there
         will be .inary files hanging around, AS INTENDED ;)"""
 
+        ctx.ui.status(
+            _("Compiled source building package files generating for source: \"{}\"").format(
+                self.spec.source.name), push_screen=True)
+
         doc_ptrn = re.compile(ctx.const.doc_package_end)
 
         self.fetch_component()  # bug 856
