@@ -494,10 +494,8 @@ class Install(AtomicOperation):
                         break
 
                 else:
-                    if not ctx.config.get_option("preserve_permanent"):
-                        remove_permanent=True
-                    else:
-                        remove_permanent=False
+                    
+                    remove_permanent= not ctx.config.get_option("preserve_permanent")
 
                     Remove.remove_file(
                         old_file,
