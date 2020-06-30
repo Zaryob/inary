@@ -54,7 +54,7 @@ def __listactions(actions):
             if __pkg_already_installed(pkg, pkginfo):
                 continue
             beinstalled.append("{0}-{1}".format(pkg, pkginfo))
-            configs.append(pkg, operation)
+            configs.append(pkg)
         else:
             if installdb.has_package(pkg):
                 beremoved.append("{}".format(pkg))
