@@ -54,7 +54,7 @@ def __listactions(actions):
             if __pkg_already_installed(pkg, pkginfo):
                 continue
             beinstalled.append("{0}-{1}".format(pkg, pkginfo))
-            configs.append(pkg, operation)
+            configs.append([pkg, operation])
         else:
             if installdb.has_package(pkg):
                 beremoved.append("{}".format(pkg))
@@ -213,6 +213,7 @@ def takeback(operation):
     if not beinstalled and not beremoved:
         ctx.ui.info(
             _("There is no packages to taking back (installing or removing)."))
+        return
 
     if beinstalled:
         ctx.ui.info(
@@ -230,8 +231,8 @@ def takeback(operation):
 
     errors = []
     paths = []
-    lndig = math.floor(math.log(len(beinstalled), 10)) + 1
     for pkg in beinstalled:
+        lndig = math.floor(math.log(len(beinstalled), 10)) + 1
         ctx.ui.info(_("Downloading") +
                     str(" [ {:>" +
                         str(lndig) +
@@ -297,5 +298,5 @@ def snapshot():
         ctx.ui.display_progress(operation="snapshot",
                                 percent=progress.update(processed),
                                 info=_("Taking snapshot of the system."))
-
+    ctx.ui.info("")
     historydb.update_history()
