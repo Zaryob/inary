@@ -213,6 +213,7 @@ def takeback(operation):
     if not beinstalled and not beremoved:
         ctx.ui.info(
             _("There is no packages to taking back (installing or removing)."))
+        return
 
     if beinstalled:
         ctx.ui.info(
@@ -230,8 +231,8 @@ def takeback(operation):
 
     errors = []
     paths = []
-    lndig = math.floor(math.log(len(beinstalled), 10)) + 1
     for pkg in beinstalled:
+        lndig = math.floor(math.log(len(beinstalled), 10)) + 1
         ctx.ui.info(_("Downloading") +
                     str(" [ {:>" +
                         str(lndig) +
