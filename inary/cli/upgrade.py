@@ -64,6 +64,13 @@ expanded to package names.
                          default=False, help=_("Skip sysconf operations after installation."))
         group.add_option("--force-sysconf", action="store_true",
                          default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
+        group.add_option("--preserve-permanent", action="store_true",
+                         default=False,
+                         help=_("Preserves permanent tagged files on upgrade action "
+                                "like some important libc modules. This is used to be "
+                                "sure about stability of system packages. This helps "
+                                "you preserve your own source compiled applications "
+                                "like pip modules, gem installations etc."))
         group.add_option("-c", "--component", action="append",
                          default=None, help=_("Upgrade component's and recursive components' packages."))
         group.add_option("-r", "--repository", action="store",

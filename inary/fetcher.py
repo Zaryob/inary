@@ -40,8 +40,6 @@ try:
 except ImportError:
     raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
 
-# inary modules
-
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):

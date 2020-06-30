@@ -487,10 +487,15 @@ class Install(AtomicOperation):
 
                     if os.path.samestat(new_file_stat, old_file_stat):
                         break
+
                 else:
+                    
+                    remove_permanent= not ctx.config.get_option("preserve_permanent")
+
                     Remove.remove_file(
                         old_file,
                         self.pkginfo.name,
+                        remove_permanent,
                         store_old_paths=self.store_old_paths)
 
         if self.reinstall():
