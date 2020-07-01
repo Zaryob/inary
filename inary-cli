@@ -101,7 +101,6 @@ def blc_wsl():
 
 if __name__ == "__main__":
     blc_wsl()
-    inary.util.noecho(True)
     sys.excepthook = handle_exception
 
     signal.signal(signal.SIGTERM, sig_handler)
@@ -110,4 +109,3 @@ if __name__ == "__main__":
     if cli.command.name[1] in "rdb sf".split():
         ctx.filesdb = inary.db.filesdb.FilesDB()
     cli.run_command()
-    inary.util.noecho(False)

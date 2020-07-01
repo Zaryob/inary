@@ -186,9 +186,7 @@ class CLI(inary.ui.UI):
                                          'green') + '/' + util.colorize(_('no)'),
                                                                         'red') + ":  "
 
-        util.noecho(False)
         s = input(prompt)
-        util.noecho(True)
 
         if yes_expr.search(s):
             return True
