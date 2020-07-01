@@ -55,18 +55,18 @@ def setltime(name, value):
 def t(name, path, command):
     """Main trigger handler"""
     status = 0
-    if os.path.isdir(path) == True:
+    if os.path.isdir(path):
         if getltime(name) != getmtime(path):
             sys.stdout.write("\n\x1b[33m    " +
                              _("[-] Process triggering for ") +
                              "\x1b[;0m{}".format(name))
             status = os.system(command + " &>/dev/null")
-            setltime(name, getmtime(path))
             if status != 0:
                 sys.stdout.write("\r\x1b[K\x1b[31;1m    " +
                                  _("[!] Triggering end with ") +
-                                 "\x1b[;0m{}".format(status))
+                                 "\x1b[;0m{} {}".format(status,name))
             else:
+                setltime(name, getmtime(path))
                 sys.stdout.write("\r\x1b[K\x1b[32;1m    " +
                                  _("[+] Process triggered for " +
                                    "\x1b[;0m{}".format(name)))
