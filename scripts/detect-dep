@@ -1,0 +1,10 @@
+work=$(mktemp)
+rm -f $work ; mkdir $work
+cp $1 $work/
+cd $work
+unzip -x $1 &>/dev/null
+tar -xf install.tar.*
+find -type f| xargs ldd 2>/dev/null | grep "=>" | sed "s/(.*)//g" | sort | uniq |  \
+  sed "s/.*=. //g" | sed "s/lib64/lib/g" | xargs inary sf | grep "has file" | \
+  awk '{print $2}' | sort | uniq | sed "s/^\"/    <Dependency>/g" | sed "s/\"$/<\/Dependency>/g"
+rm -rf $work

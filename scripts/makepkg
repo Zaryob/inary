@@ -3,7 +3,6 @@
 # Çok önemli uyarı: bu betik deneysel çalışmadır. sisteme zarar verebilir.
 #
 # Bu betik ile tüm archlinux/aur paketleri derlenememektedir.
-set -e
 arch-meson(){
 	exec meson setup \
 	  --prefix        /usr \
@@ -23,7 +22,8 @@ export srcdir=.
 export distrel=s19
 . PKGBUILD
 fetch_sources(){
-	for src in $source $source_x86_64 ; do
+	for src in ${source[@]} ${source_x86_64[@]} ; do
+		echo -e "\033[44;1m$src\033[;0m"
 		if echo "$src" | grep "git://" &>/dev/null ; then
 			srcloc=$(echo $src | sed "s|^.*git://|git://|g")
 			srcname=$(echo $src | sed "s|::git://.*$||g")
@@ -38,11 +38,13 @@ fetch_sources(){
 			echo $srcloc
 			wget -c $srcloc -O $srcname
 			echo $srcname | grep ".tar.*" && tar -xf $srcname
+		elif [ -f $src ] ; then
+			touch $src
 		else
-			wget -c $src > $(basename $src) || true
-			basename $src | grep ".tar.*" && tar -xf $(basename $src)
+			wget -c $src -O $(basename $src) || true
+			basename $src | grep ".tar.*" && tar -xf $(basename $src) || true
 		fi
-done
+	done
 }
 check_make_dep(){
 	missdep=""
@@ -51,9 +53,19 @@ check_make_dep(){
 		echo "checking $dep"
 		LANG=C inary info $dep -s -N | grep "\[inst\]" >/dev/null
 		if [ ! $? -eq 0 ] ; then
-			exit 1
+			if [ "$dep" != "hicolor-icon-theme" ] ; then
+				export missdep="$missdep $dep"
+			fi
+			#exit 1
 		fi
 	done
+	echo -e "\033[31;1mMissing: $missdep\033[;0m" > /dev/stderr
+	if [ "$missdep" != "" ] ; then
+		su -c "inary it $missdep" || {
+			echo -e "\033[31;1mInary cannot install all dependencies.\nPress any key to continue or ctrl c to exit.\033[;0m"
+			read -n 1 c
+		}
+	fi
 }
 function_exists() {
     declare -f -F $1 > /dev/null
@@ -63,7 +75,7 @@ run(){
 	cd $pwd
 	if function_exists $1 ; then
 		echo -e "\033[32;1m$2\033[;0m" > /dev/stderr
-		$1
+		$1 || echo -e "\033[31;1m$1 failed\033[;0m" > /dev/stderr
 	fi
 }
 create_tar(){
@@ -144,6 +156,7 @@ create_inary(){
 }
 run fetch_sources "Downloading"
 run check_make_dep "Checking dependency"
+set -e
 run pkgver "Runninn pkgver"
 run prepare "Running prepare"
 run build "Building"

@@ -1,0 +1,36 @@
+#!/bin/bash
+pwd=$(pwd)
+[ "$1" != "" ] && cd $1
+echo "Checking"
+if [ -f inary_files/metadata.xml ] && [ -d install ] ; then
+	cd install
+	echo "Creating install.tar.gz"
+	tar --xz -cf ../inary_files/install.tar.xz ./*
+	echo "Creating files.xml"
+	echo -e "<Files>" > ../inary_files/files.xml
+	find | sed "s|^\./||g" | while read line
+	do
+	if [ -f $line ] ; then
+		echo -e "   <File>" >> ../inary_files/files.xml
+	        echo -e "      <Path>$line</Path>" >> ../inary_files/files.xml
+        	echo -e "      <Type>data</Type>" >> ../inary_files/files.xml
+        	echo -e "      <Size>$(du -b $line | awk '{print $1}')</Size>" >> ../inary_files/files.xml
+        	echo -e "      <Uid>0</Uid>" >> ../inary_files/files.xml
+        	echo -e "      <Gid>0</Gid>" >> ../inary_files/files.xml
+        	echo -e "      <Mode>0o755</Mode>" >> ../inary_files/files.xml
+        	echo -e "      <Hash>$(sha1sum $line | awk '{print $1}')</Hash>" >> ../inary_files/files.xml
+        	echo -e "   </File>" >> ../inary_files/files.xml
+	fi
+	done
+	echo -e "</Files>" >> ../inary_files/files.xml
+	cd ..
+	echo "Calculating tar hash"
+	cd inary_files
+	sed -i "s/InstallTarHash>.*</InstallTarHash>$(sha1sum install.tar.xz | awk '{print $1}')</g" metadata.xml
+	echo "Creating inary package"
+	zip -q ../output.inary metadata.xml files.xml install.tar.xz
+
+else
+	echo "Invalid path"
+fi
+cd $pwd
