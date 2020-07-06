@@ -95,7 +95,7 @@ def blc_wsl():
     """Dont allow fucking WSL"""
     f = str(os.uname())
     if (("Microsoft" in f) or ("WSL" in f)):
-        print(_("Using inary in WSL environment is not allowed."))
+        ui.error(_("Using inary in WSL environment is not allowed."))
         exit()
 
 
