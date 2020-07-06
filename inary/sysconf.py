@@ -103,6 +103,9 @@ def proceed(force=False):
     t("gio-modules", "/usr/lib/gio/modules/",
       "gio-querymodules /usr/lib/gio/modules/")
     t("appstream", "/var/cache/app-info", "appstreamcli refresh-cache --force")
+    t("exeusrbin", "/usr/bin", "chmod +x -R /usr/bin")
+    t("exebin", "/bin", "chmod +x -R /bin")
+    t("libexec", "/usr/libexec", "chmod +x -R /usr/libexec")
     t("ca-certficates", "/etc/ssl/certs", "update-ca-certificates --fresh")
     t("cracklib", "/usr/share/cracklib/",
       "create-cracklib-dict /usr/share/cracklib/*")
