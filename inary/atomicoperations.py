@@ -188,6 +188,7 @@ class Install(AtomicOperation):
             package=self.pkginfo,
             files=self.files)
 
+        ctx.ui.info(_("Checking package operation availability..."),verbose=True)
         self.ask_reinstall = ask_reinstall
         ctx.ui.status(_("Checking requirements"), push_screen=False)
         self.check_requirements()
@@ -200,13 +201,14 @@ class Install(AtomicOperation):
 
         # postOps from inary.operations.install and inary.operations.upgrade
         ctx.ui.status(_("Unpacking package"), push_screen=False)
+
         self.extract_install()
 
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.store_inary_files()
         self.update_databases()
-        ctx.ui.status(_("Syncing all buffers"), push_screen=False)
         if ctx.config.values.general.fs_sync:
+            ctx.ui.status(_("Syncing all buffers"), push_screen=False)
             os.sync()
 
         ctx.ui.close()
@@ -534,13 +536,15 @@ class Install(AtomicOperation):
 
     def store_postops(self):
         """stores postops script temporarly"""
+        ctx.ui.info(_("Precaching postoperations.py file"),verbose=True)
+
         if 'postOps' in self.metadata.package.isA:
             self.package.extract_file_synced(
                 ctx.const.postops, ctx.config.tmp_dir())
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
-
+        ctx.ui.info(_("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"),verbose=True)
         if self.reinstall() or  self.operation == UPGRADE or self.operation == DOWNGRADE:
             util.clean_dir(self.old_path)
         self.package.extract_file_synced(
