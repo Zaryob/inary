@@ -90,12 +90,16 @@ class InstallDB(lazydb.LazyDB):
         #Clear old inode cache TODO: drop cache need option
         #open("/proc/sys/vm/drop_caches","w").write("2")
         for package in self.list_installed():
-            i = os.path.join(
-            self.package_path(package),
-            ctx.const.metadata_xml)
-            ctx.ui.debug(_("Checking {}").format(package))
-            if os.path.isfile(i):
-                    open(i,"rb").read(1)
+            ie_path = os.path.join(
+                self.package_path(package),
+                ctx.const.metadata_xml)
+            ctx.ui.debug(_("Checking inode {}").format(package))
+            if os.path.isfile(ie_path):
+                os.stat(ie_path)
+            else:
+                ctx.ui.error(_("Unhandled corruption on {0} package metadata."
+                               "Please check installation of {0} package").format(package))
+
 
 
     @staticmethod
