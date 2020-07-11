@@ -81,7 +81,7 @@ class InstallDB(lazydb.LazyDB):
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
-        self.__generate_inode_cache()
+        # self.__generate_inode_cache() TODO: Needs look it up.
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
@@ -92,12 +92,12 @@ class InstallDB(lazydb.LazyDB):
         for package in self.list_installed():
             i = os.path.join(
             self.package_path(package),
-            ctx.const.metadata_xml)   
+            ctx.const.metadata_xml)
             ctx.ui.debug(_("Checking {}").format(package))
             if os.path.isfile(i):
                     open(i,"rb").read(1)
-    
-    
+
+
     @staticmethod
     def __generate_installed_extra():
         ie = []
