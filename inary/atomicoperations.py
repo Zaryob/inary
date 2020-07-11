@@ -205,6 +205,9 @@ class Install(AtomicOperation):
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.store_inary_files()
         self.update_databases()
+        ctx.ui.status(_("Syncing all buffers"), push_screen=False)
+        if ctx.config.values.general.fs_sync:
+            os.sync()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
@@ -489,7 +492,7 @@ class Install(AtomicOperation):
                         break
 
                 else:
-                    
+
                     remove_permanent= not ctx.config.get_option("preserve_permanent")
 
                     Remove.remove_file(
