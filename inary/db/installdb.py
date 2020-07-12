@@ -82,7 +82,6 @@ class InstallDB(lazydb.LazyDB):
 
     def init(self):
         self.__generate_inode_cache() # TODO: Needs look it up.
-        
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
