@@ -111,6 +111,6 @@ def proceed(force=False):
       "create-cracklib-dict /usr/share/cracklib/*")
     sys.stdout.write("\n")
     if ctx.config.values.general.fs_sync:
-        ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions.", noln=True)
+        ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
         os.sync()
-        ctx.ui.info(_("[+] Synced filesystem.", noln=True)
+        ctx.ui.info(_("[+] Synced filesystem."), noln=True)
