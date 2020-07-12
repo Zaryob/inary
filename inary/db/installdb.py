@@ -87,6 +87,8 @@ class InstallDB(lazydb.LazyDB):
 
 
     def __generate_inode_cache(self):
+        # This made to fix issue
+        # https://stackoverflow.com/questions/26178038/python-slow-read-performance-issue
         #Clear old inode cache TODO: drop cache need option
         #open("/proc/sys/vm/drop_caches","w").write("2")
         for package in self.list_installed():
@@ -95,9 +97,17 @@ class InstallDB(lazydb.LazyDB):
                 ctx.const.metadata_xml)
             ctx.ui.debug(_("Checking inode {}").format(package))
             if os.path.isfile(ie_path):
-                os.stat(ie_path)
+                fd = os.open(ie_path, os.O_RDONLY)
+                if os.read(fd, 7) == "<INARY>":
+                    os.close(fd)
+                    pass
+                else:
+                    ctx.ui.error(_("File content of metadata.xml can be corrupted."
+                                   "Probably filesystem crashed. "
+                                   "Check your installation of {0} package and filesystem").format(package))
             else:
                 ctx.ui.error(_("Unhandled corruption on {0} package metadata."
+                               "There is not any metadata.xml file for {0} package."
                                "Please check installation of {0} package").format(package))
 
 
