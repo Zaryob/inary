@@ -341,6 +341,15 @@ def run_logged(cmd):
 
     return p.returncode
 
+########################
+# Filesystem functions #
+########################
+
+def fs_sync():
+    if ctx.config.values.general.fs_sync:
+        ctx.ui.status(_("Syncing all buffers"), push_screen=False)
+        ctx.ui.debug(_("Filesystem syncing (It wouldn't be run whether nosync set with kernel parameters)"))
+        os.sync()
 
 ######################
 # Terminal functions #

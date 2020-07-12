@@ -20,6 +20,7 @@ import sys
 
 # INARY Modules
 import inary.context as ctx
+import inary.util as util
 
 # Gettext Library
 import gettext
@@ -112,5 +113,5 @@ def proceed(force=False):
     sys.stdout.write("\n")
     if ctx.config.values.general.fs_sync:
         ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
-        os.sync()
+        util.fs_sync()
         ctx.ui.info(_("[+] Synced filesystem."), noln=True)

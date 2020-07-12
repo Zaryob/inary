@@ -207,9 +207,7 @@ class Install(AtomicOperation):
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.store_inary_files()
         self.update_databases()
-        if ctx.config.values.general.fs_sync:
-            ctx.ui.status(_("Syncing all buffers"), push_screen=False)
-            os.sync()
+        util.fs_sync()
 
         ctx.ui.close()
         if self.operation == UPGRADE:
