@@ -114,4 +114,6 @@ def proceed(force=False):
     if ctx.config.values.general.fs_sync:
         ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
         util.fs_sync()
-        ctx.ui.info(_("[+] Synced filesystem."), noln=True)
+        sys.stdout.write("\r\x1b[K\x1b[32;1m" +
+                         _("[+] Synced filesystem" +
+                         "\x1b[;0m\n"))
