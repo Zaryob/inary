@@ -207,6 +207,7 @@ class Install(AtomicOperation):
         ctx.ui.status(_("Updating database"), push_screen=False)
         self.store_inary_files()
         self.update_databases()
+        ctx.ui.status(_("Syncing all buffers"), push_screen=False)
         util.fs_sync()
 
         ctx.ui.close()
