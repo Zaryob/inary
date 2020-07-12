@@ -6,6 +6,7 @@ fi
 dest=""
 [ "$1" == "" ] || dest="-D$1"
 inary dc $dest
+echo 2 > /proc/sys/vm/drop_caches
 inary rdb $dest
 inary ur $dest
 inary up -c system.base $dest

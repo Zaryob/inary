@@ -20,6 +20,7 @@ import sys
 
 # INARY Modules
 import inary.context as ctx
+import inary.util as util
 
 # Gettext Library
 import gettext
@@ -55,18 +56,18 @@ def setltime(name, value):
 def t(name, path, command):
     """Main trigger handler"""
     status = 0
-    if os.path.isdir(path) == True:
+    if os.path.isdir(path):
         if getltime(name) != getmtime(path):
             sys.stdout.write("\n\x1b[33m    " +
                              _("[-] Process triggering for ") +
                              "\x1b[;0m{}".format(name))
             status = os.system(command + " &>/dev/null")
-            setltime(name, getmtime(path))
             if status != 0:
                 sys.stdout.write("\r\x1b[K\x1b[31;1m    " +
                                  _("[!] Triggering end with ") +
-                                 "\x1b[;0m{}".format(status))
+                                 "\x1b[;0m{} {}".format(status,name))
             else:
+                setltime(name, getmtime(path))
                 sys.stdout.write("\r\x1b[K\x1b[32;1m    " +
                                  _("[+] Process triggered for " +
                                    "\x1b[;0m{}".format(name)))
@@ -103,7 +104,16 @@ def proceed(force=False):
     t("gio-modules", "/usr/lib/gio/modules/",
       "gio-querymodules /usr/lib/gio/modules/")
     t("appstream", "/var/cache/app-info", "appstreamcli refresh-cache --force")
+    t("exeusrbin", "/usr/bin", "chmod +x -R /usr/bin")
+    t("exebin", "/bin", "chmod +x -R /bin")
+    t("libexec", "/usr/libexec", "chmod +x -R /usr/libexec")
     t("ca-certficates", "/etc/ssl/certs", "update-ca-certificates --fresh")
     t("cracklib", "/usr/share/cracklib/",
       "create-cracklib-dict /usr/share/cracklib/*")
     sys.stdout.write("\n")
+    if ctx.config.values.general.fs_sync:
+        ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
+        util.fs_sync()
+        sys.stdout.write("\r\x1b[K\x1b[32;1m" +
+                         _("[+] Synced filesystem" +
+                         "\x1b[;0m\n"))

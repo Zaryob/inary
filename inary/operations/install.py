@@ -239,7 +239,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo() and not ctx.config.get_option('ignore_satisfy'):
             raise Exception(
-                _('External dependencies not satisfied: \"{}\"').format(dep))
+                _('External dependencies not satisfied: \"{}\", \"{}\"').format(dep,name))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
