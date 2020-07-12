@@ -81,7 +81,7 @@ class InstallDB(lazydb.LazyDB):
 
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
-        # self.__generate_inode_cache() TODO: Needs look it up.
+        self.__generate_inode_cache() # TODO: Needs look it up.
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
@@ -95,20 +95,22 @@ class InstallDB(lazydb.LazyDB):
             ie_path = os.path.join(
                 self.package_path(package),
                 ctx.const.metadata_xml)
-            ctx.ui.debug(_("Checking inode {}").format(package))
+            ctx.ui.info(_("Checking package directory of \"{}\" package").format(package), verbose=True)
             if os.path.isfile(ie_path):
                 fd = os.open(ie_path, os.O_RDONLY)
-                if os.read(fd, 7) == "<INARY>":
-                    os.close(fd)
+                itag=os.read(fd, 7)
+                os.close(fd)
+
+                if itag == b'<INARY>' or b'<?xml v':
                     pass
                 else:
                     ctx.ui.error(_("File content of metadata.xml can be corrupted."
                                    "Probably filesystem crashed. "
-                                   "Check your installation of {0} package and filesystem").format(package))
+                                   "Check your installation of \"{0}\" package and filesystem").format(package))
             else:
-                ctx.ui.error(_("Unhandled corruption on {0} package metadata."
+                ctx.ui.error(_("Unhandled corruption on \"{0}\" package metadata."
                                "There is not any metadata.xml file for {0} package."
-                               "Please check installation of {0} package").format(package))
+                               "Please check installation of \"{0}\" package").format(package))
 
 
 
