@@ -77,11 +77,11 @@ class InstallDB(lazydb.LazyDB):
             self,
             cacheable=True,
             cachedir=ctx.config.packages_dir())
+        self.installed_db = self.__generate_installed_pkgs()
+        self.__generate_inode_cache() # TODO: Needs look it up.
         # self.init()
 
     def init(self):
-        self.installed_db = self.__generate_installed_pkgs()
-        self.__generate_inode_cache() # TODO: Needs look it up.
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
