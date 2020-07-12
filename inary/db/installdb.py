@@ -42,6 +42,8 @@ _ = __trans.gettext
 class InstallDBError(inary.errors.Error):
     pass
 
+class CorruptedPackageError(inary.errors.Error):
+    pass
 
 class InstallInfo:
     state_map = {'i': _('installed'), 'ip': _('installed-pending')}
@@ -78,10 +80,11 @@ class InstallDB(lazydb.LazyDB):
             cacheable=True,
             cachedir=ctx.config.packages_dir())
         self.installed_db = self.__generate_installed_pkgs()
+        self.__generate_inode_cache() # TODO: Needs look it up.
+
         # self.init()
 
     def init(self):
-        self.__generate_inode_cache() # TODO: Needs look it up.
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
@@ -104,14 +107,16 @@ class InstallDB(lazydb.LazyDB):
                 if itag == b'<INARY>' or b'<?xml v':
                     pass
                 else:
-                    ctx.ui.error(_("File content of metadata.xml can be corrupted."
-                                   "Probably filesystem crashed. "
-                                   "Check your installation of \"{0}\" package and filesystem").format(package))
-            else:
-                ctx.ui.error(_("Unhandled corruption on \"{0}\" package metadata."
-                               "There is not any metadata.xml file for {0} package."
-                               "Please check installation of \"{0}\" package").format(package))
+                    ctx.ui.warning(_("File content of metadata.xml can be corrupted.\n"
+                                   "Probably filesystem crashed. \n"
+                                   "Check your installation of \"{0}\" package and filesystem.").format(package))
+                    raise CorruptedPackageError(_("\"{}\" corrupted.").format(package))
 
+            else:
+                ctx.ui.warning(_("Unhandled corruption on \"{0}\" package metadata.\n"
+                               "There is not any metadata.xml file for {0} package.\n"
+                               "Please check installation of \"{0}\" package").format(package))
+                raise CorruptedPackageError(_("\"{}\" corrupted.").format(package))
 
 
     @staticmethod
