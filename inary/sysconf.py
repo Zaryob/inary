@@ -20,6 +20,7 @@ import sys
 
 # INARY Modules
 import inary.context as ctx
+import inary.util as util
 
 # Gettext Library
 import gettext
@@ -112,5 +113,7 @@ def proceed(force=False):
     sys.stdout.write("\n")
     if ctx.config.values.general.fs_sync:
         ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
-        os.sync()
-        ctx.ui.info(_("[+] Synced filesystem."), noln=True)
+        util.fs_sync()
+        sys.stdout.write("\r\x1b[K\x1b[32;1m" +
+                         _("[+] Synced filesystem" +
+                         "\x1b[;0m\n"))
