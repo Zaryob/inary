@@ -1,6 +1,7 @@
 #!/bin/bash
+set -e
 ataraxia-meson(){
-	exec meson setup \
+	meson setup \
 	  --prefix        /usr \
 	  --libexecdir    lib \
 	  --sbindir       bin \
@@ -12,16 +13,17 @@ ataraxia-meson(){
 	  "$@"
 
 }
-[ -d build ] && rm -rf build
-[ -d install ] && rm -rf install
-[ -d inary ] && rm -rf inary
 export SRC=$(pwd)/build
 export PKG=$(pwd)/install
 export CC=gcc
 export CXX=g++
-mkdir -p $SRC
-mkdir inary
 source KagamiBuild
+[ -d build ] && rm -rf build
+[ -d install ] && rm -rf install
+[ -d inary ] && rm -rf inary
+mkdir -p "$SRC"/$name-$version || true
+mkdir inary || true
+mkdir -p $PKG || true
 cd $SRC
 for s in $source
 do
@@ -29,7 +31,7 @@ if basename $s | grep ".git$" &>/dev/null ; then
 	git clone $s
 else
 	wget $s
-	tar -xf $(basename $s)
+	basename $s | grep ".tar.*$" && tar -xf $(basename $s)
 fi
 done
 build
