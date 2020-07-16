@@ -49,8 +49,8 @@ class AutoXmlTestCase(unittest.TestCase):
         self.assertEqual(len(a.heality.tith), 100)
         self.assert_(not a.errors())
 
-        a.print_text(file('/tmp/a', 'w'))
-        la = file('/tmp/a').readlines()
+        a.print_text(open('/tmp/a', 'w'))
+        la = open('/tmp/a').readlines()
         self.assert_(util.any(lambda x: x.find('02012018') != -1, la))
         a.write('/tmp/a.xml')
         return
