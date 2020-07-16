@@ -1104,7 +1104,7 @@ class Builder:
         witcher = None  # Who makes magic? ;)
         try:
             witcher = __import__("magic").detect_from_filename
-        except ModuleNotFoundError:
+        except ImportError:
             ctx.ui.warning(_("Module \"magic\" cannot found. Falling back with \"file\" command. \
 It is dangerous. So, if you wanna create stable packages, please fix \
 this issue in your workplace. Probably installing \"python3-filemagic\" \
