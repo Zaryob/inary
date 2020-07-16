@@ -20,7 +20,7 @@ jobs:
     - name: Updating repositories 
       run: |
           sudo apt update
-    - name: Installing curl curl
+    - name: Installing curl
       run: |
         sudo apt install libcurl4-openssl-dev
 
@@ -38,4 +38,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python inary-cli
+        python inary-cli --version
