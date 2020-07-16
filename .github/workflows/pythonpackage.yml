@@ -19,9 +19,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install curl
       run: |
-        apt update
-        apt upgrade
-        apt install libcurl4-openssl-dev
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install libcurl4-openssl-dev
 
     - name: Install dependencies
       run: |
