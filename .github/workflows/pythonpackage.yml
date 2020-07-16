@@ -17,12 +17,14 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install curl
+    - name: Updating repositories 
       run: |
-        sudo apt update
+          sudo apt update
+    - name: Installing curl curl
+      run: |
         sudo apt install libcurl4-openssl-dev
 
-    - name: Install dependencies
+    - name: Install requirements
       run: |
         python -m pip install --upgrade pip
         export PYCURL_SSL_LIBRARY=openssl
