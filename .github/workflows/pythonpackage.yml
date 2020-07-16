@@ -20,7 +20,6 @@ jobs:
     - name: Install curl
       run: |
         sudo apt update
-        sudo apt upgrade
         sudo apt install libcurl4-openssl-dev
 
     - name: Install dependencies
