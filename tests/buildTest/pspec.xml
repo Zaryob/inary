@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd">
+<INARY>
+    <Source>
+        <Name>hello</Name>
+        <Homepage>https://gitlab.com/sulinos/devel/inary</Homepage>
+        <Packager>
+            <Name>Ali Rıza KESKİN</Name>
+            <Email>parduscix@yandex.ru</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <PartOf>system.base</PartOf>
+        <Summary>Hello package build test</Summary>
+        <Description>Pakcage build test for inary.</Description>
+        <Archive sha1sum="b858cb282617fb0956d960215c8e84d1ccf909c6" type="binary" >https://gitlab.com/sulincix/outher/-/raw/gh-pages/space</Archive>
+    </Source>
+
+    <Package>
+        <IsA>postOps</IsA>
+        <Name>hello</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2020-01-28</Date>
+            <Version>31.42.543a</Version>
+            <Comment>First release</Comment>
+            <Name>Ali Rıza KESKİN</Name>
+            <Email>parduscix@yandex.ru</Email>
+        </Update>
+    </History>
+</INARY>
