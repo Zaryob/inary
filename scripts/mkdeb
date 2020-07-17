@@ -3,7 +3,10 @@ export CWD=$(pwd)
 tmp=$(mktemp)
 rm -f $tmp ; mkdir $tmp
 cd $1
-[ -d ./DEBIAN ] || echo "DEBIAN directory not found" && exit 1
+if [ ! -d ./DEBIAN ] ; then
+    echo "DEBIAN directory not found"
+    exit 1
+fi
 export NAME=$(cat DEBIAN/control | grep "Package: " | sed "s/.*: //g")
 export ARCH=$(cat DEBIAN/control | grep "Architecture: " | sed "s/.*: //g")
 export VERS=$(cat DEBIAN/control | grep "Version: " | sed "s/.*: //g")

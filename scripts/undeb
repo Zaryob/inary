@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+CURDIR=$(pwd)
+udir="$(mktemp -d)"
+if [ ! -f "$1" ] ; then
+    echo "Deb file not detected."
+    exit 1
+fi
+cp -prf $1 $udir/
+cd $udir/
+ar -x $udir/*.deb
+rm -rf $udir/*.deb
+rm -rf $udir/debian-binary
+mkdir -p $udir/DEBIAN
+mv $udir/control.tar.* $udir/DEBIAN/
+cd $udir/DEBIAN/
+tar -xf ./control.tar.*
+rm -rf ./control.tar.*
+cd ../
+tar -xf ./data.tar.*
+rm -rf ./data.tar.*
+export dirname=$(cat "$udir/DEBIAN/control" | grep Package | head -n 1 | sed "s/^Package: //g")
+echo $CURDIR/$dirname
+mkdir -p $CURDIR/$dirname
+cp -prf $udir/* $CURDIR/$dirname/
+rm -rf $udir/
