@@ -12,6 +12,11 @@ export ARCH=$(cat DEBIAN/control | grep "Architecture: " | sed "s/.*: //g")
 export VERS=$(cat DEBIAN/control | grep "Version: " | sed "s/.*: //g")
 tar czvf $tmp/data.tar.gz [a-z]* | sed "s/^/Adding: /g"
 cd DEBIAN
+touch md5sums
+	find .. | grep -v DEBIAN | while read line
+	do
+		[ -f $line ] && md5sum $line | sed "s|^\./||g" >> md5sums
+	done
 tar czf $tmp/control.tar.gz *
 cd ../..
 echo 2.0 > $tmp/debian-binary
