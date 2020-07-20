@@ -39,6 +39,8 @@ class BinutilsError(inary.actionsapi.Error):
 
 
 # Globals
+if not inary.actionsapi.variables.glb:
+    inary.actionsapi.variables.initVariables()
 env = inary.actionsapi.variables.glb.env
 dirs = inary.actionsapi.variables.glb.dirs
 config = inary.actionsapi.variables.glb.config

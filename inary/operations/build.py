@@ -774,6 +774,8 @@ class Builder:
         # finished its work in the archive source directory.
         curDir = os.getcwd()
         src_dir = self.pkg_src_dir()
+        os.environ['CURDIR']=curDir
+        os.environ['SRCDIR']=src_dir
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
