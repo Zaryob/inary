@@ -108,6 +108,8 @@ def proceed(force=False):
     t("exebin", "/bin", "chmod +x -R /bin")
     t("libexec", "/usr/libexec", "chmod +x -R /usr/libexec")
     t("ca-certficates", "/etc/ssl/certs", "update-ca-certificates --fresh")
+    t("baselayout_owner", "/", "chown root  /* ; chown root /usr/* ; chown root /var/*")
+    t("baselayout_group", "/", "chgrp root /* ; chgrp root /usr/* ; chgrp root /var/*")
     t("cracklib", "/usr/share/cracklib/",
       "create-cracklib-dict /usr/share/cracklib/*")
     sys.stdout.write("\n")
