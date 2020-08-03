@@ -87,9 +87,10 @@ class BuildPo(build):
                             -o po/{2}.pot".format(PROJECT, files, PROJECT))
 
         # Update PO files
-        for item in glob.glob1("po", "*.po"):
-            print("Updating .. ", item)
-            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
+        # FIXME: enable this block
+        #for item in glob.glob1("po", "*.po"):
+        #   print("Updating .. ", item)
+        #   os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)
@@ -105,7 +106,8 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        self.installi18n()
+        #FIXME enable this
+        #self.installi18n()
         self.generateConfigFile()
 
     def finalize_options(self):
