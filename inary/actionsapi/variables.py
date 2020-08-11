@@ -88,6 +88,7 @@ class Dirs:
     conf = 'etc'
     localstate = 'var'
     libexec = 'usr/libexec'
+    lib = 'usr/lib'
     defaultprefix = 'usr'
     emul32prefix = 'emul32'
 

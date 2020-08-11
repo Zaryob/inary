@@ -148,6 +148,8 @@ def ninja_install(parameters=""):
                  "{}/usr/".format(get.installDIR()))
         removeDir("/emul32")
 
+def check():
+    ninja_check()
 
 def ninja_check():
     if system('ninja test {} -C inaryPackageBuild'.format(get.makeJOBS())):

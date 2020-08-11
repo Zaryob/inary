@@ -209,6 +209,12 @@ def localstateDIR():
 def libexecDIR():
     return dirs.libexec
 
+def libDIR():
+    if env.build_type == "emul32":
+        return dirs.lib+"32"
+    else:
+        return dirs.lib
+
 
 def defaultprefixDIR():
     return dirs.defaultprefix
