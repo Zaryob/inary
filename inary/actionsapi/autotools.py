@@ -80,8 +80,7 @@ def configure(parameters=''):
     if get.buildTYPE() == "emul32":
         prefix = get.emul32prefixDIR() 
 
-    args = './configure \
-                --prefix=/{0} \
+    args = '--prefix=/{0} \
                 --build={1} \
                 --mandir=/{2} \
                 --infodir=/{3} \
@@ -134,7 +133,7 @@ def fixpc():
 
 def install(parameters='', argument='install'):
     """install source into install directory with given parameters"""
-    args = 'make prefix={0}/{1} \
+    args = 'prefix={0}/{1} \
             datadir={0}/{2} \
             infodir={0}/{3} \
             localstatedir={0}/{4} \
