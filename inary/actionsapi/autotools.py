@@ -76,12 +76,11 @@ class RunTimeError(inary.actionsapi.Error):
 def configure(parameters=''):
     """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"""
 
-        prefix = get.defaultprefixDIR()
+    prefix = get.defaultprefixDIR()
+    if get.buildTYPE() == "emul32":
+        prefix = get.emul32prefixDIR() 
 
-        if get.buildTYPE() == "emul32" 
-            prefix = get.emul32prefixDIR() 
-
-        args = './configure \
+    args = './configure \
                 --prefix=/{0} \
                 --build={1} \
                 --mandir=/{2} \
@@ -94,7 +93,7 @@ def configure(parameters=''):
                 {9}'.format(prefix, get.HOST(), get.manDIR(), get.infoDIR(),
                                get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
                                get.libDIR(), parameters)
-        rawConfigure(args)
+    rawConfigure(args)
 
 def rawConfigure(parameters=''):
     """configure source with given parameters = --prefix=/usr --libdir=/usr/lib --with-nls """
