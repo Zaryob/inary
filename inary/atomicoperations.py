@@ -312,19 +312,13 @@ class Install(AtomicOperation):
 
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release
-                if pkg_version > iversion:
-                    ctx.ui.info(_('Upgrading to new upstream version.'))
-                    self.operation = UPGRADE
-                elif pkg_release > irelease:
-                    ctx.ui.info(_('Upgrading to new distribution release.'))
+                if pkg_release > irelease:
+                    ctx.ui.info(_('Upgrading to new release.'))
                     self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
                 if not self.operation == UPGRADE:
-                    if pkg_version < iversion:
-                        # x = _('Downgrade to old upstream version?')
-                        x = None
-                    elif pkg_release < irelease:
+                    if pkg_release < irelease:
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = None
