@@ -1,0 +1,54 @@
+#!/bin/bash
+setcfg(){
+    echo -ne " $1 [y/n]"
+    read -sn 1 c
+    echo -ne "($c)"
+    if [ "$c" == "y" ] || [ "$c" == "Y" ] ; then
+        echo "$2=y" >> .config
+    else
+        echo "$2=n" >> .config
+    fi
+    echo
+}
+ask_cfg(){
+
+    echo "Inary configure :"
+    echo "#inary config file" > .config
+    setcfg "Native Language Support" "NLS_SUPPORT"
+    setcfg "Additional scripts" "ADDITIONAL_SCRIPTS"
+    echo -e "\".config\" file changed."
+    
+
+}
+yes(){
+while true ; do
+    echo -ne "$1"
+done
+}
+usage(){
+cat <<EOF
+./configure [OPTIONS]
+
+Options list:
+
+--yes-all :  enable all
+--no-all  :  disable all
+
+--help    :  show this message
+
+EOF
+
+}
+for i in $@ ; do
+    if [ "$i" == "--yes-all" ] ; then
+        yes y | ask_cfg
+        exit 0
+    elif [ "$i" == "--no-all" ] ; then
+        yes n | ask_cfg
+        exit 0
+    elif [ "$i" == "--help" ] ; then
+        usage
+        exit 0
+    fi
+done
+ask_cfg

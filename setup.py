@@ -35,6 +35,18 @@ CONFIG_DIR = "/etc/inary"
 MIMEFILE_DIR = "/usr/share/mime/packages"
 TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
+#config file
+if not os.path.isfile(".config"):
+    print("No config file found. You must run ./configure first.")
+    exit(127)
+cfg=open(".config","r").readlines()
+
+def getConfig(name=""):
+    for line in cfg:
+        if name in line:
+            return "y" in line.split("=")[1]
+    return False
+
 
 class Build(build):
     def run(self):
@@ -106,8 +118,8 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        #FIXME enable this
-        #self.installi18n()
+        if getConfig("NLS_SUPPORT"):
+            self.installi18n()
         self.generateConfigFile()
 
     def finalize_options(self):
@@ -204,7 +216,7 @@ setup(name="inary",
                 'test': Test},
       data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf"]),
                   (MIMEFILE_DIR, ["build/inary.xml"])],
-      scripts=['inary-cli',
+      scripts=(['inary-cli',
                'scripts/pspec2po',
                'scripts/revdep-rebuild',
                'scripts/sulinstrapt',
@@ -219,7 +231,7 @@ setup(name="inary",
                'scripts/detect-file-dep',
                'scripts/uninary',
                'scripts/update-inary-cache',
-               'scripts/version-bump'],
+               'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',
