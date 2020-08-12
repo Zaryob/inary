@@ -1,8 +1,9 @@
 #!/bin/bash
+set -e
 setcfg(){
     echo -ne " $1 [y/n]"
     read -sn 1 c
-    echo -ne "($c)"
+    echo -ne "\033[32;1m($c)\033[;0m"
     if [ "$c" == "y" ] || [ "$c" == "Y" ] ; then
         echo "$2=y" >> .config
     else
@@ -10,20 +11,55 @@ setcfg(){
     fi
     echo
 }
+defconfig="ny"
 ask_cfg(){
 
-    echo "Inary configure :"
+    echo -e "\033[34;1mInary configure :\033[;0m"
     echo "#inary config file" > .config
-    setcfg "Native Language Support" "NLS_SUPPORT"
+    setcfg "Native language support" "NLS_SUPPORT"
     setcfg "Additional scripts" "ADDITIONAL_SCRIPTS"
-    echo -e "\".config\" file changed."
-    
+    echo -e "\033[33;1m\".config\" file changed.\033[;0m"
 
 }
+
+ask_check(){
+echo -e "\033[34;1mInary check :\033[;0m"
+chkfile "/dev/null"
+chkfile "/usr/bin/"
+chkfile "/var/lib/"
+chkfile "/usr/lib/"
+chkfile "/etc/"
+chkcmd "python3" && chkcmd "python3.8" || chkcmd "python3.7"
+chkcmd "intltool-extract"
+chkcmd "xgettext"
+chkcmd "msgfmt"
+}
+
+chkcmd(){
+    echo -ne "checking $1 "
+    if which $1 &>/dev/null ; then
+        echo -e "\033[32;1m(yes)\033[;0m"
+    else
+        echo -e "\033[33;1m(no)\033[;0m"
+        echo -e "\033[32;1mERROR:\033[;0m $1 not found in \$PATH"
+        return 1
+    fi
+}
+
+chkfile(){
+    echo -ne "checking $1 "
+    if [ -e  "$1" ] ; then
+        echo -e "\033[32;1m(yes)\033[;0m"
+    else
+        echo -e "\033[33;1m(no)\033[;0m"
+        echo -e "\033[32;1mERROR:\033[;0m $1 not found."
+        return 1
+    fi
+}
 yes(){
-while true ; do
-    echo -ne "$1"
-done
+    while true ; do
+        echo -ne "$1"
+    done
 }
 usage(){
 cat <<EOF
@@ -31,20 +67,31 @@ cat <<EOF
 
 Options list:
 
---yes-all :  enable all
---no-all  :  disable all
+--yes-all :  Enable all
+--no-all  :  Disable all
+--default :  Use default config
 
---help    :  show this message
+--help    :  Show this message
+--clean   :  Delete .config file
 
 EOF
 
 }
 for i in $@ ; do
     if [ "$i" == "--yes-all" ] ; then
+        ask_check
         yes y | ask_cfg
         exit 0
     elif [ "$i" == "--no-all" ] ; then
+        ask_check
         yes n | ask_cfg
+        exit 0
+    elif [ "$i" == "--clean" ] ; then
+        [ -f .config ] && rm -f .config
+        exit 0
+    elif [ "$i" == "--default" ] ; then
+        ask_check
+        echo "$defconfig" | ask_cfg
         exit 0
     elif [ "$i" == "--help" ] ; then
         usage
