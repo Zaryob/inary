@@ -542,8 +542,6 @@ class Install(AtomicOperation):
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
         ctx.ui.info(_("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"),verbose=True)
-        if self.operation == REINSTALL or  self.operation == UPGRADE or self.operation == DOWNGRADE:
-            util.clean_dir(self.old_path)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(
@@ -554,13 +552,9 @@ class Install(AtomicOperation):
 
     def update_databases(self):
         """update databases"""
-        if self.operation == REINSTALL:
-            self.installdb.remove_package(self.pkginfo)
-
-        # need service or system restart?
 
         if self.installdb.has_package(self.pkginfo.name):
-            if self.operation == (UPGRADE or DOWNGRADE):
+            if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
                 self.installdb.remove_package(self.pkginfo)
                 self.installdb.add_package(self.pkginfo)
 
@@ -590,6 +584,8 @@ class Install(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
                                       operation=opttostr[self.operation], otype=otype)
 
+        if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
+            util.clean_dir(self.old_path)
 
 def install_single(pkg, upgrade=False):
     """install a single package from URI or ID"""
