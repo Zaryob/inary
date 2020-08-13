@@ -4,7 +4,7 @@ all: build install
 clean:
 	`find | grep pycache | sed 's/^/rm -rf /g'`
 	rm -rf build
-	rm -f p0/*.mo
+	rm -f po/*.mo
 build:
 	python3 setup.py build
 install:
