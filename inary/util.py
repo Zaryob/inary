@@ -734,6 +734,8 @@ def get_file_hashes(top, excludePrefix=None, removePrefix=None):
 
 def check_file_hash(filename, hash):
     """Check the file's integrity with a given hash."""
+    if os.path.isdir(filename+"/.git"):
+        return True
     return sha1_file(filename) == hash
 
 

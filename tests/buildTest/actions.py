@@ -10,11 +10,13 @@ from inary.actionsapi import get
 from inary.actionsapi import inarytools
 from inary.actionsapi import mesontools
 from inary.actionsapi import cmaketools
+from inary.actionsapi import autotools
 
+def setup():
+    pass
+
+def build():
+    pass
 
 def install():
-    print("curdir="+get.curDIR())
-    print("workdir="+get.workDIR())
-    shelltools.system("mkdir -p {}/usr/bin/".format(get.installDIR()))
-    shelltools.system("install space {}/usr/bin/hello".format(get.installDIR()))
-    shelltools.system("env")
+    autotools.install("DESTDIR={} >/dev/null".format(get.installDIR()))

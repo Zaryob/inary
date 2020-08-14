@@ -342,6 +342,18 @@ class Fetcher:
 
 
 # helper function
+def fetch_git(url, destdir="",branch="master"):
+
+    if os.path.isdir(destdir):
+        os.system("rm -rf \"{}\"".format(destdir))
+    status=os.system("git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url,destdir,branch))
+    if status != 0:
+        print(status)
+        ctx.ui.error(
+            _('Failed to clone git repository from {}.').format(url))
+        exit(1)
+
+
 def fetch_url(url, destdir=None, progress=None, destfile=None, pkgname=''):
 
     if not destdir:
@@ -436,4 +448,8 @@ def fetch(packages=None, path=os.path.curdir):
                     repodb.get_repo_url(repo)), str(
                     uri.path()))
 
-        fetch_url(url, path, ctx.ui.Progress)
+        if url.startswith("git://") or url.endswith(".git"):
+            branch="master"
+            fetch_git(url.replace("git://","https://"),path,branch)
+        else:
+            fetch_url(url, path, ctx.ui.Progress)
