@@ -125,8 +125,7 @@ def check_path_collision(package, pkgList):
     return collisions
 
 
-def exclude_special_files(filepath, fileinfo, ag):
-    keeplist = ag.get("KeepSpecial", [])
+def exclude_special_files(filepath, fileinfo, keeplist):
     patterns = {"libtool": "libtool library file",
                 "python": "python.*byte-compiled",
                 "perl": "Perl POD document text"}
@@ -261,7 +260,6 @@ class Builder:
 
         self.check_paths()
 
-        self.actionLocals = None
         self.actionGlobals = None
         self.actionScript = ""
 
@@ -275,6 +273,7 @@ class Builder:
 
         self.has_ccache = False
         self.has_icecream = False
+        
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -417,8 +416,6 @@ class Builder:
                 _("Rebuilding source for build type: {}").format(build_type))
 
         self.build_type = build_type
-        self.set_environment_vars()
-        self.load_action_script()
 
     def set_environment_vars(self):
         """Sets the environment variables for actions API to use"""
@@ -428,10 +425,11 @@ class Builder:
 
         os.environ.clear()
 
-        inary.actionsapi.variables.initVariables()
+        #inary.actionsapi.variables.initVariables()
 
         env = {"PKG_DIR": self.pkg_dir(),
-               "WORK_DIR": self.pkg_work_dir(),
+               "WORK_DIR": self.pkg_src_dir(),
+               "SRCDIR": self.pkg_work_dir(),
                "HOME": self.pkg_work_dir(),
                "INSTALL_DIR": self.pkg_install_dir(),
                "INARY_BUILD_TYPE": self.build_type,
@@ -702,19 +700,6 @@ class Builder:
             raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
                 fname, e))
 
-    def load_action_script(self):
-        """Compiles and executes the action script"""
-
-        compiled_script = self.compile_action_script()
-
-        try:
-            localSymbols = globalSymbols = {}
-            exec(compiled_script, localSymbols, globalSymbols)
-        except Exception as e:
-            raise (e)
-
-        self.actionLocals = localSymbols
-        self.actionGlobals = globalSymbols
 
     def compile_postops_script(self):
         """Compiles postops scripts to check syntax errors"""
@@ -730,40 +715,30 @@ class Builder:
                 raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
                     fname, e))
 
+    def get_action_variable(self,name,default):
+        (ret, out , err) = util.run_batch('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name,os.getcwd()))
+        if ret == 0:
+            return out
+        else:
+            return default
+
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
 
-        dirname = self.actionGlobals.get("WorkDir")
-        if dirname:
-            return util.join_path(self.pkg_work_dir(), dirname)
-
-        dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
+        dirname=self.get_action_variable("WorkDir","")
+        if dirname == "":
+            dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
         src_dir = util.join_path(self.pkg_work_dir(), dirname)
-
         if not os.path.exists(src_dir):
-            archive = self.spec.source.archive[0]
+            util.ensure_dirs(src_dir)
 
             # For binary types, WorkDir is usually "."
-            if archive.type == "binary":
-                return self.pkg_work_dir()
-
-            basename = os.path.basename(archive.uri)
-            dirname = os.path.splitext(basename)[0]
-            src_dir = util.join_path(self.pkg_work_dir(), dirname)
-
-            while not os.path.exists(src_dir):
-                src_dir, ext = os.path.splitext(src_dir)
-                if not ext:
-                    break
-            if not os.path.exists(src_dir):
-                src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).__next__()[1] if
-                                                               not d.startswith(".")][0])
-                if self.get_state() == "unpack":
-                    ctx.ui.info(
-                        "Using {} as  WorkDir".format(src_dir),
-                        verbose=True)
-
-        return src_dir
+        archive = self.spec.source.archive[0]
+        if archive.type == "binary":
+            return self.pkg_work_dir()
+        else:
+            return src_dir
+        
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
@@ -773,47 +748,19 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
-        src_dir = self.pkg_src_dir()
+        src_dir=self.pkg_src_dir()
+        self.set_environment_vars()
+        os.environ['WORK_DIR']=src_dir
         os.environ['CURDIR']=curDir
-        os.environ['SRCDIR']=src_dir
+        os.environ['SRCDIR']=self.pkg_work_dir()
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
 
-        if func in self.actionLocals:
-            # Fixme: It needs a more effective fix than commit 17d7d45 on
-            # branch origin/foreign-actions
-
-            prcss = process.Process(
-                name="INARY_BUILD", target=self.actionLocals[func],)
-            prcss.start()
-            ctx.ui.info(
-                _("[ Child Process PID ] : "),
-                color="brightwhite",
-                noln=True)
-            print(prcss.pid)
-
-            prcss.join()
-            if prcss.exception:
-                error, traceback = prcss.exception
-                for i in traceback.splitlines():
-                    if 'actions.py' in i:
-                        errmsg = i
-
-                raise Error(_("Running commands in \"{}\" function failed:\nError Message: \n{}\n\t{} ").format(
-                    func,
-                    errmsg,
-                    error
-                )
-                )
-
-        else:
-            if mandatory:
-                raise Error(
-                    _("unable to call function from actions: \'{}\'").format(func))
-
+        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func,curDir)):
+              raise Error(_("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
         return True
 
@@ -1141,9 +1088,8 @@ package might be a good solution."))
                 strip_debug_action(
                     filepath,
                     fileinfo,
-                    install_dir,
-                    self.actionGlobals)
-                exclude_special_files(filepath, fileinfo, self.actionGlobals)
+                    install_dir)
+                exclude_special_files(filepath, fileinfo,get_action_variable("KeepSpecial", []))
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
