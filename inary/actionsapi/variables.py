@@ -54,6 +54,7 @@ class Env(object):
         self.__vars = {
             'pkg_dir': 'PKG_DIR',
             'work_dir': 'WORK_DIR',
+            'operation': 'OPERATION',
             'install_dir': 'INSTALL_DIR',
             'build_type': 'INARY_BUILD_TYPE',
             'src_name': 'SRC_NAME',

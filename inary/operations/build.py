@@ -753,6 +753,7 @@ class Builder:
         os.environ['WORK_DIR']=src_dir
         os.environ['CURDIR']=curDir
         os.environ['SRCDIR']=self.pkg_work_dir()
+        os.environ['OPERATION']=func
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:

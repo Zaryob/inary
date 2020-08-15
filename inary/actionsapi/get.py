@@ -90,6 +90,10 @@ def pkgDIR():
 
 def workDIR():
     return env.work_dir
+    
+
+def operation():
+    return env.operation
 
 
 def installDIR():
