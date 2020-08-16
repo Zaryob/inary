@@ -363,6 +363,9 @@ class Builder:
         self.fetch_source_archives()
 
         util.clean_dir(self.pkg_install_dir())
+        if not os.path.exists(self.pkg_install_dir()):
+                util.ensure_dirs(self.pkg_install_dir())
+                
         for build_type in self.build_types:
             self.set_build_type(build_type)
             self.unpack_source_archives()
@@ -465,7 +468,7 @@ class Builder:
                 os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" % os.environ
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
                 # as $HOME can be modified through actions.py
-                os.environ["CCACHE_DIR"] = "/root/.ccache"
+                os.environ["CCACHE_DIR"] = "/tmp/.ccache"
 
     def fetch_files(self):
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
