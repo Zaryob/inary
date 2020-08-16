@@ -435,6 +435,7 @@ class Builder:
                "SRC_NAME": self.spec.source.name,
                "SRC_VERSION": self.spec.getSourceVersion(),
                "SRC_RELEASE": self.spec.getSourceRelease(),
+               "PATH":"/bin:/usr/bin:/sbin:/usr/sbin",
                "PYTHONDONTWRITEBYTECODE": '1'}
         if self.build_type == "emul32":
             env["CC"] = "{} -m32".format(os.getenv("CC"))
