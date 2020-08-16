@@ -163,8 +163,7 @@ def exclude_special_files(filepath, fileinfo, keeplist):
             util.rmdirs(os.path.dirname(filepath))
 
 
-def strip_debug_action(filepath, fileinfo, install_dir, ag):
-    excludelist = tuple(ag.get("NoStrip", []))
+def strip_debug_action(filepath, fileinfo, install_dir,excludelist):
 
     # real path in .inary package
     path = '/' + util.removepathprefix(install_dir, filepath)
@@ -1089,8 +1088,8 @@ package might be a good solution."))
                 strip_debug_action(
                     filepath,
                     fileinfo,
-                    install_dir)
-                exclude_special_files(filepath, fileinfo,get_action_variable("KeepSpecial", []))
+                    install_dir,tuple(self.get_action_variable("NoStrip", [])))
+                exclude_special_files(filepath, fileinfo,self.get_action_variable("KeepSpecial", []))
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
