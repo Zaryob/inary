@@ -617,7 +617,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         def errors(self, where):
             """return errors in the object"""
             errs = []
-            if hasattr(self, name) and getattr(self, name) is not None:
+            if hasattr(self, name) and getattr(self, name):
                 value = getattr(self, name)
                 errs.extend(errors_a(value, where + '.' + name))
             else:
