@@ -29,8 +29,8 @@ msgstr "opção ambíguo: %s (%s?)"
 
 #: /usr/lib/python3.7/optparse.py:381
 #, python-format
-msgid "Usage: %s\n"
-msgstr "maneira de usar: %s\n"
+msgid "Usage: %s"
+msgstr "maneira de usar: %s"
 
 #: /usr/lib/python3.7/optparse.py:400
 msgid "Usage"
@@ -92,20 +92,20 @@ msgstr "Program terminei."
 
 #: inary-cli:54
 msgid ""
-"\n"
+""
 "Keyboard Interrupt [Ctrl-C]: Exiting..."
 msgstr "Interrupção do teclado: Saindo ..."
 
 #: inary-cli:57
 msgid ""
-"\n"
+""
 "Keyboard Interrupt [Ctrl-D]: Exiting..."
 msgstr "Interrupção do teclado: Saindo ..."
 
 #: inary-cli:61
 msgid ""
-"\n"
-"Unhandled internal exception.\n"
+""
+"Unhandled internal exception."
 "Please file a bug report to <https://github.com/SulinOS/inary/issues>."
 msgstr ""
 
@@ -119,10 +119,10 @@ msgstr "Usar 'inary help' para ajuda general, por favor. "
 
 #: inary-cli:82
 msgid ""
-"\n"
+""
 "Traceback:"
 msgstr ""
-"\n"
+""
 "Traça de resultado:"
 
 #: inary-cli:85
@@ -139,10 +139,10 @@ msgstr "INARY pacote"
 
 #: inary/actionsapi/autotools.py:45 inary/actionsapi/cmaketools.py:41
 msgid ""
-"Please attach the config.log to your bug report:\n"
+"Please attach the config.log to your bug report:"
 "{}/config.log"
 msgstr ""
-"Anexar o config.log ao seu relatório de erro, Por faver:\n"
+"Anexar o config.log ao seu relatório de erro, Por faver:"
 "{}/config.log"
 
 #: inary/actionsapi/autotools.py:99 inary/actionsapi/autotools.py:111
@@ -627,7 +627,7 @@ msgstr ""
 
 #: inary/archive.py:594
 msgid ""
-"Problem occured while uncompressing \"{}.Z\" file.\n"
+"Problem occured while uncompressing \"{}.Z\" file."
 "Error:{}"
 msgstr ""
 
@@ -650,9 +650,9 @@ msgstr ""
 
 #: inary/archive.py:964
 msgid ""
-"Archive File: {}\n"
-" * Expected sha1 value: {}\n"
-" * Received sha1 value: {}\n"
+"Archive File: {}"
+" * Expected sha1 value: {}"
+" * Received sha1 value: {}"
 msgstr ""
 
 #: inary/archive.py:967
@@ -733,12 +733,12 @@ msgstr ""
 
 #: inary/atomicoperations.py:273
 #, python-brace-format
-msgid "\"/{0}\" from \"{1}\" package\n"
+msgid "\"/{0}\" from \"{1}\" package"
 msgstr "Configurar falhou."
 
 #: inary/atomicoperations.py:274
 msgid ""
-"File conflicts:\n"
+"File conflicts:"
 "\"{}\""
 msgstr ""
 
@@ -905,14 +905,14 @@ msgstr "Instale falhou."
 
 #: inary/cli/addrepo.py:32
 msgid ""
-"Add a repository\n"
-"\n"
-"Usage: add-repo <repo> <indexuri>\n"
-"\n"
-"<repo>: name of repository to add\n"
-"<indexuri>: URI of index file\n"
-"\n"
-"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment\n"
+"Add a repository"
+""
+"Usage: add-repo <repo> <indexuri>"
+""
+"<repo>: name of repository to add"
+"<indexuri>: URI of index file"
+""
+"NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment"
 msgstr ""
 
 #: inary/cli/addrepo.py:50
@@ -933,15 +933,15 @@ msgstr ""
 
 #: inary/cli/addrepo.py:72
 msgid ""
-"Add \"{}\" repository without updating the database?\n"
-"By confirming this you are also adding the repository to your system without checking the distribution of the repository.\n"
+"Add \"{}\" repository without updating the database?"
+"By confirming this you are also adding the repository to your system without checking the distribution of the repository."
 "Would you like to continue?"
 msgstr ""
 
 #: inary/cli/addrepo.py:85
 #, python-brace-format
 msgid ""
-"Error: {0} repository could not be reached: \n"
+"Error: {0} repository could not be reached: "
 "{1}"
 msgstr ""
 
@@ -961,10 +961,10 @@ msgstr ""
 
 #: inary/cli/blame.py:27
 msgid ""
-"Information about the package owner and release\n"
-"\n"
-"Usage: blame <package> ... <package>\n"
-"\n"
+"Information about the package owner and release"
+""
+"Usage: blame <package> ... <package>"
+""
 msgstr ""
 
 #: inary/cli/blame.py:40
@@ -981,34 +981,34 @@ msgstr ""
 
 #: inary/cli/blame.py:75 inary/data/specfile.py:402 inary/data/specfile.py:506
 #, python-brace-format
-msgid "Name: {0}, version: {1}, release: {2}\n"
+msgid "Name: {0}, version: {1}, release: {2}"
 msgstr ""
 
 #: inary/cli/blame.py:77
 #, python-brace-format
-msgid "Package Maintainer: {0} <{1}>\n"
+msgid "Package Maintainer: {0} <{1}>"
 msgstr ""
 
 #: inary/cli/blame.py:79
 #, python-brace-format
-msgid "Release Updater: {0.name} <{0.email}>\n"
+msgid "Release Updater: {0.name} <{0.email}>"
 msgstr ""
 
 #: inary/cli/blame.py:81
-msgid "Update Date: {}\n"
+msgid "Update Date: {}"
 msgstr ""
 
 #: inary/cli/build.py:28
 msgid ""
-"Build INARY packages\n"
-"\n"
-"Usage: build [<pspec.xml> | <sourcename>] ...\n"
-"\n"
-"You can give a URI of the pspec.xml file. INARY will\n"
-"fetch all necessary files and build the package for you.\n"
-"\n"
-"Alternatively, you can give the name of a source package\n"
-"to be downloaded from a repository containing sources.\n"
+"Build INARY packages"
+""
+"Usage: build [<pspec.xml> | <sourcename>] ..."
+""
+"You can give a URI of the pspec.xml file. INARY will"
+"fetch all necessary files and build the package for you."
+""
+"Alternatively, you can give the name of a source package"
+"to be downloaded from a repository containing sources."
 msgstr ""
 
 #: inary/cli/build.py:49
@@ -1097,18 +1097,18 @@ msgstr ""
 
 #: inary/cli/check.py:30
 msgid ""
-"Verify installation\n"
-"\n"
-"    Usage: check [<package1> <package2> ... <packagen>]\n"
-"           check -c <component>\n"
-"\n"
-"    <packagei>: package name\n"
-"\n"
-"    A cryptographic checksum is stored for each installed\n"
-"    file. Check command uses the checksums to verify a package.\n"
-"    Just give the names of packages.\n"
-"\n"
-"    If no packages are given, checks all installed packages.\n"
+"Verify installation"
+""
+"    Usage: check [<package1> <package2> ... <packagen>]"
+"           check -c <component>"
+""
+"    <packagei>: package name"
+""
+"    A cryptographic checksum is stored for each installed"
+"    file. Check command uses the checksums to verify a package."
+"    Just give the names of packages."
+""
+"    If no packages are given, checks all installed packages."
 "    "
 msgstr ""
 
@@ -1170,7 +1170,7 @@ msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/cli/check.py:142
 msgid ""
-"Inary was unable to check the integrity of packages which contain files that you don't have read access.\n"
+"Inary was unable to check the integrity of packages which contain files that you don't have read access."
 "Running the check under a privileged user may help fixing this problem."
 msgstr ""
 
@@ -1215,7 +1215,7 @@ msgid "Suppresses all coloring of INARY's output."
 msgstr ""
 
 #: inary/cli/command.py:139
-msgid "Destination directory \"{}\" does not exist. Creating directory.\n"
+msgid "Destination directory \"{}\" does not exist. Creating directory."
 msgstr ""
 
 #: inary/cli/command.py:153 inary/util.py:85
@@ -1235,8 +1235,8 @@ msgid "Do not perform any action, just show what would be done."
 msgstr ""
 
 #: inary/cli/command.py:223
-msgid "usage: {}\n"
-msgstr "maneira de usar: {}\n"
+msgid "usage: {}"
+msgstr "maneira de usar: {}"
 
 #: inary/cli/configmanager.py:33
 msgid "Inary Config file manager."
@@ -1265,12 +1265,12 @@ msgstr ""
 
 #: inary/cli/configurepending.py:53
 msgid ""
-"Configure pending packages\n"
-"\n"
-"If SCOM configuration of some packages were not\n"
-"done at installation time, they are added to a list\n"
-"of packages waiting to be configured. This command\n"
-"configures those packages.\n"
+"Configure pending packages"
+""
+"If SCOM configuration of some packages were not"
+"done at installation time, they are added to a list"
+"of packages waiting to be configured. This command"
+"configures those packages."
 msgstr ""
 
 #: inary/cli/configurepending.py:68 inary/cli/reconfigure.py:60
@@ -1279,12 +1279,12 @@ msgstr ""
 
 #: inary/cli/deletecache.py:30
 msgid ""
-"Delete cache files\n"
-"\n"
-"Usage: delete-cache\n"
-"\n"
-"Sources, packages and temporary files are stored\n"
-"under /var directory. Since these accumulate they can\n"
+"Delete cache files"
+""
+"Usage: delete-cache"
+""
+"Sources, packages and temporary files are stored"
+"under /var directory. Since these accumulate they can"
 "consume a lot of disk space."
 msgstr ""
 
@@ -1306,14 +1306,14 @@ msgstr "Execução de aclocal falhou."
 
 #: inary/cli/delta.py:25
 msgid ""
-"Creates delta packages\n"
-"\n"
-"Usages: delta oldpackage1 oldpackage2 ...  newpackage\n"
-"        delta -t newpackage oldpackage1 oldpackage2 ...\n"
-"\n"
-"Delta command finds the changed files between the given\n"
-"packages by comparing the sha1sum of files and creates\n"
-"a delta package with the changed files.\n"
+"Creates delta packages"
+""
+"Usages: delta oldpackage1 oldpackage2 ...  newpackage"
+"        delta -t newpackage oldpackage1 oldpackage2 ..."
+""
+"Delta command finds the changed files between the given"
+"packages by comparing the sha1sum of files and creates"
+"a delta package with the changed files."
 msgstr ""
 
 #: inary/cli/delta.py:45
@@ -1326,25 +1326,25 @@ msgstr ""
 
 #: inary/cli/disablerepo.py:24
 msgid ""
-"Disable repository\n"
-"\n"
-"Usage: disable-repo [<repo1> <repo2> ... <repon>]\n"
-"\n"
-"<repoi>: repository name\n"
-"\n"
-"Disabled repositories are not taken into account in operations\n"
+"Disable repository"
+""
+"Usage: disable-repo [<repo1> <repo2> ... <repon>]"
+""
+"<repoi>: repository name"
+""
+"Disabled repositories are not taken into account in operations"
 msgstr ""
 
 #: inary/cli/emerge.py:29
 msgid ""
-"Build and install INARY source packages from repository\n"
-"\n"
-"Usage: emerge <sourcename> ...\n"
-"\n"
-"You should give the name of a source package to be\n"
-"downloaded from a repository containing sources.\n"
-"\n"
-"You can also give the name of a component.\n"
+"Build and install INARY source packages from repository"
+""
+"Usage: emerge <sourcename> ..."
+""
+"You should give the name of a source package to be"
+"downloaded from a repository containing sources."
+""
+"You can also give the name of a component."
 msgstr ""
 
 #: inary/cli/emerge.py:46
@@ -1387,14 +1387,14 @@ msgstr ""
 
 #: inary/cli/emergeup.py:29
 msgid ""
-"Build and upgrade INARY source packages from repository\n"
-"\n"
-"Usage: emergeup ...\n"
-"\n"
-"You should give the name of a source package to be\n"
-"downloaded from a repository containing sources.\n"
-"\n"
-"You can also give the name of a component.\n"
+"Build and upgrade INARY source packages from repository"
+""
+"Usage: emergeup ..."
+""
+"You should give the name of a source package to be"
+"downloaded from a repository containing sources."
+""
+"You can also give the name of a component."
 msgstr ""
 
 #: inary/cli/emergeup.py:46
@@ -1403,24 +1403,24 @@ msgstr "%prog [optçaos]"
 
 #: inary/cli/enablerepo.py:24
 msgid ""
-"Enable repository\n"
-"\n"
-"Usage: enable-repo [<repo1> <repo2> ... <repon>]\n"
-"\n"
-"<repoi>: repository name\n"
-"\n"
-"Disabled repositories are not taken into account in operations\n"
+"Enable repository"
+""
+"Usage: enable-repo [<repo1> <repo2> ... <repon>]"
+""
+"<repoi>: repository name"
+""
+"Disabled repositories are not taken into account in operations"
 msgstr ""
 
 #: inary/cli/fetch.py:26
 msgid ""
-"Fetch a package\n"
-"\n"
-"Usage: fetch [<package1> <package2> ... <packagen>]\n"
-"\n"
-"<packagei>: package name\n"
-"\n"
-"Downloads the given inary packages to working directory\n"
+"Fetch a package"
+""
+"Usage: fetch [<package1> <package2> ... <packagen>]"
+""
+"<packagei>: package name"
+""
+"Downloads the given inary packages to working directory"
 msgstr ""
 
 #: inary/cli/fetch.py:41
@@ -1437,14 +1437,14 @@ msgstr ""
 
 #: inary/cli/graph.py:28
 msgid ""
-"Graph package relations\n"
-"\n"
-"Usage: graph [<package1> <package2> ...]\n"
-"\n"
-"Write a graph of package relations, tracking dependency and\n"
-"conflicts relations starting from given packages. By default\n"
-"shows the package relations among repository packages, and writes\n"
-"the package in graphviz format to 'pgraph.dot'.\n"
+"Graph package relations"
+""
+"Usage: graph [<package1> <package2> ...]"
+""
+"Write a graph of package relations, tracking dependency and"
+"conflicts relations starting from given packages. By default"
+"shows the package relations among repository packages, and writes"
+"the package in graphviz format to 'pgraph.dot'."
 msgstr ""
 
 #: inary/cli/graph.py:43
@@ -1485,25 +1485,25 @@ msgstr ""
 
 #: inary/cli/help.py:25
 msgid ""
-"Prints help for given commands\n"
-"\n"
-"Usage: help [ <command1> <command2> ... <commandn> ]\n"
-"\n"
+"Prints help for given commands"
+""
+"Usage: help [ <command1> <command2> ... <commandn> ]"
+""
 "If run without parameters, it prints the general help."
 msgstr ""
 
 #: inary/cli/help.py:51
 msgid ""
-"%prog [options] <command> [arguments]\n"
-"\n"
-"where <command> is one of:\n"
-"\n"
+"%prog [options] <command> [arguments]"
+""
+"where <command> is one of:"
+""
 msgstr ""
 
 #: inary/cli/help.py:57
 msgid ""
-"\n"
-"Use \"%prog help <command>\" for help on a specific command.\n"
+""
+"Use \"%prog help <command>\" for help on a specific command."
 msgstr ""
 
 #: inary/cli/history.py:29
@@ -1540,10 +1540,10 @@ msgstr ""
 
 #: inary/cli/history.py:35
 msgid ""
-"History of inary operations\n"
-"\n"
-"Usage: history\n"
-"\n"
+"History of inary operations"
+""
+"Usage: history"
+""
 "Lists previous operations."
 msgstr ""
 
@@ -1605,17 +1605,17 @@ msgstr ""
 
 #: inary/cli/index.py:27
 msgid ""
-"Index INARY files in a given directory\n"
-"\n"
-"Usage: index <directory> ...\n"
-"\n"
-"This command searches for all INARY files in a directory, collects INARY\n"
-"tags from them and accumulates the information in an output XML file,\n"
-"named by default 'inary-index.xml'. In particular, it indexes both\n"
-"source and binary packages.\n"
-"\n"
-"If you give multiple directories, the command still works, but puts\n"
-"everything in a single index file.\n"
+"Index INARY files in a given directory"
+""
+"Usage: index <directory> ..."
+""
+"This command searches for all INARY files in a directory, collects INARY"
+"tags from them and accumulates the information in an output XML file,"
+"named by default 'inary-index.xml'. In particular, it indexes both"
+"source and binary packages."
+""
+"If you give multiple directories, the command still works, but puts"
+"everything in a single index file."
 msgstr ""
 
 #: inary/cli/index.py:50
@@ -1648,11 +1648,11 @@ msgstr ""
 
 #: inary/cli/info.py:29
 msgid ""
-"Display package information\n"
-"\n"
-"Usage: info <package1> <package2> ... <packagen>\n"
-"\n"
-"<packagei> is either a package name or a .inary file,\n"
+"Display package information"
+""
+"Usage: info <package1> <package2> ... <packagen>"
+""
+"<packagei> is either a package name or a .inary file,"
 msgstr ""
 
 #: inary/cli/info.py:47
@@ -1733,15 +1733,15 @@ msgstr ""
 
 #: inary/cli/install.py:29
 msgid ""
-"Install INARY packages\n"
-"\n"
-"Usage: install <package1> <package2> ... <packagen>\n"
-"\n"
-"You may use filenames, URI's or package names for packages. If you have\n"
-"specified a package name, it should exist in a specified repository.\n"
-"\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
+"Install INARY packages"
+""
+"Usage: install <package1> <package2> ... <packagen>"
+""
+"You may use filenames, URI's or package names for packages. If you have"
+"specified a package name, it should exist in a specified repository."
+""
+"You can also specify components instead of package names, which will be"
+"expanded to package names."
 msgstr ""
 
 #: inary/cli/install.py:47
@@ -1790,13 +1790,13 @@ msgstr ""
 
 #: inary/cli/listavailable.py:28
 msgid ""
-"List available packages in the repositories\n"
-"\n"
-"Usage: list-available [ <repo1> <repo2> ... repon ]\n"
-"\n"
-"Gives a brief list of INARY packages published in the specified\n"
-"repositories. If no repository is specified, we list packages in\n"
-"all repositories.\n"
+"List available packages in the repositories"
+""
+"Usage: list-available [ <repo1> <repo2> ... repon ]"
+""
+"Gives a brief list of INARY packages published in the specified"
+"repositories. If no repository is specified, we list packages in"
+"all repositories."
 msgstr ""
 
 #: inary/cli/listavailable.py:46
@@ -1821,18 +1821,18 @@ msgstr ""
 
 #: inary/cli/listavailable.py:74
 msgid ""
-"\n"
-" Repository : \"{}\"\n"
+""
+" Repository : \"{}\""
 msgstr ""
 
 #: inary/cli/listcomponents.py:27
 msgid ""
-"List available components\n"
-"\n"
-"Usage: list-components\n"
-"\n"
-"Gives a brief list of INARY components published in the\n"
-"repositories.\n"
+"List available components"
+""
+"Usage: list-components"
+""
+"Gives a brief list of INARY components published in the"
+"repositories."
 msgstr ""
 
 #: inary/cli/listcomponents.py:42
@@ -1850,9 +1850,9 @@ msgstr ""
 
 #: inary/cli/listinstalled.py:28
 msgid ""
-"Print the list of all installed packages\n"
-"\n"
-"Usage: list-installed\n"
+"Print the list of all installed packages"
+""
+"Usage: list-installed"
 msgstr ""
 
 #: inary/cli/listinstalled.py:42
@@ -1877,13 +1877,13 @@ msgstr ""
 
 #: inary/cli/listnewest.py:27
 msgid ""
-"List newest packages in the repositories\n"
-"\n"
-"Usage: list-newest [ <repo1> <repo2> ... repon ]\n"
-"\n"
-"Gives a list of INARY newly published packages in the specified\n"
-"repositories. If no repository is specified, we list the new\n"
-"packages from all repositories.\n"
+"List newest packages in the repositories"
+""
+"Usage: list-newest [ <repo1> <repo2> ... repon ]"
+""
+"Gives a list of INARY newly published packages in the specified"
+"repositories. If no repository is specified, we list the new"
+"packages from all repositories."
 msgstr ""
 
 #: inary/cli/listnewest.py:46
@@ -1900,7 +1900,7 @@ msgstr ""
 
 #: inary/cli/listnewest.py:79
 #, python-brace-format
-msgid "Packages added to '{0}' since \"{1}\":\n"
+msgid "Packages added to '{0}' since \"{1}\":"
 msgstr ""
 
 #: inary/cli/listnewest.py:82
@@ -1909,11 +1909,11 @@ msgstr ""
 
 #: inary/cli/listorphaned.py:28
 msgid ""
-"List orphaned packages\n"
-"\n"
-"Usage: list-orphaned\n"
-"\n"
-"Lists packages installed as dependency, but no longer needed by any other installed package.\n"
+"List orphaned packages"
+""
+"Usage: list-orphaned"
+""
+"Lists packages installed as dependency, but no longer needed by any other installed package."
 msgstr ""
 
 #: inary/cli/listorphaned.py:43
@@ -1938,9 +1938,9 @@ msgstr "Configurar falhou."
 
 #: inary/cli/listpending.py:26
 msgid ""
-"List pending packages\n"
-"\n"
-"Lists packages waiting to be configured.\n"
+"List pending packages"
+""
+"Lists packages waiting to be configured."
 msgstr ""
 
 #: inary/cli/listpending.py:41
@@ -1953,11 +1953,11 @@ msgstr ""
 
 #: inary/cli/listrepo.py:25
 msgid ""
-"List repositories\n"
-"\n"
-"Usage: list-repo\n"
-"\n"
-"Lists currently tracked repositories.\n"
+"List repositories"
+""
+"Usage: list-repo"
+""
+"Lists currently tracked repositories."
 msgstr ""
 
 #: inary/cli/listrepo.py:42 inary/cli/listrepo.py:44
@@ -1975,11 +1975,11 @@ msgstr ""
 
 #: inary/cli/listsources.py:28
 msgid ""
-"List available sources\n"
-"\n"
-"Usage: list-sources\n"
-"\n"
-"Gives a brief list of sources published in the repositories.\n"
+"List available sources"
+""
+"Usage: list-sources"
+""
+"Gives a brief list of sources published in the repositories."
 msgstr ""
 
 #: inary/cli/listsources.py:42
@@ -1992,11 +1992,11 @@ msgstr ""
 
 #: inary/cli/listupgrades.py:29
 msgid ""
-"List packages to be upgraded\n"
-"\n"
-"Usage: list-upgrades\n"
-"\n"
-"Lists the packages that will be upgraded.\n"
+"List packages to be upgraded"
+""
+"Usage: list-upgrades"
+""
+"Lists the packages that will be upgraded."
 msgstr ""
 
 #: inary/cli/listupgrades.py:44
@@ -2017,14 +2017,14 @@ msgstr ""
 
 #: inary/cli/rebuilddb.py:27
 msgid ""
-"Rebuild Databases\n"
-"\n"
-"Usage: rebuilddb [ <package1> <package2> ... <packagen> ]\n"
-"\n"
-"Rebuilds the INARY databases\n"
-"\n"
-"If package specs are given, they should be the names of package\n"
-"dirs under /var/lib/inary\n"
+"Rebuild Databases"
+""
+"Usage: rebuilddb [ <package1> <package2> ... <packagen> ]"
+""
+"Rebuilds the INARY databases"
+""
+"If package specs are given, they should be the names of package"
+"dirs under /var/lib/inary"
 msgstr ""
 
 #: inary/cli/rebuilddb.py:43
@@ -2041,12 +2041,12 @@ msgstr ""
 
 #: inary/cli/reconfigure.py:45
 msgid ""
-"Reconfigure pending packages\n"
-"\n"
-"If SCOM configuration of some packages were not\n"
-"done at installation time, they are added to a list\n"
-"of packages waiting to be configured. This command\n"
-"configures those packages.\n"
+"Reconfigure pending packages"
+""
+"If SCOM configuration of some packages were not"
+"done at installation time, they are added to a list"
+"of packages waiting to be configured. This command"
+"configures those packages."
 msgstr ""
 
 #: inary/cli/reconfigure.py:56
@@ -2055,14 +2055,14 @@ msgstr "Configurar falhou."
 
 #: inary/cli/remove.py:28
 msgid ""
-"Remove INARY packages\n"
-"\n"
-"Usage: remove <package1> <package2> ... <packagen>\n"
-"\n"
-"Remove package(s) from your system. Just give the package names to remove.\n"
-"\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
+"Remove INARY packages"
+""
+"Usage: remove <package1> <package2> ... <packagen>"
+""
+"Remove package(s) from your system. Just give the package names to remove."
+""
+"You can also specify components instead of package names, which will be"
+"expanded to package names."
 msgstr ""
 
 #: inary/cli/remove.py:45
@@ -2079,11 +2079,11 @@ msgstr ""
 
 #: inary/cli/removeorphaned.py:29
 msgid ""
-"Remove orphaned packages\n"
-"\n"
-"Usage: remove-orphaned\n"
-"\n"
-"Remove all orphaned packages from the system.\n"
+"Remove orphaned packages"
+""
+"Usage: remove-orphaned"
+""
+"Remove all orphaned packages from the system."
 msgstr ""
 
 #: inary/cli/removeorphaned.py:43
@@ -2096,24 +2096,24 @@ msgstr ""
 
 #: inary/cli/removerepo.py:23
 msgid ""
-"Remove repositories\n"
-"\n"
-"Usage: remove-repo <repo1> <repo2> ... <repon>\n"
-"\n"
-"Remove all repository information from the system.\n"
+"Remove repositories"
+""
+"Usage: remove-repo <repo1> <repo2> ... <repon>"
+""
+"Remove all repository information from the system."
 msgstr ""
 
 #: inary/cli/search.py:28
 msgid ""
-"Search packages\n"
-"\n"
-"Usage: search <term1> <term2> ... <termn>\n"
-"\n"
-"Finds a package containing specified search terms\n"
-"in summary, description, and package name fields.\n"
-"Default search is done in package database. Use\n"
-"options to search in install database or source\n"
-"database.\n"
+"Search packages"
+""
+"Usage: search <term1> <term2> ... <termn>"
+""
+"Finds a package containing specified search terms"
+"in summary, description, and package name fields."
+"Default search is done in package database. Use"
+"options to search in install database or source"
+"database."
 msgstr ""
 
 #: inary/cli/search.py:45
@@ -2154,11 +2154,11 @@ msgstr ""
 
 #: inary/cli/searchfile.py:27
 msgid ""
-"Search for a file\n"
-"\n"
-"Usage: search-file <path1> <path2> ... <pathn>\n"
-"\n"
-"Finds the installed package which contains the specified file.\n"
+"Search for a file"
+""
+"Usage: search-file <path1> <path2> ... <pathn>"
+""
+"Finds the installed package which contains the specified file."
 msgstr ""
 
 #: inary/cli/searchfile.py:40
@@ -2200,14 +2200,14 @@ msgstr ""
 
 #: inary/cli/updaterepo.py:28
 msgid ""
-"Update repository databases\n"
-"\n"
-"Usage: update-repo [<repo1> <repo2> ... <repon>]\n"
-"\n"
-"<repoi>: repository name\n"
-"\n"
-"Synchronizes the INARY databases with the current repository.\n"
-"If no repository is given, all repositories are updated.\n"
+"Update repository databases"
+""
+"Usage: update-repo [<repo1> <repo2> ... <repon>]"
+""
+"<repoi>: repository name"
+""
+"Synchronizes the INARY databases with the current repository."
+"If no repository is given, all repositories are updated."
 msgstr ""
 
 #: inary/cli/updaterepo.py:45
@@ -2220,22 +2220,22 @@ msgstr ""
 
 #: inary/cli/upgrade.py:28
 msgid ""
-"Upgrade INARY packages\n"
-"\n"
-"Usage: Upgrade [<package1> <package2> ... <packagen>]\n"
-"\n"
-"<packagei>: package name\n"
-"\n"
-"Upgrades the entire system if no package names are given\n"
-"\n"
-"You may use only package names to specify packages because\n"
-"the package upgrade operation is defined only with respect\n"
-"to repositories. If you have specified a package name, it\n"
-"should exist in the package repositories. If you just want to\n"
-"reinstall a package from a INARY file, use the install command.\n"
-"\n"
-"You can also specify components instead of package names, which will be\n"
-"expanded to package names.\n"
+"Upgrade INARY packages"
+""
+"Usage: Upgrade [<package1> <package2> ... <packagen>]"
+""
+"<packagei>: package name"
+""
+"Upgrades the entire system if no package names are given"
+""
+"You may use only package names to specify packages because"
+"the package upgrade operation is defined only with respect"
+"to repositories. If you have specified a package name, it"
+"should exist in the package repositories. If you just want to"
+"reinstall a package from a INARY file, use the install command."
+""
+"You can also specify components instead of package names, which will be"
+"expanded to package names."
 msgstr ""
 
 #: inary/cli/upgrade.py:52
@@ -2334,7 +2334,7 @@ msgid "Unknown package operation"
 msgstr ""
 
 #: inary/data/index.py:101
-msgid "* Generating index tree...\n"
+msgid "* Generating index tree..."
 msgstr ""
 
 #: inary/data/index.py:111
@@ -2402,7 +2402,7 @@ msgid "   -> Adding source to index: \"{}\""
 msgstr ""
 
 #: inary/data/index.py:360
-msgid "Building index of Inary files under \"{}\" \n"
+msgid "Building index of Inary files under \"{}\" "
 msgstr ""
 
 #: inary/data/index.py:365
@@ -2411,7 +2411,7 @@ msgstr ""
 
 #: inary/data/metadata.py:84
 #, python-brace-format
-msgid "Distribution: {0}, Dist. Release: {1}\n"
+msgid "Distribution: {0}, Dist. Release: {1}"
 msgstr ""
 
 #: inary/data/metadata.py:86
@@ -2446,39 +2446,39 @@ msgid "\"{0}\" dependency of package \"{1}\" is not satisfied."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/data/specfile.py:404 inary/data/specfile.py:508
-msgid "Summary: {}\n"
+msgid "Summary: {}"
 msgstr ""
 
 #: inary/data/specfile.py:405 inary/data/specfile.py:509
-msgid "Description: {}\n"
+msgid "Description: {}"
 msgstr ""
 
 #: inary/data/specfile.py:406 inary/data/specfile.py:510
-msgid "Licenses: {}\n"
+msgid "Licenses: {}"
 msgstr ""
 
 #: inary/data/specfile.py:407 inary/data/specfile.py:511
-msgid "Component: {}\n"
+msgid "Component: {}"
 msgstr ""
 
 #: inary/data/specfile.py:408
-msgid "Provides: \n"
+msgid "Provides: "
 msgstr ""
 
 #: inary/data/specfile.py:411
-msgid "   - Commands: \n"
+msgid "   - Commands: "
 msgstr ""
 
 #: inary/data/specfile.py:416
-msgid "   - CMAKE Needs: \n"
+msgid "   - CMAKE Needs: "
 msgstr ""
 
 #: inary/data/specfile.py:421
-msgid "   - PkgConfig Needs: \n"
+msgid "   - PkgConfig Needs: "
 msgstr ""
 
 #: inary/data/specfile.py:426
-msgid "   - Services: \n"
+msgid "   - Services: "
 msgstr ""
 
 #: inary/data/specfile.py:431
@@ -2507,7 +2507,7 @@ msgstr ""
 
 #: inary/db/filesdb.py:58
 msgid ""
-"\n"
+""
 "Added files database..."
 msgstr ""
 
@@ -2526,13 +2526,13 @@ msgstr ""
 #: inary/db/installdb.py:64
 #, python-brace-format
 msgid ""
-"State: {0}\n"
-"Version: {1}, Release: {2}\n"
+"State: {0}"
+"Version: {1}, Release: {2}"
 msgstr ""
 
 #: inary/db/installdb.py:68
 #, python-brace-format
-msgid "Distribution: {0}, Install Time: {1}\n"
+msgid "Distribution: {0}, Install Time: {1}"
 msgstr ""
 
 #: inary/db/installdb.py:130
@@ -2564,16 +2564,16 @@ msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/db/repodb.py:185
 msgid ""
-"Error parsing repository index information: {} \n"
+"Error parsing repository index information: {} "
 " Index file does not exist or is malformed."
 msgstr ""
 
 #: inary/db/repodb.py:294
 msgid ""
-"Repository \"{}\" is not compatible with your distribution. Repository is disabled.\n"
-"Your distribution is {} release {}\n"
-"Repository distribution is {} release {}\n"
-"\n"
+"Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+"Your distribution is {} release {}"
+"Repository distribution is {} release {}"
+""
 "If you want add this repository please use \"--ignore-check\" parameter with this command."
 msgstr ""
 
@@ -2685,8 +2685,8 @@ msgstr "util {} não pode ser encontrado"
 
 #: inary/file.py:193
 msgid ""
-"File integrity of \"{}\" compromised.\n"
-" localfile:{}\n"
+"File integrity of \"{}\" compromised."
+" localfile:{}"
 " newsha1: {}"
 msgstr ""
 
@@ -2844,7 +2844,7 @@ msgid "SyntaxError in Post Operations script ({0}): {1}"
 msgstr ""
 
 #: inary/operations/build.py:786 inary/util.py:811
-msgid "ERROR: WorkDir ({}) does not exist\n"
+msgid "ERROR: WorkDir ({}) does not exist"
 msgstr ""
 
 #: inary/operations/build.py:796
@@ -2853,9 +2853,9 @@ msgstr ""
 
 #: inary/operations/build.py:808
 msgid ""
-"Running commands in \"{}\" function failed:\n"
-"Error Message: \n"
-"{}\n"
+"Running commands in \"{}\" function failed:"
+"Error Message: "
+"{}"
 "\t{} "
 msgstr ""
 
@@ -2906,7 +2906,7 @@ msgid "Ignoring build dependencies."
 msgstr ""
 
 #: inary/operations/build.py:917
-msgid "Patch file is missing: \"{}\"\n"
+msgid "Patch file is missing: \"{}\""
 msgstr ""
 
 #: inary/operations/build.py:921
@@ -2949,7 +2949,7 @@ msgstr ""
 
 #: inary/operations/build.py:1137
 msgid ""
-"Output:\n"
+"Output:"
 "{}"
 msgstr ""
 
@@ -3024,14 +3024,14 @@ msgstr ""
 
 #: inary/operations/emerge.py:61
 msgid ""
-"The following list of packages will be installed\n"
-"from repository in the respective order to satisfy dependencies:\n"
+"The following list of packages will be installed"
+"from repository in the respective order to satisfy dependencies:"
 msgstr ""
 
 #: inary/operations/emerge.py:64
 msgid ""
-"The following list of packages will be built and\n"
-"installed in the respective order to satisfy dependencies:\n"
+"The following list of packages will be built and"
+"installed in the respective order to satisfy dependencies:"
 msgstr ""
 
 #: inary/operations/emerge.py:73 inary/operations/install.py:90
@@ -3048,12 +3048,12 @@ msgstr ""
 
 #: inary/operations/helper.py:64
 #, python-brace-format
-msgid " - [\"{0}\" conflicts with: \"{1}\"]\n"
+msgid " - [\"{0}\" conflicts with: \"{1}\"]"
 msgstr ""
 
 #: inary/operations/helper.py:68
 msgid ""
-"The following packages have conflicts:\n"
+"The following packages have conflicts:"
 "{}"
 msgstr ""
 
@@ -3127,11 +3127,11 @@ msgid "There is no packages to taking back (installing or removing)."
 msgstr ""
 
 #: inary/operations/history.py:219
-msgid "Following packages will be installed:\n"
+msgid "Following packages will be installed:"
 msgstr ""
 
 #: inary/operations/history.py:224
-msgid "Following packages will be removed:\n"
+msgid "Following packages will be removed:"
 msgstr ""
 
 #: inary/operations/history.py:228 inary/operations/history.py:247
@@ -3147,8 +3147,8 @@ msgstr "Instale falhou."
 
 #: inary/operations/history.py:245
 msgid ""
-"\n"
-"Following packages could not be found in repositories and are not cached:\n"
+""
+"Following packages could not be found in repositories and are not cached:"
 msgstr ""
 
 #: inary/operations/history.py:299
@@ -3165,10 +3165,6 @@ msgstr ""
 
 #: inary/operations/install.py:64
 msgid "Checking dependencies for install..."
-msgstr ""
-
-#: inary/operations/install.py:77
-msgid "Following packages will be installed:"
 msgstr ""
 
 #: inary/operations/install.py:91 inary/operations/install.py:251
@@ -3211,16 +3207,16 @@ msgid " -> checking {}"
 msgstr ""
 
 #: inary/operations/install.py:363
-msgid "Following packages are not satisfied:\n"
+msgid "Following packages are not satisfied:"
 msgstr ""
 
 #: inary/operations/install.py:365
 #, python-brace-format
-msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n"
+msgid " -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied."
 msgstr "Ficheiro de projeto {} nao foi encontrado. "
 
 #: inary/operations/remove.py:58
-msgid "Safety switch prevents the removal of following packages:\n"
+msgid "Safety switch prevents the removal of following packages:"
 msgstr ""
 
 #: inary/operations/remove.py:64 inary/operations/upgrade.py:469
@@ -3372,7 +3368,7 @@ msgstr ""
 
 #: inary/package.py:114
 msgid ""
-"There was a problem while fetching \"{}\".\n"
+"There was a problem while fetching \"{}\"."
 "The package may have been upgraded. Please try to upgrade the package."
 msgstr ""
 
@@ -3472,14 +3468,14 @@ msgstr ""
 #: inary/sxml/xmlext_minidom.py:56 inary/sxml/xmlfile_iks.py:73
 #: inary/sxml/xmlfile_iks.py:100 inary/sxml/xmlfile_minidom.py:74
 #: inary/sxml/xmlfile_minidom.py:101
-msgid "File \"{}\" has invalid XML: {}\n"
+msgid "File \"{}\" has invalid XML: {}"
 msgstr ""
 
 #: inary/sxml/xmlext_minidom.py:65
 msgid ""
-"FileString is an invalid XML: {}\n"
-"\n"
-"FileString: {}\n"
+"FileString is an invalid XML: {}"
+""
+"FileString: {}"
 msgstr ""
 
 #: inary/sxml/xmlfile_iks.py:82 inary/sxml/xmlfile_minidom.py:83
@@ -3500,7 +3496,7 @@ msgid "[+] Process triggered for [;0m{}"
 msgstr ""
 
 #: inary/sysconf.py:86
-msgid "Process triggering for sysconf.\n"
+msgid "Process triggering for sysconf."
 msgstr ""
 
 #: inary/uri.py:83
