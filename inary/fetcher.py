@@ -451,5 +451,7 @@ def fetch(packages=None, path=os.path.curdir):
         if url.startswith("git://") or url.endswith(".git"):
             branch="master"
             fetch_git(url.replace("git://","https://"),path,branch)
-        else:
+        elif "://" in url:
             fetch_url(url, path, ctx.ui.Progress)
+        else:
+            fetch_from_locale(url,path)
