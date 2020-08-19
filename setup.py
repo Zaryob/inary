@@ -56,16 +56,17 @@ class Build(build):
         build.run(self)
 
         self.mkpath(self.build_base)
-
-        for in_file in IN_FILES:
-            name, ext = os.path.splitext(in_file)
-            self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
+        if getConfig("NLS_SUPPORT"):
+            for in_file in IN_FILES:
+                name, ext = os.path.splitext(in_file)
+                self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
 
 
 class BuildPo(build):
     def run(self):
-        build.run(self)
-        self.build_po()
+        if getConfig("NLS_SUPPORT"):
+            build.run(self)
+            self.build_po()
 
     @staticmethod
     def build_po():
