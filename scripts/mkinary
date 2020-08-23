@@ -4,7 +4,7 @@ pwd=$(pwd)
 echo "Checking"
 if [ -f inary_files/metadata.xml ] && [ -d install ] ; then
 	cd install
-	echo "Creating install.tar.gz"
+	echo "Creating install.tar.xz"
 	tar --xz -cf ../inary_files/install.tar.xz ./*
 	echo "Creating files.xml"
 	echo -e "<Files>" > ../inary_files/files.xml

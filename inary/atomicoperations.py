@@ -294,6 +294,7 @@ class Install(AtomicOperation):
                             _('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
                 self.operation = REINSTALL
+                ctx.ui.info(_('Re-installing package.'))
             else:
                 pkg_version = inary.version.make_version(pkg.version)
                 iversion = inary.version.make_version(iversion_s)
@@ -311,19 +312,13 @@ class Install(AtomicOperation):
 
                 # is this an upgrade?
                 # determine and report the kind of upgrade: version, release
-                if pkg_version > iversion:
-                    ctx.ui.info(_('Upgrading to new upstream version.'))
-                    self.operation = UPGRADE
-                elif pkg_release > irelease:
-                    ctx.ui.info(_('Upgrading to new distribution release.'))
+                if pkg_release > irelease:
+                    ctx.ui.info(_('Upgrading to new release.'))
                     self.operation = UPGRADE
 
                 # is this a downgrade? confirm this action.
                 if not self.operation == UPGRADE:
-                    if pkg_version < iversion:
-                        # x = _('Downgrade to old upstream version?')
-                        x = None
-                    elif pkg_release < irelease:
+                    if pkg_release < irelease:
                         x = _('Downgrade to old distribution release?')
                     else:
                         x = None
@@ -338,8 +333,6 @@ class Install(AtomicOperation):
             self.old_path = self.installdb.pkg_dir(
                 pkg.name, iversion_s, irelease_s)
 
-    def reinstall(self):
-        return self.installdb.has_package(self.package_fname)
 
     def preinstall(self):
         if 'postOps' in self.metadata.package.isA:
@@ -502,7 +495,7 @@ class Install(AtomicOperation):
                         remove_permanent,
                         store_old_paths=self.store_old_paths)
 
-        if self.reinstall():
+        if self.operation == REINSTALL:
             # get 'config' typed file objects replace is not set
             # new = [x for x in self.files.list if x.type == 'config' and not
             # x.replace, self.files.list]
@@ -529,8 +522,7 @@ class Install(AtomicOperation):
             update_permissions()
 
         self.package.extract_install(ctx.config.dest_dir())
-
-        if self.reinstall() or self.operation == UPGRADE:
+        if self.operation == REINSTALL or self.operation == UPGRADE:
             clean_leftovers()
 
     def store_postops(self):
@@ -544,8 +536,6 @@ class Install(AtomicOperation):
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
         ctx.ui.info(_("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"),verbose=True)
-        if self.reinstall() or  self.operation == UPGRADE or self.operation == DOWNGRADE:
-            util.clean_dir(self.old_path)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(
@@ -556,13 +546,9 @@ class Install(AtomicOperation):
 
     def update_databases(self):
         """update databases"""
-        if self.reinstall():
-            self.installdb.remove_package(self.pkginfo)
-
-        # need service or system restart?
 
         if self.installdb.has_package(self.pkginfo.name):
-            if self.operation == (UPGRADE or DOWNGRADE):
+            if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
                 self.installdb.remove_package(self.pkginfo)
                 self.installdb.add_package(self.pkginfo)
 
@@ -592,6 +578,8 @@ class Install(AtomicOperation):
         self.historydb.add_and_update(pkgBefore=self.old_pkginfo, pkgAfter=self.pkginfo,
                                       operation=opttostr[self.operation], otype=otype)
 
+        if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
+            util.clean_dir(self.old_path)
 
 def install_single(pkg, upgrade=False):
     """install a single package from URI or ID"""

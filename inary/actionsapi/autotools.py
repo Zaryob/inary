@@ -76,13 +76,11 @@ class RunTimeError(inary.actionsapi.Error):
 def configure(parameters=''):
     """configure source with given parameters = "--with-nls --with-libusb --with-something-usefull"""
 
-    if can_access_file('configure'):
-        gnuconfig_update()
+    prefix = get.defaultprefixDIR()
+    if get.buildTYPE() == "emul32":
+        prefix = get.emul32prefixDIR() 
 
-        prefix = get.emul32prefixDIR() if get.buildTYPE(
-        ) == "emul32" else get.defaultprefixDIR()
-        args = './configure \
-                --prefix=/{0} \
+    args = '--prefix=/{0} \
                 --build={1} \
                 --mandir=/{2} \
                 --infodir=/{3} \
@@ -90,17 +88,11 @@ def configure(parameters=''):
                 --sysconfdir=/{5} \
                 --localstatedir=/{6} \
                 --libexecdir=/{7} \
-                {8}{9}'.format(prefix, get.HOST(), get.manDIR(), get.infoDIR(),
+                --libdir=/{8}\
+                {9}'.format(prefix, get.HOST(), get.manDIR(), get.infoDIR(),
                                get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
-                               "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
-                               parameters)
-
-        if system(args):
-            raise ConfigureError(_('Configure failed.'))
-    else:
-        raise ConfigureError(
-            _('No configure script found. (\"{}\" file not found.)'.format("configure")))
-
+                               get.libDIR(), parameters)
+    rawConfigure(args)
 
 def rawConfigure(parameters=''):
     """configure source with given parameters = --prefix=/usr --libdir=/usr/lib --with-nls """
@@ -141,7 +133,7 @@ def fixpc():
 
 def install(parameters='', argument='install'):
     """install source into install directory with given parameters"""
-    args = 'make prefix={0}/{1} \
+    args = 'prefix={0}/{1} \
             datadir={0}/{2} \
             infodir={0}/{3} \
             localstatedir={0}/{4} \
@@ -158,15 +150,7 @@ def install(parameters='', argument='install'):
                         parameters,
                         argument)
 
-    if system(args):
-        raise InstallError(_('Install failed.'))
-    else:
-        fixInfoDir()
-
-    if get.buildTYPE() == "emul32":
-        fixpc()
-        if isDirectory("{}/emul32".format(get.installDIR())):
-            removeDir("/emul32")
+    rawInstall(args)
 
 
 def rawInstall(parameters='', argument='install'):
@@ -188,10 +172,14 @@ def aclocal(parameters=''):
         raise RunTimeError(_('Running \'aclocal\' failed.'))
 
 
-def autogen():
+def autogen(noconfigure=True):
     """generates configure script from autogen"""
-    if system('bash autogen.sh'):
-        raise RunTimeError(_('Running \'autogen.sh\' script failed.'))
+    if noconfigure:
+        if system('NOCONFIGURE=1 bash autogen.sh'):
+            raise RunTimeError(_('Running \'autogen.sh\' script failed.'))    	
+    else:
+        if system('bash autogen.sh'):
+            raise RunTimeError(_('Running \'autogen.sh\' script failed.'))
 
 
 def autoconf(parameters=''):

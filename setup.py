@@ -35,6 +35,18 @@ CONFIG_DIR = "/etc/inary"
 MIMEFILE_DIR = "/usr/share/mime/packages"
 TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
+#config file
+if not os.path.isfile(".config"):
+    print("No config file found. You must run ./configure first.")
+    exit(127)
+cfg=open(".config","r").readlines()
+
+def getConfig(name=""):
+    for line in cfg:
+        if name in line:
+            return "y" in line.split("=")[1]
+    return False
+
 
 class Build(build):
     def run(self):
@@ -44,16 +56,17 @@ class Build(build):
         build.run(self)
 
         self.mkpath(self.build_base)
-
-        for in_file in IN_FILES:
-            name, ext = os.path.splitext(in_file)
-            self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
+        if getConfig("NLS_SUPPORT"):
+            for in_file in IN_FILES:
+                name, ext = os.path.splitext(in_file)
+                self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
 
 
 class BuildPo(build):
     def run(self):
-        build.run(self)
-        self.build_po()
+        if getConfig("NLS_SUPPORT"):
+            build.run(self)
+            self.build_po()
 
     @staticmethod
     def build_po():
@@ -87,9 +100,10 @@ class BuildPo(build):
                             -o po/{2}.pot".format(PROJECT, files, PROJECT))
 
         # Update PO files
-        for item in glob.glob1("po", "*.po"):
-            print("Updating .. ", item)
-            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
+        # FIXME: enable this block
+        #for item in glob.glob1("po", "*.po"):
+        #   print("Updating .. ", item)
+        #   os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)
@@ -105,7 +119,8 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        self.installi18n()
+        if getConfig("NLS_SUPPORT"):
+            self.installi18n()
         self.generateConfigFile()
 
     def finalize_options(self):
@@ -202,21 +217,24 @@ setup(name="inary",
                 'test': Test},
       data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf"]),
                   (MIMEFILE_DIR, ["build/inary.xml"])],
-      scripts=['inary-cli',
+      scripts=(['inary-cli',
                'scripts/pspec2po',
                'scripts/revdep-rebuild',
                'scripts/sulinstrapt',
                'scripts/makepkg',
+               'scripts/makekagami',
                'scripts/mkdeb',
                'scripts/revdep-rebuild-devel',
                'scripts/inary-sandbox',
                'scripts/inarysh',
                'scripts/lsinary',
+               'scripts/mkinary',
                'scripts/detect-dep',
                'scripts/detect-file-dep',
                'scripts/uninary',
+               'scripts/genpspec',
                'scripts/update-inary-cache',
-               'scripts/version-bump'],
+               'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',

@@ -39,6 +39,8 @@ class BinutilsError(inary.actionsapi.Error):
 
 
 # Globals
+if not inary.actionsapi.variables.glb:
+    inary.actionsapi.variables.initVariables()
 env = inary.actionsapi.variables.glb.env
 dirs = inary.actionsapi.variables.glb.dirs
 config = inary.actionsapi.variables.glb.config
@@ -88,6 +90,10 @@ def pkgDIR():
 
 def workDIR():
     return env.work_dir
+    
+
+def operation():
+    return env.operation
 
 
 def installDIR():
@@ -206,6 +212,12 @@ def localstateDIR():
 
 def libexecDIR():
     return dirs.libexec
+
+def libDIR():
+    if env.build_type == "emul32":
+        return dirs.lib+"32"
+    else:
+        return dirs.lib
 
 
 def defaultprefixDIR():

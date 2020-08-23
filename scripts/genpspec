@@ -1,0 +1,124 @@
+#!/usr/bin/python3
+#fonksionlar
+tab=0
+def write(tag,name="",vars=[]):
+    ret="{}<{}".format(("\t"*tab),tag)
+    for i in vars:
+        ret=ret+" "+i
+    ret=ret+">{}</{}>".format(name,tag)
+    return ret
+    
+def otag(tag):
+    global tab
+    ret="{}<{}>".format(("\t"*tab),tag)
+    tab=tab+1
+    return ret
+def ctag(tag):
+    global tab
+    tab=tab-1
+    return "{}</{}>".format(("\t"*tab),tag)
+   
+   
+ 
+from pspec import inary
+# pspec başı
+print('<?xml version="1.0" ?>')
+print('<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd">')
+print(otag("Inary"))
+
+# Source kısmı başı
+print()
+print(otag("Source"))
+print(write("Name",inary.source.name))
+print(write("Homepage",inary.source.homepage))
+print(otag("Packager"))
+print(write("Name",inary.source.packager.name))
+print(write("Email",inary.source.packager.email))
+print(ctag("Packager"))
+print(write("License",inary.source.license))
+
+# IsA kısmı zorunlu değil o yüzden önce varmı bakıyoz
+if hasattr(inary.source,"isa"):
+    for i in inary.source.isa:
+        print(write("IsA",i))
+
+#partof aynı şekilde zorunlu değil
+if hasattr(inary.source,"partof"):
+    print(write("partof",inary.source.partof))
+
+#Summary Description zorunlu
+print(write("Summary",inary.source.summary))
+print(write("Description",inary.source.description))
+
+
+#Archives zorunlu
+for i in inary.source.archive:
+    print(write("Archive",i[1],["sha1sum=\"{}\"".format(i[0])]))
+    
+#AdditionalFiles zorunlu değil.
+if hasattr(inary.source,"additionalfiles"):
+   print(otag("AdditionalFile"))
+   for i in inary.source.additionalfiles:
+       print(write("AdditionalFile",i[1],["target=\"{}\"".format(i[0])]))
+   print(ctag("AdditionalFile"))
+   
+#BuildDependencies zorunlu (boş bile olsa)
+print(otag("BuildDependencies"))
+for i in inary.source.builddependencies:
+    print(write("Dependency",i))
+print(ctag("BuildDependencies"))
+
+#Patches zorunlu değil
+if hasattr(inary.source,"patches"):
+   print(otag("Patches"))
+   for i in inary.source.patches:
+       print(write("Patch",i))
+   print(ctag("Patches"))
+
+#Source bitişi
+print(ctag("Source"))
+
+#Package başı
+for package in inary.source.packages:
+    pkg=getattr(inary, package)
+    print()
+    print(otag("Package"))
+    print(write("Name",pkg.name))
+
+    #RuntimeDependencies zorunlu (boş bile olsa)
+    print(otag("RuntimeDependencies"))
+    for i in pkg.runtimedependencies:
+        print(write("Dependency",i))
+    print(ctag("RuntimeDependencies"))
+
+    #Files zorunlu
+    print(otag("Files"))
+    for i in pkg.files:
+        print(write("Path",i[1],["fileType=\"{}\"".format(i[0])]))
+    print(ctag("Files"))
+
+    #AdditionalFiles zorunlu değil
+    if hasattr(pkg,"additionalfiles"):
+       print(otag("AdditionalFile"))
+       for i in pkg.additionalfiles:
+           print(write("AdditionalFile",i[0],["owner=\"{}\"".format(i[1]),"permission=\"{}\"".format(str(i[2])),"target=\"{}\"".format(i[3])]))
+       print(ctag("AdditionalFile"))
+
+    #Package sonu
+    print(ctag("Package"))
+    
+#History başı
+print()
+print(otag("History"))
+j=len(inary.history.update)
+for i in inary.history.update:
+    print(otag("Update release=\"{}\"".format(j)))
+    print(write("Date",i[0]))
+    print(write("Version",i[1]))
+    print(write("Comment",i[2]))
+    print(write("Name",i[3]))
+    print(write("Email",i[4]))
+    print(ctag("Update"))
+    j=j-1
+print(ctag("History"))
+print(ctag("Inary"))

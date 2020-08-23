@@ -198,7 +198,7 @@ class PackageDB(lazydb.LazyDB):
 
         return distro, release
 
-    def get_version_and_distro_release(self, name, repo):
+    def get_version_and_distro_release(self, name, repo=None):
         if not self.has_package(name, repo):
             raise Exception(_('Package \"{}\" not found.').format(name))
 
@@ -206,7 +206,7 @@ class PackageDB(lazydb.LazyDB):
 
         return self.__get_version(pkg_doc) + self.__get_distro_release(pkg_doc)
 
-    def get_version(self, name, repo):
+    def get_version(self, name, repo=None):
         if not self.has_package(name, repo):
             raise Exception(_('Package \"{}\" not found.').format(name))
 
@@ -222,7 +222,7 @@ class PackageDB(lazydb.LazyDB):
 
         return self.__get_summary(pkg_doc)
 
-    def get_release(self, name, repo):
+    def get_release(self, name, repo=None):
         if not self.has_package(name, repo):
             raise Exception(_('Package \"{}\" not found.').format(name))
 
@@ -230,7 +230,7 @@ class PackageDB(lazydb.LazyDB):
 
         return self.__get_release(pkg_doc)
 
-    def get_last_date(self, name, repo):
+    def get_last_date(self, name, repo=None):
         if not self.has_package(name, repo):
             raise Exception(_('Package \"{}\" not found.').format(name))
 
@@ -310,7 +310,7 @@ class PackageDB(lazydb.LazyDB):
 
         return pairs
 
-    def list_packages(self, repo):
+    def list_packages(self, repo=None):
         return self.pdb.get_item_keys(repo)
 
     def list_newest(self, repo, since=None, historydb=None):

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!DOCTYPE INARY SYSTEM "https://raw.githubusercontent.com/Zaryob/inary/master/inary-spec.dtd">
+<INARY>
+    <Source>
+        <Name>unibuild</Name>
+        <Homepage>https://gitlab.com/sulinos/devel/inary</Homepage>
+        <Packager>
+            <Name>Ali Rıza KESKİN</Name>
+            <Email>parduscix@yandex.ru</Email>
+        </Packager>
+        <License>GPLv2</License>
+        <IsA>app:console</IsA>
+        <PartOf>system.base</PartOf>
+        <Summary>unibuild package build test</Summary>
+        <Description>Pakcage build test for inary.</Description>
+        <Archive sha1sum="master" >https://gitlab.com/sulinos/devel/unibuild.git</Archive>
+    </Source>
+
+    <Package>
+        <IsA>postOps</IsA>
+        <Name>unibuild</Name>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+            <Date>2020-01-28</Date>
+            <Version>31.42.543a</Version>
+            <Comment>First release</Comment>
+            <Name>Ali Rıza KESKİN</Name>
+            <Email>parduscix@yandex.ru</Email>
+        </Update>
+    </History>
+</INARY>
