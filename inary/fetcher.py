@@ -92,7 +92,7 @@ class UIHandler:
         self.s_time = self.now()
 
     def update(self, total_to_download, total_downloaded,
-               total_to_upload, total_uploaded):
+               total_to_upload=0, total_uploaded=0):
         if self.size == total_downloaded:
             return
 
@@ -242,7 +242,7 @@ class Fetcher:
                     'SEC-FETCH-MODE':'navigate',
                     'SEC-FETCH-SITE':'none',
                     'SEC-FETCH-USER':'?1',
-                    'UPGRADE-INSECURE-REQUESTS':'1',
+                    'UPGRADE-INSECURE-REQUESTS':'1'
                 }
             )
             total = c.headers.get('content-length')
@@ -250,16 +250,16 @@ class Fetcher:
             handler.start(
                 self.archive_file,
                 self.url.get_uri(),
-                self.url.filename(),
-            )
+                self.url.filename())
             if not total:
                 file_id.write(res.content)
             else:
                 down = 0
                 total = int(total)
-                for data in res.iter_content(chunk_size=4096):
-                    snap.write(data)
+                for data in c.iter_content(chunk_size=4096):
+                    file_id.write(data)
                     down += len(data)
+                    # print("REQUESTS")
                     handler.update(total, down)
             # c.perform()
             # This is not a bug. This is a new feature. ŞAka bir yana bu hata
@@ -281,7 +281,8 @@ class Fetcher:
                 self.try_number = self.try_number + 1
                 ctx.ui.info(_("Download error: {}".format(x)), verbose=True)
                 fetch()
-            raise FetchError("{}".format(x.args[1]))
+            raise x
+            # raise FetchError("{}".format(x.args[1]))
 
         if os.stat(self.partial_file).st_size == 0:
             os.remove(self.partial_file)
