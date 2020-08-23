@@ -145,7 +145,6 @@ def exclude_special_files(filepath, fileinfo, keeplist):
                                 new_ladata)
             if new_ladata != ladata:
                 open(filepath, "w").write(new_ladata)
-
     for name, pattern in list(patterns.items()):
         if name in keeplist:
             continue
@@ -170,15 +169,12 @@ def strip_debug_action(filepath, fileinfo, install_dir,excludelist):
 
     if path.startswith(excludelist):
         return
-
     outputpath = util.join_path(os.path.dirname(install_dir),
                                 ctx.const.debug_dir_suffix,
                                 ctx.const.debug_files_suffix,
                                 path)
-
     if util.strip_file(filepath, fileinfo, outputpath):
         ctx.ui.info("{0} [{1}]".format(path, "stripped"), verbose=True)
-
 
 class Builder:
     """Provides the package build and creation routines"""
@@ -272,6 +268,7 @@ class Builder:
 
         self.has_ccache = False
         self.has_icecream = False
+        self.variable_buffer={}
         
 
     def set_spec_file(self, specuri):
@@ -719,11 +716,15 @@ class Builder:
                     fname, e))
 
     def get_action_variable(self,name,default):
-        (ret, out , err) = util.run_batch('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name,os.getcwd()))
-        if ret == 0:
-            return out
+        if name in self.variable_buffer.keys():
+            return self.variable_buffer[name]
         else:
-            return default
+            (ret, out , err) = util.run_batch('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name,os.getcwd()))
+            if ret == 0:
+                self.variable_buffer[name]=out
+                return out
+            else:
+                return default
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -968,6 +969,9 @@ class Builder:
         metadata.package.installedSize = int(size)
 
         self.metadata = metadata
+        if int(size) == 0:
+            return False
+        return True
 
     def gen_files_xml(self, package):
         """Generates files.xml using the path definitions in specfile and
@@ -1063,6 +1067,8 @@ It is dangerous. So, if you wanna create stable packages, please fix \
 this issue in your workplace. Probably installing \"python3-filemagic\" \
 package might be a good solution."))
 
+        self.nostrip=tuple(self.get_action_variable("NoStrip", []))
+        self.keepspecial=self.get_action_variable("KeepSpecial", [])
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = util.join_path(root, fn)
@@ -1073,7 +1079,6 @@ package might be a good solution."))
                         ctx.ui.warning(
                             _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(filepath)))
                         fileinfo = "broken symlink"
-
                     ctx.ui.info(
                         _("\'magic\' return of \"{0}\" is \"{1}\"").format(
                             filepath, fileinfo), verbose=True)
@@ -1092,8 +1097,9 @@ package might be a good solution."))
                 strip_debug_action(
                     filepath,
                     fileinfo,
-                    install_dir,tuple(self.get_action_variable("NoStrip", [])))
-                exclude_special_files(filepath, fileinfo,self.get_action_variable("KeepSpecial", []))
+                    install_dir,self.nostrip)
+                exclude_special_files(filepath, fileinfo,self.keepspecial)
+                
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
@@ -1106,6 +1112,9 @@ package might be a good solution."))
         doc_ptrn = re.compile(ctx.const.doc_package_end)
 
         self.fetch_component()  # bug 856
+        ctx.ui.status(
+            _("Running file actions: \"{}\"").format(
+                self.spec.source.name), push_screen=True)
 
         # Operations and filters for package files
         self.file_actions()
@@ -1192,10 +1201,15 @@ package might be a good solution."))
                             package.name))
                 continue
 
+            if not self.gen_metadata_xml(package):
+                ctx.ui.warning(
+                        _("Ignoring empty package: \"{}\"").format(
+                            package.name))
+                continue
+
             ctx.ui.status(
                 _("Building package: \"{}\"").format(
                     package.name), push_screen=True)
-            self.gen_metadata_xml(package)
 
             name = self.package_filename(self.metadata.package)
 
