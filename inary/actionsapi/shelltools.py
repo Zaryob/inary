@@ -322,7 +322,7 @@ def system(command):
         command +
         "\n")
     #    command = str.join(str.split(command))
-    retValue = run_logged(command)
+    retValue = os.system(command)
 
     # if return value is different than 0, it means error, raise exception
     if retValue != 0:
