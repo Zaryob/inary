@@ -274,7 +274,7 @@ class Fetcher:
             """
             # c.close()
 
-        except:
+        except Exception as x:
             if x.args[0] == 33:
                 os.remove(self.partial_file)
             if self.try_number != 3:
