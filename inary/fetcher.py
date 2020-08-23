@@ -35,11 +35,13 @@ _ = __trans.gettext
 
 # Network libraries
 # import ftplib
-try:
-    import pycurl
-except ImportError:
-    raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
+#try:
+#    import pycurl
+#except ImportError:
+#    raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
 
+
+from requests import get
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
@@ -150,7 +152,9 @@ class Fetcher:
         self.destfile = destfile
         self.progress = None
         self.try_number = 0
-        self.useragent = 'Inary Fetcher/' + inary.__version__
+        
+        # spoof user-agent (yes, I'm GoogleBot :D)
+        self.useragent = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(
@@ -179,6 +183,8 @@ class Fetcher:
                 _("File already exsist. Download skiped..."),
                 verbose=True)
             return 0
+        
+        """
         c = pycurl.Curl()
         c.protocol = self.url.scheme()
         c.setopt(c.URL, self.url.get_uri())
@@ -206,29 +212,17 @@ class Fetcher:
             # To block man-in-middle attack
             c.setopt(pycurl.SSL_VERIFYHOST, 2)
             # c.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
+        """
 
         # Header
         # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
-        handler = UIHandler()
-        handler.start(
-            self.archive_file,
-            self.url.get_uri(),
-            self.url.filename())
-
         if os.path.exists(self.partial_file):
-            if self._test_range_support():
-                file_id = open(self.partial_file, "ab")
-                c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
-                ctx.ui.info(
-                    _("Partial file detected. Download resuming..."),
-                    verbose=True)
-            else:
-                file_id = open(self.partial_file, "wb")
+            os.remove(self.partial_file)
 
-        else:
-            file_id = open(self.partial_file, "wb")
+        file_id = open(self.partial_file, "wb")
 
+        """
         # Function sets
         c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
         c.setopt(c.NOPROGRESS, False)
@@ -236,20 +230,51 @@ class Fetcher:
 
         c.setopt(pycurl.FOLLOWLOCATION, 1)
         c.setopt(c.WRITEDATA, file_id)
+        """
 
         try:
-            c.perform()
+            c = get(self.url.get_uri(), stream=True, timeout=timeout, headers={
+                    'User-Agent':self.useragent,
+                    'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'Accept-Encoding':'gzip, deflate, br',
+                    'Accept-Language':'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                    'SEC-FETCH-DEST':'document',
+                    'SEC-FETCH-MODE':'navigate',
+                    'SEC-FETCH-SITE':'none',
+                    'SEC-FETCH-USER':'?1',
+                    'UPGRADE-INSECURE-REQUESTS':'1',
+                }
+            )
+            total = c.headers.get('content-length')
+            handler = UIHandler()
+            handler.start(
+                self.archive_file,
+                self.url.get_uri(),
+                self.url.filename(),
+            )
+            if not total:
+                file_id.write(res.content)
+            else:
+                down = 0
+                total = int(total)
+                for data in res.iter_content(chunk_size=4096):
+                    snap.write(data)
+                    down += len(data)
+                    handler.update(total, down)
+            # c.perform()
             # This is not a bug. This is a new feature. ŞAka bir yana bu hata
             ctx.ui.info("\n", noln=True)
             # pycurl yüzünden kaynaklanıyor
             file_id.close()
+            """
             ctx.ui.info(_("RESPONSE: ") +
                         str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
             ctx.ui.info(_("Downloaded from: " +
                           str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
-            c.close()
+            """
+            # c.close()
 
-        except pycurl.error as x:
+        except:
             if x.args[0] == 33:
                 os.remove(self.partial_file)
             if self.try_number != 3:
