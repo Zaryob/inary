@@ -1295,6 +1295,10 @@ def get_cpu_count():
         # If we cannot count cpu, we shoult return 1
         return 1
 
+def getenv(key):
+    if os.getenv(key) == None:
+        return ""
+    return os.getenv[key]
 
 def get_vm_info():
     vm_info = {}

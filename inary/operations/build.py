@@ -438,10 +438,10 @@ class Builder:
                "PATH":"/bin:/usr/bin:/sbin:/usr/sbin",
                "PYTHONDONTWRITEBYTECODE": '1'}
         if self.build_type == "emul32":
-            env["CC"] = "{} -m32".format(os.getenv("CC"))
-            env["CXX"] = "{} -m32".format(os.getenv("CXX"))
-            env["CFLAGS"] = os.getenv("CFLAGS").replace("-fPIC", "")
-            env["CXXFLAGS"] = os.getenv("CXXFLAGS").replace("-fPIC", "")
+            env["CC"] = "{} -m32".format(util.getenv("CC"))
+            env["CXX"] = "{} -m32".format(util.getenv("CXX"))
+            env["CFLAGS"] = util.getenv("CFLAGS").replace("-fPIC", "")
+            env["CXXFLAGS"] = util.getenv("CXXFLAGS").replace("-fPIC", "")
             env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
         if self.build_type == "clang":
             env['CC'] = "clang"
