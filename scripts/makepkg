@@ -75,7 +75,10 @@ run(){
 	cd $pwd
 	if function_exists $1 ; then
 		echo -e "\033[32;1m$2\033[;0m" > /dev/stderr
-		$1 || echo -e "\033[31;1m$1 failed\033[;0m" > /dev/stderr
+		if ! $1 ; then
+			echo -e "\033[31;1m$1 failed\033[;0m" > /dev/stderr
+			exit 1
+		fi
 	fi
 }
 create_tar(){
@@ -156,10 +159,8 @@ create_inary(){
 }
 run fetch_sources "Downloading"
 run check_make_dep "Checking dependency"
-set -e
 run pkgver "Runninn pkgver"
 run prepare "Running prepare"
-set -e
 run build "Building"
 run package "Installing"
 run create_tar "Creating install.tar.xz"
