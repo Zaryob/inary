@@ -119,7 +119,7 @@ class Digraph(object):
                 self.p[v] = u
                 self.dfs_visit(v, finish_hook)
             elif self.color[v] == 'g':  # cycle detected
-		continue
+                continue
 		
         self.color[u] = 'b'  # mark black (completed)
         if finish_hook:
