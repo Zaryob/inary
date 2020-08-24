@@ -159,6 +159,7 @@ run check_make_dep "Checking dependency"
 set -e
 run pkgver "Runninn pkgver"
 run prepare "Running prepare"
+set -e
 run build "Building"
 run package "Installing"
 run create_tar "Creating install.tar.xz"
