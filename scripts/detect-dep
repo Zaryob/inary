@@ -1,3 +1,4 @@
+export LANG=C
 work=$(mktemp)
 rm -f $work ; mkdir $work
 cp $1 $work/
