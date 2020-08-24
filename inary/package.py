@@ -225,7 +225,7 @@ class Package:
                 # Also, tar.extract() doesn't write on symlinks... Not any
                 # more :).
                 if os.path.isfile(
-                        tarinfo.name) or os.path.islink(tarinfo.name):
+                        tarinfo.name) and not os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
                     except OSError as e:
