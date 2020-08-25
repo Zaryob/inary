@@ -203,6 +203,7 @@ class Fetcher:
         return self.archive_file
         
     def _get_pycurl(self):
+        import pycurl
         c = pycurl.Curl()
         c.protocol = self.url.scheme()
         c.setopt(c.URL, self.url.get_uri())
@@ -250,6 +251,7 @@ class Fetcher:
         c.close()
     
     def _get_requests(self):
+        from requests import get
         c = get(self.url.get_uri(), stream=True, timeout=timeout, headers={
                 'User-Agent':self.useragent,
                 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
