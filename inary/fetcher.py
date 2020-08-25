@@ -181,6 +181,12 @@ class Fetcher:
             os.remove(self.partial_file)
 
         self.file_id = open(self.partial_file, "wb")
+        
+        self.handler = UIHandler()
+        self.handler.start(
+            self.archive_file,
+            self.url.get_uri(),
+            self.url.filename())
 
         try:
             self.fetcher = self._get_fetcher_mode()
@@ -267,11 +273,6 @@ class Fetcher:
             }
         )
         total = c.headers.get('content-length')
-        self.handler = UIHandler()
-        self.handler.start(
-            self.archive_file,
-            self.url.get_uri(),
-            self.url.filename())
         if not total:
             self.file_id.write(res.content)
         else:
