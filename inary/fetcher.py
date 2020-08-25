@@ -278,7 +278,7 @@ class Fetcher:
         else:
             down = 0
             total = int(total)
-            for data in c.iter_content(chunk_size=4096):
+            for data in c.iter_content(chunk_size=1024):
                 self.file_id.write(data)
                 down += len(data)
                 self.handler.update(total, down)
