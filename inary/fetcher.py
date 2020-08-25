@@ -287,19 +287,19 @@ class Fetcher:
             if mode == 0 or mode not in [0, 1, 2]:
                 try:
                     import pycurl
-                    self.fetcher = _get_pycurl
+                    self.fetcher = self._get_pycurl
                 except ImportError:
                     try:
                         from requests import get
-                        self.fetcher = _get_requests
+                        self.fetcher = self._get_requests
                     except ImportError:
                         raise FetchError(_('No backend configured for fetcher. Install pycurl or requests then try again.'))
             elif mode == 1:
                 import pycurl
-                self.fetcher = _get_pycurl
+                self.fetcher = self._get_pycurl
             elif mode == 2:
                 from requests import get
-                self.fetcher = _get_requests
+                self.fetcher = self._get_requests
                 
         return self.fetcher
 
