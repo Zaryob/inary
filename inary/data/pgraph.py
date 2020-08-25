@@ -33,11 +33,6 @@ class CycleException(inary.errors.Exception):
     def __str__(self):
         return _('Encountered cycle {}').format(self.cycle)
 
-class PTree:
-
-    def __init__(self,pkg=None):
-        self.deps=[]
-        self.package=None
 
 class PGraph:
 
