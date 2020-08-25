@@ -282,7 +282,8 @@ class Fetcher:
     
     def _get_fetcher_mode(self):
         if not self.fetcher:
-            mode = int(ctx.config.get_option('fetcher_mode'))
+            mode = ctx.config.get_option('fetcher_mode')
+            mode = int(mode) if mode else 0
             if mode == 0 or mode not in [0, 1, 2]:
                 try:
                     import pycurl
