@@ -101,6 +101,9 @@ class GeneralDefaults:
     
     # FETCHER USER-AGENT STRING
     fetcher_useragent = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+    
+    # FETCHER CHUNK SIZE
+    fetcher_chunksize = 8196
 
 
 class BuildDefaults:

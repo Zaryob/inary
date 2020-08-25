@@ -278,7 +278,8 @@ class Fetcher:
         else:
             down = 0
             total = int(total)
-            for data in c.iter_content(chunk_size=8196):
+            chunk = int(ctx.config.get_option('fetcher_chunksize') or 8196)
+            for data in c.iter_content(chunk_size=chunk):
                 self.file_id.write(data)
                 down += len(data)
                 self.handler.update(total, down)
