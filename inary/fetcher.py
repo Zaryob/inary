@@ -25,23 +25,14 @@ import inary.db
 import inary.uri
 import inary.errors
 import inary.mirrors
-import inary.util as util
-import inary.context as ctx
+from inary import util
+from inary.util import ctx
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-# Network libraries
-# import ftplib
-#try:
-#    import pycurl
-#except ImportError:
-#    raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
-
-
-from requests import get
 
 # For raising errors when fetching
 class FetchError(inary.errors.Error):
@@ -152,9 +143,10 @@ class Fetcher:
         self.destfile = destfile
         self.progress = None
         self.try_number = 0
+        self.fetcher = _get_fetcher_mode()
         
-        # spoof user-agent (yes, I'm GoogleBot :D)
-        self.useragent = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+        # spoof user-agent
+        self.useragent = ctx.config.get_option('fetcher_useragent')
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(
@@ -183,97 +175,14 @@ class Fetcher:
                 _("File already exsist. Download skiped..."),
                 verbose=True)
             return 0
-        
-        """
-        c = pycurl.Curl()
-        c.protocol = self.url.scheme()
-        c.setopt(c.URL, self.url.get_uri())
-        # Some runtime settings (user agent, bandwidth limit, timeout,
-        # redirections etc.)
-        c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
-        c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
-        c.setopt(pycurl.AUTOREFERER, 1)
-        # This for waiting to establish connection
-        c.setopt(pycurl.CONNECTTIMEOUT, timeout)
-        # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
-        c.setopt(pycurl.MAXREDIRS, 50)
-        c.setopt(pycurl.NOSIGNAL, True)
-
-        if hasattr(pycurl, "AUTOREFERER"):
-            c.setopt(pycurl.AUTOREFERER, 1)
-
-        c.setopt(pycurl.LOW_SPEED_TIME, 30)
-        c.setopt(pycurl.LOW_SPEED_LIMIT, 5)
-
-        if not ctx.config.values.general.ssl_verify:
-            c.setopt(pycurl.SSL_VERIFYPEER, 0)
-            c.setopt(pycurl.SSL_VERIFYHOST, 0)
-        else:
-            # To block man-in-middle attack
-            c.setopt(pycurl.SSL_VERIFYHOST, 2)
-            # c.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
-        """
-
-        # Header
-        # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
 
         if os.path.exists(self.partial_file):
             os.remove(self.partial_file)
 
-        file_id = open(self.partial_file, "wb")
-
-        """
-        # Function sets
-        c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
-        c.setopt(c.NOPROGRESS, False)
-        c.setopt(c.XFERINFOFUNCTION, handler.update)
-
-        c.setopt(pycurl.FOLLOWLOCATION, 1)
-        c.setopt(c.WRITEDATA, file_id)
-        """
+        self.file_id = open(self.partial_file, "wb")
 
         try:
-            c = get(self.url.get_uri(), stream=True, timeout=timeout, headers={
-                    'User-Agent':self.useragent,
-                    'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                    'Accept-Encoding':'gzip, deflate, br',
-                    'Accept-Language':'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
-                    'SEC-FETCH-DEST':'document',
-                    'SEC-FETCH-MODE':'navigate',
-                    'SEC-FETCH-SITE':'none',
-                    'SEC-FETCH-USER':'?1',
-                    'UPGRADE-INSECURE-REQUESTS':'1'
-                }
-            )
-            total = c.headers.get('content-length')
-            handler = UIHandler()
-            handler.start(
-                self.archive_file,
-                self.url.get_uri(),
-                self.url.filename())
-            if not total:
-                file_id.write(res.content)
-            else:
-                down = 0
-                total = int(total)
-                for data in c.iter_content(chunk_size=4096):
-                    file_id.write(data)
-                    down += len(data)
-                    # print("REQUESTS")
-                    handler.update(total, down)
-            # c.perform()
-            # This is not a bug. This is a new feature. ŞAka bir yana bu hata
-            ctx.ui.info("\n", noln=True)
-            # pycurl yüzünden kaynaklanıyor
-            file_id.close()
-            """
-            ctx.ui.info(_("RESPONSE: ") +
-                        str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
-            ctx.ui.info(_("Downloaded from: " +
-                          str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
-            """
-            # c.close()
-
+            self.fetcher()
         except Exception as x:
             if x.args[0] == 33:
                 os.remove(self.partial_file)
@@ -291,6 +200,106 @@ class Fetcher:
 
         shutil.move(self.partial_file, self.archive_file)
         return self.archive_file
+        
+    def _get_pycurl(self):
+        c = pycurl.Curl()
+        c.protocol = self.url.scheme()
+        c.setopt(c.URL, self.url.get_uri())
+        # Some runtime settings (user agent, bandwidth limit, timeout,
+        # redirections etc.)
+        c.setopt(pycurl.MAX_RECV_SPEED_LARGE, self._get_bandwith_limit())
+        c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
+        c.setopt(pycurl.AUTOREFERER, 1)
+        # This for waiting to establish connection
+        c.setopt(pycurl.CONNECTTIMEOUT, timeout)
+        # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
+        c.setopt(pycurl.MAXREDIRS, 50)
+        c.setopt(pycurl.NOSIGNAL, True)
+        if hasattr(pycurl, "AUTOREFERER"):
+            c.setopt(pycurl.AUTOREFERER, 1)
+
+        c.setopt(pycurl.LOW_SPEED_TIME, 30)
+        c.setopt(pycurl.LOW_SPEED_LIMIT, 5)
+
+        if not ctx.config.values.general.ssl_verify:
+            c.setopt(pycurl.SSL_VERIFYPEER, 0)
+            c.setopt(pycurl.SSL_VERIFYHOST, 0)
+        else:
+            # To block man-in-middle attack
+            c.setopt(pycurl.SSL_VERIFYHOST, 2)
+            # c.setopt(pycurl.CAINFO, "/etc/inary/certificates/sourceforge.crt")
+
+        # Header
+        # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
+        # Function sets
+        c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
+        c.setopt(c.NOPROGRESS, False)
+        c.setopt(c.XFERINFOFUNCTION, self.handler.update)
+        c.setopt(pycurl.FOLLOWLOCATION, 1)
+        c.setopt(c.WRITEDATA, self.file_id)
+        c.perform()
+        # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+        ctx.ui.info("\n", noln=True)
+        # pycurl yüzünden kaynaklanıyor
+        self.file_id.close()
+        ctx.ui.info(_("RESPONSE: ") +
+                    str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
+        ctx.ui.info(_("Downloaded from: " +
+                        str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+        c.close()
+    
+    def _get_requests(self):
+        c = get(self.url.get_uri(), stream=True, timeout=timeout, headers={
+                'User-Agent':self.useragent,
+                'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'Accept-Encoding':'gzip, deflate, br',
+                'Accept-Language':'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'SEC-FETCH-DEST':'document',
+                'SEC-FETCH-MODE':'navigate',
+                'SEC-FETCH-SITE':'none',
+                'SEC-FETCH-USER':'?1',
+                'UPGRADE-INSECURE-REQUESTS':'1'
+            }
+        )
+        total = c.headers.get('content-length')
+        self.handler = UIHandler()
+        self.handler.start(
+            self.archive_file,
+            self.url.get_uri(),
+            self.url.filename())
+        if not total:
+            self.file_id.write(res.content)
+        else:
+            down = 0
+            total = int(total)
+            for data in c.iter_content(chunk_size=4096):
+                file_id.write(data)
+                down += len(data)
+                self.handler.update(total, down)
+        ctx.ui.info("\n", noln=True)
+        self.file_id.close()
+    
+    def _get_fetcher_mode(self):
+        if not self.fetcher:
+            mode = int(ctx.config.get_option('fetcher_mode'))
+            if mode == 0 or mode not in [0, 1, 2]:
+                try:
+                    import pycurl
+                    self.fetcher = _get_pycurl
+                except ImportError:
+                    try:
+                        from requests import get
+                        self.fetcher = _get_requests
+                    except ImportError:
+                        raise FetchError(_('No backend configured for fetcher. Install pycurl or requests then try again.'))
+            elif mode == 1:
+                import pycurl
+                self.fetcher = _get_pycurl
+            elif mode == 2:
+                from requests import get
+                self.fetcher = _get_requests
+                
+        return self.fetcher
 
     def _get_http_headers(self):
         headers = []
