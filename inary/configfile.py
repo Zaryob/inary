@@ -88,6 +88,22 @@ class GeneralDefaults:
     no_color = False
     ignore_safety = False
     ignore_delta = False
+    
+    # SELECT FETCHER DOWNLOAD BACKEND
+    # 0 - Auto (try and choose)
+    #     pyCurl -> requests -> other ways (if implemented)
+    # 1 - Force pyCurl
+    # 2 - Force requests
+    # 
+    # Note: if you entered invalid number to here,
+    #       using default one
+    fetcher_mode = 0
+    
+    # FETCHER USER-AGENT STRING
+    fetcher_useragent = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+    
+    # FETCHER CHUNK SIZE
+    fetcher_chunksize = 8196
 
 
 class BuildDefaults:
