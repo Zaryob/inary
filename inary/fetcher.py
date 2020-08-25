@@ -277,7 +277,7 @@ class Fetcher:
             down = 0
             total = int(total)
             for data in c.iter_content(chunk_size=4096):
-                file_id.write(data)
+                self.file_id.write(data)
                 down += len(data)
                 self.handler.update(total, down)
         ctx.ui.info("\n", noln=True)
@@ -298,10 +298,8 @@ class Fetcher:
                     except ImportError:
                         raise FetchError(_('No backend configured for fetcher. Install pycurl or requests then try again.'))
             elif mode == 1:
-                import pycurl
                 self.fetcher = self._get_pycurl
             elif mode == 2:
-                from requests import get
                 self.fetcher = self._get_requests
                 
         return self.fetcher
