@@ -183,6 +183,7 @@ class Fetcher:
 
         try:
             self.fetcher = self._get_fetcher_mode()
+            self.timeout = timeout
             self.fetcher()
         except Exception as x:
             if x.args[0] == 33:
@@ -213,7 +214,7 @@ class Fetcher:
         c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
         c.setopt(pycurl.AUTOREFERER, 1)
         # This for waiting to establish connection
-        c.setopt(pycurl.CONNECTTIMEOUT, timeout)
+        c.setopt(pycurl.CONNECTTIMEOUT, self.timeout)
         # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
         c.setopt(pycurl.MAXREDIRS, 50)
         c.setopt(pycurl.NOSIGNAL, True)
@@ -252,7 +253,7 @@ class Fetcher:
     
     def _get_requests(self):
         from requests import get
-        c = get(self.url.get_uri(), stream=True, timeout=timeout, headers={
+        c = get(self.url.get_uri(), stream=True, timeout=self.timeout, headers={
                 'User-Agent':self.useragent,
                 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                 'Accept-Encoding':'gzip, deflate, br',
