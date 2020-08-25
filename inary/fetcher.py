@@ -143,7 +143,7 @@ class Fetcher:
         self.destfile = destfile
         self.progress = None
         self.try_number = 0
-        self.fetcher = None
+        self.fetcher = self._get_fetcher_mode()
         
         # spoof user-agent
         self.useragent = ctx.config.get_option('fetcher_useragent')
@@ -182,7 +182,6 @@ class Fetcher:
         self.file_id = open(self.partial_file, "wb")
 
         try:
-            self.fetcher = _get_fetcher_mode()
             self.fetcher()
         except Exception as x:
             if x.args[0] == 33:
