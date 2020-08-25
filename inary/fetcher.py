@@ -146,7 +146,8 @@ class Fetcher:
         self.fetcher = None
         
         # spoof user-agent
-        self.useragent = ctx.config.get_option('fetcher_useragent')
+        self.useragent = (ctx.config.get_option('fetcher_useragent') 
+                            or 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(
@@ -277,7 +278,7 @@ class Fetcher:
             down = 0
             total = int(total)
             for data in c.iter_content(chunk_size=4096):
-                file_id.write(data)
+                self.file_id.write(data)
                 down += len(data)
                 self.handler.update(total, down)
         ctx.ui.info("\n", noln=True)
@@ -285,8 +286,7 @@ class Fetcher:
     
     def _get_fetcher_mode(self):
         if not self.fetcher:
-            mode = ctx.config.get_option('fetcher_mode')
-            mode = int(mode) if mode else 0
+            mode = int(ctx.config.get_option('fetcher_mode') or 0)
             if mode == 0 or mode not in [0, 1, 2]:
                 try:
                     import pycurl
@@ -298,10 +298,8 @@ class Fetcher:
                     except ImportError:
                         raise FetchError(_('No backend configured for fetcher. Install pycurl or requests then try again.'))
             elif mode == 1:
-                import pycurl
                 self.fetcher = self._get_pycurl
             elif mode == 2:
-                from requests import get
                 self.fetcher = self._get_requests
                 
         return self.fetcher
