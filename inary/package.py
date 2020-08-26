@@ -225,12 +225,11 @@ class Package:
                 # Also, tar.extract() doesn't write on symlinks... 
                 # We remove file symlinks before (directory symlinks 
                 #broke system)
-                if os.path.isfile(tarinfo.name):
+                if not os.path.isdir(tarinfo.name):
                     if os.path.islink(tarinfo.name):
                         link=os.readlink(tarinfo.name)
                         if  not os.path.isdir(link):
                             try:
-                                print(tarinfo.name)
                                 os.unlink(tarinfo.name)
                             except OSError as e:
                                 ctx.ui.warning(e)

@@ -342,7 +342,7 @@ class ArchiveTar(ArchiveBase):
 
         if self.tar is None:
             self.tar = tarfile.open(self.file_path, rmode,
-                                    fileobj=self.fileobj)
+                                    fileobj=self.fileobj,errorlevel=1)
 
         oldwd = None
         try:
@@ -448,6 +448,11 @@ class ArchiveTar(ArchiveBase):
                 self.tar.extract(tarinfo)
                 for service in startservices:
                     os.system("service {} start".format(service))
+            except IOError as e:
+                os.remove(tarinfo.name)
+                tar.extract(tarinfo)
+            except tarfile.ReadError:
+                pass
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
