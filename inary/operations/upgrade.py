@@ -279,8 +279,9 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # install / reinstall
 
     packagedb = inary.db.packagedb.PackageDB()
+    installdb = inary.db.installdb.InstallDB()
 
-    G_f = pgraph.PGraph(packagedb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb,installdb)  # construct G_f
 
     A = set(A)
 
@@ -299,29 +300,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     for x in A:
         G_f.add_package(x)
 
-    installdb = inary.db.installdb.InstallDB()
-
-    def add_runtime_deps(pkg, Bp):
-        for dep in pkg.runtimeDependencies():
-            # add packages that can be upgraded
-            if installdb.has_package(
-                    dep.package) and dep.satisfied_by_installed():
-                continue
-
-            if dep.satisfied_by_repo():
-                if dep.package not in G_f.vertices():
-                    Bp.add(str(dep.package))
-
-                # Always add the dependency info although the dependant
-                # package is already a member of this graph. Upgrade order
-                # might change if the dependency info differs from the
-                # previous ones.
-                G_f.add_dep(pkg.name, dep)
-            else:
-                ctx.ui.error(
-                    _('Dependency \"{0}\" of \"{1}\" cannot be satisfied.').format(
-                        dep, pkg.name))
-                raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):
         """Try to resolve conflicts by upgrading
@@ -389,9 +367,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         Bp = set()
 
         for x in A:
-            pkg = packagedb.get_package(x)
-
-            add_runtime_deps(pkg, Bp)
+            G_f.add_package(x)
             add_resolvable_conflicts(pkg, Bp)
 
             if installdb.has_package(x):
@@ -399,9 +375,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 add_needed_revdeps(pkg, Bp)
 
         A = Bp
-
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
 
     order = G_f.topological_sort()
     order.reverse()

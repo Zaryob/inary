@@ -222,14 +222,16 @@ class Package:
                 # change the inode and will do the trick (in fact, old
                 # file will be deleted only when its closed).
                 #
-                # Also, tar.extract() doesn't write on symlinks... Not any
-                # more :).
-                if os.path.isfile(
-                        tarinfo.name) and not os.path.islink(tarinfo.name):
-                    try:
-                        os.unlink(tarinfo.name)
-                    except OSError as e:
-                        ctx.ui.warning(e)
+                # Also, tar.extract() doesn't write on symlinks... 
+                # We remove file symlinks before (directory symlinks 
+                #broke system)
+                if os.path.isfile(tarinfo.name):
+                    if os.path.islink(tarinfo.name):
+                        if os.path.isfile(os.readlink(tarinfo.name)) :
+                            try:
+                                os.unlink(tarinfo.name)
+                            except OSError as e:
+                                ctx.ui.warning(e)
 
             else:
                 # Added for package-manager

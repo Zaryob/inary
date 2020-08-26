@@ -154,8 +154,6 @@ def plan_emerge(A):
                     process_dep(rtdep)
         B = Bp
 
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
     order_build = G_f.topological_sort()
     order_build.reverse()
 

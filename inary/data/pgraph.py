@@ -19,6 +19,7 @@ import inary.db
 import inary.errors
 import inary.context as ctx
 import inary.operations.helper as op_helper
+import sys
 
 # Gettext Library
 import gettext
@@ -42,6 +43,7 @@ class PGraph:
         self.packages=[]
         self.vertic=[]
         self.checked=[]
+        self.reinstall=False
         
         if installdb == None:
             self.installdb=inary.db.installdb.InstallDB()
@@ -52,38 +54,44 @@ class PGraph:
     def topological_sort(self):
         return inary.util.unique_list(self.packages)
         
-    def check_package(self,pkg=None):
+    def check_package(self,pkg=None,reverse=False):
         if pkg not in self.checked:
             self.checked.append(pkg)
         else:
             return
+            
         if pkg in self.packages:
             return
         else:
-            
-            if self.installdb.has_package(pkg):
-                return
-            
-            if pkg not in self.packages:
-                self.packages.append(pkg)
 
-            for dep in self.packagedb.get_package(pkg).runtimeDependencies():
-                if dep not in self.packages:
-                    self.check_package(dep.package)
-                    if not self.installdb.has_package(dep.package):
-                        self.packages.append(dep.package)
+            if reverse:
+                if pkg not in self.packages:
+                    self.packages.append(pkg)
+                for (dep, depinfo) in self.installdb.get_rev_deps(pkg):
+                    if dep not in self.packages:
+                        self.check_package(dep)
+                        if self.installdb.has_package(dep):
+                            self.packages.append(dep)            
+            else:
+                if self.installdb.has_package(pkg) and not self.reinstall:
+                    return
+                if pkg not in self.packages:
+                    self.packages.append(pkg)
+                for dep in self.packagedb.get_package(pkg).runtimeDependencies():
+                    if dep not in self.packages:
+                        self.check_package(dep.package)
+                        if not self.installdb.has_package(dep.package):
+                            self.packages.append(dep.package)
 
         
 
-    def write_graphviz(self,fd=None):
-        return
         
     def add_package(self,package):
-        self.check_package(package)
+        self.check_package(package,False)
         
-    def add_dep(self,pkg,dep):
-        self.check_package(pkg)
-        
+    def add_package_revdep(self,package):
+        self.check_package(package,True)
+                
     def vertices(self):
         return self.vertic
 
@@ -114,18 +122,10 @@ def package_graph(A, packagedb, ignore_installed=False, reverse=False):
         Bp = set()
         # print pkg
         if reverse:
-            for x in B:
-                for name, dep in packagedb.get_rev_deps(x):
-                    if ignore_installed:
-                        if dep.satisfied_by_installed():
-                            continue
-                    if name not in G_f.vertices():
-                        Bp.add(name)
-                    G_f.add_dep(name, dep)
+            True
         else:
             for x in B:
-                pkg = packagedb.get_package(x)
-                G_f.add_package(pkg)
+                G_f.add_package(x)
         B = Bp
     return G_f
 
@@ -140,14 +140,8 @@ def generate_pending_order(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = installdb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                if dep.package in G_f.vertices():
-                    G_f.add_dep(x, dep)
+            G_f.add_package(x)
         B = Bp
-    if ctx.get_option('debug'):
-        import sys
-        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
 
