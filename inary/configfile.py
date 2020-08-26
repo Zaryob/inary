@@ -59,6 +59,9 @@ import configparser
 # INARY Modules
 import inary.errors
 
+# Öşex like this
+from inary.util import hewal as eval
+
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)

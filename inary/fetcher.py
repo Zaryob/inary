@@ -83,12 +83,15 @@ class UIHandler:
         self.s_time = self.now()
 
     def update(self, total_to_download, total_downloaded,
-               total_to_upload=0, total_uploaded=0):
+               total_to_upload=0, total_uploaded=0,
+               background_color=None, foreground_color=None):
         if self.size == total_downloaded:
             return
 
         self.size = total_downloaded
         self.total_size = total_to_download
+        self.background = background_color
+        self.foreground = foreground_color
         if self.total_size:
             try:
                 self.percent = (self.size * 100.0) / self.total_size
@@ -122,7 +125,9 @@ class UIHandler:
                                 rate=self.rate,
                                 eta=self.eta,
                                 symbol=self.symbol,
-                                basename=self.basename)
+                                basename=self.basename,
+                                backgroundcolor=self.background,
+                                foregroundcolor=self.foreground)
 
         self.last_updated = self.now()
 
@@ -146,7 +151,7 @@ class Fetcher:
         self.fetcher = None
         
         # spoof user-agent
-        self.useragent = (ctx.config.get_option('fetcher_useragent') 
+        self.useragent = (ctx.config.values.general.fetcher_useragent
                             or 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
@@ -278,17 +283,17 @@ class Fetcher:
         else:
             down = 0
             total = int(total)
-            chunk = int(ctx.config.get_option('fetcher_chunksize') or 8196)
+            chunk = int(ctx.config.values.general.fetcher_chunksize or 8196)
             for data in c.iter_content(chunk_size=chunk):
                 self.file_id.write(data)
                 down += len(data)
-                self.handler.update(total, down)
+                self.handler.update(total, down,foreground_color="backgroundblue")
         ctx.ui.info("\n", noln=True)
         self.file_id.close()
     
     def _get_fetcher_mode(self):
         if not self.fetcher:
-            mode = int(ctx.config.get_option('fetcher_mode') or 0)
+            mode = int(ctx.config.values.general.fetcher_mode or 0)
             if mode == 0 or mode not in [0, 1, 2]:
                 try:
                     import pycurl

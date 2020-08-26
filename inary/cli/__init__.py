@@ -200,8 +200,8 @@ class CLI(inary.ui.UI):
 
         elif ka['operation'] == "fetching":
             if not ctx.get_option("no_color"):
-                complated_background = 'backgroundgreen'
-                queried_background = 'backgroundyellow'
+                complated_background = (ka['foregroundcolor'] or 'backgroundgreen')
+                queried_background = (ka['backgroundcolor'] or 'backgroundyellow')
             else:
                 complated_background = queried_background = "default"
 

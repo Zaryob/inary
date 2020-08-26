@@ -340,6 +340,16 @@ def run_logged(cmd):
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
+    
+def hewal(expr):
+    """Eval with öşex power"""
+    expr=str(expr).upper()
+    if expr in ("TRUE", "1", "ON", "T","Y","YES"):
+        return True
+    elif expr  in ("FALSE", "0", "OFF", "F","N","NO"):
+        return False
+    return None
+        
 
 ########################
 # Filesystem functions #
@@ -392,7 +402,7 @@ def initscr():
     printw("\x1b[s\x1bc")
 
 
-def endsrc():
+def endwin():
     """Clear and restore screen"""
     printw("\x1bc\x1b[u")
 
