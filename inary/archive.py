@@ -445,14 +445,16 @@ class ArchiveTar(ArchiveBase):
                         shutil.rmtree(tarinfo.name)
 
             try:
-                self.tar.extract(tarinfo)
-                for service in startservices:
-                    os.system("service {} start".format(service))
+                if not os.path.isdir("/"+tarinfo.name) and not os.path.islink("/"+tarinfo.name):
+                    try:
+                        os.unlink("/"+tarinfo.name)
+                    except:
+                        #TODO: review this block
+                        pass
+                    self.tar.extract(tarinfo)
             except IOError as e:
                 os.remove(tarinfo.name)
-                tar.extract(tarinfo)
-            except tarfile.ReadError:
-                pass
+                self.tar.extract(tarinfo)
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
