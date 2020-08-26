@@ -847,7 +847,7 @@ class Builder:
                         _('Would you like to install the unsatisfied build dependencies?')):
                     ctx.ui.info(_('Installing build dependencies.'))
                     if not inary.operations.install.install(
-                            [dep.package for dep in dep_unsatis], reinstall=True):
+                            [dep.package for dep in dep_unsatis], reinstall=False):
                         fail()
                 else:
                     fail()

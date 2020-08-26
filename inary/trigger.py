@@ -29,33 +29,6 @@ class Trigger:
         self.postscript = None
         self.missing_postOps = False
 
-    def load_script(self):
-        """Compiles and executes the script"""
-        compiled_script = self.compile_script()
-
-        try:
-            if not self.missing_postOps:
-                localSymbols = globalSymbols = {}
-                exec(compiled_script, localSymbols, globalSymbols)
-            else:
-                return 0
-        except Exception as e:
-            raise (e)
-
-        self.Locals = localSymbols
-        self.Globals = globalSymbols
-
-    def compile_script(self):
-        """Compiles the script and returns a code object"""
-
-        fname = util.join_path(self.postscript)
-        if os.path.isfile(fname):
-            buf = open(fname).read()
-            return compile(buf, fname, "exec")
-        else:
-            self.missing_postOps = True
-            return None
-
     def run_command(self, func):
         """"""
         if not self.missing_postOps:
@@ -84,7 +57,6 @@ class Trigger:
     def preinstall(self, specdir):
         self.specdir = specdir
         self.postscript = util.join_path(self.specdir, ctx.const.postops)
-        self.load_script()
         retval = self.run_command("preInstall")
         util.delete_file(self.postscript)
         return retval
@@ -92,17 +64,14 @@ class Trigger:
     def postinstall(self, specdir):
         self.specdir = specdir
         self.postscript = util.join_path(self.specdir, ctx.const.postops)
-        self.load_script()
         return self.run_command("postInstall")
 
     def postremove(self, specdir):
         self.specdir = specdir
         self.postscript = util.join_path(self.specdir, ctx.const.postops)
-        self.load_script()
         return self.run_command("postRemove")
 
     def preremove(self, specdir):
         self.specdir = specdir
         self.postscript = util.join_path(self.specdir, ctx.const.postops)
-        self.load_script()
         return self.run_command("preRemove")

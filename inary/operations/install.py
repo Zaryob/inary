@@ -254,7 +254,13 @@ def install_pkg_files(package_URIs, reinstall=False):
             raise Exception(_('External dependencies not satisfied.'))
         install_pkg_names(extra_packages, reinstall=True, extra=True)
 
-    packagedb = inary.db.packagedb.PackageDB()
+
+    class PackageDB:
+        @staticmethod
+        def get_package(key, repo=None):
+            return d_t[str(key)]
+
+    packagedb = PackageDB()
     installdb = inary.db.installdb.InstallDB()
 
     A = list(d_t.keys())
@@ -272,12 +278,14 @@ def install_pkg_files(package_URIs, reinstall=False):
     # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
-        G_f.add_package(x)
+        G_f.packages.append(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B:
-            G_f.add_package(x)
+            pkg = packagedb.get_package(x)
+            for dep in pkg.runtimeDependencies():
+                    G_f.add_package(dep)
         B = Bp
     order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):

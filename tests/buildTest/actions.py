@@ -12,6 +12,7 @@ from inary.actionsapi import mesontools
 from inary.actionsapi import cmaketools
 from inary.actionsapi import autotools
 
+
 def setup():
     pass
 
@@ -19,4 +20,5 @@ def build():
     pass
 
 def install():
-    autotools.install("DESTDIR={} >/dev/null".format(get.installDIR()))
+    os.chdir("../unibuild-master")
+    autotools.install("DESTDIR={} ".format(get.installDIR()))

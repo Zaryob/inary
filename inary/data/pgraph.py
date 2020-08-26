@@ -69,7 +69,7 @@ class PGraph:
                     self.packages.append(pkg)
                 for (dep, depinfo) in self.installdb.get_rev_deps(pkg):
                     if dep not in self.packages:
-                        self.check_package(dep)
+                        self.check_package(dep,reverse)
                         if self.installdb.has_package(dep):
                             self.packages.append(dep)            
             else:
@@ -79,7 +79,7 @@ class PGraph:
                     self.packages.append(pkg)
                 for dep in self.packagedb.get_package(pkg).runtimeDependencies():
                     if dep not in self.packages:
-                        self.check_package(dep.package)
+                        self.check_package(dep.package,reverse)
                         if not self.installdb.has_package(dep.package):
                             self.packages.append(dep.package)
 
@@ -92,6 +92,12 @@ class PGraph:
     def add_package_revdep(self,package):
         self.check_package(package,True)
                 
+    def add_package_file(self,pkg):
+        self.packages.append(pkg)
+        for dep in self.installdb.get_package(pkg).runtimeDependencies():
+                    if dep not in self.packages:
+                        self.check_package(dep.package)
+                            
     def vertices(self):
         return self.vertic
 

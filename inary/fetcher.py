@@ -383,7 +383,6 @@ class Fetcher:
 
 # helper function
 def fetch_git(url, destdir="",branch="master"):
-
     if os.path.isdir(destdir):
         os.system("rm -rf \"{}\"".format(destdir))
     status=os.system("git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url,destdir,branch))

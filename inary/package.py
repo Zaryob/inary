@@ -227,11 +227,20 @@ class Package:
                 #broke system)
                 if os.path.isfile(tarinfo.name):
                     if os.path.islink(tarinfo.name):
-                        if os.path.isfile(os.readlink(tarinfo.name)) :
+                        link=os.readlink(tarinfo.name)
+                        if  not os.path.isdir(link):
                             try:
+                                print(tarinfo.name)
                                 os.unlink(tarinfo.name)
                             except OSError as e:
                                 ctx.ui.warning(e)
+                    else:
+                         try:
+                             os.unlink(tarinfo.name)
+                         except OSError as e:
+                             ctx.ui.warning(e)
+
+
 
             else:
                 # Added for package-manager
@@ -244,7 +253,7 @@ class Package:
         tar = self.get_install_archive()
 
         if tar:
-            tar.unpack_dir(outdir, callback=callback)
+                tar.unpack_dir(outdir, callback=callback)
         else:
             self.extract_dir_flat('install', outdir)
 
