@@ -253,7 +253,7 @@ class Package:
         tar = self.get_install_archive()
 
         if tar:
-                tar.unpack_dir(outdir, callback=callback)
+            tar.unpack_dir(outdir, callback=callback)
         else:
             self.extract_dir_flat('install', outdir)
 
