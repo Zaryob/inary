@@ -36,12 +36,12 @@ MIMEFILE_DIR = "/usr/share/mime/packages"
 TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
 #config file
-if not os.path.isfile(".config"):
-    print("No config file found. You must run ./configure first.")
-    exit(127)
-cfg=open(".config","r").readlines()
+if os.path.isfile(".config"):
+    cfg=open(".config","r").readlines()
 
 def getConfig(name=""):
+    if not os.path.isfile(".config"):
+        return True
     for line in cfg:
         if name in line:
             return "y" in line.split("=")[1]

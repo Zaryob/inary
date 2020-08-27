@@ -21,7 +21,7 @@ import logging.handlers
 import os
 import sys
 
-__version__ = "1.4"
+__version__ = "1.4.1"
 
 __all__ = ['api', 'configfile', 'db', 'util', '_cleanup']
 
