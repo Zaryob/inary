@@ -94,9 +94,10 @@ class GeneralDefaults:
     
     # SELECT FETCHER DOWNLOAD BACKEND
     # 0 - Auto (try and choose)
-    #     pyCurl -> requests -> other ways (if implemented)
+    #     pyCurl -> requests -> wget
     # 1 - Force pyCurl
     # 2 - Force requests
+    # 3 - Force wget (on shell)
     # 
     # Note: if you entered invalid number to here,
     #       using default one

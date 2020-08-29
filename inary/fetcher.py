@@ -262,6 +262,8 @@ class Fetcher:
         ctx.ui.info(_("Downloaded from: " +
                         str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
         c.close()
+    def _get_wget(self):
+        return os.system("timeout \"{}\" wget -c --user-agent \"{}\"  \"{}\" -O \"{}\"".format(self.timeout,self.useragent,self.url.get_uri(),self.partial_file))
     
     def _get_requests(self):
         from requests import get
@@ -294,20 +296,21 @@ class Fetcher:
     def _get_fetcher_mode(self):
         if not self.fetcher:
             mode = int(ctx.config.values.general.fetcher_mode or 0)
-            if mode == 0 or mode not in [0, 1, 2]:
+            if mode not in [1, 2,3]:
                 try:
-                    import pycurl
                     self.fetcher = self._get_pycurl
                 except ImportError:
                     try:
-                        from requests import get
                         self.fetcher = self._get_requests
                     except ImportError:
-                        raise FetchError(_('No backend configured for fetcher. Install pycurl or requests then try again.'))
+                             self.fetcher = self._get_wget
+
             elif mode == 1:
                 self.fetcher = self._get_pycurl
             elif mode == 2:
                 self.fetcher = self._get_requests
+            elif mode == 3:
+                self.fetcher = self._get_wget
                 
         return self.fetcher
 
