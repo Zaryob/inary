@@ -31,7 +31,7 @@ class Trigger:
 
     def run_command(self, func):
         """"""
-        if not self.missing_postOps:
+        if os.path.exists(self.specdir+"/postoperations.py"):
             curDir = os.getcwd()
             os.chdir(self.specdir)
             cmd_extra = ""

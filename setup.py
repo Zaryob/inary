@@ -119,8 +119,7 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        if getConfig("NLS_SUPPORT"):
-            self.installi18n()
+        self.installi18n()
         self.generateConfigFile()
 
     def finalize_options(self):
@@ -131,6 +130,8 @@ class Install(install):
         install.finalize_options(self)
 
     def installi18n(self):
+        if not getConfig("NLS_SUPPORT"):
+            return
         for name in os.listdir('po'):
             if not name.endswith('.po'):
                 continue
