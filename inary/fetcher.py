@@ -263,7 +263,7 @@ class Fetcher:
                         str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
         c.close()
     def _get_wget(self):
-        return os.system("timeout \"{}\" wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.timeout,self.useragent,self.url.get_uri(),self.partial_file))
+        return os.system("timeout \"{}\" busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.timeout,self.useragent,self.url.get_uri(),self.partial_file))
     
     def _get_requests(self):
         from requests import get
