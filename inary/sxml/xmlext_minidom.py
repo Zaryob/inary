@@ -24,7 +24,7 @@
  this implementation uses minidom
 """
 
-# MiniDOM Library 
+# MiniDOM Library
 # in order to lack possibility of Ciksemel
 from xml.parsers.expat import ExpatError
 import xml.dom.minidom as minidom

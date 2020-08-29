@@ -35,6 +35,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+
 class ConfigureError(inary.actionsapi.Error):
     def __init__(self, value=''):
         inary.actionsapi.Error.__init__(self, value)
@@ -78,7 +79,7 @@ def configure(parameters=''):
 
     prefix = get.defaultprefixDIR()
     if get.buildTYPE() == "emul32":
-        prefix = get.emul32prefixDIR() 
+        prefix = get.emul32prefixDIR()
 
     args = '--prefix=/{0} \
                 --build={1} \
@@ -90,9 +91,10 @@ def configure(parameters=''):
                 --libexecdir=/{7} \
                 --libdir=/{8}\
                 {9}'.format(prefix, get.HOST(), get.manDIR(), get.infoDIR(),
-                               get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
-                               get.libDIR(), parameters)
+                            get.dataDIR(), get.confDIR(), get.localstateDIR(), get.libexecDIR(),
+                            get.libDIR(), parameters)
     rawConfigure(args)
+
 
 def rawConfigure(parameters=''):
     """configure source with given parameters = --prefix=/usr --libdir=/usr/lib --with-nls """
@@ -176,7 +178,7 @@ def autogen(noconfigure=True):
     """generates configure script from autogen"""
     if noconfigure:
         if system('NOCONFIGURE=1 bash autogen.sh'):
-            raise RunTimeError(_('Running \'autogen.sh\' script failed.'))    	
+            raise RunTimeError(_('Running \'autogen.sh\' script failed.'))
     else:
         if system('bash autogen.sh'):
             raise RunTimeError(_('Running \'autogen.sh\' script failed.'))

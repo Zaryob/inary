@@ -129,7 +129,7 @@ def plan_remove(A):
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
 
-    G_f = pgraph.PGraph(packagedb,installdb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
 
     # find the (install closure) graph of G_f by package
     # set A using packagedb

@@ -34,7 +34,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-
 def can_access_file(filePath):
     """test the existence of file"""
     return os.access(filePath, os.F_OK)

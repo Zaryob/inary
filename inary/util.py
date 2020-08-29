@@ -340,16 +340,17 @@ def run_logged(cmd):
     ctx.ui.debug(_('return value for "{0}" is {1}').format(cmd, p.returncode))
 
     return p.returncode
-    
+
+
 def hewal(expr):
     """Eval with öşex power"""
-    expr=str(expr).upper()
-    if expr in ("TRUE", "1", "ON", "T","Y","YES"):
+    expr = str(expr).upper()
+    if expr in ("TRUE", "1", "ON", "T", "Y", "YES"):
         return True
-    elif expr  in ("FALSE", "0", "OFF", "F","N","NO"):
+    elif expr in ("FALSE", "0", "OFF", "F", "N", "NO"):
         return False
     return None
-        
+
 
 ########################
 # Filesystem functions #
@@ -357,12 +358,14 @@ def hewal(expr):
 
 def fs_sync():
     if ctx.config.values.general.fs_sync:
-        ctx.ui.debug(_("Filesystem syncing (It wouldn't be run whether nosync set with kernel parameters)"))
+        ctx.ui.debug(
+            _("Filesystem syncing (It wouldn't be run whether nosync set with kernel parameters)"))
         os.sync()
 
 ######################
 # Terminal functions #
 ######################
+
 
 def get_terminal_size():
     try:
@@ -1305,10 +1308,12 @@ def get_cpu_count():
         # If we cannot count cpu, we shoult return 1
         return 1
 
+
 def getenv(key):
     if os.getenv(key) == None:
         return ""
     return os.getenv[key]
+
 
 def get_vm_info():
     vm_info = {}

@@ -342,7 +342,7 @@ class ArchiveTar(ArchiveBase):
 
         if self.tar is None:
             self.tar = tarfile.open(self.file_path, rmode,
-                                    fileobj=self.fileobj,errorlevel=1)
+                                    fileobj=self.fileobj, errorlevel=1)
 
         oldwd = None
         try:
@@ -449,7 +449,7 @@ class ArchiveTar(ArchiveBase):
                     try:
                         os.unlink("/"+tarinfo.name)
                     except:
-                        #TODO: review this block
+                        # TODO: review this block
                         pass
                     self.tar.extract(tarinfo)
             except IOError as e:
@@ -906,8 +906,9 @@ class SourceArchive:
             ctx.config.archives_dir(), self.url.filename())
         self.archive = archive
         self.progress = None
-        self.isgit=(self.url.get_uri().startswith("git://") or self.url.get_uri().endswith(".git"))
-        self.branch="master" # TODO need support branch from pspec
+        self.isgit = (self.url.get_uri().startswith("git://")
+                      or self.url.get_uri().endswith(".git"))
+        self.branch = "master"  # TODO need support branch from pspec
 
     def fetch(self, interactive=True):
         if not self.is_cached(interactive):
@@ -923,8 +924,9 @@ class SourceArchive:
                 elif self.url.get_uri().startswith("file://") or self.url.get_uri().startswith("/"):
                     self.fetch_from_locale()
                 elif self.isgit:
-                    self.branch=self.archive.sha1sum
-                    inary.fetcher.fetch_git(self.url,ctx.config.archives_dir()+"/"+self.url.filename(),self.branch)
+                    self.branch = self.archive.sha1sum
+                    inary.fetcher.fetch_git(
+                        self.url, ctx.config.archives_dir()+"/"+self.url.filename(), self.branch)
                 else:
                     inary.fetcher.fetch_url(
                         self.url, ctx.config.archives_dir(), self.progress)
@@ -959,7 +961,7 @@ class SourceArchive:
             self.progress)
 
     def is_cached(self, interactive=True):
-    
+
         if not os.access(self.archiveFile, os.R_OK):
             return False
 
@@ -974,7 +976,6 @@ class SourceArchive:
         return False
 
     def unpack(self, target_dir, clean_dir=True):
-
 
         # check archive file's integrity
         if not util.check_file_hash(self.archiveFile, self.archive.sha1sum):

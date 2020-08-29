@@ -149,10 +149,10 @@ class Fetcher:
         self.progress = None
         self.try_number = 0
         self.fetcher = None
-        
+
         # spoof user-agent
         self.useragent = (ctx.config.values.general.fetcher_useragent
-                            or 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+                          or 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(
@@ -186,7 +186,7 @@ class Fetcher:
             os.remove(self.partial_file)
 
         self.file_id = open(self.partial_file, "wb")
-        
+
         self.handler = UIHandler()
         self.handler.start(
             self.archive_file,
@@ -214,7 +214,7 @@ class Fetcher:
 
         shutil.move(self.partial_file, self.archive_file)
         return self.archive_file
-        
+
     def _get_pycurl(self):
         import pycurl
         c = pycurl.Curl()
@@ -260,25 +260,26 @@ class Fetcher:
         ctx.ui.info(_("RESPONSE: ") +
                     str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
         ctx.ui.info(_("Downloaded from: " +
-                        str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+                      str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
         c.close()
+
     def _get_wget(self):
-        return os.system("timeout \"{}\" busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.timeout,self.useragent,self.url.get_uri(),self.partial_file))
-    
+        return os.system("timeout \"{}\" busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.timeout, self.useragent, self.url.get_uri(), self.partial_file))
+
     def _get_requests(self):
         from requests import get
         c = get(self.url.get_uri(), stream=True, timeout=self.timeout, headers={
-                'User-Agent':self.useragent,
-                'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-                'Accept-Encoding':'gzip, deflate, br',
-                'Accept-Language':'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
-                'SEC-FETCH-DEST':'document',
-                'SEC-FETCH-MODE':'navigate',
-                'SEC-FETCH-SITE':'none',
-                'SEC-FETCH-USER':'?1',
-                'UPGRADE-INSECURE-REQUESTS':'1'
-            }
-        )
+                'User-Agent': self.useragent,
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'SEC-FETCH-DEST': 'document',
+                'SEC-FETCH-MODE': 'navigate',
+                'SEC-FETCH-SITE': 'none',
+                'SEC-FETCH-USER': '?1',
+                'UPGRADE-INSECURE-REQUESTS': '1'
+                }
+                )
         total = c.headers.get('content-length')
         if not total:
             self.file_id.write(res.content)
@@ -289,21 +290,22 @@ class Fetcher:
             for data in c.iter_content(chunk_size=chunk):
                 self.file_id.write(data)
                 down += len(data)
-                self.handler.update(total, down,foreground_color="backgroundblue")
+                self.handler.update(
+                    total, down, foreground_color="backgroundblue")
         ctx.ui.info("\n", noln=True)
         self.file_id.close()
-    
+
     def _get_fetcher_mode(self):
         if not self.fetcher:
             mode = int(ctx.config.values.general.fetcher_mode or 0)
-            if mode not in [1, 2,3]:
+            if mode not in [1, 2, 3]:
                 try:
                     self.fetcher = self._get_pycurl
                 except ImportError:
                     try:
                         self.fetcher = self._get_requests
                     except ImportError:
-                             self.fetcher = self._get_wget
+                        self.fetcher = self._get_wget
 
             elif mode == 1:
                 self.fetcher = self._get_pycurl
@@ -311,7 +313,7 @@ class Fetcher:
                 self.fetcher = self._get_requests
             elif mode == 3:
                 self.fetcher = self._get_wget
-                
+
         return self.fetcher
 
     def _get_http_headers(self):
@@ -390,10 +392,11 @@ class Fetcher:
 
 
 # helper function
-def fetch_git(url, destdir="",branch="master"):
+def fetch_git(url, destdir="", branch="master"):
     if os.path.isdir(destdir):
         os.system("rm -rf \"{}\"".format(destdir))
-    status=os.system("git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url,destdir,branch))
+    status = os.system(
+        "git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url, destdir, branch))
     if status != 0:
         print(status)
         ctx.ui.error(
@@ -496,9 +499,9 @@ def fetch(packages=None, path=os.path.curdir):
                     uri.path()))
 
         if url.startswith("git://") or url.endswith(".git"):
-            branch="master"
-            fetch_git(url.replace("git://","https://"),path,branch)
+            branch = "master"
+            fetch_git(url.replace("git://", "https://"), path, branch)
         elif "://" in url:
             fetch_url(url, path, ctx.ui.Progress)
         else:
-            fetch_from_locale(url,path)
+            fetch_from_locale(url, path)

@@ -19,6 +19,7 @@ import inary.context as ctx
 
 # Set individual information, that are generally needed for ActionsAPI
 
+
 def exportFlags():
     """General flags used in actions API."""
 

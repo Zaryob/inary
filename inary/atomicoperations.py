@@ -188,7 +188,8 @@ class Install(AtomicOperation):
             package=self.pkginfo,
             files=self.files)
 
-        ctx.ui.info(_("Checking package operation availability..."),verbose=True)
+        ctx.ui.info(
+            _("Checking package operation availability..."), verbose=True)
         self.ask_reinstall = ask_reinstall
         ctx.ui.status(_("Checking requirements"), push_screen=False)
         self.check_requirements()
@@ -332,7 +333,6 @@ class Install(AtomicOperation):
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(
                 pkg.name, iversion_s, irelease_s)
-
 
     def preinstall(self):
         if 'postOps' in self.metadata.package.isA:
@@ -487,7 +487,8 @@ class Install(AtomicOperation):
 
                 else:
 
-                    remove_permanent= not ctx.config.get_option("preserve_permanent")
+                    remove_permanent = not ctx.config.get_option(
+                        "preserve_permanent")
 
                     Remove.remove_file(
                         old_file,
@@ -527,7 +528,7 @@ class Install(AtomicOperation):
 
     def store_postops(self):
         """stores postops script temporarly"""
-        ctx.ui.info(_("Precaching postoperations.py file"),verbose=True)
+        ctx.ui.info(_("Precaching postoperations.py file"), verbose=True)
 
         if 'postOps' in self.metadata.package.isA:
             self.package.extract_file_synced(
@@ -535,7 +536,8 @@ class Install(AtomicOperation):
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
-        ctx.ui.info(_("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"),verbose=True)
+        ctx.ui.info(
+            _("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"), verbose=True)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(
@@ -580,6 +582,7 @@ class Install(AtomicOperation):
 
         if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
             util.clean_dir(self.old_path)
+
 
 def install_single(pkg, upgrade=False):
     """install a single package from URI or ID"""

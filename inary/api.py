@@ -13,82 +13,81 @@
 
 
 # Gettext Library
+from inary.operations.search import *
+from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
+from inary.operations.repository import *
+from inary.operations.remove import remove, get_remove_order
+from inary.operations.install import install, get_install_order
+from inary.operations.info import info, info_file
+from inary.operations.history import takeback, get_takeback_plan, snapshot
+from inary.operations.helper import calculate_download_sizes, calculate_free_space_needed, get_package_requirements
+from inary.operations.emerge import emerge
+from inary.operations.check import check
+from inary.operations.build import build, build_until
+from inary.fetcher import fetch
+from inary.data.pgraph import package_graph
+from inary.data.index import index
+from inary.db.filesdb import rebuild_db
+from inary.analyzer.conflict import calculate_conflicts
+from . import fetcher
+from inary.settings import *
+import inary.util
+import inary.uri
+import inary.operations.upgrade
+import inary.operations.search
+import inary.operations.repository
+import inary.operations.remove
+import inary.operations.helper
+import inary.operations.history
+import inary.operations.install
+import inary.operations.info
+import inary.operations.emerge
+import inary.operations.check
+import inary.operations.build
+import inary.file
+import inary.errors
+import inary.db.groupdb
+import inary.db.sourcedb
+import inary.db.historydb
+import inary.db.installdb
+import inary.db.filesdb
+import inary.db.repodb
+import inary.db.packagedb
+import inary.db.componentdb
+import inary.data.pgraph
+import inary.data.metadata
+import inary.data.index
+import inary.data
+import inary.context as ctx
+import inary.config
+import inary.blacklist
+import inary.atomicoperations
+import inary
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import inary
 # Atomic Operations
-import inary.atomicoperations
 
 # Configuration Libraries
-import inary.blacklist
-import inary.config
-import inary.context as ctx
 
 # DataFile Libraries
-import inary.data
-import inary.data.index
-import inary.data.metadata
-import inary.data.pgraph
 
 # DataBase Libraries
-import inary.db.componentdb
-import inary.db.packagedb
-import inary.db.repodb
-import inary.db.filesdb
-import inary.db.installdb
-import inary.db.historydb
-import inary.db.sourcedb
-import inary.db.componentdb
-import inary.db.groupdb
 
 # Error Library
-import inary.errors
 
 # File Library
-import inary.file
 
 # Operation Libraries
-import inary.operations.build
-import inary.operations.check
-import inary.operations.emerge
-import inary.operations.info
-import inary.operations.install
-import inary.operations.history
-import inary.operations.helper
-import inary.operations.remove
-import inary.operations.repository
-import inary.operations.search
-import inary.operations.upgrade
 
 # URI Library
-import inary.uri
 
 # Utilities
-import inary.util
 
 # Settings
-from inary.settings import *
 
 # Fetcher
-from . import fetcher
 
 # The following are INARY operations which constitute the INARY API
 # Within functions
-from inary.analyzer.conflict import calculate_conflicts
-from inary.db.filesdb import rebuild_db
-from inary.data.index import index
-from inary.data.pgraph import package_graph
-from inary.fetcher import fetch
-from inary.operations.build import build, build_until
-from inary.operations.check import check
-from inary.operations.emerge import emerge
-from inary.operations.helper import calculate_download_sizes, calculate_free_space_needed, get_package_requirements
-from inary.operations.history import takeback, get_takeback_plan, snapshot
-from inary.operations.info import info, info_file
-from inary.operations.install import install, get_install_order
-from inary.operations.remove import remove, get_remove_order
-from inary.operations.repository import *
-from inary.operations.upgrade import upgrade, get_upgrade_order, get_base_upgrade_order
-from inary.operations.search import *

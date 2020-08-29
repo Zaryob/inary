@@ -24,7 +24,7 @@
  this implementation uses iksemel
 """
 
-# Ciksemel Library 
+# Ciksemel Library
 import ciksemel as iks
 
 # Inary Modules

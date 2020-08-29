@@ -273,6 +273,7 @@ def upgrade(A=None, repo=None):
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
 
+
 def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced
     # try to construct a inary graph of packages to
@@ -281,7 +282,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     packagedb = inary.db.packagedb.PackageDB()
     installdb = inary.db.installdb.InstallDB()
 
-    G_f = pgraph.PGraph(packagedb,installdb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
 
     A = set(A)
 
@@ -299,7 +300,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
-
 
     def add_resolvable_conflicts(pkg, Bp):
         """Try to resolve conflicts by upgrading

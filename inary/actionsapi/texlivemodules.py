@@ -28,7 +28,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-
 WorkDir = "{0}-{1}".format(get.srcNAME(), get.srcVERSION().split('_')[-1])
 
 

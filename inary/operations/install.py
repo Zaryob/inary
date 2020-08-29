@@ -63,7 +63,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(
             _('Checking dependencies for install...'),
             color="brightpurple")
-        order = plan_install_pkg_names(A,reinstall)
+        order = plan_install_pkg_names(A, reinstall)
     else:
         order = list(A)
     componentdb = inary.db.componentdb.ComponentDB()
@@ -242,7 +242,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo() and not ctx.config.get_option('ignore_satisfy'):
             raise Exception(
-                _('External dependencies not satisfied: \"{}\", \"{}\"').format(dep,name))
+                _('External dependencies not satisfied: \"{}\", \"{}\"').format(dep, name))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -253,7 +253,6 @@ def install_pkg_files(package_URIs, reinstall=False):
         if not ctx.ui.confirm(_('Would you like to continue?')):
             raise Exception(_('External dependencies not satisfied.'))
         install_pkg_names(extra_packages, reinstall=True, extra=True)
-
 
     class PackageDB:
         @staticmethod
@@ -272,8 +271,8 @@ def install_pkg_files(package_URIs, reinstall=False):
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb,installdb)  # construct G_f
-    G_f.reinstall=reinstall
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
+    G_f.reinstall = reinstall
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
@@ -285,7 +284,7 @@ def install_pkg_files(package_URIs, reinstall=False):
         for x in B:
             pkg = packagedb.get_package(x)
             for dep in pkg.runtimeDependencies():
-                    G_f.add_package(dep)
+                G_f.add_package(dep)
         B = Bp
     order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):
@@ -306,14 +305,14 @@ def install_pkg_files(package_URIs, reinstall=False):
     return True
 
 
-def plan_install_pkg_names(A,reinstall=False):
+def plan_install_pkg_names(A, reinstall=False):
     # try to construct a inary graph of packages to
     # install / reinstall
     packagedb = inary.db.packagedb.PackageDB()
     installdb = inary.db.installdb.InstallDB()
 
-    G_f = pgraph.PGraph(packagedb,installdb)  # construct G_f
-    G_f.reinstall=reinstall
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
+    G_f.reinstall = reinstall
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb

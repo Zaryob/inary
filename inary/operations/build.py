@@ -162,7 +162,7 @@ def exclude_special_files(filepath, fileinfo, keeplist):
             util.rmdirs(os.path.dirname(filepath))
 
 
-def strip_debug_action(filepath, fileinfo, install_dir,excludelist):
+def strip_debug_action(filepath, fileinfo, install_dir, excludelist):
 
     # real path in .inary package
     path = '/' + util.removepathprefix(install_dir, filepath)
@@ -175,6 +175,7 @@ def strip_debug_action(filepath, fileinfo, install_dir,excludelist):
                                 path)
     if util.strip_file(filepath, fileinfo, outputpath):
         ctx.ui.info("{0} [{1}]".format(path, "stripped"), verbose=True)
+
 
 class Builder:
     """Provides the package build and creation routines"""
@@ -268,8 +269,7 @@ class Builder:
 
         self.has_ccache = False
         self.has_icecream = False
-        self.variable_buffer={}
-        
+        self.variable_buffer = {}
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -361,8 +361,8 @@ class Builder:
 
         util.clean_dir(self.pkg_install_dir())
         if not os.path.exists(self.pkg_install_dir()):
-                util.ensure_dirs(self.pkg_install_dir())
-                
+            util.ensure_dirs(self.pkg_install_dir())
+
         for build_type in self.build_types:
             self.set_build_type(build_type)
             self.unpack_source_archives()
@@ -424,7 +424,7 @@ class Builder:
 
         os.environ.clear()
 
-        #inary.actionsapi.variables.initVariables()
+        # inary.actionsapi.variables.initVariables()
 
         env = {"PKG_DIR": self.pkg_dir(),
                "WORK_DIR": self.pkg_src_dir(),
@@ -435,7 +435,7 @@ class Builder:
                "SRC_NAME": self.spec.source.name,
                "SRC_VERSION": self.spec.getSourceVersion(),
                "SRC_RELEASE": self.spec.getSourceRelease(),
-               "PATH":"/bin:/usr/bin:/sbin:/usr/sbin",
+               "PATH": "/bin:/usr/bin:/sbin:/usr/sbin",
                "PYTHONDONTWRITEBYTECODE": '1'}
         if self.build_type == "emul32":
             env["CC"] = "{} -m32".format(util.getenv("CC"))
@@ -700,7 +700,6 @@ class Builder:
             raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
                 fname, e))
 
-
     def compile_postops_script(self):
         """Compiles postops scripts to check syntax errors"""
         fname = util.join_path(self.specdir, ctx.const.postops)
@@ -715,13 +714,14 @@ class Builder:
                 raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
                     fname, e))
 
-    def get_action_variable(self,name,default):
+    def get_action_variable(self, name, default):
         if name in self.variable_buffer.keys():
             return self.variable_buffer[name]
         else:
-            (ret, out , err) = util.run_batch('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name,os.getcwd()))
+            (ret, out, err) = util.run_batch(
+                'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name, os.getcwd()))
             if ret == 0:
-                self.variable_buffer[name]=out
+                self.variable_buffer[name] = out
                 return out
             else:
                 return default
@@ -729,7 +729,7 @@ class Builder:
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
 
-        dirname=self.get_action_variable("WorkDir","")
+        dirname = self.get_action_variable("WorkDir", "")
         if dirname == "":
             dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
         src_dir = util.join_path(self.pkg_work_dir(), dirname)
@@ -742,7 +742,6 @@ class Builder:
             return self.pkg_work_dir()
         else:
             return src_dir
-        
 
     def run_action_function(self, func, mandatory=False):
         """Calls the corresponding function in actions.py.
@@ -752,20 +751,21 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
-        src_dir=self.pkg_src_dir()
+        src_dir = self.pkg_src_dir()
         self.set_environment_vars()
-        os.environ['WORK_DIR']=src_dir
-        os.environ['CURDIR']=curDir
-        os.environ['SRCDIR']=self.pkg_work_dir()
-        os.environ['OPERATION']=func
+        os.environ['WORK_DIR'] = src_dir
+        os.environ['CURDIR'] = curDir
+        os.environ['SRCDIR'] = self.pkg_work_dir()
+        os.environ['OPERATION'] = func
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
 
-        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func,curDir)):
-              raise Error(_("unable to call function from actions: \'{}\'").format(func))
+        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
+            raise Error(
+                _("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
         return True
 
@@ -1067,8 +1067,8 @@ It is dangerous. So, if you wanna create stable packages, please fix \
 this issue in your workplace. Probably installing \"python3-filemagic\" \
 package might be a good solution."))
 
-        self.nostrip=tuple(self.get_action_variable("NoStrip", []))
-        self.keepspecial=self.get_action_variable("KeepSpecial", [])
+        self.nostrip = tuple(self.get_action_variable("NoStrip", []))
+        self.keepspecial = self.get_action_variable("KeepSpecial", [])
         for root, dirs, files in os.walk(install_dir):
             for fn in files:
                 filepath = util.join_path(root, fn)
@@ -1097,9 +1097,8 @@ package might be a good solution."))
                 strip_debug_action(
                     filepath,
                     fileinfo,
-                    install_dir,self.nostrip)
-                exclude_special_files(filepath, fileinfo,self.keepspecial)
-                
+                    install_dir, self.nostrip)
+                exclude_special_files(filepath, fileinfo, self.keepspecial)
 
     def build_packages(self):
         """Build each package defined in PSPEC file. After this process there
@@ -1203,8 +1202,8 @@ package might be a good solution."))
 
             if not self.gen_metadata_xml(package):
                 ctx.ui.warning(
-                        _("Ignoring empty package: \"{}\"").format(
-                            package.name))
+                    _("Ignoring empty package: \"{}\"").format(
+                        package.name))
                 continue
 
             ctx.ui.status(

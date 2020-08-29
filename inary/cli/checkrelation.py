@@ -60,7 +60,7 @@ Usage: check-relation
             installed = list(set(installed) & set(component_pkgs))
 
         installed.sort()
-        need_reinstall=[]
+        need_reinstall = []
         for pkg in installed:
             pkgname = pkg
             files = self.installdb.get_files(pkg)
@@ -68,14 +68,16 @@ Usage: check-relation
             for f in files.list:
                 if not os.path.exists("/"+f.path):
                     need_reinstall.append(pkg)
-                    sys.stderr.write(_("Missing: /{} - {}").format(f.path,pkg)+"\n")
+                    sys.stderr.write(
+                        _("Missing: /{} - {}").format(f.path, pkg)+"\n")
 
-        need_reinstall=util.unique_list(need_reinstall)
-        if len(need_reinstall)>0:
-            sys.stderr.write(_("This packages broken and need to reinstall.")+"\n\n")
+        need_reinstall = util.unique_list(need_reinstall)
+        if len(need_reinstall) > 0:
+            sys.stderr.write(
+                _("This packages broken and need to reinstall.")+"\n\n")
             for pkg in need_reinstall:
                 sys.stderr.write("{} ".format(pkg))
                 from inary.operations import install
-            ctx.set_option("ignore_dependency",True)
-            install.install(need_reinstall,reinstall=True)
+            ctx.set_option("ignore_dependency", True)
+            install.install(need_reinstall, reinstall=True)
             sys.stderr.write("\n")
