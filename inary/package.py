@@ -68,6 +68,7 @@ class Package:
     def __init__(self, packagefn, mode='r', format=None,
                  tmp_dir=None, pkgname='', no_fetch=False):
         self.filepath = packagefn
+        self.destdir = ctx.config.dest_dir()
         url = inary.uri.URI(packagefn)
 
         if ("://" in self.filepath) and not no_fetch:
@@ -225,17 +226,19 @@ class Package:
                 # Also, tar.extract() doesn't write on symlinks...
                 # We remove file symlinks before (directory symlinks
                 # broke system)
-                if not os.path.isdir(tarinfo.name):
-                    if os.path.islink(tarinfo.name):
-                        link = os.readlink(tarinfo.name)
-                        if not os.path.isdir(link):
+                if not os.path.isdir(self.destdir+"/"+tarinfo.name):
+                    if os.path.islink(self.destdir+"/"+tarinfo.name):
+                        link = os.readlink(self.destdir+"/"+tarinfo.name)
+                        if not os.path.isdir(self.destdir+"/"+link):
                             try:
-                                os.unlink(tarinfo.name)
+                                if os.path.exists(self.destdir+"/"+tarinfo.name):
+                                    os.unlink(self.destdir+"/"+tarinfo.name)
                             except OSError as e:
                                 ctx.ui.warning(e)
                     else:
                         try:
-                            os.unlink(tarinfo.name)
+                            if os.path.exists(self.destdir+"/"+tarinfo.name):
+                                os.unlink(self.destdir+"/"+tarinfo.name)
                         except OSError as e:
                             ctx.ui.warning(e)
 

@@ -445,9 +445,9 @@ class ArchiveTar(ArchiveBase):
                         shutil.rmtree(tarinfo.name)
 
             try:
-                if not os.path.isdir("/"+tarinfo.name) and not os.path.islink("/"+tarinfo.name):
+                if not os.path.isdir(tarinfo.name) and not os.path.islink(tarinfo.name):
                     try:
-                        os.unlink("/"+tarinfo.name)
+                        os.unlink(tarinfo.name)
                     except:
                         # TODO: review this block
                         pass
