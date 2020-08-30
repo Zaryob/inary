@@ -25,6 +25,7 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 from functools import reduce
+from inary.util.filesystem_terminal import *
 import operator
 
 #########################
