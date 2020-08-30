@@ -10,8 +10,6 @@
 # any later version.
 #
 # Please read the COPYING file.
-from inary.util import ctx
-
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
@@ -29,14 +27,24 @@ class FileError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
         self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
 
 
 class ArgumentError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
         self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
 
 class FilePermissionDeniedError(Error):
     pass
+
+# Error Classes
+class FileError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+
+
+class ArgumentError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
