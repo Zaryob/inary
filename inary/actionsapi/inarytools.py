@@ -37,21 +37,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-# Error Classes
-class FileError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
-
-
-class ArgumentError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
-
-
 # Tool functions
 def executable_insinto(destinationDirectory, *sourceFiles):
     """insert a executable file into destinationDirectory"""

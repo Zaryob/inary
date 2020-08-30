@@ -10,28 +10,33 @@
 # any later version.
 #
 # Please read the COPYING file.
-
-# FIXME: Exception shadows builtin Exception. This is no good.
-class Exception(Exception):
-    """Class of exceptions that must be caught and handled within INARY"""
-
-    def __str__(self):
-        s = ''
-        for x in self.args:
-            if s != '':
-                s += '\n'
-            s += str(x)
-        return str(s)
-
+from inary.util import ctx
 
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
 
 
-class AnotherInstanceError(Exception):
+class AnotherInstanceError(Error):
     pass
 
 
-class PrivilegeError(Exception):
+class PrivilegeError(Error):
+    pass
+
+# Error Classes
+class FileError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[InaryTools]: " + value)
+
+
+class ArgumentError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[InaryTools]: " + value)
+
+class FilePermissionDeniedError(Error):
     pass
