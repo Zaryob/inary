@@ -23,7 +23,7 @@ import inary
 import inary.configfile
 import inary.context as ctx
 import inary.data
-import inary.errors
+from inary.errors import PostOpsError, NotfoundError, Error, FileError
 import inary.data
 import inary.db
 import inary.file
@@ -39,18 +39,6 @@ import inary.trigger
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class Error(inary.errors.Error):
-    pass
-
-
-class PostOpsError(inary.errors.Error):
-    pass
-
-
-class NotfoundError(inary.errors.Error):
-    pass
 
 
 # single package operations
@@ -142,7 +130,7 @@ class Install(AtomicOperation):
             if not cached_file:
                 downloaded_file = install_op.package.filepath
                 if util.sha1_file(downloaded_file) != pkg_hash:
-                    raise inary.errors.Error(
+                    raise Error(
                         _("Download Error: Package does not match the repository package."))
 
             return install_op
@@ -639,7 +627,7 @@ class Remove(AtomicOperation):
         self.trigger = inary.trigger.Trigger()
         try:
             self.files = self.installdb.get_files(self.package_name)
-        except inary.errors.Error as e:
+        except Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
             ctx.ui.warning(
@@ -724,7 +712,7 @@ class Remove(AtomicOperation):
                     # way
                     if ctx.config.get_option("purge"):
                         os.unlink(fpath)
-            except util.FileError:
+            except FileError:
                 pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):

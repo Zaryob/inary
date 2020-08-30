@@ -82,3 +82,12 @@ class CycleException(Error):
 
 class ParserError(Error):
     pass
+
+
+class PostOpsError(Error):
+    pass
+
+
+class NotfoundError(Error):
+    pass
+
