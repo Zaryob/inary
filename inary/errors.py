@@ -72,3 +72,10 @@ class InvalidSignature(Error):
         Error.__init__(
             self, _("GPG Signature is invalid for \"{}\"").format(url))
         self.url = url
+
+class CycleException(Error):
+    def __init__(self, cycle):
+        self.cycle = cycle
+
+    def __str__(self):
+        return _('Encountered cycle {}').format(self.cycle)

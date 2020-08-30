@@ -16,7 +16,7 @@
 
 # Inary Modules
 import inary.db
-import inary.errors
+from inary.errors import CycleException
 import inary.context as ctx
 import inary.operations.helper as op_helper
 
@@ -24,14 +24,6 @@ import inary.operations.helper as op_helper
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class CycleException(inary.errors.Exception):
-    def __init__(self, cycle):
-        self.cycle = cycle
-
-    def __str__(self):
-        return _('Encountered cycle {}').format(self.cycle)
 
 
 class PGraph:
