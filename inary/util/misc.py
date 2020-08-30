@@ -18,14 +18,15 @@
 import inary
 import inary.errors
 import inary.context as ctx
-import os
+from os import listdir, path, readlink, rmdir
+from sys import maxunicode
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import unicodedata
+from unicodedata import category as ucategory
 
 def join_path(a, *p):
     """Join two or more pathname components.
@@ -51,9 +52,9 @@ def colorize(msg, color):
 
 def config_changed(config_file):
     fpath = join_path(ctx.config.dest_dir(), config_file.path)
-    if os.path.exists(fpath) and not os.path.isdir(fpath):
-        if os.path.islink(fpath):
-            f = os.readlink(fpath)
+    if path.exists(fpath) and not path.isdir(fpath):
+        if path.islink(fpath):
+            f = readlink(fpath)
             if os.path.exists(f) and sha1_data(f) != config_file.hash:
                 return True
         else:
@@ -64,12 +65,12 @@ def config_changed(config_file):
 
 # recursively remove empty dirs starting from dirpath
 def rmdirs(dirpath):
-    if os.path.isdir(dirpath) and not os.listdir(dirpath):
+    if path.isdir(dirpath) and not listdir(dirpath):
         ctx.ui.info(
             _("Removing empty dir: \"{}\"").format(dirpath),
             verbose=True)
-        os.rmdir(dirpath)
-        rmdirs(os.path.dirname(dirpath))
+        rmdir(dirpath)
+        rmdirs(path.dirname(dirpath))
 
 
 # Python regex sucks
@@ -77,9 +78,9 @@ def rmdirs(dirpath):
 def letters():
     start = end = None
     result = []
-    for index in range(sys.maxunicode + 1):
+    for index in range(maxunicode + 1):
         c = chr(index)
-        if unicodedata.category(c)[0] == 'L':
+        if ucategory(c)[0] == 'L':
             if start is None:
                 start = end = c
             else:
