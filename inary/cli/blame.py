@@ -79,12 +79,12 @@ Usage: blame <package> ... <package>
                 elif ctx.get_option('all'):
                     for hno, update in enumerate(pkg.history):
                         self.print_package_info(pkg, hno, 
-                            (installed_pkg.history[hno] and installed_pkg.history[hno].release == installed_pkg.history[hno].release))
+                            (installed_pkg.history[hno] and installed_pkg.history[-1].release == installed_pkg.history[hno].release))
                 else:
                     for hno, update in enumerate(pkg.history):
                         if int(update.release) == release:
                             self.print_package_info(pkg, hno, 
-                                (installed_pkg.history[hno] and installed_pkg.history[hno].release == installed_pkg.history[hno].release))
+                                (installed_pkg.history[hno] and installed_pkg.history[-1].release == installed_pkg.history[hno].release))
                             return
 
     @staticmethod
