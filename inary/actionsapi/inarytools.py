@@ -22,7 +22,8 @@ import re
 import sys
 
 # Inary Modules
-from inary.util import remove_prefix, uncompress
+from inary.util.files import uncompress
+from inary.util.strings import remove_prefix
 
 # ActionsAPI Modules
 import inary.actionsapi
