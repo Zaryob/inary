@@ -306,10 +306,12 @@ class Fetcher:
             self.fetcher_mode = mode
             if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET]:
                 try:
+                    from pycurl import URL
                     self.fetcher = self._get_pycurl
                     self.fetcher_mode = self.FETCH_MODE_PYCURL
                 except ImportError:
                     try:
+                        from requests import get
                         self.fetcher = self._get_requests
                         self.fetcher_mode = self.FETCH_MODE_REQUESTS
                     except ImportError:
