@@ -521,10 +521,11 @@ class Builder:
                                                        dir_name))
 
     def fetch_postops(self):
-        postops_script = util.join_path(self.specdiruri, ctx.const.postops)
-        if util.check_file(postops_script, noerr=True):
-            self.download(postops_script, util.join_path(self.specdir))
-            ctx.ui.info(_("PostOps Script Fetched."))
+        for postops in ctx.const.postops:
+            postops_script = util.join_path(self.specdiruri, postops)
+            if util.check_file(postops_script, noerr=True):
+                self.download(postops_script, util.join_path(self.specdir))
+                ctx.ui.info(_("PostOps Script Fetched."))
 
     @staticmethod
     def download(uri, transferdir):
@@ -700,19 +701,6 @@ class Builder:
             raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
                 fname, e))
 
-    def compile_postops_script(self):
-        """Compiles postops scripts to check syntax errors"""
-        fname = util.join_path(self.specdir, ctx.const.postops)
-        if(util.check_file(fname, noerr=True)):
-            try:
-                self.actionScript = open(fname).read()
-                compile(self.actionScript, "error", "exec")
-            except IOError as e:
-                raise Error(_("Unable to read Post Operations script ({0}): {1}").format(
-                    fname, e))
-            except SyntaxError as e:
-                raise Error(_("SyntaxError in Post Operations script ({0}): {1}").format(
-                    fname, e))
 
     def get_action_variable(self, name, default):
         if name in self.variable_buffer.keys():
@@ -1231,9 +1219,10 @@ package might be a good solution."))
 
             # add postops files to package
             os.chdir(self.specdir)
-            if util.check_file(ctx.const.postops, noerr=True) and (
-                    'postOps' in self.metadata.package.isA):
-                pkg.add_to_package(ctx.const.postops)
+            for postops in ctx.const.postops:
+                if util.check_file(postops, noerr=True) and (
+                        'postOps' in self.metadata.package.isA):
+                    pkg.add_to_package(postops)
 
             # add xmls and files
             os.chdir(self.pkg_dir())
@@ -1447,8 +1436,6 @@ def build_until(pspec, state):
         pb = Builder(pspec)
     else:
         pb = Builder.from_name(pspec)
-
-    pb.compile_postops_script()
 
     if state == "fetch":
         __buildState_fetch(pb)

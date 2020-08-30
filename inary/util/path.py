@@ -28,6 +28,7 @@ _ = __trans.gettext
 
 from functools import reduce
 import struct
+from inary.util.strings import *
 
 #############################
 # Path Processing Functions #

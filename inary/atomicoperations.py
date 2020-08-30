@@ -531,8 +531,12 @@ class Install(AtomicOperation):
         ctx.ui.info(_("Precaching postoperations.py file"), verbose=True)
 
         if 'postOps' in self.metadata.package.isA:
-            self.package.extract_file_synced(
-                ctx.const.postops, ctx.config.tmp_dir())
+            for postops in ctx.const.postops :
+                try:
+                    self.package.extract_file_synced(
+                        postops, ctx.config.tmp_dir())
+                except:
+                    pass
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
@@ -543,8 +547,12 @@ class Install(AtomicOperation):
         self.package.extract_file_synced(
             ctx.const.metadata_xml, self.package.pkg_dir())
         if 'postOps' in self.metadata.package.isA:
-            self.package.extract_file_synced(
-                ctx.const.postops, self.package.pkg_dir())
+            for postops in ctx.const.postops :
+                try:
+                    self.package.extract_file_synced(
+                        postops, ctx.config.tmp_dir())
+                except:
+                    pass
 
     def update_databases(self):
         """update databases"""

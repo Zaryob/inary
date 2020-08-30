@@ -29,6 +29,7 @@ _ = __trans.gettext
 import shutil
 import hashlib
 import fnmatch
+from inary.util.strings import remove_prefix
 
 ####################################
 # File/Directory Related Functions #

@@ -30,8 +30,29 @@ class Trigger:
         self.missing_postOps = False
 
     def run_command(self, func):
-        """"""
-        if os.path.exists(self.specdir+"/postoperations.py"):
+        """Run postOps scripts"""
+        if os.path.exists(self.specdir+"/"+ctx.const.postops[1]):
+            curDir = os.getcwd()
+            os.chdir(self.specdir)
+            cmd_extra = ""
+            # FIXME: translate support needed
+            if ctx.config.get_option('debug'):
+                ctx.ui.info(
+                    util.colorize(
+                        "Running => {}",
+                        'brightgreen').format(
+                        util.colorize(
+                            func,
+                            "brightyellow")))
+            else:
+                cmd_extra = " > /dev/null"
+            ret_val = os.system(
+                'bash --noprofile --norc -c \'source postoperations.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func) +
+            cmd_extra)
+            os.chdir(curDir)
+            if (ret_val  != 0):
+                return False
+        if os.path.exists(self.specdir+"/"+ctx.const.postops[0]):
             curDir = os.getcwd()
             os.chdir(self.specdir)
             cmd_extra = ""
@@ -50,28 +71,32 @@ class Trigger:
                 'python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func) +
                 cmd_extra)
             os.chdir(curDir)
-            return (ret_val == 0)
-        else:
-            return 0
+            if (ret_val  != 0):
+                return False
+        return True
 
     def preinstall(self, specdir):
         self.specdir = specdir
-        self.postscript = util.join_path(self.specdir, ctx.const.postops)
-        retval = self.run_command("preInstall")
-        util.delete_file(self.postscript)
+        for postops in ctx.const.postops:
+            self.postscript = util.join_path(self.specdir, postops)
+            retval = self.run_command("preInstall")
+            util.delete_file(self.postscript)
         return retval
 
     def postinstall(self, specdir):
         self.specdir = specdir
-        self.postscript = util.join_path(self.specdir, ctx.const.postops)
+        for postops in ctx.const.postops:
+            self.postscript = util.join_path(self.specdir, postops)
         return self.run_command("postInstall")
 
     def postremove(self, specdir):
         self.specdir = specdir
-        self.postscript = util.join_path(self.specdir, ctx.const.postops)
+        for postops in ctx.const.postops:
+            self.postscript = util.join_path(self.specdir, postops)
         return self.run_command("postRemove")
 
     def preremove(self, specdir):
         self.specdir = specdir
-        self.postscript = util.join_path(self.specdir, ctx.const.postops)
+        for postops in ctx.const.postops:
+             self.postscript = util.join_path(self.specdir, postops)
         return self.run_command("preRemove")
