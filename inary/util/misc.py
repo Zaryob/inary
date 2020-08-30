@@ -18,7 +18,6 @@
 import inary
 import inary.errors
 import inary.context as ctx
-from inary.util import join_path
 
 # Gettext Library
 import gettext
@@ -27,6 +26,19 @@ _ = __trans.gettext
 
 import unicodedata
 import sys
+
+def join_path(a, *p):
+    """Join two or more pathname components.
+    Python os.path.join cannot handle '/' at the start of latter components.
+    """
+    path = a
+    for b in p:
+        b = b.lstrip('/')
+        if path == '' or path.endswith('/'):
+            path += b
+        else:
+            path += '/' + b
+    return path
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
