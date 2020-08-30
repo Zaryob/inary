@@ -19,7 +19,6 @@ import inary.db
 import inary.errors
 import inary.context as ctx
 import inary.operations.helper as op_helper
-import sys
 
 # Gettext Library
 import gettext
