@@ -86,21 +86,6 @@ Usage: blame <package> ... <package>
                             self.print_package_info(pkg, hno, 
                                 (installed_pkg.history[hno] and installed_pkg.history[hno].release == installed_pkg.history[hno].release))
                             return
-            """
-            if self.installdb.has_package(package):
-                pkg = self.installdb.get_package(package)
-                release = ctx.get_option('release')
-                if not release and not ctx.get_option('all'):
-                    self.print_package_info(pkg)
-                elif ctx.get_option('all'):
-                    for hno, update in enumerate(pkg.history):
-                        self.print_package_info(pkg, hno)
-                else:
-                    for hno, update in enumerate(pkg.history):
-                        if int(update.release) == release:
-                            self.print_package_info(pkg, hno)
-                            return
-            """
 
     @staticmethod
     def print_package_info(package, hno=0, installed=False):
