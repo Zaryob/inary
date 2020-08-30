@@ -45,11 +45,17 @@ class PGraph:
         self.checked = []
         self.reinstall = False
 
-        if installdb == None:
+        if not installdb:
             self.installdb = inary.db.installdb.InstallDB()
 
-        if packagedb == None:
+        if not packagedb:
             self.packagedb = inary.db.packagedb.PackageDB()
+    
+    def get_installdb(self):
+        return self.installdb
+            
+    def get_packagedb(self):
+        return self.packagedb
 
     def topological_sort(self):
         return inary.util.unique_list(self.packages)

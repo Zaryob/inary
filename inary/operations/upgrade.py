@@ -279,10 +279,10 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    packagedb = inary.db.packagedb.PackageDB()
-    installdb = inary.db.installdb.InstallDB()
-
-    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
+    G_f = pgraph.PGraph()  # construct G_f
+    
+    installdb = G_f.get_installdb()
+    packagedb = G_f.get_packagedb()
 
     A = set(A)
 
@@ -368,11 +368,12 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 
         for x in A:
             G_f.add_package(x)
-            add_resolvable_conflicts(x, Bp)
+            pkg = packagedb.get_package(x)
+            add_resolvable_conflicts(pkg, Bp)
 
             if installdb.has_package(x):
-                add_broken_revdeps(x, Bp)
-                add_needed_revdeps(x, Bp)
+                add_broken_revdeps(pkg, Bp)
+                add_needed_revdeps(pkg, Bp)
 
         A = Bp
 
