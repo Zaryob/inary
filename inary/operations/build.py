@@ -687,20 +687,6 @@ class Builder:
                 # mode is octal!
                 os.chmod(dest, int(afile.permission, 8))
 
-    def compile_action_script(self):
-        """Compiles the action script and returns a code object"""
-
-        fname = util.join_path(self.specdir, ctx.const.actions_file)
-        try:
-            buf = open(fname).read()
-            return compile(buf, fname, "exec")
-        except IOError as e:
-            raise Error(_("Unable to read Actions Script ({0}): {1}").format(
-                fname, e))
-        except SyntaxError as e:
-            raise Error(_("SyntaxError in Actions Script ({0}): {1}").format(
-                fname, e))
-
 
     def get_action_variable(self, name, default):
         if name in self.variable_buffer.keys():
