@@ -18,6 +18,7 @@
 import inary
 import inary.errors
 import inary.context as ctx
+import os
 
 # Gettext Library
 import gettext
@@ -25,7 +26,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 import unicodedata
-import sys
 
 def join_path(a, *p):
     """Join two or more pathname components.
