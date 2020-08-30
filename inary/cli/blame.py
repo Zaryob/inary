@@ -75,7 +75,7 @@ Usage: blame <package> ... <package>
                 installed_pkg = self.installdb.get_package(package)
                 if not release and not ctx.get_option('all'):
                     self.print_package_info(pkg, 
-                        installed=(installed_pkg.history[hno] and pkg.history[-1].release == installed_pkg.history[-1].release))
+                        installed=(pkg.history[-1].release == installed_pkg.history[-1].release))
                 elif ctx.get_option('all'):
                     for hno, update in enumerate(pkg.history):
                         self.print_package_info(pkg, hno, 
