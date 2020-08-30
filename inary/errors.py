@@ -35,3 +35,17 @@ class AnotherInstanceError(Exception):
 
 class PrivilegeError(Exception):
     pass
+
+# Error Classes
+class FileError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[InaryTools]: " + value)
+
+
+class ArgumentError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+        ctx.ui.error("[InaryTools]: " + value)

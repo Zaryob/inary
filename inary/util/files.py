@@ -30,7 +30,7 @@ import shutil
 import hashlib
 import fnmatch
 from inary.util.strings import remove_prefix
-from inary.actionsapi.inarytools import FileError
+from inary.errors import FileError
 
 ####################################
 # File/Directory Related Functions #
