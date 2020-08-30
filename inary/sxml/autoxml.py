@@ -31,7 +31,7 @@ import formatter
 
 # Standart Python Libraries
 import inary.errors
-import inary.oo as oo
+import .oo as oo
 import inary.util as util
 import inary.context as ctx
 import inary.sxml.xmlfile as xmlfile
