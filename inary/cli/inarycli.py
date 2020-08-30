@@ -52,7 +52,7 @@ import inary.cli.blame
 import inary.cli.addrepo
 import inary.cli.command as command
 import inary.cli
-import inary.errors
+from inary.errors import ParserError
 import inary
 import optparse
 import sys
@@ -62,13 +62,6 @@ import inary.cli.help
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-# FIXME: why does this has to be imported last
-
-
-class ParserError(inary.errors.Exception):
-    pass
 
 
 class PreParser(optparse.OptionParser):

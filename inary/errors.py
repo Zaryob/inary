@@ -79,3 +79,6 @@ class CycleException(Error):
 
     def __str__(self):
         return _('Encountered cycle {}').format(self.cycle)
+
+class ParserError(Error):
+    pass
