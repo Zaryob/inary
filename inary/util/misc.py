@@ -18,6 +18,7 @@
 import inary
 import inary.errors
 import inary.context as ctx
+from inary.util import join_path
 
 # Gettext Library
 import gettext
