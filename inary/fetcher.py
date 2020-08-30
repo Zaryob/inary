@@ -194,7 +194,7 @@ class Fetcher:
 
         try:
             self.fetcher = self._get_fetcher_mode()
-            if self.fetcher_mode != FETCH_MODE_WGET and not self.handler:
+            if self.fetcher_mode != self.FETCH_MODE_WGET and not self.handler:
                 self.handler = UIHandler()
                 self.handler.start(
                     self.archive_file,
@@ -304,17 +304,17 @@ class Fetcher:
         if not self.fetcher:
             mode = int(ctx.config.values.general.fetcher_mode or 0)
             self.fetcher_mode = mode
-            if mode not in [FETCH_MODE_PYCURL, FETCH_MODE_REQUESTS, FETCH_MODE_WGET]:
+            if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET]:
                 try:
                     self.fetcher = self._get_pycurl
-                    self.fetcher_mode = FETCH_MODE_PYCURL
+                    self.fetcher_mode = self.FETCH_MODE_PYCURL
                 except ImportError:
                     try:
                         self.fetcher = self._get_requests
-                        self.fetcher_mode = FETCH_MODE_REQUESTS
+                        self.fetcher_mode = self.FETCH_MODE_REQUESTS
                     except ImportError:
                         self.fetcher = self._get_wget
-                        self.fetcher_mode = FETCH_MODE_WGET
+                        self.fetcher_mode = self.FETCH_MODE_WGET
 
             elif mode == 1:
                 self.fetcher = self._get_pycurl
