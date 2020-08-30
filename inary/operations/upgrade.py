@@ -368,11 +368,11 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 
         for x in A:
             G_f.add_package(x)
-            add_resolvable_conflicts(pkg, Bp)
+            add_resolvable_conflicts(x, Bp)
 
             if installdb.has_package(x):
-                add_broken_revdeps(pkg, Bp)
-                add_needed_revdeps(pkg, Bp)
+                add_broken_revdeps(x, Bp)
+                add_needed_revdeps(x, Bp)
 
         A = Bp
 
