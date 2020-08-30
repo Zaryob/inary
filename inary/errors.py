@@ -10,7 +10,7 @@
 # any later version.
 #
 # Please read the COPYING file.
-class Error(Exception):
+class Error(BaseException):
     """Class of exceptions that lead to program termination"""
     pass
 
