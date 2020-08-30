@@ -728,7 +728,7 @@ class Remove(AtomicOperation):
 
         # remove emptied directories
         dpath = os.path.dirname(fpath)
-        while dpath != '/' and not os.listdir(dpath) and os.path.exists(dpath):
+        while dpath != '/' and os.path.exists(dpath) and not os.listdir(dpath):
             os.rmdir(dpath)
             dpath = os.path.dirname(dpath)
 
