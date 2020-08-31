@@ -58,7 +58,7 @@ Remove all orphaned packages from the system.
         self.init()
         orphaned = [0]
         first = True
-        while len(orphaned) > 1:
+        while len(orphaned) > 0:
             orphaned = self.installdb.get_orphaned()
             if ctx.get_option('exclude'):
                 orphaned = inary.blacklist.exclude(
