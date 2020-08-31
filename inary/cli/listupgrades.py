@@ -55,9 +55,10 @@ Lists the packages that will be upgraded.
     def run(self):
         self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
-        is_upgradable = operations.upgrade.is_upgradable
+        def upgradable(pkg):
+            operations.upgrade.is_upgradable(pkg, installdb)
 
-        upgradable_pkgs = list(filter(is_upgradable, installdb.list_installed()))
+        upgradable_pkgs = list(filter(upgradable, installdb.list_installed()))
         # replaced packages can not pass is_upgradable test, so we add them manually
         # upgradable_pkgs.extend(list_replaces())
 
