@@ -56,12 +56,14 @@ Remove all orphaned packages from the system.
     def run(self):
         from inary.operations import remove
         self.init()
-        orphaned = self.installdb.get_orphaned()
-        if ctx.get_option('exclude'):
-            orphaned = inary.blacklist.exclude(
-                orphaned, ctx.get_option('exclude'))
+        orphaned = [0]
+        while len(orphaned) > 1:
+            orphaned = self.installdb.get_orphaned()
+            if ctx.get_option('exclude'):
+                orphaned = inary.blacklist.exclude(
+                    orphaned, ctx.get_option('exclude'))
 
-        remove.remove(orphaned)
+            remove.remove(orphaned)
 
-        if not self.options.ignore_sysconf:
-            sysconf.proceed(self.options.force_sysconf)
+            if not self.options.ignore_sysconf:
+                sysconf.proceed(self.options.force_sysconf)
