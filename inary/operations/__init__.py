@@ -11,4 +11,3 @@
 #
 # Please read the COPYING file.
 #
-from inary.errors import Error

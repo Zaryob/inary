@@ -67,5 +67,5 @@ Remove all orphaned packages from the system.
                 remove.remove(orphaned, confirm=first)
                 first = False
 
-                if not self.options.ignore_sysconf:
-                    sysconf.proceed(self.options.force_sysconf)
+        if not self.options.ignore_sysconf:
+            sysconf.proceed(self.options.force_sysconf)

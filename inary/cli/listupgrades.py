@@ -55,6 +55,7 @@ Lists the packages that will be upgraded.
     def run(self):
         self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
+
         def upgradable(pkg):
             operations.upgrade.is_upgradable(pkg, installdb)
 
