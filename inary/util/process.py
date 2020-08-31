@@ -35,9 +35,9 @@ except ImportError:
 # Process Releated Functions #
 ##############################
 
-def makedirs(path):
-    if not path.exists(path):
-        makedirs(path)
+def makedirs(dpath):
+    if not path.exists(dpath):
+        makedirs(dpath)
 
 
 def search_executable(executable):
