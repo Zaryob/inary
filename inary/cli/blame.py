@@ -89,8 +89,9 @@ Usage: blame <package> ... <package>
 
     @staticmethod
     def print_package_info(package, hno=0, installed=False):
-        s = _('Name: {0}, version: {1}, release: {2}{3}\n').format(
-            package.name, package.history[hno].version, package.history[hno].release, ' (Installed)' if installed else '')
+        s = _('Name: {0}, version: {1}, release: {2}').format(
+            package.name, package.history[hno].version, package.history[hno].release)
+        s += ' ({})\n'.format(_('Installed')) if installed else '\n'
         s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name),
                                                          package.source.packager.email)
         s += _('Release Updater: {0.name} <{0.email}>\n').format(
