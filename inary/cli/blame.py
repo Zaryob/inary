@@ -57,10 +57,9 @@ Usage: blame <package> ... <package>
             return
 
         for package in self.args:
-            installed = self.installdb.has_package(package)
             pkg = self.packagedb.get_package(package)
             release = ctx.get_option('release')
-            if not installed:
+            if not self.installdb.has_package(package):
                 if not release and not ctx.get_option('all'):
                     self.print_package_info(pkg)
                 elif ctx.get_option('all'):

@@ -18,6 +18,7 @@
 import inary
 import inary.errors
 import inary.context as ctx
+from os import path, makedirs, environ, access, X_OK
 
 # Gettext Library
 import gettext
@@ -35,15 +36,15 @@ except ImportError:
 ##############################
 
 def makedirs(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    if not path.exists(path):
+        makedirs(path)
 
 
 def search_executable(executable):
     """Search for the executable in user's paths and return it."""
-    for _path in os.environ["PATH"].split(":"):
-        full_path = os.path.join(_path, executable)
-        if os.path.exists(full_path) and os.access(full_path, os.X_OK):
+    for _path in environ["PATH"].split(":"):
+        full_path = path.join(_path, executable)
+        if path.exists(full_path) and access(full_path, X_OK):
             return full_path
     return None
 
