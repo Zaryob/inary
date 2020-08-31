@@ -98,9 +98,10 @@ def remove(A, ignore_dep=False, ignore_safety=False, confirm=False):
         color='cyan')
     del removal_size, symbol
 
-    if confirm and not ctx.ui.confirm(_('Would you like to continue?')):
-        ctx.ui.warning(_('Package removal declined.'))
-        return False
+    if confirm or len(order) > len(A_0):
+        if not ctx.ui.confirm(_('Would you like to continue?')):
+            ctx.ui.warning(_('Package removal declined.'))
+            return False
 
     if ctx.get_option('dry_run'):
         return
