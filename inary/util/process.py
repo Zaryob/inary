@@ -15,8 +15,6 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
-import inary
-import inary.errors
 import inary.context as ctx
 from os import path, makedirs as mkdirs, environ, access, X_OK
 
