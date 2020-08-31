@@ -57,13 +57,15 @@ Remove all orphaned packages from the system.
         from inary.operations import remove
         self.init()
         orphaned = [0]
+        first = True
         while len(orphaned) > 1:
             orphaned = self.installdb.get_orphaned()
             if ctx.get_option('exclude'):
                 orphaned = inary.blacklist.exclude(
                     orphaned, ctx.get_option('exclude'))
 
-            remove.remove(orphaned)
+            remove.remove(orphaned, confirm=first)
+            first = False
 
             if not self.options.ignore_sysconf:
                 sysconf.proceed(self.options.force_sysconf)
