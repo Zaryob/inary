@@ -444,7 +444,12 @@ def upgrade_base(A=None):
     return set()
 
 
-def is_upgradable(name, installdb, packagedb):
+def is_upgradable(name, installdb=None, packagedb=None):
+    if not installdb:
+        installdb = inary.db.installdb.InstallDB()
+
+    if not packagedb:
+        packagedb = inary.db.packagedb.PackageDB()
 
     if not installdb.has_package(name):
         return False
