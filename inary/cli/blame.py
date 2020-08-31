@@ -75,16 +75,16 @@ Usage: blame <package> ... <package>
                 installed_pkg = self.installdb.get_package(package)
                 if not release and not ctx.get_option('all'):
                     self.print_package_info(pkg, 
-                        installed=(pkg.history[-1].release == installed_pkg.history[-1].release))
+                        installed=(pkg.history[0].release == installed_pkg.history[0].release))
                 elif ctx.get_option('all'):
                     for hno, update in enumerate(pkg.history):
                         self.print_package_info(pkg, hno, 
-                            (installed_pkg.history[hno] and installed_pkg.history[-1].release == installed_pkg.history[hno].release))
+                            (installed_pkg.history[hno] and installed_pkg.history[0].release == installed_pkg.history[hno].release))
                 else:
                     for hno, update in enumerate(pkg.history):
                         if int(update.release) == release:
                             self.print_package_info(pkg, hno, 
-                                (installed_pkg.history[hno] and installed_pkg.history[-1].release == installed_pkg.history[hno].release))
+                                (installed_pkg.history[hno] and installed_pkg.history[0].release == installed_pkg.history[hno].release))
                             return
 
     @staticmethod
