@@ -62,9 +62,10 @@ Remove all orphaned packages from the system.
             if ctx.get_option('exclude'):
                 orphaned = inary.blacklist.exclude(
                     orphaned, ctx.get_option('exclude'))
+            
+            if len(orphaned) > 0:
+                remove.remove(orphaned, confirm=first)
+                first = False
 
-            remove.remove(orphaned, confirm=first)
-            first = False
-
-            if not self.options.ignore_sysconf:
-                sysconf.proceed(self.options.force_sysconf)
+                if not self.options.ignore_sysconf:
+                    sysconf.proceed(self.options.force_sysconf)
