@@ -18,7 +18,7 @@
 import inary
 import inary.errors
 import inary.context as ctx
-from os import path, makedirs, environ, access, X_OK
+from os import path, makedirs as mkdirs, environ, access, X_OK
 
 # Gettext Library
 import gettext
@@ -37,7 +37,7 @@ except ImportError:
 
 def makedirs(dpath):
     if not path.exists(dpath):
-        makedirs(dpath)
+        mkdirs(dpath)
 
 
 def search_executable(executable):
