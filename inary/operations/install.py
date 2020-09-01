@@ -171,7 +171,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
     
-    if not reinstall or True:
+    if not reinstall:
         for x in package_URIs:
                 pkg_name = util.parse_package_name_get_name(
                     os.path.basename(x))
