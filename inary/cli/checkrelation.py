@@ -27,7 +27,7 @@ _ = __trans.gettext
 
 
 class CheckRelation(command.Command, metaclass=command.autocommand):
-    __doc__ = _("""Print the list of all installed packages
+    __doc__ = _("""Check packages and system relations
 
 Usage: check-relation
 """)
@@ -43,12 +43,22 @@ Usage: check-relation
 
         group = optparse.OptionGroup(self.parser, _("list-installed options"))
 
-        group.add_option("-c", "--component", action="store",
-                         default=None, help=_("List installed packages under given component."))
-        group.add_option("-i", "--install-info", action="store_true",
-                         default=False, help=_("Show detailed install info."))
+        group.add_option("-f", "--force", action="store_true",
+                         default=False, help=_("Deep scan mode"))
 
         self.parser.add_option_group(group)
+
+    def fix_reinstall(self,need_reinstall):
+        need_reinstall = util.unique_list(need_reinstall)
+        if len(need_reinstall) > 0:
+            sys.stderr.write(
+                _("This packages broken and need to reinstall.")+"\n\n")
+            for pkg in need_reinstall:
+                sys.stderr.write("{} ".format(pkg))
+                from inary.operations import install
+            ctx.set_option("ignore_dependency", True)
+            install.install(need_reinstall, reinstall=True)
+            sys.stderr.write("\n")
 
     def run(self):
         self.init(database=True, write=False)
@@ -61,23 +71,25 @@ Usage: check-relation
 
         installed.sort()
         need_reinstall = []
+        
         for pkg in installed:
-            pkgname = pkg
-            files = self.installdb.get_files(pkg)
-            sys.stderr.write(_("Checking: {}").format(pkg)+"\r")
-            for f in files.list:
-                if not os.path.exists("/"+f.path):
-                    need_reinstall.append(pkg)
+            for p in self.installdb.get_package(pkg).runtimeDependencies():
+                sys.stderr.write(_("Checking: {}").format(p)+"\r")
+                if not self.installdb.has_package(str(p.package)):
+                    need_reinstall.append(p.package)
                     sys.stderr.write(
-                        _("Missing: /{} - {}").format(f.path, pkg)+"\n")
+                        _("Missing: - {}").format(p.package)+"\n")
+        self.fix_reinstall(need_reinstall)
 
-        need_reinstall = util.unique_list(need_reinstall)
-        if len(need_reinstall) > 0:
-            sys.stderr.write(
-                _("This packages broken and need to reinstall.")+"\n\n")
-            for pkg in need_reinstall:
-                sys.stderr.write("{} ".format(pkg))
-                from inary.operations import install
-            ctx.set_option("ignore_dependency", True)
-            install.install(need_reinstall, reinstall=True)
-            sys.stderr.write("\n")
+        if self.options.force:
+            for pkg in installed:
+                pkgname = pkg
+                files = self.installdb.get_files(pkg)
+                sys.stderr.write(_("Checking: {}").format(pkg)+"\r")
+                for f in files.list:
+                    if not os.path.exists("/"+f.path):
+                        need_reinstall.append(pkg)
+                        sys.stderr.write(
+                            _("Missing: /{} - {}").format(f.path, pkg)+"\n")
+            self.fix_reinstall(need_reinstall)
+

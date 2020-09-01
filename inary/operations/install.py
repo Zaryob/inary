@@ -170,10 +170,9 @@ def install_pkg_files(package_URIs, reinstall=False):
 
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
-    if not reinstall:
+    
+    if not reinstall or True:
         for x in package_URIs:
-            if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(
-                    ctx.const.package_suffix):
                 pkg_name = util.parse_package_name_get_name(
                     os.path.basename(x))
                 if installdb.has_package(pkg_name):
@@ -211,7 +210,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     if not ctx.get_option('ignore_check'):
         for x in list(d_t.keys()):
             pkg = d_t[x]
-            if pkg.distributionRelease != ctx.config.values.general.distribution_release:
+            if pkg.distributionRelease > ctx.config.values.general.distribution_release:
                 raise Exception(_('Package \"{0}\" is not compatible with your distribution release \'{1}\' \'{2}\'.').format(
                     x, ctx.config.values.general.distribution,
                     ctx.config.values.general.distribution_release))
@@ -252,7 +251,7 @@ def install_pkg_files(package_URIs, reinstall=False):
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Would you like to continue?')):
             raise Exception(_('External dependencies not satisfied.'))
-        install_pkg_names(extra_packages, reinstall=True, extra=True)
+        install_pkg_names(extra_packages, reinstall=False, extra=False)
 
     class PackageDB:
         @staticmethod
@@ -278,13 +277,15 @@ def install_pkg_files(package_URIs, reinstall=False):
     # set A using packagedb
     for x in A:
         G_f.packages.append(x)
+    print(tobe_installed)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                G_f.add_package(dep)
+            G_f.add_package(x)
+            #for dep in pkg.runtimeDependencies():
+             #   G_f.add_package(dep)
         B = Bp
     order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):
