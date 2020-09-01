@@ -27,6 +27,7 @@ _ = __trans.gettext
 from functools import reduce
 from inary.util.filesystem_terminal import *
 import operator
+from inary.util.filesystem_terminal import get_terminal_size
 
 #########################
 # string/list/functional#

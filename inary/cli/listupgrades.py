@@ -12,10 +12,6 @@
 # Please read the COPYING file.
 #
 
-import inary.db
-import inary.context as ctx
-import inary.blacklist
-import inary.cli.command as command
 import optparse
 import sys
 
@@ -23,6 +19,12 @@ import sys
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
+
+import inary.cli.command as command
+import inary.blacklist
+import inary.context as ctx
+import inary.db
+import inary.operations as operations
 
 
 class ListUpgrades(command.Command, metaclass=command.autocommand):
@@ -51,28 +53,25 @@ Lists the packages that will be upgraded.
         self.parser.add_option_group(group)
 
     def run(self):
-        import inary.operations as operations
         self.init(database=True, write=False)
         installdb = inary.db.installdb.InstallDB()
-        packagedb = inary.db.packagedb.PackageDB()
 
-        upgradable_pkgs = operations.upgrade.list_upgradeable(
-            installdb, packagedb)
+        def upgradable(pkg):
+            operations.upgrade.is_upgradable(pkg, installdb)
+
+        upgradable_pkgs = list(filter(upgradable, installdb.list_installed()))
         # replaced packages can not pass is_upgradable test, so we add them manually
         # upgradable_pkgs.extend(list_replaces())
 
         # consider also blacklist filtering
-        upgradable_pkgs = inary.blacklist.exclude_from(
-            upgradable_pkgs, ctx.const.blacklist)
+        upgradable_pkgs = inary.blacklist.exclude_from(upgradable_pkgs, ctx.const.blacklist)
 
         component = ctx.get_option('component')
         if component:
-            component_pkgs = self.componentdb.get_union_packages(
-                component, walk=True)
+            component_pkgs = self.componentdb.get_union_packages(component, walk=True)
             upgradable_pkgs = list(set(upgradable_pkgs) & set(component_pkgs))
 
-        upgradable_pkgs = inary.blacklist.exclude_from(
-            upgradable_pkgs, ctx.const.blacklist)
+        upgradable_pkgs = inary.blacklist.exclude_from(upgradable_pkgs, ctx.const.blacklist)
 
         if not upgradable_pkgs:
             ctx.ui.info(_('No packages to upgrade.'))
@@ -84,19 +83,17 @@ Lists the packages that will be upgraded.
         maxlen = max([len(_p) for _p in upgradable_pkgs])
 
         if self.options.install_info:
-            ctx.ui.info(
-                _('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
-            sys.stdout.write(
-                '===========================================================================')
+            ctx.ui.info(_('Package Name          |St|        Version|  Rel.|  Distro|             Date'))
+            sys.stdout.write('===========================================================================')
 
         for pkg in upgradable_pkgs:
+            package = self.installdb.get_package(pkg)
             inst_info = self.installdb.get_info(pkg)
             if self.options.long:
-                ctx.ui.info(pkg)
+                ctx.ui.info(package)
                 sys.stdout.write(inst_info)
             elif self.options.install_info:
-                ctx.ui.info('%-20s |%s ' % (pkg, inst_info.one_liner()))
+                ctx.ui.info('%-20s |%s ' % (package.name, inst_info.one_liner()))
             else:
-                pkgname = pkg + ' ' * max(0, maxlen - len(pkg))
-                ctx.ui.info(
-                    '{0} - {1}'.format(pkgname, str(packagedb.get_summary(pkg))))
+                package.name += ' ' * max(0, maxlen - len(package.name))
+                ctx.ui.info('{0} - {1}'.format(package.name, str(package.summary)))

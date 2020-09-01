@@ -32,7 +32,7 @@ _ = __trans.gettext
 
 
 @util.locked
-def remove(A, ignore_dep=False, ignore_safety=False):
+def remove(A, ignore_dep=False, ignore_safety=False, confirm=False):
     """
     Removes the given packages from the system
     @param A: list of package names -> list_of_strings
@@ -98,7 +98,7 @@ def remove(A, ignore_dep=False, ignore_safety=False):
         color='cyan')
     del removal_size, symbol
 
-    if len(order) > len(A_0):
+    if confirm or len(order) > len(A_0):
         if not ctx.ui.confirm(_('Would you like to continue?')):
             ctx.ui.warning(_('Package removal declined.'))
             return False

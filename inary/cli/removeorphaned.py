@@ -35,7 +35,6 @@ Remove all orphaned packages from the system.
 
     def __init__(self, args):
         super(RemoveOrphaned, self).__init__(args)
-        self.installdb = inary.db.installdb.InstallDB()
 
     name = ("remove-orphaned", "ro")
 
@@ -56,12 +55,17 @@ Remove all orphaned packages from the system.
     def run(self):
         from inary.operations import remove
         self.init()
-        orphaned = self.installdb.get_orphaned()
-        if ctx.get_option('exclude'):
-            orphaned = inary.blacklist.exclude(
-                orphaned, ctx.get_option('exclude'))
-
-        remove.remove(orphaned)
+        orphaned = [0]
+        first = True
+        while len(orphaned) > 0:
+            orphaned = inary.db.installdb.InstallDB().get_orphaned()
+            if ctx.get_option('exclude'):
+                orphaned = inary.blacklist.exclude(
+                    orphaned, ctx.get_option('exclude'))
+            
+            if len(orphaned) > 0:
+                remove.remove(orphaned, confirm=first)
+                first = False
 
         if not self.options.ignore_sysconf:
             sysconf.proceed(self.options.force_sysconf)

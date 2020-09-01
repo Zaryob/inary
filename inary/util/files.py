@@ -30,6 +30,7 @@ import shutil
 import hashlib
 import fnmatch
 from inary.util.strings import remove_prefix
+from inary.errors import FileError, FilePermissionDeniedError
 
 ####################################
 # File/Directory Related Functions #

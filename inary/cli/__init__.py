@@ -20,7 +20,7 @@ import locale
 
 # Inary Modules
 import inary.ui
-import inary.errors
+from inary.errors import Error
 import inary.util as util
 import inary.context as ctx
 
@@ -28,15 +28,6 @@ import inary.context as ctx
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class Error(inary.errors.Error):
-    pass
-
-
-class Exception(inary.errors.Exception):
-    pass
-
 
 # in old releases used this printu function
 def printu(obj, err=False):

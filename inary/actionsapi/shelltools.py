@@ -257,10 +257,10 @@ def touch(filePath):
 
 def cd(directoryName=''):
     """change directory"""
-    current = os.getcwd()
     if directoryName:
         os.chdir(directoryName)
     else:
+        current = os.getcwd()
         os.chdir(os.path.dirname(current))
 
 

@@ -10,28 +10,84 @@
 # any later version.
 #
 # Please read the COPYING file.
-
-# FIXME: Exception shadows builtin Exception. This is no good.
-class Exception(Exception):
-    """Class of exceptions that must be caught and handled within INARY"""
-
-    def __str__(self):
-        s = ''
-        for x in self.args:
-            if s != '':
-                s += '\n'
-            s += str(x)
-        return str(s)
-
+from gettext import translation
+_ = translation('inary', fallback=True).gettext
 
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
 
 
-class AnotherInstanceError(Exception):
+class AnotherInstanceError(Error):
     pass
 
 
-class PrivilegeError(Exception):
+class PrivilegeError(Error):
     pass
+
+# Error Classes
+class FileError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+
+
+class ArgumentError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+
+class FilePermissionDeniedError(Error):
+    pass
+
+# Error Classes
+class FileError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+
+
+class ArgumentError(Error):
+    def __init__(self, value=''):
+        Error.__init__(self, value)
+        self.value = value
+
+class AlreadyHaveException(Error):
+    def __init__(self, url, localfile):
+        Error.__init__(
+            self, _("URL \"{0}\" already downloaded as \"{1}\"").format(
+                url, localfile))
+        self.url = url
+        self.localfile = localfile
+
+
+class NoSignatureFound(Error):
+    def __init__(self, url):
+        Error.__init__(
+            self, _("No signature found for \"{}\"").format(url))
+        self.url = url
+
+class InvalidSignature(Error):
+    def __init__(self, url):
+        Error.__init__(
+            self, _("GPG Signature is invalid for \"{}\"").format(url))
+        self.url = url
+
+class CycleException(Error):
+    def __init__(self, cycle):
+        self.cycle = cycle
+
+    def __str__(self):
+        return _('Encountered cycle {}').format(self.cycle)
+
+class ParserError(Error):
+    pass
+
+
+class PostOpsError(Error):
+    pass
+
+
+class NotfoundError(Error):
+    pass
+

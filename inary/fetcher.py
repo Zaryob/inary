@@ -135,6 +135,10 @@ class UIHandler:
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
+    
+    FETCH_MODE_PYCURL = 1
+    FETCH_MODE_REQUESTS = 2
+    FETCH_MODE_WGET = 3
 
     def __init__(self, url, destdir="/tmp", destfile=None):
         if not isinstance(url, inary.uri.URI):
@@ -149,6 +153,7 @@ class Fetcher:
         self.progress = None
         self.try_number = 0
         self.fetcher = None
+        self.handler = None
 
         # spoof user-agent
         self.useragent = (ctx.config.values.general.fetcher_useragent
@@ -187,14 +192,14 @@ class Fetcher:
 
         self.file_id = open(self.partial_file, "wb")
 
-        self.handler = UIHandler()
-        self.handler.start(
-            self.archive_file,
-            self.url.get_uri(),
-            self.url.filename())
-
         try:
             self.fetcher = self._get_fetcher_mode()
+            if self.fetcher_mode != self.FETCH_MODE_WGET and not self.handler:
+                self.handler = UIHandler()
+                self.handler.start(
+                    self.archive_file,
+                    self.url.get_uri(),
+                    self.url.filename())
             self.timeout = timeout
             self.fetcher()
         except Exception as x:
@@ -298,14 +303,20 @@ class Fetcher:
     def _get_fetcher_mode(self):
         if not self.fetcher:
             mode = int(ctx.config.values.general.fetcher_mode or 0)
-            if mode not in [1, 2, 3]:
+            self.fetcher_mode = mode
+            if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET]:
                 try:
+                    from pycurl import URL
                     self.fetcher = self._get_pycurl
+                    self.fetcher_mode = self.FETCH_MODE_PYCURL
                 except ImportError:
                     try:
+                        from requests import get
                         self.fetcher = self._get_requests
+                        self.fetcher_mode = self.FETCH_MODE_REQUESTS
                     except ImportError:
                         self.fetcher = self._get_wget
+                        self.fetcher_mode = self.FETCH_MODE_WGET
 
             elif mode == 1:
                 self.fetcher = self._get_pycurl

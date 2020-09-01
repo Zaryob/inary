@@ -28,40 +28,13 @@ import shutil
 import inary.uri
 import inary.util
 import inary.fetcher
-import inary.errors
+from inary.errors import AlreadyHaveException, NoSignatureFound, InvalidSignature
 import inary.context as ctx
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class AlreadyHaveException(inary.errors.Exception):
-    def __init__(self, url, localfile):
-        inary.errors.Exception.__init__(
-            self, _("URL \"{0}\" already downloaded as \"{1}\"").format(
-                url, localfile))
-        self.url = url
-        self.localfile = localfile
-
-
-class NoSignatureFound(inary.errors.Exception):
-    def __init__(self, url):
-        inary.errors.Exception.__init__(
-            self, _("No signature found for \"{}\"").format(url))
-        self.url = url
-
-
-class Error(inary.errors.Error):
-    pass
-
-
-class InvalidSignature(inary.errors.Error):
-    def __init__(self, url):
-        inary.errors.Exception.__init__(
-            self, _("GPG Signature is invalid for \"{}\"").format(url))
-        self.url = url
 
 
 class File:

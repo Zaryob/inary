@@ -23,7 +23,7 @@ import inary
 import inary.cli
 import inary.context as ctx
 import inary.db
-import inary.errors
+from inary.errors import Error, ParserError
 import inary.util
 from inary.cli import inarycli
 
@@ -49,7 +49,11 @@ def handle_exception(exception, value, tb):
     ui = inary.cli.CLI()  # make a temporary UI
     show_traceback = False
 
-    if isinstance(value, inary.errors.Error):
+    if isinstance(value, ParserError):
+        show_traceback = True
+        ui.error(_("\nUnhandled internal exception.\n"
+                   "Please file a bug report to <https://github.com/SulinOS/inary/issues>."))
+    elif isinstance(value, Error):
         ui.error(_("Program terminated."))
     elif isinstance(value, KeyboardInterrupt):
         ui.error(_("\nKeyboard Interrupt [Ctrl-C]: Exiting..."))
@@ -57,10 +61,6 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, EOFError):
         ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
         exit()
-    elif isinstance(value, inary.errors.Exception):
-        show_traceback = True
-        ui.error(_("\nUnhandled internal exception.\n"
-                   "Please file a bug report to <https://github.com/SulinOS/inary/issues>."))
     elif isinstance(value, IOError) and value.errno == errno.EPIPE:
         # Ignore broken pipe errors
         sys.exit(0)

@@ -16,23 +16,14 @@
 
 # Inary Modules
 import inary.db
-import inary.errors
+from inary.errors import CycleException
 import inary.context as ctx
 import inary.operations.helper as op_helper
-import sys
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class CycleException(inary.errors.Exception):
-    def __init__(self, cycle):
-        self.cycle = cycle
-
-    def __str__(self):
-        return _('Encountered cycle {}').format(self.cycle)
 
 
 class PGraph:
@@ -45,11 +36,17 @@ class PGraph:
         self.checked = []
         self.reinstall = False
 
-        if installdb == None:
+        if not installdb:
             self.installdb = inary.db.installdb.InstallDB()
 
-        if packagedb == None:
+        if not packagedb:
             self.packagedb = inary.db.packagedb.PackageDB()
+    
+    def get_installdb(self):
+        return self.installdb
+            
+    def get_packagedb(self):
+        return self.packagedb
 
     def topological_sort(self):
         return inary.util.unique_list(self.packages)

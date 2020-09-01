@@ -49,21 +49,6 @@ class Singleton(type):
         return cls.instance
 
 
-# inary modules
-
-
-class Error(inary.errors.Error):
-    pass
-
-
-class FileError(Error):
-    pass
-
-
-class FilePermissionDeniedError(Error):
-    pass
-
-
 def locked(func):
     """
     Decorator for synchronizing privileged functions
