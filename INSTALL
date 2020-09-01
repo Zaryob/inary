@@ -2,6 +2,7 @@ You can install Inary on your system with commands.
 
 # ./setup.py build
 # ./setup.py install
+su -c "ln -s /usr/local/bin/inary-cli /usr/bin/inary"
 
 If you are on a Solus or PisiLinux system, you should delete /usr/lib/pardus/pisi
 when you are installing the SVN version
@@ -10,3 +11,6 @@ If you are upgrading from an old INARY release you may have to
 run the following command as root:
 
 # inary rebuild-db
+
+Add Sulin repository
+su -c "inary ar sulin https://gitlab.com/sulinos/repositories/SulinRepository/-/raw/master/inary-index.xml"
