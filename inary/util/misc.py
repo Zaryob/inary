@@ -18,6 +18,7 @@
 import inary.context as ctx
 from os import listdir, path, readlink, rmdir
 from sys import maxunicode
+from inary.util.files import sha1_file, sha1_data
 
 # Gettext Library
 import gettext
