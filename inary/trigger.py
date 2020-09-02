@@ -48,9 +48,9 @@ class Trigger:
                 cmd_extra = " > /dev/null"
             ret_val = os.system(
                 'bash --noprofile --norc -c \'source postoperations.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func) +
-            cmd_extra)
+                cmd_extra)
             os.chdir(curDir)
-            if (ret_val  != 0):
+            if (ret_val != 0):
                 return False
         if os.path.exists(self.specdir+"/"+ctx.const.postops[0]):
             curDir = os.getcwd()
@@ -71,7 +71,7 @@ class Trigger:
                 'python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func) +
                 cmd_extra)
             os.chdir(curDir)
-            if (ret_val  != 0):
+            if (ret_val != 0):
                 return False
         return True
 
@@ -98,5 +98,5 @@ class Trigger:
     def preremove(self, specdir):
         self.specdir = specdir
         for postops in ctx.const.postops:
-             self.postscript = util.join_path(self.specdir, postops)
+            self.postscript = util.join_path(self.specdir, postops)
         return self.run_command("preRemove")

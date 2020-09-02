@@ -30,6 +30,8 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 # in old releases used this printu function
+
+
 def printu(obj, err=False):
     if not isinstance(obj, str):
         obj = str(obj)

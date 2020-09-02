@@ -48,7 +48,7 @@ Usage: check-relation
 
         self.parser.add_option_group(group)
 
-    def fix_reinstall(self,need_reinstall):
+    def fix_reinstall(self, need_reinstall):
         need_reinstall = util.unique_list(need_reinstall)
         if len(need_reinstall) > 0:
             sys.stderr.write(
@@ -71,7 +71,7 @@ Usage: check-relation
 
         installed.sort()
         need_reinstall = []
-        
+
         for pkg in installed:
             for p in self.installdb.get_package(pkg).runtimeDependencies():
                 sys.stderr.write(_("Checking: {}").format(p)+"\r")
@@ -92,4 +92,3 @@ Usage: check-relation
                         sys.stderr.write(
                             _("Missing: /{} - {}").format(f.path, pkg)+"\n")
             self.fix_reinstall(need_reinstall)
-

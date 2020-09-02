@@ -192,6 +192,7 @@ class ArchiveBinary(ArchiveBase):
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
+        print(target_dir)
         target_file = os.path.join(target_dir,
                                    os.path.basename(self.file_path))
         if os.path.isfile(self.file_path):

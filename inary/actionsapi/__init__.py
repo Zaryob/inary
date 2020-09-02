@@ -15,6 +15,7 @@
 import inary.context as ctx
 from inary.errors import Error
 
+
 def error(msg):
     if ctx.config.get_option('ignore_action_errors'):
         ctx.ui.error(msg)

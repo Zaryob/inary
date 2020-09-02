@@ -15,6 +15,7 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+from unicodedata import category as ucategory
 import inary.context as ctx
 from os import listdir, path, readlink, rmdir
 from sys import maxunicode
@@ -25,7 +26,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from unicodedata import category as ucategory
 
 def join_path(a, *p):
     """Join two or more pathname components.
@@ -39,6 +39,7 @@ def join_path(a, *p):
         else:
             path += '/' + b
     return path
+
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
@@ -91,4 +92,3 @@ def letters():
                 result.append(start + "-" + end)
             start = None
     return ''.join(result)
-

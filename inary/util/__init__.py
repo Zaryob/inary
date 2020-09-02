@@ -15,6 +15,16 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+from inary.util.strings import *
+from inary.util.process import *
+from inary.util.path import *
+from inary.util.package import *
+from inary.util.misc import *
+from inary.util.kernel import *
+from inary.util.filesystem_terminal import *
+from inary.util.files import *
+from inary.util.curses import *
+import fcntl
 import inary
 import inary.errors
 import inary.context as ctx
@@ -23,18 +33,6 @@ import inary.context as ctx
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-import fcntl
-
-from inary.util.curses import *
-from inary.util.files import *
-from inary.util.filesystem_terminal import *
-from inary.util.kernel import *
-from inary.util.misc import *
-from inary.util.package import *
-from inary.util.path import *
-from inary.util.process import *
-from inary.util.strings import *
 
 
 class Singleton(type):

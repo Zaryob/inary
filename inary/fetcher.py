@@ -135,7 +135,7 @@ class UIHandler:
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
-    
+
     FETCH_MODE_PYCURL = 1
     FETCH_MODE_REQUESTS = 2
     FETCH_MODE_WGET = 3

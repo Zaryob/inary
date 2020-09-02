@@ -41,10 +41,10 @@ class PGraph:
 
         if not packagedb:
             self.packagedb = inary.db.packagedb.PackageDB()
-    
+
     def get_installdb(self):
         return self.installdb
-            
+
     def get_packagedb(self):
         return self.packagedb
 

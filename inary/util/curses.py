@@ -15,6 +15,7 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+import sys
 import inary
 import inary.errors
 import inary.context as ctx
@@ -24,7 +25,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import sys
 
 #############################
 #   ncurses like functions  #

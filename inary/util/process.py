@@ -97,4 +97,3 @@ def hewal(expr):
     elif expr in ("FALSE", "0", "OFF", "F", "N", "NO"):
         return False
     return None
-

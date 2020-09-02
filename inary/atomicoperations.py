@@ -519,7 +519,7 @@ class Install(AtomicOperation):
         ctx.ui.info(_("Precaching postoperations.py file"), verbose=True)
 
         if 'postOps' in self.metadata.package.isA:
-            for postops in ctx.const.postops :
+            for postops in ctx.const.postops:
                 try:
                     self.package.extract_file_synced(
                         postops, ctx.config.tmp_dir())
@@ -535,7 +535,7 @@ class Install(AtomicOperation):
         self.package.extract_file_synced(
             ctx.const.metadata_xml, self.package.pkg_dir())
         if 'postOps' in self.metadata.package.isA:
-            for postops in ctx.const.postops :
+            for postops in ctx.const.postops:
                 try:
                     self.package.extract_file_synced(
                         postops, ctx.config.tmp_dir())

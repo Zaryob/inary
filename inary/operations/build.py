@@ -687,7 +687,6 @@ class Builder:
                 # mode is octal!
                 os.chmod(dest, int(afile.permission, 8))
 
-
     def get_action_variable(self, name, default):
         if name in self.variable_buffer.keys():
             return self.variable_buffer[name]

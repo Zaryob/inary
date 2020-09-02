@@ -15,6 +15,10 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+from inary.util.filesystem_terminal import get_terminal_size
+import operator
+from inary.util.filesystem_terminal import *
+from functools import reduce
 import inary
 import inary.errors
 import inary.context as ctx
@@ -24,10 +28,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from functools import reduce
-from inary.util.filesystem_terminal import *
-import operator
-from inary.util.filesystem_terminal import get_terminal_size
 
 #########################
 # string/list/functional#
@@ -203,4 +203,3 @@ def format_by_columns(strings, sep_width=2):
         lines.append(sep.join(current_line))
 
     return "\n".join(lines)
-

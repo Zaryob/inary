@@ -14,7 +14,14 @@
 
 """misc. utility functions, including process and file utils"""
 
-import os, re
+from inary.errors import FileError, FilePermissionDeniedError
+from inary.util.strings import remove_prefix
+from inary.util.process import run_batch
+import fnmatch
+import hashlib
+import shutil
+import os
+import re
 
 # Inary Modules
 import inary
@@ -26,15 +33,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import shutil
-import hashlib
-import fnmatch
-from inary.util.strings import remove_prefix
-from inary.errors import FileError, FilePermissionDeniedError
 
 ####################################
 # File/Directory Related Functions #
 ####################################
+
 
 def check_file(_file, mode=os.F_OK, noerr=False):
     """Shorthand to check if a file exists."""
@@ -441,4 +444,3 @@ def partition_freespace(directory):
     """Return free space of given directory's partition."""
     st = os.statvfs(directory)
     return st.f_frsize * st.f_bfree
-

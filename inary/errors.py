@@ -13,6 +13,7 @@
 from gettext import translation
 _ = translation('inary', fallback=True).gettext
 
+
 class Error(Exception):
     """Class of exceptions that lead to program termination"""
     pass
@@ -26,6 +27,8 @@ class PrivilegeError(Error):
     pass
 
 # Error Classes
+
+
 class FileError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
@@ -36,11 +39,14 @@ class ArgumentError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
         self.value = value
+
 
 class FilePermissionDeniedError(Error):
     pass
 
 # Error Classes
+
+
 class FileError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
@@ -51,6 +57,7 @@ class ArgumentError(Error):
     def __init__(self, value=''):
         Error.__init__(self, value)
         self.value = value
+
 
 class AlreadyHaveException(Error):
     def __init__(self, url, localfile):
@@ -67,11 +74,13 @@ class NoSignatureFound(Error):
             self, _("No signature found for \"{}\"").format(url))
         self.url = url
 
+
 class InvalidSignature(Error):
     def __init__(self, url):
         Error.__init__(
             self, _("GPG Signature is invalid for \"{}\"").format(url))
         self.url = url
+
 
 class CycleException(Error):
     def __init__(self, cycle):
@@ -79,6 +88,7 @@ class CycleException(Error):
 
     def __str__(self):
         return _('Encountered cycle {}').format(self.cycle)
+
 
 class ParserError(Error):
     pass
@@ -90,4 +100,3 @@ class PostOpsError(Error):
 
 class NotfoundError(Error):
     pass
-

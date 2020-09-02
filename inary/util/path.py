@@ -14,6 +14,9 @@
 
 """misc. utility functions, including process and file utils"""
 
+from inary.util.strings import *
+import struct
+from functools import reduce
 import os
 
 # Inary Modules
@@ -26,9 +29,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from functools import reduce
-import struct
-from inary.util.strings import *
 
 #############################
 # Path Processing Functions #
@@ -89,4 +89,3 @@ def join_path(a, *p):
         else:
             path += '/' + b
     return path
-

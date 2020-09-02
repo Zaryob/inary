@@ -15,6 +15,11 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+import struct
+import termios
+import fcntl
+import sys
+import os
 import inary
 import inary.errors
 import inary.context as ctx
@@ -24,15 +29,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-import os
-import sys
-import fcntl
-import termios
-import struct
 
 ########################
 # Filesystem functions #
 ########################
+
 
 def fs_sync():
     if ctx.config.values.general.fs_sync:

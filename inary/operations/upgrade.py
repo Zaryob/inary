@@ -280,7 +280,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # install / reinstall
 
     G_f = pgraph.PGraph()  # construct G_f
-    
+
     installdb = G_f.get_installdb()
     packagedb = G_f.get_packagedb()
 

@@ -15,6 +15,7 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
+from inary.util.strings import *
 import inary
 import inary.errors
 import inary.context as ctx
@@ -24,11 +25,11 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-from inary.util.strings import *
 
 ########################################
 # Package/Repository Related Functions #
 ########################################
+
 
 def package_filename(name, version, release, distro_id=None, arch=None):
     """Return a filename for a package with the given information. """
