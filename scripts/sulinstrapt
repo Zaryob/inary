@@ -31,12 +31,11 @@ if echo $2 | grep "^-" &>/dev/null ; then
 	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
 	echo $2 | grep "a" && inary it curl nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
 fi
-if [ ! -d $sulin/proc/sys/kernel ] ; then
-	for i in /dev /sys /proc /run
-	do
-		mkdir -p $sulin/$i &>/dev/null
-		mount --bind $i $sulin/$i
-	done
-fi
+for i in /dev /sys /proc /run
+do
+	mkdir -p $sulin/$i &>/dev/null
+	umount -lf -R $sulin/$i || true
+	mount --bind $i $sulin/$i
+done
 chroot $sulin inary cp baselayout
 chroot $sulin inary cp
