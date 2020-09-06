@@ -16,8 +16,10 @@ from inary.actionsapi import autotools
 def setup():
     pass
 
+
 def build():
     pass
+
 
 def install():
     os.chdir("../unibuild-master")

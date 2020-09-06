@@ -37,6 +37,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+
 class File:
     # Compression types
     COMPRESSION_TYPE_AUTO = 0
