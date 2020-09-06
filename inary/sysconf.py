@@ -75,6 +75,9 @@ def t(name, path, command):
 
 def t_r(name, path, command):
     """main trigger handler with recursive"""
+    if not os.path.exists(path):
+        return
+
     for i in os.listdir(path):
         if os.path.isdir("{}/{}".format(path, i)):
             t("{}-{}".format(name, i), "{}/{}".format(path, i),

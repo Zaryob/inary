@@ -14,6 +14,8 @@
 
 """misc. utility functions, including process and file utils"""
 
+import os
+
 # Inary Modules
 import platform
 import inary
