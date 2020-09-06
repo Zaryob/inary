@@ -39,7 +39,7 @@ Lists packages waiting to be configured.
         A = inary.db.installdb.InstallDB().list_pending()
         if len(A):
             ctx.ui.info(_('Listing pending orders:'), color='blue')
-            for p in inary.data.pgraph.generate_pending_order(A):
+            for p in A:
                 ctx.ui.info(p)
         else:
             ctx.ui.info(_('There are no packages waiting to be configured.'))
