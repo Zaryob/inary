@@ -14,6 +14,8 @@
 
 """misc. utility functions, including process and file utils"""
 
+import os
+
 # Inary Modules
 from unicodedata import category as ucategory
 import inary.context as ctx

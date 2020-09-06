@@ -1,6 +1,5 @@
 #!/bin/sh
 #sulinstrapt betiği ile sulinos chroot oluşturabilirsiniz veya diskinize kurulum yapabilirsiniz
-set -e
 if [ "$1" == "" ] || [ "$1" == "-*" ]
 then
 	echo "Usage: sulinstrapt [directory]"
@@ -30,9 +29,9 @@ if echo $2 | grep "^-" &>/dev/null ; then
 	echo $2 | grep "x" && inary it -c x11 -y --ignore-configure -D$sulin
 	echo $2 | grep "d" && inary it -c system.devel -y --ignore-configure -D$sulin
 	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
-	echo $2 | grep "a" && inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
+	echo $2 | grep "a" && inary it curl nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
 fi
-if [ ! -d /proc/sys/kernel ] ; then
+if [ ! -d $sulin/proc/sys/kernel ] ; then
 	for i in /dev /sys /proc /run
 	do
 		mkdir -p $sulin/$i &>/dev/null

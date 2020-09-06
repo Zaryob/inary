@@ -330,7 +330,7 @@ class Install(AtomicOperation):
                 return 0
             ctx.ui.info(_('Pre-install configuration have been run for \"{}\"'.format(
                 self.pkginfo.name)), color='brightyellow')
-            if not self.trigger.preinstall(ctx.config.tmp_dir()):
+            if not self.trigger.preinstall(self.package.pkg_dir()):
                 util.clean_dir(self.package.pkg_dir())
                 ctx.ui.error(
                     _('Pre-install configuration of \"{}\" package failed.').format(self.pkginfo.name))
@@ -538,7 +538,7 @@ class Install(AtomicOperation):
             for postops in ctx.const.postops:
                 try:
                     self.package.extract_file_synced(
-                        postops, ctx.config.tmp_dir())
+                        postops, self.package.pkg_dir())
                 except:
                     pass
 

@@ -37,8 +37,7 @@ def configure_pending(packages=None):
     else:
         packages = set(packages).intersection(installdb.list_pending())
 
-    order = inary.data.pgraph.generate_pending_order(packages)
-    for x in order:
+    for x in packages:
         if installdb.has_package(x):
             pkginfo = installdb.get_package(x)
             ops_Dir = installdb.package_path(x)
