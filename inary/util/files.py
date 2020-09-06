@@ -17,6 +17,7 @@
 from inary.errors import FileError, FilePermissionDeniedError, Error
 from inary.util.strings import remove_prefix
 from inary.util.process import run_batch
+from inary.util.path import join_path
 import fnmatch
 import hashlib
 import shutil
