@@ -1,6 +1,5 @@
 #!/bin/sh
 #sulinstrapt betiği ile sulinos chroot oluşturabilirsiniz veya diskinize kurulum yapabilirsiniz
-set -e
 if [ "$1" == "" ] || [ "$1" == "-*" ]
 then
 	echo "Usage: sulinstrapt [directory]"
