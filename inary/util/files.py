@@ -14,7 +14,7 @@
 
 """misc. utility functions, including process and file utils"""
 
-from inary.errors import FileError, FilePermissionDeniedError
+from inary.errors import FileError, FilePermissionDeniedError, Error
 from inary.util.strings import remove_prefix
 from inary.util.process import run_batch
 import fnmatch
