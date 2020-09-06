@@ -25,20 +25,13 @@ import inary.db
 import inary.uri
 import inary.errors
 import inary.mirrors
-import inary.util as util
-import inary.context as ctx
+from inary import util
+from inary.util import ctx
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-# Network libraries
-# import ftplib
-try:
-    import pycurl
-except ImportError:
-    raise(_("PyCurl module not found. Please install python3-pycurl or check your installation."))
 
 
 # For raising errors when fetching
@@ -90,12 +83,15 @@ class UIHandler:
         self.s_time = self.now()
 
     def update(self, total_to_download, total_downloaded,
-               total_to_upload, total_uploaded):
+               total_to_upload=0, total_uploaded=0,
+               background_color=None, foreground_color=None):
         if self.size == total_downloaded:
             return
 
         self.size = total_downloaded
         self.total_size = total_to_download
+        self.background = background_color
+        self.foreground = foreground_color
         if self.total_size:
             try:
                 self.percent = (self.size * 100.0) / self.total_size
@@ -129,7 +125,9 @@ class UIHandler:
                                 rate=self.rate,
                                 eta=self.eta,
                                 symbol=self.symbol,
-                                basename=self.basename)
+                                basename=self.basename,
+                                backgroundcolor=self.background,
+                                foregroundcolor=self.foreground)
 
         self.last_updated = self.now()
 
@@ -137,6 +135,10 @@ class UIHandler:
 class Fetcher:
     """Fetcher can fetch a file from various sources using various
     protocols."""
+
+    FETCH_MODE_PYCURL = 1
+    FETCH_MODE_REQUESTS = 2
+    FETCH_MODE_WGET = 3
 
     def __init__(self, url, destdir="/tmp", destfile=None):
         if not isinstance(url, inary.uri.URI):
@@ -150,7 +152,12 @@ class Fetcher:
         self.destfile = destfile
         self.progress = None
         self.try_number = 0
-        self.useragent = 'Inary Fetcher/' + inary.__version__
+        self.fetcher = None
+        self.handler = None
+
+        # spoof user-agent
+        self.useragent = (ctx.config.values.general.fetcher_useragent
+                          or 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
 
         self.archive_file = os.path.join(destdir, destfile or url.filename())
         self.partial_file = os.path.join(
@@ -179,6 +186,42 @@ class Fetcher:
                 _("File already exsist. Download skiped..."),
                 verbose=True)
             return 0
+
+        if os.path.exists(self.partial_file):
+            os.remove(self.partial_file)
+
+        self.file_id = open(self.partial_file, "wb")
+
+        try:
+            self.fetcher = self._get_fetcher_mode()
+            if self.fetcher_mode != self.FETCH_MODE_WGET and not self.handler:
+                self.handler = UIHandler()
+                self.handler.start(
+                    self.archive_file,
+                    self.url.get_uri(),
+                    self.url.filename())
+            self.timeout = timeout
+            self.fetcher()
+        except Exception as x:
+            if x.args[0] == 33:
+                os.remove(self.partial_file)
+            if self.try_number != 3:
+                self.try_number = self.try_number + 1
+                ctx.ui.info(_("Download error: {}".format(x)), verbose=True)
+                fetch()
+            raise x
+            # raise FetchError("{}".format(x.args[1]))
+
+        if os.stat(self.partial_file).st_size == 0:
+            os.remove(self.partial_file)
+            ctx.ui.error(
+                FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
+
+        shutil.move(self.partial_file, self.archive_file)
+        return self.archive_file
+
+    def _get_pycurl(self):
+        import pycurl
         c = pycurl.Curl()
         c.protocol = self.url.scheme()
         c.setopt(c.URL, self.url.get_uri())
@@ -188,11 +231,10 @@ class Fetcher:
         c.setopt(pycurl.USERAGENT, (self.useragent).encode("utf-8"))
         c.setopt(pycurl.AUTOREFERER, 1)
         # This for waiting to establish connection
-        c.setopt(pycurl.CONNECTTIMEOUT, timeout)
+        c.setopt(pycurl.CONNECTTIMEOUT, self.timeout)
         # c.setopt(pycurl.TIMEOUT, timeout) # This for waiting to read data
         c.setopt(pycurl.MAXREDIRS, 50)
         c.setopt(pycurl.NOSIGNAL, True)
-
         if hasattr(pycurl, "AUTOREFERER"):
             c.setopt(pycurl.AUTOREFERER, 1)
 
@@ -209,62 +251,81 @@ class Fetcher:
 
         # Header
         # c.setopt(pycurl.HTTPHEADER, ["%s: %s" % header for header in self._get_http_headers().items()])
-
-        handler = UIHandler()
-        handler.start(
-            self.archive_file,
-            self.url.get_uri(),
-            self.url.filename())
-
-        if os.path.exists(self.partial_file):
-            if self._test_range_support():
-                file_id = open(self.partial_file, "ab")
-                c.setopt(c.RESUME_FROM, os.path.getsize(self.partial_file))
-                ctx.ui.info(
-                    _("Partial file detected. Download resuming..."),
-                    verbose=True)
-            else:
-                file_id = open(self.partial_file, "wb")
-
-        else:
-            file_id = open(self.partial_file, "wb")
-
         # Function sets
         c.setopt(pycurl.DEBUGFUNCTION, ctx.ui.debug)
         c.setopt(c.NOPROGRESS, False)
-        c.setopt(c.XFERINFOFUNCTION, handler.update)
-
+        c.setopt(c.XFERINFOFUNCTION, self.handler.update)
         c.setopt(pycurl.FOLLOWLOCATION, 1)
-        c.setopt(c.WRITEDATA, file_id)
+        c.setopt(c.WRITEDATA, self.file_id)
+        c.perform()
+        # This is not a bug. This is a new feature. ŞAka bir yana bu hata
+        ctx.ui.info("\n", noln=True)
+        # pycurl yüzünden kaynaklanıyor
+        self.file_id.close()
+        ctx.ui.info(_("RESPONSE: ") +
+                    str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
+        ctx.ui.info(_("Downloaded from: " +
+                      str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
+        c.close()
 
-        try:
-            c.perform()
-            # This is not a bug. This is a new feature. ŞAka bir yana bu hata
-            ctx.ui.info("\n", noln=True)
-            # pycurl yüzünden kaynaklanıyor
-            file_id.close()
-            ctx.ui.info(_("RESPONSE: ") +
-                        str(c.getinfo(c.RESPONSE_CODE)), verbose=True)
-            ctx.ui.info(_("Downloaded from: " +
-                          str(c.getinfo(c.EFFECTIVE_URL))), verbose=True)
-            c.close()
+    def _get_wget(self):
+        return os.system("timeout \"{}\" busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.timeout, self.useragent, self.url.get_uri(), self.partial_file))
 
-        except pycurl.error as x:
-            if x.args[0] == 33:
-                os.remove(self.partial_file)
-            if self.try_number != 3:
-                self.try_number = self.try_number + 1
-                ctx.ui.info(_("Download error: {}".format(x)), verbose=True)
-                fetch()
-            raise FetchError("{}".format(x.args[1]))
+    def _get_requests(self):
+        from requests import get
+        c = get(self.url.get_uri(), stream=True, timeout=self.timeout, headers={
+                'User-Agent': self.useragent,
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'SEC-FETCH-DEST': 'document',
+                'SEC-FETCH-MODE': 'navigate',
+                'SEC-FETCH-SITE': 'none',
+                'SEC-FETCH-USER': '?1',
+                'UPGRADE-INSECURE-REQUESTS': '1'
+                }
+                )
+        total = c.headers.get('content-length')
+        if not total:
+            self.file_id.write(res.content)
+        else:
+            down = 0
+            total = int(total)
+            chunk = int(ctx.config.values.general.fetcher_chunksize or 8196)
+            for data in c.iter_content(chunk_size=chunk):
+                self.file_id.write(data)
+                down += len(data)
+                self.handler.update(
+                    total, down, foreground_color="backgroundblue")
+        ctx.ui.info("\n", noln=True)
+        self.file_id.close()
 
-        if os.stat(self.partial_file).st_size == 0:
-            os.remove(self.partial_file)
-            ctx.ui.error(
-                FetchError(_('A problem occurred. Please check the archive address and/or permissions again.')))
+    def _get_fetcher_mode(self):
+        if not self.fetcher:
+            mode = int(ctx.config.values.general.fetcher_mode or 0)
+            self.fetcher_mode = mode
+            if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET]:
+                try:
+                    from pycurl import URL
+                    self.fetcher = self._get_pycurl
+                    self.fetcher_mode = self.FETCH_MODE_PYCURL
+                except ImportError:
+                    try:
+                        from requests import get
+                        self.fetcher = self._get_requests
+                        self.fetcher_mode = self.FETCH_MODE_REQUESTS
+                    except ImportError:
+                        self.fetcher = self._get_wget
+                        self.fetcher_mode = self.FETCH_MODE_WGET
 
-        shutil.move(self.partial_file, self.archive_file)
-        return self.archive_file
+            elif mode == 1:
+                self.fetcher = self._get_pycurl
+            elif mode == 2:
+                self.fetcher = self._get_requests
+            elif mode == 3:
+                self.fetcher = self._get_wget
+
+        return self.fetcher
 
     def _get_http_headers(self):
         headers = []
@@ -342,11 +403,11 @@ class Fetcher:
 
 
 # helper function
-def fetch_git(url, destdir="",branch="master"):
-
+def fetch_git(url, destdir="", branch="master"):
     if os.path.isdir(destdir):
         os.system("rm -rf \"{}\"".format(destdir))
-    status=os.system("git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url,destdir,branch))
+    status = os.system(
+        "git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url, destdir, branch))
     if status != 0:
         print(status)
         ctx.ui.error(
@@ -449,9 +510,9 @@ def fetch(packages=None, path=os.path.curdir):
                     uri.path()))
 
         if url.startswith("git://") or url.endswith(".git"):
-            branch="master"
-            fetch_git(url.replace("git://","https://"),path,branch)
+            branch = "master"
+            fetch_git(url.replace("git://", "https://"), path, branch)
         elif "://" in url:
             fetch_url(url, path, ctx.ui.Progress)
         else:
-            fetch_from_locale(url,path)
+            fetch_from_locale(url, path)

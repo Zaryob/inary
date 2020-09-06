@@ -23,7 +23,7 @@ import inary
 import inary.configfile
 import inary.context as ctx
 import inary.data
-import inary.errors
+from inary.errors import PostOpsError, NotfoundError, Error, FileError
 import inary.data
 import inary.db
 import inary.file
@@ -39,18 +39,6 @@ import inary.trigger
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-class Error(inary.errors.Error):
-    pass
-
-
-class PostOpsError(inary.errors.Error):
-    pass
-
-
-class NotfoundError(inary.errors.Error):
-    pass
 
 
 # single package operations
@@ -142,7 +130,7 @@ class Install(AtomicOperation):
             if not cached_file:
                 downloaded_file = install_op.package.filepath
                 if util.sha1_file(downloaded_file) != pkg_hash:
-                    raise inary.errors.Error(
+                    raise Error(
                         _("Download Error: Package does not match the repository package."))
 
             return install_op
@@ -188,7 +176,8 @@ class Install(AtomicOperation):
             package=self.pkginfo,
             files=self.files)
 
-        ctx.ui.info(_("Checking package operation availability..."),verbose=True)
+        ctx.ui.info(
+            _("Checking package operation availability..."), verbose=True)
         self.ask_reinstall = ask_reinstall
         ctx.ui.status(_("Checking requirements"), push_screen=False)
         self.check_requirements()
@@ -332,7 +321,6 @@ class Install(AtomicOperation):
             self.old_pkginfo = self.installdb.get_info(pkg.name)
             self.old_path = self.installdb.pkg_dir(
                 pkg.name, iversion_s, irelease_s)
-
 
     def preinstall(self):
         if 'postOps' in self.metadata.package.isA:
@@ -487,7 +475,8 @@ class Install(AtomicOperation):
 
                 else:
 
-                    remove_permanent= not ctx.config.get_option("preserve_permanent")
+                    remove_permanent = not ctx.config.get_option(
+                        "preserve_permanent")
 
                     Remove.remove_file(
                         old_file,
@@ -527,22 +516,31 @@ class Install(AtomicOperation):
 
     def store_postops(self):
         """stores postops script temporarly"""
-        ctx.ui.info(_("Precaching postoperations.py file"),verbose=True)
+        ctx.ui.info(_("Precaching postoperations.py file"), verbose=True)
 
         if 'postOps' in self.metadata.package.isA:
-            self.package.extract_file_synced(
-                ctx.const.postops, ctx.config.tmp_dir())
+            for postops in ctx.const.postops:
+                try:
+                    self.package.extract_file_synced(
+                        postops, ctx.config.tmp_dir())
+                except:
+                    pass
 
     def store_inary_files(self):
         """put files.xml, metadata.xml, somewhere in the file system. We'll need these in future..."""
-        ctx.ui.info(_("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"),verbose=True)
+        ctx.ui.info(
+            _("Storing inary files (files.xml, metadata.xml and whether postoperations.py)"), verbose=True)
         self.package.extract_file_synced(
             ctx.const.files_xml, self.package.pkg_dir())
         self.package.extract_file_synced(
             ctx.const.metadata_xml, self.package.pkg_dir())
         if 'postOps' in self.metadata.package.isA:
-            self.package.extract_file_synced(
-                ctx.const.postops, self.package.pkg_dir())
+            for postops in ctx.const.postops:
+                try:
+                    self.package.extract_file_synced(
+                        postops, ctx.config.tmp_dir())
+                except:
+                    pass
 
     def update_databases(self):
         """update databases"""
@@ -580,6 +578,7 @@ class Install(AtomicOperation):
 
         if self.operation == (UPGRADE or DOWNGRADE or REINSTALL):
             util.clean_dir(self.old_path)
+
 
 def install_single(pkg, upgrade=False):
     """install a single package from URI or ID"""
@@ -628,7 +627,7 @@ class Remove(AtomicOperation):
         self.trigger = inary.trigger.Trigger()
         try:
             self.files = self.installdb.get_files(self.package_name)
-        except inary.errors.Error as e:
+        except Error as e:
             # for some reason file was deleted, we still allow removes!
             ctx.ui.error(str(e))
             ctx.ui.warning(
@@ -713,7 +712,7 @@ class Remove(AtomicOperation):
                     # way
                     if ctx.config.get_option("purge"):
                         os.unlink(fpath)
-            except util.FileError:
+            except FileError:
                 pass
         else:
             if os.path.isfile(fpath) or os.path.islink(fpath):
@@ -729,7 +728,7 @@ class Remove(AtomicOperation):
 
         # remove emptied directories
         dpath = os.path.dirname(fpath)
-        while dpath != '/' and not os.listdir(dpath):
+        while dpath != '/' and os.path.exists(dpath) and not os.listdir(dpath):
             os.rmdir(dpath)
             dpath = os.path.dirname(dpath)
 

@@ -65,7 +65,7 @@ def t(name, path, command):
             if status != 0:
                 sys.stdout.write("\r\x1b[K\x1b[31;1m    " +
                                  _("[!] Triggering end with ") +
-                                 "\x1b[;0m{} {}".format(status,name))
+                                 "\x1b[;0m{} {}".format(status, name))
             else:
                 setltime(name, getmtime(path))
                 sys.stdout.write("\r\x1b[K\x1b[32;1m    " +
@@ -112,8 +112,9 @@ def proceed(force=False):
       "create-cracklib-dict /usr/share/cracklib/*")
     sys.stdout.write("\n")
     if ctx.config.values.general.fs_sync:
-        ctx.ui.info(_("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
+        ctx.ui.info(
+            _("[-] Syncing filesystem to restrain filesystem corruptions."), noln=True)
         util.fs_sync()
         sys.stdout.write("\r\x1b[K\x1b[32;1m" +
                          _("[+] Synced filesystem" +
-                         "\x1b[;0m\n"))
+                           "\x1b[;0m\n"))

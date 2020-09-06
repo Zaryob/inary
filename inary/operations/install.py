@@ -63,7 +63,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(
             _('Checking dependencies for install...'),
             color="brightpurple")
-        order = plan_install_pkg_names(A)
+        order = plan_install_pkg_names(A, reinstall)
     else:
         order = list(A)
     componentdb = inary.db.componentdb.ComponentDB()
@@ -98,7 +98,10 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     paths = []
     extra_paths = {}
-    lndig = math.floor(math.log(len(order), 10)) + 1
+    try:
+        lndig = math.floor(math.log(len(order), 10)) + 1
+    except ValueError:
+        lndig = 1
     for x in order:
         ctx.ui.info(
             _("Downloading") + str(" [ {:>" + str(lndig) + "} / {} ] => [{}]").format(order.index(x) + 1, len(order),
@@ -167,16 +170,15 @@ def install_pkg_files(package_URIs, reinstall=False):
 
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
+
     if not reinstall:
         for x in package_URIs:
-            if not x.endswith(ctx.const.delta_package_suffix) and x.endswith(
-                    ctx.const.package_suffix):
-                pkg_name = util.parse_package_name_get_name(
-                    os.path.basename(x))
-                if installdb.has_package(pkg_name):
-                    already_installed.add(pkg_name)
-                else:
-                    tobe_installed.append(x)
+            pkg_name = util.parse_package_name_get_name(
+                os.path.basename(x))
+            if installdb.has_package(pkg_name):
+                already_installed.add(pkg_name)
+            else:
+                tobe_installed.append(x)
         if already_installed:
             ctx.ui.warning(_("The following package(s) are already installed "
                              "and are not going to be installed again:"))
@@ -208,7 +210,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     if not ctx.get_option('ignore_check'):
         for x in list(d_t.keys()):
             pkg = d_t[x]
-            if pkg.distributionRelease != ctx.config.values.general.distribution_release:
+            if pkg.distributionRelease > ctx.config.values.general.distribution_release:
                 raise Exception(_('Package \"{0}\" is not compatible with your distribution release \'{1}\' \'{2}\'.').format(
                     x, ctx.config.values.general.distribution,
                     ctx.config.values.general.distribution_release))
@@ -239,7 +241,7 @@ def install_pkg_files(package_URIs, reinstall=False):
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo() and not ctx.config.get_option('ignore_satisfy'):
             raise Exception(
-                _('External dependencies not satisfied: \"{}\", \"{}\"').format(dep,name))
+                _('External dependencies not satisfied: \"{}\", \"{}\"').format(dep, name))
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -249,7 +251,7 @@ def install_pkg_files(package_URIs, reinstall=False):
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Would you like to continue?')):
             raise Exception(_('External dependencies not satisfied.'))
-        install_pkg_names(extra_packages, reinstall=True, extra=True)
+        install_pkg_names(extra_packages, reinstall=False, extra=False)
 
     class PackageDB:
         @staticmethod
@@ -257,6 +259,7 @@ def install_pkg_files(package_URIs, reinstall=False):
             return d_t[str(key)]
 
     packagedb = PackageDB()
+    installdb = inary.db.installdb.InstallDB()
 
     A = list(d_t.keys())
 
@@ -267,25 +270,23 @@ def install_pkg_files(package_URIs, reinstall=False):
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    G_f = pgraph.PGraph(packagedb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
+    G_f.reinstall = reinstall
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
     for x in A:
-        G_f.add_package(x)
+        G_f.packages.append(x)
+    print(tobe_installed)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B:
             pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                if dep.satisfied_by_dict_repo(d_t):
-                    if dep.package not in G_f.vertices():
-                        Bp.add(str(dep.package))
-                    G_f.add_dep(x, dep)
+            G_f.add_package(x)
+            # for dep in pkg.runtimeDependencies():
+            #   G_f.add_package(dep)
         B = Bp
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     if not ctx.get_option('ignore_package_conflicts'):
         conflicts = operations.helper.check_conflicts(order, packagedb)
@@ -305,12 +306,14 @@ def install_pkg_files(package_URIs, reinstall=False):
     return True
 
 
-def plan_install_pkg_names(A):
+def plan_install_pkg_names(A, reinstall=False):
     # try to construct a inary graph of packages to
     # install / reinstall
     packagedb = inary.db.packagedb.PackageDB()
+    installdb = inary.db.installdb.InstallDB()
 
-    G_f = pgraph.PGraph(packagedb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
+    G_f.reinstall = reinstall
 
     # find the "install closure" graph of G_f by package
     # set A using packagedb
@@ -321,22 +324,7 @@ def plan_install_pkg_names(A):
     while len(B) > 0:
         Bp = set()
         for x in B:
-            pkg = packagedb.get_package(x)
-            for dep in pkg.runtimeDependencies():
-                ctx.ui.info(
-                    _(' -> checking {}').format(str(dep)), verbose=True)
-                # we don't deal with already *satisfied* dependencies
-                if not dep.satisfied_by_installed():
-                    if not dep.satisfied_by_repo(
-                            packagedb=packagedb) and not ctx.config.get_option('ignore_satisfy'):
-                        if dep in not_satisfied:
-                            not_satisfied[dep] += [pkg.name]
-                        else:
-                            not_satisfied[dep] = [pkg.name]
-                        pass
-                    if dep.package not in G_f.vertices():
-                        Bp.add(str(dep.package))
-                    G_f.add_dep(x, dep)
+            G_f.add_package(x)
 
             if ctx.config.values.general.allow_docs:
                 dep = x + ctx.const.doc_package_end
@@ -365,8 +353,6 @@ def plan_install_pkg_names(A):
             msg += (_(' -> \"{0}\" dependency(s) of package \"{1}\" is not satisfied.\n').format(
                 not_satisfied[ns], ns))
         raise Exception(msg)
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     order.reverse()
     return order

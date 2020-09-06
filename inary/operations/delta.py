@@ -81,7 +81,11 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         # add postops files to package
         os.chdir(specdir)
-        delta_pkg.add_to_package(ctx.const.postops)
+        for postops in ctx.const.postops:
+            try:
+                delta_pkg.add_to_package(ctx.const.postops)
+            except:
+                pass
 
         # add xmls and files
         os.chdir(new_pkg_path)

@@ -22,7 +22,8 @@ import re
 import sys
 
 # Inary Modules
-from inary.util import remove_prefix, uncompress
+from inary.util.files import uncompress
+from inary.util.strings import remove_prefix
 
 # ActionsAPI Modules
 import inary.actionsapi
@@ -34,21 +35,6 @@ import inary.actionsapi.get as get
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-# Error Classes
-class FileError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
-
-
-class ArgumentError(inary.actionsapi.Error):
-    def __init__(self, value=''):
-        inary.actionsapi.Error.__init__(self, value)
-        self.value = value
-        ctx.ui.error("[InaryTools]: " + value)
 
 
 # Tool functions

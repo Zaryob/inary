@@ -36,12 +36,12 @@ MIMEFILE_DIR = "/usr/share/mime/packages"
 TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
 #config file
-if not os.path.isfile(".config"):
-    print("No config file found. You must run ./configure first.")
-    exit(127)
-cfg=open(".config","r").readlines()
+if os.path.isfile(".config"):
+    cfg=open(".config","r").readlines()
 
 def getConfig(name=""):
+    if not os.path.isfile(".config"):
+        return True
     for line in cfg:
         if name in line:
             return "y" in line.split("=")[1]
@@ -119,8 +119,7 @@ class BuildPo(build):
 class Install(install):
     def run(self):
         install.run(self)
-        if getConfig("NLS_SUPPORT"):
-            self.installi18n()
+        self.installi18n()
         self.generateConfigFile()
 
     def finalize_options(self):
@@ -131,6 +130,8 @@ class Install(install):
         install.finalize_options(self)
 
     def installi18n(self):
+        if not getConfig("NLS_SUPPORT"):
+            return
         for name in os.listdir('po'):
             if not name.endswith('.po'):
                 continue
@@ -209,6 +210,7 @@ setup(name="inary",
                 'inary.data',
                 'inary.db',
                 'inary.libraries',
+                'inary.util',
                 'inary.operations',
                 'inary.sxml'],
       cmdclass={'build': Build,
@@ -216,7 +218,7 @@ setup(name="inary",
                 'install': Install,
                 'test': Test},
       data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf"]),
-                  (MIMEFILE_DIR, ["build/inary.xml"])],
+                  (MIMEFILE_DIR, ["build/inary.xml"] if getConfig("NLS_SUPPORT") else [])],
       scripts=(['inary-cli',
                'scripts/pspec2po',
                'scripts/revdep-rebuild',

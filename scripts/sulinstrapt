@@ -1,6 +1,6 @@
 #!/bin/sh
 #sulinstrapt betiği ile sulinos chroot oluşturabilirsiniz veya diskinize kurulum yapabilirsiniz
-
+set -e
 if [ "$1" == "" ] || [ "$1" == "-*" ]
 then
 	echo "Usage: sulinstrapt [directory]"
@@ -21,8 +21,8 @@ then
   echo "$sulin is a file. You must delete or move."
   exit 1
 fi
-inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml -y -D$sulin
-inary ur -y -D$sulin
+inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml.xz -y -D$sulin || true
+inary ur -y -D$sulin || true
 inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
 inary it -c system.base -y --ignore-configure -D$sulin
 if echo $2 | grep "^-" &>/dev/null ; then
@@ -32,10 +32,12 @@ if echo $2 | grep "^-" &>/dev/null ; then
 	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
 	echo $2 | grep "a" && inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
 fi
-for i in /dev /sys /proc /run
-do
-	mkdir -p $sulin/$i &>/dev/null
-	mount --bind $i $sulin/$i
-done
+if [ ! -d /proc/sys/kernel ] ; then
+	for i in /dev /sys /proc /run
+	do
+		mkdir -p $sulin/$i &>/dev/null
+		mount --bind $i $sulin/$i
+	done
+fi
 chroot $sulin inary cp baselayout
 chroot $sulin inary cp

@@ -33,6 +33,7 @@ Usage: blame <package> ... <package>
     def __init__(self, args=None):
         super(Blame, self).__init__(args)
         self.installdb = inary.db.installdb.InstallDB()
+        self.packagedb = inary.db.packagedb.PackageDB()
 
     name = ("blame", "bl")
 
@@ -56,9 +57,9 @@ Usage: blame <package> ... <package>
             return
 
         for package in self.args:
-            if self.installdb.has_package(package):
-                pkg = self.installdb.get_package(package)
-                release = ctx.get_option('release')
+            pkg = self.packagedb.get_package(package)
+            release = ctx.get_option('release')
+            if not self.installdb.has_package(package):
                 if not release and not ctx.get_option('all'):
                     self.print_package_info(pkg)
                 elif ctx.get_option('all'):
@@ -69,11 +70,27 @@ Usage: blame <package> ... <package>
                         if int(update.release) == release:
                             self.print_package_info(pkg, hno)
                             return
+            else:
+                installed_pkg = self.installdb.get_package(package)
+                if not release and not ctx.get_option('all'):
+                    self.print_package_info(pkg,
+                                            installed=(pkg.history[0].release == installed_pkg.history[0].release))
+                elif ctx.get_option('all'):
+                    for hno, update in enumerate(pkg.history):
+                        self.print_package_info(pkg, hno,
+                                                (installed_pkg.history[hno] and installed_pkg.history[0].release == installed_pkg.history[hno].release))
+                else:
+                    for hno, update in enumerate(pkg.history):
+                        if int(update.release) == release:
+                            self.print_package_info(pkg, hno,
+                                                    (installed_pkg.history[hno] and installed_pkg.history[0].release == installed_pkg.history[hno].release))
+                            return
 
     @staticmethod
-    def print_package_info(package, hno=0):
-        s = _('Name: {0}, version: {1}, release: {2}\n').format(
+    def print_package_info(package, hno=0, installed=False):
+        s = _('Name: {0}, version: {1}, release: {2}').format(
             package.name, package.history[hno].version, package.history[hno].release)
+        s += ' ({})\n'.format(_('Installed')) if installed else '\n'
         s += _('Package Maintainer: {0} <{1}>\n').format(str(package.source.packager.name),
                                                          package.source.packager.email)
         s += _('Release Updater: {0.name} <{0.email}>\n').format(

@@ -34,7 +34,6 @@ __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
 
-
 def can_access_file(filePath):
     """test the existence of file"""
     return os.access(filePath, os.F_OK)
@@ -258,10 +257,10 @@ def touch(filePath):
 
 def cd(directoryName=''):
     """change directory"""
-    current = os.getcwd()
     if directoryName:
         os.chdir(directoryName)
     else:
+        current = os.getcwd()
         os.chdir(os.path.dirname(current))
 
 
@@ -275,7 +274,7 @@ def ls(source):
 
 def export(key, value):
     """export environ variable"""
-    os.environ[key] = value
+    os.environ[str(key)] = str(value)
 
 
 def isLink(filePath):

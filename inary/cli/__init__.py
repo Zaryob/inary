@@ -20,7 +20,7 @@ import locale
 
 # Inary Modules
 import inary.ui
-import inary.errors
+from inary.errors import Error
 import inary.util as util
 import inary.context as ctx
 
@@ -29,16 +29,9 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
-class Error(inary.errors.Error):
-    pass
-
-
-class Exception(inary.errors.Exception):
-    pass
-
-
 # in old releases used this printu function
+
+
 def printu(obj, err=False):
     if not isinstance(obj, str):
         obj = str(obj)
@@ -200,8 +193,10 @@ class CLI(inary.ui.UI):
 
         elif ka['operation'] == "fetching":
             if not ctx.get_option("no_color"):
-                complated_background = 'backgroundgreen'
-                queried_background = 'backgroundyellow'
+                complated_background = (
+                    ka['foregroundcolor'] or 'backgroundgreen')
+                queried_background = (
+                    ka['backgroundcolor'] or 'backgroundyellow')
             else:
                 complated_background = queried_background = "default"
 

@@ -273,14 +273,16 @@ def upgrade(A=None, repo=None):
         install_op = atomicoperations.Install(path)
         install_op.postinstall()
 
+
 def plan_upgrade(A, force_replaced=True, replaces=None):
     # FIXME: remove force_replaced
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    packagedb = inary.db.packagedb.PackageDB()
+    G_f = pgraph.PGraph()  # construct G_f
 
-    G_f = pgraph.PGraph(packagedb)  # construct G_f
+    installdb = G_f.get_installdb()
+    packagedb = G_f.get_packagedb()
 
     A = set(A)
 
@@ -298,30 +300,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # set A using packagedb
     for x in A:
         G_f.add_package(x)
-
-    installdb = inary.db.installdb.InstallDB()
-
-    def add_runtime_deps(pkg, Bp):
-        for dep in pkg.runtimeDependencies():
-            # add packages that can be upgraded
-            if installdb.has_package(
-                    dep.package) and dep.satisfied_by_installed():
-                continue
-
-            if dep.satisfied_by_repo():
-                if dep.package not in G_f.vertices():
-                    Bp.add(str(dep.package))
-
-                # Always add the dependency info although the dependant
-                # package is already a member of this graph. Upgrade order
-                # might change if the dependency info differs from the
-                # previous ones.
-                G_f.add_dep(pkg.name, dep)
-            else:
-                ctx.ui.error(
-                    _('Dependency \"{0}\" of \"{1}\" cannot be satisfied.').format(
-                        dep, pkg.name))
-                raise Exception(_("Upgrade is not possible."))
 
     def add_resolvable_conflicts(pkg, Bp):
         """Try to resolve conflicts by upgrading
@@ -389,9 +367,8 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
         Bp = set()
 
         for x in A:
+            G_f.add_package(x)
             pkg = packagedb.get_package(x)
-
-            add_runtime_deps(pkg, Bp)
             add_resolvable_conflicts(pkg, Bp)
 
             if installdb.has_package(x):
@@ -399,9 +376,6 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
                 add_needed_revdeps(pkg, Bp)
 
         A = Bp
-
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
 
     order = G_f.topological_sort()
     order.reverse()
@@ -470,7 +444,12 @@ def upgrade_base(A=None):
     return set()
 
 
-def is_upgradable(name, installdb, packagedb):
+def is_upgradable(name, installdb=None, packagedb=None):
+    if not installdb:
+        installdb = inary.db.installdb.InstallDB()
+
+    if not packagedb:
+        packagedb = inary.db.packagedb.PackageDB()
 
     if not installdb.has_package(name):
         return False

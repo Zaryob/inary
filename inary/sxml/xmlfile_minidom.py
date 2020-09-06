@@ -26,7 +26,7 @@
 # Standart System Library
 import io
 
-# MiniDOM Library 
+# MiniDOM Library
 # in order to lack possibilty of Ciksemel
 from xml.parsers.expat import ExpatError
 import xml.dom.minidom as minidom

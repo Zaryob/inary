@@ -19,6 +19,7 @@ import inary.version
 # AutoXML Library
 import inary.sxml.autoxml as autoxml
 
+
 class Relation(metaclass=autoxml.autoxml):
     s_Package = [autoxml.String, autoxml.mandatory]
     a_version = [autoxml.String, autoxml.optional]

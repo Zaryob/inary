@@ -38,7 +38,6 @@ import inary.cli.install
 import inary.cli.info
 import inary.cli.init
 import inary.cli.index
-import inary.cli.graph
 import inary.cli.fetch
 import inary.cli.emergeup
 import inary.cli.emerge
@@ -47,12 +46,13 @@ import inary.cli.deletecache
 import inary.cli.configurepending
 import inary.cli.configmanager
 import inary.cli.check
+import inary.cli.checkrelation
 import inary.cli.build
 import inary.cli.blame
 import inary.cli.addrepo
 import inary.cli.command as command
 import inary.cli
-import inary.errors
+from inary.errors import ParserError
 import inary
 import optparse
 import sys
@@ -62,13 +62,6 @@ import inary.cli.help
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
-
-# FIXME: why does this has to be imported last
-
-
-class ParserError(inary.errors.Exception):
-    pass
 
 
 class PreParser(optparse.OptionParser):

@@ -14,6 +14,7 @@
 import inary.context as ctx
 import inary.signalhandler
 
+
 def set_userinterface(ui):
     """
     Set the user interface where the status information will be send

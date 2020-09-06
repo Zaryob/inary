@@ -32,7 +32,7 @@ _ = __trans.gettext
 
 
 @util.locked
-def remove(A, ignore_dep=False, ignore_safety=False):
+def remove(A, ignore_dep=False, ignore_safety=False, confirm=False):
     """
     Removes the given packages from the system
     @param A: list of package names -> list_of_strings
@@ -98,7 +98,7 @@ def remove(A, ignore_dep=False, ignore_safety=False):
         color='cyan')
     del removal_size, symbol
 
-    if len(order) > len(A_0):
+    if confirm or len(order) > len(A_0):
         if not ctx.ui.confirm(_('Would you like to continue?')):
             ctx.ui.warning(_('Package removal declined.'))
             return False
@@ -129,52 +129,39 @@ def plan_remove(A):
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
 
-    G_f = pgraph.PGraph(installdb)  # construct G_f
+    G_f = pgraph.PGraph(packagedb, installdb)  # construct G_f
 
     # find the (install closure) graph of G_f by package
     # set A using packagedb
     for x in A:
-        G_f.add_package(x)
+        G_f.add_package_revdep(x)
     B = A
     while len(B) > 0:
         Bp = set()
         for x in B:
-            rev_deps = installdb.get_rev_deps(x)
-            for (rev_dep, depinfo) in rev_deps:
-                # we don't deal with uninstalled rev deps
-                # and unsatisfied dependencies (this is important, too)
-                # satisfied_by_any_installed_other_than is for AnyDependency
-                if installdb.has_package(rev_dep) and \
-                        depinfo.satisfied_by_installed() and not \
-                        depinfo.satisfied_by_any_installed_other_than(x):
-                    if rev_dep not in G_f.vertices():
-                        Bp.add(rev_dep)
-                        G_f.add_plain_dep(rev_dep, x)
+            G_f.add_package_revdep(x)
+            #IDEA: Optimize
+            if ctx.config.values.general.allow_docs:
+                doc_package = x + ctx.const.doc_package_end
+                if packagedb.has_package(doc_package):
+                    Bp.add(doc_package)
 
-                    #IDEA: Optimize
-                    if ctx.config.values.general.allow_docs:
-                        doc_package = x + ctx.const.doc_package_end
-                        if packagedb.has_package(doc_package):
-                            Bp.add(doc_package)
+            if ctx.config.values.general.allow_pages:
+                info_package = x + ctx.const.info_package_end
+                if packagedb.has_package(info_package):
+                    Bp.add(info_package)
 
-                    if ctx.config.values.general.allow_pages:
-                        info_package = x + ctx.const.info_package_end
-                        if packagedb.has_package(info_package):
-                            Bp.add(info_package)
+            if ctx.config.values.general.allow_dbginfo:
+                dbg_package = x + ctx.const.debug_name_suffix
+                if packagedb.has_package(dbg_package):
+                    Bp.add(dbg_package)
 
-                    if ctx.config.values.general.allow_dbginfo:
-                        dbg_package = x + ctx.const.debug_name_suffix
-                        if packagedb.has_package(dbg_package):
-                            Bp.add(dbg_package)
-
-                    if ctx.config.values.general.allow_static:
-                        static_package = x + ctx.const.static_name_suffix
-                        if packagedb.has_package(static_package):
-                            Bp.add(static_package)
+            if ctx.config.values.general.allow_static:
+                static_package = x + ctx.const.static_name_suffix
+                if packagedb.has_package(static_package):
+                    Bp.add(static_package)
 
         B = Bp
-    if ctx.config.get_option('debug'):
-        G_f.write_graphviz(sys.stdout)
     order = G_f.topological_sort()
     return order
 

@@ -42,8 +42,10 @@ _ = __trans.gettext
 class InstallDBError(inary.errors.Error):
     pass
 
+
 class CorruptedPackageError(inary.errors.Error):
     pass
+
 
 class InstallInfo:
     state_map = {'i': _('installed'), 'ip': _('installed-pending')}
@@ -84,40 +86,41 @@ class InstallDB(lazydb.LazyDB):
         # self.init()
 
     def init(self):
-        self.__generate_inode_cache() # TODO: Needs look it up.
+        self.__generate_inode_cache()  # TODO: Needs look it up.
         self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
-
 
     def __generate_inode_cache(self):
         # This made to fix issue
         # https://stackoverflow.com/questions/26178038/python-slow-read-performance-issue
-        #Clear old inode cache TODO: drop cache need option
-        #open("/proc/sys/vm/drop_caches","w").write("2")
+        # Clear old inode cache TODO: drop cache need option
+        # open("/proc/sys/vm/drop_caches","w").write("2")
         for package in self.list_installed():
             ie_path = os.path.join(
                 self.package_path(package),
                 ctx.const.metadata_xml)
-            ctx.ui.info(_("Checking package directory of \"{}\" package").format(package), verbose=True)
+            ctx.ui.info(_("Checking package directory of \"{}\" package").format(
+                package), verbose=True)
             if os.path.isfile(ie_path):
                 fd = os.open(ie_path, os.O_RDONLY)
-                itag=os.read(fd, 7)
+                itag = os.read(fd, 7)
                 os.close(fd)
 
                 if itag == b'<INARY>' or b'<?xml v':
                     pass
                 else:
                     ctx.ui.warning(_("File content of metadata.xml can be corrupted.\n"
-                                   "Probably filesystem crashed. \n"
-                                   "Check your installation of \"{0}\" package and filesystem.").format(package))
-                    raise CorruptedPackageError(_("\"{}\" corrupted.").format(package))
+                                     "Probably filesystem crashed. \n"
+                                     "Check your installation of \"{0}\" package and filesystem.").format(package))
+                    raise CorruptedPackageError(
+                        _("\"{}\" corrupted.").format(package))
 
             else:
                 ctx.ui.warning(_("Unhandled corruption on \"{0}\" package metadata.\n"
-                               "There is not any metadata.xml file for {0} package.\n"
-                               "Please check installation of \"{0}\" package").format(package))
-                raise CorruptedPackageError(_("\"{}\" corrupted.").format(package))
-
+                                 "There is not any metadata.xml file for {0} package.\n"
+                                 "Please check installation of \"{0}\" package").format(package))
+                raise CorruptedPackageError(
+                    _("\"{}\" corrupted.").format(package))
 
     @staticmethod
     def __generate_installed_extra():

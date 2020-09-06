@@ -178,7 +178,7 @@ def build(debugSymbols=False):
 
 def install(distro=""):
     if not distro:
-        distro="linux"
+        distro = "linux"
     suffix = __getSuffix()
 
     # Dump kernel version under /etc/kernel
@@ -215,13 +215,14 @@ def install(distro=""):
 
     # Create extra/ and updates/ subdirectories
     for _dir in ("extra", "updates"):
-        inarytools.dodir("/lib/modules/{0}-{1}/{2}".format(suffix, distro, _dir))
+        inarytools.dodir(
+            "/lib/modules/{0}-{1}/{2}".format(suffix, distro, _dir))
 
 
 def installModuleHeaders(extraHeaders=None, distro=""):
     if not distro:
-        distro="linux"
-        
+        distro = "linux"
+
     """ Install the files needed to build out-of-tree kernel modules. """
     extras = ["drivers/md/",
               "net/mac80211",
@@ -238,7 +239,8 @@ def installModuleHeaders(extraHeaders=None, distro=""):
     wanted = ["Makefile*", "Kconfig*", "Kbuild*", "*.sh", "*.pl", "*.lds"]
 
     suffix = __getSuffix()
-    headersDirectoryName = "usr/src/linux-headers-{0}-{1}".format(suffix, distro)
+    headersDirectoryName = "usr/src/linux-headers-{0}-{1}".format(
+        suffix, distro)
 
     # Get the destination directory for header installation
     destination = os.path.join(get.installDIR(), headersDirectoryName)
@@ -287,7 +289,9 @@ def installModuleHeaders(extraHeaders=None, distro=""):
     # Settle the correct build symlink to this headers
     inarytools.dosym("/{}".format(headersDirectoryName),
                      "/lib/modules/{}-{}/build".format(suffix, distro))
-    inarytools.dosym("build", "/lib/modules/{}-{}/source".format(suffix, distro))
+    inarytools.dosym(
+        "build", "/lib/modules/{}-{}/source".format(suffix, distro))
+
 
 def prepareLibcHeaders():
     # make defconfig and install the
@@ -297,6 +301,7 @@ def prepareLibcHeaders():
 
     autotools.make("mrproper")
     autotools.make("{} allnoconfig".format(make_cmd))
+
 
 def installLibcHeaders(excludes=None):
     headers_tmp = os.path.join(get.installDIR(), 'tmp-headers')
@@ -317,11 +322,11 @@ def installLibcHeaders(excludes=None):
     # Workaround ends here ...
     oldwd = os.getcwd()
 
-    shelltools.system("find {} -name ..install.cmd -or -name .install | xargs rm -vf".format(headers_tmp))
+    shelltools.system(
+        "find {} -name ..install.cmd -or -name .install | xargs rm -vf".format(headers_tmp))
     shelltools.cd(os.path.join(headers_tmp, "install", "include"))
     shelltools.system("find . -name '.' -o -name '.*' -prune -o -print | \
                        cpio -pVd --preserve-modification-time {}".format(headers_dir))
-
 
     # Remove possible excludes given by actions.py
     if excludes:

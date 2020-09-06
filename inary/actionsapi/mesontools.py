@@ -62,11 +62,13 @@ def fixpc():
         for f in ls("{}/*.pc".format(path)):
             dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
 
-def configure(parameters="",type="meson"):
+
+def configure(parameters="", type="meson"):
     if type == "meson":
         meson_configure(parameters)
     else:
         cmake_configure(parameters)
+
 
 def meson_configure(parameters=""):
     if can_access_file('meson.build'):
@@ -121,6 +123,7 @@ def cmake_configure(parameters=""):
 def make(parameters=""):
     ninja_build(parameters)
 
+
 def ninja_build(parameters=""):
     if system("ninja {} {} -C inaryPackageBuild".format(get.makeJOBS(), parameters)):
         raise NinjaBuildError(_("Build failed."))
@@ -129,8 +132,10 @@ def ninja_build(parameters=""):
         if isDirectory("{}/emul32".format(get.installDIR())):
             removeDir("/emul32")
 
+
 def install(parameters=""):
     ninja_install(parameters)
+
 
 def ninja_install(parameters=""):
     insdir = util.join_path(
@@ -148,8 +153,10 @@ def ninja_install(parameters=""):
                  "{}/usr/".format(get.installDIR()))
         removeDir("/emul32")
 
+
 def check():
     ninja_check()
+
 
 def ninja_check():
     if system('ninja test {} -C inaryPackageBuild'.format(get.makeJOBS())):
