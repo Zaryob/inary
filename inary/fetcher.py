@@ -287,7 +287,7 @@ class Fetcher:
                 )
         total = c.headers.get('content-length')
         if not total:
-            self.file_id.write(res.content)
+            self.file_id.write(c.content)
         else:
             down = 0
             total = int(total)
