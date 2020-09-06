@@ -25,6 +25,7 @@ import lzma
 import shutil
 
 # INARY Modules
+from inary.errors import Error
 import inary.uri
 import inary.util
 import inary.fetcher
