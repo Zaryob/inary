@@ -13,6 +13,7 @@
 # Please read the COPYING file.
 #
 
+import inary
 import os
 import shutil
 import glob
@@ -27,7 +28,6 @@ from distutils.command.install import install
 from distutils.sysconfig import get_python_lib
 
 sys.path.insert(0, '.')
-import inary
 
 IN_FILES = ("inary.xml.in",)
 PROJECT = "inary"
@@ -35,9 +35,10 @@ CONFIG_DIR = "/etc/inary"
 MIMEFILE_DIR = "/usr/share/mime/packages"
 TMPFILES_DIR = "/usr/lib/tmpfiles.d"
 
-#config file
+# config file
 if os.path.isfile(".config"):
-    cfg=open(".config","r").readlines()
+    cfg = open(".config", "r").readlines()
+
 
 def getConfig(name=""):
     if not os.path.isfile(".config"):
@@ -51,7 +52,8 @@ def getConfig(name=""):
 class Build(build):
     def run(self):
         # Preparing configure file
-        shutil.copy("config/inary.conf-{}".format(os.uname().machine), "config/inary.conf")
+        shutil.copy("config/inary.conf-{}".format(os.uname().machine),
+                    "config/inary.conf")
 
         build.run(self)
 
@@ -59,7 +61,8 @@ class Build(build):
         if getConfig("NLS_SUPPORT"):
             for in_file in IN_FILES:
                 name, ext = os.path.splitext(in_file)
-                self.spawn(["intltool-merge", "-x", "po", in_file, os.path.join(self.build_base, name)])
+                self.spawn(["intltool-merge", "-x", "po", in_file,
+                            os.path.join(self.build_base, name)])
 
 
 class BuildPo(build):
@@ -101,7 +104,7 @@ class BuildPo(build):
 
         # Update PO files
         # FIXME: enable this block
-        #for item in glob.glob1("po", "*.po"):
+        # for item in glob.glob1("po", "*.po"):
         #   print("Updating .. ", item)
         #   os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
@@ -140,10 +143,12 @@ class Install(install):
             os.system("msgfmt po/{0}.po -o po/{0}.mo".format(lang))
             if not self.root:
                 self.root = "/"
-            destpath = os.path.join(self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
+            destpath = os.path.join(
+                self.root, "usr/share/locale/{}/LC_MESSAGES".format(lang))
             if not os.path.exists(destpath):
                 os.makedirs(destpath)
-            shutil.copy("po/{}.mo".format(lang), os.path.join(destpath, "inary.mo"))
+            shutil.copy("po/{}.mo".format(lang),
+                        os.path.join(destpath, "inary.mo"))
 
     def generateConfigFile(self):
         import inary.configfile
@@ -158,14 +163,15 @@ class Install(install):
         inaryconf = open(confFile, "w")
 
         klasses = inspect.getmembers(inary.configfile, inspect.isclass)
-        defaults = [klass for klass in klasses if klass[0].endswith('Defaults')]
+        defaults = [
+            klass for klass in klasses if klass[0].endswith('Defaults')]
 
         for d in defaults:
             section_name = d[0][:-len('Defaults')].lower()
             inaryconf.write("[{}]\n".format(section_name))
 
-            section_members = [m for m in inspect.getmembers(d[1]) \
-                               if not m[0].startswith('__') \
+            section_members = [m for m in inspect.getmembers(d[1])
+                               if not m[0].startswith('__')
                                and not m[0].endswith('__')]
 
             for member in section_members:
@@ -192,6 +198,7 @@ class Test(Command):
             sys.executable, '-bWd',
             os.path.join('runTests.py')
         ])
+
 
 setup(name="inary",
       version=inary.__version__,
@@ -220,23 +227,23 @@ setup(name="inary",
       data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf"]),
                   (MIMEFILE_DIR, ["build/inary.xml"] if getConfig("NLS_SUPPORT") else [])],
       scripts=(['inary-cli',
-               'scripts/pspec2po',
-               'scripts/revdep-rebuild',
-               'scripts/sulinstrapt',
-               'scripts/makepkg',
-               'scripts/makekagami',
-               'scripts/mkdeb',
-               'scripts/revdep-rebuild-devel',
-               'scripts/inary-sandbox',
-               'scripts/inarysh',
-               'scripts/lsinary',
-               'scripts/mkinary',
-               'scripts/detect-dep',
-               'scripts/detect-file-dep',
-               'scripts/uninary',
-               'scripts/genpspec',
-               'scripts/update-inary-cache',
-               'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),
+                'scripts/pspec2po',
+                'scripts/revdep-rebuild',
+                'scripts/sulinstrapt',
+                'scripts/makepkg',
+                'scripts/makekagami',
+                'scripts/mkdeb',
+                'scripts/revdep-rebuild-devel',
+                'scripts/inary-sandbox',
+                'scripts/inarysh',
+                'scripts/lsinary',
+                'scripts/mkinary',
+                'scripts/detect-dep',
+                'scripts/detect-file-dep',
+                'scripts/uninary',
+                'scripts/genpspec',
+                'scripts/update-inary-cache',
+                'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',
@@ -266,7 +273,7 @@ setup(name="inary",
           'Topic :: System',
           'Topic :: System :: Installation/Setup',
           'Topic :: Software Development :: Bug Tracking',
-          ],
+      ],
       )
 
 # the below stuff is really nice but we already have a version
