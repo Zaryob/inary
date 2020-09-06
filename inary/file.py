@@ -25,6 +25,7 @@ import lzma
 import shutil
 
 # INARY Modules
+from inary.errors import Error
 import inary.uri
 import inary.util
 import inary.fetcher
@@ -35,7 +36,6 @@ import inary.context as ctx
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
-
 
 class File:
     # Compression types
