@@ -24,6 +24,7 @@ import sys
 # Inary Modules
 from inary.util.files import uncompress
 from inary.util.strings import remove_prefix
+from inary.errors import FileError, Error
 
 # ActionsAPI Modules
 import inary.actionsapi
