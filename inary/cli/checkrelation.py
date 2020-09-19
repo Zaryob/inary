@@ -71,6 +71,7 @@ Usage: check-relation
 
         installed.sort()
         need_reinstall = []
+        broken_packages=[]
 
         for pkg in installed:
             for p in self.installdb.get_package(pkg).runtimeDependencies():
@@ -78,9 +79,8 @@ Usage: check-relation
                 if not self.installdb.has_package(str(p.package)):
                     need_reinstall.append(p.package)
                     sys.stderr.write(
-                        _("Missing: - {}").format(p.package)+"\n")
-        self.fix_reinstall(need_reinstall)
-
+                        _("Missing: - {} : Needed by: - {}").format(p.package,pkg)+"\n")
+                    
         if self.options.force:
             for pkg in installed:
                 pkgname = pkg
@@ -91,4 +91,4 @@ Usage: check-relation
                         need_reinstall.append(pkg)
                         sys.stderr.write(
                             _("Missing: /{} - {}").format(f.path, pkg)+"\n")
-            self.fix_reinstall(need_reinstall)
+        self.fix_reinstall(need_reinstall)

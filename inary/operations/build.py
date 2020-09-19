@@ -703,9 +703,16 @@ class Builder:
         """Returns the real path of WorkDir for an unpacked archive."""
 
         dirname = self.get_action_variable("WorkDir", "")
+        src_list=os.listdir(self.pkg_work_dir())
+        if "inaryBuildState" in src_list:
+            src_list.remove("inaryBuildState")
         if dirname == "":
-            dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
+            if len(src_list)==1:
+                dirname = src_list[0]
+            else:
+                dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
         src_dir = util.join_path(self.pkg_work_dir(), dirname)
+        ctx.ui.info(_("WorkDir:{}".format(src_dir)))
         if not os.path.exists(src_dir):
             util.ensure_dirs(src_dir)
 
