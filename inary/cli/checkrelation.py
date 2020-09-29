@@ -79,7 +79,7 @@ Usage: check-relation
                 if not self.installdb.has_package(str(p.package)):
                     need_reinstall.append(p.package)
                     sys.stderr.write(
-                        _("Missing: - {} : Needed by: - {}").format(p.package,pkg)+"\n")
+                        _("Missing: - {} : Needed by: - {}").format(p.package, pkg)+"\n")
                     
         if self.options.force:
             for pkg in installed:
