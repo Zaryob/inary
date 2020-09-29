@@ -75,7 +75,7 @@ def get_cpu_count():
 
 
 def getenv(key):
-    if os.getenv(key) == None:
+    if os.getenv(key) is None:
         return ""
     return os.getenv[key]
 
