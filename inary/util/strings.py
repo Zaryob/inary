@@ -54,49 +54,49 @@ def unzip(seq):
     return list(zip(*seq))
 
 
-def concat(l):
+def concat(lst):
     """Concatenate a list of lists."""
-    return reduce(operator.concat, l)
+    return reduce(operator.concat, lst)
 
 
-def multisplit(str, chars):
+def multisplit(m_str, chars):
     """Split str with any of the chars."""
-    l = [str]
+    ms = [m_str]
     for c in chars:
-        l = concat([x.split(c) for x in l])
-    return l
+        ms = concat([x.split(c) for x in ms])
+    return ms
 
 
-def same(l):
+def same(lst):
     """Check if all elements of a sequence are equal."""
-    if len(l) == 0:
+    if len(lst) == 0:
         return True
     else:
-        last = l.pop()
-        for x in l:
+        last = lst.pop()
+        for x in lst:
             if x != last:
                 return False
         return True
 
 
-def flatten_list(l):
+def flatten_list(lst):
     """Flatten a list of lists."""
     # Fastest solution is list comprehension
     # See:
     # http://stackoverflow.com/questions/952914/making-a-flat-list-out-of-list-of-lists-in-python
-    return [item for sublist in l for item in sublist]
+    return [item for sublist in lst for item in sublist]
 
 
-def unique_list(l):
+def unique_list(lst):
     """Creates a unique list by deleting duplicate items"""
-    list_set = set(l)
+    list_set = set(lst)
     unique_list = (list(list_set))
     return [x for x in unique_list]
 
 
-def strlist(l):
+def strlist(lst):
     """Concatenate string reps of l's elements."""
-    return "".join([str(x) + ' ' for x in l])
+    return "".join([str(x) + ' ' for x in lst])
 
 
 def prefix(a, b):

@@ -48,15 +48,15 @@ Gives a brief list of sources published in the repositories.
 
         self.init(database=True, write=False)
 
-        l = self.sourcedb.list_sources()
+        sources = self.sourcedb.list_sources()
 
-        if l:
+        if sources:
             maxlen = max([len(_p) for _p in l])
 
         installed_list = inary.db.sourcedb.SourceDB().list_sources()
-        l.sort()
+        sources.sort()
 
-        for p in l:
+        for p in sources:
             sf, repo = self.sourcedb.get_spec_repo(p)
             if self.options.long:
                 ctx.ui.info(_('[Repository: ') + repo + ']')
