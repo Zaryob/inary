@@ -140,7 +140,6 @@ def plan_remove(A):
         Bp = set()
         for x in B:
             G_f.add_package_revdep(x)
-            #IDEA: Optimize
             if ctx.config.values.general.allow_docs:
                 doc_package = x + ctx.const.doc_package_end
                 if packagedb.has_package(doc_package):
