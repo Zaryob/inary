@@ -163,6 +163,7 @@ class Install(AtomicOperation):
         self.store_old_paths = None
         self.old_path = None
         self.trigger = inary.trigger.Trigger()
+        self.ask_reinstall=False
 
     def install(self, ask_reinstall=True):
 

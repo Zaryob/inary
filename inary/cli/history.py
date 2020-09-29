@@ -68,8 +68,7 @@ Lists previous operations.""")
         history.takeback(operation)
 
     def print_history(self):
-        ordered_history = []
-        ordered_history.append(_("Inary Transaction History: "))
+        ordered_history = [_("Inary Transaction History: ")]
         for operation in self.historydb.get_last(ctx.get_option('last')):
 
             msg_oprt = util.colorize(_("Operation "), 'yellow') \
