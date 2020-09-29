@@ -82,6 +82,11 @@ def getenv(key):
 
 def get_vm_info():
     vm_info = {}
+    try:
+        import subprocess
+    except ImportError:
+        ctx.ui.error(_("A problem occurred caused by your python installation."
+                       "No \"subprocess\" module caught. Probably your python installation corrupted."))
 
     if platform.system() == 'Linux':
         try:

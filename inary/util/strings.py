@@ -15,13 +15,11 @@
 """misc. utility functions, including process and file utils"""
 
 # Inary Modules
-from inary.util.filesystem_terminal import get_terminal_size
+
+from inary.util.terminal import get_terminal_size
 import operator
-from inary.util.filesystem_terminal import *
+from inary.util.terminal import *
 from functools import reduce
-import inary
-import inary.errors
-import inary.context as ctx
 
 # Gettext Library
 import gettext
