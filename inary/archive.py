@@ -453,6 +453,8 @@ class ArchiveTar(ArchiveBase):
                         # TODO: review this block
                         pass
                     self.tar.extract(tarinfo)
+
+            # FIXME: Burda bir bokluk var
             except IOError as e:
                 os.remove(tarinfo.name)
                 self.tar.extract(tarinfo)
