@@ -454,10 +454,6 @@ class ArchiveTar(ArchiveBase):
                         pass
                     self.tar.extract(tarinfo)
 
-            # FIXME: Burda bir bokluk var
-            except IOError as e:
-                os.remove(tarinfo.name)
-                self.tar.extract(tarinfo)
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
