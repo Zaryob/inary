@@ -84,7 +84,7 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
         for postops in ctx.const.postops:
             try:
                 delta_pkg.add_to_package(ctx.const.postops)
-            except:
+            except Exception:
                 pass
 
         # add xmls and files

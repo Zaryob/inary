@@ -523,7 +523,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, ctx.config.tmp_dir())
-                except:
+                except Exception:
                     pass
 
     def store_inary_files(self):
@@ -539,7 +539,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, self.package.pkg_dir())
-                except:
+                except Exception:
                     pass
 
     def update_databases(self):

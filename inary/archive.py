@@ -449,7 +449,7 @@ class ArchiveTar(ArchiveBase):
                 if not os.path.isdir(tarinfo.name) and not os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
-                    except:
+                    except Exception:
                         # TODO: review this block
                         pass
                     self.tar.extract(tarinfo)
