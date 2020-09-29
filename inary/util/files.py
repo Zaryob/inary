@@ -341,7 +341,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                     if level is None and len(
                             paths_m) - 1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
-                    if not level is None:
+                    if level is not None:
                         ctx.ui.info(
                             _("Detected patch level={0} for {1}").format(
                                 level, os.path.basename(patchFile)), verbose=True)
