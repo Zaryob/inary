@@ -47,8 +47,8 @@ class Trigger:
             else:
                 cmd_extra = " > /dev/null"
             ret_val = os.system(
-                'bash --noprofile --norc -c \'source postoperations.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func) +
-                cmd_extra)
+                'bash --noprofile --norc -c \'source postoperations.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func) + cmd_extra
+            )
             os.chdir(curDir)
             if (ret_val != 0):
                 return False
@@ -67,9 +67,10 @@ class Trigger:
                             "brightyellow")))
             else:
                 cmd_extra = " > /dev/null"
+
             ret_val = os.system(
-                'python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func) +
-                cmd_extra)
+                'python3 -c \'import postoperations\nif(hasattr(postoperations,"{0}")):\n postoperations.{0}()\''.format(func) + cmd_extra
+            )
             os.chdir(curDir)
             if (ret_val != 0):
                 return False

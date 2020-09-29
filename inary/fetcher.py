@@ -269,7 +269,12 @@ class Fetcher:
         c.close()
 
     def _get_wget(self):
-        return os.system("busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(self.useragent, self.url.get_uri(), self.partial_file))
+        return os.system("busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(
+                self.useragent,
+                self.url.get_uri(),
+                self.partial_file
+            )
+        )
 
     def _get_requests(self):
         from requests import get
@@ -397,7 +402,8 @@ class Fetcher:
             return True
         else:
             ctx.ui.debug(
-                _("Server doesn't support partial downloads. Previously downloaded part of the file will be over-written."))
+                _("Server doesn't support partial downloads."
+                  "Previously downloaded part of the file will be over-written."))
             os.remove(self.partial_file)
             return False
 

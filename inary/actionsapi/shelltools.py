@@ -123,9 +123,8 @@ def unlink(pattern):
                 ctx.ui.error(
                     _('ActionsAPI [unlink]: Permission denied: \"{}\"').format(filePath))
         elif isDirectory(filePath):
-            ctx.ui.warning(_(
-                'ActionsAPI [unlink]: \"{}\" is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(
-                filePath))
+            ctx.ui.warning(
+                _('ActionsAPI [unlink]: \"{}\" is not a file, use \'unlinkDir\' or \'removeDir\' to remove directories.').format(filePath))
 
         else:
             ctx.ui.error(

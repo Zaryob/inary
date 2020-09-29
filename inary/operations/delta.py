@@ -46,13 +46,17 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         if old_pkg_info.name != new_pkg_info.name:
             ctx.ui.warning(
-                _("The file \"{0}\" belongs to a different package other than '{1}'. Skipping it...").format(old_package,
-                                                                                                             new_pkg_info.name))
+                _("The file \"{0}\" belongs to a different package other than '{1}'. Skipping it...").format(
+                    old_package,
+                    new_pkg_info.name
+                )
+            )
             continue
 
         if old_pkg_info.release == new_pkg_info.release:
             ctx.ui.warning(
-                _("Package \"{}\" has the same release number with the new package. Skipping it...").format(old_package))
+                _("Package \"{}\" has the same release number with the new package. Skipping it...").format(old_package)
+            )
             continue
 
         delta_name = "-".join((old_pkg_info.name,
@@ -71,9 +75,8 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
         files_delta = find_delta(old_pkg_files, new_pkg_files)
 
         if len(files_delta) == len(new_pkg_files.list):
-            ctx.ui.warning(_(
-                "All files in the package \"{}\" are different from the files in the new package. Skipping it...").format(
-                old_package))
+            ctx.ui.warning(
+                _("All files in the package \"{}\" are different from the files in the new package. Skipping it...").format(old_package))
             continue
 
         delta_pkg = inary.package.Package(
