@@ -71,7 +71,7 @@ Usage: check-relation
 
         installed.sort()
         need_reinstall = []
-        broken_packages=[]
+        broken_packages = []
 
         for pkg in installed:
             for p in self.installdb.get_package(pkg).runtimeDependencies():
