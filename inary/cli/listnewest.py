@@ -71,8 +71,8 @@ packages from all repositories.
                 int(ctx.config.get_option('last')))
         else:
             since = None
-        l = self.packagedb.list_newest(repo, since, self.historydb)
-        if not l:
+        newests = self.packagedb.list_newest(repo, since, self.historydb)
+        if not newests:
             return
         if since:
             ctx.ui.info(
@@ -82,10 +82,10 @@ packages from all repositories.
             ctx.ui.info(_("Packages added to \'{}\':").format(repo))
 
         # maxlen is defined dynamically from the longest package name (#9021)
-        maxlen = max([len(_p) for _p in l])
+        maxlen = max([len(_p) for _p in newests])
 
-        l.sort()
-        for p in l:
+        newests.sort()
+        for p in newests:
             pkgsum = self.packagedb.get_summary(p)
             lenp = len(p)
             p += ' ' * max(0, maxlen - lenp)

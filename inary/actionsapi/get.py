@@ -106,8 +106,8 @@ def installDIR():
 
 def lsbINFO():
     """Returns a dictionary filled through /etc/lsb-release."""
-    return dict([(l.split("=")[0], l.split("=")[1].strip("'\""))
-                 for l in open("/etc/lsb-release").read().strip().split("\n") if "=" in l])
+    return dict([(line.split("=")[0], line.split("=")[1].strip("'\""))
+                 for line in open("/etc/lsb-release").read().strip().split("\n") if "=" in line])
 
 
 def kernelVERSION():

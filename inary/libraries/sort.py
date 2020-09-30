@@ -9,7 +9,9 @@
 #
 # Please read the COPYING file.
 #
-def sort_bubble(array=[], reverse=False):
+def sort_bubble(array=None, reverse=False):
+    if array is None:
+        array = []
     mlen = len(array)
     cout_i = 0
     while cout_i < mlen:
@@ -76,7 +78,9 @@ def sort_min_max(x, reverse=False):
     return array
 
 
-def sort_auto(array=[], reverse=False):
+def sort_auto(array=None, reverse=False):
+    if array is None:
+        array = []
     if len(array) <= 10:
         return sort_bubble(array, reverse)
     elif len(array) <= 500:

@@ -186,8 +186,9 @@ def handleConfigFiles():
                         ctx.ui.info(
                             _('Creating \"/etc/texmf/{}.d\"').format(dirname))
                         dodir("/etc/texmf/{}.d".format(dirname))
-                    ctx.ui.info(_('Moving (and symlinking) \"/usr/share/texmf/{0}\" to \"/etc/texmf/{1}.d\"').format(configFile,
-                                                                                                                     dirname))
+                    ctx.ui.info(
+                        _('Moving (and symlinking) \"/usr/share/texmf/{0}\" to \"/etc/texmf/{1}.d\"').format(configFile,
+                                                                                                             dirname))
                     domove("/usr/share/texmf/{0}/{1}".format(dirname,
                                                              configFile), "/etc/texmf/{}.d".format(dirname))
                     dosym("/etc/texmf/{0}.d/{1}".format(dirname, configFile),

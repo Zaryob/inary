@@ -449,10 +449,12 @@ class ArchiveTar(ArchiveBase):
                 if not os.path.isdir(tarinfo.name) and not os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
-                    except:
+                    except Exception:
                         # TODO: review this block
                         pass
                     self.tar.extract(tarinfo)
+
+            # FIXME: Burda bir bokluk var
             except IOError as e:
                 os.remove(tarinfo.name)
                 self.tar.extract(tarinfo)

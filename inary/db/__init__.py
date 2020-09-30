@@ -37,7 +37,7 @@ def flush_caches():
 
 
 def update_caches():
-    # Updates ondisk caches
+    # Updates on disk caches
     for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
                installdb.InstallDB(), groupdb.GroupDB()]:
         if db.is_initialized():

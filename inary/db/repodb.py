@@ -175,7 +175,7 @@ class RepoDB(lazydb.LazyDB):
                 index_path = os.path.splitext(index_path)[0]
 
         if not os.path.exists(index_path):
-            #ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
+            # ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
 
         try:
@@ -291,8 +291,13 @@ class RepoDB(lazydb.LazyDB):
         if not compatible:
             self.deactivate_repo(name)
             raise IncompatibleRepoError(
-                _("Repository \"{}\" is not compatible with your distribution. Repository is disabled.\nYour distribution is {} release {}\nRepository distribution is {} release {}\n\nIf you want add this repository please use \"--ignore-check\" parameter with this command.").format(name,
-                                                                                                                                                                                                                                                                                            ctx.config.values.general.distribution,
-                                                                                                                                                                                                                                                                                            ctx.config.values.general.distribution_release,
-                                                                                                                                                                                                                                                                                            dist_name,
-                                                                                                                                                                                                                                                                                            dist_release))
+                _("Repository \"{}\" is not compatible with your distribution. Repository is disabled."
+                  "Your distribution is {} release {}"
+                  "Repository distribution is {} release {}\n"
+                  "If you want add this repository please use \"--ignore-check\" parameter with this command.").format(
+                    name,
+                    ctx.config.values.general.distribution,
+                    ctx.config.values.general.distribution_release,
+                    dist_name,
+                    dist_release)
+            )

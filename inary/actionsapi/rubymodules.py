@@ -114,7 +114,12 @@ def auto_dodoc():
 def install(parameters=''):
     """does ruby setup.rb install"""
     if system(
-            'ruby -w setup.rb --prefix=/{0}/{1} --destdir={1} {2}'.format(get.defaultprefixDIR(), get_gemdir(), get.installDIR(), parameters)):
+            'ruby -w setup.rb --prefix=/{0}/{1} --destdir={1} {2}'.format(
+                get.defaultprefixDIR(),
+                get_gemdir(),
+                get.installDIR(),
+                parameters
+            )):
         raise InstallError(_('Install failed.'))
 
     auto_dodoc()

@@ -43,6 +43,8 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         super(AddRepo, self).__init__(args)
         self.repodb = inary.db.repodb.RepoDB()
 
+        self.just_add = False
+
     name = ("add-repo", "ar")
 
     def options(self):
@@ -66,7 +68,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         if len(self.args) == 2:
             self.init()
             name, indexuri = self.args
-            self.just_add = False
 
             if ctx.get_option('no_fetch'):
                 if ctx.ui.confirm(_('Add \"{}\" repository without updating the database?\nBy confirming '

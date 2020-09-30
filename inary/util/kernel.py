@@ -18,8 +18,6 @@ import os
 
 # Inary Modules
 import platform
-import inary
-import inary.errors
 import inary.context as ctx
 
 # Gettext Library
@@ -75,13 +73,18 @@ def get_cpu_count():
 
 
 def getenv(key):
-    if os.getenv(key) == None:
+    if os.getenv(key) is None:
         return ""
     return os.getenv[key]
 
 
 def get_vm_info():
     vm_info = {}
+    try:
+        import subprocess
+    except ImportError:
+        ctx.ui.error(_("A problem occurred caused by your python installation."
+                       "No \"subprocess\" module caught. Probably your python installation corrupted."))
 
     if platform.system() == 'Linux':
         try:

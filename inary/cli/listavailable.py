@@ -80,21 +80,21 @@ all repositories.
         component = ctx.get_option('component')
         if component:
             try:
-                l = self.componentdb.get_packages(
+                packages = self.componentdb.get_packages(
                     component, repo=repo, walk=True)
             except BaseException:
                 return
         else:
-            l = self.packagedb.list_packages(repo)
+            packages = self.packagedb.list_packages(repo)
 
         installed_list = inary.db.installdb.InstallDB().list_installed()
 
         # maxlen is defined dynamically from the longest package name (#9021)
-        if l:
-            maxlen = max([len(_p) for _p in l])
+        if packages:
+            maxlen = max([len(_p) for _p in packages])
 
-        l.sort()
-        for p in l:
+        packages.sort()
+        for p in packages:
             if ctx.config.get_option('uninstalled') and p in installed_list:
                 continue
 

@@ -815,7 +815,7 @@ class autoxml(oo.autosuper, oo.autoprop):
             return []
 
         def decode(node, errs, where):
-            l = []
+            lst = []
             nodes = xmlext.getAllNodes(node, path)
             # print node, tag + '/' + comp_tag, nodes
             if len(nodes) == 0 and req == mandatory:
@@ -825,14 +825,14 @@ class autoxml(oo.autosuper, oo.autoprop):
             for node in nodes:
                 dummy = xmlext.newNode(node, "Dummy")
                 xmlext.addNode(dummy, '', node)
-                l.append(decode_item(
+                lst.append(decode_item(
                     dummy, errs, where + str("[{}]".format(ix))))
                 ix += 1
-            return l
+            return lst
 
-        def encode(node, l, errs):
-            if l:
-                for item in l:
+        def encode(node, lst, errs):
+            if lst:
+                for item in lst:
                     if list_tagpath:
                         listnode = xmlext.addNode(
                             node, list_tagpath, branch=False)
@@ -846,17 +846,17 @@ class autoxml(oo.autosuper, oo.autoprop):
                         _('Mandatory list "{0}" under "{1}" node is empty.').format(
                             path, node.name()))
 
-        def errors(l, where):
+        def errors(lst, where):
             errs = []
             ix = 1
-            for node in l:
+            for node in lst:
                 errs.extend(errors_item(node, where + '[{}]'.format(ix)))
                 ix += 1
             return errs
 
-        def format(l, f, errs):
-            l.sort()
-            for node in l:
+        def format(lst, f, errs):
+            lst.sort()
+            for node in lst:
                 format_item(node, f, errs)
                 f.add_literal_data(' ')
 

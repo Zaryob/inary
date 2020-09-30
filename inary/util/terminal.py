@@ -20,26 +20,12 @@ import termios
 import fcntl
 import sys
 import os
-import inary
-import inary.errors
-import inary.context as ctx
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
-########################
-# Filesystem functions #
-########################
-
-
-def fs_sync():
-    if ctx.config.values.general.fs_sync:
-        ctx.ui.debug(
-            _("Filesystem syncing (It wouldn't be run whether nosync set with kernel parameters)"))
-        os.sync()
 
 ######################
 # Terminal functions #

@@ -163,6 +163,7 @@ class Install(AtomicOperation):
         self.store_old_paths = None
         self.old_path = None
         self.trigger = inary.trigger.Trigger()
+        self.ask_reinstall=False
 
     def install(self, ask_reinstall=True):
 
@@ -523,7 +524,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, ctx.config.tmp_dir())
-                except:
+                except Exception:
                     pass
 
     def store_inary_files(self):
@@ -539,7 +540,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, self.package.pkg_dir())
-                except:
+                except Exception:
                     pass
 
     def update_databases(self):

@@ -703,11 +703,11 @@ class Builder:
         """Returns the real path of WorkDir for an unpacked archive."""
 
         dirname = self.get_action_variable("WorkDir", "")
-        src_list=os.listdir(self.pkg_work_dir())
+        src_list = os.listdir(self.pkg_work_dir())
         if "inaryBuildState" in src_list:
             src_list.remove("inaryBuildState")
         if dirname == "":
-            if len(src_list)==1:
+            if len(src_list) == 1:
                 dirname = src_list[0]
             else:
                 dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
@@ -1057,7 +1057,10 @@ package might be a good solution."))
                         fileinfo = witcher(filepath).name
                     except ValueError:
                         ctx.ui.warning(
-                            _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(filepath)))
+                            _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(
+                                filepath)
+                            )
+                        )
                         fileinfo = "broken symlink"
                     ctx.ui.info(
                         _("\'magic\' return of \"{0}\" is \"{1}\"").format(
@@ -1066,8 +1069,11 @@ package might be a good solution."))
                     result = util.run_batch(
                         "file {}".format(filepath), ui_debug=False)
                     if result[0]:
-                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(result[0], filepath) +
-                                     _("Output:\n{}").format(result[1]))
+                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(
+                                         result[0],
+                                         filepath) +
+                                     _("Output:\n{}").format(result[1])
+                        )
 
                     fileinfo = str(result[1])
                     ctx.ui.info(

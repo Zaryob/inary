@@ -60,7 +60,7 @@ def mvprintw(x, y, msg=''):
 
 def noecho(enabled=True):
     if not ctx.get_option('no_color'):
-        if(enabled):
+        if enabled:
             printw("\x1b[?25l")
         else:
             printw("\x1b[?25h")
@@ -68,51 +68,51 @@ def noecho(enabled=True):
 
 def attron(attribute):
     """Attribute enable"""
-    if(attribute == "A_NORMAL"):
+    if attribute == "A_NORMAL":
         sys.stdout.write("\x1b[;0m")
-    elif(attribute == "A_UNDERLINE"):
+    elif attribute == "A_UNDERLINE":
         sys.stdout.write("\x1b[4m")
-    elif(attribute == "A_REVERSE"):
+    elif attribute == "A_REVERSE":
         sys.stdout.write("\x1b[7m")
-    elif(attribute == "A_BLINK"):
+    elif attribute == "A_BLINK":
         sys.stdout.write("\x1b[5m")
-    elif(attribute == "A_DIM"):
+    elif attribute == "A_DIM":
         sys.stdout.write("\x1b[2m")
-    elif(attribute == "A_BOLD"):
+    elif attribute == "A_BOLD":
         sys.stdout.write("\x1b[1m")
-    elif(attribute == "A_INVIS"):
+    elif attribute == "A_INVIS":
         sys.stdout.write("\x1b[8m")
-    elif(attribute == "C_BLACK"):
+    elif attribute == "C_BLACK":
         sys.stdout.write("\x1b[30m")
-    elif(attribute == "C_RED"):
+    elif attribute == "C_RED":
         sys.stdout.write("\x1b[31m")
-    elif(attribute == "C_GREEN"):
+    elif attribute == "C_GREEN":
         sys.stdout.write("\x1b[32m")
-    elif(attribute == "C_YELLOW"):
+    elif attribute == "C_YELLOW":
         sys.stdout.write("\x1b[33m")
-    elif(attribute == "C_BLUE"):
+    elif attribute == "C_BLUE":
         sys.stdout.write("\x1b[34m")
-    elif(attribute == "C_MAGENTA"):
+    elif attribute == "C_MAGENTA":
         sys.stdout.write("\x1b[35m")
-    elif(attribute == "C_CYAN"):
+    elif attribute == "C_CYAN":
         sys.stdout.write("\x1b[36m")
-    elif(attribute == "C_WHITE"):
+    elif attribute == "C_WHITE":
         sys.stdout.write("\x1b374m")
-    elif(attribute == "B_BLACK"):
+    elif attribute == "B_BLACK":
         sys.stdout.write("\x1b[40m")
-    elif(attribute == "B_RED"):
+    elif attribute == "B_RED":
         sys.stdout.write("\x1b[41m")
-    elif(attribute == "B_GREEN"):
+    elif attribute == "B_GREEN":
         sys.stdout.write("\x1b[42m")
-    elif(attribute == "B_YELLOW"):
+    elif attribute == "B_YELLOW":
         sys.stdout.write("\x1b[43m")
-    elif(attribute == "B_BLUE"):
+    elif attribute == "B_BLUE":
         sys.stdout.write("\x1b[44m")
-    elif(attribute == "B_MAGENTA"):
+    elif attribute == "B_MAGENTA":
         sys.stdout.write("\x1b[45m")
-    elif(attribute == "B_CYAN"):
+    elif attribute == "B_CYAN":
         sys.stdout.write("\x1b[46m")
-    elif(attribute == "B_WHITE"):
+    elif attribute == "B_WHITE":
         sys.stdout.write("\x1b[47m")
     sys.stdout.flush()
 

@@ -112,7 +112,8 @@ class Package:
                 # Bug 3465
                 if ctx.get_option('reinstall'):
                     raise Error(_(
-                        "There was a problem while fetching \"{}\".\nThe package may have been upgraded. Please try to upgrade the package.").format(
+                        "There was a problem while fetching \"{}\"."
+                        "The package may have been upgraded. Please try to upgrade the package.").format(
                         url))
                 raise
         else:

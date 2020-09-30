@@ -60,8 +60,8 @@ class Command(object):
     @staticmethod
     def commands_string():
         s = ''
-        l = sorted([x.name[0] for x in Command.cmd])
-        for name in l:
+        lst = sorted([x.name[0] for x in Command.cmd])
+        for name in lst:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('inary', fallback=True)
             summary = trans.gettext(commandcls.__doc__).split('\n')[0]

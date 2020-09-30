@@ -16,9 +16,8 @@
 
 # Inary Modules
 from inary.util.strings import *
-import inary
-import inary.errors
 import inary.context as ctx
+from inary.errors import Error
 
 # Gettext Library
 import gettext
