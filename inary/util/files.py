@@ -14,20 +14,20 @@
 
 """misc. utility functions, including process and file utils"""
 
-from inary.errors import FileError, FilePermissionDeniedError, Error
-from inary.util.strings import remove_prefix
-from inary.util.process import run_batch
-from inary.util.path import join_path
 import fnmatch
 import hashlib
-import shutil
 import os
 import re
+import shutil
 
 # Inary Modules
 import inary
-import inary.errors
 import inary.context as ctx
+import inary.errors
+from inary.errors import FileError, FilePermissionDeniedError, Error
+from inary.util.path import join_path
+from inary.util.process import run_batch
+from inary.util.strings import remove_prefix
 
 # Gettext Library
 import gettext

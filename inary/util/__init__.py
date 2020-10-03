@@ -14,22 +14,22 @@
 
 """misc. utility functions, including process and file utils"""
 
-# Inary Modules
-from inary.util.strings import *
-from inary.util.process import *
-from inary.util.path import *
-from inary.util.package import *
-from inary.util.misc import *
-from inary.util.kernel import *
-from inary.util.terminal import *
-from inary.util.files import *
-from inary.util.curses import *
-from inary.util.filesystem import *
-from inary.util.terminal import *
 import fcntl
 import inary
-import inary.errors
 import inary.context as ctx
+import inary.errors
+from inary.util.curses import *
+from inary.util.files import *
+from inary.util.filesystem import *
+from inary.util.kernel import *
+from inary.util.misc import *
+from inary.util.package import *
+from inary.util.path import *
+from inary.util.process import *
+# Inary Modules
+from inary.util.strings import *
+from inary.util.terminal import *
+from inary.util.terminal import *
 
 # Gettext Library
 import gettext
