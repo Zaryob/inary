@@ -438,11 +438,14 @@ class Install(AtomicOperation):
                 new_paths.append(f.path)
 
             for old_file in self.old_files.list:
-                if old_file.path in new_paths:
-                    continue
 
                 old_file_path = os.path.join(
                     ctx.config.dest_dir(), old_file.path)
+
+                if old_file.path in new_paths:
+                    if os.path.islink(old_file_path):
+                        os.unlink(old_file_path)
+                    continue
 
                 try:
                     old_file_stat = os.lstat(old_file_path)
