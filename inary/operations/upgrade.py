@@ -224,7 +224,10 @@ def upgrade(A=None, repo=None):
 
     paths = []
     extra_paths = {}
-    lndig = math.floor(math.log(len(order), 10)) + 1
+    try:
+        lndig = math.floor(math.log(len(order), 10)) + 1
+    except ValueError:
+        lndig = 1
     for x in order:
         ctx.ui.info(_("Downloading") +
                     str(" [ {:>" +

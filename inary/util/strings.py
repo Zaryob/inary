@@ -147,7 +147,10 @@ def human_readable_rate(size=0):
 
 
 def format_by_columns(strings, sep_width=2):
-    longest_str_len = len(max(strings, key=len))
+    if(len(strings)>0):
+        longest_str_len = len(max(strings, key=len))
+    else:
+        longest_str_len = 0
     term_columns = get_terminal_size()[1]
 
     def get_columns(max_count):
