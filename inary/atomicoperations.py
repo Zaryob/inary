@@ -339,10 +339,10 @@ class Install(AtomicOperation):
     def postinstall(self):
 
         # Chowning for additional files
-        # for _file in self.package.get_files().list:
-        #    fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-        #    if os.path.islink(fpath):
-        #        ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
+        for _file in self.package.get_files().list:
+            fpath = util.join_path(ctx.config.dest_dir(), _file.path)
+            if os.path.islink(fpath):
+                ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
         #    else:
         #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
         #        os.chown(fpath, int(_file.uid), int(_file.gid))
