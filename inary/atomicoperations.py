@@ -341,7 +341,7 @@ class Install(AtomicOperation):
         # Chowning for additional files
         for _file in self.package.get_files().list:
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-            if os.path.islink(fpath)
+            if os.path.islink(fpath):
                 if os.path.lexists(fpath) and os.path.exists(fpath):
                     ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
                 else:
