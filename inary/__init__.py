@@ -63,6 +63,9 @@ def _cleanup():
     ctx.enable_keyboard_interrupts()
 
 
+# we need umask 0x022 (0x027 may broke so we need force 0x022)
+os.umask(18)
+
 # Hack for inary to work with non-patched Python. inary needs
 # lots of work for not doing this.
 importlib.reload(sys)
