@@ -70,8 +70,10 @@ class PGraph:
                         if self.installdb.has_package(dep):
                             self.packages.append(dep)
             else:
-                if self.installdb.has_package(pkg) and not self.reinstall:
-                    return
+                if self.installdb.has_package(pkg):
+                    if self.packagedb.get_package(pkg).release == self.installdb.get_package(pkg).release:
+                        if not self.reinstall:
+                            return
                 if pkg not in self.packages:
                     self.packages.append(pkg)
                 for dep in self.packagedb.get_package(pkg).runtimeDependencies():
