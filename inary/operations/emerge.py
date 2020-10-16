@@ -21,6 +21,7 @@ import inary.data
 import inary.ui as ui
 import inary.util as util
 import inary.context as ctx
+import inary.data.pgraph as pgraph
 import inary.operations as operations
 import inary.atomicoperations as atomicoperations
 
@@ -95,11 +96,12 @@ installed in the respective order to satisfy dependencies:
 
 def plan_emerge(A):
     sourcedb = inary.db.sourcedb.SourceDB()
+    installdb = inary.db.installdb.InstallDB()
 
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    G_f = inary.data.pgraph.Digraph()
+    G_f = pgraph.PGraph(sourcedb, installdb)
 
     def get_spec(name):
         if sourcedb.has_spec(name):
@@ -113,8 +115,9 @@ def plan_emerge(A):
 
     def add_src(src):
         if not str(src.name) in G_f.vertices():
-            G_f.add_vertex(str(src.name), (src.version, src.release))
-
+            # TODO replace this shitty way with a function
+            G_f.packages.append(src.name)
+            
     def pkgtosrc(pkg):
         return sourcedb.pkgtosrc(pkg)
 
