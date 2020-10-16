@@ -80,7 +80,6 @@ installed in the respective order to satisfy dependencies:
         atomicoperations.install_single_name(x)
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
-
     for x in order_build:
         package_names = operations.build.build(x).new_packages
         inary.operations.install.install_pkg_files(

@@ -245,7 +245,10 @@ class Builder:
         self.target_package_format = ctx.get_option("package_format") \
             or inary.package.Package.default_format
 
-        self.read_translations(self.specdir)
+        try:
+            self.read_translations(self.specdir)
+        except Exception:
+            ctx.ui.output(_("Translation cannot readed.")+"\n")
 
         self.sourceArchives = inary.archive.SourceArchives(self.spec)
 
@@ -270,6 +273,7 @@ class Builder:
         self.has_ccache = False
         self.has_icecream = False
         self.variable_buffer = {}
+        self.destdir=os.getcwd()
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -479,7 +483,6 @@ class Builder:
         self.fetch_patches()
         self.fetch_additionalFiles()
         self.fetch_postops()
-
         return self.destdir
 
     def fetch_pspecfile(self):
@@ -731,6 +734,11 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
+        self.specdiruri = os.path.dirname(self.specuri.get_uri())
+        pkgname = os.path.basename(self.specdiruri)
+        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
+        if os.path.exists(self.destdir):
+            curDir=self.destdir
         src_dir = self.pkg_src_dir()
         self.set_environment_vars()
         os.environ['WORK_DIR'] = src_dir
