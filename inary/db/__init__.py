@@ -47,6 +47,9 @@ def update_caches():
 def regenerate_caches():
     flush_caches()
     # Force cache regeneration
-    for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
+    try:
+        for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
                componentdb.ComponentDB(), groupdb.GroupDB()]:
-        db.cache_regenerate()
+            db.cache_regenerate()
+    except Exception: # TODO: warning message needed
+        pass
