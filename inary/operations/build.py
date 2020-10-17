@@ -213,19 +213,25 @@ class Builder:
 
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
+        self.specuri=specuri
+        self.specdiruri = os.path.dirname(self.specuri)
+        self.pkgname = os.path.basename(self.specdiruri)
+        self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
 
         # process args
         if not isinstance(specuri, inary.uri.URI):
             specuri = inary.uri.URI(specuri)
 
+        self.fetch_pspecfile()
         # read spec file, we'll need it :)
-        self.set_spec_file(specuri)
-
+        self.spec = self.set_spec_file(specuri)
+        
         if specuri.is_remote_file():
             self.specdir = self.fetch_files()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
+        
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
         self.package_rfp = None
@@ -280,9 +286,10 @@ class Builder:
             # FIXME: doesn't work for file://
             specuri = inary.uri.URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
+        
         spec = Specfile.SpecFile()
-        spec.read(self.specuri, ctx.config.tmp_dir())
-        self.spec = spec
+        spec.read("{}/{}".format(self.destdir,ctx.const.pspec_file),self.specuri)
+        return spec
 
     def read_translations(self, specdir):
         self.spec.read_translations(util.join_path(specdir,
@@ -472,9 +479,6 @@ class Builder:
                 os.environ["CCACHE_DIR"] = "/tmp/.ccache"
 
     def fetch_files(self):
-        self.specdiruri = os.path.dirname(self.specuri.get_uri())
-        pkgname = os.path.basename(self.specdiruri)
-        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
         # self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
