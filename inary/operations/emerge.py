@@ -142,11 +142,8 @@ def plan_emerge(A):
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    if srcdep not in G_f.vertices():
-                        Bp.add(srcdep)
-                        add_src(get_src(srcdep))
-                    if not src.name == srcdep:  # firefox - firefox-devel thing
-                        G_f.add_edge(src.name, srcdep)
+                    print(dep.package)
+                    G_f.packages.append(dep.package)
 
             for builddep in src.buildDependencies:
                 process_dep(builddep)
