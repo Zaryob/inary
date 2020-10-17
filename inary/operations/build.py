@@ -215,8 +215,12 @@ class Builder:
         self.installdb = inary.db.installdb.InstallDB()
         self.specuri=specuri
         self.specdiruri = os.path.dirname(self.specuri)
-        self.pkgname = os.path.basename(self.specdiruri)
-        self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
+        if len(self.specdiruri) > 0:
+            self.pkgname = os.path.basename(self.specdiruri)
+            self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
+        else:
+            self.pkgname = ""
+            self.destdir = os.getcwd()
 
         # process args
         if not isinstance(specuri, inary.uri.URI):
