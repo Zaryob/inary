@@ -209,24 +209,24 @@ class Builder:
             raise Error(
                 _("Source \"{}\" not found in any active repository.").format(name))
 
-    def __init__(self, specuri):
-
+    def __init__(self, specuri,emerge=False):
+        self.emerge=emerge
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
         self.specuri=specuri
         self.specdiruri = os.path.dirname(self.specuri)
-        if len(self.specdiruri) > 0:
+        if len(self.specdiruri) > 0 and self.emerge:
             self.pkgname = os.path.basename(self.specdiruri)
             self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
         else:
-            self.pkgname = ""
-            self.destdir = os.getcwd()
+            self.destdir=None
 
         # process args
         if not isinstance(specuri, inary.uri.URI):
             specuri = inary.uri.URI(specuri)
 
-        self.fetch_pspecfile()
+        if self.emerge:
+            self.fetch_pspecfile()
         # read spec file, we'll need it :)
         self.spec = self.set_spec_file(specuri)
         
@@ -292,7 +292,10 @@ class Builder:
         self.specuri = specuri
         
         spec = Specfile.SpecFile()
-        spec.read("{}/{}".format(self.destdir,ctx.const.pspec_file),self.specuri)
+        if self.emerge:
+            spec.read("{}/{}".format(self.destdir,ctx.const.pspec_file),self.specuri)
+        else:
+            spec.read(self.specuri, ctx.config.tmp_dir())
         return spec
 
     def read_translations(self, specdir):

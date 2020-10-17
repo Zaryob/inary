@@ -81,7 +81,7 @@ installed in the respective order to satisfy dependencies:
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
     for x in order_build:
-        package_names = operations.build.build(x).new_packages
+        package_names = operations.build.build(x,emerge=True).new_packages
         inary.operations.install.install_pkg_files(
             package_names, reinstall=True)  # handle inter-package deps here
         # reset counts between builds
