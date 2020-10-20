@@ -209,8 +209,10 @@ class Builder:
             raise Error(
                 _("Source \"{}\" not found in any active repository.").format(name))
 
-    def __init__(self, specuri,emerge=False):
-        self.emerge=emerge
+    def __init__(self, specuri):
+        self.emerge=False
+        if "://" in specuri:
+            self.emerge=True
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
         self.specuri=specuri
@@ -374,7 +376,12 @@ class Builder:
         self.check_patches()
 
         self.check_build_dependencies()
-        self.fetch_component()
+        
+        try:
+            self.fetch_component()
+        except:
+            ctx.ui.output(_("Component cannot readed.")+"\n")
+            
         self.fetch_source_archives()
 
         util.clean_dir(self.pkg_install_dir())
@@ -537,9 +544,8 @@ class Builder:
     def fetch_postops(self):
         for postops in ctx.const.postops:
             postops_script = util.join_path(self.specdiruri, postops)
-            if util.check_file(postops_script, noerr=True):
-                self.download(postops_script, util.join_path(self.specdir))
-                ctx.ui.info(_("PostOps Script Fetched."))
+            if util.check_file(postops_script, noerr=True) or "://" in postops_script:
+                self.download(postops_script, util.join_path(self.destdir))
 
     @staticmethod
     def download(uri, transferdir):
@@ -1115,7 +1121,10 @@ package might be a good solution."))
 
         doc_ptrn = re.compile(ctx.const.doc_package_end)
 
-        self.fetch_component()  # bug 856
+        try:
+            self.fetch_component()
+        except:
+            ctx.ui.output(_("Component cannot readed.")+"\n")
         ctx.ui.status(
             _("Running file actions: \"{}\"").format(
                 self.spec.source.name), push_screen=True)
