@@ -163,6 +163,7 @@ class Install(AtomicOperation):
         self.store_old_paths = None
         self.old_path = None
         self.trigger = inary.trigger.Trigger()
+        self.ask_reinstall=False
 
     def install(self, ask_reinstall=True):
 
@@ -338,13 +339,13 @@ class Install(AtomicOperation):
     def postinstall(self):
 
         # Chowning for additional files
-        # for _file in self.package.get_files().list:
-        #    fpath = util.join_path(ctx.config.dest_dir(), _file.path)
-        #    if os.path.islink(fpath):
-        #        ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
-        #    else:
-        #        ctx.ui.info(_("Chowning in postinstall {0} ({1}:{2})").format(_file.path, _file.uid, _file.gid), verbose=True)
-        #        os.chown(fpath, int(_file.uid), int(_file.gid))
+        for _file in self.package.get_files().list:
+            fpath = util.join_path(ctx.config.dest_dir(), _file.path)
+            if os.path.islink(fpath):
+                if os.path.lexists(fpath) and os.path.exists(fpath):
+                    ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
+                else:
+                    ctx.ui.warning(_("Broken or missing symlink '{}'").format(fpath))
 
         if 'postOps' in self.metadata.package.isA:
             if ctx.config.get_option(
@@ -437,11 +438,18 @@ class Install(AtomicOperation):
                 new_paths.append(f.path)
 
             for old_file in self.old_files.list:
-                if old_file.path in new_paths:
-                    continue
 
                 old_file_path = os.path.join(
                     ctx.config.dest_dir(), old_file.path)
+
+                if old_file.path in new_paths:
+                    continue
+
+                if old_file_path not in new_paths:
+                    if os.path.islink(old_file_path):
+                        os.unlink(old_file_path)
+                        continue
+
 
                 try:
                     old_file_stat = os.lstat(old_file_path)
@@ -523,7 +531,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, ctx.config.tmp_dir())
-                except:
+                except Exception:
                     pass
 
     def store_inary_files(self):
@@ -539,7 +547,7 @@ class Install(AtomicOperation):
                 try:
                     self.package.extract_file_synced(
                         postops, self.package.pkg_dir())
-                except:
+                except Exception:
                     pass
 
     def update_databases(self):

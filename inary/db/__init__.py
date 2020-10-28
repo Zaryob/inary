@@ -37,7 +37,7 @@ def flush_caches():
 
 
 def update_caches():
-    # Updates ondisk caches
+    # Updates on disk caches
     for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
                installdb.InstallDB(), groupdb.GroupDB()]:
         if db.is_initialized():
@@ -47,6 +47,9 @@ def update_caches():
 def regenerate_caches():
     flush_caches()
     # Force cache regeneration
-    for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
+    try:
+        for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
                componentdb.ComponentDB(), groupdb.GroupDB()]:
-        db.cache_regenerate()
+            db.cache_regenerate()
+    except Exception: # TODO: warning message needed
+        pass

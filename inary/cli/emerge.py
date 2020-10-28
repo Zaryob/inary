@@ -53,7 +53,8 @@ You can also give the name of a component.
         group.add_option("--ignore-sysconf", action="store_true",
                          default=False, help=_("Skip sysconf operations after installation."))
         group.add_option("--force-sysconf", action="store_true",
-                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
+                         default=False, help=_("Force sysconf operations after installation."
+                                               "Applies all sysconf operations"))
 
         self.parser.add_option_group(group)
 

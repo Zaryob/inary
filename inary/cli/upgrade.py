@@ -54,8 +54,6 @@ expanded to package names.
         super(Upgrade, self).options(group)
         group.add_option("--security-only", action="store_true",
                          default=False, help=_("Security related package upgrades only."))
-        group.add_option("-b", "--bypass-update-repo", action="store_true",
-                         default=False, help=_("Do not update repositories."))
         group.add_option("--ignore-file-conflicts", action="store_true",
                          default=False, help=_("Ignore file conflicts."))
         group.add_option("--ignore-package-conflicts", action="store_true",
@@ -63,7 +61,8 @@ expanded to package names.
         group.add_option("--ignore-sysconf", action="store_true",
                          default=False, help=_("Skip sysconf operations after installation."))
         group.add_option("--force-sysconf", action="store_true",
-                         default=False, help=_("Force sysconf operations after installation. Applies all sysconf operations"))
+                         default=False, help=_("Force sysconf operations after installation. "
+                                               "Applies all sysconf operations"))
         group.add_option("--preserve-permanent", action="store_true",
                          default=False,
                          help=_("Preserves permanent tagged files on upgrade action "
@@ -96,13 +95,6 @@ expanded to package names.
             self.init(database=True, write=False)
         else:
             self.init()
-
-        if not ctx.get_option('bypass_update_repo'):
-            ctx.ui.info(_('Updating repositories.'), color='green')
-            repos = inary.db.repodb.RepoDB().list_repos(only_active=True)
-            repository.update_repos(repos)
-        else:
-            ctx.ui.info(_('Will not update repositories.'))
 
         reposit = ctx.get_option('repository')
         components = ctx.get_option('component')

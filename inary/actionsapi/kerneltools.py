@@ -249,8 +249,8 @@ def installModuleHeaders(extraHeaders=None, distro=""):
     # First create the skel
     find_cmd = "find . -path %s -prune -o -type f \( -name %s \) -print" % \
         (
-            " -prune -o -path ".join(["'./%s/*'" % l for l in pruned]),
-            " -o -name ".join(["'%s'" % k for k in wanted])
+            " -prune -o -path ".join(["'./%s/*'" % prune for prune in pruned]),
+            " -o -name ".join(["'%s'" % want for want in wanted])
         ) + " | cpio -pVd --preserve-modification-time %s" % destination
 
     shelltools.system(find_cmd)

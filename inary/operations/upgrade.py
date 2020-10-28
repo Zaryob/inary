@@ -184,7 +184,6 @@ def upgrade(A=None, repo=None):
         return True
 
     ctx.ui.debug('A = {}'.format(str(A)))
-
     if not ctx.config.get_option('ignore_dependency'):
         order = plan_upgrade(A, replaces=replaces)
     else:
@@ -224,7 +223,11 @@ def upgrade(A=None, repo=None):
 
     paths = []
     extra_paths = {}
-    lndig = math.floor(math.log(len(order), 10)) + 1
+    try:
+        lndig = math.floor(math.log(len(order), 10)) + 1
+    except ValueError:
+        lndig = 1
+        
     for x in order:
         ctx.ui.info(_("Downloading") +
                     str(" [ {:>" +
@@ -280,13 +283,10 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
     # install / reinstall
 
     G_f = pgraph.PGraph()  # construct G_f
-
     installdb = G_f.get_installdb()
     packagedb = G_f.get_packagedb()
 
-    A = set(A)
-
-    # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
+    A = set(A)    # Force upgrading of installed but replaced packages or else they will be removed (they are obsoleted also).
     # This is not wanted for a replaced driver package (eg. nvidia-X).
     #
     # FIXME: this is also not nice. this would not be needed if replaced packages are not written as obsoleted also.
@@ -379,6 +379,7 @@ def plan_upgrade(A, force_replaced=True, replaces=None):
 
     order = G_f.topological_sort()
     order.reverse()
+
     return order
 
 

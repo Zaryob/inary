@@ -1,5 +1,5 @@
 DESTDIR=/
-all: build
+all: clean build
 
 clean:
 	`find | grep pycache | sed 's/^/rm -rf /g'`

@@ -176,7 +176,6 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
                 pool.terminate()
                 pool.join()
                 ctx.ui.info("")
-                raise
 
         latest_packages = []
 

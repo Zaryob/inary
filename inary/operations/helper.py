@@ -256,7 +256,8 @@ def show_changed_configs(package_dict, opt):
     for package in package_dict:
         if package_dict[package]:
             if ctx.ui.confirm(util.colorize(
-                    _("[?] Would you like to see changes in config files of \"{0}\" package").format(package), color='brightyellow')):
+                    _("[?] Would you like to see changes in config files of \"{0}\" package").format(package),
+                    color='brightyellow')):
                 for file in package_dict[package]:
                     new_file = util.join_path(
                         ctx.config.history_dir(), opt, package, ctx.config.dest_dir(), file)

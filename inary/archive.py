@@ -449,13 +449,11 @@ class ArchiveTar(ArchiveBase):
                 if not os.path.isdir(tarinfo.name) and not os.path.islink(tarinfo.name):
                     try:
                         os.unlink(tarinfo.name)
-                    except:
+                    except Exception:
                         # TODO: review this block
                         pass
                     self.tar.extract(tarinfo)
-            except IOError as e:
-                os.remove(tarinfo.name)
-                self.tar.extract(tarinfo)
+
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing

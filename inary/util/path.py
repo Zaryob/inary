@@ -14,15 +14,11 @@
 
 """misc. utility functions, including process and file utils"""
 
-from inary.util.strings import *
-import struct
 from functools import reduce
 import os
 
 # Inary Modules
-import inary
-import inary.errors
-import inary.context as ctx
+from inary.util.strings import *
 
 # Gettext Library
 import gettext

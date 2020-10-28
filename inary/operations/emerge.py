@@ -21,6 +21,7 @@ import inary.data
 import inary.ui as ui
 import inary.util as util
 import inary.context as ctx
+import inary.data.pgraph as pgraph
 import inary.operations as operations
 import inary.atomicoperations as atomicoperations
 
@@ -79,7 +80,6 @@ installed in the respective order to satisfy dependencies:
         atomicoperations.install_single_name(x)
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
-
     for x in order_build:
         package_names = operations.build.build(x).new_packages
         inary.operations.install.install_pkg_files(
@@ -95,11 +95,12 @@ installed in the respective order to satisfy dependencies:
 
 def plan_emerge(A):
     sourcedb = inary.db.sourcedb.SourceDB()
+    installdb = inary.db.installdb.InstallDB()
 
     # try to construct a inary graph of packages to
     # install / reinstall
 
-    G_f = inary.data.pgraph.Digraph()
+    G_f = pgraph.PGraph(sourcedb, installdb)
 
     def get_spec(name):
         if sourcedb.has_spec(name):
@@ -113,8 +114,9 @@ def plan_emerge(A):
 
     def add_src(src):
         if not str(src.name) in G_f.vertices():
-            G_f.add_vertex(str(src.name), (src.version, src.release))
-
+            # TODO replace this shitty way with a function
+            G_f.packages.append(src.name)
+            
     def pkgtosrc(pkg):
         return sourcedb.pkgtosrc(pkg)
 
@@ -140,11 +142,8 @@ def plan_emerge(A):
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    if srcdep not in G_f.vertices():
-                        Bp.add(srcdep)
-                        add_src(get_src(srcdep))
-                    if not src.name == srcdep:  # firefox - firefox-devel thing
-                        G_f.add_edge(src.name, srcdep)
+                    print(dep.package)
+                    G_f.packages.append(dep.package)
 
             for builddep in src.buildDependencies:
                 process_dep(builddep)

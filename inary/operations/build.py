@@ -210,22 +210,34 @@ class Builder:
                 _("Source \"{}\" not found in any active repository.").format(name))
 
     def __init__(self, specuri):
-
+        self.emerge=False
+        if "://" in specuri:
+            self.emerge=True
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
+        self.specuri=specuri
+        self.specdiruri = os.path.dirname(self.specuri)
+        if len(self.specdiruri) > 0 and self.emerge:
+            self.pkgname = os.path.basename(self.specdiruri)
+            self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
+        else:
+            self.destdir=None
 
         # process args
         if not isinstance(specuri, inary.uri.URI):
             specuri = inary.uri.URI(specuri)
 
+        if self.emerge:
+            self.fetch_pspecfile()
         # read spec file, we'll need it :)
-        self.set_spec_file(specuri)
-
+        self.spec = self.set_spec_file(specuri)
+        
         if specuri.is_remote_file():
             self.specdir = self.fetch_files()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
+        
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
         self.package_rfp = None
@@ -245,7 +257,10 @@ class Builder:
         self.target_package_format = ctx.get_option("package_format") \
             or inary.package.Package.default_format
 
-        self.read_translations(self.specdir)
+        try:
+            self.read_translations(self.specdir)
+        except Exception:
+            ctx.ui.output(_("Translation cannot readed.")+"\n")
 
         self.sourceArchives = inary.archive.SourceArchives(self.spec)
 
@@ -270,15 +285,20 @@ class Builder:
         self.has_ccache = False
         self.has_icecream = False
         self.variable_buffer = {}
+        self.destdir=os.getcwd()
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
             # FIXME: doesn't work for file://
             specuri = inary.uri.URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
+        
         spec = Specfile.SpecFile()
-        spec.read(self.specuri, ctx.config.tmp_dir())
-        self.spec = spec
+        if self.emerge:
+            spec.read("{}/{}".format(self.destdir,ctx.const.pspec_file),self.specuri)
+        else:
+            spec.read(self.specuri, ctx.config.tmp_dir())
+        return spec
 
     def read_translations(self, specdir):
         self.spec.read_translations(util.join_path(specdir,
@@ -356,7 +376,12 @@ class Builder:
         self.check_patches()
 
         self.check_build_dependencies()
-        self.fetch_component()
+        
+        try:
+            self.fetch_component()
+        except:
+            ctx.ui.output(_("Component cannot readed.")+"\n")
+            
         self.fetch_source_archives()
 
         util.clean_dir(self.pkg_install_dir())
@@ -468,9 +493,6 @@ class Builder:
                 os.environ["CCACHE_DIR"] = "/tmp/.ccache"
 
     def fetch_files(self):
-        self.specdiruri = os.path.dirname(self.specuri.get_uri())
-        pkgname = os.path.basename(self.specdiruri)
-        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
         # self.location = os.path.dirname(self.url.uri)
 
         self.fetch_actionsfile()
@@ -479,7 +501,6 @@ class Builder:
         self.fetch_patches()
         self.fetch_additionalFiles()
         self.fetch_postops()
-
         return self.destdir
 
     def fetch_pspecfile(self):
@@ -523,9 +544,8 @@ class Builder:
     def fetch_postops(self):
         for postops in ctx.const.postops:
             postops_script = util.join_path(self.specdiruri, postops)
-            if util.check_file(postops_script, noerr=True):
-                self.download(postops_script, util.join_path(self.specdir))
-                ctx.ui.info(_("PostOps Script Fetched."))
+            if util.check_file(postops_script, noerr=True) or "://" in postops_script:
+                self.download(postops_script, util.join_path(self.destdir))
 
     @staticmethod
     def download(uri, transferdir):
@@ -703,11 +723,11 @@ class Builder:
         """Returns the real path of WorkDir for an unpacked archive."""
 
         dirname = self.get_action_variable("WorkDir", "")
-        src_list=os.listdir(self.pkg_work_dir())
+        src_list = os.listdir(self.pkg_work_dir())
         if "inaryBuildState" in src_list:
             src_list.remove("inaryBuildState")
         if dirname == "":
-            if len(src_list)==1:
+            if len(src_list) == 1:
                 dirname = src_list[0]
             else:
                 dirname = self.spec.source.name + "-" + self.spec.getSourceVersion()
@@ -731,6 +751,11 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
+        self.specdiruri = os.path.dirname(self.specuri.get_uri())
+        pkgname = os.path.basename(self.specdiruri)
+        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
+        if os.path.exists(self.destdir):
+            curDir=self.destdir
         src_dir = self.pkg_src_dir()
         self.set_environment_vars()
         os.environ['WORK_DIR'] = src_dir
@@ -1057,7 +1082,10 @@ package might be a good solution."))
                         fileinfo = witcher(filepath).name
                     except ValueError:
                         ctx.ui.warning(
-                            _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(filepath)))
+                            _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(
+                                filepath)
+                            )
+                        )
                         fileinfo = "broken symlink"
                     ctx.ui.info(
                         _("\'magic\' return of \"{0}\" is \"{1}\"").format(
@@ -1066,8 +1094,11 @@ package might be a good solution."))
                     result = util.run_batch(
                         "file {}".format(filepath), ui_debug=False)
                     if result[0]:
-                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(result[0], filepath) +
-                                     _("Output:\n{}").format(result[1]))
+                        ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(
+                                         result[0],
+                                         filepath) +
+                                     _("Output:\n{}").format(result[1])
+                        )
 
                     fileinfo = str(result[1])
                     ctx.ui.info(
@@ -1090,7 +1121,10 @@ package might be a good solution."))
 
         doc_ptrn = re.compile(ctx.const.doc_package_end)
 
-        self.fetch_component()  # bug 856
+        try:
+            self.fetch_component()
+        except:
+            ctx.ui.output(_("Component cannot readed.")+"\n")
         ctx.ui.status(
             _("Running file actions: \"{}\"").format(
                 self.spec.source.name), push_screen=True)

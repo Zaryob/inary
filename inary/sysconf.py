@@ -111,6 +111,7 @@ def proceed(force=False):
     t("exebin", "/bin", "chmod +x -R /bin")
     t("libexec", "/usr/libexec", "chmod +x -R /usr/libexec")
     t("ca-certficates", "/etc/ssl/certs", "update-ca-certificates --fresh")
+    t("profile.env", "/etc/env.d", "env-update")
     t("cracklib", "/usr/share/cracklib/",
       "create-cracklib-dict /usr/share/cracklib/*")
     sys.stdout.write("\n")

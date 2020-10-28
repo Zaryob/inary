@@ -84,14 +84,10 @@ def set_repo_activity(name, active):
 def update_repos(repos, force=False):
     inary.db.historydb.HistoryDB().create_history("repoupdate")
     updated = False
-    try:
-        for repo in repos:
-            updated |= __update_repo(repo, force)
-    finally:
-        if updated:
-            ctx.ui.info(_('Regenerating database caches...'), verbose=True)
+    for repo in repos:
+        updated = __update_repo(repo, force)
+        if updated :
             inary.db.regenerate_caches()
-
 
 @util.locked
 def update_repo(repo, force=False):

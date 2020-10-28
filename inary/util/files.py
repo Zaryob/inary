@@ -14,20 +14,20 @@
 
 """misc. utility functions, including process and file utils"""
 
-from inary.errors import FileError, FilePermissionDeniedError, Error
-from inary.util.strings import remove_prefix
-from inary.util.process import run_batch
-from inary.util.path import join_path
 import fnmatch
 import hashlib
-import shutil
 import os
 import re
+import shutil
 
 # Inary Modules
 import inary
-import inary.errors
 import inary.context as ctx
+import inary.errors
+from inary.errors import FileError, FilePermissionDeniedError, Error
+from inary.util.path import join_path
+from inary.util.process import run_batch
+from inary.util.strings import remove_prefix
 
 # Gettext Library
 import gettext
@@ -315,11 +315,11 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
         with open(patchFile) as patchfile:
             lines = patchfile.readlines()
             try:
-                paths_m = [l.strip().split()[1]
-                           for l in lines if l.startswith("---") and "/" in l]
+                paths_m = [line.strip().split()[1]
+                           for line in lines if line.startswith("---") and "/" in line]
                 try:
-                    paths_p = [l.strip().split()[1]
-                               for l in lines if l.startswith("+++")]
+                    paths_p = [line.strip().split()[1]
+                               for line in lines if line.startswith("+++")]
                 except IndexError:
                     paths_p = []
             except IndexError:
@@ -328,8 +328,8 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                 if not paths_p:
                     paths_p = paths_m[:]
                     try:
-                        paths_m = [l.strip().split()[1]
-                                   for l in lines if l.startswith("***") and "/" in l]
+                        paths_m = [line.strip().split()[1]
+                                   for line in lines if line.startswith("***") and "/" in line]
                     except IndexError:
                         pass
 
@@ -341,7 +341,7 @@ def do_patch(sourceDir, patchFile, level=0, name=None, reverse=False):
                     if level is None and len(
                             paths_m) - 1 == paths_m.index(path_m):
                         level = check_patch_level(sourceDir, path_m)
-                    if not level is None:
+                    if level is not None:
                         ctx.ui.info(
                             _("Detected patch level={0} for {1}").format(
                                 level, os.path.basename(patchFile)), verbose=True)
