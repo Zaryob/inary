@@ -76,8 +76,13 @@ installed in the respective order to satisfy dependencies:
 
     ctx.ui.notify(ui.packagestogo, order=order_inst)
 
-    for x in order_inst:
-        atomicoperations.install_single_name(x)
+    # Dependency install from source repo (fully emerge)
+    sourcedb = inary.db.sourcedb.SourceDB()
+    inary.operations.emerge.emerge(sourcedb.get_source_names(order_inst))
+    
+    # Dependency install from binary repo (half emerge)
+    #for x in order_inst:
+    #    atomicoperations.install_single_name(x)
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
     for x in order_build:
@@ -142,7 +147,6 @@ def plan_emerge(A):
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    print(dep.package)
                     G_f.packages.append(dep.package)
 
             for builddep in src.buildDependencies:

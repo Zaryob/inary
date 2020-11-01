@@ -283,7 +283,6 @@ def install_pkg_files(package_URIs, reinstall=False):
     # set A using packagedb
     for x in A:
         G_f.packages.append(x)
-    print(tobe_installed)
     B = A
     while len(B) > 0:
         Bp = set()

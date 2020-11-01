@@ -104,6 +104,12 @@ class SourceDB(lazydb.LazyDB):
     def get_spec(self, name, repo=None):
         spec, repo = self.get_spec_repo(name, repo)
         return spec
+    
+    def get_source_names(self,names,repo=None):
+        A=[]
+        for x in names:
+            A.append(self.pkgtosrc(x,repo))
+        return A
 
     def search_spec(self, terms, lang=None, repo=None, fields=None, cs=False):
         """
