@@ -286,6 +286,9 @@ class Builder:
         self.has_icecream = False
         self.variable_buffer = {}
         self.destdir=os.getcwd()
+        if os.getuid() != 0:
+            if os.system("fakeroot --version &>/dev/null") == 0:
+                os.environ['USER']="root"
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -751,6 +754,7 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
+        command=""
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
         pkgname = os.path.basename(self.specdiruri)
         self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
@@ -762,13 +766,15 @@ class Builder:
         os.environ['CURDIR'] = curDir
         os.environ['SRCDIR'] = self.pkg_work_dir()
         os.environ['OPERATION'] = func
+        if os.getuid() != 0:
+            if os.system("fakeroot --version &>/dev/null") == 0:
+                 command+="fakeroot "
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
-
-        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
+        if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
             raise Error(
                 _("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
