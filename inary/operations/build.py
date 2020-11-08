@@ -465,18 +465,6 @@ class Builder:
                "SRC_RELEASE": self.spec.getSourceRelease(),
                "PATH": "/bin:/usr/bin:/sbin:/usr/sbin",
                "PYTHONDONTWRITEBYTECODE": '1'}
-        if self.build_type == "emul32":
-            env["CC"] = "{} -m32".format(util.getenv("CC"))
-            env["CXX"] = "{} -m32".format(util.getenv("CXX"))
-            env["CFLAGS"] = util.getenv("CFLAGS").replace("-fPIC", "")
-            env["CXXFLAGS"] = util.getenv("CXXFLAGS").replace("-fPIC", "")
-            env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
-        if self.build_type == "clang":
-            env['CC'] = "clang"
-            env['CXX'] = "clang++"
-        if self.build_type == "clang32":
-            env['CC'] = "clang -m32"
-            env['CXX'] = "clang++ -m32"
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
