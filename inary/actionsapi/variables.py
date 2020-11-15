@@ -45,6 +45,7 @@ def exportFlags():
     os.environ['MAKEFLAGS'] = values.build.makeflags
 
     os.environ['LD_AS_NEEDED'] = "1"
+    os.environ['NOCONFIGURE'] = "1"
     if os.environ['INARY_BUILD_TYPE'] == "emul32":
         os.environ['CC'] = "{}-gcc -m32".format(values.build.host)
         os.environ['CXX'] = "{}-g++ -m32".format(values.build.host)

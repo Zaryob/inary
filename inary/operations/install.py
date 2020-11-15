@@ -341,6 +341,11 @@ def plan_install_pkg_names(A, reinstall=False):
                 if packagedb.has_package(dep):
                     Bp.add(dep)
                     G_f.add_package(dep)
+            if ctx.config.values.general.allow_devel:
+                dep = x + ctx.const.devel_package_end
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
             if ctx.config.values.general.allow_dbginfo:
                 dep = x + ctx.const.debug_name_suffix
                 if packagedb.has_package(dep):

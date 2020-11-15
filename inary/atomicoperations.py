@@ -264,10 +264,11 @@ class Install(AtomicOperation):
                 file_conflicts_str += _(
                     "\"/{0}\" from \"{1}\" package\n").format(existing_file, pkg)
             msg = _('File conflicts:\n\"{}\"').format(file_conflicts_str)
-            if self.ignore_file_conflicts:
-                ctx.ui.warning(msg)
-            else:
-                raise Error(msg)
+            ctx.ui.warning(msg)
+            if not self.ignore_file_conflicts:
+                if not ctx.ui.confirm(
+                            _('Do you want to overwrite it?')):
+                        raise Error(msg)
 
     def check_operation(self):
 
@@ -653,7 +654,7 @@ class Remove(AtomicOperation):
                 self.package), push_screen=False)
 
         if not self.installdb.has_package(self.package_name):
-            raise Exception(_('Trying to remove nonexistent package ')
+            ctx.ui.status(_('Trying to remove nonexistent package ')
                             + self.package_name)
 
         self.check_dependencies()
