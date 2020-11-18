@@ -20,7 +20,7 @@ then
   echo "$sulin is a file. You must delete or move."
   exit 1
 fi
-inary ar sulin https://osdn.dl.osdn.net/storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz -y -D$sulin || true
+inary ar sulin "https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz" -y -D$sulin || true
 inary ur -y -D$sulin || true
 inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
 inary it -c system.base curl -y --ignore-configure -D$sulin
