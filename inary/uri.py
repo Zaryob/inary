@@ -56,7 +56,7 @@ class URI(object):
         self.__scheme = u[0]
         self.__location = u[1]
         self.__path = u[2]
-        self.__filename = os.path.basename(self.__path)
+        self.__filename = str(uri).split("/")[-1]
         self.__params = u[3]
         self.__query = u[4]
         self.__fragment = u[5]
