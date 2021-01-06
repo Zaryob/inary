@@ -483,7 +483,7 @@ def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
 # Operation function
 
 
-def fetch(packages=None, path=os.path.curdir):
+def fetch(packages=None, path=os.path.curdir,repo=None):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
     @param packages: list of package names -> list_of_strings
@@ -495,7 +495,7 @@ def fetch(packages=None, path=os.path.curdir):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
-        package, repo = packagedb.get_package_repo(name)
+        package, repo = packagedb.get_package_repo(name,repo)
         ctx.ui.info(
             _("\"{0}\" package found in \"{1}\" repository.").format(
                 package.name, repo))
