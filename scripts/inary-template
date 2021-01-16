@@ -1,32 +1,36 @@
 #!/bin/bash
 #define constants
-available_build_types=(autotools cmaketools mesontools pythontools)
+available_build_types=(autotools cmaketools mesontools qt)
 inf_msg(){
     echo "Create new inary package template. "
 }
 
 err_msg(){
-      echo "Usage: $(basename $0) [-o output] [-n name] [-h]" >&2
-      echo " General Options:"
-      echo "  -o   output directory"
-      echo "  -n   package name"
-      echo "  -h   write help message"
-      echo " Actions options:"
-      echo "  -t   build type (default: autotools)"
-      echo "         Build types: ${available_build_types[@]}"
-      echo " Pspec options:"
-      echo "  -p   homepage url"
-      echo "  -u   packager name"
-      echo "  -e   packager email adress"
-      echo "  -l   package license"
-      echo "  -i   isa value"
-      echo "  -s   package summary"
-      echo "  -d   package description"
-      echo "  -b   build dependencies list"
-      echo "  -g   package source adress"
-      echo "  -r   runtime dependencies list"
-      echo "  -v   package verison"
-      echo "  -q   rfp status [true/false] (default true)"
+      echo "Usage: $(basename $0) -n package-name -a source-url [OPTIONS]" >&2
+      echo "  General Options:"
+      echo "    -o   output directory (default: package name)"
+      echo "    -n   package name (required)"
+      echo "    -x   build package after create [true/false] (default false)"
+      echo "    -h   write help message"
+      echo "  Actions options:"
+      echo "    -t   build type (default: autotools)"
+      echo "           Build types: ${available_build_types[@]}"
+      echo "    -c   configure options"
+      echo "  Pspec options:"
+      echo "    Source section:"
+      echo "      -p   homepage url"
+      echo "      -u   packager name"
+      echo "      -e   packager email adress"
+      echo "      -l   package license"
+      echo "      -i   isa value list"
+      echo "      -s   package summary"
+      echo "      -d   package description"
+      echo "      -b   build dependencies list"
+      echo "      -a   package source archive list (required)"
+      echo "      -q   rfp status [true/false] (default true)"
+      echo "    Package section:"
+      echo "      -r   runtime dependencies list"
+      echo "      -v   package verison"
       exit 1
 }
 
@@ -40,24 +44,32 @@ license="GPLv3"
 isa=""
 summary="Package summary missing"
 description="Package description missing"
-src="http://src.example.org/example.tar.gz"
+src=""
 bdeps=""
 rdeps=""
 ver="1.0.0"
 rfp=true
+bnow=false
+confopt=""
 #opt parse
-while getopts -- ':o:n:t:p:u:e:l:i:s:d:b:g:r:v:q:' OPTION; do
+while getopts -- ':o:n:x:t:c:p:u:e:l:i:s:d:b:a:r:v:q:' OPTION; do
   case "$OPTION" in
-   o|output)
-      directory="$OPTARG"
+   o)
+      directory="${OPTARG[@]}"
       ;;
 
    n)
-      name="$OPTARG"
+      name="${OPTARG[@]}"
       ;;
-      
+   x)
+     bnow="${OPTARG[@]}"
+     if [ "$bnow" != "true" ] && [ "$bnow" != "false" ]; then
+        echo "Error: Invalid status: $bnow"
+        err_msg
+      fi
+     ;;
    t)
-      buildtype="$OPTARG"
+      buildtype="${OPTARG[@]}"
       a=0
       for item in ${available_build_types[@]}
       do
@@ -71,20 +83,23 @@ while getopts -- ':o:n:t:p:u:e:l:i:s:d:b:g:r:v:q:' OPTION; do
       fi
       ;;
       
+    c)
+      confopt="${OPTARG[@]}"
+      ;;
     p)
-      homepage="$OPTARG"
+      homepage="${OPTARG[@]}"
       ;;
       
     u)
-      packager="$OPTARG"
+      packager="${OPTARG[@]}"
       ;;
       
     e)
-      email="$OPTARG"
+      email="${OPTARG[@]}"
       ;;
       
     l)
-      license="$OPTARG"
+      license="${OPTARG[@]}"
       ;;
       
     i)
@@ -92,19 +107,19 @@ while getopts -- ':o:n:t:p:u:e:l:i:s:d:b:g:r:v:q:' OPTION; do
       ;;
       
     s)
-      summary="$OPTARG"
+      summary="${OPTARG[@]}"
       ;;
       
     d)
-      description="$OPTARG"
+      description="${OPTARG[@]}"
       ;;      
       
     b)
       bdeps="${OPTARG[@]}"
       ;;
       
-    g)
-      src="$OPTARG"
+    a)
+      src="${OPTARG[@]}"
       ;;
       
     r)
@@ -112,10 +127,10 @@ while getopts -- ':o:n:t:p:u:e:l:i:s:d:b:g:r:v:q:' OPTION; do
       ;;
       
     v)
-      ver="$OPTARG"
+      ver="${OPTARG[@]}"
       ;;
     q)
-      rfp="$OPTARG"
+      rfp="${OPTARG[@]}"
       if [ "$rfp" != "true" ] && [ "$rfp" != "false" ]; then
         echo "Error: Invalid rfp status: $rfp"
         err_msg
@@ -130,10 +145,15 @@ done
 
 #check options
 if [ "$name" == "" ] ; then
-    echo "Error: name missing."
+    echo "Error: package name missing."
     err_msg
-elif [ "$directory" == "" ] ; then
+fi
+if [ "$directory" == "" ] ; then
     directory=$name
+fi
+if [ "$src" == "" ] ; then
+    echo "Error: source archive missing."
+    err_msg
 fi
 
 write_pspec(){
@@ -157,7 +177,10 @@ done
 echo "        <Summary>$summary</Summary>"
 echo "        <Description>$description</Description>"
 for i in $src ; do
-  echo "        <Archive sha1sum=\"fix me\">$i</Archive>"
+  out=$(mktemp)
+  wget -c $i -O $out
+  echo "        <Archive sha1sum=\"$(sha1sum $out | sed 's/ .*//g')\">$i</Archive>"
+  rm -f $out
 done
 echo "        <BuildDependencies>"
 for i in $bdeps ; do
@@ -183,8 +206,37 @@ cat << EOF
             <Path fileType="data">/usr/share</Path>
             <Path fileType="executable">/usr/bin</Path>
             <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
             <Path fileType="library">/usr/libexec</Path>
             <Path fileType="executable">/bin</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-32bit</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i-32bit</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+            <Path fileType="library">/lib32</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-devel</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i-devel</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include</Path>
         </Files>
     </Package>
 
@@ -192,7 +244,7 @@ cat << EOF
         <Update release="1">
 EOF
 echo "            <Date>$(date "+%Y-%m-%d")</Date>"
-echo "            <Version>0.0.1</Version>"
+echo "            <Version>$ver</Version>"
 echo "            <Comment>First release</Comment>"
 echo "            <Name>$packager</Name>"
 echo "            <Email>$email</Email>"
@@ -209,17 +261,18 @@ cat << EOF
 #
 # Licensed under the GNU General Public License, version 3.
 # See the file http://www.gnu.org/licenses/gpl.txt
+from inary.actionsapi import inarytools
 EOF
 echo "from inary.actionsapi import $buildtype as tools"
 cat << EOF
-from inary.actionsapi import inarytools
 from inary.actionsapi import get
 #more information : https://gitlab.com/sulinos/inary/tree/master/inary/actionsapi
 def setup():
-    tools.configure()
-
+EOF
+echo "    tools.configure(\"$confopt\")"
+cat << EOF
 def build():
-    tools.make("build")
+    tools.make()
 
 def install():
     tools.rawInstall("DESTDIR=%s" % get.installDIR())
@@ -227,5 +280,12 @@ def install():
 EOF
 }
 mkdir -p $(pwd)/$name
+echo "Creating pspec.xml to $(pwd)/$name/pspec.xml"
 write_pspec > $(pwd)/$name/pspec.xml
+echo "Creating actions.py to $(pwd)/$name/actions.py"
 write_actions > $(pwd)/$name/actions.py
+
+if [ "$bnow" == "true" ] ; then
+  cd $(pwd)/$name
+  inary bi --verbose --debug
+fi
