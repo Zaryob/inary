@@ -1,0 +1,231 @@
+#!/bin/bash
+#define constants
+available_build_types=(autotools cmaketools mesontools pythontools)
+inf_msg(){
+    echo "Create new inary package template. "
+}
+
+err_msg(){
+      echo "Usage: $(basename $0) [-o output] [-n name] [-h]" >&2
+      echo " General Options:"
+      echo "  -o   output directory"
+      echo "  -n   package name"
+      echo "  -h   write help message"
+      echo " Actions options:"
+      echo "  -t   build type (default: autotools)"
+      echo "         Build types: ${available_build_types[@]}"
+      echo " Pspec options:"
+      echo "  -p   homepage url"
+      echo "  -u   packager name"
+      echo "  -e   packager email adress"
+      echo "  -l   package license"
+      echo "  -i   isa value"
+      echo "  -s   package summary"
+      echo "  -d   package description"
+      echo "  -b   build dependencies list"
+      echo "  -g   package source adress"
+      echo "  -r   runtime dependencies list"
+      echo "  -v   package verison"
+      echo "  -q   rfp status [true/false] (default true)"
+      exit 1
+}
+
+#default variables
+name=""
+homepage="https://gitlab.com/sulinos/devel/inary"
+buildtype="autotools"
+packager="Your Name"
+email="yourmane@example.org"
+license="GPLv3"
+isa=""
+summary="Package summary missing"
+description="Package description missing"
+src="http://src.example.org/example.tar.gz"
+bdeps=""
+rdeps=""
+ver="1.0.0"
+rfp=true
+#opt parse
+while getopts -- ':o:n:t:p:u:e:l:i:s:d:b:g:r:v:q:' OPTION; do
+  case "$OPTION" in
+   o|output)
+      directory="$OPTARG"
+      ;;
+
+   n)
+      name="$OPTARG"
+      ;;
+      
+   t)
+      buildtype="$OPTARG"
+      a=0
+      for item in ${available_build_types[@]}
+      do
+        if [ "$buildtype" == "$item" ]; then
+          a=1
+        fi
+      done
+      if [ "$a" == "0" ] ; then
+        echo "Error: Invalid build type: $a $buildtype"
+        err_msg
+      fi
+      ;;
+      
+    p)
+      homepage="$OPTARG"
+      ;;
+      
+    u)
+      packager="$OPTARG"
+      ;;
+      
+    e)
+      email="$OPTARG"
+      ;;
+      
+    l)
+      license="$OPTARG"
+      ;;
+      
+    i)
+      isa="${OPTARG[@]}"
+      ;;
+      
+    s)
+      summary="$OPTARG"
+      ;;
+      
+    d)
+      description="$OPTARG"
+      ;;      
+      
+    b)
+      bdeps="${OPTARG[@]}"
+      ;;
+      
+    g)
+      src="$OPTARG"
+      ;;
+      
+    r)
+      rdeps="${OPTARG[@]}"
+      ;;
+      
+    v)
+      ver="$OPTARG"
+      ;;
+    q)
+      rfp="$OPTARG"
+      if [ "$rfp" != "true" ] && [ "$rfp" != "false" ]; then
+        echo "Error: Invalid rfp status: $rfp"
+        err_msg
+      fi
+      ;;
+    ?)
+      inf_msg
+      err_msg
+      ;;
+  esac
+done
+
+#check options
+if [ "$name" == "" ] ; then
+    echo "Error: name missing."
+    err_msg
+elif [ "$directory" == "" ] ; then
+    directory=$name
+fi
+
+write_pspec(){
+echo "<?xml version=\"1.0\" ?>"
+echo "<!DOCTYPE INARY SYSTEM \"https://gitlab.com/sulinos/sulinproject/inary/raw/master/inary-spec.dtd\">"
+echo "<INARY>"
+echo "    <Source>"
+echo "        <Name>$name</Name>"
+if [ "$rfp" != "false" ] ; then
+  echo "        <Rfp>$name is a rfp package</Rfp>"
+fi
+echo "        <Homepage>$homepage</Homepage>"
+echo "        <Packager>"
+echo "            <Name>$packager</Name>"
+echo "            <Email>$email</Email>"
+echo "        </Packager>"
+echo "        <License>$license</License>"
+for i in $isa ; do
+  echo "        <IsA>$i/IsA>"
+done
+echo "        <Summary>$summary</Summary>"
+echo "        <Description>$description</Description>"
+for i in $src ; do
+  echo "        <Archive sha1sum=\"fix me\">$i</Archive>"
+done
+echo "        <BuildDependencies>"
+for i in $bdeps ; do
+  echo "            <Dependency>$i</Dependency>"
+done
+echo "        </BuildDependencies>"
+echo "    </Source>"
+
+echo "    <Package>"
+echo "        <Name>$name</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="doc">/usr/share/doc</Path>
+            <Path fileType="man">/usr/share/man</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="executable">/bin</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+EOF
+echo "            <Date>$(date "+%Y-%m-%d")</Date>"
+echo "            <Version>0.0.1</Version>"
+echo "            <Comment>First release</Comment>"
+echo "            <Name>$packager</Name>"
+echo "            <Email>$email</Email>"
+echo "        </Update>"
+echo "    </History>"
+echo "</INARY>"
+
+
+}
+write_actions(){
+cat << EOF
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/licenses/gpl.txt
+EOF
+echo "from inary.actionsapi import $buildtype as tools"
+cat << EOF
+from inary.actionsapi import inarytools
+from inary.actionsapi import get
+#more information : https://gitlab.com/sulinos/inary/tree/master/inary/actionsapi
+def setup():
+    tools.configure()
+
+def build():
+    tools.make("build")
+
+def install():
+    tools.rawInstall("DESTDIR=%s" % get.installDIR())
+
+EOF
+}
+mkdir -p $(pwd)/$name
+write_pspec > $(pwd)/$name/pspec.xml
+write_actions > $(pwd)/$name/actions.py
