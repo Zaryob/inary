@@ -13,6 +13,7 @@ err_msg(){
       echo "    -n   package name (required)"
       echo "    -x   build package after create"
       echo "    -y   do not ask anything"
+      echo "    -z   do not generate pspec and actions"
       echo "    -h   write help message"
       echo "  Actions options:"
       echo "    -t   build type (default: autotools)"
@@ -29,7 +30,7 @@ err_msg(){
       echo "      -d   package description"
       echo "      -b   build dependencies list"
       echo "      -a   package source archive list (required)"
-      echo "      -q   rfp status [true/false] (default true)"
+      echo "      -q   disable rfp status"
       echo "      -qq  rfp description"
       echo "    Package section:"
       echo "      -r   runtime dependencies list"
@@ -57,6 +58,7 @@ rfp=true
 bnow=false
 confopt=""
 forceyes=""
+dummy=""
 #opt parse
 while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:q:qq:' OPTION; do
   case "$OPTION" in
@@ -146,6 +148,9 @@ while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:q:qq:' OPTION; do
             ;;
           x)
             bnow="true"
+            ;;
+          z)
+            dummy="true"
             ;;
           *)
             inf_msg
@@ -309,7 +314,7 @@ EOF
 # Write info after creating
 info "Package name" "$name"
 info "Output directory" "$(realpath $directory)"
-info "Package version" "$version"
+info "Package version" "$ver"
 info "Homepage" "$homepage"
 info "Packager" "$packager"
 info "Email" "$email"
@@ -326,6 +331,11 @@ if [ "$forceyes" == "" ] ; then
         echo "       Operation canceled."
         exit
     fi
+fi
+if [ "$dummy" == "true" ] ; then
+    echo "Do not create pspec and actions. If you wanna create, you must remove -z parameter."
+    echo "  Operation canceled."
+    exit
 fi
 directory=$(realpath $directory)
 mkdir -p $directory
