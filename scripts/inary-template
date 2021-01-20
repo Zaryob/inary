@@ -2,6 +2,13 @@
 set -e
 #define constants
 available_build_types=(autotools cmaketools mesontools qt)
+
+info(){
+    echo -e "\033[32;1m$1\033[;0m: $2"
+}
+err(){
+    echo -e "\033[31;1m$1\033[;0m: $2"
+}
 inf_msg(){
     echo "Create new inary package template. "
 }
@@ -31,7 +38,7 @@ err_msg(){
       echo "      -b   build dependencies list"
       echo "      -a   package source archive list (required)"
       echo "      -q   disable rfp status"
-      echo "      -qq  rfp description"
+      echo "      -m   rfp description"
       echo "    Package section:"
       echo "      -r   runtime dependencies list"
       echo "      -v   package verison"
@@ -60,7 +67,7 @@ confopt=""
 forceyes=""
 dummy=""
 #opt parse
-while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:q:qq:' OPTION; do
+while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:m:' OPTION; do
   case "$OPTION" in
    o)
       directory="${OPTARG[@]}"
@@ -79,7 +86,7 @@ while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:q:qq:' OPTION; do
         fi
       done
       if [ "$a" == "0" ] ; then
-        echo "Error: Invalid build type: $a $buildtype"
+        err "Error" "Invalid build type: $a $buildtype"
         err_msg
       fi
       ;;
@@ -130,19 +137,16 @@ while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:q:qq:' OPTION; do
     v)
       ver="${OPTARG[@]}"
       ;;
-    q)
-      rfp="${OPTARG[@]}"
-      if [ "$rfp" != "true" ] && [ "$rfp" != "false" ]; then
-        echo "Error: Invalid rfp status: $rfp"
-        err_msg
-      fi
-      ;;
-    qq)
+    m)
       rfpdescription="${OPTARGS[@]}"
       ;;
     ?)
       for arg in ${OPTARG[@]} ; do
         case "$arg" in
+          q)
+            echo "uwu"
+            rfp="false"
+            ;;
           y)
             forceyes="-y"
             ;;
@@ -175,9 +179,6 @@ if [ "$src" == "" ] ; then
     err_msg
 fi
 
-info(){
-    echo -e "\033[32;1m$1\033[;0m: $2"
-}
 
 write_pspec(){
 echo "<?xml version=\"1.0\" ?>"
@@ -185,7 +186,7 @@ echo "<!DOCTYPE INARY SYSTEM \"https://gitlab.com/sulinos/sulinproject/inary/raw
 echo "<INARY>"
 echo "    <Source>"
 echo "        <Name>$name</Name>"
-if [ "$rfp" != "false" ] ; then
+if [ "$rfp" == "true" ] ; then
   echo "        <Rfp>$rfpdescription</Rfp>"
 else
   echo "        <!--Rfp>$rfpdescription</Rfp-->"
@@ -230,8 +231,6 @@ cat << EOF
         <Files>
             <Path fileType="config">/etc</Path>
             <Path fileType="localedata">/usr/share/locale</Path>
-            <Path fileType="doc">/usr/share/doc</Path>
-            <Path fileType="man">/usr/share/man</Path>
             <Path fileType="info">/usr/share/info</Path>
             <Path fileType="data">/usr/share</Path>
             <Path fileType="executable">/usr/bin</Path>
@@ -239,6 +238,28 @@ cat << EOF
             <Path fileType="library">/lib</Path>
             <Path fileType="library">/usr/libexec</Path>
             <Path fileType="executable">/bin</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-pages</Name>"
+echo "        <RuntimeDependencies>"
+echo "            <Dependency>$name</Dependency>"
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/share/man/</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-docs</Name>"
+echo "        <RuntimeDependencies>"
+echo "            <Dependency>$name</Dependency>"
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/share/doc/</Path>
         </Files>
     </Package>
 EOF
