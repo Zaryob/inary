@@ -278,8 +278,7 @@ class Fetcher:
         )
         
     def _get_aria2c(self):
-        # FIXME: We need ssl verification.
-        return os.system("aria2c -U \"{}\" --check-certificate=false -c \"{}\" -o \"{}\"".format(
+        return os.system("aria2c -U \"{}\" -c \"{}\" -d \"/\" -o \"{}\"".format(
                 self.useragent,
                 self.url.get_uri(),
                 self.partial_file
