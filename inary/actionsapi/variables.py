@@ -30,16 +30,20 @@ def exportFlags():
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
     values = ctx.config.values
-    os.environ['HOST'] = values.build.host
     if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
-        os.environ['CFLAGS'] = values.build.cflags.replace("-fPIC", "")
-        os.environ['CXXFLAGS'] = values.build.cxxflags.replace("-fPIC", "")
         os.environ['PKG_CONFIG_PATH'] = "/usr/lib32/pkgconfig"
-    else:
-        os.environ['CFLAGS'] = values.build.cflags
-        os.environ['CXXFLAGS'] = values.build.cxxflags
-        
-    os.environ['LDFLAGS'] = values.build.ldflags
+    
+    if "INARY_USE_FLAGS" in os.environ and os.environ['INARY_USE_FLAGS']:
+        os.environ['LDFLAGS'] = values.build.ldflags
+        if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
+            os.environ['CFLAGS'] = values.build.cflags.replace("-fPIC", "")
+            os.environ['CXXFLAGS'] = values.build.cxxflags.replace("-fPIC", "")
+            
+        else:
+            os.environ['CFLAGS'] = values.build.cflags
+            os.environ['CXXFLAGS'] = values.build.cxxflags
+            
+    os.environ['HOST'] = values.build.host
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
     os.environ['MAKEFLAGS'] = values.build.makeflags

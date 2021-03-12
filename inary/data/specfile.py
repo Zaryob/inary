@@ -189,6 +189,7 @@ class Source(metaclass=autoxml.autoxml):
     t_Version = [autoxml.String, autoxml.optional]
     t_Release = [autoxml.String, autoxml.optional]
     t_SourceURI = [autoxml.String, autoxml.optional]  # used in index
+    t_UseFlag =  [autoxml.String, autoxml.optional]
 
     def buildtimeDependencies(self):
         return self.buildDependencies

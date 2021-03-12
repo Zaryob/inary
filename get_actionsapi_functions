@@ -1,0 +1,6 @@
+#!/bin/bash
+find inary/actionsapi -type f -name "*.py" | while read line
+do
+echo "$line:"
+cat $line | grep -v "__" | grep "^def " | sed "s/^def /  - /g"
+done

@@ -34,7 +34,6 @@ import inary.util as util
 import inary.context as ctx
 import inary.process as process
 import inary.data.files as Files
-import inary.actionsapi.variables
 import inary.data.metadata as Metadata
 import inary.data.specfile as Specfile
 import inary.data.component as Component
@@ -464,7 +463,9 @@ class Builder:
                "SRC_VERSION": self.spec.getSourceVersion(),
                "SRC_RELEASE": self.spec.getSourceRelease(),
                "PATH": "/bin:/usr/bin:/sbin:/usr/sbin",
-               "PYTHONDONTWRITEBYTECODE": '1'}
+               "PYTHONDONTWRITEBYTECODE": '1',
+               "INARY_USE_FLAGS": "True"}
+        # FIXME: Get useflag status from pspec file (Source section)
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
