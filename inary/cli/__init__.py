@@ -164,7 +164,6 @@ class CLI(inary.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
 
-        locale.setlocale(locale.LC_ALL, "")
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
         locale.setlocale(locale.LC_ALL, "C")
 
