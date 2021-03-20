@@ -285,9 +285,6 @@ class Builder:
         self.has_icecream = False
         self.variable_buffer = {}
         self.destdir=os.getcwd()
-        if os.getuid() != 0:
-            if os.system("fakeroot --version &>/dev/null") == 0:
-                os.environ['USER']="root"
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
@@ -448,7 +445,7 @@ class Builder:
 
         # Each time a builder is created we must reset
         # environment. See bug #2575
-
+        username=os.environ["USER"]
         os.environ.clear()
 
         # inary.actionsapi.variables.initVariables()
@@ -457,6 +454,7 @@ class Builder:
                "WORK_DIR": self.pkg_src_dir(),
                "SRCDIR": self.pkg_work_dir(),
                "HOME": self.pkg_work_dir(),
+               "USER": username,
                "INSTALL_DIR": self.pkg_install_dir(),
                "INARY_BUILD_TYPE": self.build_type,
                "SRC_NAME": self.spec.source.name,
