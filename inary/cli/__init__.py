@@ -165,8 +165,6 @@ class CLI(inary.ui.UI):
             return True
 
         yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
-        locale.setlocale(locale.LC_ALL, "C")
-
         tty.tcflush(sys.stdin.fileno(), 0)
 
         if invert:
