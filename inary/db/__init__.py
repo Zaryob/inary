@@ -30,8 +30,8 @@ def invalidate_caches():
 
 def flush_caches():
     # Invalidate and flush caches to re-generate them when needed
-    for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
-               componentdb.ComponentDB(), groupdb.GroupDB()]:
+    for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
+               installdb.InstallDB(), historydb.HistoryDB(), groupdb.GroupDB(), repodb.RepoDB()]:
         db.invalidate()
         db.cache_flush()
 
@@ -39,7 +39,7 @@ def flush_caches():
 def update_caches():
     # Updates on disk caches
     for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
-               installdb.InstallDB(), groupdb.GroupDB()]:
+               installdb.InstallDB(), historydb.HistoryDB(), groupdb.GroupDB(), repodb.RepoDB()]:
         if db.is_initialized():
             db.cache_save()
 
@@ -48,8 +48,8 @@ def regenerate_caches():
     flush_caches()
     # Force cache regeneration
     try:
-        for db in [packagedb.PackageDB(), sourcedb.SourceDB(),
-               componentdb.ComponentDB(), groupdb.GroupDB()]:
+        for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
+               installdb.InstallDB(), historydb.HistoryDB(), groupdb.GroupDB(), repodb.RepoDB()]:
             db.cache_regenerate()
     except Exception: # TODO: warning message needed
         pass

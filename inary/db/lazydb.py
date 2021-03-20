@@ -24,6 +24,11 @@ import inary.util as util
 # lower borks for international locales. What we want is ascii lower.
 lower_map = str.maketrans(util.ascii_uppercase, util.ascii_lowercase)
 
+# Gettext Library
+import gettext
+__trans = gettext.translation('inary', fallback=True)
+_ = __trans.gettext
+
 
 class Singleton(object):
     _the_instances = {}
