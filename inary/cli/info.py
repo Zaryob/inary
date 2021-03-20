@@ -107,9 +107,9 @@ Usage: info <package1> <package2> ... <packagen>
             self.inaryfile_info(arg)
             return
 
-        self.installdb_info(arg)
-        self.packagedb_info(arg)
-        self.sourcedb_info(arg)
+        if self.installdb_info(arg):
+            self.packagedb_info(arg)
+            self.sourcedb_info(arg)
 
     def print_files(self, files):
         files.list.sort(key=lambda x: x.path)
@@ -165,7 +165,7 @@ Usage: info <package1> <package2> ... <packagen>
 
             if self.options.files or self.options.files_path:
                 self.print_files(files)
-                return
+                return False
 
             if self.options.short:
                 ctx.ui.formatted_output(_("[inst] "), noln=True, column=" ")
@@ -175,6 +175,7 @@ Usage: info <package1> <package2> ... <packagen>
             self.print_metadata(metadata, self.installdb)
         else:
             ctx.ui.info(_("\"{}\" package is not installed.").format(package))
+        return True
 
     def packagedb_info(self, package):
         if self.packagedb.has_package(package):
