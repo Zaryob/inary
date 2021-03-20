@@ -16,7 +16,6 @@
 import re
 import sys
 import tty
-import locale
 
 # Inary Modules
 import inary.ui
@@ -164,7 +163,8 @@ class CLI(inary.ui.UI):
         if ctx.config.options and ctx.config.options.yes_all:
             return True
 
-        yes_expr = re.compile(locale.nl_langinfo(locale.YESEXPR))
+        yes_expr_nl = re.compile("^["+_('(yes')[1].upper()+_('(yes')[1]+"]")
+        yes_expr = re.compile("^[Yy]")
         tty.tcflush(sys.stdin.fileno(), 0)
 
         if invert:
@@ -177,8 +177,7 @@ class CLI(inary.ui.UI):
                                                                         'red') + ":  "
 
         s = input(prompt)
-
-        if yes_expr.search(s):
+        if yes_expr.search(s) or yes_expr_nl.search(s):
             return True
         else:
             return False
