@@ -13,6 +13,7 @@
 #
 
 import inary.db.filesdb
+import inary.db
 import inary.context as ctx
 import inary.cli.command as command
 import optparse
@@ -50,4 +51,10 @@ dirs under /var/lib/inary
     def run(self):
         self.init(database=True)
         if ctx.ui.confirm(_('Rebuild INARY databases?')):
-            inary.db.filesdb.rebuild_db()
+            ctx.ui.info(_("Updating database caches"))
+            inary.db.regenerate_caches()
+            ctx.ui.info(_("Saving database caches"))
+            inary.db.update_caches()
+            if ctx.get_option('files'):
+                ctx.ui.info(_("Updating filesdb"))
+                inary.db.filesdb.rebuild_db()
