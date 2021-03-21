@@ -19,7 +19,8 @@ def ctag(tag):
     return "{}</{}>".format(("\t"*tab),tag)
    
    
- 
+import sys, os
+sys.path.insert(0,os.getcwd())
 from pspec import inary
 # pspec başı
 print('<?xml version="1.0" ?>')
@@ -31,6 +32,8 @@ print()
 print(otag("Source"))
 print(write("Name",inary.source.name))
 print(write("Homepage",inary.source.homepage))
+if hasattr(inary.source,"rfp"):
+    print(write("Rfp",inary.source.rfp))
 print(otag("Packager"))
 print(write("Name",inary.source.packager.name))
 print(write("Email",inary.source.packager.email))

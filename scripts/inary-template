@@ -305,6 +305,98 @@ echo "</INARY>"
 
 
 }
+
+write_pspec_class(){
+echo "class inary:"
+echo "    class source:"
+echo "        name = \"$name\""
+echo "        homepage = \"$homepage\""
+if [ "$rfp" == "true" ] ; then
+    echo "        rfp= \"$rfpdescription\""
+else
+    echo "        #rfp= \"$rfpdescription\""
+
+fi
+echo ""
+echo "        class packager:"
+echo "            name = \"$packager\""
+echo "            email = \"$email\""
+echo "        license = \"$license\""
+echo -n "        isa = ["
+for i in $isa ; do
+    echo -n "\"$isa\","
+done
+echo "]"
+echo "        summary = \"$summary\""
+echo "        description = \"$description\""
+echo -n "        archive = ["
+for i in $src ; do
+    echo "(\"FIXME\",\"$i\"),"
+    echo -n "          "
+done
+echo "]"
+echo -n "        builddependencies = ["
+for i in $bdeps ; do
+    echo "\"$i\","
+done
+echo "]"
+echo "        packages = [\"package\",\"package_docs\" , \"package_devel\","
+echo "                    \"package_pages\", \"package_32bit\"]"
+echo ""
+echo "    class package:"
+echo "        name = \"$name\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i\","
+done
+echo "]"
+echo "        files = [(\"config\", \"/etc\"),"
+echo "                 (\"localedata\", \"/usr/share/locale\"),"
+echo "                 (\"info\", \"/usr/share/info\"),"
+echo "                 (\"data\", \"/usr/share\"),"
+echo "                 (\"executable\", \"/usr/bin\"),"
+echo "                 (\"library\", \"/usr/lib\"),"
+echo "                 (\"library\", \"/lib\"),"
+echo "                 (\"library\", \"/usr/libexec\"),"
+echo "                 (\"executable\", \"/bin\")]"
+echo ""
+echo "    class package_docs:"
+echo "        name = \"${name}-docs\""
+echo "        runtimedependencies = [\"$name\"]"
+echo "        files = [(\"library\", \"/usr/share/doc/\")]"
+echo ""
+echo "    class package_pages:"
+echo "        name = \"${name}-pages\""
+echo "        runtimedependencies = [\"$name\"]"
+echo "        files = [(\"library\", \"/usr/share/doc/\")]"
+echo ""
+echo "    class package_32bit:"
+echo "        name = \"${name}-32bit\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i-32bit\","
+done
+echo "]"
+echo "        files = [(\"library\", \"/usr/lib32\"),"
+echo "                 (\"library\", \"/lib32\")]"
+echo ""
+echo "    class package_devel:"
+echo "        name = \"${name}-devel\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i-devel\","
+done
+echo "]"
+echo "        files = [(\"data\", \"/usr/lib/pkgconfig\"),"
+echo "                 (\"header\", \"/usr/include\")]"
+echo ""
+echo "    class history:"
+echo "        update = ["
+echo "            [\"$(date "+%Y-%m-%d")\", \"$ver\", \"First release\","
+echo "                \"$packager\", \"$email\"],"
+echo "        ]"
+}
+
 write_actions(){
 cat << EOF
 #!/usr/bin/env python3
@@ -362,6 +454,7 @@ directory=$(realpath $directory)
 mkdir -p $directory
 info "Creating" "pspec.xml to $directory/pspec.xml"
 write_pspec > $directory/pspec.xml
+write_pspec_class > $directory/pspec.py
 info "Creating" "actions.py to $directory/actions.py"
 write_actions > $directory/actions.py
 
