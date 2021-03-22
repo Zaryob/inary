@@ -21,6 +21,7 @@ err_msg(){
       echo "    -x   build package after create"
       echo "    -y   do not ask anything"
       echo "    -z   do not generate pspec and actions"
+      echo "    -d   do not generate pspec class"
       echo "    -h   write help message"
       echo "  Actions options:"
       echo "    -t   build type (default: autotools)"
@@ -50,8 +51,13 @@ name=""
 directory=""
 homepage="https://gitlab.com/sulinos/devel/inary"
 buildtype="autotools"
-packager="Your Name"
-email="yourmane@example.org"
+if [ -f "~/.gitconfig" ] ; then
+    email="$(cat ~/.gitconfig | grep 'email =' | sed 's/.*= //g')"
+    packager="$(cat ~/.gitconfig | grep 'name =' | sed 's/.*= //g')"
+else
+    packager="Your Name"
+    email="yourmane@example.org"
+fi
 license="GPLv3"
 isa=""
 summary="Package summary missing"
@@ -66,8 +72,9 @@ bnow=false
 confopt=""
 forceyes=""
 dummy=""
+noclass=""
 #opt parse
-while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:m:' OPTION; do
+while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:m:d' OPTION; do
   case "$OPTION" in
    o)
       directory="${OPTARG[@]}"
@@ -155,6 +162,9 @@ while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:m:' OPTION; do
             ;;
           z)
             dummy="true"
+            ;;
+          d)
+            noclass="true"
             ;;
           *)
             inf_msg
@@ -368,7 +378,7 @@ echo ""
 echo "    class package_pages:"
 echo "        name = \"${name}-pages\""
 echo "        runtimedependencies = [\"$name\"]"
-echo "        files = [(\"library\", \"/usr/share/doc/\")]"
+echo "        files = [(\"library\", \"/usr/share/man/\")]"
 echo ""
 echo "    class package_32bit:"
 echo "        name = \"${name}-32bit\""
@@ -454,7 +464,10 @@ directory=$(realpath $directory)
 mkdir -p $directory
 info "Creating" "pspec.xml to $directory/pspec.xml"
 write_pspec > $directory/pspec.xml
-write_pspec_class > $directory/pspec.py
+if [ ! "$noclass" == "true" ] ; then
+    info "Creating" "pspec.py to $directory/pspec.py"
+    write_pspec_class > $directory/pspec.py
+fi
 info "Creating" "actions.py to $directory/actions.py"
 write_actions > $directory/actions.py
 
