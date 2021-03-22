@@ -125,6 +125,29 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
+    install_files = []
+    file_conflicts = []
+    for path in paths:
+        pkg = inary.package.Package(path)
+        pkg.read()
+        ctx.ui.info(_("Checking integration") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ] => {}").format(paths.index(path) +
+                                           1, len(paths),pkg.metadata.package.name), color="yellow")
+        for file in pkg.files.list:
+            if file not in install_files:
+                install_files.append(file)
+            else:
+                file_conflicts.append(file)
+        ctx.ui.info(_("Current {} / Total {} files counted.").format(len(pkg.files.list),len(install_files)))
+    if len(file_conflicts) > 0:
+        ctx.ui.warning(_("Integration check error detected."))
+        for path in file_conflicts:
+            ctx.ui.warning(" -> "+_('File conflicts:\n\"{}\"').format(path))
+        if not ctx.ui.confirm(_('Do you want to continue?')):
+            raise Error(msg)
+
     for path in paths:
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
@@ -139,8 +162,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(_("Installing") +
                     str(" [ {:>" +
                         str(lndig) +
-                        "} / {} ]").format(paths.index(path) +
-                                           1, len(paths)), color="yellow")
+                        "} / {} ] => {}").format(paths.index(path) +
+                                           1, len(paths),util.basename(path)), color="yellow")
         install_op.store_inary_files()
         install_op.install(False)
         try:

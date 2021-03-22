@@ -85,3 +85,6 @@ def join_path(a, *p):
         else:
             path += '/' + b
     return path
+
+def basename(path):
+    return path.split("/")[-1] # os.path.basename is not usefull for remote links
