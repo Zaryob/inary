@@ -86,8 +86,9 @@ def update_repos(repos, force=False):
     updated = False
     for repo in repos:
         updated = __update_repo(repo, force)
-        if updated :
+        if updated:
             inary.db.regenerate_caches()
+
 
 @util.locked
 def update_repo(repo, force=False):

@@ -134,13 +134,14 @@ def install_pkg_names(A, reinstall=False, extra=False):
                     str(" [ {:>" +
                         str(lndig) +
                         "} / {} ] => {}").format(paths.index(path) +
-                                           1, len(paths),pkg.metadata.package.name), color="yellow")
+                                                 1, len(paths), pkg.metadata.package.name), color="yellow")
         for file in pkg.files.list:
             if file not in install_files:
                 install_files.append(file)
             else:
                 file_conflicts.append(file)
-        ctx.ui.info(_("Current {} / Total {} files counted.").format(len(pkg.files.list),len(install_files)))
+        ctx.ui.info(
+            _("Current {} / Total {} files counted.").format(len(pkg.files.list), len(install_files)))
     if len(file_conflicts) > 0:
         ctx.ui.warning(_("Integration check error detected."))
         for path in file_conflicts:
@@ -163,7 +164,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
                     str(" [ {:>" +
                         str(lndig) +
                         "} / {} ] => {}").format(paths.index(path) +
-                                           1, len(paths),util.basename(path)), color="yellow")
+                                                 1, len(paths), util.basename(path)), color="yellow")
         install_op.store_inary_files()
         install_op.install(False)
         try:

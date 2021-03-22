@@ -79,9 +79,9 @@ installed in the respective order to satisfy dependencies:
     # Dependency install from source repo (fully emerge)
     sourcedb = inary.db.sourcedb.SourceDB()
     inary.operations.emerge.emerge(sourcedb.get_source_names(order_inst))
-    
+
     # Dependency install from binary repo (half emerge)
-    #for x in order_inst:
+    # for x in order_inst:
     #    atomicoperations.install_single_name(x)
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
@@ -121,7 +121,7 @@ def plan_emerge(A):
         if not str(src.name) in G_f.vertices():
             # TODO replace this shitty way with a function
             G_f.packages.append(src.name)
-            
+
     def pkgtosrc(pkg):
         return sourcedb.pkgtosrc(pkg)
 

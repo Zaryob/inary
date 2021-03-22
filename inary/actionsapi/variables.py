@@ -33,17 +33,17 @@ def exportFlags():
     if "INARY_BUILD_TYPE" in os.environ and os.environ['INARY_BUILD_TYPE']:
         if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
             os.environ['PKG_CONFIG_PATH'] = "/usr/lib32/pkgconfig"
-    
+
     if "INARY_USE_FLAGS" in os.environ and os.environ['INARY_USE_FLAGS']:
         os.environ['LDFLAGS'] = values.build.ldflags
         if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
             os.environ['CFLAGS'] = values.build.cflags.replace("-fPIC", "")
             os.environ['CXXFLAGS'] = values.build.cxxflags.replace("-fPIC", "")
-            
+
         else:
             os.environ['CFLAGS'] = values.build.cflags
             os.environ['CXXFLAGS'] = values.build.cxxflags
-            
+
     os.environ['HOST'] = values.build.host
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs

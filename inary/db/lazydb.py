@@ -13,6 +13,7 @@
 #
 
 # Standart Python Modules
+import gettext
 import os
 import time
 import pickle
@@ -25,7 +26,6 @@ import inary.util as util
 lower_map = str.maketrans(util.ascii_uppercase, util.ascii_lowercase)
 
 # Gettext Library
-import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 

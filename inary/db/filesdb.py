@@ -49,17 +49,18 @@ class FilesDB(lazydb.LazyDB):
         installdb = inary.db.installdb.InstallDB()
         installed = installdb.list_installed()
         installed.sort()
-        total=len(installed)
-        count=1
+        total = len(installed)
+        count = 1
         for pkg in installed:
             files = installdb.get_files(pkg)
             self.add_files(pkg, files)
             ctx.ui.info(
                 "%-80.80s\r" %
-                ("{}/{} "+_('-> Adding files of \"{}\" package to db...')).format(total,count,pkg),
+                ("{}/{} "+_('-> Adding files of \"{}\" package to db...')
+                 ).format(total, count, pkg),
                 noln=True,
                 color='brightpurple')
-            count+=1
+            count += 1
         ctx.ui.info(_('\nAdded files database...'), color='green')
 
     def get_file(self, path):

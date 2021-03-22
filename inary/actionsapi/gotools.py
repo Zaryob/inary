@@ -66,7 +66,8 @@ def configure(parameters='',
               installPrefix='/{}'.format(get.defaultprefixDIR()), sourceDir='.'):
     """configure source with given Go parameters = "-DGo_BUILD_TYPE -DGo_CXX_FLAGS ... " """
     if not can_access_file(join_path(sourceDir, 'main.go')):
-            raise ConfigureError(_('{} not found'.format("main.go")))        
+        raise ConfigureError(_('{} not found'.format("main.go")))
+
 
 def go(parameters=''):
     """use go command from actionsapi"""
@@ -104,4 +105,5 @@ def install(parameters='', argument=''):
 
 def rawInstall(parameters='', argument=''):
     """rawInstall not available. Using install function"""
-    raise RunTimeError(_('rawInstall function is not available for gotools. Use install function'))
+    raise RunTimeError(
+        _('rawInstall function is not available for gotools. Use install function'))

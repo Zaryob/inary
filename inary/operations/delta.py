@@ -55,7 +55,8 @@ def create_delta_packages_from_obj(old_packages, new_package_obj, specdir):
 
         if old_pkg_info.release == new_pkg_info.release:
             ctx.ui.warning(
-                _("Package \"{}\" has the same release number with the new package. Skipping it...").format(old_package)
+                _("Package \"{}\" has the same release number with the new package. Skipping it...").format(
+                    old_package)
             )
             continue
 

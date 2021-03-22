@@ -163,7 +163,7 @@ class Install(AtomicOperation):
         self.store_old_paths = None
         self.old_path = None
         self.trigger = inary.trigger.Trigger()
-        self.ask_reinstall=False
+        self.ask_reinstall = False
 
     def install(self, ask_reinstall=True):
 
@@ -267,8 +267,8 @@ class Install(AtomicOperation):
             ctx.ui.warning(msg)
             if not self.ignore_file_conflicts:
                 if not ctx.ui.confirm(
-                            _('Do you want to overwrite it?')):
-                        raise Error(msg)
+                        _('Do you want to overwrite it?')):
+                    raise Error(msg)
 
     def check_operation(self):
 
@@ -344,9 +344,11 @@ class Install(AtomicOperation):
             fpath = util.join_path(ctx.config.dest_dir(), _file.path)
             if os.path.islink(fpath):
                 if os.path.lexists(fpath) and os.path.exists(fpath):
-                    ctx.ui.info(_("Added symlink '{}' ").format(fpath), verbose=True)
+                    ctx.ui.info(_("Added symlink '{}' ").format(
+                        fpath), verbose=True)
                 else:
-                    ctx.ui.warning(_("Broken or missing symlink '{}'").format(fpath))
+                    ctx.ui.warning(
+                        _("Broken or missing symlink '{}'").format(fpath))
 
         if 'postOps' in self.metadata.package.isA:
             if ctx.config.get_option(
@@ -450,7 +452,6 @@ class Install(AtomicOperation):
                     if os.path.islink(old_file_path):
                         os.unlink(old_file_path)
                         continue
-
 
                 try:
                     old_file_stat = os.lstat(old_file_path)
@@ -655,7 +656,7 @@ class Remove(AtomicOperation):
 
         if not self.installdb.has_package(self.package_name):
             ctx.ui.status(_('Trying to remove nonexistent package ')
-                            + self.package_name)
+                          + self.package_name)
 
         self.check_dependencies()
         if not ctx.config.get_option(

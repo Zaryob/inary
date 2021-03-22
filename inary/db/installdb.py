@@ -412,7 +412,7 @@ class InstallDB(lazydb.LazyDB):
     def get_rev_deps(self, name):
         rev_deps = []
         if not self.rev_deps_db:
-            self.rev_deps_db =self.__generate_revdeps()
+            self.rev_deps_db = self.__generate_revdeps()
         package_revdeps = self.rev_deps_db.get(name)
         if package_revdeps:
             for pkg, dep in list(package_revdeps.items()):

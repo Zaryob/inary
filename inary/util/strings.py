@@ -147,7 +147,7 @@ def human_readable_rate(size=0):
 
 
 def format_by_columns(strings, sep_width=2):
-    if(len(strings)>0):
+    if(len(strings) > 0):
         longest_str_len = len(max(strings, key=len))
     else:
         longest_str_len = 0

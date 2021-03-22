@@ -49,7 +49,7 @@ def regenerate_caches():
     # Force cache regeneration
     try:
         for db in [packagedb.PackageDB(), sourcedb.SourceDB(), componentdb.ComponentDB(),
-               installdb.InstallDB(), historydb.HistoryDB(), groupdb.GroupDB(), repodb.RepoDB()]:
+                   installdb.InstallDB(), historydb.HistoryDB(), groupdb.GroupDB(), repodb.RepoDB()]:
             db.cache_regenerate()
-    except Exception: # TODO: warning message needed
+    except Exception:  # TODO: warning message needed
         pass

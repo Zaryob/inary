@@ -74,14 +74,14 @@ def configure(parameters='',
                                                                         parameters,
                                                                         sourceDir)
         if get.CFLAGS():
-            args+=' -DCMAKE_C_FLAGS="{0} {1}"'.format(get.CFLAGS(),
-                    "-m32" if get.buildTYPE() == "emul32" else "-m64")
+            args += ' -DCMAKE_C_FLAGS="{0} {1}"'.format(get.CFLAGS(),
+                                                        "-m32" if get.buildTYPE() == "emul32" else "-m64")
         if get.CXXFLAGS():
-            args+=' -DCMAKE_CXX_FLAGS="{0} {1}"'.format(get.CXXFLAGS(),
-                    "-m32" if get.buildTYPE() == "emul32" else "-m64")
+            args += ' -DCMAKE_CXX_FLAGS="{0} {1}"'.format(get.CXXFLAGS(),
+                                                          "-m32" if get.buildTYPE() == "emul32" else "-m64")
         if get.LDFLAGS():
-            args+=' -DCMAKE_LD_FLAGS="{0}"'.format(get.LDFLAGS())
-        
+            args += ' -DCMAKE_LD_FLAGS="{0}"'.format(get.LDFLAGS())
+
         if system(args):
             raise ConfigureError(_('Configure failed.'))
     else:

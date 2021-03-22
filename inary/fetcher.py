@@ -271,18 +271,18 @@ class Fetcher:
 
     def _get_wget(self):
         return os.system("busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(
-                self.useragent,
-                self.url.get_uri(),
-                self.partial_file
-            )
+            self.useragent,
+            self.url.get_uri(),
+            self.partial_file
         )
-        
+        )
+
     def _get_aria2c(self):
         return os.system("aria2c -U \"{}\" -c \"{}\" -d \"/\" -o \"{}\"".format(
-                self.useragent,
-                self.url.get_uri(),
-                self.partial_file
-            )
+            self.useragent,
+            self.url.get_uri(),
+            self.partial_file
+        )
         )
 
     def _get_requests(self):
@@ -494,7 +494,7 @@ def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
 # Operation function
 
 
-def fetch(packages=None, path=os.path.curdir,repo=None):
+def fetch(packages=None, path=os.path.curdir, repo=None):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
     @param packages: list of package names -> list_of_strings
@@ -506,7 +506,7 @@ def fetch(packages=None, path=os.path.curdir,repo=None):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
-        package, repo = packagedb.get_package_repo(name,repo)
+        package, repo = packagedb.get_package_repo(name, repo)
         ctx.ui.info(
             _("\"{0}\" package found in \"{1}\" repository.").format(
                 package.name, repo))

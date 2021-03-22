@@ -58,10 +58,9 @@ Downloads the given inary packages to working directory
         full_packages = []
 
         for repo in self.args:
-            full_packages=packages.list_packages(repo)
+            full_packages = packages.list_packages(repo)
             for pkgname in full_packages:
-                pkg,repo=packages.get_package_repo(pkgname,repo)
-                output=os.path.join(ctx.config.options.output_dir,os.path.dirname(pkg.packageURI))
-                fetcher.fetch([pkgname], output,repo)
-        
-        
+                pkg, repo = packages.get_package_repo(pkgname, repo)
+                output = os.path.join(
+                    ctx.config.options.output_dir, os.path.dirname(pkg.packageURI))
+                fetcher.fetch([pkgname], output, repo)
