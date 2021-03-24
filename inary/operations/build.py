@@ -238,6 +238,12 @@ class Builder:
 
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
+        if os.getuid() == 0:
+             # Compile package as root user is dangerous.
+             if not self.emerge and not ctx.ui.confirm(
+                    _("Would you like to compile package as root user?")):
+                raise Error(_("Operation canceled."))
+
         self.package_rfp = None
         if self.spec.source.rfp:
             ctx.ui.info(util.colorize(_("[ !!! ] Building RFP for {}").format(self.spec.source.rfp),
