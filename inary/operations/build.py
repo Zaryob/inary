@@ -756,6 +756,8 @@ class Builder:
         if os.getuid() != 0:
             if os.system("fakeroot --version &>/dev/null") == 0:
                 command += "fakeroot "
+            else:
+                command += "unshare -r "
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
