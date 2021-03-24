@@ -32,7 +32,6 @@ import inary.fetcher
 import inary.package
 import inary.util as util
 import inary.context as ctx
-import inary.process as process
 import inary.data.files as Files
 import inary.data.metadata as Metadata
 import inary.data.specfile as Specfile

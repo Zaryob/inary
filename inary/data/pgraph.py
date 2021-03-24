@@ -16,7 +16,6 @@
 
 # Inary Modules
 import inary.db
-from inary.errors import CycleException
 import inary.context as ctx
 import inary.operations.helper as op_helper
 

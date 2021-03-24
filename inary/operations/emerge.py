@@ -12,9 +12,6 @@
 # Please read the COPYING file.
 #
 
-# Standart Python Libraries
-import sys
-
 # Inary Modules
 import inary.db
 import inary.data
@@ -23,7 +20,7 @@ import inary.util as util
 import inary.context as ctx
 import inary.data.pgraph as pgraph
 import inary.operations as operations
-import inary.atomicoperations as atomicoperations
+#import inary.atomicoperations as atomicoperations
 
 # Gettext Library
 import gettext
@@ -81,6 +78,10 @@ installed in the respective order to satisfy dependencies:
     inary.operations.emerge.emerge(sourcedb.get_source_names(order_inst))
 
     # Dependency install from binary repo (half emerge)
+<<<<<<< HEAD
+    # TODO: Add half-emerge support from parameter
+=======
+>>>>>>> b3d4edf3096eff70f802ab6c925dc5228fa38e15
     # for x in order_inst:
     #    atomicoperations.install_single_name(x)
 

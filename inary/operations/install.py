@@ -14,7 +14,6 @@
 
 # Standart Python Libraries
 import os
-import sys
 import math
 import zipfile
 

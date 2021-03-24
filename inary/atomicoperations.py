@@ -23,7 +23,7 @@ import inary
 import inary.configfile
 import inary.context as ctx
 import inary.data
-from inary.errors import PostOpsError, NotfoundError, Error, FileError
+from inary.errors import Error, FileError
 import inary.data
 import inary.db
 import inary.file

@@ -15,7 +15,6 @@
 import inary.context as ctx
 from inary.util import colorize
 from inary.util import join_path
-from inary.util import run_logged
 
 # ActionsAPI Modules
 from inary.actionsapi import error

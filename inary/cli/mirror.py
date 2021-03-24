@@ -13,7 +13,10 @@
 import inary.db
 import inary.context as ctx
 import inary.cli.command as command
+<<<<<<< HEAD
+=======
 import inary.data.index as index
+>>>>>>> b3d4edf3096eff70f802ab6c925dc5228fa38e15
 import optparse
 import os
 
