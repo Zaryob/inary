@@ -138,7 +138,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
             sha = util.sha1_data(file.path)[0:5]
             if sha not in install_files:
                     install_files[sha] = []
-            print(sha)
             if file not in install_files[sha]:
                 install_files[sha].append(file)
             else:
