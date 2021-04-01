@@ -65,7 +65,7 @@ def t(name, path, command):
             if status != 0:
                 sys.stdout.write("\r\x1b[K\x1b[31;1m    " +
                                  _("[!] Triggering end with ") +
-                                 "\x1b[;0m{} {}".format(status, name))
+                                 "\x1b[;0m{} {}".format(status/256, name))
             else:
                 setltime(name, getmtime(path))
                 sys.stdout.write("\r\x1b[K\x1b[32;1m    " +
