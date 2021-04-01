@@ -47,7 +47,7 @@ class UtilTestCase(unittest.TestCase):
 
     # file/directory related functions tests
     def testCheckFile(self):
-        assert check_file('/usr/bin/bash')
+        assert check_file('/bin/bash')
         try:
             check_file('/usr/bin/aatests')
         except BaseException:

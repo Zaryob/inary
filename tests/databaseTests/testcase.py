@@ -13,7 +13,7 @@ class TestCase(unittest.TestCase):
         options = inary.config.Options()
         options.destdir = 'tests/tmp_root'
         inary.api.set_options(options)
-        inary.api.set_scom(False)
+        #inary.api.set_scom(False)
         ctx.config.values.general.distribution = "Sulin"
         ctx.config.values.general.distribution_release = "2019"
         ctx.config.values.general.ignore_safety = True
