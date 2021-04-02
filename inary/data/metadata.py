@@ -73,8 +73,9 @@ class Package(specfile.Package, xmlfile.XmlFile, metaclass=autoxml.autoxml):
             return None
 
     def decode_hook(self, node, errs, where):
-        self.version = self.history[0].version
-        self.release = self.history[0].release
+        if len(self.history) > 0:
+            self.version = self.history[0].version
+            self.release = self.history[0].release
 
     def __str__(self):
         s = specfile.Package.__str__(self)

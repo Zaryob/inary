@@ -43,7 +43,6 @@ class SourceDB(lazydb.LazyDB):
         self.__revdeps = {}
 
         repodb = inary.db.repodb.RepoDB()
-
         for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
             self.__source_nodes[repo], self.__pkgstosrc[repo] = self.__generate_sources(
@@ -59,7 +58,6 @@ class SourceDB(lazydb.LazyDB):
     def __generate_sources(doc):
         sources = {}
         pkgstosrc = {}
-
         for spec in xmlext.getTagByName(doc, "SpecFile"):
             src = xmlext.getNode(spec, "Source")
             src_name = xmlext.getNodeText(src, "Name")
