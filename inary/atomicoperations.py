@@ -277,45 +277,40 @@ class Install(AtomicOperation):
 
         if self.installdb.has_package(pkg.name):  # is this a reinstallation?
             (iversion_s, irelease_s) = self.installdb.get_version(pkg.name)[:2]
-
-            # determine if same version
-            if pkg.release == irelease_s:
-                if self.ask_reinstall:
-                    if not ctx.ui.confirm(
-                            _('Re-install same version package?')):
-                        raise Error(_('Package re-install declined'))
-                self.operation = REINSTALL
-                ctx.ui.info(_('Re-installing package.'))
-            else:
-                pkg_version = inary.version.make_version(pkg.version)
-                iversion = inary.version.make_version(iversion_s)
-                if ctx.config.get_option(
-                        'store_lib_info') and pkg_version > iversion:
+            pkg_version = inary.version.make_version(pkg.version)
+            iversion = inary.version.make_version(iversion_s)
+            if pkg_version > iversion:
+                if ctx.config.get_option('store_lib_info'):
                     self.store_old_paths = os.path.join(
                         ctx.config.old_paths_cache_dir(), pkg.name)
                     ctx.ui.info(_('Storing old paths info.'))
                     open(
                         self.store_old_paths, "w").write(
                         "Version: {}\n".format(iversion_s))
+            elif pkg_version < iversion:
+                ctx.ui.warning(_('Downgrade to old version.'))
 
-                pkg_release = int(pkg.release)
-                irelease = int(irelease_s)
 
-                # is this an upgrade?
-                # determine and report the kind of upgrade: version, release
-                if pkg_release > irelease:
-                    ctx.ui.info(_('Upgrading to new release.'))
-                    self.operation = UPGRADE
+            pkg_release = int(pkg.release)
+            irelease = int(irelease_s)
 
-                # is this a downgrade? confirm this action.
-                if not self.operation == UPGRADE:
-                    if pkg_release < irelease:
-                        x = _('Downgrade to old distribution release?')
-                    else:
-                        x = None
-                    if self.ask_reinstall and x and not ctx.ui.confirm(x):
-                        raise Error(_('Package downgrade declined'))
-                    self.operation = DOWNGRADE
+            # is this an upgrade?
+            # determine and report the kind of upgrade: version, release
+            if pkg_release > irelease:
+                ctx.ui.info(_('Upgrading to new release.'))
+                self.operation = UPGRADE
+            # is this a downgrade? confirm this action.
+            elif pkg_release < irelease:
+                x = _('Downgrade to old distribution release?')
+                if not ctx.ui.confirm(x):
+                    raise Error(_('Package downgrade declined'))
+                self.operation = DOWNGRADE
+            else:
+                if self.ask_reinstall:
+                    if not ctx.ui.confirm(_('Re-install same version package?')):
+                        raise Error(_('Package re-install declined'))
+                self.operation = REINSTALL
+
 
             # schedule for reinstall
 
