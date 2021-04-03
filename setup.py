@@ -106,7 +106,8 @@ class BuildPo(build):
         # FIXME: enable this block
         for item in glob.glob1("po", "*.po"):
             print("Updating .. ", item)
-            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
+            os.system(
+                "msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)

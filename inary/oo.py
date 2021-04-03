@@ -42,4 +42,3 @@ class autoeq(type):
 class Struct(metaclass=autoeq):
     def __init__(self, **entries):
         self.__dict__.update(entries)
-

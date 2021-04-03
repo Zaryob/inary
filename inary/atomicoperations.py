@@ -290,7 +290,6 @@ class Install(AtomicOperation):
             elif pkg_version < iversion:
                 ctx.ui.warning(_('Downgrade to old version.'))
 
-
             pkg_release = int(pkg.release)
             irelease = int(irelease_s)
 
@@ -310,7 +309,6 @@ class Install(AtomicOperation):
                     if not ctx.ui.confirm(_('Re-install same version package?')):
                         raise Error(_('Package re-install declined'))
                 self.operation = REINSTALL
-
 
             # schedule for reinstall
 

@@ -238,8 +238,8 @@ class Builder:
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
         if os.getuid() == 0:
-             # Compile package as root user is dangerous.
-             if not self.emerge and not ctx.ui.confirm(
+            # Compile package as root user is dangerous.
+            if not self.emerge and not ctx.ui.confirm(
                     _("Would you like to compile package as root user?")):
                 raise Error(_("Operation canceled."))
 
@@ -299,7 +299,7 @@ class Builder:
         spec = Specfile.SpecFile()
         if self.emerge:
             spec.read("{}/{}".format(self.destdir,
-                      ctx.const.pspec_file), self.specuri)
+                                     ctx.const.pspec_file), self.specuri)
         else:
             spec.read(self.specuri, ctx.config.tmp_dir())
         return spec

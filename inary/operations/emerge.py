@@ -50,32 +50,28 @@ def emerge(A):
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
-        order_inst, order_build = plan_emerge(A)
+        need_build, order_build = plan_emerge(A)
     else:
-        order_inst = []
+        need_build = []
         order_build = A
 
-    if order_inst:
-        ctx.ui.info(_("""The following list of packages will be installed
-from repository in the respective order to satisfy dependencies:
-""") + util.strlist(order_inst))
-    ctx.ui.info(_("""The following list of packages will be built and
-installed in the respective order to satisfy dependencies:
-""") + util.strlist(order_build))
+    if need_build:
+        ctx.ui.info(_("""The following list of packages will be built:""")+"\n"
+                    + util.strlist(need_build) + util.strlist(order_build))
 
     if ctx.get_option('dry_run'):
         return
 
-    if len(order_inst) + len(order_build) > len(A_0):
+    if len(need_build) + len(order_build) > len(A_0):
         if not ctx.ui.confirm(
                 _('There are extra packages due to dependencies. Would you like to continue?')):
             return False
 
-    ctx.ui.notify(ui.packagestogo, order=order_inst)
+    ctx.ui.notify(ui.packagestogo, order=need_build)
 
     # Dependency install from source repo (fully emerge)
     sourcedb = inary.db.sourcedb.SourceDB()
-    inary.operations.emerge.emerge(sourcedb.get_source_names(order_inst))
+    inary.operations.emerge.emerge(need_build)
 
     # Dependency install from binary repo (half emerge)
     # TODO: Add half-emerge support from parameter
@@ -93,7 +89,7 @@ installed in the respective order to satisfy dependencies:
     # FIXME: take a look at the fixme above :(, we have to be sure
     # that order_build is a known type...
     U = set(order_build)
-    U.update(order_inst)
+    U.update(need_build)
 
 
 def plan_emerge(A):
@@ -129,7 +125,7 @@ def plan_emerge(A):
     B = A
 
     install_list = set()
-
+    need_build = set()
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -139,9 +135,19 @@ def plan_emerge(A):
 
             # add dependencies
 
+            def find_build_dep(A):
+                for i in A:
+                    if i in need_build:
+                        return
+                    else:
+                        need_build.add(pkgtosrc(i))
+                        src = get_spec(pkgtosrc(i)).source
+                        find_build_dep(src.buildDependencies)
+
             def process_dep(dep):
                 if not dep.satisfied_by_installed():
-                    if dep.satisfied_by_repo():
+                    # TODO: add half-emerge support
+                    if sourcedb.get_pkg_src()[dep.package] or dep.satisfied_by_repo():
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
@@ -157,6 +163,8 @@ def plan_emerge(A):
 
     order_build = G_f.topological_sort()
     order_build.reverse()
-    order_inst = inary.operations.install.plan_install_pkg_names(install_list)
+    find_build_dep(install_list)
+    # TODO: add half-emerge bupport
+    # order_inst = inary.operations.install.plan_install_pkg_names(install_list)
 
-    return order_inst, order_build
+    return need_build, order_build

@@ -41,6 +41,7 @@ class SourceDB(lazydb.LazyDB):
         self.__source_nodes = {}
         self.__pkgstosrc = {}
         self.__revdeps = {}
+        self.pkg_src_nodes = None
 
         repodb = inary.db.repodb.RepoDB()
         for repo in repodb.list_repos():
@@ -86,8 +87,24 @@ class SourceDB(lazydb.LazyDB):
 
         return revdeps
 
+    def get_pkg_src(self, repo=None):
+        if self.pkg_src_nodes:
+            return self.pkg_src_nodes
+        pkg_src = {}
+        for src in self.list_sources(repo):
+            for pkg in self.list_package_from_source(src):
+                pkg_src[pkg] = src
+        return pkg_src
+
     def list_sources(self, repo=None):
         return self.sdb.get_item_keys(repo)
+
+    def list_package_from_source(self, source, repo=None):
+        src = self.get_spec(source, repo)
+        ret = set()
+        for pkg in src.packages:
+            ret.add(pkg.name)
+        return ret
 
     def which_repo(self, name):
         return self.sdb.which_repo(self.pkgtosrc(name))
@@ -145,7 +162,8 @@ class SourceDB(lazydb.LazyDB):
         return spec, repo
 
     def pkgtosrc(self, name, repo=None):
-        return self.psdb.get_item(name, repo)
+        src = self.get_pkg_src(repo)[name]
+        return src or self.psdb.get_item(name, repo)
 
     def get_rev_deps(self, name, repo=None):
         try:

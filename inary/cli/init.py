@@ -34,4 +34,4 @@ class InitNothing(command.PackageOp, metaclass=command.autocommand):
         pass
 
     def run(self):
-        repodb=inary.db.repodb.RepoDB()
+        repodb = inary.db.repodb.RepoDB()
