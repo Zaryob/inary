@@ -157,7 +157,6 @@ def plan_emerge(A):
 
     order_build = G_f.topological_sort()
     order_build.reverse()
-
     order_inst = inary.operations.install.plan_install_pkg_names(install_list)
 
     return order_inst, order_build
