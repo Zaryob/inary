@@ -45,8 +45,6 @@ def add_repo(name, indexuri, at=None):
     else:
         repo = inary.db.repodb.Repo(inary.uri.URI(indexuri))
         repodb.add_repo(name, repo, at=at)
-        ctx.ui.info(_('Flushing database caches...'), verbose=True)
-        inary.db.flush_caches()
         ctx.ui.info(_('Repository \"{}\" added to system.').format(name))
 
 
@@ -76,8 +74,6 @@ def set_repo_activity(name, active):
         repodb.activate_repo(name)
     else:
         repodb.deactivate_repo(name)
-    ctx.ui.info(_('Regenerating database caches...'), verbose=True)
-    inary.db.regenerate_caches()
 
 
 @util.locked
