@@ -27,7 +27,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-@util.locked
 def emerge(A):
     """
     Builds and installs the given packages from source
@@ -57,22 +56,22 @@ def emerge(A):
     if ctx.get_option('dry_run'):
         return
     
-    if need_build:
-        ctx.ui.info(_("""The following list of packages will be built:\n{} {}""").format(
-                    util.strlist(need_build),
-                    util.strlist(order_build)))
-
-    if len(need_build) + len(order_build) > len(A_0):
-        if not ctx.ui.confirm(
-                _('There are extra packages due to dependencies. Would you like to continue?')):
-            return False
-
+    # TODO: Enable this code
+    #if need_build:
+    #    ctx.ui.info(_("""The following list of packages will be built:\n{} {}""").format(
+    #                util.strlist(need_build),
+    #                util.strlist(order_build)))
+    #
+    #if len(need_build) + len(order_build) > len(A_0):
+    #    if not ctx.ui.confirm(
+    #            _('There are extra packages due to dependencies. Would you like to continue?')):
+    #        return False
+    
     ctx.ui.notify(ui.packagestogo, order=need_build)
 
     # Dependency install from source repo (fully emerge)
     sourcedb = inary.db.sourcedb.SourceDB()
     inary.operations.emerge.emerge(need_build)
-
     # Dependency install from binary repo (half emerge)
     # TODO: Add half-emerge support from parameter
     # for x in order_inst:
@@ -125,7 +124,7 @@ def plan_emerge(A):
     B = A
 
     install_list = set()
-    need_build = set()
+    need_build = []
     skip_list = set()
     while len(B) > 0:
         Bp = set()
@@ -138,17 +137,19 @@ def plan_emerge(A):
 
             def find_build_dep(A):
                 for i in A:
-                    if i in need_build or i in order_build:
-                        return
-                    elif i in skip_list:
+                    if i in need_build or \
+                       i in order_build or \
+                       i in A or \
+                       i in skip_list:
                         return
                     else:
                         pkg = pkgtosrc(i)
-                        need_build.add(pkg)
+                        need_build.insert(0,pkg)
                         src = get_spec(pkg).source
                         for dep in src.buildDependencies:
                             if not installdb.has_package(dep.package):
-                                find_build_dep([dep.package])
+                                if dep.package not in install_list:
+                                    find_build_dep([dep.package])
                             else:
                                 skip_list.add(dep.package)
 
