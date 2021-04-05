@@ -136,6 +136,10 @@ def plan_emerge(A):
             # add dependencies
 
             def find_build_dep(A):
+                # need_build is build list
+                # order_build is build list from input
+                # A is current process list
+                # skip_list is finished list
                 for i in A:
                     if i in need_build or \
                        i in order_build or \
