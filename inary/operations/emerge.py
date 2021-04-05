@@ -27,7 +27,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
 @util.locked
 def emerge(A):
     """
@@ -55,12 +54,13 @@ def emerge(A):
         need_build = []
         order_build = A
 
-    if need_build:
-        ctx.ui.info(_("""The following list of packages will be built:""")+"\n"
-                    + util.strlist(need_build) + util.strlist(order_build))
-
     if ctx.get_option('dry_run'):
         return
+    
+    if need_build:
+        ctx.ui.info(_("""The following list of packages will be built:\n{} {}""").format(
+                    util.strlist(need_build),
+                    util.strlist(order_build)))
 
     if len(need_build) + len(order_build) > len(A_0):
         if not ctx.ui.confirm(
@@ -138,13 +138,14 @@ def plan_emerge(A):
 
             def find_build_dep(A):
                 for i in A:
-                    if i in need_build:
+                    if i in need_build or i in order_build:
                         return
                     elif i in skip_list:
                         return
                     else:
-                        need_build.add(pkgtosrc(i))
-                        src = get_spec(pkgtosrc(i)).source
+                        pkg = pkgtosrc(i)
+                        need_build.add(pkg)
+                        src = get_spec(pkg).source
                         for dep in src.buildDependencies:
                             if not installdb.has_package(dep.package):
                                 find_build_dep([dep.package])
