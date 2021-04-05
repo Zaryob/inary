@@ -126,6 +126,7 @@ def plan_emerge(A):
 
     install_list = set()
     need_build = set()
+    skip_list = set()
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -139,10 +140,16 @@ def plan_emerge(A):
                 for i in A:
                     if i in need_build:
                         return
+                    elif i in skip_list:
+                        return
                     else:
                         need_build.add(pkgtosrc(i))
                         src = get_spec(pkgtosrc(i)).source
-                        find_build_dep(src.buildDependencies)
+                        for dep in src.buildDependencies:
+                            if not installdb.has_package(dep.package):
+                                find_build_dep([dep.package])
+                            else:
+                                skip_list.add(dep.package)
 
             def process_dep(dep):
                 if not dep.satisfied_by_installed():

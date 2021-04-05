@@ -94,6 +94,7 @@ class SourceDB(lazydb.LazyDB):
         for src in self.list_sources(repo):
             for pkg in self.list_package_from_source(src):
                 pkg_src[pkg] = src
+        self.pkg_src_nodes = pkg_src
         return pkg_src
 
     def list_sources(self, repo=None):
