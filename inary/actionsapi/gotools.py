@@ -62,8 +62,7 @@ class RunTimeError(inary.actionsapi.Error):
         ctx.ui.error("[GoTools]: " + value)
 
 
-def configure(parameters='',
-              installPrefix='/{}'.format(get.defaultprefixDIR()), sourceDir='.'):
+def configure(parameters='', installPrefix='', sourceDir='.'):
     """configure source with given Go parameters = "-DGo_BUILD_TYPE -DGo_CXX_FLAGS ... " """
     if not can_access_file(join_path(sourceDir, 'main.go')):
         raise ConfigureError(_('{} not found'.format("main.go")))
