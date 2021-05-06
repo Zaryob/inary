@@ -69,17 +69,18 @@ def configure(parameters='',
     if can_access_file(join_path(sourceDir, 'CMakeLists.txt')):
         args = 'cmake -DCMAKE_INSTALL_PREFIX={0} \
                       -DCMAKE_INSTALL_LIBDIR={1} \
-                      -DCMAKE_C_FLAGS="{7} {2}" \
-                      -DCMAKE_CXX_FLAGS="{7} {3}" \
-                      -DCMAKE_LD_FLAGS="{4}" \
-                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {5} {6}'.format(installPrefix,
+                      -DCMAKE_BUILD_TYPE=RelWithDebInfo {2} {3}'.format(installPrefix,
                                                                         "/usr/lib32 " if get.buildTYPE() == "emul32" else "/usr/lib",
-                                                                        get.CFLAGS(),
-                                                                        get.CXXFLAGS(),
-                                                                        get.LDFLAGS(),
                                                                         parameters,
-                                                                        sourceDir,
-                                                                        "-m32" if get.buildTYPE() == "emul32" else "-m64")
+                                                                        sourceDir)
+        if get.CFLAGS():
+            args += ' -DCMAKE_C_FLAGS="{0} {1}"'.format(get.CFLAGS(),
+                                                        "-m32" if get.buildTYPE() == "emul32" else "-m64")
+        if get.CXXFLAGS():
+            args += ' -DCMAKE_CXX_FLAGS="{0} {1}"'.format(get.CXXFLAGS(),
+                                                          "-m32" if get.buildTYPE() == "emul32" else "-m64")
+        if get.LDFLAGS():
+            args += ' -DCMAKE_LD_FLAGS="{0}"'.format(get.LDFLAGS())
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))

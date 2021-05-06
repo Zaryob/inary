@@ -12,9 +12,6 @@
 # Please read the COPYING file.
 #
 
-# Standart Python Libraries
-import sys
-
 # Inary Modules
 import inary.db
 import inary.data
@@ -23,15 +20,13 @@ import inary.util as util
 import inary.context as ctx
 import inary.data.pgraph as pgraph
 import inary.operations as operations
-import inary.atomicoperations as atomicoperations
+#import inary.atomicoperations as atomicoperations
 
 # Gettext Library
 import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
-@util.locked
 def emerge(A):
     """
     Builds and installs the given packages from source
@@ -53,31 +48,34 @@ def emerge(A):
     # FIXME: Errr... order_build changes type conditionally and this
     # is not good. - baris
     if not ctx.config.get_option('ignore_dependency'):
-        order_inst, order_build = plan_emerge(A)
+        need_build, order_build = plan_emerge(A)
     else:
-        order_inst = []
+        need_build = []
         order_build = A
-
-    if order_inst:
-        ctx.ui.info(_("""The following list of packages will be installed
-from repository in the respective order to satisfy dependencies:
-""") + util.strlist(order_inst))
-    ctx.ui.info(_("""The following list of packages will be built and
-installed in the respective order to satisfy dependencies:
-""") + util.strlist(order_build))
 
     if ctx.get_option('dry_run'):
         return
+    
+    # TODO: Enable this code
+    #if need_build:
+    #    ctx.ui.info(_("""The following list of packages will be built:\n{} {}""").format(
+    #                util.strlist(need_build),
+    #                util.strlist(order_build)))
+    #
+    #if len(need_build) + len(order_build) > len(A_0):
+    #    if not ctx.ui.confirm(
+    #            _('There are extra packages due to dependencies. Would you like to continue?')):
+    #        return False
+    
+    ctx.ui.notify(ui.packagestogo, order=need_build)
 
-    if len(order_inst) + len(order_build) > len(A_0):
-        if not ctx.ui.confirm(
-                _('There are extra packages due to dependencies. Would you like to continue?')):
-            return False
-
-    ctx.ui.notify(ui.packagestogo, order=order_inst)
-
-    for x in order_inst:
-        atomicoperations.install_single_name(x)
+    # Dependency install from source repo (fully emerge)
+    sourcedb = inary.db.sourcedb.SourceDB()
+    inary.operations.emerge.emerge(need_build)
+    # Dependency install from binary repo (half emerge)
+    # TODO: Add half-emerge support from parameter
+    # for x in order_inst:
+    #    atomicoperations.install_single_name(x)
 
     # ctx.ui.notify(ui.packagestogo, order = order_build)
     for x in order_build:
@@ -90,7 +88,7 @@ installed in the respective order to satisfy dependencies:
     # FIXME: take a look at the fixme above :(, we have to be sure
     # that order_build is a known type...
     U = set(order_build)
-    U.update(order_inst)
+    U.update(need_build)
 
 
 def plan_emerge(A):
@@ -116,7 +114,7 @@ def plan_emerge(A):
         if not str(src.name) in G_f.vertices():
             # TODO replace this shitty way with a function
             G_f.packages.append(src.name)
-            
+
     def pkgtosrc(pkg):
         return sourcedb.pkgtosrc(pkg)
 
@@ -126,7 +124,8 @@ def plan_emerge(A):
     B = A
 
     install_list = set()
-
+    need_build = []
+    skip_list = set()
     while len(B) > 0:
         Bp = set()
         for x in B:
@@ -136,13 +135,35 @@ def plan_emerge(A):
 
             # add dependencies
 
+            def find_build_dep(A):
+                # need_build is build list
+                # order_build is build list from input
+                # A is current process list
+                # skip_list is finished list
+                for i in A:
+                    if i in need_build or \
+                       i in order_build or \
+                       i in A or \
+                       i in skip_list:
+                        return
+                    else:
+                        pkg = pkgtosrc(i)
+                        need_build.insert(0,pkg)
+                        src = get_spec(pkg).source
+                        for dep in src.buildDependencies:
+                            if not installdb.has_package(dep.package):
+                                if dep.package not in install_list:
+                                    find_build_dep([dep.package])
+                            else:
+                                skip_list.add(dep.package)
+
             def process_dep(dep):
                 if not dep.satisfied_by_installed():
-                    if dep.satisfied_by_repo():
+                    # TODO: add half-emerge support
+                    if sourcedb.get_pkg_src()[dep.package] or dep.satisfied_by_repo():
                         install_list.add(dep.package)
                         return
                     srcdep = pkgtosrc(dep.package)
-                    print(dep.package)
                     G_f.packages.append(dep.package)
 
             for builddep in src.buildDependencies:
@@ -155,7 +176,8 @@ def plan_emerge(A):
 
     order_build = G_f.topological_sort()
     order_build.reverse()
+    find_build_dep(install_list)
+    # TODO: add half-emerge bupport
+    # order_inst = inary.operations.install.plan_install_pkg_names(install_list)
 
-    order_inst = inary.operations.install.plan_install_pkg_names(install_list)
-
-    return order_inst, order_build
+    return need_build, order_build

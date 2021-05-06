@@ -50,7 +50,8 @@ repositories.
 
         self.init(database=True, write=False)
 
-        components = self.componentdb.list_components(ctx.get_option('repository'))
+        components = self.componentdb.list_components(
+            ctx.get_option('repository'))
         if components:
             maxlen = max([len(_p) for _p in components])
         components.sort()

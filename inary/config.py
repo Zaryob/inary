@@ -161,10 +161,7 @@ class Config(object, metaclass=util.Singleton):
 
     def tmp_dir(self):
         sysdir = self.subdir(self.values.dirs.tmp_dir)
-        if 'USER' in os.environ:
-            userdir = self.subdir('/tmp/inary-' + os.environ['USER'])
-        else:
-            userdir = self.subdir('/tmp/inary-root')
+        userdir = self.subdir('/tmp/inary')
         # check write access
         if os.access(sysdir, os.W_OK):
             return sysdir

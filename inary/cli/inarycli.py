@@ -33,6 +33,7 @@ import inary.cli.listinstalled
 import inary.cli.listcomponents
 import inary.cli.listavailable
 import inary.cli.listnewest
+import inary.cli.mirror
 import inary.cli.history
 import inary.cli.install
 import inary.cli.info

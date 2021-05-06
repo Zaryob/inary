@@ -106,7 +106,8 @@ class BuildPo(build):
         # FIXME: enable this block
         for item in glob.glob1("po", "*.po"):
             print("Updating .. ", item)
-            os.system("msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
+            os.system(
+                "msgmerge --update --no-wrap --sort-by-file po/{0} po/{1}.pot".format(item, PROJECT))
 
         # Cleanup
         os.unlink(files)
@@ -231,16 +232,18 @@ setup(name="inary",
                 'scripts/revdep-rebuild',
                 'scripts/sulinstrapt',
                 'scripts/makepkg',
-                'scripts/makekagami',
                 'scripts/mkdeb',
                 'scripts/revdep-rebuild-devel',
                 'scripts/inary-sandbox',
+                'scripts/inary-template',
                 'scripts/inarysh',
                 'scripts/lsinary',
                 'scripts/mkinary',
                 'scripts/detect-dep',
+                'scripts/detect-revdep',
                 'scripts/detect-file-dep',
                 'scripts/uninary',
+                'scripts/undeb',
                 'scripts/genpspec',
                 'scripts/update-inary-cache',
                 'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),

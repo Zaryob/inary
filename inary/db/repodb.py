@@ -151,6 +151,12 @@ class RepoOrder:
 
 class RepoDB(lazydb.LazyDB):
 
+    def __init__(self):
+        lazydb.LazyDB.__init__(
+            self,
+            cacheable=True,
+            cachedir=ctx.config.packages_dir())
+
     def init(self):
         self.repoorder = RepoOrder()
 

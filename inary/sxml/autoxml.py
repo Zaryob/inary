@@ -712,8 +712,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 return value
             else:
                 if req == mandatory:
-                    errs.append(
-                        where + ': ' + _('Mandatory token {} not available.').format(token))
+                    raise Exception(_('Mandatory token {} not available.').format(
+                        token)+"\n  {}".format(where))
                 return None
 
         def encode(node, value, errs):
@@ -722,8 +722,8 @@ class autoxml(oo.autosuper, oo.autoprop):
                 writetext(node, token, str(value))
             else:
                 if req == mandatory:
-                    errs.append(
-                        _('Mandatory token {} not available.').format(token))
+                    raise Exception(_('Mandatory token {} not available.').format(
+                        token)+"\n  {}".format(value))
 
         def errors(value, where):
             errs = []

@@ -20,16 +20,16 @@ then
   echo "$sulin is a file. You must delete or move."
   exit 1
 fi
-inary ar sulin https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml.xz -y -D$sulin || true
+inary ar sulin "https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz" -y -D$sulin || true
 inary ur -y -D$sulin || true
 inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
-inary it -c system.base -y --ignore-configure -D$sulin
-if echo $2 | grep "^-" &>/dev/null ; then
-	echo $2 | grep "b" && inary it -c system.boot toybox btrfs-progs linux -y --ignore-configure -D$sulin
+inary it -c system.base curl -y --ignore-configure -D$sulin
+if echo "$2" | grep "^-" &>/dev/null ; then
+	echo $2 | grep "b" && inary it -c system.boot toybox btrfs-progs linux linux-firmware -y --ignore-configure -D$sulin
 	echo $2 | grep "x" && inary it -c x11 -y --ignore-configure -D$sulin
 	echo $2 | grep "d" && inary it -c system.devel -y --ignore-configure -D$sulin
 	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
-	echo $2 | grep "a" && inary it curl nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
+	echo $2 | grep "a" && inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
 fi
 for i in /dev /sys /proc /run
 do
@@ -37,5 +37,6 @@ do
 	umount -lf -R $sulin/$i || true
 	mount --bind $i $sulin/$i
 done
+chroot $sulin inary cp busybox
 chroot $sulin inary cp baselayout
 chroot $sulin inary cp

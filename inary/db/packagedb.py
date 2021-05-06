@@ -42,6 +42,7 @@ class PackageDB(lazydb.LazyDB):
 
     def init(self):
         self.__package_nodes = {}  # Packages
+        self.__source_nodes = {}  # Packages
         self.__revdeps = {}  # Reverse dependencies
         self.__obsoletes = {}  # Obsoletes
         self.__replaces = {}  # Replaces
@@ -50,6 +51,7 @@ class PackageDB(lazydb.LazyDB):
         for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
             self.__package_nodes[repo] = self.__generate_packages(doc)
+            self.__source_nodes[repo] = self.__generate_sources(doc)
             self.__revdeps[repo] = self.__generate_revdeps(doc)
             self.__obsoletes[repo] = self.__generate_obsoletes(doc)
             self.__replaces[repo] = self.__generate_replaces(doc)
@@ -89,7 +91,18 @@ class PackageDB(lazydb.LazyDB):
             compressed_data = gzip.zlib.compress(
                 xmlext.toString(x).encode('utf-8'))
             pdict[name] = compressed_data
+        return pdict
 
+    @staticmethod
+    def __generate_sources(doc):
+        pdict = {}
+
+        for x in xmlext.getTagByName(doc, "SpecFile"):
+            source = xmlext.getNode(x, "Source")
+            name = xmlext.getNodeText(source, "Name")
+            compressed_data = gzip.zlib.compress(
+                xmlext.toString(x).encode('utf-8'))
+            pdict[name] = compressed_data
         return pdict
 
     @staticmethod

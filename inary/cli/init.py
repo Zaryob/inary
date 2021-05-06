@@ -13,6 +13,8 @@
 #
 
 import inary.cli.command as command
+from inary.operations import repository
+import inary.db
 
 # Gettext Library
 import gettext
@@ -32,4 +34,4 @@ class InitNothing(command.PackageOp, metaclass=command.autocommand):
         pass
 
     def run(self):
-        pass
+        repodb = inary.db.repodb.RepoDB()

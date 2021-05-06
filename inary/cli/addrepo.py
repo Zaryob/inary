@@ -43,7 +43,6 @@ NB: We support only local files (e.g., /a/b/c) and http:// URIs at the moment
         super(AddRepo, self).__init__(args)
         self.repodb = inary.db.repodb.RepoDB()
 
-
     name = ("add-repo", "ar")
 
     def options(self):

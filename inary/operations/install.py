@@ -14,7 +14,6 @@
 
 # Standart Python Libraries
 import os
-import sys
 import math
 import zipfile
 
@@ -125,6 +124,33 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
+    install_files = {}
+    file_conflicts = []
+    for path in paths:
+        pkg = inary.package.Package(path)
+        pkg.read()
+        ctx.ui.info(_("Checking integration") +
+                    str(" [ {:>" +
+                        str(lndig) +
+                        "} / {} ] => {}").format(paths.index(path) +
+                                                 1, len(paths), pkg.metadata.package.name), color="yellow")
+        for file in pkg.files.list:
+            sha = util.sha1_data(file.path)[0:5]
+            if sha not in install_files:
+                install_files[sha] = []
+            if file not in install_files[sha]:
+                install_files[sha].append(file)
+            else:
+                file_conflicts.append(file)
+        ctx.ui.info(
+            _("Current {} / Total {} files counted.").format(len(pkg.files.list), len(install_files)))
+    if len(file_conflicts) > 0:
+        ctx.ui.warning(_("Integration check error detected."))
+        for path in file_conflicts:
+            ctx.ui.warning(" -> "+_('File conflicts:\n\"{}\"').format(path))
+        if not ctx.ui.confirm(_('Do you want to continue?')):
+            raise Error(msg)
+
     for path in paths:
         if installdb.has_package(path):
             remove_op = atomicoperations.Remove(path)
@@ -139,8 +165,8 @@ def install_pkg_names(A, reinstall=False, extra=False):
         ctx.ui.info(_("Installing") +
                     str(" [ {:>" +
                         str(lndig) +
-                        "} / {} ]").format(paths.index(path) +
-                                           1, len(paths)), color="yellow")
+                        "} / {} ] => {}").format(paths.index(path) +
+                                                 1, len(paths), util.basename(path)), color="yellow")
         install_op.store_inary_files()
         install_op.install(False)
         try:
@@ -283,7 +309,6 @@ def install_pkg_files(package_URIs, reinstall=False):
     # set A using packagedb
     for x in A:
         G_f.packages.append(x)
-    print(tobe_installed)
     B = A
     while len(B) > 0:
         Bp = set()
@@ -339,6 +364,11 @@ def plan_install_pkg_names(A, reinstall=False):
                     G_f.add_package(dep)
             if ctx.config.values.general.allow_pages:
                 dep = x + ctx.const.info_package_end
+                if packagedb.has_package(dep):
+                    Bp.add(dep)
+                    G_f.add_package(dep)
+            if ctx.config.values.general.allow_devel:
+                dep = x + ctx.const.devel_package_end
                 if packagedb.has_package(dep):
                     Bp.add(dep)
                     G_f.add_package(dep)

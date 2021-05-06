@@ -19,7 +19,8 @@ def ctag(tag):
     return "{}</{}>".format(("\t"*tab),tag)
    
    
- 
+import sys, os
+sys.path.insert(0,os.getcwd())
 from pspec import inary
 # pspec başı
 print('<?xml version="1.0" ?>')
@@ -31,6 +32,8 @@ print()
 print(otag("Source"))
 print(write("Name",inary.source.name))
 print(write("Homepage",inary.source.homepage))
+if hasattr(inary.source,"rfp"):
+    print(write("Rfp",inary.source.rfp))
 print(otag("Packager"))
 print(write("Name",inary.source.packager.name))
 print(write("Email",inary.source.packager.email))
@@ -57,7 +60,7 @@ for i in inary.source.archive:
     
 #AdditionalFiles zorunlu değil.
 if hasattr(inary.source,"additionalfiles"):
-   print(otag("AdditionalFile"))
+   print(otag("AdditionalFiles"))
    for i in inary.source.additionalfiles:
        print(write("AdditionalFile",i[1],["target=\"{}\"".format(i[0])]))
    print(ctag("AdditionalFile"))
@@ -99,7 +102,7 @@ for package in inary.source.packages:
 
     #AdditionalFiles zorunlu değil
     if hasattr(pkg,"additionalfiles"):
-       print(otag("AdditionalFile"))
+       print(otag("AdditionalFiles"))
        for i in pkg.additionalfiles:
            print(write("AdditionalFile",i[0],["owner=\"{}\"".format(i[1]),"permission=\"{}\"".format(str(i[2])),"target=\"{}\"".format(i[3])]))
        print(ctag("AdditionalFile"))

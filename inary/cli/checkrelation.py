@@ -80,7 +80,7 @@ Usage: check-relation
                     need_reinstall.append(p.package)
                     sys.stderr.write(
                         _("Missing: - {} : Needed by: - {}").format(p.package, pkg)+"\n")
-                    
+
         if self.options.force:
             for pkg in installed:
                 pkgname = pkg

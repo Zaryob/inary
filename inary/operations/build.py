@@ -32,9 +32,7 @@ import inary.fetcher
 import inary.package
 import inary.util as util
 import inary.context as ctx
-import inary.process as process
 import inary.data.files as Files
-import inary.actionsapi.variables
 import inary.data.metadata as Metadata
 import inary.data.specfile as Specfile
 import inary.data.component as Component
@@ -210,18 +208,18 @@ class Builder:
                 _("Source \"{}\" not found in any active repository.").format(name))
 
     def __init__(self, specuri):
-        self.emerge=False
+        self.emerge = False
         if "://" in specuri:
-            self.emerge=True
+            self.emerge = True
         self.componentdb = inary.db.componentdb.ComponentDB()
         self.installdb = inary.db.installdb.InstallDB()
-        self.specuri=specuri
+        self.specuri = specuri
         self.specdiruri = os.path.dirname(self.specuri)
         if len(self.specdiruri) > 0 and self.emerge:
             self.pkgname = os.path.basename(self.specdiruri)
             self.destdir = util.join_path(ctx.config.tmp_dir(), self.pkgname)
         else:
-            self.destdir=None
+            self.destdir = None
 
         # process args
         if not isinstance(specuri, inary.uri.URI):
@@ -231,15 +229,20 @@ class Builder:
             self.fetch_pspecfile()
         # read spec file, we'll need it :)
         self.spec = self.set_spec_file(specuri)
-        
+
         if specuri.is_remote_file():
             self.specdir = self.fetch_files()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
-        
         # Don't wait until creating .inary file for complaining about versioning
         # scheme errors
+        if os.getuid() == 0:
+            # Compile package as root user is dangerous.
+            if not self.emerge and not ctx.ui.confirm(
+                    _("Would you like to compile package as root user?")):
+                raise Error(_("Operation canceled."))
+
         self.package_rfp = None
         if self.spec.source.rfp:
             ctx.ui.info(util.colorize(_("[ !!! ] Building RFP for {}").format(self.spec.source.rfp),
@@ -285,17 +288,18 @@ class Builder:
         self.has_ccache = False
         self.has_icecream = False
         self.variable_buffer = {}
-        self.destdir=os.getcwd()
+        self.destdir = os.getcwd()
 
     def set_spec_file(self, specuri):
         if not specuri.is_remote_file():
             # FIXME: doesn't work for file://
             specuri = inary.uri.URI(os.path.realpath(specuri.get_uri()))
         self.specuri = specuri
-        
+
         spec = Specfile.SpecFile()
         if self.emerge:
-            spec.read("{}/{}".format(self.destdir,ctx.const.pspec_file),self.specuri)
+            spec.read("{}/{}".format(self.destdir,
+                                     ctx.const.pspec_file), self.specuri)
         else:
             spec.read(self.specuri, ctx.config.tmp_dir())
         return spec
@@ -376,12 +380,12 @@ class Builder:
         self.check_patches()
 
         self.check_build_dependencies()
-        
+
         try:
             self.fetch_component()
         except:
             ctx.ui.output(_("Component cannot readed.")+"\n")
-            
+
         self.fetch_source_archives()
 
         util.clean_dir(self.pkg_install_dir())
@@ -446,7 +450,7 @@ class Builder:
 
         # Each time a builder is created we must reset
         # environment. See bug #2575
-
+        username = os.environ["USER"]
         os.environ.clear()
 
         # inary.actionsapi.variables.initVariables()
@@ -455,25 +459,16 @@ class Builder:
                "WORK_DIR": self.pkg_src_dir(),
                "SRCDIR": self.pkg_work_dir(),
                "HOME": self.pkg_work_dir(),
+               "USER": username,
                "INSTALL_DIR": self.pkg_install_dir(),
                "INARY_BUILD_TYPE": self.build_type,
                "SRC_NAME": self.spec.source.name,
                "SRC_VERSION": self.spec.getSourceVersion(),
                "SRC_RELEASE": self.spec.getSourceRelease(),
                "PATH": "/bin:/usr/bin:/sbin:/usr/sbin",
-               "PYTHONDONTWRITEBYTECODE": '1'}
-        if self.build_type == "emul32":
-            env["CC"] = "{} -m32".format(util.getenv("CC"))
-            env["CXX"] = "{} -m32".format(util.getenv("CXX"))
-            env["CFLAGS"] = util.getenv("CFLAGS").replace("-fPIC", "")
-            env["CXXFLAGS"] = util.getenv("CXXFLAGS").replace("-fPIC", "")
-            env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
-        if self.build_type == "clang":
-            env['CC'] = "clang"
-            env['CXX'] = "clang++"
-        if self.build_type == "clang32":
-            env['CC'] = "clang -m32"
-            env['CXX'] = "clang++ -m32"
+               "PYTHONDONTWRITEBYTECODE": '1',
+               "INARY_USE_FLAGS": "True"}
+        # FIXME: Get useflag status from pspec file (Source section)
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
@@ -751,24 +746,29 @@ class Builder:
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
         curDir = os.getcwd()
+        command = ""
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
         pkgname = os.path.basename(self.specdiruri)
         self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
         if os.path.exists(self.destdir):
-            curDir=self.destdir
+            curDir = self.destdir
         src_dir = self.pkg_src_dir()
         self.set_environment_vars()
         os.environ['WORK_DIR'] = src_dir
         os.environ['CURDIR'] = curDir
         os.environ['SRCDIR'] = self.pkg_work_dir()
         os.environ['OPERATION'] = func
+        if os.getuid() != 0:
+            if os.system("fakeroot --version &>/dev/null") == 0:
+                command += "fakeroot "
+            else:
+                command += "unshare -r "
         if os.path.exists(src_dir):
             os.chdir(src_dir)
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
-
-        if os.system('python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
+        if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
             raise Error(
                 _("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
@@ -1084,7 +1084,7 @@ package might be a good solution."))
                         ctx.ui.warning(
                             _("File \"{}\" might be a broken symlink. Check it before publishing package.".format(
                                 filepath)
-                            )
+                              )
                         )
                         fileinfo = "broken symlink"
                     ctx.ui.info(
@@ -1095,9 +1095,9 @@ package might be a good solution."))
                         "file {}".format(filepath), ui_debug=False)
                     if result[0]:
                         ctx.ui.error(_("\'file\' command failed with return code {0} for file: \"{1}\"").format(
-                                         result[0],
-                                         filepath) +
-                                     _("Output:\n{}").format(result[1])
+                            result[0],
+                            filepath) +
+                            _("Output:\n{}").format(result[1])
                         )
 
                     fileinfo = str(result[1])

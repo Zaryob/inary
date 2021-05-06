@@ -87,7 +87,8 @@ class InstallDB(lazydb.LazyDB):
 
     def init(self):
         self.__generate_inode_cache()  # TODO: Needs look it up.
-        self.rev_deps_db = self.__generate_revdeps()
+        self.rev_deps_db = None
+        #self.rev_deps_db = self.__generate_revdeps()
         self.installed_extra = self.__generate_installed_extra()
 
     def __generate_inode_cache(self):
@@ -410,7 +411,8 @@ class InstallDB(lazydb.LazyDB):
 
     def get_rev_deps(self, name):
         rev_deps = []
-
+        if not self.rev_deps_db:
+            self.rev_deps_db = self.__generate_revdeps()
         package_revdeps = self.rev_deps_db.get(name)
         if package_revdeps:
             for pkg, dep in list(package_revdeps.items()):
@@ -421,7 +423,8 @@ class InstallDB(lazydb.LazyDB):
 
     def get_rev_dep_names(self, name):
         rev_deps = []
-
+        if not self.rev_deps_db:
+            self.rev_deps_db = self.__generate_revdeps()
         package_revdeps = self.rev_deps_db.get(name)
         if package_revdeps:
             for pkg in list(package_revdeps.items()):
@@ -519,6 +522,8 @@ class InstallDB(lazydb.LazyDB):
 
     def add_package(self, pkginfo):
         # Cleanup old revdep info
+        if not self.rev_deps_db:
+            self.rev_deps_db = self.__generate_revdeps()
         for revdep_info in list(self.rev_deps_db.values()):
             if pkginfo.name in revdep_info:
                 del revdep_info[pkginfo.name]
@@ -531,6 +536,8 @@ class InstallDB(lazydb.LazyDB):
         if package_name in self.installed_db:
             del self.installed_db[package_name]
 
+        if not self.rev_deps_db:
+            self.rev_deps_db = self.__generate_revdeps()
         # Cleanup revdep info
         for revdep_info in list(self.rev_deps_db.values()):
             if package_name in revdep_info:

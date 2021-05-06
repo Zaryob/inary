@@ -16,8 +16,6 @@
 
 # Inary Modules
 import sys
-import inary
-import inary.errors
 import inary.context as ctx
 
 # Gettext Library

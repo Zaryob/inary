@@ -1,0 +1,477 @@
+#!/bin/bash
+set -e
+#define constants
+available_build_types=(autotools cmaketools mesontools qt)
+
+info(){
+    echo -e "\033[32;1m$1\033[;0m: $2"
+}
+err(){
+    echo -e "\033[31;1m$1\033[;0m: $2"
+}
+inf_msg(){
+    echo "Create new inary package template. "
+}
+
+err_msg(){
+      echo "Usage: $(basename $0) -n package-name -a source-url [OPTIONS]" >&2
+      echo "  General Options:"
+      echo "    -o   output directory (default: package name)"
+      echo "    -n   package name (required)"
+      echo "    -x   build package after create"
+      echo "    -y   do not ask anything"
+      echo "    -z   do not generate pspec and actions"
+      echo "    -d   do not generate pspec class"
+      echo "    -h   write help message"
+      echo "  Actions options:"
+      echo "    -t   build type (default: autotools)"
+      echo "           Build types: ${available_build_types[@]}"
+      echo "    -c   configure options"
+      echo "  Pspec options:"
+      echo "    Source section:"
+      echo "      -p   homepage url"
+      echo "      -u   packager name"
+      echo "      -e   packager email adress"
+      echo "      -l   package license"
+      echo "      -i   isa value list"
+      echo "      -s   package summary"
+      echo "      -d   package description"
+      echo "      -b   build dependencies list"
+      echo "      -a   package source archive list (required)"
+      echo "      -q   disable rfp status"
+      echo "      -m   rfp description"
+      echo "    Package section:"
+      echo "      -r   runtime dependencies list"
+      echo "      -v   package verison"
+      exit 1
+}
+
+#default variables
+name=""
+directory=""
+homepage="https://gitlab.com/sulinos/devel/inary"
+buildtype="autotools"
+if [ -f "~/.gitconfig" ] ; then
+    email="$(cat ~/.gitconfig | grep 'email =' | sed 's/.*= //g')"
+    packager="$(cat ~/.gitconfig | grep 'name =' | sed 's/.*= //g')"
+else
+    packager="Your Name"
+    email="yourmane@example.org"
+fi
+license="GPLv3"
+isa=""
+summary="Package summary missing"
+description="Package description missing"
+rfpdescription="This is a rfp package"
+src=""
+bdeps=""
+rdeps=""
+ver="1.0.0"
+rfp=true
+bnow=false
+confopt=""
+forceyes=""
+dummy=""
+noclass=""
+#opt parse
+while getopts -- ':o:n:t:c:p:u:e:l:i:s:d:b:a:r:v:m:d' OPTION; do
+  case "$OPTION" in
+   o)
+      directory="${OPTARG[@]}"
+      ;;
+
+   n)
+      name="${OPTARG[@]}"
+      ;;
+   t)
+      buildtype="${OPTARG[@]}"
+      a=0
+      for item in ${available_build_types[@]}
+      do
+        if [ "$buildtype" == "$item" ]; then
+          a=1
+        fi
+      done
+      if [ "$a" == "0" ] ; then
+        err "Error" "Invalid build type: $a $buildtype"
+        err_msg
+      fi
+      ;;
+      
+    c)
+      confopt="${OPTARG[@]}"
+      ;;
+    p)
+      homepage="${OPTARG[@]}"
+      ;;
+      
+    u)
+      packager="${OPTARG[@]}"
+      ;;
+      
+    e)
+      email="${OPTARG[@]}"
+      ;;
+      
+    l)
+      license="${OPTARG[@]}"
+      ;;
+      
+    i)
+      isa="${OPTARG[@]}"
+      ;;
+      
+    s)
+      summary="${OPTARG[@]}"
+      ;;
+      
+    d)
+      description="${OPTARG[@]}"
+      ;;      
+      
+    b)
+      bdeps="${OPTARG[@]}"
+      ;;
+      
+    a)
+      src="${OPTARG[@]}"
+      ;;
+      
+    r)
+      rdeps="${OPTARG[@]}"
+      ;;
+      
+    v)
+      ver="${OPTARG[@]}"
+      ;;
+    m)
+      rfpdescription="${OPTARGS[@]}"
+      ;;
+    ?)
+      for arg in ${OPTARG[@]} ; do
+        case "$arg" in
+          q)
+            echo "uwu"
+            rfp="false"
+            ;;
+          y)
+            forceyes="-y"
+            ;;
+          x)
+            bnow="true"
+            ;;
+          z)
+            dummy="true"
+            ;;
+          d)
+            noclass="true"
+            ;;
+          *)
+            inf_msg
+            err_msg
+            ;;
+          esac
+        done
+      ;;
+  esac
+done
+
+#check options
+if [ "$name" == "" ] ; then
+    echo "Error: package name missing."
+    err_msg
+fi
+if [ "$directory" == "" ] ; then
+    directory=$name
+fi
+if [ "$src" == "" ] ; then
+    echo "Error: source archive missing."
+    err_msg
+fi
+
+
+write_pspec(){
+echo "<?xml version=\"1.0\" ?>"
+echo "<!DOCTYPE INARY SYSTEM \"https://gitlab.com/sulinos/sulinproject/inary/raw/master/inary-spec.dtd\">"
+echo "<INARY>"
+echo "    <Source>"
+echo "        <Name>$name</Name>"
+if [ "$rfp" == "true" ] ; then
+  echo "        <Rfp>$rfpdescription</Rfp>"
+else
+  echo "        <!--Rfp>$rfpdescription</Rfp-->"
+fi
+echo "        <Homepage>$homepage</Homepage>"
+echo "        <Packager>"
+echo "            <Name>$packager</Name>"
+echo "            <Email>$email</Email>"
+echo "        </Packager>"
+echo "        <License>$license</License>"
+for i in $isa ; do
+  echo "        <IsA>$i/IsA>"
+done
+echo "        <Summary>$summary</Summary>"
+echo "        <Description>$description</Description>"
+for i in $src ; do
+  if [ "$bnow" == "true" ] ; then
+      # TODO: Download with inary support needed.
+      out=$(mktemp)
+      wget -c $i -O $out || true
+      echo "        <Archive sha1sum=\"$(sha1sum $out | sed 's/ .*//g')\">$i</Archive>"
+      rm -f $out
+  else
+      echo "        <Archive sha1sum=\"FIXME\">$i</Archive>"
+  fi
+done
+echo "        <BuildDependencies>"
+for i in $bdeps ; do
+  echo "            <Dependency>$i</Dependency>"
+done
+echo "        </BuildDependencies>"
+echo "    </Source>"
+
+echo "    <Package>"
+echo "        <Name>$name</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/usr/share</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib</Path>
+            <Path fileType="library">/lib</Path>
+            <Path fileType="library">/usr/libexec</Path>
+            <Path fileType="executable">/bin</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-pages</Name>"
+echo "        <RuntimeDependencies>"
+echo "            <Dependency>$name</Dependency>"
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/share/man/</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-docs</Name>"
+echo "        <RuntimeDependencies>"
+echo "            <Dependency>$name</Dependency>"
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/share/doc/</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-32bit</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i-32bit</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="library">/usr/lib32</Path>
+            <Path fileType="library">/lib32</Path>
+        </Files>
+    </Package>
+EOF
+echo "    <Package>"
+echo "        <Name>$name-devel</Name>"
+echo "        <RuntimeDependencies>"
+for i in $rdeps ; do
+  echo "            <Dependency>$i-devel</Dependency>"
+done
+echo "        </RuntimeDependencies>"
+cat << EOF
+        <Files>
+            <Path fileType="data">/usr/lib/pkgconfig</Path>
+            <Path fileType="header">/usr/include</Path>
+        </Files>
+    </Package>
+
+    <History>
+        <Update release="1">
+EOF
+echo "            <Date>$(date "+%Y-%m-%d")</Date>"
+echo "            <Version>$ver</Version>"
+echo "            <Comment>First release</Comment>"
+echo "            <Name>$packager</Name>"
+echo "            <Email>$email</Email>"
+echo "        </Update>"
+echo "    </History>"
+echo "</INARY>"
+
+
+}
+
+write_pspec_class(){
+echo "class inary:"
+echo "    class source:"
+echo "        name = \"$name\""
+echo "        homepage = \"$homepage\""
+if [ "$rfp" == "true" ] ; then
+    echo "        rfp= \"$rfpdescription\""
+else
+    echo "        #rfp= \"$rfpdescription\""
+
+fi
+echo ""
+echo "        class packager:"
+echo "            name = \"$packager\""
+echo "            email = \"$email\""
+echo "        license = \"$license\""
+echo -n "        isa = ["
+for i in $isa ; do
+    echo -n "\"$isa\","
+done
+echo "]"
+echo "        summary = \"$summary\""
+echo "        description = \"$description\""
+echo -n "        archive = ["
+for i in $src ; do
+    echo "(\"FIXME\",\"$i\"),"
+    echo -n "          "
+done
+echo "]"
+echo -n "        builddependencies = ["
+for i in $bdeps ; do
+    echo "\"$i\","
+done
+echo "]"
+echo "        packages = [\"package\",\"package_docs\" , \"package_devel\","
+echo "                    \"package_pages\", \"package_32bit\"]"
+echo ""
+echo "    class package:"
+echo "        name = \"$name\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i\","
+done
+echo "]"
+echo "        files = [(\"config\", \"/etc\"),"
+echo "                 (\"localedata\", \"/usr/share/locale\"),"
+echo "                 (\"info\", \"/usr/share/info\"),"
+echo "                 (\"data\", \"/usr/share\"),"
+echo "                 (\"executable\", \"/usr/bin\"),"
+echo "                 (\"library\", \"/usr/lib\"),"
+echo "                 (\"library\", \"/lib\"),"
+echo "                 (\"library\", \"/usr/libexec\"),"
+echo "                 (\"executable\", \"/bin\")]"
+echo ""
+echo "    class package_docs:"
+echo "        name = \"${name}-docs\""
+echo "        runtimedependencies = [\"$name\"]"
+echo "        files = [(\"library\", \"/usr/share/doc/\")]"
+echo ""
+echo "    class package_pages:"
+echo "        name = \"${name}-pages\""
+echo "        runtimedependencies = [\"$name\"]"
+echo "        files = [(\"library\", \"/usr/share/man/\")]"
+echo ""
+echo "    class package_32bit:"
+echo "        name = \"${name}-32bit\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i-32bit\","
+done
+echo "]"
+echo "        files = [(\"library\", \"/usr/lib32\"),"
+echo "                 (\"library\", \"/lib32\")]"
+echo ""
+echo "    class package_devel:"
+echo "        name = \"${name}-devel\""
+echo -n "        runtimedependencies = ["
+for i in $rdeps ; do
+    echo "\"$i-devel\","
+done
+echo "]"
+echo "        files = [(\"data\", \"/usr/lib/pkgconfig\"),"
+echo "                 (\"header\", \"/usr/include\")]"
+echo ""
+echo "    class history:"
+echo "        update = ["
+echo "            [\"$(date "+%Y-%m-%d")\", \"$ver\", \"First release\","
+echo "                \"$packager\", \"$email\"],"
+echo "        ]"
+}
+
+write_actions(){
+cat << EOF
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Licensed under the GNU General Public License, version 3.
+# See the file http://www.gnu.org/licenses/gpl.txt
+from inary.actionsapi import inarytools
+EOF
+echo "from inary.actionsapi import $buildtype as tools"
+cat << EOF
+from inary.actionsapi import get
+#more information : https://gitlab.com/sulinos/inary/tree/master/inary/actionsapi
+def setup():
+EOF
+echo "    tools.configure(\"$confopt\")"
+cat << EOF
+def build():
+    tools.make()
+
+def install():
+    tools.rawInstall("DESTDIR=%s" % get.installDIR())
+
+EOF
+}
+
+
+# Write info after creating
+info "Package name" "$name"
+info "Output directory" "$(realpath $directory)"
+info "Package version" "$ver"
+info "Homepage" "$homepage"
+info "Packager" "$packager"
+info "Email" "$email"
+info "License" "$license"
+info "Summary" "$summary"
+info "Description" "$description"
+info "Build type" "$buildtype"
+
+if [ "$forceyes" == "" ] ; then
+    echo ""
+    info ">>>" "Are informations correct? [y/N]"
+    read -s -n 1 c
+    if ! [ "$c" == "y" ] || [ "$c" == ""Y ] ; then
+        echo "       Operation canceled."
+        exit
+    fi
+fi
+if [ "$dummy" == "true" ] ; then
+    echo "Do not create pspec and actions. If you wanna create, you must remove -z parameter."
+    echo "  Operation canceled."
+    exit
+fi
+directory=$(realpath $directory)
+mkdir -p $directory
+info "Creating" "pspec.xml to $directory/pspec.xml"
+write_pspec > $directory/pspec.xml
+if [ ! "$noclass" == "true" ] ; then
+    info "Creating" "pspec.py to $directory/pspec.py"
+    write_pspec_class > $directory/pspec.py
+fi
+info "Creating" "actions.py to $directory/actions.py"
+write_actions > $directory/actions.py
+
+if [ "$bnow" == "true" ] ; then
+  cd $directory
+  exec inary bi --verbose --debug $forceyes
+fi

@@ -30,19 +30,44 @@ def exportFlags():
     # Build systems depend on these environment variables. That is why
     # we export them instead of using as (instance) variables.
     values = ctx.config.values
+    if "INARY_BUILD_TYPE" in os.environ and os.environ['INARY_BUILD_TYPE']:
+        if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
+            os.environ['PKG_CONFIG_PATH'] = "/usr/lib32/pkgconfig"
+
+    if "INARY_USE_FLAGS" in os.environ and os.environ['INARY_USE_FLAGS']:
+        os.environ['LDFLAGS'] = values.build.ldflags
+        if os.environ['INARY_BUILD_TYPE'] == "emul32" or os.environ['INARY_BUILD_TYPE'] == "clang32":
+            os.environ['CFLAGS'] = values.build.cflags.replace("-fPIC", "")
+            os.environ['CXXFLAGS'] = values.build.cxxflags.replace("-fPIC", "")
+
+        else:
+            os.environ['CFLAGS'] = values.build.cflags
+            os.environ['CXXFLAGS'] = values.build.cxxflags
+
     os.environ['HOST'] = values.build.host
-    os.environ['CFLAGS'] = values.build.cflags
-    os.environ['CXXFLAGS'] = values.build.cxxflags
-    os.environ['LDFLAGS'] = values.build.ldflags
     os.environ['USER_LDFLAGS'] = values.build.ldflags
     os.environ['JOBS'] = values.build.jobs
     os.environ['MAKEFLAGS'] = values.build.makeflags
 
     os.environ['LD_AS_NEEDED'] = "1"
-
-    os.environ['CC'] = "{}-gcc".format(values.build.host)
-    os.environ['CXX'] = "{}-g++".format(values.build.host)
-    os.environ['LD'] = "ld"
+    os.environ['NOCONFIGURE'] = "1"
+    if "INARY_BUILD_TYPE" in os.environ and os.environ['INARY_BUILD_TYPE']:
+        if os.environ['INARY_BUILD_TYPE'] == "emul32":
+            os.environ['CC'] = "{}-gcc -m32".format(values.build.host)
+            os.environ['CXX'] = "{}-g++ -m32".format(values.build.host)
+            os.environ['LD'] = "ld -m32"
+        elif os.environ['INARY_BUILD_TYPE'] == "clang32":
+            os.environ['CC'] = "clang -m32".format(values.build.host)
+            os.environ['CXX'] = "clang -m32".format(values.build.host)
+            os.environ['LD'] = "ld -m32"
+        elif os.environ['INARY_BUILD_TYPE'] == "clang":
+            os.environ['CC'] = "clang".format(values.build.host)
+            os.environ['CXX'] = "clang".format(values.build.host)
+            os.environ['LD'] = "ld"
+        else:
+            os.environ['CC'] = "{}-gcc".format(values.build.host)
+            os.environ['CXX'] = "{}-g++".format(values.build.host)
+            os.environ['LD'] = "ld"
 
 
 class Env(object):

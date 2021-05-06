@@ -53,7 +53,6 @@ def locked(func):
     """
     Decorator for synchronizing privileged functions
     """
-
     def wrapper(*__args, **__kw):
         try:
             lock = open(join_path(ctx.config.lock_dir(), 'inary'), 'w')

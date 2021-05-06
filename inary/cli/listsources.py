@@ -51,7 +51,7 @@ Gives a brief list of sources published in the repositories.
         sources = self.sourcedb.list_sources()
 
         if sources:
-            maxlen = max([len(_p) for _p in l])
+            maxlen = max([len(_p) for _p in sources])
 
         installed_list = inary.db.sourcedb.SourceDB().list_sources()
         sources.sort()

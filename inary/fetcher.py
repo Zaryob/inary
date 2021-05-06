@@ -139,6 +139,7 @@ class Fetcher:
     FETCH_MODE_PYCURL = 1
     FETCH_MODE_REQUESTS = 2
     FETCH_MODE_WGET = 3
+    FETCH_MODE_ARIA2C = 4
 
     def __init__(self, url, destdir="/tmp", destfile=None):
         if not isinstance(url, inary.uri.URI):
@@ -270,10 +271,18 @@ class Fetcher:
 
     def _get_wget(self):
         return os.system("busybox wget -c --user-agent \"{}\"  \"{}\" -O \"{}\" 2>&1".format(
-                self.useragent,
-                self.url.get_uri(),
-                self.partial_file
-            )
+            self.useragent,
+            self.url.get_uri(),
+            self.partial_file
+        )
+        )
+
+    def _get_aria2c(self):
+        return os.system("aria2c -U \"{}\" -c \"{}\" -d \"/\" -o \"{}\"".format(
+            self.useragent,
+            self.url.get_uri(),
+            self.partial_file
+        )
         )
 
     def _get_requests(self):
@@ -309,7 +318,7 @@ class Fetcher:
         if not self.fetcher:
             mode = int(ctx.config.values.general.fetcher_mode or 0)
             self.fetcher_mode = mode
-            if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET]:
+            if mode not in [self.FETCH_MODE_PYCURL, self.FETCH_MODE_REQUESTS, self.FETCH_MODE_WGET, self.FETCH_MODE_ARIA2C]:
                 try:
                     from pycurl import URL
                     self.fetcher = self._get_pycurl
@@ -329,6 +338,8 @@ class Fetcher:
                 self.fetcher = self._get_requests
             elif mode == 3:
                 self.fetcher = self._get_wget
+            elif mode == 4:
+                self.fetcher = self._get_aria2c
 
         return self.fetcher
 
@@ -483,7 +494,7 @@ def fetch_from_mirror(url, destdir=None, progress=None, destfile=None):
 # Operation function
 
 
-def fetch(packages=None, path=os.path.curdir):
+def fetch(packages=None, path=os.path.curdir, repo=None):
     """
     Fetches the given packages from the repository without installing, just downloads the packages.
     @param packages: list of package names -> list_of_strings
@@ -495,7 +506,7 @@ def fetch(packages=None, path=os.path.curdir):
     packagedb = inary.db.packagedb.PackageDB()
     repodb = inary.db.repodb.RepoDB()
     for name in packages:
-        package, repo = packagedb.get_package_repo(name)
+        package, repo = packagedb.get_package_repo(name, repo)
         ctx.ui.info(
             _("\"{0}\" package found in \"{1}\" repository.").format(
                 package.name, repo))

@@ -1,0 +1,36 @@
+#!/bin/bash
+export name="$1"
+if ! [ -f "$name" ] ; then
+    echo "File Not found: $name"
+    exit 1
+fi
+revdepall=()
+check_revdep(){
+    ldd $1 | grep "$(basename $name | sed s/\.so.*$/.so/g)"
+}
+check_dir_dep(){
+    revdep=()
+    find $1 -type f 2>/dev/null | grep ".so$" | while read line
+    do
+        if check_revdep $line &>/dev/null ; then
+            echo $line
+            echo -e "\033[32;1m\tRevDep:\033[;0m\t$line" >/dev/stderr
+            revdep+=("$line")
+        else
+            echo $? > /dev/null
+        fi
+    done
+}
+echo -e "\033[33;1mStage 1: \033[;0mChecking reverse dependencies:" >/dev/stderr
+for i in /lib /usr/lib /usr/local/lib /data/app/
+do
+    revdepall+=($(check_dir_dep $i))
+done
+echo -e "\033[33;1mStage 2: \033[;0mDeterminating package names:" >/dev/stderr
+for i in ${revdepall[@]}
+do
+    inary sf -q $i | cut -f 2 -d "\"" 
+done | sort | uniq | while read line ; do
+    echo -e "\033[32;1m\tPackage: \033[;0m$line" >/dev/stderr
+done
+echo -e "\033[33;1mDone\033[;0m" >/dev/stderr

@@ -98,6 +98,7 @@ class GeneralDefaults:
     # 1 - Force pyCurl
     # 2 - Force requests
     # 3 - Force wget (on shell)
+    # 4 - Force aria2c (on shell)
     #
     # Note: if you entered invalid number to here,
     #       using default one
