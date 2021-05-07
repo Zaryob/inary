@@ -515,8 +515,15 @@ class ArchiveTar(ArchiveBase):
             #
             # Note: This is no good while installing a inary package.
             # Thats why this is optional.
-            if self.no_same_permissions and not os.path.islink(tarinfo.name):
-                os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+            if not os.path.islink(tarinfo.name):
+                os.chown(tarinfo.name, 0,0)
+                if self.no_same_permissions :
+                    os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
+                else:
+                    os.chmod(tarinfo.name, 0o755 & ~ctx.const.umask)
+            else:
+                os.lchown(tarinfo.name, 0,0)
+            print(tarinfo.name)
 
             if self.no_same_owner:
                 uid = os.getuid()
@@ -533,7 +540,6 @@ class ArchiveTar(ArchiveBase):
                         _("LChowning {0} ({1}:{2})").format(
                             tarinfo.name, uid, gid), verbose=True)
                     os.lchown(tarinfo.name, uid, gid)
-
             if callback:
                 callback(tarinfo, extracted=True)
 

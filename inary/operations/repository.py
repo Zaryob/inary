@@ -21,6 +21,7 @@ import inary.file
 import inary.errors
 import inary.util as util
 import inary.context as ctx
+import inary.data.history as History
 
 # Gettext Library
 import gettext
@@ -115,7 +116,9 @@ def __update_repo(repo, force=False):
             else:
                 return False
 
-        inary.db.historydb.HistoryDB().update_repo(repo, repouri, "update")
+        history = History.History()
+        history.create("repoupdate")
+        history.update()
 
         repodb.check_distribution(repo)
 
