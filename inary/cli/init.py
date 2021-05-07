@@ -28,7 +28,7 @@ class InitNothing(command.PackageOp, metaclass=command.autocommand):
     def __init__(self, args):
         super(InitNothing, self).__init__(args)
 
-    name = (_("init"), "i")
+    name = ("init", "i")
 
     def options(self):
         pass
