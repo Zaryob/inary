@@ -353,8 +353,8 @@ class ArchiveTar(ArchiveBase):
 
         ctx.ui.info(_("Target DIR: \"{}\"").format(target_dir), verbose=True)
         os.chdir(target_dir)
-
         for tarinfo in self.tar:
+            ctx.ui.info(_("Extracting: /{}").format(tarinfo.name))
             if callback:
                 callback(tarinfo, extracted=False)
 
@@ -523,7 +523,6 @@ class ArchiveTar(ArchiveBase):
                     os.chmod(tarinfo.name, 0o755 & ~ctx.const.umask)
             else:
                 os.lchown(tarinfo.name, 0,0)
-            print(tarinfo.name)
 
             if self.no_same_owner:
                 uid = os.getuid()
