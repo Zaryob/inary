@@ -520,7 +520,7 @@ class ArchiveTar(ArchiveBase):
                 os.chmod(tarinfo.name, tarinfo.mode)
             else:
                 os.lchown(tarinfo.name, 0,0)
-                os.lchmod(tarinfo.name, tarinfo.mode)
+                os.chmod(tarinfo.name, tarinfo.mode)
 
             if self.no_same_owner:
                 uid = os.getuid()
