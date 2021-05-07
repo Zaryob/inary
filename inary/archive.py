@@ -515,12 +515,15 @@ class ArchiveTar(ArchiveBase):
             #
             # Note: This is no good while installing a inary package.
             # Thats why this is optional.
-            if not os.path.islink(tarinfo.name):
+            if  os.path.isfile(tarinfo.name):
                 os.chown(tarinfo.name, 0,0)
                 os.chmod(tarinfo.name, tarinfo.mode)
+            # FIXME: We must chmod directory as 755. Empty directory permission is 777. Remove this
+            elif os.path.isdir(tarinfo.name):
+                os.chown(tarinfo.name, 0,0)
+                os.chmod(tarinfo.name, 0o755)
             else:
                 os.lchown(tarinfo.name, 0,0)
-                os.chmod(tarinfo.name, tarinfo.mode)
 
             if self.no_same_owner:
                 uid = os.getuid()
