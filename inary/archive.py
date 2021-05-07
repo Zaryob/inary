@@ -517,12 +517,10 @@ class ArchiveTar(ArchiveBase):
             # Thats why this is optional.
             if not os.path.islink(tarinfo.name):
                 os.chown(tarinfo.name, 0,0)
-                if self.no_same_permissions :
-                    os.chmod(tarinfo.name, tarinfo.mode & ~ctx.const.umask)
-                else:
-                    os.chmod(tarinfo.name, 0o755 & ~ctx.const.umask)
+                os.chmod(tarinfo.name, tarinfo.mode)
             else:
                 os.lchown(tarinfo.name, 0,0)
+                os.chmod(tarinfo.name, tarinfo.mode)
 
             if self.no_same_owner:
                 uid = os.getuid()
