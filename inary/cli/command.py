@@ -35,20 +35,22 @@ class autocommand(type):
         name = getattr(cls, 'name', None)
         if name is None:
             raise inary.cli.Error(_('Command lacks name.'))
-        longname, shortname = name
-
-        def add_cmd(cmd):
+        
+        def add_cmd(cmd,skip_duplicate=False):
             if cmd in Command.cmd_dict:
-                raise inary.cli.Error(
-                    _('Duplicate command \'{}\'').format(cmd))
+                if not skip_duplicate:
+                    raise inary.cli.Error(
+                        _('Duplicate command \'{}\'').format(cmd))
             else:
                 Command.cmd_dict[cmd] = cls
 
-        add_cmd(longname)
-        if shortname:
-            add_cmd(shortname)
 
-
+        for cmd_name in name:
+            if cmd_name:
+                add_cmd(cmd_name)
+        add_cmd(_(name[0]),True)
+        
+        
 class Command(object):
     """generic help string for any command"""
 
@@ -65,10 +67,10 @@ class Command(object):
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('inary', fallback=True)
             summary = trans.gettext(commandcls.__doc__).split('\n')[0]
-            name = commandcls.name[0]
+            name = _(commandcls.name[0])
             if commandcls.name[1]:
                 name += ' ({})'.format(commandcls.name[1])
-            s += util.colorize(' %23s ' % name, 'blue') + '- %s\n' % summary
+            s += util.colorize(' %23s ' % name, 'red') + '- %s\n' % summary
         return s
 
     @staticmethod
