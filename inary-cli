@@ -93,10 +93,10 @@ def handle_exception(exception, value, tb):
 
 def blc_wsl():
     """Dont allow fucking WSL"""
-    f = str(os.uname())
-    if (("Microsoft" in f) or ("WSL" in f)):
+    f = str(os.uname()).lower()
+    if (("microsoft" in f) or ("wsl" in f)):
         ui.error(_("Using inary in WSL environment is not allowed."))
-        exit()
+        exit(1)
 
 
 if __name__ == "__main__":
