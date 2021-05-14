@@ -221,7 +221,7 @@ def doman(*sourceFiles, pageDirectory=None):
                 if not pageDirectory:
                     pageDirectory = source[source.rindex('.') + 1:]
             except ValueError:
-                error(
+                ctx.ui.warning(
                     _('ActionsAPI [doman]: Wrong man page file: \"{}\"').format(source))
 
             manPDIR = join_path(manDIR, '/man{}'.format(pageDirectory))
@@ -389,7 +389,7 @@ def dosym(sourceFile, destinationFile):
     try:
         os.symlink(sourceFile, join_path(get.installDIR(), destinationFile))
     except OSError:
-        error(_('ActionsAPI [dosym]: File already exists: \"{}\"').format(
+        ctx.ui.warning(_('ActionsAPI [dosym]: File already exists: \"{}\"').format(
             destinationFile))
 
 
