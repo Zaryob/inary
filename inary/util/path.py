@@ -90,3 +90,16 @@ def join_path(a, *p):
 def basename(path):
     # os.path.basename is not usefull for remote links
     return path.split("/")[-1]
+
+def url_encode(url):
+    if "?" not in url:
+        return url
+    head=url.split("?")[0]
+    get=url.split("?")[1]
+    getx = "?"
+    for i in get:
+        if not i.isalnum():
+            getx += "%"+str(hex(ord(i))).split("x")[1]
+        else:
+             getx += i
+    return "{}{}".format(head,getx)
