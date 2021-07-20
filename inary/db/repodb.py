@@ -170,7 +170,7 @@ class RepoDB(lazydb.LazyDB):
         repo = self.get_repo(repo_name)
 
         index_path = repo.indexuri.get_uri()
-        if index_path == None :#or not os.path.exists(index_path):
+        if index_path == None :
             # ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
         # FIXME Local index files should also be cached.
@@ -181,7 +181,8 @@ class RepoDB(lazydb.LazyDB):
 
             if File.is_compressed(index_path):
                 index_path = os.path.splitext(index_path)[0]
-
+        if not os.path.exists(index_path):
+            return xmlext.newDocument("INARY")
         try:
             return xmlext.parse(index_path)
         except Exception as e:
