@@ -433,7 +433,7 @@ def fetch_git(url, destdir="", branch="master"):
 
 
 def fetch_url(url, destdir=None, progress=None, destfile=None, pkgname=''):
-
+    url  = util.url_encode(str(url))
     if not destdir:
         destdir = ctx.config.archives_dir()
     if not progress:
