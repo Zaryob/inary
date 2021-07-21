@@ -707,13 +707,13 @@ class Builder:
         if name in self.variable_buffer.keys():
             return self.variable_buffer[name]
         else:
-            (ret, out, err) = util.run_batch(
-                'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name, os.getcwd()))
-            if ret == 0:
-                self.variable_buffer[name] = out
-                return out
-            else:
-                return default
+            if os.path.exists("{}/actions.py"):
+                (ret, out, err) = util.run_batch(
+                    'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nsys.stdout.write(actions.{0})\''.format(name, self.curDir))
+                if ret == 0:
+                    self.variable_buffer[name] = out
+                    return out
+        return default
 
     def pkg_src_dir(self):
         """Returns the real path of WorkDir for an unpacked archive."""
@@ -746,17 +746,17 @@ class Builder:
         actionLocals inary.build.Error will be raised."""
         # we'll need our working directory after actionscript
         # finished its work in the archive source directory.
-        curDir = os.getcwd()
+        self.curDir = os.getcwd()
         command = ""
         self.specdiruri = os.path.dirname(self.specuri.get_uri())
         pkgname = os.path.basename(self.specdiruri)
         self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
         if os.path.exists(self.destdir):
-            curDir = self.destdir
+            self.curDir = self.destdir
         src_dir = self.pkg_src_dir()
         self.set_environment_vars()
         os.environ['WORK_DIR'] = src_dir
-        os.environ['CURDIR'] = curDir
+        os.environ['CURDIR'] = self.curDir
         os.environ['SRCDIR'] = self.pkg_work_dir()
         os.environ['OPERATION'] = func
         if os.getuid() != 0:
@@ -769,15 +769,20 @@ class Builder:
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
-        if os.path.exists("{}/actions.py".format(src_dir)):
-            if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
+        if os.path.exists("{}/actions.py".format(self.curDir)):
+            ctx.ui.info(_("Using actions file as python script"))
+            if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, self.curDir)):
                 raise Error(
                     _("unable to call function from actions: \'{}\'").format(func))
-        elif os.path.exists("{}/actions.sh".format(src_dir)):
-            if os.system(command+'bash --noprofile --norc -c \'source {1}/actions.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func, curDir)):
+        elif os.path.exists("{}/actions.sh".format(self.curDir)):
+            ctx.ui.info(_("Using actions file as bash script"))
+            if os.system(command+'bash -e --noprofile --norc -c \'source {1}/actions.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func, self.curDir)):
                 raise Error(
                     _("unable to call function from actions: \'{}\'").format(func))
-        os.chdir(curDir)
+        else:
+            raise Error(
+                    _("Actions file not found\n function:{}\n Actions directory:{}").format(func,self.curDir))
+        os.chdir(self.curDir)
         return True
 
     def check_paths(self):
