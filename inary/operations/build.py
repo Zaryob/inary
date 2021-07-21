@@ -768,9 +768,14 @@ class Builder:
         else:
             raise Error(
                 _("ERROR: WorkDir ({}) does not exist\n").format(src_dir))
-        if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
-            raise Error(
-                _("unable to call function from actions: \'{}\'").format(func))
+        if os.path.exists("{}/actions.py".format(src_dir)):
+            if os.system(command+'python3 -c \'import sys\nsys.path.append("{1}")\nimport actions\nif(hasattr(actions,"{0}")): actions.{0}()\''.format(func, curDir)):
+                raise Error(
+                    _("unable to call function from actions: \'{}\'").format(func))
+        elif os.path.exists("{}/actions.sh".format(src_dir)):
+            if os.system(command+'bash --noprofile --norc -c \'source {1}/actions.sh ; if declare -F {0} &>/dev/null ; then {0} ; fi\''.format(func, curDir)):
+                raise Error(
+                    _("unable to call function from actions: \'{}\'").format(func))
         os.chdir(curDir)
         return True
 
