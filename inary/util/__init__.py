@@ -29,7 +29,7 @@ from inary.util.process import *
 # Inary Modules
 from inary.util.strings import *
 from inary.util.terminal import *
-from inary.util.terminal import *
+from inary.util.cpuinfo import *
 
 # Gettext Library
 import gettext
