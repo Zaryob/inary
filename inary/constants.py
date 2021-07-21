@@ -100,7 +100,7 @@ class Constants(metaclass=Singleton):
         # when the constant is bound to change later on.
         # in some places literals are just as good, for instance
         # when constant is the same as string. readability is important...
-        self.__c.actions_file = "actions.py"
+        self.__c.actions_file = ["actions.py", "actions.sh"]
         self.__c.pspec_file = "pspec.xml"
         self.__c.files_dir = "files"
         self.__c.metadata_dir = "metadata"

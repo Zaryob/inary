@@ -503,8 +503,9 @@ class Builder:
         self.download(pspecuri, self.destdir)
 
     def fetch_actionsfile(self):
-        actionsuri = util.join_path(self.specdiruri, ctx.const.actions_file)
-        self.download(actionsuri, self.destdir)
+        for actions in ctx.const.actions_file:
+            actionsuri = util.join_path(self.specdiruri, actions)
+            self.download(actionsuri, self.destdir)
 
     def fetch_translationsfile(self):
         translationsuri = util.join_path(self.specdiruri,
