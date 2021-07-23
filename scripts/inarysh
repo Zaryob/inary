@@ -17,6 +17,12 @@ import traceback
 import signal
 import os
 
+# libreadline interface
+from ctypes import CDLL, c_char_p
+libreadline = CDLL("libreadline.so")
+libreadline.readline.restype = c_char_p
+libreadline.readline.argtypes=[c_char_p]
+
 import inary.ui
 import inary.context as ctx
 from inary.cli.inarycli import InaryCLI
@@ -104,19 +110,18 @@ if __name__ == "__main__":
     while 1:
         sys.excepthook = handle_exception
 
-        cmd = input('inary >> ')
-        if cmd.strip()=='exit':
-            ctx.ui.info(_('Bye!'))
-            exit()
-        if cmd.startswith('!'):
-            cmd = cmd[1:]
-            if cmd.startswith('bash') or\
-               cmd.startswith('zsh') or\
-               cmd.startswith('sh'):
-                ui.error(_("Can not use an other SHELL in Inary Shell"))
-            else:
+        try:
+            cmd = libreadline.readline('inary >> '.encode("utf-8")).decode("utf-8")
+            if cmd.strip()=='exit':
+                ctx.ui.info(_('Bye!'))
+                break
+            elif "cd" == cmd.split()[0]:
+                os.chdir(cmd.replace("cd ",""))    
+            elif cmd.startswith('!'):
+                cmd = cmd[1:]
                 os.system(cmd)
-            continue
-
-        cli = InaryCLI(cmd.split())
-        cli.run_command()
+            else:
+                cli = InaryCLI(cmd.split())
+                cli.run_command()
+        except:
+            pass
