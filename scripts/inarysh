@@ -26,6 +26,7 @@ libreadline.readline.argtypes=[c_char_p]
 import inary.ui
 import inary.context as ctx
 from inary.cli.inarycli import InaryCLI
+import inary.util
 
 import gettext
 gettext.bindtextdomain('inary', "/usr/share/locale")
@@ -62,9 +63,6 @@ def handle_exception(exception, value, tb):
     elif isinstance(value, KeyboardInterrupt):
         ui.error(_("\nKeyboard Interrupt: Exiting..."))
         exit()
-    elif isinstance(value, EOFError):
-        ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
-        exit()
     elif isinstance(value, inary.errors.Exception):
         show_traceback = True
         ui.error(_("\nUnhandled internal exception.\n"
@@ -99,6 +97,9 @@ if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, '')
     sys.excepthook = handle_exception
     signal.signal(signal.SIGTERM, sig_handler)
+    script = None
+    if len(sys.argv) > 1:
+        script = open(sys.argv[1],"r")
     ui = inary.cli.CLI() # make a temporary UI
     ui.info(_("Welcome to the interactive INARY shell.\n"
            "Type 'help' to see a list of commands.\n"
@@ -111,17 +112,27 @@ if __name__ == "__main__":
         sys.excepthook = handle_exception
 
         try:
-            cmd = libreadline.readline('inary >> '.encode("utf-8")).decode("utf-8")
+            if script == None:
+                cmd = libreadline.readline(inary.util.colorize('inary >> ',color="green").encode("utf-8"))
+                if cmd == None:
+                    ui.error(_("\nKeyboard Interrupt [Ctrl-D]: Exiting..."))
+                    break
+                cmd = cmd.decode("utf-8")
+            else:
+                cmd = script.readline()
             if cmd.strip()=='exit':
-                ctx.ui.info(_('Bye!'))
+                ui.info(_('Bye!'))
                 break
-            elif "cd" == cmd.split()[0]:
-                os.chdir(cmd.replace("cd ",""))    
             elif cmd.startswith('!'):
                 cmd = cmd[1:]
-                os.system(cmd)
+                if "cd" == cmd.split()[0]:
+                    os.chdir(cmd.replace("cd ",""))    
+                elif cmd.startswith('!'):
+                    os.system(os.environ["SHELL"])
+                else:
+                  os.system(cmd)
             else:
                 cli = InaryCLI(cmd.split())
                 cli.run_command()
-        except:
-            pass
+        except Exception as e:
+            ui.error(str(e))
