@@ -170,7 +170,7 @@ class RepoDB(lazydb.LazyDB):
         repo = self.get_repo(repo_name)
 
         index_path = repo.indexuri.get_uri()
-        if index_path == None :
+        if index_path == None:
             # ctx.ui.warning(_("{} repository needs to be updated").format(repo_name))
             return xmlext.newDocument("INARY")
         # FIXME Local index files should also be cached.
