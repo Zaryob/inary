@@ -35,8 +35,8 @@ class autocommand(type):
         name = getattr(cls, 'name', None)
         if name is None:
             raise inary.cli.Error(_('Command lacks name.'))
-        
-        def add_cmd(cmd,skip_duplicate=False):
+
+        def add_cmd(cmd, skip_duplicate=False):
             if cmd in Command.cmd_dict:
                 if not skip_duplicate:
                     raise inary.cli.Error(
@@ -44,13 +44,12 @@ class autocommand(type):
             else:
                 Command.cmd_dict[cmd] = cls
 
-
         for cmd_name in name:
             if cmd_name:
                 add_cmd(cmd_name)
-        add_cmd(_(name[0]),True)
-        
-        
+        add_cmd(_(name[0]), True)
+
+
 class Command(object):
     """generic help string for any command"""
 

@@ -114,7 +114,7 @@ def proceed(force=False):
     t("profile.env", "/etc/env.d", "env-update")
     t("cracklib", "/usr/share/cracklib/",
       "create-cracklib-dict /usr/share/cracklib/*")
-    t("ldconfig","/etc/ld.so.conf.d","ldconfig")
+    t("ldconfig", "/etc/ld.so.conf.d", "ldconfig")
     sys.stdout.write("\n")
     if ctx.config.values.general.fs_sync:
         ctx.ui.info(

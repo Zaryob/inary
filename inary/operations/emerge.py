@@ -27,6 +27,7 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
+
 def emerge(A):
     """
     Builds and installs the given packages from source
@@ -55,18 +56,18 @@ def emerge(A):
 
     if ctx.get_option('dry_run'):
         return
-    
+
     # TODO: Enable this code
-    #if need_build:
+    # if need_build:
     #    ctx.ui.info(_("""The following list of packages will be built:\n{} {}""").format(
     #                util.strlist(need_build),
     #                util.strlist(order_build)))
     #
-    #if len(need_build) + len(order_build) > len(A_0):
+    # if len(need_build) + len(order_build) > len(A_0):
     #    if not ctx.ui.confirm(
     #            _('There are extra packages due to dependencies. Would you like to continue?')):
     #        return False
-    
+
     ctx.ui.notify(ui.packagestogo, order=need_build)
 
     # Dependency install from source repo (fully emerge)
@@ -148,7 +149,7 @@ def plan_emerge(A):
                         return
                     else:
                         pkg = pkgtosrc(i)
-                        need_build.insert(0,pkg)
+                        need_build.insert(0, pkg)
                         src = get_spec(pkg).source
                         for dep in src.buildDependencies:
                             if not installdb.has_package(dep.package):

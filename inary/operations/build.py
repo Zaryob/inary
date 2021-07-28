@@ -781,7 +781,7 @@ class Builder:
                     _("unable to call function from actions: \'{}\'").format(func))
         else:
             raise Error(
-                    _("Actions file not found\n function:{}\n Actions directory:{}").format(func,self.curDir))
+                _("Actions file not found\n function:{}\n Actions directory:{}").format(func, self.curDir))
         os.chdir(self.curDir)
         return True
 
