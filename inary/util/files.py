@@ -254,8 +254,8 @@ def sha1_file(filename):
             raise FilePermissionDeniedError(
                 _("You don't have necessary read permissions"))
         else:
-            raise FileError(
-                _("Cannot calculate SHA1 hash of \"{}\"").format(filename))
+            raise FileError("{}:\n {}".format(
+                _("Cannot calculate SHA1 hash of \"{}\"").format(filename),str(e)))
 
 
 def sha1_data(data):
