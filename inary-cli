@@ -19,8 +19,8 @@ import os
 import sys
 import traceback
 
-if os.path.exists("/usr/lib/sulin/inary"):
-    sys.path.insert(0,"/usr/lib/sulin/inary")
+if os.path.exists("/usr/lib/sulin"):
+    sys.path.insert(0,"/usr/lib/sulin")
 
 import inary
 import inary.cli
