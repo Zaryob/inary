@@ -19,6 +19,9 @@ import os
 import sys
 import traceback
 
+if os.path.exists("/usr/lib/sulin/inary"):
+    sys.path.insert(0,"/usr/lib/sulin/inary")
+
 import inary
 import inary.cli
 import inary.context as ctx
