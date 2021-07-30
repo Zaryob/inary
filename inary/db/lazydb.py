@@ -80,8 +80,11 @@ class LazyDB(Singleton):
                 f.write(LazyDB.cache_version)
                 f.flush()
                 os.fsync(f.fileno())
-            pickle.dump(self._instance().__dict__,
-                        open(self.__cache_file(), 'wb'), 1)
+                try:
+                    pickle.dump(self._instance().__dict__,
+                            open(self.__cache_file(), 'wb'), 1)
+                except:
+                    pass
 
             ctx.ui.debug("LazyDB: {0} cached.".format(self.__class__.__name__))
 
