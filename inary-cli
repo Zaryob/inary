@@ -98,6 +98,7 @@ def blc_wsl():
     """Dont allow fucking WSL"""
     f = str(os.uname()).lower()
     if (("microsoft" in f) or ("wsl" in f) or inary.util.get_cpuinfo("microcode") == "0xffffffff"):
+        ui = inary.cli.CLI()
         ui.error(_("Using inary in WSL environment is not allowed."))
         exit(1)
 
