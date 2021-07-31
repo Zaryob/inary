@@ -1,42 +1,121 @@
 #!/bin/bash
-#sulinstrapt betiği ile sulinos chroot oluşturabilirsiniz veya diskinize kurulum yapabilirsiniz
-if [[ "$1" == ""  ||  "$1" == "-*" ]]
-then
+set -e
+umask 022
+curdir=$(pwd)
+packages=(baselayout bash bzip2 ca-certificates    \
+          coreutils cracklib curl expat gdbm       \
+          gettext glib2 glibc gmp libcap libffi    \
+          libgcc libgomp libidn2 libpcre libssh2   \
+          libunistring libxml2 ncurses openssl     \
+          pam python3 python3-psutil sed busybox   \
+          python3-pycurl readline run-parts libpsl \
+          sqlite timezone unzip xz zlib acl attr)
+
+repo="https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz"
+help_msg(){
+    echo "Usage: sulinstrapt [options] destdir"
+    echo "  -r   : repository url"
+    echo "  -b   : install boot packages"
+    echo "  -x   : install x11 packages"
+    echo "  -d   : install devel packages"
+    echo "  -n   : install network packages"
+    echo "  -a   : install additional packages"
+    exit $1
+}
+get_path(){
+    name=$1
+    grep "${name:0:0}\/$name/$name-[0-9][0-9.]*[a-f,-\.]" "$sulin/tmp/repo" | sed "s/.*<PackageURI>//g" | sed "s/<\/.*//g" | sort -V | head -n 1
+}
+clean_tmp(){
+    rm -rf "$sulin"/tmp/install.tar.* 
+    rm -rf "$sulin"/tmp/*.xml 
+    rm -rf "$sulin"/tmp/*.py
+    rm -rf "$sulin"/tmp/scom
+}
+if [[ "$1" == ""  ||  "$1" == "-*" ]] ; then
 	echo "Usage: sulinstrapt [directory]"
 	exit 0
-fi
-sulin="$1"
-if [[ $UID -ne 0 ]]
-then
+elif [[ $UID -ne 0 ]] ; then
 	echo "You must be root!"
 	exit 1
 fi
-if [[ -d "$sulin" ]]
-then
+if [[ -d "$sulin" ]] ; then
   echo "$sulin already exist"
-fi
-if [[ -f "$sulin" ]]
-then
+  exit 1
+elif [[ -f "$sulin" ]] ; then
   echo "$sulin is a file. You must delete or move."
   exit 1
 fi
-inary ar sulin "https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz" -y -D$sulin || true
-inary ur -y -D$sulin || true
-inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -D$sulin 
-inary it -c system.base curl -y --ignore-configure -D$sulin
-if echo "$2" | grep "^-" &>/dev/null ; then
-	echo $2 | grep "b" && inary it -c system.boot toybox btrfs-progs linux linux-firmware -y --ignore-configure -D$sulin
-	echo $2 | grep "x" && inary it -c x11 -y --ignore-configure -D$sulin
-	echo $2 | grep "d" && inary it -c system.devel -y --ignore-configure -D$sulin
-	echo $2 | grep "n" && inary it NetworkManager -y --ignore-configure -D$sulin
-	echo $2 | grep "a" && inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure -D$sulin
-fi
-for i in /dev /sys /proc /run
-do
-	mkdir -p $sulin/$i &>/dev/null
-	umount -lf -R $sulin/$i || true
-	mount --bind $i $sulin/$i
+
+while getopts -- ':r' OPTION; do
+  if [[ "$OPTION" == "r" ]] ; then
+      repo="${OPTARG[@]}"
+   fi
 done
+sulin=$(realpath "$1")
+mkdir -p "$sulin/tmp"
+if [[ ! -f "$sulin/tmp/repo" ]] ; then
+    wget -c "$repo" -O "$sulin/tmp/repo"
+    if LANG=C file "$sulin/tmp/repo" | grep "XZ" &>/dev/null ; then
+        mv "$sulin/tmp/repo" "$sulin/tmp/repo.xz"
+        xz -d "$sulin/tmp/repo.xz"
+    fi
+fi
+i=0
+total=${#packages[@]}
+cd $sulin/
+for pkg in ${packages[@]} ; do
+    URI=$(dirname "$repo")/$(get_path $pkg)
+    echo -e "\033[32;1m[$i/$total] Install: \033[0m$pkg"
+    if [[ ! -f "$sulin/tmp/$pkg.zip" ]] ; then
+        wget -c "$URI" -O "$sulin/tmp/$pkg.zip"
+        cd tmp ; unzip -o $sulin/tmp/$pkg.zip >/dev/null ; cd ..
+        tar --overwrite -xf tmp/install.tar.*
+        clean_tmp
+    fi
+    i=$(($i+1))
+done
+echo -e "\033[32;1m[$i/$total] Install: \033[0minary-develop"
+if [[ ! -f "$sulin/tmp/inary-develop.zip" ]] ; then
+    wget https://gitlab.com/sulinos/devel/inary/-/archive/develop/inary-develop.zip -O "$sulin/tmp/inary-develop.zip"
+    cd tmp ; unzip -o $sulin/tmp/inary-develop.zip >/dev/null
+    mkdir -p "$sulin/usr/lib/sulin/inary"
+    cp -prf inary-develop/inary/* "$sulin/usr/lib/sulin/inary"
+    cp -pf inary-develop/inary-cli "$sulin/usr/bin/inary-cli"
+    ln -s inary-cli "$sulin/usr/bin/inary"
+    rm -rf inary-develop
+    clean_tmp
+fi
+for i in $(chroot "$sulin" busybox --list)
+    do
+	if chroot "$sulin" busybox which $i &>/dev/null ; then
+		true
+	else
+		chroot "$sulin" ln -s $(chroot "$sulin" busybox which busybox) /usr/bin/$i
+	fi
+    done
+for dir in dev sys proc run ; do
+    [[ -d "$sulin/$dir" ]] || mkdir -p "$sulin/$dir"
+    while umount -f "$sulin/dev" 2>/dev/null ; do true; done
+    mount --bind /run "$sulin/$dir"
+done
+cat /etc/resolv.conf > "$sulin/etc/resolv.conf"
+chroot "$sulin" update-ca-certificates --fresh >/dev/null
+chroot "$sulin" inary ar sulin "$repo" || true
+chroot "$sulin" inary ur sulin -y
+chroot "$sulin" inary it baselayout --ignore-dep --ignore-safety -y --ignore-configure
+chroot "$sulin" inary it -c system.base -y --ignore-configure
 chroot $sulin inary cp busybox
 chroot $sulin inary cp baselayout
 chroot $sulin inary cp
+if echo "$2" | grep "^-" &>/dev/null ; then
+	echo $2 | grep "b" && chroot "$sulin" inary it -c system.boot toybox btrfs-progs linux linux-firmware -y --ignore-configure
+	echo $2 | grep "x" && chroot "$sulin" inary it -c x11 -y --ignore-configure
+	echo $2 | grep "d" && chroot "$sulin" inary it -c system.devel -y --ignore-configure
+	echo $2 | grep "n" && chroot "$sulin" inary it NetworkManager -y --ignore-configure
+	echo $2 | grep "a" && chroot "$sulin" inary it nano wget vim strace ntfsprogs tree dialog pfork scom htop -y --ignore-configure
+fi
+rm -rf "$sulin"/tmp*
+for dir in dev sys proc run ; do
+    while umount -f "$sulin/$dir" 2>/dev/null ; do true; done
+done
