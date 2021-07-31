@@ -25,7 +25,6 @@ import gettext
 __trans = gettext.translation('inary', fallback=True)
 _ = __trans.gettext
 
-
 #############################
 # Path Processing Functions #
 #############################
@@ -98,8 +97,9 @@ def url_encode(url):
     head = url.split("?")[0]
     get = url.split("?")[1]
     getx = "?"
+    chars = ["+"]
     for i in get:
-        if not i.isalnum():
+        if i in chars:
             getx += "%"+str(hex(ord(i))).split("x")[1]
         else:
             getx += i
