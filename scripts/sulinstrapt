@@ -39,13 +39,14 @@ elif [[ $UID -ne 0 ]] ; then
 	echo "You must be root!"
 	exit 1
 fi
-if [[ -d "$sulin" ]] ; then
-  echo "$sulin already exist"
+if [[ -d "$1" ]] ; then
+  echo "$1 already exist"
   exit 1
-elif [[ -f "$sulin" ]] ; then
-  echo "$sulin is a file. You must delete or move."
+elif [[ -f "$1" ]] ; then
+  echo "$1 is a file. You must delete or move."
   exit 1
 fi
+mkdir -p "$1"
 
 while getopts -- ':r' OPTION; do
   if [[ "$OPTION" == "r" ]] ; then
