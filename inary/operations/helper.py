@@ -264,19 +264,19 @@ def show_changed_configs(package_dict, opt):
                         ctx.config.history_dir(), opt, package, ctx.config.dest_dir(), file)
 
                     if os.path.exists(new_file):
-                        ctx.ui.info(
-                            _("[*] Changes in config file: {}").format(file),
-                            color='yellow')
-                        os.system(
-                            "diff -u {0} {1} | less".format(new_file, file))
-                        ctx.ui.info(_("[?] Select the process which will be happened:"))
-                        ctx.ui.info(_("1. Store new config file, not apply [*]"))
-                        ctx.ui.info(_("2. Apply new config file (keep old config)"))
-                        ctx.ui.info(_("3. Apply new config file (don't keep old config)"))
-                        ctx.ui.info(_("4. Delete new config file"))
                         if ctx.config.options and ctx.config.options.yes_all:
                             prompt = "1"
                         else:
+                            ctx.ui.info(
+                                _("[*] Changes in config file: {}").format(file),
+                                color='yellow')
+                            os.system(
+                                "diff -u {0} {1} | less".format(new_file, file))
+                            ctx.ui.info(_("[?] Select the process which will be happened:"))
+                            ctx.ui.info(_("1. Store new config file, not apply [*]"))
+                            ctx.ui.info(_("2. Apply new config file (keep old config)"))
+                            ctx.ui.info(_("3. Apply new config file (don't keep old config)"))
+                            ctx.ui.info(_("4. Delete new config file"))
                             prompt = subprocess.getoutput("read -n 1 c ; echo $c")
                         
                         if prompt == "1":
