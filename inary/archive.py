@@ -435,7 +435,7 @@ class ArchiveTar(ArchiveBase):
                     try:
                         os.renames(tarinfo.name, tarinfo.linkname)
                     except OSError as e :
-                        ctx.ui.warn(str(e))
+                        ctx.ui.warning(str(e))
                         pass
 
                 else:
