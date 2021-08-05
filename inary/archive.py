@@ -436,7 +436,6 @@ class ArchiveTar(ArchiveBase):
                         os.renames(tarinfo.name, tarinfo.linkname)
                     except OSError as e :
                         ctx.ui.warning(str(e))
-                        pass
 
                 else:
                     # This should not happen. Probably a packaging error.
@@ -519,18 +518,21 @@ class ArchiveTar(ArchiveBase):
             #
             # Note: This is no good while installing a inary package.
             # Thats why this is optional.
-            if os.path.isfile(tarinfo.name):
-                if os.getuid() == 0:
-                    os.chown(tarinfo.name, 0, 0)
-                os.chmod(tarinfo.name, tarinfo.mode)
-            # FIXME: We must chmod directory as 755. Empty directory permission is 777. Remove this
-            elif os.path.isdir(tarinfo.name):
-                if os.getuid() == 0:
-                    os.chown(tarinfo.name, 0, 0)
-                os.chmod(tarinfo.name, 0o755)
-            else:
-                if os.getuid() == 0:
-                    os.lchown(tarinfo.name, 0, 0)
+            try:
+                if os.path.isfile(tarinfo.name):
+                    if os.getuid() == 0:
+                        os.chown(tarinfo.name, 0, 0)
+                    os.chmod(tarinfo.name, tarinfo.mode)
+                # FIXME: We must chmod directory as 755. Empty directory permission is 777. Remove this
+                elif os.path.isdir(tarinfo.name):
+                    if os.getuid() == 0:
+                        os.chown(tarinfo.name, 0, 0)
+                    os.chmod(tarinfo.name, 0o755)
+                else:
+                    if os.getuid() == 0:
+                        os.lchown(tarinfo.name, 0, 0)
+            except OSError as e:
+                ctx.ui.warning(str(e))
 
             if self.no_same_owner:
                 uid = os.getuid()
