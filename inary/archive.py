@@ -432,7 +432,11 @@ class ArchiveTar(ArchiveBase):
                 elif not os.path.lexists(tarinfo.linkname):
                     # Symlink target does not exist. Assume the old
                     # directory is moved to another place in package.
-                    os.renames(tarinfo.name, tarinfo.linkname)
+                    try:
+                        os.renames(tarinfo.name, tarinfo.linkname)
+                    except OSError as e :
+                        ctx.ui.warn(str(e))
+                        pass
 
                 else:
                     # This should not happen. Probably a packaging error.
