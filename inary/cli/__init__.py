@@ -50,9 +50,16 @@ class CLI(inary.ui.UI):
         self.warnings = 0
         self.errors = 0
         self.clean_line = "\x1b[K"
+        from ctypes import CDLL, c_char_p
+        self.libreadline=CDLL("libreadline.so")
+        self.libreadline.readline.argtypes = [c_char_p]
+        self.libreadline.readline.restype = c_char_p
 
     def close(self):
         util.xterm_title_reset()
+
+    def input(self,msg):
+        return self.libreadline.readline(msg.encode("UTF-8")).decode("UTF-8")
 
     def output(self, msg, err=False, verbose=False):
         if (verbose and self.show_verbose) or (not verbose):
@@ -153,7 +160,7 @@ class CLI(inary.ui.UI):
             prompt += util.colorize('[  {}  ]\n'.format(opt), 'faintblue')
 
         while True:
-            s = input(prompt)
+            s = self.input(prompt)
             for opt in opts:
                 if opt.startswith(str(s)):
                     return opt
@@ -176,7 +183,7 @@ class CLI(inary.ui.UI):
                                          'green') + '/' + util.colorize(_('no)'),
                                                                         'red') + ":  "
 
-        s = input(prompt)
+        s = self.input(prompt)
         if yes_expr.search(s) or yes_expr_nl.search(s):
             return True
         else:
