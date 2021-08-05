@@ -272,7 +272,7 @@ def show_changed_configs(package_dict, opt):
                         ctx.ui.info(_("[?] Select the process which will be happened:"))
                         ctx.ui.info(_("1. Store new config file, not apply [*]"))
                         ctx.ui.info(_("2. Apply new config file (keep old config)"))
-                        ctx.ui.info(_("3. Apply new config file (don't keep old config)")
+                        ctx.ui.info(_("3. Apply new config file (don't keep old config)"))
                         ctx.ui.info(_("4. Delete new config file"))
                         if ctx.config.options and ctx.config.options.yes_all:
                             prompt = "1"
