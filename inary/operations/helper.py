@@ -279,16 +279,16 @@ def show_changed_configs(package_dict, opt):
                         else:
                             prompt = subprocess.getoutput("read -n 1 c ; echo $c")
                         
-                        if prompt == "1"
+                        if prompt == "1":
                             pass
-                        elif pprompt == "2"
+                        elif pprompt == "2":
                             apply_changed_config(
                                 util.join_path(
                                     ctx.config.dest_dir(),
                                     file),
                                 new_file,
                                 keep=True)
-                        elif pprompt == "3"
+                        elif pprompt == "3":
                             apply_changed_config(
                                 util.join_path(
                                     ctx.config.dest_dir(),
