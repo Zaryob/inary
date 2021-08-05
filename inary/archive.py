@@ -354,7 +354,7 @@ class ArchiveTar(ArchiveBase):
         ctx.ui.info(_("Target DIR: \"{}\"").format(target_dir), verbose=True)
         os.chdir(target_dir)
         for tarinfo in self.tar:
-            ctx.ui.info(_("Extracting: /{}").format(tarinfo.name))
+            ctx.ui.info(_("Extracting: /{}").format(tarinfo.name),verbose=True)
             if callback:
                 callback(tarinfo, extracted=False)
 
