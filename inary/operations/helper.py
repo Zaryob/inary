@@ -269,23 +269,26 @@ def show_changed_configs(package_dict, opt):
                             color='yellow')
                         os.system(
                             "diff -u {0} {1} | less".format(new_file, file))
-                        prompt = ctx.ui.choose(_("[?] Select the process which will be happened:"),
-                                               [_("1. Store new config file, not apply [*]"),
-                                                _("2. Apply new config file (keep old config)"),
-                                                _("3. Apply new config file (don't keep old config)"),
-                                                _("4. Delete new config file")])
-
-                        if prompt == _(
-                                "1. Store new config file, not apply [*]"):
+                        ctx.ui.info(_("[?] Select the process which will be happened:"))
+                        ctx.ui.info(_("1. Store new config file, not apply [*]"))
+                        ctx.ui.info(_("2. Apply new config file (keep old config)"))
+                        ctx.ui.info(_("3. Apply new config file (don't keep old config)")
+                        ctx.ui.info(_("4. Delete new config file"))
+                        if ctx.config.options and ctx.config.options.yes_all:
+                            prompt = "1"
+                        else:
+                            prompt = subprocess.getoutput("read -n 1 c ; echo $c")
+                        
+                        if prompt == "1"
                             pass
-                        elif prompt == _("2. Apply new config file (keep old config)"):
+                        elif pprompt == "2"
                             apply_changed_config(
                                 util.join_path(
                                     ctx.config.dest_dir(),
                                     file),
                                 new_file,
                                 keep=True)
-                        elif prompt == _("3. Apply new config file (don't keep old config)"):
+                        elif pprompt == "3"
                             apply_changed_config(
                                 util.join_path(
                                     ctx.config.dest_dir(),
