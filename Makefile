@@ -18,6 +18,6 @@ pot:
 build:
 	python3 setup.py build
 install:
-	mkdir -p {DESTDIR}/usr/bin/ ${DESTDIR}/usr/lib/sulin || true
+	mkdir -p ${DESTDIR}/usr/bin/ ${DESTDIR}/usr/lib/sulin || true
 	python3 setup.py install --install-lib=${DESTDIR}/usr/lib/sulin --root=${DESTDIR} --install-scripts=${DESTDIR}/usr/bin
 	[ -f ${DESTDIR}/usr/bin/inary ] || ln -s inary-cli ${DESTDIR}/usr/bin/inary || true
