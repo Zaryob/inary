@@ -58,7 +58,7 @@ class Build(build):
         build.run(self)
 
         self.mkpath(self.build_base)
-        if getConfig("NLS_SUPPORT"):
+        if getConfig("NLS_SUPPORT") and 0 == os.system("which intltool-merge &>/dev/null"):
             for in_file in IN_FILES:
                 name, ext = os.path.splitext(in_file)
                 self.spawn(["intltool-merge", "-x", "po", in_file,
@@ -67,7 +67,7 @@ class Build(build):
 
 class BuildPo(build):
     def run(self):
-        if getConfig("NLS_SUPPORT"):
+        if getConfig("NLS_SUPPORT") and 0 == os.system("which intltool-merge &>/dev/null"):
             build.run(self)
             self.build_po()
 
@@ -134,7 +134,7 @@ class Install(install):
         install.finalize_options(self)
 
     def installi18n(self):
-        if not getConfig("NLS_SUPPORT"):
+        if not getConfig("NLS_SUPPORT") and 0 == os.system("which intltool-merge &>/dev/null"):
             return
         for name in os.listdir('po'):
             if not name.endswith('.po'):
@@ -226,7 +226,7 @@ setup(name="inary",
                 'install': Install,
                 'test': Test},
       data_files=[(CONFIG_DIR, ["config/inary.conf", "config/mirrors.conf"]),
-                  (MIMEFILE_DIR, ["build/inary.xml"] if getConfig("NLS_SUPPORT") else [])],
+                  (MIMEFILE_DIR, ["build/inary.xml"] if getConfig("NLS_SUPPORT") and 0 == os.system("which intltool-merge &>/dev/null") else [])],
       scripts=(['inary-cli',
                 'scripts/pspec2po',
                 'scripts/revdep-rebuild',
