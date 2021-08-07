@@ -323,7 +323,7 @@ class ArchiveTar(ArchiveBase):
             return
         if not os.path.isdir(info.name):
             return
-        print("Overwriting stale pip install: /{}".format(info.name))
+        ctx.ui.warning(_("Overwriting stale pip install: /{}").format(info.name))
         shutil.rmtree(info.name)
 
     def unpack_dir(self, target_dir, callback=None):
@@ -398,7 +398,7 @@ class ArchiveTar(ArchiveBase):
                                     old_path = "/" + old_path
                                 if not new_path.startswith("/"):
                                     new_path = "/" + new_path
-                                print("Moving:", old_path, " -> ", new_path)
+                                ctx.ui.info("Moving:", old_path, " -> ", new_path)
                                 os.system(
                                     "mv -f {0} {1}".format(old_path, new_path))
                             else:

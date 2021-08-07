@@ -115,9 +115,9 @@ Usage: info <package1> <package2> ... <packagen>
         files.list.sort(key=lambda x: x.path)
         for fileinfo in files.list:
             if self.options.files:
-                print(fileinfo)
+                ctx.ui.info(fileinfo)
             else:
-                print("/" + fileinfo.path)
+                ctx.ui.info("/" + fileinfo.path)
 
     @staticmethod
     def print_metadata(metadata, packagedb=None):
@@ -134,7 +134,6 @@ Usage: info <package1> <package2> ... <packagen>
                 ctx.ui.formatted_output(
                     " ".join(
                         (_("Reverse Dependencies:"), util.strlist(revdeps))))
-                print()
 
     @staticmethod
     def print_specdata(spec, sourcedb=None):
@@ -148,8 +147,9 @@ Usage: info <package1> <package2> ... <packagen>
                     name for name,
                     dep in sourcedb.get_rev_deps(
                         spec.source.name)]
-                print(_('Reverse Build Dependencies:'), util.strlist(revdeps))
-                print()
+                ctx.ui.formatted_output(
+                    " ".join(
+                        (_('Reverse Build Dependencies:\n{}'), util.strlist(revdeps))))
 
     def inaryfile_info(self, package):
         metadata, files = info_operation.info_file(package)

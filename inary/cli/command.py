@@ -169,12 +169,12 @@ class Command(object):
     def help(self):
         """print help for the command"""
         trans = gettext.translation('inary', fallback=True)
-        print(
+        ctx.ui.output(
             "{0}: {1}".format(
                 self.format_name(),
                 trans.gettext(
                     self.__doc__)))
-        print(self.parser.format_option_help())
+        ctx.ui.output(self.parser.format_option_help())
 
     @staticmethod
     def die():

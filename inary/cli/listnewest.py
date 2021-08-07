@@ -91,4 +91,3 @@ packages from all repositories.
             p += ' ' * max(0, maxlen - lenp)
             ctx.ui.info('{0} - {1} '.format(p, str(pkgsum)))
 
-        print()

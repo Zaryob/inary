@@ -48,7 +48,6 @@ class PGraph:
         return self.packagedb
 
     def topological_sort(self):
-        print(self.packages.all())
         return inary.util.unique_list(self.packages.all())
 
     def check_package(self, pkg=None, reverse=False):

@@ -426,7 +426,6 @@ def fetch_git(url, destdir="", branch="master"):
     status = os.system(
         "git clone  \"{0}\" \"{1}\" -b \"{2}\"".format(url, destdir, branch))
     if status != 0:
-        print(status)
         ctx.ui.error(
             _('Failed to clone git repository from {}.').format(url))
         exit(1)
