@@ -33,7 +33,7 @@ clean_tmp(){
     rm -rf "$sulin"/tmp/scom
 }
 if [[ "$1" == ""  ||  "$1" == "-*" ]] ; then
-	echo "Usage: sulinstrapt [directory]"
+	help_msg
 	exit 0
 elif [[ $UID -ne 0 ]] ; then
 	echo "You must be root!"

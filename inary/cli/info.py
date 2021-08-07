@@ -115,7 +115,7 @@ Usage: info <package1> <package2> ... <packagen>
         files.list.sort(key=lambda x: x.path)
         for fileinfo in files.list:
             if self.options.files:
-                ctx.ui.info(fileinfo)
+                ctx.ui.info(str(fileinfo))
             else:
                 ctx.ui.info("/" + fileinfo.path)
 
