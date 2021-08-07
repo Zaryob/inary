@@ -62,7 +62,7 @@ class CLI(inary.ui.UI):
         return self.libreadline.readline(msg.encode("UTF-8")).decode("UTF-8")
 
     def output(self, msg, err=False, verbose=False):
-        if verbose or not self.show_verbose:
+        if verbose or self.show_verbose:
             if isinstance(msg, bytes):
                 msg = msg.decode('utf-8')
             if err:
