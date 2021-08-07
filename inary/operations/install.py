@@ -124,7 +124,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
-    install_files = {}
+    install_files = util.AdvancedList()
     file_conflicts = []
     for path in paths:
         pkg = inary.package.Package(path)
@@ -135,15 +135,12 @@ def install_pkg_names(A, reinstall=False, extra=False):
                         "} / {} ] => {}").format(paths.index(path) +
                                                  1, len(paths), pkg.metadata.package.name), color="yellow")
         for file in pkg.files.list:
-            sha = util.sha1_data(file.path)[0:5]
-            if sha not in install_files:
-                install_files[sha] = []
-            if file not in install_files[sha]:
-                install_files[sha].append(file)
-            else:
+            if install_files.exists(file):
                 file_conflicts.append(file)
+            else:
+                install_files.add(file)
         ctx.ui.info(
-            _("Current {} / Total {} files counted.").format(len(pkg.files.list), len(install_files)))
+            _("Current {} / Total {} files counted.").format(len(pkg.files.list), install_files.length()))
     if len(file_conflicts) > 0:
         ctx.ui.warning(_("Integration check error detected."))
         for path in file_conflicts:

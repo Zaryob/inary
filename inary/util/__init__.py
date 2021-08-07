@@ -30,6 +30,7 @@ from inary.util.process import *
 from inary.util.strings import *
 from inary.util.terminal import *
 from inary.util.cpuinfo import *
+from inary.util.list import *
 
 # Gettext Library
 import gettext

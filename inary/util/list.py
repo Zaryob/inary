@@ -60,7 +60,7 @@ class AdvancedList:
     def exists(self,element):
         """check element available in list"""
         path = self.__get_path(element)
-        return element in self.__liststore[path]
+        return path in self.__liststore and element in self.__liststore[path]
 
     def length(self):
         """return list length"""

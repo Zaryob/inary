@@ -30,7 +30,7 @@ class PGraph:
     def __init__(self, packagedb=None, installdb=None):
         self.packagedb = packagedb
         self.installdb = installdb
-        self.packages = []
+        self.packages = inary.util.AdvancedList(2)
         self.vertic = []
         self.checked = []
         self.reinstall = False
@@ -48,7 +48,8 @@ class PGraph:
         return self.packagedb
 
     def topological_sort(self):
-        return inary.util.unique_list(self.packages)
+        print(self.packages.all())
+        return inary.util.unique_list(self.packages.all())
 
     def check_package(self, pkg=None, reverse=False):
         if pkg not in self.checked:
@@ -56,30 +57,30 @@ class PGraph:
         else:
             return
 
-        if pkg in self.packages:
+        if self.packages.exists(pkg):
             return
         else:
 
             if reverse:
-                if pkg not in self.packages:
-                    self.packages.append(pkg)
+                if not self.packages.exists(pkg):
+                    self.packages(pkg)
                 for (dep, depinfo) in self.installdb.get_rev_deps(pkg):
-                    if dep not in self.packages:
+                    if not self.packages.exists(dep):
                         self.check_package(dep, reverse)
                         if self.installdb.has_package(dep):
-                            self.packages.append(dep)
+                            self.packages.add(dep)
             else:
                 if self.installdb.has_package(pkg):
                     if self.packagedb.get_package(pkg).release == self.installdb.get_package(pkg).release:
                         if not self.reinstall:
                             return
-                if pkg not in self.packages:
-                    self.packages.append(pkg)
+                if not self.packages.exists(pkg):
+                    self.packages.add(pkg)
                 for dep in self.packagedb.get_package(pkg).runtimeDependencies():
-                    if dep not in self.packages:
+                    if not self.packages.exists(dep):
                         self.check_package(dep.package, reverse)
                         if not self.installdb.has_package(dep.package):
-                            self.packages.append(dep.package)
+                            self.packages.add(dep.package)
 
     def add_package(self, package):
         self.check_package(package, False)
@@ -88,9 +89,9 @@ class PGraph:
         self.check_package(package, True)
 
     def add_package_file(self, pkg):
-        self.packages.append(pkg)
+        self.packages.add(pkg)
         for dep in self.installdb.get_package(pkg).runtimeDependencies():
-            if dep not in self.packages:
+            if not self.packages.exists(dep):
                 self.check_package(dep.package)
 
     def vertices(self):
