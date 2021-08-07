@@ -89,6 +89,7 @@ class Index(command.Command, metaclass=command.autocommand):
             compression |= ctypes.get(type_str, 0)
 
         util.xterm_title(_("Taking inary repo index."))
+        ctx.config.options.yes_all = True
         index.index(self.args or ["."], ctx.get_option('output'),
                     skip_sources=ctx.get_option('skip_sources'),
                     skip_signing=ctx.get_option('skip_signing'),
