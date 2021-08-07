@@ -263,7 +263,7 @@ class Builder:
         try:
             self.read_translations(self.specdir)
         except Exception:
-            ctx.ui.output(_("Translation cannot readed.")+"\n")
+            ctx.ui.warning(_("Translation cannot readed.")+"\n")
 
         self.sourceArchives = inary.archive.SourceArchives(self.spec)
 
@@ -384,7 +384,7 @@ class Builder:
         try:
             self.fetch_component()
         except:
-            ctx.ui.output(_("Component cannot readed.")+"\n")
+            ctx.ui.warning(_("Component cannot readed.")+"\n")
 
         self.fetch_source_archives()
 
@@ -1135,7 +1135,7 @@ package might be a good solution."))
         try:
             self.fetch_component()
         except:
-            ctx.ui.output(_("Component cannot readed.")+"\n")
+            ctx.ui.warning(_("Component cannot readed.")+"\n")
         ctx.ui.status(
             _("Running file actions: \"{}\"").format(
                 self.spec.source.name), push_screen=True)

@@ -61,15 +61,19 @@ class CLI(inary.ui.UI):
     def input(self,msg):
         return self.libreadline.readline(msg.encode("UTF-8")).decode("UTF-8")
 
-    def output(self, msg, err=False, verbose=False):
-        if verbose or self.show_verbose:
-            if isinstance(msg, bytes):
-                msg = msg.decode('utf-8')
-            if err:
-                sys.stderr.write(str(msg))
-            else:
-                # msg=self.clean_line+msg+self.clean_line
-                sys.stdout.write(str(msg))
+    def verbose(self,msg,err=False):
+        if self.show_verbose:
+            msg = util.colorize(_('Verboses: '), 'brightwhite') + msg
+            self.output(msg,err)
+
+    def output(self, msg, err=False):
+        if isinstance(msg, bytes):
+            msg = msg.decode('utf-8')
+        if err:
+            sys.stderr.write(str(msg))
+        else:
+            # msg=self.clean_line+msg+self.clean_line
+            sys.stdout.write(str(msg))
 
     def formatted_output(self, msg, verbose=False, noln=False, column=":"):
         key_width = 20
@@ -107,43 +111,37 @@ class CLI(inary.ui.UI):
                                       "rest": rest}
             if not noln:
                 new_msg = "{}\n".format(new_msg)
-        msg = new_msg
-        self.output(str(msg), verbose=verbose)
+        msg = str(new_msg)
+        if verbose:
+            self.verbose(msg)
+        else:
+            self.output(msg)
 
     def info(self, msg, verbose=False, noln=False, color='default'):
         # TODO: need to look at more kinds of info messages
         # let's cheat from KDE :)
         msg = util.colorize(msg, color)
-        if verbose:
-            msg = util.colorize(_('Verboses: '), 'brightwhite') + msg
         if not noln:
             msg = '{}\n'.format(msg)
 
-        self.output(str(msg), verbose=verbose)
+        if verbose:
+            self.verbose(msg)
+        else:
+            self.output(msg)
 
     def warning(self, msg, verbose=False):
         msg = str(msg)
         self.warnings += 1
         if ctx.log:
             ctx.log.warning(msg)
-        if ctx.get_option('no_color'):
-            self.output(_('Warning: ') + msg + '\n', err=True)
-        else:
-            self.output(
-                util.colorize(
-                    msg + '\n',
-                    'brightyellow'),
-                err=True)
+        self.output(util.colorize(msg + '\n','brightyellow'),err=True)
 
     def error(self, msg):
         msg = str(msg)
         self.errors += 1
         if ctx.log:
             ctx.log.error(msg)
-        if ctx.get_option('no_color'):
-            self.output(_('Error: ') + msg + '\n', err=True)
-        else:
-            self.output(util.colorize(msg + '\n', 'brightred'), err=True)
+        self.output(util.colorize(msg + '\n', 'brightred'), err=True)
 
     def action(self, msg, verbose=False):
         # TODO: this seems quite redundant?
