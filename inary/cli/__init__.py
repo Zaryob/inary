@@ -127,14 +127,13 @@ class CLI(inary.ui.UI):
         if ctx.log:
             ctx.log.warning(msg)
         if ctx.get_option('no_color'):
-            self.output(_('Warning: ') + msg + '\n', err=True, verbose=verbose)
+            self.output(_('Warning: ') + msg + '\n', err=True)
         else:
             self.output(
                 util.colorize(
                     msg + '\n',
                     'brightyellow'),
-                err=True,
-                verbose=verbose)
+                err=True)
 
     def error(self, msg):
         msg = str(msg)
