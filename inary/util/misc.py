@@ -45,11 +45,10 @@ def join_path(a, *p):
 
 def colorize(msg, color):
     """Colorize the given message for console output"""
-    if color in ctx.const.colors and not (ctx.get_option(
-            'no_color') or ctx.config.values.general.no_color):
-        return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
-    else:
+    if ctx.get_option('no_color') or ctx.config.values.general.no_color: 
         return str(msg)
+    else:
+        return str(ctx.const.colors[color] + msg + ctx.const.colors['default'])
 
 
 def config_changed(config_file):
