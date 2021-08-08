@@ -44,6 +44,8 @@ Downloads the given inary packages to working directory
                          help=_("Output directory for the fetched packages"))
         group.add_option("--runtime-deps", action="store_true", default=None,
                          help=_("Download with runtime dependencies."))
+        group.add_option("-r","--repository", action="store", default=None,
+                         help=_("Download from selected repository."))
 
         self.parser.add_option_group(group)
 
@@ -59,10 +61,10 @@ Downloads the given inary packages to working directory
         full_packages = []
 
         for inary_package in self.args:
-            package = packages.get_package(inary_package)
+            package = packages.get_package(inary_package,ctx.config.options.repository)
             full_packages.append(inary_package)
             if ctx.config.options.runtime_deps:
                 for dep in package.runtimeDependencies():
                     full_packages.append(dep.name())
 
-        fetcher.fetch(full_packages, ctx.config.options.output_dir)
+        fetcher.fetch(full_packages, ctx.config.options.output_dir,ctx.config.options.repository)

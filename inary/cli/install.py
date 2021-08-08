@@ -80,6 +80,7 @@ expanded to package names.
         group.add_option("-s", "--store-lib-info", action="store_true",
                          default=False,
                          help=_("Store previous libraries info when package is updating to newer version."))
+
         self.parser.add_option_group(group)
 
     def run(self):
