@@ -52,7 +52,7 @@ Usage: check-integration
         self.init(database=True, write=False)
         installed = self.installdb.list_installed()
         installed.sort()
-        install_files = util.AdvancedList()
+        install_files = util.AdvancedList(7)
         fail_list = []
 
         for pkg in installed:
