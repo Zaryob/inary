@@ -18,7 +18,7 @@ class AdvancedList:
     def __init__(self,fpar=3,lpar=4):
         """fpar is calculate hash first character parameter, lpar is max key length parameter"""
         self.__liststore = {}
-        self.__f=fpar
+        self.__f=(-1*fpar)
         self.__l=lpar
         self.__lengthstore = {}
         from hashlib import sha1 as sha1
@@ -26,7 +26,7 @@ class AdvancedList:
         
 
     def __get_path(self,element):
-        return self.sha1(str(element)[::-1][:self.__f].encode("utf-8")).hexdigest()[:self.__l]
+        return self.sha1(str(element)[:self.__f:-1].encode("utf-8")).hexdigest()[:self.__l]
 
     def __get_array(self,path):
         if path not in self.__liststore:
