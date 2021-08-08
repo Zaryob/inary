@@ -48,6 +48,7 @@ import inary.cli.configurepending
 import inary.cli.configmanager
 import inary.cli.check
 import inary.cli.checkrelation
+import inary.cli.checkintegration
 import inary.cli.build
 import inary.cli.blame
 import inary.cli.addrepo
