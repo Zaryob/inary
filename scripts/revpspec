@@ -29,8 +29,10 @@ def dictify(file,root=True):
         else:
             ret[child.tag] = arr
     return ret
-
-pspec = dictify(sys.argv[1])
+if len(sys.argv) > 1:
+    pspec = dictify(sys.argv[1])
+else:
+    pspec = dictify("pspec.xml")
 
 def get_node(node,attr=None):
     node = node.split(".")
