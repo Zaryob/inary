@@ -8,7 +8,7 @@ class inary:
             email = "zaryob.dev@gmail.com"
         license = "GPLv2"
         isa = ["app:console"]
-        partof = "bystem.base"
+        partof = "system.base"
         summary = "ciksemel is iksemel based xml library."
         description = "Application deployment framework for desktop apps"
         archive = [("6daf8319453645dd8bae2d85e22f7a6ae08a2d1c",

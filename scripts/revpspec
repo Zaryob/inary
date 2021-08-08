@@ -1,0 +1,167 @@
+import sys
+import xml.etree.ElementTree as ET
+
+from copy import copy
+
+def dictify(file,root=True):
+    ret = {}
+    if root:
+        r = ET.parse(file).getroot()
+    else:
+        r = file
+    for child in r:
+        arr = []
+        for it in r.iter(child.tag):
+            if it.text.strip() == "":
+                arr.append(dictify(it,False))
+            else:
+                if it.attrib:
+                    arr2 = {}
+                    arr2[child.tag] = it.text.strip()
+                    for i in it.attrib:
+                        arr2[i] = it.get(i)
+                    arr.append(arr2)
+                else:
+                    arr.append(it.text.strip())
+        if len(arr) == 1:
+            ret[child.tag] = arr[0]
+        else:
+            ret[child.tag] = arr
+    return ret
+
+pspec = dictify(sys.argv[1])
+
+def get_node(node,attr=None):
+    node = node.split(".")
+    if not attr:
+        attr = pspec
+    for n in node:
+        if n in attr:
+            attr = attr[n]
+        else:
+            return None
+    return attr
+
+tab = 0
+def print(line,n=0,nl="\n"):
+    global tab
+    sys.stdout.write("{}{}{}".format((tab*4*" "),line,nl))
+    tab +=n
+    
+def o(tag,node,arr=False):
+    if not get_node(node):
+        return
+    if arr:
+        print("{} = {}".format(tag,str2arr(get_node(node))))
+    else:
+        print("{} = \"{}\"".format(tag,safe(get_node(node))))
+
+def u(tag,var,arr=False):
+    if arr:
+        print("{} = {}".format(tag,str2arr(var)))
+    else:
+        print("{} = \"{}\"".format(tag,safe(var)))
+
+
+def str2arr(msg):
+    if type(msg) == type(""):
+        return "[\'{}\']".format(msg)
+    return str(msg)
+
+def safe(msg):
+    return str(msg).replace("\"","\\\"")
+
+print("class inary:",1)
+# Source section
+print("class source:",1)
+o("name","Source.Name")
+o("homepage","Source.Homepage")
+print("class packager:",1)
+o("name","Source.Packager.Name")
+o("email","Source.Packager.Email")
+tab-=1
+o("license","Source.License")
+o("isa","Source.IsA",True)
+o("partof","Source.PartOf")
+o("summary","Source.Summary")
+o("description","Source.Description")
+print("archive = [",1)
+archive = get_node("Source.Archive")
+if type(archive) == type({}):
+    print("(\"{}\",\"{}\"),".format(archive["Archive"],archive["sha1sum"]))
+else:
+    for a in archive:
+        print("(\"{}\",\"{}\"),".format(a["Archive"],a["sha1sum"]))
+tab-=1
+print("]")
+o("builddependencies","Source.BuildDependencies.Dependency",True)
+addfiles = get_node("Source.AdditionalFiles.AdditionalFile")
+if addfiles:
+    print("additionalfiles = [",1)
+    if type(addfiles) == type({}):
+        print("(\"{}\",\"{}\"),".format(addfiles["AdditionalFile"],addfiles["target"]))
+    else:
+        for a in addfiles:
+            print("(\"{}\",\"{}\"),".format(a["AdditionalFile"],a["target"]))
+    tab-=1
+    print("]")
+o("patches","Source.Patches.Patch",True)
+# Package section
+def opkg(node):
+    global tab
+    print("class pkg_{}:".format(node["Name"].replace("-","_")),1)
+    u("name",node["Name"])
+    if "RuntimeDependencies" in node:
+        print("runtimedependencies = {}".format(node["RuntimeDependencies"]["Dependency"]))
+    else:
+        print("runtimedependencies = []")
+    a = None
+    if "Files" in node:
+        a = node["Files"]["Path"]
+    if a:
+        print("files = [",1)
+        if type(a) == type({}):
+            print("(\"{}\",\"{}\"),".format(a["fileType"],a["Path"]))
+        else:
+            for aa in a:
+                print("(\"{}\",\"{}\"),".format(aa["fileType"],aa["Path"]))
+        tab-=1
+        print("]")
+    a = None
+    if "AdditionalFiles" in node:
+        a = node["AdditionalFiles"]["AdditionalFile"]
+    if a:
+        print("additionalfiles = [",1)
+        if type(a) == type({}):
+            print("(\"{}\",\"{}\",\"{}\",\"{}\"),".format(a["AdditionalFile"],a["owner"],a["permission"],a["target"]))
+        else:
+            for aa in a:
+                print("(\"{}\",\"{}\",\"{}\",\"{}\"),".format(aa["AdditionalFile"],aa["owner"],aa["permission"],aa["target"]))
+        tab-=1
+        print("]")
+
+if "Name" in get_node("Package"):
+    print("packages = pkg_{}".format(str2arr(get_node("Package")["Name"].replace("-","_"))))
+    tab=1
+    opkg(get_node("Package"))
+else:
+    pkgs = []
+    for i in get_node("Package"):
+        pkgs.append("pkg_{}".format(i["Name"].replace("-","_")))
+    print("packages = {}".format(pkgs))
+    for i in get_node("Package"):
+        tab=1
+        opkg(i)
+# history section
+tab=1
+print("class history:",1)
+a = get_node("History.Update")
+print("update = [",1)
+if "Date" in a:
+    print("(\"{}\",\"{}\",\"{}\",\"{}\",\"{}\")".format(a["Date"],a["Version"],safe(a["Comment"]),a["Name"],a["Email"]))
+else:
+    for aa in a:
+        print("[\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"],".format(aa["Date"],aa["Version"],safe(aa["Comment"]),aa["Name"],aa["Email"]))
+tab-=1
+print("]")
+

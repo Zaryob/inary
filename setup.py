@@ -245,6 +245,7 @@ setup(name="inary",
                 'scripts/uninary',
                 'scripts/undeb',
                 'scripts/genpspec',
+                'scripts/revpspec',
                 'scripts/update-inary-cache',
                 'scripts/version-bump'] if getConfig("ADDITIONAL_SCRIPTS") else ['inary-cli']),
       classifiers=[
