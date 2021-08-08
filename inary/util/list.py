@@ -26,7 +26,7 @@ class AdvancedList:
         
 
     def __get_path(self,element):
-        return self.sha1(str(element)[:self.__f].encode("utf-8")).hexdigest()[:self.__l]
+        return self.sha1(str(element[::-1])[:self.__f].encode("utf-8")).hexdigest()[:self.__l]
 
     def __get_array(self,path):
         if path not in self.__liststore:

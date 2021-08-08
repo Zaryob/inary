@@ -60,11 +60,11 @@ Usage: check-integration
             files = self.installdb.get_files(pkg)
             for f in files.list:
                 #sys.stderr.write("\x1b[K"+_("Checking: {}").format(f.path)+"\r")
-                if install_files.exists(f.path[::-1]):
+                if install_files.exists(f.path):
                     fail_list.append(f.path)
                     ctx.ui.warning(_("Found integration issue {}").format(f.path))
                 else:
-                    install_files.add(f.path[::-1])
+                    install_files.add(f.path)
             ctx.ui.info(_("[{}/{}] {} => ({} / {}) files counted.").format(installed.index(pkg),len(installed),pkgname,len(files.list), install_files.length()))
             ctx.ui.verbose("Key length: {} / Ratio: {} \n".format(len(install_files.keys()),install_files.length()/len(install_files.keys())))
         ctx.ui.warning(_("List of integration issues:"))
