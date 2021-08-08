@@ -68,5 +68,6 @@ Usage: check-integration
             ctx.ui.info(_("[{}/{}] {} => ({} / {}) files counted.").format(installed.index(pkg),len(installed),pkgname,len(files.list), install_files.length()))
             ctx.ui.verbose("Key length: {} / Ratio: {} \n".format(len(install_files.keys()),install_files.length()/len(install_files.keys())))
         ctx.ui.warning(_("List of integration issues:"))
+        fail_list.sort()
         for path in fail_list:
-            ctx.ui.warning(path)
+            ctx.ui.warning("  /{}".format(path))
