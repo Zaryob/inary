@@ -124,7 +124,7 @@ def install_pkg_names(A, reinstall=False, extra=False):
     if conflicts:
         operations.remove.remove_conflicting_packages(conflicts)
 
-    install_files = util.AdvancedList()
+    install_files = util.AdvancedList(7)
     file_conflicts = []
     for path in paths:
         pkg = inary.package.Package(path)
