@@ -54,6 +54,8 @@ def print(line,n=0,nl="\n"):
 def o(tag,node,arr=False):
     if not get_node(node):
         return
+    if type(node) == type([]):
+        node = node[0]
     if arr:
         print("{} = {}".format(tag,str2arr(get_node(node))))
     else:
@@ -77,13 +79,13 @@ def safe(msg):
 print("class inary:",1)
 # Source section
 print("class source:",1)
-o("name","Source.Name")
+u("name",pspec["Source"]["Name"][0])
 o("homepage","Source.Homepage")
 print("class packager:",1)
 o("name","Source.Packager.Name")
 o("email","Source.Packager.Email")
 tab-=1
-o("license","Source.License")
+o("license","Source.License",True)
 o("isa","Source.IsA",True)
 o("partof","Source.PartOf")
 o("summary","Source.Summary")
