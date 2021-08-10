@@ -59,7 +59,10 @@ class CLI(inary.ui.UI):
         util.xterm_title_reset()
 
     def input(self,msg):
-        return self.libreadline.readline(msg.encode("UTF-8")).decode("UTF-8")
+        try:
+            return self.libreadline.readline(msg.encode("UTF-8")).decode("UTF-8")
+        except:
+            return ""
 
     def verbose(self,msg,err=False):
         if self.show_verbose:
