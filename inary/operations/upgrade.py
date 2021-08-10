@@ -124,8 +124,8 @@ def find_upgrades(packages, replaces):
                 Ap.append(i_pkg)
                 ds.append(i_pkg)
             else:
-                ctx.ui.info(_('Package \"{0.name}\" is already at the latest release {0.release}.').format(
-                    pkg), True)
+                ctx.ui.verbose(_('Package \"{0.name}\" is already at the latest release {0.release}.').format(
+                    pkg))
 
     if debug and ds:
         ctx.ui.info(_('The following packages have different sha1sum:'))

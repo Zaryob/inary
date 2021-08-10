@@ -40,8 +40,11 @@ def install_pkg_names(A, reinstall=False, extra=False):
 
     installdb = inary.db.installdb.InstallDB()
     packagedb = inary.db.packagedb.PackageDB()
+    componentdb = inary.db.componentdb.ComponentDB()
     # A was a list, remove duplicates
     A_0 = A = set(A)
+
+
 
     # filter packages that are already installed
     if not reinstall:
@@ -52,6 +55,11 @@ def install_pkg_names(A, reinstall=False, extra=False):
                              "and are not going to be installed again:"))
             ctx.ui.info(util.format_by_columns(sorted(d)))
             A = Ap
+
+    if componentdb.has_component('system.base'):
+        systembase = componentdb.get_union_component('system.base').packages
+        for pkg in systembase:
+            A.add(pkg)
 
     if len(A) == 0:
         ctx.ui.info(_('No packages to install.'))
@@ -65,7 +73,6 @@ def install_pkg_names(A, reinstall=False, extra=False):
         order = plan_install_pkg_names(A, reinstall)
     else:
         order = list(A)
-    componentdb = inary.db.componentdb.ComponentDB()
 
     # Bug 4211
     if componentdb.has_component('system.base'):
