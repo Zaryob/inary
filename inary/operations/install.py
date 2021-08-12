@@ -56,10 +56,11 @@ def install_pkg_names(A, reinstall=False, extra=False):
             ctx.ui.info(util.format_by_columns(sorted(d)))
             A = Ap
 
-    if componentdb.has_component('system.base'):
-        systembase = componentdb.get_union_component('system.base').packages
-        for pkg in systembase:
-            A.add(pkg)
+    if not ctx.config.get_option('ignore_dependency'):
+        if componentdb.has_component('system.base'):
+            systembase = componentdb.get_union_component('system.base').packages
+            for pkg in systembase:
+                A.add(pkg)
 
     if len(A) == 0:
         ctx.ui.info(_('No packages to install.'))
